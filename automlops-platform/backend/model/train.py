@@ -21,3 +21,21 @@ model.fit(X_train, y_train)
 joblib.dump(model, "model/model.joblib")
 
 print("Model trained and saved!")
+
+import mlflow
+import mlflow.sklearn
+
+mlflow.set_experiment("churn-prediction")
+
+with mlflow.start_run():
+    model = RandomForestClassifier()
+    model.fit(X_train, y_train)
+
+    mlflow.log_param("model_type", "RandomForest")
+    mlflow.log_metric("accuracy", model.score(X_test, y_test))
+
+mlflow.sklearn.log_model(
+    model,
+    "model",
+    registered_model_name="churn-model"
+)

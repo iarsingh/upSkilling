@@ -8,11 +8,12 @@ logging.basicConfig(
 from fastapi import FastAPI
 import joblib
 import numpy as np
+import mlflow.pyfunc
+
 
 app = FastAPI()
 
-model = joblib.load("model/model_v1.joblib")
-
+model = mlflow.pyfunc.load_model("models:/churn-model/Production")
 @app.get("/")
 def home():
     logging.info("Health check endpoint called")
