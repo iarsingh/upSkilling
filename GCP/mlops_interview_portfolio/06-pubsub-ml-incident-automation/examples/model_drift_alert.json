@@ -1,0 +1,10 @@
+{
+  "alert_name": "MLModelDriftDetected",
+  "model": "customer-churn",
+  "version": "v3",
+  "severity": "warning",
+  "metric": "model_drift_score",
+  "value": 0.24,
+  "threshold": 0.2,
+  "environment": "production"
+}

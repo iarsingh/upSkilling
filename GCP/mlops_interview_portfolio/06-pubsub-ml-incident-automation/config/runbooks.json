@@ -1,0 +1,22 @@
+{
+  "MLModelDriftDetected": {
+    "owner": "ml-platform",
+    "runbook": "Check feature distribution, compare training-serving skew, review recent data pipeline changes.",
+    "default_severity": "warning"
+  },
+  "MLInferenceHighP99Latency": {
+    "owner": "platform-sre",
+    "runbook": "Check pod CPU/memory, HPA status, GKE node pressure, and recent rollout history.",
+    "default_severity": "critical"
+  },
+  "MLInferenceHighErrorRate": {
+    "owner": "platform-sre",
+    "runbook": "Check application logs, dependency errors, model load failures, and rollback candidates.",
+    "default_severity": "critical"
+  },
+  "MLPredictionDataQualityIssue": {
+    "owner": "data-platform",
+    "runbook": "Check upstream schema changes, null rates, invalid categorical values, and batch freshness.",
+    "default_severity": "warning"
+  }
+}

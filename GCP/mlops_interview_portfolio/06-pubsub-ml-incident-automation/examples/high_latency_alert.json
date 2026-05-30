@@ -1,0 +1,10 @@
+{
+  "alert_name": "MLInferenceHighP99Latency",
+  "model": "customer-churn",
+  "version": "v3",
+  "severity": "critical",
+  "metric": "p99_latency_ms",
+  "value": 620,
+  "threshold": 300,
+  "environment": "production"
+}

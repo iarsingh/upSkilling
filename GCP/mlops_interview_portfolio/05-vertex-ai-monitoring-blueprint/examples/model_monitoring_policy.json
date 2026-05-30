@@ -1,0 +1,27 @@
+{
+  "model_name": "customer-churn",
+  "endpoint": "projects/PROJECT_ID/locations/us-central1/endpoints/ENDPOINT_ID",
+  "sampling_rate": 0.8,
+  "alert_topic": "vertex-model-monitoring-alerts",
+  "features": {
+    "monthly_spend": {
+      "drift_threshold": 0.12,
+      "skew_threshold": 0.1
+    },
+    "support_tickets": {
+      "drift_threshold": 0.15,
+      "skew_threshold": 0.12
+    },
+    "tenure_months": {
+      "drift_threshold": 0.1,
+      "skew_threshold": 0.1
+    },
+    "product_usage_score": {
+      "drift_threshold": 0.08,
+      "skew_threshold": 0.08
+    }
+  },
+  "prediction": {
+    "drift_threshold": 0.1
+  }
+}

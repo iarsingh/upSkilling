@@ -1,0 +1,11 @@
+resources:
+  - ../../base
+
+patches:
+  - target:
+      kind: Deployment
+      name: churn-inference
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 3

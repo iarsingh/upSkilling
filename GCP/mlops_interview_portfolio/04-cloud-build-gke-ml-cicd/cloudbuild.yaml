@@ -1,0 +1,50 @@
+substitutions:
+  _REGION: us-central1
+  _CLUSTER: ml-platform-gke
+  _REPOSITORY: ml-services
+  _SERVICE: churn-inference
+  _ENV: dev
+
+steps:
+  - id: unit-tests
+    name: python:3.12-slim
+    entrypoint: python
+    args: ["-m", "unittest", "discover", "service/tests"]
+
+  - id: build-image
+    name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - ${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_SERVICE}:${SHORT_SHA}
+      - service
+
+  - id: push-image
+    name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_SERVICE}:${SHORT_SHA}
+
+  - id: deploy-to-gke
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        gcloud container clusters get-credentials ${_CLUSTER} --region ${_REGION}
+        kubectl set image deployment/${_SERVICE} \
+          ${_SERVICE}=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_SERVICE}:${SHORT_SHA} \
+          -n ml-platform
+        kubectl rollout status deployment/${_SERVICE} -n ml-platform --timeout=180s
+
+  - id: smoke-test
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        kubectl get deployment ${_SERVICE} -n ml-platform
+        kubectl get pods -n ml-platform -l app=${_SERVICE}
+
+images:
+  - ${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_SERVICE}:${SHORT_SHA}
