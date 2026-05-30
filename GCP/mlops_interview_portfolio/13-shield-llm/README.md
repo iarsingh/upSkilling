@@ -30,3 +30,20 @@ python3 src/shield_llm_gate.py evaluate \
 - Async evaluation keeps gateway latency low while still creating compliance
   evidence.
 - Gemini and open-weight models can share the same policy control plane.
+
+## Interview Architecture
+
+Explain this as an enterprise control plane for LLM traffic. A FastAPI gateway
+on GKE intercepts prompts, guardrail layers evaluate inputs and outputs, Gemini
+or open-weight models generate responses, Pub/Sub streams telemetry, BigQuery
+stores governance logs, and Vertex AI Metadata records lineage.
+
+## Interview Flow
+
+1. A user or application sends a prompt to the gateway.
+2. Input guardrails check prompt injection, PII, toxicity, policy, and context.
+3. Safe requests route to Gemini or approved open-weight models.
+4. Response guardrails evaluate hallucination, output PII, toxicity, and
+   groundedness.
+5. Telemetry, tokens, safety scores, prompt versions, and response metadata are
+   streamed to Pub/Sub, BigQuery, and Vertex AI Metadata.

@@ -14,13 +14,13 @@ gcp-mlops-platform-portfolio
 Suggested repo description:
 
 ```text
-Production-style GCP MLOps portfolio: GKE, Terraform, Cloud Build, Vertex AI Pipelines, model promotion gates, observability, Hugging Face LLMOps, LLM-assisted AIOps, GitOps remediation, multi-tenant healthcare MLOps, streaming feature infrastructure, batch forecasting, edge vision MLOps, real-time fraud detection, and ML lifecycle governance.
+Production-style GCP MLOps portfolio: GKE, Terraform, Cloud Build, Vertex AI Pipelines, model promotion gates, observability, Hugging Face LLMOps, autonomous GenAI platforms, LLM-assisted AIOps, GitOps remediation, multi-tenant healthcare MLOps, streaming feature infrastructure, batch forecasting, edge vision MLOps, real-time fraud detection, and ML lifecycle governance.
 ```
 
 Suggested GitHub topics:
 
 ```text
-mlops, gcp, gke, anthos, terraform, kubernetes, cloud-build, cloud-deploy, vertex-ai, vertex-ai-pipelines, kubeflow, argocd, config-connector, huggingface, llmops, aiops, gitops, dataflow, bigquery-ml, feature-store, bigtable, edge-ai, fraud-detection, ml-platform, sre, observability, model-monitoring, model-registry
+mlops, gcp, gke, anthos, terraform, kubernetes, cloud-build, cloud-deploy, vertex-ai, vertex-ai-pipelines, vertex-ai-vector-search, kubeflow, argocd, config-connector, triton, cosign, huggingface, llmops, aiops, gitops, devsecops, rag, agents, dataflow, bigquery-ml, feature-store, bigtable, edge-ai, fraud-detection, ml-platform, sre, observability, model-monitoring, model-registry
 ```
 
 ## README Checklist
@@ -51,6 +51,7 @@ mlops, gcp, gke, anthos, terraform, kubernetes, cloud-build, cloud-deploy, verte
 - One CLI output from NexusFraud regulated release validation
 - One CLI output from ClearRoute healthcare platform release validation
 - One CLI output from AdStream streaming feature release validation
+- One CLI output from AegisSphere autonomous GenAI platform validation
 - Cloud Build YAML snippet
 - Kubernetes deployment snippet
 - Terraform plan snippet with sensitive values hidden
@@ -62,9 +63,10 @@ Built a production-style GCP MLOps portfolio covering GKE platform design,
 Terraform infrastructure, Cloud Build CI/CD, model promotion gates, observability
 and SLO reporting, Vertex AI Pipelines, Model Registry governance, Hugging Face
 LLMOps release gates, LLM-assisted AIOps, GitOps remediation, multi-tenant
-healthcare MLOps, Dataflow streaming, BigQuery ML forecasting, edge vision
-deployment, regulated fraud detection, feature store consistency checks, batch
-inference quality gates, and retraining controls.
+healthcare MLOps, autonomous GenAI platform operations, Dataflow streaming,
+BigQuery ML forecasting, edge vision deployment, regulated fraud detection,
+feature store consistency checks, batch inference quality gates, and retraining
+controls.
 ```
 
 ## Resume Bullet Options
@@ -105,6 +107,10 @@ inference quality gates, and retraining controls.
 - Built AdStream, a high-throughput streaming feature platform with Terraform,
   Cloud Deploy, Pub/Sub, Dataflow, Vertex AI Feature Store, Bigtable, BigQuery,
   Cloud Build, and SLO-based rollback.
+- Built AegisSphere, an autonomous self-healing GenAI and agentic platform on
+  GKE Enterprise with Terraform, Argo CD, Cloud Build, Artifact Analysis,
+  Cosign, VPC Service Controls, External Secrets, Vertex AI Vector Search,
+  Triton, Vertex AI Metadata, and AIOps remediation loops.
 
 ## Publishing Order
 

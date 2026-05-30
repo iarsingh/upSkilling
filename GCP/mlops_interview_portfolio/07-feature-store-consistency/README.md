@@ -46,3 +46,19 @@ python3 src/feature_consistency.py validate \
 - CI gates should fail before a model reaches production traffic.
 - The same pattern can be implemented with Feast, Vertex AI Feature Store,
   BigQuery, Redis, or custom online stores.
+
+## Interview Architecture
+
+Explain this as the feature reliability gate before model promotion. A feature
+contract defines the expected entity, schema, nullability, owner, and freshness
+SLA. Offline training snapshots and online feature metadata are compared before
+the model can move forward.
+
+## Interview Flow
+
+1. A data or ML team updates a feature contract.
+2. The training pipeline produces an offline feature snapshot.
+3. The online store publishes schema and freshness metadata.
+4. The validator checks entity presence, dtype parity, null rates, and freshness.
+5. Passing gates allow promotion; failures block release and point to the owning
+   team.

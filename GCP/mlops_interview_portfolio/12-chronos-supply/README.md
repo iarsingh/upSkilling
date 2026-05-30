@@ -35,3 +35,21 @@ python3 src/chronos_supply_gate.py evaluate \
   poisoning training.
 - BigQuery plus Redis supports both analytical planning and low-latency
   warehouse inventory lookups.
+
+## Interview Architecture
+
+Explain this as a high-throughput batch forecasting platform. Cloud Composer
+orchestrates the schedule, Dataflow validates retail logs with Great
+Expectations, BigQuery ML handles scalable baseline forecasting, Vertex AI
+trains complex segment models, and Redis serves low-latency inventory lookups.
+
+## Interview Flow
+
+1. Retail event logs land in BigQuery or Cloud Storage.
+2. Dataflow runs Great Expectations checks before training begins.
+3. Cloud Composer fans out BQML and Vertex AI training jobs by SKU-store
+   segment.
+4. Challenger forecasts are compared against champion baselines segment by
+   segment.
+5. Approved models are registered, forecasts are written to BigQuery, and hot
+   lookup slices are cached in Redis for warehouse systems.

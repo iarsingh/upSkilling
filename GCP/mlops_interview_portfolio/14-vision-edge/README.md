@@ -33,3 +33,19 @@ python3 src/vision_edge_gate.py evaluate \
 - Uncertainty and drift telemetry should decide what data is collected, not raw
   image uploads from every device.
 - Model optimization is a release gate, not a post-processing step.
+
+## Interview Architecture
+
+Explain this as a cloud control plane with edge execution. GCP stores defect
+images and trains large vision models on Vertex AI GPUs. Cloud Build optimizes
+models with TensorRT or Edge TPU compilation, Artifact Registry stores edge
+containers, and GKE Enterprise manages rollout to factory edge devices.
+
+## Interview Flow
+
+1. Defect images and labels are collected centrally in Cloud Storage.
+2. Vertex AI Custom Training trains a vision anomaly model.
+3. The model is optimized for edge hardware and packaged into a container.
+4. GKE Enterprise or Anthos-style rollout pushes canaries to selected factories.
+5. Edge devices classify locally under the latency target and stream uncertainty
+   and drift metrics back to GCP for selective retraining.

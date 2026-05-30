@@ -1,0 +1,59 @@
+{
+  "platform": "AegisSphere",
+  "devops_gitops": {
+    "terraform_modules": ["gke", "vpc-peering", "cloudsql", "iam", "artifact-registry", "secret-manager"],
+    "gke_enterprise_enabled": true,
+    "multi_tenant_clusters": true,
+    "argocd_enabled": true,
+    "config_connector_enabled": true,
+    "git_source_of_truth": true,
+    "drift_reconciliation_enabled": true,
+    "sandbox_provisioning_minutes": 4,
+    "max_sandbox_provisioning_minutes": 5
+  },
+  "devsecops": {
+    "cloud_build_enabled": true,
+    "artifact_analysis_enabled": true,
+    "cosign_signing_enabled": true,
+    "artifact_registry_enabled": true,
+    "vpc_service_controls_enabled": true,
+    "external_secrets_operator_enabled": true,
+    "secret_manager_enabled": true,
+    "network_policies_enabled": true,
+    "max_critical_vulnerabilities": 0,
+    "critical_vulnerabilities": 0
+  },
+  "mlops_llmops": {
+    "vertex_ai_pipelines_enabled": true,
+    "vertex_ai_feature_store_enabled": true,
+    "prompts_as_code": true,
+    "vertex_ai_vector_search_enabled": true,
+    "gemini_enabled": true,
+    "open_weights_on_triton_enabled": true,
+    "vertex_ai_metadata_enabled": true,
+    "golden_dataset_attached": true,
+    "pipeline_hash_attached": true,
+    "prompt_release_minutes": 12,
+    "max_prompt_release_minutes": 30
+  },
+  "aiops": {
+    "cloud_monitoring_enabled": true,
+    "pubsub_event_bus_enabled": true,
+    "cloud_run_remediation_enabled": true,
+    "event_driven_ansible_supported": true,
+    "latency_self_healing_enabled": true,
+    "token_budget_self_healing_enabled": true,
+    "hallucination_rollback_enabled": true,
+    "fallback_model_routing_enabled": true,
+    "policy_bound_remediation": true,
+    "rollback_audit_enabled": true
+  },
+  "runtime_slos": {
+    "rag_p95_latency_ms": 620,
+    "max_rag_p95_latency_ms": 900,
+    "hallucination_rate": 0.006,
+    "max_hallucination_rate": 0.01,
+    "token_budget_overrun_rate": 0.002,
+    "max_token_budget_overrun_rate": 0.005
+  }
+}

@@ -35,3 +35,20 @@ python3 src/nexus_fraud_gate.py evaluate \
 - Canary and shadow deployment strategies reduce risk for downstream payment
   systems.
 - Continuous training must be drift-triggered, governed, and lineage-aware.
+
+## Interview Architecture
+
+Explain this as a regulated real-time ML platform. Pub/Sub ingests transaction
+events, Dataflow computes streaming features, Vertex AI Feature Store serves
+online features, Vertex AI Pipelines retrains models, Metadata tracks lineage,
+and Cloud Build promotes models through canary and shadow paths.
+
+## Interview Flow
+
+1. Transactions stream into Pub/Sub.
+2. Dataflow enriches events and writes online features to Vertex AI Feature
+   Store.
+3. The fraud service reads low-latency features and scores transactions.
+4. Drift detection triggers Vertex AI Pipelines for continuous training.
+5. New models are deployed through shadow and canary strategies with audit,
+   explainability, and regulatory approval gates.

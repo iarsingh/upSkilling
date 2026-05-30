@@ -1,0 +1,22 @@
+{
+  "policies": [
+    {
+      "trigger": "high_rag_latency",
+      "action": "scale_rag_gateway",
+      "max_replica_increase": 5,
+      "requires_gitops_record": true
+    },
+    {
+      "trigger": "token_budget_overrun",
+      "action": "route_to_lightweight_model",
+      "max_traffic_shift_percent": 25,
+      "requires_gitops_record": true
+    },
+    {
+      "trigger": "hallucination_anomaly",
+      "action": "rollback_prompt_variant",
+      "requires_metadata_lookup": true,
+      "requires_gitops_record": true
+    }
+  ]
+}

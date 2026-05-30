@@ -88,3 +88,20 @@ kubectl apply -f k8s/
 - I modeled the inference service as a scalable Kubernetes workload.
 - I included a GPU node pool blueprint for ML-specific scheduling needs.
 - I kept the project GitOps-compatible for promotion across environments.
+
+## Interview Architecture
+
+Explain this as the foundation layer of an ML platform. Terraform provisions
+GCP primitives, GKE hosts the runtime, GCS stores model artifacts, MLflow tracks
+experiments, and Kubernetes manifests define serving workloads. GitOps can sit
+on top to keep cluster state reconciled from Git.
+
+## Interview Flow
+
+1. A platform engineer provisions GKE, node pools, artifact storage, and IAM
+   with Terraform.
+2. ML teams publish model artifacts to GCS and track experiments in MLflow.
+3. CI/CD builds an inference image and updates Kubernetes manifests.
+4. GitOps or `kubectl` applies the inference deployment and HPA.
+5. GKE scales the service based on load, while the platform team monitors
+   latency, errors, resource usage, and rollout health.

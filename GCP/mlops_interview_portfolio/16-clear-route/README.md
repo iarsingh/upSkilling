@@ -36,3 +36,22 @@ python3 src/clear_route_gate.py evaluate \
   network isolation before model lifecycle automation matters.
 - Kubeflow and Vertex AI can coexist when Kubernetes is the team workflow layer
   and Vertex AI is the managed training/control-plane layer.
+
+## Interview Architecture
+
+Explain this as MLOps-as-a-Service for healthcare teams. Terraform provisions
+GCP foundations, Config Connector manages selected GCP resources through
+Kubernetes CRDs, Argo CD reconciles platform state, GKE Enterprise provides
+tenant isolation, Kubeflow gives data scientists workflows, and Vertex AI runs
+secure training.
+
+## Interview Flow
+
+1. A platform change is committed to Git.
+2. Terraform and Config Connector create or update GCP resources.
+3. Argo CD reconciles Kubeflow, tenant namespaces, IAM bindings, and network
+   policies.
+4. A data scientist commits a model definition, triggering Cloud Build tests,
+   image build, Artifact Analysis scan, and registry push.
+5. Vertex AI trains with VPC isolation and BigQuery access, then the validated
+   model is deployed to autoscaling GKE serving workloads.

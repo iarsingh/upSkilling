@@ -85,3 +85,18 @@ python3 src/promotion_cli.py promote \
 - Promotion is automated, but production still requires human approval.
 - Metrics gates prevent models with high latency or weak quality from shipping.
 - The audit trail supports governance and rollback discussions.
+
+## Interview Architecture
+
+Explain this as the model-release control layer. A registry stores model state
+and lineage, a promotion policy defines quality requirements, and a CLI or CI
+job decides whether a model can move from candidate to staging or production.
+
+## Interview Flow
+
+1. A training pipeline writes a candidate model and metrics to the registry.
+2. The promotion gate loads model metrics and the target environment.
+3. Accuracy, latency, and error-rate checks are evaluated.
+4. Staging promotion can be automatic when gates pass.
+5. Production promotion requires approval, archives the previous production
+   model, and records an audit event.

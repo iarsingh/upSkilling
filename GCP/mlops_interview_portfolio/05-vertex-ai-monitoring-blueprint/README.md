@@ -44,3 +44,18 @@ python3 src/monitoring_policy.py validate \
 - Drift thresholds should be explicit, reviewed, and version controlled.
 - Monitoring signals should route to an incident workflow, not sit in a UI.
 - BigQuery gives a scalable audit trail for prediction logs and analysis.
+
+## Interview Architecture
+
+Explain this as managed model monitoring on GCP. Vertex AI endpoints emit
+prediction logs, BigQuery stores monitoring data, a versioned policy defines
+drift thresholds, and Pub/Sub routes breaches into incident automation.
+
+## Interview Flow
+
+1. A model is deployed to a Vertex AI endpoint with prediction logging enabled.
+2. Request and response logs land in BigQuery for analysis and audit.
+3. A monitoring policy defines feature drift and prediction drift thresholds.
+4. The validator checks that policy before it is promoted.
+5. When thresholds are breached, Pub/Sub sends the alert to incident automation
+   or a runbook workflow.

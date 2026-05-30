@@ -63,6 +63,31 @@ platform where training, serving, tracking, and promotion can happen safely.
 
 GitHub: <add project link>
 
+## Post 20: AegisSphere
+
+Project 18: AegisSphere, an autonomous self-healing GenAI and agentic platform
+on GKE Enterprise.
+
+This is the convergence project:
+
+- DevOps: Terraform modules for GKE, VPC peering, Cloud SQL, IAM, and Artifact
+  Registry
+- GitOps: Argo CD reconciles applications, model endpoints, and network
+  policies from Git
+- DevSecOps: Cloud Build, Artifact Analysis, Cosign signing, VPC Service
+  Controls, Secret Manager, and External Secrets
+- MLOps: Vertex AI Pipelines and Feature Store for tabular routing models
+- LLMOps: prompts as code, Vertex AI Vector Search, Gemini, open-weights models
+  on Triton, and Vertex AI Metadata lineage
+- AIOps: Cloud Monitoring and Pub/Sub trigger Cloud Run remediation for latency,
+  token budget overruns, hallucination anomalies, and fallback model routing
+
+The executive framing: AegisSphere turns GenAI platform operations into a secure
+control plane where every model, prompt, vector index, secret, deployment, and
+self-healing action is governed, observable, and reversible.
+
+GitHub: <add project link>
+
 ## Post 3: Model Promotion Gates
 
 Project 2: model promotion gates.

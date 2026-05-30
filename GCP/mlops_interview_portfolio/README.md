@@ -25,6 +25,8 @@ and operate the full ML platform lifecycle:
   MLOps systems
 - Converge platform engineering, GitOps, security, streaming infrastructure,
   and MLOps lifecycle automation
+- Run autonomous self-healing GenAI and agentic platforms with DevSecOps,
+  LLMOps, and AIOps controls
 - Explain SLOs, GitOps, model lineage, and production readiness
 
 ## Project Index
@@ -48,6 +50,7 @@ and operate the full ML platform lifecycle:
 | 15 | NexusFraud | Real-time financial anomaly MLOps | Apache Beam, Dataflow, Vertex AI Feature Store, Vertex AI Pipelines, Metadata, canary/shadow deploys |
 | 16 | ClearRoute | Multi-tenant healthcare MLOps platform | GKE Enterprise, Anthos, Terraform, Config Connector, Argo CD, Kubeflow, Vertex AI, HIPAA-aligned controls |
 | 17 | AdStream | Streaming ad recommendation platform | Terraform, Cloud Deploy, Dataflow, Pub/Sub, Vertex AI Feature Store, Bigtable, BigQuery, SLO rollback |
+| 18 | AegisSphere | Autonomous GenAI and agentic platform | GKE Enterprise, Terraform, Argo CD, Cloud Build, Artifact Analysis, Cosign, Vertex AI, Vector Search, Triton, AIOps |
 
 ## Portfolio Architecture
 
@@ -70,6 +73,7 @@ flowchart TD
     A --> W[15 NexusFraud]
     A --> X[16 ClearRoute]
     A --> Y[17 AdStream]
+    A --> Z[18 AegisSphere]
 
     B --> H[GKE Runtime Platform]
     B --> I[GCS Model Artifacts]
@@ -108,6 +112,10 @@ flowchart TD
     X --> K
     Y --> K
     Y --> L
+    Z --> H
+    Z --> J
+    Z --> L
+    Z --> N
 ```
 
 ## End-to-End Story
@@ -126,6 +134,8 @@ flowchart TD
     industrial edge vision, and regulated fraud detection.
 11. Show senior platform engineering through multi-tenant GitOps healthcare
     MLOps and high-throughput streaming feature infrastructure.
+12. Operate a self-healing GenAI platform where DevOps, DevSecOps, LLMOps, and
+    AIOps are designed as one production control plane.
 
 ## 01. GKE ML Platform Blueprint
 
@@ -459,6 +469,24 @@ Interview angle:
 > Feature Store, Cloud Deploy, CI/CD, and SLO rollback protect a 50k+ RPS
 > recommendation path."
 
+## 18. AegisSphere
+
+Path: `18-aegis-sphere`
+
+An autonomous self-healing Generative AI and agentic platform on GKE Enterprise.
+It validates Terraform-managed multi-tenant infrastructure, Argo CD GitOps,
+Cloud Build secure supply chain, Artifact Analysis, Cosign image signing, VPC
+Service Controls, External Secrets, Vertex AI Pipelines, Feature Store, Vector
+Search, Gemini, Triton open-weights serving, Vertex AI Metadata, and AIOps
+self-healing loops for latency, token budget, hallucination, and fallback model
+routing.
+
+Interview angle:
+
+> "I can design a mission-critical GenAI platform where DevOps, DevSecOps,
+> LLMOps, and AIOps converge into a secure, governed, self-healing production
+> control plane."
+
 ## How To Validate
 
 Run all Python tests:
@@ -483,6 +511,7 @@ terraform -chdir=GCP/mlops_interview_portfolio/14-vision-edge/terraform fmt -che
 terraform -chdir=GCP/mlops_interview_portfolio/15-nexus-fraud/terraform fmt -check
 terraform -chdir=GCP/mlops_interview_portfolio/16-clear-route/terraform fmt -check
 terraform -chdir=GCP/mlops_interview_portfolio/17-ad-stream/terraform fmt -check
+terraform -chdir=GCP/mlops_interview_portfolio/18-aegis-sphere/terraform fmt -check
 ```
 
 Run CLI demos:
@@ -540,6 +569,9 @@ python3 GCP/mlops_interview_portfolio/16-clear-route/src/clear_route_gate.py eva
 
 python3 GCP/mlops_interview_portfolio/17-ad-stream/src/ad_stream_gate.py evaluate \
   --release GCP/mlops_interview_portfolio/17-ad-stream/examples/streaming_release.json
+
+python3 GCP/mlops_interview_portfolio/18-aegis-sphere/src/aegis_sphere_gate.py evaluate \
+  --release GCP/mlops_interview_portfolio/18-aegis-sphere/examples/platform_release.json
 ```
 
 ## Resume Alignment
@@ -564,6 +596,8 @@ These projects support the following resume themes:
   regulated financial anomaly detection on GCP
 - Multi-tenant GitOps platform engineering, healthcare security controls,
   streaming feature infrastructure, and SLO-based rollback automation
+- Autonomous GenAI platform engineering with DevSecOps supply chain security,
+  LLMOps lineage, RAG governance, and AIOps self-healing
 
 ## Publishing Assets
 

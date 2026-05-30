@@ -109,3 +109,20 @@ Expected output:
   fairness checks, calibration, and operational readiness.
 - Monitoring must feed both incident response and retraining workflows.
 - A mature ML platform makes the safe path the easiest path for data scientists.
+
+## Interview Architecture
+
+Explain this as the control plane over Vertex AI. BigQuery and Feature Store
+provide data, Vertex AI Pipelines trains and evaluates, Experiments and Metadata
+record lineage, Model Registry owns approval, and endpoint deployment is gated
+by canary, monitoring, retraining, and governance policies.
+
+## Interview Flow
+
+1. Dataset contracts and feature freshness checks validate training readiness.
+2. Vertex AI Pipelines runs reproducible training and evaluation.
+3. Experiments and Metadata capture lineage from data snapshot to model artifact.
+4. The release readiness gate checks quality, fairness, calibration, registry
+   approval, monitoring, rollback, and audit metadata.
+5. Approved models deploy as canaries; monitoring feeds incident response and
+   retraining triggers.

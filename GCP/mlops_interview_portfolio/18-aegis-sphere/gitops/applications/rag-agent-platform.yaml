@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aegis-rag-agent-platform
+  namespace: argocd
+spec:
+  project: aegis-platform
+  source:
+    repoURL: https://github.com/example/aegis-sphere.git
+    targetRevision: main
+    path: gitops/platform/rag-agents
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: aegis-agents
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

@@ -100,3 +100,20 @@ Expected result:
   for production remediation.
 - This pattern can be extended with Vertex AI Gemini, Cloud Deploy, Policy
   Controller, Config Sync, Argo CD, Slack, PagerDuty, Jira, and ServiceNow.
+
+## Interview Architecture
+
+Explain this as AIOps constrained by GitOps. Cloud Monitoring and Logging
+provide incident context, Pub/Sub triggers a triage service, an LLM-style policy
+selects a runbook and proposal, and GitOps guardrails determine whether the
+change can become a pull request.
+
+## Interview Flow
+
+1. Cloud Monitoring detects latency, error, drift, or quality issues.
+2. Pub/Sub delivers alert and log context to the AIOps triage service.
+3. The service summarizes the incident and matches a runbook.
+4. A remediation proposal is checked for severity, blast radius, rollback, and
+   allowed manifest path.
+5. Safe proposals become GitOps pull requests; unsafe proposals stay in human
+   review.

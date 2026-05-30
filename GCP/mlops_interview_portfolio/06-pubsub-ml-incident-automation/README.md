@@ -74,3 +74,19 @@ python3 src/incident_router.py \
 - ML incidents need both platform and model-quality runbooks.
 - Pub/Sub decouples alert producers from incident response consumers.
 - This can be extended to Slack, PagerDuty, Jira, or ServiceNow.
+
+## Interview Architecture
+
+Explain this as the operations bridge between monitoring and response. Cloud
+Monitoring produces alerts, Pub/Sub decouples producers from responders, and a
+Cloud Function-style router maps each alert to severity, owner, runbook, and
+recommended action.
+
+## Interview Flow
+
+1. A serving system emits latency, error, drift, or data-quality signals.
+2. Cloud Monitoring evaluates alert policies and publishes events to Pub/Sub.
+3. The incident router parses the alert payload.
+4. The router maps alert type to owner, severity, runbook, and next action.
+5. The incident summary can be sent to Slack, PagerDuty, Jira, ServiceNow, or a
+   custom remediation workflow.

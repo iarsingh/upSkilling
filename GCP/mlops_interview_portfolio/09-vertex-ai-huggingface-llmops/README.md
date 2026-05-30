@@ -124,3 +124,20 @@ sequenceDiagram
   rollout behavior around open-source models.
 - This pattern can be extended to Vertex AI Pipelines, Model Registry,
   Experiments, Feature Store, and Cloud Deploy.
+
+## Interview Architecture
+
+Explain this as a controlled path for open-source models on managed GCP
+serving. Hugging Face supplies the model, a custom container standardizes the
+runtime, Cloud Build creates the artifact, Artifact Registry stores it, and
+Vertex AI serves it behind release gates.
+
+## Interview Flow
+
+1. A model card describes source, task, owner, license, and production approval.
+2. Evaluation jobs produce quality, safety, latency, and cost metrics.
+3. Deployment config defines Vertex AI endpoint, traffic split, logging,
+   monitoring, and rollback.
+4. The release gate validates all three inputs.
+5. Approved releases deploy gradually to Vertex AI while prediction logs and
+   alerts feed monitoring workflows.

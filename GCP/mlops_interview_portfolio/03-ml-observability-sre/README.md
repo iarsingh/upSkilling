@@ -66,3 +66,18 @@ Example output:
 - p99 latency matters more than average latency for real-time inference.
 - Alert rules should combine reliability and ML quality indicators.
 - This can be extended into Prometheus, Grafana, OpenTelemetry, or ELK.
+
+## Interview Architecture
+
+Explain this as the SRE layer for ML serving. Inference logs are the source of
+truth, metric aggregation turns logs into reliability and model-quality signals,
+and an SLO evaluator decides whether the service is healthy or alerting.
+
+## Interview Flow
+
+1. The inference service emits structured logs for every prediction.
+2. A monitoring job parses latency, status, and drift fields.
+3. The tool calculates p95, p99, error rate, request count, and max drift.
+4. SLO policy checks compare observed values against thresholds.
+5. The output becomes an incident summary for Prometheus, Grafana, PagerDuty,
+   Slack, or a platform runbook.

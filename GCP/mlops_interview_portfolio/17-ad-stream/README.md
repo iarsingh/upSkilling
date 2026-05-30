@@ -34,3 +34,22 @@ python3 src/ad_stream_gate.py evaluate \
 - Blue/green Dataflow deployment reduces risk when changing live feature
   pipelines.
 - Online/offline feature parity is critical for ad ranking systems.
+
+## Interview Architecture
+
+Explain this as real-time feature infrastructure for ad ranking. Pub/Sub
+receives clickstream events, Dataflow computes features, Vertex AI Feature
+Store coordinates online/offline feature definitions, Bigtable serves online
+features, BigQuery stores historical features, and Cloud Deploy promotes
+streaming pipelines with blue/green safety.
+
+## Interview Flow
+
+1. Clickstream events arrive in Pub/Sub.
+2. Dataflow transforms events into behavioral features.
+3. Online features are written to Bigtable-backed serving paths, while offline
+   features land in BigQuery for training.
+4. Feature or model code changes trigger Cloud Build tests and ephemeral
+   Dataflow validation jobs.
+5. Cloud Deploy promotes blue/green pipeline versions and Cloud Monitoring SLOs
+   trigger rollback if latency or errors spike.

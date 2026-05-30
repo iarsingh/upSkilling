@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: tenant-rag-isolation
+  namespace: aegis-agents
+spec:
+  podSelector:
+    matchLabels:
+      app: rag-gateway
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              tenant: approved
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              platform: vector-search

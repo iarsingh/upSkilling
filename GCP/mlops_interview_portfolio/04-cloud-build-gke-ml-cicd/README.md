@@ -65,3 +65,18 @@ terraform/
 - Kustomize overlays mirror real environment promotion patterns.
 - Smoke tests reduce failed rollout risk.
 - Artifact Registry and GKE are native GCP choices for ML platform delivery.
+
+## Interview Architecture
+
+Explain this as the delivery layer for ML inference. Cloud Build owns test,
+build, push, deploy, and smoke-test stages; Artifact Registry stores immutable
+images; Kustomize manages environment differences; GKE runs the service.
+
+## Interview Flow
+
+1. A developer changes serving code, model packaging, or deployment config.
+2. Cloud Build runs tests and builds a Docker image.
+3. The image is pushed to Artifact Registry with a versioned tag.
+4. Kustomize overlays select dev or prod deployment settings.
+5. GKE rolls out the new image, Cloud Build checks rollout status, and a smoke
+   test confirms the endpoint can serve predictions.
