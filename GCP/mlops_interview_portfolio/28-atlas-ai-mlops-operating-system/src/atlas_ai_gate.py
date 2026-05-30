@@ -9,6 +9,8 @@ SKILL_DOMAINS = [
     "llmops",
     "data_platform",
     "devsecops",
+    "testing_stages",
+    "security_tools",
     "sre_aiops",
     "algorithms_finops",
 ]

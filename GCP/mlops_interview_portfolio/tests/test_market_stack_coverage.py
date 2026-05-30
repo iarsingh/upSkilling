@@ -29,6 +29,10 @@ def test_market_stack_upgrade_map_mentions_current_platform_signals():
         "Kubeflow Pipelines v2",
         "KServe",
         "Katib",
+        "Prisma Cloud",
+        "SentinelOne",
+        "Binary Authorization",
+        "Artifact Analysis",
     ]
 
     for term in required_terms:
@@ -57,3 +61,44 @@ def test_modern_requirements_include_data_genai_and_observability_stack():
 
     for package in required_packages:
         assert package in requirements
+
+
+def test_security_testing_playbook_mentions_enterprise_security_controls():
+    portfolio_root = Path(__file__).resolve().parents[1]
+    playbook = (portfolio_root / "SECURITY_TESTING_PLAYBOOK.md").read_text(
+        encoding="utf-8"
+    )
+    required_terms = [
+        "Prisma Cloud",
+        "SentinelOne",
+        "Artifact Analysis",
+        "Binary Authorization",
+        "Cosign",
+        "Model Armor",
+        "LLM and RAG evaluation",
+        "Chaos and rollback tests",
+    ]
+
+    for term in required_terms:
+        assert term in playbook
+
+
+def test_all_project_readmes_include_testing_and_security_gates():
+    portfolio_root = Path(__file__).resolve().parents[1]
+    project_readmes = sorted(portfolio_root.glob("[0-9][0-9]-*/README.md"))
+    required_terms = [
+        "## Testing and Security Gates",
+        "Prisma Cloud",
+        "SentinelOne",
+        "Artifact Analysis",
+        "Binary Authorization",
+        "Cosign",
+        "Model Armor",
+        "Cloud Monitoring",
+    ]
+
+    assert len(project_readmes) == 28
+    for readme in project_readmes:
+        text = readme.read_text(encoding="utf-8")
+        for term in required_terms:
+            assert term in text, f"{readme} is missing {term}"

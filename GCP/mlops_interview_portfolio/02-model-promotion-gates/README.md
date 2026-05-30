@@ -49,6 +49,29 @@ Default gates:
 - Error rate must be at most `0.02`
 - Production promotion requires approval
 
+## Testing and Security Gates
+
+- **Code and unit tests:** validate Python CLIs, policy logic, API handlers, and
+  reusable ML utilities with `pytest` before merge.
+- **Data and ML tests:** run schema checks, feature freshness checks, drift
+  checks, model evaluation, and batch/streaming quality gates with pandas,
+  Great Expectations, Evidently, and Vertex AI evaluation metadata.
+- **Pipeline tests:** validate Kubeflow/Vertex AI pipeline components,
+  container inputs/outputs, retry policy, artifact paths, and promotion evidence
+  before production execution.
+- **LLM and RAG tests:** evaluate prompt injection, PII leakage, groundedness,
+  hallucination, toxicity, retrieval quality, token budget, and agent loop
+  limits with Model Armor, Vertex AI Gen AI evaluation, Ragas, or DeepEval.
+- **CI/CD security:** scan Terraform, Kubernetes manifests, dependencies, and
+  container images using Prisma Cloud, Artifact Analysis, and policy-as-code;
+  sign approved images with Cosign.
+- **Admission and runtime security:** enforce Binary Authorization, Kubernetes
+  network policies, Secret Manager/External Secrets, VPC Service Controls, and
+  SentinelOne or Prisma Cloud runtime workload protection on GKE.
+- **Release safety:** use canary, shadow, performance, chaos, and rollback tests
+  with Cloud Deploy, Cloud Monitoring, OpenTelemetry, Eventarc, and Pub/Sub
+  remediation workflows.
+
 ## Run
 
 Evaluate a model for staging:

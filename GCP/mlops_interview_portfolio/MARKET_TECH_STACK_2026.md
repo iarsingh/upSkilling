@@ -18,7 +18,7 @@ expectations on GCP.
   GPU/TPU scheduling, Ray on Vertex AI, vLLM, Triton, and workload identity.
 - **DevSecOps:** Cloud Build, Artifact Analysis, Binary Authorization-style
   promotion, Cosign signing, Secret Manager, External Secrets, VPC Service
-  Controls, Cloud Armor, and policy-as-code.
+  Controls, Cloud Armor, Prisma Cloud, SentinelOne, and policy-as-code.
 - **AIOps and SRE:** Cloud Monitoring, Cloud Logging, Cloud Trace with
   OpenTelemetry, Eventarc, Pub/Sub remediation, error-budget-aware rollbacks,
   and self-healing workflows.
@@ -88,7 +88,7 @@ stack:
 | `25-cyber-stream` | Add Aho-Corasick, ring buffers, Dataflow, Pub/Sub, BigQuery drift, Eventarc, Cloud Run retraining, Vertex AI custom training, and Cloud Deploy shadow rollout. | Cybersecurity streaming MLOps with deterministic fast paths plus governed ML updates. |
 | `26-kubeflow-gke-ml-factory` | Add Kubeflow Profiles, Notebooks, Kubeflow Pipelines v2, Katib, KServe, Kueue, Workload Identity, Managed Prometheus, Argo CD/Config Sync, and Vertex AI Metadata export. | Kubernetes-native ML factory for teams that need self-managed tenancy, GPU scheduling, and open-source extensibility on GKE. |
 | `27-kubeflow-vertex-hybrid-pipelines` | Add KFP v2 SDK, Google Cloud Pipeline Components, Kubeflow-on-GKE execution, Vertex AI Pipelines execution, Metadata, Model Registry, Cloud Build, Cloud Deploy, canary, and shadow release gates. | Shows how to bridge open-source Kubeflow portability with managed Vertex AI production governance. |
-| `28-atlas-ai-mlops-operating-system` | Combine GKE Enterprise, Terraform, GitOps, Kubeflow, Vertex AI Pipelines, Agent Engine, Vector Search, Model Armor, Dataflow, Feature Store, BigQuery, Bigtable, Cloud Deploy, AIOps, GPU FinOps, and DSA fast paths. | Capstone board-level architecture that shows ownership of the full enterprise AI/MLOps operating model. |
+| `28-atlas-ai-mlops-operating-system` | Combine GKE Enterprise, Terraform, GitOps, Kubeflow, Vertex AI Pipelines, Agent Engine, Vector Search, Model Armor, Dataflow, Feature Store, BigQuery, Bigtable, Cloud Deploy, Prisma Cloud, SentinelOne, Binary Authorization, AIOps, GPU FinOps, and DSA fast paths. | Capstone board-level architecture that shows ownership of the full enterprise AI/MLOps operating model, testing stages, and security posture. |
 
 ## How To Use In Interviews
 

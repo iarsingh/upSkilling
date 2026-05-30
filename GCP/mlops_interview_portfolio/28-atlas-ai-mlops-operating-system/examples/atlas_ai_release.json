@@ -41,10 +41,36 @@
     "artifact_registry": true,
     "artifact_analysis": true,
     "cosign_signing": true,
+    "binary_authorization": true,
+    "prisma_cloud_scanning": true,
+    "sentinelone_runtime_protection": true,
     "secret_manager": true,
     "vpc_service_controls": true,
     "private_service_connect": true,
     "policy_as_code": true
+  },
+  "testing_stages": {
+    "unit_tests": true,
+    "data_contract_tests": true,
+    "pipeline_component_tests": true,
+    "integration_tests": true,
+    "model_evaluation_tests": true,
+    "llm_rag_evaluation_tests": true,
+    "security_tests": true,
+    "performance_tests": true,
+    "chaos_rollback_tests": true
+  },
+  "security_tools": {
+    "artifact_analysis": true,
+    "binary_authorization": true,
+    "cosign": true,
+    "prisma_cloud": true,
+    "sentinelone": true,
+    "secret_manager": true,
+    "model_armor": true,
+    "cloud_armor": true,
+    "vpc_service_controls": true,
+    "private_service_connect": true
   },
   "sre_aiops": {
     "cloud_monitoring": true,
@@ -66,7 +92,7 @@
     "dynamic_programming": true
   },
   "quality": {
-    "min_skill_domains": 7,
+    "min_skill_domains": 9,
     "min_covered_project_count": 27,
     "max_p95_platform_latency_ms": 500,
     "p95_platform_latency_ms": 318,

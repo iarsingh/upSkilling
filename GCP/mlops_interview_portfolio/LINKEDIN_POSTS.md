@@ -75,12 +75,18 @@ This is the capstone project that combines the full portfolio:
 - Pub/Sub, Dataflow, BigQuery, Bigtable, and Cloud Storage
 - Gemini, Agent Engine, Vector Search, Model Armor, RAG, and vLLM/Triton
 - Cloud Build, Artifact Registry, Artifact Analysis, Cosign, and Secret Manager
+- Prisma Cloud for CI/CD, IaC, image, and workload security checks
+- SentinelOne for runtime Kubernetes workload protection
 - Cloud Monitoring, OpenTelemetry, Eventarc, and AIOps remediation
 - GPU FinOps, token buckets, graph traversal, tries, MinHash, and ring buffers
 
 The lesson: senior MLOps is an operating model, not a single tool. The value is
 connecting platform, data, ML lifecycle, GenAI governance, security, reliability,
 cost, and algorithms into one system that can be operated safely.
+
+The security lesson: a model release is not production-ready until it passes
+testing stages, signed artifact policy, CNAPP/CWPP checks, runtime protection,
+SLO gates, and rollback drills.
 
 GitHub: <add project link>
 

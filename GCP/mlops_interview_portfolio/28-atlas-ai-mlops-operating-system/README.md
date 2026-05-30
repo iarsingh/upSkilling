@@ -24,7 +24,8 @@ GitOps delivery, and AIOps self-healing from one governed platform.
   Cloud Composer, Great Expectations, Evidently, and pandas/NumPy validation.
 - **DevSecOps:** Cloud Build, Artifact Registry, Artifact Analysis, Cosign,
   Secret Manager, External Secrets, VPC Service Controls, Private Service
-  Connect, Cloud Armor, and policy-as-code.
+  Connect, Cloud Armor, Prisma Cloud, SentinelOne, Binary Authorization, and
+  policy-as-code.
 - **AIOps and SRE:** Cloud Monitoring, Cloud Logging, Cloud Trace,
   OpenTelemetry, Eventarc, Pub/Sub remediation topics, SLO burn-rate alerts,
   model drift, hallucination signals, and GitOps rollback automation.
@@ -101,6 +102,29 @@ the individual systems:
 9. Eventarc and Pub/Sub trigger Cloud Run remediation that opens or applies a
    policy-bound GitOps rollback.
 
+## Testing and Security Stages
+
+1. **Pull request:** unit tests, linting, dependency review, secret scanning,
+   SAST, Terraform policy checks, and KFP component contract tests.
+2. **Build:** Cloud Build creates SBOMs, scans containers with Artifact
+   Analysis and Prisma Cloud, signs images with Cosign, and stores immutable
+   artifacts in Artifact Registry.
+3. **Pre-deploy:** Binary Authorization checks signatures and attestations;
+   policy-as-code blocks privileged pods, public notebooks, broad IAM, and
+   missing network policies.
+4. **ML validation:** Vertex AI/Kubeflow pipelines run data contracts, model
+   evaluation, drift checks, explainability evidence, and champion/challenger
+   gates.
+5. **LLM validation:** Model Armor, Vertex AI Gen AI evaluation, Ragas, and
+   DeepEval check prompt injection, toxicity, hallucination, groundedness, and
+   runaway agent loops.
+6. **Runtime:** SentinelOne or Prisma Cloud protects GKE workloads against
+   malware, suspicious process execution, crypto-mining, reverse shells, and
+   workload drift.
+7. **Production:** Cloud Monitoring, OpenTelemetry, Cloud Logging, and BigQuery
+   evidence tables track SLOs, token cost, model quality, security alerts, and
+   rollback history.
+
 ## Interview Talking Points
 
 - This is the project to discuss when an interviewer asks, "Can you design the
@@ -115,6 +139,29 @@ the individual systems:
   versioning, telemetry, and rollback.
 - Algorithms are part of platform engineering when latency, memory, and cost
   matter.
+
+## Testing and Security Gates
+
+- **Code and unit tests:** validate Python CLIs, policy logic, API handlers, and
+  reusable ML utilities with `pytest` before merge.
+- **Data and ML tests:** run schema checks, feature freshness checks, drift
+  checks, model evaluation, and batch/streaming quality gates with pandas,
+  Great Expectations, Evidently, and Vertex AI evaluation metadata.
+- **Pipeline tests:** validate Kubeflow/Vertex AI pipeline components,
+  container inputs/outputs, retry policy, artifact paths, and promotion evidence
+  before production execution.
+- **LLM and RAG tests:** evaluate prompt injection, PII leakage, groundedness,
+  hallucination, toxicity, retrieval quality, token budget, and agent loop
+  limits with Model Armor, Vertex AI Gen AI evaluation, Ragas, or DeepEval.
+- **CI/CD security:** scan Terraform, Kubernetes manifests, dependencies, and
+  container images using Prisma Cloud, Artifact Analysis, and policy-as-code;
+  sign approved images with Cosign.
+- **Admission and runtime security:** enforce Binary Authorization, Kubernetes
+  network policies, Secret Manager/External Secrets, VPC Service Controls, and
+  SentinelOne or Prisma Cloud runtime workload protection on GKE.
+- **Release safety:** use canary, shadow, performance, chaos, and rollback tests
+  with Cloud Deploy, Cloud Monitoring, OpenTelemetry, Eventarc, and Pub/Sub
+  remediation workflows.
 
 ## Run
 

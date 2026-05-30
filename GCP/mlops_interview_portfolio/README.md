@@ -37,6 +37,8 @@ and operate the full ML platform lifecycle:
   Pipelines governance
 - Present one capstone enterprise AI/MLOps operating system that combines all
   project skills into a single architecture
+- Add testing stages and enterprise security controls with Prisma Cloud,
+  SentinelOne, Artifact Analysis, Binary Authorization, Cosign, and Model Armor
 - Explain SLOs, GitOps, model lineage, and production readiness
 
 ## Project Index
@@ -718,7 +720,8 @@ The capstone enterprise AI/MLOps operating system that combines the entire
 portfolio. It ties together GKE Enterprise, Terraform, GitOps, Kubeflow,
 Vertex AI, streaming Dataflow features, Feature Store, BigQuery, Bigtable,
 GenAI/RAG, Agent Engine, Vector Search, Model Armor, DevSecOps supply chain,
-Cloud Monitoring, AIOps remediation, GPU FinOps, and algorithmic fast paths.
+Prisma Cloud, SentinelOne, Cloud Monitoring, AIOps remediation, GPU FinOps, and
+algorithmic fast paths.
 
 Showcases:
 
@@ -728,6 +731,8 @@ Showcases:
 - Kubeflow for tenant experimentation and Vertex AI for governed production
 - GenAI assets managed with the same rigor as models and infrastructure
 - SLO, drift, safety, vulnerability, and cost signals feeding GitOps rollback
+- Testing stages across unit, data contract, KFP component, integration, model,
+  LLM/RAG, security, performance, chaos, and rollback validation
 
 Interview angle:
 
@@ -899,6 +904,8 @@ These projects support the following resume themes:
   Pipelines governance
 - Enterprise AI/MLOps operating-system design across platform, data, ML, GenAI,
   security, SRE, AIOps, FinOps, and algorithms
+- CI/CD testing and runtime security posture using Prisma Cloud, SentinelOne,
+  Artifact Analysis, Binary Authorization, Cosign, and Model Armor
 
 ## Publishing Assets
 
@@ -906,6 +913,7 @@ These projects support the following resume themes:
 - [LinkedIn post templates](LINKEDIN_POSTS.md)
 - [2026 market tech stack upgrade map](MARKET_TECH_STACK_2026.md)
 - [Optional modern Python/GenAI dependency profile](requirements-modern.txt)
+- [Security and testing playbook](SECURITY_TESTING_PLAYBOOK.md)
 - DevOps-to-MLOps transition with production reliability focus
 
 ## How To Present In Interviews

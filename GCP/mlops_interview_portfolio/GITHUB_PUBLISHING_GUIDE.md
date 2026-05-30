@@ -63,6 +63,7 @@ mlops, gcp, gke, anthos, terraform, kubernetes, cloud-build, cloud-deploy, verte
 - One CLI output from KubeFlowForge Kubeflow on GKE validation
 - One CLI output from PipelineBridge hybrid KFP/Vertex AI validation
 - One CLI output from AtlasAI full portfolio capstone validation
+- One screenshot or excerpt from the security and testing playbook
 - Cloud Build YAML snippet
 - Kubernetes deployment snippet
 - Terraform plan snippet with sensitive values hidden
@@ -157,7 +158,8 @@ inference quality gates, and retraining controls.
   Model Registry, Cloud Build, Cloud Deploy, canary, shadow, and rollback gates.
 - Built AtlasAI, a capstone enterprise AI/MLOps operating system combining GKE,
   Terraform, GitOps, Kubeflow, Vertex AI, GenAI/RAG, Dataflow, Feature Store,
-  DevSecOps, AIOps, GPU FinOps, and algorithmic serving patterns.
+  DevSecOps, Prisma Cloud, SentinelOne, AIOps, GPU FinOps, and algorithmic
+  serving patterns.
 
 ## Publishing Order
 

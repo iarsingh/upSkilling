@@ -18,7 +18,7 @@ def test_atlas_ai_approves_full_portfolio_capstone():
     result = evaluate_release(release)
 
     assert result["status"] == "approved"
-    assert result["skill_domain_count"] == 7
+    assert result["skill_domain_count"] == 9
     assert result["covered_project_count"] == 27
 
 
@@ -27,7 +27,7 @@ def test_atlas_ai_blocks_incomplete_operating_system():
         Path(__file__).resolve().parents[1] / "examples" / "atlas_ai_release.json"
     )
     release["llmops"]["model_armor"] = False
-    release["devsecops"]["cosign_signing"] = False
+    release["security_tools"]["prisma_cloud"] = False
     release["quality"]["release_failure_rate"] = 0.04
 
     result = evaluate_release(release)
