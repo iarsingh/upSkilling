@@ -1,0 +1,49 @@
+{
+  "models": [
+    {
+      "id": "churn-model-v1",
+      "name": "customer-churn",
+      "version": 1,
+      "stage": "archived",
+      "artifact_uri": "gs://ml-platform-models/churn/v1/model.json",
+      "metrics": {
+        "accuracy": 0.78,
+        "p99_latency_ms": 310,
+        "error_rate": 0.018
+      },
+      "audit": []
+    },
+    {
+      "id": "churn-model-v2",
+      "name": "customer-churn",
+      "version": 2,
+      "stage": "production",
+      "artifact_uri": "gs://ml-platform-models/churn/v2/model.json",
+      "metrics": {
+        "accuracy": 0.84,
+        "p99_latency_ms": 220,
+        "error_rate": 0.011
+      },
+      "audit": [
+        {
+          "event": "promoted",
+          "target": "production",
+          "approved_by": "platform-lead"
+        }
+      ]
+    },
+    {
+      "id": "churn-model-v3",
+      "name": "customer-churn",
+      "version": 3,
+      "stage": "candidate",
+      "artifact_uri": "gs://ml-platform-models/churn/v3/model.json",
+      "metrics": {
+        "accuracy": 0.88,
+        "p99_latency_ms": 185,
+        "error_rate": 0.009
+      },
+      "audit": []
+    }
+  ]
+}

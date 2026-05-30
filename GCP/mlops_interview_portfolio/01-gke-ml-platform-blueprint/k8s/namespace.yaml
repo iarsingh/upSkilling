@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ml-platform
+  labels:
+    platform: mlops
+    managed-by: gitops
