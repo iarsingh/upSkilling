@@ -13,16 +13,36 @@ serving API to GKE.
 - Smoke-test stage after deployment
 - Clear separation of build, deploy, and verify stages
 
+## Architecture
+
+```mermaid
+flowchart LR
+    A[Git Push] --> B[Cloud Build Trigger]
+    B --> C[Unit Tests]
+    C --> D[Docker Build]
+    D --> E[Artifact Registry]
+    E --> F[GKE Cluster]
+    G[Kustomize Overlay: dev/prod] --> F
+    F --> H[Churn Inference Deployment]
+    H --> I[Rollout Status Check]
+    I --> J[Smoke Test]
+    J --> K[Deployment Verified]
+```
+
 ## Pipeline Flow
 
-```text
-Git push
-  -> Cloud Build
-  -> Unit tests
-  -> Docker build
-  -> Artifact Registry push
-  -> GKE deploy with kustomize
-  -> Smoke test service health
+```mermaid
+sequenceDiagram
+    participant Dev as Developer
+    participant CB as Cloud Build
+    participant AR as Artifact Registry
+    participant GKE as GKE
+    Dev->>CB: Push commit
+    CB->>CB: Run unit tests
+    CB->>AR: Build and push image
+    CB->>GKE: Update deployment image
+    GKE-->>CB: Rollout status
+    CB->>GKE: Smoke test deployment
 ```
 
 ## Files

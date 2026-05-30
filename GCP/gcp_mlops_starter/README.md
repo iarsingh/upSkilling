@@ -35,6 +35,33 @@ This project simulates a practical MLOps workflow:
 It is intentionally small so it can be understood, modified, and deployed
 without needing expensive managed training jobs.
 
+## Architecture
+
+```mermaid
+flowchart LR
+    A[Terraform] --> B[GCS Raw Data Bucket]
+    A --> C[GCS Model Artifacts Bucket]
+    A --> D[BigQuery Feature Dataset]
+    A --> E[Pub/Sub Model Events Topic]
+    A --> F[Pipeline Runner Service Account]
+
+    G[Python Training CLI] --> H[Synthetic Churn Dataset]
+    H --> I[Gaussian Naive Bayes Training]
+    I --> J[model.json]
+    I --> K[metrics.json]
+    J --> C
+    K --> C
+    I --> E
+```
+
+## Flow
+
+1. Terraform creates the GCP foundation for raw data, model artifacts, feature
+   storage, model events, and pipeline identity.
+2. The Python CLI generates a churn dataset and trains a lightweight model.
+3. The pipeline writes model and metrics artifacts locally.
+4. Artifacts can be uploaded to the GCS model bucket for review or deployment.
+
 ## Project Layout
 
 ```text

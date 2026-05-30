@@ -17,21 +17,30 @@ This project demonstrates the platform engineering side of MLOps:
 
 ## Architecture
 
-```text
-Developer / CI
-    |
-    v
-GitHub Actions / Cloud Build
-    |
-    v
-Artifact Registry + GCS Model Bucket
-    |
-    v
-GKE Namespace: ml-platform
-    |-- MLflow tracking service
-    |-- Inference API deployment
-    |-- HPA for latency/traffic scaling
-    |-- Service account with workload identity
+```mermaid
+flowchart LR
+    A[Developer / CI] --> B[GitHub Actions or Cloud Build]
+    B --> C[Artifact Registry]
+    B --> D[GCS Model Artifact Bucket]
+    C --> E[GKE Cluster]
+    D --> E
+
+    subgraph E[GKE Cluster]
+        F[Namespace: ml-platform]
+        G[MLflow Tracking Service]
+        H[Churn Inference Deployment]
+        I[Horizontal Pod Autoscaler]
+        J[CPU Node Pool]
+        K[GPU Node Pool Blueprint]
+        L[Workload Identity Service Account]
+    end
+
+    F --> G
+    F --> H
+    I --> H
+    H --> J
+    H --> K
+    L --> H
 ```
 
 ## Contents

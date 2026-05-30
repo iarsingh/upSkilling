@@ -16,13 +16,19 @@ expensive online prediction infrastructure during an interview.
 
 ## Architecture
 
-```text
-Vertex AI Endpoint
-  -> Prediction request/response logging
-  -> BigQuery monitoring dataset
-  -> Drift policy evaluation
-  -> Pub/Sub alert topic
-  -> Incident automation / Slack / PagerDuty
+```mermaid
+flowchart LR
+    A[Vertex AI Endpoint] --> B[Prediction Request and Response Logs]
+    B --> C[BigQuery Monitoring Dataset]
+    D[Monitoring Policy JSON] --> E[Policy Validator CLI]
+    E --> F[Versioned Monitoring Config]
+    F --> G[GCS Monitoring Config Bucket]
+    C --> H[Drift and Skew Evaluation]
+    H --> I{Threshold Breach?}
+    I -- No --> J[Continue Monitoring]
+    I -- Yes --> K[Pub/Sub Alert Topic]
+    K --> L[Incident Automation]
+    L --> M[Slack / PagerDuty / Jira]
 ```
 
 ## Run Policy Validation

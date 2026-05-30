@@ -29,6 +29,38 @@ and operate the full ML platform lifecycle:
 | 05 | Vertex AI Monitoring Blueprint | Managed MLOps | Vertex AI monitoring concepts, BigQuery logs, Pub/Sub alerts |
 | 06 | Pub/Sub ML Incident Automation | Incident response | Pub/Sub, Cloud Function style routing, runbooks, severity mapping |
 
+## Portfolio Architecture
+
+```mermaid
+flowchart TD
+    A[DevOps to MLOps Portfolio] --> B[01 GKE ML Platform Blueprint]
+    A --> C[02 Model Promotion Gates]
+    A --> D[03 ML Observability SRE]
+    A --> E[04 Cloud Build GKE ML CI/CD]
+    A --> F[05 Vertex AI Monitoring Blueprint]
+    A --> G[06 Pub/Sub ML Incident Automation]
+
+    B --> H[GKE Runtime Platform]
+    B --> I[GCS Model Artifacts]
+    E --> H
+    E --> J[Artifact Registry]
+    C --> I
+    C --> K[Model Registry and Lineage]
+    D --> L[SLO Signals]
+    F --> L
+    F --> M[BigQuery Prediction Logs]
+    L --> G
+    G --> N[Runbooks and Incident Routing]
+```
+
+## End-to-End Story
+
+1. Build the ML platform foundation on GKE with Terraform and GitOps.
+2. Deliver inference services through Cloud Build, Artifact Registry, and GKE.
+3. Promote models only when quality, latency, and approval gates pass.
+4. Monitor inference reliability and model drift with SLO-focused tooling.
+5. Route alerts into Pub/Sub-based incident automation with runbook ownership.
+
 ## 01. GKE ML Platform Blueprint
 
 Path: `01-gke-ml-platform-blueprint`

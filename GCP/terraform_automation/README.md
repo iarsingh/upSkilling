@@ -16,6 +16,33 @@ This project currently manages:
 Terraform state is stored in a GCS backend so the infrastructure can be managed
 consistently across runs.
 
+## Architecture
+
+```mermaid
+flowchart LR
+    A[Python CLI] --> B[Terraform Helper]
+    B --> C[Terraform Configuration]
+    C --> D[GCS Remote State Bucket]
+    C --> E[GCS Artifact Bucket]
+    C --> F[Automation Service Account]
+    C --> G[Pub/Sub Topic]
+
+    H[gcloud / ADC Auth] --> B
+    D --> I[Terraform State Validation]
+    C --> I
+    I --> A
+```
+
+## Flow
+
+1. The Python CLI wraps Terraform commands for bootstrap, deploy, status, and
+   validation workflows.
+2. Terraform provisions the GCS state bucket, artifact bucket, service account,
+   and Pub/Sub topic.
+3. Remote state is stored in GCS so later runs can detect drift.
+4. The validation helper reads Terraform state and checks workspace/resource
+   alignment.
+
 ## Repository Layout
 
 ```text

@@ -12,6 +12,34 @@ thinking: quality gates, approval gates, lineage, and audit-friendly state.
 - JSON model registry with audit trail
 - CI-friendly Python tests
 
+## Architecture
+
+```mermaid
+flowchart LR
+    A[Candidate Model] --> B[Promotion CLI]
+    C[JSON Model Registry] --> B
+    D[Promotion Policy] --> B
+    B --> E{Quality Gates Pass?}
+    E -- No --> F[Reject Promotion]
+    E -- Yes --> G{Production Target?}
+    G -- No --> H[Promote to Staging]
+    G -- Yes --> I{Approval Provided?}
+    I -- No --> F
+    I -- Yes --> J[Archive Previous Production Model]
+    J --> K[Promote to Production]
+    H --> L[Audit Trail]
+    K --> L
+    L --> C
+```
+
+## Flow
+
+1. The CLI loads a model candidate from the JSON registry.
+2. Promotion policy checks accuracy, p99 latency, and error rate.
+3. Staging promotion is automatic when gates pass.
+4. Production promotion requires explicit approval.
+5. Previous production models are archived and the audit trail is updated.
+
 ## Promotion Rules
 
 Default gates:

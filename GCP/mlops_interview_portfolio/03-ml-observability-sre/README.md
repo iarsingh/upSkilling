@@ -13,6 +13,31 @@ rate, drift score, and alert decisions.
 - Incident-summary style output
 - Python automation for operational workflows
 
+## Architecture
+
+```mermaid
+flowchart LR
+    A[Inference Service Logs] --> B[JSONL Log Loader]
+    B --> C[Metric Aggregator]
+    C --> D[p95 / p99 Latency]
+    C --> E[Error Rate]
+    C --> F[Max Drift Score]
+    D --> G[SLO Evaluator]
+    E --> G
+    F --> G
+    H[SLO Policy] --> G
+    G --> I[Healthy or Alert Decision]
+    I --> J[Incident Summary]
+    J --> K[Prometheus / Grafana / ELK Extension]
+```
+
+## Flow
+
+1. Inference logs are parsed from JSONL.
+2. The tool calculates latency percentiles, error rate, and drift score.
+3. SLO policy thresholds are evaluated against those metrics.
+4. The output summarizes whether the service is healthy or alerting.
+
 ## Run
 
 ```bash
