@@ -1,0 +1,46 @@
+{
+  "platform": "AeroPredict",
+  "ingestion": {
+    "pubsub_multi_region": true,
+    "regions": ["us-central1", "europe-west1"],
+    "gb_per_second": 3.2,
+    "min_gb_per_second": 2.5
+  },
+  "stream_processing": {
+    "runner": "apache-beam-dataflow",
+    "windowing": "tumbling",
+    "window_seconds": 30,
+    "feature_validation_enabled": true,
+    "max_processing_lag_ms": 350,
+    "processing_lag_ms": 180
+  },
+  "features": {
+    "store": "vertex-ai-feature-store",
+    "online_backend": "cloud-bigtable",
+    "offline_store": "bigquery",
+    "online_lookup_latency_ms": 7,
+    "max_online_lookup_latency_ms": 10,
+    "online_offline_parity": true
+  },
+  "retraining": {
+    "drift_daemon_enabled": true,
+    "feature_skew_detection_enabled": true,
+    "cloud_workflows_trigger_enabled": true,
+    "vertex_ai_pipelines_enabled": true,
+    "training_containers": ["xgboost", "tensorflow"]
+  },
+  "security": {
+    "terraform_managed": true,
+    "vpc_service_controls_enabled": true,
+    "private_training_enabled": true,
+    "least_privilege_iam": true
+  },
+  "deployment": {
+    "target": "vertex-ai-endpoints",
+    "cloud_deploy_enabled": true,
+    "blue_green_enabled": true,
+    "fallback_routing_enabled": true,
+    "p95_prediction_latency_ms": 120,
+    "max_p95_prediction_latency_ms": 250
+  }
+}

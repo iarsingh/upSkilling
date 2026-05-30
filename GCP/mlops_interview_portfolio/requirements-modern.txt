@@ -1,0 +1,43 @@
+# Optional modern Python and GenAI stack for portfolio implementations.
+#
+# The project READMEs and policy CLIs are intentionally lightweight, but these
+# packages are the realistic implementation layer to mention or use when turning
+# any blueprint into production code.
+
+# Test and configuration
+pytest>=7.4
+pydantic>=2.10
+pyyaml>=6.0
+
+# Data engineering and classical ML
+numpy>=1.26
+pandas>=2.2
+pyarrow>=15.0
+scikit-learn>=1.4
+xgboost>=2.0
+
+# Google Cloud and Vertex AI
+google-cloud-aiplatform>=1.80
+google-genai>=1.0
+google-cloud-bigquery>=3.25
+google-cloud-pubsub>=2.23
+google-cloud-storage>=2.18
+google-cloud-monitoring>=2.22
+google-cloud-logging>=3.11
+
+# LLMOps, RAG, and evaluation
+langchain>=0.3
+llama-index>=0.12
+ragas>=0.2
+deepeval>=2.0
+
+# API serving, observability, and metrics
+fastapi>=0.115
+uvicorn>=0.34
+prometheus-client>=0.20
+opentelemetry-api>=1.27
+opentelemetry-sdk>=1.27
+
+# Data quality and drift
+great-expectations>=1.2
+evidently>=0.4

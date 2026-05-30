@@ -27,6 +27,12 @@ and operate the full ML platform lifecycle:
   and MLOps lifecycle automation
 - Run autonomous self-healing GenAI and agentic platforms with DevSecOps,
   LLMOps, and AIOps controls
+- Operate IoT streaming predictive maintenance and secure enterprise
+  multi-agent platforms
+- Use graph traversal, tries, heaps, and dynamic programming to reduce ML
+  serving latency and cloud cost
+- Optimize GPU FinOps, biomedical Graph-RAG, and cybersecurity streaming with
+  algorithmic platform components
 - Explain SLOs, GitOps, model lineage, and production readiness
 
 ## Project Index
@@ -51,6 +57,13 @@ and operate the full ML platform lifecycle:
 | 16 | ClearRoute | Multi-tenant healthcare MLOps platform | GKE Enterprise, Anthos, Terraform, Config Connector, Argo CD, Kubeflow, Vertex AI, HIPAA-aligned controls |
 | 17 | AdStream | Streaming ad recommendation platform | Terraform, Cloud Deploy, Dataflow, Pub/Sub, Vertex AI Feature Store, Bigtable, BigQuery, SLO rollback |
 | 18 | AegisSphere | Autonomous GenAI and agentic platform | GKE Enterprise, Terraform, Argo CD, Cloud Build, Artifact Analysis, Cosign, Vertex AI, Vector Search, Triton, AIOps |
+| 19 | AeroPredict | IoT predictive maintenance MLOps | Multi-region Pub/Sub, Dataflow, Vertex AI Feature Store, Bigtable, BigQuery, Cloud Workflows, Cloud Deploy |
+| 20 | OmniAgent | Secure multi-agent LLMOps platform | Vertex AI Agent Engine, Agent Studio, Gemini, GKE Enterprise, vLLM, Vector Search, PSC, Eventarc |
+| 21 | GraphShield | Real-time fraud graph MLOps | GKE, Go/C++ sampler, BFS, SCC detection, Pub/Sub, Dataflow, Bigtable, Vertex AI Pipelines, PyTorch Geometric |
+| 22 | LexiStream | Low-latency GenAI routing gateway | Rust/Go, concurrent Trie, Min-Heap, Levenshtein DP, GKE, eBPF, Secret Manager, WAF, Cloud Monitoring |
+| 23 | FinPulse | GPU FinOps and AIOps optimizer | GKE Enterprise, Kueue, Spot GPUs, DP bin packing, token buckets, vLLM, Gemini, BigQuery, Cloud Monitoring |
+| 24 | BioGraphRAG | Biomedical Graph-RAG platform | Dataflow, MinHash, LSH, A*/Dijkstra, Vertex AI Vector Search, Vertex AI Pipelines, Cloud Build, Secret Manager |
+| 25 | CyberStream | Cyber-threat streaming MLOps | Pub/Sub, Dataflow, Aho-Corasick, ring buffers, BigQuery drift, Eventarc, Cloud Run, Vertex AI, Cloud Deploy |
 
 ## Portfolio Architecture
 
@@ -74,6 +87,13 @@ flowchart TD
     A --> X[16 ClearRoute]
     A --> Y[17 AdStream]
     A --> Z[18 AegisSphere]
+    A --> AA[19 AeroPredict]
+    A --> AB[20 OmniAgent]
+    A --> AC[21 GraphShield]
+    A --> AD[22 LexiStream]
+    A --> AE[23 FinPulse]
+    A --> AF[24 BioGraphRAG]
+    A --> AG[25 CyberStream]
 
     B --> H[GKE Runtime Platform]
     B --> I[GCS Model Artifacts]
@@ -116,6 +136,20 @@ flowchart TD
     Z --> J
     Z --> L
     Z --> N
+    AA --> K
+    AA --> L
+    AB --> M
+    AB --> L
+    AC --> K
+    AC --> L
+    AD --> J
+    AD --> L
+    AE --> J
+    AE --> L
+    AF --> M
+    AF --> L
+    AG --> L
+    AG --> K
 ```
 
 ## End-to-End Story
@@ -136,6 +170,12 @@ flowchart TD
     MLOps and high-throughput streaming feature infrastructure.
 12. Operate a self-healing GenAI platform where DevOps, DevSecOps, LLMOps, and
     AIOps are designed as one production control plane.
+13. Extend the portfolio into IoT predictive maintenance and secure enterprise
+    multi-agent orchestration.
+14. Demonstrate DSA-driven platform engineering with graph traversal and
+    memory-optimized text routing systems.
+15. Add FinOps, biomedical Graph-RAG, and cybersecurity streaming systems where
+    algorithms directly shape reliability, latency, and cost.
 
 ## 01. GKE ML Platform Blueprint
 
@@ -487,12 +527,127 @@ Interview angle:
 > LLMOps, and AIOps converge into a secure, governed, self-healing production
 > control plane."
 
+## 19. AeroPredict
+
+Path: `19-aero-predict`
+
+A predictive maintenance and IoT analytics platform for connected fleet
+operations. It validates multi-region Pub/Sub ingestion, Apache Beam/Dataflow
+tumbling-window features, Vertex AI Feature Store online/offline paths,
+Bigtable sub-10ms lookup, BigQuery training lakehouse, Cloud Workflows
+drift-triggered retraining, VPC Service Controls, and Cloud Deploy blue/green
+rollout to Vertex AI Endpoints.
+
+Interview angle:
+
+> "I can build streaming IoT MLOps platforms where telemetry ingestion,
+> real-time feature engineering, drift-triggered retraining, and zero-downtime
+> model deployment work as one system."
+
+## 20. OmniAgent
+
+Path: `20-omni-agent`
+
+A secure multi-agent enterprise orchestration and guardrail platform. It
+validates Vertex AI Agent Engine, Agent Studio, Gemini, vLLM on GKE Enterprise,
+Vertex AI Vector Search grounding, Cloud Build document embedding sync, GKE API
+gateway controls, Secret Manager injection, PII sanitization, Private Service
+Connect, BigQuery telemetry, and Eventarc self-healing for runaway agent loops.
+
+Interview angle:
+
+> "I can design agentic platforms where autonomous workflows are grounded,
+> private, observable, quota-controlled, and safe to operate against enterprise
+> systems."
+
+## 21. GraphShield
+
+Path: `21-graph-shield`
+
+A real-time financial fraud graph platform using custom graph traversals. It
+validates an in-memory subgraph sampler, optimized adjacency lists, bounded
+depth-3 BFS, Tarjan/Kosaraju SCC detection, Pub/Sub and Dataflow streaming,
+Bigtable adjacency cache, GKE memory-optimized node pools, Vertex AI Pipelines,
+PyTorch Geometric GNN training, and Vertex AI Metadata lineage.
+
+Interview angle:
+
+> "I can apply DSA to production MLOps by using bounded graph traversal and
+> connected-component algorithms to meet low-latency fraud detection SLAs."
+
+## 22. LexiStream
+
+Path: `22-lexi-stream`
+
+A real-time intent routing and search suggestion gateway using custom
+memory-aware data structures. It validates a concurrent compressed Trie,
+Min-Heap Top-K tracking, early-terminating Levenshtein distance, Rust/Go on
+GKE, eBPF routing, Secret Manager safety tokens, WAF prompt-injection filtering,
+Prometheus metrics, Cloud Monitoring, and AIOps memory/fallback scaling.
+
+Interview angle:
+
+> "I can reduce GenAI cost and latency by combining systems programming,
+> efficient data structures, and cloud-native LLM routing infrastructure."
+
+## 23. FinPulse
+
+Path: `23-fin-pulse`
+
+A multi-agent FinOps broker and GPU cluster optimizer. It validates dynamic
+programming GPU bin packing, token bucket and leaky bucket rate limiting, GKE
+Enterprise, Argo CD, Kueue, Spot GPU nodes, vLLM and Gemini routing, Pub/Sub and
+BigQuery cost telemetry, VPC Service Controls, Prometheus, Cloud Monitoring,
+and fallback routing to smaller open-weight models.
+
+Interview angle:
+
+> "I can reduce GenAI platform cost by combining algorithmic GPU scheduling,
+> quota enforcement, telemetry, and AIOps fallback routing."
+
+## 24. BioGraphRAG
+
+Path: `24-bio-graph-rag`
+
+A knowledge-graph grounded biomedical RAG platform. It validates A*/Dijkstra
+graph search, MinHash and LSH deduplication, Dataflow document ingestion,
+fine-tuned NER, knowledge graph construction, Vertex AI Vector Search, Vertex
+AI Pipelines, Cloud Build incremental index updates, HIPAA-aligned masking, and
+Secret Manager controls.
+
+Interview angle:
+
+> "I can design Graph-RAG systems where vector retrieval, graph search, and
+> compliance controls work together for grounded biomedical reasoning."
+
+## 25. CyberStream
+
+Path: `25-cyber-stream`
+
+A high-throughput cyber-threat intelligence pipeline. It validates
+Aho-Corasick multi-pattern matching, sliding-window bitsets, ring buffers,
+multi-region Pub/Sub, autoscaling Dataflow, BigQuery drift checks, Eventarc,
+Cloud Run retraining triggers, Vertex AI Custom Training with VPC Peering,
+Cloud Deploy shadow deployment, and Cloud Monitoring promotion gates.
+
+Interview angle:
+
+> "I can build cybersecurity MLOps systems where deterministic automata,
+> streaming ML features, and shadow deployment protect high-volume threat
+> detection paths."
+
 ## How To Validate
 
 Run all Python tests:
 
 ```bash
 python3 -m pytest GCP/mlops_interview_portfolio
+```
+
+Validate market-stack coverage:
+
+```bash
+python3 -m pytest GCP/mlops_interview_portfolio/tests/test_market_stack_coverage.py
 ```
 
 Run Terraform formatting checks:
@@ -512,6 +667,13 @@ terraform -chdir=GCP/mlops_interview_portfolio/15-nexus-fraud/terraform fmt -che
 terraform -chdir=GCP/mlops_interview_portfolio/16-clear-route/terraform fmt -check
 terraform -chdir=GCP/mlops_interview_portfolio/17-ad-stream/terraform fmt -check
 terraform -chdir=GCP/mlops_interview_portfolio/18-aegis-sphere/terraform fmt -check
+terraform -chdir=GCP/mlops_interview_portfolio/19-aero-predict/terraform fmt -check
+terraform -chdir=GCP/mlops_interview_portfolio/20-omni-agent/terraform fmt -check
+terraform -chdir=GCP/mlops_interview_portfolio/21-graph-shield/terraform fmt -check
+terraform -chdir=GCP/mlops_interview_portfolio/22-lexi-stream/terraform fmt -check
+terraform -chdir=GCP/mlops_interview_portfolio/23-fin-pulse/terraform fmt -check
+terraform -chdir=GCP/mlops_interview_portfolio/24-bio-graph-rag/terraform fmt -check
+terraform -chdir=GCP/mlops_interview_portfolio/25-cyber-stream/terraform fmt -check
 ```
 
 Run CLI demos:
@@ -572,6 +734,27 @@ python3 GCP/mlops_interview_portfolio/17-ad-stream/src/ad_stream_gate.py evaluat
 
 python3 GCP/mlops_interview_portfolio/18-aegis-sphere/src/aegis_sphere_gate.py evaluate \
   --release GCP/mlops_interview_portfolio/18-aegis-sphere/examples/platform_release.json
+
+python3 GCP/mlops_interview_portfolio/19-aero-predict/src/aero_predict_gate.py evaluate \
+  --release GCP/mlops_interview_portfolio/19-aero-predict/examples/fleet_release.json
+
+python3 GCP/mlops_interview_portfolio/20-omni-agent/src/omni_agent_gate.py evaluate \
+  --release GCP/mlops_interview_portfolio/20-omni-agent/examples/agent_platform_release.json
+
+python3 GCP/mlops_interview_portfolio/21-graph-shield/src/graph_shield_gate.py evaluate \
+  --release GCP/mlops_interview_portfolio/21-graph-shield/examples/graph_release.json
+
+python3 GCP/mlops_interview_portfolio/22-lexi-stream/src/lexi_stream_gate.py evaluate \
+  --release GCP/mlops_interview_portfolio/22-lexi-stream/examples/gateway_release.json
+
+python3 GCP/mlops_interview_portfolio/23-fin-pulse/src/fin_pulse_gate.py evaluate \
+  --release GCP/mlops_interview_portfolio/23-fin-pulse/examples/gpu_release.json
+
+python3 GCP/mlops_interview_portfolio/24-bio-graph-rag/src/bio_graph_rag_gate.py evaluate \
+  --release GCP/mlops_interview_portfolio/24-bio-graph-rag/examples/biograph_release.json
+
+python3 GCP/mlops_interview_portfolio/25-cyber-stream/src/cyber_stream_gate.py evaluate \
+  --release GCP/mlops_interview_portfolio/25-cyber-stream/examples/threat_release.json
 ```
 
 ## Resume Alignment
@@ -598,11 +781,19 @@ These projects support the following resume themes:
   streaming feature infrastructure, and SLO-based rollback automation
 - Autonomous GenAI platform engineering with DevSecOps supply chain security,
   LLMOps lineage, RAG governance, and AIOps self-healing
+- IoT predictive maintenance, streaming telemetry feature engineering, secure
+  multi-agent orchestration, Private Service Connect, and Eventarc remediation
+- DSA-driven MLOps with graph algorithms, concurrent tries, heaps, dynamic
+  programming, memory-aware serving, and low-latency GenAI gateways
+- GPU FinOps optimization, biomedical Graph-RAG, and cybersecurity streaming
+  threat intelligence with algorithmic fast paths
 
 ## Publishing Assets
 
 - [GitHub publishing guide](GITHUB_PUBLISHING_GUIDE.md)
 - [LinkedIn post templates](LINKEDIN_POSTS.md)
+- [2026 market tech stack upgrade map](MARKET_TECH_STACK_2026.md)
+- [Optional modern Python/GenAI dependency profile](requirements-modern.txt)
 - DevOps-to-MLOps transition with production reliability focus
 
 ## How To Present In Interviews

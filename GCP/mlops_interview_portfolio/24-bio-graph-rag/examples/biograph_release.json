@@ -1,0 +1,37 @@
+{
+  "platform": "BioGraphRAG",
+  "dsa_layer": {
+    "graph_search": "astar",
+    "max_graph_search_latency_ms": 20,
+    "p95_graph_search_latency_ms": 14,
+    "minhash_enabled": true,
+    "lsh_enabled": true,
+    "dedup_rate": 0.31,
+    "min_dedup_rate": 0.2
+  },
+  "data_pipeline": {
+    "dataflow_enabled": true,
+    "ner_model_enabled": true,
+    "knowledge_graph_enabled": true,
+    "vertex_ai_vector_search_enabled": true
+  },
+  "mlops_llmops": {
+    "vertex_ai_pipelines_enabled": true,
+    "embedding_validation_enabled": true,
+    "cloud_build_incremental_index_update": true,
+    "zero_downtime_index_update": true,
+    "ontology_change_trigger_enabled": true
+  },
+  "devsecops": {
+    "hipaa_aligned_controls": true,
+    "secret_manager_masking_rules": true,
+    "gke_ingress_pii_masking": true,
+    "audit_logs_enabled": true
+  },
+  "quality": {
+    "groundedness": 0.94,
+    "min_groundedness": 0.9,
+    "hallucination_rate": 0.006,
+    "max_hallucination_rate": 0.01
+  }
+}

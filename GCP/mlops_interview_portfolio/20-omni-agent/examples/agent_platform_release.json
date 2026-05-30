@@ -1,0 +1,47 @@
+{
+  "platform": "OmniAgent",
+  "agent_runtime": {
+    "vertex_ai_agent_engine_enabled": true,
+    "agent_studio_enabled": true,
+    "agents": ["analyst", "validator", "execution", "policy"],
+    "gemini_enabled": true,
+    "open_weights_backend": "vllm-on-gke-enterprise",
+    "max_agent_loop_count": 8,
+    "configured_loop_limit": 6
+  },
+  "grounding": {
+    "vertex_ai_vector_search_enabled": true,
+    "private_docs_embeddings": true,
+    "cloud_build_doc_sync_enabled": true,
+    "git_markdown_trigger_enabled": true,
+    "embedding_freshness_minutes": 20,
+    "max_embedding_freshness_minutes": 60
+  },
+  "security": {
+    "gke_api_gateway_enabled": true,
+    "secret_manager_injection": true,
+    "pii_sanitization_enabled": true,
+    "private_service_connect_enabled": true,
+    "public_internet_agent_to_agent_allowed": false,
+    "private_database_access_controlled": true
+  },
+  "telemetry": {
+    "bigquery_enabled": true,
+    "token_consumption_logged": true,
+    "latency_logged": true,
+    "hallucination_metrics_enabled": true,
+    "ragas_or_deepeval_enabled": true,
+    "tool_loop_metrics_enabled": true
+  },
+  "aiops": {
+    "cloud_logging_enabled": true,
+    "eventarc_enabled": true,
+    "runaway_loop_termination_enabled": true,
+    "cost_quota_enforcement_enabled": true,
+    "agent_rollback_enabled": true,
+    "max_token_overrun_rate": 0.005,
+    "token_overrun_rate": 0.002,
+    "p95_agent_latency_ms": 780,
+    "max_p95_agent_latency_ms": 1200
+  }
+}

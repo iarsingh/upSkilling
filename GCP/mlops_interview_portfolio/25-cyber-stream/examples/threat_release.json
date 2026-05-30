@@ -1,0 +1,36 @@
+{
+  "platform": "CyberStream",
+  "dsa_layer": {
+    "aho_corasick_enabled": true,
+    "signature_count": 50000,
+    "min_signature_count": 25000,
+    "ring_buffers_enabled": true,
+    "sliding_window_bitsets_enabled": true,
+    "window_seconds": 10,
+    "p95_pattern_match_latency_ms": 6,
+    "max_p95_pattern_match_latency_ms": 10
+  },
+  "streaming": {
+    "multi_region_pubsub": true,
+    "dataflow_autoscaling": true,
+    "events_per_second": 1200000,
+    "min_events_per_second": 1000000,
+    "processing_lag_ms": 220,
+    "max_processing_lag_ms": 500
+  },
+  "mlops": {
+    "bigquery_drift_checks": true,
+    "eventarc_trigger_enabled": true,
+    "cloud_run_retraining_trigger": true,
+    "vertex_ai_custom_training": true,
+    "vpc_peering_enabled": true
+  },
+  "deployment": {
+    "cloud_deploy_enabled": true,
+    "shadow_deployment_enabled": true,
+    "cloud_monitoring_comparison_enabled": true,
+    "zero_downtime_promotion": true,
+    "candidate_false_positive_delta": 0.003,
+    "max_false_positive_delta": 0.01
+  }
+}

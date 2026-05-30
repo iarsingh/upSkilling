@@ -1,0 +1,36 @@
+{
+  "platform": "GraphShield",
+  "dsa_layer": {
+    "sampler_language": "go",
+    "adjacency_list_optimized": true,
+    "atomic_bitsets_enabled": true,
+    "bounded_bfs_enabled": true,
+    "bfs_depth": 3,
+    "max_bfs_depth": 3,
+    "p95_sampling_latency_ms": 22,
+    "max_sampling_latency_ms": 30,
+    "scc_algorithm": "tarjan",
+    "scc_background_job_enabled": true
+  },
+  "devops": {
+    "terraform_managed": true,
+    "argocd_enabled": true,
+    "gke_memory_optimized_node_pool": true,
+    "horizontal_autoscaling_enabled": true
+  },
+  "streaming": {
+    "pubsub_enabled": true,
+    "dataflow_enabled": true,
+    "bigtable_adjacency_cache": true,
+    "events_per_second": 85000,
+    "minimum_events_per_second": 50000
+  },
+  "mlops": {
+    "vertex_ai_pipelines_enabled": true,
+    "training_framework": "pytorch-geometric",
+    "vertex_ai_metadata_enabled": true,
+    "graph_schema_version_logged": true,
+    "training_snapshot_logged": true,
+    "model_hyperparameters_logged": true
+  }
+}

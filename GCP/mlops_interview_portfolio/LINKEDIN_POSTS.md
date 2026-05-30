@@ -63,6 +63,172 @@ platform where training, serving, tracking, and promotion can happen safely.
 
 GitHub: <add project link>
 
+## Post 25: FinPulse
+
+Project 23: FinPulse, a multi-agent GPU FinOps broker.
+
+The core idea is algorithmic cost control:
+
+- Dynamic programming for GPU bin packing
+- Token bucket and leaky bucket quota enforcement
+- GKE Enterprise and Kueue
+- Spot GPU nodes
+- vLLM and Gemini routing
+- Pub/Sub and BigQuery cost telemetry
+- Prometheus and Cloud Monitoring
+- Fallback routing to smaller open-weight models
+
+The lesson: GPU cost optimization is not just dashboards. It needs scheduling
+algorithms, quota controls, telemetry, and automated routing decisions.
+
+GitHub: <add project link>
+
+## Post 26: BioGraphRAG
+
+Project 24: BioGraphRAG, a biomedical Graph-RAG platform.
+
+This project combines:
+
+- A* or Dijkstra graph search
+- MinHash and LSH deduplication
+- Dataflow document ingestion
+- Fine-tuned biomedical NER
+- Knowledge graph construction
+- Vertex AI Vector Search
+- Vertex AI Pipelines
+- Cloud Build incremental index updates
+- Secret Manager masking rules
+
+The lesson: for biomedical reasoning, vector search alone is not enough.
+Graph-RAG gives relational evidence paths for grounded multi-hop answers.
+
+GitHub: <add project link>
+
+## Post 27: CyberStream
+
+Project 25: CyberStream, a high-throughput cyber-threat intelligence platform.
+
+The fast path:
+
+- Aho-Corasick multi-pattern matching
+- Sliding-window bitsets
+- Per-IP ring buffers
+- Multi-region Pub/Sub
+- Autoscaling Dataflow
+
+The ML path:
+
+- BigQuery drift checks
+- Eventarc
+- Cloud Run retraining trigger
+- Vertex AI Custom Training
+- Cloud Deploy shadow deployment
+- Cloud Monitoring promotion gate
+
+The lesson: cyber systems need deterministic algorithms and ML together.
+Automata catch known signatures fast, while MLOps updates behavioral models
+safely.
+
+GitHub: <add project link>
+
+## Post 23: GraphShield
+
+Project 21: GraphShield, a real-time fraud graph MLOps platform.
+
+This project brings DSA directly into MLOps:
+
+- Dynamic heterogeneous transaction graph
+- Custom in-memory subgraph sampler
+- Optimized adjacency lists
+- Atomic bitsets
+- Bounded depth-3 BFS
+- Tarjan or Kosaraju SCC detection
+- Pub/Sub and Dataflow streaming
+- Bigtable adjacency cache
+- Vertex AI Pipelines
+- PyTorch Geometric GNN training
+- Vertex AI Metadata lineage
+
+The lesson: senior ML platform work is not just wiring cloud services. Sometimes
+the difference between usable and unusable production ML is a graph traversal
+that stays under the latency budget.
+
+GitHub: <add project link>
+
+## Post 24: LexiStream
+
+Project 22: LexiStream, a real-time intent routing and search suggestion
+gateway for GenAI systems.
+
+The DSA layer:
+
+- Concurrent compressed Trie for prefix matching
+- Min-Heap for Top-K hot queries
+- Early-terminating Levenshtein distance
+- Sub-5ms match latency target
+
+The platform layer:
+
+- Rust or Go gateway on GKE
+- eBPF-aware low-latency routing
+- Secret Manager safety tokens
+- WAF prompt-injection filtering
+- Prometheus metrics
+- Cloud Monitoring
+- AIOps memory scaling and fallback Gemini routing
+
+The lesson: efficient data structures can directly reduce GenAI latency and
+cost by resolving common prompts before calling an expensive model endpoint.
+
+GitHub: <add project link>
+
+## Post 21: AeroPredict
+
+Project 19: AeroPredict, a predictive maintenance and IoT analytics platform
+for connected fleet operations.
+
+The platform validates:
+
+- Multi-region Pub/Sub ingestion
+- Apache Beam/Dataflow tumbling windows
+- Streaming feature validation
+- Vertex AI Feature Store
+- Bigtable online feature lookups under 10ms
+- BigQuery offline training lakehouse
+- Drift and feature-skew triggered retraining
+- Cloud Workflows and Vertex AI Pipelines
+- VPC Service Controls
+- Cloud Deploy blue/green rollout to Vertex AI Endpoints
+
+The lesson: IoT MLOps is not just streaming data. It is streaming feature
+correctness, low-latency serving, drift-triggered retraining, and zero-downtime
+model delivery.
+
+GitHub: <add project link>
+
+## Post 22: OmniAgent
+
+Project 20: OmniAgent, a secure multi-agent enterprise orchestration platform.
+
+This project focuses on agentic systems in production:
+
+- Vertex AI Agent Engine and Agent Studio
+- Analyst, validator, execution, and policy agents
+- Gemini APIs
+- Open-weight models with vLLM on GKE Enterprise
+- Vertex AI Vector Search for private grounding
+- Cloud Build document embedding sync from Git
+- GKE API gateway for prompt and response interception
+- Secret Manager and PII sanitization
+- Private Service Connect
+- BigQuery telemetry
+- Eventarc self-healing for runaway tool loops and quota breaches
+
+The lesson: enterprise agents need a platform. Governance, privacy, telemetry,
+token limits, loop detection, and rollback are what make agentic workflows safe.
+
+GitHub: <add project link>
+
 ## Post 20: AegisSphere
 
 Project 18: AegisSphere, an autonomous self-healing GenAI and agentic platform

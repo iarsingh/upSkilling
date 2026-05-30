@@ -1,0 +1,36 @@
+{
+  "platform": "LexiStream",
+  "dsa_layer": {
+    "gateway_language": "rust",
+    "concurrent_trie_enabled": true,
+    "bitwise_trie_compression": true,
+    "min_heap_top_k_enabled": true,
+    "top_k_size": 100,
+    "levenshtein_enabled": true,
+    "early_termination_enabled": true,
+    "p95_match_latency_ms": 3.2,
+    "max_p95_match_latency_ms": 5
+  },
+  "platform_engineering": {
+    "gke_deployed": true,
+    "ebpf_routing_enabled": true,
+    "horizontal_autoscaling_enabled": true,
+    "memory_autoscaling_enabled": true
+  },
+  "devsecops": {
+    "secret_manager_enabled": true,
+    "vertex_ai_extensions_enabled": true,
+    "waf_enabled": true,
+    "prompt_injection_filter_enabled": true,
+    "input_sanitization_enabled": true
+  },
+  "aiops_observability": {
+    "prometheus_metrics_enabled": true,
+    "cloud_monitoring_enabled": true,
+    "cache_hit_rate": 0.82,
+    "min_cache_hit_rate": 0.75,
+    "heap_rebalance_p95_ms": 1.4,
+    "max_heap_rebalance_p95_ms": 2.5,
+    "fallback_gemini_provisioning_enabled": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "platform": "FinPulse",
+  "dsa_layer": {
+    "dp_gpu_bin_packing_enabled": true,
+    "gpu_types": ["a100", "l4", "t4"],
+    "target_vram_utilization": 0.82,
+    "min_vram_utilization": 0.75,
+    "token_bucket_enabled": true,
+    "leaky_bucket_enabled": true,
+    "quota_overrun_rate": 0.003,
+    "max_quota_overrun_rate": 0.01
+  },
+  "devops": {
+    "gke_enterprise_enabled": true,
+    "argocd_enabled": true,
+    "kueue_enabled": true,
+    "spot_gpu_nodes_enabled": true,
+    "terraform_managed": true
+  },
+  "llmops": {
+    "gateway_intercepts_traffic": true,
+    "vllm_enabled": true,
+    "vertex_ai_gemini_enabled": true,
+    "pubsub_telemetry_enabled": true,
+    "bigquery_cost_ledger_enabled": true
+  },
+  "devsecops_aiops": {
+    "vpc_service_controls_enabled": true,
+    "prometheus_metrics_enabled": true,
+    "cloud_monitoring_enabled": true,
+    "fallback_model_routing_enabled": true,
+    "cost_threshold_violation_rate": 0.004,
+    "max_cost_threshold_violation_rate": 0.01
+  }
+}

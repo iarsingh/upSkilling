@@ -14,19 +14,20 @@ gcp-mlops-platform-portfolio
 Suggested repo description:
 
 ```text
-Production-style GCP MLOps portfolio: GKE, Terraform, Cloud Build, Vertex AI Pipelines, model promotion gates, observability, Hugging Face LLMOps, autonomous GenAI platforms, LLM-assisted AIOps, GitOps remediation, multi-tenant healthcare MLOps, streaming feature infrastructure, batch forecasting, edge vision MLOps, real-time fraud detection, and ML lifecycle governance.
+Production-style GCP MLOps portfolio: GKE, Terraform, Cloud Build, Vertex AI Pipelines, model promotion gates, observability, Hugging Face LLMOps, autonomous GenAI platforms, multi-agent orchestration, DSA-driven ML serving, GPU FinOps, biomedical Graph-RAG, cyber-threat streaming, LLM-assisted AIOps, GitOps remediation, IoT predictive maintenance, multi-tenant healthcare MLOps, streaming feature infrastructure, batch forecasting, edge vision MLOps, real-time fraud detection, and ML lifecycle governance.
 ```
 
 Suggested GitHub topics:
 
 ```text
-mlops, gcp, gke, anthos, terraform, kubernetes, cloud-build, cloud-deploy, vertex-ai, vertex-ai-pipelines, vertex-ai-vector-search, kubeflow, argocd, config-connector, triton, cosign, huggingface, llmops, aiops, gitops, devsecops, rag, agents, dataflow, bigquery-ml, feature-store, bigtable, edge-ai, fraud-detection, ml-platform, sre, observability, model-monitoring, model-registry
+mlops, gcp, gke, anthos, terraform, kubernetes, cloud-build, cloud-deploy, vertex-ai, vertex-ai-pipelines, vertex-ai-vector-search, vertex-ai-agent-engine, kubeflow, argocd, config-connector, triton, vllm, cosign, huggingface, llmops, aiops, gitops, devsecops, finops, rag, graph-rag, agents, dataflow, pubsub, bigquery-ml, feature-store, bigtable, eventarc, cloud-run, graph-algorithms, trie, heap, dynamic-programming, aho-corasick, minhash, lsh, edge-ai, iot, predictive-maintenance, cyber-threat-intelligence, fraud-detection, ml-platform, sre, observability, model-monitoring, model-registry
 ```
 
 ## README Checklist
 
 - Start with the value proposition, not a course name.
 - Include the project index table.
+- Link the `MARKET_TECH_STACK_2026.md` upgrade map.
 - Add one architecture diagram near the top.
 - Add a "How to validate" section with test commands.
 - Add an "Interview talking points" section.
@@ -52,6 +53,13 @@ mlops, gcp, gke, anthos, terraform, kubernetes, cloud-build, cloud-deploy, verte
 - One CLI output from ClearRoute healthcare platform release validation
 - One CLI output from AdStream streaming feature release validation
 - One CLI output from AegisSphere autonomous GenAI platform validation
+- One CLI output from AeroPredict IoT predictive maintenance validation
+- One CLI output from OmniAgent multi-agent security validation
+- One CLI output from GraphShield fraud graph validation
+- One CLI output from LexiStream low-latency routing validation
+- One CLI output from FinPulse GPU FinOps validation
+- One CLI output from BioGraphRAG biomedical Graph-RAG validation
+- One CLI output from CyberStream threat intelligence validation
 - Cloud Build YAML snippet
 - Kubernetes deployment snippet
 - Terraform plan snippet with sensitive values hidden
@@ -63,10 +71,12 @@ Built a production-style GCP MLOps portfolio covering GKE platform design,
 Terraform infrastructure, Cloud Build CI/CD, model promotion gates, observability
 and SLO reporting, Vertex AI Pipelines, Model Registry governance, Hugging Face
 LLMOps release gates, LLM-assisted AIOps, GitOps remediation, multi-tenant
-healthcare MLOps, autonomous GenAI platform operations, Dataflow streaming,
-BigQuery ML forecasting, edge vision deployment, regulated fraud detection,
-feature store consistency checks, batch inference quality gates, and retraining
-controls.
+healthcare MLOps, autonomous GenAI platform operations, multi-agent
+orchestration, DSA-driven serving, GPU FinOps optimization, biomedical
+Graph-RAG, cyber-threat streaming, IoT predictive maintenance, Dataflow
+streaming, BigQuery ML forecasting, edge vision deployment, regulated fraud
+detection, feature store consistency checks, batch inference quality gates, and
+retraining controls.
 ```
 
 ## Resume Bullet Options
@@ -111,6 +121,30 @@ controls.
   GKE Enterprise with Terraform, Argo CD, Cloud Build, Artifact Analysis,
   Cosign, VPC Service Controls, External Secrets, Vertex AI Vector Search,
   Triton, Vertex AI Metadata, and AIOps remediation loops.
+- Built AeroPredict, an IoT predictive maintenance MLOps blueprint with
+  multi-region Pub/Sub, Dataflow tumbling windows, Vertex AI Feature Store,
+  Bigtable online features, BigQuery lakehouse, Cloud Workflows retraining, and
+  Cloud Deploy blue/green endpoint rollout.
+- Built OmniAgent, a secure multi-agent platform blueprint with Vertex AI Agent
+  Engine, Agent Studio, Gemini, vLLM on GKE Enterprise, Vector Search, Secret
+  Manager, Private Service Connect, BigQuery telemetry, and Eventarc self-healing.
+- Built GraphShield, a real-time fraud graph MLOps blueprint with custom
+  adjacency lists, bounded BFS, SCC detection, Pub/Sub, Dataflow, Bigtable,
+  GKE memory-optimized node pools, Vertex AI Pipelines, and PyTorch Geometric.
+- Built LexiStream, a low-latency GenAI routing gateway with concurrent Tries,
+  Min-Heap Top-K tracking, Levenshtein dynamic programming, GKE, eBPF, WAF,
+  Secret Manager, Prometheus metrics, and Cloud Monitoring AIOps triggers.
+- Built FinPulse, a GPU FinOps optimizer with dynamic-programming bin packing,
+  token/leaky bucket quota controls, GKE Enterprise, Kueue, Spot GPUs, vLLM,
+  Gemini, Pub/Sub, BigQuery, and Cloud Monitoring fallback routing.
+- Built BioGraphRAG, a biomedical Graph-RAG blueprint with A*/Dijkstra search,
+  MinHash/LSH deduplication, Dataflow ingestion, NER extraction, Vertex AI
+  Vector Search, Vertex AI Pipelines, Cloud Build index updates, and HIPAA-style
+  masking controls.
+- Built CyberStream, a cyber-threat streaming MLOps blueprint with Aho-Corasick
+  automata, sliding-window bitsets, ring buffers, multi-region Pub/Sub,
+  Dataflow, BigQuery drift checks, Eventarc, Cloud Run, Vertex AI Custom
+  Training, and Cloud Deploy shadow promotion.
 
 ## Publishing Order
 
