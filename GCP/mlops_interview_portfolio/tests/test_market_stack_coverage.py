@@ -10,7 +10,7 @@ def test_market_stack_upgrade_map_covers_all_projects():
         if path.is_dir() and path.name[:2].isdigit()
     )
 
-    assert len(project_dirs) == 25
+    assert len(project_dirs) == 28
     for project_dir in project_dirs:
         assert f"`{project_dir}`" in guide
 
@@ -26,6 +26,9 @@ def test_market_stack_upgrade_map_mentions_current_platform_signals():
         "Kueue",
         "Ray on Vertex AI",
         "Dynamic Workload Scheduler",
+        "Kubeflow Pipelines v2",
+        "KServe",
+        "Katib",
     ]
 
     for term in required_terms:
@@ -42,6 +45,8 @@ def test_modern_requirements_include_data_genai_and_observability_stack():
         "pandas",
         "google-genai",
         "google-cloud-aiplatform",
+        "google-cloud-pipeline-components",
+        "kfp",
         "fastapi",
         "opentelemetry-api",
         "great-expectations",

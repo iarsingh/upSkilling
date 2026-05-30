@@ -19,11 +19,15 @@ xgboost>=2.0
 # Google Cloud and Vertex AI
 google-cloud-aiplatform>=1.80
 google-genai>=1.0
+google-cloud-pipeline-components>=2.18
 google-cloud-bigquery>=3.25
 google-cloud-pubsub>=2.23
 google-cloud-storage>=2.18
 google-cloud-monitoring>=2.22
 google-cloud-logging>=3.11
+
+# Kubeflow and pipeline portability
+kfp>=2.10
 
 # LLMOps, RAG, and evaluation
 langchain>=0.3

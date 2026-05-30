@@ -1,0 +1,49 @@
+{
+  "platform": "KubeFlowForge",
+  "gke": {
+    "enterprise_enabled": true,
+    "private_cluster": true,
+    "workload_identity_enabled": true,
+    "gpu_node_pools": ["l4-training", "a100-batch"],
+    "kueue_enabled": true,
+    "managed_prometheus_enabled": true
+  },
+  "gitops": {
+    "terraform_modules_enabled": true,
+    "argocd_or_config_sync_enabled": true,
+    "drift_detection_enabled": true,
+    "tenant_namespaces_from_git": true
+  },
+  "kubeflow": {
+    "profiles_enabled": true,
+    "notebooks_enabled": true,
+    "pipelines_v2_enabled": true,
+    "katib_enabled": true,
+    "kserve_enabled": true,
+    "central_dashboard_enabled": true
+  },
+  "security": {
+    "network_policy_enabled": true,
+    "secret_manager_external_secrets": true,
+    "artifact_analysis_enabled": true,
+    "image_signing_required": true,
+    "vpc_service_controls_enabled": true,
+    "public_notebooks_allowed": false
+  },
+  "mlops": {
+    "artifact_registry_enabled": true,
+    "cloud_storage_artifacts_enabled": true,
+    "bigquery_training_sources_enabled": true,
+    "vertex_ai_metadata_export_enabled": true,
+    "model_canary_enabled": true,
+    "rollback_enabled": true
+  },
+  "slo": {
+    "max_pipeline_failure_rate": 0.03,
+    "pipeline_failure_rate": 0.012,
+    "max_p95_inference_latency_ms": 250,
+    "p95_inference_latency_ms": 172,
+    "gpu_quota_utilization": 0.74,
+    "max_gpu_quota_utilization": 0.9
+  }
+}

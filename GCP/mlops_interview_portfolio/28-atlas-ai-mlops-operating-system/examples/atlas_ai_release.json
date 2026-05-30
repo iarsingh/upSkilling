@@ -1,0 +1,78 @@
+{
+  "platform": "AtlasAI",
+  "covered_project_count": 27,
+  "foundation": {
+    "terraform_enabled": true,
+    "gke_enterprise_enabled": true,
+    "gitops_enabled": true,
+    "workload_identity_enabled": true,
+    "multi_tenant_namespaces": true,
+    "kueue_gpu_scheduling": true
+  },
+  "mlops": {
+    "kubeflow_pipelines_v2": true,
+    "vertex_ai_pipelines": true,
+    "vertex_ai_metadata": true,
+    "model_registry": true,
+    "feature_store": true,
+    "batch_and_online_inference": true,
+    "canary_shadow_rollback": true
+  },
+  "llmops": {
+    "gemini_enabled": true,
+    "vertex_ai_agent_engine": true,
+    "vertex_ai_vector_search": true,
+    "model_armor": true,
+    "prompt_registry": true,
+    "rag_evaluation": true,
+    "open_weight_serving": "vllm-or-triton-on-gke"
+  },
+  "data_platform": {
+    "pubsub_streaming": true,
+    "dataflow_pipelines": true,
+    "bigquery_offline_store": true,
+    "bigtable_online_store": true,
+    "cloud_storage_lake": true,
+    "data_quality_checks": true,
+    "drift_detection": true
+  },
+  "devsecops": {
+    "cloud_build": true,
+    "artifact_registry": true,
+    "artifact_analysis": true,
+    "cosign_signing": true,
+    "secret_manager": true,
+    "vpc_service_controls": true,
+    "private_service_connect": true,
+    "policy_as_code": true
+  },
+  "sre_aiops": {
+    "cloud_monitoring": true,
+    "cloud_logging": true,
+    "opentelemetry": true,
+    "eventarc": true,
+    "pubsub_remediation": true,
+    "gitops_rollback": true,
+    "slo_burn_rate_alerts": true
+  },
+  "algorithms_finops": {
+    "gpu_bin_packing": true,
+    "token_bucket_quotas": true,
+    "graph_traversal": true,
+    "aho_corasick_matching": true,
+    "minhash_lsh": true,
+    "trie_routing": true,
+    "ring_buffers": true,
+    "dynamic_programming": true
+  },
+  "quality": {
+    "min_skill_domains": 7,
+    "min_covered_project_count": 27,
+    "max_p95_platform_latency_ms": 500,
+    "p95_platform_latency_ms": 318,
+    "max_release_failure_rate": 0.02,
+    "release_failure_rate": 0.008,
+    "max_critical_vulnerabilities": 0,
+    "critical_vulnerabilities": 0
+  }
+}

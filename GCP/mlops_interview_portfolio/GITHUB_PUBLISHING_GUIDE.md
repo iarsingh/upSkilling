@@ -60,6 +60,9 @@ mlops, gcp, gke, anthos, terraform, kubernetes, cloud-build, cloud-deploy, verte
 - One CLI output from FinPulse GPU FinOps validation
 - One CLI output from BioGraphRAG biomedical Graph-RAG validation
 - One CLI output from CyberStream threat intelligence validation
+- One CLI output from KubeFlowForge Kubeflow on GKE validation
+- One CLI output from PipelineBridge hybrid KFP/Vertex AI validation
+- One CLI output from AtlasAI full portfolio capstone validation
 - Cloud Build YAML snippet
 - Kubernetes deployment snippet
 - Terraform plan snippet with sensitive values hidden
@@ -75,8 +78,9 @@ healthcare MLOps, autonomous GenAI platform operations, multi-agent
 orchestration, DSA-driven serving, GPU FinOps optimization, biomedical
 Graph-RAG, cyber-threat streaming, IoT predictive maintenance, Dataflow
 streaming, BigQuery ML forecasting, edge vision deployment, regulated fraud
-detection, feature store consistency checks, batch inference quality gates, and
-retraining controls.
+detection, Kubeflow on GKE, hybrid KFP/Vertex AI Pipelines, an enterprise
+AI/MLOps operating-system capstone, feature store consistency checks, batch
+inference quality gates, and retraining controls.
 ```
 
 ## Resume Bullet Options
@@ -145,6 +149,15 @@ retraining controls.
   automata, sliding-window bitsets, ring buffers, multi-region Pub/Sub,
   Dataflow, BigQuery drift checks, Eventarc, Cloud Run, Vertex AI Custom
   Training, and Cloud Deploy shadow promotion.
+- Built KubeFlowForge, a Kubeflow on GKE Enterprise blueprint with Kubeflow
+  Profiles, Notebooks, KFP v2, Katib, KServe, Kueue, Workload Identity,
+  GitOps, Managed Prometheus, Secret Manager, and Vertex AI Metadata export.
+- Built PipelineBridge, a hybrid Kubeflow Pipelines and Vertex AI Pipelines
+  blueprint using KFP v2, Google Cloud Pipeline Components, Vertex AI Metadata,
+  Model Registry, Cloud Build, Cloud Deploy, canary, shadow, and rollback gates.
+- Built AtlasAI, a capstone enterprise AI/MLOps operating system combining GKE,
+  Terraform, GitOps, Kubeflow, Vertex AI, GenAI/RAG, Dataflow, Feature Store,
+  DevSecOps, AIOps, GPU FinOps, and algorithmic serving patterns.
 
 ## Publishing Order
 

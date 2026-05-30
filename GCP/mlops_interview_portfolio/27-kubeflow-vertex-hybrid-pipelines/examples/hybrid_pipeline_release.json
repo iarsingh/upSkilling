@@ -1,0 +1,44 @@
+{
+  "platform": "PipelineBridge",
+  "pipeline_authoring": {
+    "kfp_v2_sdk_enabled": true,
+    "component_contract_tests_enabled": true,
+    "pipeline_yaml_compiled": true,
+    "google_cloud_pipeline_components_enabled": true,
+    "containerized_components": true
+  },
+  "execution_backends": {
+    "kubeflow_on_gke_enabled": true,
+    "vertex_ai_pipelines_enabled": true,
+    "tenant_namespace_execution": true,
+    "managed_production_execution": true,
+    "backend_parity_tests_enabled": true
+  },
+  "governance": {
+    "vertex_ai_metadata_enabled": true,
+    "model_registry_enabled": true,
+    "bigquery_evidence_tables": true,
+    "dataset_lineage_enabled": true,
+    "prompt_variant_lineage_enabled": true,
+    "approval_gate_enabled": true
+  },
+  "delivery": {
+    "cloud_build_enabled": true,
+    "artifact_registry_enabled": true,
+    "artifact_analysis_enabled": true,
+    "cloud_deploy_enabled": true,
+    "canary_enabled": true,
+    "shadow_enabled": true,
+    "rollback_enabled": true
+  },
+  "quality": {
+    "min_model_quality_score": 0.82,
+    "model_quality_score": 0.88,
+    "max_training_serving_skew": 0.025,
+    "training_serving_skew": 0.011,
+    "max_canary_error_rate": 0.01,
+    "canary_error_rate": 0.004,
+    "max_p95_latency_ms": 400,
+    "p95_latency_ms": 245
+  }
+}

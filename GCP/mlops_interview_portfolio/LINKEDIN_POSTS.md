@@ -63,6 +63,71 @@ platform where training, serving, tracking, and promotion can happen safely.
 
 GitHub: <add project link>
 
+## Post 30: AtlasAI
+
+Project 28: AtlasAI, an enterprise AI and MLOps operating system on GCP.
+
+This is the capstone project that combines the full portfolio:
+
+- GKE Enterprise, Terraform, GitOps, and Workload Identity
+- Kubeflow for notebooks, KFP v2, Katib, and KServe
+- Vertex AI Pipelines, Metadata, Model Registry, and Feature Store
+- Pub/Sub, Dataflow, BigQuery, Bigtable, and Cloud Storage
+- Gemini, Agent Engine, Vector Search, Model Armor, RAG, and vLLM/Triton
+- Cloud Build, Artifact Registry, Artifact Analysis, Cosign, and Secret Manager
+- Cloud Monitoring, OpenTelemetry, Eventarc, and AIOps remediation
+- GPU FinOps, token buckets, graph traversal, tries, MinHash, and ring buffers
+
+The lesson: senior MLOps is an operating model, not a single tool. The value is
+connecting platform, data, ML lifecycle, GenAI governance, security, reliability,
+cost, and algorithms into one system that can be operated safely.
+
+GitHub: <add project link>
+
+## Post 28: KubeFlowForge
+
+Project 26: KubeFlowForge, a multi-tenant Kubeflow platform on GKE Enterprise.
+
+This project shows Kubeflow as a real internal ML platform:
+
+- GKE Enterprise private cluster
+- Terraform and Argo CD or Config Sync
+- Kubeflow Profiles and tenant namespaces
+- Kubeflow Pipelines v2
+- Katib hyperparameter tuning
+- KServe model serving
+- Kueue and GPU node pools
+- Workload Identity and NetworkPolicy
+- Secret Manager with External Secrets
+- Managed Prometheus and Cloud Monitoring
+- Vertex AI Metadata export
+
+The lesson: installing Kubeflow is the easy part. The senior engineering work is
+tenancy, quotas, GitOps, GPU scheduling, security, observability, and rollback.
+
+GitHub: <add project link>
+
+## Post 29: PipelineBridge
+
+Project 27: PipelineBridge, a hybrid Kubeflow Pipelines and Vertex AI Pipelines
+governance platform.
+
+The core idea:
+
+- Author once with KFP v2
+- Compile portable pipeline YAML
+- Run experimentation on Kubeflow on GKE
+- Run production candidates on Vertex AI Pipelines
+- Use Google Cloud Pipeline Components where managed services are needed
+- Track lineage in Vertex AI Metadata
+- Register models in Vertex AI Model Registry
+- Promote with Cloud Build, Cloud Deploy, canary, shadow, and rollback gates
+
+The lesson: the strongest GCP Kubeflow story is not Kubeflow versus Vertex AI.
+It is portability for teams plus managed governance for production.
+
+GitHub: <add project link>
+
 ## Post 25: FinPulse
 
 Project 23: FinPulse, a multi-agent GPU FinOps broker.

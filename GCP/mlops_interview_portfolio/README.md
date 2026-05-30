@@ -33,6 +33,10 @@ and operate the full ML platform lifecycle:
   serving latency and cloud cost
 - Optimize GPU FinOps, biomedical Graph-RAG, and cybersecurity streaming with
   algorithmic platform components
+- Run Kubeflow on GKE with KFP v2, Katib, KServe, Kueue, and hybrid Vertex AI
+  Pipelines governance
+- Present one capstone enterprise AI/MLOps operating system that combines all
+  project skills into a single architecture
 - Explain SLOs, GitOps, model lineage, and production readiness
 
 ## Project Index
@@ -64,6 +68,9 @@ and operate the full ML platform lifecycle:
 | 23 | FinPulse | GPU FinOps and AIOps optimizer | GKE Enterprise, Kueue, Spot GPUs, DP bin packing, token buckets, vLLM, Gemini, BigQuery, Cloud Monitoring |
 | 24 | BioGraphRAG | Biomedical Graph-RAG platform | Dataflow, MinHash, LSH, A*/Dijkstra, Vertex AI Vector Search, Vertex AI Pipelines, Cloud Build, Secret Manager |
 | 25 | CyberStream | Cyber-threat streaming MLOps | Pub/Sub, Dataflow, Aho-Corasick, ring buffers, BigQuery drift, Eventarc, Cloud Run, Vertex AI, Cloud Deploy |
+| 26 | KubeFlowForge | Kubeflow on GKE ML platform | GKE Enterprise, Kubeflow, KFP v2, Katib, KServe, Kueue, Argo CD, Workload Identity |
+| 27 | PipelineBridge | Hybrid Kubeflow and Vertex AI pipelines | KFP v2, Kubeflow Pipelines, Vertex AI Pipelines, Metadata, Model Registry, Cloud Build, Cloud Deploy |
+| 28 | AtlasAI | Enterprise AI/MLOps operating system | GKE, Terraform, Kubeflow, Vertex AI, GenAI, Dataflow, Feature Store, DevSecOps, AIOps, FinOps |
 
 ## Portfolio Architecture
 
@@ -94,6 +101,9 @@ flowchart TD
     A --> AE[23 FinPulse]
     A --> AF[24 BioGraphRAG]
     A --> AG[25 CyberStream]
+    A --> AH[26 KubeFlowForge]
+    A --> AI[27 PipelineBridge]
+    A --> AJ[28 AtlasAI]
 
     B --> H[GKE Runtime Platform]
     B --> I[GCS Model Artifacts]
@@ -150,6 +160,18 @@ flowchart TD
     AF --> L
     AG --> L
     AG --> K
+    AH --> H
+    AH --> K
+    AH --> L
+    AI --> J
+    AI --> K
+    AI --> L
+    AJ --> H
+    AJ --> J
+    AJ --> K
+    AJ --> L
+    AJ --> M
+    AJ --> N
 ```
 
 ## End-to-End Story
@@ -176,6 +198,10 @@ flowchart TD
     memory-optimized text routing systems.
 15. Add FinOps, biomedical Graph-RAG, and cybersecurity streaming systems where
     algorithms directly shape reliability, latency, and cost.
+16. Add Kubeflow on GKE and hybrid KFP/Vertex AI pipelines for open-source
+    portability plus managed production governance.
+17. Close with AtlasAI, a capstone platform that combines every project into
+    one enterprise AI/MLOps operating system.
 
 ## 01. GKE ML Platform Blueprint
 
@@ -636,6 +662,79 @@ Interview angle:
 > streaming ML features, and shadow deployment protect high-volume threat
 > detection paths."
 
+## 26. KubeFlowForge
+
+Path: `26-kubeflow-gke-ml-factory`
+
+A multi-tenant Kubeflow platform on GKE Enterprise for internal ML teams. It
+combines Terraform, Argo CD or Config Sync, Workload Identity, Kubeflow
+Profiles, Notebooks, Kubeflow Pipelines v2, Katib, KServe, Kueue, Artifact
+Registry, Secret Manager, Cloud Monitoring, and Vertex AI Metadata export.
+
+Showcases:
+
+- Kubeflow on GKE Enterprise platform architecture
+- Tenant isolation through profiles, namespaces, network policies, and quotas
+- KFP v2 pipelines for feature validation, training, evaluation, and packaging
+- Katib hyperparameter tuning with GPU scheduling controls
+- KServe canary serving with SLO and rollback gates
+- GitOps-driven platform lifecycle and drift control
+
+Interview angle:
+
+> "I can run Kubeflow as a secure internal ML platform, not just install it. My
+> focus is tenancy, GitOps, GPU scheduling, observability, and release evidence."
+
+## 27. PipelineBridge
+
+Path: `27-kubeflow-vertex-hybrid-pipelines`
+
+A hybrid Kubeflow Pipelines and Vertex AI Pipelines platform. It standardizes on
+KFP v2 components, compiles pipeline YAML once, runs experimentation on
+Kubeflow on GKE, runs governed production candidates on Vertex AI Pipelines, and
+uses Vertex AI Metadata, Model Registry, Cloud Build, Cloud Deploy, canary,
+shadow, and rollback controls.
+
+Showcases:
+
+- Portable KFP v2 pipeline authoring
+- Kubeflow on GKE for tenant-controlled experimentation
+- Vertex AI Pipelines for managed production orchestration
+- Vertex AI Metadata and Model Registry governance
+- Cloud Build component tests and image scanning
+- Cloud Deploy promotion with SLO-based canary rollback
+
+Interview angle:
+
+> "I can bridge open-source Kubeflow and managed Vertex AI by making KFP v2 the
+> portable contract and treating pipeline promotion like production software
+> delivery."
+
+## 28. AtlasAI
+
+Path: `28-atlas-ai-mlops-operating-system`
+
+The capstone enterprise AI/MLOps operating system that combines the entire
+portfolio. It ties together GKE Enterprise, Terraform, GitOps, Kubeflow,
+Vertex AI, streaming Dataflow features, Feature Store, BigQuery, Bigtable,
+GenAI/RAG, Agent Engine, Vector Search, Model Armor, DevSecOps supply chain,
+Cloud Monitoring, AIOps remediation, GPU FinOps, and algorithmic fast paths.
+
+Showcases:
+
+- One board-level architecture that connects all 27 previous project themes
+- Platform engineering, MLOps, LLMOps, data engineering, DevSecOps, SRE/AIOps,
+  FinOps, and DSA in one system
+- Kubeflow for tenant experimentation and Vertex AI for governed production
+- GenAI assets managed with the same rigor as models and infrastructure
+- SLO, drift, safety, vulnerability, and cost signals feeding GitOps rollback
+
+Interview angle:
+
+> "I can design the whole AI platform operating model: infrastructure, data,
+> ML lifecycle, GenAI governance, security, reliability, cost, and automated
+> remediation."
+
 ## How To Validate
 
 Run all Python tests:
@@ -755,6 +854,15 @@ python3 GCP/mlops_interview_portfolio/24-bio-graph-rag/src/bio_graph_rag_gate.py
 
 python3 GCP/mlops_interview_portfolio/25-cyber-stream/src/cyber_stream_gate.py evaluate \
   --release GCP/mlops_interview_portfolio/25-cyber-stream/examples/threat_release.json
+
+python3 GCP/mlops_interview_portfolio/26-kubeflow-gke-ml-factory/src/kubeflow_gke_gate.py evaluate \
+  --release GCP/mlops_interview_portfolio/26-kubeflow-gke-ml-factory/examples/kubeflow_platform_release.json
+
+python3 GCP/mlops_interview_portfolio/27-kubeflow-vertex-hybrid-pipelines/src/hybrid_pipeline_gate.py evaluate \
+  --release GCP/mlops_interview_portfolio/27-kubeflow-vertex-hybrid-pipelines/examples/hybrid_pipeline_release.json
+
+python3 GCP/mlops_interview_portfolio/28-atlas-ai-mlops-operating-system/src/atlas_ai_gate.py evaluate \
+  --release GCP/mlops_interview_portfolio/28-atlas-ai-mlops-operating-system/examples/atlas_ai_release.json
 ```
 
 ## Resume Alignment
@@ -787,6 +895,10 @@ These projects support the following resume themes:
   programming, memory-aware serving, and low-latency GenAI gateways
 - GPU FinOps optimization, biomedical Graph-RAG, and cybersecurity streaming
   threat intelligence with algorithmic fast paths
+- Kubeflow on GKE Enterprise, KFP v2, Katib, KServe, Kueue, and hybrid Vertex AI
+  Pipelines governance
+- Enterprise AI/MLOps operating-system design across platform, data, ML, GenAI,
+  security, SRE, AIOps, FinOps, and algorithms
 
 ## Publishing Assets
 
