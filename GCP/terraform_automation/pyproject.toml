@@ -1,0 +1,26 @@
+[project]
+name = "gcp-terraform-automation"
+version = "0.1.0"
+description = "Terraform automation and state validator for GCP using Python."
+authors = [{ name = "Infrastructure Automation" }]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "click>=8.1",
+  "python-terraform>=0.10.0",
+  "google-cloud-resource-manager>=1.0.0",
+  "rich>=13.0.0"
+]
+
+[project.scripts]
+gcp-terraform = "terraform_automation.cli:main"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
