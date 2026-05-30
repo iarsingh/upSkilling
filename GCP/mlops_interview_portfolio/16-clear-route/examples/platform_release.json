@@ -1,0 +1,52 @@
+{
+  "platform": "ClearRoute",
+  "tenancy": {
+    "teams": 8,
+    "namespace_per_team": true,
+    "dedicated_service_accounts": true,
+    "tenant_network_policies_enabled": true,
+    "tenant_storage_isolated": true
+  },
+  "gke_enterprise": {
+    "architecture": "hub-and-spoke",
+    "anthos_enabled": true,
+    "config_sync_enabled": true,
+    "policy_controller_enabled": true
+  },
+  "iac_gitops": {
+    "terraform_managed": true,
+    "config_connector_enabled": true,
+    "argocd_enabled": true,
+    "gcp_resources_as_crds": ["cloudsql", "iam", "gcs"],
+    "manual_console_changes_allowed": false
+  },
+  "mlops": {
+    "kubeflow_on_gke": true,
+    "vertex_ai_training_enabled": true,
+    "bigquery_source_enabled": true,
+    "vertex_metadata_enabled": true,
+    "model_registry_enabled": true
+  },
+  "ci_cd": {
+    "system": "cloud-build",
+    "lint_enabled": true,
+    "unit_tests_enabled": true,
+    "immutable_images": true,
+    "artifact_analysis_scan_enabled": true,
+    "artifact_registry_enabled": true
+  },
+  "security": {
+    "hipaa_aligned_controls": true,
+    "vpc_peering_enabled": true,
+    "private_google_access": true,
+    "custom_iam_roles": true,
+    "kms_encryption": true,
+    "audit_logs_enabled": true
+  },
+  "deployment": {
+    "autoscaling_gke_serving": true,
+    "network_security_policies": true,
+    "canary_enabled": true,
+    "rollback_enabled": true
+  }
+}

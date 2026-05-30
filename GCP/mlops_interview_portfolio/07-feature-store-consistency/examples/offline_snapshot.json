@@ -1,0 +1,14 @@
+{
+  "snapshot_time": "2026-05-31T08:00:00Z",
+  "schema": {
+    "customer_id": "string",
+    "transaction_count_7d": "int",
+    "avg_order_value_30d": "float",
+    "days_since_last_login": "int"
+  },
+  "null_rates": {
+    "transaction_count_7d": 0.0,
+    "avg_order_value_30d": 0.0,
+    "days_since_last_login": 0.0
+  }
+}

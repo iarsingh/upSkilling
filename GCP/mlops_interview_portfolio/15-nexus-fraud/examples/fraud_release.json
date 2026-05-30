@@ -1,0 +1,42 @@
+{
+  "platform": "NexusFraud",
+  "streaming": {
+    "processor": "apache-beam-dataflow",
+    "events_per_second": 45000,
+    "max_processing_lag_ms": 250,
+    "processing_lag_ms": 120
+  },
+  "features": {
+    "store": "vertex-ai-feature-store",
+    "online_latency_ms": 18,
+    "max_online_latency_ms": 30,
+    "freshness_minutes": 2,
+    "max_freshness_minutes": 5
+  },
+  "orchestration": {
+    "training": "vertex-ai-pipelines",
+    "scheduling": "cloud-composer",
+    "metadata": "vertex-ai-metadata",
+    "terraform_managed": true
+  },
+  "continuous_training": {
+    "enabled": true,
+    "data_drift_detected": true,
+    "concept_drift_detected": true,
+    "approval_required": true
+  },
+  "deployment": {
+    "ci_cd": "cloud-build",
+    "canary_enabled": true,
+    "shadow_enabled": true,
+    "initial_canary_percent": 5,
+    "max_initial_canary_percent": 10,
+    "zero_downtime": true
+  },
+  "governance": {
+    "lineage_complete": true,
+    "audit_log_enabled": true,
+    "regulatory_review": "approved",
+    "model_explainability_enabled": true
+  }
+}

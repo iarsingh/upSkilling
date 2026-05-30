@@ -1,0 +1,22 @@
+{
+  "batch_id": "customer_churn_2026_05_31",
+  "owner": "growth-ml",
+  "input_profile": {
+    "rows": 100000,
+    "duplicate_entity_rate": 0.001,
+    "missing_required_feature_rate": 0.002
+  },
+  "prediction_profile": {
+    "rows": 99980,
+    "failed_prediction_rate": 0.0002,
+    "null_prediction_rate": 0.0
+  },
+  "policy": {
+    "minimum_rows": 50000,
+    "max_duplicate_entity_rate": 0.005,
+    "max_missing_required_feature_rate": 0.01,
+    "min_output_completeness_rate": 0.999,
+    "max_failed_prediction_rate": 0.001,
+    "max_null_prediction_rate": 0.0
+  }
+}

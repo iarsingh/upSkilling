@@ -1,0 +1,37 @@
+# ChronosSupply
+
+Enterprise multi-echelon demand forecasting and inventory optimization platform
+for high-throughput retail batch MLOps on GCP.
+
+ChronosSupply forecasts demand for millions of SKU-store combinations and
+promotes challenger models only when data quality, segment-level accuracy,
+cost, scalability, and registry controls pass. The design maps to Cloud
+Composer, Dataflow, Great Expectations, BigQuery ML, Vertex AI Custom Training,
+Vertex AI Model Registry, GitHub Actions, Memorystore, and BigQuery serving.
+
+## What It Demonstrates
+
+- Cloud Composer orchestration for predictable batch compute spikes
+- Dataflow + Great Expectations validation before training
+- BQML and Vertex AI custom training split by segment complexity
+- Segment-level challenger versus champion evaluation
+- Spot/preemptible worker policy for cost efficiency
+- GitHub Actions controlled model registration
+- Micro-batched BigQuery predictions and Redis inventory cache
+
+## Run
+
+```bash
+python3 src/chronos_supply_gate.py evaluate \
+  --candidate examples/forecast_run.json
+```
+
+## Interview Talking Points
+
+- Forecasting platforms fail when aggregate metrics hide weak SKU-store
+  segments; segment gates are mandatory.
+- Batch MLOps cost control is an architecture concern, not an afterthought.
+- Great Expectations and Dataflow prevent corrupt upstream retail logs from
+  poisoning training.
+- BigQuery plus Redis supports both analytical planning and low-latency
+  warehouse inventory lookups.

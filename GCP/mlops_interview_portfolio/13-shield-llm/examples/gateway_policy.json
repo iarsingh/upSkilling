@@ -1,0 +1,43 @@
+{
+  "platform": "ShieldLLM",
+  "runtime": {
+    "gateway": "fastapi",
+    "deployment": "gke",
+    "providers": ["vertex-ai-gemini", "open-weights"],
+    "p95_latency_ms": 180,
+    "max_p95_latency_ms": 250
+  },
+  "guardrails": {
+    "layers": [
+      "prompt_injection",
+      "pii_input",
+      "toxicity_input",
+      "policy_input",
+      "context_relevance",
+      "llm_response",
+      "hallucination",
+      "pii_output",
+      "toxicity_output"
+    ],
+    "required_layer_count": 9,
+    "max_prompt_injection_rate": 0.002,
+    "prompt_injection_rate": 0.001,
+    "max_pii_leak_rate": 0.0,
+    "pii_leak_rate": 0.0
+  },
+  "evaluation": {
+    "frameworks": ["ragas", "deepeval"],
+    "vertex_ai_pipelines_enabled": true,
+    "min_groundedness": 0.88,
+    "groundedness": 0.91,
+    "max_hallucination_rate": 0.02,
+    "hallucination_rate": 0.008
+  },
+  "telemetry": {
+    "pubsub_enabled": true,
+    "bigquery_enabled": true,
+    "vertex_metadata_enabled": true,
+    "token_logging_enabled": true,
+    "safety_score_logging_enabled": true
+  }
+}

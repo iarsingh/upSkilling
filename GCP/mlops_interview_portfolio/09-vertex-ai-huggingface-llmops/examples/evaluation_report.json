@@ -1,0 +1,21 @@
+{
+  "evaluation_set": "prompt_eval_set_v1",
+  "metrics": {
+    "accuracy": 0.935,
+    "f1": 0.928,
+    "toxicity_rate": 0.001,
+    "hallucination_rate": 0.0,
+    "pii_leak_rate": 0.0,
+    "p95_latency_ms": 185,
+    "estimated_cost_per_1k_predictions_usd": 0.42
+  },
+  "thresholds": {
+    "min_accuracy": 0.9,
+    "min_f1": 0.9,
+    "max_toxicity_rate": 0.005,
+    "max_hallucination_rate": 0.01,
+    "max_pii_leak_rate": 0.0,
+    "max_p95_latency_ms": 300,
+    "max_cost_per_1k_predictions_usd": 1.0
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "platform": "AdStream",
+  "throughput": {
+    "requests_per_second": 52000,
+    "minimum_requests_per_second": 50000,
+    "p99_latency_ms": 42,
+    "max_p99_latency_ms": 60,
+    "error_rate": 0.001,
+    "max_error_rate": 0.005
+  },
+  "devops": {
+    "terraform_managed": true,
+    "cloud_deploy_enabled": true,
+    "blue_green_dataflow": true,
+    "pubsub_source_enabled": true,
+    "slo_auto_rollback_enabled": true
+  },
+  "dataflow": {
+    "runner": "apache-beam-dataflow",
+    "ephemeral_integration_tests": true,
+    "schema_validation": "apache-beam-sdk",
+    "active_color": "blue",
+    "candidate_color": "green"
+  },
+  "features": {
+    "store": "vertex-ai-feature-store",
+    "online_backend": "cloud-bigtable",
+    "offline_store": "bigquery",
+    "online_offline_parity": true,
+    "freshness_seconds": 8,
+    "max_freshness_seconds": 15
+  },
+  "mlops": {
+    "features_as_code": true,
+    "models_as_code": true,
+    "cloud_build_enabled": true,
+    "model_canary_enabled": true,
+    "monitoring_custom_slos": true
+  }
+}

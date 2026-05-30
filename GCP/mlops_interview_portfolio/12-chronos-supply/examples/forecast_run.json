@@ -1,0 +1,37 @@
+{
+  "platform": "ChronosSupply",
+  "orchestrator": "cloud-composer",
+  "data_validation": {
+    "tool": "great-expectations",
+    "runner": "dataflow",
+    "failed_expectation_rate": 0.002,
+    "max_failed_expectation_rate": 0.01
+  },
+  "training": {
+    "bqml_jobs": 3200,
+    "vertex_custom_training_jobs": 240,
+    "spot_worker_ratio": 0.72,
+    "min_spot_worker_ratio": 0.6,
+    "max_batch_cost_usd": 850,
+    "estimated_batch_cost_usd": 612
+  },
+  "evaluation": {
+    "champion_metric": "wape",
+    "min_segments_improved_rate": 0.82,
+    "segments_improved_rate": 0.89,
+    "max_wape_regression": 0.01,
+    "worst_segment_wape_regression": 0.004
+  },
+  "registry": {
+    "target": "vertex-ai-model-registry",
+    "ci_system": "github-actions",
+    "approved": true,
+    "lineage_uri": "gs://chronos-audit/runs/2026-05-31.json"
+  },
+  "serving": {
+    "micro_batch_minutes": 15,
+    "max_micro_batch_minutes": 30,
+    "bigquery_output_enabled": true,
+    "redis_cache_enabled": true
+  }
+}

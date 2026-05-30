@@ -1,0 +1,10 @@
+apiVersion: storage.cnrm.cloud.google.com/v1beta1
+kind: StorageBucket
+metadata:
+  name: clearroute-team-artifacts
+  namespace: mlops-platform
+spec:
+  location: US
+  uniformBucketLevelAccess: true
+  versioning:
+    enabled: true

@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: clearroute-kubeflow-platform
+  namespace: argocd
+spec:
+  project: mlops-platform
+  source:
+    repoURL: https://github.com/example/clearroute-platform.git
+    targetRevision: main
+    path: platform/kubeflow
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kubeflow
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

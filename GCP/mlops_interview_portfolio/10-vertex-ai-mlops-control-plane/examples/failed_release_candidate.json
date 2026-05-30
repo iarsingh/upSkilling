@@ -1,0 +1,73 @@
+{
+  "model_name": "customer_churn_xgboost",
+  "version": "2026-05-31.2",
+  "target_environment": "production",
+  "dataset_contract": {
+    "owner": "",
+    "schema_version": "customer_churn_features.v13",
+    "freshness_hours": 30,
+    "max_freshness_hours": 24,
+    "required_features": 42,
+    "validated_features": 40
+  },
+  "training_pipeline": {
+    "orchestrator": "manual-notebook",
+    "pipeline_spec_version": "",
+    "reproducible": false,
+    "container_image": "",
+    "random_seed": null
+  },
+  "lineage": {
+    "experiment_id": "",
+    "training_data_snapshot": "",
+    "feature_contract": "customer_churn_features.v13",
+    "model_artifact": ""
+  },
+  "evaluation": {
+    "metrics": {
+      "auc": 0.86,
+      "f1": 0.78,
+      "precision": 0.75,
+      "recall": 0.8,
+      "calibration_error": 0.07,
+      "fairness_gap": 0.12
+    },
+    "thresholds": {
+      "min_auc": 0.9,
+      "min_f1": 0.82,
+      "min_precision": 0.8,
+      "min_recall": 0.84,
+      "max_calibration_error": 0.03,
+      "max_fairness_gap": 0.05
+    }
+  },
+  "registry": {
+    "state": "candidate",
+    "approved_by": "",
+    "risk_review": "pending",
+    "previous_production_version": ""
+  },
+  "deployment": {
+    "strategy": "canary",
+    "initial_traffic_percent": 50,
+    "max_initial_traffic_percent": 20,
+    "rollback_enabled": false,
+    "endpoint": ""
+  },
+  "monitoring": {
+    "prediction_logging_enabled": false,
+    "signals": ["latency"],
+    "alert_topic": ""
+  },
+  "retraining": {
+    "enabled": false,
+    "triggers": [],
+    "max_days_between_training": 0
+  },
+  "governance": {
+    "release_owner": "",
+    "business_owner": "growth",
+    "approval_ticket": "",
+    "audit_log_uri": ""
+  }
+}

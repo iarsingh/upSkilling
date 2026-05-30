@@ -1,0 +1,11 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: adstream-dataflow-bluegreen
+description: Blue/green promotion for AdStream streaming feature pipelines
+serialPipeline:
+  stages:
+    - targetId: staging
+      profiles: [green]
+    - targetId: production
+      profiles: [blue, green]

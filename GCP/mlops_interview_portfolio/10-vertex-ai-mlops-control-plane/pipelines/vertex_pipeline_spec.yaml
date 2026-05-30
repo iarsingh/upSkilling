@@ -1,0 +1,36 @@
+pipeline:
+  name: customer-churn-training
+  orchestrator: vertex-ai-pipelines
+  owner: ml-platform
+  schedule: daily
+  steps:
+    - name: validate_dataset_contract
+      component: data-validation
+      inputs:
+        dataset: bq://mlops.training.customer_churn
+        contract: customer_churn_features.v12
+    - name: train_model
+      component: custom-training
+      inputs:
+        image: us-central1-docker.pkg.dev/example/ml-training/churn-trainer:latest
+        machine_type: n1-standard-8
+    - name: evaluate_model
+      component: model-evaluation
+      inputs:
+        metrics:
+          - auc
+          - f1
+          - precision
+          - recall
+          - calibration_error
+          - fairness_gap
+    - name: run_release_readiness_gate
+      component: release-readiness
+      inputs:
+        candidate: examples/ml_release_candidate.json
+    - name: register_model
+      component: vertex-ai-model-registry
+      condition: release_readiness.status == "approved"
+    - name: deploy_canary
+      component: vertex-ai-endpoint-deploy
+      condition: registry.state == "approved"

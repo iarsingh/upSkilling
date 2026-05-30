@@ -1,0 +1,126 @@
+# Vertex AI Hugging Face LLMOps Blueprint
+
+This project demonstrates how to operate a Hugging Face model on Vertex AI with
+production MLOps controls around model metadata, deployment configuration,
+evaluation gates, safety policy, and rollout readiness.
+
+It is designed as a local blueprint: you can validate the release policy and
+explain the cloud architecture without needing to run GPU infrastructure during
+an interview. The same pattern maps to Vertex AI custom containers, Hugging Face
+Transformers, Cloud Build, Artifact Registry, Cloud Storage, BigQuery, and
+Cloud Monitoring.
+
+## What It Demonstrates
+
+- Hugging Face model metadata review before deployment
+- Vertex AI endpoint deployment planning
+- LLM evaluation gates for quality, latency, cost, and safety
+- Prompt evaluation dataset ownership
+- Artifact Registry image promotion
+- BigQuery inference logging design
+- Cloud Monitoring alert routing
+- CI-friendly release readiness validation
+
+## Architecture
+
+```mermaid
+flowchart LR
+    A[Hugging Face Model] --> B[Custom Inference Container]
+    B --> C[Artifact Registry]
+    D[Cloud Build] --> B
+    D --> E[LLMOps Release Gate]
+    F[Prompt Eval Dataset] --> E
+    G[Eval Metrics JSON] --> E
+    H[Deployment Config] --> E
+    E --> I{Release Approved?}
+    I -- No --> J[Block Deployment]
+    I -- Yes --> K[Vertex AI Endpoint]
+    K --> L[Prediction Logs]
+    L --> M[BigQuery]
+    K --> N[Cloud Monitoring]
+    N --> O[Pub/Sub Incident Automation]
+```
+
+## Project Layout
+
+```text
+cloudbuild.yaml
+examples/
+  deployment_config.json
+  evaluation_report.json
+  model_card.json
+  prompt_eval_set.json
+service/
+  app.py
+  Dockerfile
+  requirements.txt
+  tests/
+src/
+  llmops_release_gate.py
+terraform/
+  main.tf
+  variables.tf
+  outputs.tf
+tests/
+  test_llmops_release_gate.py
+```
+
+## Release Gates
+
+The local validator blocks deployment when:
+
+- Model metadata is missing license, owner, task, or approved source
+- Evaluation quality is below threshold
+- Toxicity, hallucination, or PII rates exceed policy
+- p95 latency is above the serving target
+- Estimated cost per 1,000 predictions is too high
+- Deployment config is missing logging, monitoring, or rollback settings
+
+## Run
+
+```bash
+python3 src/llmops_release_gate.py evaluate \
+  --model-card examples/model_card.json \
+  --eval-report examples/evaluation_report.json \
+  --deployment-config examples/deployment_config.json
+```
+
+Expected result:
+
+```json
+{
+  "status": "approved",
+  "model": "distilbert-base-uncased-finetuned-sst-2-english",
+  "target": "vertex-ai-endpoint",
+  "failures": []
+}
+```
+
+## Cloud Build Flow
+
+```mermaid
+sequenceDiagram
+    participant Dev as Developer
+    participant CB as Cloud Build
+    participant AR as Artifact Registry
+    participant Gate as Release Gate
+    participant VAI as Vertex AI
+    Dev->>CB: Push model serving change
+    CB->>CB: Run unit tests
+    CB->>AR: Build and push inference image
+    CB->>Gate: Validate model, eval, deployment config
+    Gate-->>CB: Approved or blocked
+    CB->>VAI: Deploy approved image to endpoint
+```
+
+## Interview Talking Points
+
+- Hugging Face gives model velocity; Vertex AI gives managed deployment,
+  governance, logging, monitoring, and scalable serving.
+- LLMOps release gates should combine model quality, safety, latency, cost,
+  ownership, and rollback readiness.
+- Evaluation data should be versioned and owned like application test data.
+- Custom containers let platform teams standardize observability, auth, and
+  rollout behavior around open-source models.
+- This pattern can be extended to Vertex AI Pipelines, Model Registry,
+  Experiments, Feature Store, and Cloud Deploy.

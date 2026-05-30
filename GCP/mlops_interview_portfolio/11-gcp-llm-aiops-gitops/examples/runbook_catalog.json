@@ -1,0 +1,26 @@
+{
+  "runbooks": [
+    {
+      "id": "rb-high-latency-hpa",
+      "service": "churn-inference",
+      "symptoms": ["high_p99_latency", "cpu_saturation"],
+      "allowed_severities": ["sev2", "sev3"],
+      "supported_actions": ["increase_hpa_max_replicas"],
+      "owner": "ml-platform",
+      "approval_required": true,
+      "allowed_manifest_prefixes": ["gitops/overlays/prod/"],
+      "max_services_per_change": 1
+    },
+    {
+      "id": "rb-model-drift-rollback",
+      "service": "churn-inference",
+      "symptoms": ["model_drift", "prediction_quality_drop"],
+      "allowed_severities": ["sev2", "sev3"],
+      "supported_actions": ["rollback_model_version"],
+      "owner": "ml-platform",
+      "approval_required": true,
+      "allowed_manifest_prefixes": ["gitops/overlays/prod/"],
+      "max_services_per_change": 1
+    }
+  ]
+}

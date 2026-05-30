@@ -1,0 +1,38 @@
+steps:
+  - name: python:3.12
+    entrypoint: python
+    args:
+      - -m
+      - pytest
+      - GCP/mlops_interview_portfolio/09-vertex-ai-huggingface-llmops/tests
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/hf-sentiment:$SHORT_SHA
+      - service
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/hf-sentiment:$SHORT_SHA
+
+  - name: python:3.12
+    entrypoint: python
+    args:
+      - src/llmops_release_gate.py
+      - evaluate
+      - --model-card
+      - examples/model_card.json
+      - --eval-report
+      - examples/evaluation_report.json
+      - --deployment-config
+      - examples/deployment_config.json
+
+substitutions:
+  _REGION: us-central1
+  _REPOSITORY: ml-serving
+
+options:
+  logging: CLOUD_LOGGING_ONLY

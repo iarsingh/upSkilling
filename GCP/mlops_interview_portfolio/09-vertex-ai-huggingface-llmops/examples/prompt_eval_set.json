@@ -1,0 +1,15 @@
+{
+  "name": "prompt_eval_set_v1",
+  "owner": "ml-platform",
+  "task": "text-classification",
+  "examples": [
+    {
+      "input": "The delivery arrived early and the support team was helpful.",
+      "expected_label": "positive"
+    },
+    {
+      "input": "The product failed twice and nobody responded to my ticket.",
+      "expected_label": "negative"
+    }
+  ]
+}

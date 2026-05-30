@@ -1,0 +1,73 @@
+{
+  "model_name": "customer_churn_xgboost",
+  "version": "2026-05-31.1",
+  "target_environment": "production",
+  "dataset_contract": {
+    "owner": "growth-data",
+    "schema_version": "customer_churn_features.v12",
+    "freshness_hours": 4,
+    "max_freshness_hours": 24,
+    "required_features": 42,
+    "validated_features": 42
+  },
+  "training_pipeline": {
+    "orchestrator": "vertex-ai-pipelines",
+    "pipeline_spec_version": "churn-training-pipeline.v5",
+    "reproducible": true,
+    "container_image": "us-central1-docker.pkg.dev/example/ml-training/churn-trainer:2026-05-31",
+    "random_seed": 42
+  },
+  "lineage": {
+    "experiment_id": "exp-churn-2026-05-31",
+    "training_data_snapshot": "bq://mlops.training.customer_churn_20260531",
+    "feature_contract": "customer_churn_features.v12",
+    "model_artifact": "gs://example-model-registry/customer_churn_xgboost/2026-05-31.1"
+  },
+  "evaluation": {
+    "metrics": {
+      "auc": 0.918,
+      "f1": 0.842,
+      "precision": 0.821,
+      "recall": 0.865,
+      "calibration_error": 0.018,
+      "fairness_gap": 0.031
+    },
+    "thresholds": {
+      "min_auc": 0.9,
+      "min_f1": 0.82,
+      "min_precision": 0.8,
+      "min_recall": 0.84,
+      "max_calibration_error": 0.03,
+      "max_fairness_gap": 0.05
+    }
+  },
+  "registry": {
+    "state": "approved",
+    "approved_by": "ml-platform-lead",
+    "risk_review": "completed",
+    "previous_production_version": "2026-05-15.2"
+  },
+  "deployment": {
+    "strategy": "canary",
+    "initial_traffic_percent": 10,
+    "max_initial_traffic_percent": 20,
+    "rollback_enabled": true,
+    "endpoint": "projects/example/locations/us-central1/endpoints/customer-churn"
+  },
+  "monitoring": {
+    "prediction_logging_enabled": true,
+    "signals": ["drift", "skew", "data_quality", "latency", "error_rate"],
+    "alert_topic": "projects/example/topics/ml-platform-alerts"
+  },
+  "retraining": {
+    "enabled": true,
+    "triggers": ["drift", "performance_decay", "scheduled"],
+    "max_days_between_training": 14
+  },
+  "governance": {
+    "release_owner": "ml-platform",
+    "business_owner": "growth",
+    "approval_ticket": "MLOPS-1042",
+    "audit_log_uri": "gs://example-audit/ml-releases/customer_churn_xgboost/2026-05-31.1.json"
+  }
+}

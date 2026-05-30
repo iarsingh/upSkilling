@@ -1,0 +1,23 @@
+{
+  "incident_id": "inc-2026-05-31-001",
+  "service": "churn-inference",
+  "environment": "production",
+  "severity": "sev2",
+  "symptom": "high_p99_latency",
+  "metric": "p99_latency_ms",
+  "current_value": 920,
+  "threshold": 500,
+  "duration_minutes": 12,
+  "logs_summary": [
+    "request queue depth increased after traffic spike",
+    "no model error-rate increase detected",
+    "cpu utilization above 82 percent for 10 minutes"
+  ],
+  "proposed_change": {
+    "action": "increase_hpa_max_replicas",
+    "manifest_path": "gitops/overlays/prod/inference-hpa.yaml",
+    "current_value": 6,
+    "proposed_value": 10,
+    "rollback": "revert HPA maxReplicas from 10 to 6"
+  }
+}

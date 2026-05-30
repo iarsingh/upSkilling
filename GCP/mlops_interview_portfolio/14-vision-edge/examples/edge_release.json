@@ -1,0 +1,32 @@
+{
+  "platform": "VisionEdge",
+  "training": {
+    "service": "vertex-ai-custom-training",
+    "accelerator": "nvidia-tesla-t4",
+    "dataset_uri": "gs://vision-edge/raw-defect-images",
+    "model_family": "resnet-anomaly",
+    "validation_auc": 0.947,
+    "min_validation_auc": 0.92
+  },
+  "optimization": {
+    "steps": ["tensorrt", "edge-tpu-compile"],
+    "artifact_registry_image": "us-central1-docker.pkg.dev/example/edge/vision-defect:2026-05-31",
+    "size_reduction_rate": 0.63,
+    "min_size_reduction_rate": 0.45
+  },
+  "edge_deployment": {
+    "control_plane": "gke-enterprise",
+    "transport": "mqtt-pubsub-bridge",
+    "zero_downtime_enabled": true,
+    "canary_factory_count": 3,
+    "max_canary_factory_count": 5,
+    "p95_inference_latency_ms": 7.4,
+    "max_p95_inference_latency_ms": 10
+  },
+  "telemetry": {
+    "uncertainty_stream_enabled": true,
+    "drift_metrics_enabled": true,
+    "selective_data_collection_enabled": true,
+    "cloud_retraining_trigger_enabled": true
+  }
+}
