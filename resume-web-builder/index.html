@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Upload a PDF or DOCX resume and generate a customizable web resume.">
+    <title>Resume Web Builder</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"></script>
+  </head>
+  <body>
+    <div class="orb orb-one" aria-hidden="true"></div>
+    <div class="orb orb-two" aria-hidden="true"></div>
+
+    <main class="app-shell">
+      <nav class="topbar">
+        <a class="brand" href="#top" aria-label="Resume Web Builder home">
+          <span class="brand-mark">RW</span>
+          <span>Resume Web Builder</span>
+        </a>
+        <div class="nav-actions">
+          <button class="ghost-button" id="sampleBtn" type="button">Use Sample</button>
+          <button class="primary-button" id="downloadBtn" type="button">Export HTML</button>
+        </div>
+      </nav>
+
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow">PDF/DOCX to Web Resume</p>
+          <h1>Turn a resume file into a polished web resume.</h1>
+          <p>
+            Upload a PDF or DOCX resume, extract the content, tune the design, edit the sections,
+            and export a deployable HTML portfolio resume.
+          </p>
+          <div class="hero-stats" aria-label="Builder capabilities">
+            <div><strong>3</strong><span>Templates</span></div>
+            <div><strong>6</strong><span>Theme colors</span></div>
+            <div><strong>1-click</strong><span>HTML export</span></div>
+          </div>
+        </div>
+
+        <form class="upload-panel" id="uploadForm">
+          <label class="dropzone" for="resumeFile" id="dropzone">
+            <input id="resumeFile" type="file" accept=".pdf,.doc,.docx,.txt">
+            <span class="upload-icon">↑</span>
+            <strong>Upload resume</strong>
+            <small>PDF, DOCX, DOC, or TXT. You can edit extracted content after upload.</small>
+          </label>
+          <div class="status-card" id="statusCard">Ready for upload.</div>
+        </form>
+      </section>
+
+      <section class="workspace">
+        <aside class="controls">
+          <section class="control-card">
+            <h2>Customize</h2>
+            <label>
+              Template
+              <select id="templateSelect">
+                <option value="executive">Executive</option>
+                <option value="terminal">Platform Dark</option>
+                <option value="minimal">Minimal</option>
+              </select>
+            </label>
+            <label>
+              Accent
+              <input id="accentColor" type="color" value="#0f766e">
+            </label>
+            <label>
+              Background
+              <select id="backgroundSelect">
+                <option value="mesh">Animated Mesh</option>
+                <option value="grid">Grid</option>
+                <option value="plain">Plain</option>
+              </select>
+            </label>
+            <label>
+              Density
+              <select id="densitySelect">
+                <option value="comfortable">Comfortable</option>
+                <option value="compact">Compact</option>
+              </select>
+            </label>
+          </section>
+
+          <section class="control-card">
+            <h2>Profile</h2>
+            <label>Name <input id="nameInput" type="text"></label>
+            <label>Title <input id="titleInput" type="text"></label>
+            <label>Email <input id="emailInput" type="email"></label>
+            <label>Phone <input id="phoneInput" type="text"></label>
+            <label>Location <input id="locationInput" type="text"></label>
+            <label>LinkedIn <input id="linkedinInput" type="url"></label>
+            <label>GitHub <input id="githubInput" type="url"></label>
+          </section>
+
+          <section class="control-card ai-card">
+            <h2>AI Assist</h2>
+            <label class="toggle-row">
+              <input id="ollamaEnabled" type="checkbox">
+              Use Ollama local LLM
+            </label>
+            <div class="ollama-grid">
+              <label>
+                Ollama URL
+                <input id="ollamaEndpointInput" type="url" value="http://localhost:11434">
+              </label>
+              <label>
+                Model
+                <input id="ollamaModelInput" type="text" value="llama3.1:8b" placeholder="llama3.1:8b">
+              </label>
+            </div>
+            <label>
+              Target role
+              <input id="targetRoleInput" type="text" placeholder="e.g. Senior MLOps Engineer">
+            </label>
+            <button class="primary-button" id="aiPolishBtn" type="button">Polish Summary</button>
+            <button class="secondary-button" id="aiKeywordsBtn" type="button">Extract Keywords</button>
+            <button class="secondary-button" id="aiSectionsBtn" type="button">Suggest Sections</button>
+            <button class="ghost-button" id="aiScoreBtn" type="button">Resume Score</button>
+            <div class="ai-output" id="aiOutput">AI assist uses local heuristics now. No API key required.</div>
+          </section>
+        </aside>
+
+        <section class="editor-preview">
+          <div class="tabs">
+            <button class="tab active" data-tab="preview" type="button">Preview</button>
+            <button class="tab" data-tab="edit" type="button">Edit Content</button>
+            <button class="tab" data-tab="raw" type="button">Extracted Text</button>
+          </div>
+
+          <div class="tab-panel active" id="previewPanel">
+            <article class="resume-preview template-executive bg-mesh" id="resumePreview"></article>
+          </div>
+
+          <div class="tab-panel" id="editPanel">
+            <div class="section-editor">
+              <label>Professional Summary <textarea id="summaryInput"></textarea></label>
+              <label>Skills <textarea id="skillsInput"></textarea></label>
+              <label>Experience <textarea id="experienceInput"></textarea></label>
+              <label>Projects <textarea id="projectsInput"></textarea></label>
+              <label>Education & Certifications <textarea id="educationInput"></textarea></label>
+              <div class="dynamic-header">
+                <div>
+                  <h3>Dynamic Sections</h3>
+                  <p>Add portfolio sections like Awards, Publications, Open Source, Case Studies, or Services.</p>
+                </div>
+                <button class="secondary-button" id="addSectionBtn" type="button">Add Section</button>
+              </div>
+              <div class="dynamic-sections" id="dynamicSections"></div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="rawPanel">
+            <textarea id="rawText" class="raw-text" placeholder="Extracted resume text will appear here. You can paste resume text manually too."></textarea>
+            <button class="secondary-button" id="parseRawBtn" type="button">Generate From Text</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="chatbot-panel" aria-label="Resume chatbot">
+        <div class="chatbot-head">
+          <div>
+            <p class="eyebrow">Resume Chatbot</p>
+            <h2>Ask basic details from the parsed resume.</h2>
+          </div>
+          <div class="chat-quick-actions">
+            <button type="button" data-chat-question="What are the candidate skills?">Skills</button>
+            <button type="button" data-chat-question="What projects are listed?">Projects</button>
+            <button type="button" data-chat-question="What is missing or should improve?">Missing</button>
+          </div>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <form class="chat-form" id="chatForm">
+          <input id="chatInput" type="text" placeholder="Ask about name, email, skills, experience, projects, education...">
+          <button class="primary-button" type="submit">Ask</button>
+        </form>
+      </section>
+    </main>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
