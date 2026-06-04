@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate*
+data/*.csv
+artifacts/*.json
+artifacts/*.txt

@@ -1,0 +1,27 @@
+[project]
+name = "gcp-vertex-tabular-ml"
+version = "0.1.0"
+description = "A dependency-light tabular ML project with GCP Vertex AI infrastructure."
+authors = [{ name = "GCP ML Learning Project" }]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "google-cloud-storage>=2.10.0"
+]
+
+[project.scripts]
+gcp-vertex-tabular-ml = "gcp_vertex_tabular_ml.cli:main"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
