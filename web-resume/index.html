@@ -1,0 +1,1511 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Akhilesh Ranjan Singh - ML Platform and DevOps Engineer with 6.7+ years of experience across GCP, Kubernetes, MLOps, Terraform, GitOps, and observability.">
+    <meta name="author" content="Akhilesh Ranjan Singh">
+    <meta name="theme-color" content="#0f766e">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Akhilesh Ranjan Singh | ML Platform & DevOps Engineer">
+    <meta property="og:description" content="ML Platform and DevOps Engineer building Kubernetes-based cloud platforms and production-grade ML infrastructure across GCP, AWS, and Azure.">
+    <meta property="og:image" content="./og-card.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Akhilesh Ranjan Singh | ML Platform & DevOps Engineer">
+    <meta name="twitter:description" content="GCP, Kubernetes, MLOps, Terraform, GitOps, observability, and cloud-native platform resume.">
+    <meta name="twitter:image" content="./og-card.svg">
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="canonical" href="https://iarsingh.github.io/upSkilling/web-resume/">
+    <title>Akhilesh Ranjan Singh | ML Platform & DevOps Engineer</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Akhilesh Ranjan Singh",
+        "jobTitle": "ML Platform and DevOps Engineer",
+        "email": "mailto:akhileshranjan.ks@gmail.com",
+        "telephone": "+91-8002392976",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Noida",
+          "addressCountry": "India"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/iamarsingh/",
+          "https://github.com/iarsingh"
+        ],
+        "url": "https://iarsingh.github.io/upSkilling/web-resume/"
+      }
+    </script>
+    <style>
+      :root {
+        --bg: #f4f7f8;
+        --surface: #ffffff;
+        --soft: #f7faf9;
+        --ink: #101827;
+        --muted: #62707e;
+        --line: #dce5e8;
+        --accent: #0f766e;
+        --accent-2: #2563eb;
+        --gold: #a16207;
+        --dark: #17212b;
+        --dark-2: #233342;
+        --shadow: 0 22px 70px rgba(16, 24, 39, 0.12);
+        --radius: 18px;
+      }
+
+      @keyframes drift {
+        0% {
+          transform: translate3d(0, 0, 0) rotate(0deg);
+        }
+        50% {
+          transform: translate3d(18px, -14px, 0) rotate(4deg);
+        }
+        100% {
+          transform: translate3d(0, 0, 0) rotate(0deg);
+        }
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          box-shadow: 0 0 0 6px rgba(15, 118, 110, 0.14);
+        }
+        50% {
+          box-shadow: 0 0 0 10px rgba(15, 118, 110, 0.06);
+        }
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          linear-gradient(135deg, rgba(15, 118, 110, 0.13) 0 18%, transparent 18% 100%),
+          linear-gradient(225deg, rgba(37, 99, 235, 0.1) 0 16%, transparent 16% 100%),
+          linear-gradient(90deg, rgba(16, 24, 39, 0.05) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(16, 24, 39, 0.04) 1px, transparent 1px),
+          var(--bg);
+        background-size: auto, auto, 44px 44px, 44px 44px;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.55;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background:
+          linear-gradient(115deg, transparent 0 58%, rgba(15, 118, 110, 0.09) 58% 59%, transparent 59%),
+          linear-gradient(115deg, transparent 0 68%, rgba(37, 99, 235, 0.08) 68% 69%, transparent 69%);
+        pointer-events: none;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        right: 7vw;
+        top: 18vh;
+        z-index: -1;
+        width: 240px;
+        height: 240px;
+        border: 1px solid rgba(15, 118, 110, 0.16);
+        border-radius: 40px;
+        background: rgba(255, 255, 255, 0.32);
+        filter: blur(1px);
+        animation: drift 12s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      a,
+      button,
+      summary {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      a:focus-visible,
+      button:focus-visible,
+      summary:focus-visible {
+        outline: 3px solid rgba(15, 118, 110, 0.28);
+        outline-offset: 3px;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .progress {
+        position: fixed;
+        inset: 0 auto auto 0;
+        z-index: 50;
+        width: var(--progress, 0%);
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      }
+
+      .shell {
+        width: min(1200px, calc(100% - 28px));
+        margin: 18px auto 42px;
+      }
+
+      .nav {
+        position: sticky;
+        top: 12px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 12px;
+        border: 1px solid rgba(220, 229, 232, 0.9);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 14px 36px rgba(16, 24, 39, 0.08);
+        backdrop-filter: blur(18px);
+        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      }
+
+      .nav:hover {
+        transform: translateY(-1px);
+        border-color: rgba(15, 118, 110, 0.25);
+        box-shadow: 0 18px 44px rgba(16, 24, 39, 0.11);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding-left: 5px;
+        font-weight: 900;
+      }
+
+      .mark {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--dark);
+        color: #ffffff;
+        transition: transform 220ms ease, background 220ms ease;
+      }
+
+      .brand:hover .mark {
+        transform: rotate(-8deg) scale(1.05);
+        background: var(--accent);
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 4px;
+      }
+
+      .nav-links a,
+      .nav-action {
+        border: 0;
+        border-radius: 999px;
+        padding: 9px 13px;
+        background: transparent;
+        color: var(--muted);
+        font-weight: 800;
+        font-size: 0.88rem;
+        cursor: pointer;
+        transition: color 160ms ease, background 160ms ease, transform 160ms ease;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--ink);
+        background: var(--soft);
+        transform: translateY(-1px);
+      }
+
+      .nav-action {
+        color: #ffffff;
+        background: var(--accent);
+      }
+
+      .nav-action:hover {
+        transform: translateY(-1px);
+        background: var(--dark);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 370px;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        animation: fadeUp 520ms ease both;
+      }
+
+      .hero-main {
+        position: relative;
+        min-height: 580px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+        background:
+          linear-gradient(135deg, #ffffff 0%, #f9fcfb 54%, #eef7f5 100%);
+      }
+
+      .hero-main::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(15, 118, 110, 0.09) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(15, 118, 110, 0.07) 1px, transparent 1px);
+        background-size: 34px 34px;
+        mask-image: linear-gradient(90deg, transparent 0%, #000 56%, #000 100%);
+        opacity: 0.7;
+      }
+
+      .hero-main::after {
+        content: "";
+        position: absolute;
+        right: 34px;
+        top: 46px;
+        width: 260px;
+        height: 300px;
+        border: 1px solid rgba(15, 118, 110, 0.18);
+        border-radius: 18px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.34)),
+          repeating-linear-gradient(0deg, rgba(16, 24, 39, 0.08) 0 1px, transparent 1px 42px);
+        opacity: 0.55;
+      }
+
+      .hero-copy {
+        position: relative;
+        z-index: 1;
+        padding: 58px;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        width: fit-content;
+        margin-bottom: 22px;
+        padding: 8px 12px;
+        border: 1px solid rgba(15, 118, 110, 0.22);
+        border-radius: 999px;
+        background: rgba(15, 118, 110, 0.08);
+        color: var(--accent);
+        font-size: 0.86rem;
+        font-weight: 900;
+      }
+
+      .status::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 6px rgba(15, 118, 110, 0.14);
+        animation: pulse 2.4s ease-in-out infinite;
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 840px;
+        margin: 0;
+        font-size: clamp(3rem, 7vw, 6.4rem);
+        line-height: 0.9;
+        letter-spacing: 0;
+      }
+
+      .headline {
+        max-width: 780px;
+        margin: 24px 0 0;
+        color: var(--muted);
+        font-size: 1.12rem;
+      }
+
+      .platform-map {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        max-width: 680px;
+        margin-top: 30px;
+      }
+
+      .platform-node {
+        position: relative;
+        min-height: 82px;
+        display: grid;
+        align-content: space-between;
+        gap: 10px;
+        padding: 14px;
+        border: 1px solid rgba(220, 229, 232, 0.95);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 12px 28px rgba(16, 24, 39, 0.06);
+        backdrop-filter: blur(10px);
+        overflow: hidden;
+        transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+      }
+
+      .platform-node::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent 0 35%, rgba(255, 255, 255, 0.72) 48%, transparent 62% 100%);
+        transform: translateX(-130%);
+        transition: transform 520ms ease;
+      }
+
+      .platform-node:hover {
+        transform: translateY(-4px);
+        border-color: rgba(15, 118, 110, 0.34);
+        box-shadow: 0 18px 38px rgba(16, 24, 39, 0.1);
+      }
+
+      .platform-node:hover::before {
+        transform: translateX(130%);
+      }
+
+      .platform-node strong {
+        font-size: 0.88rem;
+      }
+
+      .platform-node span {
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 750;
+      }
+
+      .hero-footer {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        border-top: 1px solid var(--line);
+        background: var(--soft);
+      }
+
+      .hero-stat {
+        padding: 22px;
+        border-right: 1px solid var(--line);
+        transition: background 180ms ease, transform 180ms ease;
+      }
+
+      .hero-stat:hover {
+        background: #ffffff;
+        transform: translateY(-2px);
+      }
+
+      .hero-stat:last-child {
+        border-right: 0;
+      }
+
+      .hero-stat strong {
+        display: block;
+        font-size: 1.6rem;
+        line-height: 1;
+      }
+
+      .hero-stat span {
+        display: block;
+        margin-top: 7px;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .profile {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 28%),
+          linear-gradient(135deg, #17212b, #223342);
+        color: #ffffff;
+        transition: transform 220ms ease, box-shadow 220ms ease;
+      }
+
+      .profile:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 28px 80px rgba(16, 24, 39, 0.2);
+      }
+
+      .portrait {
+        position: relative;
+        aspect-ratio: 4 / 5;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        margin: 18px 18px 0;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 16px;
+        background:
+          linear-gradient(135deg, rgba(15, 118, 110, 0.62), rgba(255, 255, 255, 0.08)),
+          linear-gradient(180deg, #243544, #17212b);
+        font-size: 4rem;
+        font-weight: 950;
+        box-shadow: 0 24px 54px rgba(0, 0, 0, 0.24);
+        transition: transform 260ms ease, border-color 260ms ease;
+      }
+
+      .portrait:hover {
+        transform: scale(1.015);
+        border-color: rgba(255, 255, 255, 0.36);
+      }
+
+      .portrait img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: center top;
+        transition: transform 420ms ease, filter 420ms ease;
+      }
+
+      .portrait:hover img {
+        transform: scale(1.045);
+        filter: saturate(1.04) contrast(1.03);
+      }
+
+      .portrait::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0;
+        height: 38%;
+        background: linear-gradient(180deg, transparent, rgba(23, 33, 43, 0.78));
+      }
+
+      .fallback {
+        width: 100%;
+        height: 100%;
+        display: none;
+        place-items: center;
+        background:
+          linear-gradient(135deg, rgba(15, 118, 110, 0.62), rgba(37, 99, 235, 0.16)),
+          linear-gradient(180deg, #243544, #17212b);
+      }
+
+      .contact {
+        display: grid;
+        gap: 14px;
+        padding: 24px;
+      }
+
+      .contact-row {
+        display: grid;
+        gap: 3px;
+      }
+
+      .contact-row span {
+        color: rgba(255, 255, 255, 0.58);
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .contact-row a,
+      .contact-row p {
+        margin: 0;
+        overflow-wrap: anywhere;
+        color: #ffffff;
+        font-size: 0.94rem;
+      }
+
+      .contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-top: 4px;
+      }
+
+      .contact-links a {
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 999px;
+        padding: 8px 11px;
+        background: rgba(255, 255, 255, 0.07);
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 0.85rem;
+        transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+      }
+
+      .contact-links a:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.13);
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: 330px minmax(0, 1fr);
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .sidebar {
+        display: grid;
+        align-self: start;
+        gap: 18px;
+        position: sticky;
+        top: 92px;
+      }
+
+      .panel {
+        padding: 24px;
+      }
+
+      .main {
+        display: grid;
+        gap: 18px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+
+      h2 {
+        margin: 0;
+        color: var(--ink);
+        font-size: 1.05rem;
+        line-height: 1.2;
+      }
+
+      h3 {
+        margin: 0;
+      }
+
+      .section-label {
+        color: var(--accent);
+        font-size: 0.78rem;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 7px 10px;
+        background: var(--soft);
+        color: #2f3d47;
+        font-size: 0.82rem;
+        font-weight: 820;
+        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+      }
+
+      .chip:hover {
+        transform: translateY(-2px);
+        border-color: rgba(15, 118, 110, 0.45);
+        background: rgba(15, 118, 110, 0.08);
+        box-shadow: 0 10px 20px rgba(15, 118, 110, 0.08);
+      }
+
+      .impact {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .impact-card {
+        min-height: 132px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 18px;
+        border-radius: 14px;
+        background: var(--dark);
+        color: #ffffff;
+        transition: transform 180ms ease, box-shadow 180ms ease;
+      }
+
+      .impact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 18px 42px rgba(16, 24, 39, 0.16);
+      }
+
+      .impact-card:nth-child(2) {
+        background: var(--accent);
+      }
+
+      .impact-card:nth-child(3) {
+        background: var(--dark-2);
+      }
+
+      .impact-card strong {
+        display: block;
+        font-size: 1.8rem;
+        line-height: 1;
+      }
+
+      .impact-card span {
+        color: rgba(255, 255, 255, 0.74);
+        font-size: 0.84rem;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 14px;
+      }
+
+      .role {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--surface);
+        overflow: hidden;
+        transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+      }
+
+      .role:hover {
+        transform: translateY(-2px);
+        border-color: rgba(15, 118, 110, 0.32);
+        box-shadow: 0 14px 34px rgba(16, 24, 39, 0.08);
+      }
+
+      .role summary {
+        list-style: none;
+        cursor: pointer;
+      }
+
+      .role summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .role-head {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        align-items: center;
+        gap: 14px;
+        padding: 18px;
+      }
+
+      .role-title h3 {
+        font-size: 1.05rem;
+      }
+
+      .role-title p {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .date {
+        color: var(--gold);
+        font-size: 0.8rem;
+        font-weight: 950;
+        white-space: nowrap;
+      }
+
+      .toggle {
+        width: 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        color: var(--accent);
+        font-weight: 950;
+        transition: transform 180ms ease, background 180ms ease;
+      }
+
+      .toggle::before {
+        content: "+";
+      }
+
+      .role[open] .toggle::before {
+        content: "-";
+      }
+
+      .role[open] .toggle {
+        transform: rotate(180deg);
+        background: rgba(15, 118, 110, 0.08);
+      }
+
+      .role ul {
+        margin: 0;
+        padding: 0 22px 20px 40px;
+        color: var(--muted);
+      }
+
+      .role li + li {
+        margin-top: 8px;
+      }
+
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .filter {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 13px;
+        background: var(--surface);
+        color: var(--muted);
+        font-weight: 850;
+        cursor: pointer;
+        transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, color 160ms ease;
+      }
+
+      .filter:hover {
+        transform: translateY(-2px);
+        border-color: rgba(15, 118, 110, 0.34);
+      }
+
+      .filter.active {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: #ffffff;
+      }
+
+      .project-grid,
+      .portfolio-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .project-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .portfolio-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .project,
+      .portfolio-card {
+        position: relative;
+        display: grid;
+        gap: 14px;
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--surface);
+        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+        overflow: hidden;
+      }
+
+      .project::before,
+      .portfolio-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(15, 118, 110, 0.08), transparent 42%);
+        opacity: 0;
+        transition: opacity 180ms ease;
+        pointer-events: none;
+      }
+
+      .portfolio-card {
+        min-height: 180px;
+      }
+
+      .project:hover,
+      .portfolio-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(15, 118, 110, 0.42);
+        box-shadow: 0 18px 44px rgba(16, 24, 39, 0.1);
+      }
+
+      .project:hover::before,
+      .portfolio-card:hover::before {
+        opacity: 1;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .project-type {
+        width: fit-content;
+        border-radius: 999px;
+        padding: 6px 9px;
+        background: rgba(15, 118, 110, 0.1);
+        color: var(--accent);
+        font-size: 0.76rem;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      .project-skills {
+        color: var(--accent);
+        font-size: 0.9rem;
+        font-weight: 850;
+      }
+
+      .portfolio-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .portfolio-bullet {
+        width: 11px;
+        height: 11px;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 6px rgba(15, 118, 110, 0.1);
+        transition: transform 180ms ease, box-shadow 180ms ease;
+      }
+
+      .portfolio-card:hover .portfolio-bullet {
+        transform: scale(1.15);
+        box-shadow: 0 0 0 8px rgba(15, 118, 110, 0.08);
+      }
+
+      .portfolio-link {
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 900;
+        transition: transform 160ms ease;
+      }
+
+      .portfolio-link:hover {
+        transform: translateX(3px);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+
+      .portfolio-card h3 {
+        font-size: 0.98rem;
+        line-height: 1.28;
+      }
+
+      .portfolio-card p {
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .cert-list {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .cert-list li {
+        padding-left: 14px;
+        border-left: 3px solid var(--accent);
+        color: var(--muted);
+      }
+
+      .print-note {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      @media (max-width: 980px) {
+        .shell {
+          width: 100%;
+          margin: 0;
+        }
+
+        .nav {
+          position: static;
+          border-radius: 0;
+        }
+
+        .hero,
+        .content {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-main {
+          min-height: auto;
+          border-radius: 0;
+        }
+
+        .hero-copy {
+          padding: 34px 24px;
+        }
+
+        .hero-footer,
+        .impact,
+        .project-grid,
+        .portfolio-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-stat {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .hero-stat:last-child {
+          border-bottom: 0;
+        }
+
+        .profile,
+        .card {
+          border-radius: 0;
+        }
+
+        .content {
+          margin-top: 0;
+        }
+
+        .sidebar {
+          position: static;
+        }
+
+        .role-head {
+          grid-template-columns: 1fr auto;
+        }
+
+        .date {
+          grid-column: 1 / -1;
+          order: 2;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav-links {
+          justify-content: flex-start;
+        }
+
+        h1 {
+          font-size: 3.1rem;
+        }
+
+        .content {
+          gap: 0;
+        }
+      }
+
+      @media print {
+        body {
+          background: #ffffff;
+        }
+
+        .shell {
+          width: 100%;
+          margin: 0;
+        }
+
+        .nav,
+        .progress,
+        .nav-action,
+        .print-note,
+        #portfolio {
+          display: none;
+        }
+
+        .hero,
+        .content,
+        .project-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .card,
+        .role,
+        .project {
+          box-shadow: none;
+          break-inside: avoid;
+        }
+
+        .hero-main {
+          min-height: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script>
+      const { useEffect, useMemo, useState } = React;
+      const h = React.createElement;
+
+      const profile = {
+        name: "Akhilesh Ranjan Singh",
+        role: "ML Platform & DevOps Engineer | GCP | Kubernetes | MLOps",
+        summary:
+          "ML Platform and DevOps Engineer with 6.7+ years of experience building Kubernetes-based cloud platforms and production-grade ML infrastructure across GCP, AWS, and Azure.",
+        email: "akhileshranjan.ks@gmail.com",
+        phone: "+91-8002392976",
+        phoneHref: "+918002392976",
+        location: "Noida, India",
+        linkedin: "https://www.linkedin.com/in/iamarsingh/",
+        github: "https://github.com/iarsingh"
+      };
+
+      const navItems = [
+        ["summary", "Summary"],
+        ["experience", "Experience"],
+        ["projects", "Projects"],
+        ["portfolio", "GitHub"],
+        ["skills", "Skills"]
+      ];
+
+      const stats = [
+        ["6.7+", "Years across cloud and DevOps platforms"],
+        ["30+", "Microservices under observability coverage"],
+        ["3x", "Deployment frequency improvement"],
+        ["99.9%", "Multi-cloud Kubernetes uptime"]
+      ];
+
+      const impacts = [
+        ["60%", "Faster incident detection with ELK and OpenTelemetry"],
+        ["45%", "MTTR improvement across 30+ microservices"],
+        ["4h", "Model promotion reduced from 4 days to under 4 hours"]
+      ];
+
+      const coreSkills = [
+        "GCP",
+        "Vertex AI",
+        "GKE",
+        "Terraform",
+        "Kubernetes",
+        "Docker",
+        "Helm",
+        "Kubeflow",
+        "Cloud Build",
+        "Argo CD",
+        "GitOps",
+        "MLflow",
+        "BigQuery",
+        "Pub/Sub",
+        "Cloud Monitoring",
+        "LLMOps",
+        "AIOps",
+        "AWS",
+        "Azure"
+      ];
+
+      const tools = [
+        "Python",
+        "Bash",
+        "Go",
+        "Jenkins",
+        "GitHub Actions",
+        "GitLab CI/CD",
+        "Prometheus",
+        "Grafana",
+        "ELK Stack",
+        "OpenTelemetry",
+        "Vault",
+        "Cosign",
+        "Kafka",
+        "PostgreSQL"
+      ];
+
+      const certifications = [
+        "Google Professional Cloud DevOps Engineer, 2025",
+        "Google Professional Cloud Network Engineer, 2025",
+        "Google Associate Cloud Engineer, 2024",
+        "Microsoft DevOps Engineer Expert AZ-400, 2024"
+      ];
+
+      const roles = [
+        {
+          title: "ML Platform & DevOps Engineer",
+          company: "Capgemini, Noida",
+          date: "09/2024 - Present",
+          open: true,
+          bullets: [
+            "Reduced ML model promotion lead time from 4 days to under 4 hours by building automated MLOps pipelines integrating MLflow, Kubeflow Pipelines, GitOps workflows, and approval-based release controls.",
+            "Reduced inference p99 latency by 30% through optimization of Kubernetes autoscaling policies, GPU-enabled node pools, resource allocation strategies, and real-time model serving infrastructure.",
+            "Built centralized observability solutions using the ELK Stack and OpenTelemetry practices, reducing incident detection time by 60% and improving MTTR by 45% across 30+ microservices.",
+            "Increased deployment frequency by 3x and enabled zero-downtime releases across 20+ services using Jenkins, GitHub Actions, and Kubernetes on GKE.",
+            "Improved platform reliability by 35% through SLI/SLO-driven monitoring, proactive alerting, intelligent health-check automation, and anomaly-based alert tuning.",
+            "Strengthened cloud-native security and governance by implementing Kubernetes RBAC, IAM controls, Terraform-based infrastructure automation, and MLflow model lineage tracking for audit-ready environments."
+          ]
+        },
+        {
+          title: "Senior Software Engineer - DevOps",
+          company: "Tech Mahindra, Mumbai",
+          date: "07/2022 - 09/2024",
+          bullets: [
+            "Improved deployment reliability by 55% by building enterprise CI/CD pipelines integrating Jenkins, Docker, GitHub Actions, and Terraform across GKE, AKS, and EKS multi-cloud Kubernetes clusters.",
+            "Reduced manual operational effort by 70% by authoring Python automation scripts for infrastructure lifecycle management, log analysis, and automated incident triage workflows.",
+            "Maintained 99.9% platform uptime across GCP, AWS, and Azure by operating multi-cloud Kubernetes clusters with proactive metrics monitoring, cutting on-call escalation rate by 40%.",
+            "Improved secrets and access security compliance to 100% by enforcing DevSecOps practices including Kubernetes RBAC, Vault-based secrets management, and vulnerability scanning across the CI/CD pipeline."
+          ]
+        },
+        {
+          title: "System Engineer - Cloud & DevOps",
+          company: "TCS, Bengaluru",
+          date: "09/2019 - 07/2022",
+          bullets: [
+            "Achieved 99.8% uptime for containerized workloads by managing Kubernetes and GKE clusters with automated scaling, health monitoring, SLA-adherent alerting, and incident workflows.",
+            "Reduced on-prem-to-cloud migration downtime to under 2 hours per workload by designing phased migration playbooks for 15+ services using Jenkins and Cloud Build CI/CD pipelines.",
+            "Decreased build and release cycle time by 30% by optimizing Jenkins pipeline configurations with parallel execution stages, Docker layer caching, and automated artifact management."
+          ]
+        }
+      ];
+
+      const selectedProjects = [
+        {
+          type: "mlops",
+          label: "GCP MLOps",
+          title: "Enterprise MLOps Platform on Google Cloud",
+          desc:
+            "Designed and implemented a production-grade MLOps platform using Vertex AI, MLflow, Cloud Build, and BigQuery for model training, deployment, monitoring, and governance. Implemented model lineage tracking, canary deployments, approval workflows, and automated retraining pipelines.",
+          skills: "Vertex AI, BigQuery, Feature Store, Model Registry, Cloud Build, Monitoring, Pub/Sub"
+        },
+        {
+          type: "genai",
+          label: "GenAI Platform",
+          title: "AegisSphere: GenAI and Agentic Platform",
+          desc:
+            "Designed a self-healing GenAI platform on GKE Enterprise using GitOps, LLMOps, and RAG architectures. Implemented automated remediation, secure deployment workflows, and AI observability capabilities.",
+          skills: "Terraform, Argo CD, Vertex AI, Vector Search, Triton, Cloud Run, Pub/Sub, LLMOps, AIOps"
+        }
+      ];
+
+      const portfolioProjects = [
+        ["platform", "GKE ML Platform Blueprint", "Platform architecture with GKE, Terraform, GCS, GPU node pools, and GitOps-ready manifests.", "01-gke-ml-platform-blueprint"],
+        ["mlops", "Model Promotion Gates", "Model lifecycle gates using MLflow-style registry, approval workflows, lineage, and Python automation.", "02-model-promotion-gates"],
+        ["mlops", "ML Observability SRE", "Reliability engineering blueprint for p99 latency, error rate, drift, Prometheus alerts, and SLO reporting.", "03-ml-observability-sre"],
+        ["platform", "Cloud Build GKE ML CI/CD", "Delivery automation with Cloud Build, Artifact Registry, GKE rollout, and Kustomize overlays.", "04-cloud-build-gke-ml-cicd"],
+        ["mlops", "Vertex AI Monitoring Blueprint", "Managed MLOps monitoring with Vertex AI concepts, BigQuery prediction logs, and Pub/Sub alerts.", "05-vertex-ai-monitoring-blueprint"],
+        ["platform", "Pub/Sub ML Incident Automation", "Incident response routing with Pub/Sub, Cloud Function-style automation, runbooks, and severity mapping.", "06-pubsub-ml-incident-automation"],
+        ["mlops", "Feature Store Consistency Guardrails", "Feature reliability checks for offline/online parity, freshness SLAs, feature contracts, and CI gates.", "07-feature-store-consistency"],
+        ["mlops", "Batch Inference Quality Gates", "Batch ML quality policy with completeness checks, quarantine workflow, and audit summaries.", "08-batch-inference-quality-gates"],
+        ["genai", "Vertex AI Hugging Face LLMOps Blueprint", "LLMOps release gates for Vertex AI, Hugging Face, Cloud Build, Artifact Registry, BigQuery, and evaluations.", "09-vertex-ai-huggingface-llmops"],
+        ["mlops", "Vertex AI MLOps Control Plane", "End-to-end ML lifecycle governance with pipelines, experiments, registry, feature store, monitoring, and retraining.", "10-vertex-ai-mlops-control-plane"],
+        ["genai", "GCP LLM AIOps GitOps Remediation", "AIOps remediation with Cloud Monitoring, Pub/Sub, Vertex AI Gemini patterns, GKE, Argo CD, and policy guardrails.", "11-gcp-llm-aiops-gitops"],
+        ["data", "ChronosSupply", "Batch forecasting MLOps using Cloud Composer, Dataflow, Great Expectations, BigQuery ML, Vertex AI, and Memorystore.", "12-chronos-supply"],
+        ["genai", "ShieldLLM", "Enterprise LLMOps governance with GKE, FastAPI, Gemini, Pub/Sub, BigQuery, Vertex AI Metadata, Ragas, and DeepEval.", "13-shield-llm"],
+        ["mlops", "VisionEdge", "Hybrid edge-cloud vision MLOps with Vertex AI custom training, GPUs, TensorRT, Edge TPU, Anthos, and MQTT/Pub/Sub.", "14-vision-edge"],
+        ["streaming", "NexusFraud", "Real-time financial anomaly MLOps with Beam, Dataflow, Feature Store, Vertex AI Pipelines, and canary/shadow deploys.", "15-nexus-fraud"],
+        ["security", "ClearRoute", "Multi-tenant healthcare MLOps platform using GKE Enterprise, Anthos, Terraform, Argo CD, Kubeflow, and HIPAA-aligned controls.", "16-clear-route"],
+        ["streaming", "AdStream", "Streaming ad recommendation platform with Terraform, Cloud Deploy, Dataflow, Pub/Sub, Feature Store, Bigtable, and BigQuery.", "17-ad-stream"],
+        ["genai", "AegisSphere", "Autonomous GenAI and agentic platform with GKE Enterprise, Terraform, Argo CD, Cloud Build, Cosign, Vertex AI, Vector Search, Triton, and AIOps.", "18-aegis-sphere"],
+        ["streaming", "AeroPredict", "IoT predictive maintenance MLOps with multi-region Pub/Sub, Dataflow, Feature Store, Bigtable, BigQuery, Workflows, and Cloud Deploy.", "19-aero-predict"],
+        ["genai", "OmniAgent", "Secure multi-agent LLMOps platform with Vertex AI Agent Engine, Gemini, GKE Enterprise, vLLM, Vector Search, PSC, and Eventarc.", "20-omni-agent"],
+        ["data", "GraphShield", "Real-time fraud graph MLOps with GKE, graph sampling, BFS, SCC detection, Pub/Sub, Dataflow, Bigtable, Vertex AI Pipelines, and PyTorch Geometric.", "21-graph-shield"],
+        ["genai", "LexiStream", "Low-latency GenAI routing gateway with Rust/Go, concurrent Trie, Min-Heap, Levenshtein DP, GKE, eBPF, Secret Manager, WAF, and Monitoring.", "22-lexi-stream"],
+        ["platform", "FinPulse", "GPU FinOps and AIOps optimizer with GKE Enterprise, Kueue, Spot GPUs, DP bin packing, token buckets, vLLM, Gemini, BigQuery, and Monitoring.", "23-fin-pulse"],
+        ["data", "BioGraphRAG", "Biomedical Graph-RAG platform with Dataflow, MinHash, LSH, A*/Dijkstra, Vertex AI Vector Search, Vertex AI Pipelines, Cloud Build, and Secret Manager.", "24-bio-graph-rag"],
+        ["security", "CyberStream", "Cyber-threat streaming MLOps with Pub/Sub, Dataflow, Aho-Corasick, ring buffers, BigQuery drift, Eventarc, Cloud Run, Vertex AI, and Cloud Deploy.", "25-cyber-stream"],
+        ["platform", "KubeFlowForge", "Kubeflow on GKE ML platform with GKE Enterprise, Kubeflow, KFP v2, Katib, KServe, Kueue, Argo CD, and Workload Identity.", "26-kubeflow-gke-ml-factory"],
+        ["mlops", "PipelineBridge", "Hybrid Kubeflow and Vertex AI pipelines with KFP v2, Vertex AI Pipelines, Metadata, Model Registry, Cloud Build, and Cloud Deploy.", "27-kubeflow-vertex-hybrid-pipelines"],
+        ["platform", "AtlasAI", "Enterprise AI/MLOps operating system combining GKE, Terraform, Kubeflow, Vertex AI, GenAI, Dataflow, Feature Store, DevSecOps, AIOps, and FinOps.", "28-atlas-ai-mlops-operating-system"]
+      ].map(([category, title, desc, slug]) => ({
+        category,
+        title,
+        desc,
+        url: `https://github.com/iarsingh/upSkilling/tree/main/GCP/mlops_interview_portfolio/${slug}`
+      }));
+
+      function SectionTitle({ label, title, children }) {
+        return h("div", { className: "section-title" },
+          h("div", null, h("p", { className: "section-label" }, label), h("h2", null, title)),
+          children
+        );
+      }
+
+      function Filters({ active, setActive, options }) {
+        return h("div", { className: "filters" },
+          options.map((option) =>
+            h("button", {
+              key: option.value,
+              className: `filter ${active === option.value ? "active" : ""}`,
+              type: "button",
+              onClick: () => setActive(option.value)
+            }, option.label)
+          )
+        );
+      }
+
+      function App() {
+        const [progress, setProgress] = useState(0);
+        const [activeSection, setActiveSection] = useState("summary");
+        const [projectFilter, setProjectFilter] = useState("all");
+        const [portfolioFilter, setPortfolioFilter] = useState("all");
+        const [emailLabel, setEmailLabel] = useState(profile.email);
+
+        useEffect(() => {
+          const onScroll = () => {
+            const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+            setProgress(scrollable > 0 ? Math.min((window.scrollY / scrollable) * 100, 100) : 0);
+
+            const active = navItems
+              .map(([id]) => document.getElementById(id))
+              .filter(Boolean)
+              .reverse()
+              .find((section) => section.getBoundingClientRect().top <= 130);
+            if (active) setActiveSection(active.id);
+          };
+
+          onScroll();
+          window.addEventListener("scroll", onScroll, { passive: true });
+          return () => window.removeEventListener("scroll", onScroll);
+        }, []);
+
+        const selected = useMemo(
+          () => selectedProjects.filter((project) => projectFilter === "all" || project.type === projectFilter),
+          [projectFilter]
+        );
+
+        const portfolio = useMemo(
+          () => portfolioProjects.filter((project) => portfolioFilter === "all" || project.category === portfolioFilter),
+          [portfolioFilter]
+        );
+
+        const copyEmail = async (event) => {
+          if (!navigator.clipboard) return;
+          event.preventDefault();
+          await navigator.clipboard.writeText(profile.email);
+          setEmailLabel("Email copied");
+          window.setTimeout(() => setEmailLabel(profile.email), 1300);
+        };
+
+        return h(React.Fragment, null,
+          h("div", { className: "progress", style: { "--progress": `${progress}%` } }),
+          h("div", { className: "shell" },
+            h("nav", { className: "nav", "aria-label": "Page navigation" },
+              h("a", { className: "brand", href: "#top", "aria-label": "Go to top" },
+                h("span", { className: "mark" }, "AS"),
+                h("span", null, profile.name)
+              ),
+              h("div", { className: "nav-links" },
+                navItems.map(([id, label]) =>
+                  h("a", { key: id, className: activeSection === id ? "active" : "", href: `#${id}` }, label)
+                ),
+                h("button", { className: "nav-action", type: "button", onClick: () => window.print() }, "Print")
+              )
+            ),
+
+            h("header", { className: "hero", id: "top" },
+              h("section", { className: "hero-main card" },
+                h("div", { className: "hero-copy" },
+                  h("span", { className: "status" }, "Open to ML Platform, DevOps, and MLOps roles"),
+                  h("p", { className: "eyebrow" }, profile.role),
+                  h("h1", null, profile.name),
+                  h("p", { className: "headline" }, profile.summary),
+                  h("div", { className: "platform-map", "aria-label": "Platform strengths" },
+                    [
+                      ["GKE", "Runtime"],
+                      ["Vertex AI", "ML lifecycle"],
+                      ["GitOps", "Release control"],
+                      ["Observability", "SLOs & MTTR"]
+                    ].map(([title, label]) =>
+                      h("div", { className: "platform-node", key: title },
+                        h("strong", null, title),
+                        h("span", null, label)
+                      )
+                    )
+                  )
+                ),
+                h("div", { className: "hero-footer", "aria-label": "Career highlights" },
+                  stats.map(([value, label]) =>
+                    h("div", { className: "hero-stat", key: label }, h("strong", null, value), h("span", null, label))
+                  )
+                )
+              ),
+              h("aside", { className: "profile card", "aria-label": "Contact and profile photo" },
+                h("div", { className: "portrait" },
+                  h("img", {
+                    src: "./profile.jpg",
+                    alt: profile.name,
+                    onError: (event) => {
+                      event.currentTarget.style.display = "none";
+                      event.currentTarget.nextElementSibling.style.display = "grid";
+                    }
+                  }),
+                  h("span", { className: "fallback" }, "AS")
+                ),
+                h("div", { className: "contact" },
+                  h("div", { className: "contact-row" }, h("span", null, "Email"), h("a", { href: `mailto:${profile.email}`, onClick: copyEmail }, emailLabel)),
+                  h("div", { className: "contact-row" }, h("span", null, "Phone"), h("a", { href: `tel:${profile.phoneHref}` }, profile.phone)),
+                  h("div", { className: "contact-row" }, h("span", null, "Location"), h("p", null, profile.location)),
+                  h("div", { className: "contact-links" },
+                    h("a", { href: profile.linkedin, target: "_blank", rel: "noopener" }, "LinkedIn"),
+                    h("a", { href: profile.github, target: "_blank", rel: "noopener" }, "GitHub")
+                  )
+                )
+              )
+            ),
+
+            h("main", { className: "content" },
+              h("aside", { className: "sidebar", id: "skills" },
+                h("section", { className: "panel card" },
+                  h(SectionTitle, { label: "Stack", title: "Core Skills" }),
+                  h("div", { className: "chips" }, coreSkills.map((skill) => h("span", { className: "chip", key: skill }, skill)))
+                ),
+                h("section", { className: "panel card" },
+                  h(SectionTitle, { label: "Tooling", title: "Engineering Tools" }),
+                  h("div", { className: "chips" }, tools.map((tool) => h("span", { className: "chip", key: tool }, tool)))
+                ),
+                h("section", { className: "panel card" },
+                  h(SectionTitle, { label: "Credentials", title: "Certifications" }),
+                  h("ul", { className: "cert-list" }, certifications.map((cert) => h("li", { key: cert }, cert)))
+                ),
+                h("section", { className: "panel card" },
+                  h(SectionTitle, { label: "Education", title: "Academic Background" }),
+                  h("p", { className: "muted" }, "Bachelor of Engineering, Computer Science, RGPV Bhopal, 2019")
+                )
+              ),
+
+              h("section", { className: "main" },
+                h("section", { className: "panel card", id: "summary" },
+                  h(SectionTitle, { label: "Profile", title: "Professional Summary" }),
+                  h("p", { className: "muted" },
+                    "ML Platform and DevOps Engineer with 6.7+ years of experience building Kubernetes-based cloud platforms and production-grade ML infrastructure across GCP, AWS, and Azure. Experienced in MLOps, platform engineering, CI/CD automation, Infrastructure as Code, observability, and cloud-native operations using GKE, Kubeflow, MLflow, Vertex AI, Terraform, and GitOps practices."
+                  ),
+                  h("div", { className: "impact", "aria-label": "Resume impact highlights" },
+                    impacts.map(([value, label]) =>
+                      h("div", { className: "impact-card", key: label }, h("strong", null, value), h("span", null, label))
+                    )
+                  )
+                ),
+
+                h("section", { className: "panel card", id: "experience" },
+                  h(SectionTitle, { label: "Career", title: "Professional Experience" }),
+                  h("div", { className: "timeline" },
+                    roles.map((role) =>
+                      h("details", { className: "role", key: role.title, open: role.open || undefined },
+                        h("summary", { className: "role-head" },
+                          h("div", { className: "role-title" }, h("h3", null, role.title), h("p", null, role.company)),
+                          h("span", { className: "date" }, role.date),
+                          h("span", { className: "toggle", "aria-hidden": "true" })
+                        ),
+                        h("ul", null, role.bullets.map((bullet) => h("li", { key: bullet }, bullet)))
+                      )
+                    )
+                  )
+                ),
+
+                h("section", { className: "panel card", id: "projects" },
+                  h(SectionTitle, { label: "Selected Work", title: "Projects" },
+                    h(Filters, {
+                      active: projectFilter,
+                      setActive: setProjectFilter,
+                      options: [
+                        { value: "all", label: "All" },
+                        { value: "mlops", label: "MLOps" },
+                        { value: "genai", label: "GenAI" }
+                      ]
+                    })
+                  ),
+                  h("div", { className: "project-grid" },
+                    selected.map((project) =>
+                      h("article", { className: "project", key: project.title },
+                        h("span", { className: "project-type" }, project.label),
+                        h("h3", null, project.title),
+                        h("p", { className: "muted" }, project.desc),
+                        h("p", { className: "project-skills" }, project.skills)
+                      )
+                    )
+                  )
+                ),
+
+                h("section", { className: "panel card", id: "portfolio" },
+                  h(SectionTitle, { label: "GitHub Portfolio", title: "All GCP MLOps Projects" },
+                    h(Filters, {
+                      active: portfolioFilter,
+                      setActive: setPortfolioFilter,
+                      options: [
+                        { value: "all", label: "All" },
+                        { value: "platform", label: "Platform" },
+                        { value: "mlops", label: "MLOps" },
+                        { value: "genai", label: "GenAI" },
+                        { value: "streaming", label: "Streaming" },
+                        { value: "security", label: "Security" },
+                        { value: "data", label: "Data/Graph" }
+                      ]
+                    })
+                  ),
+                  h("div", { className: "portfolio-grid" },
+                    portfolio.map((project) =>
+                      h("article", { className: "portfolio-card", key: project.title },
+                        h("div", { className: "portfolio-top" },
+                          h("span", { className: "portfolio-bullet", "aria-hidden": "true" }),
+                          h("a", { className: "portfolio-link", href: project.url, target: "_blank", rel: "noopener" }, "View GitHub")
+                        ),
+                        h("h3", null, project.title),
+                        h("p", null, project.desc)
+                      )
+                    )
+                  )
+                ),
+
+                h("p", { className: "print-note" }, "Use the Print button to save this resume as PDF.")
+              )
+            )
+          )
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(h(App));
+    </script>
+  </body>
+</html>
