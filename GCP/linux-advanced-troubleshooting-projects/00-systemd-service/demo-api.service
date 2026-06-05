@@ -1,0 +1,13 @@
+[Unit]
+Description=Demo API Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 -m http.server 8080
+WorkingDirectory=/opt/demo-api
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+

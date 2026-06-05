@@ -1,0 +1,13 @@
+service: payments-api
+window: 30d
+slos:
+  - name: availability
+    sli: successful_requests / total_requests
+    target: 99.9
+  - name: latency
+    sli: requests_under_500ms / total_requests
+    target: 95.0
+error_budget_policy:
+  freeze_releases_below_percent: 10
+  require_review_below_percent: 25
+

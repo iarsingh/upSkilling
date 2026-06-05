@@ -1,0 +1,11 @@
+---
+- name: Back up database and config to GCS
+  hosts: database
+  become: true
+  vars:
+    backup_bucket: gs://REPLACE_WITH_BACKUP_BUCKET
+    backup_dir: /var/backups/ansible-dr
+    database_name: appdb
+  roles:
+    - backup
+

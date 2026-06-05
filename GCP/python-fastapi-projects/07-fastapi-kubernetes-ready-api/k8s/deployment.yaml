@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-k8s-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fastapi-k8s-api
+  template:
+    metadata:
+      labels:
+        app: fastapi-k8s-api
+    spec:
+      containers:
+        - name: api
+          image: fastapi-k8s-api:local
+          ports:
+            - containerPort: 8080
+          env:
+            - name: CONFIG_PROFILE
+              value: prod
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8080
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+

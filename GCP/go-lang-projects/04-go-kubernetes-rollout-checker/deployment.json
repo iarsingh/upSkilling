@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "name": "sample-api",
+    "generation": 3
+  },
+  "spec": {
+    "replicas": 2
+  },
+  "status": {
+    "observedGeneration": 3,
+    "readyReplicas": 2,
+    "availableReplicas": 2
+  }
+}
+

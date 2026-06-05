@@ -1,0 +1,12 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.ansible/
+dist/
+build/
+.DS_Store

@@ -1,0 +1,9 @@
+resources:
+  - ../../base
+
+namePrefix: prod-
+
+replicas:
+  - name: sample-api
+    count: 3
+

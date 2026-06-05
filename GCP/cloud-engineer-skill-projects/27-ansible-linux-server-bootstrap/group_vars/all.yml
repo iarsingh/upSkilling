@@ -1,0 +1,12 @@
+timezone: UTC
+baseline_packages:
+  - curl
+  - git
+  - htop
+  - jq
+  - unzip
+ops_users:
+  - name: platform
+    groups: sudo
+ssh_password_authentication: "no"
+

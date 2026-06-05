@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-api
+  namespace: platform-demo
+spec:
+  type: ClusterIP
+  selector:
+    app: sample-api
+  ports:
+    - port: 80
+      targetPort: 8080
+

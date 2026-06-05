@@ -1,0 +1,29 @@
+---
+- name: Deploy application to GKE with Ansible
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../group_vars/all.yml
+  tasks:
+    - name: Get GKE credentials
+      ansible.builtin.command:
+        cmd: "gcloud container clusters get-credentials {{ gke_cluster }} --region {{ gke_region }} --project {{ gcp_project_id }}"
+      changed_when: false
+
+    - name: Apply Kubernetes resources
+      kubernetes.core.k8s:
+        state: present
+        src: ../k8s/app.yml
+
+    - name: Wait for deployment rollout
+      kubernetes.core.k8s_info:
+        api_version: apps/v1
+        kind: Deployment
+        name: ansible-api
+        namespace: "{{ namespace }}"
+      register: deployment
+      until: deployment.resources | length > 0 and deployment.resources[0].status.readyReplicas | default(0) >= 2
+      retries: 20
+      delay: 15
+

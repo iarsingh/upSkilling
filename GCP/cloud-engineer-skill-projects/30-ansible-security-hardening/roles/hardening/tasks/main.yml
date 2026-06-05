@@ -1,0 +1,62 @@
+---
+- name: Install security packages
+  ansible.builtin.apt:
+    name:
+      - auditd
+      - ufw
+      - unattended-upgrades
+    state: present
+    update_cache: true
+
+- name: Disable SSH root login
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?PermitRootLogin"
+    line: PermitRootLogin no
+    validate: "sshd -t -f %s"
+  notify: Restart ssh
+
+- name: Disable SSH password auth
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?PasswordAuthentication"
+    line: PasswordAuthentication no
+    validate: "sshd -t -f %s"
+  notify: Restart ssh
+
+- name: Install login banner
+  ansible.builtin.template:
+    src: issue.net.j2
+    dest: /etc/issue.net
+    mode: "0644"
+
+- name: Configure SSH banner
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?Banner"
+    line: Banner /etc/issue.net
+    validate: "sshd -t -f %s"
+  notify: Restart ssh
+
+- name: Allow SSH from IAP range
+  community.general.ufw:
+    rule: allow
+    proto: tcp
+    port: "22"
+    from_ip: 35.235.240.0/20
+
+- name: Enable UFW
+  community.general.ufw:
+    state: enabled
+    policy: deny
+
+- name: Create hardening report
+  ansible.builtin.copy:
+    dest: /var/log/ansible-hardening-report.txt
+    mode: "0644"
+    content: |
+      hardening_applied=true
+      password_auth=disabled
+      root_login=disabled
+      firewall=enabled
+

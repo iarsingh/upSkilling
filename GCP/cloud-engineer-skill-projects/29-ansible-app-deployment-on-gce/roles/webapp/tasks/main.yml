@@ -1,0 +1,79 @@
+---
+- name: Install app dependencies
+  ansible.builtin.apt:
+    name:
+      - python3-venv
+      - python3-pip
+      - nginx
+    state: present
+    update_cache: true
+
+- name: Create app user
+  ansible.builtin.user:
+    name: "{{ webapp_user }}"
+    system: true
+    shell: /usr/sbin/nologin
+
+- name: Create app directory
+  ansible.builtin.file:
+    path: "{{ webapp_dir }}"
+    state: directory
+    owner: "{{ webapp_user }}"
+    group: "{{ webapp_user }}"
+    mode: "0755"
+
+- name: Copy app
+  ansible.builtin.copy:
+    src: app.py
+    dest: "{{ webapp_dir }}/app.py"
+    owner: "{{ webapp_user }}"
+    group: "{{ webapp_user }}"
+    mode: "0644"
+  notify: Restart webapp
+
+- name: Create virtual environment
+  ansible.builtin.command: python3 -m venv "{{ webapp_dir }}/venv"
+  args:
+    creates: "{{ webapp_dir }}/venv/bin/python"
+
+- name: Install Python packages
+  ansible.builtin.pip:
+    name:
+      - flask==3.0.3
+      - gunicorn==22.0.0
+    virtualenv: "{{ webapp_dir }}/venv"
+
+- name: Install systemd service
+  ansible.builtin.template:
+    src: webapp.service.j2
+    dest: /etc/systemd/system/webapp.service
+    mode: "0644"
+  notify:
+    - Reload systemd
+    - Restart webapp
+
+- name: Install nginx reverse proxy
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-available/webapp
+    mode: "0644"
+  notify: Restart nginx
+
+- name: Enable nginx site
+  ansible.builtin.file:
+    src: /etc/nginx/sites-available/webapp
+    dest: /etc/nginx/sites-enabled/webapp
+    state: link
+  notify: Restart nginx
+
+- name: Enable webapp service
+  ansible.builtin.service:
+    name: webapp
+    enabled: true
+    state: started
+
+- name: Validate local health endpoint
+  ansible.builtin.uri:
+    url: "http://127.0.0.1:{{ webapp_port }}/healthz"
+    status_code: 200
+

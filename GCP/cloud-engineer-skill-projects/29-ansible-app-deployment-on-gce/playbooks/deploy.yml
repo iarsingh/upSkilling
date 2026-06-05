@@ -1,0 +1,11 @@
+---
+- name: Deploy web app on GCE
+  hosts: web
+  become: true
+  vars:
+    webapp_user: webapp
+    webapp_dir: /opt/webapp
+    webapp_port: 8080
+  roles:
+    - webapp
+

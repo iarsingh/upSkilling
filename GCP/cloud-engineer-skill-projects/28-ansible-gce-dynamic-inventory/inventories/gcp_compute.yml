@@ -1,0 +1,21 @@
+---
+plugin: google.cloud.gcp_compute
+projects:
+  - REPLACE_WITH_PROJECT_ID
+auth_kind: serviceaccount
+service_account_file: REPLACE_WITH_SERVICE_ACCOUNT_FILE
+zones:
+  - us-central1-a
+  - us-central1-b
+keyed_groups:
+  - key: labels.role
+    prefix: role
+  - key: labels.env
+    prefix: env
+hostnames:
+  - name
+compose:
+  ansible_host: networkInterfaces[0].accessConfigs[0].natIP | default(networkInterfaces[0].networkIP)
+filters:
+  - status = RUNNING
+

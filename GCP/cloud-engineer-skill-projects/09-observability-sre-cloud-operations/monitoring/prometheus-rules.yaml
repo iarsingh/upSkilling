@@ -1,0 +1,11 @@
+groups:
+  - name: sample-api
+    rules:
+      - alert: HighErrorRate
+        expr: sum(rate(http_requests_total{status=~"5.."}[5m])) / sum(rate(http_requests_total[5m])) > 0.05
+        for: 10m
+        labels:
+          severity: page
+        annotations:
+          summary: sample-api 5xx rate is above 5 percent
+

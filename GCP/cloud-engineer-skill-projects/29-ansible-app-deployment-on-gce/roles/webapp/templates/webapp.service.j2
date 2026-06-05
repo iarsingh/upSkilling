@@ -1,0 +1,15 @@
+[Unit]
+Description=Ansible managed Flask webapp
+After=network.target
+
+[Service]
+User={{ webapp_user }}
+WorkingDirectory={{ webapp_dir }}
+Environment=PATH={{ webapp_dir }}/venv/bin
+ExecStart={{ webapp_dir }}/venv/bin/gunicorn --bind 127.0.0.1:{{ webapp_port }} app:app
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+

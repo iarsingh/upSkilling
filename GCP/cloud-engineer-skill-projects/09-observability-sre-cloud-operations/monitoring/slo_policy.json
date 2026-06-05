@@ -1,0 +1,19 @@
+{
+  "service": "sample-api",
+  "sli": "availability",
+  "target": 99.9,
+  "window": "30d",
+  "burn_rate_alerts": [
+    {
+      "name": "fast-burn",
+      "window": "1h",
+      "threshold": 14.4
+    },
+    {
+      "name": "slow-burn",
+      "window": "6h",
+      "threshold": 6
+    }
+  ]
+}
+

@@ -1,0 +1,24 @@
+---
+- name: Restore drill checklist
+  hosts: database
+  become: true
+  vars:
+    backup_bucket: gs://REPLACE_WITH_BACKUP_BUCKET
+    restore_dir: /tmp/ansible-restore-drill
+  tasks:
+    - name: Create restore drill directory
+      ansible.builtin.file:
+        path: "{{ restore_dir }}"
+        state: directory
+        mode: "0750"
+
+    - name: List latest backup objects
+      ansible.builtin.command:
+        cmd: "gsutil ls -l {{ backup_bucket }}/"
+      changed_when: false
+      register: backup_objects
+
+    - name: Show backup objects
+      ansible.builtin.debug:
+        var: backup_objects.stdout_lines
+

@@ -1,0 +1,7 @@
+---
+- name: Harden Linux servers
+  hosts: linux
+  become: true
+  roles:
+    - hardening
+

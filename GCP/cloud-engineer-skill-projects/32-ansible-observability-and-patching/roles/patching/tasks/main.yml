@@ -1,0 +1,23 @@
+---
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Upgrade packages safely
+  ansible.builtin.apt:
+    upgrade: safe
+  register: patch_result
+
+- name: Check whether reboot is required
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+  register: reboot_required
+
+- name: Write maintenance report
+  ansible.builtin.copy:
+    dest: /var/log/ansible-patching-report.txt
+    mode: "0644"
+    content: |
+      changed={{ patch_result.changed }}
+      reboot_required={{ reboot_required.stat.exists }}
+

@@ -1,0 +1,8 @@
+---
+- name: Validate dynamic GCE inventory
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Ping discovered host
+      ansible.builtin.ping:
+

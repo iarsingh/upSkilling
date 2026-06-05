@@ -1,0 +1,20 @@
+name: terraform-plan
+
+on:
+  pull_request:
+    paths:
+      - "GCP/terraform-advanced-projects/**"
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform fmt -check -recursive
+        working-directory: GCP/terraform-advanced-projects
+      - run: terraform init -backend=false
+        working-directory: GCP/terraform-advanced-projects/01-reusable-gcp-modules
+      - run: terraform validate
+        working-directory: GCP/terraform-advanced-projects/01-reusable-gcp-modules
+
