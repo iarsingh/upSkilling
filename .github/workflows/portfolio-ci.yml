@@ -82,7 +82,7 @@ jobs:
                   continue
               for path in list(root.rglob("*.yml")) + list(root.rglob("*.yaml")):
                   with path.open(encoding="utf-8") as file:
-                      yaml.safe_load(file)
+                      list(yaml.safe_load_all(file))
                   print(path)
           PY
 
@@ -116,6 +116,7 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: "1.22"
+          cache: false
 
       - name: Test Go projects
         run: |

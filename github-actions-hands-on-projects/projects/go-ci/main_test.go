@@ -7,4 +7,3 @@ func TestHealthStatus(t *testing.T) {
 		t.Fatalf("expected healthy, got %s", got)
 	}
 }
-

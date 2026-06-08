@@ -6,4 +6,3 @@ func HealthStatus(ok bool) string {
 	}
 	return "unhealthy"
 }
-
