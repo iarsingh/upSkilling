@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "web-resume/**"
+      - "resume-web-builder/**"
       - ".github/workflows/web-resume-pages.yml"
   workflow_dispatch:
 
@@ -34,7 +34,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: web-resume
+          path: resume-web-builder
 
       - name: Deploy to GitHub Pages
         id: deployment
