@@ -1,0 +1,21 @@
+timezone: "Asia/Kolkata"
+baseline_packages:
+  - curl
+  - git
+  - htop
+  - jq
+  - tree
+  - unzip
+  - vim
+
+ops_user: "devops"
+docker_users:
+  - "devops"
+
+node_exporter_version: "1.8.2"
+node_exporter_port: 9100
+
+kubernetes_tools:
+  kubectl_version: "v1.30.4"
+  helm_version: "v3.15.4"
+

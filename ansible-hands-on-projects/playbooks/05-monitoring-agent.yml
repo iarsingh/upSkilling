@@ -1,0 +1,8 @@
+---
+- name: Monitoring agent setup
+  hosts: monitoring_hosts
+  become: true
+  roles:
+    - common
+    - monitoring
+

@@ -1,0 +1,35 @@
+name: Go CI
+
+on:
+  push:
+    paths:
+      - "projects/go-ci/**"
+      - ".github/workflows/go-ci.yml"
+  pull_request:
+    paths:
+      - "projects/go-ci/**"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/go-ci
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      - name: Format check
+        run: test -z "$(gofmt -l .)"
+
+      - name: Run tests
+        run: go test ./...
+

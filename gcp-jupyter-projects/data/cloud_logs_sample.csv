@@ -1,0 +1,12 @@
+timestamp,service,severity,status_code,latency_ms,message
+2026-06-01T10:00:00Z,model-api,INFO,200,92,prediction served
+2026-06-01T10:01:00Z,model-api,INFO,200,88,prediction served
+2026-06-01T10:02:00Z,model-api,WARNING,429,240,rate limit reached
+2026-06-01T10:03:00Z,feature-store,INFO,200,130,feature lookup ok
+2026-06-01T10:04:00Z,feature-store,ERROR,500,880,feature lookup failed
+2026-06-01T10:05:00Z,model-api,ERROR,503,1200,upstream unavailable
+2026-06-01T10:06:00Z,model-api,INFO,200,96,prediction served
+2026-06-01T10:07:00Z,auth-service,WARNING,401,55,invalid token
+2026-06-01T10:08:00Z,model-api,ERROR,500,1030,prediction failure
+2026-06-01T10:09:00Z,feature-store,INFO,200,145,feature lookup ok
+

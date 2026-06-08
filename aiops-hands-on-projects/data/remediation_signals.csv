@@ -1,0 +1,6 @@
+incident_id,service,namespace,symptom,current_replicas,error_rate,p95_latency_ms,cpu_utilization,action_risk
+inc-001,model-api,mlops,high_latency,3,0.03,950,0.82,low
+inc-002,model-api,mlops,high_error_rate,3,0.12,1200,0.88,medium
+inc-003,feature-store,mlops,dependency_error,2,0.18,880,0.45,high
+inc-004,auth-service,platform,auth_failures,2,0.01,80,0.35,medium
+

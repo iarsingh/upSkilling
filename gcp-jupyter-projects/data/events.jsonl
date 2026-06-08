@@ -1,0 +1,6 @@
+{"event_id":"evt-001","event_type":"order.created","source":"checkout","amount":99.5,"environment":"prod"}
+{"event_id":"evt-002","event_type":"order.cancelled","source":"checkout","amount":45.0,"environment":"prod"}
+{"event_id":"evt-003","event_type":"model.prediction","source":"model-api","amount":0.0,"environment":"dev"}
+{"event_id":"evt-004","event_type":"order.created","source":"mobile","amount":120.0,"environment":"prod"}
+{"event_id":"","event_type":"bad.event","source":"unknown","amount":-1.0,"environment":"dev"}
+

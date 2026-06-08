@@ -1,0 +1,21 @@
+{
+  "row_count": 25000,
+  "random_seed": 42,
+  "date_range": {
+    "start": "2026-01-01T00:05:00+00:00",
+    "end": "2026-04-01T00:00:00+00:00"
+  },
+  "overall_accuracy": 0.8918,
+  "actual_churn_rate": 0.1081,
+  "average_latency_ms": 100.55,
+  "model_versions": [
+    "churn-v1",
+    "churn-v2",
+    "churn-v3"
+  ],
+  "drift_periods": [
+    "baseline",
+    "gradual_drift",
+    "post_drift"
+  ]
+}

@@ -18,8 +18,10 @@ This folder is a dedicated space for LinkedIn posts, hooks, snippets, and visual
 - `assets/` - diagrams, screenshots, carousels, and image prompts
 - `deployment/` - Terraform and Kubernetes scaffold for a GKE MLOps platform
 - `terraform-project/` - standalone Terraform project for the full GKE MLOps platform
+- `gcp-hands-on-projects/` - Go and Python projects for Cloud Run, Pub/Sub, GCS, BigQuery, and Secret Manager
 - `architecture/` - architecture design and Terraform implementation map for the 100-day track
 - `interview/` - senior scenario-based interview questions
+- `career-switch-plan/` - job switch roadmap, resources, interview prep, and hands-on projects
 - `100-day-gke-mlops-content-calendar.md` - 100-day roadmap for posts and hands-on practice
 - `100-linkedin-post-hooks.md` - 100 short daily LinkedIn hooks
 - `topic-calendar.md` - planned LinkedIn post ideas
@@ -34,6 +36,16 @@ Dedicated task files:
 - `architecture/100-day-terraform-code-plan.md` - Terraform and Kubernetes code plan only
 - `architecture/100-task-architecture-and-terraform-map.md` - combined reference map
 - `interview/100-day-gke-mlops-interview-questions.md` - 100 roadmap-aligned senior interview questions
+
+## Career Switch Plan
+
+Use `career-switch-plan/` for job-switch preparation. It includes the learning plan, official resources, interview questions, hands-on project ideas, and a daily tracker.
+
+Best path:
+
+```text
+DevOps Engineer -> GCP Platform Engineer -> MLOps / AI Infrastructure Engineer
+```
 
 ## Suggested Posting Style
 

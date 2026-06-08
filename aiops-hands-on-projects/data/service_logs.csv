@@ -1,0 +1,14 @@
+timestamp,service,namespace,severity,status_code,latency_ms,error_message
+2026-06-09T10:00:00Z,model-api,mlops,INFO,200,92,
+2026-06-09T10:01:00Z,model-api,mlops,INFO,200,88,
+2026-06-09T10:02:00Z,model-api,mlops,WARNING,429,240,rate limit
+2026-06-09T10:03:00Z,feature-store,mlops,INFO,200,130,
+2026-06-09T10:04:00Z,feature-store,mlops,ERROR,500,880,redis timeout
+2026-06-09T10:05:00Z,model-api,mlops,ERROR,503,1200,upstream unavailable
+2026-06-09T10:06:00Z,model-api,mlops,INFO,200,96,
+2026-06-09T10:07:00Z,auth-service,platform,WARNING,401,55,invalid token
+2026-06-09T10:08:00Z,model-api,mlops,ERROR,500,1030,prediction failure
+2026-06-09T10:09:00Z,feature-store,mlops,INFO,200,145,
+2026-06-09T10:10:00Z,model-api,mlops,ERROR,504,1400,gateway timeout
+2026-06-09T10:11:00Z,model-api,mlops,ERROR,503,1320,upstream unavailable
+

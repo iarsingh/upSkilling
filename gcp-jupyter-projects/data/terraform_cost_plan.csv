@@ -1,0 +1,10 @@
+resource_type,resource_name,environment,monthly_quantity,unit_cost_usd,notes
+gke_node_pool,n2-standard-4-dev,dev,2,97.09,2 nodes
+gke_node_pool,n2-standard-4-prod,prod,6,97.09,6 nodes
+cloud_sql,postgres-dev,dev,1,45.00,small dev database
+cloud_sql,postgres-prod,prod,1,180.00,production database
+cloud_storage,ml-artifacts,prod,500,0.026,gb stored
+artifact_registry,docker-images,prod,100,0.10,gb stored
+bigquery,analytics-query,prod,300,0.00625,tb processed estimate
+cloud_run,model-api,prod,120,0.32,vCPU hour estimate
+

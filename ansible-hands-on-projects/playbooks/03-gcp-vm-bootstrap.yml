@@ -1,0 +1,8 @@
+---
+- name: GCP VM bootstrap
+  hosts: gcp_vms
+  become: true
+  roles:
+    - common
+    - gcp_ops
+

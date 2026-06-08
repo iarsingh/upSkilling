@@ -1,0 +1,4 @@
+service: safe-demo
+environment: dev
+secret_reference: use-github-actions-secrets-not-plaintext
+

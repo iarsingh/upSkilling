@@ -1,0 +1,10 @@
+namespace,workload,cpu_request_millicores,cpu_usage_p95_millicores,memory_request_mib,memory_usage_p95_mib,replicas
+platform,api-gateway,500,420,512,460,3
+platform,auth-service,300,190,384,330,2
+mlops,model-api,1000,1480,1024,1320,3
+mlops,feature-worker,700,310,768,420,2
+data,etl-runner,1500,900,2048,1600,1
+data,bigquery-exporter,400,120,512,210,1
+observability,prometheus,1200,980,4096,3900,1
+observability,grafana,300,110,512,260,1
+

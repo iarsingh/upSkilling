@@ -1,0 +1,35 @@
+name: Security Scan
+
+on:
+  push:
+    paths:
+      - "projects/security-scan/**"
+      - ".github/workflows/security-scan.yml"
+  pull_request:
+    paths:
+      - "projects/security-scan/**"
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Trivy filesystem scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: projects/security-scan
+          format: table
+          exit-code: "0"
+
+      - name: Secret scan with Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

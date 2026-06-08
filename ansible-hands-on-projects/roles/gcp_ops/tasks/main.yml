@@ -1,0 +1,47 @@
+---
+- name: Install GCP operations packages
+  ansible.builtin.package:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+    state: present
+
+- name: Create Google Cloud SDK keyring directory
+  ansible.builtin.file:
+    path: /usr/share/keyrings
+    state: directory
+    mode: "0755"
+
+- name: Add Google Cloud SDK apt key
+  ansible.builtin.get_url:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    dest: /usr/share/keyrings/cloud.google.gpg
+    mode: "0644"
+
+- name: Add Google Cloud SDK apt repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main"
+    filename: google-cloud-sdk
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install Google Cloud CLI
+  ansible.builtin.package:
+    name: google-cloud-cli
+    state: present
+
+- name: Create GCP ops notes
+  ansible.builtin.copy:
+    dest: /opt/devops/gcp-ops-notes.txt
+    owner: "{{ ops_user }}"
+    group: "{{ ops_user }}"
+    mode: "0644"
+    content: |
+      GCP VM bootstrap complete.
+      Next commands:
+      - gcloud auth login
+      - gcloud config set project PROJECT_ID
+      - gcloud compute instances list
+

@@ -1,0 +1,33 @@
+name: Kubernetes Manifest Validation
+
+on:
+  push:
+    paths:
+      - "projects/k8s-manifest-validation/**"
+      - ".github/workflows/k8s-manifest-validation.yml"
+  pull_request:
+    paths:
+      - "projects/k8s-manifest-validation/**"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/k8s-manifest-validation
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up kubeconform
+        run: |
+          curl -L -o kubeconform.tar.gz https://github.com/yannh/kubeconform/releases/download/v0.6.7/kubeconform-linux-amd64.tar.gz
+          tar -xzf kubeconform.tar.gz
+          sudo mv kubeconform /usr/local/bin/kubeconform
+
+      - name: Validate manifests
+        run: kubeconform -strict -summary k8s/*.yaml
+

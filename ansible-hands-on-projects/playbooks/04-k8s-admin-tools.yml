@@ -1,0 +1,8 @@
+---
+- name: Kubernetes admin tools setup
+  hosts: k8s_admin_hosts
+  become: true
+  roles:
+    - common
+    - k8s_tools
+

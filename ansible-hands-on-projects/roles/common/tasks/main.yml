@@ -1,0 +1,43 @@
+---
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+  when: ansible_os_family == "Debian"
+
+- name: Install baseline packages
+  ansible.builtin.package:
+    name: "{{ baseline_packages }}"
+    state: present
+
+- name: Set server timezone
+  community.general.timezone:
+    name: "{{ timezone }}"
+
+- name: Create operations user
+  ansible.builtin.user:
+    name: "{{ ops_user }}"
+    shell: /bin/bash
+    groups: sudo
+    append: true
+    create_home: true
+
+- name: Create ops directory
+  ansible.builtin.file:
+    path: /opt/devops
+    state: directory
+    owner: "{{ ops_user }}"
+    group: "{{ ops_user }}"
+    mode: "0755"
+
+- name: Disable password authentication
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?PasswordAuthentication"
+    line: "PasswordAuthentication no"
+    backup: true
+  notify: Restart ssh
+
+- name: Flush SSH handler when config changed
+  ansible.builtin.meta: flush_handlers
+

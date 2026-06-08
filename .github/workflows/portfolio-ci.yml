@@ -1,0 +1,220 @@
+name: Portfolio Project CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "aiops-hands-on-projects/**"
+      - "ansible-hands-on-projects/**"
+      - "gcp-jupyter-projects/**"
+      - "genai-hands-on-projects/**"
+      - "github-actions-hands-on-projects/**"
+      - "kaggle-mlops-datasets/**"
+      - "linkedin/gke-terraform-content/**"
+      - ".github/workflows/portfolio-ci.yml"
+  pull_request:
+    paths:
+      - "aiops-hands-on-projects/**"
+      - "ansible-hands-on-projects/**"
+      - "gcp-jupyter-projects/**"
+      - "genai-hands-on-projects/**"
+      - "github-actions-hands-on-projects/**"
+      - "kaggle-mlops-datasets/**"
+      - "linkedin/gke-terraform-content/**"
+      - ".github/workflows/portfolio-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python-yaml-notebooks:
+    name: Python, YAML, and Notebook Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: python -m pip install --upgrade pip pytest pyyaml
+
+      - name: Compile Python files
+        run: |
+          python -m py_compile \
+            aiops-hands-on-projects/python/log-anomaly-detector/detect_anomalies.py \
+            aiops-hands-on-projects/python/alert-correlation-engine/correlate_alerts.py \
+            aiops-hands-on-projects/python/slo-burn-rate-analyzer/analyze_burn_rate.py \
+            aiops-hands-on-projects/python/auto-remediation-simulator/remediate.py \
+            genai-hands-on-projects/python/rag-knowledge-api/app/main.py \
+            genai-hands-on-projects/python/genai-safety-gateway/app/main.py \
+            genai-hands-on-projects/python/meeting-notes-summarizer/summarize.py \
+            github-actions-hands-on-projects/projects/python-ci/app/calculator.py \
+            github-actions-hands-on-projects/projects/docker-cloud-run/main.py \
+            linkedin/gke-terraform-content/gcp-hands-on-projects/python/gcs-csv-etl/main.py \
+            linkedin/gke-terraform-content/gcp-hands-on-projects/python/bigquery-cost-reporter/main.py \
+            linkedin/gke-terraform-content/gcp-hands-on-projects/python/secret-manager-fastapi/main.py
+
+      - name: Validate YAML files
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import yaml
+
+          roots = [
+              Path("aiops-hands-on-projects"),
+              Path("ansible-hands-on-projects"),
+              Path("github-actions-hands-on-projects"),
+              Path("linkedin/gke-terraform-content"),
+              Path(".github/workflows"),
+          ]
+          for root in roots:
+              if not root.exists():
+                  continue
+              for path in list(root.rglob("*.yml")) + list(root.rglob("*.yaml")):
+                  with path.open(encoding="utf-8") as file:
+                      yaml.safe_load(file)
+                  print(path)
+          PY
+
+      - name: Validate notebook JSON
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          for path in list(Path("gcp-jupyter-projects").rglob("*.ipynb")) + list(Path("aiops-hands-on-projects").rglob("*.ipynb")) + list(Path("genai-hands-on-projects").rglob("*.ipynb")):
+              with path.open(encoding="utf-8") as file:
+                  notebook = json.load(file)
+              assert notebook.get("nbformat") == 4, f"Invalid nbformat in {path}"
+              print(path)
+          PY
+
+      - name: Run Python unit tests
+        working-directory: github-actions-hands-on-projects/projects/python-ci
+        run: |
+          python -m pip install -r requirements.txt
+          pytest -q
+
+  go-tests:
+    name: Go Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      - name: Test Go projects
+        run: |
+          set -e
+          for module in \
+            github-actions-hands-on-projects/projects/go-ci \
+            linkedin/gke-terraform-content/gcp-hands-on-projects/go/cloud-run-health-api \
+            linkedin/gke-terraform-content/gcp-hands-on-projects/go/pubsub-event-worker
+          do
+            echo "Testing $module"
+            (cd "$module" && test -z "$(gofmt -l .)" && go test ./...)
+          done
+
+  ansible-syntax:
+    name: Ansible Syntax Checks
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ansible-hands-on-projects
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Ansible
+        run: python -m pip install -r requirements.txt
+
+      - name: Prepare example inventory
+        run: cp inventories/dev.ini.example inventories/dev.ini
+
+      - name: Syntax check playbooks
+        run: |
+          ansible-playbook --syntax-check playbooks/01-linux-baseline.yml
+          ansible-playbook --syntax-check playbooks/02-docker-app-host.yml
+          ansible-playbook --syntax-check playbooks/03-gcp-vm-bootstrap.yml
+          ansible-playbook --syntax-check playbooks/04-k8s-admin-tools.yml
+          ansible-playbook --syntax-check playbooks/05-monitoring-agent.yml
+
+  terraform-validation:
+    name: Terraform Validation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: github-actions-hands-on-projects/projects/terraform-validation/terraform
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform fmt
+        run: terraform fmt -check -recursive
+
+      - name: Terraform init
+        run: terraform init -backend=false
+
+      - name: Terraform validate
+        run: terraform validate
+
+  dataset-checks:
+    name: Dataset Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate Kaggle dataset files
+        run: |
+          python - <<'PY'
+          import csv
+          import json
+          from pathlib import Path
+
+          root = Path("kaggle-mlops-datasets/model-monitoring-drift")
+          csv_path = root / "mlops_model_monitoring_dataset.csv"
+          metadata_path = root / "dataset-metadata.json"
+          summary_path = root / "summary.json"
+
+          assert csv_path.exists(), "Missing root-level Kaggle CSV"
+          assert metadata_path.exists(), "Missing Kaggle metadata"
+          assert summary_path.exists(), "Missing summary"
+
+          with metadata_path.open(encoding="utf-8") as file:
+              metadata = json.load(file)
+          assert metadata["id"] == "iamarsingh/mlops-model-monitoring-drift-dataset"
+
+          with csv_path.open(encoding="utf-8") as file:
+              rows = sum(1 for _ in csv.DictReader(file))
+          assert rows == 25000, f"Expected 25000 rows, got {rows}"
+
+          print(f"Dataset rows: {rows}")
+          PY

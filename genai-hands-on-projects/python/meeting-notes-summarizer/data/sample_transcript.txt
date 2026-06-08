@@ -1,0 +1,7 @@
+Platform Lead: We need to deploy the model API on GKE with HPA and request limits.
+MLOps Engineer: Decision: use Cloud Run for the first demo and GKE for the production-style project.
+DevOps Engineer: Risk: the service account permissions are not reviewed yet.
+Platform Lead: Action owner Akhilesh: create Terraform for Artifact Registry and GKE namespace.
+MLOps Engineer: Next step: add model monitoring metrics for latency, error rate, and prediction distribution.
+DevOps Engineer: Concern: we need rollback steps before production release.
+

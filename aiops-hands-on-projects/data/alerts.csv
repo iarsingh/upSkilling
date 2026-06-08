@@ -1,0 +1,9 @@
+alert_id,timestamp,service,namespace,severity,alert_name,resource,description
+alrt-001,2026-06-09T10:04:00Z,feature-store,mlops,critical,HighErrorRate,pod/feature-store-1,5xx errors increased
+alrt-002,2026-06-09T10:05:00Z,model-api,mlops,critical,HighLatency,pod/model-api-2,p95 latency above threshold
+alrt-003,2026-06-09T10:05:30Z,model-api,mlops,critical,HighErrorRate,pod/model-api-2,5xx errors increased
+alrt-004,2026-06-09T10:06:00Z,model-api,mlops,warning,HPAHighUtilization,hpa/model-api,cpu utilization high
+alrt-005,2026-06-09T10:07:00Z,auth-service,platform,warning,AuthFailures,pod/auth-service-1,401 responses increased
+alrt-006,2026-06-09T10:08:00Z,model-api,mlops,critical,DependencyUnavailable,service/feature-store,feature lookup failing
+alrt-007,2026-06-09T10:09:00Z,model-api,mlops,critical,HighLatency,pod/model-api-3,p95 latency above threshold
+
