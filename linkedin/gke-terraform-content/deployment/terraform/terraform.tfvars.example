@@ -1,0 +1,12 @@
+project_id = "your-gcp-project-id"
+region     = "us-central1"
+
+authorized_cidr_blocks = [
+  {
+    cidr_block   = "203.0.113.10/32"
+    display_name = "office-or-vpn"
+  }
+]
+
+enable_gpu_pool = false
+

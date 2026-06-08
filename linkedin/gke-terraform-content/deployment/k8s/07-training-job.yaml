@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sample-training-job
+  namespace: training
+  labels:
+    app: sample-training
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        app: sample-training
+    spec:
+      restartPolicy: Never
+      tolerations:
+        - key: workload
+          operator: Equal
+          value: batch
+          effect: NoSchedule
+      nodeSelector:
+        pool: spot-batch
+      containers:
+        - name: trainer
+          image: python:3.12-slim
+          command:
+            - python
+            - -c
+            - "print('sample training job for GKE MLOps platform')"
+          resources:
+            requests:
+              cpu: "1"
+              memory: 2Gi
+            limits:
+              memory: 4Gi
+

@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mlops
+  labels:
+    name: mlops
+    platform: gke-mlops
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: training
+  labels:
+    name: training
+    platform: gke-mlops
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: serving
+  labels:
+    name: serving
+    platform: gke-mlops
+
