@@ -1,0 +1,30 @@
+{
+  "dataset_number": 67,
+  "topic": "Cloud security posture",
+  "generated_at": "2026-06-09T00:05:42.256788+00:00",
+  "row_count": 1000,
+  "column_count": 14,
+  "target_column": "risk_detected",
+  "target_distribution": {
+    "0": 228,
+    "1": 772
+  },
+  "missing_values": {
+    "record_id": 0,
+    "event_date": 0,
+    "project_name": 0,
+    "service_name": 0,
+    "gcp_region": 0,
+    "environment": 0,
+    "owning_team": 0,
+    "signal_category": 0,
+    "metric_a": 0,
+    "metric_b": 0,
+    "metric_c": 0,
+    "metric_d": 0,
+    "risk_score": 0,
+    "risk_detected": 0
+  },
+  "synthetic": true,
+  "license": "CC0-1.0"
+}

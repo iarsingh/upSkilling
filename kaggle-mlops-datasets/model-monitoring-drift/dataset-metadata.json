@@ -1,9 +1,85 @@
 {
   "title": "MLOps Model Monitoring and Drift Dataset",
+  "subtitle": "Synthetic production ML monitoring data for drift analysis.",
+  "description": "Synthetic prediction telemetry for MLOps model monitoring, drift detection, latency analysis, error-rate tracking, model version comparison, and production ML interview practice. The dataset is generated from a fixed-seed Python script and does not contain real users, customers, credentials, systems, or production data.",
   "id": "iamarsingh/mlops-model-monitoring-drift-dataset",
   "licenses": [
     {
       "name": "CC0-1.0"
     }
-  ]
+  ],
+  "resources": [
+    {
+      "path": "mlops_model_monitoring_dataset.csv",
+      "description": "Root-level preview copy of the MLOps monitoring dataset.",
+      "schema": {
+        "fields": [
+          {"name": "event_id", "title": "unique synthetic event id", "type": "id"},
+          {"name": "event_timestamp", "title": "UTC timestamp for prediction request", "type": "datetime"},
+          {"name": "customer_id", "title": "synthetic customer identifier", "type": "id"},
+          {"name": "region", "title": "simulated GCP serving region", "type": "string"},
+          {"name": "traffic_channel", "title": "source channel for prediction traffic", "type": "string"},
+          {"name": "model_name", "title": "model identifier", "type": "string"},
+          {"name": "model_version", "title": "deployed model version", "type": "string"},
+          {"name": "drift_period", "title": "baseline, gradual drift, or post-drift period", "type": "string"},
+          {"name": "customer_age", "title": "synthetic customer age", "type": "integer"},
+          {"name": "account_age_days", "title": "account tenure in days", "type": "integer"},
+          {"name": "monthly_spend_usd", "title": "monthly spend in USD", "type": "decimal"},
+          {"name": "support_tickets_30d", "title": "support tickets opened in last 30 days", "type": "integer"},
+          {"name": "failed_payments_30d", "title": "failed payments in last 30 days", "type": "integer"},
+          {"name": "usage_hours_7d", "title": "product usage hours in last 7 days", "type": "decimal"},
+          {"name": "predicted_churn", "title": "predicted churn class", "type": "integer"},
+          {"name": "predicted_probability", "title": "churn probability score", "type": "decimal"},
+          {"name": "prediction_score_band", "title": "low, medium, or high risk score band", "type": "string"},
+          {"name": "actual_churn", "title": "observed churn label", "type": "integer"},
+          {"name": "prediction_correct", "title": "whether prediction matched actual label", "type": "integer"},
+          {"name": "latency_ms", "title": "simulated model API latency in milliseconds", "type": "integer"},
+          {"name": "request_error", "title": "simulated request error indicator", "type": "integer"},
+          {"name": "drift_score", "title": "synthetic drift severity score from 0 to 1", "type": "decimal"}
+        ]
+      }
+    },
+    {
+      "path": "data/mlops_model_monitoring_dataset.csv",
+      "description": "Main CSV file for the MLOps monitoring dataset.",
+      "schema": {
+        "fields": [
+          {"name": "event_id", "title": "unique synthetic event id", "type": "id"},
+          {"name": "event_timestamp", "title": "UTC timestamp for prediction request", "type": "datetime"},
+          {"name": "customer_id", "title": "synthetic customer identifier", "type": "id"},
+          {"name": "region", "title": "simulated GCP serving region", "type": "string"},
+          {"name": "traffic_channel", "title": "source channel for prediction traffic", "type": "string"},
+          {"name": "model_name", "title": "model identifier", "type": "string"},
+          {"name": "model_version", "title": "deployed model version", "type": "string"},
+          {"name": "drift_period", "title": "baseline, gradual drift, or post-drift period", "type": "string"},
+          {"name": "customer_age", "title": "synthetic customer age", "type": "integer"},
+          {"name": "account_age_days", "title": "account tenure in days", "type": "integer"},
+          {"name": "monthly_spend_usd", "title": "monthly spend in USD", "type": "decimal"},
+          {"name": "support_tickets_30d", "title": "support tickets opened in last 30 days", "type": "integer"},
+          {"name": "failed_payments_30d", "title": "failed payments in last 30 days", "type": "integer"},
+          {"name": "usage_hours_7d", "title": "product usage hours in last 7 days", "type": "decimal"},
+          {"name": "predicted_churn", "title": "predicted churn class", "type": "integer"},
+          {"name": "predicted_probability", "title": "churn probability score", "type": "decimal"},
+          {"name": "prediction_score_band", "title": "low, medium, or high risk score band", "type": "string"},
+          {"name": "actual_churn", "title": "observed churn label", "type": "integer"},
+          {"name": "prediction_correct", "title": "whether prediction matched actual label", "type": "integer"},
+          {"name": "latency_ms", "title": "simulated model API latency in milliseconds", "type": "integer"},
+          {"name": "request_error", "title": "simulated request error indicator", "type": "integer"},
+          {"name": "drift_score", "title": "synthetic drift severity score from 0 to 1", "type": "decimal"}
+        ]
+      }
+    },
+    {
+      "path": "data_dictionary.md",
+      "description": "Column definitions, target labels, and suggested analysis tasks."
+    },
+    {
+      "path": "summary.json",
+      "description": "Dataset summary with row count, schema, missing-value checks, and quality notes."
+    }
+  ],
+  "keywords": ["beginner", "tabular", "classification", "artificial intelligence", "data visualization"],
+  "expectedUpdateFrequency": "never",
+  "userSpecifiedSources": "Synthetic dataset generated from the fixed-seed Python script included in this Kaggle package. No real users, customers, credentials, cloud systems, or production prediction logs are represented.",
+  "image": "dataset-cover-image.png"
 }

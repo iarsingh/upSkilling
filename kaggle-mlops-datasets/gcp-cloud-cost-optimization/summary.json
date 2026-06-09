@@ -1,0 +1,56 @@
+{
+  "dataset_name": "GCP Cloud Cost Optimization Dataset",
+  "generated_at": "2026-06-08T23:55:10.491969+00:00",
+  "row_count": 18000,
+  "column_count": 17,
+  "columns": [
+    "billing_record_id",
+    "usage_date",
+    "project_id",
+    "service_name",
+    "sku_category",
+    "environment",
+    "owning_team",
+    "gcp_region",
+    "usage_quantity",
+    "usage_unit",
+    "daily_cost_usd",
+    "committed_use_covered_pct",
+    "idle_resource_score",
+    "rightsizing_savings_usd",
+    "label_compliance",
+    "budget_threshold_pct",
+    "cost_anomaly"
+  ],
+  "target_column": "cost_anomaly",
+  "target_distribution": {
+    "0": 17435,
+    "1": 565
+  },
+  "missing_values": {
+    "billing_record_id": 0,
+    "usage_date": 0,
+    "project_id": 0,
+    "service_name": 0,
+    "sku_category": 0,
+    "environment": 0,
+    "owning_team": 0,
+    "gcp_region": 0,
+    "usage_quantity": 0,
+    "usage_unit": 0,
+    "daily_cost_usd": 0,
+    "committed_use_covered_pct": 0,
+    "idle_resource_score": 0,
+    "rightsizing_savings_usd": 0,
+    "label_compliance": 0,
+    "budget_threshold_pct": 0,
+    "cost_anomaly": 0
+  },
+  "license": "CC0-1.0",
+  "synthetic": true,
+  "quality_notes": [
+    "Generated with a fixed random seed for reproducibility.",
+    "No real users, companies, credentials, logs, or cloud resources are included.",
+    "Columns use CSV-friendly scalar values for Kaggle preview compatibility."
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "dataset_name": "AIOps Incident Alert Correlation Dataset",
+  "generated_at": "2026-06-08T23:55:10.031508+00:00",
+  "row_count": 15000,
+  "column_count": 17,
+  "columns": [
+    "incident_id",
+    "event_timestamp",
+    "service_name",
+    "gcp_region",
+    "owning_team",
+    "severity",
+    "root_cause",
+    "alert_count",
+    "duplicate_alerts",
+    "p95_latency_ms",
+    "error_rate_pct",
+    "cpu_utilization_pct",
+    "memory_utilization_pct",
+    "deployment_within_2h",
+    "customer_impact_score",
+    "mttr_minutes",
+    "escalated"
+  ],
+  "target_column": "escalated",
+  "target_distribution": {
+    "0": 9259,
+    "1": 5741
+  },
+  "missing_values": {
+    "incident_id": 0,
+    "event_timestamp": 0,
+    "service_name": 0,
+    "gcp_region": 0,
+    "owning_team": 0,
+    "severity": 0,
+    "root_cause": 0,
+    "alert_count": 0,
+    "duplicate_alerts": 0,
+    "p95_latency_ms": 0,
+    "error_rate_pct": 0,
+    "cpu_utilization_pct": 0,
+    "memory_utilization_pct": 0,
+    "deployment_within_2h": 0,
+    "customer_impact_score": 0,
+    "mttr_minutes": 0,
+    "escalated": 0
+  },
+  "license": "CC0-1.0",
+  "synthetic": true,
+  "quality_notes": [
+    "Generated with a fixed random seed for reproducibility.",
+    "No real users, companies, credentials, logs, or cloud resources are included.",
+    "Columns use CSV-friendly scalar values for Kaggle preview compatibility."
+  ]
+}

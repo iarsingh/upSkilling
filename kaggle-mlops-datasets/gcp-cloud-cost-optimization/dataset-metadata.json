@@ -1,0 +1,217 @@
+{
+  "title": "GCP Cloud Cost Optimization Dataset",
+  "subtitle": "Synthetic GCP billing data for FinOps and cost anomaly practice.",
+  "description": "Synthetic GCP billing and FinOps dataset for cost anomaly detection, rightsizing analysis, and budget dashboards.",
+  "id": "iamarsingh/gcp-cloud-cost-optimization-dataset",
+  "licenses": [
+    {
+      "name": "CC0-1.0"
+    }
+  ],
+  "resources": [
+    {
+      "path": "gcp_cloud_cost_optimization.csv",
+      "description": "Root-level preview copy of GCP Cloud Cost Optimization Dataset.",
+      "schema": {
+        "fields": [
+          {
+            "name": "billing_record_id",
+            "title": "unique synthetic billing record identifier",
+            "type": "id"
+          },
+          {
+            "name": "usage_date",
+            "title": "billing usage date",
+            "type": "string"
+          },
+          {
+            "name": "project_id",
+            "title": "simulated GCP project id",
+            "type": "string"
+          },
+          {
+            "name": "service_name",
+            "title": "GCP service category",
+            "type": "string"
+          },
+          {
+            "name": "sku_category",
+            "title": "billing SKU category",
+            "type": "string"
+          },
+          {
+            "name": "environment",
+            "title": "resource environment label",
+            "type": "string"
+          },
+          {
+            "name": "owning_team",
+            "title": "team owning the spend",
+            "type": "string"
+          },
+          {
+            "name": "gcp_region",
+            "title": "region or global billing scope",
+            "type": "string"
+          },
+          {
+            "name": "usage_quantity",
+            "title": "synthetic usage quantity",
+            "type": "decimal"
+          },
+          {
+            "name": "usage_unit",
+            "title": "unit for the usage quantity",
+            "type": "string"
+          },
+          {
+            "name": "daily_cost_usd",
+            "title": "daily cost in USD",
+            "type": "decimal"
+          },
+          {
+            "name": "committed_use_covered_pct",
+            "title": "fraction of spend covered by commitments",
+            "type": "decimal"
+          },
+          {
+            "name": "idle_resource_score",
+            "title": "synthetic idle or waste signal from 0 to 1",
+            "type": "decimal"
+          },
+          {
+            "name": "rightsizing_savings_usd",
+            "title": "estimated savings from rightsizing",
+            "type": "decimal"
+          },
+          {
+            "name": "label_compliance",
+            "title": "whether the resource has required labels",
+            "type": "integer"
+          },
+          {
+            "name": "budget_threshold_pct",
+            "title": "percentage of expected budget consumed",
+            "type": "decimal"
+          },
+          {
+            "name": "cost_anomaly",
+            "title": "target label indicating anomalous cost behavior",
+            "type": "integer"
+          }
+        ]
+      }
+    },
+    {
+      "path": "data/gcp_cloud_cost_optimization.csv",
+      "description": "Main CSV file for GCP Cloud Cost Optimization Dataset.",
+      "schema": {
+        "fields": [
+          {
+            "name": "billing_record_id",
+            "title": "unique synthetic billing record identifier",
+            "type": "id"
+          },
+          {
+            "name": "usage_date",
+            "title": "billing usage date",
+            "type": "string"
+          },
+          {
+            "name": "project_id",
+            "title": "simulated GCP project id",
+            "type": "string"
+          },
+          {
+            "name": "service_name",
+            "title": "GCP service category",
+            "type": "string"
+          },
+          {
+            "name": "sku_category",
+            "title": "billing SKU category",
+            "type": "string"
+          },
+          {
+            "name": "environment",
+            "title": "resource environment label",
+            "type": "string"
+          },
+          {
+            "name": "owning_team",
+            "title": "team owning the spend",
+            "type": "string"
+          },
+          {
+            "name": "gcp_region",
+            "title": "region or global billing scope",
+            "type": "string"
+          },
+          {
+            "name": "usage_quantity",
+            "title": "synthetic usage quantity",
+            "type": "decimal"
+          },
+          {
+            "name": "usage_unit",
+            "title": "unit for the usage quantity",
+            "type": "string"
+          },
+          {
+            "name": "daily_cost_usd",
+            "title": "daily cost in USD",
+            "type": "decimal"
+          },
+          {
+            "name": "committed_use_covered_pct",
+            "title": "fraction of spend covered by commitments",
+            "type": "decimal"
+          },
+          {
+            "name": "idle_resource_score",
+            "title": "synthetic idle or waste signal from 0 to 1",
+            "type": "decimal"
+          },
+          {
+            "name": "rightsizing_savings_usd",
+            "title": "estimated savings from rightsizing",
+            "type": "decimal"
+          },
+          {
+            "name": "label_compliance",
+            "title": "whether the resource has required labels",
+            "type": "integer"
+          },
+          {
+            "name": "budget_threshold_pct",
+            "title": "percentage of expected budget consumed",
+            "type": "decimal"
+          },
+          {
+            "name": "cost_anomaly",
+            "title": "target label indicating anomalous cost behavior",
+            "type": "integer"
+          }
+        ]
+      }
+    },
+    {
+      "path": "data_dictionary.md",
+      "description": "Column definitions, target label explanation, and suggested tasks."
+    },
+    {
+      "path": "summary.json",
+      "description": "Dataset quality summary with row count, schema, missing-value checks, and target distribution."
+    }
+  ],
+  "keywords": [
+    "beginner",
+    "tabular",
+    "business",
+    "data visualization",
+    "classification"
+  ],
+  "expectedUpdateFrequency": "never",
+  "userSpecifiedSources": "Synthetic dataset generated from a fixed-seed Python script included in this Kaggle package. No real users, cloud bills, incidents, prompts, credentials, or production systems are represented.",
+  "image": "dataset-cover-image.png"
+}

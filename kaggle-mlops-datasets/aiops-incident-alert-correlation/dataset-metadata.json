@@ -1,0 +1,217 @@
+{
+  "title": "AIOps Incident Alert Correlation Dataset",
+  "subtitle": "Synthetic SRE incident telemetry for AIOps alert correlation.",
+  "description": "Synthetic incident and alert telemetry for practicing AIOps correlation, escalation prediction, and SRE dashboards.",
+  "id": "iamarsingh/aiops-incident-alert-correlation-dataset",
+  "licenses": [
+    {
+      "name": "CC0-1.0"
+    }
+  ],
+  "resources": [
+    {
+      "path": "aiops_incident_alert_correlation.csv",
+      "description": "Root-level preview copy of AIOps Incident Alert Correlation Dataset.",
+      "schema": {
+        "fields": [
+          {
+            "name": "incident_id",
+            "title": "unique synthetic incident identifier",
+            "type": "id"
+          },
+          {
+            "name": "event_timestamp",
+            "title": "UTC timestamp for the incident event",
+            "type": "datetime"
+          },
+          {
+            "name": "service_name",
+            "title": "affected application or platform service",
+            "type": "string"
+          },
+          {
+            "name": "gcp_region",
+            "title": "simulated Google Cloud region",
+            "type": "string"
+          },
+          {
+            "name": "owning_team",
+            "title": "team responsible for the affected service",
+            "type": "string"
+          },
+          {
+            "name": "severity",
+            "title": "incident severity level",
+            "type": "string"
+          },
+          {
+            "name": "root_cause",
+            "title": "synthetic root cause category",
+            "type": "string"
+          },
+          {
+            "name": "alert_count",
+            "title": "number of alerts emitted during the incident",
+            "type": "integer"
+          },
+          {
+            "name": "duplicate_alerts",
+            "title": "number of noisy duplicate alerts",
+            "type": "integer"
+          },
+          {
+            "name": "p95_latency_ms",
+            "title": "simulated p95 service latency in milliseconds",
+            "type": "integer"
+          },
+          {
+            "name": "error_rate_pct",
+            "title": "simulated request error rate percentage",
+            "type": "decimal"
+          },
+          {
+            "name": "cpu_utilization_pct",
+            "title": "average CPU utilization during the incident",
+            "type": "decimal"
+          },
+          {
+            "name": "memory_utilization_pct",
+            "title": "average memory utilization during the incident",
+            "type": "decimal"
+          },
+          {
+            "name": "deployment_within_2h",
+            "title": "whether a deployment happened within two hours",
+            "type": "integer"
+          },
+          {
+            "name": "customer_impact_score",
+            "title": "synthetic impact score from 0 to 100",
+            "type": "decimal"
+          },
+          {
+            "name": "mttr_minutes",
+            "title": "mean time to resolution in minutes",
+            "type": "integer"
+          },
+          {
+            "name": "escalated",
+            "title": "target label indicating whether the incident was escalated",
+            "type": "integer"
+          }
+        ]
+      }
+    },
+    {
+      "path": "data/aiops_incident_alert_correlation.csv",
+      "description": "Main CSV file for AIOps Incident Alert Correlation Dataset.",
+      "schema": {
+        "fields": [
+          {
+            "name": "incident_id",
+            "title": "unique synthetic incident identifier",
+            "type": "id"
+          },
+          {
+            "name": "event_timestamp",
+            "title": "UTC timestamp for the incident event",
+            "type": "datetime"
+          },
+          {
+            "name": "service_name",
+            "title": "affected application or platform service",
+            "type": "string"
+          },
+          {
+            "name": "gcp_region",
+            "title": "simulated Google Cloud region",
+            "type": "string"
+          },
+          {
+            "name": "owning_team",
+            "title": "team responsible for the affected service",
+            "type": "string"
+          },
+          {
+            "name": "severity",
+            "title": "incident severity level",
+            "type": "string"
+          },
+          {
+            "name": "root_cause",
+            "title": "synthetic root cause category",
+            "type": "string"
+          },
+          {
+            "name": "alert_count",
+            "title": "number of alerts emitted during the incident",
+            "type": "integer"
+          },
+          {
+            "name": "duplicate_alerts",
+            "title": "number of noisy duplicate alerts",
+            "type": "integer"
+          },
+          {
+            "name": "p95_latency_ms",
+            "title": "simulated p95 service latency in milliseconds",
+            "type": "integer"
+          },
+          {
+            "name": "error_rate_pct",
+            "title": "simulated request error rate percentage",
+            "type": "decimal"
+          },
+          {
+            "name": "cpu_utilization_pct",
+            "title": "average CPU utilization during the incident",
+            "type": "decimal"
+          },
+          {
+            "name": "memory_utilization_pct",
+            "title": "average memory utilization during the incident",
+            "type": "decimal"
+          },
+          {
+            "name": "deployment_within_2h",
+            "title": "whether a deployment happened within two hours",
+            "type": "integer"
+          },
+          {
+            "name": "customer_impact_score",
+            "title": "synthetic impact score from 0 to 100",
+            "type": "decimal"
+          },
+          {
+            "name": "mttr_minutes",
+            "title": "mean time to resolution in minutes",
+            "type": "integer"
+          },
+          {
+            "name": "escalated",
+            "title": "target label indicating whether the incident was escalated",
+            "type": "integer"
+          }
+        ]
+      }
+    },
+    {
+      "path": "data_dictionary.md",
+      "description": "Column definitions, target label explanation, and suggested tasks."
+    },
+    {
+      "path": "summary.json",
+      "description": "Dataset quality summary with row count, schema, missing-value checks, and target distribution."
+    }
+  ],
+  "keywords": [
+    "beginner",
+    "tabular",
+    "classification",
+    "computer science",
+    "data visualization"
+  ],
+  "expectedUpdateFrequency": "never",
+  "userSpecifiedSources": "Synthetic dataset generated from a fixed-seed Python script included in this Kaggle package. No real users, cloud bills, incidents, prompts, credentials, or production systems are represented.",
+  "image": "dataset-cover-image.png"
+}

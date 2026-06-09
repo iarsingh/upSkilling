@@ -16,6 +16,7 @@ The projects are GCP-friendly and designed to run locally first, then deploy to 
 - `07-fastapi-kubernetes-ready-api`: Kubernetes-ready API with probes, config, and manifests.
 - `08-fastapi-devops-release-api`: Release metadata and deployment gate API.
 - `09-fastapi-mlops-model-registry-api`: Lightweight model registry and promotion API.
+- `10-fastapi-web-scraping-tool`: Async page scraper API with URL validation, BeautifulSoup parsing, Docker, and Cloud Run deployment.
 
 ## Common Commands
 
@@ -43,4 +44,3 @@ make validate
 - Health check and readiness output.
 - API request/response examples.
 - CI/CD pipeline screenshot.
-

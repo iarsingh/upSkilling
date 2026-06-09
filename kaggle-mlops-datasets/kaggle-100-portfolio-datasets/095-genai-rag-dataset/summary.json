@@ -1,0 +1,30 @@
+{
+  "dataset_number": 95,
+  "topic": "GenAI RAG evaluation",
+  "generated_at": "2026-06-09T00:05:46.042617+00:00",
+  "row_count": 1000,
+  "column_count": 14,
+  "target_column": "evaluation_passed",
+  "target_distribution": {
+    "0": 242,
+    "1": 758
+  },
+  "missing_values": {
+    "record_id": 0,
+    "event_date": 0,
+    "project_name": 0,
+    "service_name": 0,
+    "gcp_region": 0,
+    "environment": 0,
+    "owning_team": 0,
+    "signal_category": 0,
+    "metric_a": 0,
+    "metric_b": 0,
+    "metric_c": 0,
+    "metric_d": 0,
+    "risk_score": 0,
+    "evaluation_passed": 0
+  },
+  "synthetic": true,
+  "license": "CC0-1.0"
+}

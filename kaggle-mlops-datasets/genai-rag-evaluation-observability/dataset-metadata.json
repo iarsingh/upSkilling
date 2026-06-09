@@ -1,0 +1,217 @@
+{
+  "title": "GenAI RAG Evaluation and Observability Dataset",
+  "subtitle": "Synthetic RAG evaluation telemetry for GenAI observability.",
+  "description": "Synthetic RAG evaluation dataset for GenAI observability, hallucination analysis, prompt comparison, and retrieval quality dashboards.",
+  "id": "iamarsingh/genai-rag-evaluation-observability-dataset",
+  "licenses": [
+    {
+      "name": "CC0-1.0"
+    }
+  ],
+  "resources": [
+    {
+      "path": "genai_rag_evaluation_observability.csv",
+      "description": "Root-level preview copy of GenAI RAG Evaluation and Observability Dataset.",
+      "schema": {
+        "fields": [
+          {
+            "name": "evaluation_id",
+            "title": "unique synthetic evaluation identifier",
+            "type": "id"
+          },
+          {
+            "name": "evaluation_timestamp",
+            "title": "UTC timestamp for the evaluation event",
+            "type": "datetime"
+          },
+          {
+            "name": "question_domain",
+            "title": "knowledge domain for the user question",
+            "type": "string"
+          },
+          {
+            "name": "prompt_template_version",
+            "title": "prompt template version under evaluation",
+            "type": "string"
+          },
+          {
+            "name": "model_name",
+            "title": "LLM used for the response",
+            "type": "string"
+          },
+          {
+            "name": "retrieval_top_k",
+            "title": "configured number of retrieved chunks",
+            "type": "integer"
+          },
+          {
+            "name": "retrieved_context_count",
+            "title": "actual number of contexts returned",
+            "type": "integer"
+          },
+          {
+            "name": "context_relevance_score",
+            "title": "synthetic relevance score from 0 to 1",
+            "type": "decimal"
+          },
+          {
+            "name": "groundedness_score",
+            "title": "synthetic answer groundedness score from 0 to 1",
+            "type": "decimal"
+          },
+          {
+            "name": "answer_similarity_score",
+            "title": "synthetic reference similarity score from 0 to 1",
+            "type": "decimal"
+          },
+          {
+            "name": "citation_coverage_pct",
+            "title": "percentage of answer claims covered by citations",
+            "type": "decimal"
+          },
+          {
+            "name": "response_latency_ms",
+            "title": "response latency in milliseconds",
+            "type": "integer"
+          },
+          {
+            "name": "input_tokens",
+            "title": "input token count",
+            "type": "integer"
+          },
+          {
+            "name": "output_tokens",
+            "title": "output token count",
+            "type": "integer"
+          },
+          {
+            "name": "estimated_cost_usd",
+            "title": "estimated request cost in USD",
+            "type": "decimal"
+          },
+          {
+            "name": "hallucination_flag",
+            "title": "label indicating potential hallucination",
+            "type": "integer"
+          },
+          {
+            "name": "evaluation_passed",
+            "title": "target label indicating whether evaluation passed",
+            "type": "integer"
+          }
+        ]
+      }
+    },
+    {
+      "path": "data/genai_rag_evaluation_observability.csv",
+      "description": "Main CSV file for GenAI RAG Evaluation and Observability Dataset.",
+      "schema": {
+        "fields": [
+          {
+            "name": "evaluation_id",
+            "title": "unique synthetic evaluation identifier",
+            "type": "id"
+          },
+          {
+            "name": "evaluation_timestamp",
+            "title": "UTC timestamp for the evaluation event",
+            "type": "datetime"
+          },
+          {
+            "name": "question_domain",
+            "title": "knowledge domain for the user question",
+            "type": "string"
+          },
+          {
+            "name": "prompt_template_version",
+            "title": "prompt template version under evaluation",
+            "type": "string"
+          },
+          {
+            "name": "model_name",
+            "title": "LLM used for the response",
+            "type": "string"
+          },
+          {
+            "name": "retrieval_top_k",
+            "title": "configured number of retrieved chunks",
+            "type": "integer"
+          },
+          {
+            "name": "retrieved_context_count",
+            "title": "actual number of contexts returned",
+            "type": "integer"
+          },
+          {
+            "name": "context_relevance_score",
+            "title": "synthetic relevance score from 0 to 1",
+            "type": "decimal"
+          },
+          {
+            "name": "groundedness_score",
+            "title": "synthetic answer groundedness score from 0 to 1",
+            "type": "decimal"
+          },
+          {
+            "name": "answer_similarity_score",
+            "title": "synthetic reference similarity score from 0 to 1",
+            "type": "decimal"
+          },
+          {
+            "name": "citation_coverage_pct",
+            "title": "percentage of answer claims covered by citations",
+            "type": "decimal"
+          },
+          {
+            "name": "response_latency_ms",
+            "title": "response latency in milliseconds",
+            "type": "integer"
+          },
+          {
+            "name": "input_tokens",
+            "title": "input token count",
+            "type": "integer"
+          },
+          {
+            "name": "output_tokens",
+            "title": "output token count",
+            "type": "integer"
+          },
+          {
+            "name": "estimated_cost_usd",
+            "title": "estimated request cost in USD",
+            "type": "decimal"
+          },
+          {
+            "name": "hallucination_flag",
+            "title": "label indicating potential hallucination",
+            "type": "integer"
+          },
+          {
+            "name": "evaluation_passed",
+            "title": "target label indicating whether evaluation passed",
+            "type": "integer"
+          }
+        ]
+      }
+    },
+    {
+      "path": "data_dictionary.md",
+      "description": "Column definitions, target label explanation, and suggested tasks."
+    },
+    {
+      "path": "summary.json",
+      "description": "Dataset quality summary with row count, schema, missing-value checks, and target distribution."
+    }
+  ],
+  "keywords": [
+    "beginner",
+    "tabular",
+    "artificial intelligence",
+    "classification",
+    "data visualization"
+  ],
+  "expectedUpdateFrequency": "never",
+  "userSpecifiedSources": "Synthetic dataset generated from a fixed-seed Python script included in this Kaggle package. No real users, cloud bills, incidents, prompts, credentials, or production systems are represented.",
+  "image": "dataset-cover-image.png"
+}

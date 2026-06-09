@@ -14,6 +14,7 @@ https://www.kaggle.com/datasets/iamarsingh/mlops-model-monitoring-drift-dataset
 
 - `data/mlops_model_monitoring_dataset.csv` - main dataset
 - `mlops_model_monitoring_dataset.csv` - root-level copy of the main dataset for Kaggle preview/download
+- `dataset-cover-image.png` - cover image for Kaggle dataset metadata
 - `data_dictionary.md` - column definitions
 - `summary.json` - generated dataset summary
 - `scripts/generate_dataset.py` - reproducible dataset generator
