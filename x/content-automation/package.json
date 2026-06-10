@@ -1,0 +1,21 @@
+{
+  "name": "x-content-automation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local-only X content generation and posting automation.",
+  "main": "src/index.js",
+  "scripts": {
+    "draft": "node src/index.js --draft",
+    "prepare:30": "node src/index.js --prepare-30",
+    "publish": "node src/index.js --publish",
+    "publish:next": "node src/index.js --publish-next",
+    "publish:date": "node src/index.js --publish-date",
+    "x:auth": "node src/oauth.js",
+    "x:refresh": "node src/oauth.js --refresh",
+    "install:cron": "node src/install-cron.js",
+    "run:cron": "node src/schedule-cron.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

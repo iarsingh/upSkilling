@@ -1,0 +1,722 @@
+[
+  {
+    "id": "day-001",
+    "day": 1,
+    "date": "2026-06-11",
+    "pillar": "Kubernetes",
+    "audience": "platform engineers",
+    "topic": "Kubernetes requests and limits for production workloads",
+    "angle": "practical answer",
+    "hashtags": [
+      "#Kubernetes",
+      "#DevOps",
+      "#CloudNative"
+    ],
+    "slug": "2026-06-11-kubernetes-requests-and-limits-for-production-workloads",
+    "thread": [
+      "Thread: Kubernetes requests and limits for production workloads for platform engineers. A short production view with the answer, architecture flow, and checklist. #Kubernetes #DevOps #CloudNative",
+      "Answer: Start from workload behavior, set requests from steady usage, set limits from failure boundaries, and validate with latency during scale events.",
+      "Architecture flow: Service -> Deployment -> requests/limits -> HPA -> PDB -> alerts -> rollback runbook",
+      "Production checklist: Check p95 latency, restart rate, throttling, pending pods, PDB coverage, and rollback path before calling a rollout production-ready.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Kubernetes #DevOps #CloudNative"
+    ],
+    "postPath": "posts/2026-06-11-kubernetes-requests-and-limits-for-production-workloads.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-002",
+    "day": 2,
+    "date": "2026-06-12",
+    "pillar": "MLOps",
+    "audience": "ML platform engineers",
+    "topic": "Model registry approvals for production ML",
+    "angle": "architecture flow",
+    "hashtags": [
+      "#MLOps",
+      "#MachineLearning",
+      "#AI"
+    ],
+    "slug": "2026-06-12-model-registry-approvals-for-production-ml",
+    "thread": [
+      "Thread: Model registry approvals for production ML for ML platform engineers. A short production view with the answer, architecture flow, and checklist. #MLOps #MachineLearning #AI",
+      "Answer: Treat every model like a controlled release: version data, code, metrics, approvals, artifact, deployment target, and rollback decision together.",
+      "Architecture flow: Data -> training pipeline -> MLflow run -> registry approval -> canary deploy -> monitoring -> rollback or promote",
+      "Production checklist: Track lineage, owner, metric threshold, canary window, drift signal, refresh trigger, and model retirement rule.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #MLOps #MachineLearning #AI"
+    ],
+    "postPath": "posts/2026-06-12-model-registry-approvals-for-production-ml.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-003",
+    "day": 3,
+    "date": "2026-06-13",
+    "pillar": "Infrastructure",
+    "audience": "cloud engineers",
+    "topic": "Terraform review checklist",
+    "angle": "production checklist",
+    "hashtags": [
+      "#Terraform",
+      "#SRE",
+      "#PlatformEngineering"
+    ],
+    "slug": "2026-06-13-terraform-review-checklist",
+    "thread": [
+      "Thread: Terraform review checklist for cloud engineers. A short production view with the answer, architecture flow, and checklist. #Terraform #SRE #PlatformEngineering",
+      "Answer: Good infrastructure practice is repeatability plus reviewability. Plans, policies, approvals, state, and drift checks should be visible before apply.",
+      "Architecture flow: PR -> terraform fmt/validate -> plan -> policy check -> approval -> apply -> drift monitor -> GitOps sync",
+      "Production checklist: Review blast radius, state backend, IAM scope, module version, secrets handling, tags, cost estimate, and rollback notes.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Terraform #SRE #PlatformEngineering"
+    ],
+    "postPath": "posts/2026-06-13-terraform-review-checklist.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-004",
+    "day": 4,
+    "date": "2026-06-14",
+    "pillar": "Data Science",
+    "audience": "data and ML practitioners",
+    "topic": "Data leakage in production ML",
+    "angle": "debugging workflow",
+    "hashtags": [
+      "#DataScience",
+      "#MachineLearning",
+      "#Analytics"
+    ],
+    "slug": "2026-06-14-data-leakage-in-production-ml",
+    "thread": [
+      "Thread: Data leakage in production ML for data and ML practitioners. A short production view with the answer, architecture flow, and checklist. #DataScience #MachineLearning #Analytics",
+      "Answer: Strong model work starts before training: define the business cost, validate data quality, prevent leakage, and choose metrics that match decisions.",
+      "Architecture flow: Question -> data contract -> split strategy -> baseline -> experiment -> validation -> monitoring",
+      "Production checklist: Check leakage, skew, missing values, imbalance, metric fit, explainability, deployment input contract, and feedback loop.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #DataScience #MachineLearning #Analytics"
+    ],
+    "postPath": "posts/2026-06-14-data-leakage-in-production-ml.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-005",
+    "day": 5,
+    "date": "2026-06-15",
+    "pillar": "Kubernetes",
+    "audience": "platform engineers",
+    "topic": "HPA, VPA, and Cluster Autoscaler together",
+    "angle": "governance pattern",
+    "hashtags": [
+      "#Kubernetes",
+      "#DevOps",
+      "#CloudNative"
+    ],
+    "slug": "2026-06-15-hpa-vpa-and-cluster-autoscaler-together",
+    "thread": [
+      "Thread: HPA, VPA, and Cluster Autoscaler together for platform engineers. A short production view with the answer, architecture flow, and checklist. #Kubernetes #DevOps #CloudNative",
+      "Answer: Start from workload behavior, set requests from steady usage, set limits from failure boundaries, and validate with latency during scale events.",
+      "Architecture flow: Service -> Deployment -> requests/limits -> HPA -> PDB -> alerts -> rollback runbook",
+      "Production checklist: Check p95 latency, restart rate, throttling, pending pods, PDB coverage, and rollback path before calling a rollout production-ready.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Kubernetes #DevOps #CloudNative"
+    ],
+    "postPath": "posts/2026-06-15-hpa-vpa-and-cluster-autoscaler-together.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-006",
+    "day": 6,
+    "date": "2026-06-16",
+    "pillar": "MLOps",
+    "audience": "ML platform engineers",
+    "topic": "Canary deployment for machine learning models",
+    "angle": "reliability tradeoff",
+    "hashtags": [
+      "#MLOps",
+      "#MachineLearning",
+      "#AI"
+    ],
+    "slug": "2026-06-16-canary-deployment-for-machine-learning-models",
+    "thread": [
+      "Thread: Canary deployment for machine learning models for ML platform engineers. A short production view with the answer, architecture flow, and checklist. #MLOps #MachineLearning #AI",
+      "Answer: Treat every model like a controlled release: version data, code, metrics, approvals, artifact, deployment target, and rollback decision together.",
+      "Architecture flow: Data -> training pipeline -> MLflow run -> registry approval -> canary deploy -> monitoring -> rollback or promote",
+      "Production checklist: Track lineage, owner, metric threshold, canary window, drift signal, refresh trigger, and model retirement rule.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #MLOps #MachineLearning #AI"
+    ],
+    "postPath": "posts/2026-06-16-canary-deployment-for-machine-learning-models.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-007",
+    "day": 7,
+    "date": "2026-06-17",
+    "pillar": "Infrastructure",
+    "audience": "cloud engineers",
+    "topic": "GitOps workflow design",
+    "angle": "interview-ready summary",
+    "hashtags": [
+      "#Terraform",
+      "#SRE",
+      "#PlatformEngineering"
+    ],
+    "slug": "2026-06-17-gitops-workflow-design",
+    "thread": [
+      "Thread: GitOps workflow design for cloud engineers. A short production view with the answer, architecture flow, and checklist. #Terraform #SRE #PlatformEngineering",
+      "Answer: Good infrastructure practice is repeatability plus reviewability. Plans, policies, approvals, state, and drift checks should be visible before apply.",
+      "Architecture flow: PR -> terraform fmt/validate -> plan -> policy check -> approval -> apply -> drift monitor -> GitOps sync",
+      "Production checklist: Review blast radius, state backend, IAM scope, module version, secrets handling, tags, cost estimate, and rollback notes.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Terraform #SRE #PlatformEngineering"
+    ],
+    "postPath": "posts/2026-06-17-gitops-workflow-design.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-008",
+    "day": 8,
+    "date": "2026-06-18",
+    "pillar": "Data Science",
+    "audience": "data and ML practitioners",
+    "topic": "Train validation test split patterns",
+    "angle": "practical answer",
+    "hashtags": [
+      "#DataScience",
+      "#MachineLearning",
+      "#Analytics"
+    ],
+    "slug": "2026-06-18-train-validation-test-split-patterns",
+    "thread": [
+      "Thread: Train validation test split patterns for data and ML practitioners. A short production view with the answer, architecture flow, and checklist. #DataScience #MachineLearning #Analytics",
+      "Answer: Strong model work starts before training: define the business cost, validate data quality, prevent leakage, and choose metrics that match decisions.",
+      "Architecture flow: Question -> data contract -> split strategy -> baseline -> experiment -> validation -> monitoring",
+      "Production checklist: Check leakage, skew, missing values, imbalance, metric fit, explainability, deployment input contract, and feedback loop.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #DataScience #MachineLearning #Analytics"
+    ],
+    "postPath": "posts/2026-06-18-train-validation-test-split-patterns.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-009",
+    "day": 9,
+    "date": "2026-06-19",
+    "pillar": "Kubernetes",
+    "audience": "platform engineers",
+    "topic": "Pod disruption budgets for reliable releases",
+    "angle": "architecture flow",
+    "hashtags": [
+      "#Kubernetes",
+      "#DevOps",
+      "#CloudNative"
+    ],
+    "slug": "2026-06-19-pod-disruption-budgets-for-reliable-releases",
+    "thread": [
+      "Thread: Pod disruption budgets for reliable releases for platform engineers. A short production view with the answer, architecture flow, and checklist. #Kubernetes #DevOps #CloudNative",
+      "Answer: Start from workload behavior, set requests from steady usage, set limits from failure boundaries, and validate with latency during scale events.",
+      "Architecture flow: Service -> Deployment -> requests/limits -> HPA -> PDB -> alerts -> rollback runbook",
+      "Production checklist: Check p95 latency, restart rate, throttling, pending pods, PDB coverage, and rollback path before calling a rollout production-ready.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Kubernetes #DevOps #CloudNative"
+    ],
+    "postPath": "posts/2026-06-19-pod-disruption-budgets-for-reliable-releases.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-010",
+    "day": 10,
+    "date": "2026-06-20",
+    "pillar": "MLOps",
+    "audience": "ML platform engineers",
+    "topic": "Feature store governance",
+    "angle": "production checklist",
+    "hashtags": [
+      "#MLOps",
+      "#MachineLearning",
+      "#AI"
+    ],
+    "slug": "2026-06-20-feature-store-governance",
+    "thread": [
+      "Thread: Feature store governance for ML platform engineers. A short production view with the answer, architecture flow, and checklist. #MLOps #MachineLearning #AI",
+      "Answer: Treat every model like a controlled release: version data, code, metrics, approvals, artifact, deployment target, and rollback decision together.",
+      "Architecture flow: Data -> training pipeline -> MLflow run -> registry approval -> canary deploy -> monitoring -> rollback or promote",
+      "Production checklist: Track lineage, owner, metric threshold, canary window, drift signal, refresh trigger, and model retirement rule.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #MLOps #MachineLearning #AI"
+    ],
+    "postPath": "posts/2026-06-20-feature-store-governance.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-011",
+    "day": 11,
+    "date": "2026-06-21",
+    "pillar": "Infrastructure",
+    "audience": "cloud engineers",
+    "topic": "Secrets management in Kubernetes",
+    "angle": "debugging workflow",
+    "hashtags": [
+      "#Terraform",
+      "#SRE",
+      "#PlatformEngineering"
+    ],
+    "slug": "2026-06-21-secrets-management-in-kubernetes",
+    "thread": [
+      "Thread: Secrets management in Kubernetes for cloud engineers. A short production view with the answer, architecture flow, and checklist. #Terraform #SRE #PlatformEngineering",
+      "Answer: Good infrastructure practice is repeatability plus reviewability. Plans, policies, approvals, state, and drift checks should be visible before apply.",
+      "Architecture flow: PR -> terraform fmt/validate -> plan -> policy check -> approval -> apply -> drift monitor -> GitOps sync",
+      "Production checklist: Review blast radius, state backend, IAM scope, module version, secrets handling, tags, cost estimate, and rollback notes.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Terraform #SRE #PlatformEngineering"
+    ],
+    "postPath": "posts/2026-06-21-secrets-management-in-kubernetes.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-012",
+    "day": 12,
+    "date": "2026-06-22",
+    "pillar": "Data Science",
+    "audience": "data and ML practitioners",
+    "topic": "Feature engineering habits",
+    "angle": "governance pattern",
+    "hashtags": [
+      "#DataScience",
+      "#MachineLearning",
+      "#Analytics"
+    ],
+    "slug": "2026-06-22-feature-engineering-habits",
+    "thread": [
+      "Thread: Feature engineering habits for data and ML practitioners. A short production view with the answer, architecture flow, and checklist. #DataScience #MachineLearning #Analytics",
+      "Answer: Strong model work starts before training: define the business cost, validate data quality, prevent leakage, and choose metrics that match decisions.",
+      "Architecture flow: Question -> data contract -> split strategy -> baseline -> experiment -> validation -> monitoring",
+      "Production checklist: Check leakage, skew, missing values, imbalance, metric fit, explainability, deployment input contract, and feedback loop.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #DataScience #MachineLearning #Analytics"
+    ],
+    "postPath": "posts/2026-06-22-feature-engineering-habits.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-013",
+    "day": 13,
+    "date": "2026-06-23",
+    "pillar": "Kubernetes",
+    "audience": "platform engineers",
+    "topic": "RBAC mistakes that create production risk",
+    "angle": "reliability tradeoff",
+    "hashtags": [
+      "#Kubernetes",
+      "#DevOps",
+      "#CloudNative"
+    ],
+    "slug": "2026-06-23-rbac-mistakes-that-create-production-risk",
+    "thread": [
+      "Thread: RBAC mistakes that create production risk for platform engineers. A short production view with the answer, architecture flow, and checklist. #Kubernetes #DevOps #CloudNative",
+      "Answer: Start from workload behavior, set requests from steady usage, set limits from failure boundaries, and validate with latency during scale events.",
+      "Architecture flow: Service -> Deployment -> requests/limits -> HPA -> PDB -> alerts -> rollback runbook",
+      "Production checklist: Check p95 latency, restart rate, throttling, pending pods, PDB coverage, and rollback path before calling a rollout production-ready.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Kubernetes #DevOps #CloudNative"
+    ],
+    "postPath": "posts/2026-06-23-rbac-mistakes-that-create-production-risk.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-014",
+    "day": 14,
+    "date": "2026-06-24",
+    "pillar": "MLOps",
+    "audience": "ML platform engineers",
+    "topic": "MLflow and Kubeflow reproducibility",
+    "angle": "interview-ready summary",
+    "hashtags": [
+      "#MLOps",
+      "#MachineLearning",
+      "#AI"
+    ],
+    "slug": "2026-06-24-mlflow-and-kubeflow-reproducibility",
+    "thread": [
+      "Thread: MLflow and Kubeflow reproducibility for ML platform engineers. A short production view with the answer, architecture flow, and checklist. #MLOps #MachineLearning #AI",
+      "Answer: Treat every model like a controlled release: version data, code, metrics, approvals, artifact, deployment target, and rollback decision together.",
+      "Architecture flow: Data -> training pipeline -> MLflow run -> registry approval -> canary deploy -> monitoring -> rollback or promote",
+      "Production checklist: Track lineage, owner, metric threshold, canary window, drift signal, refresh trigger, and model retirement rule.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #MLOps #MachineLearning #AI"
+    ],
+    "postPath": "posts/2026-06-24-mlflow-and-kubeflow-reproducibility.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-015",
+    "day": 15,
+    "date": "2026-06-25",
+    "pillar": "Infrastructure",
+    "audience": "cloud engineers",
+    "topic": "Cloud cost optimization habits",
+    "angle": "practical answer",
+    "hashtags": [
+      "#Terraform",
+      "#SRE",
+      "#PlatformEngineering"
+    ],
+    "slug": "2026-06-25-cloud-cost-optimization-habits",
+    "thread": [
+      "Thread: Cloud cost optimization habits for cloud engineers. A short production view with the answer, architecture flow, and checklist. #Terraform #SRE #PlatformEngineering",
+      "Answer: Good infrastructure practice is repeatability plus reviewability. Plans, policies, approvals, state, and drift checks should be visible before apply.",
+      "Architecture flow: PR -> terraform fmt/validate -> plan -> policy check -> approval -> apply -> drift monitor -> GitOps sync",
+      "Production checklist: Review blast radius, state backend, IAM scope, module version, secrets handling, tags, cost estimate, and rollback notes.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Terraform #SRE #PlatformEngineering"
+    ],
+    "postPath": "posts/2026-06-25-cloud-cost-optimization-habits.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-016",
+    "day": 16,
+    "date": "2026-06-26",
+    "pillar": "Data Science",
+    "audience": "data and ML practitioners",
+    "topic": "Classification metrics beyond accuracy",
+    "angle": "architecture flow",
+    "hashtags": [
+      "#DataScience",
+      "#MachineLearning",
+      "#Analytics"
+    ],
+    "slug": "2026-06-26-classification-metrics-beyond-accuracy",
+    "thread": [
+      "Thread: Classification metrics beyond accuracy for data and ML practitioners. A short production view with the answer, architecture flow, and checklist. #DataScience #MachineLearning #Analytics",
+      "Answer: Strong model work starts before training: define the business cost, validate data quality, prevent leakage, and choose metrics that match decisions.",
+      "Architecture flow: Question -> data contract -> split strategy -> baseline -> experiment -> validation -> monitoring",
+      "Production checklist: Check leakage, skew, missing values, imbalance, metric fit, explainability, deployment input contract, and feedback loop.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #DataScience #MachineLearning #Analytics"
+    ],
+    "postPath": "posts/2026-06-26-classification-metrics-beyond-accuracy.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-017",
+    "day": 17,
+    "date": "2026-06-27",
+    "pillar": "Kubernetes",
+    "audience": "platform engineers",
+    "topic": "CrashLoopBackOff debugging workflow",
+    "angle": "production checklist",
+    "hashtags": [
+      "#Kubernetes",
+      "#DevOps",
+      "#CloudNative"
+    ],
+    "slug": "2026-06-27-crashloopbackoff-debugging-workflow",
+    "thread": [
+      "Thread: CrashLoopBackOff debugging workflow for platform engineers. A short production view with the answer, architecture flow, and checklist. #Kubernetes #DevOps #CloudNative",
+      "Answer: Start from workload behavior, set requests from steady usage, set limits from failure boundaries, and validate with latency during scale events.",
+      "Architecture flow: Service -> Deployment -> requests/limits -> HPA -> PDB -> alerts -> rollback runbook",
+      "Production checklist: Check p95 latency, restart rate, throttling, pending pods, PDB coverage, and rollback path before calling a rollout production-ready.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Kubernetes #DevOps #CloudNative"
+    ],
+    "postPath": "posts/2026-06-27-crashloopbackoff-debugging-workflow.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-018",
+    "day": 18,
+    "date": "2026-06-28",
+    "pillar": "MLOps",
+    "audience": "ML platform engineers",
+    "topic": "Model monitoring signals",
+    "angle": "debugging workflow",
+    "hashtags": [
+      "#MLOps",
+      "#MachineLearning",
+      "#AI"
+    ],
+    "slug": "2026-06-28-model-monitoring-signals",
+    "thread": [
+      "Thread: Model monitoring signals for ML platform engineers. A short production view with the answer, architecture flow, and checklist. #MLOps #MachineLearning #AI",
+      "Answer: Treat every model like a controlled release: version data, code, metrics, approvals, artifact, deployment target, and rollback decision together.",
+      "Architecture flow: Data -> training pipeline -> MLflow run -> registry approval -> canary deploy -> monitoring -> rollback or promote",
+      "Production checklist: Track lineage, owner, metric threshold, canary window, drift signal, refresh trigger, and model retirement rule.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #MLOps #MachineLearning #AI"
+    ],
+    "postPath": "posts/2026-06-28-model-monitoring-signals.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-019",
+    "day": 19,
+    "date": "2026-06-29",
+    "pillar": "Infrastructure",
+    "audience": "cloud engineers",
+    "topic": "CI/CD release safety",
+    "angle": "governance pattern",
+    "hashtags": [
+      "#Terraform",
+      "#SRE",
+      "#PlatformEngineering"
+    ],
+    "slug": "2026-06-29-ci-cd-release-safety",
+    "thread": [
+      "Thread: CI/CD release safety for cloud engineers. A short production view with the answer, architecture flow, and checklist. #Terraform #SRE #PlatformEngineering",
+      "Answer: Good infrastructure practice is repeatability plus reviewability. Plans, policies, approvals, state, and drift checks should be visible before apply.",
+      "Architecture flow: PR -> terraform fmt/validate -> plan -> policy check -> approval -> apply -> drift monitor -> GitOps sync",
+      "Production checklist: Review blast radius, state backend, IAM scope, module version, secrets handling, tags, cost estimate, and rollback notes.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Terraform #SRE #PlatformEngineering"
+    ],
+    "postPath": "posts/2026-06-29-ci-cd-release-safety.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-020",
+    "day": 20,
+    "date": "2026-06-30",
+    "pillar": "Data Science",
+    "audience": "data and ML practitioners",
+    "topic": "Class imbalance in production datasets",
+    "angle": "reliability tradeoff",
+    "hashtags": [
+      "#DataScience",
+      "#MachineLearning",
+      "#Analytics"
+    ],
+    "slug": "2026-06-30-class-imbalance-in-production-datasets",
+    "thread": [
+      "Thread: Class imbalance in production datasets for data and ML practitioners. A short production view with the answer, architecture flow, and checklist. #DataScience #MachineLearning #Analytics",
+      "Answer: Strong model work starts before training: define the business cost, validate data quality, prevent leakage, and choose metrics that match decisions.",
+      "Architecture flow: Question -> data contract -> split strategy -> baseline -> experiment -> validation -> monitoring",
+      "Production checklist: Check leakage, skew, missing values, imbalance, metric fit, explainability, deployment input contract, and feedback loop.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #DataScience #MachineLearning #Analytics"
+    ],
+    "postPath": "posts/2026-06-30-class-imbalance-in-production-datasets.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-021",
+    "day": 21,
+    "date": "2026-07-01",
+    "pillar": "Kubernetes",
+    "audience": "platform engineers",
+    "topic": "Namespaces for multi-team platforms",
+    "angle": "interview-ready summary",
+    "hashtags": [
+      "#Kubernetes",
+      "#DevOps",
+      "#CloudNative"
+    ],
+    "slug": "2026-07-01-namespaces-for-multi-team-platforms",
+    "thread": [
+      "Thread: Namespaces for multi-team platforms for platform engineers. A short production view with the answer, architecture flow, and checklist. #Kubernetes #DevOps #CloudNative",
+      "Answer: Start from workload behavior, set requests from steady usage, set limits from failure boundaries, and validate with latency during scale events.",
+      "Architecture flow: Service -> Deployment -> requests/limits -> HPA -> PDB -> alerts -> rollback runbook",
+      "Production checklist: Check p95 latency, restart rate, throttling, pending pods, PDB coverage, and rollback path before calling a rollout production-ready.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Kubernetes #DevOps #CloudNative"
+    ],
+    "postPath": "posts/2026-07-01-namespaces-for-multi-team-platforms.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-022",
+    "day": 22,
+    "date": "2026-07-02",
+    "pillar": "MLOps",
+    "audience": "ML platform engineers",
+    "topic": "Automated retraining triggers",
+    "angle": "practical answer",
+    "hashtags": [
+      "#MLOps",
+      "#MachineLearning",
+      "#AI"
+    ],
+    "slug": "2026-07-02-automated-retraining-triggers",
+    "thread": [
+      "Thread: Automated retraining triggers for ML platform engineers. A short production view with the answer, architecture flow, and checklist. #MLOps #MachineLearning #AI",
+      "Answer: Treat every model like a controlled release: version data, code, metrics, approvals, artifact, deployment target, and rollback decision together.",
+      "Architecture flow: Data -> training pipeline -> MLflow run -> registry approval -> canary deploy -> monitoring -> rollback or promote",
+      "Production checklist: Track lineage, owner, metric threshold, canary window, drift signal, refresh trigger, and model retirement rule.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #MLOps #MachineLearning #AI"
+    ],
+    "postPath": "posts/2026-07-02-automated-retraining-triggers.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-023",
+    "day": 23,
+    "date": "2026-07-03",
+    "pillar": "Infrastructure",
+    "audience": "cloud engineers",
+    "topic": "Observability signals for incidents",
+    "angle": "architecture flow",
+    "hashtags": [
+      "#Terraform",
+      "#SRE",
+      "#PlatformEngineering"
+    ],
+    "slug": "2026-07-03-observability-signals-for-incidents",
+    "thread": [
+      "Thread: Observability signals for incidents for cloud engineers. A short production view with the answer, architecture flow, and checklist. #Terraform #SRE #PlatformEngineering",
+      "Answer: Good infrastructure practice is repeatability plus reviewability. Plans, policies, approvals, state, and drift checks should be visible before apply.",
+      "Architecture flow: PR -> terraform fmt/validate -> plan -> policy check -> approval -> apply -> drift monitor -> GitOps sync",
+      "Production checklist: Review blast radius, state backend, IAM scope, module version, secrets handling, tags, cost estimate, and rollback notes.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Terraform #SRE #PlatformEngineering"
+    ],
+    "postPath": "posts/2026-07-03-observability-signals-for-incidents.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-024",
+    "day": 24,
+    "date": "2026-07-04",
+    "pillar": "Data Science",
+    "audience": "data and ML practitioners",
+    "topic": "Data drift vs concept drift",
+    "angle": "production checklist",
+    "hashtags": [
+      "#DataScience",
+      "#MachineLearning",
+      "#Analytics"
+    ],
+    "slug": "2026-07-04-data-drift-vs-concept-drift",
+    "thread": [
+      "Thread: Data drift vs concept drift for data and ML practitioners. A short production view with the answer, architecture flow, and checklist. #DataScience #MachineLearning #Analytics",
+      "Answer: Strong model work starts before training: define the business cost, validate data quality, prevent leakage, and choose metrics that match decisions.",
+      "Architecture flow: Question -> data contract -> split strategy -> baseline -> experiment -> validation -> monitoring",
+      "Production checklist: Check leakage, skew, missing values, imbalance, metric fit, explainability, deployment input contract, and feedback loop.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #DataScience #MachineLearning #Analytics"
+    ],
+    "postPath": "posts/2026-07-04-data-drift-vs-concept-drift.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-025",
+    "day": 25,
+    "date": "2026-07-05",
+    "pillar": "Kubernetes",
+    "audience": "platform engineers",
+    "topic": "Readiness vs liveness probes",
+    "angle": "debugging workflow",
+    "hashtags": [
+      "#Kubernetes",
+      "#DevOps",
+      "#CloudNative"
+    ],
+    "slug": "2026-07-05-readiness-vs-liveness-probes",
+    "thread": [
+      "Thread: Readiness vs liveness probes for platform engineers. A short production view with the answer, architecture flow, and checklist. #Kubernetes #DevOps #CloudNative",
+      "Answer: Start from workload behavior, set requests from steady usage, set limits from failure boundaries, and validate with latency during scale events.",
+      "Architecture flow: Service -> Deployment -> requests/limits -> HPA -> PDB -> alerts -> rollback runbook",
+      "Production checklist: Check p95 latency, restart rate, throttling, pending pods, PDB coverage, and rollback path before calling a rollout production-ready.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Kubernetes #DevOps #CloudNative"
+    ],
+    "postPath": "posts/2026-07-05-readiness-vs-liveness-probes.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-026",
+    "day": 26,
+    "date": "2026-07-06",
+    "pillar": "MLOps",
+    "audience": "ML platform engineers",
+    "topic": "Audit-ready ML lineage",
+    "angle": "governance pattern",
+    "hashtags": [
+      "#MLOps",
+      "#MachineLearning",
+      "#AI"
+    ],
+    "slug": "2026-07-06-audit-ready-ml-lineage",
+    "thread": [
+      "Thread: Audit-ready ML lineage for ML platform engineers. A short production view with the answer, architecture flow, and checklist. #MLOps #MachineLearning #AI",
+      "Answer: Treat every model like a controlled release: version data, code, metrics, approvals, artifact, deployment target, and rollback decision together.",
+      "Architecture flow: Data -> training pipeline -> MLflow run -> registry approval -> canary deploy -> monitoring -> rollback or promote",
+      "Production checklist: Track lineage, owner, metric threshold, canary window, drift signal, refresh trigger, and model retirement rule.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #MLOps #MachineLearning #AI"
+    ],
+    "postPath": "posts/2026-07-06-audit-ready-ml-lineage.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-027",
+    "day": 27,
+    "date": "2026-07-07",
+    "pillar": "Infrastructure",
+    "audience": "cloud engineers",
+    "topic": "SLO design for engineering teams",
+    "angle": "reliability tradeoff",
+    "hashtags": [
+      "#Terraform",
+      "#SRE",
+      "#PlatformEngineering"
+    ],
+    "slug": "2026-07-07-slo-design-for-engineering-teams",
+    "thread": [
+      "Thread: SLO design for engineering teams for cloud engineers. A short production view with the answer, architecture flow, and checklist. #Terraform #SRE #PlatformEngineering",
+      "Answer: Good infrastructure practice is repeatability plus reviewability. Plans, policies, approvals, state, and drift checks should be visible before apply.",
+      "Architecture flow: PR -> terraform fmt/validate -> plan -> policy check -> approval -> apply -> drift monitor -> GitOps sync",
+      "Production checklist: Review blast radius, state backend, IAM scope, module version, secrets handling, tags, cost estimate, and rollback notes.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Terraform #SRE #PlatformEngineering"
+    ],
+    "postPath": "posts/2026-07-07-slo-design-for-engineering-teams.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-028",
+    "day": 28,
+    "date": "2026-07-08",
+    "pillar": "Data Science",
+    "audience": "data and ML practitioners",
+    "topic": "Communicating model results",
+    "angle": "interview-ready summary",
+    "hashtags": [
+      "#DataScience",
+      "#MachineLearning",
+      "#Analytics"
+    ],
+    "slug": "2026-07-08-communicating-model-results",
+    "thread": [
+      "Thread: Communicating model results for data and ML practitioners. A short production view with the answer, architecture flow, and checklist. #DataScience #MachineLearning #Analytics",
+      "Answer: Strong model work starts before training: define the business cost, validate data quality, prevent leakage, and choose metrics that match decisions.",
+      "Architecture flow: Question -> data contract -> split strategy -> baseline -> experiment -> validation -> monitoring",
+      "Production checklist: Check leakage, skew, missing values, imbalance, metric fit, explainability, deployment input contract, and feedback loop.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #DataScience #MachineLearning #Analytics"
+    ],
+    "postPath": "posts/2026-07-08-communicating-model-results.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-029",
+    "day": 29,
+    "date": "2026-07-09",
+    "pillar": "Kubernetes",
+    "audience": "platform engineers",
+    "topic": "Kubernetes requests and limits for production workloads",
+    "angle": "practical answer",
+    "hashtags": [
+      "#Kubernetes",
+      "#DevOps",
+      "#CloudNative"
+    ],
+    "slug": "2026-07-09-kubernetes-requests-and-limits-for-production-workloads",
+    "thread": [
+      "Thread: Kubernetes requests and limits for production workloads for platform engineers. A short production view with the answer, architecture flow, and checklist. #Kubernetes #DevOps #CloudNative",
+      "Answer: Start from workload behavior, set requests from steady usage, set limits from failure boundaries, and validate with latency during scale events.",
+      "Architecture flow: Service -> Deployment -> requests/limits -> HPA -> PDB -> alerts -> rollback runbook",
+      "Production checklist: Check p95 latency, restart rate, throttling, pending pods, PDB coverage, and rollback path before calling a rollout production-ready.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #Kubernetes #DevOps #CloudNative"
+    ],
+    "postPath": "posts/2026-07-09-kubernetes-requests-and-limits-for-production-workloads.md",
+    "status": "pending"
+  },
+  {
+    "id": "day-030",
+    "day": 30,
+    "date": "2026-07-10",
+    "pillar": "MLOps",
+    "audience": "ML platform engineers",
+    "topic": "Model registry approvals for production ML",
+    "angle": "architecture flow",
+    "hashtags": [
+      "#MLOps",
+      "#MachineLearning",
+      "#AI"
+    ],
+    "slug": "2026-07-10-model-registry-approvals-for-production-ml",
+    "thread": [
+      "Thread: Model registry approvals for production ML for ML platform engineers. A short production view with the answer, architecture flow, and checklist. #MLOps #MachineLearning #AI",
+      "Answer: Treat every model like a controlled release: version data, code, metrics, approvals, artifact, deployment target, and rollback decision together.",
+      "Architecture flow: Data -> training pipeline -> MLflow run -> registry approval -> canary deploy -> monitoring -> rollback or promote",
+      "Production checklist: Track lineage, owner, metric threshold, canary window, drift signal, refresh trigger, and model retirement rule.",
+      "My rule: if it cannot be reviewed, monitored, and rolled back, it is not production-ready yet. What would you add? #MLOps #MachineLearning #AI"
+    ],
+    "postPath": "posts/2026-07-10-model-registry-approvals-for-production-ml.md",
+    "status": "pending"
+  }
+]
