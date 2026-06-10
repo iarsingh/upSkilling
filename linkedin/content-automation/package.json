@@ -8,6 +8,7 @@
     "draft": "node src/index.js --draft",
     "publish": "node src/index.js --publish",
     "publish:next": "node src/index.js --publish-next",
+    "publish:date": "node src/publish-calendar-date.js",
     "prepare:100": "node src/index.js --prepare-100",
     "linkedin:auth": "node src/oauth.js",
     "schedule:cron": "node src/schedule-cron.js",

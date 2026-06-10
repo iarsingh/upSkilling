@@ -1,0 +1,45 @@
+name: Daily LinkedIn Publish
+
+on:
+  schedule:
+    # 09:30 Asia/Kolkata = 04:00 UTC.
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+    inputs:
+      publish_date:
+        description: "Optional date to publish, YYYY-MM-DD. Defaults to today in Asia/Kolkata."
+        required: false
+        type: string
+
+concurrency:
+  group: linkedin-daily-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: linkedin/content-automation
+    env:
+      TIMEZONE: Asia/Kolkata
+      LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+      LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
+      PUBLISH_DATE: ${{ inputs.publish_date }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate LinkedIn secrets
+        run: |
+          test -n "$LINKEDIN_ACCESS_TOKEN"
+          test -n "$LINKEDIN_AUTHOR_URN"
+
+      - name: Publish scheduled post
+        run: node src/publish-calendar-date.js

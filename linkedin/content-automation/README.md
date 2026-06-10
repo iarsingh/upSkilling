@@ -91,6 +91,19 @@ npm run publish:next
 
 That means one scheduled content item is posted per day until the 100-day calendar is complete.
 
+## GitHub Actions Daily Publishing
+
+The repository includes `.github/workflows/linkedin-daily.yml`, which publishes one scheduled post every day at `09:30 Asia/Kolkata`.
+
+Add these repository secrets in GitHub:
+
+```bash
+LINKEDIN_ACCESS_TOKEN=your_token
+LINKEDIN_AUTHOR_URN=urn:li:person:your_person_id
+```
+
+The workflow reads `content-calendar.json` and publishes the item whose `date` matches the current date in `Asia/Kolkata`. You can also run it manually from the GitHub Actions tab and provide `publish_date` in `YYYY-MM-DD` format.
+
 ## Notes
 
 - Ollama model default: `llama3.1:8b`.

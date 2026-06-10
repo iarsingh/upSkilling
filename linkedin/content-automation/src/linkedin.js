@@ -62,26 +62,27 @@ async function uploadImage(imagePath) {
 async function publishPost(text, imagePath) {
   assertLinkedInConfig();
   const imageUrn = imagePath ? await uploadImage(imagePath) : "";
-  const content = imageUrn
-    ? { media: { title: "Daily engineering note", id: imageUrn } }
-    : {};
+  const body = {
+    author: linkedinAuthorUrn,
+    commentary: text,
+    visibility: "PUBLIC",
+    distribution: {
+      feedDistribution: "MAIN_FEED",
+      targetEntities: [],
+      thirdPartyDistributionChannels: []
+    },
+    lifecycleState: "PUBLISHED",
+    isReshareDisabledByAuthor: false
+  };
+
+  if (imageUrn) {
+    body.content = { media: { title: "Daily engineering note", id: imageUrn } };
+  }
 
   const response = await fetch("https://api.linkedin.com/rest/posts", {
     method: "POST",
     headers: headers({ "Content-Type": "application/json" }),
-    body: JSON.stringify({
-      author: linkedinAuthorUrn,
-      commentary: text,
-      visibility: "PUBLIC",
-      distribution: {
-        feedDistribution: "MAIN_FEED",
-        targetEntities: [],
-        thirdPartyDistributionChannels: []
-      },
-      lifecycleState: "PUBLISHED",
-      isReshareDisabledByAuthor: false,
-      content
-    })
+    body: JSON.stringify(body)
   });
 
   if (!response.ok) {
