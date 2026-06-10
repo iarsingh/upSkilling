@@ -1,0 +1,6 @@
+service_name,gcp_region,p95_latency_ms,error_rate_pct,cpu_utilization_pct,memory_utilization_pct,active_alert_count,deployment_within_30m,slo_burn_rate
+checkout,us-central1,920,7.5,88,82,19,true,8.2
+payments,us-east1,420,2.1,61,70,6,false,2.3
+recommendations,europe-west1,1260,11.4,93,89,28,true,14.0
+inventory,asia-south1,210,0.5,42,48,2,false,0.7
+search,us-central1,760,4.8,77,75,11,false,5.6

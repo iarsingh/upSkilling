@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: incident-copilot
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/example/mlops-ollama-incident-copilot.git
+    targetRevision: main
+    path: helm/incident-copilot
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mlops
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

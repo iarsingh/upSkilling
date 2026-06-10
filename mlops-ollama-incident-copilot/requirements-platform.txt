@@ -1,0 +1,11 @@
+# Optional platform dependencies for cloud/Kubeflow/MLflow workflows.
+# Keep the core runtime in requirements.txt small; install this file when running platform scripts.
+mlflow>=2.17.0
+kfp>=2.9.0
+google-cloud-aiplatform>=1.71.0
+google-cloud-pubsub>=2.26.0
+redis>=5.1.0
+psycopg[binary]>=3.2.0
+pymongo>=4.10.0
+mysql-connector-python>=9.1.0
+confluent-kafka>=2.6.0

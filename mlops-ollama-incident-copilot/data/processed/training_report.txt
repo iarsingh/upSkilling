@@ -1,0 +1,11 @@
+version=incident-rf-20260610073346
+roc_auc=0.7893
+
+              precision    recall  f1-score   support
+
+           0       0.84      0.75      0.79       866
+           1       0.54      0.67      0.60       384
+
+    accuracy                           0.72      1250
+   macro avg       0.69      0.71      0.69      1250
+weighted avg       0.74      0.72      0.73      1250

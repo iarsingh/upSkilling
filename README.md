@@ -20,6 +20,10 @@
 
 - `aiops-hands-on-projects/` - AIOps projects for log anomaly detection, alert correlation, SLO burn-rate analysis, auto-remediation simulation, and incident prediction.
 
+## GCP AIOps Projects
+
+- `gcp-aiops-projects/` - GCP-focused AIOps projects for Cloud Monitoring, Pub/Sub, Cloud Run, SRE triage, and safe remediation workflows.
+
 ## GitHub Actions Hands-On Projects
 
 - `github-actions-hands-on-projects/` - CI/CD workflow projects for Python, Go, Docker, Cloud Run, Terraform, Kubernetes manifests, security scanning, and reusable workflows.

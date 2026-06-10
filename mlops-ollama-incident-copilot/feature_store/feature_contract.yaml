@@ -1,0 +1,24 @@
+feature_view: incident_service_telemetry
+online_store: redis
+offline_store: postgres
+entity:
+  name: service
+  join_key: service_name
+features:
+  - name: cpu_utilization
+    dtype: float
+  - name: memory_utilization
+    dtype: float
+  - name: request_rate
+    dtype: float
+  - name: error_rate
+    dtype: float
+  - name: latency_ms
+    dtype: float
+  - name: pod_restarts
+    dtype: int
+  - name: deploy_age_minutes
+    dtype: float
+  - name: queue_depth
+    dtype: int
+freshness_sla_minutes: 5

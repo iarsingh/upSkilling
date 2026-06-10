@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.gocache/
+.ansible/
+*.pyc
+.env
+models/*.joblib
+data/raw/*.csv
+data/processed/*.csv

@@ -1,0 +1,14 @@
+model_name: incident-risk-random-forest
+target: incident
+features:
+  - cpu_utilization
+  - memory_utilization
+  - request_rate
+  - error_rate
+  - latency_ms
+  - pod_restarts
+  - deploy_age_minutes
+  - queue_depth
+thresholds:
+  high_risk: 0.70
+  medium_risk: 0.40

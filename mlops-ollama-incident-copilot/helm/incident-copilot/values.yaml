@@ -1,0 +1,41 @@
+replicaCount: 2
+
+image:
+  repository: incident-copilot
+  tag: local
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+env:
+  MODEL_PATH: /app/models/incident_risk_model.joblib
+  MODEL_REGISTRY_URI: http://mlflow.mlops.svc.cluster.local:5000
+  FEATURE_STORE_URI: redis://redis.mlops.svc.cluster.local:6379/0
+  KAFKA_BOOTSTRAP_SERVERS: kafka.mlops.svc.cluster.local:9092
+  OLLAMA_BASE_URL: http://ollama.mlops.svc.cluster.local:11434
+  OLLAMA_MODEL: llama3.1:8b
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: "1"
+    memory: 1Gi
+
+gpu:
+  enabled: false
+  nodeSelector:
+    cloud.google.com/gke-accelerator: nvidia-tesla-t4
+  tolerations:
+    - key: nvidia.com/gpu
+      operator: Exists
+      effect: NoSchedule
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 70

@@ -1,0 +1,58 @@
+[
+  {
+    "feature": "cpu_utilization",
+    "baseline_mean": 51.9408,
+    "current_mean": 53.7711,
+    "relative_change": 0.0352,
+    "status": "ok"
+  },
+  {
+    "feature": "memory_utilization",
+    "baseline_mean": 45.3017,
+    "current_mean": 46.3289,
+    "relative_change": 0.0227,
+    "status": "ok"
+  },
+  {
+    "feature": "request_rate",
+    "baseline_mean": 720.404,
+    "current_mean": 728.7748,
+    "relative_change": 0.0116,
+    "status": "ok"
+  },
+  {
+    "feature": "error_rate",
+    "baseline_mean": 0.0552,
+    "current_mean": 0.0666,
+    "relative_change": 0.2066,
+    "status": "ok"
+  },
+  {
+    "feature": "latency_ms",
+    "baseline_mean": 283.8662,
+    "current_mean": 375.1909,
+    "relative_change": 0.3217,
+    "status": "drift"
+  },
+  {
+    "feature": "pod_restarts",
+    "baseline_mean": 1.126,
+    "current_mean": 1.186,
+    "relative_change": 0.0533,
+    "status": "ok"
+  },
+  {
+    "feature": "deploy_age_minutes",
+    "baseline_mean": 412.6115,
+    "current_mean": 436.633,
+    "relative_change": 0.0582,
+    "status": "ok"
+  },
+  {
+    "feature": "queue_depth",
+    "baseline_mean": 25.988,
+    "current_mean": 26.171,
+    "relative_change": 0.007,
+    "status": "ok"
+  }
+]

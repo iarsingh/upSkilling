@@ -1,0 +1,12 @@
+{
+  "service_name": "payments-api",
+  "environment": "local",
+  "cpu_utilization": 91.5,
+  "memory_utilization": 87.2,
+  "request_rate": 1350,
+  "error_rate": 0.11,
+  "latency_ms": 920,
+  "pod_restarts": 4,
+  "deploy_age_minutes": 18,
+  "queue_depth": 145
+}

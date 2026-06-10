@@ -1,0 +1,24 @@
+steps:
+  - name: python:3.12
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        pip install -r requirements.txt
+        ruff check .
+        PYTHONPATH=src pytest -q
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/mlops-containers/incident-copilot:$SHORT_SHA
+      - .
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/mlops-containers/incident-copilot:$SHORT_SHA
+
+substitutions:
+  _REGION: us-central1

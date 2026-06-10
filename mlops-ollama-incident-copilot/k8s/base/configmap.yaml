@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: incident-copilot-config
+  namespace: mlops
+data:
+  MODEL_REGISTRY_URI: http://mlflow:5000
+  FEATURE_STORE_URI: redis://redis:6379/0
+  KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+  OLLAMA_MODEL: llama3.1:8b

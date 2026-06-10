@@ -10,6 +10,7 @@ on:
       - "gcp-jupyter-projects/**"
       - "genai-hands-on-projects/**"
       - "github-actions-hands-on-projects/**"
+      - "gcp-aiops-projects/**"
       - "kaggle-mlops-datasets/**"
       - "linkedin/gke-terraform-content/**"
       - ".github/workflows/portfolio-ci.yml"
@@ -20,6 +21,7 @@ on:
       - "gcp-jupyter-projects/**"
       - "genai-hands-on-projects/**"
       - "github-actions-hands-on-projects/**"
+      - "gcp-aiops-projects/**"
       - "kaggle-mlops-datasets/**"
       - "linkedin/gke-terraform-content/**"
       - ".github/workflows/portfolio-ci.yml"
@@ -58,6 +60,8 @@ jobs:
             genai-hands-on-projects/python/rag-knowledge-api/app/main.py \
             genai-hands-on-projects/python/genai-safety-gateway/app/main.py \
             genai-hands-on-projects/python/meeting-notes-summarizer/summarize.py \
+            gcp-aiops-projects/01-gcp-aiops-incident-predictor/src/aiops_core.py \
+            gcp-aiops-projects/01-gcp-aiops-incident-predictor/src/score_incidents.py \
             github-actions-hands-on-projects/projects/python-ci/app/calculator.py \
             github-actions-hands-on-projects/projects/docker-cloud-run/main.py \
             linkedin/gke-terraform-content/gcp-hands-on-projects/python/gcs-csv-etl/main.py \
@@ -104,6 +108,10 @@ jobs:
         run: |
           python -m pip install -r requirements.txt
           pytest -q
+
+      - name: Run GCP AIOps unit tests
+        working-directory: gcp-aiops-projects/01-gcp-aiops-incident-predictor
+        run: python -m unittest discover -s tests
 
   go-tests:
     name: Go Tests

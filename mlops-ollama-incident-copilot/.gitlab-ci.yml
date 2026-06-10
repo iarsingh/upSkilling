@@ -1,0 +1,27 @@
+stages:
+  - test
+  - build
+  - deploy
+
+test:
+  image: python:3.12
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - ruff check .
+    - PYTHONPATH=src pytest -q
+
+build:
+  image: docker:27
+  services:
+    - docker:27-dind
+  stage: build
+  script:
+    - docker build -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" .
+
+deploy:
+  image: alpine/helm:3.16.2
+  stage: deploy
+  script:
+    - helm upgrade --install incident-copilot ./helm/incident-copilot --namespace mlops --create-namespace
+  when: manual
