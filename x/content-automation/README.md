@@ -92,6 +92,30 @@ Publish a specific scheduled date:
 npm run publish:date -- 2026-06-11
 ```
 
+## Manual posting without paid API access
+
+If you do not want to use paid X API credits, use the local drafts and paste them into X manually.
+
+Print the next due thread and copy Post 1 to your clipboard:
+
+```bash
+npm run manual:next
+```
+
+Print a specific date and copy Post 1:
+
+```bash
+npm run manual:date -- 2026-06-11
+```
+
+Copy a specific post from a thread:
+
+```bash
+npm run manual:copy -- 2026-06-11 2
+```
+
+Paste Post 1 into X, reply to it with Post 2, then continue with each copied post.
+
 ## Optional local schedule
 
 Install a local cron job using `POST_TIME` from `.env`:
