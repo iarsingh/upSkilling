@@ -43,6 +43,8 @@ function normalizePost(raw, topic) {
   return {
     hook: String(raw.hook || topic.topic).trim(),
     body: String(raw.body || "").trim(),
+    answer: String(raw.answer || "").trim(),
+    flow: Array.isArray(raw.flow) ? raw.flow.slice(0, 6).map(String) : [],
     bullets: Array.isArray(raw.bullets) ? raw.bullets.slice(0, 5).map(String) : [],
     cta: String(raw.cta || "What would you add from your experience?").trim(),
     hashtags: Array.isArray(raw.hashtags) && raw.hashtags.length ? raw.hashtags : topic.hashtags,
@@ -65,8 +67,18 @@ async function generatePost(topic) {
 
 function renderLinkedInText(post) {
   const bullets = post.bullets.map((item) => `- ${item}`).join("\n");
+  const flow = post.flow.map((item, index) => `${index + 1}. ${item}`).join("\n");
   const hashtags = post.hashtags.map((tag) => tag.startsWith("#") ? tag : `#${tag}`).join(" ");
-  return [post.hook, "", post.body, "", bullets, "", post.cta, "", hashtags].join("\n").trim();
+  const sections = [
+    post.hook,
+    post.body,
+    post.answer ? `Answer:\n${post.answer}` : "",
+    flow ? `Architecture flow:\n${flow}` : "",
+    bullets ? `Production checklist:\n${bullets}` : "",
+    post.cta,
+    hashtags
+  ].filter(Boolean);
+  return sections.join("\n\n").trim();
 }
 
 module.exports = { generatePost, renderLinkedInText };

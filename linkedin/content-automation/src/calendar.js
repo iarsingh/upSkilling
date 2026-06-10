@@ -37,24 +37,69 @@ function postFromCalendarItem(item) {
     "monitoring and operations view": `The operations view of ${topic}`
   };
 
+  const patterns = {
+    Kubernetes: {
+      answer: `Treat Kubernetes as the operating layer for reliability, not just a place to run containers. The goal is to make workload behavior explicit through resources, rollout rules, probes, autoscaling, and ownership boundaries.`,
+      flow: [
+        "Developer commits app and Kubernetes manifests",
+        "CI builds image, scans it, and pushes to registry",
+        "GitOps or CD applies Helm/Kustomize changes to the cluster",
+        "Scheduler places pods based on requests, limits, taints, and affinities",
+        "Probes, autoscaling, logs, metrics, and alerts close the operations loop"
+      ],
+      secondBullet: "Validate requests, limits, probes, rollout strategy, autoscaling rules, and failure behavior together."
+    },
+    MLOps: {
+      answer: `Production MLOps is a release system for models, data, and features. A good platform connects training, registry approval, deployment, monitoring, rollback, and retraining into one governed workflow.`,
+      flow: [
+        "Raw data lands in the offline store with quality checks",
+        "Feature pipeline writes reusable features to offline and online stores",
+        "Training pipeline logs metrics, artifacts, lineage, and model version",
+        "Model registry enforces approval before staging or production",
+        "Serving, monitoring, drift checks, and rollback policies protect production"
+      ],
+      secondBullet: "Track dataset version, feature version, code version, model metrics, approver, and deployment target together."
+    },
+    "Data Science": {
+      answer: `A model is only useful when the data, metric, and business decision are aligned. Strong data science work makes assumptions visible before training and keeps validation close to real-world usage.`,
+      flow: [
+        "Define the business decision and cost of wrong predictions",
+        "Profile data quality, leakage, missingness, and sampling bias",
+        "Split data using a strategy that matches production usage",
+        "Evaluate with technical metrics and business-facing tradeoffs",
+        "Package explanations, limitations, and monitoring signals for deployment"
+      ],
+      secondBullet: "Check leakage, drift, missing values, metric choice, and business impact before trusting the model."
+    },
+    "IT Engineering": {
+      answer: `Reliable engineering comes from repeatable operating systems: clear ownership, automated delivery, observable services, and documented recovery paths. The best platforms reduce surprises during change.`,
+      flow: [
+        "Plan the change with ownership, risk, and rollback defined",
+        "Automate provisioning, deployment, validation, and audit trails",
+        "Expose user-facing health through metrics, logs, traces, and alerts",
+        "Practice incident response with runbooks and post-incident learning",
+        "Feed reliability and cost signals back into platform improvements"
+      ],
+      secondBullet: "Define ownership, rollback path, alert signal, and audit trail before scaling the process."
+    }
+  };
+
+  const patternKey = Object.keys(patterns).find((key) => item.pillar.includes(key)) || "IT Engineering";
+  const pattern = patterns[patternKey];
+
   const bullets = [
     `Define the production problem before choosing the tool or pattern.`,
-    `Write down the ownership boundary, rollback path, and failure signal.`,
+    pattern.secondBullet,
     `Measure the result with one reliability metric and one delivery metric.`,
-    `Keep the implementation repeatable through automation and documentation.`
+    `Keep implementation repeatable through automation, documentation, and review.`,
+    `Make the failure mode visible before it becomes an incident.`
   ];
-
-  if (item.pillar.includes("Kubernetes")) {
-    bullets[1] = "Validate the behavior with requests, limits, probes, rollout strategy, and autoscaling rules.";
-  } else if (item.pillar.includes("MLOps")) {
-    bullets[1] = "Track dataset version, code version, model metrics, approver, and deployment target together.";
-  } else if (item.pillar.includes("Data Science")) {
-    bullets[1] = "Check leakage, drift, missing values, metric choice, and business impact before trusting the model.";
-  }
 
   return {
     hook: hookMap[angle] || `${topic}: a practical engineering note`,
     body: `Day ${item.day}/100 of my ${item.pillar}. This note is for ${item.audience} who want simple, production-minded ways to improve engineering systems.`,
+    answer: pattern.answer,
+    flow: pattern.flow,
     bullets,
     cta: "What would you add from your production experience?",
     hashtags: item.hashtags,
@@ -148,6 +193,8 @@ module.exports = {
   calendarPath,
   statePath,
   prepareCalendar,
+  postFromCalendarItem,
+  writeDraft,
   loadCalendar,
   nextDueItem,
   markPublished
