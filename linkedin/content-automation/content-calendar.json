@@ -1,32 +1,11 @@
 {
   "createdAt": "2026-06-10T08:54:46.591Z",
-  "days": 100,
+  "days": 99,
   "items": [
-    {
-      "id": "day-001",
-      "day": 1,
-      "date": "2026-06-11",
-      "pillar": "Kubernetes Series",
-      "audience": "DevOps and platform engineers",
-      "topic": "Kubernetes requests and limits explained with production examples - practical checklist",
-      "baseTopic": "Kubernetes requests and limits explained with production examples",
-      "angle": "practical checklist",
-      "hashtags": [
-        "#Kubernetes",
-        "#DevOps",
-        "#PlatformEngineering",
-        "#CloudNative"
-      ],
-      "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
-      "status": "scheduled",
-      "draftPath": "posts/2026-06-11-day-001-kubernetes-requests-and-limits-explained-with-production-examples.md",
-      "imagePath": "assets/2026-06-11-day-001-kubernetes-requests-and-limits-explained-with-production-examples.png",
-      "text": "A practical checklist for Kubernetes requests and limits explained with production examples\n\nDay 1/100 of my Kubernetes Series. This note is for DevOps and platform engineers who want simple, production-minded ways to improve engineering systems.\n\n- Define the production problem before choosing the tool or pattern.\n- Validate the behavior with requests, limits, probes, rollout strategy, and autoscaling rules.\n- Measure the result with one reliability metric and one delivery metric.\n- Keep the implementation repeatable through automation and documentation.\n\nWhat would you add from your production experience?\n\n#Kubernetes #DevOps #PlatformEngineering #CloudNative"
-    },
     {
       "id": "day-002",
       "day": 2,
-      "date": "2026-06-12",
+      "date": "2026-06-11",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Model registry approvals and controlled production releases - common production mistake",
@@ -47,7 +26,7 @@
     {
       "id": "day-003",
       "day": 3,
-      "date": "2026-06-13",
+      "date": "2026-06-12",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Why data leakage silently breaks ML models - beginner-friendly explanation",
@@ -68,7 +47,7 @@
     {
       "id": "day-004",
       "day": 4,
-      "date": "2026-06-14",
+      "date": "2026-06-13",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "SLI, SLO, and SLA explained for engineering teams - architecture decision guide",
@@ -89,7 +68,7 @@
     {
       "id": "day-005",
       "day": 5,
-      "date": "2026-06-15",
+      "date": "2026-06-14",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "How HPA, VPA, and Cluster Autoscaler work together - debugging workflow",
@@ -110,7 +89,7 @@
     {
       "id": "day-006",
       "day": 6,
-      "date": "2026-06-16",
+      "date": "2026-06-15",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Canary deployment strategy for machine learning models - security and governance angle",
@@ -131,7 +110,7 @@
     {
       "id": "day-007",
       "day": 7,
-      "date": "2026-06-17",
+      "date": "2026-06-16",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Train validation test split patterns for real-world data - cost and reliability tradeoff",
@@ -152,7 +131,7 @@
     {
       "id": "day-008",
       "day": 8,
-      "date": "2026-06-18",
+      "date": "2026-06-17",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "Infrastructure as Code review checklist for Terraform - interview-ready summary",
@@ -173,7 +152,7 @@
     {
       "id": "day-009",
       "day": 9,
-      "date": "2026-06-19",
+      "date": "2026-06-18",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Pod disruption budgets for reliable deployments - real-world platform pattern",
@@ -194,7 +173,7 @@
     {
       "id": "day-010",
       "day": 10,
-      "date": "2026-06-20",
+      "date": "2026-06-19",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Feature store governance for production ML - monitoring and operations view",
@@ -215,7 +194,7 @@
     {
       "id": "day-011",
       "day": 11,
-      "date": "2026-06-21",
+      "date": "2026-06-20",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Feature engineering habits that improve model quality - practical checklist",
@@ -236,7 +215,7 @@
     {
       "id": "day-012",
       "day": 12,
-      "date": "2026-06-22",
+      "date": "2026-06-21",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "CI/CD pipeline design for safer releases - common production mistake",
@@ -257,7 +236,7 @@
     {
       "id": "day-013",
       "day": 13,
-      "date": "2026-06-23",
+      "date": "2026-06-22",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Kubernetes RBAC mistakes that create security risk - beginner-friendly explanation",
@@ -278,7 +257,7 @@
     {
       "id": "day-014",
       "day": 14,
-      "date": "2026-06-24",
+      "date": "2026-06-23",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "MLflow and Kubeflow pipeline design for reproducibility - architecture decision guide",
@@ -299,7 +278,7 @@
     {
       "id": "day-015",
       "day": 15,
-      "date": "2026-06-25",
+      "date": "2026-06-24",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Evaluating classification models beyond accuracy - debugging workflow",
@@ -320,7 +299,7 @@
     {
       "id": "day-016",
       "day": 16,
-      "date": "2026-06-26",
+      "date": "2026-06-25",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "Observability signals that reduce incident response time - security and governance angle",
@@ -341,7 +320,7 @@
     {
       "id": "day-017",
       "day": 17,
-      "date": "2026-06-27",
+      "date": "2026-06-26",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Debugging CrashLoopBackOff step by step - cost and reliability tradeoff",
@@ -362,7 +341,7 @@
     {
       "id": "day-018",
       "day": 18,
-      "date": "2026-06-28",
+      "date": "2026-06-27",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Model monitoring signals every ML platform should track - interview-ready summary",
@@ -383,7 +362,7 @@
     {
       "id": "day-019",
       "day": 19,
-      "date": "2026-06-29",
+      "date": "2026-06-28",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Handling class imbalance in production datasets - real-world platform pattern",
@@ -404,7 +383,7 @@
     {
       "id": "day-020",
       "day": 20,
-      "date": "2026-06-30",
+      "date": "2026-06-29",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "Secrets management patterns for Kubernetes platforms - monitoring and operations view",
@@ -425,7 +404,7 @@
     {
       "id": "day-021",
       "day": 21,
-      "date": "2026-07-01",
+      "date": "2026-06-30",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Designing namespaces for multi-team platforms - practical checklist",
@@ -446,7 +425,7 @@
     {
       "id": "day-022",
       "day": 22,
-      "date": "2026-07-02",
+      "date": "2026-07-01",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Automated retraining triggers using drift and performance metrics - common production mistake",
@@ -467,7 +446,7 @@
     {
       "id": "day-023",
       "day": 23,
-      "date": "2026-07-03",
+      "date": "2026-07-02",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Data drift vs concept drift explained clearly - beginner-friendly explanation",
@@ -488,7 +467,7 @@
     {
       "id": "day-024",
       "day": 24,
-      "date": "2026-07-04",
+      "date": "2026-07-03",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "Cloud cost optimization habits for engineering teams - architecture decision guide",
@@ -509,7 +488,7 @@
     {
       "id": "day-025",
       "day": 25,
-      "date": "2026-07-05",
+      "date": "2026-07-04",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Readiness probes vs liveness probes in real workloads - debugging workflow",
@@ -530,7 +509,7 @@
     {
       "id": "day-026",
       "day": 26,
-      "date": "2026-07-06",
+      "date": "2026-07-05",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Building audit-ready ML lineage on cloud platforms - security and governance angle",
@@ -551,7 +530,7 @@
     {
       "id": "day-027",
       "day": 27,
-      "date": "2026-07-07",
+      "date": "2026-07-06",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "How to communicate model results to business teams - cost and reliability tradeoff",
@@ -572,7 +551,7 @@
     {
       "id": "day-028",
       "day": 28,
-      "date": "2026-07-08",
+      "date": "2026-07-07",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "GitOps workflow design for production infrastructure - interview-ready summary",
@@ -593,7 +572,7 @@
     {
       "id": "day-029",
       "day": 29,
-      "date": "2026-07-09",
+      "date": "2026-07-08",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Kubernetes requests and limits explained with production examples - real-world platform pattern",
@@ -614,7 +593,7 @@
     {
       "id": "day-030",
       "day": 30,
-      "date": "2026-07-10",
+      "date": "2026-07-09",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Model registry approvals and controlled production releases - monitoring and operations view",
@@ -635,7 +614,7 @@
     {
       "id": "day-031",
       "day": 31,
-      "date": "2026-07-11",
+      "date": "2026-07-10",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Why data leakage silently breaks ML models - practical checklist",
@@ -656,7 +635,7 @@
     {
       "id": "day-032",
       "day": 32,
-      "date": "2026-07-12",
+      "date": "2026-07-11",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "SLI, SLO, and SLA explained for engineering teams - common production mistake",
@@ -677,7 +656,7 @@
     {
       "id": "day-033",
       "day": 33,
-      "date": "2026-07-13",
+      "date": "2026-07-12",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "How HPA, VPA, and Cluster Autoscaler work together - beginner-friendly explanation",
@@ -698,7 +677,7 @@
     {
       "id": "day-034",
       "day": 34,
-      "date": "2026-07-14",
+      "date": "2026-07-13",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Canary deployment strategy for machine learning models - architecture decision guide",
@@ -719,7 +698,7 @@
     {
       "id": "day-035",
       "day": 35,
-      "date": "2026-07-15",
+      "date": "2026-07-14",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Train validation test split patterns for real-world data - debugging workflow",
@@ -740,7 +719,7 @@
     {
       "id": "day-036",
       "day": 36,
-      "date": "2026-07-16",
+      "date": "2026-07-15",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "Infrastructure as Code review checklist for Terraform - security and governance angle",
@@ -761,7 +740,7 @@
     {
       "id": "day-037",
       "day": 37,
-      "date": "2026-07-17",
+      "date": "2026-07-16",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Pod disruption budgets for reliable deployments - cost and reliability tradeoff",
@@ -782,7 +761,7 @@
     {
       "id": "day-038",
       "day": 38,
-      "date": "2026-07-18",
+      "date": "2026-07-17",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Feature store governance for production ML - interview-ready summary",
@@ -803,7 +782,7 @@
     {
       "id": "day-039",
       "day": 39,
-      "date": "2026-07-19",
+      "date": "2026-07-18",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Feature engineering habits that improve model quality - real-world platform pattern",
@@ -824,7 +803,7 @@
     {
       "id": "day-040",
       "day": 40,
-      "date": "2026-07-20",
+      "date": "2026-07-19",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "CI/CD pipeline design for safer releases - monitoring and operations view",
@@ -845,7 +824,7 @@
     {
       "id": "day-041",
       "day": 41,
-      "date": "2026-07-21",
+      "date": "2026-07-20",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Kubernetes RBAC mistakes that create security risk - practical checklist",
@@ -866,7 +845,7 @@
     {
       "id": "day-042",
       "day": 42,
-      "date": "2026-07-22",
+      "date": "2026-07-21",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "MLflow and Kubeflow pipeline design for reproducibility - common production mistake",
@@ -887,7 +866,7 @@
     {
       "id": "day-043",
       "day": 43,
-      "date": "2026-07-23",
+      "date": "2026-07-22",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Evaluating classification models beyond accuracy - beginner-friendly explanation",
@@ -908,7 +887,7 @@
     {
       "id": "day-044",
       "day": 44,
-      "date": "2026-07-24",
+      "date": "2026-07-23",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "Observability signals that reduce incident response time - architecture decision guide",
@@ -929,7 +908,7 @@
     {
       "id": "day-045",
       "day": 45,
-      "date": "2026-07-25",
+      "date": "2026-07-24",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Debugging CrashLoopBackOff step by step - debugging workflow",
@@ -950,7 +929,7 @@
     {
       "id": "day-046",
       "day": 46,
-      "date": "2026-07-26",
+      "date": "2026-07-25",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Model monitoring signals every ML platform should track - security and governance angle",
@@ -971,7 +950,7 @@
     {
       "id": "day-047",
       "day": 47,
-      "date": "2026-07-27",
+      "date": "2026-07-26",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Handling class imbalance in production datasets - cost and reliability tradeoff",
@@ -992,7 +971,7 @@
     {
       "id": "day-048",
       "day": 48,
-      "date": "2026-07-28",
+      "date": "2026-07-27",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "Secrets management patterns for Kubernetes platforms - interview-ready summary",
@@ -1013,7 +992,7 @@
     {
       "id": "day-049",
       "day": 49,
-      "date": "2026-07-29",
+      "date": "2026-07-28",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Designing namespaces for multi-team platforms - real-world platform pattern",
@@ -1034,7 +1013,7 @@
     {
       "id": "day-050",
       "day": 50,
-      "date": "2026-07-30",
+      "date": "2026-07-29",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Automated retraining triggers using drift and performance metrics - monitoring and operations view",
@@ -1055,7 +1034,7 @@
     {
       "id": "day-051",
       "day": 51,
-      "date": "2026-07-31",
+      "date": "2026-07-30",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Data drift vs concept drift explained clearly - practical checklist",
@@ -1076,7 +1055,7 @@
     {
       "id": "day-052",
       "day": 52,
-      "date": "2026-08-01",
+      "date": "2026-07-31",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "Cloud cost optimization habits for engineering teams - common production mistake",
@@ -1097,7 +1076,7 @@
     {
       "id": "day-053",
       "day": 53,
-      "date": "2026-08-02",
+      "date": "2026-08-01",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Readiness probes vs liveness probes in real workloads - beginner-friendly explanation",
@@ -1118,7 +1097,7 @@
     {
       "id": "day-054",
       "day": 54,
-      "date": "2026-08-03",
+      "date": "2026-08-02",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Building audit-ready ML lineage on cloud platforms - architecture decision guide",
@@ -1139,7 +1118,7 @@
     {
       "id": "day-055",
       "day": 55,
-      "date": "2026-08-04",
+      "date": "2026-08-03",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "How to communicate model results to business teams - debugging workflow",
@@ -1160,7 +1139,7 @@
     {
       "id": "day-056",
       "day": 56,
-      "date": "2026-08-05",
+      "date": "2026-08-04",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "GitOps workflow design for production infrastructure - security and governance angle",
@@ -1181,7 +1160,7 @@
     {
       "id": "day-057",
       "day": 57,
-      "date": "2026-08-06",
+      "date": "2026-08-05",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Kubernetes requests and limits explained with production examples - cost and reliability tradeoff",
@@ -1202,7 +1181,7 @@
     {
       "id": "day-058",
       "day": 58,
-      "date": "2026-08-07",
+      "date": "2026-08-06",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Model registry approvals and controlled production releases - interview-ready summary",
@@ -1223,7 +1202,7 @@
     {
       "id": "day-059",
       "day": 59,
-      "date": "2026-08-08",
+      "date": "2026-08-07",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Why data leakage silently breaks ML models - real-world platform pattern",
@@ -1244,7 +1223,7 @@
     {
       "id": "day-060",
       "day": 60,
-      "date": "2026-08-09",
+      "date": "2026-08-08",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "SLI, SLO, and SLA explained for engineering teams - monitoring and operations view",
@@ -1265,7 +1244,7 @@
     {
       "id": "day-061",
       "day": 61,
-      "date": "2026-08-10",
+      "date": "2026-08-09",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "How HPA, VPA, and Cluster Autoscaler work together - practical checklist",
@@ -1286,7 +1265,7 @@
     {
       "id": "day-062",
       "day": 62,
-      "date": "2026-08-11",
+      "date": "2026-08-10",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Canary deployment strategy for machine learning models - common production mistake",
@@ -1307,7 +1286,7 @@
     {
       "id": "day-063",
       "day": 63,
-      "date": "2026-08-12",
+      "date": "2026-08-11",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Train validation test split patterns for real-world data - beginner-friendly explanation",
@@ -1328,7 +1307,7 @@
     {
       "id": "day-064",
       "day": 64,
-      "date": "2026-08-13",
+      "date": "2026-08-12",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "Infrastructure as Code review checklist for Terraform - architecture decision guide",
@@ -1349,7 +1328,7 @@
     {
       "id": "day-065",
       "day": 65,
-      "date": "2026-08-14",
+      "date": "2026-08-13",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Pod disruption budgets for reliable deployments - debugging workflow",
@@ -1370,7 +1349,7 @@
     {
       "id": "day-066",
       "day": 66,
-      "date": "2026-08-15",
+      "date": "2026-08-14",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Feature store governance for production ML - security and governance angle",
@@ -1391,7 +1370,7 @@
     {
       "id": "day-067",
       "day": 67,
-      "date": "2026-08-16",
+      "date": "2026-08-15",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Feature engineering habits that improve model quality - cost and reliability tradeoff",
@@ -1412,7 +1391,7 @@
     {
       "id": "day-068",
       "day": 68,
-      "date": "2026-08-17",
+      "date": "2026-08-16",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "CI/CD pipeline design for safer releases - interview-ready summary",
@@ -1433,7 +1412,7 @@
     {
       "id": "day-069",
       "day": 69,
-      "date": "2026-08-18",
+      "date": "2026-08-17",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Kubernetes RBAC mistakes that create security risk - real-world platform pattern",
@@ -1454,7 +1433,7 @@
     {
       "id": "day-070",
       "day": 70,
-      "date": "2026-08-19",
+      "date": "2026-08-18",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "MLflow and Kubeflow pipeline design for reproducibility - monitoring and operations view",
@@ -1475,7 +1454,7 @@
     {
       "id": "day-071",
       "day": 71,
-      "date": "2026-08-20",
+      "date": "2026-08-19",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Evaluating classification models beyond accuracy - practical checklist",
@@ -1496,7 +1475,7 @@
     {
       "id": "day-072",
       "day": 72,
-      "date": "2026-08-21",
+      "date": "2026-08-20",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "Observability signals that reduce incident response time - common production mistake",
@@ -1517,7 +1496,7 @@
     {
       "id": "day-073",
       "day": 73,
-      "date": "2026-08-22",
+      "date": "2026-08-21",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Debugging CrashLoopBackOff step by step - beginner-friendly explanation",
@@ -1538,7 +1517,7 @@
     {
       "id": "day-074",
       "day": 74,
-      "date": "2026-08-23",
+      "date": "2026-08-22",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Model monitoring signals every ML platform should track - architecture decision guide",
@@ -1559,7 +1538,7 @@
     {
       "id": "day-075",
       "day": 75,
-      "date": "2026-08-24",
+      "date": "2026-08-23",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Handling class imbalance in production datasets - debugging workflow",
@@ -1580,7 +1559,7 @@
     {
       "id": "day-076",
       "day": 76,
-      "date": "2026-08-25",
+      "date": "2026-08-24",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "Secrets management patterns for Kubernetes platforms - security and governance angle",
@@ -1601,7 +1580,7 @@
     {
       "id": "day-077",
       "day": 77,
-      "date": "2026-08-26",
+      "date": "2026-08-25",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Designing namespaces for multi-team platforms - cost and reliability tradeoff",
@@ -1622,7 +1601,7 @@
     {
       "id": "day-078",
       "day": 78,
-      "date": "2026-08-27",
+      "date": "2026-08-26",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Automated retraining triggers using drift and performance metrics - interview-ready summary",
@@ -1643,7 +1622,7 @@
     {
       "id": "day-079",
       "day": 79,
-      "date": "2026-08-28",
+      "date": "2026-08-27",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Data drift vs concept drift explained clearly - real-world platform pattern",
@@ -1664,7 +1643,7 @@
     {
       "id": "day-080",
       "day": 80,
-      "date": "2026-08-29",
+      "date": "2026-08-28",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "Cloud cost optimization habits for engineering teams - monitoring and operations view",
@@ -1685,7 +1664,7 @@
     {
       "id": "day-081",
       "day": 81,
-      "date": "2026-08-30",
+      "date": "2026-08-29",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Readiness probes vs liveness probes in real workloads - practical checklist",
@@ -1706,7 +1685,7 @@
     {
       "id": "day-082",
       "day": 82,
-      "date": "2026-08-31",
+      "date": "2026-08-30",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Building audit-ready ML lineage on cloud platforms - common production mistake",
@@ -1727,7 +1706,7 @@
     {
       "id": "day-083",
       "day": 83,
-      "date": "2026-09-01",
+      "date": "2026-08-31",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "How to communicate model results to business teams - beginner-friendly explanation",
@@ -1748,7 +1727,7 @@
     {
       "id": "day-084",
       "day": 84,
-      "date": "2026-09-02",
+      "date": "2026-09-01",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "GitOps workflow design for production infrastructure - architecture decision guide",
@@ -1769,7 +1748,7 @@
     {
       "id": "day-085",
       "day": 85,
-      "date": "2026-09-03",
+      "date": "2026-09-02",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Kubernetes requests and limits explained with production examples - debugging workflow",
@@ -1790,7 +1769,7 @@
     {
       "id": "day-086",
       "day": 86,
-      "date": "2026-09-04",
+      "date": "2026-09-03",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Model registry approvals and controlled production releases - security and governance angle",
@@ -1811,7 +1790,7 @@
     {
       "id": "day-087",
       "day": 87,
-      "date": "2026-09-05",
+      "date": "2026-09-04",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Why data leakage silently breaks ML models - cost and reliability tradeoff",
@@ -1832,7 +1811,7 @@
     {
       "id": "day-088",
       "day": 88,
-      "date": "2026-09-06",
+      "date": "2026-09-05",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "SLI, SLO, and SLA explained for engineering teams - interview-ready summary",
@@ -1853,7 +1832,7 @@
     {
       "id": "day-089",
       "day": 89,
-      "date": "2026-09-07",
+      "date": "2026-09-06",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "How HPA, VPA, and Cluster Autoscaler work together - real-world platform pattern",
@@ -1874,7 +1853,7 @@
     {
       "id": "day-090",
       "day": 90,
-      "date": "2026-09-08",
+      "date": "2026-09-07",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Canary deployment strategy for machine learning models - monitoring and operations view",
@@ -1895,7 +1874,7 @@
     {
       "id": "day-091",
       "day": 91,
-      "date": "2026-09-09",
+      "date": "2026-09-08",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Train validation test split patterns for real-world data - practical checklist",
@@ -1916,7 +1895,7 @@
     {
       "id": "day-092",
       "day": 92,
-      "date": "2026-09-10",
+      "date": "2026-09-09",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "Infrastructure as Code review checklist for Terraform - common production mistake",
@@ -1937,7 +1916,7 @@
     {
       "id": "day-093",
       "day": 93,
-      "date": "2026-09-11",
+      "date": "2026-09-10",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Pod disruption budgets for reliable deployments - beginner-friendly explanation",
@@ -1958,7 +1937,7 @@
     {
       "id": "day-094",
       "day": 94,
-      "date": "2026-09-12",
+      "date": "2026-09-11",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "Feature store governance for production ML - architecture decision guide",
@@ -1979,7 +1958,7 @@
     {
       "id": "day-095",
       "day": 95,
-      "date": "2026-09-13",
+      "date": "2026-09-12",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Feature engineering habits that improve model quality - debugging workflow",
@@ -2000,7 +1979,7 @@
     {
       "id": "day-096",
       "day": 96,
-      "date": "2026-09-14",
+      "date": "2026-09-13",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "CI/CD pipeline design for safer releases - security and governance angle",
@@ -2021,7 +2000,7 @@
     {
       "id": "day-097",
       "day": 97,
-      "date": "2026-09-15",
+      "date": "2026-09-14",
       "pillar": "Kubernetes Series",
       "audience": "DevOps and platform engineers",
       "topic": "Kubernetes RBAC mistakes that create security risk - cost and reliability tradeoff",
@@ -2042,7 +2021,7 @@
     {
       "id": "day-098",
       "day": 98,
-      "date": "2026-09-16",
+      "date": "2026-09-15",
       "pillar": "MLOps Series",
       "audience": "ML engineers and cloud engineers",
       "topic": "MLflow and Kubeflow pipeline design for reproducibility - interview-ready summary",
@@ -2063,7 +2042,7 @@
     {
       "id": "day-099",
       "day": 99,
-      "date": "2026-09-17",
+      "date": "2026-09-16",
       "pillar": "Data Science Series",
       "audience": "data scientists and ML practitioners",
       "topic": "Evaluating classification models beyond accuracy - real-world platform pattern",
@@ -2084,7 +2063,7 @@
     {
       "id": "day-100",
       "day": 100,
-      "date": "2026-09-18",
+      "date": "2026-09-17",
       "pillar": "IT Engineering Series",
       "audience": "cloud, DevOps, and SRE professionals",
       "topic": "Observability signals that reduce incident response time - monitoring and operations view",
@@ -2102,5 +2081,12 @@
       "imagePath": "assets/2026-09-18-day-100-observability-signals-that-reduce-incident-response-time.png",
       "text": "The operations view of Observability signals that reduce incident response time\n\nDay 100/100 of my IT Engineering Series. This note is for cloud, DevOps, and SRE professionals who want simple, production-minded ways to improve engineering systems.\n\n- Define the production problem before choosing the tool or pattern.\n- Write down the ownership boundary, rollback path, and failure signal.\n- Measure the result with one reliability metric and one delivery metric.\n- Keep the implementation repeatable through automation and documentation.\n\nWhat would you add from your production experience?\n\n#CloudComputing #SRE #CICD #InfrastructureAsCode"
     }
-  ]
+  ],
+  "lastManualPublish": {
+    "id": "day-001",
+    "date": "2026-06-11",
+    "publishedAt": "2026-06-10T09:13:29.368Z",
+    "linkedInId": "urn:li:share:7470402558424068097",
+    "note": "Published manually through GitHub Actions workflow_dispatch test."
+  }
 }
