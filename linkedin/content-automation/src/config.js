@@ -32,6 +32,7 @@ module.exports = {
   linkedinAccessToken: process.env.LINKEDIN_ACCESS_TOKEN || "",
   linkedinProfileUrl: process.env.LINKEDIN_PROFILE_URL || "https://www.linkedin.com/in/iamarsingh/",
   linkedinAuthorUrn: process.env.LINKEDIN_AUTHOR_URN || "",
+  linkedinAttachImages: String(process.env.LINKEDIN_ATTACH_IMAGES || "false").toLowerCase() === "true",
   postTime: process.env.POST_TIME || "09:30",
   timezone: process.env.TIMEZONE || "Asia/Kolkata"
 };

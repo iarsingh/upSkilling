@@ -33,9 +33,7 @@ async function main() {
     return;
   }
 
-  const imagePath = item.imagePath ? path.join(root, item.imagePath) : "";
-  const image = imagePath && fs.existsSync(imagePath) ? imagePath : "";
-  const linkedInId = await publishPost(item.text, image);
+  const linkedInId = await publishPost(item.text);
   console.log(`Published ${item.id} for ${dateArg}: ${linkedInId}`);
 }
 

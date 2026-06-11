@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { linkedinAccessToken, linkedinAuthorUrn } = require("./config");
+const { linkedinAccessToken, linkedinAuthorUrn, linkedinAttachImages } = require("./config");
 
 const API_VERSION = "202605";
 
@@ -61,7 +61,7 @@ async function uploadImage(imagePath) {
 
 async function publishPost(text, imagePath) {
   assertLinkedInConfig();
-  const imageUrn = imagePath ? await uploadImage(imagePath) : "";
+  const imageUrn = linkedinAttachImages && imagePath ? await uploadImage(imagePath) : "";
   const body = {
     author: linkedinAuthorUrn,
     commentary: text,

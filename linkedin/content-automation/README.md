@@ -8,7 +8,7 @@ Local automation for generating daily LinkedIn posts about Kubernetes, MLOps, Da
 - Uses Ollama locally when available, with a fallback generator when Ollama is offline.
 - Creates hashtags, content pillars, a suggested call to action, and a visual image asset.
 - Saves a markdown draft and image under `posts/` and `assets/`.
-- Can publish to LinkedIn when API credentials are configured.
+- Can publish text-only to LinkedIn when API credentials are configured.
 - Can create a local cron trigger for daily posting.
 
 ## Quick Start
@@ -65,7 +65,7 @@ Then publish the next scheduled post:
 npm run publish:next
 ```
 
-The script uploads the next scheduled image first, then creates the LinkedIn post and records it in `publish-state.json`.
+The script publishes text only by default and records the result in `publish-state.json`. Image assets are still generated for local review, but they are not attached unless `LINKEDIN_ATTACH_IMAGES=true` is set.
 
 ## Daily Local Trigger
 
@@ -93,7 +93,7 @@ That means one scheduled content item is posted per day until the 100-day calend
 
 ## GitHub Actions Daily Publishing
 
-The repository includes `.github/workflows/linkedin-daily.yml`, which publishes one scheduled post every day at `09:30 Asia/Kolkata`.
+The repository includes `.github/workflows/linkedin-daily.yml`, which publishes one scheduled text-only post every day at `09:47 Asia/Kolkata`.
 
 Add these repository secrets in GitHub:
 
@@ -109,6 +109,7 @@ The workflow reads `content-calendar.json` and publishes the item whose `date` m
 - Ollama model default: `llama3.1:8b`.
 - Ollama calls time out after `OLLAMA_TIMEOUT_MS`, then the script uses a fallback content template.
 - Image generation creates an SVG and attempts PNG conversion using macOS `sips`.
+- LinkedIn images are disabled by default. Set `LINKEDIN_ATTACH_IMAGES=true` only if you want the publisher to upload and attach generated assets again.
 - LinkedIn publishing requires API access and the correct posting permissions for your LinkedIn app.
 
 ## LinkedIn Scope Error
