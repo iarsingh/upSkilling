@@ -2,8 +2,8 @@ name: Daily LinkedIn Publish
 
 on:
   schedule:
-    # 09:30 Asia/Kolkata = 04:00 UTC.
-    - cron: "0 4 * * *"
+    # 09:47 Asia/Kolkata = 04:17 UTC. Avoid minute 0, where scheduled runs are more likely to be delayed or dropped.
+    - cron: "17 4 * * *"
   workflow_dispatch:
     inputs:
       publish_date:
