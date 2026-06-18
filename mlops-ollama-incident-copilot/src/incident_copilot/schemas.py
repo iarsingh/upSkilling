@@ -29,6 +29,8 @@ class HealthResponse(BaseModel):
 
     status: str
     model_loaded: bool
+    ollama_connected: bool
+    ollama_base_url: str
     ollama_model: str
 
 

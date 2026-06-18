@@ -58,6 +58,7 @@ Check Ollama:
 ```bash
 ollama list
 ollama serve
+curl http://localhost:11434/api/tags
 ```
 
 Pull the model if needed:
@@ -82,6 +83,15 @@ Open the API docs:
 ```text
 http://localhost:8080/docs
 ```
+
+Confirm the API can see Ollama:
+
+```bash
+curl http://localhost:8080/health
+```
+
+Look for `"ollama_connected": true`. If it is `false`, start Ollama with `ollama serve`
+and make sure `OLLAMA_BASE_URL` points to `http://localhost:11434`.
 
 ## Test a prediction
 

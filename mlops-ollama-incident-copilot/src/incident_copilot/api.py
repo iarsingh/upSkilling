@@ -45,6 +45,8 @@ def health() -> HealthResponse:
     return HealthResponse(
         status="ok" if model.loaded else "model-missing",
         model_loaded=model.loaded,
+        ollama_connected=copilot.is_connected(),
+        ollama_base_url=settings.ollama_base_url,
         ollama_model=settings.ollama_model,
     )
 

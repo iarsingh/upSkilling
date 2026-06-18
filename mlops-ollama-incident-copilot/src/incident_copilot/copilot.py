@@ -48,6 +48,14 @@ class OllamaCopilot:
             pass
         return fallback_recommendation(features, probability, risk), "fallback"
 
+    def is_connected(self) -> bool:
+        try:
+            response = requests.get(f"{self.base_url}/api/tags", timeout=3)
+            response.raise_for_status()
+            return True
+        except requests.RequestException:
+            return False
+
     @staticmethod
     def _prompt(features: IncidentFeatures, probability: float, risk: str) -> str:
         return f"""
