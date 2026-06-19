@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LinkedIn Apply Cockpit</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #111827;
+      --muted: #4b5563;
+      --line: #d1d5db;
+      --panel: #f8fafc;
+      --accent: #0f766e;
+      --accent-2: #1d4ed8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+    }
+    header {
+      padding: 24px 28px 18px;
+      border-bottom: 1px solid var(--line);
+      background: #f9fafb;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.15;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 19px;
+    }
+    p {
+      margin: 0 0 10px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    main {
+      padding: 24px 28px 40px;
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(280px, 0.95fr) minmax(360px, 1.4fr);
+      align-items: start;
+    }
+    section {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: #ffffff;
+    }
+    .panel {
+      background: var(--panel);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    a.button, button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 8px 12px;
+      border: 1px solid var(--accent-2);
+      border-radius: 6px;
+      background: #ffffff;
+      color: var(--accent-2);
+      text-decoration: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button {
+      border-color: var(--accent);
+      color: #ffffff;
+      background: var(--accent);
+      width: 100%;
+    }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .kv {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 8px 12px;
+      font-size: 15px;
+    }
+    .kv strong {
+      color: var(--ink);
+    }
+    textarea {
+      width: 100%;
+      min-height: 170px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 12px;
+      font: 14px/1.45 Arial, sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+    }
+    .copy-row {
+      display: grid;
+      grid-template-columns: 1fr 130px;
+      gap: 10px;
+      align-items: center;
+      margin: 8px 0;
+    }
+    code {
+      display: block;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #ffffff;
+      color: #111827;
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .copy-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>LinkedIn Apply Cockpit</h1>
+    <p>High-volume queue for DevOps, MLOps, Platform, GCP, Kubernetes, and SRE roles. Submit only after checking role fit and resume choice.</p>
+  </header>
+
+  <main>
+    <div>
+      <section class="panel">
+        <h2>Profile Answers</h2>
+        <div class="kv">
+          <strong>Experience</strong><span>7 years</span>
+          <strong>Current CTC</strong><span>13 LPA</span>
+          <strong>Expected CTC</strong><span>19 LPA</span>
+          <strong>Notice period</strong><span>90 days</span>
+          <strong>Location</strong><span>Any</span>
+          <strong>Work mode</strong><span>Remote, hybrid, or onsite</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Resume Rule</h2>
+        <ul>
+          <li>MLOps, ML Platform, AI Infra, Vertex AI, Kubeflow, MLflow: use MLOps resume.</li>
+          <li>DevOps, Platform, GCP, Kubernetes, SRE, Terraform, CI/CD: use Platform Engineer resume.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Copy Answers</h2>
+        <div class="copy-row"><code>7 years</code><button data-copy="7 years">Copy</button></div>
+        <div class="copy-row"><code>13 LPA</code><button data-copy="13 LPA">Copy</button></div>
+        <div class="copy-row"><code>19 LPA</code><button data-copy="19 LPA">Copy</button></div>
+        <div class="copy-row"><code>90 days</code><button data-copy="90 days">Copy</button></div>
+        <div class="copy-row"><code>Any location and any work mode</code><button data-copy="Any location and any work mode">Copy</button></div>
+      </section>
+    </div>
+
+    <div>
+      <section>
+        <h2>LinkedIn Search Queue</h2>
+        <div class="grid">
+          <a class="button" target="_blank" href="https://www.linkedin.com/jobs/search/?keywords=MLOps%20Engineer&location=India&f_E=3%2C4&f_TPR=r604800">MLOps Engineer</a>
+          <a class="button" target="_blank" href="https://www.linkedin.com/jobs/search/?keywords=ML%20Platform%20Engineer&location=India&f_E=3%2C4&f_TPR=r604800">ML Platform</a>
+          <a class="button" target="_blank" href="https://www.linkedin.com/jobs/search/?keywords=AI%20Infrastructure%20Engineer&location=India&f_E=3%2C4&f_TPR=r604800">AI Infrastructure</a>
+          <a class="button" target="_blank" href="https://www.linkedin.com/jobs/search/?keywords=DevOps%20Engineer%20Kubernetes%20Terraform%20GCP&location=India&f_E=3%2C4&f_TPR=r604800">DevOps GCP K8s</a>
+          <a class="button" target="_blank" href="https://www.linkedin.com/jobs/search/?keywords=Platform%20Engineer%20Kubernetes%20Cloud&location=India&f_E=3%2C4&f_TPR=r604800">Platform Engineer</a>
+          <a class="button" target="_blank" href="https://www.linkedin.com/jobs/search/?keywords=GCP%20Engineer%20DevOps%20Kubernetes&location=India&f_E=3%2C4&f_TPR=r604800">GCP Engineer</a>
+          <a class="button" target="_blank" href="https://www.linkedin.com/jobs/search/?keywords=Kubernetes%20Engineer%20DevOps&location=India&f_E=3%2C4&f_TPR=r604800">Kubernetes</a>
+          <a class="button" target="_blank" href="https://www.linkedin.com/jobs/search/?keywords=Site%20Reliability%20Engineer%20SRE%20Kubernetes&location=India&f_E=3%2C4&f_TPR=r604800">SRE</a>
+        </div>
+      </section>
+
+      <section>
+        <h2>Recruiter Message</h2>
+        <textarea id="message">Hi,
+
+I saw the role and wanted to reach out directly.
+
+I have 7 years of experience across DevOps, Kubernetes, GCP, CI/CD, Terraform, Ansible, observability, and MLOps/platform engineering. I have hands-on experience building deployment workflows, cloud infrastructure, monitoring systems, and ML platform projects using Docker, Kubernetes, MLflow, Kubeflow, Prometheus, Grafana, and GitOps workflows.
+
+Current CTC: 13 LPA
+Expected CTC: 19 LPA
+Notice period: 90 days
+Location/work mode: Open
+
+I would be happy to discuss if my profile fits this role.
+
+Thanks,
+Akhilesh Ranjan Singh</textarea>
+        <button data-copy-target="message">Copy Recruiter Message</button>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    async function copyText(value) {
+      await navigator.clipboard.writeText(value);
+    }
+
+    document.querySelectorAll("[data-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        await copyText(button.dataset.copy);
+        button.textContent = "Copied";
+        setTimeout(() => button.textContent = "Copy", 900);
+      });
+    });
+
+    document.querySelectorAll("[data-copy-target]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const field = document.getElementById(button.dataset.copyTarget);
+        await copyText(field.value);
+        button.textContent = "Copied";
+        setTimeout(() => button.textContent = "Copy Recruiter Message", 900);
+      });
+    });
+  </script>
+</body>
+</html>

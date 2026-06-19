@@ -1,0 +1,67 @@
+{
+  "candidate": {
+    "name": "Akhilesh Ranjan Singh",
+    "experience_years": 7,
+    "current_ctc_lpa": 13,
+    "expected_ctc_lpa": 19,
+    "notice_period_days": 90,
+    "preferred_location": "any",
+    "work_mode": "any"
+  },
+  "target_roles": [
+    "MLOps Engineer",
+    "DevOps Engineer",
+    "Platform Engineer",
+    "Cloud Engineer",
+    "GCP Engineer",
+    "Kubernetes Engineer",
+    "Site Reliability Engineer",
+    "Infrastructure Engineer",
+    "AI Infrastructure Engineer",
+    "ML Platform Engineer"
+  ],
+  "preferred_keywords": [
+    "GCP",
+    "Kubernetes",
+    "Docker",
+    "Terraform",
+    "Ansible",
+    "CI/CD",
+    "GitOps",
+    "ArgoCD",
+    "Jenkins",
+    "GitHub Actions",
+    "MLflow",
+    "Kubeflow",
+    "Vertex AI",
+    "Prometheus",
+    "Grafana",
+    "OpenTelemetry",
+    "Python",
+    "Linux",
+    "SRE",
+    "MLOps"
+  ],
+  "companies_to_avoid": [],
+  "daily_application_target": {
+    "mode": "maximum",
+    "recommended_safe_range": "40-70 targeted applications per day",
+    "quality_rule": "Apply only when at least 3 target keywords match or the role is directly DevOps, MLOps, Cloud, Platform, SRE, or Kubernetes."
+  },
+  "resumes": {
+    "platform_engineer": "/Users/akhileshsingh/Documents/AKHILESH_RANJAN_SINGH_Platform_Engineer.pdf",
+    "mlops": "/Users/akhileshsingh/Documents/AKHILESH_RANJAN_SINGH_MLOPS.pdf"
+  },
+  "resume_selection": {
+    "MLOps Engineer": "mlops",
+    "ML Platform Engineer": "mlops",
+    "AI Infrastructure Engineer": "mlops",
+    "DevOps Engineer": "platform_engineer",
+    "Platform Engineer": "platform_engineer",
+    "Cloud Engineer": "platform_engineer",
+    "GCP Engineer": "platform_engineer",
+    "Kubernetes Engineer": "platform_engineer",
+    "Site Reliability Engineer": "platform_engineer",
+    "Infrastructure Engineer": "platform_engineer"
+  }
+}

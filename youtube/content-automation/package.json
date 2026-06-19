@@ -1,0 +1,16 @@
+{
+  "name": "youtube-content-automation",
+  "version": "1.0.0",
+  "description": "Local YouTube video generator and uploader using Ollama, ffmpeg, and the YouTube Data API.",
+  "main": "src/youtube-video.js",
+  "type": "commonjs",
+  "scripts": {
+    "video": "node src/youtube-video.js",
+    "auth": "node src/youtube-auth.js",
+    "upload": "node src/youtube-upload.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

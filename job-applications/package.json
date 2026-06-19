@@ -1,0 +1,14 @@
+{
+  "name": "job-applications",
+  "version": "1.0.0",
+  "description": "High-volume LinkedIn and Naukri application helper for DevOps, MLOps, Platform, GCP, Kubernetes, and SRE roles.",
+  "type": "commonjs",
+  "scripts": {
+    "score": "node score-job.js",
+    "open:linkedin": "node open-linkedin-batch.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
