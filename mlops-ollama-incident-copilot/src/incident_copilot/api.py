@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Response
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
 
-from incident_copilot.copilot import OllamaCopilot
+from incident_copilot.copilot import ClaudeCopilot, IncidentCopilot, OllamaCopilot
 from incident_copilot.model import FEATURE_COLUMNS, IncidentRiskModel, risk_level
 from incident_copilot.schemas import (
     HealthResponse,
@@ -15,10 +15,21 @@ from incident_copilot.settings import get_settings
 
 settings = get_settings()
 model = IncidentRiskModel(settings.model_path)
-copilot = OllamaCopilot(
+ollama_copilot = OllamaCopilot(
     base_url=settings.ollama_base_url,
     model=settings.ollama_model,
     timeout_seconds=settings.copilot_timeout_seconds,
+)
+claude_copilot = ClaudeCopilot(
+    api_key=settings.anthropic_api_key,
+    base_url=settings.anthropic_base_url,
+    model=settings.anthropic_model,
+    timeout_seconds=settings.copilot_timeout_seconds,
+)
+copilot = IncidentCopilot(
+    provider=settings.copilot_provider,
+    ollama=ollama_copilot,
+    claude=claude_copilot,
 )
 
 PREDICTIONS = Counter("incident_copilot_predictions_total", "Total prediction requests")
@@ -42,12 +53,19 @@ app = FastAPI(
 
 @app.get("/health", response_model=HealthResponse)
 def health() -> HealthResponse:
+    ollama_connected = ollama_copilot.is_connected()
+    claude_connected = claude_copilot.is_connected()
     return HealthResponse(
         status="ok" if model.loaded else "model-missing",
         model_loaded=model.loaded,
-        ollama_connected=copilot.is_connected(),
+        copilot_provider=settings.copilot_provider,
+        copilot_connected=claude_connected if settings.copilot_provider == "claude" else ollama_connected,
+        ollama_connected=ollama_connected,
         ollama_base_url=settings.ollama_base_url,
         ollama_model=settings.ollama_model,
+        claude_connected=claude_connected,
+        anthropic_base_url=settings.anthropic_base_url,
+        anthropic_model=settings.anthropic_model,
     )
 
 

@@ -4,8 +4,12 @@ services:
     container_name: incident-copilot-api
     environment:
       MODEL_PATH: /app/models/incident_risk_model.joblib
+      COPILOT_PROVIDER: ${COPILOT_PROVIDER:-ollama}
       OLLAMA_BASE_URL: http://host.docker.internal:11434
       OLLAMA_MODEL: llama3.1:8b
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      ANTHROPIC_BASE_URL: ${ANTHROPIC_BASE_URL:-https://api.anthropic.com}
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-haiku-4-5}
       POSTGRES_DSN: postgresql://mlops:mlops@postgres:5432/mlops
       FEATURE_STORE_URI: redis://redis:6379/0
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092

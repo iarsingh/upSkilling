@@ -2,12 +2,18 @@ name: Daily LinkedIn Publish
 
 on:
   schedule:
-    # 09:47 Asia/Kolkata = 04:17 UTC. Avoid minute 0, where scheduled runs are more likely to be delayed or dropped.
-    - cron: "17 4 * * *"
+    # 09:30, 14:30, and 19:30 Asia/Kolkata.
+    - cron: "0 4 * * *"
+    - cron: "0 9 * * *"
+    - cron: "0 14 * * *"
   workflow_dispatch:
     inputs:
       publish_date:
         description: "Optional date to publish, YYYY-MM-DD. Defaults to today in Asia/Kolkata."
+        required: false
+        type: string
+      publish_slot:
+        description: "Optional slot to publish, for example 09:30, 14:30, or 19:30. Defaults to all slots for the date."
         required: false
         type: string
 
@@ -26,6 +32,7 @@ jobs:
       LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
       LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
       PUBLISH_DATE: ${{ inputs.publish_date }}
+      PUBLISH_SLOT: ${{ inputs.publish_slot || (github.event.schedule == '0 4 * * *' && '09:30') || (github.event.schedule == '0 9 * * *' && '14:30') || (github.event.schedule == '0 14 * * *' && '19:30') || '' }}
 
     steps:
       - name: Checkout repository

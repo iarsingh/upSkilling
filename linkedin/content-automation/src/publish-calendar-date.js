@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { publishPost } = require("./linkedin");
 const { root } = require("./config");
+const { loadState, markPublished } = require("./calendar");
 
 const calendarPath = path.join(root, "content-calendar.json");
 
@@ -25,16 +26,26 @@ function loadCalendar() {
 
 async function main() {
   const dateArg = process.argv[2] || process.env.PUBLISH_DATE || dateInTimezone(process.env.TIMEZONE);
+  const slotArg = process.argv[3] || process.env.PUBLISH_SLOT || "";
   const calendar = loadCalendar();
-  const item = calendar.items.find((entry) => entry.date === dateArg);
+  const state = loadState();
+  const publishedIds = new Set(state.published.map((entry) => entry.id));
+  const items = calendar.items
+    .filter((entry) => entry.date === dateArg && !publishedIds.has(entry.id))
+    .filter((entry) => !slotArg || entry.slot === slotArg)
+    .sort((a, b) => (a.slot || "").localeCompare(b.slot || "") || a.id.localeCompare(b.id));
 
-  if (!item) {
-    console.log(`No scheduled LinkedIn item for ${dateArg}. Nothing to publish.`);
+  if (items.length === 0) {
+    const slotMessage = slotArg ? ` at slot ${slotArg}` : "";
+    console.log(`No scheduled LinkedIn item for ${dateArg}${slotMessage}. Nothing to publish.`);
     return;
   }
 
-  const linkedInId = await publishPost(item.text);
-  console.log(`Published ${item.id} for ${dateArg}: ${linkedInId}`);
+  for (const item of items) {
+    const linkedInId = await publishPost(item.text);
+    markPublished(item, linkedInId);
+    console.log(`Published ${item.id} for ${dateArg}: ${linkedInId}`);
+  }
 }
 
 main().catch((error) => {

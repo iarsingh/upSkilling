@@ -104,6 +104,24 @@ LINKEDIN_AUTHOR_URN=urn:li:person:your_person_id
 
 The workflow reads `content-calendar.json` and publishes the item whose `date` matches the current date in `Asia/Kolkata`. You can also run it manually from the GitHub Actions tab and provide `publish_date` in `YYYY-MM-DD` format.
 
+## Three Daily Streams
+
+To schedule one MLOps post, one Kubernetes post, and one Python post every day:
+
+```bash
+npm run schedule:three-daily
+```
+
+This creates 60 days of calendar items with three streams:
+
+- MLOps at slot `09:30`
+- Kubernetes at slot `14:30`
+- Python Automation at slot `19:30`
+
+The GitHub workflow runs three times per day and publishes the matching slot. Manual workflow runs can also provide `publish_date` and `publish_slot`. If no slot is provided, the date publisher publishes all unpublished calendar items matching that date, sorted by slot.
+
+Note: three LinkedIn posts per day is aggressive. Use this only if you can maintain quality and engagement. A safer growth schedule is one strong post per day, or three streams rotated across the week.
+
 ## Notes
 
 - Ollama model default: `llama3.1:8b`.

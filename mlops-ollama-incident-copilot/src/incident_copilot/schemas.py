@@ -29,9 +29,14 @@ class HealthResponse(BaseModel):
 
     status: str
     model_loaded: bool
+    copilot_provider: str
+    copilot_connected: bool
     ollama_connected: bool
     ollama_base_url: str
     ollama_model: str
+    claude_connected: bool
+    anthropic_base_url: str
+    anthropic_model: str
 
 
 class ModelInfoResponse(BaseModel):

@@ -93,6 +93,34 @@ curl http://localhost:8080/health
 Look for `"ollama_connected": true`. If it is `false`, start Ollama with `ollama serve`
 and make sure `OLLAMA_BASE_URL` points to `http://localhost:11434`.
 
+## Enable Claude
+
+Claude is optional. Ollama remains the default local provider. To use Anthropic Claude
+for remediation guidance:
+
+```bash
+cp .env.example .env
+sed -i.bak 's/COPILOT_PROVIDER=ollama/COPILOT_PROVIDER=claude/' .env
+sed -i.bak 's/^ANTHROPIC_API_KEY=.*/ANTHROPIC_API_KEY=your-anthropic-key/' .env
+```
+
+The default Claude model is `claude-haiku-4-5`, which is Anthropic's current
+fast Haiku model alias. You can override it in `.env`:
+
+```bash
+ANTHROPIC_MODEL=claude-sonnet-4-6
+```
+
+Confirm the active provider:
+
+```bash
+curl http://localhost:8080/health
+```
+
+Look for `"copilot_provider": "claude"` and `"claude_connected": true`.
+If Claude is not configured or reachable, `/predict` still returns a fallback
+recommendation with `"copilot_source": "fallback"`.
+
 ## Test a prediction
 
 ```bash

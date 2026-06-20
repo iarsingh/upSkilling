@@ -10,6 +10,7 @@
     "publish:next": "node src/index.js --publish-next",
     "publish:date": "node src/publish-calendar-date.js",
     "prepare:100": "node src/index.js --prepare-100",
+    "schedule:three-daily": "node scripts/schedule-three-daily-series.js",
     "linkedin:auth": "node src/oauth.js",
     "schedule:cron": "node src/schedule-cron.js",
     "install:cron": "node src/install-cron.js"

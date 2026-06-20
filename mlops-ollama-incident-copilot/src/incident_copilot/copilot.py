@@ -76,3 +76,83 @@ Queue depth: {features.queue_depth}
 
 Return 3-5 crisp action bullets. Do not mention that you are an AI.
 """.strip()
+
+
+class ClaudeCopilot:
+    def __init__(self, api_key: str | None, base_url: str, model: str, timeout_seconds: int):
+        self.api_key = api_key
+        self.base_url = base_url.rstrip("/")
+        self.model = model
+        self.timeout_seconds = timeout_seconds
+
+    def recommendation(self, features: IncidentFeatures, probability: float, risk: str) -> tuple[str, str]:
+        if not self.api_key:
+            return fallback_recommendation(features, probability, risk), "fallback"
+
+        prompt = OllamaCopilot._prompt(features, probability, risk)
+        try:
+            response = requests.post(
+                f"{self.base_url}/v1/messages",
+                headers={
+                    "x-api-key": self.api_key,
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                },
+                json={
+                    "model": self.model,
+                    "max_tokens": 384,
+                    "temperature": 0.2,
+                    "messages": [{"role": "user", "content": prompt}],
+                },
+                timeout=self.timeout_seconds,
+            )
+            response.raise_for_status()
+            content = response.json().get("content", [])
+            text = self._extract_text(content)
+            if text:
+                return text, "claude"
+        except (requests.RequestException, ValueError, TypeError):
+            pass
+        return fallback_recommendation(features, probability, risk), "fallback"
+
+    def is_connected(self) -> bool:
+        if not self.api_key:
+            return False
+        try:
+            response = requests.get(
+                f"{self.base_url}/v1/models/{self.model}",
+                headers={
+                    "x-api-key": self.api_key,
+                    "anthropic-version": "2023-06-01",
+                },
+                timeout=3,
+            )
+            response.raise_for_status()
+            return True
+        except requests.RequestException:
+            return False
+
+    @staticmethod
+    def _extract_text(content: list[dict]) -> str:
+        return "\n".join(
+            block.get("text", "").strip()
+            for block in content
+            if block.get("type") == "text" and block.get("text", "").strip()
+        ).strip()
+
+
+class IncidentCopilot:
+    def __init__(self, provider: str, ollama: OllamaCopilot, claude: ClaudeCopilot):
+        self.provider = provider
+        self.ollama = ollama
+        self.claude = claude
+
+    def recommendation(self, features: IncidentFeatures, probability: float, risk: str) -> tuple[str, str]:
+        if self.provider == "claude":
+            return self.claude.recommendation(features, probability, risk)
+        return self.ollama.recommendation(features, probability, risk)
+
+    def provider_connected(self) -> bool:
+        if self.provider == "claude":
+            return self.claude.is_connected()
+        return self.ollama.is_connected()
