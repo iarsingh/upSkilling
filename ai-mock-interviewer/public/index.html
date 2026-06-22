@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Mock Interviewer</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="topbar">
+        <div>
+          <p class="eyebrow">Local Ollama Coach</p>
+          <h1>AI Mock Interviewer</h1>
+        </div>
+        <div class="status" id="status">
+          <span class="dot"></span>
+          <span id="statusText">Checking Ollama</span>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside class="panel interview-sidebar">
+          <div class="sidebar-head">
+            <p class="eyebrow">Interviews</p>
+            <button id="addInterview" class="ghost small" type="button">New</button>
+          </div>
+          <div id="interviewList" class="interview-list"></div>
+          <div class="history-head">
+            <p class="eyebrow">Progress History</p>
+          </div>
+          <div id="progressHistory" class="history-list"></div>
+        </aside>
+
+        <aside class="panel setup">
+          <div class="session-card">
+            <p class="eyebrow">Session</p>
+            <strong id="interviewLabel">Interview 1</strong>
+            <div class="session-actions">
+              <button id="previousInterview" class="ghost small" type="button">Previous interview</button>
+              <button id="nextInterview" class="ghost small" type="button">Next interview</button>
+              <button id="resetInterview" class="danger small" type="button">Reset current</button>
+            </div>
+          </div>
+          <div class="mode-card">
+            <p class="eyebrow">Mode</p>
+            <label class="mode-option">
+              <input type="radio" name="interviewMode" value="live" checked>
+              <span>Live mock interview</span>
+            </label>
+            <label class="mode-option">
+              <input type="radio" name="interviewMode" value="manual">
+              <span>Mock interview</span>
+            </label>
+          </div>
+          <label>
+            Question order
+            <select id="questionOrder">
+              <option value="random">Random mock questions</option>
+              <option value="sequence">Sequential questions</option>
+            </select>
+          </label>
+          <label>
+            30-day practice plan
+            <select id="practiceDay">
+              <option value="all">All questions</option>
+            </select>
+          </label>
+          <label>
+            Mock interview set
+            <select id="mockSet">
+              <option value="all">No fixed set</option>
+              <option value="random-bank">Random full bank mock interview</option>
+              <option value="custom-jd">Custom JD mock interview</option>
+            </select>
+          </label>
+          <label>
+            Target role
+            <input id="role" value="Senior GCP DevOps / SRE / Cloud Engineer">
+          </label>
+          <label>
+            Seniority
+            <select id="level">
+              <option>senior</option>
+              <option>mid-senior</option>
+              <option>lead</option>
+              <option>staff</option>
+              <option>entry</option>
+            </select>
+          </label>
+          <label>
+            Focus areas
+            <textarea id="topic" rows="4">GKE expert, Terraform advanced, Python automation, SRE SLI/SLO/error budgets, Prometheus/Grafana/OpenTelemetry, ArgoCD GitOps, GCP security, platform engineering, Vertex AI and MLOps basics</textarea>
+          </label>
+          <label>
+            CV / profile context
+            <textarea id="cvText" rows="7" placeholder="Paste your resume text here. It is saved in this browser."></textarea>
+          </label>
+          <label>
+            Market skills / job description
+            <textarea id="jdText" rows="7" placeholder="Keep the market skill benchmark here, or paste a JD before a custom JD mock."></textarea>
+          </label>
+          <label>
+            Import public JD URL
+            <input id="jdUrl" placeholder="https://company.com/careers/job...">
+          </label>
+          <label class="toggle">
+            <input id="autoNext" type="checkbox" checked>
+            <span>Live auto-advance</span>
+          </label>
+          <button id="importJd" class="ghost">Import JD from URL</button>
+          <button id="saveContext" class="ghost">Save CV and JD</button>
+          <button id="newQuestion" class="primary">New question</button>
+          <button id="endInterview" class="ghost">End interview & feedback</button>
+        </aside>
+
+        <section class="panel interview">
+          <div class="question-row">
+            <div>
+              <p class="eyebrow">Question</p>
+              <h2 id="question">This is a mock interview. Click New question to generate a random DevOps, MLOps, Kubernetes, GCP, Terraform, Python, or scenario-based question.</h2>
+            </div>
+          </div>
+
+          <div class="recorder">
+            <button id="micButton" class="record">Start mic</button>
+            <button id="clearButton" class="ghost">Clear</button>
+            <span id="micState">Microphone idle</span>
+          </div>
+
+          <label class="answer-label">
+            Answer transcript
+            <textarea id="answer" rows="10" placeholder="Speak your answer or type it here."></textarea>
+          </label>
+
+          <button id="feedbackButton" class="primary wide">Save answer</button>
+        </section>
+
+        <section class="panel feedback">
+          <div class="feedback-head">
+            <p class="eyebrow">Final Feedback</p>
+            <button id="copyButton" class="ghost small">Copy</button>
+          </div>
+          <article id="feedbackOutput" class="markdown">
+            Your final interview feedback will appear here after you end the interview.
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

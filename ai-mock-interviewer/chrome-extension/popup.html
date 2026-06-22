@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Job Autofill</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main>
+      <header>
+        <p>Local Ollama</p>
+        <h1>Job Autofill</h1>
+      </header>
+
+      <section class="status" id="status">Checking local server...</section>
+
+      <section class="profile">
+        <strong id="profileName">Profile loading</strong>
+        <span id="profileLine">Start the local server on port 3030.</span>
+      </section>
+
+      <button id="fillBasic" class="primary">Fill visible fields</button>
+      <button id="fillAi">AI map and fill</button>
+      <button id="coverLetter">Generate cover letter</button>
+      <button id="highlightUploads">Highlight resume uploads</button>
+
+      <section class="note">
+        Review all fields before submitting. File upload fields must be selected manually by Chrome security rules.
+      </section>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "ai-mock-interviewer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local Ollama-powered mock interview coach with browser microphone input.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

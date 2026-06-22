@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Local Ollama Job Autofill",
+  "version": "1.0.0",
+  "description": "Locally autofill job applications from your resume profile with optional Ollama suggestions.",
+  "permissions": ["activeTab", "storage", "scripting"],
+  "host_permissions": ["http://127.0.0.1:3030/*"],
+  "action": {
+    "default_title": "Job Autofill",
+    "default_popup": "popup.html"
+  }
+}
