@@ -1,0 +1,21 @@
+groups:
+  - name: platform-sample-api
+    rules:
+      - alert: HighErrorRate
+        expr: rate(platform_sample_requests_total[5m]) > 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: High request volume detected
+          description: Validate traffic, errors, and autoscaling behavior.
+
+      - alert: PodRestartSpike
+        expr: increase(kube_pod_container_status_restarts_total[10m]) > 3
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: Pod restart spike detected
+          description: Check recent deployment, logs, probes, and resource pressure.
+

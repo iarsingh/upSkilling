@@ -1,0 +1,12 @@
+resources:
+  - ../../base
+
+namespace: platform-demo
+
+commonLabels:
+  environment: prod
+
+replicas:
+  - name: platform-sample-api
+    count: 3
+

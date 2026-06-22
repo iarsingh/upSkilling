@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: platform-demo
+  labels:
+    owner: platform-team
+    environment: dev
+

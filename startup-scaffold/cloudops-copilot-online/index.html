@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CloudOps Copilot Online</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">CloudOps Copilot</p>
+        <h1>Online startup operating console</h1>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-button" id="exportData" title="Export workspace data" aria-label="Export workspace data">DL</button>
+        <button class="icon-button" id="resetDemo" title="Load demo workspace" aria-label="Load demo workspace">R</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar" aria-label="Workspace navigation">
+        <button class="nav-item active" data-view="dashboard">Dashboard</button>
+        <button class="nav-item" data-view="incident">Incident Demo</button>
+        <button class="nav-item" data-view="leads">Leads</button>
+        <button class="nav-item" data-view="tasks">Founder Tasks</button>
+        <button class="nav-item" data-view="playbook">Playbook</button>
+      </aside>
+
+      <section class="workspace">
+        <section class="view active" id="dashboard">
+          <section class="panel intro-panel">
+            <div>
+              <h2>Startup Command Center</h2>
+              <p>Use this workspace to validate CloudOps Copilot, manage early customer conversations, test incident examples, and prepare a pilot-ready reliability product.</p>
+            </div>
+            <div class="intro-actions">
+              <span class="status-chip">GKE</span>
+              <span class="status-chip">SRE</span>
+              <span class="status-chip">MLOps</span>
+              <span class="status-chip">Incident Response</span>
+            </div>
+          </section>
+
+          <div class="metrics-grid" id="metricsGrid"></div>
+
+          <div class="split">
+            <section class="panel">
+              <div class="panel-heading">
+                <h2>Pipeline</h2>
+                <span id="pipelineSignal" class="status-chip"></span>
+              </div>
+              <div class="pipeline" id="pipelineList"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <h2>Demo Readiness</h2>
+                <span class="status-chip" id="readinessStatus">MVP v0</span>
+              </div>
+              <div class="readiness-meter">
+                <div class="readiness-bar"><span id="readinessBar"></span></div>
+                <strong id="readinessPercent">0%</strong>
+              </div>
+              <div class="readiness-next" id="readinessNext"></div>
+              <div class="readiness-list" id="readinessList"></div>
+              <div class="demo-assets">
+                <h3>Demo Assets</h3>
+                <button class="asset-button" type="button" data-demo-asset="script">Copy 5-min script</button>
+                <button class="asset-button" type="button" data-demo-asset="pilot">Copy pilot ask</button>
+                <button class="asset-button" type="button" data-demo-asset="security">Copy security note</button>
+              </div>
+            </section>
+          </div>
+
+          <section class="panel next-steps-panel">
+            <div class="panel-heading">
+              <h2>Recommended Next Moves</h2>
+              <span class="status-chip">This week</span>
+            </div>
+            <div class="next-step-grid">
+              <article><strong>1. Validate pain</strong><p>Run 5 discovery calls with DevOps, SRE, and platform engineers.</p></article>
+              <article><strong>2. Demo one incident</strong><p>Use the incident analyzer with a real anonymized Kubernetes or GCP alert.</p></article>
+              <article><strong>3. Ask for pilot signal</strong><p>Ask what would make this useful enough for a 30-day trial.</p></article>
+              <article><strong>4. Capture exact words</strong><p>Save interview notes in the Playbook section and look for repeated language.</p></article>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="incident">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Incident Analyzer</h2>
+              <span class="status-chip">Browser MVP</span>
+            </div>
+            <div class="incident-grid">
+              <form id="incidentForm" class="form-stack">
+                <label>
+                  System type
+                  <select id="incidentType">
+                    <option>Kubernetes</option>
+                    <option>GCP</option>
+                    <option>Terraform</option>
+                    <option>CI/CD</option>
+                    <option>MLOps Inference</option>
+                  </select>
+                </label>
+                <label>
+                  Alert, logs, or command output
+                  <textarea id="incidentText" rows="12" placeholder="Paste alert text, kubectl describe output, Terraform error, CI failure log, or inference issue..."></textarea>
+                </label>
+                <div>
+                  <h3>Sample Incidents</h3>
+                  <div class="sample-grid" id="sampleIncidents"></div>
+                </div>
+                <button class="primary-button" type="submit">Generate Response</button>
+              </form>
+              <article class="analysis-output" id="analysisOutput"></article>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="leads">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Lead And Demo Tracker</h2>
+              <span class="status-chip" id="leadCount"></span>
+            </div>
+            <div class="section-copy">
+              <p>Track every person you interview, demo, or ask for a pilot. Strong leads should include a real pain signal, a clear workflow, and one next step.</p>
+            </div>
+            <form id="leadForm" class="lead-form">
+              <input id="leadName" placeholder="Name" required />
+              <input id="leadCompany" placeholder="Company" required />
+              <select id="leadStage">
+                <option>Interview</option>
+                <option>Demo</option>
+                <option>Pilot</option>
+                <option>Paid</option>
+              </select>
+              <input id="leadPain" placeholder="Pain signal" required />
+              <button class="primary-button" type="submit">Add Lead</button>
+            </form>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>Stage</th>
+                    <th>Pain</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="leadRows"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="tasks">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Founder Tasks</h2>
+              <span class="status-chip" id="taskCount"></span>
+            </div>
+            <div class="section-copy">
+              <p>Use this board to keep validation, product, GTM, and operations moving together. The goal is not busywork; it is learning velocity.</p>
+            </div>
+            <form id="taskForm" class="task-form">
+              <input id="taskTitle" placeholder="Next action" required />
+              <select id="taskLane">
+                <option>Validation</option>
+                <option>Product</option>
+                <option>GTM</option>
+                <option>Operations</option>
+              </select>
+              <button class="primary-button" type="submit">Add Task</button>
+            </form>
+            <div class="task-board" id="taskBoard"></div>
+          </section>
+        </section>
+
+        <section class="view" id="playbook">
+          <div class="playbook-grid">
+            <section class="panel">
+              <div class="panel-heading">
+                <h2>Positioning</h2>
+                <span class="status-chip">ICP</span>
+              </div>
+              <div class="content-list">
+                <h3>One-line pitch</h3>
+                <p>CloudOps Copilot turns noisy Kubernetes, GCP, Terraform, CI/CD, and MLOps incidents into clear investigation steps, runbooks, and customer-ready updates.</p>
+                <h3>Best first customer</h3>
+                <p>Startup or mid-market platform teams running GKE with small on-call rotations, growing alert volume, and weak runbook coverage.</p>
+                <h3>Promise</h3>
+                <p>Reduce incident confusion, make junior on-call safer, and turn repeated debugging work into reusable operational knowledge.</p>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <h2>Demo Script</h2>
+                <span class="status-chip">5 min</span>
+              </div>
+              <ol class="content-list">
+                <li>Paste a real anonymized alert or Kubernetes error.</li>
+                <li>Show likely causes, investigation commands, and confidence.</li>
+                <li>Show the customer update and postmortem draft.</li>
+                <li>Ask which part matches their current incident workflow.</li>
+                <li>Ask for one more anonymized incident example.</li>
+              </ol>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <h2>Pricing Test</h2>
+                <span class="status-chip">Pilot</span>
+              </div>
+              <div class="pricing-grid">
+                <article class="price-card">
+                  <h3>Validation</h3>
+                  <strong>Free</strong>
+                  <p>One anonymized incident analysis and feedback call.</p>
+                </article>
+                <article class="price-card">
+                  <h3>Pilot</h3>
+                  <strong>$199/mo</strong>
+                  <p>Shared workspace, runbook drafts, and weekly review.</p>
+                </article>
+                <article class="price-card">
+                  <h3>Team</h3>
+                  <strong>$499/mo</strong>
+                  <p>Multiple services, incident library, and onboarding support.</p>
+                </article>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <h2>Outreach Copy</h2>
+                <span class="status-chip">DM</span>
+              </div>
+              <pre class="copy-block">Hi &lt;Name&gt;,
+
+I am building CloudOps Copilot for DevOps, SRE, and platform teams.
+
+It converts alert, log, Kubernetes, GCP, Terraform, CI/CD, or MLOps context into investigation steps, runbooks, and postmortem drafts.
+
+I am not selling yet. I am looking for 15 minutes of feedback from people who handle production incidents.
+
+Would you be open to sharing one anonymized incident example?</pre>
+            </section>
+
+            <section class="panel wide-panel">
+              <div class="panel-heading">
+                <h2>Interview Questions</h2>
+                <span class="status-chip" id="interviewNoteCount">Discovery</span>
+              </div>
+              <div class="interview-console">
+                <div class="question-grid" id="questionBank">
+                  <article>
+                    <h3>Incident Workflow</h3>
+                    <button class="question-button" data-question="How many production alerts does your team receive in a normal week?">Weekly alert volume</button>
+                    <button class="question-button" data-question="What happens in the first 10 minutes after a high-severity alert fires?">First 10 minutes</button>
+                    <button class="question-button" data-question="Which tools do you open first during incident triage?">First tools opened</button>
+                    <button class="question-button" data-question="Where does incident context usually get lost?">Lost context</button>
+                    <button class="question-button" data-question="How do junior engineers know what to check before escalating?">Junior on-call</button>
+                  </article>
+                  <article>
+                    <h3>Runbooks And RCA</h3>
+                    <button class="question-button" data-question="How are runbooks created, reviewed, and kept current?">Runbook freshness</button>
+                    <button class="question-button" data-question="Which recurring incidents still require senior-engineer judgment?">Senior-only incidents</button>
+                    <button class="question-button" data-question="How long does it take to write a postmortem after an incident?">Postmortem time</button>
+                    <button class="question-button" data-question="What details are often missing from RCA documents?">Missing RCA details</button>
+                    <button class="question-button" data-question="What would make an AI-generated runbook untrustworthy?">Trust blockers</button>
+                  </article>
+                  <article>
+                    <h3>Buying Signal</h3>
+                    <button class="question-button" data-question="What incident-response work would you pay to reduce or automate?">Paid pain</button>
+                    <button class="question-button" data-question="Who owns the budget for reliability, observability, or platform tooling?">Budget owner</button>
+                    <button class="question-button" data-question="What security or compliance concerns would block a tool like this?">Security blockers</button>
+                    <button class="question-button" data-question="Would you try this with anonymized incident examples first?">Demo willingness</button>
+                    <button class="question-button" data-question="What result would make this worth piloting for 30 days?">Pilot success</button>
+                  </article>
+                  <article>
+                    <h3>Demo Follow-Up</h3>
+                    <button class="question-button" data-question="Which part of the generated analysis matched your real workflow?">Workflow match</button>
+                    <button class="question-button" data-question="Which recommendation was too generic or wrong?">Weak answer</button>
+                    <button class="question-button" data-question="What context should the tool ask for before generating an answer?">Missing context</button>
+                    <button class="question-button" data-question="Would this be more useful in Slack, PagerDuty, GitHub, or a web console?">Best surface</button>
+                    <button class="question-button" data-question="Can you share one more anonymized alert, log snippet, or runbook?">More examples</button>
+                  </article>
+                </div>
+
+                <form id="interviewForm" class="interview-form">
+                  <label>
+                    Selected question
+                    <textarea id="selectedQuestion" rows="2" readonly>Click any question above to start capturing an answer.</textarea>
+                  </label>
+                  <label>
+                    Answer notes
+                    <textarea id="interviewAnswer" rows="5" placeholder="Capture exact customer language, examples, objections, and follow-up actions..."></textarea>
+                  </label>
+                  <div class="interview-fields">
+                    <input id="interviewPerson" placeholder="Person or company" />
+                    <select id="interviewSignal">
+                      <option>Strong Pain</option>
+                      <option>Weak Pain</option>
+                      <option>Trust Concern</option>
+                      <option>Budget Signal</option>
+                      <option>Product Feedback</option>
+                    </select>
+                    <select id="interviewStrength">
+                      <option>High</option>
+                      <option>Medium</option>
+                      <option>Low</option>
+                    </select>
+                    <button class="primary-button" type="submit">Save Note</button>
+                  </div>
+                </form>
+
+                <div class="interview-notes" id="interviewNotes"></div>
+              </div>
+            </section>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

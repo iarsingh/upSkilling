@@ -1,0 +1,35 @@
+name: Platform CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate Kubernetes YAML
+        run: |
+          kubectl apply --dry-run=client -f k8s/base/
+
+      - name: Validate Dockerfile exists
+        run: |
+          test -f app/Dockerfile
+          test -f app/requirements.txt
+          test -f app/main.py
+
+      - name: Terraform format check
+        run: |
+          terraform fmt -check -recursive terraform
+
+      - name: Terraform init and validate
+        run: |
+          cd terraform/environments/dev
+          terraform init -backend=false
+          terraform validate
+

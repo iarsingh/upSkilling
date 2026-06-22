@@ -1,5 +1,11 @@
 .terraform/
 __pycache__/
+.pytest_cache/
+.venv/
+.env
+.env.*
+!.env.example
+.DS_Store
 kaggle.json
 kaggle-mlops-datasets/kaggle-100-portfolio-datasets/upload_status.json
 .ansible/
