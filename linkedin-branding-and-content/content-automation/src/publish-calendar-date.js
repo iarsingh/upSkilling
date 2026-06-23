@@ -25,8 +25,12 @@ function loadCalendar() {
 }
 
 async function main() {
-  const dateArg = process.argv[2] || process.env.PUBLISH_DATE || dateInTimezone(process.env.TIMEZONE);
-  const slotArg = process.argv[3] || process.env.PUBLISH_SLOT || "";
+  const rawArgs = process.argv.slice(2);
+  const args = new Set(rawArgs);
+  const positional = rawArgs.filter((arg) => !arg.startsWith("--"));
+  const dryRun = args.has("--dry-run") || String(process.env.DRY_RUN || "").toLowerCase() === "true";
+  const dateArg = positional[0] || process.env.PUBLISH_DATE || dateInTimezone(process.env.TIMEZONE);
+  const slotArg = positional[1] || process.env.PUBLISH_SLOT || "";
   const calendar = loadCalendar();
   const state = loadState();
   const publishedIds = new Set(state.published.map((entry) => entry.id));
@@ -42,6 +46,10 @@ async function main() {
   }
 
   for (const item of items) {
+    if (dryRun) {
+      console.log(`[dry-run] Would publish ${item.id} for ${dateArg}${item.slot ? ` at ${item.slot}` : ""}: ${item.topic}`);
+      continue;
+    }
     const linkedInId = await publishPost(item.text);
     markPublished(item, linkedInId);
     console.log(`Published ${item.id} for ${dateArg}: ${linkedInId}`);

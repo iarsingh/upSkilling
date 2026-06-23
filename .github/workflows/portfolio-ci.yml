@@ -12,7 +12,7 @@ on:
       - "github-actions-hands-on-projects/**"
       - "gcp-aiops-projects/**"
       - "kaggle-mlops-datasets/**"
-      - "linkedin/gke-terraform-content/**"
+      - "linkedin-branding-and-content/gke-terraform-content/**"
       - ".github/workflows/portfolio-ci.yml"
   pull_request:
     paths:
@@ -23,7 +23,7 @@ on:
       - "github-actions-hands-on-projects/**"
       - "gcp-aiops-projects/**"
       - "kaggle-mlops-datasets/**"
-      - "linkedin/gke-terraform-content/**"
+      - "linkedin-branding-and-content/gke-terraform-content/**"
       - ".github/workflows/portfolio-ci.yml"
   workflow_dispatch:
 
@@ -64,9 +64,9 @@ jobs:
             gcp-aiops-projects/01-gcp-aiops-incident-predictor/src/score_incidents.py \
             github-actions-hands-on-projects/projects/python-ci/app/calculator.py \
             github-actions-hands-on-projects/projects/docker-cloud-run/main.py \
-            linkedin/gke-terraform-content/gcp-hands-on-projects/python/gcs-csv-etl/main.py \
-            linkedin/gke-terraform-content/gcp-hands-on-projects/python/bigquery-cost-reporter/main.py \
-            linkedin/gke-terraform-content/gcp-hands-on-projects/python/secret-manager-fastapi/main.py
+            linkedin-branding-and-content/gke-terraform-content/gcp-hands-on-projects/python/gcs-csv-etl/main.py \
+            linkedin-branding-and-content/gke-terraform-content/gcp-hands-on-projects/python/bigquery-cost-reporter/main.py \
+            linkedin-branding-and-content/gke-terraform-content/gcp-hands-on-projects/python/secret-manager-fastapi/main.py
 
       - name: Validate YAML files
         run: |
@@ -78,7 +78,7 @@ jobs:
               Path("aiops-hands-on-projects"),
               Path("ansible-hands-on-projects"),
               Path("github-actions-hands-on-projects"),
-              Path("linkedin/gke-terraform-content"),
+              Path("linkedin-branding-and-content/gke-terraform-content"),
               Path(".github/workflows"),
           ]
           for root in roots:
@@ -131,8 +131,8 @@ jobs:
           set -e
           for module in \
             github-actions-hands-on-projects/projects/go-ci \
-            linkedin/gke-terraform-content/gcp-hands-on-projects/go/cloud-run-health-api \
-            linkedin/gke-terraform-content/gcp-hands-on-projects/go/pubsub-event-worker
+            linkedin-branding-and-content/gke-terraform-content/gcp-hands-on-projects/go/cloud-run-health-api \
+            linkedin-branding-and-content/gke-terraform-content/gcp-hands-on-projects/go/pubsub-event-worker
           do
             echo "Testing $module"
             (cd "$module" && test -z "$(gofmt -l .)" && go test ./...)

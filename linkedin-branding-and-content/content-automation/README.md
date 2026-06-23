@@ -81,19 +81,19 @@ Install or replace the local cron trigger:
 npm run install:cron
 ```
 
-Recommended daily schedule: `09:30 Asia/Kolkata`.
+Recommended daily schedule: `06:00`, `09:00`, and `00:00 Asia/Kolkata`.
 
-The installed cron trigger runs:
+The installed cron trigger runs three times per day:
 
 ```bash
-npm run publish:next
+node src/publish-calendar-date.js
 ```
 
-That means one scheduled content item is posted per day until the 100-day calendar is complete.
+That means the local schedule publishes one content stream per run: MLOps at `06:00`, Kubernetes at `09:00`, and Python Automation at `00:00`.
 
 ## GitHub Actions Daily Publishing
 
-The repository includes `.github/workflows/linkedin-daily.yml`, which publishes one scheduled text-only post every day at `09:47 Asia/Kolkata`.
+The repository includes `.github/workflows/linkedin-daily.yml`, which publishes scheduled text-only posts every day at `06:00`, `09:00`, and `00:00 Asia/Kolkata`.
 
 Add these repository secrets in GitHub:
 
@@ -104,21 +104,21 @@ LINKEDIN_AUTHOR_URN=urn:li:person:your_person_id
 
 The workflow reads `content-calendar.json` and publishes the item whose `date` matches the current date in `Asia/Kolkata`. You can also run it manually from the GitHub Actions tab and provide `publish_date` in `YYYY-MM-DD` format.
 
-## Three Daily Streams
+## Calendar Streams
 
-To schedule one MLOps post, one Kubernetes post, and one Python post every day:
+To prepare one MLOps post, one Kubernetes post, and one Python post every day:
 
 ```bash
 npm run schedule:three-daily
 ```
 
-This creates 60 days of calendar items with three streams:
+This creates 60 days of calendar items with three content streams:
 
-- MLOps at slot `09:30`
-- Kubernetes at slot `14:30`
-- Python Automation at slot `19:30`
+- MLOps
+- Kubernetes
+- Python Automation
 
-The GitHub workflow runs three times per day and publishes the matching slot. Manual workflow runs can also provide `publish_date` and `publish_slot`. If no slot is provided, the date publisher publishes all unpublished calendar items matching that date, sorted by slot.
+The local cron and GitHub workflow run each stream at its assigned time: MLOps at `06:00`, Kubernetes at `09:00`, and Python Automation at `00:00 Asia/Kolkata`. Manual GitHub workflow runs can still provide `publish_date` and an optional `publish_slot` for one-off recovery.
 
 Note: three LinkedIn posts per day is aggressive. Use this only if you can maintain quality and engagement. A safer growth schedule is one strong post per day, or three streams rotated across the week.
 

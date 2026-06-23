@@ -9,6 +9,8 @@
     "publish": "node src/index.js --publish",
     "publish:next": "node src/index.js --publish-next",
     "publish:date": "node src/publish-calendar-date.js",
+    "publish:today": "node src/publish-calendar-date.js",
+    "dry-run:today": "node src/publish-calendar-date.js --dry-run",
     "prepare:100": "node src/index.js --prepare-100",
     "schedule:three-daily": "node scripts/schedule-three-daily-series.js",
     "linkedin:auth": "node src/oauth.js",

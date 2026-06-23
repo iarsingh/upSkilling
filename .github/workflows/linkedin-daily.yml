@@ -2,10 +2,10 @@ name: Daily LinkedIn Publish
 
 on:
   schedule:
-    # 09:30, 14:30, and 19:30 Asia/Kolkata.
-    - cron: "0 4 * * *"
-    - cron: "0 9 * * *"
-    - cron: "0 14 * * *"
+    # 06:00, 09:00, and 00:00 Asia/Kolkata.
+    - cron: "30 0 * * *"
+    - cron: "30 3 * * *"
+    - cron: "30 18 * * *"
   workflow_dispatch:
     inputs:
       publish_date:
@@ -13,7 +13,7 @@ on:
         required: false
         type: string
       publish_slot:
-        description: "Optional slot to publish, for example 09:30, 14:30, or 19:30. Defaults to all slots for the date."
+        description: "Optional calendar slot to publish. Leave blank to publish all posts for the date."
         required: false
         type: string
 
@@ -26,13 +26,13 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: linkedin/content-automation
+        working-directory: linkedin-branding-and-content/content-automation
     env:
       TIMEZONE: Asia/Kolkata
       LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
       LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
       PUBLISH_DATE: ${{ inputs.publish_date }}
-      PUBLISH_SLOT: ${{ inputs.publish_slot || (github.event.schedule == '0 4 * * *' && '09:30') || (github.event.schedule == '0 9 * * *' && '14:30') || (github.event.schedule == '0 14 * * *' && '19:30') || '' }}
+      PUBLISH_SLOT: ${{ inputs.publish_slot || (github.event.schedule == '30 0 * * *' && '09:30') || (github.event.schedule == '30 3 * * *' && '14:30') || (github.event.schedule == '30 18 * * *' && '19:30') || '' }}
 
     steps:
       - name: Checkout repository

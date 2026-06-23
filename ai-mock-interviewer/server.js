@@ -536,6 +536,33 @@ Priority skill rotation:
 Ask exactly one interview question. Make it realistic, scenario-based, suitable for spoken practice, and strongly aligned to the JD while testing the candidate's CV claims. Rotate through the priority skills instead of repeating the same topic. For Google/product-company style, prefer system design, tradeoff, debugging, incident, and production ownership questions. Do not include the answer.`;
 }
 
+function cleanGeneratedQuestion(text) {
+  const raw = String(text || "").trim();
+  if (!raw) return "";
+
+  const questionSection = raw.match(/\*\*Question:?\*\*\s*([\s\S]+)/i);
+  const candidate = (questionSection ? questionSection[1] : raw)
+    .replace(/\r/g, "")
+    .replace(/\n\s*(This question|The question|This tests|It also assesses)[\s\S]*$/i, "")
+    .replace(/^Here(?:'s| is)[\s\S]*?\n\s*/i, "")
+    .replace(/^\*\*Question:?\*\*:?\s*/i, "")
+    .replace(/^["'`“]+|["'`”]+$/g, "")
+    .replace(/^[-*]\s+/, "")
+    .trim();
+
+  if (candidate) return candidate.replace(/\s+/g, " ").trim();
+
+  const quoted = candidate.match(/["“]([\s\S]+?\?)[”"]/);
+  if (quoted) return quoted[1].replace(/\s+/g, " ").trim();
+
+  const questionLine = candidate
+    .split(/\r?\n/)
+    .map((line) => line.replace(/^#+\s*/, "").replace(/^\*\*|\*\*$/g, "").trim())
+    .find((line) => /\?$/.test(line) && !/^here('| i)s|^question$/i.test(line));
+
+  return questionLine || candidate;
+}
+
 function serveStatic(req, res) {
   const url = new URL(req.url, `http://${req.headers.host}`);
   const requested = url.pathname === "/" ? "/index.html" : url.pathname;
@@ -665,7 +692,8 @@ const server = http.createServer(async (req, res) => {
 
     if (req.method === "POST" && req.url === "/api/question") {
       const input = await readBody(req);
-      sendJson(res, 200, { question: await askOllama(questionPrompt(input)) });
+      const question = cleanGeneratedQuestion(await askOllama(questionPrompt(input)));
+      sendJson(res, 200, { question });
       return;
     }
 
