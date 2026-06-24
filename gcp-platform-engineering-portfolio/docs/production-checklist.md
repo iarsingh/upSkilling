@@ -3,7 +3,7 @@
 ## Infrastructure
 
 - [ ] Terraform modules reviewed
-- [ ] Remote state configured
+- [ ] Terraform Enterprise workspace and remote state configured
 - [ ] Environment variables separated
 - [ ] IAM least privilege implemented
 - [ ] Required labels added
@@ -29,15 +29,18 @@
 - [ ] Kubernetes dry-run validation
 - [ ] Docker build
 - [ ] Security scan
-- [ ] Approval before production
+- [ ] Immutable Artifact Registry image
+- [ ] GitOps promotion commit
+- [ ] ArgoCD sync and rollback verified
 
 ## Observability
 
 - [ ] Health endpoint
 - [ ] Readiness endpoint
 - [ ] Metrics endpoint
-- [ ] Dashboard defined
-- [ ] Alerts defined
+- [ ] Grafana dashboard loaded
+- [ ] Prometheus targets healthy
+- [ ] Alerts tested
 - [ ] Runbook linked
 
 ## Security
@@ -48,4 +51,13 @@
 - [ ] RBAC reviewed
 - [ ] WAF/rate limit reviewed
 - [ ] Audit logging enabled
+- [ ] GitHub OIDC federation used instead of a service-account key
+- [ ] Workload Identity binding verified
 
+## Performance
+
+- [ ] k6 load test completed
+- [ ] HPA scale-up captured
+- [ ] Scale-down stabilization confirmed
+- [ ] p95 latency below target
+- [ ] Error rate below target

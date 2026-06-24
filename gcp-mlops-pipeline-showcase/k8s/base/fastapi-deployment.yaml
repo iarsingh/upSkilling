@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: model-api
+  namespace: mlops-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: model-api
+  template:
+    metadata:
+      labels:
+        app: model-api
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "8080"
+    spec:
+      serviceAccountName: model-serving
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: api
+          image: us-central1-docker.pkg.dev/PROJECT_ID/mlops/model-serving:bootstrap
+          imagePullPolicy: Always
+          env:
+            - name: MODEL_URI
+              value: gs://MODEL_BUCKET/models/diabetes/latest/model.joblib
+            - name: MODEL_NAME
+              value: diabetes-regressor
+            - name: MODEL_VERSION
+              value: bootstrap
+            - name: PREDICTION_LOG_BUCKET
+              value: PREDICTION_BUCKET
+          ports:
+            - name: http
+              containerPort: 8080
+          startupProbe:
+            httpGet:
+              path: /health
+              port: http
+            failureThreshold: 18
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: model-api
+  namespace: mlops-demo
+  labels:
+    app: model-api
+spec:
+  selector:
+    app: model-api
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

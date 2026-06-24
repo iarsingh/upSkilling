@@ -9,6 +9,7 @@ const els = {
   nextInterview: document.querySelector("#nextInterview"),
   resetInterview: document.querySelector("#resetInterview"),
   modeInputs: document.querySelectorAll("input[name='interviewMode']"),
+  technology: document.querySelector("#technology"),
   questionOrder: document.querySelector("#questionOrder"),
   practiceDay: document.querySelector("#practiceDay"),
   mockSet: document.querySelector("#mockSet"),
@@ -18,9 +19,15 @@ const els = {
   cvText: document.querySelector("#cvText"),
   jdText: document.querySelector("#jdText"),
   jdUrl: document.querySelector("#jdUrl"),
+  jdPdf: document.querySelector("#jdPdf"),
   autoNext: document.querySelector("#autoNext"),
   question: document.querySelector("#question"),
+  questionCounter: document.querySelector("#questionCounter"),
+  answerCounter: document.querySelector("#answerCounter"),
+  sessionProgress: document.querySelector("#sessionProgress"),
+  answerLabel: document.querySelector("#answerLabel"),
   answer: document.querySelector("#answer"),
+  answerCount: document.querySelector("#answerCount"),
   newQuestion: document.querySelector("#newQuestion"),
   micButton: document.querySelector("#micButton"),
   clearButton: document.querySelector("#clearButton"),
@@ -30,10 +37,46 @@ const els = {
   micState: document.querySelector("#micState"),
   copyButton: document.querySelector("#copyButton"),
   importJd: document.querySelector("#importJd"),
+  importJdPdf: document.querySelector("#importJdPdf"),
   saveContext: document.querySelector("#saveContext")
 };
 
 const STORAGE_KEY = "aiMockInterviewerState";
+const technologyLabels = {
+  all: "All technologies",
+  kubernetes: "Kubernetes / GKE",
+  gcp: "Google Cloud Platform",
+  terraform: "Terraform / IaC",
+  python: "Python automation",
+  scripting: "Scripting & automation",
+  coding: "Coding exercises",
+  sre: "SRE / reliability",
+  mlops: "MLOps / Vertex AI",
+  cicd: "CI/CD / GitOps",
+  observability: "Observability",
+  security: "Cloud / DevSecOps security",
+  networking: "Cloud networking",
+  linux: "Linux / systems",
+  platform: "Platform engineering",
+  scenario: "Scenario-based questions"
+};
+const technologyMatchers = {
+  kubernetes: /\b(kubernetes|k8s|gke|pod|deployment|statefulset|daemonset|helm|kubectl|cluster|node pool|namespace|container|ingress|service mesh|istio|kserve|kubeflow)\b/i,
+  gcp: /\b(gcp|google cloud|gke|cloud run|compute engine|cloud storage|pub\/sub|pubsub|cloud sql|alloydb|bigquery|dataflow|composer|cloud build|cloud deploy|vertex ai|shared vpc|cloud armor|cloud dns|organization polic|service account)\b/i,
+  terraform: /\b(terraform|infrastructure as code|iac|hcl|remote state|state file|workspace|sentinel|opa|policy as code|drift)\b/i,
+  python: /\b(python|pytest|pip|virtualenv|fastapi|flask|django|boto3|google cloud sdk|automation script|rest api|exception handling|decorator|generator|asyncio|pandas)\b/i,
+  scripting: /\b(script|scripting|automation|automate|python|bash|shell|powershell|cli|sdk|api|cron|scheduled job|json|yaml|csv)\b/i,
+  coding: /\b(write|code|coding|implement|function|class|algorithm|script|program|parse|return|input|output|unit test)\b/i,
+  sre: /\b(sre|reliability|sli|slo|sla|error budget|incident|postmortem|rca|on-call|oncall|availability|capacity planning|chaos|mttr|toil|runbook|disaster recovery|rto|rpo)\b/i,
+  mlops: /\b(mlops|machine learning|vertex ai|mlflow|kubeflow|model|inference|feature store|training pipeline|data drift|concept drift|gpu|kserve|seldon|bentoml|tensorflow serving|torchserve)\b/i,
+  cicd: /\b(ci\/cd|cicd|continuous integration|continuous delivery|continuous deployment|gitops|argocd|argo cd|jenkins|github actions|gitlab|cloud build|cloud deploy|pipeline|artifact|canary|blue.?green|rollback)\b/i,
+  observability: /\b(observability|prometheus|grafana|opentelemetry|open telemetry|monitoring|logging|metrics|tracing|trace|dashboard|alert|elk|opensearch|cloud operations|cloud monitoring)\b/i,
+  security: /\b(security|devsecops|iam|rbac|workload identity|secret|vault|cloud armor|waf|binary authorization|vulnerability|sast|dast|supply chain|sbom|gatekeeper|kyverno|admission|least privilege|encryption|kms)\b/i,
+  networking: /\b(network|networking|vpc|subnet|dns|load balancer|load balancing|firewall|vpn|interconnect|tcp|udp|http|https|tls|nat|routing|route|ingress|egress|gateway|proxy|envoy|apigee)\b/i,
+  linux: /\b(linux|kernel|systemd|process|filesystem|memory|cpu|disk|inode|shell|bash|tcpdump|strace|lsof|top|vmstat|iostat|permission|certificate|tls)\b/i,
+  platform: /\b(platform engineering|developer platform|internal developer platform|idp|self-service|golden path|backstage|developer experience|devex|landing zone|governance|multi-tenant)\b/i,
+  scenario: /\b(scenario|design|troubleshoot|debug|incident|outage|production|failed|failure|latency|unavailable|crash|pending|spike|drift|recover|migration|rollout|rollback|how would you|walk me through|you are|a team|a company)\b/i
+};
 const defaultFocusAreas = "GKE expert, Terraform advanced, Python automation, SRE SLI/SLO/error budgets, Prometheus/Grafana/OpenTelemetry, ArgoCD GitOps, GCP security, platform engineering, Vertex AI and MLOps basics";
 const defaultTargetSkills = `Target role family: Senior GCP DevOps / SRE / Cloud Engineer / Platform Engineer / Cloud Reliability Engineer / ML Platform Engineer
 Experience level: 6-8 years
@@ -421,6 +464,50 @@ const questionBank = [
   "Platform roadmap: What would your first 90 days look like as a senior platform engineer joining a product company?",
   "Stakeholder tradeoff: Product wants faster releases, security wants stricter gates, and SRE wants fewer incidents. How would you align them?"
 ];
+const scriptingQuestionBank = [
+  "Python automation: Design a production-ready script that inventories all GCP projects, collects labels and owners, and exports non-compliant resources to CSV.",
+  "Python automation: How would you automate GKE namespace creation with quotas, RBAC, network policies, labels, and audit logging?",
+  "Bash automation: Write the approach for a shell script that checks disk, memory, CPU, failed systemd units, and endpoint health across Linux servers.",
+  "GCP SDK automation: How would you build a Python tool that disables stale service-account keys only after approval and records every action?",
+  "Kubernetes automation: Design a script that finds CrashLoopBackOff, ImagePullBackOff, pending, and frequently restarted pods across all namespaces.",
+  "Terraform automation: How would you automate fmt, validate, lint, security scanning, plan generation, policy checks, and plan summaries in CI?",
+  "Log automation: Build an approach to parse application logs, group errors by service and exception, and report the top failures during an incident.",
+  "API automation: How would you implement pagination, retries, exponential backoff, rate-limit handling, authentication, and idempotency in a cloud API client?",
+  "Configuration automation: How would you safely update YAML configuration across many repositories without destroying formatting or unrelated settings?",
+  "Certificate automation: Design a job that discovers expiring TLS certificates, alerts owners, validates renewals, and avoids duplicate notifications.",
+  "Cost automation: How would you create a daily GCP cost anomaly report by project, service, label, and team?",
+  "Backup automation: Design a script that runs backups, validates checksums, tests restoration, enforces retention, and reports RPO compliance.",
+  "CI/CD automation: How would you automatically promote one immutable artifact through development, staging, and production with approvals and rollback?",
+  "Security automation: Build a workflow that scans public buckets, open firewall rules, overprivileged IAM roles, and unencrypted resources.",
+  "Incident automation: Which incident-response steps should be automated, and which must remain human-controlled?",
+  "Python testing: How would you test a cloud automation script without modifying real production resources?",
+  "Secrets automation: How would you retrieve and rotate secrets without printing them in logs, command history, process arguments, or CI output?",
+  "Scheduled automation: Compare cron, Kubernetes CronJobs, Cloud Scheduler with Cloud Run, and workflow orchestration for operational jobs.",
+  "Automation reliability: How would you add dry-run mode, structured logging, metrics, checkpoints, locking, retries, and rollback to a destructive script?",
+  "Automation ownership: How would you package, document, release, monitor, and support internal automation used by several engineering teams?"
+];
+const codingQuestionBank = [
+  "Python coding: Write a function that reads Kubernetes pod records and returns pods with restartCount above a threshold, grouped by namespace.",
+  "Python coding: Write a log parser that counts HTTP status codes and prints the five endpoints with the highest 5xx count.",
+  "Python coding: Implement exponential backoff with jitter for an API call, with a maximum retry count and retryable-status handling.",
+  "Python coding: Write a function that flattens nested JSON into dot-separated keys while preserving list values.",
+  "Python coding: Write a function that compares desired and actual GCP resource labels and returns missing, changed, and unexpected labels.",
+  "Python coding: Implement a thread-safe rate limiter that allows a configurable number of API requests per minute.",
+  "Python coding: Write a script that finds duplicate IP addresses and overlapping CIDR ranges from a list of network definitions.",
+  "Python coding: Write a function that calculates SLO compliance and remaining error budget from total and failed request counts.",
+  "Python coding: Parse Prometheus text-format metrics and return samples whose metric name and labels match given filters.",
+  "Python coding: Write a function that selects the latest valid semantic version from a list of container image tags.",
+  "Python coding: Implement a context manager that records operation duration and emits structured success or failure logs.",
+  "Python coding: Write unit tests for a function that deletes old cloud snapshots, including dry-run, API failure, and retention exceptions.",
+  "Python coding: Write a script that reads a CSV of users and roles, validates allowed roles, and produces an IAM change plan without applying it.",
+  "Python coding: Implement a bounded worker pool that processes cloud resources concurrently while preserving errors for a final report.",
+  "Python coding: Write a function that detects configuration drift between two nested dictionaries while ignoring approved keys.",
+  "Bash coding: Write a script that exits non-zero when disk usage exceeds a threshold and prints the five largest directories safely.",
+  "Bash coding: Write a script that checks an HTTP endpoint with timeout and retries, then emits a machine-readable health result.",
+  "Kubernetes coding: Write a Python program using the Kubernetes client that lists unschedulable pods and summarizes their scheduling reasons.",
+  "GCP coding: Write a Python program using Google Cloud client libraries that lists public Cloud Storage buckets and handles permission errors.",
+  "Terraform coding: Write a validation strategy or test that rejects resources missing required labels and prevents public ingress on port 22."
+];
 let questionNumber = 1;
 let interviewNumber = 1;
 let submittingFromMic = false;
@@ -468,6 +555,7 @@ function saveState() {
     progressHistory,
     questionBankIndex,
     usedQuestionKeys,
+    technology: els.technology.value,
     practiceDay: els.practiceDay.value,
     mockSet: els.mockSet.value,
     questionOrder: els.questionOrder.value,
@@ -488,6 +576,7 @@ function loadState() {
     : saved.cvText;
   els.jdText.value = saved.jdText || defaultTargetSkills;
   els.autoNext.checked = saved.autoNext !== false;
+  els.technology.value = saved.technology || "all";
   els.questionOrder.value = saved.questionOrder || "random";
   setMode(saved.interviewMode || "live");
   interviewNumber = Number(saved.interviewNumber || 1);
@@ -521,8 +610,18 @@ function renderInterview() {
   finalTranscript = els.answer.value;
   els.feedbackOutput.innerHTML = session.finalFeedback || "Your final interview feedback will appear here after you end the interview.";
   els.previousInterview.disabled = interviewNumber <= 1;
+  renderSessionStats();
   renderInterviewList();
   renderProgressHistory();
+}
+
+function renderSessionStats() {
+  const answered = currentInterview().answers?.length || 0;
+  const characters = els.answer.value.length;
+  els.questionCounter.textContent = `Question ${Math.max(1, questionNumber)}`;
+  els.answerCounter.textContent = `${answered} answered`;
+  els.answerCount.textContent = `${characters} character${characters === 1 ? "" : "s"}`;
+  els.sessionProgress.style.width = `${Math.min(100, answered * 10)}%`;
 }
 
 function renderInterviewList() {
@@ -540,17 +639,19 @@ function renderInterviewList() {
 }
 
 function currentPracticeLabel() {
-  if (els.mockSet.value === "random-bank") return "Random full bank mock interview";
-  if (els.mockSet.value === "custom-jd") return "Custom JD mock interview";
+  const technology = technologyLabels[els.technology.value] || technologyLabels.all;
+  let practice = "All questions";
+  if (els.mockSet.value === "random-bank") practice = "Random full bank mock interview";
+  if (els.mockSet.value === "custom-jd") practice = "Custom JD mock interview";
   if (els.mockSet.value.startsWith("day-")) {
-    return `Day ${els.mockSet.value.replace("day-", "")} mock interview`;
+    practice = `Day ${els.mockSet.value.replace("day-", "")} mock interview`;
   }
   if (els.mockSet.value !== "all") {
     const set = mockInterviewSets.find((item) => item.id === els.mockSet.value);
-    return set?.title || "Mock interview set";
+    practice = set?.title || practice;
   }
-  if (els.practiceDay.value !== "all") return `Day ${els.practiceDay.value} practice`;
-  return "All questions";
+  if (els.practiceDay.value !== "all") practice = `Day ${els.practiceDay.value} practice`;
+  return els.technology.value === "all" ? practice : `${practice} · ${technology}`;
 }
 
 function plainTextFromHtml(html) {
@@ -624,15 +725,50 @@ function updateModeUi() {
     : "Manual mode: stop mic, then click Save answer";
 }
 
+function updateAnswerEditor() {
+  const codingMode = els.technology.value === "coding";
+  els.answerLabel.textContent = codingMode ? "Code solution" : "Answer transcript";
+  els.answer.placeholder = codingMode
+    ? "Write or dictate your Python, Bash, Terraform, or pseudocode solution here."
+    : "Speak your answer or type it here.";
+  els.answer.classList.toggle("code-editor", codingMode);
+  els.micButton.disabled = !SpeechRecognition;
+}
+
 function contextPayload() {
   return {
     role: els.role.value,
     level: els.level.value,
-    topic: els.topic.value,
+    topic: els.technology.value === "all"
+      ? els.topic.value
+      : `${technologyLabels[els.technology.value]}. ${els.topic.value}`,
     cvText: els.cvText.value,
     jdText: els.jdText.value,
     interviewNumber
   };
+}
+
+function applyImportedJd(text, message) {
+  els.jdText.value = text;
+  questionBankIndex = 0;
+  usedQuestionKeys = [];
+  interviews = [createInterview(1)];
+  interviewNumber = 1;
+  renderInterview();
+  saveState();
+  els.feedbackOutput.innerHTML = markdownToHtml(message);
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = String(reader.result || "");
+      resolve(result.includes(",") ? result.split(",").pop() : result);
+    };
+    reader.onerror = () => reject(new Error("Could not read the selected file."));
+    reader.readAsDataURL(file);
+  });
 }
 
 function formatTranscript() {
@@ -644,9 +780,7 @@ function formatTranscript() {
 
 function buildJdQuestions() {
   const jd = `${els.jdText.value} ${els.topic.value}`.toLowerCase();
-  const questions = [
-    "Based on this JD, which three requirements are the highest hiring signal for you, and how would you prove each one from your past experience?"
-  ];
+  const questions = [];
 
   if (/gke|google kubernetes|kubernetes/.test(jd)) {
     questions.push("This JD emphasizes GKE/Kubernetes. Describe a production GKE incident you handled, the exact signals you checked, and how you prevented recurrence.");
@@ -716,6 +850,31 @@ function uniqueQuestions(questions) {
   });
 }
 
+function matchesTechnology(question, section = "") {
+  if (els.technology.value === "all") return true;
+  const matcher = technologyMatchers[els.technology.value];
+  return matcher ? matcher.test(`${section} ${question}`) : true;
+}
+
+function filterTechnologyQuestions(questions) {
+  return questions.filter((question) => matchesTechnology(question));
+}
+
+function specializedQuestions() {
+  if (els.technology.value === "scripting") return scriptingQuestionBank;
+  if (els.technology.value === "coding") return codingQuestionBank;
+  if (els.technology.value === "all") {
+    return [...scriptingQuestionBank, ...codingQuestionBank];
+  }
+  return [];
+}
+
+function largeBankQuestions() {
+  return largeQuestionBank
+    .filter((item) => matchesTechnology(item.question, item.section))
+    .map((item) => item.question);
+}
+
 function buildCustomJdMockQuestions() {
   const role = els.role.value || "this role";
   const jd = els.jdText.value.trim() || defaultTargetSkills;
@@ -736,42 +895,56 @@ function buildCustomJdMockQuestions() {
   ];
 
   return uniqueQuestions([
-    jdQuestions[0],
     ...baseQuestions.slice(0, 7),
-    ...jdQuestions.slice(1),
+    ...jdQuestions,
     baseQuestions[7]
   ]).slice(0, 8);
 }
 
 function questionPool() {
+  if (els.technology.value === "scripting" || els.technology.value === "coding") {
+    return uniqueQuestions(specializedQuestions());
+  }
+
+  let questions = [];
   if (els.mockSet.value !== "all") {
     if (els.mockSet.value === "random-bank") {
-      return uniqueQuestions([
-        ...largeQuestionBank.map((item) => item.question),
-        ...questionBank
-      ]);
+      questions = [
+        ...specializedQuestions(),
+        ...largeBankQuestions(),
+        ...filterTechnologyQuestions(questionBank)
+      ];
+      return uniqueQuestions(questions);
     }
-    if (els.mockSet.value === "custom-jd") return buildCustomJdMockQuestions();
+    if (els.mockSet.value === "custom-jd") {
+      return filterTechnologyQuestions(buildCustomJdMockQuestions());
+    }
     if (els.mockSet.value.startsWith("day-")) {
       const dayNumber = els.mockSet.value.replace("day-", "");
       const day = practicePlan.find((item) => String(item.day) === dayNumber);
-      if (day) return day.questions.map((item) => item.question);
+      if (day) return filterTechnologyQuestions(day.questions.map((item) => item.question));
     }
     const set = mockInterviewSets.find((item) => item.id === els.mockSet.value);
-    if (set) return set.questions.map((item) => item.question);
+    if (set) return filterTechnologyQuestions(set.questions.map((item) => item.question));
   }
   if (els.practiceDay.value !== "all") {
     const day = practicePlan.find((item) => String(item.day) === els.practiceDay.value);
-    if (day) return day.questions.map((item) => item.question);
+    if (day) return filterTechnologyQuestions(day.questions.map((item) => item.question));
   }
-  return uniqueQuestions([
-    ...buildJdQuestions(),
-    ...largeQuestionBank.map((item) => item.question),
-    ...questionBank
-  ]);
+  questions = [
+    ...specializedQuestions(),
+    ...filterTechnologyQuestions(buildJdQuestions()),
+    ...largeBankQuestions(),
+    ...filterTechnologyQuestions(questionBank)
+  ];
+  return uniqueQuestions(questions);
 }
 
 function activeQuestionPoolLabel(poolLength) {
+  const technology = technologyLabels[els.technology.value] || technologyLabels.all;
+  if (els.technology.value !== "all") {
+    return `${technology} question ${usedQuestionKeys.length}/${poolLength}`;
+  }
   if (els.mockSet.value === "random-bank") return `random full bank question ${usedQuestionKeys.length}/${poolLength}`;
   if (els.mockSet.value === "custom-jd") return `custom JD question ${questionBankIndex}/${poolLength}`;
   if (els.mockSet.value.startsWith("day-")) return `day mock interview question ${questionBankIndex}/${poolLength}`;
@@ -884,6 +1057,7 @@ function setQuestionFromText(question) {
   session.question = els.question.textContent;
   session.answerDraft = "";
   session.history.push(`Question ${questionNumber}: ${els.question.textContent}`);
+  renderSessionStats();
   saveState();
 }
 
@@ -986,6 +1160,7 @@ async function submitAnswer() {
   session.answerDraft = "";
   els.feedbackOutput.innerHTML = markdownToHtml(`## Answer Saved\nSaved answer ${session.answers.length}. Final feedback will come when you end the interview.`);
   session.finalFeedback = els.feedbackOutput.innerHTML;
+  renderSessionStats();
   saveState();
 
   try {
@@ -1017,6 +1192,7 @@ function setupSpeech() {
     finalTranscript = els.answer.value.trim();
     els.micButton.textContent = "Stop mic";
     els.micButton.classList.add("active");
+    els.micButton.setAttribute("aria-pressed", "true");
     els.micState.textContent = "Listening";
   };
 
@@ -1028,6 +1204,7 @@ function setupSpeech() {
       else interim += text;
     }
     els.answer.value = `${finalTranscript}${interim ? ` ${interim}` : ""}`.trim();
+    renderSessionStats();
   };
 
   recognition.onerror = (event) => {
@@ -1038,6 +1215,7 @@ function setupSpeech() {
     listening = false;
     els.micButton.textContent = "Start mic";
     els.micButton.classList.remove("active");
+    els.micButton.setAttribute("aria-pressed", "false");
     if (els.micState.textContent === "Listening") els.micState.textContent = "Microphone idle";
     if (currentMode() === "live" && !submittingFromMic && els.answer.value.trim()) {
       submittingFromMic = true;
@@ -1057,6 +1235,7 @@ els.clearButton.addEventListener("click", () => {
   finalTranscript = "";
   els.feedbackOutput.textContent = "Your final interview feedback will appear here after you end the interview.";
   captureInterviewState();
+  renderSessionStats();
   saveState();
 });
 
@@ -1081,18 +1260,44 @@ els.importJd.addEventListener("click", async () => {
   els.feedbackOutput.textContent = "Importing job description...";
   try {
     const data = await api("/api/import-jd-url", { url });
-    els.jdText.value = data.text;
-    questionBankIndex = 0;
-    usedQuestionKeys = [];
-    interviews = [createInterview(1)];
-    interviewNumber = 1;
-    renderInterview();
-    saveState();
-    els.feedbackOutput.innerHTML = markdownToHtml("## JD Imported\nQuestion bank updated from this job description. Click New question to start.");
+    applyImportedJd(data.text, "## JD Imported\nQuestion bank updated from this job description. Click New question to start.");
   } catch (error) {
     els.feedbackOutput.innerHTML = markdownToHtml(`## Import Failed\n${error.message}\n\nFor blocked sites, paste the JD text manually into the Job description box.`);
   } finally {
     setBusy(els.importJd, false, "Import JD from URL");
+  }
+});
+
+els.importJdPdf.addEventListener("click", async () => {
+  const file = els.jdPdf.files?.[0];
+  if (!file) {
+    els.feedbackOutput.innerHTML = markdownToHtml("## Missing File\nChoose a job description file first.");
+    return;
+  }
+  const supportedFile = /\.(pdf|docx|txt|md|png|jpe?g|webp|tiff?|bmp)$/i.test(file.name) ||
+    /^(application\/pdf|application\/vnd\.openxmlformats-officedocument\.wordprocessingml\.document|text\/|image\/)/i.test(file.type);
+  if (!supportedFile) {
+    els.feedbackOutput.innerHTML = markdownToHtml("## Invalid File\nPlease choose a PDF, DOCX, TXT, Markdown, or image file.");
+    return;
+  }
+  if (file.size > 5_000_000) {
+    els.feedbackOutput.innerHTML = markdownToHtml("## File Too Large\nPlease upload a file under 5 MB.");
+    return;
+  }
+
+  setBusy(els.importJdPdf, true, "Importing");
+  els.feedbackOutput.textContent = "Extracting job description from file...";
+  try {
+    const data = await api("/api/import-jd-file", {
+      filename: file.name,
+      mimeType: file.type,
+      data: await fileToBase64(file)
+    });
+    applyImportedJd(data.text, `## JD File Imported\nExtracted text from \`${file.name}\`. Question bank updated for this JD. Click New question to start.`);
+  } catch (error) {
+    els.feedbackOutput.innerHTML = markdownToHtml(`## File Import Failed\n${error.message}\n\nYou can still paste the JD text manually into the Job description box.`);
+  } finally {
+    setBusy(els.importJdPdf, false, "Import JD from file");
   }
 });
 
@@ -1203,11 +1408,27 @@ els.copyButton.addEventListener("click", async () => {
 setupSpeech();
 loadPracticeSources().then(() => {
   loadState();
+  updateAnswerEditor();
   checkHealth();
 });
 
 [els.role, els.level, els.topic, els.cvText, els.jdText, els.questionOrder, els.autoNext].forEach((input) => {
   input.addEventListener("change", saveState);
+});
+
+els.technology.addEventListener("change", () => {
+  questionBankIndex = 0;
+  usedQuestionKeys = [];
+  interviews = [createInterview(1)];
+  interviewNumber = 1;
+  renderInterview();
+  updateAnswerEditor();
+  saveState();
+  const poolLength = questionPool().length;
+  els.feedbackOutput.innerHTML = markdownToHtml(
+    `## Technology Practice Selected\n${technologyLabels[els.technology.value]} has ${poolLength} matching questions. Click New question to start.`
+  );
+  currentInterview().finalFeedback = els.feedbackOutput.innerHTML;
 });
 
 els.practiceDay.addEventListener("change", () => {
@@ -1232,5 +1453,13 @@ els.mockSet.addEventListener("change", () => {
 
 els.answer.addEventListener("input", () => {
   currentInterview().answerDraft = els.answer.value;
+  renderSessionStats();
   saveState();
+});
+
+els.answer.addEventListener("keydown", (event) => {
+  if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+    event.preventDefault();
+    submitAnswer();
+  }
 });

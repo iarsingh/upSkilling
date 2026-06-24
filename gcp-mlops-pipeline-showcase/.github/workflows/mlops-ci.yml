@@ -1,0 +1,129 @@
+name: MLOps Pipeline CI/CD
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  REGION: us-central1
+  REPOSITORY: mlops
+  CLUSTER_NAME: mlops-gke
+  PYTHON_VERSION: "3.12"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install project
+        run: pip install -e ".[dev]"
+
+      - name: Lint and test
+        run: |
+          ruff check src tests
+          pytest -q
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Validate Terraform
+        run: |
+          terraform -chdir=terraform fmt -check -recursive
+          terraform -chdir=terraform init -backend=false
+          terraform -chdir=terraform validate
+
+      - uses: imranismail/setup-kustomize@v2
+        with:
+          kustomize-version: "5.6.0"
+
+      - name: Render Kubernetes manifests
+        run: kustomize build k8s/overlays/prod > /tmp/mlops-prod.yaml
+
+      - name: Build containers
+        run: |
+          docker build -f docker/training.Dockerfile -t training:test .
+          docker build -f docker/serving.Dockerfile -t serving:test .
+          docker build -f docker/retrainer.Dockerfile -t retrainer:test .
+          docker build -f docker/mlflow.Dockerfile -t mlflow:test .
+
+  publish-and-deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.GCP_PROJECT_ID != ''
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_DEPLOY_SERVICE_ACCOUNT }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker authentication
+        run: gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
+
+      - name: Build and push containers
+        env:
+          PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+        run: |
+          for component in training serving retrainer mlflow
+          do
+            case "${component}" in
+              serving) image_name="model-serving" ;;
+              *) image_name="${component}" ;;
+            esac
+            image="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${image_name}:${GITHUB_SHA}"
+            docker build \
+              -f "docker/${component}.Dockerfile" \
+              --build-arg MODEL_VERSION="${GITHUB_SHA}" \
+              -t "${image}" .
+            docker push "${image}"
+          done
+
+      - name: Update Cloud Run retrainer image
+        env:
+          PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+        run: |
+          gcloud run services update model-retraining-trigger \
+            --project "${PROJECT_ID}" \
+            --region "${REGION}" \
+            --image "${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/retrainer:${GITHUB_SHA}"
+
+      - name: Deploy GKE workloads
+        env:
+          PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+          MODEL_BUCKET: ${{ vars.MODEL_BUCKET }}
+          PREDICTION_BUCKET: ${{ vars.PREDICTION_BUCKET }}
+          MLFLOW_BUCKET: ${{ vars.MLFLOW_BUCKET }}
+          MLFLOW_DATABASE_PASSWORD: ${{ secrets.MLFLOW_DATABASE_PASSWORD }}
+        run: |
+          gcloud container clusters get-credentials "${CLUSTER_NAME}" \
+            --region "${REGION}" \
+            --project "${PROJECT_ID}"
+
+          kubectl create namespace mlops-demo --dry-run=client -o yaml | kubectl apply -f -
+          kubectl create secret generic mlflow-db \
+            --namespace mlops-demo \
+            --from-literal="database-url=postgresql://mlflow:${MLFLOW_DATABASE_PASSWORD}@127.0.0.1:5432/mlflow" \
+            --dry-run=client -o yaml | kubectl apply -f -
+
+          kubectl kustomize k8s/overlays/prod \
+            | sed "s/PROJECT_ID/${PROJECT_ID}/g" \
+            | sed "s/MODEL_BUCKET/${MODEL_BUCKET}/g" \
+            | sed "s/PREDICTION_BUCKET/${PREDICTION_BUCKET}/g" \
+            | sed "s/MLFLOW_BUCKET/${MLFLOW_BUCKET}/g" \
+            | sed "s/:bootstrap/:${GITHUB_SHA}/g" \
+            | kubectl apply -f -

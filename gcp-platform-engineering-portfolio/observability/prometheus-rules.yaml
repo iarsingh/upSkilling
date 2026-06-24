@@ -1,21 +1,63 @@
-groups:
-  - name: platform-sample-api
-    rules:
-      - alert: HighErrorRate
-        expr: rate(platform_sample_requests_total[5m]) > 10
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: High request volume detected
-          description: Validate traffic, errors, and autoscaling behavior.
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: platform-sample-api
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: platform-sample-api
+      rules:
+        - alert: PlatformApiHighErrorRate
+          expr: |
+            (
+              sum(rate(platform_sample_http_requests_total{status=~"5.."}[5m]))
+              /
+              clamp_min(sum(rate(platform_sample_http_requests_total[5m])), 0.001)
+            ) > 0.05
+          for: 10m
+          labels:
+            severity: critical
+            service: platform-sample-api
+          annotations:
+            summary: Platform API 5xx error rate is above 5%
+            runbook_url: docs/troubleshooting-runbook.md#high-error-rate
 
-      - alert: PodRestartSpike
-        expr: increase(kube_pod_container_status_restarts_total[10m]) > 3
-        for: 5m
-        labels:
-          severity: critical
-        annotations:
-          summary: Pod restart spike detected
-          description: Check recent deployment, logs, probes, and resource pressure.
+        - alert: PlatformApiHighLatency
+          expr: |
+            histogram_quantile(
+              0.95,
+              sum by (le) (rate(platform_sample_http_request_duration_seconds_bucket[5m]))
+            ) > 0.5
+          for: 10m
+          labels:
+            severity: warning
+            service: platform-sample-api
+          annotations:
+            summary: Platform API p95 latency is above 500 ms
+            runbook_url: docs/troubleshooting-runbook.md#high-latency
 
+        - alert: PlatformApiUnavailable
+          expr: absent(up{service="platform-sample-api"} == 1)
+          for: 5m
+          labels:
+            severity: critical
+            service: platform-sample-api
+          annotations:
+            summary: Prometheus cannot scrape the platform API
+            runbook_url: docs/troubleshooting-runbook.md#service-unavailable
+
+        - alert: PlatformApiPodRestartSpike
+          expr: |
+            sum(increase(kube_pod_container_status_restarts_total{
+              namespace="platform-demo",
+              pod=~"platform-sample-api-.*"
+            }[10m])) > 3
+          for: 5m
+          labels:
+            severity: warning
+            service: platform-sample-api
+          annotations:
+            summary: Platform API pods are restarting repeatedly
+            runbook_url: docs/troubleshooting-runbook.md#pod-restarts

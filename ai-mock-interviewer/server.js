@@ -1,6 +1,9 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
+const mammoth = require("mammoth");
+const { PDFParse } = require("pdf-parse");
+const tesseract = require("tesseract.js");
 
 const PORT = Number(process.env.PORT || 3030);
 const HOST = process.env.HOST || "127.0.0.1";
@@ -10,6 +13,7 @@ const PUBLIC_DIR = path.join(__dirname, "public");
 const DATA_DIR = path.join(__dirname, "data");
 const PROFILE_PATH = path.join(DATA_DIR, "applicant-profile.json");
 const QUESTION_BANK_PATH = path.join(__dirname, "1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt");
+const OCR_LANG_PATH = path.join(__dirname, "node_modules", "@tesseract.js-data", "eng", "4.0.0");
 const MARKET_SKILL_BENCHMARK = `Target role family: Senior GCP DevOps / SRE / Cloud Engineer / Platform Engineer / Cloud Reliability Engineer / ML Platform Engineer
 Experience level: 6-8 years
 Target companies: Google-style interviews and product companies
@@ -70,7 +74,7 @@ function readBody(req) {
     let data = "";
     req.on("data", (chunk) => {
       data += chunk;
-      if (data.length > 1_000_000) {
+      if (data.length > 8_000_000) {
         reject(new Error("Request body is too large."));
         req.destroy();
       }
@@ -78,6 +82,64 @@ function readBody(req) {
     req.on("end", () => resolve(data ? JSON.parse(data) : {}));
     req.on("error", reject);
   });
+}
+
+function cleanExtractedText(value) {
+  return String(value || "").replace(/\s+\n/g, "\n").replace(/[ \t]+/g, " ").trim();
+}
+
+async function extractPdfText(data) {
+  const parser = new PDFParse({ data });
+  try {
+    const result = await parser.getText();
+    return cleanExtractedText(result.text);
+  } finally {
+    await parser.destroy();
+  }
+}
+
+async function extractWordText(data) {
+  const result = await mammoth.extractRawText({ buffer: data });
+  return cleanExtractedText(result.value);
+}
+
+async function extractImageText(data) {
+  const result = await tesseract.recognize(data, "eng", { langPath: OCR_LANG_PATH });
+  return cleanExtractedText(result.data.text);
+}
+
+async function extractUploadedJdText(input) {
+  const data = Buffer.from(String(input.data || ""), "base64");
+  if (!data.length) {
+    throw new Error("The uploaded file was empty.");
+  }
+  if (data.length > 5_000_000) {
+    throw new Error("File is too large. Please upload a file under 5 MB.");
+  }
+
+  const filename = String(input.filename || "").toLowerCase();
+  const mimeType = String(input.mimeType || "").toLowerCase();
+  let text = "";
+
+  if (mimeType.includes("pdf") || filename.endsWith(".pdf")) {
+    text = await extractPdfText(data);
+  } else if (
+    mimeType.includes("wordprocessingml") ||
+    filename.endsWith(".docx")
+  ) {
+    text = await extractWordText(data);
+  } else if (mimeType.startsWith("text/") || filename.endsWith(".txt") || filename.endsWith(".md")) {
+    text = cleanExtractedText(data.toString("utf8"));
+  } else if (mimeType.startsWith("image/") || /\.(png|jpe?g|webp|tiff?|bmp)$/i.test(filename)) {
+    text = await extractImageText(data);
+  } else {
+    throw new Error("Unsupported file type. Upload PDF, DOCX, TXT, MD, PNG, JPG, WEBP, TIFF, or BMP.");
+  }
+
+  if (text.length < 80) {
+    throw new Error("Could not extract enough readable text. Try a clearer file or paste the JD manually.");
+  }
+  return text;
 }
 
 function trimContext(value, maxLength = 5000) {
@@ -704,6 +766,16 @@ const server = http.createServer(async (req, res) => {
         return;
       }
       sendJson(res, 200, { text: await importJobDescription(input.url) });
+      return;
+    }
+
+    if (req.method === "POST" && (req.url === "/api/import-jd-file" || req.url === "/api/import-jd-pdf")) {
+      const input = await readBody(req);
+      if (!String(input.data || "").trim()) {
+        sendJson(res, 400, { error: "Please upload a JD file." });
+        return;
+      }
+      sendJson(res, 200, { text: await extractUploadedJdText(input) });
       return;
     }
 

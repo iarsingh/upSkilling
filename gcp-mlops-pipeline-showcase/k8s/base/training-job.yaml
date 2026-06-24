@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: initial-model-training
+  namespace: mlops-demo
+spec:
+  backoffLimit: 2
+  template:
+    spec:
+      restartPolicy: Never
+      serviceAccountName: model-serving
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: trainer
+          image: us-central1-docker.pkg.dev/PROJECT_ID/mlops/training:bootstrap
+          args:
+            - --output-dir
+            - /tmp/artifacts
+          env:
+            - name: MLFLOW_TRACKING_URI
+              value: http://mlflow:5000
+            - name: MLFLOW_EXPERIMENT_NAME
+              value: diabetes-regression
+            - name: MODEL_ARTIFACT_URI
+              value: gs://MODEL_BUCKET/models/diabetes/latest/model.joblib
+            - name: BASELINE_ARTIFACT_URI
+              value: gs://MODEL_BUCKET/models/diabetes/latest/baseline.json
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: "2"
+              memory: 2Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true

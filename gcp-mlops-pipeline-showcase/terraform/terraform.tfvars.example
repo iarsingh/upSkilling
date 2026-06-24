@@ -1,0 +1,8 @@
+project_id               = "your-mlops-project"
+region                   = "us-central1"
+zone                     = "us-central1-a"
+environment              = "prod"
+mlflow_database_password = "replace-with-secret-value"
+
+retrainer_image_uri = "us-central1-docker.pkg.dev/your-mlops-project/mlops/retrainer:bootstrap"
+training_image_uri  = "us-central1-docker.pkg.dev/your-mlops-project/mlops/training:bootstrap"

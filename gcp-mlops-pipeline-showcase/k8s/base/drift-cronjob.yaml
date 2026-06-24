@@ -1,0 +1,54 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: model-drift-monitor
+  namespace: mlops-demo
+spec:
+  schedule: "*/30 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          restartPolicy: Never
+          serviceAccountName: drift-monitor
+          securityContext:
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          containers:
+            - name: drift-monitor
+              image: us-central1-docker.pkg.dev/PROJECT_ID/mlops/training:bootstrap
+              command:
+                - python
+                - -m
+                - src.monitoring.drift
+              env:
+                - name: BASELINE_URI
+                  value: gs://MODEL_BUCKET/models/diabetes/latest/baseline.json
+                - name: PREDICTION_LOG_BUCKET
+                  value: PREDICTION_BUCKET
+                - name: GCP_PROJECT_ID
+                  value: PROJECT_ID
+                - name: RETRAIN_TOPIC_ID
+                  value: model-retraining
+                - name: DRIFT_THRESHOLD
+                  value: "0.2"
+                - name: MINIMUM_SAMPLES
+                  value: "100"
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
+                readOnlyRootFilesystem: true

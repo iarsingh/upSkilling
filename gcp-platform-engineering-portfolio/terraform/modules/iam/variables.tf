@@ -25,3 +25,14 @@ variable "roles" {
   default     = []
 }
 
+variable "workload_identity_namespace" {
+  type        = string
+  description = "Kubernetes namespace allowed to impersonate the service account"
+  default     = null
+}
+
+variable "workload_identity_service_account" {
+  type        = string
+  description = "Kubernetes service account allowed to impersonate the GCP service account"
+  default     = null
+}

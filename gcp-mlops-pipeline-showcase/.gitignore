@@ -1,0 +1,14 @@
+.DS_Store
+.env
+.pytest_cache/
+.ruff_cache/
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+__pycache__/
+.venv/
+artifacts/
+data/
+*.joblib
+mlflow.db

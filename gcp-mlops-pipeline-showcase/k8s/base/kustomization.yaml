@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+  - service-accounts.yaml
+  - fastapi-deployment.yaml
+  - fastapi-hpa.yaml
+  - kserve-inferenceservice.yaml
+  - drift-cronjob.yaml
+  - mlflow.yaml
+  - training-job.yaml
+  - service-monitor.yaml
+  - prometheus-rules.yaml
+  - grafana-dashboard.yaml

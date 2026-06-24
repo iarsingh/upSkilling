@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mlops-serving-dashboard
+  namespace: mlops-demo
+  labels:
+    grafana_dashboard: "1"
+data:
+  mlops-serving.json: |
+    {
+      "title": "GKE MLOps Model Serving",
+      "uid": "gke-mlops-serving",
+      "schemaVersion": 39,
+      "refresh": "30s",
+      "time": {"from": "now-1h", "to": "now"},
+      "panels": [
+        {
+          "id": 1,
+          "title": "Prediction Throughput",
+          "type": "timeseries",
+          "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+          "targets": [
+            {
+              "expr": "sum(rate(mlops_prediction_requests_total{status=\"success\"}[5m]))",
+              "legendFormat": "requests/sec",
+              "refId": "A"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "p95 Prediction Latency",
+          "type": "timeseries",
+          "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+          "fieldConfig": {"defaults": {"unit": "s"}},
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.95, sum by (le) (rate(mlops_prediction_latency_seconds_bucket[5m])))",
+              "legendFormat": "p95",
+              "refId": "A"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Prediction Error Rate",
+          "type": "stat",
+          "gridPos": {"h": 8, "w": 8, "x": 0, "y": 8},
+          "fieldConfig": {"defaults": {"unit": "percentunit"}},
+          "targets": [
+            {
+              "expr": "sum(rate(mlops_prediction_requests_total{status=\"error\"}[5m])) / clamp_min(sum(rate(mlops_prediction_requests_total[5m])), 0.001)",
+              "legendFormat": "errors",
+              "refId": "A"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "title": "FastAPI HPA Replicas",
+          "type": "timeseries",
+          "gridPos": {"h": 8, "w": 8, "x": 8, "y": 8},
+          "targets": [
+            {
+              "expr": "kube_horizontalpodautoscaler_status_current_replicas{namespace=\"mlops-demo\",horizontalpodautoscaler=\"model-api\"}",
+              "legendFormat": "current",
+              "refId": "A"
+            },
+            {
+              "expr": "kube_horizontalpodautoscaler_status_desired_replicas{namespace=\"mlops-demo\",horizontalpodautoscaler=\"model-api\"}",
+              "legendFormat": "desired",
+              "refId": "B"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "title": "Latest Batch Size",
+          "type": "stat",
+          "gridPos": {"h": 8, "w": 8, "x": 16, "y": 8},
+          "targets": [
+            {
+              "expr": "max(mlops_predictions_last_request)",
+              "legendFormat": "predictions",
+              "refId": "A"
+            }
+          ]
+        }
+      ]
+    }

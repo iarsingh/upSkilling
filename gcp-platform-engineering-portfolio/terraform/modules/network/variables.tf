@@ -3,6 +3,11 @@ variable "name" {
   description = "Network name prefix"
 }
 
+variable "project_id" {
+  type        = string
+  description = "GCP project ID"
+}
+
 variable "region" {
   type        = string
   description = "GCP region"
@@ -30,4 +35,3 @@ variable "services_cidr" {
   description = "Service secondary CIDR"
   default     = "10.30.0.0/20"
 }
-

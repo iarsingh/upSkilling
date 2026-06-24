@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: platform
+  namespace: argocd
+spec:
+  description: Production platform workloads managed from the main branch
+  sourceRepos:
+    - https://github.com/YOUR_GITHUB_USERNAME/gcp-platform-engineering-portfolio.git
+    - https://prometheus-community.github.io/helm-charts
+  destinations:
+    - namespace: platform-demo
+      server: https://kubernetes.default.svc
+    - namespace: monitoring
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"

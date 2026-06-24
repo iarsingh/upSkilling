@@ -1,10 +1,26 @@
-name: Platform CI
+name: Platform CI and GitOps Promotion
 
 on:
   pull_request:
   push:
     branches:
       - main
+
+permissions:
+  contents: write
+  id-token: write
+  security-events: write
+
+concurrency:
+  group: platform-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  REGION: us-central1
+  GAR_REPOSITORY: platform
+  IMAGE_NAME: platform-sample-api
+  PYTHON_VERSION: "3.12"
+  TERRAFORM_VERSION: "1.9.8"
 
 jobs:
   validate:
@@ -13,23 +29,104 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate Kubernetes YAML
-        run: |
-          kubectl apply --dry-run=client -f k8s/base/
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: app/requirements-dev.txt
 
-      - name: Validate Dockerfile exists
-        run: |
-          test -f app/Dockerfile
-          test -f app/requirements.txt
-          test -f app/main.py
+      - name: Install application dependencies
+        run: pip install -r app/requirements-dev.txt
+
+      - name: Lint application
+        run: ruff check app
+
+      - name: Test application
+        working-directory: app
+        run: pytest -q
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
 
       - name: Terraform format check
-        run: |
-          terraform fmt -check -recursive terraform
+        run: terraform fmt -check -recursive terraform
 
-      - name: Terraform init and validate
+      - name: Terraform validate
+        working-directory: terraform/environments/prod
         run: |
-          cd terraform/environments/dev
           terraform init -backend=false
           terraform validate
 
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2
+        with:
+          kustomize-version: "5.6.0"
+
+      - name: Render Kubernetes production manifests
+        run: |
+          kustomize build k8s/overlays/prod > /tmp/platform-prod.yaml
+          test -s /tmp/platform-prod.yaml
+
+      - name: Build container
+        run: docker build -t "${IMAGE_NAME}:${GITHUB_SHA}" app
+
+      - name: Scan container
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          format: table
+          exit-code: "1"
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+
+  publish-and-promote:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.GCP_PROJECT_ID != ''
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITOPS_TOKEN || github.token }}
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_DEPLOY_SERVICE_ACCOUNT }}
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Artifact Registry authentication
+        run: gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
+
+      - name: Build and push immutable image
+        env:
+          PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+        run: |
+          IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${GAR_REPOSITORY}/${IMAGE_NAME}:${GITHUB_SHA}"
+          docker build --build-arg APP_VERSION="${GITHUB_SHA}" -t "${IMAGE}" app
+          docker push "${IMAGE}"
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2
+        with:
+          kustomize-version: "5.6.0"
+
+      - name: Promote image through Git
+        env:
+          PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+        run: |
+          cd k8s/overlays/prod
+          kustomize edit set image \
+            "us-central1-docker.pkg.dev/example-project/platform/platform-sample-api=${REGION}-docker.pkg.dev/${PROJECT_ID}/${GAR_REPOSITORY}/${IMAGE_NAME}:${GITHUB_SHA}"
+          git config user.name "platform-gitops-bot"
+          git config user.email "platform-gitops-bot@users.noreply.github.com"
+          git add kustomization.yaml
+          git diff --cached --quiet && exit 0
+          git commit -m "chore(gitops): promote ${GITHUB_SHA} [skip ci]"
+          git push

@@ -63,7 +63,11 @@ Questions are not repeated until the current question pool is exhausted. Saving 
 
 The app is a mock interview question generator. By default, `Question order` is set to `Random mock questions`, so clicking `New question` randomly selects from the active pool without repeating questions until the pool is exhausted. Switch to `Sequential questions` if you want ordered practice.
 
-The built-in market question bank has 187 balanced senior-level questions across GKE, Terraform, GCP services, SRE, observability, security, networking, CI/CD, Python automation, platform engineering, MLOps, FinOps, Linux fundamentals, data reliability, DR, and senior behavioral ownership. The app also loads all 1120 questions from the local `1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt` bank, including the GCP ML and Vertex AI questions.
+Use `Technology practice` to prepare one subject at a time. Available filters include Kubernetes/GKE, GCP, Terraform/IaC, Python automation, scripting and automation, coding exercises, SRE, MLOps/Vertex AI, CI/CD/GitOps, observability, security, networking, Linux, platform engineering, and scenario-based questions. The selected technology filters the full question bank, practice days, and mock interview sets.
+
+`Coding exercises` provides practical Python, Bash, Kubernetes API, GCP SDK, log-processing, networking, SLO, and Terraform validation tasks. Write the solution directly in the code-friendly answer editor, then save it as an interview answer for final feedback.
+
+The built-in market question bank has 187 balanced senior-level questions across GKE, Terraform, GCP services, SRE, observability, security, networking, CI/CD, Python automation, platform engineering, MLOps, FinOps, Linux fundamentals, data reliability, DR, and senior behavioral ownership. The app also loads all 1180 questions from the local `1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt` bank, including the GCP ML, Vertex AI, and JD-specific Senior Cloud Engineering questions.
 
 Choose `Random full bank mock interview` from `Mock interview set` to generate random questions from the complete local question bank.
 
@@ -72,6 +76,8 @@ Choose `Random full bank mock interview` from `Mock interview set` to generate r
 Paste a public company/ATS job URL into `Import public JD URL`, then click `Import JD from URL`.
 
 This works for pages that expose readable job text. Some boards block automated access, including many LinkedIn/Indeed-style pages; for those, paste the JD text manually into `Job description`.
+
+You can also choose a local JD file with `Upload JD file`, then click `Import JD from file`. Supported formats include PDF, Word `.docx`, `.txt`, Markdown, and common image files such as PNG/JPG/WEBP/TIFF/BMP. The app extracts text locally through the mock interviewer server, fills the job description box, and resets the question tracker for the new target. Image files use local OCR, so clearer screenshots produce better results.
 
 When a JD is imported or pasted, the instant question pool adds JD-specific questions for matched skills such as GKE, Terraform, SRE, observability, GitOps, security, Python automation, platform engineering, networking, MLOps, FinOps, DR, landing zones, incident leadership, Linux fundamentals, and progressive delivery.
 

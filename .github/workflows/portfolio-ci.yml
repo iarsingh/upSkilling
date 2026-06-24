@@ -11,6 +11,8 @@ on:
       - "genai-hands-on-projects/**"
       - "github-actions-hands-on-projects/**"
       - "gcp-aiops-projects/**"
+      - "gcp-platform-engineering-portfolio/**"
+      - "gcp-mlops-pipeline-showcase/**"
       - "kaggle-mlops-datasets/**"
       - "linkedin-branding-and-content/gke-terraform-content/**"
       - ".github/workflows/portfolio-ci.yml"
@@ -22,6 +24,8 @@ on:
       - "genai-hands-on-projects/**"
       - "github-actions-hands-on-projects/**"
       - "gcp-aiops-projects/**"
+      - "gcp-platform-engineering-portfolio/**"
+      - "gcp-mlops-pipeline-showcase/**"
       - "kaggle-mlops-datasets/**"
       - "linkedin-branding-and-content/gke-terraform-content/**"
       - ".github/workflows/portfolio-ci.yml"
@@ -188,6 +192,101 @@ jobs:
 
       - name: Terraform validate
         run: terraform validate
+
+  platform-engineering-showcase:
+    name: GCP Platform Engineering Showcase
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: gcp-platform-engineering-portfolio
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: gcp-platform-engineering-portfolio/app/requirements-dev.txt
+
+      - name: Install and test application
+        run: |
+          pip install -r app/requirements-dev.txt
+          ruff check app
+          (cd app && pytest -q)
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Validate Terraform
+        run: |
+          terraform fmt -check -recursive terraform
+          cd terraform/environments/prod
+          terraform init -backend=false
+          terraform validate
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2
+        with:
+          kustomize-version: "5.6.0"
+
+      - name: Render GitOps manifests
+        run: |
+          kustomize build k8s/overlays/prod > /tmp/platform-prod.yaml
+          kustomize build observability > /tmp/platform-observability.yaml
+          test -s /tmp/platform-prod.yaml
+          test -s /tmp/platform-observability.yaml
+
+      - name: Build container
+        run: docker build -t platform-sample-api:${GITHUB_SHA} app
+
+  gcp-mlops-pipeline-showcase:
+    name: GCP MLOps Pipeline Showcase
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: gcp-mlops-pipeline-showcase
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: gcp-mlops-pipeline-showcase/pyproject.toml
+
+      - name: Install, lint, and test
+        run: |
+          pip install -e ".[dev]"
+          ruff check src tests
+          pytest -q
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Validate Terraform
+        run: |
+          terraform -chdir=terraform fmt -check -recursive
+          terraform -chdir=terraform init -backend=false
+          terraform -chdir=terraform validate
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2
+        with:
+          kustomize-version: "5.6.0"
+
+      - name: Render Kubernetes manifests
+        run: kustomize build k8s/overlays/prod > /tmp/gcp-mlops-prod.yaml
+
+      - name: Build MLOps containers
+        run: |
+          docker build -f docker/training.Dockerfile -t training:${GITHUB_SHA} .
+          docker build -f docker/serving.Dockerfile -t model-serving:${GITHUB_SHA} .
+          docker build -f docker/retrainer.Dockerfile -t retrainer:${GITHUB_SHA} .
+          docker build -f docker/mlflow.Dockerfile -t mlflow:${GITHUB_SHA} .
 
   dataset-checks:
     name: Dataset Checks

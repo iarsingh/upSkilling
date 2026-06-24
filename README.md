@@ -46,7 +46,8 @@ This keeps the GitHub view clean and recruiter-readable.
 | Area | Folder | Recruiter Signal |
 | --- | --- | --- |
 | GCP Cloud Engineering | [`gcp-cloud-engineering-portfolio`](gcp-cloud-engineering-portfolio/) | Deep GCP labs, Terraform, GKE, Cloud Run, security, networking, Vertex AI |
-| Platform Engineering | [`gcp-platform-engineering-portfolio`](gcp-platform-engineering-portfolio/) | Self-service platform, golden paths, GKE, CI/CD, observability |
+| Platform Engineering | [`gcp-platform-engineering-portfolio`](gcp-platform-engineering-portfolio/) | Terraform Enterprise, private GKE, ArgoCD GitOps, Cloud Armor, CI/CD, Prometheus/Grafana, HPA |
+| GKE MLOps Pipeline | [`gcp-mlops-pipeline-showcase`](gcp-mlops-pipeline-showcase/) | Vertex AI retraining, MLflow, FastAPI, KServe, GCS drift monitoring, Pub/Sub and Cloud Run |
 | GCP Notebooks | [`gcp-jupyter-projects`](gcp-jupyter-projects/) | BigQuery, Pub/Sub, Vertex AI, GKE rightsizing, FinOps notebooks |
 | GCP AIOps | [`gcp-aiops-projects`](gcp-aiops-projects/) | Incident prediction and Cloud Run-ready AIOps workflows |
 | MLOps Incident Copilot | [`mlops-ollama-incident-copilot`](mlops-ollama-incident-copilot/) | FastAPI, MLflow, Ollama, incident risk, observability |
@@ -95,7 +96,7 @@ Best for:
 
 Folder: [`gcp-platform-engineering-portfolio`](gcp-platform-engineering-portfolio/)
 
-Production-style platform engineering reference project for self-service infrastructure, GKE workloads, Terraform, CI/CD, observability, and security guardrails.
+Production-style platform engineering showcase with Terraform Enterprise, GCP project/VPC foundations, private regional GKE, Workload Identity, ArgoCD GitOps, GitHub Actions image promotion, Artifact Registry, Cloud Armor, Prometheus/Grafana, alerting, and HPA load testing.
 
 Best for:
 
@@ -116,7 +117,20 @@ Best for:
 - AIOps Engineer
 - SRE
 
-### 4. AI Mock Interviewer
+### 4. GCP MLOps Pipeline on GKE
+
+Folder: [`gcp-mlops-pipeline-showcase`](gcp-mlops-pipeline-showcase/)
+
+End-to-end model lifecycle with scikit-learn training, MLflow on GKE, Cloud SQL and Cloud Storage, FastAPI and KServe inference, Prometheus/Grafana metrics, PSI drift detection, Pub/Sub, Cloud Run, and Vertex AI retraining.
+
+Best for:
+
+- MLOps Engineer
+- ML Platform Engineer
+- AI Infrastructure Engineer
+- GCP Platform Engineer
+
+### 5. AI Mock Interviewer
 
 Folder: [`ai-mock-interviewer`](ai-mock-interviewer/)
 
@@ -128,7 +142,7 @@ Best for:
 - Interview preparation
 - Recruiter-facing learning discipline
 
-### 5. GenAI Hands-On Projects
+### 6. GenAI Hands-On Projects
 
 Folder: [`genai-hands-on-projects`](genai-hands-on-projects/)
 
@@ -187,4 +201,3 @@ It now includes structured hands-on projects across GCP, GKE, Terraform, Kuberne
 
 My goal is to show practical engineering depth through real project folders, not just resume keywords.
 ```
-

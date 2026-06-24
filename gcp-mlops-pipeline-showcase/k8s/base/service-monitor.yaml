@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: model-api
+  namespace: mlops-demo
+  labels:
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: model-api
+  namespaceSelector:
+    matchNames:
+      - mlops-demo
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 30s

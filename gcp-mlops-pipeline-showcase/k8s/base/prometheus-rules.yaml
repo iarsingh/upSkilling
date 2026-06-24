@@ -1,0 +1,33 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: mlops-serving
+  namespace: mlops-demo
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: mlops-serving
+      rules:
+        - alert: ModelServingHighLatency
+          expr: |
+            histogram_quantile(
+              0.95,
+              sum by (le) (rate(mlops_prediction_latency_seconds_bucket[5m]))
+            ) > 0.5
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: Model serving p95 latency is above 500 ms
+        - alert: ModelServingErrors
+          expr: |
+            sum(rate(mlops_prediction_requests_total{status="error"}[5m]))
+            /
+            clamp_min(sum(rate(mlops_prediction_requests_total[5m])), 0.001)
+            > 0.02
+          for: 10m
+          labels:
+            severity: critical
+          annotations:
+            summary: Model serving error rate is above 2%

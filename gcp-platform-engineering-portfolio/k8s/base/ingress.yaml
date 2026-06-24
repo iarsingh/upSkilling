@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: platform-sample-api
+  namespace: platform-demo
+  annotations:
+    kubernetes.io/ingress.class: gce
+    kubernetes.io/ingress.global-static-ip-name: platform-sample-api
+spec:
+  defaultBackend:
+    service:
+      name: platform-sample-api
+      port:
+        number: 80
