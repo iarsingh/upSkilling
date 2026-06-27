@@ -81,19 +81,19 @@ Install or replace the local cron trigger:
 npm run install:cron
 ```
 
-Recommended daily schedule: `06:00`, `09:00`, and `00:00 Asia/Kolkata`.
+Recommended schedule for profile growth: one strong weekday post at `09:00 Asia/Kolkata`, plus one Saturday portfolio/practical update at `10:30 Asia/Kolkata`.
 
-The installed cron trigger runs three times per day:
+The installed cron trigger runs once per weekday and once on Saturday:
 
 ```bash
 node src/publish-calendar-date.js
 ```
 
-That means the local schedule publishes one content stream per run: MLOps at `06:00`, Kubernetes at `09:00`, and Python Automation at `00:00`.
+It uses `PUBLISH_MODE=weekly-rotation`, so the local schedule publishes one selected content stream per run.
 
-## GitHub Actions Daily Publishing
+## GitHub Actions Publishing
 
-The repository includes `.github/workflows/linkedin-daily.yml`, which publishes scheduled text-only posts every day at `06:00`, `09:00`, and `00:00 Asia/Kolkata`.
+The repository includes `.github/workflows/linkedin-daily.yml`, which publishes scheduled text-only posts at `09:00 Asia/Kolkata` Monday-Friday and `10:30 Asia/Kolkata` on Saturday.
 
 Add these repository secrets in GitHub:
 
@@ -102,7 +102,13 @@ LINKEDIN_ACCESS_TOKEN=your_token
 LINKEDIN_AUTHOR_URN=urn:li:person:your_person_id
 ```
 
-The workflow reads `content-calendar.json` and publishes the item whose `date` matches the current date in `Asia/Kolkata`. You can also run it manually from the GitHub Actions tab and provide `publish_date` in `YYYY-MM-DD` format.
+The workflow reads `content-calendar.json` and publishes one item whose `date` matches the current date in `Asia/Kolkata`. With `PUBLISH_MODE=weekly-rotation`, it rotates the existing calendar streams:
+
+- Monday and Thursday: Kubernetes / platform engineering
+- Tuesday and Friday: MLOps
+- Wednesday and Saturday: Python automation / portfolio update
+
+You can also run it manually from the GitHub Actions tab and provide `publish_date` in `YYYY-MM-DD` format. To publish a specific stream manually, provide `publish_slot` as `09:30`, `14:30`, or `19:30`.
 
 ## Calendar Streams
 

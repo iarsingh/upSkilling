@@ -2,10 +2,10 @@ name: Daily LinkedIn Publish
 
 on:
   schedule:
-    # 06:00, 09:00, and 00:00 Asia/Kolkata.
-    - cron: "30 0 * * *"
-    - cron: "30 3 * * *"
-    - cron: "30 18 * * *"
+    # 09:00 Asia/Kolkata, Monday-Friday.
+    - cron: "30 3 * * 1-5"
+    # 10:30 Asia/Kolkata, Saturday.
+    - cron: "0 5 * * 6"
   workflow_dispatch:
     inputs:
       publish_date:
@@ -32,7 +32,8 @@ jobs:
       LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
       LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
       PUBLISH_DATE: ${{ inputs.publish_date }}
-      PUBLISH_SLOT: ${{ inputs.publish_slot || (github.event.schedule == '30 0 * * *' && '09:30') || (github.event.schedule == '30 3 * * *' && '14:30') || (github.event.schedule == '30 18 * * *' && '19:30') || '' }}
+      PUBLISH_SLOT: ${{ inputs.publish_slot }}
+      PUBLISH_MODE: weekly-rotation
 
     steps:
       - name: Checkout repository
