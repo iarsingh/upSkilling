@@ -65,7 +65,7 @@ The retraining trigger creates a candidate. Production promotion should require:
 
 - RMSE does not regress beyond tolerance.
 - R2 meets the minimum threshold.
-- Candidate artifact and baseline exist.
+- Candidate artifact and baseline exist under `models/diabetes/candidates/<job-name>/`.
 - Image and dependency scans pass.
 - A human or policy engine approves model promotion.
 - KServe canary metrics remain within SLO.

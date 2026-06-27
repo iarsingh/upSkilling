@@ -1,0 +1,47 @@
+[project]
+name = "gcp-ops-toolkit"
+version = "1.0.0"
+description = "Python automation toolkit for GKE, IAM, cost, Cloud Run, and Vertex AI operations."
+requires-python = ">=3.11"
+dependencies = [
+  "click>=8.1.7",
+  "fastapi>=0.115.0",
+  "google-api-python-client>=2.149.0",
+  "google-auth>=2.35.0",
+  "google-cloud-aiplatform>=1.70.0",
+  "google-cloud-artifact-registry>=1.14.0",
+  "google-cloud-billing>=1.13.0",
+  "google-cloud-build>=3.27.0",
+  "google-cloud-compute>=1.19.0",
+  "google-cloud-run>=0.10.0",
+  "google-cloud-resource-manager>=1.13.0",
+  "kubernetes>=31.0.0",
+  "pydantic>=2.9.0",
+  "rich>=13.9.0",
+  "uvicorn[standard]>=0.30.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "httpx>=0.27.0",
+  "pytest>=8.3.0",
+  "ruff>=0.8.0",
+]
+
+[project.scripts]
+gcp-ops = "gcp_ops_toolkit.cli:cli"
+
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

@@ -27,6 +27,7 @@ def submit_vertex_training(event: dict) -> str:
 
     aiplatform.init(project=project_id, location=region, staging_bucket=staging_bucket)
     display_name = f"drift-retrain-{datetime.now(UTC):%Y%m%d-%H%M%S}"
+    artifact_prefix = os.environ["MODEL_ARTIFACT_PREFIX"].rstrip("/")
     job = aiplatform.CustomJob(
         display_name=display_name,
         worker_pool_specs=[
@@ -42,11 +43,11 @@ def submit_vertex_training(event: dict) -> str:
                     "env": [
                         {
                             "name": "MODEL_ARTIFACT_URI",
-                            "value": os.environ["MODEL_ARTIFACT_URI"],
+                            "value": f"{artifact_prefix}/{display_name}/model.joblib",
                         },
                         {
                             "name": "BASELINE_ARTIFACT_URI",
-                            "value": os.environ["BASELINE_ARTIFACT_URI"],
+                            "value": f"{artifact_prefix}/{display_name}/baseline.json",
                         },
                         {
                             "name": "MLFLOW_RUN_NAME",

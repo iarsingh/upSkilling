@@ -385,12 +385,8 @@ resource "google_cloud_run_v2_service" "retrainer" {
         value = "gs://${google_storage_bucket.vertex_staging.name}"
       }
       env {
-        name  = "MODEL_ARTIFACT_URI"
-        value = "gs://${google_storage_bucket.model_artifacts.name}/models/diabetes/latest/model.joblib"
-      }
-      env {
-        name  = "BASELINE_ARTIFACT_URI"
-        value = "gs://${google_storage_bucket.model_artifacts.name}/models/diabetes/latest/baseline.json"
+        name  = "MODEL_ARTIFACT_PREFIX"
+        value = "gs://${google_storage_bucket.model_artifacts.name}/models/diabetes/candidates"
       }
     }
   }
