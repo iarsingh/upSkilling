@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AI Mock Interviewer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/styles.css">
   </head>
   <body>
@@ -11,12 +12,18 @@
       <section class="topbar">
         <div class="brand-block">
           <p class="eyebrow">Local Ollama Coach</p>
-          <h1>AI Mock Interviewer</h1>
+          <div class="brand-title">
+            <img class="brand-icon" src="/favicon.svg" alt="" aria-hidden="true">
+            <h1>AI Mock Interviewer</h1>
+          </div>
           <p class="subtitle">Practice focused technical rounds and get evidence-based feedback.</p>
         </div>
-        <div class="status" id="status">
-          <span class="dot"></span>
-          <span id="statusText">Checking Ollama</span>
+        <div class="top-actions">
+          <a class="ghost link-button" href="/admin.html">Admin report</a>
+          <div class="status" id="status">
+            <span class="dot"></span>
+            <span id="statusText">Checking Ollama</span>
+          </div>
         </div>
       </section>
 
@@ -65,9 +72,11 @@
             <select id="technology">
               <option value="all">All technologies</option>
               <option value="kubernetes">Kubernetes / GKE</option>
+              <option value="docker">Docker / Containers</option>
               <option value="gcp">Google Cloud Platform</option>
               <option value="terraform">Terraform / IaC</option>
               <option value="python">Python automation</option>
+              <option value="go">Go programming</option>
               <option value="scripting">Scripting &amp; automation</option>
               <option value="coding">Coding exercises</option>
               <option value="sre">SRE / reliability</option>
@@ -78,6 +87,8 @@
               <option value="networking">Cloud networking</option>
               <option value="linux">Linux / systems</option>
               <option value="platform">Platform engineering</option>
+              <option value="tech-risk-technical">Technology risk - technical</option>
+              <option value="tech-risk-behavioral">Technology risk - behavioural</option>
               <option value="scenario">Scenario-based questions</option>
             </select>
           </label>
@@ -156,6 +167,8 @@
             <span>Live auto-advance</span>
           </label>
           <div class="setup-actions">
+            <button id="previousQuestion" class="ghost" type="button">Previous question</button>
+            <button id="nextQuestion" class="ghost" type="button">Next question</button>
             <button id="newQuestion" class="primary" type="button">New question</button>
             <button id="endInterview" class="ghost" type="button">End interview &amp; feedback</button>
           </div>

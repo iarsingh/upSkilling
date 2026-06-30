@@ -63,7 +63,7 @@ Questions are not repeated until the current question pool is exhausted. Saving 
 
 The app is a mock interview question generator. By default, `Question order` is set to `Random mock questions`, so clicking `New question` randomly selects from the active pool without repeating questions until the pool is exhausted. Switch to `Sequential questions` if you want ordered practice.
 
-Use `Technology practice` to prepare one subject at a time. Available filters include Kubernetes/GKE, GCP, Terraform/IaC, Python automation, scripting and automation, coding exercises, SRE, MLOps/Vertex AI, CI/CD/GitOps, observability, security, networking, Linux, platform engineering, and scenario-based questions. The selected technology filters the full question bank, practice days, and mock interview sets.
+Use `Technology practice` to prepare one subject at a time. Available filters include Kubernetes/GKE, Docker/containers, GCP, Terraform/IaC, Python automation, scripting and automation, coding exercises, SRE, MLOps/Vertex AI, CI/CD/GitOps, observability, security, networking, Linux, platform engineering, and scenario-based questions. The selected technology filters the full question bank, practice days, and mock interview sets.
 
 `Coding exercises` provides practical Python, Bash, Kubernetes API, GCP SDK, log-processing, networking, SLO, and Terraform validation tasks. Write the solution directly in the code-friendly answer editor, then save it as an interview answer for final feedback.
 

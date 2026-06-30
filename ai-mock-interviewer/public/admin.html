@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Report - AI Mock Interviewer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell admin-shell">
+      <section class="topbar">
+        <div class="brand-block">
+          <p class="eyebrow">Admin</p>
+          <div class="brand-title">
+            <img class="brand-icon" src="/favicon.svg" alt="" aria-hidden="true">
+            <h1>Interview Report</h1>
+          </div>
+          <p class="subtitle">Track answered questions, remaining practice, and completed feedback reports.</p>
+        </div>
+        <div class="top-actions">
+          <button id="refreshReport" class="ghost" type="button">Refresh</button>
+          <a class="ghost link-button" href="/">Back to interview</a>
+        </div>
+      </section>
+
+      <section class="admin-grid">
+        <article class="panel admin-card">
+          <p class="eyebrow">Current Session</p>
+          <h2 id="currentInterviewTitle">Interview</h2>
+          <div class="admin-metrics">
+            <div>
+              <span id="answeredCount">0</span>
+              <small>Answered</small>
+            </div>
+            <div>
+              <span id="remainingCount">0</span>
+              <small>Left</small>
+            </div>
+            <div>
+              <span id="totalCount">0</span>
+              <small>Total</small>
+            </div>
+            <div>
+              <span id="completionRate">0%</span>
+              <small>Complete</small>
+            </div>
+          </div>
+          <div class="progress-track admin-progress" aria-hidden="true">
+            <span id="adminProgress"></span>
+          </div>
+          <dl class="admin-facts">
+            <div>
+              <dt>Practice</dt>
+              <dd id="practiceLabel">All questions</dd>
+            </div>
+            <div>
+              <dt>Role</dt>
+              <dd id="roleLabel">Not set</dd>
+            </div>
+            <div>
+              <dt>Questions generated</dt>
+              <dd id="generatedCount">0</dd>
+            </div>
+          </dl>
+        </article>
+
+        <article class="panel admin-card">
+          <p class="eyebrow">All Interviews</p>
+          <div class="admin-metrics compact">
+            <div>
+              <span id="allAnsweredCount">0</span>
+              <small>Total answered</small>
+            </div>
+            <div>
+              <span id="interviewCount">0</span>
+              <small>Sessions</small>
+            </div>
+            <div>
+              <span id="reportCount">0</span>
+              <small>Reports</small>
+            </div>
+          </div>
+          <div id="topicBreakdown" class="topic-list"></div>
+        </article>
+
+        <article class="panel admin-card admin-wide">
+          <div class="admin-section-head">
+            <div>
+              <p class="eyebrow">Answered Questions</p>
+              <h2>Current Interview</h2>
+            </div>
+          </div>
+          <div id="answeredQuestions" class="admin-list"></div>
+        </article>
+
+        <article class="panel admin-card admin-wide">
+          <div class="admin-section-head">
+            <div>
+              <p class="eyebrow">Reports</p>
+              <h2>Final Feedback History</h2>
+            </div>
+          </div>
+          <div id="reportHistory" class="admin-list"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="/admin.js"></script>
+  </body>
+</html>

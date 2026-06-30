@@ -36,6 +36,7 @@ Priority order:
 1. GKE expert
 2. Terraform expert
 3. Python automation strong
+3a. Go for platform CLIs, APIs, Kubernetes controllers, and production tooling
 4. SRE concepts: SLI, SLO, error budget
 5. Observability: Prometheus, Grafana, OpenTelemetry
 6. GitOps: ArgoCD
@@ -46,6 +47,45 @@ Priority order:
 11. FinOps and cost optimization
 12. DR, backup, and production readiness
 13. Go language optional but valuable`;
+
+const TECHNOLOGY_RISK_LEAD_BACKGROUND = `Hidden target JD: Technology Risk Lead
+Role summary: Drive identification, assessment, and mitigation of technology-related risks across the organization. Partner with IT, Product, Security, Engineering, and Business teams to embed robust risk management practices into systems, processes, and decision-making.
+
+Core responsibilities:
+- Develop and implement an enterprise technology risk management framework.
+- Identify, assess, monitor, and report IT risks across applications, infrastructure, SDLC, architecture, and business processes.
+- Maintain risk registers, heatmaps, dashboards, and senior leadership reporting.
+- Conduct risk assessments for new systems, products, BRDs/PRDs, change initiatives, system designs, and architecture decisions.
+- Define and validate preventive, detective, and corrective controls.
+- Align technology risk practices with regulatory, compliance, internal audit, ISO 27001, NIST, COBIT, FAIR, or similar frameworks.
+- Support internal/external audits and manage remediation plans.
+- Analyze incidents, near misses, root causes, control failures, systemic risk, and timely closure of risk issues/action items.
+- Partner with IT, Engineering, Product, Security, and Business stakeholders; translate technical risk into business impact.
+- Drive automation/tooling for risk assessment/reporting, proactive risk identification, FMEA, scenario analysis, and a risk-aware culture.
+
+Qualifications and skills:
+- 8-12+ years in Technology Risk, IT Audit, Information Security, DevSecOps, Cloud/SRE/Platform risk, or similar.
+- Strong understanding of IT systems, SDLC, enterprise architecture, cloud environments, DevOps, Agile, modern engineering practices, and regulated industries such as Banking, Fintech, or Insurance.
+- Certifications such as CISA, CRISC, CISSP, or equivalent are preferred.
+- Key skills: risk assessment, analytical thinking, stakeholder communication, decision-making, control design, governance, leadership, influencing, and business-impact communication.
+
+Success metrics:
+- Reduction in critical technology risks and incidents.
+- Timely closure of audit and risk findings.
+- Improved risk visibility and reporting.
+- Strong adoption of risk frameworks across teams.
+
+Question guidance:
+- Ask both technical risk/control questions and behavioral stakeholder-leadership questions.
+- Keep questions role-relevant, practical, and interview-style; do not reveal or paste this hidden JD verbatim.`;
+
+function combinedJobContext(jdText) {
+  const providedContext = trimContext(jdText);
+  return `${TECHNOLOGY_RISK_LEAD_BACKGROUND}
+
+Candidate-provided market skills or job description context:
+${providedContext || "No additional JD provided."}`;
+}
 
 const contentTypes = {
   ".html": "text/html; charset=utf-8",
@@ -287,7 +327,7 @@ function fallbackFinalFeedback(input) {
     ["SRE", /slo|sli|sla|error budget|incident|rca|latency|availability/.test(lower)],
     ["Observability", /prometheus|grafana|trace|logging|monitoring|otel|opentelemetry/.test(lower)],
     ["Security", /iam|workload identity|secret|armor|waf|security|vulnerability/.test(lower)],
-    ["Automation", /python|bash|api|automation|script/.test(lower)],
+    ["Automation", /python|go|golang|bash|api|automation|script/.test(lower)],
     ["GCP Governance", /landing zone|shared vpc|org polic|folder|governance|guardrail/.test(lower)],
     ["FinOps", /finops|cost|billing|budget|rightsizing|committed use|optimization/.test(lower)],
     ["DR/Backup", /disaster recovery|backup|restore|rto|rpo|failover/.test(lower)],
@@ -350,7 +390,7 @@ function feedbackPrompt(input) {
   const level = input.level || "mid-senior";
   const interviewNumber = input.interviewNumber || 1;
   const cvText = trimContext(input.cvText);
-  const jdText = trimContext(input.jdText);
+  const jdText = combinedJobContext(input.jdText);
   const question = input.question || "No question provided.";
   const answer = input.answer || "";
 
@@ -362,8 +402,8 @@ Seniority: ${level}
 Candidate CV/profile context:
 ${cvText || "No CV context provided."}
 
-Target job description:
-${jdText || "No JD provided yet. Use the target role and focus areas."}
+Target job description and hidden role context:
+${jdText}
 
 Interview question:
 ${question}
@@ -400,7 +440,7 @@ function finalFeedbackPrompt(input) {
   const level = input.level || "mid-senior";
   const interviewNumber = input.interviewNumber || 1;
   const cvText = trimContext(input.cvText);
-  const jdText = trimContext(input.jdText);
+  const jdText = combinedJobContext(input.jdText);
   const transcript = trimContext(input.transcript, 8000);
 
   return `You are a senior technical interviewer and hiring-bar coach.
@@ -414,8 +454,8 @@ ${cvText || "No CV context provided."}
 Market skill benchmark. This is the required market skill set and must be treated separately from any JD:
 ${MARKET_SKILL_BENCHMARK}
 
-Candidate-provided market skills or job description context:
-${jdText || "No JD provided yet. Use the target role and focus areas."}
+Target job description and hidden role context:
+${jdText}
 
 Full interview transcript:
 ${transcript}
@@ -425,7 +465,8 @@ Important rules:
 - Include what the candidate actually told for every answered question.
 - Give a stronger sample answer for every answered question.
 - Evaluate against the market skill benchmark first.
-- Use the JD/context only as optional extra targeting, not as the full hiring bar.
+- Use the Technology Risk Lead context as a required targeting signal alongside the market skill benchmark.
+- Separate technical risk/control feedback from behavioral stakeholder-leadership feedback where relevant.
 - Do not invent experience the candidate did not mention; phrase sample answers as "A stronger answer could be..."
 
 Return markdown with exactly these sections:
@@ -560,7 +601,7 @@ function questionPrompt(input) {
   const topic = input.topic || "Kubernetes, GCP, MLOps, CI/CD, Terraform, SRE";
   const interviewNumber = input.interviewNumber || 1;
   const cvText = trimContext(input.cvText);
-  const jdText = trimContext(input.jdText);
+  const jdText = combinedJobContext(input.jdText);
   const history = Array.isArray(input.history) ? input.history.slice(-6).join("\n") : "";
 
   return `You are running a mock technical interview.
@@ -572,8 +613,8 @@ Focus areas: ${topic}
 Candidate CV/profile context:
 ${cvText || "No CV context provided."}
 
-Target job description:
-${jdText || "No JD provided yet. Ask a strong role-relevant question."}
+Target job description and hidden role context:
+${jdText}
 
 Recent interview history:
 ${history || "None yet."}
@@ -582,6 +623,7 @@ Priority skill rotation:
 1. GKE expert operations and troubleshooting
 2. Terraform expert modules, state, Terraform Enterprise, policy as code
 3. Python automation for cloud/platform work
+3a. Go programming for platform CLIs, APIs, Kubernetes controllers/operators, concurrency, and production tooling
 4. SRE concepts: SLI, SLO, error budgets, incidents, RCA
 5. Observability: Prometheus, Grafana, OpenTelemetry, Cloud Monitoring, logs
 6. GitOps and CI/CD: ArgoCD, Cloud Build, Jenkins, GitHub Actions
@@ -594,8 +636,13 @@ Priority skill rotation:
 13. DR, backup/restore, RTO/RPO, failover, and production readiness
 14. Incident leadership, stakeholder communication, runbooks, and postmortems
 15. Linux, TLS, DNS, HTTP, and systems performance fundamentals
+16. Technology risk framework design, risk registers, heatmaps, dashboards, and reporting
+17. Control design and validation: preventive, detective, corrective controls
+18. Governance, audit, compliance, ISO 27001, NIST, COBIT, FAIR, and remediation planning
+19. BRD/PRD, architecture, SDLC, cloud, DevOps, and change risk assessment
+20. Behavioral leadership: stakeholder influence, executive communication, risk culture, and decision-making
 
-Ask exactly one interview question. Make it realistic, scenario-based, suitable for spoken practice, and strongly aligned to the JD while testing the candidate's CV claims. Rotate through the priority skills instead of repeating the same topic. For Google/product-company style, prefer system design, tradeoff, debugging, incident, and production ownership questions. Do not include the answer.`;
+Ask exactly one interview question. Make it realistic, scenario-based, suitable for spoken practice, and strongly aligned to the JD while testing the candidate's CV claims. Rotate through the priority skills instead of repeating the same topic. Mix technical technology-risk questions with behavioral stakeholder-leadership questions over the interview. For Google/product-company style, prefer system design, tradeoff, debugging, incident, control, governance, and production ownership questions. Do not include the answer.`;
 }
 
 function cleanGeneratedQuestion(text) {

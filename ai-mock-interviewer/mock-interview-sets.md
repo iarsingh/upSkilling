@@ -158,3 +158,136 @@ Focus: architecture tradeoffs, production readiness, cost, reliability, delivery
 7. **GCP Services:** Cloud SQL performance: A Cloud SQL database has high CPU and lock contention. How would you debug queries, connections, pooling, indexes, replicas, and app rollout impact?
 8. **SRE/Reliability:** Platform engineering: What self-service golden paths would you build for product teams, and what guardrails would you enforce without slowing delivery?
 
+## Mock Interview 13 - Recently Asked GCP Access and Security Round
+
+Focus: Compute Engine SSH, GKE identity, service account keys, signed images, hybrid networking, security, and logging
+
+1. **GCP Services:** Compute Engine SSH troubleshooting: You are not able to SSH into a Compute Engine instance. What could be the reasons, and how would you troubleshoot it?
+2. **GCP Services:** Compute Engine SSH access: What do we get when we SSH into a Compute Engine instance?
+3. **GKE/Kubernetes:** GKE Workload Identity: You have workloads running on GKE. How would you give only one pod access to Cloud Storage?
+4. **Security/DevSecOps:** Service account key security: You know about service account JSON keys. Even if someone has the JSON key, how can you prevent them from creating or accessing resources?
+5. **Security/DevSecOps:** GKE image verification: In GKE, anyone can deploy a Docker image. How would you ensure that only verified and signed images are deployed?
+6. **Networking:** Hybrid connectivity: How do you connect an on-premises network to a GCP network?
+7. **Security/DevSecOps:** GCP security baseline: What additional security measures would you implement for the GCP environment?
+8. **Observability:** Cloud Logging analysis: You have logs in Cloud Logging. How would you analyze them?
+
+## Mock Interview 14 - Recently Asked Operations and Docker Round
+
+Focus: log automation, Cloud Functions, Cloud Run, Datadog, latency, cost optimization, Docker, and Dockerfiles
+
+1. **Automation/Platform:** Log automation: Can you automate log analysis or processing?
+2. **GCP Services:** Cloud Functions and Cloud Run: Have you used Cloud Functions or Cloud Run? Explain use cases and operational considerations.
+3. **Observability:** Datadog: Have you used Datadog, and how would you use it for metrics, logs, traces, dashboards, and alerts?
+4. **GCP Services:** Cloud Functions latency: A newly created Cloud Function had high latency for a few minutes and then automatically recovered. What could be the reason?
+5. **GCP Services:** GCP cost optimization: How would you reduce the cost of a GCP environment?
+6. **Containers:** Docker experience: Have you worked on Docker? Explain the workflows and production concerns you handled.
+7. **Containers:** Dockerfiles: Have you written Dockerfiles? What best practices do you follow?
+8. **Containers:** Docker build context: What is Docker build context, and why does it matter for build speed, security, and image contents?
+
+## Mock Interview 15 - Docker Fundamentals Round
+
+Focus: Docker basics, Dockerfiles, image size, build behavior, and image security
+
+1. **Containers:** Docker fundamentals: What is Docker, and what problem does it solve?
+2. **Containers:** Dockerfile fundamentals: What is a Dockerfile, and how is it used to build an image?
+3. **Containers:** Docker CMD vs ENTRYPOINT: What is the difference between CMD and ENTRYPOINT?
+4. **Containers:** Docker image optimization: How do you optimize Docker image size?
+5. **Containers:** Docker multi-stage builds: What are multi-stage builds, and when would you use them?
+6. **Containers:** Docker image security: How do you secure Docker images before deploying them?
+
+## Mock Interview 16 - Kubernetes and GKE Fundamentals Round
+
+Focus: Kubernetes architecture, workload objects, services, ingress, rollouts, probes, and GKE operations
+
+1. **GKE/Kubernetes:** Kubernetes architecture: Explain the architecture of Kubernetes, including control plane and worker-node components.
+2. **GKE/Kubernetes:** Kubernetes workload objects: What are Pods, Deployments, ReplicaSets, StatefulSets, and DaemonSets?
+3. **GKE/Kubernetes:** StatefulSet vs Deployment: What is the difference between StatefulSet and Deployment?
+4. **GKE/Kubernetes:** Kubernetes Service types: What is a Service, and how do ClusterIP, NodePort, and LoadBalancer differ?
+5. **GKE/Kubernetes:** Kubernetes ConfigMaps and Secrets: What are ConfigMaps and Secrets, and when would you use each?
+6. **GKE/Kubernetes:** Kubernetes Ingress: How does Ingress work, and what components are involved?
+7. **GKE/Kubernetes:** Kubernetes rolling updates: How do you perform rolling updates and rollbacks?
+8. **GKE/Kubernetes:** Kubernetes probes: How do liveness and readiness probes work?
+
+## Mock Interview 17 - GKE Troubleshooting and Reliability Round
+
+Focus: CrashLoopBackOff, Pending pods, node failure, autoscaling, upgrades, availability, security, and DR
+
+1. **GKE/Kubernetes:** CrashLoopBackOff: A pod is continuously restarting. How would you troubleshoot it?
+2. **GKE/Kubernetes:** Pending pods: How do you troubleshoot Pending pods?
+3. **GKE/Kubernetes:** Kubernetes node failure: What happens when a node fails, and how do workloads recover?
+4. **GKE/Kubernetes:** GKE Cluster Autoscaler: How does Cluster Autoscaler work in GKE?
+5. **GKE/Kubernetes:** GKE cluster upgrade: How do you upgrade a GKE cluster safely?
+6. **GKE/Kubernetes:** Highly available GKE: How would you design a highly available GKE architecture?
+7. **Security/DevSecOps:** Production Kubernetes security: How would you secure a production Kubernetes cluster?
+8. **SRE/Reliability:** Disaster recovery: How would you implement disaster recovery for a production platform?
+
+## Mock Interview 18 - Terraform Fundamentals Round
+
+Focus: state, remote backends, locking, loops, modules, environments, imports, lifecycle, secrets, and cost
+
+1. **Terraform/IaC:** Terraform state basics: Explain Terraform state and why it is important.
+2. **Terraform/IaC:** Terraform remote state: What is remote state, and why do teams use it?
+3. **Terraform/IaC:** Terraform state locking: How do you handle state locking?
+4. **Terraform/IaC:** Terraform count vs for_each: What is the difference between count and for_each?
+5. **Terraform/IaC:** Terraform modules: What are modules, and how do you use them for reusable infrastructure?
+6. **Terraform/IaC:** Terraform environments: How do you manage multiple environments such as dev, staging, and production?
+7. **Terraform/IaC:** Terraform import: How do you import existing resources into Terraform safely?
+8. **Terraform/IaC:** Terraform lifecycle block: What is the Terraform lifecycle block, and when would you use it?
+9. **Terraform/IaC:** Terraform secrets: How do you handle secrets in Terraform?
+10. **Terraform/IaC:** Terraform cost optimization: How do you reduce infrastructure cost using Terraform?
+
+## Mock Interview 19 - GCP Architecture and IAM Round
+
+Focus: GCP project architecture, Shared VPC, hub-and-spoke, DNS, NAT, VPN, routing, IAM, Cloud Identity, access, monitoring, and security
+
+1. **GCP Services:** GCP project architecture: Describe a GCP project architecture you have implemented.
+2. **Networking:** Shared VPC: Explain Shared VPC and when you would use host and service projects.
+3. **Networking:** Hub-and-spoke architecture: Explain hub-and-spoke architecture in GCP.
+4. **Networking:** Hub project resources: How do you deploy shared resources in a hub project?
+5. **Networking:** Cloud DNS: Explain Cloud DNS.
+6. **Networking:** Cloud NAT: Explain Cloud NAT and the problem it solves.
+7. **Networking:** VPN Gateway: Explain VPN Gateway and how it connects networks.
+8. **Networking:** Cloud Router: Explain Cloud Router and its role with dynamic routing and BGP.
+9. **Security/DevSecOps:** GCP IAM: Explain IAM in GCP and how roles are assigned.
+10. **Security/DevSecOps:** Cloud Identity: What is Cloud Identity, and how does it relate to users and groups?
+11. **Security/DevSecOps:** GCP user access: How do you provide read-only or admin access to users safely?
+12. **Security/DevSecOps:** GCP infrastructure security: How do you secure GCP infrastructure?
+
+## Mock Interview 20 - Networking Fundamentals Round
+
+Focus: VPCs, subnets, routing, VPN, firewall rules, DNS, and hybrid connectivity
+
+1. **Networking:** VPC fundamentals: Explain VPC in cloud networking.
+2. **Networking:** Public vs private subnet: What is the difference between public and private subnets?
+3. **Networking:** Routing fundamentals: Explain routing in a cloud network.
+4. **Networking:** VPN connectivity: How does VPN connectivity work between on-premises and cloud?
+5. **Networking:** Firewall rules: Explain firewall rules and how you design them safely.
+6. **Networking:** DNS resolution: How does DNS resolution work in hybrid or cloud environments?
+7. **Networking:** Hybrid connectivity: How do on-premises systems connect to GCP?
+
+## Mock Interview 21 - CI/CD and Azure Identity Round
+
+Focus: CI/CD pipelines, deployment strategies, rollback, Azure IAM, Entra ID, and identity management
+
+1. **CI/CD/GitOps:** CI/CD pipeline: Explain your CI/CD pipeline from code commit to production.
+2. **CI/CD/GitOps:** CI/CD tools: Which CI/CD tools have you used, and where did each fit?
+3. **CI/CD/GitOps:** Application deployment: How do you deploy applications to Kubernetes, GKE, Cloud Run, or VMs?
+4. **CI/CD/GitOps:** Blue-green deployment: Explain blue-green deployment.
+5. **CI/CD/GitOps:** Canary deployment: Explain canary deployment.
+6. **CI/CD/GitOps:** Deployment rollback: How do you roll back deployments?
+7. **Azure:** Azure IAM equivalent: What is the Azure equivalent of IAM?
+8. **Azure:** Microsoft Entra ID: Explain Microsoft Entra ID and how it is used.
+9. **Azure:** Azure identity management: How do you manage users, groups, roles, and identities in Azure?
+
+## Mock Interview 22 - Monitoring and Scenario Round
+
+Focus: monitoring tools, alerts, production troubleshooting, resource usage, failed deployments, app access, migration, HA, security, and DR
+
+1. **Observability:** Monitoring tools: Which monitoring tools have you used in production?
+2. **Observability:** Alert creation: How do you create useful alerts without creating noise?
+3. **SRE/Reliability:** Production troubleshooting: How do you troubleshoot production issues end to end?
+4. **Observability:** High CPU or memory: How do you investigate high CPU or memory usage?
+5. **SRE/Reliability:** Failed production deployment: A production deployment failed. What steps would you take?
+6. **SRE/Reliability:** Application inaccessible after deployment: Users cannot access the application after deployment. How would you debug it?
+7. **Networking:** On-prem to GCP migration: How would you migrate an application from on-premises to GCP?
+8. **SRE/Reliability:** Disaster recovery: How would you implement disaster recovery?

@@ -28,6 +28,8 @@ const els = {
   answerLabel: document.querySelector("#answerLabel"),
   answer: document.querySelector("#answer"),
   answerCount: document.querySelector("#answerCount"),
+  previousQuestion: document.querySelector("#previousQuestion"),
+  nextQuestion: document.querySelector("#nextQuestion"),
   newQuestion: document.querySelector("#newQuestion"),
   micButton: document.querySelector("#micButton"),
   clearButton: document.querySelector("#clearButton"),
@@ -42,12 +44,15 @@ const els = {
 };
 
 const STORAGE_KEY = "aiMockInterviewerState";
+const ANSWER_RESET_VERSION = "2026-06-27-start-fresh";
 const technologyLabels = {
   all: "All technologies",
   kubernetes: "Kubernetes / GKE",
+  docker: "Docker / Containers",
   gcp: "Google Cloud Platform",
   terraform: "Terraform / IaC",
   python: "Python automation",
+  go: "Go programming",
   scripting: "Scripting & automation",
   coding: "Coding exercises",
   sre: "SRE / reliability",
@@ -58,13 +63,17 @@ const technologyLabels = {
   networking: "Cloud networking",
   linux: "Linux / systems",
   platform: "Platform engineering",
+  "tech-risk-technical": "Technology risk - technical",
+  "tech-risk-behavioral": "Technology risk - behavioural",
   scenario: "Scenario-based questions"
 };
 const technologyMatchers = {
-  kubernetes: /\b(kubernetes|k8s|gke|pod|deployment|statefulset|daemonset|helm|kubectl|cluster|node pool|namespace|container|ingress|service mesh|istio|kserve|kubeflow)\b/i,
+  kubernetes: /\b(kubernetes|k8s|gke|pod|deployment|statefulset|daemonset|helm|kubectl|cluster|node pool|namespace|ingress|service mesh|istio|kserve|kubeflow)\b/i,
+  docker: /\b(docker|dockerfile|container image|image size|build context|cmd|entrypoint|multi-stage|multistage|base image|distroless|alpine|container security|image scanning|docker build|docker run|docker compose|layer|cache|registry)\b/i,
   gcp: /\b(gcp|google cloud|gke|cloud run|compute engine|cloud storage|pub\/sub|pubsub|cloud sql|alloydb|bigquery|dataflow|composer|cloud build|cloud deploy|vertex ai|shared vpc|cloud armor|cloud dns|organization polic|service account)\b/i,
   terraform: /\b(terraform|infrastructure as code|iac|hcl|remote state|state file|workspace|sentinel|opa|policy as code|drift)\b/i,
-  python: /\b(python|pytest|pip|virtualenv|fastapi|flask|django|boto3|google cloud sdk|automation script|rest api|exception handling|decorator|generator|asyncio|pandas)\b/i,
+  python: /\b(python|pytest|pip|virtualenv|fastapi|flask|django|boto3|google cloud sdk|automation script|rest api|exception handling|decorator|generator|asyncio|pandas|cloud automation|kubernetes client)\b/i,
+  go: /\b(go|golang|goroutine|channel|context|interface|struct|pointer|slice|map|error handling|go module|cobra|client-go|kubernetes controller|operator|controller-runtime|concurrency|http server)\b/i,
   scripting: /\b(script|scripting|automation|automate|python|bash|shell|powershell|cli|sdk|api|cron|scheduled job|json|yaml|csv)\b/i,
   coding: /\b(write|code|coding|implement|function|class|algorithm|script|program|parse|return|input|output|unit test)\b/i,
   sre: /\b(sre|reliability|sli|slo|sla|error budget|incident|postmortem|rca|on-call|oncall|availability|capacity planning|chaos|mttr|toil|runbook|disaster recovery|rto|rpo)\b/i,
@@ -75,6 +84,8 @@ const technologyMatchers = {
   networking: /\b(network|networking|vpc|subnet|dns|load balancer|load balancing|firewall|vpn|interconnect|tcp|udp|http|https|tls|nat|routing|route|ingress|egress|gateway|proxy|envoy|apigee)\b/i,
   linux: /\b(linux|kernel|systemd|process|filesystem|memory|cpu|disk|inode|shell|bash|tcpdump|strace|lsof|top|vmstat|iostat|permission|certificate|tls)\b/i,
   platform: /\b(platform engineering|developer platform|internal developer platform|idp|self-service|golden path|backstage|developer experience|devex|landing zone|governance|multi-tenant)\b/i,
+  "tech-risk-technical": /\b(technology risk|risk assessment|risk register|heatmap|control|preventive|detective|corrective|iso 27001|nist|cobit|fair|audit|compliance|remediation|brd|prd|architecture|sdlc|change risk|cloud risk|incident|near miss|control failure|fmea|scenario analysis)\b/i,
+  "tech-risk-behavioral": /\b(behavioral|behavioural|stakeholder|communication|leadership|influenc|senior leadership|trusted advisor|decision|risk culture|conflict|priorit|audit finding|remediation|product|engineering|security|business)\b/i,
   scenario: /\b(scenario|design|troubleshoot|debug|incident|outage|production|failed|failure|latency|unavailable|crash|pending|spike|drift|recover|migration|rollout|rollback|how would you|walk me through|you are|a team|a company)\b/i
 };
 const defaultFocusAreas = "GKE expert, Terraform advanced, Python automation, SRE SLI/SLO/error budgets, Prometheus/Grafana/OpenTelemetry, ArgoCD GitOps, GCP security, platform engineering, Vertex AI and MLOps basics";
@@ -205,6 +216,12 @@ Priority order for interview preparation:
 11. FinOps and cost optimization
 12. DR, backup, and production readiness
 13. Go language optional but valuable`;
+const hiddenTechnologyRiskLeadContext = `Technology Risk Lead hidden JD context:
+Drive identification, assessment, and mitigation of technology-related risks across IT, Product, Security, Engineering, and Business teams.
+Responsibilities include enterprise technology risk framework design, risk registers, heatmaps, dashboards, application/infrastructure/process risk monitoring, risk assessments for new systems/products/change initiatives, BRD/PRD and architecture risk reviews, preventive/detective/corrective control design and validation, audit/compliance remediation, ISO 27001, NIST, COBIT, FAIR alignment, incident root-cause and systemic risk analysis, risk events/near misses/control failures, stakeholder reporting, automation/tooling, FMEA, scenario analysis, and building a risk-aware culture.
+Qualifications include 8-12+ years in technology risk, IT audit, information security, cloud/platform risk, strong SDLC and enterprise architecture understanding, regulated-industry exposure, cloud/DevOps/Agile familiarity, and CISA/CRISC/CISSP-style governance depth.
+Key skills: risk assessment, analytical thinking, communication, stakeholder management, problem solving, technical-risk-to-business-impact translation, leadership, influencing, and decision-making.
+Success metrics: fewer critical technology risks/incidents, timely closure of audit/risk findings, improved risk visibility/reporting, and adoption of risk frameworks.`;
 const defaultCvText = `AKHILESH RANJAN SINGH
 DevOps Engineer | GCP | Kubernetes | Terraform | Cloud Security
 Email: akhileshranjan.ks@gmail.com
@@ -283,6 +300,77 @@ const questionBank = [
   "Observability: An alert says p95 latency increased from 200ms to 2s after a deployment. How would you investigate using Prometheus, Grafana, Cloud Logging, logs, and traces?",
   "GitOps: How would you implement GitOps with ArgoCD for Kubernetes workloads across dev, staging, and production while keeping rollbacks and approvals safe?",
   "Cloud security: How would you secure workload access to GCP services from GKE using Workload Identity, IAM, Secret Manager, and least privilege?",
+  "Compute Engine SSH troubleshooting: You are not able to SSH into a Compute Engine instance. What could be the reasons, and how would you troubleshoot it?",
+  "Compute Engine SSH access: What do we get when we SSH into a Compute Engine instance?",
+  "GKE Workload Identity: You have workloads running on GKE. How would you give only one pod access to Cloud Storage?",
+  "Service account key security: You know about service account JSON keys. Even if someone has the JSON key, how can you prevent them from creating or accessing resources?",
+  "GKE image verification: In GKE, anyone can deploy a Docker image. How would you ensure that only verified and signed images are deployed?",
+  "Hybrid connectivity: How do you connect an on-premises network to a GCP network?",
+  "GCP security baseline: What additional security measures would you implement for the GCP environment?",
+  "Cloud Logging analysis: You have logs in Cloud Logging. How would you analyze them?",
+  "Log automation: Can you automate log analysis or processing?",
+  "Cloud Functions and Cloud Run: Have you used Cloud Functions or Cloud Run? Explain use cases and operational considerations.",
+  "Datadog: Have you used Datadog, and how would you use it for metrics, logs, traces, dashboards, and alerts?",
+  "Cloud Functions latency: A newly created Cloud Function had high latency for a few minutes and then automatically recovered. What could be the reason?",
+  "GCP cost optimization: How would you reduce the cost of a GCP environment?",
+  "Docker experience: Have you worked on Docker? Explain the workflows and production concerns you handled.",
+  "Dockerfiles: Have you written Dockerfiles? What best practices do you follow?",
+  "Docker build context: What is Docker build context, and why does it matter for build speed, security, and image contents?",
+  "Docker fundamentals: What is Docker, and what problem does it solve?",
+  "Dockerfile fundamentals: What is a Dockerfile, and how is it used to build an image?",
+  "Docker CMD vs ENTRYPOINT: What is the difference between CMD and ENTRYPOINT?",
+  "Docker image optimization: How do you optimize Docker image size?",
+  "Docker multi-stage builds: What are multi-stage builds, and when would you use them?",
+  "Docker image security: How do you secure Docker images before deploying them?",
+  "Kubernetes architecture: Explain the architecture of Kubernetes, including control plane and worker-node components.",
+  "Kubernetes workload objects: What are Pods, Deployments, ReplicaSets, StatefulSets, and DaemonSets?",
+  "Kubernetes Service types: What is a Service, and how do ClusterIP, NodePort, and LoadBalancer differ?",
+  "Kubernetes ConfigMaps and Secrets: What are ConfigMaps and Secrets, and when would you use each?",
+  "Kubernetes Ingress: How does Ingress work, and what components are involved?",
+  "Kubernetes rolling updates: How do you perform rolling updates and rollbacks?",
+  "Kubernetes probes: How do liveness and readiness probes work?",
+  "Kubernetes node failure: What happens when a node fails, and how do workloads recover?",
+  "GKE Cluster Autoscaler: How does Cluster Autoscaler work in GKE?",
+  "GKE cluster upgrade: How do you upgrade a GKE cluster safely?",
+  "Terraform state basics: Explain Terraform state and why it is important.",
+  "Terraform remote state: What is remote state, and why do teams use it?",
+  "Terraform state locking: How do you handle state locking?",
+  "Terraform count vs for_each: What is the difference between count and for_each?",
+  "Terraform modules: What are modules, and how do you use them for reusable infrastructure?",
+  "Terraform environments: How do you manage multiple environments such as dev, staging, and production?",
+  "Terraform lifecycle block: What is the Terraform lifecycle block, and when would you use it?",
+  "GCP project architecture: Describe a GCP project architecture you have implemented.",
+  "Shared VPC: Explain Shared VPC and when you would use host and service projects.",
+  "Hub-and-spoke architecture: Explain hub-and-spoke architecture in GCP.",
+  "Hub project resources: How do you deploy shared resources in a hub project?",
+  "Cloud NAT: Explain Cloud NAT and the problem it solves.",
+  "VPN Gateway: Explain VPN Gateway and how it connects networks.",
+  "Cloud Router: Explain Cloud Router and its role with dynamic routing and BGP.",
+  "GCP IAM: Explain IAM in GCP and how roles are assigned.",
+  "Cloud Identity: What is Cloud Identity, and how does it relate to users and groups?",
+  "GCP user access: How do you provide read-only or admin access to users safely?",
+  "VPC fundamentals: Explain VPC in cloud networking.",
+  "Public vs private subnet: What is the difference between public and private subnets?",
+  "Routing fundamentals: Explain routing in a cloud network.",
+  "VPN connectivity: How does VPN connectivity work between on-premises and cloud?",
+  "Firewall rules: Explain firewall rules and how you design them safely.",
+  "DNS resolution: How does DNS resolution work in hybrid or cloud environments?",
+  "CI/CD pipeline: Explain your CI/CD pipeline from code commit to production.",
+  "CI/CD tools: Which CI/CD tools have you used, and where did each fit?",
+  "Application deployment: How do you deploy applications to Kubernetes, GKE, Cloud Run, or VMs?",
+  "Azure IAM equivalent: What is the Azure equivalent of IAM?",
+  "Microsoft Entra ID: Explain Microsoft Entra ID and how it is used.",
+  "Azure identity management: How do you manage users, groups, roles, and identities in Azure?",
+  "Monitoring tools: Which monitoring tools have you used in production?",
+  "Alert creation: How do you create useful alerts without creating noise?",
+  "Production troubleshooting: How do you troubleshoot production issues end to end?",
+  "High CPU or memory: How do you investigate high CPU or memory usage?",
+  "Failed production deployment: A production deployment failed. What steps would you take?",
+  "Application inaccessible after deployment: Users cannot access the application after deployment. How would you debug it?",
+  "On-prem to GCP migration: How would you migrate an application from on-premises to GCP?",
+  "Highly available GKE: How would you design a highly available GKE architecture?",
+  "Production Kubernetes security: How would you secure a production Kubernetes cluster?",
+  "Disaster recovery: How would you implement disaster recovery for a production platform?",
   "Platform engineering: What self-service golden paths would you build for product teams, and what guardrails would you enforce without slowing delivery?",
   "Vertex AI and MLOps: A team wants model serving on Kubernetes with FastAPI and GPU workloads. How would you design deployment, autoscaling, monitoring, and rollback?",
   "Go optional: Where would Go be useful in a platform engineering environment, and how would you decide between Go, Python, and Bash for automation?",
@@ -486,6 +574,42 @@ const scriptingQuestionBank = [
   "Automation reliability: How would you add dry-run mode, structured logging, metrics, checkpoints, locking, retries, and rollback to a destructive script?",
   "Automation ownership: How would you package, document, release, monitor, and support internal automation used by several engineering teams?"
 ];
+const dockerQuestionBank = [
+  "Docker fundamentals: What is Docker, and what problem does it solve?",
+  "Dockerfile fundamentals: What is a Dockerfile, and how is it used to build an image?",
+  "Docker experience: Have you worked on Docker? Explain the workflows and production concerns you handled.",
+  "Dockerfiles: Have you written Dockerfiles? What best practices do you follow?",
+  "Docker build context: What is Docker build context, and why does it matter for build speed, security, and image contents?",
+  "Docker CMD vs ENTRYPOINT: What is the difference between CMD and ENTRYPOINT?",
+  "Docker image optimization: How do you optimize Docker image size?",
+  "Docker multi-stage builds: What are multi-stage builds, and when would you use them?",
+  "Docker image security: How do you secure Docker images before deploying them?",
+  "Docker image design: How would you build secure, small, reproducible Docker images for production services?",
+  "Docker layer caching: How do Docker layers and cache affect build speed and image reproducibility?",
+  "Docker base images: How do you choose between Ubuntu, Alpine, slim, and distroless base images?",
+  "Docker non-root containers: Why should containers avoid running as root, and how do you implement that in a Dockerfile?",
+  "Docker secrets: How do you prevent secrets from leaking into Docker images, build logs, and runtime environment variables?",
+  "Docker registry: How do you tag, push, scan, and promote Docker images through environments?",
+  "Docker troubleshooting: A container works locally but fails in Kubernetes. How would you debug entrypoint, environment variables, filesystem, permissions, and health checks?",
+  "Docker networking: How does container networking work locally, and what changes when the container runs in Kubernetes?",
+  "Docker volumes: When would you use bind mounts, volumes, or ephemeral container storage?",
+  "Docker Compose: When is Docker Compose useful, and why is it different from Kubernetes?",
+  "Docker production readiness: What checks should pass before a Docker image is approved for production?"
+];
+const pythonQuestionBank = [
+  "Python automation: How would you design a Python script that audits GCP IAM bindings, flags risky roles, and exports a remediation report?",
+  "Python automation: How would you use the Kubernetes Python client to find CrashLoopBackOff, ImagePullBackOff, Pending, and high-restart pods across namespaces?",
+  "Python error handling: How would you design retries, exponential backoff, timeouts, and idempotency for a Python cloud API automation tool?",
+  "Python testing: How would you unit test a GCP or Kubernetes automation script without touching real production resources?",
+  "Python logging: How would you implement structured logging, correlation IDs, and metrics in a Python operational tool?",
+  "Python data parsing: How would you parse large JSON, YAML, CSV, or log files safely and produce an incident summary?",
+  "Python concurrency: When would you use threads, asyncio, multiprocessing, or a worker pool for cloud resource inventory?",
+  "Python packaging: How would you package, version, document, and release an internal Python CLI used by platform teams?",
+  "Python FastAPI: How would you design a small FastAPI service that exposes self-service infrastructure requests with validation, approval, and audit logs?",
+  "Python security: How would you prevent secrets from leaking through environment variables, logs, stack traces, process arguments, or CI output?",
+  "Python code review: What would you check in a Python automation PR before allowing it to run against production infrastructure?",
+  "Python interview coding: Write the approach for a function that calculates SLO compliance and remaining error budget from request totals and failures."
+];
 const codingQuestionBank = [
   "Python coding: Write a function that reads Kubernetes pod records and returns pods with restartCount above a threshold, grouped by namespace.",
   "Python coding: Write a log parser that counts HTTP status codes and prints the five endpoints with the highest 5xx count.",
@@ -508,6 +632,48 @@ const codingQuestionBank = [
   "GCP coding: Write a Python program using Google Cloud client libraries that lists public Cloud Storage buckets and handles permission errors.",
   "Terraform coding: Write a validation strategy or test that rejects resources missing required labels and prevents public ingress on port 22."
 ];
+const goQuestionBank = [
+  "Go fundamentals: What are the main differences between Go and Python for cloud/platform automation, and when would you choose each?",
+  "Go error handling: How does Go error handling work, and how would you structure errors in a production CLI or service?",
+  "Go concurrency: Explain goroutines, channels, context cancellation, and wait groups using a platform automation example.",
+  "Go HTTP service: How would you build a small Go HTTP service for health checks, metrics, and safe operational actions?",
+  "Go CLI design: How would you design a Go CLI with Cobra to audit Kubernetes or GCP resources across environments?",
+  "Go Kubernetes: When would you use client-go or controller-runtime, and how would you design a simple Kubernetes controller?",
+  "Go operator: A team wants an operator to manage namespace onboarding with RBAC, quotas, and network policies. How would you approach it in Go?",
+  "Go interfaces: How do interfaces help with testing cloud clients, Kubernetes clients, and business logic in Go?",
+  "Go testing: How would you write unit tests, table-driven tests, mocks, and integration tests for a Go platform tool?",
+  "Go modules: How do Go modules, semantic versioning, dependency updates, and vulnerability scanning fit into enterprise engineering?",
+  "Go observability: How would you add structured logs, Prometheus metrics, traces, and graceful shutdown to a Go service?",
+  "Go production readiness: What code review checklist would you use before deploying a Go automation service or controller to production?"
+];
+const techRiskTechnicalQuestionBank = [
+  "Technology risk framework: How would you design an enterprise technology risk management framework for cloud, applications, infrastructure, SDLC, and third-party integrations?",
+  "Risk assessment: A product team is launching a new customer-facing platform on GCP/GKE. How would you assess technology risk from BRD/PRD through architecture review, build, release, and operations?",
+  "Control design: For a regulated cloud platform, define preventive, detective, and corrective controls for IAM, network exposure, CI/CD, secrets, vulnerability management, and production changes.",
+  "Risk register and heatmap: What fields would you maintain in a technology risk register, how would you score likelihood/impact, and how would you convert it into a leadership heatmap?",
+  "Framework mapping: How would you map ISO 27001, NIST, COBIT, and FAIR requirements to practical cloud and DevOps controls without creating checkbox compliance?",
+  "Audit remediation: An external audit finds weak access reviews, missing evidence, and delayed patching. How would you create a remediation plan, owners, due dates, risk acceptance, and reporting?",
+  "Incident risk analysis: A production incident was fixed quickly, but the same failure could repeat. How would you analyze root cause, systemic risk, control failure, and long-term mitigation?",
+  "Change risk: A major architecture change introduces a new data flow, API gateway, and cloud database. What risk questions would you ask before approval?",
+  "Cloud risk dashboard: Design a technology risk dashboard for senior leadership. What KRIs, control metrics, exceptions, trends, and escalation signals would you include?",
+  "Risk automation: What parts of technology risk assessment and reporting would you automate using cloud logs, CI/CD metadata, vulnerability scanners, policy-as-code, and ticketing workflows?",
+  "FMEA and scenario analysis: How would you use FMEA or scenario analysis to identify high-impact technology failure modes before they become incidents?",
+  "Control validation: How would you test whether a control is actually working, for example privileged access, deployment approval, backup restore, or vulnerability SLA closure?"
+];
+const techRiskBehavioralQuestionBank = [
+  "Behavioural risk leadership: Tell me about a time you had to influence engineering or product teams to fix a technology risk they did not initially prioritize.",
+  "Stakeholder communication: How would you explain a critical cloud security risk to senior leadership in business-impact language without overwhelming them with technical detail?",
+  "Conflict handling: Product wants to release quickly, Security wants stricter controls, and Engineering says the control adds toil. How would you drive a decision?",
+  "Trusted advisor: Describe how you would build trust with IT, Engineering, Product, Security, Audit, and Business stakeholders as a Technology Risk Lead.",
+  "Prioritization: You have critical audit findings, recurring incidents, and a weak risk dashboard. How would you prioritize the next 30, 60, and 90 days?",
+  "Risk culture: Give an example of how you would promote a risk-aware culture without making teams feel blocked or blamed.",
+  "Executive reporting: How would you present a deteriorating risk trend to senior leadership and ask for investment or policy support?",
+  "Decision-making: Tell me about a time you had incomplete information but still had to make or recommend a risk decision.",
+  "Remediation ownership: A risk issue is overdue because multiple teams disagree on ownership. How would you move it to closure?",
+  "Audit partnership: How would you handle a disagreement with internal or external auditors about severity, evidence, or remediation feasibility?",
+  "Incident communication: During a major incident with regulatory implications, how would you coordinate technical updates, business impact, risk reporting, and follow-up actions?",
+  "Leadership reflection: What does success look like for you in a Technology Risk Lead role after six months?"
+];
 let questionNumber = 1;
 let interviewNumber = 1;
 let submittingFromMic = false;
@@ -527,7 +693,9 @@ function createInterview(number) {
     answerDraft: "",
     finalFeedback: "",
     history: [],
-    answers: []
+    answers: [],
+    questionHistory: [],
+    questionHistoryIndex: -1
   };
 }
 
@@ -545,6 +713,7 @@ function setBusy(button, busy, text) {
 
 function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    answerResetVersion: ANSWER_RESET_VERSION,
     role: els.role.value,
     level: els.level.value,
     topic: els.topic.value,
@@ -566,6 +735,7 @@ function saveState() {
 
 function loadState() {
   const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+  const shouldResetAnswers = saved.answerResetVersion !== ANSWER_RESET_VERSION;
   els.role.value = saved.role || els.role.value;
   els.level.value = saved.level || els.level.value;
   els.topic.value = !saved.topic || saved.topic === els.topic.defaultValue
@@ -579,18 +749,19 @@ function loadState() {
   els.technology.value = saved.technology || "all";
   els.questionOrder.value = saved.questionOrder || "random";
   setMode(saved.interviewMode || "live");
-  interviewNumber = Number(saved.interviewNumber || 1);
-  interviews = Array.isArray(saved.interviews) && saved.interviews.length
+  interviewNumber = shouldResetAnswers ? 1 : Number(saved.interviewNumber || 1);
+  interviews = !shouldResetAnswers && Array.isArray(saved.interviews) && saved.interviews.length
     ? saved.interviews
     : [createInterview(1)];
-  progressHistory = Array.isArray(saved.progressHistory) ? saved.progressHistory : [];
-  questionBankIndex = Number(saved.questionBankIndex || 0);
-  usedQuestionKeys = Array.isArray(saved.usedQuestionKeys) ? saved.usedQuestionKeys : [];
+  progressHistory = shouldResetAnswers || !Array.isArray(saved.progressHistory) ? [] : saved.progressHistory;
+  questionBankIndex = shouldResetAnswers ? 0 : Number(saved.questionBankIndex || 0);
+  usedQuestionKeys = shouldResetAnswers || !Array.isArray(saved.usedQuestionKeys) ? [] : saved.usedQuestionKeys;
   els.practiceDay.value = saved.practiceDay || "all";
   els.mockSet.value = saved.mockSet || "all";
   questionNumber = currentInterview().questionNumber || 1;
   renderInterview();
   updateModeUi();
+  if (shouldResetAnswers) saveState();
 }
 
 function captureInterviewState() {
@@ -599,10 +770,32 @@ function captureInterviewState() {
   session.question = els.question.textContent;
   session.answerDraft = els.answer.value;
   session.finalFeedback = els.feedbackOutput.innerHTML;
+  saveCurrentQuestionDraft();
+}
+
+function saveCurrentQuestionDraft() {
+  const session = currentInterview();
+  if (!Array.isArray(session.questionHistory)) {
+    session.questionHistory = [];
+    session.questionHistoryIndex = -1;
+  }
+  const index = Number(session.questionHistoryIndex);
+  if (index >= 0 && session.questionHistory[index]) {
+    session.questionHistory[index].answerDraft = els.answer.value;
+  }
+}
+
+function ensureQuestionHistory() {
+  const session = currentInterview();
+  if (!Array.isArray(session.questionHistory)) session.questionHistory = [];
+  if (!Number.isInteger(session.questionHistoryIndex)) {
+    session.questionHistoryIndex = session.questionHistory.length ? session.questionHistory.length - 1 : -1;
+  }
 }
 
 function renderInterview() {
   const session = currentInterview();
+  ensureQuestionHistory();
   questionNumber = session.questionNumber || 1;
   els.interviewLabel.textContent = `Interview ${interviewNumber}`;
   els.question.textContent = session.question || "This is a mock interview. Click New question to generate a random DevOps, MLOps, Kubernetes, GCP, Terraform, Python, or scenario-based question.";
@@ -610,6 +803,8 @@ function renderInterview() {
   finalTranscript = els.answer.value;
   els.feedbackOutput.innerHTML = session.finalFeedback || "Your final interview feedback will appear here after you end the interview.";
   els.previousInterview.disabled = interviewNumber <= 1;
+  els.previousQuestion.disabled = session.questionHistoryIndex <= 0;
+  els.nextQuestion.disabled = session.questionHistoryIndex >= session.questionHistory.length - 1;
   renderSessionStats();
   renderInterviewList();
   renderProgressHistory();
@@ -779,7 +974,7 @@ function formatTranscript() {
 }
 
 function buildJdQuestions() {
-  const jd = `${els.jdText.value} ${els.topic.value}`.toLowerCase();
+  const jd = `${hiddenTechnologyRiskLeadContext} ${els.jdText.value} ${els.topic.value}`.toLowerCase();
   const questions = [];
 
   if (/gke|google kubernetes|kubernetes/.test(jd)) {
@@ -802,6 +997,9 @@ function buildJdQuestions() {
   }
   if (/python|automation|script|sdk|api/.test(jd)) {
     questions.push("This JD emphasizes Python automation. What platform operations would you automate first, and how would you design the script or service?");
+  }
+  if (/\bgo\b|golang|kubernetes controller|operator|client-go|controller-runtime|platform cli/.test(jd)) {
+    questions.push("This JD mentions Go or platform tooling. When would you choose Go over Python for a CLI, API service, or Kubernetes controller, and how would you design it?");
   }
   if (/platform engineering|developer platform|self-service|golden path|backstage|devex/.test(jd)) {
     questions.push("This JD emphasizes platform engineering. What self-service golden paths would you build, and what guardrails would you enforce?");
@@ -836,6 +1034,14 @@ function buildJdQuestions() {
   if (/bigquery|composer|dataflow|data pipeline|analytics/.test(jd)) {
     questions.push("This JD touches data platform reliability. How would you support reliable BigQuery or data pipeline infrastructure as a platform engineer?");
   }
+  if (/technology risk|risk assessment|risk register|heatmap|control|iso 27001|nist|cobit|fair|audit|compliance|remediation/.test(jd)) {
+    questions.push("Technology risk technical: How would you build a technology risk framework that covers cloud platforms, applications, SDLC, controls, audit findings, and leadership reporting?");
+    questions.push("Technology risk technical: A new product architecture is being reviewed before launch. How would you assess risk, validate controls, document residual risk, and decide whether to approve?");
+  }
+  if (/stakeholder|communication|leadership|influenc|risk-aware|trusted advisor|business impact/.test(jd)) {
+    questions.push("Technology risk behavioural: Tell me about a time you influenced engineering, product, or security stakeholders to reduce a technology risk without slowing delivery unnecessarily.");
+    questions.push("Technology risk behavioural: How would you translate a complex technical control failure into business impact for senior leadership?");
+  }
 
   return questions;
 }
@@ -861,10 +1067,23 @@ function filterTechnologyQuestions(questions) {
 }
 
 function specializedQuestions() {
+  if (els.technology.value === "python") return pythonQuestionBank;
+  if (els.technology.value === "go") return goQuestionBank;
   if (els.technology.value === "scripting") return scriptingQuestionBank;
+  if (els.technology.value === "docker") return dockerQuestionBank;
   if (els.technology.value === "coding") return codingQuestionBank;
+  if (els.technology.value === "tech-risk-technical") return techRiskTechnicalQuestionBank;
+  if (els.technology.value === "tech-risk-behavioral") return techRiskBehavioralQuestionBank;
   if (els.technology.value === "all") {
-    return [...scriptingQuestionBank, ...codingQuestionBank];
+    return [
+      ...scriptingQuestionBank,
+      ...dockerQuestionBank,
+      ...pythonQuestionBank,
+      ...goQuestionBank,
+      ...codingQuestionBank,
+      ...techRiskTechnicalQuestionBank,
+      ...techRiskBehavioralQuestionBank
+    ];
   }
   return [];
 }
@@ -877,7 +1096,7 @@ function largeBankQuestions() {
 
 function buildCustomJdMockQuestions() {
   const role = els.role.value || "this role";
-  const jd = els.jdText.value.trim() || defaultTargetSkills;
+  const jd = `${hiddenTechnologyRiskLeadContext}\n\n${els.jdText.value.trim() || defaultTargetSkills}`;
   const jdQuestions = buildJdQuestions();
   const jdPreview = jd
     .split(/\s+/)
@@ -891,18 +1110,20 @@ function buildCustomJdMockQuestions() {
     `Custom JD Kubernetes: For the workloads described in this JD, how would you design namespaces, RBAC, network policies, autoscaling, ingress, deployment strategy, and troubleshooting runbooks?`,
     `Custom JD security: What are the biggest IAM, secrets, container, supply-chain, network, and audit risks in this role, and how would you reduce them in the first 90 days?`,
     `Custom JD observability: What SLIs, SLOs, dashboards, alerts, logs, traces, and runbooks would you create for the systems described in this JD?`,
+    `Technology risk technical: How would you create risk registers, heatmaps, control validation evidence, and remediation dashboards for this role?`,
+    `Technology risk behavioural: Product and Engineering disagree with your risk severity rating. How would you influence the decision and communicate residual risk?`,
     `Custom JD closing round: Why are you a strong match for this JD? Give a concise senior-level answer using your GCP, Kubernetes, Terraform, SRE, automation, and platform experience. JD signal: ${jdPreview}...`
   ];
 
   return uniqueQuestions([
-    ...baseQuestions.slice(0, 7),
+    ...baseQuestions.slice(0, 9),
     ...jdQuestions,
-    baseQuestions[7]
-  ]).slice(0, 8);
+    baseQuestions[9]
+  ]).slice(0, 10);
 }
 
 function questionPool() {
-  if (els.technology.value === "scripting" || els.technology.value === "coding") {
+  if (["scripting", "coding", "tech-risk-technical", "tech-risk-behavioral"].includes(els.technology.value)) {
     return uniqueQuestions(specializedQuestions());
   }
 
@@ -1047,18 +1268,65 @@ function markdownToHtml(markdown) {
 }
 
 function setQuestionFromText(question) {
+  saveCurrentQuestionDraft();
   questionNumber += 1;
   els.question.textContent = question.replace(/^["']|["']$/g, "");
   els.answer.value = "";
   finalTranscript = "";
   els.micState.textContent = `Interview question ${questionNumber} ready. ${activeQuestionPoolLabel(questionPool().length)}`;
   const session = currentInterview();
+  ensureQuestionHistory();
   session.questionNumber = questionNumber;
   session.question = els.question.textContent;
   session.answerDraft = "";
+  session.questionHistory = session.questionHistory.slice(0, session.questionHistoryIndex + 1);
+  session.questionHistory.push({
+    number: questionNumber,
+    question: els.question.textContent,
+    answerDraft: ""
+  });
+  session.questionHistoryIndex = session.questionHistory.length - 1;
   session.history.push(`Question ${questionNumber}: ${els.question.textContent}`);
   renderSessionStats();
+  els.previousQuestion.disabled = session.questionHistoryIndex <= 0;
+  els.nextQuestion.disabled = session.questionHistoryIndex >= session.questionHistory.length - 1;
   saveState();
+}
+
+function showQuestionHistoryEntry(index) {
+  const session = currentInterview();
+  ensureQuestionHistory();
+  const entry = session.questionHistory[index];
+  if (!entry) return;
+  session.questionHistoryIndex = index;
+  questionNumber = entry.number || index + 1;
+  els.question.textContent = entry.question;
+  els.answer.value = entry.answerDraft || "";
+  finalTranscript = els.answer.value;
+  session.questionNumber = questionNumber;
+  session.question = entry.question;
+  session.answerDraft = els.answer.value;
+  els.micState.textContent = `Viewing question ${questionNumber}`;
+  renderSessionStats();
+  els.previousQuestion.disabled = session.questionHistoryIndex <= 0;
+  els.nextQuestion.disabled = session.questionHistoryIndex >= session.questionHistory.length - 1;
+  saveState();
+}
+
+function showPreviousQuestion() {
+  const session = currentInterview();
+  ensureQuestionHistory();
+  if (session.questionHistoryIndex <= 0) return;
+  saveCurrentQuestionDraft();
+  showQuestionHistoryEntry(session.questionHistoryIndex - 1);
+}
+
+function showNextQuestion() {
+  const session = currentInterview();
+  ensureQuestionHistory();
+  if (session.questionHistoryIndex >= session.questionHistory.length - 1) return;
+  saveCurrentQuestionDraft();
+  showQuestionHistoryEntry(session.questionHistoryIndex + 1);
 }
 
 function loadFastQuestion() {
@@ -1152,10 +1420,20 @@ async function submitAnswer() {
   }
 
   const session = currentInterview();
-  session.answers.push({
-    question: els.question.textContent,
-    answer
-  });
+  ensureQuestionHistory();
+  const existingAnswer = session.answers.find((item) => item.question === els.question.textContent);
+  if (existingAnswer) {
+    existingAnswer.answer = answer;
+  } else {
+    session.answers.push({
+      question: els.question.textContent,
+      answer
+    });
+  }
+  if (session.questionHistory[session.questionHistoryIndex]) {
+    session.questionHistory[session.questionHistoryIndex].answerDraft = answer;
+    session.questionHistory[session.questionHistoryIndex].answered = true;
+  }
   session.history.push(`Question ${questionNumber}: ${els.question.textContent}\nAnswer: ${answer}`);
   session.answerDraft = "";
   els.feedbackOutput.innerHTML = markdownToHtml(`## Answer Saved\nSaved answer ${session.answers.length}. Final feedback will come when you end the interview.`);
@@ -1373,6 +1651,14 @@ els.newQuestion.addEventListener("click", async () => {
   loadFastQuestion();
 });
 
+els.previousQuestion.addEventListener("click", () => {
+  showPreviousQuestion();
+});
+
+els.nextQuestion.addEventListener("click", () => {
+  showNextQuestion();
+});
+
 els.feedbackButton.addEventListener("click", async () => {
   await submitAnswer();
 });
@@ -1453,6 +1739,7 @@ els.mockSet.addEventListener("change", () => {
 
 els.answer.addEventListener("input", () => {
   currentInterview().answerDraft = els.answer.value;
+  saveCurrentQuestionDraft();
   renderSessionStats();
   saveState();
 });
