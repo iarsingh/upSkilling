@@ -291,3 +291,251 @@ Focus: monitoring tools, alerts, production troubleshooting, resource usage, fai
 6. **SRE/Reliability:** Application inaccessible after deployment: Users cannot access the application after deployment. How would you debug it?
 7. **Networking:** On-prem to GCP migration: How would you migrate an application from on-premises to GCP?
 8. **SRE/Reliability:** Disaster recovery: How would you implement disaster recovery?
+
+## Mock Interview 26 - Technology Risk Fundamentals
+
+Focus: technology risk basics, risk assessment lifecycle, risk appetite, registers, heat maps, and prioritization
+
+1. **Technology Risk:** What is Technology Risk?
+2. **Technology Risk:** What are the different types of technology risks?
+3. **Technology Risk:** How do you perform a technology risk assessment?
+4. **Technology Risk:** What is inherent risk vs residual risk?
+5. **Technology Risk:** What is risk appetite and risk tolerance?
+6. **Technology Risk:** How do you prioritize risks?
+7. **Technology Risk:** Explain the risk management lifecycle.
+8. **Technology Risk:** What is a risk register?
+9. **Technology Risk:** What information should a risk register contain?
+10. **Technology Risk:** How do you create a risk heat map?
+
+## Mock Interview 27 - Technology Risk Assessment
+
+Focus: cloud application risk assessment, identification techniques, scoring, FMEA, scenario analysis, and treatment options
+
+1. **Risk Assessment:** Walk me through a risk assessment for deploying a new cloud application.
+2. **Risk Assessment:** How do you identify technology risks?
+3. **Risk Assessment:** What techniques do you use for risk identification?
+4. **Risk Assessment:** What is qualitative vs quantitative risk analysis?
+5. **Risk Assessment:** Explain likelihood and impact scoring.
+6. **Risk Assessment:** How do you calculate risk severity?
+7. **Risk Assessment:** What is FMEA?
+8. **Risk Assessment:** What is scenario analysis?
+9. **Risk Assessment:** Explain risk acceptance, avoidance, mitigation, and transfer.
+10. **Risk Assessment:** Give an example of a risk you mitigated.
+
+## Mock Interview 28 - IT Controls
+
+Focus: preventive, detective, corrective, compensating controls, least privilege, RBAC, segregation of duties, and control monitoring
+
+1. **IT Controls:** What are preventive controls?
+2. **IT Controls:** What are detective controls?
+3. **IT Controls:** What are corrective controls?
+4. **IT Controls:** Give examples of each control type in cloud infrastructure.
+5. **IT Controls:** How do you validate control effectiveness?
+6. **IT Controls:** What is segregation of duties?
+7. **IT Controls:** What is least privilege?
+8. **IT Controls:** Explain RBAC.
+9. **IT Controls:** What are compensating controls?
+10. **IT Controls:** How do you monitor control failures?
+
+## Mock Interview 29 - SDLC and Secure Development Risk
+
+Focus: risk in SDLC, BRD/PRD review, architecture review, Secure SDLC, threat modeling, STRIDE, and DevSecOps
+
+1. **SDLC/Secure Development:** How do you integrate risk into SDLC?
+2. **SDLC/Secure Development:** What risks should be reviewed during BRD/PRD?
+3. **SDLC/Secure Development:** How do you review architecture from a risk perspective?
+4. **SDLC/Secure Development:** What security controls should exist before production deployment?
+5. **SDLC/Secure Development:** Explain Secure SDLC.
+6. **SDLC/Secure Development:** What are threat modeling techniques?
+7. **SDLC/Secure Development:** What is STRIDE?
+8. **SDLC/Secure Development:** What is attack surface?
+9. **SDLC/Secure Development:** What is shift-left security?
+10. **SDLC/Secure Development:** How do DevSecOps practices reduce risk?
+
+## Mock Interview 30 - Governance and Compliance
+
+Focus: ISO 27001, NIST CSF, COBIT, FAIR, audits, evidence, and audit finding management
+
+1. **Governance/Compliance:** What is ISO 27001?
+2. **Governance/Compliance:** Explain the ISO 27001 Annex A controls.
+3. **Governance/Compliance:** What is NIST Cybersecurity Framework?
+4. **Governance/Compliance:** What are the five NIST functions?
+5. **Governance/Compliance:** What is COBIT?
+6. **Governance/Compliance:** What is the difference between ISO 27001 and NIST?
+7. **Governance/Compliance:** What is FAIR?
+8. **Governance/Compliance:** What is an IT audit?
+9. **Governance/Compliance:** What evidence is typically collected during audits?
+10. **Governance/Compliance:** How do you manage audit findings?
+
+## Mock Interview 31 - Cloud Risk
+
+Focus: cloud shared responsibility, GCP security, IAM, Kubernetes, Terraform, secrets, and misconfiguration risk
+
+1. **Cloud Risk:** What are cloud security risks?
+2. **Cloud Risk:** Explain the Shared Responsibility Model.
+3. **Cloud Risk:** What are the risks of public cloud?
+4. **Cloud Risk:** How do you secure GCP projects?
+5. **Cloud Risk:** What are IAM best practices?
+6. **Cloud Risk:** What risks exist in Kubernetes clusters?
+7. **Cloud Risk:** What are the risks of Terraform automation?
+8. **Cloud Risk:** How do you secure Terraform state files?
+9. **Cloud Risk:** How do you approach secrets management?
+10. **Cloud Risk:** What are common cloud misconfiguration risks?
+
+## Mock Interview 32 - Kubernetes and DevOps Risk
+
+Focus: CI/CD risks, Jenkins, GitHub Actions, supply chain security, SBOM, image signing, runtime security, Helm, RBAC, and privileged containers
+
+1. **Kubernetes/DevOps Risk:** What are the risks of CI/CD pipelines?
+2. **Kubernetes/DevOps Risk:** How do you secure Jenkins?
+3. **Kubernetes/DevOps Risk:** What are the risks of GitHub Actions?
+4. **Kubernetes/DevOps Risk:** What is supply chain security?
+5. **Kubernetes/DevOps Risk:** What is an SBOM?
+6. **Kubernetes/DevOps Risk:** Explain image signing.
+7. **Kubernetes/DevOps Risk:** What is runtime security?
+8. **Kubernetes/DevOps Risk:** What are the risks of Helm charts?
+9. **Kubernetes/DevOps Risk:** What are Kubernetes RBAC risks?
+10. **Kubernetes/DevOps Risk:** What are the risks of privileged containers?
+
+## Mock Interview 33 - Incident Management Risk
+
+Focus: incident process, problem management, RCA, postmortems, 5 Whys, near misses, recurrence prevention, KPIs, MTTD, and MTTR
+
+1. **Incident Management:** Describe your incident management process.
+2. **Incident Management:** What is the difference between incident, problem, and risk?
+3. **Incident Management:** How do you perform Root Cause Analysis?
+4. **Incident Management:** What is a postmortem?
+5. **Incident Management:** Explain the 5 Whys technique.
+6. **Incident Management:** What is a near miss?
+7. **Incident Management:** How do you prevent recurring incidents?
+8. **Incident Management:** What KPIs do you track?
+9. **Incident Management:** What is Mean Time to Detect (MTTD)?
+10. **Incident Management:** What is Mean Time to Recover (MTTR)?
+
+## Mock Interview 34 - Risk Monitoring and Reporting
+
+Focus: risk metrics, dashboards, leadership reporting, KRIs, KPIs, cloud posture, SIEM, vulnerability prioritization, trends, and business impact
+
+1. **Monitoring/Reporting:** What risk metrics do you monitor?
+2. **Monitoring/Reporting:** What should a risk dashboard include?
+3. **Monitoring/Reporting:** How do you report risks to leadership?
+4. **Monitoring/Reporting:** Explain Key Risk Indicators (KRIs).
+5. **Monitoring/Reporting:** What is the difference between KRIs and KPIs?
+6. **Monitoring/Reporting:** How do you monitor cloud security posture?
+7. **Monitoring/Reporting:** What SIEM tools have you used?
+8. **Monitoring/Reporting:** How do you prioritize vulnerabilities?
+9. **Monitoring/Reporting:** What is risk trending?
+10. **Monitoring/Reporting:** How do you communicate business impact?
+
+## Mock Interview 35 - Architecture Review Risk
+
+Focus: architecture approval, third-party risk, SPOFs, HA, DR, RTO/RPO, BCP, Zero Trust, and common architecture risks
+
+1. **Architecture Review:** What do you review before approving an architecture?
+2. **Architecture Review:** How do you evaluate third-party risk?
+3. **Architecture Review:** What questions do you ask during architecture reviews?
+4. **Architecture Review:** How do you identify single points of failure?
+5. **Architecture Review:** Explain High Availability from a risk perspective.
+6. **Architecture Review:** Explain Disaster Recovery.
+7. **Architecture Review:** What is the difference between RTO and RPO?
+8. **Architecture Review:** What is Business Continuity Planning?
+9. **Architecture Review:** Explain Zero Trust Architecture.
+10. **Architecture Review:** What are common architecture risks?
+
+## Mock Interview 36 - Audit and Compliance Scenarios
+
+Focus: shared access, Terraform state secrets, Jenkins credentials, public dashboards, GCP Owner access, patching gaps, logging, vulnerabilities, encryption, and public buckets
+
+1. **Audit/Compliance Scenarios:** An auditor finds that production access is shared among developers. What do you do?
+2. **Audit/Compliance Scenarios:** Terraform state contains database passwords. How would you fix this?
+3. **Audit/Compliance Scenarios:** Jenkins stores credentials in plain text. What actions would you take?
+4. **Audit/Compliance Scenarios:** Kubernetes dashboard is publicly accessible. What risks exist?
+5. **Audit/Compliance Scenarios:** A developer requests Owner access in GCP. Would you approve it?
+6. **Audit/Compliance Scenarios:** Your audit finds that 50 VMs have no patching process. What is your response?
+7. **Audit/Compliance Scenarios:** Cloud logging has been disabled. Why is this a risk?
+8. **Audit/Compliance Scenarios:** A critical vulnerability is found in production. What steps would you follow?
+9. **Audit/Compliance Scenarios:** An application stores customer data without encryption. What are the risks?
+10. **Audit/Compliance Scenarios:** Public storage buckets are discovered. How would you respond?
+
+## Mock Interview 37 - Technology Risk Behavioural Questions
+
+Focus: risk leadership, stakeholder influence, audit lessons, incidents, balancing delivery and security, hidden risks, priorities, and career motivation
+
+1. **Leadership/Behavioural:** Tell me about a difficult technology risk you managed.
+2. **Leadership/Behavioural:** Describe a situation where engineering disagreed with your recommendation.
+3. **Leadership/Behavioural:** How do you influence stakeholders without authority?
+4. **Leadership/Behavioural:** Tell me about an audit that did not go well.
+5. **Leadership/Behavioural:** Describe a major production incident.
+6. **Leadership/Behavioural:** How do you balance security and delivery speed?
+7. **Leadership/Behavioural:** Tell me about a time you identified a hidden risk.
+8. **Leadership/Behavioural:** Describe a risk that eventually became an incident.
+9. **Leadership/Behavioural:** How do you handle conflicting priorities?
+10. **Leadership/Behavioural:** Why do you want to move into Technology Risk?
+
+## Mock Interview 38 - GCP DevOps Risk Tailored Round
+
+Focus: GCP, Kubernetes, Terraform, CI/CD, service accounts, least privilege, compliance, cloud security incidents, and risk assessment
+
+1. **GCP DevOps Risk:** How do you secure Terraform state in GCP?
+2. **GCP DevOps Risk:** How do you prevent infrastructure drift?
+3. **GCP DevOps Risk:** How do you secure GKE clusters?
+4. **GCP DevOps Risk:** Explain IAM best practices in GCP.
+5. **GCP DevOps Risk:** How do you review Terraform code from a risk perspective?
+6. **GCP DevOps Risk:** How do you integrate security into CI/CD pipelines?
+7. **GCP DevOps Risk:** What risks exist when using service accounts?
+8. **GCP DevOps Risk:** How would you implement least privilege across GCP projects?
+9. **GCP DevOps Risk:** How do you monitor cloud security and compliance?
+10. **GCP DevOps Risk:** How would you perform a risk assessment before deploying a new Kubernetes cluster?
+11. **GCP DevOps Risk:** How do you ensure Infrastructure as Code changes are compliant before deployment?
+12. **GCP DevOps Risk:** Describe a cloud security incident you investigated and the lessons learned.
+
+## Mock Interview 40 - Network Hub Scope and Hub-Spoke Risk Round
+
+Focus: GCP hub-and-spoke networking, Shared VPC, Network Connectivity Center, routing, DNS, firewall governance, NAT, hybrid connectivity, segmentation, and network risk
+
+1. **Network Hub Scope:** What is a network hub-and-spoke architecture, and why do organizations use it in GCP?
+2. **Network Hub Scope:** What should be included in the scope of a network hub project?
+3. **Network Hub Scope:** How would you design Shared VPC with host and service projects for a hub-and-spoke model?
+4. **Network Hub Scope:** How does Network Connectivity Center help in a hub-and-spoke network design?
+5. **Network Hub Scope:** What are the routing risks in a hub-and-spoke architecture?
+6. **Network Hub Scope:** How would you manage firewall rules centrally while still allowing application team ownership?
+7. **Network Hub Scope:** How would you design DNS resolution across hub, spoke, on-premises, and private GCP services?
+8. **Network Hub Scope:** What are the security risks of VPC peering, and what limitations should you consider?
+9. **Network Hub Scope:** How would you design outbound internet access through Cloud NAT or centralized egress controls?
+10. **Network Hub Scope:** How do you segment production, non-production, shared services, and third-party connectivity in a hub network?
+11. **Network Hub Scope:** What monitoring, logging, and KRIs would you define for network hub risk?
+12. **Network Hub Scope:** How would you perform a risk assessment before onboarding a new spoke project or VPC into the hub?
+
+## Mock Interview 41 - GCP Landing Zone Risk and Governance Round
+
+Focus: GCP landing zone design, organization hierarchy, folders, projects, IAM, org policies, Shared VPC, logging, security baseline, billing, and governance
+
+1. **GCP Landing Zone:** What is a GCP landing zone, and why is it important for enterprise cloud adoption?
+2. **GCP Landing Zone:** What core components would you include in a secure GCP landing zone?
+3. **GCP Landing Zone:** How would you design the GCP organization, folder, and project hierarchy?
+4. **GCP Landing Zone:** Which GCP organization policies would you enforce as part of a secure baseline?
+5. **GCP Landing Zone:** How would you design IAM and access management for a landing zone?
+6. **GCP Landing Zone:** How would you design networking for a GCP landing zone?
+7. **GCP Landing Zone:** How would you implement centralized logging, monitoring, and audit evidence in a landing zone?
+8. **GCP Landing Zone:** How would you manage security controls such as SCC, KMS, Secret Manager, vulnerability scanning, and policy-as-code?
+9. **GCP Landing Zone:** How would you handle billing, budgets, labels, cost allocation, and FinOps in a landing zone?
+10. **GCP Landing Zone:** How would you onboard new application teams or projects into the landing zone safely?
+11. **GCP Landing Zone:** What are common risks or anti-patterns in GCP landing zone implementation?
+12. **GCP Landing Zone:** How would you assess whether an existing GCP landing zone is mature and compliant?
+
+## Mock Interview 42 - Multi-Cloud Network Connectivity Risk Round
+
+Focus: GCP, AWS, Azure connectivity, VPN, Interconnect, Direct Connect, ExpressRoute, routing, DNS, IP planning, segmentation, observability, security, and resilience
+
+1. **Multi-Cloud Networking:** How would you design secure network connectivity between GCP, AWS, and Azure?
+2. **Multi-Cloud Networking:** What are the main connectivity options for multi-cloud networking, and when would you choose VPN versus dedicated connectivity?
+3. **Multi-Cloud Networking:** How would you plan IP address ranges to avoid overlap across multiple cloud providers and on-premises networks?
+4. **Multi-Cloud Networking:** How would you design routing between GCP Cloud Router, AWS Transit Gateway, Azure Virtual WAN, and on-premises networks?
+5. **Multi-Cloud Networking:** What are the security risks of transitive routing in a multi-cloud network?
+6. **Multi-Cloud Networking:** How would you design DNS resolution across GCP, AWS, Azure, and on-premises environments?
+7. **Multi-Cloud Networking:** How would you segment production, non-production, shared services, and third-party traffic across multiple clouds?
+8. **Multi-Cloud Networking:** How would you design centralized ingress and egress security controls for multi-cloud workloads?
+9. **Multi-Cloud Networking:** How would you monitor multi-cloud network connectivity, latency, packet loss, route changes, and availability?
+10. **Multi-Cloud Networking:** How would you troubleshoot an application latency issue between GCP and AWS?
+11. **Multi-Cloud Networking:** What disaster recovery and resilience considerations apply to multi-cloud connectivity?
+12. **Multi-Cloud Networking:** How would you perform a technology risk assessment for a new multi-cloud network connection?

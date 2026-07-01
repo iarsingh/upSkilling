@@ -1,0 +1,224 @@
+Technology Risk Interview Questions - Topic Wise
+=================================================
+
+Use this as a quick revision checklist. For answers, use technology-risk-interview-questions-and-answers.txt.
+
+- Define the concept.
+- Give a practical cloud/DevOps example.
+- Explain business impact, controls, and follow-up.
+
+Technology Risk Fundamentals
+----------------------------
+1. What is Technology Risk?
+2. What are the different types of technology risks?
+3. How do you perform a technology risk assessment?
+4. What is inherent risk vs residual risk?
+5. What is risk appetite and risk tolerance?
+6. How do you prioritize risks?
+7. Explain the risk management lifecycle.
+8. What is a risk register?
+9. What information should a risk register contain?
+10. How do you create a risk heat map?
+
+Risk Assessment
+---------------
+11. Walk me through a risk assessment for deploying a new cloud application.
+12. How do you identify technology risks?
+13. What techniques do you use for risk identification?
+14. What is qualitative vs quantitative risk analysis?
+15. Explain likelihood and impact scoring.
+16. How do you calculate risk severity?
+17. What is FMEA?
+18. What is scenario analysis?
+19. Explain risk acceptance, avoidance, mitigation, and transfer.
+20. Give an example of a risk you mitigated.
+
+IT Controls
+-----------
+21. What are preventive controls?
+22. What are detective controls?
+23. What are corrective controls?
+24. Give examples of each in cloud infrastructure.
+25. How do you validate control effectiveness?
+26. What is segregation of duties?
+27. What is least privilege?
+28. Explain RBAC.
+29. What are compensating controls?
+30. How do you monitor control failures?
+
+SDLC and Secure Development
+---------------------------
+31. How do you integrate risk into SDLC?
+32. What risks should be reviewed during BRD/PRD?
+33. How do you review architecture from a risk perspective?
+34. What security controls should exist before production deployment?
+35. Explain Secure SDLC.
+36. What are threat modeling techniques?
+37. What is STRIDE?
+38. What is attack surface?
+39. What is shift-left security?
+40. How do DevSecOps practices reduce risk?
+
+Governance and Compliance
+-------------------------
+41. What is ISO 27001?
+42. Explain the ISO 27001 Annex A controls.
+43. What is NIST Cybersecurity Framework?
+44. What are the five NIST functions?
+45. What is COBIT?
+46. Difference between ISO 27001 and NIST.
+47. What is FAIR?
+48. What is an IT audit?
+49. What evidence is typically collected during audits?
+50. How do you manage audit findings?
+
+Cloud Risk
+----------
+51. What are cloud security risks?
+52. Shared Responsibility Model.
+53. Risks of public cloud.
+54. How do you secure GCP projects?
+55. IAM best practices.
+56. Risks in Kubernetes clusters.
+57. Risks of Terraform automation.
+58. State file security in Terraform.
+59. Secrets management.
+60. Cloud misconfiguration risks.
+
+Kubernetes and DevOps Risk
+--------------------------
+61. Risks of CI/CD pipelines.
+62. How do you secure Jenkins?
+63. Risks of GitHub Actions.
+64. What is supply chain security?
+65. What is an SBOM?
+66. Explain image signing.
+67. What is runtime security?
+68. Risks of Helm charts.
+69. Kubernetes RBAC risks.
+70. Risks of privileged containers.
+
+Incident Management
+-------------------
+71. Describe your incident management process.
+72. Difference between incident, problem, and risk.
+73. How do you perform Root Cause Analysis?
+74. What is a postmortem?
+75. Explain the 5 Whys technique.
+76. What is a near miss?
+77. How do you prevent recurring incidents?
+78. What KPIs do you track?
+79. What is Mean Time to Detect (MTTD)?
+80. What is Mean Time to Recover (MTTR)?
+
+Monitoring and Reporting
+------------------------
+81. What risk metrics do you monitor?
+82. What should a risk dashboard include?
+83. How do you report risks to leadership?
+84. Explain Key Risk Indicators (KRIs).
+85. Difference between KRIs and KPIs.
+86. How do you monitor cloud security posture?
+87. What SIEM tools have you used?
+88. How do you prioritize vulnerabilities?
+89. What is risk trending?
+90. How do you communicate business impact?
+
+Architecture Review
+-------------------
+91. What do you review before approving an architecture?
+92. How do you evaluate third-party risk?
+93. What questions do you ask during architecture reviews?
+94. How do you identify single points of failure?
+95. Explain High Availability from a risk perspective.
+96. Explain Disaster Recovery.
+97. Difference between RTO and RPO.
+98. What is Business Continuity Planning?
+99. Explain Zero Trust Architecture.
+100. What are common architecture risks?
+
+Audit and Compliance Scenarios
+------------------------------
+101. An auditor finds that production access is shared among developers. What do you do?
+102. Terraform state contains database passwords. How would you fix this?
+103. Jenkins stores credentials in plain text. What actions would you take?
+104. Kubernetes dashboard is publicly accessible. What risks exist?
+105. A developer requests Owner access in GCP. Would you approve it?
+106. Your audit finds that 50 VMs have no patching process. What is your response?
+107. Cloud logging has been disabled. Why is this a risk?
+108. A critical vulnerability is found in production. What steps would you follow?
+109. An application stores customer data without encryption. What are the risks?
+110. Public storage buckets are discovered. How would you respond?
+
+Behavioral Questions
+--------------------
+111. Tell me about a difficult technology risk you managed.
+112. Describe a situation where engineering disagreed with your recommendation.
+113. How do you influence stakeholders without authority?
+114. Tell me about an audit that did not go well.
+115. Describe a major production incident.
+116. How do you balance security and delivery speed?
+117. Tell me about a time you identified a hidden risk.
+118. Describe a risk that eventually became an incident.
+119. How do you handle conflicting priorities?
+120. Why do you want to move into Technology Risk?
+
+Questions Tailored to GCP DevOps Experience
+-------------------------------------------
+121. How do you secure Terraform state in GCP?
+122. How do you prevent infrastructure drift?
+123. How do you secure GKE clusters?
+124. Explain IAM best practices in GCP.
+125. How do you review Terraform code from a risk perspective?
+126. How do you integrate security into CI/CD pipelines?
+127. What risks exist when using service accounts?
+128. How would you implement least privilege across GCP projects?
+129. How do you monitor cloud security and compliance?
+130. How would you perform a risk assessment before deploying a new Kubernetes cluster?
+131. How do you ensure Infrastructure as Code changes are compliant before deployment?
+132. Describe a cloud security incident you investigated and the lessons learned.
+
+Network Hub Scope and Hub-Spoke Risk
+------------------------------------
+133. What is a network hub-and-spoke architecture, and why do organizations use it in GCP?
+134. What should be included in the scope of a network hub project?
+135. How would you design Shared VPC with host and service projects for a hub-and-spoke model?
+136. How does Network Connectivity Center help in a hub-and-spoke network design?
+137. What are the routing risks in a hub-and-spoke architecture?
+138. How would you manage firewall rules centrally while still allowing application team ownership?
+139. How would you design DNS resolution across hub, spoke, on-premises, and private GCP services?
+140. What are the security risks of VPC peering, and what limitations should you consider?
+141. How would you design outbound internet access through Cloud NAT or centralized egress controls?
+142. How do you segment production, non-production, shared services, and third-party connectivity in a hub network?
+143. What monitoring, logging, and KRIs would you define for network hub risk?
+144. How would you perform a risk assessment before onboarding a new spoke project or VPC into the hub?
+
+GCP Landing Zone Risk and Governance
+------------------------------------
+145. What is a GCP landing zone, and why is it important for enterprise cloud adoption?
+146. What core components would you include in a secure GCP landing zone?
+147. How would you design the GCP organization, folder, and project hierarchy?
+148. Which GCP organization policies would you enforce as part of a secure baseline?
+149. How would you design IAM and access management for a landing zone?
+150. How would you design networking for a GCP landing zone?
+151. How would you implement centralized logging, monitoring, and audit evidence in a landing zone?
+152. How would you manage security controls such as SCC, KMS, Secret Manager, vulnerability scanning, and policy-as-code?
+153. How would you handle billing, budgets, labels, cost allocation, and FinOps in a landing zone?
+154. How would you onboard new application teams or projects into the landing zone safely?
+155. What are common risks or anti-patterns in GCP landing zone implementation?
+156. How would you assess whether an existing GCP landing zone is mature and compliant?
+
+Multi-Cloud Network Connectivity Risk
+-------------------------------------
+157. How would you design secure network connectivity between GCP, AWS, and Azure?
+158. What are the main connectivity options for multi-cloud networking, and when would you choose VPN versus dedicated connectivity?
+159. How would you plan IP address ranges to avoid overlap across multiple cloud providers and on-premises networks?
+160. How would you design routing between GCP Cloud Router, AWS Transit Gateway, Azure Virtual WAN, and on-premises networks?
+161. What are the security risks of transitive routing in a multi-cloud network?
+162. How would you design DNS resolution across GCP, AWS, Azure, and on-premises environments?
+163. How would you segment production, non-production, shared services, and third-party traffic across multiple clouds?
+164. How would you design centralized ingress and egress security controls for multi-cloud workloads?
+165. How would you monitor multi-cloud network connectivity, latency, packet loss, route changes, and availability?
+166. How would you troubleshoot an application latency issue between GCP and AWS?
+167. What disaster recovery and resilience considerations apply to multi-cloud connectivity?
+168. How would you perform a technology risk assessment for a new multi-cloud network connection?

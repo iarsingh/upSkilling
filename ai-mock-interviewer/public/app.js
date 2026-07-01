@@ -52,6 +52,7 @@ const technologyLabels = {
   gcp: "Google Cloud Platform",
   terraform: "Terraform / IaC",
   python: "Python automation",
+  fastapi: "FastAPI backend",
   go: "Go programming",
   scripting: "Scripting & automation",
   coding: "Coding exercises",
@@ -73,6 +74,7 @@ const technologyMatchers = {
   gcp: /\b(gcp|google cloud|gke|cloud run|compute engine|cloud storage|pub\/sub|pubsub|cloud sql|alloydb|bigquery|dataflow|composer|cloud build|cloud deploy|vertex ai|shared vpc|cloud armor|cloud dns|organization polic|service account)\b/i,
   terraform: /\b(terraform|infrastructure as code|iac|hcl|remote state|state file|workspace|sentinel|opa|policy as code|drift)\b/i,
   python: /\b(python|pytest|pip|virtualenv|fastapi|flask|django|boto3|google cloud sdk|automation script|rest api|exception handling|decorator|generator|asyncio|pandas|cloud automation|kubernetes client)\b/i,
+  fastapi: /\b(fastapi|pydantic|uvicorn|asgi|starlette|dependency injection|background task|middleware|openapi|swagger|async endpoint|request validation|response model|api versioning)\b/i,
   go: /\b(go|golang|goroutine|channel|context|interface|struct|pointer|slice|map|error handling|go module|cobra|client-go|kubernetes controller|operator|controller-runtime|concurrency|http server)\b/i,
   scripting: /\b(script|scripting|automation|automate|python|bash|shell|powershell|cli|sdk|api|cron|scheduled job|json|yaml|csv)\b/i,
   coding: /\b(write|code|coding|implement|function|class|algorithm|script|program|parse|return|input|output|unit test)\b/i,
@@ -610,6 +612,20 @@ const pythonQuestionBank = [
   "Python code review: What would you check in a Python automation PR before allowing it to run against production infrastructure?",
   "Python interview coding: Write the approach for a function that calculates SLO compliance and remaining error budget from request totals and failures."
 ];
+const fastApiQuestionBank = [
+  "FastAPI fundamentals: How would you structure a production FastAPI service with routers, dependencies, schemas, settings, and clear module boundaries?",
+  "FastAPI request validation: How do Pydantic models, response models, and validation errors help keep APIs safe and predictable?",
+  "FastAPI async: When should a FastAPI endpoint be async, and what mistakes can block the event loop in production?",
+  "FastAPI dependency injection: How would you use dependencies for authentication, database sessions, request context, and reusable validation?",
+  "FastAPI security: How would you implement JWT/OAuth2 authentication, role-based access, secret handling, and least privilege for internal APIs?",
+  "FastAPI database design: How would you manage database connections, migrations, transactions, pooling, and retries in a FastAPI app?",
+  "FastAPI observability: What logs, metrics, traces, request IDs, and health endpoints would you add before deploying a FastAPI service?",
+  "FastAPI deployment: How would you deploy FastAPI with Uvicorn/Gunicorn, containers, Kubernetes/GKE, autoscaling, probes, and graceful shutdown?",
+  "FastAPI performance: A FastAPI endpoint has high p95 latency. How would you debug code, database calls, external APIs, concurrency, and infrastructure?",
+  "FastAPI background work: When would you use BackgroundTasks, Pub/Sub, Celery, Cloud Tasks, or a separate worker instead of doing work in the request path?",
+  "FastAPI testing: How would you test endpoints, dependencies, authentication, database behavior, and error paths using pytest and TestClient?",
+  "FastAPI production readiness: What checklist would you use before approving a FastAPI service for production?"
+];
 const codingQuestionBank = [
   "Python coding: Write a function that reads Kubernetes pod records and returns pods with restartCount above a threshold, grouped by namespace.",
   "Python coding: Write a log parser that counts HTTP status codes and prints the five endpoints with the highest 5xx count.",
@@ -998,6 +1014,9 @@ function buildJdQuestions() {
   if (/python|automation|script|sdk|api/.test(jd)) {
     questions.push("This JD emphasizes Python automation. What platform operations would you automate first, and how would you design the script or service?");
   }
+  if (/fastapi|pydantic|uvicorn|asgi|backend api|rest api/.test(jd)) {
+    questions.push("This JD mentions FastAPI or backend APIs. How would you design, secure, observe, test, and deploy a production FastAPI service?");
+  }
   if (/\bgo\b|golang|kubernetes controller|operator|client-go|controller-runtime|platform cli/.test(jd)) {
     questions.push("This JD mentions Go or platform tooling. When would you choose Go over Python for a CLI, API service, or Kubernetes controller, and how would you design it?");
   }
@@ -1068,6 +1087,7 @@ function filterTechnologyQuestions(questions) {
 
 function specializedQuestions() {
   if (els.technology.value === "python") return pythonQuestionBank;
+  if (els.technology.value === "fastapi") return fastApiQuestionBank;
   if (els.technology.value === "go") return goQuestionBank;
   if (els.technology.value === "scripting") return scriptingQuestionBank;
   if (els.technology.value === "docker") return dockerQuestionBank;
@@ -1079,6 +1099,7 @@ function specializedQuestions() {
       ...scriptingQuestionBank,
       ...dockerQuestionBank,
       ...pythonQuestionBank,
+      ...fastApiQuestionBank,
       ...goQuestionBank,
       ...codingQuestionBank,
       ...techRiskTechnicalQuestionBank,

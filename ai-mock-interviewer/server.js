@@ -27,7 +27,7 @@ Core skills to test:
 - Observability: Prometheus, Grafana, OpenTelemetry, Google Cloud Monitoring, Google Cloud Logging, ELK / OpenSearch
 - Security and DevSecOps: IAM, Workload Identity, secret management, vulnerability management, container security, Binary Authorization, Security Command Center, supply chain security
 - Networking: TCP/IP, DNS, HTTP/HTTPS, VPN, Interconnect, firewall rules, load balancers, service networking
-- Programming and Automation: Python, Bash, Go awareness, REST APIs, SDK automation
+- Programming and Automation: Python, FastAPI, Bash, Go awareness, REST APIs, SDK automation
 - Platform Engineering: IDP, self-service infrastructure, golden paths, DevEx, Backstage awareness
 - AI Infrastructure: MLflow, Kubeflow, Vertex AI, model serving on Kubernetes, GPU workloads, MLOps fundamentals
 - Additional senior skills: GCP landing zones, folders, projects, org policies, Shared VPC, governance, FinOps, DR, backup/restore, production readiness, incident communication, postmortems, runbooks, Linux fundamentals, TLS/certificates, Cloud Deploy, progressive delivery, Gatekeeper, Kyverno, BigQuery basics, Cloud Composer, Gateway API, Envoy, Apigee awareness
@@ -37,6 +37,7 @@ Priority order:
 2. Terraform expert
 3. Python automation strong
 3a. Go for platform CLIs, APIs, Kubernetes controllers, and production tooling
+3b. FastAPI backend APIs, Pydantic validation, async services, testing, observability, and deployment
 4. SRE concepts: SLI, SLO, error budget
 5. Observability: Prometheus, Grafana, OpenTelemetry
 6. GitOps: ArgoCD
@@ -327,7 +328,7 @@ function fallbackFinalFeedback(input) {
     ["SRE", /slo|sli|sla|error budget|incident|rca|latency|availability/.test(lower)],
     ["Observability", /prometheus|grafana|trace|logging|monitoring|otel|opentelemetry/.test(lower)],
     ["Security", /iam|workload identity|secret|armor|waf|security|vulnerability/.test(lower)],
-    ["Automation", /python|go|golang|bash|api|automation|script/.test(lower)],
+    ["Automation", /python|fastapi|go|golang|bash|api|automation|script/.test(lower)],
     ["GCP Governance", /landing zone|shared vpc|org polic|folder|governance|guardrail/.test(lower)],
     ["FinOps", /finops|cost|billing|budget|rightsizing|committed use|optimization/.test(lower)],
     ["DR/Backup", /disaster recovery|backup|restore|rto|rpo|failover/.test(lower)],
@@ -624,6 +625,7 @@ Priority skill rotation:
 2. Terraform expert modules, state, Terraform Enterprise, policy as code
 3. Python automation for cloud/platform work
 3a. Go programming for platform CLIs, APIs, Kubernetes controllers/operators, concurrency, and production tooling
+3b. FastAPI backend service design, Pydantic validation, async APIs, testing, observability, and deployment
 4. SRE concepts: SLI, SLO, error budgets, incidents, RCA
 5. Observability: Prometheus, Grafana, OpenTelemetry, Cloud Monitoring, logs
 6. GitOps and CI/CD: ArgoCD, Cloud Build, Jenkins, GitHub Actions

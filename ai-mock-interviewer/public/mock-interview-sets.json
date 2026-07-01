@@ -989,5 +989,432 @@
         "question": "Go production readiness: What code review checklist would you use before deploying a Go automation service or controller to production?"
       }
     ]
+  },
+  {
+    "id": "set-26",
+    "title": "Mock Interview 26 - Technology Risk Fundamentals",
+    "focus": "technology risk basics, risk assessment lifecycle, risk appetite, registers, heat maps, and prioritization",
+    "questions": [
+      { "category": "Technology Risk", "question": "What is Technology Risk?" },
+      { "category": "Technology Risk", "question": "What are the different types of technology risks?" },
+      { "category": "Technology Risk", "question": "How do you perform a technology risk assessment?" },
+      { "category": "Technology Risk", "question": "What is inherent risk vs residual risk?" },
+      { "category": "Technology Risk", "question": "What is risk appetite and risk tolerance?" },
+      { "category": "Technology Risk", "question": "How do you prioritize risks?" },
+      { "category": "Technology Risk", "question": "Explain the risk management lifecycle." },
+      { "category": "Technology Risk", "question": "What is a risk register?" },
+      { "category": "Technology Risk", "question": "What information should a risk register contain?" },
+      { "category": "Technology Risk", "question": "How do you create a risk heat map?" }
+    ]
+  },
+  {
+    "id": "set-27",
+    "title": "Mock Interview 27 - Technology Risk Assessment",
+    "focus": "cloud application risk assessment, identification techniques, scoring, FMEA, scenario analysis, and treatment options",
+    "questions": [
+      { "category": "Risk Assessment", "question": "Walk me through a risk assessment for deploying a new cloud application." },
+      { "category": "Risk Assessment", "question": "How do you identify technology risks?" },
+      { "category": "Risk Assessment", "question": "What techniques do you use for risk identification?" },
+      { "category": "Risk Assessment", "question": "What is qualitative vs quantitative risk analysis?" },
+      { "category": "Risk Assessment", "question": "Explain likelihood and impact scoring." },
+      { "category": "Risk Assessment", "question": "How do you calculate risk severity?" },
+      { "category": "Risk Assessment", "question": "What is FMEA?" },
+      { "category": "Risk Assessment", "question": "What is scenario analysis?" },
+      { "category": "Risk Assessment", "question": "Explain risk acceptance, avoidance, mitigation, and transfer." },
+      { "category": "Risk Assessment", "question": "Give an example of a risk you mitigated." }
+    ]
+  },
+  {
+    "id": "set-28",
+    "title": "Mock Interview 28 - IT Controls",
+    "focus": "preventive, detective, corrective, compensating controls, least privilege, RBAC, segregation of duties, and control monitoring",
+    "questions": [
+      { "category": "IT Controls", "question": "What are preventive controls?" },
+      { "category": "IT Controls", "question": "What are detective controls?" },
+      { "category": "IT Controls", "question": "What are corrective controls?" },
+      { "category": "IT Controls", "question": "Give examples of each control type in cloud infrastructure." },
+      { "category": "IT Controls", "question": "How do you validate control effectiveness?" },
+      { "category": "IT Controls", "question": "What is segregation of duties?" },
+      { "category": "IT Controls", "question": "What is least privilege?" },
+      { "category": "IT Controls", "question": "Explain RBAC." },
+      { "category": "IT Controls", "question": "What are compensating controls?" },
+      { "category": "IT Controls", "question": "How do you monitor control failures?" }
+    ]
+  },
+  {
+    "id": "set-29",
+    "title": "Mock Interview 29 - SDLC and Secure Development Risk",
+    "focus": "risk in SDLC, BRD/PRD review, architecture review, Secure SDLC, threat modeling, STRIDE, and DevSecOps",
+    "questions": [
+      { "category": "SDLC/Secure Development", "question": "How do you integrate risk into SDLC?" },
+      { "category": "SDLC/Secure Development", "question": "What risks should be reviewed during BRD/PRD?" },
+      { "category": "SDLC/Secure Development", "question": "How do you review architecture from a risk perspective?" },
+      { "category": "SDLC/Secure Development", "question": "What security controls should exist before production deployment?" },
+      { "category": "SDLC/Secure Development", "question": "Explain Secure SDLC." },
+      { "category": "SDLC/Secure Development", "question": "What are threat modeling techniques?" },
+      { "category": "SDLC/Secure Development", "question": "What is STRIDE?" },
+      { "category": "SDLC/Secure Development", "question": "What is attack surface?" },
+      { "category": "SDLC/Secure Development", "question": "What is shift-left security?" },
+      { "category": "SDLC/Secure Development", "question": "How do DevSecOps practices reduce risk?" }
+    ]
+  },
+  {
+    "id": "set-30",
+    "title": "Mock Interview 30 - Governance and Compliance",
+    "focus": "ISO 27001, NIST CSF, COBIT, FAIR, audits, evidence, and audit finding management",
+    "questions": [
+      { "category": "Governance/Compliance", "question": "What is ISO 27001?" },
+      { "category": "Governance/Compliance", "question": "Explain the ISO 27001 Annex A controls." },
+      { "category": "Governance/Compliance", "question": "What is NIST Cybersecurity Framework?" },
+      { "category": "Governance/Compliance", "question": "What are the five NIST functions?" },
+      { "category": "Governance/Compliance", "question": "What is COBIT?" },
+      { "category": "Governance/Compliance", "question": "What is the difference between ISO 27001 and NIST?" },
+      { "category": "Governance/Compliance", "question": "What is FAIR?" },
+      { "category": "Governance/Compliance", "question": "What is an IT audit?" },
+      { "category": "Governance/Compliance", "question": "What evidence is typically collected during audits?" },
+      { "category": "Governance/Compliance", "question": "How do you manage audit findings?" }
+    ]
+  },
+  {
+    "id": "set-31",
+    "title": "Mock Interview 31 - Cloud Risk",
+    "focus": "cloud shared responsibility, GCP security, IAM, Kubernetes, Terraform, secrets, and misconfiguration risk",
+    "questions": [
+      { "category": "Cloud Risk", "question": "What are cloud security risks?" },
+      { "category": "Cloud Risk", "question": "Explain the Shared Responsibility Model." },
+      { "category": "Cloud Risk", "question": "What are the risks of public cloud?" },
+      { "category": "Cloud Risk", "question": "How do you secure GCP projects?" },
+      { "category": "Cloud Risk", "question": "What are IAM best practices?" },
+      { "category": "Cloud Risk", "question": "What risks exist in Kubernetes clusters?" },
+      { "category": "Cloud Risk", "question": "What are the risks of Terraform automation?" },
+      { "category": "Cloud Risk", "question": "How do you secure Terraform state files?" },
+      { "category": "Cloud Risk", "question": "How do you approach secrets management?" },
+      { "category": "Cloud Risk", "question": "What are common cloud misconfiguration risks?" }
+    ]
+  },
+  {
+    "id": "set-32",
+    "title": "Mock Interview 32 - Kubernetes and DevOps Risk",
+    "focus": "CI/CD risks, Jenkins, GitHub Actions, supply chain security, SBOM, image signing, runtime security, Helm, RBAC, and privileged containers",
+    "questions": [
+      { "category": "Kubernetes/DevOps Risk", "question": "What are the risks of CI/CD pipelines?" },
+      { "category": "Kubernetes/DevOps Risk", "question": "How do you secure Jenkins?" },
+      { "category": "Kubernetes/DevOps Risk", "question": "What are the risks of GitHub Actions?" },
+      { "category": "Kubernetes/DevOps Risk", "question": "What is supply chain security?" },
+      { "category": "Kubernetes/DevOps Risk", "question": "What is an SBOM?" },
+      { "category": "Kubernetes/DevOps Risk", "question": "Explain image signing." },
+      { "category": "Kubernetes/DevOps Risk", "question": "What is runtime security?" },
+      { "category": "Kubernetes/DevOps Risk", "question": "What are the risks of Helm charts?" },
+      { "category": "Kubernetes/DevOps Risk", "question": "What are Kubernetes RBAC risks?" },
+      { "category": "Kubernetes/DevOps Risk", "question": "What are the risks of privileged containers?" }
+    ]
+  },
+  {
+    "id": "set-33",
+    "title": "Mock Interview 33 - Incident Management Risk",
+    "focus": "incident process, problem management, RCA, postmortems, 5 Whys, near misses, recurrence prevention, KPIs, MTTD, and MTTR",
+    "questions": [
+      { "category": "Incident Management", "question": "Describe your incident management process." },
+      { "category": "Incident Management", "question": "What is the difference between incident, problem, and risk?" },
+      { "category": "Incident Management", "question": "How do you perform Root Cause Analysis?" },
+      { "category": "Incident Management", "question": "What is a postmortem?" },
+      { "category": "Incident Management", "question": "Explain the 5 Whys technique." },
+      { "category": "Incident Management", "question": "What is a near miss?" },
+      { "category": "Incident Management", "question": "How do you prevent recurring incidents?" },
+      { "category": "Incident Management", "question": "What KPIs do you track?" },
+      { "category": "Incident Management", "question": "What is Mean Time to Detect (MTTD)?" },
+      { "category": "Incident Management", "question": "What is Mean Time to Recover (MTTR)?" }
+    ]
+  },
+  {
+    "id": "set-34",
+    "title": "Mock Interview 34 - Risk Monitoring and Reporting",
+    "focus": "risk metrics, dashboards, leadership reporting, KRIs, KPIs, cloud posture, SIEM, vulnerability prioritization, trends, and business impact",
+    "questions": [
+      { "category": "Monitoring/Reporting", "question": "What risk metrics do you monitor?" },
+      { "category": "Monitoring/Reporting", "question": "What should a risk dashboard include?" },
+      { "category": "Monitoring/Reporting", "question": "How do you report risks to leadership?" },
+      { "category": "Monitoring/Reporting", "question": "Explain Key Risk Indicators (KRIs)." },
+      { "category": "Monitoring/Reporting", "question": "What is the difference between KRIs and KPIs?" },
+      { "category": "Monitoring/Reporting", "question": "How do you monitor cloud security posture?" },
+      { "category": "Monitoring/Reporting", "question": "What SIEM tools have you used?" },
+      { "category": "Monitoring/Reporting", "question": "How do you prioritize vulnerabilities?" },
+      { "category": "Monitoring/Reporting", "question": "What is risk trending?" },
+      { "category": "Monitoring/Reporting", "question": "How do you communicate business impact?" }
+    ]
+  },
+  {
+    "id": "set-35",
+    "title": "Mock Interview 35 - Architecture Review Risk",
+    "focus": "architecture approval, third-party risk, SPOFs, HA, DR, RTO/RPO, BCP, Zero Trust, and common architecture risks",
+    "questions": [
+      { "category": "Architecture Review", "question": "What do you review before approving an architecture?" },
+      { "category": "Architecture Review", "question": "How do you evaluate third-party risk?" },
+      { "category": "Architecture Review", "question": "What questions do you ask during architecture reviews?" },
+      { "category": "Architecture Review", "question": "How do you identify single points of failure?" },
+      { "category": "Architecture Review", "question": "Explain High Availability from a risk perspective." },
+      { "category": "Architecture Review", "question": "Explain Disaster Recovery." },
+      { "category": "Architecture Review", "question": "What is the difference between RTO and RPO?" },
+      { "category": "Architecture Review", "question": "What is Business Continuity Planning?" },
+      { "category": "Architecture Review", "question": "Explain Zero Trust Architecture." },
+      { "category": "Architecture Review", "question": "What are common architecture risks?" }
+    ]
+  },
+  {
+    "id": "set-36",
+    "title": "Mock Interview 36 - Audit and Compliance Scenarios",
+    "focus": "shared access, Terraform state secrets, Jenkins credentials, public dashboards, GCP Owner access, patching gaps, logging, vulnerabilities, encryption, and public buckets",
+    "questions": [
+      { "category": "Audit/Compliance Scenarios", "question": "An auditor finds that production access is shared among developers. What do you do?" },
+      { "category": "Audit/Compliance Scenarios", "question": "Terraform state contains database passwords. How would you fix this?" },
+      { "category": "Audit/Compliance Scenarios", "question": "Jenkins stores credentials in plain text. What actions would you take?" },
+      { "category": "Audit/Compliance Scenarios", "question": "Kubernetes dashboard is publicly accessible. What risks exist?" },
+      { "category": "Audit/Compliance Scenarios", "question": "A developer requests Owner access in GCP. Would you approve it?" },
+      { "category": "Audit/Compliance Scenarios", "question": "Your audit finds that 50 VMs have no patching process. What is your response?" },
+      { "category": "Audit/Compliance Scenarios", "question": "Cloud logging has been disabled. Why is this a risk?" },
+      { "category": "Audit/Compliance Scenarios", "question": "A critical vulnerability is found in production. What steps would you follow?" },
+      { "category": "Audit/Compliance Scenarios", "question": "An application stores customer data without encryption. What are the risks?" },
+      { "category": "Audit/Compliance Scenarios", "question": "Public storage buckets are discovered. How would you respond?" }
+    ]
+  },
+  {
+    "id": "set-37",
+    "title": "Mock Interview 37 - Technology Risk Behavioural Questions",
+    "focus": "risk leadership, stakeholder influence, audit lessons, incidents, balancing delivery and security, hidden risks, priorities, and career motivation",
+    "questions": [
+      { "category": "Leadership/Behavioural", "question": "Tell me about a difficult technology risk you managed." },
+      { "category": "Leadership/Behavioural", "question": "Describe a situation where engineering disagreed with your recommendation." },
+      { "category": "Leadership/Behavioural", "question": "How do you influence stakeholders without authority?" },
+      { "category": "Leadership/Behavioural", "question": "Tell me about an audit that did not go well." },
+      { "category": "Leadership/Behavioural", "question": "Describe a major production incident." },
+      { "category": "Leadership/Behavioural", "question": "How do you balance security and delivery speed?" },
+      { "category": "Leadership/Behavioural", "question": "Tell me about a time you identified a hidden risk." },
+      { "category": "Leadership/Behavioural", "question": "Describe a risk that eventually became an incident." },
+      { "category": "Leadership/Behavioural", "question": "How do you handle conflicting priorities?" },
+      { "category": "Leadership/Behavioural", "question": "Why do you want to move into Technology Risk?" }
+    ]
+  },
+  {
+    "id": "set-38",
+    "title": "Mock Interview 38 - GCP DevOps Risk Tailored Round",
+    "focus": "GCP, Kubernetes, Terraform, CI/CD, service accounts, least privilege, compliance, cloud security incidents, and risk assessment",
+    "questions": [
+      { "category": "GCP DevOps Risk", "question": "How do you secure Terraform state in GCP?" },
+      { "category": "GCP DevOps Risk", "question": "How do you prevent infrastructure drift?" },
+      { "category": "GCP DevOps Risk", "question": "How do you secure GKE clusters?" },
+      { "category": "GCP DevOps Risk", "question": "Explain IAM best practices in GCP." },
+      { "category": "GCP DevOps Risk", "question": "How do you review Terraform code from a risk perspective?" },
+      { "category": "GCP DevOps Risk", "question": "How do you integrate security into CI/CD pipelines?" },
+      { "category": "GCP DevOps Risk", "question": "What risks exist when using service accounts?" },
+      { "category": "GCP DevOps Risk", "question": "How would you implement least privilege across GCP projects?" },
+      { "category": "GCP DevOps Risk", "question": "How do you monitor cloud security and compliance?" },
+      { "category": "GCP DevOps Risk", "question": "How would you perform a risk assessment before deploying a new Kubernetes cluster?" },
+      { "category": "GCP DevOps Risk", "question": "How do you ensure Infrastructure as Code changes are compliant before deployment?" },
+      { "category": "GCP DevOps Risk", "question": "Describe a cloud security incident you investigated and the lessons learned." }
+    ]
+  },
+  {
+    "id": "set-39",
+    "title": "Mock Interview 39 - FastAPI Backend Round",
+    "focus": "FastAPI service design, Pydantic, async endpoints, security, databases, observability, testing, deployment, and production readiness",
+    "questions": [
+      {
+        "category": "FastAPI",
+        "question": "FastAPI fundamentals: How would you structure a production FastAPI service with routers, dependencies, schemas, settings, and clear module boundaries?"
+      },
+      {
+        "category": "FastAPI",
+        "question": "FastAPI request validation: How do Pydantic models, response models, and validation errors help keep APIs safe and predictable?"
+      },
+      {
+        "category": "FastAPI",
+        "question": "FastAPI async: When should a FastAPI endpoint be async, and what mistakes can block the event loop in production?"
+      },
+      {
+        "category": "FastAPI",
+        "question": "FastAPI security: How would you implement JWT/OAuth2 authentication, role-based access, secret handling, and least privilege for internal APIs?"
+      },
+      {
+        "category": "FastAPI",
+        "question": "FastAPI observability: What logs, metrics, traces, request IDs, and health endpoints would you add before deploying a FastAPI service?"
+      },
+      {
+        "category": "FastAPI",
+        "question": "FastAPI deployment: How would you deploy FastAPI with Uvicorn/Gunicorn, containers, Kubernetes/GKE, autoscaling, probes, and graceful shutdown?"
+      },
+      {
+        "category": "FastAPI",
+        "question": "FastAPI performance: A FastAPI endpoint has high p95 latency. How would you debug code, database calls, external APIs, concurrency, and infrastructure?"
+      },
+      {
+        "category": "FastAPI",
+        "question": "FastAPI production readiness: What checklist would you use before approving a FastAPI service for production?"
+      }
+    ]
+  },
+  {
+    "id": "set-40",
+    "title": "Mock Interview 40 - Network Hub Scope and Hub-Spoke Risk Round",
+    "focus": "GCP hub-and-spoke networking, Shared VPC, Network Connectivity Center, routing, DNS, firewall governance, NAT, hybrid connectivity, segmentation, and network risk",
+    "questions": [
+      {
+        "category": "Network Hub Scope",
+        "question": "What is a network hub-and-spoke architecture, and why do organizations use it in GCP?"
+      },
+      {
+        "category": "Network Hub Scope",
+        "question": "What should be included in the scope of a network hub project?"
+      },
+      {
+        "category": "Network Hub Scope",
+        "question": "How would you design Shared VPC with host and service projects for a hub-and-spoke model?"
+      },
+      {
+        "category": "Network Hub Scope",
+        "question": "How does Network Connectivity Center help in a hub-and-spoke network design?"
+      },
+      {
+        "category": "Network Hub Scope",
+        "question": "What are the routing risks in a hub-and-spoke architecture?"
+      },
+      {
+        "category": "Network Hub Scope",
+        "question": "How would you manage firewall rules centrally while still allowing application team ownership?"
+      },
+      {
+        "category": "Network Hub Scope",
+        "question": "How would you design DNS resolution across hub, spoke, on-premises, and private GCP services?"
+      },
+      {
+        "category": "Network Hub Scope",
+        "question": "What are the security risks of VPC peering, and what limitations should you consider?"
+      },
+      {
+        "category": "Network Hub Scope",
+        "question": "How would you design outbound internet access through Cloud NAT or centralized egress controls?"
+      },
+      {
+        "category": "Network Hub Scope",
+        "question": "How do you segment production, non-production, shared services, and third-party connectivity in a hub network?"
+      },
+      {
+        "category": "Network Hub Scope",
+        "question": "What monitoring, logging, and KRIs would you define for network hub risk?"
+      },
+      {
+        "category": "Network Hub Scope",
+        "question": "How would you perform a risk assessment before onboarding a new spoke project or VPC into the hub?"
+      }
+    ]
+  },
+  {
+    "id": "set-41",
+    "title": "Mock Interview 41 - GCP Landing Zone Risk and Governance Round",
+    "focus": "GCP landing zone design, organization hierarchy, folders, projects, IAM, org policies, Shared VPC, logging, security baseline, billing, and governance",
+    "questions": [
+      {
+        "category": "GCP Landing Zone",
+        "question": "What is a GCP landing zone, and why is it important for enterprise cloud adoption?"
+      },
+      {
+        "category": "GCP Landing Zone",
+        "question": "What core components would you include in a secure GCP landing zone?"
+      },
+      {
+        "category": "GCP Landing Zone",
+        "question": "How would you design the GCP organization, folder, and project hierarchy?"
+      },
+      {
+        "category": "GCP Landing Zone",
+        "question": "Which GCP organization policies would you enforce as part of a secure baseline?"
+      },
+      {
+        "category": "GCP Landing Zone",
+        "question": "How would you design IAM and access management for a landing zone?"
+      },
+      {
+        "category": "GCP Landing Zone",
+        "question": "How would you design networking for a GCP landing zone?"
+      },
+      {
+        "category": "GCP Landing Zone",
+        "question": "How would you implement centralized logging, monitoring, and audit evidence in a landing zone?"
+      },
+      {
+        "category": "GCP Landing Zone",
+        "question": "How would you manage security controls such as SCC, KMS, Secret Manager, vulnerability scanning, and policy-as-code?"
+      },
+      {
+        "category": "GCP Landing Zone",
+        "question": "How would you handle billing, budgets, labels, cost allocation, and FinOps in a landing zone?"
+      },
+      {
+        "category": "GCP Landing Zone",
+        "question": "How would you onboard new application teams or projects into the landing zone safely?"
+      },
+      {
+        "category": "GCP Landing Zone",
+        "question": "What are common risks or anti-patterns in GCP landing zone implementation?"
+      },
+      {
+        "category": "GCP Landing Zone",
+        "question": "How would you assess whether an existing GCP landing zone is mature and compliant?"
+      }
+    ]
+  },
+  {
+    "id": "set-42",
+    "title": "Mock Interview 42 - Multi-Cloud Network Connectivity Risk Round",
+    "focus": "GCP, AWS, Azure connectivity, VPN, Interconnect, Direct Connect, ExpressRoute, routing, DNS, IP planning, segmentation, observability, security, and resilience",
+    "questions": [
+      {
+        "category": "Multi-Cloud Networking",
+        "question": "How would you design secure network connectivity between GCP, AWS, and Azure?"
+      },
+      {
+        "category": "Multi-Cloud Networking",
+        "question": "What are the main connectivity options for multi-cloud networking, and when would you choose VPN versus dedicated connectivity?"
+      },
+      {
+        "category": "Multi-Cloud Networking",
+        "question": "How would you plan IP address ranges to avoid overlap across multiple cloud providers and on-premises networks?"
+      },
+      {
+        "category": "Multi-Cloud Networking",
+        "question": "How would you design routing between GCP Cloud Router, AWS Transit Gateway, Azure Virtual WAN, and on-premises networks?"
+      },
+      {
+        "category": "Multi-Cloud Networking",
+        "question": "What are the security risks of transitive routing in a multi-cloud network?"
+      },
+      {
+        "category": "Multi-Cloud Networking",
+        "question": "How would you design DNS resolution across GCP, AWS, Azure, and on-premises environments?"
+      },
+      {
+        "category": "Multi-Cloud Networking",
+        "question": "How would you segment production, non-production, shared services, and third-party traffic across multiple clouds?"
+      },
+      {
+        "category": "Multi-Cloud Networking",
+        "question": "How would you design centralized ingress and egress security controls for multi-cloud workloads?"
+      },
+      {
+        "category": "Multi-Cloud Networking",
+        "question": "How would you monitor multi-cloud network connectivity, latency, packet loss, route changes, and availability?"
+      },
+      {
+        "category": "Multi-Cloud Networking",
+        "question": "How would you troubleshoot an application latency issue between GCP and AWS?"
+      },
+      {
+        "category": "Multi-Cloud Networking",
+        "question": "What disaster recovery and resilience considerations apply to multi-cloud connectivity?"
+      },
+      {
+        "category": "Multi-Cloud Networking",
+        "question": "How would you perform a technology risk assessment for a new multi-cloud network connection?"
+      }
+    ]
   }
 ]

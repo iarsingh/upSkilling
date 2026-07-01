@@ -26,6 +26,7 @@ const technologyLabels = {
   gcp: "Google Cloud Platform",
   terraform: "Terraform / IaC",
   python: "Python automation",
+  fastapi: "FastAPI backend",
   go: "Go programming",
   scripting: "Scripting & automation",
   coding: "Coding exercises",
@@ -43,8 +44,9 @@ const technologyLabels = {
 };
 
 const localBankCounts = {
-  all: 366,
+  all: 378,
   python: 12,
+  fastapi: 12,
   go: 12,
   scripting: 20,
   docker: 20,
