@@ -578,3 +578,16 @@ Focus: Platform team scope, multi-tenancy, golden paths, self-service guardrails
 6. **Platform Engineering:** How would you design a service catalog that tracks ownership, dependencies, production-readiness status, and on-call rotation for every service on the platform?
 7. **Platform Engineering:** How would you enforce security and compliance guardrails inside a self-service platform without turning every request into a manual approval bottleneck?
 8. **Platform Engineering:** How would you decide between building a custom internal developer platform versus adopting Backstage, Port, or another off-the-shelf IDP?
+
+## Mock Interview 46 - Ansible / Configuration Management Round
+
+Focus: Ansible playbooks, roles, idempotency, Vault secrets, testing, scale, and combining Ansible with Terraform across multi-cloud environments
+
+1. **Ansible:** What is Ansible, and how does its agentless, push-based model differ from Terraform or Puppet/Chef?
+2. **Ansible:** How do you ensure Ansible playbooks are idempotent, and what happens when a task isn't naturally idempotent?
+3. **Ansible:** How would you structure reusable Ansible roles for OS patching, configuration management, and application deployment across many teams?
+4. **Ansible:** How would you manage secrets in Ansible using Vault, and how would you rotate a vaulted secret without redistributing it manually?
+5. **Ansible:** When would you use Ansible instead of Terraform, and how would you combine them in the same pipeline, for example Terraform provisions and Ansible configures?
+6. **Ansible:** How would you run Ansible playbooks against thousands of hosts efficiently, and what would you do about serial execution, forks, and failure handling?
+7. **Ansible:** How would you test Ansible roles and playbooks before running them in production, for example with Molecule or a CI pipeline?
+8. **Ansible:** You used Ansible for backup automation and disaster recovery. Walk me through how a playbook-driven DR runbook would work end to end.

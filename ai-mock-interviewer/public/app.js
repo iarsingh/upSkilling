@@ -59,6 +59,7 @@ const technologyLabels = {
   sre: "SRE / reliability",
   mlops: "MLOps / Vertex AI",
   llmops: "LLMOps / GenAI production",
+  ansible: "Ansible / config management",
   cicd: "CI/CD / GitOps",
   observability: "Observability",
   security: "Cloud / DevSecOps security",
@@ -67,6 +68,7 @@ const technologyLabels = {
   platform: "Platform engineering",
   "tech-risk-technical": "Technology risk - technical",
   "tech-risk-behavioral": "Technology risk - behavioural",
+  "hr-behavioral": "HR / behavioral basics",
   scenario: "Scenario-based questions"
 };
 const technologyMatchers = {
@@ -82,11 +84,12 @@ const technologyMatchers = {
   sre: /\b(sre|reliability|sli|slo|sla|error budget|incident|postmortem|rca|on-call|oncall|availability|capacity planning|chaos|mttr|toil|runbook|disaster recovery|rto|rpo)\b/i,
   mlops: /\b(mlops|machine learning|vertex ai|mlflow|kubeflow|model|inference|feature store|training pipeline|data drift|concept drift|gpu|kserve|seldon|bentoml|tensorflow serving|torchserve)\b/i,
   llmops: /\b(llm|genai|generative ai|rag|retrieval.augmented|vector database|vector db|embedding|prompt|token|agent|langchain|llamaindex|vllm|tgi|model garden|agent builder|guardrail|hallucinat|chatbot|copilot)\b/i,
+  ansible: /\b(ansible|playbook|ansible vault|jinja2|ansible-lint|molecule|ansible tower|awx|ad-hoc command|ansible role)\b/i,
   cicd: /\b(ci\/cd|cicd|continuous integration|continuous delivery|continuous deployment|gitops|argocd|argo cd|jenkins|github actions|gitlab|cloud build|cloud deploy|pipeline|artifact|canary|blue.?green|rollback)\b/i,
   observability: /\b(observability|prometheus|grafana|opentelemetry|open telemetry|monitoring|logging|metrics|tracing|trace|dashboard|alert|elk|opensearch|cloud operations|cloud monitoring)\b/i,
   security: /\b(security|devsecops|iam|rbac|workload identity|secret|vault|cloud armor|waf|binary authorization|vulnerability|sast|dast|supply chain|sbom|gatekeeper|kyverno|admission|least privilege|encryption|kms)\b/i,
   networking: /\b(network|networking|vpc|subnet|dns|load balancer|load balancing|firewall|vpn|interconnect|tcp|udp|http|https|tls|nat|routing|route|ingress|egress|gateway|proxy|envoy|apigee)\b/i,
-  linux: /\b(linux|kernel|systemd|process|filesystem|memory|cpu|disk|inode|shell|bash|tcpdump|strace|lsof|top|vmstat|iostat|permission|certificate|tls)\b/i,
+  linux: /\b(linux|kernel|systemd|journald|cron|process|filesystem|memory|cpu|disk|inode|shell|bash|tcpdump|strace|lsof|top|vmstat|iostat|permission|chmod|chown|sudo|ssh|scp|rsync|certificate|tls)\b/i,
   platform: /\b(platform engineering|developer platform|internal developer platform|idp|self-service|golden path|backstage|developer experience|devex|landing zone|governance|multi-tenant)\b/i,
   "tech-risk-technical": /\b(technology risk|risk assessment|risk register|heatmap|control|preventive|detective|corrective|iso 27001|nist|cobit|fair|audit|compliance|remediation|brd|prd|architecture|sdlc|change risk|cloud risk|incident|near miss|control failure|fmea|scenario analysis)\b/i,
   "tech-risk-behavioral": /\b(behavioral|behavioural|stakeholder|communication|leadership|influenc|senior leadership|trusted advisor|decision|risk culture|conflict|priorit|audit finding|remediation|product|engineering|security|business)\b/i,
@@ -599,7 +602,24 @@ const questionBank = [
   "Platform team KPIs: What metrics would convince leadership to keep funding a platform engineering team versus letting application teams manage their own infrastructure?",
   "Self-service guardrails: How would you enforce security and compliance guardrails inside a self-service platform without turning every request into a manual approval bottleneck?",
   "IDP tooling choice: How would you decide between building a custom internal developer platform versus adopting Backstage, Port, or another off-the-shelf IDP?",
-  "Platform API design: How would you version a platform self-service API so existing automation doesn't break when you add new capabilities?"
+  "Platform API design: How would you version a platform self-service API so existing automation doesn't break when you add new capabilities?",
+  "Linux CPU utilization: How would you check CPU utilization on a Linux server, and which commands would you use?",
+  "Linux memory usage: What commands would you use to check memory usage on a Linux server?",
+  "High CPU troubleshooting: How would you troubleshoot a Linux server with high CPU usage, step by step?",
+  "top vs htop: What is the difference between top and htop, and when would you use each?",
+  "Linux disk usage: How would you check disk usage on a Linux server, and how would you find what is consuming the space?",
+  "Linux processes: What is a process in Linux, and how would you find and kill a specific process safely?",
+  "Load average: What is load average in Linux, and how do you interpret it relative to CPU core count?",
+  "System monitoring approach: How do you approach monitoring systems in production, and what tools have you used?",
+  "Sudden CPU spike: A server's CPU usage suddenly spikes to 100 percent. Walk me through exactly what you would do.",
+  "Slow system troubleshooting: A system is running slowly. What steps would you take to troubleshoot it?",
+  "First logs to check: When an incident starts, which logs do you check first, and why?",
+  "DevOps definition: What is DevOps, and what problem does it solve for software teams?",
+  "Automation definition: What is automation in a DevOps context, and why does it matter?",
+  "Deployment vs DaemonSet: What is the difference between a Deployment and a DaemonSet in Kubernetes?",
+  "ServiceAccount basics: What is a Kubernetes ServiceAccount, and how is it different from a regular user account?",
+  "Cluster slowness metrics: If a Kubernetes cluster feels slow, what metrics would you check first?",
+  "Explain your automation: You mention you have written automation scripts. Walk me through one you are proud of, end to end."
 ];
 const scriptingQuestionBank = [
   "Python automation: Design a production-ready script that inventories all GCP projects, collects labels and owners, and exports non-compliant resources to CSV.",
@@ -665,7 +685,11 @@ const pythonQuestionBank = [
   "Python GCP client patterns: How would you handle pagination, quota errors, and exponential backoff when listing thousands of resources with GCP client libraries?",
   "Python dependency management: How would you manage dependencies, lockfiles, and reproducible builds for an internal Python tool using pip-tools or Poetry?",
   "Python performance: A Python automation script that inventories thousands of GCP resources is too slow. How would you profile it and decide between async, threads, or multiprocessing?",
-  "Python mocking: How would you mock GCP and Kubernetes API responses in pytest to test error handling paths like throttling, timeouts, and permission denials?"
+  "Python mocking: How would you mock GCP and Kubernetes API responses in pytest to test error handling paths like throttling, timeouts, and permission denials?",
+  "Scripting experience: Do you have hands-on scripting experience? Which languages do you use most, and why?",
+  "Python vs Bash: What is the difference between Python and Bash scripting, and when would you choose one over the other?",
+  "Task automation approach: How do you decide what to automate, and how do you approach automating a repetitive manual task?",
+  "Python CPU monitor: Write a Python script that monitors and prints current CPU utilization at a regular interval."
 ];
 const fastApiQuestionBank = [
   "FastAPI fundamentals: How would you structure a production FastAPI service with routers, dependencies, schemas, settings, and clear module boundaries?",
@@ -710,6 +734,252 @@ const codingQuestionBank = [
   "Kubernetes coding: Write a Python program using the Kubernetes client that lists unschedulable pods and summarizes their scheduling reasons.",
   "GCP coding: Write a Python program using Google Cloud client libraries that lists public Cloud Storage buckets and handles permission errors.",
   "Terraform coding: Write a validation strategy or test that rejects resources missing required labels and prevents public ingress on port 22."
+];
+const debugQuestionBank = [
+  `Debug this Jenkinsfile: Find every bug before this pipeline runs.
+
+pipeline { agent any
+  environment {
+    Docker_image = "my-app-image"
+    Docker_tag = "latest"
+  }
+  Stages {
+    stage('Checkout Code') {
+      steps {
+        git ''
+      }
+    }
+    stage('Build') {
+      Steps {
+        sh 'echo "build application"'
+        sh 'mvn clean package'
+      }
+    }
+    stage('deploy') {
+      steps {
+        Sh 'kubectl apply -f deployment.yaml'
+      }
+    }
+  }
+}`,
+  `Debug this Python script: A teammate wrote this CPU monitor and it won't even run. Find every bug.
+
+import plutil
+import time
+
+def monitor_cpu(interval = 2)
+print("monitoring cpu utilization")
+
+try :
+	while True :
+		cpu_usage = plutil.cpu_percent(interval=1)
+		print(f"Current cpu usage : {cpu_usage}%")`,
+  `Debug this Bash script: This health check script is supposed to fail loudly on errors but doesn't. Find every bug.
+
+#!/bin/bash
+URL=$1
+THRESHOLD=$2
+response=$(curl -s -o /dev/null -w %{http_code} $URL)
+if [ $response == 200 ]
+  echo "Healthy"
+else
+  echo "Unhealthy, got $response"
+fi
+disk=$(df / | grep / | awk '{ print $5} ' | sed 's/%//g')
+if [ $disk -gt $THRESHOLD ]
+  echo "Disk usage critical: $disk%"`,
+  `Debug this Terraform snippet: This module fails to plan. Find every bug.
+
+resource "google_compute_instance" "web" {
+  name         = "web-server"
+  machine_type = e2-medium
+  zone         = "us-central1-a"
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-11"
+    }
+  }
+
+  network_interface {
+    network = google_compute_network.vpc.name
+  }
+
+  tags = "web-server"
+}
+
+resource "google_compute_firewall" "allow_ssh" {
+  name    = "allow-ssh"
+  network = google_compute_network.vpc.name
+
+  allow {
+    protocol = "tcp"
+    ports    = 22
+  }
+
+  source_ranges = "0.0.0.0/0"
+}`,
+  `Debug this Dockerfile: This image builds but fails security review and best-practice checks. Find every issue.
+
+FROM ubuntu:latest
+ADD . /app
+WORKDIR /app
+RUN apt-get update && apt-get install -y python3 python3-pip
+RUN pip3 install -r requirements.txt
+ENV DB_PASSWORD=supersecret123
+EXPOSE 8080
+CMD python3 app.py`,
+  `Debug this Kubernetes manifest: This Deployment and Service are supposed to work together but traffic never reaches the pods. Find every bug.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: payments
+  template:
+    metadata:
+      labels:
+        app: payments-api
+    spec:
+      containers:
+        - name: payments
+          image: gcr.io/my-project/payments:v1
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payments-svc
+spec:
+  selector:
+    app: payments
+  ports:
+    - port: 80
+      targetPort: 9090`,
+  `Debug this GitHub Actions workflow: This deploy workflow has multiple security and correctness problems. Find every issue.
+
+name: deploy
+on: pull_request_target
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - name: Configure GCP
+        run: echo "GOOGLE_CREDENTIALS=\${{ secrets.GCP_KEY }}" >> $GITHUB_ENV
+      - name: Deploy
+        run: |
+          echo $GOOGLE_CREDENTIALS
+          gcloud deploy releases create --region=us-central1`,
+  `Debug this Ansible playbook: This playbook is meant to be safely re-run on every host but breaks idempotency and has a risky default. Find every bug.
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install nginx
+      command: apt-get install -y nginx
+
+    - name: Copy config
+      copy:
+        src: nginx.conf
+        dest: /etc/nginx/nginx.conf
+
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted
+
+    - name: Open firewall
+      command: ufw allow 0.0.0.0/0`,
+  `Debug this Python retry helper: This is supposed to retry a flaky API call with backoff, but it can loop forever or swallow real errors. Find every bug.
+
+import requests
+
+def call_api(url, max_retries=3):
+    attempt = 0
+    while True:
+        try:
+            response = requests.get(url)
+            return response.json()
+        except:
+            attempt += 1
+            print("retrying")`,
+  `Debug this Prometheus alert rule: This alert is supposed to page only on sustained high error rate, but it pages on every brief blip. Find every bug.
+
+groups:
+  - name: api-alerts
+    rules:
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status="500"}[1m]) > 0
+        labels:
+          severity: page
+        annotations:
+          summary: "Error rate is high"`,
+  `Debug this Python Kubernetes automation script: This is supposed to find and log CrashLoopBackOff pods across all namespaces, but has a bug that makes it miss most of them. Find every issue.
+
+from kubernetes import client, config
+
+config.load_kube_config()
+v1 = client.CoreV1Api()
+
+def find_crashloop_pods():
+    pods = v1.list_pod_for_all_namespaces()
+    for pod in pods:
+        for status in pod.status.container_statuses:
+            if status.state.waiting.reason == "CrashLoopBackOff":
+                print(pod.name)`,
+  `Debug this docker-compose file: This is supposed to run the app with a Postgres database, but the app can never connect. Find every bug.
+
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      - DB_HOST=localhost
+      - DB_PASSWORD=secret
+    depends_on:
+      - db
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=different_secret`,
+  `Debug this Terraform variable and output block: This module fails validation and leaks a secret in plan output. Find every bug.
+
+variable "api_key" {
+  type = string
+}
+
+variable "environment" {
+  type    = string
+  default = "prod"
+  validation {
+    condition     = var.environment in ["dev", "staging", "prod"]
+    error_message = "environment must be dev, staging, or prod"
+  }
+}
+
+output "api_key" {
+  value = var.api_key
+}`,
+  `Debug this shell deployment script: This script is supposed to build, tag, push, and deploy safely, but a single failure anywhere lets it continue to the next step. Find every bug.
+
+#!/bin/bash
+IMAGE=my-app
+TAG=$(git rev-parse HEAD)
+
+docker build -t $IMAGE:$TAG .
+docker push $IMAGE:$TAG
+kubectl set image deployment/my-app app=$IMAGE:$TAG
+kubectl rollout status deployment/my-app
+echo "Deployment complete"`
 ];
 const goQuestionBank = [
   "Go fundamentals: What are the main differences between Go and Python for cloud/platform automation, and when would you choose each?",
@@ -760,6 +1030,34 @@ const llmOpsQuestionBank = [
   "Resume deep-dive - secure MLOps: You implemented IAM, RBAC, Secrets Manager, and Binary Authorization for AI workloads. Walk me through one specific control and the risk it closed.",
   "Resume deep-dive - GitOps for AI: You used ArgoCD and Helm for AI application deployments. How is a GitOps rollout for model-serving different from a normal microservice rollout?"
 ];
+const ansibleQuestionBank = [
+  "Ansible fundamentals: What is Ansible, and how does its agentless, push-based model differ from Terraform or Puppet/Chef?",
+  "Ansible idempotency: How do you ensure Ansible playbooks are idempotent, and what happens when a task isn't naturally idempotent?",
+  "Ansible inventory: How would you structure dynamic inventory for GCP, AWS, and Azure instances instead of maintaining a static inventory file?",
+  "Ansible roles: How would you structure reusable Ansible roles for OS patching, configuration management, and application deployment across many teams?",
+  "Ansible Vault: How would you manage secrets in Ansible using Vault, and how would you rotate a vaulted secret without redistributing it manually?",
+  "Ansible vs Terraform: When would you use Ansible instead of Terraform, and how would you combine them in the same pipeline, for example Terraform provisions and Ansible configures?",
+  "Ansible at scale: How would you run Ansible playbooks against thousands of hosts efficiently, and what would you do about serial execution, forks, and failure handling?",
+  "Ansible testing: How would you test Ansible roles and playbooks before running them in production, for example with Molecule or a CI pipeline?",
+  "Ansible error handling: How do you handle partial failures in a multi-host Ansible run so one bad host doesn't block the rest of the fleet?",
+  "Ansible Jinja2 templating: How would you use Jinja2 templates in Ansible to generate environment-specific configuration files safely?",
+  "Ansible Tower/AWX: What does Ansible Tower or AWX add on top of plain ansible-playbook for enterprise teams, such as RBAC, scheduling, and audit logging?",
+  "Ansible for DR: You used Ansible for backup automation and disaster recovery. Walk me through how a playbook-driven DR runbook would work end to end.",
+  "Ansible OS patching: How would you design a safe, automated OS patching workflow with Ansible that includes health checks, rolling batches, and rollback?",
+  "Ansible linting: How would you enforce Ansible code quality using ansible-lint, pre-commit hooks, and code review before merging playbook changes?",
+  "Ansible secrets in CI/CD: How would you securely supply an Ansible Vault password or SSH key to a CI/CD pipeline without hardcoding it?",
+  "Ansible multi-cloud: You delivered Ansible IaC across GCP, AWS, and Azure. What did you handle differently for authentication and modules across the three clouds?",
+  "Ansible with Kubernetes: When would you still use Ansible in a Kubernetes-centric platform, for example bootstrapping nodes or managing non-containerized infrastructure?",
+  "Ansible change management: How would you gate risky Ansible changes, like a fleet-wide restart, behind approvals while keeping routine changes fast?",
+  "Ansible architecture: Explain the components of Ansible architecture, including the control node, managed nodes, and how they communicate.",
+  "Ansible push vs pull: What is the difference between a push-based and a pull-based configuration management model, and where does Ansible fit?",
+  "Ansible inventory basics: What is an Ansible inventory file, and what does it typically contain?",
+  "Ansible playbooks basics: What are Ansible playbooks, and what does their basic structure look like?",
+  "Ansible roles basics: What are roles in Ansible, and why would you use them instead of one large playbook?",
+  "Ansible modules basics: What are Ansible modules, and how do they differ from running a raw shell command?",
+  "Ansible connectivity: How does Ansible connect to and execute commands on remote machines?",
+  "YAML basics: What is YAML, and why is it used as the configuration language for Ansible?"
+];
 const techRiskTechnicalQuestionBank = [
   "Technology risk framework: How would you design an enterprise technology risk management framework for cloud, applications, infrastructure, SDLC, and third-party integrations?",
   "Risk assessment: A product team is launching a new customer-facing platform on GCP/GKE. How would you assess technology risk from BRD/PRD through architecture review, build, release, and operations?",
@@ -787,6 +1085,19 @@ const techRiskBehavioralQuestionBank = [
   "Audit partnership: How would you handle a disagreement with internal or external auditors about severity, evidence, or remediation feasibility?",
   "Incident communication: During a major incident with regulatory implications, how would you coordinate technical updates, business impact, risk reporting, and follow-up actions?",
   "Leadership reflection: What does success look like for you in a Technology Risk Lead role after six months?"
+];
+const hrBehavioralQuestionBank = [
+  "Tell me about yourself.",
+  "Explain your current role and day-to-day responsibilities.",
+  "Why do you want to switch your current job?",
+  "Why do you want to work at a product-based company specifically?",
+  "What is the most challenging problem you have faced in your career, and how did you handle it?",
+  "What are your strengths and weaknesses?",
+  "Where do you see yourself in 3 years?",
+  "What are the areas you do not know well or have not worked on yet?",
+  "What is the difference between theoretical knowledge and real-time, hands-on production experience, and how do you bridge that gap?",
+  "Have you worked independently on a project, or always as part of a team? Describe an example.",
+  "What would you do if an automation script you wrote failed or caused an unintended change in production?"
 ];
 let questionNumber = 1;
 let interviewNumber = 1;
@@ -1173,10 +1484,35 @@ function uniqueQuestions(questions) {
   });
 }
 
+// Broad catch-all filters (scenario/scripting/coding/tech-risk-*) match almost any
+// section title on generic words like "design" or "engineering". Only the specific,
+// single-technology filters are used to decide whether a section title genuinely
+// mixes topics (like "Advanced Kubernetes, GCP, Terraform, Python...").
+const coreTechnologyKeys = [
+  "kubernetes", "docker", "gcp", "terraform", "python", "fastapi", "go",
+  "sre", "mlops", "llmops", "cicd", "observability", "security", "networking",
+  "linux", "platform", "ansible"
+];
+const ambiguousSectionCache = new Map();
+function isAmbiguousSection(section) {
+  if (!section) return true;
+  if (ambiguousSectionCache.has(section)) return ambiguousSectionCache.get(section);
+  const matchedFilters = coreTechnologyKeys.filter((key) => technologyMatchers[key]?.test(section)).length;
+  const ambiguous = matchedFilters > 1;
+  ambiguousSectionCache.set(section, ambiguous);
+  return ambiguous;
+}
+
 function matchesTechnology(question, section = "") {
   if (els.technology.value === "all") return true;
   const matcher = technologyMatchers[els.technology.value];
-  return matcher ? matcher.test(`${section} ${question}`) : true;
+  if (!matcher) return true;
+  // A section title that itself matches more than one technology (e.g. a mixed
+  // "Advanced Kubernetes, GCP, Terraform, Python..." section) would otherwise
+  // leak every question in it into every one of those filters. Fall back to
+  // matching on the question text alone for those sections.
+  const effectiveSection = isAmbiguousSection(section) ? "" : section;
+  return matcher.test(`${effectiveSection} ${question}`);
 }
 
 function filterTechnologyQuestions(questions) {
@@ -1189,10 +1525,12 @@ function specializedQuestions() {
   if (els.technology.value === "go") return goQuestionBank;
   if (els.technology.value === "scripting") return scriptingQuestionBank;
   if (els.technology.value === "docker") return dockerQuestionBank;
-  if (els.technology.value === "coding") return codingQuestionBank;
+  if (els.technology.value === "coding") return [...codingQuestionBank, ...debugQuestionBank];
   if (els.technology.value === "llmops") return llmOpsQuestionBank;
+  if (els.technology.value === "ansible") return ansibleQuestionBank;
   if (els.technology.value === "tech-risk-technical") return techRiskTechnicalQuestionBank;
   if (els.technology.value === "tech-risk-behavioral") return techRiskBehavioralQuestionBank;
+  if (els.technology.value === "hr-behavioral") return hrBehavioralQuestionBank;
   if (els.technology.value === "all") {
     return [
       ...scriptingQuestionBank,
@@ -1201,9 +1539,12 @@ function specializedQuestions() {
       ...fastApiQuestionBank,
       ...goQuestionBank,
       ...codingQuestionBank,
+      ...debugQuestionBank,
       ...llmOpsQuestionBank,
+      ...ansibleQuestionBank,
       ...techRiskTechnicalQuestionBank,
-      ...techRiskBehavioralQuestionBank
+      ...techRiskBehavioralQuestionBank,
+      ...hrBehavioralQuestionBank
     ];
   }
   return [];
@@ -1244,7 +1585,7 @@ function buildCustomJdMockQuestions() {
 }
 
 function questionPool() {
-  if (["scripting", "coding", "tech-risk-technical", "tech-risk-behavioral"].includes(els.technology.value)) {
+  if (["scripting", "coding", "tech-risk-technical", "tech-risk-behavioral", "hr-behavioral"].includes(els.technology.value)) {
     return uniqueQuestions(specializedQuestions());
   }
 
@@ -1507,12 +1848,13 @@ async function checkHealth() {
   try {
     const response = await fetch("/api/health");
     const data = await response.json();
+    const providerLabel = data.provider === "claude" ? "Claude" : "Ollama";
     els.status.classList.toggle("ok", Boolean(data.ok));
     els.status.classList.toggle("bad", !data.ok);
-    els.statusText.textContent = data.ok ? `Ollama ready: ${data.model}` : "Ollama not reachable";
+    els.statusText.textContent = data.ok ? `${providerLabel} ready: ${data.model}` : `${providerLabel} not reachable`;
   } catch {
     els.status.classList.add("bad");
-    els.statusText.textContent = "Ollama not reachable";
+    els.statusText.textContent = "LLM provider not reachable";
   }
 }
 

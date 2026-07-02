@@ -115,6 +115,10 @@ h2 {
   line-height: 1.42;
 }
 
+#question {
+  white-space: pre-wrap;
+}
+
 .subtitle {
   margin: 7px 0 0;
   color: var(--muted);

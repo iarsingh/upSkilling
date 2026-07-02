@@ -1533,5 +1533,44 @@
         "question": "How would you decide between building a custom internal developer platform versus adopting Backstage, Port, or another off-the-shelf IDP?"
       }
     ]
+  },
+  {
+    "id": "set-46",
+    "title": "Mock Interview 46 - Ansible / Configuration Management Round",
+    "focus": "Ansible playbooks, roles, idempotency, Vault secrets, testing, scale, and combining Ansible with Terraform across multi-cloud environments",
+    "questions": [
+      {
+        "category": "Ansible",
+        "question": "What is Ansible, and how does its agentless, push-based model differ from Terraform or Puppet/Chef?"
+      },
+      {
+        "category": "Ansible",
+        "question": "How do you ensure Ansible playbooks are idempotent, and what happens when a task isn't naturally idempotent?"
+      },
+      {
+        "category": "Ansible",
+        "question": "How would you structure reusable Ansible roles for OS patching, configuration management, and application deployment across many teams?"
+      },
+      {
+        "category": "Ansible",
+        "question": "How would you manage secrets in Ansible using Vault, and how would you rotate a vaulted secret without redistributing it manually?"
+      },
+      {
+        "category": "Ansible",
+        "question": "When would you use Ansible instead of Terraform, and how would you combine them in the same pipeline, for example Terraform provisions and Ansible configures?"
+      },
+      {
+        "category": "Ansible",
+        "question": "How would you run Ansible playbooks against thousands of hosts efficiently, and what would you do about serial execution, forks, and failure handling?"
+      },
+      {
+        "category": "Ansible",
+        "question": "How would you test Ansible roles and playbooks before running them in production, for example with Molecule or a CI pipeline?"
+      },
+      {
+        "category": "Ansible",
+        "question": "You used Ansible for backup automation and disaster recovery. Walk me through how a playbook-driven DR runbook would work end to end."
+      }
+    ]
   }
 ]

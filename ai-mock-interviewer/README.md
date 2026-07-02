@@ -37,6 +37,20 @@ Override it:
 OLLAMA_MODEL=mistral npm start
 ```
 
+## LLM Provider (Ollama or Claude)
+
+By default the app runs fully locally through Ollama. You can switch it to use the Claude API instead:
+
+```bash
+LLM_PROVIDER=claude ANTHROPIC_API_KEY=sk-ant-... npm start
+```
+
+- `LLM_PROVIDER` — `ollama` (default, local, free) or `claude` (paid, higher quality, requires internet).
+- `ANTHROPIC_API_KEY` — required when `LLM_PROVIDER=claude`. Get one at [console.anthropic.com](https://console.anthropic.com).
+- `CLAUDE_MODEL` — defaults to `claude-opus-4-8`. Override with any current Claude model ID (e.g. `claude-sonnet-5`) to trade quality for cost/speed.
+
+Switching is a full swap, not automatic fallback — if `LLM_PROVIDER=claude` and `ANTHROPIC_API_KEY` is unset, Claude calls fail and the app falls back to the built-in offline feedback template (final feedback only) rather than silently using Ollama. Leave `LLM_PROVIDER` unset (or `ollama`) to keep everything local.
+
 ## Audio Input
 
 The app uses browser microphone speech recognition when available. If your browser blocks or does not support speech recognition, type or paste the transcript into the answer box and use the same feedback flow.
@@ -66,6 +80,8 @@ The app is a mock interview question generator. By default, `Question order` is 
 Use `Technology practice` to prepare one subject at a time. Available filters include Kubernetes/GKE, Docker/containers, GCP, Terraform/IaC, Python automation, scripting and automation, coding exercises, SRE, MLOps/Vertex AI, LLMOps/GenAI production, CI/CD/GitOps, observability, security, networking, Linux, platform engineering, and scenario-based questions. The selected technology filters the full question bank, practice days, and mock interview sets.
 
 `Coding exercises` provides practical Python, Bash, Kubernetes API, GCP SDK, log-processing, networking, SLO, and Terraform validation tasks. Write the solution directly in the code-friendly answer editor, then save it as an interview answer for final feedback.
+
+The `Coding exercises` filter also includes "debug this script" questions: a deliberately broken Jenkinsfile, Python script, Bash script, Terraform snippet, Dockerfile, Kubernetes manifest, GitHub Actions workflow, Ansible playbook, Prometheus alert rule, docker-compose file, or deployment script is shown, and you identify and explain every bug before it reaches production.
 
 The built-in market question bank has 258 balanced senior-level questions across GKE, Terraform, GCP services, SRE, observability, security, networking, CI/CD, Python automation, platform engineering, MLOps, LLMOps/GenAI production, FinOps, Linux fundamentals, data reliability, DR, and senior behavioral ownership. The app also loads all 1180 questions from the local `1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt` bank, including the GCP ML, Vertex AI, and JD-specific Senior Cloud Engineering questions.
 

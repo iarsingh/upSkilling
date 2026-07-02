@@ -1,0 +1,2010 @@
+[
+  {
+    "section": "Mock Interview 1 - GKE Production Troubleshooting",
+    "question": "Configuration drift: How would you detect and prevent configuration drift across applications, clusters, and cloud infrastructure?"
+  },
+  {
+    "section": "Mock Interview 1 - GKE Production Troubleshooting",
+    "question": "SRE fundamentals: Design an SLO for a customer-facing API running on GKE. What SLIs would you choose, how would you calculate error budget, and how would it affect releases?"
+  },
+  {
+    "section": "Mock Interview 1 - GKE Production Troubleshooting",
+    "question": "Cloud Monitoring: How would you design alerting policies in Google Cloud Monitoring to reduce alert fatigue and focus on user impact?"
+  },
+  {
+    "section": "Mock Interview 1 - GKE Production Troubleshooting",
+    "question": "Ingress controller: How would you debug an ingress path returning 404 or 502, from DNS to load balancer to ingress controller to service endpoints?"
+  },
+  {
+    "section": "Mock Interview 1 - GKE Production Troubleshooting",
+    "question": "Kubernetes Secrets: How would you compare Kubernetes Secrets, Secret Manager, External Secrets Operator, Sealed Secrets, and CSI drivers?"
+  },
+  {
+    "section": "Mock Interview 1 - GKE Production Troubleshooting",
+    "question": "Pipeline caching: When can ML pipeline caching help, and when can it hide stale data or bad assumptions?"
+  },
+  {
+    "section": "Mock Interview 1 - GKE Production Troubleshooting",
+    "question": "Go services: If asked to build a Kubernetes controller or CLI in Go, how would you approach the design even if Go is not your primary language?"
+  },
+  {
+    "section": "Mock Interview 1 - GKE Production Troubleshooting",
+    "question": "Reliability review: What would you check before certifying a service as production-ready on GCP/GKE?"
+  },
+  {
+    "section": "Mock Interview 2 - Terraform and GCP Platform Design",
+    "question": "Terraform expert: How would you design reusable Terraform modules for GCP networking, IAM, GKE, Cloud Run, observability, and security so teams can consume them safely?"
+  },
+  {
+    "section": "Mock Interview 2 - Terraform and GCP Platform Design",
+    "question": "Compute Engine operations: A Linux VM behind a load balancer has high CPU, many TIME_WAIT connections, and intermittent TLS errors. How would you debug it?"
+  },
+  {
+    "section": "Mock Interview 2 - Terraform and GCP Platform Design",
+    "question": "IAM recommender: How would you use IAM Recommender and audit logs to reduce over-permissioned service accounts safely?"
+  },
+  {
+    "section": "Mock Interview 2 - Terraform and GCP Platform Design",
+    "question": "Developer experience: How would you measure whether your platform improves developer experience and delivery speed?"
+  },
+  {
+    "section": "Mock Interview 2 - Terraform and GCP Platform Design",
+    "question": "Capacity incident: A regional capacity shortage affects node pool scaling. How would you mitigate and redesign for resilience?"
+  },
+  {
+    "section": "Mock Interview 2 - Terraform and GCP Platform Design",
+    "question": "VPC Service Controls: When would you use VPC Service Controls, what problems does it solve, and what operational pain can it introduce?"
+  },
+  {
+    "section": "Mock Interview 2 - Terraform and GCP Platform Design",
+    "question": "GKE multi-cluster: When would you use multiple GKE clusters versus one shared cluster, and how would you handle traffic, identity, policy, and operations?"
+  },
+  {
+    "section": "Mock Interview 2 - Terraform and GCP Platform Design",
+    "question": "BigQuery/data reliability: How would you approach BigQuery or data pipeline reliability when platform teams own infrastructure but data teams own pipelines?"
+  },
+  {
+    "section": "Mock Interview 3 - SRE Incident and Reliability",
+    "question": "Alert fatigue: You inherit 500 alerts and noisy on-call. How would you rationalize alerts using SLOs and ownership?"
+  },
+  {
+    "section": "Mock Interview 3 - SRE Incident and Reliability",
+    "question": "Observability maturity: How would you assess whether an organization has mature observability or just many dashboards?"
+  },
+  {
+    "section": "Mock Interview 3 - SRE Incident and Reliability",
+    "question": "TLS rotation: How would you rotate TLS certificates for production ingress without downtime?"
+  },
+  {
+    "section": "Mock Interview 3 - SRE Incident and Reliability",
+    "question": "Artifact Registry: How would you design Artifact Registry repositories, IAM, cleanup policies, scanning, and promotion between environments?"
+  },
+  {
+    "section": "Mock Interview 3 - SRE Incident and Reliability",
+    "question": "Immutable infrastructure: What does immutable infrastructure mean in cloud platforms, and when is mutable infrastructure still acceptable?"
+  },
+  {
+    "section": "Mock Interview 3 - SRE Incident and Reliability",
+    "question": "CI/CD design: Design a safe promotion workflow from commit to production using GitHub Actions, Cloud Build, Jenkins, artifact promotion, approvals, and rollback."
+  },
+  {
+    "section": "Mock Interview 3 - SRE Incident and Reliability",
+    "question": "SLO burn rate: Explain multi-window multi-burn-rate alerting and how you would tune alerts for fast and slow burns."
+  },
+  {
+    "section": "Mock Interview 3 - SRE Incident and Reliability",
+    "question": "Cloud Composer/Dataflow: A scheduled data pipeline misses its SLA and downstream dashboards are stale. How would you debug Composer, Dataflow, BigQuery, retries, backfills, and alerting?"
+  },
+  {
+    "section": "Mock Interview 4 - CI/CD and GitOps",
+    "question": "ArgoCD drift: A team says ArgoCD shows drift between Git and the cluster. How would you investigate and safely reconcile it?"
+  },
+  {
+    "section": "Mock Interview 4 - CI/CD and GitOps",
+    "question": "Terraform monorepo vs multi-repo: How would you decide repository structure for Terraform modules, environments, and app teams?"
+  },
+  {
+    "section": "Mock Interview 4 - CI/CD and GitOps",
+    "question": "Secrets rotation: How would you rotate secrets or keys for production services without downtime?"
+  },
+  {
+    "section": "Mock Interview 4 - CI/CD and GitOps",
+    "question": "Prometheus scale: Prometheus is overloaded with high cardinality metrics. How would you debug and fix it?"
+  },
+  {
+    "section": "Mock Interview 4 - CI/CD and GitOps",
+    "question": "Capacity planning: How would you design capacity planning for GKE node pools supporting both web services and batch or ML workloads?"
+  },
+  {
+    "section": "Mock Interview 4 - CI/CD and GitOps",
+    "question": "Pipeline orchestration: Compare Airflow, Dagster, Kubeflow, and Vertex AI Pipelines for ML/platform use cases. How would you choose?"
+  },
+  {
+    "section": "Mock Interview 4 - CI/CD and GitOps",
+    "question": "Cloud Build: How would you design Cloud Build pipelines for Docker builds, vulnerability scanning, provenance, tests, and deployment promotion?"
+  },
+  {
+    "section": "Mock Interview 4 - CI/CD and GitOps",
+    "question": "Organization policy: Which GCP org policies would you enforce for a secure baseline, and how would you handle exceptions?"
+  },
+  {
+    "section": "Mock Interview 5 - Cloud Security and DevSecOps",
+    "question": "Supply chain security: How would you implement image scanning, provenance, Binary Authorization, SBOMs, and deployment policies for containers?"
+  },
+  {
+    "section": "Mock Interview 5 - Cloud Security and DevSecOps",
+    "question": "Container startup: A container works locally but fails in Kubernetes. How would you debug entrypoint, env vars, filesystem, permissions, and security context?"
+  },
+  {
+    "section": "Mock Interview 5 - Cloud Security and DevSecOps",
+    "question": "Terraform Enterprise: Explain how you would implement Terraform Enterprise workspaces, remote state, policy as code, approvals, and module versioning for a large GCP platform."
+  },
+  {
+    "section": "Mock Interview 5 - Cloud Security and DevSecOps",
+    "question": "Hybrid connectivity: A service is slow over VPN or Interconnect. How would you troubleshoot latency, MTU, routes, BGP, firewall rules, and DNS?"
+  },
+  {
+    "section": "Mock Interview 5 - Cloud Security and DevSecOps",
+    "question": "Backstage and IDP: How would you design a Backstage-style golden path for creating a new service on GCP with CI/CD, Terraform, monitoring, and security?"
+  },
+  {
+    "section": "Mock Interview 5 - Cloud Security and DevSecOps",
+    "question": "Observability platform: How would you design observability for a platform team so developers get useful golden signals without creating noisy alerts?"
+  },
+  {
+    "section": "Mock Interview 5 - Cloud Security and DevSecOps",
+    "question": "Cloud Armor: Design a Cloud Armor and load balancing strategy for an internet-facing service. How would you handle WAF rules, rate limits, exceptions, and observability?"
+  },
+  {
+    "section": "Mock Interview 5 - Cloud Security and DevSecOps",
+    "question": "Autoscaling tradeoffs: Explain HPA, VPA, and cluster autoscaler. When can they conflict, and how would you tune them for a production workload?"
+  },
+  {
+    "section": "Mock Interview 6 - Observability and Performance",
+    "question": "Firewall governance: How would you design firewall rule ownership, logging, review, and cleanup across many GCP projects?"
+  },
+  {
+    "section": "Mock Interview 6 - Observability and Performance",
+    "question": "ML feature store: What reliability and governance concerns would you consider for an ML feature store?"
+  },
+  {
+    "section": "Mock Interview 6 - Observability and Performance",
+    "question": "CrashLoopBackOff: A pod is stuck in CrashLoopBackOff in production. Give me your exact Kubernetes troubleshooting workflow and the commands or signals you would check."
+  },
+  {
+    "section": "Mock Interview 6 - Observability and Performance",
+    "question": "Migration: How would you migrate an on-prem application to GCP with minimal downtime? Cover networking, data, CI/CD, observability, security, and rollback."
+  },
+  {
+    "section": "Mock Interview 6 - Observability and Performance",
+    "question": "Cloud Storage lifecycle: How would you design lifecycle, retention, versioning, object holds, CMEK, and audit logging for compliance-sensitive storage?"
+  },
+  {
+    "section": "Mock Interview 6 - Observability and Performance",
+    "question": "OpenTofu: If a company asks about Terraform versus OpenTofu, how would you explain the tradeoffs for enterprise platform teams?"
+  },
+  {
+    "section": "Mock Interview 6 - Observability and Performance",
+    "question": "Observability: An alert says p95 latency increased from 200ms to 2s after a deployment. How would you investigate using Prometheus, Grafana, Cloud Logging, logs, and traces?"
+  },
+  {
+    "section": "Mock Interview 6 - Observability and Performance",
+    "question": "Kubernetes probes: How would you design readiness, liveness, and startup probes for a slow-starting service to avoid cascading failures?"
+  },
+  {
+    "section": "Mock Interview 7 - GCP Networking and Load Balancing",
+    "question": "GKE troubleshooting: A critical service on GKE has intermittent 5xx errors during traffic spikes. Walk me through your debugging approach from load balancer to pod-level metrics."
+  },
+  {
+    "section": "Mock Interview 7 - GCP Networking and Load Balancing",
+    "question": "Cloud Run security: How would you expose an internal Cloud Run service securely using IAM, ingress settings, VPC connector, load balancer, and service-to-service auth?"
+  },
+  {
+    "section": "Mock Interview 7 - GCP Networking and Load Balancing",
+    "question": "Pub/Sub incident: A downstream service outage caused Pub/Sub backlog. How would you recover safely without overloading dependencies or losing messages?"
+  },
+  {
+    "section": "Mock Interview 7 - GCP Networking and Load Balancing",
+    "question": "GKE expert: You are asked to design a production GKE platform for multiple product teams. How would you structure clusters, node pools, namespaces, IAM, networking, and deployment ownership?"
+  },
+  {
+    "section": "Mock Interview 7 - GCP Networking and Load Balancing",
+    "question": "Commitment planning: How would you decide whether to buy committed use discounts or reservations for GKE/Compute workloads?"
+  },
+  {
+    "section": "Mock Interview 7 - GCP Networking and Load Balancing",
+    "question": "OpenTelemetry: How would you roll out OpenTelemetry across services and connect traces, metrics, logs, dashboards, and alerts?"
+  },
+  {
+    "section": "Mock Interview 7 - GCP Networking and Load Balancing",
+    "question": "Cloud DNS: A production service intermittently resolves to an old endpoint. How would you debug DNS TTLs, Cloud DNS records, caches, split-horizon DNS, and client behavior?"
+  },
+  {
+    "section": "Mock Interview 7 - GCP Networking and Load Balancing",
+    "question": "AlloyDB design: When would you choose AlloyDB over Cloud SQL, and what operational considerations would you discuss for HA, backups, scaling, and cost?"
+  },
+  {
+    "section": "Mock Interview 8 - Platform Engineering and DevEx",
+    "question": "GitOps: How would you implement GitOps with ArgoCD for Kubernetes workloads across dev, staging, and production while keeping rollbacks and approvals safe?"
+  },
+  {
+    "section": "Mock Interview 8 - Platform Engineering and DevEx",
+    "question": "Policy as code: How would you use Sentinel, OPA, or policy validation to stop risky GCP changes before apply while keeping developer experience smooth?"
+  },
+  {
+    "section": "Mock Interview 8 - Platform Engineering and DevEx",
+    "question": "DNS migration: How would you migrate DNS zones with minimal risk, and how would you plan TTLs, validation, rollback, and monitoring?"
+  },
+  {
+    "section": "Mock Interview 8 - Platform Engineering and DevEx",
+    "question": "Container runtime security: What runtime security controls would you consider for Kubernetes workloads beyond image scanning?"
+  },
+  {
+    "section": "Mock Interview 8 - Platform Engineering and DevEx",
+    "question": "Incident postmortem quality: What makes a postmortem high quality, and how do you ensure action items actually get completed?"
+  },
+  {
+    "section": "Mock Interview 8 - Platform Engineering and DevEx",
+    "question": "ML monitoring tools: How would you combine Vertex AI Model Monitoring, Prometheus, Grafana, MLflow, and Evidently-style checks in one production monitoring design?"
+  },
+  {
+    "section": "Mock Interview 8 - Platform Engineering and DevEx",
+    "question": "Platform roadmap: What would your first 90 days look like as a senior platform engineer joining a product company?"
+  },
+  {
+    "section": "Mock Interview 8 - Platform Engineering and DevEx",
+    "question": "Drift detection: How would you detect and reconcile drift between Terraform state, real GCP resources, and manual console changes?"
+  },
+  {
+    "section": "Mock Interview 9 - MLOps and AI Infrastructure",
+    "question": "MLOps fundamentals: Explain the end-to-end ML lifecycle and where DevOps responsibilities become different from traditional application delivery."
+  },
+  {
+    "section": "Mock Interview 9 - MLOps and AI Infrastructure",
+    "question": "GKE multi-tenancy: How would you design namespace isolation, quotas, RBAC, network policies, admission controls, and observability for many teams in one cluster?"
+  },
+  {
+    "section": "Mock Interview 9 - MLOps and AI Infrastructure",
+    "question": "Trace sampling: How would you choose tracing sampling rates and make traces useful for debugging high-volume services?"
+  },
+  {
+    "section": "Mock Interview 9 - MLOps and AI Infrastructure",
+    "question": "IAM troubleshooting: A workload gets permission denied only in production. How would you debug IAM policy, service accounts, Workload Identity, org policy, and audit logs?"
+  },
+  {
+    "section": "Mock Interview 9 - MLOps and AI Infrastructure",
+    "question": "Platform API: If you expose self-service infrastructure through an API, what validations, approvals, and audit trails would you build?"
+  },
+  {
+    "section": "Mock Interview 9 - MLOps and AI Infrastructure",
+    "question": "Log correlation: How would you design correlation IDs and structured logging across microservices and async Pub/Sub workflows?"
+  },
+  {
+    "section": "Mock Interview 9 - MLOps and AI Infrastructure",
+    "question": "Model monitoring: How would you monitor model serving for latency, error rate, drift, data quality, and business impact?"
+  },
+  {
+    "section": "Mock Interview 9 - MLOps and AI Infrastructure",
+    "question": "Kubernetes certificate issue: A cluster has certificate or webhook TLS failures. How would you debug certificate chain, rotation, admission webhooks, and API server errors?"
+  },
+  {
+    "section": "Mock Interview 10 - Senior Behavioral and Ownership",
+    "question": "Backstage plugin: What Backstage plugins or templates would you prioritize for a GCP platform team?"
+  },
+  {
+    "section": "Mock Interview 10 - Senior Behavioral and Ownership",
+    "question": "BigQuery cost and performance: A BigQuery workload became slow and expensive. How would you investigate query patterns, partitioning, clustering, slots, storage, and ownership?"
+  },
+  {
+    "section": "Mock Interview 10 - Senior Behavioral and Ownership",
+    "question": "SRE toil: Give examples of toil in DevOps/SRE work and explain how you would measure and reduce it with automation."
+  },
+  {
+    "section": "Mock Interview 10 - Senior Behavioral and Ownership",
+    "question": "Load balancing: Design a global external HTTPS load balancing strategy for multiple services. How would you handle SSL, backend health checks, Cloud Armor, CDN, and observability?"
+  },
+  {
+    "section": "Mock Interview 10 - Senior Behavioral and Ownership",
+    "question": "Jenkins modernization: A company has old Jenkins pipelines. How would you modernize without disrupting releases?"
+  },
+  {
+    "section": "Mock Interview 10 - Senior Behavioral and Ownership",
+    "question": "Dashboard design: What dashboards would you build for executives, SREs, platform engineers, and application teams?"
+  },
+  {
+    "section": "Mock Interview 10 - Senior Behavioral and Ownership",
+    "question": "Prioritization: You have security backlog, cost pressure, and reliability incidents. How would you prioritize work for the next quarter?"
+  },
+  {
+    "section": "Mock Interview 10 - Senior Behavioral and Ownership",
+    "question": "Runbooks: How would you build a runbook library for common GKE, Terraform, IAM, and networking incidents, and how would you keep it updated?"
+  },
+  {
+    "section": "Mock Interview 11 - Google-Style Mixed Round",
+    "question": "PDB design: How would you use PodDisruptionBudgets during node upgrades, cluster autoscaling, and planned maintenance?"
+  },
+  {
+    "section": "Mock Interview 11 - Google-Style Mixed Round",
+    "question": "Stateful Kubernetes workloads: When would you avoid running stateful workloads on GKE, and if you must run them, how would you design storage, backup, upgrades, and recovery?"
+  },
+  {
+    "section": "Mock Interview 11 - Google-Style Mixed Round",
+    "question": "On-call maturity: How would you improve an on-call rotation that has too many alerts, poor runbooks, and slow escalation?"
+  },
+  {
+    "section": "Mock Interview 11 - Google-Style Mixed Round",
+    "question": "GPU cost control: GPU workloads are underutilized and expensive. How would you improve scheduling, quotas, sharing, and monitoring?"
+  },
+  {
+    "section": "Mock Interview 11 - Google-Style Mixed Round",
+    "question": "RBAC: How would you design Kubernetes RBAC for platform, application, security, and CI/CD teams in a shared GKE environment?"
+  },
+  {
+    "section": "Mock Interview 11 - Google-Style Mixed Round",
+    "question": "Inference optimization: How would you improve model latency and throughput using batching, autoscaling, model format optimization, GPU use, or caching?"
+  },
+  {
+    "section": "Mock Interview 11 - Google-Style Mixed Round",
+    "question": "Blue-green deployment: When would you choose blue-green over canary, and what GCP/GKE components would you use?"
+  },
+  {
+    "section": "Mock Interview 11 - Google-Style Mixed Round",
+    "question": "SDK automation: Compare using Terraform, gcloud, REST APIs, and Python SDKs for platform automation. When would you choose each?"
+  },
+  {
+    "section": "Mock Interview 12 - Product Company Final Round",
+    "question": "Cloud Run incident: A Cloud Run service has cold-start latency and failed requests after a traffic spike. How would you debug concurrency, min instances, CPU allocation, revisions, and downstream limits?"
+  },
+  {
+    "section": "Mock Interview 12 - Product Company Final Round",
+    "question": "GKE scheduling: A deployment is pending because pods cannot be scheduled. How would you debug requests, limits, node capacity, taints, affinities, quotas, and cluster autoscaler?"
+  },
+  {
+    "section": "Mock Interview 12 - Product Company Final Round",
+    "question": "Terraform provider upgrades: How would you safely upgrade Terraform and Google provider versions across many workspaces?"
+  },
+  {
+    "section": "Mock Interview 12 - Product Company Final Round",
+    "question": "CoreDNS incident: Services in a cluster intermittently fail DNS resolution. How would you debug CoreDNS, kube-dns metrics, network policies, and upstream DNS?"
+  },
+  {
+    "section": "Mock Interview 12 - Product Company Final Round",
+    "question": "Bash vs Python: When is Bash acceptable for automation, and when should you rewrite it in Python or Go?"
+  },
+  {
+    "section": "Mock Interview 12 - Product Company Final Round",
+    "question": "Responsible AI: What checks would you add for bias, explainability, lineage, and responsible AI before approving a model for production?"
+  },
+  {
+    "section": "Mock Interview 12 - Product Company Final Round",
+    "question": "Cloud SQL performance: A Cloud SQL database has high CPU and lock contention. How would you debug queries, connections, pooling, indexes, replicas, and app rollout impact?"
+  },
+  {
+    "section": "Mock Interview 12 - Product Company Final Round",
+    "question": "Platform engineering: What self-service golden paths would you build for product teams, and what guardrails would you enforce without slowing delivery?"
+  },
+  {
+    "section": "Mock Interview 13 - Recently Asked GCP Access and Security Round",
+    "question": "Compute Engine SSH troubleshooting: You are not able to SSH into a Compute Engine instance. What could be the reasons, and how would you troubleshoot it?"
+  },
+  {
+    "section": "Mock Interview 13 - Recently Asked GCP Access and Security Round",
+    "question": "Compute Engine SSH access: What do we get when we SSH into a Compute Engine instance?"
+  },
+  {
+    "section": "Mock Interview 13 - Recently Asked GCP Access and Security Round",
+    "question": "GKE Workload Identity: You have workloads running on GKE. How would you give only one pod access to Cloud Storage?"
+  },
+  {
+    "section": "Mock Interview 13 - Recently Asked GCP Access and Security Round",
+    "question": "Service account key security: You know about service account JSON keys. Even if someone has the JSON key, how can you prevent them from creating or accessing resources?"
+  },
+  {
+    "section": "Mock Interview 13 - Recently Asked GCP Access and Security Round",
+    "question": "GKE image verification: In GKE, anyone can deploy a Docker image. How would you ensure that only verified and signed images are deployed?"
+  },
+  {
+    "section": "Mock Interview 13 - Recently Asked GCP Access and Security Round",
+    "question": "Hybrid connectivity: How do you connect an on-premises network to a GCP network?"
+  },
+  {
+    "section": "Mock Interview 13 - Recently Asked GCP Access and Security Round",
+    "question": "GCP security baseline: What additional security measures would you implement for the GCP environment?"
+  },
+  {
+    "section": "Mock Interview 13 - Recently Asked GCP Access and Security Round",
+    "question": "Cloud Logging analysis: You have logs in Cloud Logging. How would you analyze them?"
+  },
+  {
+    "section": "Mock Interview 14 - Recently Asked Operations and Docker Round",
+    "question": "Log automation: Can you automate log analysis or processing?"
+  },
+  {
+    "section": "Mock Interview 14 - Recently Asked Operations and Docker Round",
+    "question": "Cloud Functions and Cloud Run: Have you used Cloud Functions or Cloud Run? Explain use cases and operational considerations."
+  },
+  {
+    "section": "Mock Interview 14 - Recently Asked Operations and Docker Round",
+    "question": "Datadog: Have you used Datadog, and how would you use it for metrics, logs, traces, dashboards, and alerts?"
+  },
+  {
+    "section": "Mock Interview 14 - Recently Asked Operations and Docker Round",
+    "question": "Cloud Functions latency: A newly created Cloud Function had high latency for a few minutes and then automatically recovered. What could be the reason?"
+  },
+  {
+    "section": "Mock Interview 14 - Recently Asked Operations and Docker Round",
+    "question": "GCP cost optimization: How would you reduce the cost of a GCP environment?"
+  },
+  {
+    "section": "Mock Interview 14 - Recently Asked Operations and Docker Round",
+    "question": "Docker experience: Have you worked on Docker? Explain the workflows and production concerns you handled."
+  },
+  {
+    "section": "Mock Interview 14 - Recently Asked Operations and Docker Round",
+    "question": "Dockerfiles: Have you written Dockerfiles? What best practices do you follow?"
+  },
+  {
+    "section": "Mock Interview 14 - Recently Asked Operations and Docker Round",
+    "question": "Docker build context: What is Docker build context, and why does it matter for build speed, security, and image contents?"
+  },
+  {
+    "section": "Mock Interview 15 - Docker Fundamentals Round",
+    "question": "Docker fundamentals: What is Docker, and what problem does it solve?"
+  },
+  {
+    "section": "Mock Interview 15 - Docker Fundamentals Round",
+    "question": "Dockerfile fundamentals: What is a Dockerfile, and how is it used to build an image?"
+  },
+  {
+    "section": "Mock Interview 15 - Docker Fundamentals Round",
+    "question": "Docker CMD vs ENTRYPOINT: What is the difference between CMD and ENTRYPOINT?"
+  },
+  {
+    "section": "Mock Interview 15 - Docker Fundamentals Round",
+    "question": "Docker image optimization: How do you optimize Docker image size?"
+  },
+  {
+    "section": "Mock Interview 15 - Docker Fundamentals Round",
+    "question": "Docker multi-stage builds: What are multi-stage builds, and when would you use them?"
+  },
+  {
+    "section": "Mock Interview 15 - Docker Fundamentals Round",
+    "question": "Docker image security: How do you secure Docker images before deploying them?"
+  },
+  {
+    "section": "Mock Interview 16 - Kubernetes and GKE Fundamentals Round",
+    "question": "Kubernetes architecture: Explain the architecture of Kubernetes, including control plane and worker-node components."
+  },
+  {
+    "section": "Mock Interview 16 - Kubernetes and GKE Fundamentals Round",
+    "question": "Kubernetes workload objects: What are Pods, Deployments, ReplicaSets, StatefulSets, and DaemonSets?"
+  },
+  {
+    "section": "Mock Interview 16 - Kubernetes and GKE Fundamentals Round",
+    "question": "StatefulSet vs Deployment: What is the difference between StatefulSet and Deployment?"
+  },
+  {
+    "section": "Mock Interview 16 - Kubernetes and GKE Fundamentals Round",
+    "question": "Kubernetes Service types: What is a Service, and how do ClusterIP, NodePort, and LoadBalancer differ?"
+  },
+  {
+    "section": "Mock Interview 16 - Kubernetes and GKE Fundamentals Round",
+    "question": "Kubernetes ConfigMaps and Secrets: What are ConfigMaps and Secrets, and when would you use each?"
+  },
+  {
+    "section": "Mock Interview 16 - Kubernetes and GKE Fundamentals Round",
+    "question": "Kubernetes Ingress: How does Ingress work, and what components are involved?"
+  },
+  {
+    "section": "Mock Interview 16 - Kubernetes and GKE Fundamentals Round",
+    "question": "Kubernetes rolling updates: How do you perform rolling updates and rollbacks?"
+  },
+  {
+    "section": "Mock Interview 16 - Kubernetes and GKE Fundamentals Round",
+    "question": "Kubernetes probes: How do liveness and readiness probes work?"
+  },
+  {
+    "section": "Mock Interview 17 - GKE Troubleshooting and Reliability Round",
+    "question": "CrashLoopBackOff: A pod is continuously restarting. How would you troubleshoot it?"
+  },
+  {
+    "section": "Mock Interview 17 - GKE Troubleshooting and Reliability Round",
+    "question": "Pending pods: How do you troubleshoot Pending pods?"
+  },
+  {
+    "section": "Mock Interview 17 - GKE Troubleshooting and Reliability Round",
+    "question": "Kubernetes node failure: What happens when a node fails, and how do workloads recover?"
+  },
+  {
+    "section": "Mock Interview 17 - GKE Troubleshooting and Reliability Round",
+    "question": "GKE cluster upgrade: How do you upgrade a GKE cluster safely?"
+  },
+  {
+    "section": "Mock Interview 17 - GKE Troubleshooting and Reliability Round",
+    "question": "Highly available GKE: How would you design a highly available GKE architecture?"
+  },
+  {
+    "section": "Mock Interview 17 - GKE Troubleshooting and Reliability Round",
+    "question": "Production Kubernetes security: How would you secure a production Kubernetes cluster?"
+  },
+  {
+    "section": "Mock Interview 17 - GKE Troubleshooting and Reliability Round",
+    "question": "Disaster recovery: How would you implement disaster recovery for a production platform?"
+  },
+  {
+    "section": "Mock Interview 18 - Terraform Fundamentals Round",
+    "question": "Terraform state basics: Explain Terraform state and why it is important."
+  },
+  {
+    "section": "Mock Interview 18 - Terraform Fundamentals Round",
+    "question": "Terraform remote state: What is remote state, and why do teams use it?"
+  },
+  {
+    "section": "Mock Interview 18 - Terraform Fundamentals Round",
+    "question": "Terraform state locking: How do you handle state locking?"
+  },
+  {
+    "section": "Mock Interview 18 - Terraform Fundamentals Round",
+    "question": "Terraform count vs for_each: What is the difference between count and for_each?"
+  },
+  {
+    "section": "Mock Interview 18 - Terraform Fundamentals Round",
+    "question": "Terraform modules: What are modules, and how do you use them for reusable infrastructure?"
+  },
+  {
+    "section": "Mock Interview 18 - Terraform Fundamentals Round",
+    "question": "Terraform environments: How do you manage multiple environments such as dev, staging, and production?"
+  },
+  {
+    "section": "Mock Interview 18 - Terraform Fundamentals Round",
+    "question": "Terraform import: How do you import existing resources into Terraform safely?"
+  },
+  {
+    "section": "Mock Interview 18 - Terraform Fundamentals Round",
+    "question": "Terraform lifecycle block: What is the Terraform lifecycle block, and when would you use it?"
+  },
+  {
+    "section": "Mock Interview 18 - Terraform Fundamentals Round",
+    "question": "Terraform secrets: How do you handle secrets in Terraform?"
+  },
+  {
+    "section": "Mock Interview 18 - Terraform Fundamentals Round",
+    "question": "Terraform cost optimization: How do you reduce infrastructure cost using Terraform?"
+  },
+  {
+    "section": "Mock Interview 19 - GCP Architecture and IAM Round",
+    "question": "GCP project architecture: Describe a GCP project architecture you have implemented."
+  },
+  {
+    "section": "Mock Interview 19 - GCP Architecture and IAM Round",
+    "question": "Shared VPC: Explain Shared VPC and when you would use host and service projects."
+  },
+  {
+    "section": "Mock Interview 19 - GCP Architecture and IAM Round",
+    "question": "Hub-and-spoke architecture: Explain hub-and-spoke architecture in GCP."
+  },
+  {
+    "section": "Mock Interview 19 - GCP Architecture and IAM Round",
+    "question": "Hub project resources: How do you deploy shared resources in a hub project?"
+  },
+  {
+    "section": "Mock Interview 19 - GCP Architecture and IAM Round",
+    "question": "Cloud DNS: Explain Cloud DNS."
+  },
+  {
+    "section": "Mock Interview 19 - GCP Architecture and IAM Round",
+    "question": "Cloud NAT: Explain Cloud NAT and the problem it solves."
+  },
+  {
+    "section": "Mock Interview 19 - GCP Architecture and IAM Round",
+    "question": "VPN Gateway: Explain VPN Gateway and how it connects networks."
+  },
+  {
+    "section": "Mock Interview 19 - GCP Architecture and IAM Round",
+    "question": "Cloud Router: Explain Cloud Router and its role with dynamic routing and BGP."
+  },
+  {
+    "section": "Mock Interview 19 - GCP Architecture and IAM Round",
+    "question": "GCP IAM: Explain IAM in GCP and how roles are assigned."
+  },
+  {
+    "section": "Mock Interview 19 - GCP Architecture and IAM Round",
+    "question": "Cloud Identity: What is Cloud Identity, and how does it relate to users and groups?"
+  },
+  {
+    "section": "Mock Interview 19 - GCP Architecture and IAM Round",
+    "question": "GCP user access: How do you provide read-only or admin access to users safely?"
+  },
+  {
+    "section": "Mock Interview 19 - GCP Architecture and IAM Round",
+    "question": "GCP infrastructure security: How do you secure GCP infrastructure?"
+  },
+  {
+    "section": "Mock Interview 20 - Networking Fundamentals Round",
+    "question": "VPC fundamentals: Explain VPC in cloud networking."
+  },
+  {
+    "section": "Mock Interview 20 - Networking Fundamentals Round",
+    "question": "Public vs private subnet: What is the difference between public and private subnets?"
+  },
+  {
+    "section": "Mock Interview 20 - Networking Fundamentals Round",
+    "question": "Routing fundamentals: Explain routing in a cloud network."
+  },
+  {
+    "section": "Mock Interview 20 - Networking Fundamentals Round",
+    "question": "VPN connectivity: How does VPN connectivity work between on-premises and cloud?"
+  },
+  {
+    "section": "Mock Interview 20 - Networking Fundamentals Round",
+    "question": "Firewall rules: Explain firewall rules and how you design them safely."
+  },
+  {
+    "section": "Mock Interview 20 - Networking Fundamentals Round",
+    "question": "DNS resolution: How does DNS resolution work in hybrid or cloud environments?"
+  },
+  {
+    "section": "Mock Interview 20 - Networking Fundamentals Round",
+    "question": "Hybrid connectivity: How do on-premises systems connect to GCP?"
+  },
+  {
+    "section": "Mock Interview 21 - CI/CD and Azure Identity Round",
+    "question": "CI/CD pipeline: Explain your CI/CD pipeline from code commit to production."
+  },
+  {
+    "section": "Mock Interview 21 - CI/CD and Azure Identity Round",
+    "question": "CI/CD tools: Which CI/CD tools have you used, and where did each fit?"
+  },
+  {
+    "section": "Mock Interview 21 - CI/CD and Azure Identity Round",
+    "question": "Application deployment: How do you deploy applications to Kubernetes, GKE, Cloud Run, or VMs?"
+  },
+  {
+    "section": "Mock Interview 21 - CI/CD and Azure Identity Round",
+    "question": "Canary deployment: Explain canary deployment."
+  },
+  {
+    "section": "Mock Interview 21 - CI/CD and Azure Identity Round",
+    "question": "Deployment rollback: How do you roll back deployments?"
+  },
+  {
+    "section": "Mock Interview 21 - CI/CD and Azure Identity Round",
+    "question": "Azure IAM equivalent: What is the Azure equivalent of IAM?"
+  },
+  {
+    "section": "Mock Interview 21 - CI/CD and Azure Identity Round",
+    "question": "Microsoft Entra ID: Explain Microsoft Entra ID and how it is used."
+  },
+  {
+    "section": "Mock Interview 21 - CI/CD and Azure Identity Round",
+    "question": "Azure identity management: How do you manage users, groups, roles, and identities in Azure?"
+  },
+  {
+    "section": "Mock Interview 22 - Monitoring and Scenario Round",
+    "question": "Monitoring tools: Which monitoring tools have you used in production?"
+  },
+  {
+    "section": "Mock Interview 22 - Monitoring and Scenario Round",
+    "question": "Alert creation: How do you create useful alerts without creating noise?"
+  },
+  {
+    "section": "Mock Interview 22 - Monitoring and Scenario Round",
+    "question": "Production troubleshooting: How do you troubleshoot production issues end to end?"
+  },
+  {
+    "section": "Mock Interview 22 - Monitoring and Scenario Round",
+    "question": "High CPU or memory: How do you investigate high CPU or memory usage?"
+  },
+  {
+    "section": "Mock Interview 22 - Monitoring and Scenario Round",
+    "question": "Failed production deployment: A production deployment failed. What steps would you take?"
+  },
+  {
+    "section": "Mock Interview 22 - Monitoring and Scenario Round",
+    "question": "Application inaccessible after deployment: Users cannot access the application after deployment. How would you debug it?"
+  },
+  {
+    "section": "Mock Interview 22 - Monitoring and Scenario Round",
+    "question": "On-prem to GCP migration: How would you migrate an application from on-premises to GCP?"
+  },
+  {
+    "section": "Mock Interview 22 - Monitoring and Scenario Round",
+    "question": "Disaster recovery: How would you implement disaster recovery?"
+  },
+  {
+    "section": "Mock Interview 23 - Technology Risk Lead Technical Round",
+    "question": "Technology risk framework: How would you design an enterprise technology risk management framework for cloud, applications, infrastructure, SDLC, and third-party integrations?"
+  },
+  {
+    "section": "Mock Interview 23 - Technology Risk Lead Technical Round",
+    "question": "Risk assessment: A product team is launching a new customer-facing platform on GCP/GKE. How would you assess technology risk from BRD/PRD through architecture review, build, release, and operations?"
+  },
+  {
+    "section": "Mock Interview 23 - Technology Risk Lead Technical Round",
+    "question": "Control design: For a regulated cloud platform, define preventive, detective, and corrective controls for IAM, network exposure, CI/CD, secrets, vulnerability management, and production changes."
+  },
+  {
+    "section": "Mock Interview 23 - Technology Risk Lead Technical Round",
+    "question": "Framework mapping: How would you map ISO 27001, NIST, COBIT, and FAIR requirements to practical cloud and DevOps controls without creating checkbox compliance?"
+  },
+  {
+    "section": "Mock Interview 23 - Technology Risk Lead Technical Round",
+    "question": "Audit remediation: An external audit finds weak access reviews, missing evidence, and delayed patching. How would you create a remediation plan, owners, due dates, risk acceptance, and reporting?"
+  },
+  {
+    "section": "Mock Interview 23 - Technology Risk Lead Technical Round",
+    "question": "Incident risk analysis: A production incident was fixed quickly, but the same failure could repeat. How would you analyze root cause, systemic risk, control failure, and long-term mitigation?"
+  },
+  {
+    "section": "Mock Interview 23 - Technology Risk Lead Technical Round",
+    "question": "Cloud risk dashboard: Design a technology risk dashboard for senior leadership. What KRIs, control metrics, exceptions, trends, and escalation signals would you include?"
+  },
+  {
+    "section": "Mock Interview 23 - Technology Risk Lead Technical Round",
+    "question": "Risk automation: What parts of technology risk assessment and reporting would you automate using cloud logs, CI/CD metadata, vulnerability scanners, policy-as-code, and ticketing workflows?"
+  },
+  {
+    "section": "Mock Interview 24 - Technology Risk Lead Behavioural Round",
+    "question": "Behavioural risk leadership: Tell me about a time you had to influence engineering or product teams to fix a technology risk they did not initially prioritize."
+  },
+  {
+    "section": "Mock Interview 24 - Technology Risk Lead Behavioural Round",
+    "question": "Stakeholder communication: How would you explain a critical cloud security risk to senior leadership in business-impact language without overwhelming them with technical detail?"
+  },
+  {
+    "section": "Mock Interview 24 - Technology Risk Lead Behavioural Round",
+    "question": "Conflict handling: Product wants to release quickly, Security wants stricter controls, and Engineering says the control adds toil. How would you drive a decision?"
+  },
+  {
+    "section": "Mock Interview 24 - Technology Risk Lead Behavioural Round",
+    "question": "Trusted advisor: Describe how you would build trust with IT, Engineering, Product, Security, Audit, and Business stakeholders as a Technology Risk Lead."
+  },
+  {
+    "section": "Mock Interview 24 - Technology Risk Lead Behavioural Round",
+    "question": "Prioritization: You have critical audit findings, recurring incidents, and a weak risk dashboard. How would you prioritize the next 30, 60, and 90 days?"
+  },
+  {
+    "section": "Mock Interview 24 - Technology Risk Lead Behavioural Round",
+    "question": "Risk culture: Give an example of how you would promote a risk-aware culture without making teams feel blocked or blamed."
+  },
+  {
+    "section": "Mock Interview 24 - Technology Risk Lead Behavioural Round",
+    "question": "Remediation ownership: A risk issue is overdue because multiple teams disagree on ownership. How would you move it to closure?"
+  },
+  {
+    "section": "Mock Interview 24 - Technology Risk Lead Behavioural Round",
+    "question": "Incident communication: During a major incident with regulatory implications, how would you coordinate technical updates, business impact, risk reporting, and follow-up actions?"
+  },
+  {
+    "section": "Mock Interview 25 - Python and Go Platform Programming Round",
+    "question": "Python automation: How would you design a Python script that audits GCP IAM bindings, flags risky roles, and exports a remediation report?"
+  },
+  {
+    "section": "Mock Interview 25 - Python and Go Platform Programming Round",
+    "question": "Python testing: How would you unit test a GCP or Kubernetes automation script without touching real production resources?"
+  },
+  {
+    "section": "Mock Interview 25 - Python and Go Platform Programming Round",
+    "question": "Python concurrency: When would you use threads, asyncio, multiprocessing, or a worker pool for cloud resource inventory?"
+  },
+  {
+    "section": "Mock Interview 25 - Python and Go Platform Programming Round",
+    "question": "Python FastAPI: How would you design a small FastAPI service that exposes self-service infrastructure requests with validation, approval, and audit logs?"
+  },
+  {
+    "section": "Mock Interview 25 - Python and Go Platform Programming Round",
+    "question": "Go fundamentals: What are the main differences between Go and Python for cloud/platform automation, and when would you choose each?"
+  },
+  {
+    "section": "Mock Interview 25 - Python and Go Platform Programming Round",
+    "question": "Go concurrency: Explain goroutines, channels, context cancellation, and wait groups using a platform automation example."
+  },
+  {
+    "section": "Mock Interview 25 - Python and Go Platform Programming Round",
+    "question": "Go Kubernetes: When would you use client-go or controller-runtime, and how would you design a simple Kubernetes controller?"
+  },
+  {
+    "section": "Mock Interview 25 - Python and Go Platform Programming Round",
+    "question": "Go production readiness: What code review checklist would you use before deploying a Go automation service or controller to production?"
+  },
+  {
+    "section": "Mock Interview 28 - IT Controls",
+    "question": "Give examples of each control type in cloud infrastructure."
+  },
+  {
+    "section": "Mock Interview 30 - Governance and Compliance",
+    "question": "What is the difference between ISO 27001 and NIST?"
+  },
+  {
+    "section": "Mock Interview 31 - Cloud Risk",
+    "question": "Explain the Shared Responsibility Model."
+  },
+  {
+    "section": "Mock Interview 31 - Cloud Risk",
+    "question": "What are the risks of public cloud?"
+  },
+  {
+    "section": "Mock Interview 31 - Cloud Risk",
+    "question": "What are IAM best practices?"
+  },
+  {
+    "section": "Mock Interview 31 - Cloud Risk",
+    "question": "What risks exist in Kubernetes clusters?"
+  },
+  {
+    "section": "Mock Interview 31 - Cloud Risk",
+    "question": "What are the risks of Terraform automation?"
+  },
+  {
+    "section": "Mock Interview 31 - Cloud Risk",
+    "question": "How do you secure Terraform state files?"
+  },
+  {
+    "section": "Mock Interview 31 - Cloud Risk",
+    "question": "How do you approach secrets management?"
+  },
+  {
+    "section": "Mock Interview 31 - Cloud Risk",
+    "question": "What are common cloud misconfiguration risks?"
+  },
+  {
+    "section": "Mock Interview 32 - Kubernetes and DevOps Risk",
+    "question": "What are the risks of CI/CD pipelines?"
+  },
+  {
+    "section": "Mock Interview 32 - Kubernetes and DevOps Risk",
+    "question": "What are the risks of GitHub Actions?"
+  },
+  {
+    "section": "Mock Interview 32 - Kubernetes and DevOps Risk",
+    "question": "What are the risks of Helm charts?"
+  },
+  {
+    "section": "Mock Interview 32 - Kubernetes and DevOps Risk",
+    "question": "What are Kubernetes RBAC risks?"
+  },
+  {
+    "section": "Mock Interview 32 - Kubernetes and DevOps Risk",
+    "question": "What are the risks of privileged containers?"
+  },
+  {
+    "section": "Mock Interview 33 - Incident Management Risk",
+    "question": "What is the difference between incident, problem, and risk?"
+  },
+  {
+    "section": "Mock Interview 34 - Risk Monitoring and Reporting",
+    "question": "What is the difference between KRIs and KPIs?"
+  },
+  {
+    "section": "Mock Interview 35 - Architecture Review Risk",
+    "question": "What is the difference between RTO and RPO?"
+  },
+  {
+    "section": "Mock Interview 39 - FastAPI Backend Round",
+    "question": "FastAPI fundamentals: How would you structure a production FastAPI service with routers, dependencies, schemas, settings, and clear module boundaries?"
+  },
+  {
+    "section": "Mock Interview 39 - FastAPI Backend Round",
+    "question": "FastAPI request validation: How do Pydantic models, response models, and validation errors help keep APIs safe and predictable?"
+  },
+  {
+    "section": "Mock Interview 39 - FastAPI Backend Round",
+    "question": "FastAPI async: When should a FastAPI endpoint be async, and what mistakes can block the event loop in production?"
+  },
+  {
+    "section": "Mock Interview 39 - FastAPI Backend Round",
+    "question": "FastAPI security: How would you implement JWT/OAuth2 authentication, role-based access, secret handling, and least privilege for internal APIs?"
+  },
+  {
+    "section": "Mock Interview 39 - FastAPI Backend Round",
+    "question": "FastAPI observability: What logs, metrics, traces, request IDs, and health endpoints would you add before deploying a FastAPI service?"
+  },
+  {
+    "section": "Mock Interview 39 - FastAPI Backend Round",
+    "question": "FastAPI deployment: How would you deploy FastAPI with Uvicorn/Gunicorn, containers, Kubernetes/GKE, autoscaling, probes, and graceful shutdown?"
+  },
+  {
+    "section": "Mock Interview 39 - FastAPI Backend Round",
+    "question": "FastAPI performance: A FastAPI endpoint has high p95 latency. How would you debug code, database calls, external APIs, concurrency, and infrastructure?"
+  },
+  {
+    "section": "Mock Interview 39 - FastAPI Backend Round",
+    "question": "FastAPI production readiness: What checklist would you use before approving a FastAPI service for production?"
+  },
+  {
+    "section": "Mock Interview 43 - LLMOps / GenAI Production Round",
+    "question": "How would you design a production LLM-backed service on GCP, covering the API gateway, model routing, caching, observability, and cost controls?"
+  },
+  {
+    "section": "Mock Interview 43 - LLMOps / GenAI Production Round",
+    "question": "A retrieval-augmented generation pipeline returns stale or irrelevant context. How would you debug the vector database, embedding pipeline, chunking strategy, and retrieval ranking?"
+  },
+  {
+    "section": "Mock Interview 43 - LLMOps / GenAI Production Round",
+    "question": "How would you build an internal LLM gateway that handles authentication, per-team rate limiting, token budget enforcement, and multi-provider fallback?"
+  },
+  {
+    "section": "Mock Interview 43 - LLMOps / GenAI Production Round",
+    "question": "A GenAI feature's inference cost grew 5x in a month. How would you investigate token usage, caching opportunities, model selection, and prompt length before cutting features?"
+  },
+  {
+    "section": "Mock Interview 43 - LLMOps / GenAI Production Round",
+    "question": "How would you defend an LLM application against prompt injection and data exfiltration from untrusted user input or retrieved documents?"
+  },
+  {
+    "section": "Mock Interview 43 - LLMOps / GenAI Production Round",
+    "question": "An AI agent can call internal tools and APIs. How would you sandbox tool execution, enforce least privilege, and prevent unintended destructive actions?"
+  },
+  {
+    "section": "Mock Interview 43 - LLMOps / GenAI Production Round",
+    "question": "How would you build an automated evaluation and regression suite for LLM output quality before shipping a prompt or model change?"
+  },
+  {
+    "section": "Mock Interview 43 - LLMOps / GenAI Production Round",
+    "question": "What would you trace and log for an LLM request end to end, including prompts, retrieved context, token counts, latency, and model version, without leaking sensitive data?"
+  },
+  {
+    "section": "Mock Interview 44 - Resume Deep-Dive: GCP, Terraform, Kubernetes Platform Round",
+    "question": "Walk me through the GCP landing zone you designed, including project hierarchy, Shared VPC, IAM governance, and policy-as-code. What tradeoffs did you make?"
+  },
+  {
+    "section": "Mock Interview 44 - Resume Deep-Dive: GCP, Terraform, Kubernetes Platform Round",
+    "question": "You built reusable Terraform Enterprise modules for networking, IAM, GKE, monitoring, logging, load balancing, and security that cut provisioning effort by 70 percent. Walk me through how you designed and versioned those modules."
+  },
+  {
+    "section": "Mock Interview 44 - Resume Deep-Dive: GCP, Terraform, Kubernetes Platform Round",
+    "question": "You manage production GKE clusters including node pools, upgrades, autoscaling, and RBAC. Walk me through your process for a zero-downtime cluster upgrade."
+  },
+  {
+    "section": "Mock Interview 44 - Resume Deep-Dive: GCP, Terraform, Kubernetes Platform Round",
+    "question": "You integrated Terraform Enterprise with Git-based CI/CD, Harness, Jira, and ServiceNow for self-service delivery. How did approvals and change management work end to end?"
+  },
+  {
+    "section": "Mock Interview 44 - Resume Deep-Dive: GCP, Terraform, Kubernetes Platform Round",
+    "question": "You designed Cloud Armor WAF policies with Adaptive Protection, rate limiting, and threat intelligence, plus IONIX and Stream Security for attack surface monitoring. Walk me through how these tools work together to stop an attack."
+  },
+  {
+    "section": "Mock Interview 44 - Resume Deep-Dive: GCP, Terraform, Kubernetes Platform Round",
+    "question": "You reduced GCP cost by 20 percent through governance, resource right-sizing, and capacity planning. Walk me through the specific levers you pulled and how you measured the savings."
+  },
+  {
+    "section": "Mock Interview 44 - Resume Deep-Dive: GCP, Terraform, Kubernetes Platform Round",
+    "question": "You provisioned GPU-enabled GKE clusters with NVIDIA L4/A100 nodes. How did you handle node pool sizing, taints/tolerations, and spot/preemptible GPUs for cost control?"
+  },
+  {
+    "section": "Mock Interview 44 - Resume Deep-Dive: GCP, Terraform, Kubernetes Platform Round",
+    "question": "At 7 years of experience, how would you demonstrate technical leadership across multiple teams during a platform migration, not just individual execution?"
+  },
+  {
+    "section": "Mock Interview 45 - Platform Engineering / Internal Developer Platform Round",
+    "question": "How would you draw the line between what a platform team owns and what application teams own, and how would you avoid the platform becoming a bottleneck?"
+  },
+  {
+    "section": "Mock Interview 45 - Platform Engineering / Internal Developer Platform Round",
+    "question": "How would you design multi-tenancy for an internal developer platform so one team's misconfiguration or spike can't affect another team's workloads?"
+  },
+  {
+    "section": "Mock Interview 45 - Platform Engineering / Internal Developer Platform Round",
+    "question": "What SLAs or SLOs would you define for your own platform team, and how would you measure whether the platform itself is reliable?"
+  },
+  {
+    "section": "Mock Interview 45 - Platform Engineering / Internal Developer Platform Round",
+    "question": "How would you design self-service ephemeral preview environments for pull requests on top of GKE, Terraform, and CI/CD?"
+  },
+  {
+    "section": "Mock Interview 45 - Platform Engineering / Internal Developer Platform Round",
+    "question": "How would you prevent manual console changes from undermining your Terraform-based golden paths, without blocking legitimate emergency fixes?"
+  },
+  {
+    "section": "Mock Interview 45 - Platform Engineering / Internal Developer Platform Round",
+    "question": "How would you design a service catalog that tracks ownership, dependencies, production-readiness status, and on-call rotation for every service on the platform?"
+  },
+  {
+    "section": "Mock Interview 45 - Platform Engineering / Internal Developer Platform Round",
+    "question": "How would you enforce security and compliance guardrails inside a self-service platform without turning every request into a manual approval bottleneck?"
+  },
+  {
+    "section": "Mock Interview 45 - Platform Engineering / Internal Developer Platform Round",
+    "question": "How would you decide between building a custom internal developer platform versus adopting Backstage, Port, or another off-the-shelf IDP?"
+  },
+  {
+    "section": "Mock Interview 46 - Ansible / Configuration Management Round",
+    "question": "What is Ansible, and how does its agentless, push-based model differ from Terraform or Puppet/Chef?"
+  },
+  {
+    "section": "Mock Interview 46 - Ansible / Configuration Management Round",
+    "question": "How do you ensure Ansible playbooks are idempotent, and what happens when a task isn't naturally idempotent?"
+  },
+  {
+    "section": "Mock Interview 46 - Ansible / Configuration Management Round",
+    "question": "How would you structure reusable Ansible roles for OS patching, configuration management, and application deployment across many teams?"
+  },
+  {
+    "section": "Mock Interview 46 - Ansible / Configuration Management Round",
+    "question": "How would you manage secrets in Ansible using Vault, and how would you rotate a vaulted secret without redistributing it manually?"
+  },
+  {
+    "section": "Mock Interview 46 - Ansible / Configuration Management Round",
+    "question": "When would you use Ansible instead of Terraform, and how would you combine them in the same pipeline, for example Terraform provisions and Ansible configures?"
+  },
+  {
+    "section": "Mock Interview 46 - Ansible / Configuration Management Round",
+    "question": "How would you run Ansible playbooks against thousands of hosts efficiently, and what would you do about serial execution, forks, and failure handling?"
+  },
+  {
+    "section": "Mock Interview 46 - Ansible / Configuration Management Round",
+    "question": "How would you test Ansible roles and playbooks before running them in production, for example with Molecule or a CI pipeline?"
+  },
+  {
+    "section": "Mock Interview 46 - Ansible / Configuration Management Round",
+    "question": "You used Ansible for backup automation and disaster recovery. Walk me through how a playbook-driven DR runbook would work end to end."
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Python automation: How would you build a Python tool that audits GCP projects for IAM risk, public buckets, unused firewall rules, missing labels, and cost anomalies?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Cloud security: How would you secure workload access to GCP services from GKE using Workload Identity, IAM, Secret Manager, and least privilege?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Vertex AI and MLOps: A team wants model serving on Kubernetes with FastAPI and GPU workloads. How would you design deployment, autoscaling, monitoring, and rollback?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Go optional: Where would Go be useful in a platform engineering environment, and how would you decide between Go, Python, and Bash for automation?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Terraform state: A Terraform apply failed halfway and now remote state does not match real GCP resources. How would you recover safely in an enterprise environment?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Cloud Run vs GKE: A company wants to standardize Cloud Run and GKE usage. How would you decide which workloads go to Cloud Run versus GKE?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Cloud SQL/AlloyDB: How would you troubleshoot a private GKE workload that cannot connect to Cloud SQL or AlloyDB?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Pub/Sub reliability: A Pub/Sub consumer service is falling behind and message age is increasing. How would you debug backlog, scaling, ordering, retries, and dead-letter handling?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Cloud Storage security: How would you design Cloud Storage bucket security for logs, artifacts, and data exports, including IAM, retention, lifecycle, CMEK, and public access prevention?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "GCP networking: How would you design GCP Shared VPC, service projects, firewall rules, private service access, DNS, and service networking for a multi-team platform?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "GKE upgrades: A GKE cluster upgrade caused service disruption. How would you design a safer upgrade strategy for control plane, node pools, PDBs, and workloads?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Helm: How would you structure Helm charts and values for repeatable deployments across environments without creating configuration drift?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Network policies: A service should only receive traffic from one namespace and one ingress gateway. How would you implement and validate Kubernetes NetworkPolicies?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Service mesh: When would you introduce Istio or Anthos Service Mesh, and what are the operational risks around mTLS, traffic splitting, retries, and observability?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Progressive delivery: How would you implement canary or blue-green releases using Cloud Deploy, Argo Rollouts, metrics, and automatic rollback?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Release readiness: A production release passed CI but caused customer impact. How would you design production readiness checks and release gates to prevent this?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Incident leadership: You are the incident commander for a GKE outage. How would you manage technical debugging, stakeholder communication, timeline, mitigation, and postmortem?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "RCA: Walk me through how you would write a strong RCA for a repeated Kubernetes outage and turn it into preventive engineering work."
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Error budgets: How would you explain error budgets to product managers and use them to make release decisions?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "ELK/OpenSearch: When would you use ELK or OpenSearch in addition to Cloud Logging, and how would you manage index cost and retention?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Admission controls: How would you enforce Kubernetes security standards using Gatekeeper, Kyverno, or admission controls without blocking developer velocity?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Security Command Center: How would you operationalize Security Command Center findings into triage, ownership, SLAs, and remediation workflows?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Secrets migration: How would you migrate applications from mounted JSON service account keys to Workload Identity and Secret Manager?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Landing zone: How would you design a GCP landing zone for a product company, including org hierarchy, folders, projects, Shared VPC, IAM, org policies, logging, and billing?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "FinOps: A monthly GCP bill increased by 40 percent after a platform migration. How would you investigate and reduce cost without harming reliability?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "DR/backup: How would you define RTO and RPO for a critical service on GCP, and how would you test backup, restore, and regional failover?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Multi-region design: You have a multi-region reliability requirement on GCP. How would you design traffic routing, data stores, failover, monitoring, and incident response?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Platform maturity: How would you evaluate whether a platform is mature enough for product-company scale across reliability, security, cost, developer experience, and automation?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Gateway/API strategy: How would you choose between Ingress, Gateway API, service mesh, load balancers, and Apigee for different traffic management requirements?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "MLOps lifecycle: How would you design MLflow or Vertex AI model lifecycle management with approval, deployment, monitoring, drift detection, and rollback?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "GPU workloads: How would you schedule GPU workloads on GKE with taints, tolerations, node pools, quotas, cost controls, and observability?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Cloud SQL backup restore: A Cloud SQL instance has accidental data deletion. How would you validate backups, point-in-time recovery, restore testing, application cutover, and communication?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Regional failover drill: How would you plan and run a failover game day for a GKE service with Cloud SQL, Pub/Sub, load balancing, DNS, and observability?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "GKE private cluster: A private GKE cluster cannot pull images or reach Google APIs. How would you debug private nodes, NAT, Private Google Access, DNS, routes, and firewall rules?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "GKE image pull failures: Pods are failing with ImagePullBackOff after a registry migration. How would you debug Artifact Registry permissions, Workload Identity, image tags, network, and pull secrets?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "GKE node pressure: Nodes show memory pressure and pods are being evicted. How would you investigate requests, limits, QoS classes, daemonsets, autoscaling, and app behavior?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Compute Engine migration: How would you migrate legacy Compute Engine workloads to GKE or Cloud Run, and what factors would make you keep them on VMs?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Pub/Sub exactly-once: A team expects exactly-once processing from Pub/Sub. How would you explain reality and design idempotency, ordering keys, retries, and DLQs?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Private Service Connect: How would you use Private Service Connect for private service access, and how would you debug connectivity failures?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Terraform secrets: How would you prevent secrets from leaking into Terraform state, plans, logs, and CI/CD output?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Terraform import: A team created resources manually and wants them managed by Terraform. How would you plan imports and reduce risk?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "GitHub Actions security: How would you secure GitHub Actions for cloud deployments using OIDC, environments, approvals, least privilege, and secret handling?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Release rollback: A canary deployment passes technical metrics but business metrics drop. How would you decide rollback versus continue?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Toil reduction: How would you identify operational toil in a platform team and turn it into automation backlog?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Chaos testing: How would you introduce chaos engineering safely for GKE workloads and what failure modes would you test first?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Logging cost: Cloud Logging cost is growing quickly. How would you reduce cost while preserving incident debugging value?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Alert ownership: How would you ensure every alert has an owner, runbook, SLO relationship, and actionable threshold?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "SCC operations: How would you operationalize Security Command Center findings into ticketing, prioritization, remediation, and reporting?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "SLSA/provenance: How would you explain SLSA, provenance, and signed artifacts to a team building a secure delivery platform?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Golden path adoption: Teams avoid your golden path and create their own pipelines. How would you understand why and improve adoption?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Service catalog: How would you design service ownership metadata, dependency mapping, and production readiness status in a service catalog?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Batch inference: How would you design batch inference on GCP using GKE, Cloud Run jobs, Vertex AI, or Composer, and what tradeoffs matter?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "LLM app operations: How would you operate an LLM-backed service in production, including latency, cost, prompt changes, safety, and observability?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "FinOps showback: How would you implement cost allocation, labels, budgets, showback, and team accountability across GCP projects?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Incident behavioral: Tell me about a time you disagreed with developers during a production incident. How did you handle it?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Leadership behavioral: How would you mentor junior engineers on Kubernetes troubleshooting and Terraform safety?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Design tradeoff: When would you intentionally choose a simpler architecture over a highly available multi-region design?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Communication: Explain a complex GKE outage to a non-technical product leader in two minutes."
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Drift monitoring: In production, how would you detect data drift, concept drift, and schema drift, and how would each one trigger different actions?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Model registry: How would you design model versioning, approval workflow, rollback, lineage, and auditability using MLflow Registry or Vertex AI Model Registry?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Feature store: What production risks does a feature store solve, and how would you design feature freshness, parity, governance, and rollback?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Batch vs real-time inference: How would you choose between batch inference, real-time inference, asynchronous inference, and streaming inference for different business use cases?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "A/B and canary for ML: How would you run A/B testing or canary deployment for an ML model while protecting users and measuring business impact?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Model rollback: A newly deployed model has lower latency but worse business outcomes. How would you detect this and roll back safely?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Reproducible training: How would you make an ML training pipeline reproducible across code version, data version, features, environment, and model artifact?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Metadata management: What metadata would you capture for every ML run to support audit, rollback, debugging, and compliance?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Champion-challenger: How would you implement a champion-challenger model deployment pattern in production?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Kubernetes control plane: Explain what happens from kubectl apply to a running pod, including API server, scheduler, kubelet, CNI, and controllers."
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "StatefulSet vs Deployment: When would you use StatefulSet, Deployment, Job, CronJob, or DaemonSet in real Kubernetes platforms?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "CNI troubleshooting: Pods on different nodes cannot communicate. How would you debug CNI, routes, firewall rules, network policies, and node health?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Pod affinity: When would you use node selectors, affinity, anti-affinity, topology spread constraints, taints, and tolerations?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Resource quotas: How would you design ResourceQuotas and LimitRanges for a shared cluster without blocking legitimate scaling?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Docker image design: How would you build secure, small, reproducible Docker images for production services?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Helm rollback: A Helm upgrade failed and left resources in a partial state. How would you recover and prevent it next time?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "DevOps lifecycle: Explain how you would design the full SDLC for a cloud-native service from code commit to production operations."
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Branching strategy: What Git branching and release strategy would you recommend for platform modules and application services?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Artifact promotion: How would you promote artifacts across environments without rebuilding and while preserving provenance?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Secrets in CI/CD: How would you prevent secrets leakage in Jenkins, GitHub Actions, GitLab CI, and Cloud Build?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Deployment rollback criteria: What metrics and business signals should automatically stop or roll back a deployment?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Infrastructure testing: How would you test Terraform modules, Kubernetes manifests, Helm charts, and policy-as-code before production?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Disaster recovery testing: How would you design a DR test that proves backup, restore, DNS failover, application recovery, and stakeholder communication?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Error budget policy: How would you create an error budget policy that balances feature velocity and reliability?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Capacity planning math: What inputs would you use to forecast GKE capacity for CPU, memory, network, storage, and regional failover?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Distributed tracing: A request crosses API gateway, Cloud Run, GKE, Pub/Sub, and Cloud SQL. How would you make tracing useful end to end?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Security baseline: What minimum security baseline would you enforce for every new GCP project?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "WAF exceptions: A Cloud Armor WAF rule blocks legitimate traffic. How would you investigate, create exceptions, and avoid weakening security?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Vulnerability management: How would you run vulnerability management for containers, VMs, dependencies, and base images?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Network segmentation: How would you segment environments and teams using VPCs, Shared VPC, firewall rules, folders, and projects?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "MTU issue: An application has intermittent failures over VPN or interconnect due to packet size. How would you identify and fix MTU problems?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "REST API automation: How would you design a REST API that allows teams to request infrastructure safely?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Stakeholder tradeoff: Product wants faster releases, security wants stricter gates, and SRE wants fewer incidents. How would you align them?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Resume deep-dive - GitHub to Bitbucket migration: You led a GitHub-to-Bitbucket migration that improved engineering productivity by 30 percent. How did you plan the migration, handle CI/CD and webhook changes, and minimize disruption?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Resume deep-dive - enterprise CI/CD: You built CI/CD platforms with Jenkins, GitHub Actions, Terraform, Docker, Kubernetes, Helm, and Ansible. How did you standardize pipelines across many application teams with different tech stacks?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Resume deep-dive - multi-cloud IaC: You delivered Terraform and Ansible IaC across GCP, AWS, and Azure. What did you do differently for state management, provider versioning, and secrets across three clouds?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Resume deep-dive - DR with Kasten K10: You engineered backup and disaster recovery using Veeam and Kasten K10 for Kubernetes. How would you test that a Kubernetes-native backup actually restores a stateful workload correctly?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Resume deep-dive - GCP migration: You reduced deployment effort by 40 percent automating CI/CD with Jenkins, Cloud Build, and Terraform, and supported an on-prem to GCP migration. What was the riskiest part of that migration and how did you de-risk it?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Current market 2026 - GKE Autopilot vs Standard: For a platform serving 40+ product teams, how would you decide between GKE Autopilot and Standard mode today, and what operational control do you give up with Autopilot?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Current market 2026 - Workload Identity Federation: How would you design keyless authentication from GitHub Actions or another CI system to GCP using Workload Identity Federation instead of long-lived service account keys?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Current market 2026 - Terraform vs OpenTofu: With Terraform's licensing changes and OpenTofu's rise, how would you evaluate whether to stay on Terraform Enterprise or migrate to OpenTofu for a large enterprise estate?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Current market 2026 - Gateway API migration: GKE is moving from Ingress to Gateway API. How would you plan a migration from existing Ingress controllers to Gateway API with zero downtime?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Current market 2026 - image signing and provenance: How would you enforce Binary Authorization with Sigstore/cosign-signed images and SLSA provenance before anything deploys to GKE?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Current market 2026 - GKE Dataplane V2: What operational differences would you expect after enabling GKE Dataplane V2 (Cilium-based), especially for network policies and observability?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Current market 2026 - Config Sync at scale: How would you use Config Sync or Argo CD to enforce consistent policy and configuration across dozens of GKE clusters and thousands of namespaces?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Current market 2026 - Docker BuildKit: How would you use BuildKit/buildx for multi-arch, cache-efficient, reproducible container builds in a modern CI pipeline?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Current market 2026 - node auto-provisioning: GKE node auto-provisioning versus Standard cluster autoscaler - how would you decide which to use for spiky, mixed CPU/GPU workloads?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Current market 2026 - FinOps chargeback: Leadership wants a chargeback/showback model for GKE and Terraform-provisioned infra across 15 teams. How would you design cost attribution without slowing teams down?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Current market 2026 - Terraform state at scale: With hundreds of Terraform workspaces, how do you prevent state drift, blast radius, and slow applies as the platform scales past 50 GCP projects?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Platform team structure: How would you structure a platform engineering team, and what ratio of platform engineers to product teams would you target as the org scales?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "You-build-it-you-run-it: How would a platform team enable \"you build it, you run it\" ownership without every team reinventing observability, security, and deployment tooling?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Platform cost visibility: How would you give product teams self-service visibility into their own infrastructure cost inside the developer platform, without building a full FinOps tool from scratch?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Golden path versioning: A golden path template changes and existing services are now out of date. How would you roll out the update and measure adoption without breaking running services?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Platform onboarding: What would the first-day experience look like for a new engineer using your internal developer platform to ship their first service to production?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Platform team KPIs: What metrics would convince leadership to keep funding a platform engineering team versus letting application teams manage their own infrastructure?"
+  },
+  {
+    "section": "Main Question Bank",
+    "question": "Platform API design: How would you version a platform self-service API so existing automation doesn't break when you add new capabilities?"
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Python automation: Design a production-ready script that inventories all GCP projects, collects labels and owners, and exports non-compliant resources to CSV."
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Python automation: How would you automate GKE namespace creation with quotas, RBAC, network policies, labels, and audit logging?"
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Bash automation: Write the approach for a shell script that checks disk, memory, CPU, failed systemd units, and endpoint health across Linux servers."
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "GCP SDK automation: How would you build a Python tool that disables stale service-account keys only after approval and records every action?"
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Kubernetes automation: Design a script that finds CrashLoopBackOff, ImagePullBackOff, pending, and frequently restarted pods across all namespaces."
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Terraform automation: How would you automate fmt, validate, lint, security scanning, plan generation, policy checks, and plan summaries in CI?"
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Log automation: Build an approach to parse application logs, group errors by service and exception, and report the top failures during an incident."
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "API automation: How would you implement pagination, retries, exponential backoff, rate-limit handling, authentication, and idempotency in a cloud API client?"
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Configuration automation: How would you safely update YAML configuration across many repositories without destroying formatting or unrelated settings?"
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Certificate automation: Design a job that discovers expiring TLS certificates, alerts owners, validates renewals, and avoids duplicate notifications."
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Cost automation: How would you create a daily GCP cost anomaly report by project, service, label, and team?"
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Backup automation: Design a script that runs backups, validates checksums, tests restoration, enforces retention, and reports RPO compliance."
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "CI/CD automation: How would you automatically promote one immutable artifact through development, staging, and production with approvals and rollback?"
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Security automation: Build a workflow that scans public buckets, open firewall rules, overprivileged IAM roles, and unencrypted resources."
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Incident automation: Which incident-response steps should be automated, and which must remain human-controlled?"
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Python testing: How would you test a cloud automation script without modifying real production resources?"
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Secrets automation: How would you retrieve and rotate secrets without printing them in logs, command history, process arguments, or CI output?"
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Scheduled automation: Compare cron, Kubernetes CronJobs, Cloud Scheduler with Cloud Run, and workflow orchestration for operational jobs."
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Automation reliability: How would you add dry-run mode, structured logging, metrics, checkpoints, locking, retries, and rollback to a destructive script?"
+  },
+  {
+    "section": "Scripting & Automation",
+    "question": "Automation ownership: How would you package, document, release, monitor, and support internal automation used by several engineering teams?"
+  },
+  {
+    "section": "Docker",
+    "question": "Docker layer caching: How do Docker layers and cache affect build speed and image reproducibility?"
+  },
+  {
+    "section": "Docker",
+    "question": "Docker base images: How do you choose between Ubuntu, Alpine, slim, and distroless base images?"
+  },
+  {
+    "section": "Docker",
+    "question": "Docker non-root containers: Why should containers avoid running as root, and how do you implement that in a Dockerfile?"
+  },
+  {
+    "section": "Docker",
+    "question": "Docker secrets: How do you prevent secrets from leaking into Docker images, build logs, and runtime environment variables?"
+  },
+  {
+    "section": "Docker",
+    "question": "Docker registry: How do you tag, push, scan, and promote Docker images through environments?"
+  },
+  {
+    "section": "Docker",
+    "question": "Docker troubleshooting: A container works locally but fails in Kubernetes. How would you debug entrypoint, environment variables, filesystem, permissions, and health checks?"
+  },
+  {
+    "section": "Docker",
+    "question": "Docker networking: How does container networking work locally, and what changes when the container runs in Kubernetes?"
+  },
+  {
+    "section": "Docker",
+    "question": "Docker volumes: When would you use bind mounts, volumes, or ephemeral container storage?"
+  },
+  {
+    "section": "Docker",
+    "question": "Docker Compose: When is Docker Compose useful, and why is it different from Kubernetes?"
+  },
+  {
+    "section": "Docker",
+    "question": "Docker production readiness: What checks should pass before a Docker image is approved for production?"
+  },
+  {
+    "section": "Python",
+    "question": "Python automation: How would you use the Kubernetes Python client to find CrashLoopBackOff, ImagePullBackOff, Pending, and high-restart pods across namespaces?"
+  },
+  {
+    "section": "Python",
+    "question": "Python error handling: How would you design retries, exponential backoff, timeouts, and idempotency for a Python cloud API automation tool?"
+  },
+  {
+    "section": "Python",
+    "question": "Python logging: How would you implement structured logging, correlation IDs, and metrics in a Python operational tool?"
+  },
+  {
+    "section": "Python",
+    "question": "Python data parsing: How would you parse large JSON, YAML, CSV, or log files safely and produce an incident summary?"
+  },
+  {
+    "section": "Python",
+    "question": "Python packaging: How would you package, version, document, and release an internal Python CLI used by platform teams?"
+  },
+  {
+    "section": "Python",
+    "question": "Python security: How would you prevent secrets from leaking through environment variables, logs, stack traces, process arguments, or CI output?"
+  },
+  {
+    "section": "Python",
+    "question": "Python code review: What would you check in a Python automation PR before allowing it to run against production infrastructure?"
+  },
+  {
+    "section": "Python",
+    "question": "Python interview coding: Write the approach for a function that calculates SLO compliance and remaining error budget from request totals and failures."
+  },
+  {
+    "section": "Python",
+    "question": "Python type hints: How would you use type hints, dataclasses, and mypy to make a platform automation codebase safer and easier to review?"
+  },
+  {
+    "section": "Python",
+    "question": "Python decorators: How would you write a decorator that adds retries, timing, and structured logging to any cloud automation function?"
+  },
+  {
+    "section": "Python",
+    "question": "Python context managers: How would you implement a context manager that acquires a distributed lock before running a destructive infrastructure operation?"
+  },
+  {
+    "section": "Python",
+    "question": "Python CLI design: How would you design a Python CLI with argparse or Click that supports dry-run, environment selection, and confirmation prompts for risky actions?"
+  },
+  {
+    "section": "Python",
+    "question": "Python GCP client patterns: How would you handle pagination, quota errors, and exponential backoff when listing thousands of resources with GCP client libraries?"
+  },
+  {
+    "section": "Python",
+    "question": "Python dependency management: How would you manage dependencies, lockfiles, and reproducible builds for an internal Python tool using pip-tools or Poetry?"
+  },
+  {
+    "section": "Python",
+    "question": "Python performance: A Python automation script that inventories thousands of GCP resources is too slow. How would you profile it and decide between async, threads, or multiprocessing?"
+  },
+  {
+    "section": "Python",
+    "question": "Python mocking: How would you mock GCP and Kubernetes API responses in pytest to test error handling paths like throttling, timeouts, and permission denials?"
+  },
+  {
+    "section": "FastAPI",
+    "question": "FastAPI dependency injection: How would you use dependencies for authentication, database sessions, request context, and reusable validation?"
+  },
+  {
+    "section": "FastAPI",
+    "question": "FastAPI database design: How would you manage database connections, migrations, transactions, pooling, and retries in a FastAPI app?"
+  },
+  {
+    "section": "FastAPI",
+    "question": "FastAPI background work: When would you use BackgroundTasks, Pub/Sub, Celery, Cloud Tasks, or a separate worker instead of doing work in the request path?"
+  },
+  {
+    "section": "FastAPI",
+    "question": "FastAPI testing: How would you test endpoints, dependencies, authentication, database behavior, and error paths using pytest and TestClient?"
+  },
+  {
+    "section": "FastAPI",
+    "question": "FastAPI rate limiting: How would you implement rate limiting and request throttling per client for a FastAPI service shared by multiple internal teams?"
+  },
+  {
+    "section": "FastAPI",
+    "question": "FastAPI error handling: How would you design exception handlers and error response schemas so clients get consistent, actionable error payloads?"
+  },
+  {
+    "section": "FastAPI",
+    "question": "FastAPI versioning: How would you version a FastAPI API without breaking existing consumers, and when would you deprecate an old version?"
+  },
+  {
+    "section": "FastAPI",
+    "question": "FastAPI caching: How would you add caching with Redis or Memorystore to a FastAPI endpoint, and how would you handle cache invalidation correctly?"
+  },
+  {
+    "section": "FastAPI",
+    "question": "FastAPI WebSockets: When would you use WebSockets instead of polling or Server-Sent Events in a FastAPI service, and what operational risks come with it?"
+  },
+  {
+    "section": "FastAPI",
+    "question": "FastAPI multi-tenant design: How would you design request-scoped tenant isolation, quotas, and data access boundaries in a shared FastAPI service?"
+  },
+  {
+    "section": "FastAPI",
+    "question": "FastAPI API gateway: How would you deploy FastAPI behind an API gateway or load balancer on GCP, including auth, TLS termination, and request tracing?"
+  },
+  {
+    "section": "FastAPI",
+    "question": "FastAPI contract-first design: How would you design an OpenAPI-first FastAPI service so the schema, docs, and client SDKs stay in sync?"
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Write a function that reads Kubernetes pod records and returns pods with restartCount above a threshold, grouped by namespace."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Write a log parser that counts HTTP status codes and prints the five endpoints with the highest 5xx count."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Implement exponential backoff with jitter for an API call, with a maximum retry count and retryable-status handling."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Write a function that flattens nested JSON into dot-separated keys while preserving list values."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Write a function that compares desired and actual GCP resource labels and returns missing, changed, and unexpected labels."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Implement a thread-safe rate limiter that allows a configurable number of API requests per minute."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Write a script that finds duplicate IP addresses and overlapping CIDR ranges from a list of network definitions."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Write a function that calculates SLO compliance and remaining error budget from total and failed request counts."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Parse Prometheus text-format metrics and return samples whose metric name and labels match given filters."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Write a function that selects the latest valid semantic version from a list of container image tags."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Implement a context manager that records operation duration and emits structured success or failure logs."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Write unit tests for a function that deletes old cloud snapshots, including dry-run, API failure, and retention exceptions."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Write a script that reads a CSV of users and roles, validates allowed roles, and produces an IAM change plan without applying it."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Implement a bounded worker pool that processes cloud resources concurrently while preserving errors for a final report."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Python coding: Write a function that detects configuration drift between two nested dictionaries while ignoring approved keys."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Bash coding: Write a script that exits non-zero when disk usage exceeds a threshold and prints the five largest directories safely."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Bash coding: Write a script that checks an HTTP endpoint with timeout and retries, then emits a machine-readable health result."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Kubernetes coding: Write a Python program using the Kubernetes client that lists unschedulable pods and summarizes their scheduling reasons."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "GCP coding: Write a Python program using Google Cloud client libraries that lists public Cloud Storage buckets and handles permission errors."
+  },
+  {
+    "section": "Coding Exercises",
+    "question": "Terraform coding: Write a validation strategy or test that rejects resources missing required labels and prevents public ingress on port 22."
+  },
+  {
+    "section": "Go",
+    "question": "Go error handling: How does Go error handling work, and how would you structure errors in a production CLI or service?"
+  },
+  {
+    "section": "Go",
+    "question": "Go HTTP service: How would you build a small Go HTTP service for health checks, metrics, and safe operational actions?"
+  },
+  {
+    "section": "Go",
+    "question": "Go CLI design: How would you design a Go CLI with Cobra to audit Kubernetes or GCP resources across environments?"
+  },
+  {
+    "section": "Go",
+    "question": "Go operator: A team wants an operator to manage namespace onboarding with RBAC, quotas, and network policies. How would you approach it in Go?"
+  },
+  {
+    "section": "Go",
+    "question": "Go interfaces: How do interfaces help with testing cloud clients, Kubernetes clients, and business logic in Go?"
+  },
+  {
+    "section": "Go",
+    "question": "Go testing: How would you write unit tests, table-driven tests, mocks, and integration tests for a Go platform tool?"
+  },
+  {
+    "section": "Go",
+    "question": "Go modules: How do Go modules, semantic versioning, dependency updates, and vulnerability scanning fit into enterprise engineering?"
+  },
+  {
+    "section": "Go",
+    "question": "Go observability: How would you add structured logs, Prometheus metrics, traces, and graceful shutdown to a Go service?"
+  },
+  {
+    "section": "Go",
+    "question": "Go generics: How would generics help when writing reusable Kubernetes resource helpers, and where would you avoid using them?"
+  },
+  {
+    "section": "Go",
+    "question": "Go context propagation: How would you propagate deadlines, cancellation, and request-scoped values across a Go service calling multiple downstream APIs?"
+  },
+  {
+    "section": "Go",
+    "question": "Go gRPC: When would you choose gRPC over REST for a platform service, and what would you consider for versioning, streaming, and error handling?"
+  },
+  {
+    "section": "Go",
+    "question": "Go worker pools: How would you design a bounded worker pool in Go to process a large batch of cloud resources while preserving per-item errors?"
+  },
+  {
+    "section": "Go",
+    "question": "Go profiling: A Go service has unexpected memory growth. How would you use pprof to find the leak and confirm the fix?"
+  },
+  {
+    "section": "Go",
+    "question": "Go configuration: How would you manage configuration and secrets for a Go service across local, staging, and production without hardcoding values?"
+  },
+  {
+    "section": "Go",
+    "question": "Go container builds: How would you build small, reproducible, multi-arch Docker images for a Go binary in CI?"
+  },
+  {
+    "section": "Go",
+    "question": "Go CRDs: How would you design a Custom Resource Definition and reconciliation loop for a Kubernetes operator that manages namespace onboarding?"
+  },
+  {
+    "section": "LLMOps",
+    "question": "Vector database operations: How would you operate a production vector database, including indexing strategy, reindexing without downtime, backup/restore, and scaling for query latency?"
+  },
+  {
+    "section": "LLMOps",
+    "question": "Prompt lifecycle management: How would you version, test, review, and roll back prompt changes the same way you would application code?"
+  },
+  {
+    "section": "LLMOps",
+    "question": "LLM latency debugging: A chat feature has high p95 latency. How would you separate model inference time, retrieval time, network hops, and streaming/rendering delays?"
+  },
+  {
+    "section": "LLMOps",
+    "question": "Model routing and fallback: How would you design fallback between a primary and secondary LLM provider or model when the primary times out, rate-limits, or returns low-confidence output?"
+  },
+  {
+    "section": "LLMOps",
+    "question": "Streaming inference infra: How would you design backend infrastructure for streaming LLM responses over GKE/Cloud Run, including timeouts, load balancing, and client reconnects?"
+  },
+  {
+    "section": "LLMOps",
+    "question": "GPU serving cost: How would you decide between managed model endpoints, self-hosted GPU serving with vLLM/TGI, and batch inference for different GenAI workloads on cost and latency?"
+  },
+  {
+    "section": "LLMOps",
+    "question": "RAG vs fine-tuning vs prompting: How would you decide between prompt engineering, RAG, and fine-tuning for a domain-specific GenAI use case, and how would that decision change operational ownership?"
+  },
+  {
+    "section": "LLMOps",
+    "question": "PII and data handling: How would you prevent PII and secrets from leaking into LLM prompts, logs, third-party model providers, and evaluation datasets?"
+  },
+  {
+    "section": "LLMOps",
+    "question": "Vertex AI Agent Builder: How would you operate a production Vertex AI Agent Builder or Model Garden deployment, including versioning, monitoring, and rollback?"
+  },
+  {
+    "section": "LLMOps",
+    "question": "Multi-tenant AI platform: How would you design tenant isolation, quota enforcement, and cost attribution for an internal platform that serves LLM access to multiple product teams?"
+  },
+  {
+    "section": "LLMOps",
+    "question": "Resume deep-dive - Vertex AI Pipelines: Walk me through a Vertex AI Pipeline you built end to end, from training through Vertex AI Model Registry to production deployment."
+  },
+  {
+    "section": "LLMOps",
+    "question": "Resume deep-dive - LLMOps stack: You deployed Llama 3, Mistral, Ollama, and vLLM on Kubernetes. How did you choose between them and scale inference for concurrent users?"
+  },
+  {
+    "section": "LLMOps",
+    "question": "Resume deep-dive - RAG pipeline: Walk me through the RAG pipeline you built, including embedding model choice, vector database, chunking, and how you measured answer quality."
+  },
+  {
+    "section": "LLMOps",
+    "question": "Resume deep-dive - model monitoring: You used Vertex AI Model Monitoring and Evidently AI for drift detection with automated retraining. How did you avoid false-positive retrains?"
+  },
+  {
+    "section": "LLMOps",
+    "question": "Resume deep-dive - secure MLOps: You implemented IAM, RBAC, Secrets Manager, and Binary Authorization for AI workloads. Walk me through one specific control and the risk it closed."
+  },
+  {
+    "section": "LLMOps",
+    "question": "Resume deep-dive - GitOps for AI: You used ArgoCD and Helm for AI application deployments. How is a GitOps rollout for model-serving different from a normal microservice rollout?"
+  },
+  {
+    "section": "Ansible",
+    "question": "Ansible inventory: How would you structure dynamic inventory for GCP, AWS, and Azure instances instead of maintaining a static inventory file?"
+  },
+  {
+    "section": "Ansible",
+    "question": "Ansible error handling: How do you handle partial failures in a multi-host Ansible run so one bad host doesn't block the rest of the fleet?"
+  },
+  {
+    "section": "Ansible",
+    "question": "Ansible Jinja2 templating: How would you use Jinja2 templates in Ansible to generate environment-specific configuration files safely?"
+  },
+  {
+    "section": "Ansible",
+    "question": "Ansible Tower/AWX: What does Ansible Tower or AWX add on top of plain ansible-playbook for enterprise teams, such as RBAC, scheduling, and audit logging?"
+  },
+  {
+    "section": "Ansible",
+    "question": "Ansible OS patching: How would you design a safe, automated OS patching workflow with Ansible that includes health checks, rolling batches, and rollback?"
+  },
+  {
+    "section": "Ansible",
+    "question": "Ansible linting: How would you enforce Ansible code quality using ansible-lint, pre-commit hooks, and code review before merging playbook changes?"
+  },
+  {
+    "section": "Ansible",
+    "question": "Ansible secrets in CI/CD: How would you securely supply an Ansible Vault password or SSH key to a CI/CD pipeline without hardcoding it?"
+  },
+  {
+    "section": "Ansible",
+    "question": "Ansible multi-cloud: You delivered Ansible IaC across GCP, AWS, and Azure. What did you handle differently for authentication and modules across the three clouds?"
+  },
+  {
+    "section": "Ansible",
+    "question": "Ansible with Kubernetes: When would you still use Ansible in a Kubernetes-centric platform, for example bootstrapping nodes or managing non-containerized infrastructure?"
+  },
+  {
+    "section": "Ansible",
+    "question": "Ansible change management: How would you gate risky Ansible changes, like a fleet-wide restart, behind approvals while keeping routine changes fast?"
+  },
+  {
+    "section": "Tech Risk Technical",
+    "question": "Risk register and heatmap: What fields would you maintain in a technology risk register, how would you score likelihood/impact, and how would you convert it into a leadership heatmap?"
+  },
+  {
+    "section": "Tech Risk Technical",
+    "question": "Change risk: A major architecture change introduces a new data flow, API gateway, and cloud database. What risk questions would you ask before approval?"
+  },
+  {
+    "section": "Tech Risk Technical",
+    "question": "FMEA and scenario analysis: How would you use FMEA or scenario analysis to identify high-impact technology failure modes before they become incidents?"
+  },
+  {
+    "section": "Tech Risk Technical",
+    "question": "Control validation: How would you test whether a control is actually working, for example privileged access, deployment approval, backup restore, or vulnerability SLA closure?"
+  },
+  {
+    "section": "Tech Risk Behavioral",
+    "question": "Executive reporting: How would you present a deteriorating risk trend to senior leadership and ask for investment or policy support?"
+  },
+  {
+    "section": "Tech Risk Behavioral",
+    "question": "Decision-making: Tell me about a time you had incomplete information but still had to make or recommend a risk decision."
+  },
+  {
+    "section": "Tech Risk Behavioral",
+    "question": "Audit partnership: How would you handle a disagreement with internal or external auditors about severity, evidence, or remediation feasibility?"
+  },
+  {
+    "section": "Tech Risk Behavioral",
+    "question": "Leadership reflection: What does success look like for you in a Technology Risk Lead role after six months?"
+  }
+]

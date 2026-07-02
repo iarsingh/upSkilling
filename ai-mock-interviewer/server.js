@@ -4,11 +4,15 @@ const path = require("path");
 const mammoth = require("mammoth");
 const { PDFParse } = require("pdf-parse");
 const tesseract = require("tesseract.js");
+const Anthropic = require("@anthropic-ai/sdk");
 
 const PORT = Number(process.env.PORT || 3030);
 const HOST = process.env.HOST || "127.0.0.1";
 const OLLAMA_URL = process.env.OLLAMA_URL || "http://127.0.0.1:11434";
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || "llama3.1:8b";
+const LLM_PROVIDER = process.env.LLM_PROVIDER || "ollama";
+const CLAUDE_MODEL = process.env.CLAUDE_MODEL || "claude-opus-4-8";
+const claudeClient = process.env.ANTHROPIC_API_KEY ? new Anthropic() : null;
 const PUBLIC_DIR = path.join(__dirname, "public");
 const DATA_DIR = path.join(__dirname, "data");
 const PROFILE_PATH = path.join(DATA_DIR, "applicant-profile.json");
@@ -321,6 +325,26 @@ async function askOllama(prompt, options = {}, timeoutMs = 45000) {
 
   const data = await response.json();
   return String(data.response || "").trim();
+}
+
+async function askClaude(prompt, options = {}) {
+  if (!claudeClient) {
+    throw new Error("ANTHROPIC_API_KEY is not set. Add it to your environment to use LLM_PROVIDER=claude.");
+  }
+  const response = await claudeClient.messages.create({
+    model: CLAUDE_MODEL,
+    max_tokens: options.maxTokens || 2000,
+    messages: [{ role: "user", content: prompt }]
+  });
+  const textBlock = response.content.find((block) => block.type === "text");
+  return String(textBlock?.text || "").trim();
+}
+
+async function askLLM(prompt, ollamaOptions = {}, timeoutMs = 45000) {
+  if (LLM_PROVIDER === "claude") {
+    return askClaude(prompt, { maxTokens: ollamaOptions.num_predict });
+  }
+  return askOllama(prompt, ollamaOptions, timeoutMs);
 }
 
 function fallbackFinalFeedback(input) {
@@ -728,11 +752,22 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === "GET" && req.url === "/api/health") {
+      if (LLM_PROVIDER === "claude") {
+        sendJson(res, 200, {
+          ok: Boolean(claudeClient),
+          provider: "claude",
+          model: CLAUDE_MODEL,
+          claudeConfigured: Boolean(claudeClient)
+        });
+        return;
+      }
       const response = await fetch(`${OLLAMA_URL}/api/tags`);
       sendJson(res, 200, {
         ok: response.ok,
+        provider: "ollama",
         model: OLLAMA_MODEL,
-        ollamaUrl: OLLAMA_URL
+        ollamaUrl: OLLAMA_URL,
+        claudeConfigured: Boolean(claudeClient)
       });
       return;
     }
@@ -751,7 +786,7 @@ const server = http.createServer(async (req, res) => {
       const input = await readBody(req);
       const profile = readProfile();
       try {
-        const response = await askOllama(autofillPrompt(input, profile), {
+        const response = await askLLM(autofillPrompt(input, profile), {
           temperature: 0.1,
           num_predict: 900
         }, 18000);
@@ -776,7 +811,7 @@ const server = http.createServer(async (req, res) => {
       const profile = readProfile();
       try {
         sendJson(res, 200, {
-          coverLetter: await askOllama(coverLetterPrompt(input, profile), {
+          coverLetter: await askLLM(coverLetterPrompt(input, profile), {
             temperature: 0.25,
             num_predict: 450
           }, 20000)
@@ -796,7 +831,7 @@ const server = http.createServer(async (req, res) => {
         sendJson(res, 400, { error: "Please record or type an answer first." });
         return;
       }
-      sendJson(res, 200, { feedback: await askOllama(feedbackPrompt(input)) });
+      sendJson(res, 200, { feedback: await askLLM(feedbackPrompt(input)) });
       return;
     }
 
@@ -808,7 +843,7 @@ const server = http.createServer(async (req, res) => {
       }
       try {
         sendJson(res, 200, {
-          feedback: await askOllama(finalFeedbackPrompt(input), {
+          feedback: await askLLM(finalFeedbackPrompt(input), {
             num_predict: 1800,
             temperature: 0.2
           }, 45000)
@@ -824,7 +859,7 @@ const server = http.createServer(async (req, res) => {
 
     if (req.method === "POST" && req.url === "/api/question") {
       const input = await readBody(req);
-      const question = cleanGeneratedQuestion(await askOllama(questionPrompt(input)));
+      const question = cleanGeneratedQuestion(await askLLM(questionPrompt(input)));
       sendJson(res, 200, { question });
       return;
     }
