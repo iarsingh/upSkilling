@@ -63,11 +63,11 @@ Questions are not repeated until the current question pool is exhausted. Saving 
 
 The app is a mock interview question generator. By default, `Question order` is set to `Random mock questions`, so clicking `New question` randomly selects from the active pool without repeating questions until the pool is exhausted. Switch to `Sequential questions` if you want ordered practice.
 
-Use `Technology practice` to prepare one subject at a time. Available filters include Kubernetes/GKE, Docker/containers, GCP, Terraform/IaC, Python automation, scripting and automation, coding exercises, SRE, MLOps/Vertex AI, CI/CD/GitOps, observability, security, networking, Linux, platform engineering, and scenario-based questions. The selected technology filters the full question bank, practice days, and mock interview sets.
+Use `Technology practice` to prepare one subject at a time. Available filters include Kubernetes/GKE, Docker/containers, GCP, Terraform/IaC, Python automation, scripting and automation, coding exercises, SRE, MLOps/Vertex AI, LLMOps/GenAI production, CI/CD/GitOps, observability, security, networking, Linux, platform engineering, and scenario-based questions. The selected technology filters the full question bank, practice days, and mock interview sets.
 
 `Coding exercises` provides practical Python, Bash, Kubernetes API, GCP SDK, log-processing, networking, SLO, and Terraform validation tasks. Write the solution directly in the code-friendly answer editor, then save it as an interview answer for final feedback.
 
-The built-in market question bank has 187 balanced senior-level questions across GKE, Terraform, GCP services, SRE, observability, security, networking, CI/CD, Python automation, platform engineering, MLOps, FinOps, Linux fundamentals, data reliability, DR, and senior behavioral ownership. The app also loads all 1180 questions from the local `1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt` bank, including the GCP ML, Vertex AI, and JD-specific Senior Cloud Engineering questions.
+The built-in market question bank has 258 balanced senior-level questions across GKE, Terraform, GCP services, SRE, observability, security, networking, CI/CD, Python automation, platform engineering, MLOps, LLMOps/GenAI production, FinOps, Linux fundamentals, data reliability, DR, and senior behavioral ownership. The app also loads all 1180 questions from the local `1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt` bank, including the GCP ML, Vertex AI, and JD-specific Senior Cloud Engineering questions.
 
 Choose `Random full bank mock interview` from `Mock interview set` to generate random questions from the complete local question bank.
 
@@ -97,7 +97,7 @@ The complete plan is also saved in `30-day-interview-plan.md`.
 
 ## Mock Interview Sets
 
-Use `Mock interview set` when you want a fixed realistic round instead of the full question bank. It includes the Day 1-Day 30 mock interviews plus 12 extra sets with 8 questions each, covering GKE troubleshooting, Terraform/GCP platform design, SRE incidents, CI/CD and GitOps, security, observability, networking, platform engineering, MLOps, behavioral ownership, Google-style mixed rounds, and product-company final rounds.
+Use `Mock interview set` when you want a fixed realistic round instead of the full question bank. It includes the Day 1-Day 30 mock interviews plus 13 extra sets with 8-12 questions each, covering GKE troubleshooting, Terraform/GCP platform design, SRE incidents, CI/CD and GitOps, security, observability, networking, platform engineering, MLOps, LLMOps/GenAI production, behavioral ownership, Google-style mixed rounds, technology risk, multi-cloud networking, and product-company final rounds.
 
 Choose `Custom JD mock interview` after pasting or importing a JD to run an 8-question mock interview generated from that JD and your saved CV/profile context.
 

@@ -219,7 +219,11 @@ function extractJsonArray(text) {
   }
 }
 
+let cachedQuestionBank = null;
+
 function readQuestionBank() {
+  if (cachedQuestionBank) return cachedQuestionBank;
+
   const text = fs.readFileSync(QUESTION_BANK_PATH, "utf8");
   const questions = [];
   let currentSection = "General";
@@ -247,6 +251,7 @@ function readQuestionBank() {
     lastQuestionNumber = number;
   }
 
+  cachedQuestionBank = questions;
   return questions;
 }
 
@@ -342,16 +347,14 @@ function fallbackFinalFeedback(input) {
   return `## What You Told
 ${transcript || "No answer transcript was captured."}
 
-## Better Sample Answers
-For each question, use this pattern: state the production context, quantify user/business impact, list exact signals or commands, explain the fix, explain rollback, and close with prevention and measurable improvement.
-
-Example senior answer style: "I would first confirm impact using SLO dashboards and error-budget burn, then isolate whether the problem is deployment, dependency, capacity, network, or configuration. For GKE I would check events, pod status, rollout history, HPA metrics, node pressure, logs, traces, and recent changes. I would mitigate with rollback, scaling, traffic shift, or config revert, then create an RCA with permanent actions such as better alerts, policy guardrails, tests, runbooks, and ownership."
-
-## Market Skill Benchmark
-Feedback is measured against Senior GCP DevOps / SRE / Cloud / Platform / ML Platform roles for 6-8 years, not only against one JD.
-
 ## Overall Score
 ${score}/10. You covered ${hits.length} important signal area${hits.length === 1 ? "" : "s"} across ${answers} answer${answers === 1 ? "" : "s"}, but need more structured depth for senior product-company interviews.
+
+## Score Breakdown
+- Technical depth: ${hits.length >= 5 ? "Good" : "Needs more depth"}.
+- Production troubleshooting: ${/incident|latency|rollback|logs|metrics|slo|debug|troubleshoot/.test(lower) ? "Partial to good" : "Needs stronger signals, commands, and decision points"}.
+- Senior ownership: ${/stakeholder|communication|rca|postmortem|prevention|runbook|owner/.test(lower) ? "Partial" : "Needs clearer ownership, prevention, and business impact"}.
+- Market coverage: ${hits.length ? hits.join(", ") : "too limited in this transcript"}.
 
 ## Hire Signal
 ${score >= 7 ? "Lean Hire" : "Lean No Hire"} for now. The direction is relevant, but the answer needs stronger architecture tradeoffs, exact signals, and production ownership details.
@@ -366,9 +369,21 @@ ${score >= 7 ? "Lean Hire" : "Lean No Hire"} for now. The direction is relevant,
 - Missing or weak areas in this transcript: ${misses.length ? misses.join(", ") : "deeper tradeoff discussion"}.
 - Use more structured examples from Capgemini, Tech Mahindra, or TCS with measurable impact.
 
+## Where To Improve
+- Start every answer with context, risk, and business impact before jumping into tools.
+- Add concrete evidence: metrics, logs, traces, kubectl or Terraform commands, dashboards, audit logs, and rollback signals.
+- Explain tradeoffs and decisions: why rollback vs scale, why Cloud Run vs GKE, why preventive vs detective control, why simple vs highly available design.
+- Close with prevention: tests, guardrails, SLO alerts, runbooks, ownership, automation, and measurable improvement.
+- Practice weak areas next: ${misses.slice(0, 5).join(", ") || "senior architecture tradeoffs and measurable outcomes"}.
+
 ## Market Skill Gaps
 - Compare every answer to the priority market skills: GKE, Terraform, Python automation, SRE, observability, GitOps, cloud security, platform engineering, Vertex AI/MLOps, landing zones, networking, FinOps, DR, and production readiness.
 - Add missing senior signals such as tradeoffs, scale, SLO impact, risk, automation, ownership, and measurable outcomes.
+
+## Better Sample Answers
+For each question, use this pattern: state the production context, quantify user/business impact, list exact signals or commands, explain the fix, explain rollback, and close with prevention and measurable improvement.
+
+Example senior answer style: "I would first confirm impact using SLO dashboards and error-budget burn, then isolate whether the problem is deployment, dependency, capacity, network, or configuration. For GKE I would check events, pod status, rollout history, HPA metrics, node pressure, logs, traces, and recent changes. I would mitigate with rollback, scaling, traffic shift, or config revert, then create an RCA with permanent actions such as better alerts, policy guardrails, tests, runbooks, and ownership."
 
 ## Best Answer Pattern
 Use: context -> risk/impact -> investigation steps -> tools/signals -> decision/tradeoff -> fix -> prevention -> metric improvement.
@@ -480,6 +495,9 @@ For each answered question, show:
 ## Overall Score
 Score out of 10 and one hiring-bar sentence.
 
+## Score Breakdown
+Give scores out of 10 for technical depth, troubleshooting structure, senior ownership, communication, and JD/market fit. Add one short reason for each score.
+
 ## Hire Signal
 Say whether the candidate currently looks Strong Hire, Hire, Lean Hire, Lean No Hire, or No Hire for the target role, and why.
 
@@ -488,6 +506,9 @@ Say whether the candidate currently looks Strong Hire, Hire, Lean Hire, Lean No 
 
 ## Gaps
 3 concise bullets. Mention missing GCP, GKE, Terraform, SRE, observability, security, platform engineering, MLOps, networking, FinOps, DR, or senior ownership depth.
+
+## Where To Improve
+Give 5 specific improvement bullets. Each bullet must say exactly what to improve and how to practice it. Include weak topics from the transcript and missing senior signals such as metrics, commands, tradeoffs, rollback, prevention, ownership, and business impact.
 
 ## Market Skill Coverage
 Make a compact checklist with Covered / Partial / Missing for:
@@ -788,9 +809,9 @@ const server = http.createServer(async (req, res) => {
       try {
         sendJson(res, 200, {
           feedback: await askOllama(finalFeedbackPrompt(input), {
-            num_predict: 350,
+            num_predict: 1800,
             temperature: 0.2
-          }, 20000)
+          }, 45000)
         });
       } catch (error) {
         sendJson(res, 200, {

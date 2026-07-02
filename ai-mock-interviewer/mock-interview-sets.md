@@ -539,3 +539,42 @@ Focus: GCP, AWS, Azure connectivity, VPN, Interconnect, Direct Connect, ExpressR
 10. **Multi-Cloud Networking:** How would you troubleshoot an application latency issue between GCP and AWS?
 11. **Multi-Cloud Networking:** What disaster recovery and resilience considerations apply to multi-cloud connectivity?
 12. **Multi-Cloud Networking:** How would you perform a technology risk assessment for a new multi-cloud network connection?
+
+## Mock Interview 43 - LLMOps / GenAI Production Round
+
+Focus: RAG reliability, vector databases, prompt lifecycle, LLM gateways, cost/latency control, prompt injection defense, agent tool-calling safety, and LLM observability
+
+1. **LLMOps / GenAI Production:** How would you design a production LLM-backed service on GCP, covering the API gateway, model routing, caching, observability, and cost controls?
+2. **LLMOps / GenAI Production:** A retrieval-augmented generation pipeline returns stale or irrelevant context. How would you debug the vector database, embedding pipeline, chunking strategy, and retrieval ranking?
+3. **LLMOps / GenAI Production:** How would you build an internal LLM gateway that handles authentication, per-team rate limiting, token budget enforcement, and multi-provider fallback?
+4. **LLMOps / GenAI Production:** A GenAI feature's inference cost grew 5x in a month. How would you investigate token usage, caching opportunities, model selection, and prompt length before cutting features?
+5. **LLMOps / GenAI Production:** How would you defend an LLM application against prompt injection and data exfiltration from untrusted user input or retrieved documents?
+6. **LLMOps / GenAI Production:** An AI agent can call internal tools and APIs. How would you sandbox tool execution, enforce least privilege, and prevent unintended destructive actions?
+7. **LLMOps / GenAI Production:** How would you build an automated evaluation and regression suite for LLM output quality before shipping a prompt or model change?
+8. **LLMOps / GenAI Production:** What would you trace and log for an LLM request end to end, including prompts, retrieved context, token counts, latency, and model version, without leaking sensitive data?
+
+## Mock Interview 44 - Resume Deep-Dive: GCP, Terraform, Kubernetes Platform Round
+
+Focus: GCP landing zones, Terraform Enterprise modules, GKE administration, self-service infrastructure, Cloud Armor security, cost optimization, and 7-years-experience senior platform ownership, with a touch of MLOps
+
+1. **Resume Deep-Dive:** Walk me through the GCP landing zone you designed, including project hierarchy, Shared VPC, IAM governance, and policy-as-code. What tradeoffs did you make?
+2. **Resume Deep-Dive:** You built reusable Terraform Enterprise modules for networking, IAM, GKE, monitoring, logging, load balancing, and security that cut provisioning effort by 70 percent. Walk me through how you designed and versioned those modules.
+3. **Resume Deep-Dive:** You manage production GKE clusters including node pools, upgrades, autoscaling, and RBAC. Walk me through your process for a zero-downtime cluster upgrade.
+4. **Resume Deep-Dive:** You integrated Terraform Enterprise with Git-based CI/CD, Harness, Jira, and ServiceNow for self-service delivery. How did approvals and change management work end to end?
+5. **Resume Deep-Dive:** You designed Cloud Armor WAF policies with Adaptive Protection, rate limiting, and threat intelligence, plus IONIX and Stream Security for attack surface monitoring. Walk me through how these tools work together to stop an attack.
+6. **Resume Deep-Dive:** You reduced GCP cost by 20 percent through governance, resource right-sizing, and capacity planning. Walk me through the specific levers you pulled and how you measured the savings.
+7. **Resume Deep-Dive:** You provisioned GPU-enabled GKE clusters with NVIDIA L4/A100 nodes. How did you handle node pool sizing, taints/tolerations, and spot/preemptible GPUs for cost control?
+8. **Resume Deep-Dive:** At 7 years of experience, how would you demonstrate technical leadership across multiple teams during a platform migration, not just individual execution?
+
+## Mock Interview 45 - Platform Engineering / Internal Developer Platform Round
+
+Focus: Platform team scope, multi-tenancy, golden paths, self-service guardrails, service catalogs, platform SLAs, and IDP tooling decisions
+
+1. **Platform Engineering:** How would you draw the line between what a platform team owns and what application teams own, and how would you avoid the platform becoming a bottleneck?
+2. **Platform Engineering:** How would you design multi-tenancy for an internal developer platform so one team's misconfiguration or spike can't affect another team's workloads?
+3. **Platform Engineering:** What SLAs or SLOs would you define for your own platform team, and how would you measure whether the platform itself is reliable?
+4. **Platform Engineering:** How would you design self-service ephemeral preview environments for pull requests on top of GKE, Terraform, and CI/CD?
+5. **Platform Engineering:** How would you prevent manual console changes from undermining your Terraform-based golden paths, without blocking legitimate emergency fixes?
+6. **Platform Engineering:** How would you design a service catalog that tracks ownership, dependencies, production-readiness status, and on-call rotation for every service on the platform?
+7. **Platform Engineering:** How would you enforce security and compliance guardrails inside a self-service platform without turning every request into a manual approval bottleneck?
+8. **Platform Engineering:** How would you decide between building a custom internal developer platform versus adopting Backstage, Port, or another off-the-shelf IDP?

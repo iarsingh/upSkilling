@@ -3,7 +3,7 @@
   "firstName": "Akhilesh",
   "middleName": "Ranjan",
   "lastName": "Singh",
-  "headline": "Senior DevOps & Platform Engineer | GCP | Kubernetes | Terraform | Cloud Security",
+  "headline": "Senior MLOps & Platform Engineer | GCP | Kubernetes | Terraform | AI Infrastructure",
   "email": "akhileshranjan.ks@gmail.com",
   "phone": "+91-8002392976",
   "location": "Noida, India",
@@ -22,7 +22,7 @@
     "ML Platform Engineer",
     "MLOps Engineer"
   ],
-  "summary": "Senior DevOps & Platform Engineer with 6.9+ years of experience designing, automating, and operating cloud-native platforms across GCP, AWS, and Azure. Skilled in Kubernetes, Terraform, CI/CD, Infrastructure as Code, cloud security, observability, and platform engineering, with expertise in building scalable cloud infrastructure and improving operational reliability. Experienced in GKE, Cloud Run, Terraform Enterprise, DevSecOps, and cloud governance. Additionally experienced in AI Infrastructure and MLOps, including MLflow, FastAPI, Vertex AI, model serving, and Kubernetes-based ML deployment workflows.",
+  "summary": "Senior MLOps & Platform Engineer with nearly 7 years of experience designing, automating, and operating cloud-native infrastructure across GCP, AWS, and Azure. Strong DevOps foundation in GKE, Terraform Enterprise, CI/CD, landing zones, and cloud security, plus hands-on experience building production AI platforms with Vertex AI, MLflow, KServe, and Kubernetes-based LLMOps (RAG, vLLM, Ollama). Skilled in Platform Engineering, Infrastructure as Code, and DevSecOps, delivering self-service cloud platforms, standardized landing zones, and automated deployment frameworks.",
   "skills": [
     "GCP",
     "GKE",
@@ -62,8 +62,29 @@
     "Pub/Sub",
     "MLflow",
     "Vertex AI",
+    "Vertex AI Pipelines",
+    "Kubeflow",
+    "Model Registry",
+    "Model Serving",
+    "Model Monitoring",
     "FastAPI",
-    "MLOps"
+    "KServe",
+    "Seldon Core",
+    "TensorFlow Serving",
+    "MLOps",
+    "LLMOps",
+    "RAG",
+    "Vector Databases",
+    "LangChain",
+    "LangGraph",
+    "Hugging Face",
+    "vLLM",
+    "Ollama",
+    "Llama 3",
+    "Mistral",
+    "Harness",
+    "Bitbucket",
+    "Binary Authorization"
   ],
   "experience": [
     {
@@ -73,11 +94,13 @@
       "start": "09/2024",
       "end": "Present",
       "highlights": [
-        "Designed secure GCP cloud platform foundations using Terraform Enterprise.",
+        "Designed secure GCP cloud platform foundations and enterprise landing zones using Terraform Enterprise, Shared VPC, and IAM governance.",
         "Built reusable Terraform modules for networking, IAM, Kubernetes, monitoring, logging, load balancing, and security controls, reducing provisioning effort by 70%.",
-        "Established GCP landing zone standards including project hierarchy, Shared VPC, network segmentation, and IAM governance.",
-        "Managed production GKE clusters including node pools, upgrades, autoscaling, RBAC, troubleshooting, and performance optimization.",
-        "Improved observability through Prometheus, Grafana, ELK Stack, and Google Cloud Operations Suite."
+        "Managed production GKE clusters including node pools, upgrades, autoscaling, RBAC, and GPU-enabled node pools (NVIDIA L4/A100) for ML workloads.",
+        "Designed and implemented end-to-end MLOps platforms using Vertex AI Pipelines, MLflow, KServe, and TensorFlow Serving for scalable model deployment.",
+        "Implemented LLMOps and RAG workflows deploying Llama 3, Mistral, Ollama, and vLLM on Kubernetes for enterprise GenAI applications.",
+        "Reduced cloud and AI infrastructure cost by over 20% through governance, GPU scheduling, autoscaling, and resource right-sizing.",
+        "Improved observability through Prometheus, Grafana, ELK Stack, OpenTelemetry, and Google Cloud Operations Suite."
       ]
     },
     {

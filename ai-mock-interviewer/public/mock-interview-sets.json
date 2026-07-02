@@ -1416,5 +1416,122 @@
         "question": "How would you perform a technology risk assessment for a new multi-cloud network connection?"
       }
     ]
+  },
+  {
+    "id": "set-43",
+    "title": "Mock Interview 43 - LLMOps / GenAI Production Round",
+    "focus": "RAG reliability, vector databases, prompt lifecycle, LLM gateways, cost/latency control, prompt injection defense, agent tool-calling safety, and LLM observability",
+    "questions": [
+      {
+        "category": "LLMOps / GenAI Production",
+        "question": "How would you design a production LLM-backed service on GCP, covering the API gateway, model routing, caching, observability, and cost controls?"
+      },
+      {
+        "category": "LLMOps / GenAI Production",
+        "question": "A retrieval-augmented generation pipeline returns stale or irrelevant context. How would you debug the vector database, embedding pipeline, chunking strategy, and retrieval ranking?"
+      },
+      {
+        "category": "LLMOps / GenAI Production",
+        "question": "How would you build an internal LLM gateway that handles authentication, per-team rate limiting, token budget enforcement, and multi-provider fallback?"
+      },
+      {
+        "category": "LLMOps / GenAI Production",
+        "question": "A GenAI feature's inference cost grew 5x in a month. How would you investigate token usage, caching opportunities, model selection, and prompt length before cutting features?"
+      },
+      {
+        "category": "LLMOps / GenAI Production",
+        "question": "How would you defend an LLM application against prompt injection and data exfiltration from untrusted user input or retrieved documents?"
+      },
+      {
+        "category": "LLMOps / GenAI Production",
+        "question": "An AI agent can call internal tools and APIs. How would you sandbox tool execution, enforce least privilege, and prevent unintended destructive actions?"
+      },
+      {
+        "category": "LLMOps / GenAI Production",
+        "question": "How would you build an automated evaluation and regression suite for LLM output quality before shipping a prompt or model change?"
+      },
+      {
+        "category": "LLMOps / GenAI Production",
+        "question": "What would you trace and log for an LLM request end to end, including prompts, retrieved context, token counts, latency, and model version, without leaking sensitive data?"
+      }
+    ]
+  },
+  {
+    "id": "set-44",
+    "title": "Mock Interview 44 - Resume Deep-Dive: GCP, Terraform, Kubernetes Platform Round",
+    "focus": "GCP landing zones, Terraform Enterprise modules, GKE administration, self-service infrastructure, Cloud Armor security, cost optimization, and 7-years-experience senior platform ownership, with a touch of MLOps",
+    "questions": [
+      {
+        "category": "Resume Deep-Dive",
+        "question": "Walk me through the GCP landing zone you designed, including project hierarchy, Shared VPC, IAM governance, and policy-as-code. What tradeoffs did you make?"
+      },
+      {
+        "category": "Resume Deep-Dive",
+        "question": "You built reusable Terraform Enterprise modules for networking, IAM, GKE, monitoring, logging, load balancing, and security that cut provisioning effort by 70 percent. Walk me through how you designed and versioned those modules."
+      },
+      {
+        "category": "Resume Deep-Dive",
+        "question": "You manage production GKE clusters including node pools, upgrades, autoscaling, and RBAC. Walk me through your process for a zero-downtime cluster upgrade."
+      },
+      {
+        "category": "Resume Deep-Dive",
+        "question": "You integrated Terraform Enterprise with Git-based CI/CD, Harness, Jira, and ServiceNow for self-service delivery. How did approvals and change management work end to end?"
+      },
+      {
+        "category": "Resume Deep-Dive",
+        "question": "You designed Cloud Armor WAF policies with Adaptive Protection, rate limiting, and threat intelligence, plus IONIX and Stream Security for attack surface monitoring. Walk me through how these tools work together to stop an attack."
+      },
+      {
+        "category": "Resume Deep-Dive",
+        "question": "You reduced GCP cost by 20 percent through governance, resource right-sizing, and capacity planning. Walk me through the specific levers you pulled and how you measured the savings."
+      },
+      {
+        "category": "Resume Deep-Dive",
+        "question": "You provisioned GPU-enabled GKE clusters with NVIDIA L4/A100 nodes. How did you handle node pool sizing, taints/tolerations, and spot/preemptible GPUs for cost control?"
+      },
+      {
+        "category": "Resume Deep-Dive",
+        "question": "At 7 years of experience, how would you demonstrate technical leadership across multiple teams during a platform migration, not just individual execution?"
+      }
+    ]
+  },
+  {
+    "id": "set-45",
+    "title": "Mock Interview 45 - Platform Engineering / Internal Developer Platform Round",
+    "focus": "Platform team scope, multi-tenancy, golden paths, self-service guardrails, service catalogs, platform SLAs, and IDP tooling decisions",
+    "questions": [
+      {
+        "category": "Platform Engineering",
+        "question": "How would you draw the line between what a platform team owns and what application teams own, and how would you avoid the platform becoming a bottleneck?"
+      },
+      {
+        "category": "Platform Engineering",
+        "question": "How would you design multi-tenancy for an internal developer platform so one team's misconfiguration or spike can't affect another team's workloads?"
+      },
+      {
+        "category": "Platform Engineering",
+        "question": "What SLAs or SLOs would you define for your own platform team, and how would you measure whether the platform itself is reliable?"
+      },
+      {
+        "category": "Platform Engineering",
+        "question": "How would you design self-service ephemeral preview environments for pull requests on top of GKE, Terraform, and CI/CD?"
+      },
+      {
+        "category": "Platform Engineering",
+        "question": "How would you prevent manual console changes from undermining your Terraform-based golden paths, without blocking legitimate emergency fixes?"
+      },
+      {
+        "category": "Platform Engineering",
+        "question": "How would you design a service catalog that tracks ownership, dependencies, production-readiness status, and on-call rotation for every service on the platform?"
+      },
+      {
+        "category": "Platform Engineering",
+        "question": "How would you enforce security and compliance guardrails inside a self-service platform without turning every request into a manual approval bottleneck?"
+      },
+      {
+        "category": "Platform Engineering",
+        "question": "How would you decide between building a custom internal developer platform versus adopting Backstage, Port, or another off-the-shelf IDP?"
+      }
+    ]
   }
 ]

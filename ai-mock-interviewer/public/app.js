@@ -58,6 +58,7 @@ const technologyLabels = {
   coding: "Coding exercises",
   sre: "SRE / reliability",
   mlops: "MLOps / Vertex AI",
+  llmops: "LLMOps / GenAI production",
   cicd: "CI/CD / GitOps",
   observability: "Observability",
   security: "Cloud / DevSecOps security",
@@ -80,6 +81,7 @@ const technologyMatchers = {
   coding: /\b(write|code|coding|implement|function|class|algorithm|script|program|parse|return|input|output|unit test)\b/i,
   sre: /\b(sre|reliability|sli|slo|sla|error budget|incident|postmortem|rca|on-call|oncall|availability|capacity planning|chaos|mttr|toil|runbook|disaster recovery|rto|rpo)\b/i,
   mlops: /\b(mlops|machine learning|vertex ai|mlflow|kubeflow|model|inference|feature store|training pipeline|data drift|concept drift|gpu|kserve|seldon|bentoml|tensorflow serving|torchserve)\b/i,
+  llmops: /\b(llm|genai|generative ai|rag|retrieval.augmented|vector database|vector db|embedding|prompt|token|agent|langchain|llamaindex|vllm|tgi|model garden|agent builder|guardrail|hallucinat|chatbot|copilot)\b/i,
   cicd: /\b(ci\/cd|cicd|continuous integration|continuous delivery|continuous deployment|gitops|argocd|argo cd|jenkins|github actions|gitlab|cloud build|cloud deploy|pipeline|artifact|canary|blue.?green|rollback)\b/i,
   observability: /\b(observability|prometheus|grafana|opentelemetry|open telemetry|monitoring|logging|metrics|tracing|trace|dashboard|alert|elk|opensearch|cloud operations|cloud monitoring)\b/i,
   security: /\b(security|devsecops|iam|rbac|workload identity|secret|vault|cloud armor|waf|binary authorization|vulnerability|sast|dast|supply chain|sbom|gatekeeper|kyverno|admission|least privilege|encryption|kms)\b/i,
@@ -225,7 +227,7 @@ Qualifications include 8-12+ years in technology risk, IT audit, information sec
 Key skills: risk assessment, analytical thinking, communication, stakeholder management, problem solving, technical-risk-to-business-impact translation, leadership, influencing, and decision-making.
 Success metrics: fewer critical technology risks/incidents, timely closure of audit/risk findings, improved risk visibility/reporting, and adoption of risk frameworks.`;
 const defaultCvText = `AKHILESH RANJAN SINGH
-DevOps Engineer | GCP | Kubernetes | Terraform | Cloud Security
+Senior MLOps & Platform Engineer | GCP | Kubernetes | Terraform | AI Infrastructure
 Email: akhileshranjan.ks@gmail.com
 Phone: +91-8002392976
 Location: Noida, India
@@ -233,55 +235,62 @@ LinkedIn: https://linkedin.com/in/iamarsingh
 GitHub: https://github.com/iarsingh
 
 PROFESSIONAL SUMMARY
-Senior DevOps & Platform Engineer with 6.9+ years of experience designing, automating, and operating cloud-native platforms across GCP, AWS, and Azure. Skilled in Kubernetes, Terraform, CI/CD, Infrastructure as Code, cloud security, observability, and platform engineering, with expertise in building scalable cloud infrastructure and improving operational reliability. Experienced in GKE, Cloud Run, Terraform Enterprise, DevSecOps, and cloud governance. Additionally experienced in AI Infrastructure and MLOps, including MLflow, FastAPI, Vertex AI, model serving, and Kubernetes-based ML deployment workflows.
+Senior MLOps & Platform Engineer with nearly 7 years of experience designing, automating, and operating cloud-native infrastructure across GCP, AWS, and Azure. Experienced in building production-ready AI platforms using Kubernetes, Terraform, Vertex AI, MLflow, FastAPI, Docker, and GitOps, enabling scalable model deployment, infrastructure automation, and platform reliability. Skilled in Platform Engineering, Infrastructure as Code, and DevSecOps, delivering self-service cloud platforms, standardized landing zones, and automated deployment frameworks. Hands-on experience in LLMOps, RAG pipelines, GPU-accelerated inference, and model lifecycle management, bridging software engineering and intelligent automation.
+
+CORE COMPETENCIES
+DevOps & Platform Engineering, Cloud Platform Engineering, Kubernetes & Container Orchestration, Infrastructure as Code (Terraform Enterprise), CI/CD Automation & GitOps, Multi-Cloud Architecture (GCP, AWS, Azure), DevSecOps & Cloud Security Governance, Site Reliability Engineering (SRE), Observability & Performance Monitoring, MLOps & AI Infrastructure Engineering
 
 TECHNICAL SKILLS
 Cloud Platforms: Google Cloud Platform (GCP), AWS, Azure
-Infrastructure as Code: Terraform, Ansible
-Security & Governance: IAM, RBAC, Cloud Armor, WAF, DevSecOps, Prisma Cloud, IONIX, Stream Security, SAST/DAST, Vulnerability Management
+Infrastructure as Code: Terraform Enterprise, Ansible
+Security & Governance: IAM, RBAC, Cloud Armor, WAF, DevSecOps, Prisma Cloud, IONIX, Stream Security, SAST/DAST, Vulnerability Management, Binary Authorization
 Programming & Scripting: Python, Bash, Go
-Databases: PostgreSQL, MySQL, MongoDB
+Databases: PostgreSQL, MySQL, MongoDB, Vector Databases
 Containers & Orchestration: Kubernetes, Docker, Helm, GKE, HPA, RBAC, Network Policies
-CI/CD & GitOps: Jenkins, GitHub Actions, GitLab CI/CD, Google Cloud Build, ArgoCD, GitOps, BitBucket
-Monitoring & Observability: ELK Stack, Prometheus, Grafana, OpenTelemetry
-MLOps & AI Infrastructure: MLflow, Vertex AI, Model Serving, Model Monitoring, FastAPI, LLM Integrations
+CI/CD & GitOps: Jenkins, GitHub Actions, GitLab CI/CD, Google Cloud Build, ArgoCD, GitOps, Bitbucket, Harness
+Monitoring & Observability: ELK Stack (Elasticsearch, Logstash, Kibana), Prometheus, Grafana, OpenTelemetry
+MLOps & AI Infrastructure: Vertex AI, Vertex AI Pipelines, MLflow, Kubeflow, Model Registry, Model Serving, Model Monitoring, Experiment Tracking, Feature Store, FastAPI, KServe, Seldon Core, TensorFlow Serving, LLMOps, RAG, Vector Databases
+LLM & Generative AI: LangChain, LangGraph, OpenAI API, Gemini API, Hugging Face, Ollama, vLLM, Llama 3, Mistral
 
 PROFESSIONAL EXPERIENCE
 DevOps Engineer, Capgemini, Noida | 09/2024 - Present
-- Designed and implemented secure cloud platform foundations on GCP using Terraform Enterprise.
-- Built reusable Terraform modules for networking, IAM, Kubernetes, monitoring, logging, load balancing, and security controls, reducing infrastructure provisioning effort by 70%.
-- Implemented Terraform Enterprise workspaces, remote state management, policy controls, reusable modules, and automated infrastructure delivery pipelines.
-- Established GCP landing zone standards including project hierarchy, Shared VPC architecture, network segmentation, and IAM governance models.
-- Developed self-service infrastructure provisioning workflows integrated with Git-based CI/CD platforms and Harness.
-- Automated lifecycle management of GKE, Cloud Run, IAM, VPCs, Load Balancers, Cloud Armor, Monitoring, and Logging.
-- Designed Google Cloud Armor security policies including WAF protections, Adaptive Protection, rate limiting, threat intelligence integrations, custom security rules, and exception handling.
-- Led cloud security initiatives using IONIX and Stream Security.
-- Improved observability through Prometheus, Grafana, ELK Stack, and Google Cloud Operations Suite.
-- Managed production GKE clusters including node pools, upgrades, autoscaling, RBAC, troubleshooting, and performance optimization.
-- Applied Kubernetes, Docker, and Helm deployment patterns to AI/ML workloads.
-- Developed MLOps and AI Infrastructure solutions involving FastAPI model serving, MLflow lifecycle management, monitoring, and AI-assisted operational workflows.
+- Designed and implemented end-to-end MLOps platforms on GCP, enabling automated model training, deployment, monitoring, and lifecycle management for AI/ML applications.
+- Built and managed Vertex AI Pipelines, Vertex AI Model Registry, and model deployment workflows for scalable production ML environments.
+- Implemented MLflow for experiment tracking, model versioning, artifact management, and model registry, enabling reproducible ML workflows.
+- Developed CI/CD pipelines for ML workloads using GitHub Actions/Jenkins, Terraform, Docker, Kubernetes, and Helm, automating model build, validation, deployment, and rollback.
+- Deployed and managed scalable inference services using FastAPI, KServe, TensorFlow Serving, and Kubernetes with autoscaling and high availability.
+- Implemented LLMOps workflows by deploying and operating Llama 3, Mistral, Ollama, and vLLM on Kubernetes-based infrastructure for enterprise AI applications.
+- Built RAG (Retrieval-Augmented Generation) pipelines integrating vector databases, embedding models, and LLMs for production GenAI use cases.
+- Implemented model monitoring, data drift, concept drift, and prediction quality monitoring using Vertex AI Model Monitoring, Evidently AI, and custom dashboards.
+- Automated model retraining pipelines triggered by drift detection, performance degradation, and scheduled workflows to maintain model accuracy in production.
+- Provisioned and optimized GPU-enabled Kubernetes clusters (NVIDIA L4/A100) for distributed training and low-latency inference, improving GPU utilization and cost efficiency.
+- Implemented centralized observability for ML platforms using Prometheus, Grafana, ELK, OpenTelemetry, and Cloud Monitoring across infrastructure, application, and model performance metrics.
+- Designed reusable Terraform modules for AI infrastructure, including GKE, Vertex AI, Cloud Storage, IAM, networking, monitoring, and security services.
+- Integrated Feature Store capabilities for consistent feature management across training and inference workflows.
+- Implemented secure MLOps practices including IAM, RBAC, Secrets Manager, Binary Authorization, image scanning, and policy-as-code for AI workloads.
+- Optimized AI infrastructure costs through GPU scheduling, cluster autoscaling, spot/preemptible instances, and storage lifecycle policies, reducing cloud expenditure by over 20%.
+- Led production incident response and root cause analysis for AI/ML services, ensuring high availability and SLA compliance.
+- Built GitOps-based deployment workflows using ArgoCD and Helm for version-controlled, automated AI application deployments across multiple Kubernetes environments.
+- Designed and governed enterprise-scale GCP landing zones using Shared VPC, project hierarchies, remote state management, IAM governance, and policy-as-code.
+- Enabled self-service infrastructure delivery by integrating Terraform Enterprise with Git-based CI/CD, Harness, Jira, and ServiceNow.
+- Enhanced cloud security and observability with Cloud Armor WAF policies, rate limiting, Adaptive Protection, and continuous attack-surface monitoring using IONIX and Stream Security.
+- Led a GitHub-to-Bitbucket migration, improving engineering productivity and operational efficiency by 30%.
 
 Senior Software Engineer - DevOps, Tech Mahindra, Mumbai | 07/2022 - 09/2024
-- Designed enterprise CI/CD platforms using Jenkins, GitHub Actions, Terraform, Docker, Kubernetes, Helm, and Ansible.
-- Built Infrastructure as Code using Terraform and Ansible across GCP, AWS, and Azure.
-- Deployed and managed containerized applications on Kubernetes using Docker and Helm.
-- Implemented DevSecOps controls including Prisma Cloud, vulnerability scanning, SAST/DAST, RBAC, IAM governance, and secrets management.
-- Engineered backup and disaster recovery using Veeam and Kasten K10.
-- Developed monitoring, logging, and alerting using ELK Stack and cloud-native observability.
-- Automated OS patching, configuration management, and deployment workflows.
-- Managed JFrog Artifactory and secure artifact processes.
-- Collaborated with Google, Microsoft, and AWS engineering teams on complex infrastructure troubleshooting.
-- Maintained highly available Kubernetes platforms across GCP, AWS, and Azure with 99.9% service availability.
+- Drove enterprise-scale CI/CD platform engineering using Jenkins, GitHub Actions, Terraform, Docker, Kubernetes, Helm, and Ansible.
+- Delivered Infrastructure as Code across GCP, AWS, and Azure using Terraform and Ansible for provisioning, configuration management, backup automation, and disaster recovery.
+- Administered highly available Kubernetes platforms using Docker and Helm, maintaining 99.9% service availability through proactive monitoring.
+- Implemented DevSecOps controls including Prisma Cloud, SAST/DAST, RBAC, IAM governance, and secrets management.
+- Managed enterprise backup and disaster recovery using Veeam and Kasten K10.
+- Integrated cloud object storage (S3, GCS, Azure Blob) with CI/CD pipelines and Kubernetes workloads for artifact storage, state file management, and application data persistence.
+- Administered artifact lifecycle management through JFrog Artifactory.
+- Partnered with Google Cloud, Microsoft, and AWS engineering teams to optimize platform performance and accelerate cloud transformation.
 
 System Engineer - Cloud & DevOps, TCS, Bengaluru | 09/2019 - 07/2022
 - Managed production Kubernetes and GKE environments for business-critical applications.
-- Automated CI/CD workflows using Jenkins, Cloud Build, and Infrastructure as Code, reducing deployment effort by 40%.
-- Provisioned and maintained GCP infrastructure using Terraform and automation scripts.
-- Implemented monitoring, alerting, and incident response using cloud-native observability.
-- Supported migration from on-premises environments to GCP.
-- Collaborated with development, infrastructure, and security teams on cloud governance, IAM controls, and platform standards.
-- Performed Linux administration, patching, troubleshooting, and production support.
-- Contributed to reliability through capacity planning, performance optimization, RCA, and operational readiness reviews.
+- Automated CI/CD pipelines using Jenkins, Cloud Build, and Terraform, reducing deployment effort by 40%.
+- Provisioned GCP infrastructure via Terraform, supported on-premises to GCP migration, and performed Linux administration and performance optimization.
+- Managed end-to-end monitoring and alerting, led incident response and RCA, and maintained SLA compliance.
 
 CERTIFICATIONS
 - Google Professional Cloud DevOps Engineer — 2025
@@ -552,7 +561,45 @@ const questionBank = [
   "Bash vs Python: When is Bash acceptable for automation, and when should you rewrite it in Python or Go?",
   "Go services: If asked to build a Kubernetes controller or CLI in Go, how would you approach the design even if Go is not your primary language?",
   "Platform roadmap: What would your first 90 days look like as a senior platform engineer joining a product company?",
-  "Stakeholder tradeoff: Product wants faster releases, security wants stricter gates, and SRE wants fewer incidents. How would you align them?"
+  "Stakeholder tradeoff: Product wants faster releases, security wants stricter gates, and SRE wants fewer incidents. How would you align them?",
+  "Resume deep-dive - GCP landing zone: Walk me through the GCP landing zone you designed, including project hierarchy, Shared VPC, IAM governance, and policy-as-code. What tradeoffs did you make?",
+  "Resume deep-dive - Terraform Enterprise modules: You built reusable Terraform Enterprise modules for networking, IAM, GKE, monitoring, logging, load balancing, and security that cut provisioning effort by 70 percent. Walk me through how you designed and versioned those modules.",
+  "Resume deep-dive - GKE administration: You manage production GKE clusters including node pools, upgrades, autoscaling, and RBAC. Walk me through your process for a zero-downtime cluster upgrade.",
+  "Resume deep-dive - self-service infrastructure: You integrated Terraform Enterprise with Git-based CI/CD, Harness, Jira, and ServiceNow for self-service delivery. How did approvals and change management work end to end?",
+  "Resume deep-dive - Cloud Armor: You designed Cloud Armor WAF policies with Adaptive Protection, rate limiting, and threat intelligence, plus IONIX and Stream Security for attack surface monitoring. Walk me through how these tools work together to stop an attack.",
+  "Resume deep-dive - GitHub to Bitbucket migration: You led a GitHub-to-Bitbucket migration that improved engineering productivity by 30 percent. How did you plan the migration, handle CI/CD and webhook changes, and minimize disruption?",
+  "Resume deep-dive - cost optimization: You reduced GCP cost by 20 percent through governance, resource right-sizing, and capacity planning. Walk me through the specific levers you pulled and how you measured the savings.",
+  "Resume deep-dive - enterprise CI/CD: You built CI/CD platforms with Jenkins, GitHub Actions, Terraform, Docker, Kubernetes, Helm, and Ansible. How did you standardize pipelines across many application teams with different tech stacks?",
+  "Resume deep-dive - multi-cloud IaC: You delivered Terraform and Ansible IaC across GCP, AWS, and Azure. What did you do differently for state management, provider versioning, and secrets across three clouds?",
+  "Resume deep-dive - DR with Kasten K10: You engineered backup and disaster recovery using Veeam and Kasten K10 for Kubernetes. How would you test that a Kubernetes-native backup actually restores a stateful workload correctly?",
+  "Resume deep-dive - GCP migration: You reduced deployment effort by 40 percent automating CI/CD with Jenkins, Cloud Build, and Terraform, and supported an on-prem to GCP migration. What was the riskiest part of that migration and how did you de-risk it?",
+  "Current market 2026 - GKE Autopilot vs Standard: For a platform serving 40+ product teams, how would you decide between GKE Autopilot and Standard mode today, and what operational control do you give up with Autopilot?",
+  "Current market 2026 - Workload Identity Federation: How would you design keyless authentication from GitHub Actions or another CI system to GCP using Workload Identity Federation instead of long-lived service account keys?",
+  "Current market 2026 - Terraform vs OpenTofu: With Terraform's licensing changes and OpenTofu's rise, how would you evaluate whether to stay on Terraform Enterprise or migrate to OpenTofu for a large enterprise estate?",
+  "Current market 2026 - Gateway API migration: GKE is moving from Ingress to Gateway API. How would you plan a migration from existing Ingress controllers to Gateway API with zero downtime?",
+  "Current market 2026 - image signing and provenance: How would you enforce Binary Authorization with Sigstore/cosign-signed images and SLSA provenance before anything deploys to GKE?",
+  "Current market 2026 - GKE Dataplane V2: What operational differences would you expect after enabling GKE Dataplane V2 (Cilium-based), especially for network policies and observability?",
+  "Current market 2026 - Config Sync at scale: How would you use Config Sync or Argo CD to enforce consistent policy and configuration across dozens of GKE clusters and thousands of namespaces?",
+  "Current market 2026 - Docker BuildKit: How would you use BuildKit/buildx for multi-arch, cache-efficient, reproducible container builds in a modern CI pipeline?",
+  "Current market 2026 - node auto-provisioning: GKE node auto-provisioning versus Standard cluster autoscaler - how would you decide which to use for spiky, mixed CPU/GPU workloads?",
+  "Current market 2026 - FinOps chargeback: Leadership wants a chargeback/showback model for GKE and Terraform-provisioned infra across 15 teams. How would you design cost attribution without slowing teams down?",
+  "Current market 2026 - Terraform state at scale: With hundreds of Terraform workspaces, how do you prevent state drift, blast radius, and slow applies as the platform scales past 50 GCP projects?",
+  "Senior scope at 7 years: At 7 years of experience, how would you demonstrate technical leadership across multiple teams during a platform migration, not just individual execution?",
+  "Platform engineering scope: How would you draw the line between what a platform team owns and what application teams own, and how would you avoid the platform becoming a bottleneck?",
+  "Multi-tenant platform: How would you design multi-tenancy for an internal developer platform so one team's misconfiguration or spike can't affect another team's workloads?",
+  "Platform SLAs: What SLAs or SLOs would you define for your own platform team, and how would you measure whether the platform itself is reliable?",
+  "Environment as a service: How would you design self-service ephemeral preview environments for pull requests on top of GKE, Terraform, and CI/CD?",
+  "Platform team structure: How would you structure a platform engineering team, and what ratio of platform engineers to product teams would you target as the org scales?",
+  "You-build-it-you-run-it: How would a platform team enable \"you build it, you run it\" ownership without every team reinventing observability, security, and deployment tooling?",
+  "Preventing ClickOps: How would you prevent manual console changes from undermining your Terraform-based golden paths, without blocking legitimate emergency fixes?",
+  "Service catalog ownership: How would you design a service catalog that tracks ownership, dependencies, production-readiness status, and on-call rotation for every service on the platform?",
+  "Platform cost visibility: How would you give product teams self-service visibility into their own infrastructure cost inside the developer platform, without building a full FinOps tool from scratch?",
+  "Golden path versioning: A golden path template changes and existing services are now out of date. How would you roll out the update and measure adoption without breaking running services?",
+  "Platform onboarding: What would the first-day experience look like for a new engineer using your internal developer platform to ship their first service to production?",
+  "Platform team KPIs: What metrics would convince leadership to keep funding a platform engineering team versus letting application teams manage their own infrastructure?",
+  "Self-service guardrails: How would you enforce security and compliance guardrails inside a self-service platform without turning every request into a manual approval bottleneck?",
+  "IDP tooling choice: How would you decide between building a custom internal developer platform versus adopting Backstage, Port, or another off-the-shelf IDP?",
+  "Platform API design: How would you version a platform self-service API so existing automation doesn't break when you add new capabilities?"
 ];
 const scriptingQuestionBank = [
   "Python automation: Design a production-ready script that inventories all GCP projects, collects labels and owners, and exports non-compliant resources to CSV.",
@@ -610,7 +657,15 @@ const pythonQuestionBank = [
   "Python FastAPI: How would you design a small FastAPI service that exposes self-service infrastructure requests with validation, approval, and audit logs?",
   "Python security: How would you prevent secrets from leaking through environment variables, logs, stack traces, process arguments, or CI output?",
   "Python code review: What would you check in a Python automation PR before allowing it to run against production infrastructure?",
-  "Python interview coding: Write the approach for a function that calculates SLO compliance and remaining error budget from request totals and failures."
+  "Python interview coding: Write the approach for a function that calculates SLO compliance and remaining error budget from request totals and failures.",
+  "Python type hints: How would you use type hints, dataclasses, and mypy to make a platform automation codebase safer and easier to review?",
+  "Python decorators: How would you write a decorator that adds retries, timing, and structured logging to any cloud automation function?",
+  "Python context managers: How would you implement a context manager that acquires a distributed lock before running a destructive infrastructure operation?",
+  "Python CLI design: How would you design a Python CLI with argparse or Click that supports dry-run, environment selection, and confirmation prompts for risky actions?",
+  "Python GCP client patterns: How would you handle pagination, quota errors, and exponential backoff when listing thousands of resources with GCP client libraries?",
+  "Python dependency management: How would you manage dependencies, lockfiles, and reproducible builds for an internal Python tool using pip-tools or Poetry?",
+  "Python performance: A Python automation script that inventories thousands of GCP resources is too slow. How would you profile it and decide between async, threads, or multiprocessing?",
+  "Python mocking: How would you mock GCP and Kubernetes API responses in pytest to test error handling paths like throttling, timeouts, and permission denials?"
 ];
 const fastApiQuestionBank = [
   "FastAPI fundamentals: How would you structure a production FastAPI service with routers, dependencies, schemas, settings, and clear module boundaries?",
@@ -624,7 +679,15 @@ const fastApiQuestionBank = [
   "FastAPI performance: A FastAPI endpoint has high p95 latency. How would you debug code, database calls, external APIs, concurrency, and infrastructure?",
   "FastAPI background work: When would you use BackgroundTasks, Pub/Sub, Celery, Cloud Tasks, or a separate worker instead of doing work in the request path?",
   "FastAPI testing: How would you test endpoints, dependencies, authentication, database behavior, and error paths using pytest and TestClient?",
-  "FastAPI production readiness: What checklist would you use before approving a FastAPI service for production?"
+  "FastAPI production readiness: What checklist would you use before approving a FastAPI service for production?",
+  "FastAPI rate limiting: How would you implement rate limiting and request throttling per client for a FastAPI service shared by multiple internal teams?",
+  "FastAPI error handling: How would you design exception handlers and error response schemas so clients get consistent, actionable error payloads?",
+  "FastAPI versioning: How would you version a FastAPI API without breaking existing consumers, and when would you deprecate an old version?",
+  "FastAPI caching: How would you add caching with Redis or Memorystore to a FastAPI endpoint, and how would you handle cache invalidation correctly?",
+  "FastAPI WebSockets: When would you use WebSockets instead of polling or Server-Sent Events in a FastAPI service, and what operational risks come with it?",
+  "FastAPI multi-tenant design: How would you design request-scoped tenant isolation, quotas, and data access boundaries in a shared FastAPI service?",
+  "FastAPI API gateway: How would you deploy FastAPI behind an API gateway or load balancer on GCP, including auth, TLS termination, and request tracing?",
+  "FastAPI contract-first design: How would you design an OpenAPI-first FastAPI service so the schema, docs, and client SDKs stay in sync?"
 ];
 const codingQuestionBank = [
   "Python coding: Write a function that reads Kubernetes pod records and returns pods with restartCount above a threshold, grouped by namespace.",
@@ -660,7 +723,42 @@ const goQuestionBank = [
   "Go testing: How would you write unit tests, table-driven tests, mocks, and integration tests for a Go platform tool?",
   "Go modules: How do Go modules, semantic versioning, dependency updates, and vulnerability scanning fit into enterprise engineering?",
   "Go observability: How would you add structured logs, Prometheus metrics, traces, and graceful shutdown to a Go service?",
-  "Go production readiness: What code review checklist would you use before deploying a Go automation service or controller to production?"
+  "Go production readiness: What code review checklist would you use before deploying a Go automation service or controller to production?",
+  "Go generics: How would generics help when writing reusable Kubernetes resource helpers, and where would you avoid using them?",
+  "Go context propagation: How would you propagate deadlines, cancellation, and request-scoped values across a Go service calling multiple downstream APIs?",
+  "Go gRPC: When would you choose gRPC over REST for a platform service, and what would you consider for versioning, streaming, and error handling?",
+  "Go worker pools: How would you design a bounded worker pool in Go to process a large batch of cloud resources while preserving per-item errors?",
+  "Go profiling: A Go service has unexpected memory growth. How would you use pprof to find the leak and confirm the fix?",
+  "Go configuration: How would you manage configuration and secrets for a Go service across local, staging, and production without hardcoding values?",
+  "Go container builds: How would you build small, reproducible, multi-arch Docker images for a Go binary in CI?",
+  "Go CRDs: How would you design a Custom Resource Definition and reconciliation loop for a Kubernetes operator that manages namespace onboarding?"
+];
+const llmOpsQuestionBank = [
+  "LLM production architecture: How would you design a production LLM-backed service on GCP, covering the API gateway, model routing, caching, observability, and cost controls?",
+  "RAG reliability: A retrieval-augmented generation pipeline returns stale or irrelevant context. How would you debug the vector database, embedding pipeline, chunking strategy, and retrieval ranking?",
+  "Vector database operations: How would you operate a production vector database, including indexing strategy, reindexing without downtime, backup/restore, and scaling for query latency?",
+  "Prompt lifecycle management: How would you version, test, review, and roll back prompt changes the same way you would application code?",
+  "LLM gateway design: How would you build an internal LLM gateway that handles authentication, per-team rate limiting, token budget enforcement, and multi-provider fallback?",
+  "Token cost control: A GenAI feature's inference cost grew 5x in a month. How would you investigate token usage, caching opportunities, model selection, and prompt length before cutting features?",
+  "LLM latency debugging: A chat feature has high p95 latency. How would you separate model inference time, retrieval time, network hops, and streaming/rendering delays?",
+  "Prompt injection defense: How would you defend an LLM application against prompt injection and data exfiltration from untrusted user input or retrieved documents?",
+  "Agent tool-calling safety: An AI agent can call internal tools and APIs. How would you sandbox tool execution, enforce least privilege, and prevent unintended destructive actions?",
+  "LLM evaluation pipeline: How would you build an automated evaluation and regression suite for LLM output quality before shipping a prompt or model change?",
+  "LLM observability: What would you trace and log for an LLM request end to end, including prompts, retrieved context, token counts, latency, and model version, without leaking sensitive data?",
+  "Model routing and fallback: How would you design fallback between a primary and secondary LLM provider or model when the primary times out, rate-limits, or returns low-confidence output?",
+  "Streaming inference infra: How would you design backend infrastructure for streaming LLM responses over GKE/Cloud Run, including timeouts, load balancing, and client reconnects?",
+  "GPU serving cost: How would you decide between managed model endpoints, self-hosted GPU serving with vLLM/TGI, and batch inference for different GenAI workloads on cost and latency?",
+  "RAG vs fine-tuning vs prompting: How would you decide between prompt engineering, RAG, and fine-tuning for a domain-specific GenAI use case, and how would that decision change operational ownership?",
+  "PII and data handling: How would you prevent PII and secrets from leaking into LLM prompts, logs, third-party model providers, and evaluation datasets?",
+  "Vertex AI Agent Builder: How would you operate a production Vertex AI Agent Builder or Model Garden deployment, including versioning, monitoring, and rollback?",
+  "Multi-tenant AI platform: How would you design tenant isolation, quota enforcement, and cost attribution for an internal platform that serves LLM access to multiple product teams?",
+  "Resume deep-dive - Vertex AI Pipelines: Walk me through a Vertex AI Pipeline you built end to end, from training through Vertex AI Model Registry to production deployment.",
+  "Resume deep-dive - LLMOps stack: You deployed Llama 3, Mistral, Ollama, and vLLM on Kubernetes. How did you choose between them and scale inference for concurrent users?",
+  "Resume deep-dive - GPU cluster ops: You provisioned GPU-enabled GKE clusters with NVIDIA L4/A100 nodes. How did you handle node pool sizing, taints/tolerations, and spot/preemptible GPUs for cost control?",
+  "Resume deep-dive - RAG pipeline: Walk me through the RAG pipeline you built, including embedding model choice, vector database, chunking, and how you measured answer quality.",
+  "Resume deep-dive - model monitoring: You used Vertex AI Model Monitoring and Evidently AI for drift detection with automated retraining. How did you avoid false-positive retrains?",
+  "Resume deep-dive - secure MLOps: You implemented IAM, RBAC, Secrets Manager, and Binary Authorization for AI workloads. Walk me through one specific control and the risk it closed.",
+  "Resume deep-dive - GitOps for AI: You used ArgoCD and Helm for AI application deployments. How is a GitOps rollout for model-serving different from a normal microservice rollout?"
 ];
 const techRiskTechnicalQuestionBank = [
   "Technology risk framework: How would you design an enterprise technology risk management framework for cloud, applications, infrastructure, SDLC, and third-party integrations?",
@@ -1092,6 +1190,7 @@ function specializedQuestions() {
   if (els.technology.value === "scripting") return scriptingQuestionBank;
   if (els.technology.value === "docker") return dockerQuestionBank;
   if (els.technology.value === "coding") return codingQuestionBank;
+  if (els.technology.value === "llmops") return llmOpsQuestionBank;
   if (els.technology.value === "tech-risk-technical") return techRiskTechnicalQuestionBank;
   if (els.technology.value === "tech-risk-behavioral") return techRiskBehavioralQuestionBank;
   if (els.technology.value === "all") {
@@ -1102,6 +1201,7 @@ function specializedQuestions() {
       ...fastApiQuestionBank,
       ...goQuestionBank,
       ...codingQuestionBank,
+      ...llmOpsQuestionBank,
       ...techRiskTechnicalQuestionBank,
       ...techRiskBehavioralQuestionBank
     ];
