@@ -1,15 +1,22 @@
 # GenAI Hands-On Projects
 
-This folder contains GenAI projects for GCP, Vertex AI/Gemini, MLOps, and AI platform interview preparation.
-
-The projects use local fallbacks so they can run without cloud credentials, and optional Gemini/Vertex AI calls when GCP authentication is configured.
+Four small, independently runnable GenAI services and one evaluation notebook, built for GCP / Vertex AI /
+Gemini and AI-platform interview preparation. Every project runs fully offline with a local fallback, and
+optionally calls Gemini through Vertex AI when GCP credentials are configured.
 
 ## Projects
 
-- `python/rag-knowledge-api/` - FastAPI RAG API over local documents with optional Gemini answer generation
-- `python/genai-safety-gateway/` - prompt safety, PII redaction, response checks, and audit logging gateway
-- `python/meeting-notes-summarizer/` - CLI summarizer for transcripts with action-item extraction
-- `notebooks/01_prompt_evaluation_lab.ipynb` - prompt evaluation notebook for quality, latency, and cost-style comparison
+| Project | What it demonstrates | Run |
+|---|---|---|
+| [`python/rag-knowledge-api/`](python/rag-knowledge-api/) | Baseline RAG: TF-IDF retrieval, single-turn Q&A | `uvicorn app.main:app --port 8081` |
+| [`python/rag-chat-assistant/`](python/rag-chat-assistant/) | RAG with a persisted vector store (Chroma) and multi-turn chat memory | `uvicorn app.main:app --port 8082` |
+| [`python/genai-safety-gateway/`](python/genai-safety-gateway/) | Prompt/response guardrails: PII redaction, injection detection, audit logging | `uvicorn app.main:app --port 8083` |
+| [`python/meeting-notes-summarizer/`](python/meeting-notes-summarizer/) | Structured summarization CLI (decisions/risks/action items) | `python3 summarize.py --input <file>` |
+| [`notebooks/01_prompt_evaluation_lab.ipynb`](notebooks/01_prompt_evaluation_lab.ipynb) | Prompt evaluation across quality, latency, and cost | `jupyter lab` |
+
+Each sub-project's own README has the full run instructions, an example request/response, and an
+"Interview Talking Points" section. `rag-knowledge-api` and `rag-chat-assistant` are meant to be compared
+directly — same problem (RAG), two different retrieval architectures.
 
 ## Common Setup
 
@@ -22,6 +29,9 @@ pip install -r requirements.txt
 
 ## Optional Vertex AI Gemini Setup
 
+Every project defaults to a local, dependency-free fallback and needs no credentials to run. To generate
+with Gemini instead:
+
 ```bash
 gcloud auth application-default login
 export GOOGLE_GENAI_USE_VERTEXAI=true
@@ -30,24 +40,24 @@ export GOOGLE_CLOUD_LOCATION="us-central1"
 export GENAI_MODEL="gemini-2.5-flash"
 ```
 
+Then set `USE_GEMINI=true` for the specific project you're running (see its README).
+
 ## Portfolio Story
 
 ```text
-I built GenAI projects covering RAG, prompt evaluation, safety controls,
-audit logging, summarization, and optional Gemini/Vertex AI integration.
-Each project has a local fallback so it is testable without cloud access,
-but can be connected to GCP for production-style demos.
+I built four GenAI services that each demonstrate a distinct concept: baseline RAG,
+vector-store RAG with conversational memory, layered safety guardrails, and structured
+summarization. Every one has a local fallback so it's testable without cloud access,
+and an optional Gemini/Vertex AI integration to demo the production path.
 ```
 
 ## Interview Topics Covered
 
-- RAG architecture
-- Embeddings and retrieval
-- Prompt evaluation
-- Hallucination risk
-- PII redaction
-- Guardrails
-- Audit logging
-- Latency and cost tradeoffs
+- RAG architecture, and TF-IDF vs. vector-embedding retrieval tradeoffs
+- Vector search, ANN indexing, and persistence
+- Conversational memory strategies (sliding window vs. full replay vs. summarization)
+- Prompt evaluation (quality, latency, cost)
+- Guardrails: PII redaction, prompt-injection detection, output policy checks
+- Audit logging for compliance and incident response
+- Structured summarization and downstream automation
 - GenAI deployment on Cloud Run or GKE
-
