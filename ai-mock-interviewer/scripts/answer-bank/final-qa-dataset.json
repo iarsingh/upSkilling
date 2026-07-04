@@ -3865,6 +3865,356 @@
   },
   {
     "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "PVC with Deployments: Can a Kubernetes Deployment use a PersistentVolumeClaim, and what are the tradeoffs versus using one with a StatefulSet?",
+    "answer": "Yes, a Deployment can mount a PVC, but all replica Pods created by that Deployment share the exact same PVC (since Deployment Pods aren't given unique identities), so it only really works cleanly with ReadWriteMany volumes or a single-replica Deployment; with ReadWriteOnce storage, scaling beyond one replica causes Pods to fail to schedule or contend for the same volume. A StatefulSet instead uses a volumeClaimTemplate to provision a distinct PVC per replica (e.g., data-mysql-0, data-mysql-1), giving each Pod its own persistent identity and storage that survives rescheduling - which is what most databases and per-replica-state workloads actually need."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Deployment vs StatefulSet for databases: If Deployments can also use PVCs, why do teams still prefer StatefulSets for running databases?",
+    "answer": "Databases need stable network identity, stable storage per replica, and ordered, predictable startup/shutdown - none of which Deployments guarantee. StatefulSet Pods get a fixed ordinal name and stable DNS (e.g., mysql-0.mysql-headless), each with its own PVC via volumeClaimTemplates, and are created/terminated in a strict sequential order, which matters for primary/replica election, cluster bootstrapping, and safe rolling upgrades. A Deployment's Pods are interchangeable and can be recreated in any order with new random names, which breaks assumptions that most stateful replication protocols rely on."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "StatefulSet scale-down order: What is the pod termination order when you scale down a StatefulSet, and why does that ordering matter for stateful workloads?",
+    "answer": "StatefulSets terminate Pods in reverse ordinal order - the highest-numbered Pod goes first (e.g., scaling from 3 to 2 removes pod-2), and by default each Pod's termination completes before the next one starts. This ordered, one-at-a-time teardown protects workloads like Kafka, Elasticsearch, or Cassandra where removing multiple nodes simultaneously could break quorum, cause data loss, or leave the cluster in a split-brain state; it lets the workload's own rebalancing/replication catch up between removals."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Container root access: How would you prevent processes inside a container from running as root?",
+    "answer": "Set a non-root user at the image level with a USER directive in the Dockerfile, and enforce it at the cluster level with a Pod securityContext/containerSecurityContext setting runAsNonRoot: true and a specific runAsUser/runAsGroup, plus allowPrivilegeEscalation: false and a read-only root filesystem where possible. To make this a hard guarantee rather than a convention, enforce it with an admission controller (Pod Security Admission 'restricted' profile, Gatekeeper, or Kyverno policy) so Pods that don't set runAsNonRoot are rejected at admission time instead of relying on every team remembering to set it."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Cross-namespace pod communication: Can Pods in different Kubernetes namespaces communicate by default, and how would you restrict or allow it deliberately?",
+    "answer": "Yes - by default Kubernetes networking is flat and any Pod can reach any other Pod's IP across namespaces, since namespaces are an API/RBAC boundary, not a network boundary. To restrict this you apply NetworkPolicies (requires a CNI that enforces them, like Calico or GKE's Dataplane V2) that default-deny ingress in a namespace and then explicitly allow traffic from specific namespaces/labels via namespaceSelector and podSelector rules; to allow it deliberately across namespaces you typically expose a Service and reference it via its cluster-DNS name (service.namespace.svc.cluster.local) and permit that specific selector in the policy."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Multi-stage CI/CD pipeline: Walk me through a multi-stage CI/CD pipeline you have built, stage by stage.",
+    "answer": "A typical pipeline I've run: checkout and static analysis (lint, unit tests, SAST) fails fast before anything expensive runs; a build stage compiles/builds a container image and tags it with the commit SHA; a scan stage runs image vulnerability scanning and blocks on critical CVEs; the image is pushed to Artifact Registry; a deploy-to-staging stage applies manifests (via Helm/Kustomize or Terraform) and runs integration/smoke tests against staging; and finally a gated production deploy stage - often manual approval plus canary or blue-green rollout - promotes the same immutable image/tag that was tested, with automated rollback wired to health checks or error-rate SLOs."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Jenkins agent restriction: You have 5 Jenkins agents but only want a specific job to run on 2 of them. How would you configure that?",
+    "answer": "Label the two target agents with a shared custom label (e.g., 'deploy-prod') in each node's configuration, then in the job/pipeline specify agent { label 'deploy-prod' } (declarative) or node('deploy-prod') { ... } (scripted) so Jenkins' scheduler only assigns that job to nodes carrying that label. For more control - like limiting concurrency across the two - combine labels with the 'Restrict where this project can be run' field and throttle concurrent builds per label using the Throttle Concurrent Builds plugin or a lockable-resources block."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Skip a Jenkins stage: A pipeline has Stage 0 through Stage 3. How would you configure it so Stage 1 can be skipped on demand?",
+    "answer": "In a declarative pipeline, wrap Stage 1 in a when block driven by a parameter, e.g. a boolean build parameter SKIP_STAGE_1, and write when { expression { return !params.SKIP_STAGE_1 } } on that stage so it's conditionally skipped rather than removed from the file. Expose the parameter via parameters { booleanParam(name: 'SKIP_STAGE_1', defaultValue: false) } so it shows up as a checkbox on 'Build with Parameters', which lets whoever triggers the build decide at runtime whether Stage 1 runs, while Jenkins still records it as 'skipped' in the stage view rather than silently absent."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "GCP services experience: Which GCP services have you worked with hands-on, and in what capacity on each?",
+    "answer": "This is a resume-deep-dive/behavioral question - answer it as a specific, structured inventory rather than a list: for each service, name what you built or owned (e.g., 'GKE - administered multi-tenant clusters, node pool sizing, upgrades, RBAC'; 'Terraform - wrote and maintained reusable modules for VPC/GKE/IAM across environments'; 'Cloud Storage/BigQuery - built data pipelines with lifecycle policies and IAM least-privilege'; 'Cloud Composer - orchestrated ETL DAGs'; 'Cloud Armor/Cloud NAT/Load Balancing - secured and exposed production services'). Interviewers are listening for depth and ownership signals, so pick 4-5 services you can go deep on rather than a shallow list of everything you've touched."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "GKE networking overview: Explain how networking works in GKE at a high level, from Pod IP allocation to external traffic.",
+    "answer": "Each GKE node gets a node IP from the VPC subnet, and each Pod gets its own IP from a secondary IP range (alias IP range) associated with that subnet, which is what makes GKE Pods natively routable inside the VPC without overlay networking (in VPC-native/alias-IP clusters, the default and recommended mode). Pod-to-Pod traffic on the same node goes through the local CNI bridge/eBPF datapath; Pod-to-Pod across nodes routes through the VPC using those alias IP ranges; Services get a stable ClusterIP that kube-proxy (or Dataplane V2/eBPF in newer clusters) load-balances to backing Pod IPs; and external traffic enters via a Service of type LoadBalancer or an Ingress, which provisions a GCP L4/L7 load balancer in front of the cluster."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Pod-to-pod communication: How do Pods communicate with each other inside the same GKE cluster?",
+    "answer": "Every Pod gets a real, routable IP from the cluster's Pod CIDR (via VPC-native alias IP ranges), so Pods can talk directly Pod-IP-to-Pod-IP without NAT, the same as any two hosts on a flat network. In practice, most communication goes through a Service (ClusterIP) rather than raw Pod IPs, because Pod IPs are ephemeral - the Service provides a stable virtual IP and DNS name, and kube-proxy or the eBPF dataplane (Dataplane V2) load-balances requests across the current healthy backend Pods, so callers never need to track individual Pod IPs directly."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Cross-namespace GKE networking: In GKE specifically, how does cross-namespace Pod communication work at the network layer, and how would a NetworkPolicy change that?",
+    "answer": "At the network layer, namespaces don't segment traffic at all - GKE's flat Pod networking means any Pod can route to any other Pod's IP or Service regardless of namespace, exactly like same-namespace traffic. GKE enforces NetworkPolicy either through Calico (older dataplane) or natively through Dataplane V2 (eBPF-based), and once you apply a default-deny-ingress NetworkPolicy in a namespace, cross-namespace traffic is blocked unless you add an explicit allow rule using a namespaceSelector (matched by the target namespace's labels) combined with a podSelector, which is the standard way to permit only specific cross-namespace calls."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Exposing GKE externally: How would you expose a GKE application to the internet, and what options would you choose between?",
+    "answer": "The main options are a Service of type LoadBalancer (provisions an external L4 Network Load Balancer, simplest but no HTTP routing/TLS termination features), a GKE Ingress (provisions a GCP external HTTP(S) Application Load Balancer with host/path routing, managed TLS certs, and Cloud Armor integration), or the newer Gateway API (the more flexible, standardized replacement for Ingress with better multi-team/multi-cluster routing support). For a production HTTP service I'd default to Ingress/Gateway API fronted by Cloud Armor and a Google-managed SSL certificate, reserving a bare LoadBalancer Service for non-HTTP protocols that don't need L7 routing."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Securing external URL: Once an application is exposed externally, how do you secure that public endpoint end to end?",
+    "answer": "Terminate TLS at the load balancer using a Google-managed certificate so traffic is encrypted in transit, and put Cloud Armor in front of it with rate limiting and WAF-style rules (SQLi/XSS preconfigured rules, geo-blocking, or bot protection as needed) to filter malicious traffic before it reaches the cluster. Behind that, apply Identity-Aware Proxy or your own auth layer for anything not meant to be fully public, restrict the backend Service/Ingress with NetworkPolicies so only the load balancer's traffic reaches the Pods, and keep logging/monitoring alerts wired up so you'd actually notice an attack in progress rather than just having controls that look good on paper."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Cloud Armor purpose: What is the purpose of Cloud Armor, and what kinds of threats does it protect against?",
+    "answer": "Cloud Armor is Google Cloud's WAF and DDoS-protection service that sits in front of external HTTP(S) load balancers (and TCP/SSL proxy LBs) to filter traffic before it reaches your backends. It protects against volumetric and protocol DDoS attacks (leveraging Google's global network-edge scrubbing), OWASP-style application attacks (SQL injection, XSS, remote code execution) via preconfigured WAF rules, and lets you write custom rules to rate-limit, allow/deny by IP or geography, or block based on request attributes - all enforced at Google's edge, before traffic ever reaches your GKE cluster or VMs."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Pod internet access: How does a Pod in a private GKE cluster reach the internet if it has no public IP?",
+    "answer": "The Pod's traffic leaves the node using the node's internal IP as the source, hits the VPC's default route, and if a Cloud NAT gateway is configured on that subnet/region, the outbound packet gets its source IP translated to one of Cloud NAT's external IPs so it can reach the internet and receive the response - all without the Pod or node ever having a public IP itself. Without Cloud NAT (or a proxy/NAT VM doing the same job), a private-IP-only Pod simply has no path out to the internet, which is why Cloud NAT is a standard companion to private GKE clusters."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Network flow Pod to Internet: Walk through the full network path from a Pod to the internet: Pod, Node, VPC, Cloud NAT, Internet.",
+    "answer": "The Pod sends a packet from its alias-IP address; it's routed through the node's network namespace/veth pair onto the node's primary interface, now carrying the node's IP as it traverses the VPC (since Pod IPs are only routable within the VPC via those alias ranges); the VPC's routing table sends internet-bound traffic (0.0.0.0/0) toward the configured NAT gateway rather than requiring a public IP on the node; Cloud NAT performs source NAT, replacing the node's internal IP with one of its allocated external IPs and tracking the connection in its NAT table; the packet exits to the internet from that external IP, and return traffic is matched back through Cloud NAT's connection tracking to the correct node and, in turn, the correct Pod."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Shared VPC definition: What is a Shared VPC in GCP, and why would an organization use one instead of per-project VPCs?",
+    "answer": "Shared VPC lets a 'Host Project' own the VPC network(s) and subnets, while other 'Service Projects' attach to and use those networks without owning any networking resources themselves - resources in service projects (VMs, GKE clusters) get provisioned into the shared subnets as if the network were local to them. Organizations use it to centralize network administration, IP address planning, firewall policy, and interconnect/VPN configuration under one team, while still letting individual product teams operate independently within their own projects for billing, IAM, and resource lifecycle."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Host Project role: What is a Host Project in a Shared VPC setup?",
+    "answer": "The Host Project is the project that owns the Shared VPC network and its subnets - it's where firewall rules, routes, Cloud NAT, VPNs/interconnects, and subnet IP ranges are defined and managed centrally. Only the Host Project's IAM policies control who can administer the network itself; other projects don't own any part of the VPC, they're just granted permission to use specific subnets from it."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Service Projects role: What are Service Projects in a Shared VPC, and how do they relate to the Host Project?",
+    "answer": "Service Projects are regular GCP projects that have been attached to a Host Project's Shared VPC, which lets their resources (Compute Engine VMs, GKE clusters, etc.) be created directly inside the Host Project's shared subnets using IAM roles like compute.networkUser scoped to specific subnets. This separates concerns cleanly: the product/application team owns and pays for the Service Project and its workloads, while the central networking team retains sole control over the underlying VPC, firewall rules, and IP address space in the Host Project."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Subnet sharing across projects: How are subnets shared across projects in a Shared VPC architecture, and how is access to them controlled?",
+    "answer": "An admin in the Host Project enables Shared VPC on specific subnets and grants Service Project teams (or their service accounts) the roles/compute.networkUser IAM role scoped either to the whole Shared VPC or to individual subnets - this determines exactly which subnets each Service Project is allowed to deploy resources into. The Host Project's network admin (roles/compute.xpnAdmin at the organization/folder level) separately controls which projects can even be attached as Service Projects in the first place, giving two layers of control."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Bucket design considerations: What should you consider before creating a Cloud Storage bucket for a production workload?",
+    "answer": "Key decisions upfront: location/region (single-region for lowest latency and cost vs multi-region/dual-region for availability and cross-region serving), storage class matched to access pattern (Standard for hot data, Nearline/Coldline/Archive for infrequent access), and access control model (Uniform bucket-level access is the recommended default over fine-grained ACLs). Beyond that: naming (must be globally unique), IAM least-privilege bindings rather than public access, versioning/retention or Object Lifecycle Management rules for cost control and compliance, encryption (Google-managed by default, or CMEK if required), and org policy constraints that block accidental public access."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Storage classes: What are the different Cloud Storage storage classes, and how would you choose between them?",
+    "answer": "Standard is for frequently accessed, 'hot' data with no minimum storage duration and the highest per-GB storage cost but no retrieval fee; Nearline is for data accessed roughly less than once a month (30-day minimum storage, small retrieval cost); Coldline is for data accessed roughly less than once a quarter (90-day minimum, higher retrieval cost); and Archive is for long-term backup/compliance data accessed less than once a year (365-day minimum, lowest storage cost, highest retrieval cost and latency). You can also use Autoclass or Object Lifecycle Management rules to automatically transition objects between classes as their access pattern ages, instead of manually picking one class upfront."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Uniform bucket-level access: What is Uniform Bucket-Level Access in Cloud Storage?",
+    "answer": "Uniform bucket-level access disables per-object ACLs entirely and makes IAM policies the single source of truth for access control on that bucket - every object inherits the same bucket-level IAM permissions rather than potentially having its own conflicting ACL. This is the recommended default because it's simpler to audit and reason about, and it eliminates the class of bugs where an object is accidentally more permissive than intended due to a legacy or mis-set ACL."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Fine-grained access: What is Fine-Grained Access in Cloud Storage, and when would you still need it over uniform access?",
+    "answer": "Fine-Grained Access is the legacy model where both bucket-level IAM and per-object ACLs apply, and effective permission is the union of both - it allows setting different access on individual objects within the same bucket (e.g., making one specific object public while the bucket itself is private). You'd still need it for legacy applications or migration scenarios that depend on per-object ACLs already being in place, but for new production workloads, Uniform is almost always the better default."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "GCS authentication: How do applications authenticate to a Cloud Storage bucket?",
+    "answer": "The recommended path is Application Default Credentials backed by a service account identity - for workloads on GCE/GKE that means Workload Identity (GKE) or the attached VM service account (Compute Engine), which the Cloud Storage client libraries pick up automatically with no key file involved; for local development, gcloud auth application-default login provides user credentials. Long-lived downloaded service account JSON keys are also technically supported but are the least secure and most operationally risky option, since they don't expire or rotate automatically and can leak."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Read-only IAM role: Which IAM role would you assign to a service account that only needs read-only access to objects in a bucket?",
+    "answer": "roles/storage.objectViewer - it grants storage.objects.get and storage.objects.list without any write, delete, or bucket-admin permissions, which is the least-privilege choice for a workload that only needs to read existing objects. Avoid the broader roles/storage.legacyBucketReader or roles/storage.admin unless the workload genuinely needs bucket-metadata visibility or full control."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Avoiding service account keys: Why should you avoid using service account keys, and what would you use instead?",
+    "answer": "Downloaded JSON service account keys are long-lived static secrets - they don't expire automatically, are easy to accidentally commit to source control or leak in logs/artifacts, and once leaked they're valid until someone manually notices and revokes them, giving an attacker a durable credential with no built-in blast-radius limit. Instead, use Workload Identity (GKE) or Workload Identity Federation (for workloads outside GCP) to let workloads impersonate a service account and get short-lived, automatically-rotated tokens with no key material ever created or stored."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Workload Identity: What is Workload Identity, and what problem does it solve?",
+    "answer": "Workload Identity lets a Kubernetes ServiceAccount in GKE impersonate a Google Cloud IAM service account, so Pods can call GCP APIs with that service account's permissions without ever having a downloaded key file mounted into the container - GKE's metadata server transparently issues short-lived tokens via federated identity. It solves the key-management problem: previously, giving a Pod GCP access meant mounting a static service account key as a Secret; Workload Identity replaces that with automatically rotated, least-privilege, per-KSA-scoped credentials, and is now the standard recommended pattern over node-level service accounts or manual key mounting."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Cloud Composer experience: Have you worked with Cloud Composer, and in what context?",
+    "answer": "Answer this as a specific resume-deep-dive: describe the actual pipeline you orchestrated (e.g., 'used Cloud Composer to schedule and orchestrate a daily ETL pipeline that pulled from Cloud Storage/BigQuery, ran transformation jobs, and pushed results downstream'), what DAGs you owned, how you handled failures/retries/alerting, and any operational work you did on the Composer environment itself. If you haven't used it hands-on, be honest and pivot to your Airflow/orchestration fundamentals rather than overclaiming."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "How Composer works: Explain how Cloud Composer works under the hood.",
+    "answer": "Cloud Composer is Google's managed Apache Airflow service - it provisions and operates the Airflow components (webserver, scheduler, workers, and metadata database) for you on top of a GKE cluster, so you write and manage DAGs (Python files defining task dependencies) without having to run Airflow's infrastructure yourself. DAG files are synced from a Cloud Storage bucket into the Airflow environment, the scheduler parses them and decides what should run, workers execute the actual tasks, and the metadata database (Cloud SQL under the hood) tracks DAG/task state, history, and the UI's view of runs."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Composer environment components: What components get created in your project when you provision a Cloud Composer environment?",
+    "answer": "Provisioning a Composer environment creates a dedicated GKE cluster that runs the Airflow scheduler, webserver, and workers; a Cloud SQL instance for the Airflow metadata database; a Cloud Storage bucket that holds your DAGs, plugins, and logs (and is the sync source into the environment); and networking resources depending on how you provisioned it, plus a dedicated service account used by the environment's workloads. Cost and operational overhead come largely from the underlying GKE cluster and Cloud SQL instance, which is why environment sizing is a real cost lever."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Self-hosting Airflow: How would you host Apache Airflow yourself outside of Cloud Composer?",
+    "answer": "Run the Airflow components as containers - typically on GKE using the official Helm chart, or on Compute Engine/Cloud Run for smaller setups - with a managed Postgres/Cloud SQL instance as the metadata database, DAGs synced via a Git-sync sidecar or baked into the image/deployment, and the KubernetesExecutor or CeleryExecutor for task execution depending on scale. Compared to Composer, self-hosting gives full control over Airflow version, plugins, and infrastructure sizing but pushes the operational burden (upgrades, scheduler HA, scaling workers, patching) fully onto your team instead of Google."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Composer project role: What was your specific role in a Cloud Composer project you worked on?",
+    "answer": "This is a resume/behavioral prompt - answer with a concrete ownership statement: what DAGs or pipelines you authored versus maintained, whether you were responsible for the Composer environment's operations (sizing, upgrades, access control) or purely a DAG author, and one specific improvement you made (e.g., reduced DAG failure rate by fixing retry/backoff config, or added SLA/alerting on critical DAGs). Concrete scope and one measurable outcome land better than a vague 'I worked on Composer.'"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Terraform VM creation: Write Terraform code to create three virtual machines.",
+    "answer": "resource \"google_compute_instance\" \"vm\" {\n  count        = 3\n  name         = \"app-vm-${count.index}\"\n  machine_type = \"e2-medium\"\n  zone         = \"us-central1-a\"\n\n  boot_disk {\n    initialize_params {\n      image = \"debian-cloud/debian-12\"\n    }\n  }\n\n  network_interface {\n    network = \"default\"\n    access_config {}\n  }\n}\n\nUsing count = 3 with count.index in the name gives three distinct instances (app-vm-0, app-vm-1, app-vm-2) from one resource block; for anything where instances have meaningfully different attributes, for_each over a map is the better fit."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Reusable VM module: How would you design a reusable Terraform module for creating virtual machines?",
+    "answer": "I'd expose variables for the things that legitimately vary per caller - instance name/prefix, count or a map of instance configs, machine type, zone/region, image, network/subnetwork, labels, and optional fields like service account and startup script - with sensible defaults so simple callers don't need to specify everything. The module would output the created instance names, self_links, and internal/external IPs so calling code can wire them into other resources, and I'd keep the module's internal resource naming deterministic and free of hardcoded environment-specific values, so the same module can be called for dev/staging/prod just by changing input variables."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "count vs for_each: Would you use count or for_each for creating multiple similar resources in Terraform, and why?",
+    "answer": "I'd default to for_each with a map (or a set of strings) whenever the resources are meaningfully distinct or the list might have items removed from the middle, because for_each keys each resource instance by a stable map key rather than a numeric index - so removing item 2 of 5 only destroys that one resource, whereas count re-indexes everything after it and can trigger unnecessary replacement of unrelated instances. I'd only reach for count for truly homogeneous, purely-numeric replication where index-based naming is fine and the list is unlikely to shrink from the middle."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Landing Zone overview: Explain what a Landing Zone is and how an organization's Landing Zone is typically structured.",
+    "answer": "A Landing Zone is the pre-built, opinionated foundation of an organization's cloud environment - the baseline of accounts/projects, networking, IAM, logging, security controls, and guardrails that every new workload lands into, rather than each team building their own networking and security from scratch. It's typically structured as a resource hierarchy (Organization -> Folders per environment or business unit -> Projects), with a small number of centrally-managed foundational projects (networking/Shared VPC host project, logging/monitoring sink project, security/IAM project) and then many workload projects attached to that foundation as Service Projects."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Landing Zone components: What components typically exist inside a cloud Landing Zone?",
+    "answer": "Typical components: an org-level resource hierarchy (folders for environments/business units), a Shared VPC Host Project with centrally managed subnets, firewall rules, Cloud NAT, and interconnect/VPN; centralized logging and monitoring (org-level log sinks routing to a central destination, and shared monitoring workspaces); centralized IAM/identity federation and organization policies (constraints like disabling external IPs, requiring OS Login, restricting public buckets); a security/guardrails layer (Security Command Center, Binary Authorization, policy-as-code); and often baseline CI/CD scaffolding and Terraform modules that new projects are expected to consume."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Centralized networking/logging/monitoring: How are networking, logging, and monitoring centralized across projects in a Landing Zone?",
+    "answer": "Networking is centralized through a Shared VPC where the Host Project owns subnets, firewall rules, routes, and NAT/interconnect, and all Service Projects attach to and consume those same subnets rather than each running its own VPC. Logging and monitoring are centralized through organization-level aggregated log sinks that route logs from every project into a central destination (Cloud Storage for archival, BigQuery for analysis, or Pub/Sub for streaming to a SIEM), and a shared Cloud Monitoring workspace or metrics scope that aggregates metrics across projects."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Project-to-Shared-VPC connection: How are individual projects connected to the Shared VPC in a Landing Zone design?",
+    "answer": "Each new workload project is provisioned as a Service Project and explicitly attached to the Host Project's Shared VPC by a network admin, who grants the project (or specific service accounts within it) the compute.networkUser role scoped to the particular subnets that project is allowed to use. In a mature Landing Zone this attachment is codified in Terraform as part of the standard 'new project' module/pipeline, so every new project automatically gets the correct Shared VPC attachment, firewall tags, and logging sinks applied consistently."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Scenario - GKE Autopilot vs Standard: A team wants to move a workload to GKE Autopilot for cost and ops simplicity. What tradeoffs would you flag before they commit?",
+    "answer": "Autopilot removes node management entirely (no node pools, no OS patching, per-Pod billing instead of per-node) which is a real ops win, but it comes with constraints: no DaemonSets in most cases, no privileged containers or host networking, restricted node-level customization, and every Pod must have resource requests set. I'd flag that workloads needing custom node images, GPU/TPU configs outside supported types, privileged security agents, or fine-grained node-pool cost tuning may not fit cleanly, and that per-Pod pricing can actually cost more than a well-bin-packed Standard cluster for very dense workloads."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Scenario - private cluster master access: A private GKE cluster's control plane becomes unreachable from a new office network. How would you diagnose and fix authorized network access?",
+    "answer": "First check the cluster's 'Control plane authorized networks' list - private clusters restrict which CIDR ranges can reach the control plane endpoint, and a new office network's egress IP almost certainly isn't in that allowlist. Fix it by adding the new network's public egress CIDR to the authorized networks list (gcloud container clusters update --enable-master-authorized-networks --master-authorized-networks=<cidr>), and longer-term, route admin access through a Cloud VPN/Interconnect-connected bastion or Identity-Aware Proxy tunnel so you're not maintaining an ever-growing manual IP allowlist."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Scenario - Cloud NAT port exhaustion: Outbound calls from GKE Pods start failing intermittently and Cloud NAT logs show port exhaustion. How would you diagnose and remediate it?",
+    "answer": "Port exhaustion means too many concurrent outbound connections are competing for the finite NAT ports allocated per VM instance - check Cloud NAT's 'Ports Allocated/Ports Used' metrics per instance to confirm which nodes are exhausting their allocation, which usually correlates with a service opening many short-lived outbound connections instead of reusing them. Immediate remediation is increasing the minimum ports-per-VM allocation on the NAT gateway (and/or enabling dynamic port allocation), while the real fix is application-level - add connection pooling/keep-alive or reduce needless per-request connections."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Scenario - VPC Service Controls block: A data pipeline suddenly gets permission-denied errors reading from BigQuery after a security team change. How would you determine if VPC Service Controls are the cause and fix it safely?",
+    "answer": "The signature symptom is a PERMISSION_DENIED that also mentions 'VPC Service Controls' or violates a service perimeter in the error detail - check the VPC-SC violation logs in Cloud Logging (they log denied requests with the offending perimeter and identity even in dry-run mode) to confirm the perimeter, not just IAM, is the blocker. Fix it by adding an explicit ingress/egress rule to the perimeter for the specific service account and BigQuery API calls needed, or by adding the calling project/service account to an access level or bridge - the goal is to narrowly permit the legitimate pipeline traffic while keeping the perimeter intact."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Scenario - Terraform workspaces vs directories: How would you decide between Terraform workspaces and separate state directories for managing dev, staging, and prod environments?",
+    "answer": "I'd lean toward separate directories/state files per environment (or a tool like Terragrunt layering on top) for anything production-critical, because workspaces share the same backend configuration and variable definitions by default, which makes it easy to accidentally apply against the wrong environment. Native workspaces are fine for genuinely identical, low-risk environments where the convenience of one config outweighs the blast-radius risk, but for dev/staging/prod I want separate state, separate backend paths, and ideally separate service-account credentials per environment."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Scenario - Composer DAG stuck: An Airflow DAG in Cloud Composer has tasks stuck in a queued state for 30 minutes with no errors. How would you triage it?",
+    "answer": "Queued-with-no-errors almost always points to a scheduling/capacity problem rather than a task-code bug: check worker pool/executor concurrency limits (parallelism, dag_concurrency, pool slots) to see if all available worker slots are already consumed, check the Airflow scheduler's health and logs for whether it's actually heartbeating and assigning tasks, and check the Composer environment's GKE node pool for resource pressure preventing new worker Pods from scheduling. If capacity looks fine, look for a stuck/zombie task holding a pool resource, or a database connection pool exhaustion on the Airflow metadata Cloud SQL instance."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Scenario - Jenkins shared library: Ten pipelines duplicate the same deployment logic with slight drift between them. How would you refactor this using a Jenkins shared library?",
+    "answer": "Extract the common deployment logic into a Jenkins Shared Library repo with a vars/ directory defining a global function (e.g., vars/deployApp.groovy) that takes parameters for the things that legitimately differ between pipelines (app name, environment, image tag, deployment target), and have each of the ten Jenkinsfiles shrink down to a @Library('my-shared-lib') _ import plus a single call like deployApp(app: 'checkout', env: 'prod'). This eliminates drift by construction, and version-pinning the library lets you roll out changes to pipelines gradually rather than all-at-once."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Scenario - IAM conditional binding: Security wants a service account to have Storage Object Viewer only during business hours and only on a specific bucket. How would you implement that in IAM?",
+    "answer": "Grant roles/storage.objectViewer scoped to that specific bucket (not project-wide) using a resource-level IAM binding, and attach an IAM Condition to that binding using CEL expressions against request.time (e.g., business-hours checks in a specific timezone) so the grant is only evaluated as active within that window. It's worth flagging that IAM time conditions are evaluated at request time and aren't a hard 'revoke at 5pm' mechanism with active session termination, so pair this with monitoring/alerting on access attempts outside the window."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Scenario - default-deny NetworkPolicy rollout: You need to introduce a default-deny NetworkPolicy in a shared GKE cluster with many existing teams. How would you roll it out without breaking production traffic?",
+    "answer": "Start by auditing actual traffic patterns first - using Dataplane V2's built-in flow logs/observability (or Hubble if using Cilium) to see which namespace-to-namespace and namespace-to-external flows are actually happening today, since guessing at allow rules without this data is how default-deny rollouts break production. Roll it out namespace by namespace rather than cluster-wide at once: apply the specific allow rules derived from the traffic audit alongside the default-deny in a low-traffic namespace first, verify nothing breaks, then repeat - and keep a fast rollback path ready during each rollout window, communicated to each team in advance."
+  },
+  {
+    "source": "App Question Bank",
     "section": "Scripting & Automation",
     "category": null,
     "question": "Python automation: Design a production-ready script that inventories all GCP projects, collects labels and owners, and exports non-compliant resources to CSV.",
@@ -4450,6 +4800,34 @@
     "category": null,
     "question": "Terraform coding: Write a validation strategy or test that rejects resources missing required labels and prevents public ingress on port 22.",
     "answer": "variable \"labels\" {\n  type = map(string)\n  validation {\n    condition     = contains(keys(var.labels), \"owner\") && contains(keys(var.labels), \"env\")\n    error_message = \"labels must include 'owner' and 'env'.\"\n  }\n}\n\nresource \"google_compute_firewall\" \"deny_ssh_public\" {\n  count = anytrue([for r in var.source_ranges : r == \"0.0.0.0/0\"]) && contains(var.allowed_ports, \"22\") ? 1 : 0\n}\nUse a Terraform `validation` block on the variable to fail plan/apply immediately if required labels are missing, and combine that with an OPA/Sentinel policy-as-code check in CI that scans the plan JSON to hard-block any security group or firewall rule allowing 0.0.0.0/0 on port 22 before it ever reaches apply."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "Anagram check: Write a program to check whether two strings are anagrams of each other.",
+    "answer": "def is_anagram(a, b):\n    a, b = a.replace(\" \", \"\").lower(), b.replace(\" \", \"\").lower()\n    if len(a) != len(b):\n        return False\n    return sorted(a) == sorted(b)\n\nThis is O(n log n) from the sort. An O(n) alternative uses a character-count dictionary (or a fixed-length array for a known alphabet): increment counts for string A, decrement for string B, and confirm every count returns to zero - this avoids the sort's log factor when both strings are large."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "Find the single unique element: Given an array where every element appears twice except one, write an optimized program to find the unique element.",
+    "answer": "from functools import reduce\ndef find_unique(nums):\n    return reduce(lambda a, b: a ^ b, nums)\n\nXOR-ing every element together cancels out every value that appears exactly twice (x ^ x = 0) and leaves the single unique value, since XOR is commutative, associative, and order-independent. This runs in O(n) time and O(1) extra space, which beats a hashmap-count approach (O(n) time, O(n) space) or sort-then-scan (O(n log n) time)."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "Time complexity: What is the time and space complexity of your solution to find the single unique element, and why?",
+    "answer": "The XOR solution is O(n) time because it makes a single linear pass over the array, XOR-ing each element into a running accumulator, and O(1) additional space because it only ever holds one integer accumulator regardless of input size - no auxiliary array, hashmap, or sorting buffer is needed. That makes it strictly better on both axes than a hashmap-frequency approach (O(n) time but O(n) space) or a sort-based approach (O(n log n) time)."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "XOR trick limitation: Why does the XOR trick fail to find the unique element when there are multiple non-duplicated elements instead of just one?",
+    "answer": "XOR-ing the whole array only isolates a single answer because every paired value cancels to zero, leaving exactly one survivor; if two or more elements are each unique (appear once), XOR-ing everything together produces the XOR of all those unique values combined, not any individual one of them, and that combined value generally can't be decomposed back into the originals without more information. Finding two unique elements requires a different technique: XOR the whole array to get combined_xor = unique1 ^ unique2, pick any set bit in that result to partition the array into two groups (elements with that bit set vs not), and XOR each group separately, since unique1 and unique2 must differ in at least one bit and therefore fall into different groups while every duplicate pair stays together in the same group."
   },
   {
     "source": "App Question Bank",
