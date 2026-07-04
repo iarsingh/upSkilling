@@ -1,0 +1,9 @@
+timestamp,provider,model,input_tokens,output_tokens,latency_ms,status
+2026-07-01T10:00:00Z,openai,gpt-4.1-mini,900,220,850,success
+2026-07-01T10:01:00Z,openai,gpt-4.1-mini,1200,340,940,success
+2026-07-01T10:02:00Z,anthropic,claude-haiku,700,180,780,success
+2026-07-01T10:03:00Z,openai,gpt-4.1,1600,500,2100,success
+2026-07-01T10:04:00Z,local,llama-3.1,800,210,1350,success
+2026-07-01T10:05:00Z,openai,gpt-4.1-mini,1400,360,1200,error
+2026-07-01T10:06:00Z,anthropic,claude-haiku,950,240,870,success
+2026-07-01T10:07:00Z,local,llama-3.1,1200,280,1550,success

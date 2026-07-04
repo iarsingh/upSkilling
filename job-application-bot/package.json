@@ -1,11 +1,12 @@
 {
   "name": "job-application-bot",
   "version": "1.0.0",
-  "description": "Playwright-driven job application automation for LinkedIn, Naukri, Indeed, Greenhouse/Lever/Workday, Uplers, and CutShort, using a local Ollama model to answer screening questions.",
+  "description": "Review-first job application assistant for LinkedIn, Naukri, Indeed, Greenhouse/Lever/Workday, Uplers, and CutShort, using a local Ollama model to score jobs and draft screening answers.",
   "type": "commonjs",
   "main": "src/cli.js",
   "scripts": {
-    "apply": "node src/cli.js",
+    "review": "node src/cli.js",
+    "apply": "node src/cli.js --submit",
     "login": "node src/cli.js --login-only"
   },
   "dependencies": {

@@ -24,7 +24,9 @@ async function openSite(siteName, { headless = false } = {}) {
 }
 
 async function ensureLoggedIn(page, { checkUrl, loggedInSelector, loginPromptMessage }) {
-  await page.goto(checkUrl, { waitUntil: "domcontentloaded" });
+  await page.goto(checkUrl, { waitUntil: "domcontentloaded", timeout: 20000 }).catch((error) => {
+    console.log(`Login page navigation warning: ${error.message}`);
+  });
   try {
     await page.waitForSelector(loggedInSelector, { timeout: 8000 });
     return true;

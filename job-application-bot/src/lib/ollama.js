@@ -1,17 +1,25 @@
 const { ollamaHost, ollamaModel } = require("./config");
 
 async function askOllama(prompt, { temperature = 0.3, numPredict = 300, format } = {}) {
-  const response = await fetch(`${ollamaHost}/api/generate`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: ollamaModel,
-      prompt,
-      stream: false,
-      ...(format ? { format } : {}),
-      options: { temperature, num_predict: numPredict }
-    })
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+  let response;
+  try {
+    response = await fetch(`${ollamaHost}/api/generate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      signal: controller.signal,
+      body: JSON.stringify({
+        model: ollamaModel,
+        prompt,
+        stream: false,
+        ...(format ? { format } : {}),
+        options: { temperature, num_predict: numPredict }
+      })
+    });
+  } finally {
+    clearTimeout(timeout);
+  }
 
   if (!response.ok) {
     throw new Error(`Ollama request failed: ${response.status} ${response.statusText}`);
@@ -67,17 +75,19 @@ async function scoreJob(jobText, profile) {
 function fallbackScoreJob(jobText, profile) {
   const lower = jobText.toLowerCase();
   const matched = profile.preferredKeywords.filter((k) => lower.includes(k.toLowerCase()));
-  const score = Math.min(100, matched.length * 8);
+  const matchedRoles = profile.targetRoles.filter((role) => lower.includes(role.toLowerCase()));
+  const score = Math.min(100, matched.length * 8 + matchedRoles.length * 20);
   const mlopsSignals = ["mlops", "ml platform", "machine learning", "mlflow", "kubeflow", "vertex ai"].filter((k) => lower.includes(k));
   const resume = mlopsSignals.length > 0 ? "mlops" : "platform_engineer";
+  const shouldApply = matched.length >= profile.minKeywordMatchesToApply || matchedRoles.length > 0;
   return {
-    decision: matched.length >= profile.minKeywordMatchesToApply ? "apply" : "skip",
+    decision: shouldApply ? "apply" : "skip",
     score,
     resume,
-    matched_keywords: matched,
-    reason: matched.length >= profile.minKeywordMatchesToApply
-      ? "Keyword fallback: enough target keywords matched."
-      : "Keyword fallback: not enough target keywords matched."
+    matched_keywords: [...new Set([...matched, ...matchedRoles])],
+    reason: shouldApply
+      ? "Keyword fallback: enough target keywords or target role matched."
+      : "Keyword fallback: not enough target keywords or target role matches."
   };
 }
 

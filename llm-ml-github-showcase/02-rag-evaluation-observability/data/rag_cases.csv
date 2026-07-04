@@ -1,0 +1,6 @@
+question,expected_doc,retrieved_docs,answer,citations
+"How do we rotate production API keys?","runbook-api-keys","runbook-api-keys|security-policy","Rotate keys in the secrets manager, deploy the new version, validate traffic, then revoke the old key.","runbook-api-keys"
+"What is the rollback process for a bad model?","model-release-runbook","model-release-runbook|incident-template","Move traffic to the previous model version, freeze rollout, open an incident, and compare prediction quality.","model-release-runbook"
+"Where are billing exports stored?","billing-export-doc","cloud-storage-guide|billing-export-doc","Billing exports are stored in the finance GCS bucket with daily partitioning.","billing-export-doc"
+"How do we request admin access?","access-management","sso-guide|audit-policy","Ask a teammate for credentials and use the shared admin account.",""
+"What should we check during high API latency?","latency-runbook","latency-runbook|dashboard-guide","Check error rate, p95 latency, recent deployments, saturation, and upstream dependency health.","latency-runbook"

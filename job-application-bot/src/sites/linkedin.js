@@ -41,16 +41,34 @@ function buildSearchUrl({ keywords, location }) {
   return `https://www.linkedin.com/jobs/search/?${params.toString()}`;
 }
 
+function normalizeJobUrl(href) {
+  if (!href) return null;
+  const absolute = href.startsWith("http") ? href : `https://www.linkedin.com${href}`;
+  const url = new URL(absolute);
+  const viewMatch = url.pathname.match(/\/jobs\/view\/(\d+)/);
+  const currentJobId = url.searchParams.get("currentJobId");
+  const jobId = viewMatch?.[1] || currentJobId;
+  if (!jobId) return null;
+  return `https://www.linkedin.com/jobs/view/${jobId}/`;
+}
+
 async function collectJobCards(page, limit) {
   const cards = [];
+  const seen = new Set();
   let lastCount = -1;
   while (cards.length < limit && cards.length !== lastCount) {
     lastCount = cards.length;
-    const handles = await page.locator("ul.jobs-search__results-list li, div.jobs-search-results-list li").all();
-    for (const h of handles) {
-      const link = h.locator("a.job-card-list__title, a.job-card-container__link").first();
+    const links = await page.locator('a[href*="/jobs/view/"], a[href*="currentJobId="]').all();
+    for (const link of links) {
       const href = await link.getAttribute("href").catch(() => null);
-      if (href && !cards.includes(href)) cards.push(href.split("?")[0]);
+      const normalized = normalizeJobUrl(href);
+      if (normalized && !seen.has(normalized)) {
+        seen.add(normalized);
+        const card = link.locator("xpath=ancestor::li[1]").first();
+        const title = ((await link.textContent().catch(() => "")) || "").trim();
+        const company = ((await card.locator("[class*='company-name'], [class*='subtitle']").first().textContent().catch(() => "")) || "").trim();
+        cards.push({ url: normalized, title, company });
+      }
       if (cards.length >= limit) break;
     }
     await page.mouse.wheel(0, 1200);
@@ -128,26 +146,57 @@ async function resolveLabel(scope, input) {
   return placeholder || "";
 }
 
+async function firstText(page, selectors, fallback = "") {
+  for (const selector of selectors) {
+    const text = await page.locator(selector).first().textContent({ timeout: 2500 }).catch(() => "");
+    if (text && text.trim()) return text.trim();
+  }
+  return fallback;
+}
+
 async function run({ page, profile, keywords, location, limit, dryRun = false }) {
   await login(page);
   const searchUrl = buildSearchUrl({ keywords, location });
-  await page.goto(searchUrl, { waitUntil: "domcontentloaded" });
+  await page.goto(searchUrl, { waitUntil: "domcontentloaded", timeout: 20000 });
   await sleep(2000);
 
-  const jobUrls = await collectJobCards(page, limit * 2); // over-collect; some will be skipped/scored out
+  const jobCards = await collectJobCards(page, limit * 2); // over-collect; some will be skipped/scored out
+  console.log(`[linkedin] Search URL: ${searchUrl}`);
+  console.log(`[linkedin] Found ${jobCards.length} job link${jobCards.length === 1 ? "" : "s"} to inspect.`);
+  if (jobCards.length === 0) {
+    console.log("[linkedin] No job links were collected. LinkedIn may have changed the page layout, blocked the search, or returned no Easy Apply results for these filters.");
+  }
   let applied = 0;
 
-  for (const jobUrl of jobUrls) {
+  for (const jobCard of jobCards) {
+    const jobUrl = jobCard.url;
     if (applied >= limit) break;
     const jobKey = `${SITE}:${jobUrl}`;
     if (applicationLog.hasApplied(jobKey)) continue;
 
-    await page.goto(jobUrl, { waitUntil: "domcontentloaded" });
+    console.log(`[linkedin] Inspecting ${jobUrl}`);
+    await page.goto(jobUrl, { waitUntil: "domcontentloaded", timeout: 20000 }).catch((error) => {
+      console.log(`[linkedin] Page load warning for ${jobUrl}: ${error.message}`);
+    });
     await sleep(1500);
 
-    const title = await page.locator("h1").first().textContent().catch(() => "Unknown title");
-    const company = await page.locator("a.job-details-jobs-unified-top-card__company-name, span.jobs-unified-top-card__company-name").first().textContent().catch(() => "Unknown company");
-    const description = await page.locator("div.jobs-description__content, div#job-details").first().textContent().catch(() => "");
+    const title = await firstText(page, [
+      "h1",
+      ".job-details-jobs-unified-top-card__job-title",
+      ".jobs-unified-top-card__job-title",
+      "[data-test-job-title]"
+    ], jobCard.title || "Unknown title");
+    const company = await firstText(page, [
+      "a.job-details-jobs-unified-top-card__company-name",
+      "span.jobs-unified-top-card__company-name",
+      ".job-details-jobs-unified-top-card__company-name",
+      "[data-test-job-company-name]"
+    ], jobCard.company || "Unknown company");
+    const description = await firstText(page, [
+      "div.jobs-description__content",
+      "div#job-details",
+      ".jobs-box__html-content"
+    ], "");
 
     const jobText = `${title}\n${company}\n${description}`;
     const score = await scoreJob(jobText, profile);

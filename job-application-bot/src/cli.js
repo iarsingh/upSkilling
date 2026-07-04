@@ -12,7 +12,17 @@ const sites = {
 };
 
 function parseArgs(argv) {
-  const args = { site: "linkedin", keywords: "DevOps Engineer Kubernetes GCP", location: "India", limit: maxApplicationsPerRun, dryRun: false, headless: false, loginOnly: false, urls: null };
+  const args = {
+    site: "linkedin",
+    keywords: "DevOps Engineer Kubernetes GCP",
+    location: "India",
+    limit: maxApplicationsPerRun,
+    dryRun: true,
+    submit: false,
+    headless: false,
+    loginOnly: false,
+    urls: null
+  };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--site") args.site = argv[++i];
@@ -20,6 +30,11 @@ function parseArgs(argv) {
     else if (a === "--location") args.location = argv[++i];
     else if (a === "--limit") args.limit = Number(argv[++i]);
     else if (a === "--dry-run") args.dryRun = true;
+    else if (a === "--review") args.dryRun = true;
+    else if (a === "--submit") {
+      args.submit = true;
+      args.dryRun = false;
+    }
     else if (a === "--headless") args.headless = true;
     else if (a === "--login-only") args.loginOnly = true;
     else if (a === "--urls") args.urls = argv[++i].split(",").map((u) => u.trim());
@@ -33,16 +48,19 @@ job-application-bot
 
 Usage:
   node src/cli.js --site linkedin --keywords "DevOps Kubernetes GCP" --location "India" --limit 20
+  node src/cli.js --site linkedin --keywords "DevOps Kubernetes GCP" --location "India" --limit 5 --submit
   node src/cli.js --site generic-ats --urls "https://boards.greenhouse.io/acme/jobs/123,https://jobs.lever.co/acme/456"
   node src/cli.js --site naukri --login-only
-  node src/cli.js --site linkedin --dry-run   # fill forms but never click the final Submit
+  node src/cli.js --site linkedin --review    # default: prepare/fill but never click final Submit
 
 Options:
   --site        linkedin | naukri | indeed | generic-ats | uplers | cutshort   (default: linkedin)
   --keywords    search keywords                                                (default: "DevOps Engineer Kubernetes GCP")
   --location    search location                                                (default: "India")
-  --limit       max applications to submit this run                           (default: from .env MAX_APPLICATIONS_PER_RUN, else 25)
-  --dry-run     fill out every form but stop before the final submit click
+  --limit       max applications to prepare or submit this run                 (default: from .env MAX_APPLICATIONS_PER_RUN, else 25)
+  --review      prepare/fill applications but stop before final submit          (default)
+  --dry-run     alias for --review
+  --submit      opt in to final application submission where the adapter supports it
   --headless    run without a visible browser window (only after you've logged in once)
   --login-only  just open the site and wait for you to log in, then exit
   --urls        comma-separated job URLs (generic-ats site only)
@@ -74,7 +92,9 @@ async function main() {
     }
 
     if (args.dryRun) {
-      console.log("Running in DRY-RUN mode: forms will be filled but no application will actually be submitted.\n");
+      console.log("Running in REVIEW mode: forms may be prepared/filled, but the bot will not click the final Submit button.\n");
+    } else if (args.submit) {
+      console.log("Running in SUBMIT mode: the bot may submit real applications on supported sites. Keep the browser visible and monitor the run.\n");
     }
 
     let applied;
@@ -96,7 +116,7 @@ async function main() {
       });
     }
 
-    console.log(`\nDone. ${applied} application${applied === 1 ? "" : "s"} ${args.dryRun ? "would be submitted" : "submitted"} this run.`);
+    console.log(`\nDone. ${applied} application${applied === 1 ? "" : "s"} ${args.dryRun ? "prepared for review" : "submitted"} this run.`);
     console.log(`Full log: data/applied-jobs.json`);
   } finally {
     await context.close();

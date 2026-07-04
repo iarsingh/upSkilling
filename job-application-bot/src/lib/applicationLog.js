@@ -17,7 +17,7 @@ function save(entries) {
 
 // jobKey should uniquely identify a posting, e.g. `${site}:${jobId or url}`.
 function hasApplied(jobKey) {
-  return load().some((entry) => entry.jobKey === jobKey);
+  return load().some((entry) => entry.jobKey === jobKey && ["submitted", "dry_run"].includes(entry.status));
 }
 
 function record(entry) {

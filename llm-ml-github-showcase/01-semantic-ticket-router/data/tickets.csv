@@ -1,0 +1,13 @@
+ticket,team
+"GPU notebook cannot connect to the shared feature store after deployment",ml-platform
+"Model training job is stuck in queued state on the Kubernetes cluster",ml-platform
+"Batch inference pipeline failed because the model artifact is missing",ml-platform
+"Customer invoice shows duplicate cloud usage charges for last month",billing
+"Billing export has incorrect tax amount for enterprise account",billing
+"Need refund for accidental overage on API usage",billing
+"Production API has high latency and 500 errors after release",sre
+"PagerDuty alert fired for memory pressure on checkout service",sre
+"Service is unavailable in one region after load balancer change",sre
+"Please create a new admin account for the analytics workspace",access
+"User cannot log in after SSO group migration",access
+"Need permission to read the production metrics dashboard",access
