@@ -1,55 +1,42 @@
-# Local Ollama Job Autofill Chrome Extension
+# Local Job Autofill Chrome Extension
 
-This is a local-only Chrome extension for filling job application forms from `data/applicant-profile.json`.
+A local-only Chrome extension that fills job application forms from `data/applicant-profile.json`, using
+the same local server as the AI Mock Interviewer app.
 
-## Run The Local Server
+## Run the Local Server
 
-From the project folder:
+From the `ai-mock-interviewer` project root:
 
 ```bash
-cd /Users/akhileshsingh/Documents/upSkilling/ai-mock-interviewer
 npm start
 ```
 
-Keep Ollama running if you want AI field mapping and cover letters:
+Keep Ollama running if you want AI-assisted field mapping and cover letters:
 
 ```bash
 ollama serve
 ```
 
-## Install In Chrome
+## Install in Chrome
 
-1. Open Chrome.
-2. Go to `chrome://extensions`.
-3. Enable `Developer mode`.
-4. Click `Load unpacked`.
-5. Select this folder:
-
-```text
-/Users/akhileshsingh/Documents/upSkilling/ai-mock-interviewer/chrome-extension
-```
+1. Open `chrome://extensions`.
+2. Enable **Developer mode**.
+3. Click **Load unpacked**.
+4. Select this `chrome-extension/` folder.
 
 ## Use
 
 1. Open a job application page.
-2. Click the `Local Ollama Job Autofill` extension.
-3. Click `Fill visible fields` for fast local autofill.
-4. Click `AI map and fill` for Ollama-assisted matching on unusual forms.
-5. Click `Generate cover letter` to fill the largest cover-letter-style text area.
+2. Click the **Local Ollama Job Autofill** extension icon.
+3. Click **Fill visible fields** for fast local autofill.
+4. Click **AI map and fill** for Ollama-assisted matching on unusual forms.
+5. Click **Generate cover letter** to fill the largest cover-letter-style text area.
 6. Review everything before submitting.
 
-Chrome does not allow extensions to set file upload values. Use `Highlight resume uploads`, then manually select:
-
-```text
-/Users/akhileshsingh/Downloads/AKHILESH_RANJANSINGH.pdf
-```
+Chrome does not allow extensions to set file upload input values. Use **Highlight resume uploads**, then
+manually select your résumé file from the file picker.
 
 ## Update Your Data
 
-Edit:
-
-```text
-/Users/akhileshsingh/Documents/upSkilling/ai-mock-interviewer/data/applicant-profile.json
-```
-
-Add expected CTC, current CTC, notice period, portfolio, or preferred locations when you want autofill to use those values.
+Edit `data/applicant-profile.json` (in the project root) to add expected CTC, current CTC, notice period,
+portfolio links, or preferred locations — the autofill and cover-letter generator both read from this file.

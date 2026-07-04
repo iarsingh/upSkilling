@@ -1,8 +1,31 @@
 # AI Mock Interviewer
 
-A local-first mock interview simulator for DevOps, SRE, Cloud, Platform Engineering, and MLOps preparation.
+A local-first, voice-led mock interview simulator for DevOps, SRE, Cloud, Platform Engineering, and MLOps
+preparation — runs entirely in your browser against a local Node server, with zero cloud dependency
+required.
 
-The app runs in your browser, asks interview questions, reads questions aloud, records or accepts typed answers, saves progress locally, and can run without internet using the built-in question bank.
+The app asks interview questions, reads them aloud, records or accepts typed answers, saves progress
+locally, and works fully offline using a built-in question bank of 2,000+ questions with answers.
+
+## Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Requirements](#requirements)
+- [Quick Start](#quick-start)
+- [Run With Local Ollama](#run-with-local-ollama)
+- [How To Use](#how-to-use)
+- [Audio Notes](#audio-notes)
+- [Offline Mode](#offline-mode)
+- [Job Description Practice](#job-description-practice)
+- [Add Custom Skills From The UI](#add-custom-skills-from-the-ui)
+- [Mock Interview Sets](#mock-interview-sets)
+- [Project Structure](#project-structure)
+- [Developer Customization](#developer-customization)
+- [Chrome Extension](#chrome-extension)
+- [Troubleshooting](#troubleshooting)
+- [GitHub Publishing Notes](#github-publishing-notes)
+- [License](#license)
 
 ## Features
 
@@ -14,6 +37,15 @@ The app runs in your browser, asks interview questions, reads questions aloud, r
 - Custom skills from the UI, so developers can add Java, React, AWS, Spring Boot, or any other topic locally.
 - Progress history saved in browser local storage.
 - Optional local Ollama support for stronger AI feedback.
+
+## Tech Stack
+
+- **Runtime**: Node.js (built-in `http` module, no framework)
+- **Frontend**: vanilla HTML/CSS/JS, browser Speech Synthesis + Speech Recognition APIs
+- **State**: browser `localStorage` (no server-side database)
+- **Optional AI**: local Ollama, or Anthropic Claude via `@anthropic-ai/sdk`
+- **JD file parsing**: `pdf-parse`, `mammoth` (DOCX), `tesseract.js` (OCR)
+- **Browser extension**: Manifest V3 Chrome extension (`chrome-extension/`)
 
 ## Requirements
 
@@ -320,4 +352,7 @@ node_modules/
 
 ## License
 
-Add a license before publishing publicly. MIT is a common choice for open-source tools.
+No license file is included yet, which by default means all rights are reserved and others may not
+reuse, modify, or redistribute this code. Add a `LICENSE` file (MIT is a common, permissive choice for a
+portfolio tool like this) before publishing the repository publicly, if you want others to be able to use
+it.
