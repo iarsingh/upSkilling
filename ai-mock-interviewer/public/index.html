@@ -11,18 +11,19 @@
     <main class="shell">
       <section class="topbar">
         <div class="brand-block">
-          <p class="eyebrow">Local Ollama Coach</p>
+          <p class="eyebrow">Open-source interview lab</p>
           <div class="brand-title">
             <img class="brand-icon" src="/favicon.svg" alt="" aria-hidden="true">
             <h1>AI Mock Interviewer</h1>
           </div>
-          <p class="subtitle">Practice focused technical rounds and get evidence-based feedback.</p>
+          <p class="subtitle">Real-time voice mock interviews for DevOps, SRE, Cloud, Platform, and MLOps roles.</p>
         </div>
         <div class="top-actions">
+          <a class="ghost link-button" href="https://github.com/iarsingh" target="_blank" rel="noreferrer">GitHub</a>
           <a class="ghost link-button" href="/admin.html">Admin report</a>
           <div class="status" id="status">
             <span class="dot"></span>
-            <span id="statusText">Checking Ollama</span>
+            <span id="statusText">Checking local runtime</span>
           </div>
         </div>
       </section>
@@ -93,6 +94,7 @@
               <option value="tech-risk-technical">Technology risk - technical</option>
               <option value="tech-risk-behavioral">Technology risk - behavioural</option>
               <option value="hr-behavioral">HR / behavioral basics</option>
+              <option value="basic-concepts">Basic / one-liner concepts</option>
               <option value="scenario">Scenario-based questions</option>
             </select>
           </label>
@@ -103,6 +105,24 @@
               <option value="sequence">Sequential questions</option>
             </select>
           </label>
+          <details class="setup-details">
+            <summary>Custom skills</summary>
+            <div class="details-content">
+              <label>
+                Skill name
+                <input id="customSkillName" placeholder="Java, React, AWS, Spring Boot...">
+              </label>
+              <label>
+                Questions
+                <textarea id="customSkillQuestions" rows="5" placeholder="Add one question per line. If empty, the app creates starter questions for this skill."></textarea>
+              </label>
+              <div class="button-row">
+                <button id="addCustomSkill" class="ghost" type="button">Add skill</button>
+                <button id="deleteCustomSkill" class="danger" type="button">Delete selected</button>
+              </div>
+              <div id="customSkillList" class="custom-skill-list"></div>
+            </div>
+          </details>
           <label>
             30-day practice plan
             <select id="practiceDay">
@@ -170,6 +190,10 @@
             <input id="autoNext" type="checkbox" checked>
             <span>Live auto-advance</span>
           </label>
+          <label class="toggle">
+            <input id="realTimeSimulation" type="checkbox" checked>
+            <span>Real-time simulation</span>
+          </label>
           <div class="setup-actions">
             <button id="previousQuestion" class="ghost" type="button">Previous question</button>
             <button id="nextQuestion" class="ghost" type="button">Next question</button>
@@ -179,6 +203,17 @@
         </aside>
 
         <section class="panel interview">
+          <div class="stage-head">
+            <div>
+              <p class="eyebrow">Live Interview Stage</p>
+              <strong>Voice-led technical round</strong>
+            </div>
+            <div class="stage-pills" aria-label="Interview capabilities">
+              <span>Question audio</span>
+              <span>Speech transcript</span>
+              <span>Auto advance</span>
+            </div>
+          </div>
           <div class="question-row">
             <div>
               <p class="eyebrow">Question</p>
@@ -189,6 +224,24 @@
               <span id="answerCounter">0 answered</span>
             </div>
           </div>
+          <div class="question-audio">
+            <button id="speakQuestion" class="ghost" type="button">Read question</button>
+            <button id="stopQuestionAudio" class="ghost" type="button">Stop audio</button>
+            <label class="audio-field">
+              Voice tone
+              <select id="questionVoiceTone">
+                <option value="natural">Natural</option>
+                <option value="deep">Deeper</option>
+                <option value="clear">Clear</option>
+                <option value="energetic">Energetic</option>
+              </select>
+            </label>
+            <label class="toggle compact">
+              <input id="autoReadQuestion" type="checkbox" checked>
+              <span>Auto-read questions</span>
+            </label>
+            <span id="questionAudioState">Question audio ready</span>
+          </div>
           <div class="progress-track" aria-hidden="true">
             <span id="sessionProgress"></span>
           </div>
@@ -196,6 +249,22 @@
           <div class="recorder">
             <button id="micButton" class="record" type="button">Start mic</button>
             <button id="clearButton" class="ghost" type="button">Clear answer</button>
+            <label class="audio-field">
+              Mic accent
+              <select id="micLanguage">
+                <option value="en-IN">English India</option>
+                <option value="en-US">English US</option>
+                <option value="en-GB">English UK</option>
+              </select>
+            </label>
+            <label class="audio-field">
+              Answer pause
+              <select id="answerPause">
+                <option value="6500">Focused</option>
+                <option value="9500">Thoughtful</option>
+                <option value="13000">Long</option>
+              </select>
+            </label>
             <span id="micState">Microphone idle</span>
           </div>
 

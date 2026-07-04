@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: portfolio
+      POSTGRES_PASSWORD: portfolio
+      POSTGRES_DB: portfolio
+    ports:
+      - "5433:5432"
+    volumes:
+      - portfolio_pgdata:/var/lib/postgresql/data
+
+volumes:
+  portfolio_pgdata:

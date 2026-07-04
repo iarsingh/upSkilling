@@ -43,6 +43,7 @@ TOPIC_ORDER = [
     "Technology Risk - Technical",
     "Technology Risk - Behavioral",
     "HR / Behavioral Basics",
+    "Basic / One-Liner Concepts",
 ]
 
 mock_sections = {}

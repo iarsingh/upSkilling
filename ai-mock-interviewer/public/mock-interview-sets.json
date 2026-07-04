@@ -1572,5 +1572,44 @@
         "question": "You used Ansible for backup automation and disaster recovery. Walk me through how a playbook-driven DR runbook would work end to end."
       }
     ]
+  },
+  {
+    "id": "set-47",
+    "title": "Mock Interview 47 - Today's Audio Interview Recap",
+    "focus": "Terraform reusable modules, production change safety, observability triage, SLI/SLO alerting, burn-rate alerts, and senior behavioral introduction",
+    "questions": [
+      {
+        "category": "Terraform/IaC",
+        "question": "How do you design reusable infrastructure modules? How do you handle reusable modules with strict state and credential isolation? How do approval workflows reduce the blast radius of infrastructure changes?"
+      },
+      {
+        "category": "Terraform/IaC",
+        "question": "Terraform change safety: When a Terraform plan shows a destroy and replace for a critical resource, what signals and guardrails do you rely on to decide whether to proceed, redesign, or block the change?"
+      },
+      {
+        "category": "Observability",
+        "question": "Incident response and observability: Customers report intermittent 5xx errors and P95 latency spikes. Walk me through your observability-driven triage sequence across metrics, logs, and traces. How do you isolate the failing dependency?"
+      },
+      {
+        "category": "SRE/Reliability",
+        "question": "SLIs, SLOs, and alerting: How do you define customer-centric SLIs, SLOs, and actionable alerts? How do you filter noisy infrastructure signals? How do you catch both fast outages and slow degradation without paging on transient spikes?"
+      },
+      {
+        "category": "SRE/Reliability",
+        "question": "Multi-window burn-rate alerting: Walk me through how you would implement multi-window burn-rate alerts for a 99.9% availability SLO. Which alert windows would you choose? Which alerts should page an on-call engineer immediately, and which should create a ticket for later investigation?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "Tell me about yourself."
+      },
+      {
+        "category": "Behavioral",
+        "question": "Describe your experience with cloud platforms, Kubernetes, Terraform, and DevOps."
+      },
+      {
+        "category": "Production Readiness",
+        "question": "How do you approach infrastructure changes in production to minimize customer impact?"
+      }
+    ]
   }
 ]

@@ -86,7 +86,8 @@ function loadAppBanks() {
     "Ansible": "ansibleQuestionBank",
     "Technology Risk - Technical": "techRiskTechnicalQuestionBank",
     "Technology Risk - Behavioral": "techRiskBehavioralQuestionBank",
-    "HR / Behavioral Basics": "hrBehavioralQuestionBank"
+    "HR / Behavioral Basics": "hrBehavioralQuestionBank",
+    "Basic / One-Liner Concepts": "basicConceptQuestionBank"
   };
   const entries = [];
   for (const [section, varName] of Object.entries(banks)) {

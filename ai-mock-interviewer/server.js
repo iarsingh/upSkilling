@@ -11,6 +11,7 @@ const HOST = process.env.HOST || "127.0.0.1";
 const OLLAMA_URL = process.env.OLLAMA_URL || "http://127.0.0.1:11434";
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || "llama3.1:8b";
 const LLM_PROVIDER = process.env.LLM_PROVIDER || "ollama";
+const OFFLINE_ONLY = process.env.OFFLINE_ONLY === "1" || process.env.OFFLINE_ONLY === "true";
 const CLAUDE_MODEL = process.env.CLAUDE_MODEL || "claude-opus-4-8";
 const claudeClient = process.env.ANTHROPIC_API_KEY ? new Anthropic() : null;
 const PUBLIC_DIR = path.join(__dirname, "public");
@@ -260,6 +261,10 @@ function readQuestionBank() {
 }
 
 async function importJobDescription(url) {
+  if (OFFLINE_ONLY) {
+    throw new Error("Offline mode is enabled. Paste the JD text manually or upload a local JD file.");
+  }
+
   const parsed = new URL(url);
   if (!["http:", "https:"].includes(parsed.protocol)) {
     throw new Error("Only http/https job URLs are supported.");
@@ -341,10 +346,57 @@ async function askClaude(prompt, options = {}) {
 }
 
 async function askLLM(prompt, ollamaOptions = {}, timeoutMs = 45000) {
+  if (OFFLINE_ONLY && LLM_PROVIDER === "claude") {
+    throw new Error("Offline mode is enabled. Claude API calls are disabled.");
+  }
   if (LLM_PROVIDER === "claude") {
     return askClaude(prompt, { maxTokens: ollamaOptions.num_predict });
   }
   return askOllama(prompt, ollamaOptions, timeoutMs);
+}
+
+function fallbackQuestion(input) {
+  const historyText = Array.isArray(input.history) ? input.history.join("\n") : "";
+  const used = new Set(
+    [...historyText.matchAll(/Question\s+\d+:\s*(.+?)(?:\n|$)/g)]
+      .map((match) => match[1].trim().toLowerCase())
+  );
+  const bank = readQuestionBank().map((item) => item.question);
+  const fallbackBank = bank.length ? bank : [
+    "GKE troubleshooting: A production service has intermittent 5xx errors. Walk me through your investigation from load balancer to pod metrics.",
+    "Terraform safety: How would you design modules, remote state, approvals, and drift detection for a senior GCP platform role?",
+    "SRE: Define SLIs, SLOs, error budget policy, alerting, and incident response for a user-facing API.",
+    "Cloud security: How would you secure GKE workloads, IAM permissions, secrets, image supply chain, and ingress traffic?",
+    "Platform engineering: What self-service golden paths would you build, and what guardrails would you enforce?"
+  ];
+  const next = fallbackBank.find((question) => !used.has(question.trim().toLowerCase()));
+  return next || fallbackBank[Math.floor(Math.random() * fallbackBank.length)];
+}
+
+function fallbackQuestionFeedback(input) {
+  const answer = String(input.answer || "");
+  const wordCount = answer.trim().split(/\s+/).filter(Boolean).length;
+  const hasSignals = /metric|log|trace|slo|rollback|runbook|rca|alert|dashboard|kubectl|terraform|iam|risk|impact/i.test(answer);
+  const score = wordCount >= 90 && hasSignals ? 7 : wordCount >= 45 ? 6 : 4;
+  return `## Score
+${score}/10. Offline feedback is using a local template because no LLM response was available.
+
+## What Went Well
+- You captured an answer for the current question.
+- ${hasSignals ? "You included useful production signals or operating details." : "You have a starting point to refine into a structured answer."}
+- The transcript is saved for final review.
+
+## Gaps
+- Add exact signals, commands, dashboards, and rollback criteria.
+- Tie the answer to business impact and reliability risk.
+- Close with prevention: tests, guardrails, runbooks, ownership, and measurable improvement.
+
+## Job Fit Coaching
+- Connect the answer to your GCP, GKE, Terraform, SRE, security, and platform engineering experience.
+- Use one concrete project example and include scale, incident impact, or measurable result.
+
+## Stronger Answer
+I would first confirm customer impact using SLO dashboards, error rate, latency, and recent-change history. Then I would isolate whether the issue is deployment, capacity, dependency, network, IAM, or configuration related. I would check logs, metrics, traces, events, and audit data, mitigate with rollback or traffic shift if impact is high, and communicate status clearly. After recovery, I would write an RCA and add preventive actions such as better alerts, tests, policy guardrails, runbooks, and ownership.`;
 }
 
 function fallbackFinalFeedback(input) {
@@ -740,7 +792,7 @@ function serveStatic(req, res) {
     res.writeHead(200, {
       "Content-Type": contentTypes[path.extname(filePath)] || "application/octet-stream"
     });
-    res.end(data);
+    res.end(req.method === "HEAD" ? undefined : data);
   });
 }
 
@@ -752,6 +804,17 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === "GET" && req.url === "/api/health") {
+      if (OFFLINE_ONLY) {
+        sendJson(res, 200, {
+          ok: true,
+          provider: "offline",
+          model: "built-in question bank",
+          ollamaUrl: OLLAMA_URL,
+          claudeConfigured: false,
+          offlineOnly: true
+        });
+        return;
+      }
       if (LLM_PROVIDER === "claude") {
         sendJson(res, 200, {
           ok: Boolean(claudeClient),
@@ -831,7 +894,21 @@ const server = http.createServer(async (req, res) => {
         sendJson(res, 400, { error: "Please record or type an answer first." });
         return;
       }
-      sendJson(res, 200, { feedback: await askLLM(feedbackPrompt(input)) });
+      if (OFFLINE_ONLY) {
+        sendJson(res, 200, {
+          feedback: fallbackQuestionFeedback(input),
+          fallback: true
+        });
+        return;
+      }
+      try {
+        sendJson(res, 200, { feedback: await askLLM(feedbackPrompt(input)) });
+      } catch {
+        sendJson(res, 200, {
+          feedback: fallbackQuestionFeedback(input),
+          fallback: true
+        });
+      }
       return;
     }
 
@@ -839,6 +916,13 @@ const server = http.createServer(async (req, res) => {
       const input = await readBody(req);
       if (!String(input.transcript || "").trim()) {
         sendJson(res, 400, { error: "No interview answers captured yet." });
+        return;
+      }
+      if (OFFLINE_ONLY) {
+        sendJson(res, 200, {
+          feedback: fallbackFinalFeedback(input),
+          fallback: true
+        });
         return;
       }
       try {
@@ -859,8 +943,22 @@ const server = http.createServer(async (req, res) => {
 
     if (req.method === "POST" && req.url === "/api/question") {
       const input = await readBody(req);
-      const question = cleanGeneratedQuestion(await askLLM(questionPrompt(input)));
-      sendJson(res, 200, { question });
+      if (OFFLINE_ONLY) {
+        sendJson(res, 200, {
+          question: fallbackQuestion(input),
+          fallback: true
+        });
+        return;
+      }
+      try {
+        const question = cleanGeneratedQuestion(await askLLM(questionPrompt(input)));
+        sendJson(res, 200, { question });
+      } catch {
+        sendJson(res, 200, {
+          question: fallbackQuestion(input),
+          fallback: true
+        });
+      }
       return;
     }
 
@@ -884,7 +982,7 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    if (req.method === "GET") {
+    if (req.method === "GET" || req.method === "HEAD") {
       serveStatic(req, res);
       return;
     }
@@ -901,5 +999,11 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, HOST, () => {
   console.log(`AI Mock Interviewer running at http://${HOST}:${PORT}`);
-  console.log(`Using Ollama model ${OLLAMA_MODEL} at ${OLLAMA_URL}`);
+  if (OFFLINE_ONLY) {
+    console.log("Offline mode enabled. Using the built-in question bank and feedback templates.");
+  } else if (LLM_PROVIDER === "claude") {
+    console.log(`Using Claude model ${CLAUDE_MODEL}`);
+  } else {
+    console.log(`Using Ollama model ${OLLAMA_MODEL} at ${OLLAMA_URL}`);
+  }
 });

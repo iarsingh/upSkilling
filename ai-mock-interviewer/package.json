@@ -5,7 +5,8 @@
   "description": "Local Ollama-powered mock interview coach with browser microphone input.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "start:offline": "OFFLINE_ONLY=1 node server.js"
   },
   "engines": {
     "node": ">=18"

@@ -1,8 +1,67 @@
 # AI Mock Interviewer
 
-Local mock interview coach powered by Ollama.
+A local-first mock interview simulator for DevOps, SRE, Cloud, Platform Engineering, and MLOps preparation.
 
-## Run
+The app runs in your browser, asks interview questions, reads questions aloud, records or accepts typed answers, saves progress locally, and can run without internet using the built-in question bank.
+
+## Features
+
+- Voice-led mock interview flow with question audio and answer transcript.
+- Offline mode with built-in mock questions and local template feedback.
+- Practice by topic: Kubernetes/GKE, Docker, GCP, Terraform, Ansible, Python, FastAPI, Go, SRE, MLOps, LLMOps, CI/CD, observability, security, networking, Linux, platform engineering, behavioral, and basics.
+- 30-day practice plan and fixed mock interview sets.
+- Custom JD practice by pasting or uploading a job description.
+- Custom skills from the UI, so developers can add Java, React, AWS, Spring Boot, or any other topic locally.
+- Progress history saved in browser local storage.
+- Optional local Ollama support for stronger AI feedback.
+
+## Requirements
+
+- Node.js 18 or newer
+- npm
+- Git
+- Chrome or Edge recommended for microphone features
+
+Optional:
+
+- Ollama, if you want local AI-generated feedback instead of offline template feedback.
+
+## Quick Start
+
+Clone the repo:
+
+```bash
+git clone <your-github-repo-url>
+cd ai-mock-interviewer
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run offline:
+
+```bash
+npm run start:offline
+```
+
+Open:
+
+```text
+http://127.0.0.1:3030
+```
+
+This is the easiest way for another person to run the project. It works with the built-in local question bank and does not require an AI API key.
+
+## Run With Local Ollama
+
+Install Ollama from:
+
+```text
+https://ollama.com
+```
 
 Start Ollama:
 
@@ -10,10 +69,9 @@ Start Ollama:
 ollama serve
 ```
 
-In another terminal:
+In another terminal, start the app:
 
 ```bash
-cd ai-mock-interviewer
 npm start
 ```
 
@@ -23,116 +81,243 @@ Open:
 http://127.0.0.1:3030
 ```
 
-## Model
-
 Default model:
 
 ```text
 llama3.1:8b
 ```
 
-Override it:
+Use another local model:
 
 ```bash
 OLLAMA_MODEL=mistral npm start
 ```
 
-## LLM Provider (Ollama or Claude)
+## How To Use
 
-By default the app runs fully locally through Ollama. You can switch it to use the Claude API instead:
+1. Open `http://127.0.0.1:3030`.
+2. Choose a `Technology practice` topic or select a `Mock interview set`.
+3. Keep `Live mock interview` and `Real-time simulation` enabled for the voice interview flow.
+4. Click `New question`.
+5. Listen to the question.
+6. Speak your answer or type it in the transcript box.
+7. Click `End interview & feedback` when the round is complete.
+
+For a fully manual flow, switch to `Mock interview`.
+
+## Audio Notes
+
+Question audio uses browser text-to-speech.
+
+Answer transcription uses browser speech recognition when supported. Chrome and Edge usually work best.
+
+If microphone transcription is unavailable, type your answer in the answer box and continue normally.
+
+Useful settings in the app:
+
+- `Voice tone`: changes the question reader style.
+- `Mic accent`: choose English India, US, or UK.
+- `Answer pause`: controls how long the app waits before auto-submitting in real-time simulation.
+
+## Offline Mode
+
+Run:
 
 ```bash
-LLM_PROVIDER=claude ANTHROPIC_API_KEY=sk-ant-... npm start
+npm run start:offline
 ```
 
-- `LLM_PROVIDER` — `ollama` (default, local, free) or `claude` (paid, higher quality, requires internet).
-- `ANTHROPIC_API_KEY` — required when `LLM_PROVIDER=claude`. Get one at [console.anthropic.com](https://console.anthropic.com).
-- `CLAUDE_MODEL` — defaults to `claude-opus-4-8`. Override with any current Claude model ID (e.g. `claude-sonnet-5`) to trade quality for cost/speed.
+Offline mode:
 
-Switching is a full swap, not automatic fallback — if `LLM_PROVIDER=claude` and `ANTHROPIC_API_KEY` is unset, Claude calls fail and the app falls back to the built-in offline feedback template (final feedback only) rather than silently using Ollama. Leave `LLM_PROVIDER` unset (or `ollama`) to keep everything local.
+- Uses local files and the built-in question bank.
+- Disables internet-only features such as Claude API calls and public JD URL import.
+- Still allows manual JD paste.
+- Still allows local JD file upload and text extraction.
+- Uses local template feedback if Ollama is not available.
 
-## Audio Input
+## Job Description Practice
 
-The app uses browser microphone speech recognition when available. If your browser blocks or does not support speech recognition, type or paste the transcript into the answer box and use the same feedback flow.
+You can prepare for a specific job:
 
-## Job-Based Interview Rounds
-
-1. Paste your full CV text into `CV / profile context`.
-2. Paste the job description into `Job description`.
+1. Paste your resume/profile into `CV / profile context`.
+2. Paste the job description into `Market skills / job description`.
 3. Click `Save CV and JD`.
-4. Click `New question` to start `Interview 1`.
-5. Use `Next interview` when you want to begin `Interview 2`, `Interview 3`, and so on for the same or a new JD.
-6. Use `Previous` to return to earlier interview rounds and review their saved answers or final feedback.
-7. Use the left `Interviews` sidebar to jump directly to any saved interview round.
+4. Select `Custom JD mock interview` from `Mock interview set`.
+5. Click `New question`.
 
-The CV, JD, role, interview number, interview answers, drafts, and final feedback are saved in your browser local storage.
+You can also upload a local JD file. Supported formats include PDF, DOCX, TXT, Markdown, and common image formats.
 
-Completed interviews are also saved in `Progress History` after you click `End interview & feedback`. Each saved record keeps the date, role, selected day/mock set/JD mode, answer count, full Q&A transcript, JD snapshot, and final feedback so you can review progress later.
+## Add Custom Skills From The UI
 
-The default target profile is Senior GCP DevOps / SRE / Cloud Engineer for 6-8 years, with priority on GKE, Terraform, Python automation, SRE fundamentals, observability, GitOps, cloud security, platform engineering, Vertex AI/MLOps, GCP landing zones, FinOps, DR/backup, incident leadership, Linux/network fundamentals, and optional Go.
+Developers can add their own practice topics without changing code.
 
-Question bank progress continues across interview rounds. For example, if `Interview 1` ends after question 5, `Interview 2` starts from question 6.
+1. Open the app.
+2. Expand `Custom skills`.
+3. Enter a skill name, for example `Java`, `React`, `AWS`, or `Spring Boot`.
+4. Add one question per line, or leave the question box empty.
+5. Click `Add skill`.
+6. The skill appears in `Technology practice` as `Custom - <skill name>`.
+7. Select it and click `New question`.
 
-Questions are not repeated until the current question pool is exhausted. Saving a new CV/JD or importing a new JD resets the used-question tracker for the new target.
+If the question box is empty, the app creates starter questions for that skill, covering fundamentals, system design, troubleshooting, security, performance, CI/CD, and senior ownership.
 
-The app is a mock interview question generator. By default, `Question order` is set to `Random mock questions`, so clicking `New question` randomly selects from the active pool without repeating questions until the pool is exhausted. Switch to `Sequential questions` if you want ordered practice.
-
-Use `Technology practice` to prepare one subject at a time. Available filters include Kubernetes/GKE, Docker/containers, GCP, Terraform/IaC, Python automation, scripting and automation, coding exercises, SRE, MLOps/Vertex AI, LLMOps/GenAI production, CI/CD/GitOps, observability, security, networking, Linux, platform engineering, and scenario-based questions. The selected technology filters the full question bank, practice days, and mock interview sets.
-
-`Coding exercises` provides practical Python, Bash, Kubernetes API, GCP SDK, log-processing, networking, SLO, and Terraform validation tasks. Write the solution directly in the code-friendly answer editor, then save it as an interview answer for final feedback.
-
-The `Coding exercises` filter also includes "debug this script" questions: a deliberately broken Jenkinsfile, Python script, Bash script, Terraform snippet, Dockerfile, Kubernetes manifest, GitHub Actions workflow, Ansible playbook, Prometheus alert rule, docker-compose file, or deployment script is shown, and you identify and explain every bug before it reaches production.
-
-The built-in market question bank has 258 balanced senior-level questions across GKE, Terraform, GCP services, SRE, observability, security, networking, CI/CD, Python automation, platform engineering, MLOps, LLMOps/GenAI production, FinOps, Linux fundamentals, data reliability, DR, and senior behavioral ownership. The app also loads all 1180 questions from the local `1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt` bank, including the GCP ML, Vertex AI, and JD-specific Senior Cloud Engineering questions.
-
-Choose `Random full bank mock interview` from `Mock interview set` to generate random questions from the complete local question bank.
-
-## Import Job Descriptions
-
-Paste a public company/ATS job URL into `Import public JD URL`, then click `Import JD from URL`.
-
-This works for pages that expose readable job text. Some boards block automated access, including many LinkedIn/Indeed-style pages; for those, paste the JD text manually into `Job description`.
-
-You can also choose a local JD file with `Upload JD file`, then click `Import JD from file`. Supported formats include PDF, Word `.docx`, `.txt`, Markdown, and common image files such as PNG/JPG/WEBP/TIFF/BMP. The app extracts text locally through the mock interviewer server, fills the job description box, and resets the question tracker for the new target. Image files use local OCR, so clearer screenshots produce better results.
-
-When a JD is imported or pasted, the instant question pool adds JD-specific questions for matched skills such as GKE, Terraform, SRE, observability, GitOps, security, Python automation, platform engineering, networking, MLOps, FinOps, DR, landing zones, incident leadership, Linux fundamentals, and progressive delivery.
-
-## Interview Modes
-
-- `Live mock interview`: speak into the mic, stop the mic, and the app saves your answer and moves to the next question. Final feedback comes at the end.
-- `Mock interview`: speak or type your answer, click `Save answer`, then click `New question` yourself when you are ready.
-- Click `End interview & feedback` when you want the final report.
-
-## 30-Day Plan
-
-Use `30-day practice plan` to select `Day 1` through `Day 30`. Each day contains 6 mixed questions for a focused mock interview. Choose `All questions` to return to the full question bank.
-
-The same Day 1-Day 30 rounds are also available inside `Mock interview set` as `Day 1 mock interview`, `Day 2 mock interview`, and so on. Use those when you want the app to run the day as an actual mock interview question flow.
-
-The complete plan is also saved in `30-day-interview-plan.md`.
+Custom skills are saved in browser local storage.
 
 ## Mock Interview Sets
 
-Use `Mock interview set` when you want a fixed realistic round instead of the full question bank. It includes the Day 1-Day 30 mock interviews plus 13 extra sets with 8-12 questions each, covering GKE troubleshooting, Terraform/GCP platform design, SRE incidents, CI/CD and GitOps, security, observability, networking, platform engineering, MLOps, LLMOps/GenAI production, behavioral ownership, Google-style mixed rounds, technology risk, multi-cloud networking, and product-company final rounds.
+The app includes fixed mock interview rounds. Use `Mock interview set` to choose one.
 
-Choose `Custom JD mock interview` after pasting or importing a JD to run an 8-question mock interview generated from that JD and your saved CV/profile context.
+Examples:
 
-Selecting a mock set automatically clears the 30-day day selector. Selecting a day automatically clears the mock set selector.
+- GKE production troubleshooting
+- Terraform and GCP platform design
+- SRE incident and reliability
+- CI/CD and GitOps
+- Security and observability
+- Platform engineering
+- MLOps and LLMOps
+- Behavioral ownership
+- Today's audio interview recap
 
-The complete set list is saved in `mock-interview-sets.md`.
+The 30-day plan is available in the app and in:
 
-## What It Does
+```text
+30-day-interview-plan.md
+```
 
-- Generates scenario-based interview questions, focused Day 1-Day 30 practice sets, or fixed mock interview rounds.
-- Aligns questions to your CV and the JD you paste.
-- Uses a built-in Senior GCP/SRE question bank for instant next questions.
-- Accepts spoken answers through the browser microphone.
-- Sends the final transcript to local Ollama when you end the interview.
-- Saves every answer during the interview.
-- Returns what you answered, stronger sample answers, market-skill coverage, final score, hire signal, strengths, weak areas, answer pattern, 7-day plan, and next mock focus at the end.
+The mock set list is available in:
 
-## Chrome Job Autofill Extension
+```text
+mock-interview-sets.md
+```
 
-The local Chrome extension lives in `chrome-extension/`. It uses `data/applicant-profile.json` plus this local server to fill job application forms, generate cover letters, and optionally use Ollama for unusual field mapping.
+## Project Structure
 
-Install it from `chrome://extensions` with `Developer mode` -> `Load unpacked` -> select `ai-mock-interviewer/chrome-extension`.
+```text
+ai-mock-interviewer/
+  public/
+    index.html
+    app.js
+    styles.css
+    mock-interview-sets.json
+    30-day-plan.json
+  server.js
+  package.json
+  package-lock.json
+  data/
+  scripts/
+  chrome-extension/
+  README.md
+```
+
+Important files:
+
+- `server.js`: local Node.js server and API routes.
+- `public/index.html`: main app page.
+- `public/app.js`: interview logic, audio, state, and question flow.
+- `public/styles.css`: UI styling.
+- `public/mock-interview-sets.json`: fixed mock interview rounds.
+- `public/30-day-plan.json`: daily practice plan.
+
+## Developer Customization
+
+Developers can customize the app in two ways:
+
+- From the UI: add custom skills and questions in `Custom skills`.
+- From code/data files: edit mock sets, topic banks, styles, or backend behavior.
+
+Common files to edit:
+
+- Add fixed interview rounds: `public/mock-interview-sets.json`
+- Add daily practice questions: `public/30-day-plan.json`
+- Change frontend UI: `public/index.html`
+- Change frontend logic/audio behavior: `public/app.js`
+- Change styling: `public/styles.css`
+- Change backend routes and LLM/offline behavior: `server.js`
+
+## Chrome Extension
+
+The `chrome-extension/` folder contains a local job autofill helper.
+
+Install it manually:
+
+1. Open `chrome://extensions`.
+2. Enable `Developer mode`.
+3. Click `Load unpacked`.
+4. Select `ai-mock-interviewer/chrome-extension`.
+
+The extension uses the same local server and profile data.
+
+## Troubleshooting
+
+Port `3030` already in use:
+
+```bash
+lsof -nP -iTCP:3030 -sTCP:LISTEN
+kill <PID>
+```
+
+Then restart:
+
+```bash
+npm run start:offline
+```
+
+Dependencies fail to install:
+
+```bash
+node -v
+npm -v
+npm install
+```
+
+Make sure Node.js is version 18 or newer.
+
+Microphone does not work:
+
+- Use Chrome or Edge.
+- Allow microphone permission in the browser.
+- Try `Mic accent: English India`.
+- Use typed answers if speech recognition is unavailable.
+
+Ollama is not reachable:
+
+```bash
+ollama serve
+```
+
+Or use offline mode:
+
+```bash
+npm run start:offline
+```
+
+## GitHub Publishing Notes
+
+Commit these:
+
+- Source files
+- `package.json`
+- `package-lock.json`
+- `public/`
+- `data/`
+- Question bank files
+- README and docs
+
+Do not commit:
+
+- `node_modules/`
+- Local secrets or API keys
+- Personal browser data
+
+Recommended `.gitignore` entries:
+
+```text
+node_modules/
+.env
+.DS_Store
+```
+
+## License
+
+Add a license before publishing publicly. MIT is a common choice for open-source tools.

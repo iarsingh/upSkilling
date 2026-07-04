@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Profile {
+  id          Int      @id @default(1)
+  fullName    String
+  headline    String
+  summary     String   @db.Text
+  email       String
+  phone       String
+  location    String
+  linkedin    String
+  github      String
+  kaggle      String?
+  hackerrank  String?
+  credly      String?
+  resumeUrl   String?
+  updatedAt   DateTime @updatedAt
+}
+
+model Experience {
+  id         String   @id @default(cuid())
+  title      String
+  company    String
+  location   String
+  startDate  String
+  endDate    String
+  highlights String[]
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Skill {
+  id       String @id @default(cuid())
+  name     String @unique
+  category String @default("General")
+  order    Int    @default(0)
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  summary     String
+  description String   @db.Text
+  tags        String[]
+  repoUrl     String?
+  liveUrl     String?
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Certification {
+  id       String  @id @default(cuid())
+  name     String
+  issuer   String
+  year     String?
+  url      String?
+  order    Int     @default(0)
+}
+
+model AdminUser {
+  id           String @id @default(cuid())
+  username     String @unique
+  passwordHash String
+}

@@ -11,6 +11,11 @@ const els = {
   modeInputs: document.querySelectorAll("input[name='interviewMode']"),
   technology: document.querySelector("#technology"),
   questionOrder: document.querySelector("#questionOrder"),
+  customSkillName: document.querySelector("#customSkillName"),
+  customSkillQuestions: document.querySelector("#customSkillQuestions"),
+  addCustomSkill: document.querySelector("#addCustomSkill"),
+  deleteCustomSkill: document.querySelector("#deleteCustomSkill"),
+  customSkillList: document.querySelector("#customSkillList"),
   practiceDay: document.querySelector("#practiceDay"),
   mockSet: document.querySelector("#mockSet"),
   role: document.querySelector("#role"),
@@ -21,7 +26,13 @@ const els = {
   jdUrl: document.querySelector("#jdUrl"),
   jdPdf: document.querySelector("#jdPdf"),
   autoNext: document.querySelector("#autoNext"),
+  realTimeSimulation: document.querySelector("#realTimeSimulation"),
   question: document.querySelector("#question"),
+  speakQuestion: document.querySelector("#speakQuestion"),
+  stopQuestionAudio: document.querySelector("#stopQuestionAudio"),
+  questionVoiceTone: document.querySelector("#questionVoiceTone"),
+  autoReadQuestion: document.querySelector("#autoReadQuestion"),
+  questionAudioState: document.querySelector("#questionAudioState"),
   questionCounter: document.querySelector("#questionCounter"),
   answerCounter: document.querySelector("#answerCounter"),
   sessionProgress: document.querySelector("#sessionProgress"),
@@ -33,6 +44,8 @@ const els = {
   newQuestion: document.querySelector("#newQuestion"),
   micButton: document.querySelector("#micButton"),
   clearButton: document.querySelector("#clearButton"),
+  micLanguage: document.querySelector("#micLanguage"),
+  answerPause: document.querySelector("#answerPause"),
   feedbackButton: document.querySelector("#feedbackButton"),
   endInterview: document.querySelector("#endInterview"),
   feedbackOutput: document.querySelector("#feedbackOutput"),
@@ -44,7 +57,7 @@ const els = {
 };
 
 const STORAGE_KEY = "aiMockInterviewerState";
-const ANSWER_RESET_VERSION = "2026-06-27-start-fresh";
+const ANSWER_RESET_VERSION = "2026-07-03-mock-from-scratch";
 const technologyLabels = {
   all: "All technologies",
   kubernetes: "Kubernetes / GKE",
@@ -69,6 +82,7 @@ const technologyLabels = {
   "tech-risk-technical": "Technology risk - technical",
   "tech-risk-behavioral": "Technology risk - behavioural",
   "hr-behavioral": "HR / behavioral basics",
+  "basic-concepts": "Basic / one-liner concepts",
   scenario: "Scenario-based questions"
 };
 const technologyMatchers = {
@@ -303,9 +317,37 @@ CERTIFICATIONS
 EDUCATION
 Bachelor of Engineering - Computer Science, RGPV, Bhopal | 2019`;
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const speechSynthesisApi = window.speechSynthesis;
 let recognition = null;
 let listening = false;
 let finalTranscript = "";
+let questionVoices = [];
+let answerSilenceTimer = null;
+let micStartedBySimulation = false;
+let questionAudioCanceled = false;
+let questionAudioRunId = 0;
+const questionVoiceTonePresets = {
+  natural: {
+    rate: 0.92,
+    pitch: 0.96,
+    voicePattern: /India|Google|Microsoft|Samantha|Daniel|Alex|Ava/i
+  },
+  deep: {
+    rate: 0.86,
+    pitch: 0.78,
+    voicePattern: /Daniel|Alex|Microsoft David|Google UK English Male|Male/i
+  },
+  clear: {
+    rate: 0.88,
+    pitch: 1,
+    voicePattern: /Google|Microsoft|Samantha|Ava|Zira/i
+  },
+  energetic: {
+    rate: 1,
+    pitch: 1.08,
+    voicePattern: /Google|Microsoft|Samantha|Ava|Zira/i
+  }
+};
 const questionBank = [
   "GKE expert: You are asked to design a production GKE platform for multiple product teams. How would you structure clusters, node pools, namespaces, IAM, networking, and deployment ownership?",
   "Terraform expert: How would you design reusable Terraform modules for GCP networking, IAM, GKE, Cloud Run, observability, and security so teams can consume them safely?",
@@ -619,7 +661,15 @@ const questionBank = [
   "Deployment vs DaemonSet: What is the difference between a Deployment and a DaemonSet in Kubernetes?",
   "ServiceAccount basics: What is a Kubernetes ServiceAccount, and how is it different from a regular user account?",
   "Cluster slowness metrics: If a Kubernetes cluster feels slow, what metrics would you check first?",
-  "Explain your automation: You mention you have written automation scripts. Walk me through one you are proud of, end to end."
+  "Explain your automation: You mention you have written automation scripts. Walk me through one you are proud of, end to end.",
+  "Scenario - Terraform locked state: Terraform apply is stuck because the state lock in GCS was not released after a crashed CI job. How would you safely unlock and verify state integrity?",
+  "Scenario - GKE OOMKilled pods: Pods in a GKE cluster keep restarting with OOMKilled after a traffic increase. How would you diagnose and fix it without just raising memory limits blindly?",
+  "Scenario - Docker image bloat in CI: A CI pipeline's Docker build time doubled and the image grew from 300MB to 1.2GB after a dependency change. How would you find the cause and fix it?",
+  "Scenario - GKE node pool stuck in NotReady: A GKE node pool shows several nodes stuck in NotReady after a Cluster Autoscaler scale-up. How would you triage and recover?",
+  "Scenario - Terraform drift after manual fix: An on-call engineer manually edited a firewall rule in the GCP console during an incident, and now Terraform plan wants to revert it. How do you reconcile safely?",
+  "Scenario - Ingress cert expiry: Users report TLS warnings on a production GKE service after a cert-manager renewal failed silently. How would you find the root cause and prevent recurrence?",
+  "Scenario - GCP quota outage: A batch job fails at 2am because a GCP compute quota was hit in one region. What immediate and long-term steps would you take?",
+  "Scenario - noisy neighbor on shared GKE cluster: One team's workload is starving CPU/network from other namespaces on a shared GKE cluster. How would you diagnose and fix it?"
 ];
 const scriptingQuestionBank = [
   "Python automation: Design a production-ready script that inventories all GCP projects, collects labels and owners, and exports non-compliant resources to CSV.",
@@ -663,7 +713,9 @@ const dockerQuestionBank = [
   "Docker networking: How does container networking work locally, and what changes when the container runs in Kubernetes?",
   "Docker volumes: When would you use bind mounts, volumes, or ephemeral container storage?",
   "Docker Compose: When is Docker Compose useful, and why is it different from Kubernetes?",
-  "Docker production readiness: What checks should pass before a Docker image is approved for production?"
+  "Docker production readiness: What checks should pass before a Docker image is approved for production?",
+  "Scenario - registry outage during deploy: Your container registry becomes unreachable mid-deployment and half the pods are on the new image, half on the old. How do you stabilize the rollout?",
+  "Scenario - poisoned base image: A base image your Dockerfiles depend on was found to contain a vulnerable package after being in production for weeks. How do you respond?"
 ];
 const pythonQuestionBank = [
   "Python automation: How would you design a Python script that audits GCP IAM bindings, flags risky roles, and exports a remediation report?",
@@ -1021,6 +1073,66 @@ const llmOpsQuestionBank = [
   "RAG vs fine-tuning vs prompting: How would you decide between prompt engineering, RAG, and fine-tuning for a domain-specific GenAI use case, and how would that decision change operational ownership?",
   "PII and data handling: How would you prevent PII and secrets from leaking into LLM prompts, logs, third-party model providers, and evaluation datasets?",
   "Vertex AI Agent Builder: How would you operate a production Vertex AI Agent Builder or Model Garden deployment, including versioning, monitoring, and rollback?",
+  "Vertex AI platform design: How would you design a production ML platform on Vertex AI for training, registry, deployment, monitoring, IAM, and cost control?",
+  "Vertex AI custom training: A training job works locally but fails on Vertex AI. How would you debug packaging, container image, service account, data access, and logs?",
+  "Vertex AI endpoint latency: A deployed model endpoint has high p95 latency after traffic increases. How would you troubleshoot autoscaling, machine type, model load time, request payloads, and downstream dependencies?",
+  "Vertex AI model registry: How would you use Vertex AI Model Registry to manage versions, aliases, lineage, approvals, rollback, and auditability?",
+  "Vertex AI batch prediction: When would you choose Vertex AI batch prediction over online endpoints, Dataflow, Cloud Run jobs, or GKE jobs?",
+  "Vertex AI Feature Store: How would you design feature freshness, offline/online consistency, access control, lineage, and monitoring for a feature store on GCP?",
+  "Vertex AI model monitoring: What would you monitor for skew, drift, attribution drift, data quality, prediction quality, and alert fatigue?",
+  "Vertex AI CI/CD: How would you build a CI/CD pipeline that packages training code, compiles pipelines, runs evaluation gates, registers models, and promotes deployments?",
+  "Vertex AI security: How would you secure Vertex AI workloads using least-privilege IAM, service accounts, VPC-SC, private networking, CMEK, and audit logs?",
+  "Vertex AI cost optimization: A Vertex AI project has rising training and prediction costs. How would you analyze spend and reduce waste without hurting model quality?",
+  "MLflow tracking design: How would you structure MLflow experiments, runs, parameters, metrics, tags, artifacts, and naming conventions for a team?",
+  "MLflow model registry: How would you use MLflow Model Registry for versioning, approvals, stage transitions, aliases, rollback, and auditability?",
+  "MLflow reproducibility: What exactly would you log in MLflow so another engineer can reproduce a model months later?",
+  "MLflow artifact storage: How would you design MLflow tracking server, backend store, artifact store, access control, backup, and retention in production?",
+  "MLflow CI/CD integration: How would you integrate MLflow with GitHub Actions, Jenkins, or Cloud Build for automated training, evaluation, registration, and deployment?",
+  "MLflow on Kubernetes: How would you deploy and operate an MLflow tracking server on GKE, including database, object storage, ingress, auth, and monitoring?",
+  "MLflow vs Vertex AI: When would you choose MLflow, Vertex AI Experiments/Model Registry, or use both together in a GCP MLOps platform?",
+  "MLflow model serving: How would you deploy an MLflow model for real-time inference using Docker, FastAPI, Kubernetes, KServe, or a managed endpoint?",
+  "MLflow governance: How would you enforce model ownership, approval gates, lineage, security scanning, and compliance evidence using MLflow metadata?",
+  "MLflow troubleshooting: An MLflow run logged metrics but the model artifact is missing or cannot be loaded. How would you debug it?",
+  "Kubeflow platform design: How would you design a production Kubeflow platform on GKE for notebooks, pipelines, training, serving, security, and observability?",
+  "Kubeflow Pipelines: How would you design a reusable Kubeflow Pipeline for data validation, training, evaluation, registration, and conditional deployment?",
+  "Kubeflow components: How would you package pipeline components as containers, pass artifacts/parameters between steps, and keep them reusable across teams?",
+  "Kubeflow multi-user isolation: How would you isolate teams in Kubeflow using namespaces, profiles, RBAC, service accounts, quotas, and network policies?",
+  "Kubeflow distributed training: How would you run distributed TensorFlow or PyTorch training on Kubeflow with GPUs, node pools, retries, and checkpointing?",
+  "Kubeflow Katib: When would you use Katib for hyperparameter tuning, and how would you control search cost, parallel trials, metrics, and early stopping?",
+  "Kubeflow model serving: How would you serve models from Kubeflow using KServe, canary releases, autoscaling, GPU support, and rollback?",
+  "Kubeflow CI/CD: How would you integrate Kubeflow Pipelines with GitHub Actions, Jenkins, Cloud Build, ArgoCD, or GitOps?",
+  "Kubeflow troubleshooting: A Kubeflow pipeline step is stuck Pending or failing. How would you debug pods, volumes, service accounts, images, logs, and events?",
+  "Kubeflow vs MLflow vs Vertex AI: How would you choose between Kubeflow, MLflow, and Vertex AI for a GCP MLOps platform?",
+  "MLOps architecture: How would you design an end-to-end production MLOps platform from data ingestion to monitoring and retraining?",
+  "MLOps lifecycle ownership: Where do data scientists, ML engineers, platform engineers, SREs, and security teams own different parts of the model lifecycle?",
+  "MLOps CI/CD/CT: How would you design continuous integration, continuous delivery, and continuous training for ML systems?",
+  "MLOps data validation: What data quality, schema, freshness, and anomaly checks would you add before training or inference?",
+  "MLOps model evaluation gates: What offline, online, business, fairness, latency, and reliability gates should a model pass before production?",
+  "MLOps monitoring strategy: How would you monitor model quality, data drift, concept drift, latency, errors, feature freshness, and business impact?",
+  "MLOps retraining strategy: How would you decide between scheduled retraining, trigger-based retraining, manual retraining, and champion-challenger updates?",
+  "MLOps incident response: A production model starts giving bad predictions but infrastructure metrics look healthy. How would you investigate and mitigate?",
+  "MLOps governance: How would you make models reproducible, auditable, explainable, secure, and compliant across teams?",
+  "MLOps cost and reliability: How would you balance GPU cost, batch vs online serving, autoscaling, SLOs, and rollback for production ML workloads?",
+  "MLOps situation - bad model release: A new model version passed offline tests but hurts business KPIs after deployment. What do you do in the first hour?",
+  "MLOps situation - data pipeline delay: Training data is delayed by six hours and a retraining job is about to run. How do you decide whether to proceed, skip, or use older data?",
+  "MLOps situation - silent schema change: An upstream team changed a column meaning without changing its name. How would you detect, mitigate, and prevent this?",
+  "MLOps situation - feature drift alert: Drift monitoring fires during a holiday sale, but revenue is up. How do you avoid a false incident while still protecting the model?",
+  "MLOps situation - model serving outage: A model endpoint returns 5xx errors after scaling from 5 to 50 replicas. How would you debug it?",
+  "MLOps situation - GPU quota shortage: A critical training job cannot start because GPU quota is exhausted. What immediate and long-term actions would you take?",
+  "MLOps situation - model artifact corruption: The registry points to a model artifact that cannot be loaded in production. How do you recover and prevent recurrence?",
+  "MLOps situation - rollback conflict: Product wants to keep a faster model, but risk wants rollback because accuracy dropped. How do you lead the decision?",
+  "MLOps situation - missing ground truth: The business asks for model accuracy monitoring, but labels arrive after 30 days. What proxy signals and workflow would you design?",
+  "MLOps situation - training-serving skew: Offline validation is strong, but online predictions are poor. How would you prove or rule out training-serving skew?",
+  "MLOps situation - PII leak risk: You discover raw customer data may be logged in model training or inference logs. What is your response plan?",
+  "MLOps situation - expensive experiment culture: Data scientists are launching many large training jobs without cost ownership. How would you introduce guardrails without blocking innovation?",
+  "MLOps situation - notebook to production: A data scientist has a high-performing notebook model. How do you turn it into a reliable production pipeline?",
+  "MLOps situation - flaky retraining pipeline: A retraining pipeline fails intermittently and teams rerun it manually. How would you stabilize it?",
+  "MLOps situation - canary disagreement: Technical metrics look good in canary, but support tickets increase. How do you investigate and decide rollout?",
+  "MLOps situation - compliance audit: An auditor asks how a prediction made three months ago was produced. What evidence should your platform provide?",
+  "MLOps situation - multi-team platform conflict: One team needs fast experimentation while another needs strict approval gates. How would you design the platform for both?",
+  "MLOps situation - stale features: Online feature values are stale but the model endpoint is healthy. How do you detect, mitigate, and redesign?",
+  "MLOps situation - disaster recovery: The region hosting your model registry and artifacts is unavailable. How would you continue serving and recover safely?",
+  "MLOps situation - interview unknown: You are asked about an MLOps tool you have not used directly. How do you answer honestly while still showing strong engineering judgment?",
   "Multi-tenant AI platform: How would you design tenant isolation, quota enforcement, and cost attribution for an internal platform that serves LLM access to multiple product teams?",
   "Resume deep-dive - Vertex AI Pipelines: Walk me through a Vertex AI Pipeline you built end to end, from training through Vertex AI Model Registry to production deployment.",
   "Resume deep-dive - LLMOps stack: You deployed Llama 3, Mistral, Ollama, and vLLM on Kubernetes. How did you choose between them and scale inference for concurrent users?",
@@ -1028,7 +1140,9 @@ const llmOpsQuestionBank = [
   "Resume deep-dive - RAG pipeline: Walk me through the RAG pipeline you built, including embedding model choice, vector database, chunking, and how you measured answer quality.",
   "Resume deep-dive - model monitoring: You used Vertex AI Model Monitoring and Evidently AI for drift detection with automated retraining. How did you avoid false-positive retrains?",
   "Resume deep-dive - secure MLOps: You implemented IAM, RBAC, Secrets Manager, and Binary Authorization for AI workloads. Walk me through one specific control and the risk it closed.",
-  "Resume deep-dive - GitOps for AI: You used ArgoCD and Helm for AI application deployments. How is a GitOps rollout for model-serving different from a normal microservice rollout?"
+  "Resume deep-dive - GitOps for AI: You used ArgoCD and Helm for AI application deployments. How is a GitOps rollout for model-serving different from a normal microservice rollout?",
+  "Scenario - hallucinated compliance answer: An LLM-powered support bot gave a customer incorrect regulatory advice that was later escalated. How would you investigate and prevent recurrence?",
+  "Scenario - runaway agent loop: An autonomous agent got stuck in a tool-calling loop overnight and ran up a large API bill. How would you detect this faster and add guardrails?"
 ];
 const ansibleQuestionBank = [
   "Ansible fundamentals: What is Ansible, and how does its agentless, push-based model differ from Terraform or Puppet/Chef?",
@@ -1056,7 +1170,9 @@ const ansibleQuestionBank = [
   "Ansible roles basics: What are roles in Ansible, and why would you use them instead of one large playbook?",
   "Ansible modules basics: What are Ansible modules, and how do they differ from running a raw shell command?",
   "Ansible connectivity: How does Ansible connect to and execute commands on remote machines?",
-  "YAML basics: What is YAML, and why is it used as the configuration language for Ansible?"
+  "YAML basics: What is YAML, and why is it used as the configuration language for Ansible?",
+  "Scenario - partial playbook failure: An Ansible playbook fails on host 40 of 200 mid-rollout, leaving the fleet in mixed state. How do you recover safely?",
+  "Scenario - vaulted secret rotation: You need to rotate a secret stored in Ansible Vault across all environments without causing a mid-day outage. How do you plan it?"
 ];
 const techRiskTechnicalQuestionBank = [
   "Technology risk framework: How would you design an enterprise technology risk management framework for cloud, applications, infrastructure, SDLC, and third-party integrations?",
@@ -1070,7 +1186,9 @@ const techRiskTechnicalQuestionBank = [
   "Cloud risk dashboard: Design a technology risk dashboard for senior leadership. What KRIs, control metrics, exceptions, trends, and escalation signals would you include?",
   "Risk automation: What parts of technology risk assessment and reporting would you automate using cloud logs, CI/CD metadata, vulnerability scanners, policy-as-code, and ticketing workflows?",
   "FMEA and scenario analysis: How would you use FMEA or scenario analysis to identify high-impact technology failure modes before they become incidents?",
-  "Control validation: How would you test whether a control is actually working, for example privileged access, deployment approval, backup restore, or vulnerability SLA closure?"
+  "Control validation: How would you test whether a control is actually working, for example privileged access, deployment approval, backup restore, or vulnerability SLA closure?",
+  "Scenario - vendor breach notification: A third-party SaaS vendor discloses a data breach affecting a system your team integrates with. Walk through your first 24 hours.",
+  "Scenario - audit finds unencrypted backups: An internal audit finds that database backups have been stored unencrypted for 8 months. How would you handle disclosure, remediation, and prevention?"
 ];
 const techRiskBehavioralQuestionBank = [
   "Behavioural risk leadership: Tell me about a time you had to influence engineering or product teams to fix a technology risk they did not initially prioritize.",
@@ -1084,7 +1202,9 @@ const techRiskBehavioralQuestionBank = [
   "Remediation ownership: A risk issue is overdue because multiple teams disagree on ownership. How would you move it to closure?",
   "Audit partnership: How would you handle a disagreement with internal or external auditors about severity, evidence, or remediation feasibility?",
   "Incident communication: During a major incident with regulatory implications, how would you coordinate technical updates, business impact, risk reporting, and follow-up actions?",
-  "Leadership reflection: What does success look like for you in a Technology Risk Lead role after six months?"
+  "Leadership reflection: What does success look like for you in a Technology Risk Lead role after six months?",
+  "Scenario - failed access review: An access recertification review reveals 12 terminated employees still have active production access. How do you respond and remediate?",
+  "Scenario - conflicting risk appetite: Business wants to launch a feature that Security rates as high risk. How do you drive the decision to resolution?"
 ];
 const hrBehavioralQuestionBank = [
   "Tell me about yourself.",
@@ -1099,6 +1219,115 @@ const hrBehavioralQuestionBank = [
   "Have you worked independently on a project, or always as part of a team? Describe an example.",
   "What would you do if an automation script you wrote failed or caused an unintended change in production?"
 ];
+const basicConceptQuestionBank = [
+  "What is DevOps?",
+  "What is a DevOps Engineer?",
+  "What is the difference between DevOps and Agile?",
+  "What is Configuration Management?",
+  "What is CI/CD?",
+  "What is the difference between Continuous Delivery and Continuous Deployment?",
+  "What is Infrastructure as Code (IaC)?",
+  "What is a virtual machine (VM), and how does it differ from a container?",
+  "What is a container?",
+  "What is the difference between a Docker image and a Docker container?",
+  "What is a Dockerfile?",
+  "How does a multi-stage Docker build work, and what problem does it fix?",
+  "What is Kubernetes?",
+  "What is a Pod in Kubernetes?",
+  "What is a Node in Kubernetes?",
+  "What is a Kubernetes namespace?",
+  "What is a Kubernetes Deployment?",
+  "What is a Kubernetes Service?",
+  "How do you upgrade/update a Kubernetes cluster?",
+  "How does the GKE API server (control plane) expose traffic, and how do clients reach it?",
+  "What is etcd, and what happens to the cluster if etcd goes down?",
+  "What does OOMKilled mean, and how do you fix it?",
+  "What happens when a Kubernetes node fails and goes NotReady?",
+  "What happens to the Horizontal Pod Autoscaler (HPA) if the metrics server goes down during a traffic spike?",
+  "What are taints and tolerations in Kubernetes, in one line?",
+  "How is a Kubernetes cluster monitored - what tools and approach would you use?",
+  "Kubernetes shows a Deployment as healthy and all Pods Running, but Grafana is alerting that the application isn't working properly - how do you investigate and fix this mismatch?",
+  "What is a Helm chart?",
+  "What is Terraform?",
+  "What is a Terraform state file?",
+  "What is a Terraform module?",
+  "What is Ansible?",
+  "How does Ansible help in DevOps and infrastructure automation, in practical terms?",
+  "What is an Ansible playbook?",
+  "What is a role in Ansible?",
+  "What is a task in Ansible?",
+  "What is an ad-hoc command in Ansible?",
+  "What is the Ansible template module?",
+  "What is idempotency?",
+  "How would you optimize a Google Cloud Run service that is taking a long time to start (cold starts)?",
+  "What is a load balancer?",
+  "What is DNS?",
+  "What is a firewall?",
+  "What is a VPC?",
+  "What is a subnet?",
+  "In simple terms, how does network traffic flow from a client to a Pod in GKE (client to Load Balancer to Service to Pod)?",
+  "What is VPC Peering, and how does it differ from Cloud Interconnect and Partner Interconnect?",
+  "What is IAM?",
+  "What is RBAC?",
+  "What is the difference between a Role and a ClusterRole in Kubernetes RBAC?",
+  "What is the difference between a RoleBinding and a ClusterRoleBinding in Kubernetes?",
+  "What is GKE Workload Identity?",
+  "What is the difference between a stateful and a stateless application?",
+  "What is a secret (in the context of Kubernetes or cloud platforms)?",
+  "What is autoscaling?",
+  "What is the difference between horizontal and vertical scaling?",
+  "What is a reverse proxy?",
+  "What is TLS/SSL?",
+  "What is a container registry?",
+  "What is Artifact Registry?",
+  "What is Cloud Build, and what does a typical Cloud Build workflow look like?",
+  "What is Cloud Deploy?",
+  "How does Cloud Armor work to protect a service?",
+  "What is a rollback?",
+  "What is a blue-green deployment?",
+  "What is a canary deployment?",
+  "What is a service mesh?",
+  "How does Istio work as a service mesh - what is the basic request/traffic flow?",
+  "What is observability?",
+  "What is the difference between SLA, SLI, and SLO?",
+  "What is an error budget?",
+  "What is a runbook?",
+  "What is a postmortem?",
+  "What is version control?",
+  "What is a Git branch?",
+  "What is a Git merge conflict?",
+  "What is git stash?",
+  "What is the difference between git fetch and git pull?",
+  "What is git cherry-pick used for?",
+  "What is git squash?",
+  "What is Jenkins?",
+  "What is Puppet, and how does it compare to Ansible?",
+  "What is the difference between HTTP and HTTPS?",
+  "What is a REST API?",
+  "What is YAML used for?",
+  "What is a cron job?",
+  "What is SSH?",
+  "What is the difference between a process and a thread?",
+  "What is a zombie process, and how do you fix a system that has many of them?",
+  "What is a file descriptor limit (ulimit), and how do you fix a \"too many open files\" error?",
+  "What is CPU throttling?",
+  "What is a message queue?",
+  "What is caching?",
+  "What is a monolith versus a microservice?",
+  "What is a typical CI/CD pipeline flow, stage by stage?",
+  "What is a Jenkins pipeline?",
+  "What is the difference between a Jenkins declarative pipeline and a scripted pipeline?",
+  "What is a Jenkinsfile?",
+  "What is a Jenkins agent (node)?",
+  "What are Jenkins plugins, and can you name a few commonly used ones?",
+  "What is GitLab CI/CD?",
+  "What is a .gitlab-ci.yml file?",
+  "What is a GitLab CI/CD runner?",
+  "What is GitHub Actions?",
+  "What is a GitHub Actions workflow file?",
+  "What is a GitHub Actions runner?",
+  "What is the difference between Jenkins, GitLab CI, and GitHub Actions?"
+];
 let questionNumber = 1;
 let interviewNumber = 1;
 let submittingFromMic = false;
@@ -1109,6 +1338,7 @@ let practicePlan = [];
 let mockInterviewSets = [];
 let largeQuestionBank = [];
 let progressHistory = [];
+let customSkills = [];
 
 function createInterview(number) {
   return {
@@ -1147,6 +1377,7 @@ function saveState() {
     interviewNumber,
     interviews,
     progressHistory,
+    customSkills,
     questionBankIndex,
     usedQuestionKeys,
     technology: els.technology.value,
@@ -1154,6 +1385,11 @@ function saveState() {
     mockSet: els.mockSet.value,
     questionOrder: els.questionOrder.value,
     autoNext: els.autoNext.checked,
+    autoReadQuestion: els.autoReadQuestion.checked,
+    questionVoiceTone: els.questionVoiceTone.value,
+    realTimeSimulation: els.realTimeSimulation.checked,
+    micLanguage: els.micLanguage.value,
+    answerPause: els.answerPause.value,
     interviewMode: currentMode()
   }));
 }
@@ -1171,6 +1407,11 @@ function loadState() {
     : saved.cvText;
   els.jdText.value = saved.jdText || defaultTargetSkills;
   els.autoNext.checked = saved.autoNext !== false;
+  els.autoReadQuestion.checked = saved.autoReadQuestion !== false;
+  els.questionVoiceTone.value = saved.questionVoiceTone || "natural";
+  els.realTimeSimulation.checked = saved.realTimeSimulation !== false;
+  els.micLanguage.value = saved.micLanguage || "en-IN";
+  els.answerPause.value = saved.answerPause || "9500";
   els.technology.value = saved.technology || "all";
   els.questionOrder.value = saved.questionOrder || "random";
   setMode(saved.interviewMode || "live");
@@ -1179,6 +1420,8 @@ function loadState() {
     ? saved.interviews
     : [createInterview(1)];
   progressHistory = shouldResetAnswers || !Array.isArray(saved.progressHistory) ? [] : saved.progressHistory;
+  customSkills = Array.isArray(saved.customSkills) ? saved.customSkills : [];
+  renderCustomSkills();
   questionBankIndex = shouldResetAnswers ? 0 : Number(saved.questionBankIndex || 0);
   usedQuestionKeys = shouldResetAnswers || !Array.isArray(saved.usedQuestionKeys) ? [] : saved.usedQuestionKeys;
   els.practiceDay.value = saved.practiceDay || "all";
@@ -1230,6 +1473,8 @@ function renderInterview() {
   els.previousInterview.disabled = interviewNumber <= 1;
   els.previousQuestion.disabled = session.questionHistoryIndex <= 0;
   els.nextQuestion.disabled = session.questionHistoryIndex >= session.questionHistory.length - 1;
+  stopQuestionAudio();
+  updateQuestionAudioControls();
   renderSessionStats();
   renderInterviewList();
   renderProgressHistory();
@@ -1325,6 +1570,108 @@ function renderProgressHistory() {
   }).join("");
 }
 
+function customSkillId(name) {
+  return `custom-${String(name || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")}`;
+}
+
+function customSkillById(id) {
+  return customSkills.find((skill) => skill.id === id);
+}
+
+function customSkillQuestionsFor(name, inputQuestions = "") {
+  const manualQuestions = String(inputQuestions || "")
+    .split(/\r?\n/)
+    .map((line) => line.replace(/^[-*\d.)\s]+/, "").trim())
+    .filter(Boolean);
+  if (manualQuestions.length) return manualQuestions;
+
+  const skill = String(name || "this technology").trim();
+  return [
+    `${skill} fundamentals: Explain the core concepts, runtime model, and where you have used it in production.`,
+    `${skill} system design: How would you design, deploy, observe, and scale a production service using ${skill}?`,
+    `${skill} troubleshooting: A production issue appears after a release involving ${skill}. How would you debug metrics, logs, traces, configuration, and rollback?`,
+    `${skill} security: What are the main security risks, dependency risks, secret handling concerns, and access controls for ${skill}?`,
+    `${skill} performance: How would you identify bottlenecks, tune performance, and validate improvements for ${skill}?`,
+    `${skill} testing and CI/CD: How would you test, package, scan, deploy, and roll back ${skill} changes safely?`,
+    `${skill} senior ownership: Describe a project where you used ${skill}, the tradeoffs you made, and the measurable impact.`,
+    `${skill} interview deep dive: What mistakes do teams commonly make with ${skill}, and how would you prevent them?`
+  ];
+}
+
+function addCustomSkillOption(skill) {
+  if (!skill?.id || els.technology.querySelector(`option[value="${skill.id}"]`)) return;
+  const option = document.createElement("option");
+  option.value = skill.id;
+  option.textContent = `Custom - ${skill.name}`;
+  els.technology.appendChild(option);
+}
+
+function renderCustomSkills() {
+  customSkills.forEach(addCustomSkillOption);
+  if (!customSkills.length) {
+    els.customSkillList.innerHTML = `<p class="history-empty">No custom skills yet.</p>`;
+    return;
+  }
+  els.customSkillList.innerHTML = customSkills.map((skill) => `
+    <button class="custom-skill-item" type="button" data-skill="${escapeHtml(skill.id)}">
+      <span>${escapeHtml(skill.name)}</span>
+      <small>${skill.questions.length} question${skill.questions.length === 1 ? "" : "s"}</small>
+    </button>
+  `).join("");
+}
+
+function saveCustomSkill() {
+  const name = els.customSkillName.value.trim();
+  if (!name) {
+    els.feedbackOutput.innerHTML = markdownToHtml("## Missing Skill\nAdd a skill name such as Java, React, AWS, or Spring Boot.");
+    return;
+  }
+  const id = customSkillId(name);
+  if (!id) return;
+  const questions = customSkillQuestionsFor(name, els.customSkillQuestions.value);
+  const existing = customSkills.find((skill) => skill.id === id);
+  if (existing) {
+    existing.name = name;
+    existing.questions = questions;
+  } else {
+    customSkills.push({ id, name, questions });
+  }
+  addCustomSkillOption({ id, name });
+  els.technology.value = id;
+  questionBankIndex = 0;
+  usedQuestionKeys = [];
+  interviews = [createInterview(1)];
+  interviewNumber = 1;
+  renderCustomSkills();
+  renderInterview();
+  saveState();
+  els.feedbackOutput.innerHTML = markdownToHtml(`## Custom Skill Added\n${name} is ready with ${questions.length} questions. Click New question to practice it.`);
+}
+
+function deleteSelectedCustomSkill() {
+  const id = els.technology.value;
+  const skill = customSkillById(id);
+  if (!skill) {
+    els.feedbackOutput.innerHTML = markdownToHtml("## No Custom Skill Selected\nSelect a custom skill from Technology practice before deleting.");
+    return;
+  }
+  customSkills = customSkills.filter((item) => item.id !== id);
+  els.technology.querySelector(`option[value="${id}"]`)?.remove();
+  els.technology.value = "all";
+  questionBankIndex = 0;
+  usedQuestionKeys = [];
+  interviews = [createInterview(1)];
+  interviewNumber = 1;
+  renderCustomSkills();
+  renderInterview();
+  saveState();
+  els.feedbackOutput.innerHTML = markdownToHtml(`## Custom Skill Deleted\n${skill.name} was removed from this browser.`);
+}
+
 function currentMode() {
   return document.querySelector("input[name='interviewMode']:checked")?.value || "live";
 }
@@ -1339,10 +1686,17 @@ function updateModeUi() {
   const liveMode = currentMode() === "live";
   els.autoNext.checked = liveMode;
   els.autoNext.disabled = true;
+  els.realTimeSimulation.disabled = !liveMode || !SpeechRecognition;
   els.feedbackButton.textContent = liveMode ? "Submit answer" : "Save answer";
-  els.micState.textContent = liveMode
-    ? "Live mode: stop mic to submit"
-    : "Manual mode: stop mic, then click Save answer";
+  if (!SpeechRecognition) {
+    els.micState.textContent = "Speech input unavailable in this browser";
+  } else if (liveMode && els.realTimeSimulation.checked) {
+    els.micState.textContent = "Simulation: question audio will open the mic";
+  } else {
+    els.micState.textContent = liveMode
+      ? "Live mode: stop mic to submit"
+      : "Manual mode: stop mic, then click Save answer";
+  }
 }
 
 function updateAnswerEditor() {
@@ -1504,6 +1858,7 @@ function isAmbiguousSection(section) {
 }
 
 function matchesTechnology(question, section = "") {
+  if (els.technology.value.startsWith("custom-")) return true;
   if (els.technology.value === "all") return true;
   const matcher = technologyMatchers[els.technology.value];
   if (!matcher) return true;
@@ -1531,6 +1886,7 @@ function specializedQuestions() {
   if (els.technology.value === "tech-risk-technical") return techRiskTechnicalQuestionBank;
   if (els.technology.value === "tech-risk-behavioral") return techRiskBehavioralQuestionBank;
   if (els.technology.value === "hr-behavioral") return hrBehavioralQuestionBank;
+  if (els.technology.value === "basic-concepts") return basicConceptQuestionBank;
   if (els.technology.value === "all") {
     return [
       ...scriptingQuestionBank,
@@ -1544,7 +1900,8 @@ function specializedQuestions() {
       ...ansibleQuestionBank,
       ...techRiskTechnicalQuestionBank,
       ...techRiskBehavioralQuestionBank,
-      ...hrBehavioralQuestionBank
+      ...hrBehavioralQuestionBank,
+      ...basicConceptQuestionBank
     ];
   }
   return [];
@@ -1585,7 +1942,11 @@ function buildCustomJdMockQuestions() {
 }
 
 function questionPool() {
-  if (["scripting", "coding", "tech-risk-technical", "tech-risk-behavioral", "hr-behavioral"].includes(els.technology.value)) {
+  if (els.technology.value.startsWith("custom-")) {
+    return uniqueQuestions(customSkillById(els.technology.value)?.questions || []);
+  }
+
+  if (["scripting", "coding", "tech-risk-technical", "tech-risk-behavioral", "hr-behavioral", "basic-concepts"].includes(els.technology.value)) {
     return uniqueQuestions(specializedQuestions());
   }
 
@@ -1624,7 +1985,8 @@ function questionPool() {
 }
 
 function activeQuestionPoolLabel(poolLength) {
-  const technology = technologyLabels[els.technology.value] || technologyLabels.all;
+  const customSkill = customSkillById(els.technology.value);
+  const technology = customSkill?.name || technologyLabels[els.technology.value] || technologyLabels.all;
   if (els.technology.value !== "all") {
     return `${technology} question ${usedQuestionKeys.length}/${poolLength}`;
   }
@@ -1731,6 +2093,8 @@ function markdownToHtml(markdown) {
 
 function setQuestionFromText(question) {
   saveCurrentQuestionDraft();
+  stopAnswerSilenceTimer();
+  stopQuestionAudio();
   questionNumber += 1;
   els.question.textContent = question.replace(/^["']|["']$/g, "");
   els.answer.value = "";
@@ -1752,6 +2116,7 @@ function setQuestionFromText(question) {
   renderSessionStats();
   els.previousQuestion.disabled = session.questionHistoryIndex <= 0;
   els.nextQuestion.disabled = session.questionHistoryIndex >= session.questionHistory.length - 1;
+  speakQuestionIfEnabled();
   saveState();
 }
 
@@ -1769,6 +2134,9 @@ function showQuestionHistoryEntry(index) {
   session.question = entry.question;
   session.answerDraft = els.answer.value;
   els.micState.textContent = `Viewing question ${questionNumber}`;
+  stopAnswerSilenceTimer();
+  stopQuestionAudio();
+  updateQuestionAudioControls();
   renderSessionStats();
   els.previousQuestion.disabled = session.questionHistoryIndex <= 0;
   els.nextQuestion.disabled = session.questionHistoryIndex >= session.questionHistory.length - 1;
@@ -1848,7 +2216,11 @@ async function checkHealth() {
   try {
     const response = await fetch("/api/health");
     const data = await response.json();
-    const providerLabel = data.provider === "claude" ? "Claude" : "Ollama";
+    const providerLabel = data.provider === "claude"
+      ? "Claude"
+      : data.provider === "offline"
+        ? "Offline bank"
+        : "Ollama";
     els.status.classList.toggle("ok", Boolean(data.ok));
     els.status.classList.toggle("bad", !data.ok);
     els.statusText.textContent = data.ok ? `${providerLabel} ready: ${data.model}` : `${providerLabel} not reachable`;
@@ -1916,6 +2288,52 @@ async function submitAnswer() {
   }
 }
 
+function realTimeSimulationEnabled() {
+  return currentMode() === "live" && els.realTimeSimulation.checked && Boolean(recognition);
+}
+
+function stopAnswerSilenceTimer() {
+  if (answerSilenceTimer) {
+    clearTimeout(answerSilenceTimer);
+    answerSilenceTimer = null;
+  }
+}
+
+function answerPauseMs() {
+  return Number(els.answerPause.value || 9500);
+}
+
+function scheduleAnswerSilenceStop() {
+  if (!realTimeSimulationEnabled() || !listening) return;
+  stopAnswerSilenceTimer();
+  answerSilenceTimer = setTimeout(() => {
+    if (listening && els.answer.value.trim()) {
+      els.micState.textContent = "Silence detected. Submitting answer.";
+      recognition.stop();
+    }
+  }, answerPauseMs());
+}
+
+function startSimulationMic() {
+  if (!realTimeSimulationEnabled() || listening) return;
+  try {
+    micStartedBySimulation = true;
+    applyRecognitionSettings();
+    recognition.start();
+  } catch (error) {
+    micStartedBySimulation = false;
+    els.micState.textContent = "Click Start mic to continue the simulation";
+  }
+}
+
+function applyRecognitionSettings() {
+  if (!recognition) return;
+  recognition.lang = els.micLanguage.value || "en-IN";
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.maxAlternatives = 3;
+}
+
 function setupSpeech() {
   if (!SpeechRecognition) {
     els.micButton.disabled = true;
@@ -1924,40 +2342,53 @@ function setupSpeech() {
   }
 
   recognition = new SpeechRecognition();
-  recognition.continuous = true;
-  recognition.interimResults = true;
-  recognition.lang = "en-US";
+  applyRecognitionSettings();
 
   recognition.onstart = () => {
     listening = true;
+    stopAnswerSilenceTimer();
     finalTranscript = els.answer.value.trim();
     els.micButton.textContent = "Stop mic";
     els.micButton.classList.add("active");
     els.micButton.setAttribute("aria-pressed", "true");
-    els.micState.textContent = "Listening";
+    els.micState.textContent = micStartedBySimulation ? "Simulation listening" : "Listening";
   };
 
   recognition.onresult = (event) => {
     let interim = "";
     for (let i = event.resultIndex; i < event.results.length; i += 1) {
-      const text = event.results[i][0].transcript;
-      if (event.results[i].isFinal) finalTranscript += `${finalTranscript ? " " : ""}${text.trim()}`;
-      else interim += text;
+      const text = bestRecognitionText(event.results[i]);
+      if (event.results[i].isFinal) {
+        finalTranscript = cleanTranscript(`${finalTranscript ? `${finalTranscript} ` : ""}${text}`);
+      } else {
+        interim += text;
+      }
     }
-    els.answer.value = `${finalTranscript}${interim ? ` ${interim}` : ""}`.trim();
+    els.answer.value = cleanTranscript(`${finalTranscript}${interim ? ` ${interim}` : ""}`);
     renderSessionStats();
+    scheduleAnswerSilenceStop();
   };
 
   recognition.onerror = (event) => {
-    els.micState.textContent = event.error === "not-allowed" ? "Microphone blocked" : "Speech input stopped";
+    if (event.error === "not-allowed") {
+      els.micState.textContent = "Microphone blocked";
+    } else if (event.error === "no-speech") {
+      els.micState.textContent = "No speech detected. Try speaking closer to the mic.";
+    } else {
+      els.micState.textContent = "Speech input stopped";
+    }
   };
 
   recognition.onend = () => {
     listening = false;
+    stopAnswerSilenceTimer();
     els.micButton.textContent = "Start mic";
     els.micButton.classList.remove("active");
     els.micButton.setAttribute("aria-pressed", "false");
-    if (els.micState.textContent === "Listening") els.micState.textContent = "Microphone idle";
+    if (els.micState.textContent === "Listening" || els.micState.textContent === "Simulation listening") {
+      els.micState.textContent = "Microphone idle";
+    }
+    micStartedBySimulation = false;
     if (currentMode() === "live" && !submittingFromMic && els.answer.value.trim()) {
       submittingFromMic = true;
       submitAnswer();
@@ -1965,10 +2396,147 @@ function setupSpeech() {
   };
 }
 
+function bestRecognitionText(result) {
+  let best = result[0];
+  for (let i = 1; i < result.length; i += 1) {
+    if ((result[i].confidence || 0) > (best.confidence || 0)) best = result[i];
+  }
+  return String(best?.transcript || "").trim();
+}
+
+function cleanTranscript(text) {
+  return String(text || "")
+    .replace(/\s+/g, " ")
+    .replace(/\bgee\s*kay\s*ee\b/gi, "GKE")
+    .replace(/\bg\s*k\s*e\b/gi, "GKE")
+    .replace(/\bk\s*eight\s*s\b/gi, "K8s")
+    .replace(/\bkubernetes\b/gi, "Kubernetes")
+    .replace(/\bterraform\b/gi, "Terraform")
+    .replace(/\bollama\b/gi, "Ollama")
+    .replace(/\bgrafana\b/gi, "Grafana")
+    .replace(/\bprometheus\b/gi, "Prometheus")
+    .replace(/\bopen telemetry\b/gi, "OpenTelemetry")
+    .replace(/\bargo\s*cd\b/gi, "ArgoCD")
+    .replace(/\bcloud armor\b/gi, "Cloud Armor")
+    .replace(/\bworkload identity\b/gi, "Workload Identity")
+    .replace(/\biam\b/gi, "IAM")
+    .replace(/\bsli\b/gi, "SLI")
+    .replace(/\bslo\b/gi, "SLO")
+    .replace(/\bsla\b/gi, "SLA")
+    .trim();
+}
+
+function updateQuestionAudioControls() {
+  const supported = Boolean(speechSynthesisApi && window.SpeechSynthesisUtterance);
+  els.speakQuestion.disabled = !supported;
+  els.stopQuestionAudio.disabled = !supported || !speechSynthesisApi.speaking;
+  els.autoReadQuestion.disabled = !supported;
+  if (!supported) {
+    els.questionAudioState.textContent = "Question audio unavailable in this browser";
+  } else if (!speechSynthesisApi.speaking && !speechSynthesisApi.pending) {
+    els.questionAudioState.textContent = "Question audio ready";
+  }
+}
+
+function preferredQuestionVoice(tonePreset = questionVoiceTonePresets.natural) {
+  questionVoices = speechSynthesisApi?.getVoices?.() || [];
+  return questionVoices.find((voice) => /^en[-_]/i.test(voice.lang) && tonePreset.voicePattern.test(voice.name)) ||
+    questionVoices.find((voice) => /^en[-_]/i.test(voice.lang) && /India|Google|Microsoft|Samantha|Daniel|Alex|Ava/i.test(voice.name)) ||
+    questionVoices.find((voice) => /^en[-_]/i.test(voice.lang)) ||
+    questionVoices[0] ||
+    null;
+}
+
+function stopQuestionAudio() {
+  if (!speechSynthesisApi) return;
+  questionAudioCanceled = true;
+  questionAudioRunId += 1;
+  speechSynthesisApi.cancel();
+  updateQuestionAudioControls();
+}
+
+function speakQuestion() {
+  if (!speechSynthesisApi || !window.SpeechSynthesisUtterance) {
+    updateQuestionAudioControls();
+    return;
+  }
+  const text = els.question.textContent.trim();
+  if (!text) return;
+  speechSynthesisApi.cancel();
+  questionAudioCanceled = false;
+  questionAudioRunId += 1;
+  const runId = questionAudioRunId;
+  const utterance = new SpeechSynthesisUtterance(text);
+  const tonePreset = questionVoiceTonePresets[els.questionVoiceTone.value] || questionVoiceTonePresets.natural;
+  const voice = preferredQuestionVoice(tonePreset);
+  if (voice) utterance.voice = voice;
+  utterance.lang = voice?.lang || "en-US";
+  utterance.rate = tonePreset.rate;
+  utterance.pitch = tonePreset.pitch;
+  utterance.onstart = () => {
+    els.questionAudioState.textContent = "Reading question";
+    updateQuestionAudioControls();
+  };
+  utterance.onend = () => {
+    els.questionAudioState.textContent = "Question audio ready";
+    updateQuestionAudioControls();
+    if (!questionAudioCanceled && runId === questionAudioRunId) startSimulationMic();
+  };
+  utterance.onerror = () => {
+    if (runId === questionAudioRunId) questionAudioCanceled = false;
+    els.questionAudioState.textContent = "Question audio stopped";
+    updateQuestionAudioControls();
+  };
+  speechSynthesisApi.speak(utterance);
+}
+
+function speakQuestionIfEnabled() {
+  updateQuestionAudioControls();
+  if (els.autoReadQuestion.checked) speakQuestion();
+}
+
+if (speechSynthesisApi) {
+  speechSynthesisApi.onvoiceschanged = () => {
+    questionVoices = speechSynthesisApi.getVoices();
+    updateQuestionAudioControls();
+  };
+}
+
 els.micButton.addEventListener("click", () => {
   if (!recognition) return;
-  if (listening) recognition.stop();
-  else recognition.start();
+  if (listening) {
+    stopAnswerSilenceTimer();
+    recognition.stop();
+  } else {
+    micStartedBySimulation = false;
+    applyRecognitionSettings();
+    recognition.start();
+  }
+});
+
+els.speakQuestion.addEventListener("click", speakQuestion);
+els.stopQuestionAudio.addEventListener("click", stopQuestionAudio);
+els.autoReadQuestion.addEventListener("change", () => {
+  if (!els.autoReadQuestion.checked) stopQuestionAudio();
+  saveState();
+});
+
+els.questionVoiceTone.addEventListener("change", () => {
+  saveState();
+  if (speechSynthesisApi?.speaking) speakQuestion();
+});
+
+[els.micLanguage, els.answerPause].forEach((input) => {
+  input.addEventListener("change", () => {
+    if (!listening) applyRecognitionSettings();
+    saveState();
+  });
+});
+
+els.realTimeSimulation.addEventListener("change", () => {
+  if (!els.realTimeSimulation.checked) stopAnswerSilenceTimer();
+  updateModeUi();
+  saveState();
 });
 
 els.clearButton.addEventListener("click", () => {
@@ -1988,6 +2556,19 @@ els.saveContext.addEventListener("click", () => {
   setTimeout(() => {
     els.saveContext.textContent = "Save CV and JD";
   }, 1200);
+});
+
+els.addCustomSkill.addEventListener("click", saveCustomSkill);
+els.deleteCustomSkill.addEventListener("click", deleteSelectedCustomSkill);
+els.customSkillList.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-skill]");
+  if (!button) return;
+  const skill = customSkillById(button.dataset.skill);
+  if (!skill) return;
+  els.customSkillName.value = skill.name;
+  els.customSkillQuestions.value = skill.questions.join("\n");
+  els.technology.value = skill.id;
+  saveState();
 });
 
 els.importJd.addEventListener("click", async () => {
@@ -2076,6 +2657,8 @@ els.previousInterview.addEventListener("click", () => {
 });
 
 els.resetInterview.addEventListener("click", () => {
+  stopAnswerSilenceTimer();
+  stopQuestionAudio();
   interviews[interviewNumber - 1] = createInterview(interviewNumber);
   questionNumber = 1;
   finalTranscript = "";
@@ -2108,6 +2691,9 @@ els.progressHistory.addEventListener("click", (event) => {
   ].join("\n")).join("\n\n");
   finalTranscript = els.answer.value;
   els.micState.textContent = `Viewing saved progress from ${new Date(record.completedAt).toLocaleString()}`;
+  stopAnswerSilenceTimer();
+  stopQuestionAudio();
+  updateQuestionAudioControls();
 });
 
 els.newQuestion.addEventListener("click", async () => {
@@ -2154,7 +2740,20 @@ els.copyButton.addEventListener("click", async () => {
   }, 1200);
 });
 
+function flashOnUpdate(el) {
+  if (!el) return;
+  const observer = new MutationObserver(() => {
+    el.classList.remove("content-flash");
+    void el.offsetWidth;
+    el.classList.add("content-flash");
+  });
+  observer.observe(el, { childList: true, characterData: true, subtree: true });
+}
+flashOnUpdate(els.question);
+flashOnUpdate(els.feedbackOutput);
+
 setupSpeech();
+updateQuestionAudioControls();
 loadPracticeSources().then(() => {
   loadState();
   updateAnswerEditor();
@@ -2174,8 +2773,13 @@ els.technology.addEventListener("change", () => {
   updateAnswerEditor();
   saveState();
   const poolLength = questionPool().length;
+  const selectedCustomSkill = customSkillById(els.technology.value);
+  if (selectedCustomSkill) {
+    els.customSkillName.value = selectedCustomSkill.name;
+    els.customSkillQuestions.value = selectedCustomSkill.questions.join("\n");
+  }
   els.feedbackOutput.innerHTML = markdownToHtml(
-    `## Technology Practice Selected\n${technologyLabels[els.technology.value]} has ${poolLength} matching questions. Click New question to start.`
+    `## Technology Practice Selected\n${selectedCustomSkill?.name || technologyLabels[els.technology.value]} has ${poolLength} matching questions. Click New question to start.`
   );
   currentInterview().finalFeedback = els.feedbackOutput.innerHTML;
 });
