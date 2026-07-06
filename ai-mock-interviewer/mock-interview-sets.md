@@ -591,3 +591,24 @@ Focus: Ansible playbooks, roles, idempotency, Vault secrets, testing, scale, and
 6. **Ansible:** How would you run Ansible playbooks against thousands of hosts efficiently, and what would you do about serial execution, forks, and failure handling?
 7. **Ansible:** How would you test Ansible roles and playbooks before running them in production, for example with Molecule or a CI pipeline?
 8. **Ansible:** You used Ansible for backup automation and disaster recovery. Walk me through how a playbook-driven DR runbook would work end to end.
+
+## Mock Interview 48 - Today AI/Python/Cloud/SRE Recap
+
+Focus: AI engineering libraries, Python equality and multiprocessing, AWS to GCP migration, Terraform IAM recovery, multi-environment architecture, Kubernetes policy guardrails, observability, tracing, burn-rate alerts, and outage mitigation decisions
+
+1. **AI/Python:** Today interview 2026-07-06 - AI engineering libraries: What Python libraries are most useful for AI Engineering nowadays?
+2. **Python:** Today interview 2026-07-06 - Python multiprocessing: Explain multiprocessing in Python. When should you use multiprocessing instead of multithreading?
+3. **Python/Coding:** Today interview 2026-07-06 - Python identity: Explain the difference between == and is in Python, using list examples.
+4. **Cloud Migration:** Today interview 2026-07-06 - AWS to GCP migration: Suppose a client has an application running on AWS. How would you migrate it to GCP across discovery, network, IAM, database, storage, CI/CD, validation, cutover, and rollback?
+5. **Terraform/IAM Incident:** Today interview 2026-07-06 - Terraform IAM recovery: A Terraform change accidentally removed production Service Account permissions. How would you debug and recover?
+6. **Platform Architecture:** Today interview 2026-07-06 - Multi-environment architecture: Design a multi-environment architecture for Dev, QA, and Prod.
+7. **Terraform/IaC:** Today interview 2026-07-06 - Terraform state isolation: How would you isolate infrastructure and Terraform state across environments?
+8. **Kubernetes Security:** Today interview 2026-07-06 - NetworkPolicy and admission control: How do you pair Kubernetes Network Policies with Admission Controllers?
+9. **Incident Response:** Today interview 2026-07-06 - Partial Terraform apply logs: During a production incident caused by a partially successful Terraform apply, what logs would you check first?
+10. **Observability:** Today interview 2026-07-06 - Early incident detection: How would you design monitoring to detect customer-impacting incidents early?
+11. **SRE/Alerting:** Today interview 2026-07-06 - Burn-rate alerts: What are burn-rate alerts and why are they useful?
+12. **Logging/Tracing:** Today interview 2026-07-06 - Log correlation: How do you correlate logs across Kubernetes microservices?
+13. **Observability:** Today interview 2026-07-06 - OpenTelemetry basics: Explain OpenTelemetry.
+14. **Incident Management:** Today interview 2026-07-06 - Outage decision-making: During an outage with incomplete information, how do you decide whether to roll back, roll forward, use a feature flag, or shift traffic?
+15. **Similar Scenario:** Today interview 2026-07-06 - Similar scenario Terraform plan review: What checks would you add before Terraform apply to prevent accidental IAM or networking breakage?
+16. **Similar Scenario:** Today interview 2026-07-06 - Similar scenario progressive mitigation: A bad release affects only 10 percent of users. How would you decide between rollback, canary pause, feature disablement, and traffic shifting?

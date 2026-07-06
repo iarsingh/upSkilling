@@ -1611,5 +1611,76 @@
         "question": "How do you approach infrastructure changes in production to minimize customer impact?"
       }
     ]
+  },
+  {
+    "id": "set-48",
+    "title": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "focus": "AI engineering libraries, Python equality and multiprocessing, AWS to GCP migration, Terraform IAM recovery, multi-environment architecture, Kubernetes policy guardrails, observability, tracing, burn-rate alerts, and outage mitigation decisions",
+    "questions": [
+      {
+        "category": "AI/Python",
+        "question": "Today interview 2026-07-06 - AI engineering libraries: What Python libraries are most useful for AI Engineering nowadays?"
+      },
+      {
+        "category": "Python",
+        "question": "Today interview 2026-07-06 - Python multiprocessing: Explain multiprocessing in Python. When should you use multiprocessing instead of multithreading?"
+      },
+      {
+        "category": "Python/Coding",
+        "question": "Today interview 2026-07-06 - Python identity: Explain the difference between == and is in Python, using list examples."
+      },
+      {
+        "category": "Cloud Migration",
+        "question": "Today interview 2026-07-06 - AWS to GCP migration: Suppose a client has an application running on AWS. How would you migrate it to GCP across discovery, network, IAM, database, storage, CI/CD, validation, cutover, and rollback?"
+      },
+      {
+        "category": "Terraform/IAM Incident",
+        "question": "Today interview 2026-07-06 - Terraform IAM recovery: A Terraform change accidentally removed production Service Account permissions. How would you debug and recover?"
+      },
+      {
+        "category": "Platform Architecture",
+        "question": "Today interview 2026-07-06 - Multi-environment architecture: Design a multi-environment architecture for Dev, QA, and Prod."
+      },
+      {
+        "category": "Terraform/IaC",
+        "question": "Today interview 2026-07-06 - Terraform state isolation: How would you isolate infrastructure and Terraform state across environments?"
+      },
+      {
+        "category": "Kubernetes Security",
+        "question": "Today interview 2026-07-06 - NetworkPolicy and admission control: How do you pair Kubernetes Network Policies with Admission Controllers?"
+      },
+      {
+        "category": "Incident Response",
+        "question": "Today interview 2026-07-06 - Partial Terraform apply logs: During a production incident caused by a partially successful Terraform apply, what logs would you check first?"
+      },
+      {
+        "category": "Observability",
+        "question": "Today interview 2026-07-06 - Early incident detection: How would you design monitoring to detect customer-impacting incidents early?"
+      },
+      {
+        "category": "SRE/Alerting",
+        "question": "Today interview 2026-07-06 - Burn-rate alerts: What are burn-rate alerts and why are they useful?"
+      },
+      {
+        "category": "Logging/Tracing",
+        "question": "Today interview 2026-07-06 - Log correlation: How do you correlate logs across Kubernetes microservices?"
+      },
+      {
+        "category": "Observability",
+        "question": "Today interview 2026-07-06 - OpenTelemetry basics: Explain OpenTelemetry."
+      },
+      {
+        "category": "Incident Management",
+        "question": "Today interview 2026-07-06 - Outage decision-making: During an outage with incomplete information, how do you decide whether to roll back, roll forward, use a feature flag, or shift traffic?"
+      },
+      {
+        "category": "Similar Scenario",
+        "question": "Today interview 2026-07-06 - Similar scenario Terraform plan review: What checks would you add before Terraform apply to prevent accidental IAM or networking breakage?"
+      },
+      {
+        "category": "Similar Scenario",
+        "question": "Today interview 2026-07-06 - Similar scenario progressive mitigation: A bad release affects only 10 percent of users. How would you decide between rollback, canary pause, feature disablement, and traffic shifting?"
+      }
+    ]
   }
 ]

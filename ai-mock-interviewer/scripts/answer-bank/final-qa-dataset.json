@@ -2891,6 +2891,118 @@
     "answer": "Structure this in three parts and keep it under 90 seconds: a one-line professional summary (years of experience, core specialization), a brief walk through your career progression highlighting the roles and achievements most relevant to this job, and a closing line connecting your background to why you're excited about this specific opportunity. Avoid reciting your full resume chronologically - pick the thread that makes the strongest case for this particular role."
   },
   {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "AI/Python",
+    "question": "Today interview 2026-07-06 - AI engineering libraries: What Python libraries are most useful for AI Engineering nowadays?",
+    "answer": "Group the answer by lifecycle. For model and data work: NumPy, pandas, scikit-learn, PyTorch, TensorFlow, Hugging Face Transformers, sentence-transformers, and XGBoost/LightGBM are common. For GenAI and RAG: LangChain, LlamaIndex, OpenAI/Anthropic/Vertex AI SDKs, FAISS/Chroma/Milvus/Pinecone clients, and evaluation tools like Ragas or DeepEval. For production AI engineering: FastAPI, Pydantic, MLflow, Airflow/Prefect, Kubernetes clients, OpenTelemetry, Prometheus clients, pytest, and cloud SDKs matter because the job is not only model building; it is packaging, serving, monitoring, evaluating, and operating AI systems safely."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "Python",
+    "question": "Today interview 2026-07-06 - Python multiprocessing: Explain multiprocessing in Python. When should you use multiprocessing instead of multithreading?",
+    "answer": "Multiprocessing runs work in separate OS processes, each with its own Python interpreter and memory space. It is useful for CPU-bound work because separate processes can run on multiple CPU cores and avoid the Global Interpreter Lock limiting Python bytecode execution. Use multithreading mostly for I/O-bound tasks such as network calls, file reads, or waiting on APIs. Use multiprocessing for CPU-heavy parsing, image processing, feature computation, encryption, compression, or batch transformations. The tradeoff is higher overhead: data must be serialized between processes, process startup is heavier than threads, and shared state needs queues, pipes, shared memory, or external storage."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "Python/Coding",
+    "question": "Today interview 2026-07-06 - Python identity: Explain the difference between == and is in Python, using list examples.",
+    "answer": "== compares values; is compares object identity. With a = [1, 2], b = [1, 2], and c = a: a == b is True because both lists contain the same values; a is b is False because they are two different list objects; a is c is True because c points to the same list object as a. In interviews, mention that is should normally be used for identity checks such as x is None, not for normal value comparison."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "Cloud Migration",
+    "question": "Today interview 2026-07-06 - AWS to GCP migration: Suppose a client has an application running on AWS. How would you migrate it to GCP across discovery, network, IAM, database, storage, CI/CD, validation, cutover, and rollback?",
+    "answer": "Start with discovery: inventory services, dependencies, traffic, data size, RTO/RPO, compliance, and current IaC. Map AWS constructs to GCP equivalents: VPC/subnets/security groups to VPC/firewall rules, IAM roles to service accounts/IAM bindings, S3 to Cloud Storage, RDS to Cloud SQL/AlloyDB, EKS/ECS to GKE/Cloud Run, CloudWatch to Cloud Operations. Build landing zone, networking, IAM, logging, and CI/CD first. Migrate data with replication where possible, run parallel validation, deploy the app in GCP using immutable artifacts, test functional, performance, security, and DR paths, then cut over gradually through DNS, load balancer, or traffic splitting. Keep rollback ready by leaving AWS healthy until GCP has passed agreed success criteria."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "Terraform/IAM Incident",
+    "question": "Today interview 2026-07-06 - Terraform IAM recovery: A Terraform change accidentally removed production Service Account permissions. How would you debug and recover?",
+    "answer": "Treat it as an incident first: stop further applies, identify impacted service accounts and customer impact, and restore the minimum required permissions quickly from a known-good plan, previous state, audit logs, or a break-glass runbook. Check CI/CD logs, Terraform plan/apply output, state history, Git diff, provider change, and Cloud Audit Logs for SetIamPolicy or binding changes. If workloads are down, temporarily re-grant least-privilege roles manually or through an emergency Terraform patch, then validate services recover. After mitigation, fix the root cause: avoid authoritative IAM resources where additive bindings are safer, add policy-as-code checks, require plan review for IAM diffs, isolate state blast radius, and add tests that detect removal of critical bindings."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "Platform Architecture",
+    "question": "Today interview 2026-07-06 - Multi-environment architecture: Design a multi-environment architecture for Dev, QA, and Prod.",
+    "answer": "Use separate projects/accounts per environment, with clear folder hierarchy, separate IAM, separate Terraform state, separate service accounts, and environment-specific network boundaries. Dev can be lower-cost and more permissive for experimentation, QA/staging should mirror prod topology closely enough for reliable testing, and prod should have stronger approvals, HA, backup, monitoring, and access controls. Reuse the same Terraform modules and deployment templates across environments, changing only inputs such as sizing, replicas, CIDRs, retention, and approval gates."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "Terraform/IaC",
+    "question": "Today interview 2026-07-06 - Terraform state isolation: How would you isolate infrastructure and Terraform state across environments?",
+    "answer": "Use separate state files/backends per environment, separate backend paths or workspaces with strict naming, separate credentials/service accounts, and ideally separate GCP projects or folders. Keep shared modules versioned separately from live environment code. Limit each state file's blast radius by domain: network, IAM, GKE, databases, and app layer should not all be in one huge state if ownership and risk differ. Enable state locking, versioning, audit logs, and least-privilege access to the backend."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "Kubernetes Security",
+    "question": "Today interview 2026-07-06 - NetworkPolicy and admission control: How do you pair Kubernetes Network Policies with Admission Controllers?",
+    "answer": "Network Policies enforce runtime traffic rules: which Pods can talk to which Pods or external destinations. Admission controllers enforce what is allowed to enter the cluster in the first place. Together, they create defense in depth: use Gatekeeper/Kyverno/Pod Security Admission to require labels, deny privileged Pods, require namespace ownership, and require default-deny plus approved allow policies; then use NetworkPolicies to enforce the actual east-west traffic boundaries. Admission prevents unsafe workloads or missing controls from being deployed, while NetworkPolicy limits blast radius if something is deployed or compromised."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "Incident Response",
+    "question": "Today interview 2026-07-06 - Partial Terraform apply logs: During a production incident caused by a partially successful Terraform apply, what logs would you check first?",
+    "answer": "Check the CI/CD job logs first to see the exact Terraform command, workspace, variables, plan file, provider versions, and resource address where apply failed. Then check Terraform state and plan output to identify which resources changed successfully and which did not. In parallel, inspect Cloud Audit Logs for IAM, network, database, or compute changes, Kubernetes events if cluster resources were affected, and application/cloud logs for user impact. The goal is to build a timeline: what Terraform attempted, what the cloud accepted, what Kubernetes observed, and when symptoms started."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "Observability",
+    "question": "Today interview 2026-07-06 - Early incident detection: How would you design monitoring to detect customer-impacting incidents early?",
+    "answer": "Start from user journeys and define SLIs such as availability, latency, error rate, freshness, and successful transactions. Alert on symptoms users feel: high 5xx rate, p95/p99 latency, failed payments, queue age, failed login, stale dashboards, or error-budget burn. Add service-level dashboards, synthetic checks, black-box probes, and dependency telemetry. Cause-based alerts still help debugging, but paging should be tied to actionable user impact, clear ownership, and runbooks."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "SRE/Alerting",
+    "question": "Today interview 2026-07-06 - Burn-rate alerts: What are burn-rate alerts and why are they useful?",
+    "answer": "Burn-rate alerts measure how quickly a service is consuming its allowed error budget for an SLO. Instead of alerting on a raw error spike, they ask whether the current error rate will exhaust the budget too quickly. Multi-window multi-burn-rate alerting catches both fast outages, such as a severe 5-minute spike, and slow burns, such as elevated errors over several hours. This reduces noise and aligns alert severity with reliability impact."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "Logging/Tracing",
+    "question": "Today interview 2026-07-06 - Log correlation: How do you correlate logs across Kubernetes microservices?",
+    "answer": "Use a correlation ID or trace ID generated at the edge and propagate it through every downstream call using headers such as traceparent or x-request-id. Each service writes structured JSON logs containing trace_id, span_id, request_id, service name, version, namespace, pod, user or tenant when safe, and error details. For async systems like Pub/Sub or Kafka, copy the trace context into message attributes. Then the logging backend can filter all logs for one request across services and connect them to distributed traces."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "Observability",
+    "question": "Today interview 2026-07-06 - OpenTelemetry basics: Explain OpenTelemetry.",
+    "answer": "OpenTelemetry is an open standard and toolkit for collecting metrics, logs, and traces. It helps instrument applications in a vendor-neutral way.\n\nDetailed interview explanation:\nOpentelemetry is part of production observability and monitoring. Observability helps teams understand what is happening inside complex systems using metrics, logs, traces, events, profiles, and alerts. The goal is not just collecting data; the goal is detecting user impact quickly and reducing time to diagnose and recover.\n\nProduction example:\nFor a Kubernetes microservice, a good observability setup collects request rate, error rate, latency, saturation, pod health, node health, logs with correlation IDs, and distributed traces across dependencies. Alerts are usually tied to SLOs or error-budget burn instead of every low-level metric spike.\n\nBest practices to mention:\n- Define SLIs and SLOs for important user journeys.\n- Use structured logs and propagate trace IDs or correlation IDs.\n- Alert on actionable user impact, not noisy symptoms.\n- Control cost with sampling, retention policies, and cardinality limits.\n- Attach runbooks, dashboards, and ownership to important alerts.\n\nCommon interview follow-ups:\nExpect questions about alert fatigue, p95 vs p99 latency, high-cardinality metrics, log retention, trace sampling, RCA, MTTA, MTTR, and how observability changes for Kubernetes or ML systems."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "Incident Management",
+    "question": "Today interview 2026-07-06 - Outage decision-making: During an outage with incomplete information, how do you decide whether to roll back, roll forward, use a feature flag, or shift traffic?",
+    "answer": "Optimize for fastest safe mitigation, not proving root cause first. Roll back when the issue clearly started after a release and rollback is low risk. Roll forward when the fix is already known, tested, and safer than reverting, such as a small config patch. Use a feature flag when a specific feature path is causing impact and can be disabled without redeploying. Shift traffic when impact is region, cluster, version, or dependency specific and a healthy target exists. Communicate assumptions, set a timebox, watch customer-impact metrics, and keep a fallback if the chosen mitigation fails."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "Similar Scenario",
+    "question": "Today interview 2026-07-06 - Similar scenario Terraform plan review: What checks would you add before Terraform apply to prevent accidental IAM or networking breakage?",
+    "answer": "Require saved plan review in CI, highlighting IAM removals, firewall exposure, subnet/routing changes, deletions, and replacements. Add policy-as-code with OPA/Sentinel to block public ingress, broad admin roles, service account key creation, removal of critical IAM bindings, missing labels, or unapproved production deletes. Use least-privilege Terraform service accounts, separate states, manual approvals for prod, drift detection, and tests for modules. For high-risk resources, add change windows and break-glass rollback steps."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 48 - Today AI/Python/Cloud/SRE Recap",
+    "category": "Similar Scenario",
+    "question": "Today interview 2026-07-06 - Similar scenario progressive mitigation: A bad release affects only 10 percent of users. How would you decide between rollback, canary pause, feature disablement, and traffic shifting?",
+    "answer": "First freeze rollout and stop increasing exposure. If the issue maps to a feature flag, disable the feature because that is usually fastest and least disruptive. If the canary version is bad, roll it back or shift traffic back to the stable version. If only one region/cluster is affected, shift traffic to healthy capacity if available. Roll forward only if the fix is small, already tested, and faster than rollback. Validate recovery on user-impact metrics, not only pod health."
+  },
+  {
     "source": "App Question Bank",
     "section": "GCP / DevOps / SRE Question Bank",
     "category": null,
@@ -4215,6 +4327,153 @@
   },
   {
     "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Python equality: What does the == operator do in Python?",
+    "answer": "The == operator checks value equality. It asks whether two objects should be considered equal according to their type's equality implementation, usually __eq__. For example, [1, 2] == [1, 2] is True because the two lists contain equal values in the same order, even though they are different list objects. This is different from is, which checks whether two variables point to the exact same object in memory."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Environment availability: How would you manage availability across Dev, QA, and Prod environments?",
+    "answer": "Availability should match environment criticality. Prod gets multi-zone or multi-region design, autoscaling, backups, SLOs, alerting, DR drills, and strict change windows. QA should be stable enough to validate releases but can usually use reduced capacity. Dev can tolerate lower availability and scheduled shutdowns for cost. The key is not making all environments equally expensive; it is making non-prod representative enough to catch issues before prod while preserving prod-grade resilience where users depend on it."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Safe promotion: How would you promote infrastructure and application changes safely between environments?",
+    "answer": "Promote the same tested artifact or module version from dev to QA to prod instead of rebuilding at each stage. Use CI checks, Terraform plan review, policy-as-code, automated tests, smoke tests, approvals, and progressive deployment. For infrastructure, pin module versions and promote version bumps through environment directories. For applications, use immutable image tags, canary or blue-green rollout, health checks, SLO gates, and clear rollback criteria."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Symptom vs cause alerts: Explain symptom-based versus cause-based alerts.",
+    "answer": "Symptom-based alerts fire on user-visible impact: error rate, latency, failed transactions, unavailability, or stale data. Cause-based alerts fire on possible reasons: CPU high, Pod restart, disk pressure, certificate near expiry, queue backlog, or database lock contention. Symptom alerts are better for paging because they tell you users are affected. Cause alerts are useful for ticketing, dashboards, or diagnostics, but too many cause alerts can create noise if they do not correlate with real impact."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Noisy alerts: How do you reduce noisy alerts?",
+    "answer": "Inventory alerts, remove duplicates, map each alert to an owner, runbook, severity, and user impact, and disable alerts that are not actionable. Convert raw resource threshold pages into SLO or symptom-based alerts where possible. Tune thresholds with historical data, add for/duration windows, group related alerts, route low-severity issues to tickets, and use inhibition so one root incident does not page ten times. After incidents, review whether alerts were early, late, missing, or noisy."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Telemetry collection: What telemetry do you collect for a production Kubernetes platform?",
+    "answer": "Collect metrics, logs, traces, events, and audit signals. Metrics include golden signals, Pod/container CPU and memory, restarts, saturation, node pressure, HPA/autoscaler behavior, API server health, ingress/load balancer metrics, database and queue health. Logs should be structured with service, environment, version, request ID, trace ID, and error fields. Traces should cover critical request paths. Also collect Kubernetes events, deployment/change events, Cloud Audit Logs, security findings, and business metrics for user journeys."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Trace ID: Why should every request carry a Trace ID?",
+    "answer": "A trace ID gives one request a stable identity across many services, Pods, queues, and databases. Without it, debugging a distributed failure becomes guesswork across timestamps and partial logs. With it, you can see the full path, latency per hop, failed dependency, retries, and logs related to the same user request. It also improves incident response because engineers can move from a customer complaint to the exact backend path quickly."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Structured JSON logging: Explain structured JSON logging.",
+    "answer": "Structured JSON logging means each log line is a JSON object with consistent fields instead of a free-text sentence. For example: timestamp, severity, service, environment, version, trace_id, request_id, user_id, route, status_code, latency_ms, and error_type. This makes logs searchable, aggregatable, and machine-processable in tools like Cloud Logging, Elasticsearch, Loki, or Splunk. It also helps alerting and incident analysis because you can query fields reliably instead of parsing text with brittle regexes."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Terraform module separation: Design Terraform module separation for networking, IAM, GKE, databases, and observability.",
+    "answer": "Separate reusable modules from environment live code. Build small modules around ownership boundaries: network/VPC/subnets/firewall/NAT, IAM/service accounts/bindings, GKE/cluster/node pools, database/Cloud SQL/AlloyDB, observability/log sinks/alerts/dashboards. Keep modules generic and versioned, with clear inputs/outputs. In live environments, compose these modules with separate state where blast radius differs. Avoid one giant module that hides risky changes or forces unrelated resources to be planned and applied together."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Distributed tracing design: Design distributed tracing for a request flowing through multiple Kubernetes services.",
+    "answer": "Instrument the ingress/API gateway and every service with OpenTelemetry. Generate or accept W3C traceparent at the edge, propagate it on HTTP/gRPC calls, and copy it into message attributes for async queues. Each service creates spans around inbound request handling, downstream calls, database queries, cache calls, and important business operations. Export spans through an OpenTelemetry Collector with consistent resource attributes like service.name, deployment.environment, version, namespace, and cluster. Use sampling carefully so errors and high-latency requests are retained."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Rollback strategy: Design a rollback strategy for application and infrastructure changes.",
+    "answer": "For applications, use immutable image versions, canary or blue-green deployment, health checks, SLO gates, and automated rollback when error rate or latency crosses thresholds. Keep database migrations backward-compatible so old and new versions can run during rollback. For infrastructure, keep versioned Terraform modules, reviewed plan files, small blast-radius states, and a documented restore path from previous state or Git commit. Always define rollback triggers, owner, command/runbook, validation checks, and communication plan before a risky change."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Feature-flag deployment: Design a feature-flag deployment strategy for production releases.",
+    "answer": "Separate deploy from release. Deploy code dark with the flag off, enable it first for internal users or a small tenant cohort, then ramp by percentage or segment while watching business and technical metrics. Flags need ownership, expiry dates, audit logs, default-safe behavior, and kill switches that work without redeploying. For critical paths, design flags to fail closed or fail to the old path, and include flag state in logs and traces so incidents can identify whether a request used the new behavior."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Customer issue scenario: Customers report production issues but dashboards are inconclusive. What do you do first?",
+    "answer": "Start by confirming and scoping impact: who is affected, what user journey, when it started, regions/tenants/versions, and error examples. Check recent changes, synthetic checks, support tickets, logs by correlation ID, ingress/load balancer metrics, dependency health, and business KPIs. If impact is real, open an incident, assign roles, communicate early, and choose a mitigation based on evidence. Do not wait for a perfect dashboard; use customer examples to drive log and trace investigation."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Failing request across services: A request is failing across multiple Kubernetes services. How would you trace and debug it?",
+    "answer": "Start from one failing request ID or trace ID. Follow the distributed trace to find the first failing or slow span, then inspect structured logs for that trace across services. Check ingress status codes, service endpoints, Pod readiness, Kubernetes events, recent deploys, config changes, network policies, and dependency health. If tracing is missing, reproduce with a generated correlation ID and follow logs hop by hop. Once mitigated, add instrumentation for the blind spot that slowed debugging."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Alert fatigue scenario: Alerts are noisy and engineers ignore them. How would you fix the alerting system?",
+    "answer": "Treat it as reliability debt. Export the alert list, group by owner/severity/frequency, identify top noisy alerts, and ask whether each one is actionable, customer-impacting, and tied to a runbook. Delete or downgrade non-actionable alerts, group correlated alerts, add durations, tune thresholds with historical data, and shift paging to SLO burn/user-impact alerts. Add an alert review process after every incident and a rule that every page must have an owner, runbook, and expected action."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Similar scenario AWS IAM mapping: During AWS to GCP migration, how would you map IAM roles, service accounts, and secrets safely?",
+    "answer": "Inventory IAM roles, policies, users, instance profiles, and secret usage in AWS. Map workload identities to GCP service accounts with least-privilege IAM roles, avoiding one broad shared account. Replace static keys with Workload Identity, Workload Identity Federation, or managed service identities where possible. Move secrets to Secret Manager with rotation and access logging. Validate access using test workloads and audit logs before cutover, and remove legacy AWS permissions only after GCP access is proven."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Similar scenario database cutover: How would you plan database migration and cutover from AWS RDS to Cloud SQL or AlloyDB with minimal downtime?",
+    "answer": "Assess engine/version compatibility, extensions, schema, data size, write rate, maintenance windows, and RPO/RTO. Use Database Migration Service or native replication where possible to perform initial load plus continuous replication. Run schema validation, row counts, checksums, query performance tests, backup/restore tests, and application compatibility tests. For cutover, freeze or drain writes briefly, let replication catch up, switch connection strings or traffic, validate critical transactions, and keep rollback to the original RDS path until confidence criteria are met."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Similar scenario NetworkPolicy rollout: How would you roll out default-deny Network Policies safely in an existing production cluster?",
+    "answer": "Audit actual traffic first using flow logs, service mesh telemetry, or CNI observability. Add labels consistently, create allow policies for known ingress, egress, DNS, monitoring, and dependencies, then test in dev/staging. Roll out namespace by namespace, starting with low-risk services, with owners present and a fast revert command ready. Watch error rates, DNS failures, connection refused/timeouts, and application logs. Make admission policy require future workloads to declare network intent."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Similar scenario observability maturity: How would you know whether your observability setup is actually helping incidents instead of just collecting data?",
+    "answer": "Measure outcomes, not tool count. Mature observability reduces MTTA and MTTR, detects user impact before customers report it, connects metrics/logs/traces by service and trace ID, has useful runbooks, and shows ownership. During postmortems, ask whether alerts were timely, dashboards answered the first questions, traces found the bottleneck, and logs were searchable. If engineers still jump across disconnected tools or rely on guesses, the setup is collecting data but not creating operational clarity."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Similar scenario SLO alert tuning: How would you tune SLO burn-rate alerts for both fast outages and slow reliability degradation?",
+    "answer": "Use multi-window multi-burn-rate alerts. A short window with a high burn rate catches severe fast outages quickly, while a longer window with a lower burn rate catches slow degradation before the monthly budget is exhausted. Tune thresholds from historical error budget consumption and page only when both short and longer windows confirm the burn, reducing false positives. Route slower burns to tickets if they do not require immediate wake-up, but still make ownership and deadlines clear."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Similar scenario trace sampling: How would you choose trace sampling and retention for high-traffic microservices?",
+    "answer": "Use head or tail sampling based on volume and debugging needs. Keep 100 percent of errors, high-latency requests, important customer journeys, and low-volume critical services. Sample normal high-volume success traffic at a lower rate to control cost. Retain detailed traces long enough for incident investigation and keep aggregated metrics longer. Document sampling rules so engineers understand why some normal requests may not have traces, and avoid dropping the exact traces needed for incidents."
+  },
+  {
+    "source": "App Question Bank",
     "section": "Scripting & Automation",
     "category": null,
     "question": "Python automation: Design a production-ready script that inventories all GCP projects, collects labels and owners, and exports non-compliant resources to CSV.",
@@ -4765,6 +5024,27 @@
     "category": null,
     "question": "Python coding: Write a function that detects configuration drift between two nested dictionaries while ignoring approved keys.",
     "answer": "def detect_drift(desired, actual, ignore_keys=frozenset()):\n    drift = {}\n    keys = set(desired) | set(actual)\n    for key in keys:\n        if key in ignore_keys:\n            continue\n        d, a = desired.get(key), actual.get(key)\n        if isinstance(d, dict) and isinstance(a, dict):\n            nested = detect_drift(d, a, ignore_keys)\n            if nested:\n                drift[key] = nested\n        elif d != a:\n            drift[key] = {'desired': d, 'actual': a}\n    return drift\nRecurses into nested dicts so drift is reported at the deepest differing key rather than flagging an entire parent object as changed, and ignore_keys is passed through recursive calls consistently."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Python coding equality: Write a function to compare two values using == and return the result.",
+    "answer": "def values_equal(a, b):\n    return a == b\n\nThis returns True when the two inputs are equal by value according to their type's __eq__ method, and False otherwise. For example, values_equal([1, 2], [1, 2]) returns True because the list values match, even though the two lists are separate objects."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Python coding identity output: Given a = [1, 2], b = [1, 2], and c = a, what do print(a == b), print(a is b), and print(a is c) output and why?",
+    "answer": "a == b prints True because both lists contain the same values in the same order. a is b prints False because a and b are two different list objects in memory. a is c prints True because c references the exact same object as a. Interview shortcut: == means value equality; is means identity."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "Today interview 2026-07-06 - Python coding multiprocessing example: Write a small Python multiprocessing example using Process, start, and join.",
+    "answer": "from multiprocessing import Process\n\ndef worker():\n    print(\"Running\")\n\nif __name__ == \"__main__\":\n    p = Process(target=worker)\n    p.start()\n    p.join()\n\nProcess creates a separate Python process, start begins execution, and join waits for that child process to finish. The if __name__ == \"__main__\" guard is important, especially on Windows and macOS spawn-based process starts, to prevent child processes from re-importing the module and recursively creating more processes."
   },
   {
     "source": "App Question Bank",
@@ -9938,13 +10218,6 @@
     "category": null,
     "question": "What is Loki?",
     "answer": "Loki is a log aggregation system designed by Grafana Labs. It indexes labels rather than full log text, making it efficient for Kubernetes-style log workloads.\n\nDetailed interview explanation:\nLoki is part of production observability and monitoring. Observability helps teams understand what is happening inside complex systems using metrics, logs, traces, events, profiles, and alerts. The goal is not just collecting data; the goal is detecting user impact quickly and reducing time to diagnose and recover.\n\nProduction example:\nFor a Kubernetes microservice, a good observability setup collects request rate, error rate, latency, saturation, pod health, node health, logs with correlation IDs, and distributed traces across dependencies. Alerts are usually tied to SLOs or error-budget burn instead of every low-level metric spike.\n\nBest practices to mention:\n- Define SLIs and SLOs for important user journeys.\n- Use structured logs and propagate trace IDs or correlation IDs.\n- Alert on actionable user impact, not noisy symptoms.\n- Control cost with sampling, retention policies, and cardinality limits.\n- Attach runbooks, dashboards, and ownership to important alerts.\n\nCommon interview follow-ups:\nExpect questions about alert fatigue, p95 vs p99 latency, high-cardinality metrics, log retention, trace sampling, RCA, MTTA, MTTR, and how observability changes for Kubernetes or ML systems."
-  },
-  {
-    "source": "Large Technical Bank",
-    "section": "Observability & Monitoring (451–540)",
-    "category": null,
-    "question": "Explain OpenTelemetry.",
-    "answer": "OpenTelemetry is an open standard and toolkit for collecting metrics, logs, and traces. It helps instrument applications in a vendor-neutral way.\n\nDetailed interview explanation:\nOpentelemetry is part of production observability and monitoring. Observability helps teams understand what is happening inside complex systems using metrics, logs, traces, events, profiles, and alerts. The goal is not just collecting data; the goal is detecting user impact quickly and reducing time to diagnose and recover.\n\nProduction example:\nFor a Kubernetes microservice, a good observability setup collects request rate, error rate, latency, saturation, pod health, node health, logs with correlation IDs, and distributed traces across dependencies. Alerts are usually tied to SLOs or error-budget burn instead of every low-level metric spike.\n\nBest practices to mention:\n- Define SLIs and SLOs for important user journeys.\n- Use structured logs and propagate trace IDs or correlation IDs.\n- Alert on actionable user impact, not noisy symptoms.\n- Control cost with sampling, retention policies, and cardinality limits.\n- Attach runbooks, dashboards, and ownership to important alerts.\n\nCommon interview follow-ups:\nExpect questions about alert fatigue, p95 vs p99 latency, high-cardinality metrics, log retention, trace sampling, RCA, MTTA, MTTR, and how observability changes for Kubernetes or ML systems."
   },
   {
     "source": "Large Technical Bank",

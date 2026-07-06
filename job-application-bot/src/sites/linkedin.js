@@ -106,6 +106,30 @@ async function handleEasyApplyModal(page, profile, jobContext, dryRun = false) {
       }
     }
 
+    // Radio-button groups ("Are you willing to relocate?" Yes/No, sponsorship,
+    // work authorization, etc.) are the most common reason a step gets stuck:
+    // LinkedIn won't advance past a required group with nothing selected, and
+    // until now nothing here ever looked at radio inputs at all - fillField()
+    // already had a radio/checkbox branch (formFiller.js:62-67) but no caller
+    // ever grouped and invoked it. This loop does the mechanical part (find
+    // each group, read its question text and option labels, skip groups that
+    // already have a selection); the actual "which option answers this
+    // question" decision is in pickRadioOption() below.
+    const radioGroups = await modal.locator("fieldset:has(input[type='radio'])").all();
+    for (const group of radioGroups) {
+      const alreadyChecked = await group.locator("input[type='radio']:checked").count().catch(() => 0);
+      if (alreadyChecked) continue;
+
+      const groupLabel = await firstGroupText(group);
+      const options = await group.locator("input[type='radio']").all();
+      const optionLabels = await Promise.all(options.map((opt) => resolveLabel(group, opt)));
+
+      const chosenIndex = pickRadioOption({ groupLabel, optionLabels, profile });
+      if (chosenIndex != null && options[chosenIndex]) {
+        await options[chosenIndex].check().catch(() => {});
+      }
+    }
+
     // Resume selection step: pick the resume matching the job's scored category if offered.
     const resumeOption = modal.locator("div[class*='jobs-document-upload'] input[type='radio']").first();
     if (await resumeOption.count().catch(() => 0)) {
@@ -144,6 +168,79 @@ async function resolveLabel(scope, input) {
   }
   const placeholder = await input.getAttribute("placeholder").catch(() => null);
   return placeholder || "";
+}
+
+// A radio-button fieldset's question is usually its <legend>; LinkedIn
+// sometimes puts it in an aria-label on the fieldset itself instead.
+async function firstGroupText(group) {
+  const legend = group.locator("legend").first();
+  if (await legend.count().catch(() => 0)) {
+    const text = (await legend.textContent().catch(() => "")) || "";
+    if (text.trim()) return text.trim();
+  }
+  const aria = await group.getAttribute("aria-label").catch(() => null);
+  return (aria || "").trim();
+}
+
+// TODO(you): given a radio group's question text and its option labels,
+// decide which option index answers it - or return null to leave it
+// unanswered rather than guess (an unanswered required group just means this
+// job stays "incomplete_needs_review", which is the safe failure mode; a
+// *wrong* answer submitted to a real company is worse than that).
+//
+// `directAnswer(groupLabel, profile)` (imported above) gives you the same
+// lookup used for text fields - e.g. for "Are you willing to relocate?" it
+// returns "Yes" from profile.standardAnswers. Your job here is matching that
+// expected answer string against `optionLabels` (LinkedIn's actual button
+// text varies: "Yes"/"No", "Yes, I am willing", numeric ranges for experience
+// questions, etc.) - exact match, substring, or something smarter is your
+// call. Numeric-range options (e.g. "5-7 years" vs profile.yearsExperience)
+// are a case worth deciding deliberately rather than leaving to substring luck.
+//
+// Params: { groupLabel: string, optionLabels: string[], profile: object }
+// Returns: number (index into optionLabels) | null
+function pickRadioOption({ groupLabel, optionLabels, profile }) {
+  const expected = directAnswer(groupLabel, profile);
+  if (!expected) return null; // no confident answer for this question - leave unanswered
+
+  const normalize = (value) => String(value || "").toLowerCase().trim();
+  const expectedNorm = normalize(expected);
+  const optionsNorm = optionLabels.map(normalize);
+
+  // Numeric experience-range questions ("0-1 years", "5-7 years", "7+ years"):
+  // directAnswer returns a plain number (profile.yearsExperience) for these,
+  // so route them by range containment instead of string matching.
+  if (/experience/.test(groupLabel.toLowerCase()) && /^\d+(\.\d+)?$/.test(expectedNorm)) {
+    const years = parseFloat(expectedNorm);
+    let bestIndex = null;
+    optionsNorm.forEach((opt, i) => {
+      const range = opt.match(/(\d+)\s*-\s*(\d+)/);
+      const plus = opt.match(/(\d+)\s*\+/);
+      if (range && years >= Number(range[1]) && years <= Number(range[2])) bestIndex = i;
+      else if (plus && years >= Number(plus[1])) bestIndex = i;
+      else if (opt === String(Math.round(years))) bestIndex = i;
+    });
+    return bestIndex;
+  }
+
+  // Yes/No questions (relocate, sponsorship, remote/hybrid/onsite, work
+  // authorization all resolve to "Yes"/"No" via directAnswer's regex table).
+  // Word-boundary match so "No" never matches inside a "Yes, ..." option and
+  // vice versa; exact match tried first since it's unambiguous.
+  if (/^(yes|no)$/.test(expectedNorm)) {
+    const exact = optionsNorm.findIndex((opt) => opt === expectedNorm);
+    if (exact !== -1) return exact;
+    const wordBoundary = optionsNorm.findIndex((opt) => new RegExp(`\\b${expectedNorm}\\b`).test(opt));
+    return wordBoundary !== -1 ? wordBoundary : null;
+  }
+
+  // General free-text expected answer (e.g. CTC/notice period occasionally
+  // phrased as a radio choice rather than a text field): exact match, then
+  // substring either direction.
+  const exact = optionsNorm.findIndex((opt) => opt === expectedNorm);
+  if (exact !== -1) return exact;
+  const substring = optionsNorm.findIndex((opt) => opt.includes(expectedNorm) || expectedNorm.includes(opt));
+  return substring !== -1 ? substring : null;
 }
 
 async function firstText(page, selectors, fallback = "") {
