@@ -3003,6 +3003,230 @@
     "answer": "First freeze rollout and stop increasing exposure. If the issue maps to a feature flag, disable the feature because that is usually fastest and least disruptive. If the canary version is bad, roll it back or shift traffic back to the stable version. If only one region/cluster is affected, shift traffic to healthy capacity if available. Roll forward only if the fix is small, already tested, and faster than rollback. Validate recovery on user-impact metrics, not only pod health."
   },
   {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "Kubeflow",
+    "question": "Kubeflow platform design: How would you design a production Kubeflow platform on GKE for notebooks, pipelines, training, serving, security, and observability?",
+    "answer": "Run Kubeflow on a dedicated GKE platform with separate namespaces/profiles per team, GPU and CPU node pools, Workload Identity, Artifact Registry, Cloud Storage, and centralized logging/monitoring. Provide managed notebook access, Kubeflow Pipelines for repeatable workflows, training operators for distributed jobs, KServe for model serving, and platform guardrails such as RBAC, quotas, network policies, image scanning, backups, and clear ownership for each component."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "Kubeflow",
+    "question": "Kubeflow Pipelines: How would you design a reusable Kubeflow Pipeline for data validation, training, evaluation, registration, and conditional deployment?",
+    "answer": "Model the workflow as containerized components connected by typed inputs/outputs: validate data, transform features, train, evaluate, and only register or deploy if metrics pass thresholds. Store artifacts in object storage, record metadata for lineage, parameterize environment-specific values, enable caching only when cache keys include data/code/config versions, and keep deployment as a conditional step so bad models stop before production."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "Kubeflow",
+    "question": "Kubeflow multi-user isolation: How would you isolate teams in Kubeflow using namespaces, profiles, RBAC, service accounts, quotas, and network policies?",
+    "answer": "Give each team a Kubeflow profile mapped to its own namespace, service accounts, resource quotas, and role bindings. Restrict cross-namespace access with RBAC and network policies, use Workload Identity for least-privilege GCP access, apply separate CPU/GPU quotas to prevent noisy neighbors, and tag/label workloads so usage, cost, and ownership are visible."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "Kubeflow",
+    "question": "Kubeflow troubleshooting: A Kubeflow pipeline step is stuck Pending or failing. How would you debug pods, volumes, service accounts, images, logs, and events?",
+    "answer": "Start with the pipeline UI to identify the failed component, then inspect the underlying pod with kubectl: events, scheduling reason, image pull errors, volume mounts, service account permissions, resource requests, node selectors, and logs. Pending often means quota, node capacity, taints/tolerations, PVC, or GPU availability; runtime failure usually points to container command, dependency, data path, or permission issues."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "MLflow",
+    "question": "MLflow tracking design: How would you structure MLflow experiments, runs, parameters, metrics, tags, artifacts, and naming conventions for a team?",
+    "answer": "Create experiments around stable business problems or model families, not every individual run, and use consistent run names that include project, branch or pipeline run, and purpose. Log hyperparameters as params, evaluation results as metrics, model files and reports as artifacts, and use tags for owner, git commit, dataset version, environment, feature set, and candidate/prod status so runs are searchable and comparable across the team."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "MLflow",
+    "question": "MLflow model registry: How would you use MLflow Model Registry for versioning, approvals, stage transitions, aliases, rollback, and auditability?",
+    "answer": "Register only evaluated candidate models, attach metadata linking the model version to the MLflow run, git commit, dataset, metrics, and owner, and require an approval step before promotion. Use stages or aliases to identify candidate, staging, and production versions, keep older production versions available for rollback, and record comments or approvals in the registry so model promotion is auditable rather than a silent artifact overwrite."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "MLflow",
+    "question": "MLflow on Kubernetes: How would you deploy and operate an MLflow tracking server on GKE, including database, object storage, ingress, auth, and monitoring?",
+    "answer": "Deploy MLflow as a stateless Kubernetes Deployment, use Cloud SQL/Postgres for the backend store, GCS for artifacts, Workload Identity for bucket/database access where possible, and an ingress or internal load balancer protected by SSO/IAP or an auth proxy. Add resource requests/limits, health checks, TLS, backups, audit logging, dashboards for request errors and latency, and alerts for database or artifact-store failures."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "MLflow",
+    "question": "MLflow troubleshooting: An MLflow run logged metrics but the model artifact is missing or cannot be loaded. How would you debug it?",
+    "answer": "Check whether the run completed the artifact logging step, inspect the artifact URI, verify the tracking server and client are using the same artifact store configuration, and confirm the service account or user has write/read permissions to the bucket or filesystem. Then verify dependency/environment files, model flavor, serialization format, and MLflow version compatibility, because a model can exist in storage but still fail to load if the environment or flavor metadata is wrong."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "Python",
+    "question": "Mock 49 focus - Python concurrency and multiprocessing choices for cloud and ML workloads: When would you use threads, asyncio, multiprocessing, or a bounded worker pool?",
+    "answer": "Use threads or asyncio for I/O-bound work such as cloud API inventory, object-store reads, HTTP calls, and database queries. Use a bounded worker pool when you need concurrency but must control API quota, memory, or downstream load. Use multiprocessing for CPU-bound work such as feature computation, PDF/image parsing, model preprocessing, compression, encryption, or large local transformations, because separate processes can use multiple CPU cores and avoid the GIL. In production, the decision should come after profiling, and every concurrent design needs timeouts, retries, error collection, and rate limits."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "Python",
+    "question": "Mock 49 focus - Python multiprocessing deep dive: Explain multiprocessing in Python and when it is better than multithreading for CPU-heavy ML or data-processing tasks.",
+    "answer": "Multiprocessing creates separate OS processes, so each worker has its own Python interpreter and memory space. That lets CPU-heavy Python code run across multiple cores without being limited by the GIL. It is better than multithreading for CPU-bound work such as feature engineering, image/PDF parsing, CPU-heavy preprocessing, encryption, compression, and batch scoring transformations. Threads are usually better for I/O-bound work because they are lighter and can overlap waiting on network or disk. The tradeoffs of multiprocessing are process startup cost, memory overhead, serialization/pickling of data, and more careful handling of shared state through queues, pools, shared memory, or external storage."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "RAG",
+    "question": "Mock 49 focus - RAG reliability debugging: A retrieval-augmented generation pipeline returns stale or irrelevant context. How would you debug indexing, embeddings, chunking, retrieval, and reranking?",
+    "answer": "First classify the failure: stale context means the source-to-index pipeline is behind; irrelevant context means retrieval quality is poor. For stale results, check source update time, ingestion jobs, failed upserts/deletes, index aliases, and whether the right collection is queried. For irrelevant results, inspect chunk size, overlap, metadata filters, embedding model/version mismatch, query rewriting, top-k, similarity threshold, and reranker behavior. Validate with a golden retrieval set where each question has expected source documents. Log retrieved IDs, scores, chunk metadata, and prompt template version so every bad answer can be traced to retrieval or generation."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "RAG",
+    "question": "Vector database operations: How would you operate a production vector database, including indexing strategy, reindexing without downtime, backup/restore, and scaling for query latency?",
+    "answer": "Choose an index type (HNSW for low-latency approximate search, IVF for larger scale with a recall/speed tradeoff) sized for expected vector count and query rate, and reindex without downtime by building the new index alongside the old one (blue-green) and cutting over traffic once the new index passes recall/latency validation. Back up the underlying vector store and metadata together so a restore reconstructs a consistent state, and scale query latency with read replicas, sharding by tenant/namespace, and caching frequent queries."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "RAG",
+    "question": "RAG vs fine-tuning vs prompting: How would you decide between prompt engineering, RAG, and fine-tuning for a domain-specific GenAI use case, and how would that decision change operational ownership?",
+    "answer": "Start with prompt engineering for anything that can be solved with better instructions and few-shot examples, since it has the lowest operational cost and fastest iteration. Add RAG when the model needs access to specific, frequently-changing, or proprietary knowledge it wasn't trained on. Reserve fine-tuning for cases needing a consistent style/format at scale or behavior that prompting genuinely cannot achieve, since fine-tuning adds real operational ownership - training pipelines, versioned model artifacts, evaluation before each retrain, and a rollback story that prompting and RAG don't require."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "RAG",
+    "question": "Resume deep-dive - RAG pipeline: Walk me through the RAG pipeline you built, including embedding model choice, vector database, chunking, and how you measured answer quality.",
+    "answer": "The pipeline chunks source documents with an overlap strategy (typically 200-500 tokens per chunk with some overlap to preserve context across boundaries), embeds chunks with a domain-appropriate embedding model, and stores vectors with metadata for filtering. At query time it embeds the user question, retrieves the top-k most similar chunks, and passes them as grounding context to the LLM. Answer quality was measured with a mix of retrieval metrics (recall@k against a labeled set) and generation metrics (groundedness/faithfulness checks, either via an LLM-as-judge or human review) rather than relying on generation quality alone."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "MLOps Architecture",
+    "question": "Kubeflow vs MLflow vs Vertex AI: How would you choose between Kubeflow, MLflow, and Vertex AI for a GCP MLOps platform?",
+    "answer": "Use Kubeflow when you want Kubernetes-native control over pipelines, training, serving, and multi-user ML workflows, especially on GKE. Use MLflow when experiment tracking, model packaging, and registry portability are the primary needs. Use Vertex AI when managed GCP operations, IAM/audit integration, managed endpoints, and lower platform maintenance matter most; many real platforms combine them, for example Kubeflow for pipelines, MLflow for tracking, and Vertex AI for managed serving."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round",
+    "category": "GenAI Observability",
+    "question": "Mock 49 focus - RAG and LLM observability: What would you trace and log end to end for a RAG request without leaking prompts, PII, secrets, or retrieved sensitive text?",
+    "answer": "Trace the full request path: gateway, auth, query rewrite, vector search, reranking, prompt assembly, model inference, tool calls, and response post-processing. Log safe metadata such as trace ID, tenant, prompt template version, model version, retrieved document IDs, chunk IDs, similarity scores, token counts, latency by stage, cache hit/miss, finish reason, and safety flags. Do not log raw prompts, secrets, PII, or full retrieved content into standard logs. If deep debugging payloads are required, store redacted or access-controlled samples with short retention and clear audit trails. This gives enough signal for latency, cost, hallucination, and retrieval debugging without creating a data-leak risk."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "LLM Architecture",
+    "question": "Mock 50 focus - LLM production architecture: How would you design a production LLM-backed service with model routing, caching, rate limits, observability, safety, and cost controls?",
+    "answer": "Design it as a normal production service plus LLM-specific controls. Put an API gateway in front for auth, quotas, request validation, and tenant identification. Route requests by use case to the right model: cheap/fast model for simple tasks, stronger model for complex tasks, fallback model for provider failures, and self-hosted model where privacy or cost requires it. Add caching for repeated deterministic prompts, token budgets per team, prompt/template versioning, safety filters, and guardrails around tool calls. Observability should capture trace ID, model version, prompt template version, token count, latency by stage, retrieval metadata, error type, and cost without logging sensitive raw prompts."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "LLM Gateway",
+    "question": "Mock 50 focus - LLM gateway: How would you build an internal gateway that handles auth, per-team token budgets, prompt templates, model fallback, audit logs, and provider abstraction?",
+    "answer": "Build a proxy service between applications and model providers. It authenticates callers, maps them to teams/projects, enforces rate limits and token budgets, injects approved prompt templates, and routes to configured models. It should abstract providers such as Vertex AI, OpenAI, Anthropic, or self-hosted vLLM so applications do not hardcode provider logic. Add retries, timeouts, circuit breakers, fallback rules, audit logs, cost attribution, and dashboards. For safety, restrict which teams can use which models, prevent logging secrets, and require approval for high-risk tools or external data sharing."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "Prompt Engineering",
+    "question": "Mock 50 focus - prompt lifecycle: How would you version, test, review, deploy, and roll back prompt changes like application code?",
+    "answer": "Store prompts in Git with owners, version numbers, changelogs, and environment-specific configuration. Every prompt change should run against a regression dataset with expected behavior, groundedness checks, safety checks, latency/cost checks, and human review for high-risk flows. Deploy prompts gradually using feature flags or config rollout, track prompt version in every trace/log, and keep old prompt versions available for rollback. The key interview point is that prompt changes can break production like code changes, so they need review, tests, rollout, observability, and rollback."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "LLM Evaluation",
+    "question": "Mock 50 focus - LLM evaluation: How would you design automated and human evaluation for answer quality, groundedness, toxicity, latency, and regression testing?",
+    "answer": "Use layered evaluation. Automated tests should include fixed golden questions, expected source references, rubric-based LLM-as-judge scoring, toxicity/safety checks, hallucination or groundedness checks, latency, token cost, and exact-match tests where applicable. Human evaluation should review samples for correctness, tone, safety, and business usefulness, especially for ambiguous or regulated use cases. Track scores over time and block deployment when a prompt/model change regresses beyond thresholds. Keep evaluation data versioned so results are comparable across releases."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "LLM Security",
+    "question": "Mock 50 focus - prompt injection and data leakage: How would you protect an LLM application from malicious input, unsafe tool calls, PII leakage, and retrieved-document injection?",
+    "answer": "Treat user input and retrieved documents as untrusted data, never as instructions. Use strong system prompts, clear delimiters, content filtering, tool allowlists, schema validation, and permission checks outside the model. Do not give the model broad credentials; tools should use least privilege and require confirmation for destructive actions. Redact PII/secrets before prompts and logs, restrict which documents can be retrieved by user/team authorization, and monitor for injection patterns. The strongest control is not a clever prompt; it is limiting what the model can access or do if the prompt is bypassed."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "LLM Deployment",
+    "question": "Mock 50 focus - self-hosted vs managed LLMs: How would you choose between Vertex AI/Gemini, OpenAI API, and self-hosted vLLM or Ollama on Kubernetes?",
+    "answer": "Use managed APIs such as Vertex AI/Gemini or OpenAI when you want fast adoption, strong model quality, low platform operations, and managed scaling. Use self-hosted vLLM/TGI/Ollama on Kubernetes when data residency, cost at scale, latency control, custom models, or offline/private operation matter enough to justify GPU operations. Compare model quality, token cost, p95 latency, throughput, privacy, compliance, operational burden, GPU availability, autoscaling, and fallback options. Many production platforms use both: managed APIs for high-quality general tasks and self-hosted models for private, high-volume, or cost-sensitive workloads."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "LLM Fine-Tuning",
+    "question": "Mock 50 focus - fine-tuning vs RAG: When would you fine-tune an LLM instead of using RAG or prompt engineering, and what operational risks would you manage?",
+    "answer": "Use prompt engineering for behavior or formatting changes when the base model already knows the task. Use RAG when answers need current, private, or auditable knowledge from documents. Use fine-tuning when you need the model to learn a repeatable style, domain-specific classification, extraction format, or task behavior from many examples. Fine-tuning adds risks: dataset quality, bias, overfitting, model versioning, evaluation, rollback, cost, and retraining. It is not a good way to inject frequently changing factual knowledge; RAG is usually better for that."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "Machine Learning Basics",
+    "question": "Mock 50 focus - machine learning fundamentals: Explain supervised learning, unsupervised learning, and reinforcement learning with practical examples.",
+    "answer": "Supervised learning trains on labeled examples, such as predicting churn from customer records or classifying incidents as high or low priority. Unsupervised learning finds patterns without labels, such as clustering customers, detecting anomalies, or reducing dimensionality. Reinforcement learning trains an agent to take actions and receive rewards or penalties, such as game playing, robotics, or policy optimization. In interviews, connect the learning type to the data available: labels imply supervised, hidden structure implies unsupervised, and sequential decisions with rewards imply reinforcement learning."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "Machine Learning Workflow",
+    "question": "Mock 50 focus - ML lifecycle: Walk through the end-to-end machine learning lifecycle from problem framing to data collection, training, deployment, monitoring, and retraining.",
+    "answer": "Start with problem framing: define business objective, prediction target, success metric, constraints, and risk. Then collect and validate data, engineer features, split train/validation/test sets, train candidate models, evaluate offline metrics and business relevance, package the model, register it with lineage, deploy through canary/shadow/A/B if needed, and monitor latency, errors, drift, data quality, prediction quality, and business KPIs. Retraining should be triggered by schedule, new labels, drift, or performance degradation, but production promotion still needs validation and rollback controls."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "Feature Engineering",
+    "question": "Mock 50 focus - feature engineering: What is feature engineering, why does it matter, and how do you avoid training-serving skew?",
+    "answer": "Feature engineering means transforming raw data into useful model inputs: aggregations, encodings, normalization, time-window features, text embeddings, missing-value handling, and domain-specific signals. It matters because model quality often depends more on useful features than algorithm choice. To avoid training-serving skew, reuse the same feature definitions in training and inference, version features, validate schemas, monitor freshness, and use a feature store or shared transformation library where appropriate. Always record feature version and data time range in model lineage."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "Model Evaluation",
+    "question": "Mock 50 focus - ML model evaluation: How would you choose metrics such as accuracy, precision, recall, F1, ROC-AUC, RMSE, and business KPIs?",
+    "answer": "Choose metrics based on problem type and business cost of errors. Accuracy is useful only when classes are balanced and errors have similar cost. Precision matters when false positives are expensive, such as unnecessary fraud blocks. Recall matters when false negatives are expensive, such as missing fraud or incidents. F1 balances precision and recall. ROC-AUC helps compare ranking ability across thresholds. RMSE/MAE fit regression problems. Always connect technical metrics to business KPIs such as revenue, risk, support tickets, latency, or user experience."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "Model Reliability",
+    "question": "Mock 50 focus - overfitting and underfitting: How do you detect overfitting or underfitting, and what actions would you take?",
+    "answer": "Overfitting means the model performs well on training data but poorly on validation or production data. Detect it through train-validation metric gaps, unstable cross-validation, and poor generalization. Fix it with more data, regularization, simpler models, dropout, pruning, early stopping, or better validation splits. Underfitting means the model is too simple or lacks useful features, causing poor training and validation performance. Fix it with better features, a more expressive model, longer training, less regularization, or improved data quality."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "ML Monitoring",
+    "question": "Mock 50 focus - model drift: Explain data drift, concept drift, prediction drift, and how you would monitor and respond to each in production.",
+    "answer": "Data drift is a change in input feature distribution. Concept drift is a change in the relationship between inputs and target, so old patterns no longer predict outcomes. Prediction drift is a change in model output distribution. Monitor feature distributions, schema, missing values, embedding distribution, prediction distribution, delayed ground-truth metrics, and business KPIs. Respond based on impact: investigate data pipeline changes, compare against seasonality, retrain with fresh data, roll back feature/model changes, or adjust thresholds. Do not retrain automatically on every drift alert without validation."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "ML Deployment",
+    "question": "Mock 50 focus - model deployment strategy: How would you deploy a new ML model safely using canary, shadow, A/B testing, rollback, and champion-challenger patterns?",
+    "answer": "Use shadow deployment when you want the new model to receive live inputs without affecting users. Use canary to send a small percentage of traffic and watch latency, errors, model metrics, and business KPIs. Use A/B testing to compare business outcomes between model versions. Use champion-challenger when a candidate must beat the current production model before promotion. Keep rollback simple by retaining prior model artifacts and routing config. For ML, rollback criteria must include business and quality metrics, not only infrastructure health."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "ML Incident",
+    "question": "Mock 50 focus - bad model incident: A model is technically healthy but business KPIs suddenly drop after release. How would you investigate and mitigate?",
+    "answer": "Open an incident and check the release timeline, model version, feature version, traffic split, customer segments, and business metric drop. Compare old vs new predictions, input distributions, confidence scores, feature freshness, training-serving skew, and any upstream data changes. If the drop aligns with the model release, pause rollout or roll back to the previous champion while investigation continues. Preserve evidence: model version, data sample, metrics, and traces. After mitigation, update evaluation gates so the missed business failure becomes a pre-production or canary check."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 50 - LLM and Machine Learning Round",
+    "category": "ML Platform",
+    "question": "Mock 50 focus - ML platform design: What shared platform capabilities would you build for data scientists and ML engineers to ship models safely and repeatedly?",
+    "answer": "Build shared capabilities across the lifecycle: data access patterns, data validation, feature store or reusable feature pipelines, experiment tracking, model registry, pipeline orchestration, CI/CD/CT, containerized training, model serving, monitoring, drift detection, approval workflows, rollback, security, and cost visibility. The platform should provide golden paths so teams do not reinvent infrastructure, but still allow flexibility for different model types. Strong platform answers include reproducibility, lineage, tenant isolation, least privilege, observability, and self-service developer experience."
+  },
+  {
     "source": "App Question Bank",
     "section": "GCP / DevOps / SRE Question Bank",
     "category": null,
@@ -5323,13 +5547,6 @@
     "source": "App Question Bank",
     "section": "LLMOps / GenAI Production",
     "category": null,
-    "question": "Vector database operations: How would you operate a production vector database, including indexing strategy, reindexing without downtime, backup/restore, and scaling for query latency?",
-    "answer": "Choose an index type (HNSW for low-latency approximate search, IVF for larger scale with a recall/speed tradeoff) sized for expected vector count and query rate, and reindex without downtime by building the new index alongside the old one (blue-green) and cutting over traffic once the new index passes recall/latency validation. Back up the underlying vector store and metadata together so a restore reconstructs a consistent state, and scale query latency with read replicas, sharding by tenant/namespace, and caching frequent queries."
-  },
-  {
-    "source": "App Question Bank",
-    "section": "LLMOps / GenAI Production",
-    "category": null,
     "question": "Prompt lifecycle management: How would you version, test, review, and roll back prompt changes the same way you would application code?",
     "answer": "Store prompts in version control alongside application code, not as untracked strings, and require PR review for changes with a diff showing exactly what wording changed. Run an automated evaluation suite (a fixed set of test inputs with expected quality criteria) before merging, deploy behind a feature flag or canary so a new prompt reaches a small percentage of traffic first, and keep the previous prompt version one config change away for instant rollback if quality regresses."
   },
@@ -5360,13 +5577,6 @@
     "category": null,
     "question": "GPU serving cost: How would you decide between managed model endpoints, self-hosted GPU serving with vLLM/TGI, and batch inference for different GenAI workloads on cost and latency?",
     "answer": "Use managed endpoints (Vertex AI, or a hosted API) for low/unpredictable volume where operational simplicity outweighs per-token cost, and move to self-hosted GPU serving with vLLM/TGI once volume is high and steady enough that GPU utilization amortizes the operational overhead - vLLM's continuous batching in particular improves throughput significantly for high-concurrency workloads. Use batch inference (no real-time latency requirement) with spot/preemptible GPUs for offline scoring jobs, since that's the cheapest option when synchronous response time doesn't matter."
-  },
-  {
-    "source": "App Question Bank",
-    "section": "LLMOps / GenAI Production",
-    "category": null,
-    "question": "RAG vs fine-tuning vs prompting: How would you decide between prompt engineering, RAG, and fine-tuning for a domain-specific GenAI use case, and how would that decision change operational ownership?",
-    "answer": "Start with prompt engineering for anything that can be solved with better instructions and few-shot examples, since it has the lowest operational cost and fastest iteration. Add RAG when the model needs access to specific, frequently-changing, or proprietary knowledge it wasn't trained on. Reserve fine-tuning for cases needing a consistent style/format at scale or behavior that prompting genuinely cannot achieve, since fine-tuning adds real operational ownership - training pipelines, versioned model artifacts, evaluation before each retrain, and a rollback story that prompting and RAG don't require."
   },
   {
     "source": "App Question Bank",
@@ -5456,20 +5666,6 @@
     "source": "App Question Bank",
     "section": "LLMOps / GenAI Production",
     "category": null,
-    "question": "MLflow tracking design: How would you structure MLflow experiments, runs, parameters, metrics, tags, artifacts, and naming conventions for a team?",
-    "answer": "Create experiments around stable business problems or model families, not every individual run, and use consistent run names that include project, branch or pipeline run, and purpose. Log hyperparameters as params, evaluation results as metrics, model files and reports as artifacts, and use tags for owner, git commit, dataset version, environment, feature set, and candidate/prod status so runs are searchable and comparable across the team."
-  },
-  {
-    "source": "App Question Bank",
-    "section": "LLMOps / GenAI Production",
-    "category": null,
-    "question": "MLflow model registry: How would you use MLflow Model Registry for versioning, approvals, stage transitions, aliases, rollback, and auditability?",
-    "answer": "Register only evaluated candidate models, attach metadata linking the model version to the MLflow run, git commit, dataset, metrics, and owner, and require an approval step before promotion. Use stages or aliases to identify candidate, staging, and production versions, keep older production versions available for rollback, and record comments or approvals in the registry so model promotion is auditable rather than a silent artifact overwrite."
-  },
-  {
-    "source": "App Question Bank",
-    "section": "LLMOps / GenAI Production",
-    "category": null,
     "question": "MLflow reproducibility: What exactly would you log in MLflow so another engineer can reproduce a model months later?",
     "answer": "Log the code version, dataset snapshot or query/version, feature transformation version, parameters, metrics, random seed, library/environment file, training container image, model artifact, evaluation report, and any preprocessing artifacts. The goal is that someone can reconstruct not just the trained model file but the exact training context that produced it, which is essential for debugging, audit, retraining, and rollback."
   },
@@ -5486,13 +5682,6 @@
     "category": null,
     "question": "MLflow CI/CD integration: How would you integrate MLflow with GitHub Actions, Jenkins, or Cloud Build for automated training, evaluation, registration, and deployment?",
     "answer": "Have CI test the training code and build the training/serving image, then run training in a controlled job that logs metrics and artifacts to MLflow with the git SHA attached. A promotion step compares metrics against thresholds, registers a model version only if it passes, and triggers deployment to staging or production through an approval or canary gate, with rollback pointing the serving layer back to the previous registry version."
-  },
-  {
-    "source": "App Question Bank",
-    "section": "LLMOps / GenAI Production",
-    "category": null,
-    "question": "MLflow on Kubernetes: How would you deploy and operate an MLflow tracking server on GKE, including database, object storage, ingress, auth, and monitoring?",
-    "answer": "Deploy MLflow as a stateless Kubernetes Deployment, use Cloud SQL/Postgres for the backend store, GCS for artifacts, Workload Identity for bucket/database access where possible, and an ingress or internal load balancer protected by SSO/IAP or an auth proxy. Add resource requests/limits, health checks, TLS, backups, audit logging, dashboards for request errors and latency, and alerts for database or artifact-store failures."
   },
   {
     "source": "App Question Bank",
@@ -5519,36 +5708,8 @@
     "source": "App Question Bank",
     "section": "LLMOps / GenAI Production",
     "category": null,
-    "question": "MLflow troubleshooting: An MLflow run logged metrics but the model artifact is missing or cannot be loaded. How would you debug it?",
-    "answer": "Check whether the run completed the artifact logging step, inspect the artifact URI, verify the tracking server and client are using the same artifact store configuration, and confirm the service account or user has write/read permissions to the bucket or filesystem. Then verify dependency/environment files, model flavor, serialization format, and MLflow version compatibility, because a model can exist in storage but still fail to load if the environment or flavor metadata is wrong."
-  },
-  {
-    "source": "App Question Bank",
-    "section": "LLMOps / GenAI Production",
-    "category": null,
-    "question": "Kubeflow platform design: How would you design a production Kubeflow platform on GKE for notebooks, pipelines, training, serving, security, and observability?",
-    "answer": "Run Kubeflow on a dedicated GKE platform with separate namespaces/profiles per team, GPU and CPU node pools, Workload Identity, Artifact Registry, Cloud Storage, and centralized logging/monitoring. Provide managed notebook access, Kubeflow Pipelines for repeatable workflows, training operators for distributed jobs, KServe for model serving, and platform guardrails such as RBAC, quotas, network policies, image scanning, backups, and clear ownership for each component."
-  },
-  {
-    "source": "App Question Bank",
-    "section": "LLMOps / GenAI Production",
-    "category": null,
-    "question": "Kubeflow Pipelines: How would you design a reusable Kubeflow Pipeline for data validation, training, evaluation, registration, and conditional deployment?",
-    "answer": "Model the workflow as containerized components connected by typed inputs/outputs: validate data, transform features, train, evaluate, and only register or deploy if metrics pass thresholds. Store artifacts in object storage, record metadata for lineage, parameterize environment-specific values, enable caching only when cache keys include data/code/config versions, and keep deployment as a conditional step so bad models stop before production."
-  },
-  {
-    "source": "App Question Bank",
-    "section": "LLMOps / GenAI Production",
-    "category": null,
     "question": "Kubeflow components: How would you package pipeline components as containers, pass artifacts/parameters between steps, and keep them reusable across teams?",
     "answer": "Package each component as a small container with a clear command, pinned dependencies, and explicit input/output contracts. Pass lightweight values as parameters and larger files/models/reports as artifacts in shared storage, version component images in Artifact Registry, document expected schemas, and avoid embedding project-specific paths so the same component can be reused across teams and environments."
-  },
-  {
-    "source": "App Question Bank",
-    "section": "LLMOps / GenAI Production",
-    "category": null,
-    "question": "Kubeflow multi-user isolation: How would you isolate teams in Kubeflow using namespaces, profiles, RBAC, service accounts, quotas, and network policies?",
-    "answer": "Give each team a Kubeflow profile mapped to its own namespace, service accounts, resource quotas, and role bindings. Restrict cross-namespace access with RBAC and network policies, use Workload Identity for least-privilege GCP access, apply separate CPU/GPU quotas to prevent noisy neighbors, and tag/label workloads so usage, cost, and ownership are visible."
   },
   {
     "source": "App Question Bank",
@@ -5577,20 +5738,6 @@
     "category": null,
     "question": "Kubeflow CI/CD: How would you integrate Kubeflow Pipelines with GitHub Actions, Jenkins, Cloud Build, ArgoCD, or GitOps?",
     "answer": "Use CI to test component code, build and scan container images, push them to Artifact Registry, and compile/version the pipeline spec. Use CD or GitOps to promote pipeline definitions and serving manifests through environments, trigger pipeline runs with approved parameters, gate promotion on evaluation results, and let ArgoCD manage long-lived Kubernetes resources such as KServe services and platform config."
-  },
-  {
-    "source": "App Question Bank",
-    "section": "LLMOps / GenAI Production",
-    "category": null,
-    "question": "Kubeflow troubleshooting: A Kubeflow pipeline step is stuck Pending or failing. How would you debug pods, volumes, service accounts, images, logs, and events?",
-    "answer": "Start with the pipeline UI to identify the failed component, then inspect the underlying pod with kubectl: events, scheduling reason, image pull errors, volume mounts, service account permissions, resource requests, node selectors, and logs. Pending often means quota, node capacity, taints/tolerations, PVC, or GPU availability; runtime failure usually points to container command, dependency, data path, or permission issues."
-  },
-  {
-    "source": "App Question Bank",
-    "section": "LLMOps / GenAI Production",
-    "category": null,
-    "question": "Kubeflow vs MLflow vs Vertex AI: How would you choose between Kubeflow, MLflow, and Vertex AI for a GCP MLOps platform?",
-    "answer": "Use Kubeflow when you want Kubernetes-native control over pipelines, training, serving, and multi-user ML workflows, especially on GKE. Use MLflow when experiment tracking, model packaging, and registry portability are the primary needs. Use Vertex AI when managed GCP operations, IAM/audit integration, managed endpoints, and lower platform maintenance matter most; many real platforms combine them, for example Kubeflow for pipelines, MLflow for tracking, and Vertex AI for managed serving."
   },
   {
     "source": "App Question Bank",
@@ -5822,13 +5969,6 @@
     "category": null,
     "question": "Resume deep-dive - LLMOps stack: You deployed Llama 3, Mistral, Ollama, and vLLM on Kubernetes. How did you choose between them and scale inference for concurrent users?",
     "answer": "The choice depends on the use case: Ollama is convenient for quick local/dev experimentation and lower-throughput internal tools, while vLLM is the production serving choice for high-concurrency workloads because of its continuous batching and PagedAttention memory management, which dramatically improves throughput per GPU. Model choice (Llama 3 vs Mistral) came down to task performance on internal evals versus latency/cost tradeoffs at a given size. Scaling concurrent users meant horizontal pod autoscaling on GPU node pools, request queuing with backpressure so the service degrades gracefully rather than falling over, and continuous batching in vLLM to serve many concurrent requests per GPU efficiently."
-  },
-  {
-    "source": "App Question Bank",
-    "section": "LLMOps / GenAI Production",
-    "category": null,
-    "question": "Resume deep-dive - RAG pipeline: Walk me through the RAG pipeline you built, including embedding model choice, vector database, chunking, and how you measured answer quality.",
-    "answer": "The pipeline chunks source documents with an overlap strategy (typically 200-500 tokens per chunk with some overlap to preserve context across boundaries), embeds chunks with a domain-appropriate embedding model, and stores vectors with metadata for filtering. At query time it embeds the user question, retrieves the top-k most similar chunks, and passes them as grounding context to the LLM. Answer quality was measured with a mix of retrieval metrics (recall@k against a labeled set) and generation metrics (groundedness/faithfulness checks, either via an LLM-as-judge or human review) rather than relying on generation quality alone."
   },
   {
     "source": "App Question Bank",

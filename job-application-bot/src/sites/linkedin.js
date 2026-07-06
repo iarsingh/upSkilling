@@ -77,64 +77,70 @@ async function collectJobCards(page, limit) {
   return cards.slice(0, limit);
 }
 
+// Fills every visible text/select/radio-group field within `surface` (a modal
+// locator, or `main` for the full-page apply flow - see handleFullPageApply).
+// Shared by both surfaces so the field-matching logic (and its accuracy) is
+// identical regardless of which UI LinkedIn happens to render this job in.
+async function fillVisibleFields(surface, profile, jobContext) {
+  const textInputs = await surface.locator("input[type='text'], input[type='tel'], input[type='email'], input[type='number'], textarea").all();
+  for (const input of textInputs) {
+    const existing = await input.inputValue().catch(() => "");
+    if (existing) continue;
+    const label = await resolveLabel(surface, input);
+    const inputType = (await input.evaluate((el) => el.tagName.toLowerCase())) === "textarea" ? "textarea" : "text";
+    try {
+      await fillField({ locator: input, label, inputType, profile, jobContext });
+    } catch {
+      // Leave unfillable fields for manual follow-up rather than blocking the run.
+    }
+  }
+
+  const selects = await surface.locator("select").all();
+  for (const select of selects) {
+    const label = await resolveLabel(surface, select);
+    try {
+      await fillField({ locator: select, label, inputType: "select", profile, jobContext });
+    } catch {
+      /* skip */
+    }
+  }
+
+  // Radio-button groups ("Are you willing to relocate?" Yes/No, sponsorship,
+  // work authorization, etc.) are the most common reason a step gets stuck:
+  // LinkedIn won't advance past a required group with nothing selected.
+  // fillField() already had a radio/checkbox branch (formFiller.js:62-67) but
+  // no caller ever grouped and invoked it. This loop does the mechanical part
+  // (find each group, read its question text and option labels, skip groups
+  // that already have a selection); the actual "which option answers this
+  // question" decision is in pickRadioOption() below.
+  const radioGroups = await surface.locator("fieldset:has(input[type='radio'])").all();
+  for (const group of radioGroups) {
+    const alreadyChecked = await group.locator("input[type='radio']:checked").count().catch(() => 0);
+    if (alreadyChecked) continue;
+
+    const groupLabel = await firstGroupText(group);
+    const options = await group.locator("input[type='radio']").all();
+    const optionLabels = await Promise.all(options.map((opt) => resolveLabel(group, opt)));
+
+    const chosenIndex = pickRadioOption({ groupLabel, optionLabels, profile });
+    if (chosenIndex != null && options[chosenIndex]) {
+      await options[chosenIndex].check().catch(() => {});
+    }
+  }
+
+  // Resume selection step: pick the resume matching the job's scored category if offered.
+  const resumeOption = surface.locator("div[class*='jobs-document-upload'] input[type='radio']").first();
+  if (await resumeOption.count().catch(() => 0)) {
+    await resumeOption.check().catch(() => {});
+  }
+}
+
 async function handleEasyApplyModal(page, profile, jobContext, dryRun = false) {
   // The modal is a wizard: repeatedly fill the visible step, then click Next
   // / Review / Submit until a step no longer advances.
   for (let step = 0; step < 12; step++) {
     const modal = page.locator("div.jobs-easy-apply-modal, div[role='dialog']").first();
-
-    const textInputs = await modal.locator("input[type='text'], input[type='tel'], input[type='email'], input[type='number'], textarea").all();
-    for (const input of textInputs) {
-      const existing = await input.inputValue().catch(() => "");
-      if (existing) continue;
-      const label = await resolveLabel(modal, input);
-      const inputType = (await input.evaluate((el) => el.tagName.toLowerCase())) === "textarea" ? "textarea" : "text";
-      try {
-        await fillField({ locator: input, label, inputType, profile, jobContext });
-      } catch {
-        // Leave unfillable fields for manual follow-up rather than blocking the run.
-      }
-    }
-
-    const selects = await modal.locator("select").all();
-    for (const select of selects) {
-      const label = await resolveLabel(modal, select);
-      try {
-        await fillField({ locator: select, label, inputType: "select", profile, jobContext });
-      } catch {
-        /* skip */
-      }
-    }
-
-    // Radio-button groups ("Are you willing to relocate?" Yes/No, sponsorship,
-    // work authorization, etc.) are the most common reason a step gets stuck:
-    // LinkedIn won't advance past a required group with nothing selected, and
-    // until now nothing here ever looked at radio inputs at all - fillField()
-    // already had a radio/checkbox branch (formFiller.js:62-67) but no caller
-    // ever grouped and invoked it. This loop does the mechanical part (find
-    // each group, read its question text and option labels, skip groups that
-    // already have a selection); the actual "which option answers this
-    // question" decision is in pickRadioOption() below.
-    const radioGroups = await modal.locator("fieldset:has(input[type='radio'])").all();
-    for (const group of radioGroups) {
-      const alreadyChecked = await group.locator("input[type='radio']:checked").count().catch(() => 0);
-      if (alreadyChecked) continue;
-
-      const groupLabel = await firstGroupText(group);
-      const options = await group.locator("input[type='radio']").all();
-      const optionLabels = await Promise.all(options.map((opt) => resolveLabel(group, opt)));
-
-      const chosenIndex = pickRadioOption({ groupLabel, optionLabels, profile });
-      if (chosenIndex != null && options[chosenIndex]) {
-        await options[chosenIndex].check().catch(() => {});
-      }
-    }
-
-    // Resume selection step: pick the resume matching the job's scored category if offered.
-    const resumeOption = modal.locator("div[class*='jobs-document-upload'] input[type='radio']").first();
-    if (await resumeOption.count().catch(() => 0)) {
-      await resumeOption.check().catch(() => {});
-    }
+    await fillVisibleFields(modal, profile, jobContext);
 
     const submitBtn = modal.getByRole("button", { name: /submit application/i });
     if (await submitBtn.count()) {
@@ -154,6 +160,44 @@ async function handleEasyApplyModal(page, profile, jobContext, dryRun = false) {
 
     await advance.click();
     await sleep(1000);
+  }
+  return false;
+}
+
+// LinkedIn increasingly routes Easy Apply to a full separate page (URL gains
+// an /apply/ segment) instead of opening the modal in place - seen both for
+// third-party ATS integrations (e.g. applicantTrackingSystemName=Ceipal) and
+// LinkedIn's own newer multi-page flow (applicantTrackingSystemName=LinkedIn).
+// Same wizard shape (fill step, click Next/Review/Submit) as the modal, just
+// scoped to the page's <main> instead of a dialog, and with more steps
+// allowed since these flows ran 4-6 pages in the postings actually seen.
+async function handleFullPageApply(page, profile, jobContext, dryRun = false) {
+  for (let step = 0; step < 15; step++) {
+    const surface = page.locator("main").first();
+    await fillVisibleFields(surface, profile, jobContext);
+
+    const submitBtn = surface.getByRole("button", { name: /submit application/i }).first();
+    if (await submitBtn.count().catch(() => 0)) {
+      if (dryRun) {
+        console.log("  [dry-run] Full-page apply form filled, would click Submit application here");
+        return "dry_run";
+      }
+      await submitBtn.click();
+      await sleep(2000);
+      return true;
+    }
+
+    const reviewBtn = surface.getByRole("button", { name: /review/i }).first();
+    const nextBtn = surface.getByRole("button", { name: /^next$/i }).first();
+    const continueBtn = surface.getByRole("button", { name: /continue/i }).first();
+    const hasReview = await reviewBtn.count().catch(() => 0);
+    const hasNext = await nextBtn.count().catch(() => 0);
+    const hasContinue = await continueBtn.count().catch(() => 0);
+    const advance = hasReview ? reviewBtn : hasNext ? nextBtn : continueBtn;
+    if (!hasReview && !hasNext && !hasContinue) return false; // stuck - unknown step layout
+
+    await advance.click();
+    await sleep(1200);
   }
   return false;
 }
@@ -311,7 +355,13 @@ async function run({ page, profile, keywords, location, limit, dryRun = false })
     await easyApplyBtn.click();
     await sleep(1500);
 
-    const outcome = await handleEasyApplyModal(page, profile, jobText.slice(0, 800), dryRun);
+    // LinkedIn either opens the modal in place (URL unchanged) or navigates
+    // to a full-page /apply/ flow (own multi-page UI, or a third-party ATS
+    // like Ceipal) - route to the matching handler rather than assuming.
+    const isFullPageApply = /\/apply\//.test(page.url());
+    const outcome = isFullPageApply
+      ? await handleFullPageApply(page, profile, jobText.slice(0, 800), dryRun)
+      : await handleEasyApplyModal(page, profile, jobText.slice(0, 800), dryRun);
     const status = outcome === "dry_run" ? "dry_run" : outcome ? "submitted" : "incomplete_needs_review";
 
     applicationLog.record({

@@ -612,3 +612,45 @@ Focus: AI engineering libraries, Python equality and multiprocessing, AWS to GCP
 14. **Incident Management:** Today interview 2026-07-06 - Outage decision-making: During an outage with incomplete information, how do you decide whether to roll back, roll forward, use a feature flag, or shift traffic?
 15. **Similar Scenario:** Today interview 2026-07-06 - Similar scenario Terraform plan review: What checks would you add before Terraform apply to prevent accidental IAM or networking breakage?
 16. **Similar Scenario:** Today interview 2026-07-06 - Similar scenario progressive mitigation: A bad release affects only 10 percent of users. How would you decide between rollback, canary pause, feature disablement, and traffic shifting?
+
+## Mock Interview 49 - Kubeflow MLflow Multiprocessing RAG Round
+
+Focus: Kubeflow platform design, Kubeflow Pipelines, MLflow tracking and registry, production MLflow on Kubernetes, Python multiprocessing, RAG reliability, vector databases, retrieval evaluation, and GenAI observability
+
+1. **Kubeflow:** Kubeflow platform design: How would you design a production Kubeflow platform on GKE for notebooks, pipelines, training, serving, security, and observability?
+2. **Kubeflow:** Kubeflow Pipelines: How would you design a reusable Kubeflow Pipeline for data validation, training, evaluation, registration, and conditional deployment?
+3. **Kubeflow:** Kubeflow multi-user isolation: How would you isolate teams in Kubeflow using namespaces, profiles, RBAC, service accounts, quotas, and network policies?
+4. **Kubeflow:** Kubeflow troubleshooting: A Kubeflow pipeline step is stuck Pending or failing. How would you debug pods, volumes, service accounts, images, logs, and events?
+5. **MLflow:** MLflow tracking design: How would you structure MLflow experiments, runs, parameters, metrics, tags, artifacts, and naming conventions for a team?
+6. **MLflow:** MLflow model registry: How would you use MLflow Model Registry for versioning, approvals, stage transitions, aliases, rollback, and auditability?
+7. **MLflow:** MLflow on Kubernetes: How would you deploy and operate an MLflow tracking server on GKE, including database, object storage, ingress, auth, and monitoring?
+8. **MLflow:** MLflow troubleshooting: An MLflow run logged metrics but the model artifact is missing or cannot be loaded. How would you debug it?
+9. **Python:** Mock 49 focus - Python concurrency and multiprocessing choices for cloud and ML workloads: When would you use threads, asyncio, multiprocessing, or a bounded worker pool?
+10. **Python:** Mock 49 focus - Python multiprocessing deep dive: Explain multiprocessing in Python and when it is better than multithreading for CPU-heavy ML or data-processing tasks.
+11. **RAG:** Mock 49 focus - RAG reliability debugging: A retrieval-augmented generation pipeline returns stale or irrelevant context. How would you debug indexing, embeddings, chunking, retrieval, and reranking?
+12. **RAG:** Vector database operations: How would you operate a production vector database, including indexing strategy, reindexing without downtime, backup/restore, and scaling for query latency?
+13. **RAG:** RAG vs fine-tuning vs prompting: How would you decide between prompt engineering, RAG, and fine-tuning for a domain-specific GenAI use case, and how would that decision change operational ownership?
+14. **RAG:** Resume deep-dive - RAG pipeline: Walk me through the RAG pipeline you built, including embedding model choice, vector database, chunking, and how you measured answer quality.
+15. **MLOps Architecture:** Kubeflow vs MLflow vs Vertex AI: How would you choose between Kubeflow, MLflow, and Vertex AI for a GCP MLOps platform?
+16. **GenAI Observability:** Mock 49 focus - RAG and LLM observability: What would you trace and log end to end for a RAG request without leaking prompts, PII, secrets, or retrieved sensitive text?
+
+## Mock Interview 50 - LLM and Machine Learning Round
+
+Focus: LLM production architecture, prompt lifecycle, LLM evaluation, fine-tuning vs RAG, model fundamentals, supervised and unsupervised learning, feature engineering, model evaluation, overfitting, drift, deployment, monitoring, and rollback
+
+1. **LLM Architecture:** Mock 50 focus - LLM production architecture: How would you design a production LLM-backed service with model routing, caching, rate limits, observability, safety, and cost controls?
+2. **LLM Gateway:** Mock 50 focus - LLM gateway: How would you build an internal gateway that handles auth, per-team token budgets, prompt templates, model fallback, audit logs, and provider abstraction?
+3. **Prompt Engineering:** Mock 50 focus - prompt lifecycle: How would you version, test, review, deploy, and roll back prompt changes like application code?
+4. **LLM Evaluation:** Mock 50 focus - LLM evaluation: How would you design automated and human evaluation for answer quality, groundedness, toxicity, latency, and regression testing?
+5. **LLM Security:** Mock 50 focus - prompt injection and data leakage: How would you protect an LLM application from malicious input, unsafe tool calls, PII leakage, and retrieved-document injection?
+6. **LLM Deployment:** Mock 50 focus - self-hosted vs managed LLMs: How would you choose between Vertex AI/Gemini, OpenAI API, and self-hosted vLLM or Ollama on Kubernetes?
+7. **LLM Fine-Tuning:** Mock 50 focus - fine-tuning vs RAG: When would you fine-tune an LLM instead of using RAG or prompt engineering, and what operational risks would you manage?
+8. **Machine Learning Basics:** Mock 50 focus - machine learning fundamentals: Explain supervised learning, unsupervised learning, and reinforcement learning with practical examples.
+9. **Machine Learning Workflow:** Mock 50 focus - ML lifecycle: Walk through the end-to-end machine learning lifecycle from problem framing to data collection, training, deployment, monitoring, and retraining.
+10. **Feature Engineering:** Mock 50 focus - feature engineering: What is feature engineering, why does it matter, and how do you avoid training-serving skew?
+11. **Model Evaluation:** Mock 50 focus - ML model evaluation: How would you choose metrics such as accuracy, precision, recall, F1, ROC-AUC, RMSE, and business KPIs?
+12. **Model Reliability:** Mock 50 focus - overfitting and underfitting: How do you detect overfitting or underfitting, and what actions would you take?
+13. **ML Monitoring:** Mock 50 focus - model drift: Explain data drift, concept drift, prediction drift, and how you would monitor and respond to each in production.
+14. **ML Deployment:** Mock 50 focus - model deployment strategy: How would you deploy a new ML model safely using canary, shadow, A/B testing, rollback, and champion-challenger patterns?
+15. **ML Incident:** Mock 50 focus - bad model incident: A model is technically healthy but business KPIs suddenly drop after release. How would you investigate and mitigate?
+16. **ML Platform:** Mock 50 focus - ML platform design: What shared platform capabilities would you build for data scientists and ML engineers to ship models safely and repeatedly?
