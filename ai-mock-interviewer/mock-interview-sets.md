@@ -654,3 +654,178 @@ Focus: LLM production architecture, prompt lifecycle, LLM evaluation, fine-tunin
 14. **ML Deployment:** Mock 50 focus - model deployment strategy: How would you deploy a new ML model safely using canary, shadow, A/B testing, rollback, and champion-challenger patterns?
 15. **ML Incident:** Mock 50 focus - bad model incident: A model is technically healthy but business KPIs suddenly drop after release. How would you investigate and mitigate?
 16. **ML Platform:** Mock 50 focus - ML platform design: What shared platform capabilities would you build for data scientists and ML engineers to ship models safely and repeatedly?
+
+## Mock Interview 51 - Kubernetes Services and Terraform Loops Round
+
+Focus: Kubernetes Service networking, kube-proxy, cross-namespace DNS, startup ordering, blue-green traffic switching, Terraform dynamic blocks, for_each, each.value, toset, and repeated S3 resources
+
+1. **GKE/Kubernetes:** What is kube-proxy?
+2. **GKE/Kubernetes:** Suppose there are two Pods running in different namespaces. What DNS name would you use so that one Pod can communicate with the other?
+3. **GKE/Kubernetes:** There are two applications, a frontend application and a backend application, running in two different Pods. What configuration would you write so that the frontend application starts only after the backend application is up and running?
+4. **CI/CD/GitOps:** We mostly follow blue-green deployment. How do you divert traffic from the Blue environment to the Green environment?
+5. **Terraform/IaC:** What is a dynamic block in Terraform?
+6. **Terraform/IaC:** What is the use case of a dynamic block?
+7. **Terraform/IaC:** How would you create multiple S3 buckets in Terraform?
+8. **Terraform/IaC:** What is the meaning of each.value in Terraform?
+9. **Terraform/IaC:** Why do we use each.value?
+10. **Terraform/IaC:** Why do we use toset() in Terraform?
+
+## Mock Interview 52 - Datadog Observability Round
+
+Focus: Datadog Agent, Kubernetes monitoring, APM, logs, traces, dashboards, monitors, SLOs, alert routing, cost control, synthetic monitoring, RUM, and incident investigation
+
+1. **Datadog/Observability:** How would you install and configure the Datadog Agent on a Kubernetes or GKE cluster?
+2. **Datadog/Observability:** How does Datadog collect metrics, logs, and traces from Kubernetes workloads?
+3. **Datadog/APM:** How would you enable Datadog APM for a microservice running on Kubernetes?
+4. **Datadog/Logs:** How would you correlate Datadog logs with traces for faster debugging?
+5. **Datadog/Monitoring:** What Datadog monitors would you create for a production API?
+6. **Datadog/SRE:** How would you define SLOs and error-budget alerts in Datadog?
+7. **Datadog/Dashboards:** What dashboards would you build in Datadog for application teams, SREs, and leadership?
+8. **Datadog/Incident Response:** A Datadog alert shows p95 latency increased after a deployment. How would you investigate?
+9. **Datadog/Cost:** How would you control Datadog cost for logs, custom metrics, and high-cardinality tags?
+10. **Datadog/Synthetics:** When would you use Datadog Synthetic Monitoring and Real User Monitoring?
+11. **Datadog/Integrations:** How would you integrate Datadog with GCP, Slack, PagerDuty, and CI/CD pipelines?
+12. **Datadog/Security:** What security and access controls would you apply in Datadog for a large engineering organization?
+
+## Mock Interview 53 - Python Developer System Design Round
+
+Focus: Python backend system design, FastAPI/Django APIs, database design, caching, queues, async processing, scalability, reliability, testing, observability, security, and production debugging
+
+1. **Python/System Design:** How would you design a scalable Python backend API for a high-traffic web application?
+2. **Python/API Design:** How would you design REST API endpoints, request validation, pagination, filtering, and versioning in a Python service?
+3. **Python/Database Design:** How would you design the database layer for a Python application, including schema design, indexes, migrations, transactions, and connection pooling?
+4. **Python/Caching:** How would you add Redis caching to a Python backend, and how would you handle cache invalidation?
+5. **Python/Async Processing:** When would you use Celery, RQ, Cloud Tasks, Pub/Sub, or Kafka for background processing in a Python application?
+6. **Python/Concurrency:** How would you choose between asyncio, threads, multiprocessing, and worker queues in Python system design?
+7. **Python/Reliability:** How would you design retries, timeouts, idempotency, and circuit breakers for a Python service calling external APIs?
+8. **Python/Security:** How would you secure a Python backend service, including authentication, authorization, secrets, input validation, and dependency security?
+9. **Python/Observability:** What logs, metrics, traces, health checks, and dashboards would you add to a production Python service?
+10. **Python/Testing:** How would you test a Python backend system across unit tests, integration tests, contract tests, load tests, and end-to-end tests?
+11. **Python/Deployment:** How would you containerize and deploy a Python web service on Kubernetes or Cloud Run?
+12. **Python/Performance:** A Python API has high latency and high CPU usage in production. How would you debug and optimize it?
+13. **System Design:** Design a URL shortener using Python. What components, data model, caching, scaling, and failure handling would you include?
+14. **System Design:** Design a notification system in Python that supports email, SMS, retries, templates, rate limits, and audit logs.
+15. **System Design:** Design a file upload and processing service in Python for large files, asynchronous processing, status tracking, and secure storage.
+16. **System Design:** Design a real-time chat or WebSocket service in Python. How would you handle scaling, message delivery, presence, and persistence?
+
+## Mock Interview 54 - DSA for Python Developers Round
+
+Focus: Data structures and algorithms in Python, time and space complexity, arrays, strings, hash maps, stacks, queues, linked lists, trees, graphs, heaps, recursion, dynamic programming, and coding interview problem solving
+
+1. **DSA/Complexity:** How do you analyze time and space complexity for a Python solution?
+2. **DSA/Arrays:** How would you solve Two Sum in Python, and what is the time complexity?
+3. **DSA/Strings:** How would you check whether two strings are anagrams in Python?
+4. **DSA/Sliding Window:** How would you find the longest substring without repeating characters?
+5. **DSA/Two Pointers:** When would you use the two-pointer technique, and how would you apply it to a sorted array?
+6. **DSA/Hashing:** Why are hash maps useful in coding interviews, and what are common pitfalls in Python dictionaries?
+7. **DSA/Stack:** How would you validate balanced parentheses using a stack?
+8. **DSA/Queue:** When would you use a queue or deque in Python, and why is list.pop(0) usually avoided?
+9. **DSA/Linked List:** How would you detect a cycle in a linked list?
+10. **DSA/Trees:** How would you perform BFS and DFS traversal of a binary tree?
+11. **DSA/Binary Search:** How would you use binary search to find the first occurrence of a target in a sorted array?
+12. **DSA/Heap:** How would you find the top K frequent elements using a heap or Counter in Python?
+13. **DSA/Graphs:** How would you detect whether an undirected graph has a cycle?
+14. **DSA/Recursion:** How do recursion and backtracking work, and what should you watch out for in Python?
+15. **DSA/Dynamic Programming:** How would you explain dynamic programming using the climbing stairs problem?
+16. **DSA/Interview Strategy:** How do you approach a new DSA problem in an interview from clarification to optimized solution?
+
+## Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round
+
+Focus: Full-stack Python engineering, frontend/backend integration, APIs, databases, DSA, DevOps, CI/CD, Docker, Kubernetes, cloud deployment, observability, GenAI, RAG, LLM safety, and production ownership
+
+1. **Full Stack/Python:** How would you design and build a full-stack application using Python for the backend and a modern JavaScript frontend?
+2. **Backend/API:** How would you design authentication, authorization, and session management for a full-stack Python application?
+3. **Backend/Database:** How would you design models, migrations, indexes, and API contracts for a Python backend connected to PostgreSQL?
+4. **Frontend/Integration:** How would the frontend handle API errors, loading states, pagination, authentication tokens, and form validation?
+5. **DSA/Python:** Which DSA patterns are most important for a Python full-stack engineer, and how would you practice them?
+6. **DSA/Coding:** How would you solve a coding problem during a Python interview while explaining complexity and tradeoffs?
+7. **DevOps/Docker:** How would you Dockerize a full-stack Python application with separate frontend, backend, database, and worker services?
+8. **DevOps/CI-CD:** How would you design a CI/CD pipeline for a full-stack Python application from pull request to production?
+9. **DevOps/Kubernetes:** How would you deploy a Python backend, frontend, background worker, and database dependencies on Kubernetes?
+10. **Observability/SRE:** What monitoring, logging, tracing, alerts, and runbooks would you add for a production full-stack app?
+11. **GenAI/RAG:** How would you add a GenAI chat feature to a full-stack Python application using RAG?
+12. **GenAI/Backend:** How would you design prompt templates, embeddings, vector search, citations, and response streaming in Python?
+13. **GenAI/Safety:** How would you protect a GenAI feature from prompt injection, data leakage, hallucinations, and unsafe tool calls?
+14. **GenAI/Operations:** How would you monitor GenAI quality, latency, token cost, retrieval quality, and user feedback in production?
+15. **System Design:** Design a full-stack AI resume analyzer using Python, React, PostgreSQL, object storage, queues, and an LLM API.
+16. **Career/Interview Strategy:** What 90-day learning plan would make someone interview-ready for full-stack Python, DSA, DevOps, and GenAI roles?
+
+## Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round
+
+Focus: Scenario-based system design for Python backend, frontend integration, databases, queues, caching, DevOps, scaling, reliability, incidents, GenAI, RAG, security, cost, and production tradeoffs
+
+1. **Scenario/System Design:** Scenario: Your Python API suddenly receives 10x traffic after a product launch. How would you redesign the system for scale and reliability?
+2. **Scenario/Database:** Scenario: A PostgreSQL-backed Python application has slow searches and frequent lock waits. How would you investigate and redesign it?
+3. **Scenario/Caching:** Scenario: A dashboard endpoint is slow because it recalculates expensive reports on every request. How would you design caching and background refresh?
+4. **Scenario/Queues:** Scenario: Users upload large files and the API times out while processing them. How would you redesign the upload and processing flow?
+5. **Scenario/DevOps:** Scenario: A full-stack Python app has manual deployments and frequent production regressions. How would you design the CI/CD and release process?
+6. **Scenario/Kubernetes:** Scenario: Your Kubernetes deployment has intermittent 502 errors during rolling updates. How would you debug and fix the rollout design?
+7. **Scenario/Observability:** Scenario: Customers report errors, but logs are hard to correlate across frontend, backend, workers, and database calls. How would you redesign observability?
+8. **Scenario/Security:** Scenario: A multi-tenant SaaS app accidentally exposes one customer's data to another customer. How would you respond and redesign tenant isolation?
+9. **Scenario/Frontend:** Scenario: The frontend feels slow even though backend latency looks healthy. How would you investigate and improve end-user performance?
+10. **Scenario/GenAI RAG:** Scenario: A GenAI chat feature gives outdated or irrelevant answers from your knowledge base. How would you debug and redesign the RAG pipeline?
+11. **Scenario/GenAI Safety:** Scenario: A user tries prompt injection to make your AI assistant reveal internal documents. How would you prevent and monitor this?
+12. **Scenario/GenAI Cost:** Scenario: Your LLM API cost increases 5x after adding a new AI feature. How would you investigate and optimize cost without hurting quality?
+13. **Scenario/Resilience:** Scenario: A third-party payment or email API is unreliable. How would you design retries, fallbacks, idempotency, and user experience?
+14. **Scenario/Data Pipeline:** Scenario: A background worker pipeline falls behind and queue depth keeps growing. How would you debug and redesign it?
+15. **Scenario/Migration:** Scenario: You need to migrate a monolithic Django app to services without stopping product delivery. What migration plan would you propose?
+16. **Scenario/Architecture Review:** Scenario: You are asked to review a proposed full-stack AI application before launch. What risks, tradeoffs, and readiness checks would you cover?
+
+## Mock Interview 57 - Diagram-Based System Design Round
+
+Focus: Architecture diagrams, data-flow diagrams, sequence diagrams, deployment diagrams, RAG diagrams, CI/CD diagrams, observability diagrams, failure paths, scalability, and tradeoff explanation
+
+1. **Diagram/System Design:** Draw and explain a high-level architecture diagram for a full-stack Python application with React, FastAPI, PostgreSQL, Redis, workers, and object storage.
+2. **Diagram/Data Flow:** Draw the request flow for user login from browser to backend, database, token/session creation, and frontend state update.
+3. **Diagram/Upload Flow:** Draw a file upload and async processing architecture using signed URLs, object storage, a queue, workers, and status tracking.
+4. **Diagram/RAG:** Draw a RAG architecture diagram showing document ingestion, chunking, embeddings, vector database, retrieval, prompt construction, LLM call, and citations.
+5. **Diagram/CI-CD:** Draw a CI/CD pipeline diagram for a Python full-stack app from pull request to production deployment and rollback.
+6. **Diagram/Kubernetes:** Draw a Kubernetes deployment diagram for frontend, backend API, worker, Redis, managed PostgreSQL, ingress, secrets, and autoscaling.
+7. **Diagram/Observability:** Draw an observability diagram showing metrics, logs, traces, dashboards, alerts, and incident response flow.
+8. **Diagram/Sequence:** Draw a sequence diagram for a user asking an AI assistant a question and receiving a streamed answer with citations.
+9. **Diagram/Resilience:** Draw a failure-handling diagram for an unreliable third-party API using retries, queues, idempotency keys, dead-letter queues, and reconciliation.
+10. **Diagram/Security:** Draw a multi-tenant SaaS security diagram showing auth, tenant isolation, database scoping, cache scoping, audit logs, and admin access.
+11. **Diagram/Scaling:** Draw how the architecture changes when traffic grows from 1,000 users to 1 million users.
+12. **Diagram/Interview:** In a system design interview, how do you present a diagram clearly while explaining tradeoffs, bottlenecks, and failure modes?
+
+## Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round
+
+Focus: Python coding practice for LeetCode/HackerRank-style interviews, arrays, strings, hashing, sliding window, two pointers, stacks, queues, linked lists, trees, graphs, heaps, sorting, binary search, dynamic programming, and clean explanation
+
+1. **Coding/Arrays:** Practice problem: Given an array of integers and a target, return indices of two numbers that add up to the target.
+2. **Coding/Strings:** Practice problem: Given a string, find the first non-repeating character.
+3. **Coding/Hashing:** Practice problem: Group a list of words into anagram groups.
+4. **Coding/Sliding Window:** Practice problem: Find the maximum sum of any subarray of size k.
+5. **Coding/Two Pointers:** Practice problem: Given a sorted array, remove duplicates in place and return the new length.
+6. **Coding/Stack:** Practice problem: Validate whether a string containing brackets is balanced.
+7. **Coding/Queue:** Practice problem: Implement a moving average over the last k values in a stream.
+8. **Coding/Linked List:** Practice problem: Reverse a singly linked list.
+9. **Coding/Binary Search:** Practice problem: Search for a target in a sorted rotated array.
+10. **Coding/Trees:** Practice problem: Return the level-order traversal of a binary tree.
+11. **Coding/Graphs:** Practice problem: Count the number of islands in a 2D grid.
+12. **Coding/Heap:** Practice problem: Find the kth largest element in an unsorted array.
+13. **Coding/Sorting:** Practice problem: Merge overlapping intervals.
+14. **Coding/DP:** Practice problem: Find the minimum cost to climb stairs.
+15. **Coding/Python:** Practice problem: Parse a log file and return the top N most frequent IP addresses.
+16. **Coding/Interview:** How should you explain your approach, complexity, and test cases for a LeetCode or HackerRank-style Python problem?
+
+## Mock Interview 59 - Python Automation and Scripting Round
+
+Focus: Python automation for DevOps and cloud engineering, file processing, APIs, CLIs, subprocess, concurrency, retries, logging, reporting, cloud SDKs, Kubernetes automation, Terraform automation, testing, packaging, and production-grade scripts
+
+1. **Python Automation:** How would you design a Python automation script so it is safe, testable, reusable, and production-ready?
+2. **Python/File Automation:** How would you write a Python script to scan a directory, find large or old files, and generate a cleanup report?
+3. **Python/API Automation:** How would you call a paginated REST API in Python, handle retries, and export the results to CSV?
+4. **Python/Cloud Automation:** How would you automate a GCP resource inventory report using Python SDKs?
+5. **Python/Kubernetes Automation:** How would you use Python to list Kubernetes pods across namespaces and report CrashLoopBackOff or Pending pods?
+6. **Python/Terraform Automation:** How would you automate Terraform plan validation and summarize risky changes using Python?
+7. **Python/Subprocess:** When would you use subprocess in Python, and how do you run shell commands safely?
+8. **Python/Concurrency:** How would you speed up a Python automation job that checks hundreds of endpoints or servers?
+9. **Python/Logging:** What logging, error handling, exit codes, and dry-run behavior should a production automation script include?
+10. **Python/Security:** How would you handle secrets, credentials, and sensitive output in Python automation?
+11. **Python/CLI:** How would you build a Python CLI tool with arguments, subcommands, config files, and helpful output?
+12. **Python/Data Processing:** How would you process a large CSV or JSONL file in Python without loading everything into memory?
+13. **Python/Monitoring Automation:** How would you write a Python script that checks service health and sends Slack or email alerts?
+14. **Python/Testing:** How would you test Python automation code that calls cloud APIs, shell commands, and external services?
+15. **Python/Packaging:** How would you package and distribute an internal Python automation tool for a team?
+16. **Python/Scenario:** Scenario: A manual weekly operations report takes four hours. How would you automate it end to end with Python?

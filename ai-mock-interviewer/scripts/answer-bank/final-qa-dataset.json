@@ -3227,6 +3227,916 @@
     "answer": "Build shared capabilities across the lifecycle: data access patterns, data validation, feature store or reusable feature pipelines, experiment tracking, model registry, pipeline orchestration, CI/CD/CT, containerized training, model serving, monitoring, drift detection, approval workflows, rollback, security, and cost visibility. The platform should provide golden paths so teams do not reinvent infrastructure, but still allow flexibility for different model types. Strong platform answers include reproducibility, lineage, tenant isolation, least privilege, observability, and self-service developer experience."
   },
   {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "category": "GKE/Kubernetes",
+    "question": "What is kube-proxy?",
+    "answer": "kube-proxy is the Kubernetes node-level networking component that watches Services and Endpoints/EndpointSlices, then programs forwarding rules so traffic sent to a Service virtual IP or NodePort is routed to one of the matching backend Pods. Depending on the mode, it uses iptables, IPVS, or platform-specific mechanisms to implement service load balancing."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "category": "GKE/Kubernetes",
+    "question": "Suppose there are two Pods running in different namespaces. What DNS name would you use so that one Pod can communicate with the other?",
+    "answer": "Use the Service DNS name, not the raw Pod IP. For a Service named backend in namespace app2, a Pod in another namespace can call backend.app2.svc.cluster.local, or usually backend.app2. The full Kubernetes DNS pattern is <service-name>.<namespace>.svc.cluster.local."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "category": "GKE/Kubernetes",
+    "question": "There are two applications, a frontend application and a backend application, running in two different Pods. What configuration would you write so that the frontend application starts only after the backend application is up and running?",
+    "answer": "In Kubernetes you should not rely on strict Pod startup order for application correctness. Expose the backend through a Service, configure readiness/startup probes on the backend, and make the frontend either retry until the backend Service is ready or use an initContainer that waits for the backend endpoint before starting the main frontend container. For production, readiness probes plus application-level retry/backoff are safer than only an initContainer."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "category": "CI/CD/GitOps",
+    "question": "We mostly follow blue-green deployment. How do you divert traffic from the Blue environment to the Green environment?",
+    "answer": "Run both blue and green versions in parallel, validate the green version, then switch the traffic routing layer from blue to green. In Kubernetes this is commonly done by updating the Service selector from labels like version: blue to version: green, or by changing an Ingress/service mesh/load balancer route. Keep blue running briefly so rollback is just switching the selector or route back."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "category": "Terraform/IaC",
+    "question": "What is a dynamic block in Terraform?",
+    "answer": "A dynamic block in Terraform generates repeatable nested blocks inside a resource, data source, provider, or provisioner from a collection. It is useful when the nested block count or contents are driven by input variables, for example generating multiple ingress rules, egress rules, disks, or lifecycle rules without copying the same nested block many times."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "category": "Terraform/IaC",
+    "question": "What is the use case of a dynamic block?",
+    "answer": "Use a dynamic block when a resource has repeatable nested configuration and the number of blocks should be controlled by input data. For example, a security group may need a variable list of ingress rules, or an S3 bucket may need a variable list of lifecycle rules. It keeps modules reusable while avoiding duplicated HCL."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "category": "Terraform/IaC",
+    "question": "How would you create multiple S3 buckets in Terraform?",
+    "answer": "Define the desired bucket names as a set or map and use for_each on aws_s3_bucket. For example, variable bucket_names can be a set(string), then resource aws_s3_bucket buckets { for_each = var.bucket_names bucket = each.value }. If each bucket needs different settings, use a map of objects and read fields from each.value."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "category": "Terraform/IaC",
+    "question": "What is the meaning of each.value in Terraform?",
+    "answer": "each.value is the value of the current item when a resource, module, or dynamic block uses for_each. If for_each is a set of strings, each.value is the current string. If for_each is a map, each.key is the map key and each.value is the map value, which may be an object containing multiple attributes."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "category": "Terraform/IaC",
+    "question": "Why do we use each.value?",
+    "answer": "We use each.value to parameterize each repeated resource or nested block with the data for the current item in a for_each loop. It lets one resource block create many correctly configured resources without hardcoding names, ports, tags, lifecycle rules, or other per-item settings."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "category": "Terraform/IaC",
+    "question": "Why do we use toset() in Terraform?",
+    "answer": "toset() converts a list or tuple into a set, which is often needed because for_each accepts a map or set of strings. It also removes duplicates and makes the collection identity based on values rather than list indexes, which is safer than count for resources where you do not want index shifts to recreate infrastructure."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 52 - Datadog Observability Round",
+    "category": "Datadog/Observability",
+    "question": "How would you install and configure the Datadog Agent on a Kubernetes or GKE cluster?",
+    "answer": "Install the Datadog Agent as a DaemonSet, usually with the Datadog Helm chart or Operator, so every node runs an Agent pod. Store the API key in a Kubernetes Secret, set the cluster name and tags, enable kube-state-metrics/CoreDNS/node/container collection, and turn on logs, APM, process, or network monitoring only when needed. In GKE, also configure the GCP integration for cloud-level metrics and use tolerations so the Agent runs on important node pools."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 52 - Datadog Observability Round",
+    "category": "Datadog/Observability",
+    "question": "How does Datadog collect metrics, logs, and traces from Kubernetes workloads?",
+    "answer": "Datadog collects node and container metrics through the Agent, cluster object state through kube-state-metrics or the Cluster Agent, logs from container stdout/stderr or files, and traces through APM libraries sending spans to the Agent. Kubernetes labels, annotations, pod metadata, service names, environment, and version tags are attached so metrics, logs, and traces can be filtered and correlated by service, namespace, cluster, and deployment version."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 52 - Datadog Observability Round",
+    "category": "Datadog/APM",
+    "question": "How would you enable Datadog APM for a microservice running on Kubernetes?",
+    "answer": "Add the Datadog tracing library for the application language, set service, env, and version tags, and point the app to the Datadog Agent trace endpoint. In Kubernetes, expose the Agent APM port, inject environment variables through the Deployment, and verify traces appear with correct service names, resources, errors, latency, and dependencies. For production, configure sampling, sensitive-data scrubbing, and trace-log correlation."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 52 - Datadog Observability Round",
+    "category": "Datadog/Logs",
+    "question": "How would you correlate Datadog logs with traces for faster debugging?",
+    "answer": "Enable trace-log correlation in the Datadog tracing library so trace_id and span_id are injected into structured application logs. Ship logs with the Datadog Agent, parse them as JSON where possible, and standardize tags like service, env, version, cluster, namespace, and pod. Then an engineer can jump from a slow trace to the exact related log lines, or from an error log to the full request trace."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 52 - Datadog Observability Round",
+    "category": "Datadog/Monitoring",
+    "question": "What Datadog monitors would you create for a production API?",
+    "answer": "Create monitors for user-impacting golden signals first: availability, 5xx error rate, p95/p99 latency, request rate anomalies, saturation, and dependency failures. Add Kubernetes monitors for CrashLoopBackOff, pending pods, restart spikes, CPU/memory pressure, HPA maxed out, node readiness, and ingress/load-balancer errors. Alerts should have owners, severity, routing, runbooks, dashboard links, and thresholds tied to SLOs rather than every noisy metric."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 52 - Datadog Observability Round",
+    "category": "Datadog/SRE",
+    "question": "How would you define SLOs and error-budget alerts in Datadog?",
+    "answer": "Define SLIs from request success rate, latency, or availability using Datadog APM, metrics, or logs. Set SLO targets such as 99.9% successful requests over 30 days, then create burn-rate alerts for fast burns and slow burns so teams catch both major outages and gradual degradation. Tie alerts to service ownership, on-call routing, release policy, and error-budget decisions."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 52 - Datadog Observability Round",
+    "category": "Datadog/Dashboards",
+    "question": "What dashboards would you build in Datadog for application teams, SREs, and leadership?",
+    "answer": "For application teams, build service dashboards with RED metrics, dependency latency, error traces, recent deployments, and logs. For SREs, build platform dashboards covering clusters, nodes, workloads, ingress, SLO burn, incidents, and capacity. For leadership, show availability, customer-impacting incidents, SLO compliance, MTTR, change failure rate, and cost/reliability trends without overwhelming low-level details."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 52 - Datadog Observability Round",
+    "category": "Datadog/Incident Response",
+    "question": "A Datadog alert shows p95 latency increased after a deployment. How would you investigate?",
+    "answer": "Start from the alert timeframe and compare latency by service, endpoint, env, version, region, and deployment marker. Use APM traces to identify the slow span, check errors and logs correlated to those traces, then inspect dependencies such as database, cache, downstream APIs, and Kubernetes resource saturation. If the new version is the clear trigger and user impact is high, pause rollout or roll back while continuing root-cause analysis."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 52 - Datadog Observability Round",
+    "category": "Datadog/Cost",
+    "question": "How would you control Datadog cost for logs, custom metrics, and high-cardinality tags?",
+    "answer": "Control cost by reducing noisy log ingestion, using exclusion filters, sampling debug logs, setting retention by value, and indexing only logs needed for search/alerting. Avoid high-cardinality tags such as request IDs, user IDs, pod UIDs, or unbounded URLs on custom metrics. Review custom metric volume, container counts, APM ingestion, and dashboard/monitor usage regularly with ownership and cleanup policies."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 52 - Datadog Observability Round",
+    "category": "Datadog/Synthetics",
+    "question": "When would you use Datadog Synthetic Monitoring and Real User Monitoring?",
+    "answer": "Use Synthetic Monitoring to test critical user journeys or APIs from controlled locations on a schedule, even when real traffic is low. Use Real User Monitoring to understand actual browser/mobile user experience, frontend errors, page load time, geographic latency, and the impact of releases on real customers. Together they help distinguish external availability from real user experience."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 52 - Datadog Observability Round",
+    "category": "Datadog/Integrations",
+    "question": "How would you integrate Datadog with GCP, Slack, PagerDuty, and CI/CD pipelines?",
+    "answer": "Use the GCP integration to collect Cloud Monitoring metrics, audit logs, and service-level telemetry, then tag resources consistently by project, environment, team, and service. Route Datadog monitors to Slack for visibility and PagerDuty for actionable incidents. In CI/CD, send deployment events and version tags to Datadog so dashboards and APM can correlate regressions with releases."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 52 - Datadog Observability Round",
+    "category": "Datadog/Security",
+    "question": "What security and access controls would you apply in Datadog for a large engineering organization?",
+    "answer": "Use SSO/SAML, SCIM provisioning, MFA, role-based access control, teams, restricted API/application keys, and least-privilege permissions for dashboards, monitors, logs, and security products. Protect sensitive logs with scrubbing and pipelines, limit who can create high-cost ingestion patterns, audit changes to monitors and integrations, and separate production access from lower environments where needed."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "Python/System Design",
+    "question": "How would you design a scalable Python backend API for a high-traffic web application?",
+    "answer": "Start with clear requirements: read/write volume, latency SLO, data consistency, authentication, and failure tolerance. Use FastAPI or Django behind a load balancer, stateless app replicas, a relational database for core data, Redis for caching/rate limiting, a queue for slow background work, and object storage for large files. Add autoscaling, structured logs, metrics, traces, health checks, CI/CD, database migrations, and rollback support so the service can scale and be operated safely."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "Python/API Design",
+    "question": "How would you design REST API endpoints, request validation, pagination, filtering, and versioning in a Python service?",
+    "answer": "Design resource-oriented endpoints with clear nouns, HTTP methods, status codes, and consistent error responses. Use Pydantic, DRF serializers, or equivalent schemas for request and response validation. Add pagination with cursor or limit/offset depending on scale, whitelist filter/sort fields, and version breaking changes through /v1 and /v2 or version headers. Document the API with OpenAPI and add contract tests for important consumers."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "Python/Database Design",
+    "question": "How would you design the database layer for a Python application, including schema design, indexes, migrations, transactions, and connection pooling?",
+    "answer": "Model tables around access patterns and data integrity, with primary keys, foreign keys, unique constraints, and indexes for common queries. Use SQLAlchemy, Django ORM, or another ORM carefully, but inspect generated SQL for hot paths. Manage schema changes with Alembic or Django migrations, wrap multi-step writes in transactions, size connection pools to avoid exhausting the database, and add read replicas or partitioning only when real load requires it."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "Python/Caching",
+    "question": "How would you add Redis caching to a Python backend, and how would you handle cache invalidation?",
+    "answer": "Cache expensive reads or frequently requested data with deterministic keys, TTLs, and serialization that is safe to evolve. Use cache-aside for most API data: read from Redis, fall back to DB on miss, then populate the cache. Invalidate or update affected keys on writes, use short TTLs for data that can tolerate staleness, add jitter to avoid stampedes, and monitor hit rate, evictions, latency, and memory usage."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "Python/Async Processing",
+    "question": "When would you use Celery, RQ, Cloud Tasks, Pub/Sub, or Kafka for background processing in a Python application?",
+    "answer": "Use a background system when work is slow, retryable, scheduled, or should not block the request path. Celery is good for Python-heavy distributed task queues with retries and scheduling; RQ is simpler for Redis-backed jobs; Cloud Tasks is strong for durable HTTP task dispatch; Pub/Sub is good for event-driven fanout; Kafka is better for high-throughput event streams and replay. Choose based on durability, ordering, throughput, retry behavior, and operational burden."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "Python/Concurrency",
+    "question": "How would you choose between asyncio, threads, multiprocessing, and worker queues in Python system design?",
+    "answer": "Use asyncio for high-concurrency I/O when libraries are truly async, threads for blocking I/O libraries that release the GIL or for simple parallel I/O, multiprocessing for CPU-bound work that needs multiple cores, and worker queues for durable work outside the request lifecycle. For web APIs, keep request handlers lightweight and push long-running jobs to workers so latency and availability are predictable."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "Python/Reliability",
+    "question": "How would you design retries, timeouts, idempotency, and circuit breakers for a Python service calling external APIs?",
+    "answer": "Set explicit connect and read timeouts for every outbound call, retry only transient failures with exponential backoff and jitter, and use idempotency keys for operations that may create or mutate state. Add circuit breakers or bulkheads when a dependency is failing so callers fail fast instead of piling up. Log dependency latency, status codes, retry counts, and fallback behavior, and expose these as metrics for alerting."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "Python/Security",
+    "question": "How would you secure a Python backend service, including authentication, authorization, secrets, input validation, and dependency security?",
+    "answer": "Validate identity with JWT/OAuth2/IAP or a trusted gateway, enforce authorization with roles/scopes or policy checks per endpoint, and never trust client-supplied tenant or role data. Store secrets in Secret Manager or Vault, validate inputs with schemas, use parameterized queries, sanitize file uploads, and apply least privilege to service accounts. Pin dependencies, scan for CVEs, keep base images patched, and avoid logging tokens, PII, or secrets."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "Python/Observability",
+    "question": "What logs, metrics, traces, health checks, and dashboards would you add to a production Python service?",
+    "answer": "Add structured JSON logs with request ID, trace ID, user or tenant context where safe, endpoint, status, latency, and error details. Emit RED metrics: request rate, errors, duration, plus saturation metrics like CPU, memory, worker queue depth, DB pool usage, and dependency latency. Add OpenTelemetry traces across database and external calls, /healthz and /readyz endpoints, and dashboards for golden signals, deployments, incidents, and SLO burn."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "Python/Testing",
+    "question": "How would you test a Python backend system across unit tests, integration tests, contract tests, load tests, and end-to-end tests?",
+    "answer": "Use unit tests for pure business logic, integration tests with a real or containerized database/cache, API tests with TestClient or httpx, and contract tests for external consumers or providers. Add migration tests, auth/security tests, failure-path tests, and load tests for critical endpoints. In CI, run fast tests on every PR and heavier integration/load suites on merge or release candidates."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "Python/Deployment",
+    "question": "How would you containerize and deploy a Python web service on Kubernetes or Cloud Run?",
+    "answer": "Build a small image with pinned dependencies, a non-root user, health endpoints, and a production server such as Gunicorn with Uvicorn workers for ASGI apps. Configure environment variables, secrets, readiness/liveness probes, resource requests/limits, autoscaling, graceful shutdown, and structured logging. On Kubernetes, use Deployments, Services, HPA, ingress, and rollout strategy; on Cloud Run, tune concurrency, min instances, CPU allocation, and revision traffic splitting."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "Python/Performance",
+    "question": "A Python API has high latency and high CPU usage in production. How would you debug and optimize it?",
+    "answer": "Start with dashboards and traces to find which endpoint, version, dependency, or code path changed. Check CPU profiles, slow database queries, N+1 ORM calls, serialization overhead, blocking calls inside async handlers, worker saturation, GC pressure, and container CPU throttling. Optimize the real bottleneck: add indexes, reduce payloads, cache hot reads, batch calls, move CPU-heavy work to workers, tune worker counts, or scale horizontally while fixing the root cause."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "System Design",
+    "question": "Design a URL shortener using Python. What components, data model, caching, scaling, and failure handling would you include?",
+    "answer": "Use a Python API service with endpoints to create and resolve short URLs, a database table mapping short_code to long_url plus owner, expiry, status, and created_at, and Redis/CDN caching for hot redirects. Generate collision-resistant codes with base62 IDs or random tokens with uniqueness checks. Redirect reads must be very fast, writes can be lower volume, analytics should go through an async event pipeline, and abuse controls should include rate limits, safe-browsing checks, and admin disablement."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "System Design",
+    "question": "Design a notification system in Python that supports email, SMS, retries, templates, rate limits, and audit logs.",
+    "answer": "Use an API to accept notification requests, validate templates and recipients, persist an audit record, and enqueue delivery jobs. Worker services process jobs by channel, render templates, call providers, retry transient failures with backoff, and move poison messages to a dead-letter queue. Add per-tenant and per-provider rate limits, idempotency keys, delivery status tracking, provider failover where needed, and dashboards for success rate, latency, backlog, and provider errors."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "System Design",
+    "question": "Design a file upload and processing service in Python for large files, asynchronous processing, status tracking, and secure storage.",
+    "answer": "Use pre-signed upload URLs so clients upload large files directly to object storage instead of streaming through the Python API. Store file metadata and status in a database, trigger processing through a queue or storage event, and run workers for validation, virus scanning, parsing, thumbnails, or transformations. Track states such as uploaded, processing, failed, and completed, enforce size/type limits, encrypt storage, scan content, and expose a status endpoint with retry-safe processing."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 53 - Python Developer System Design Round",
+    "category": "System Design",
+    "question": "Design a real-time chat or WebSocket service in Python. How would you handle scaling, message delivery, presence, and persistence?",
+    "answer": "Use a Python ASGI service with WebSockets for live connections, backed by Redis Pub/Sub, Kafka, or another broker so messages can reach users connected to different replicas. Persist messages in a database, track presence with short-lived Redis keys or heartbeats, and use delivery acknowledgements for important messages. Plan for horizontal scaling, load balancer timeouts, reconnects, backpressure, rate limits, authentication on connection, and fallback APIs for history retrieval."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Complexity",
+    "question": "How do you analyze time and space complexity for a Python solution?",
+    "answer": "Count how the number of operations grows as input size n grows, ignoring constants and small lower-order terms. A single loop is often O(n), nested loops are often O(n^2), binary search is O(log n), and sorting is usually O(n log n). Space complexity counts extra memory such as hash maps, recursion stack, queues, or copied lists. In Python, also remember that slicing, list membership, and string concatenation may hide extra time or memory costs."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Arrays",
+    "question": "How would you solve Two Sum in Python, and what is the time complexity?",
+    "answer": "Use a dictionary from number to index. Iterate through nums, compute complement = target - nums[i], and check whether the complement is already in the dictionary. If yes, return the stored index and current index; otherwise store nums[i]. This is O(n) time and O(n) extra space, much better than the O(n^2) brute-force pair check."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Strings",
+    "question": "How would you check whether two strings are anagrams in Python?",
+    "answer": "If the lengths differ, return false. Then either compare Counter(s1) == Counter(s2), which is clear and O(n), or count characters manually in a dictionary. Sorting both strings also works but costs O(n log n). In interviews, mention case sensitivity, spaces, punctuation, and Unicode assumptions before choosing the implementation."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Sliding Window",
+    "question": "How would you find the longest substring without repeating characters?",
+    "answer": "Use a sliding window with a left pointer and a dictionary mapping each character to its latest index. Move the right pointer through the string; when a repeated character appears inside the current window, move left to one position after the previous occurrence. Track the maximum window length. This is O(n) time and O(min(n, alphabet size)) space."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Two Pointers",
+    "question": "When would you use the two-pointer technique, and how would you apply it to a sorted array?",
+    "answer": "Use two pointers when the input is sorted or when you need to compare/move from both ends, compact in place, merge, or maintain a window. For a sorted two-sum style problem, place left at the start and right at the end. If nums[left] + nums[right] is too small, move left forward; if too large, move right backward; if equal, you found the answer. This is O(n)."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Hashing",
+    "question": "Why are hash maps useful in coding interviews, and what are common pitfalls in Python dictionaries?",
+    "answer": "Hash maps give average O(1) lookup, insert, and update, which often turns nested-loop searches into linear-time solutions. They are useful for frequency counts, seen sets, index lookup, grouping, and memoization. Pitfalls include assuming order in older Python versions, using mutable objects as keys, forgetting that worst-case hashing can degrade, and accidentally overwriting values when duplicates matter."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Stack",
+    "question": "How would you validate balanced parentheses using a stack?",
+    "answer": "Push opening brackets onto a stack. For each closing bracket, check that the stack is not empty and that the top opening bracket matches the closing bracket. Pop on a match; otherwise return false. At the end, the stack must be empty. This is O(n) time and O(n) space in the worst case."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Queue",
+    "question": "When would you use a queue or deque in Python, and why is list.pop(0) usually avoided?",
+    "answer": "Use a queue for FIFO processing such as BFS, task scheduling, or level-order traversal. In Python, collections.deque is preferred because append and popleft are O(1). list.pop(0) is usually avoided because removing from the front shifts all remaining elements left, making it O(n) per operation."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Linked List",
+    "question": "How would you detect a cycle in a linked list?",
+    "answer": "Use Floyd's tortoise and hare algorithm. Move slow one step and fast two steps. If there is a cycle, fast will eventually meet slow; if fast reaches None, there is no cycle. This uses O(n) time and O(1) space. An alternative is a visited set, but that uses O(n) extra memory."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Trees",
+    "question": "How would you perform BFS and DFS traversal of a binary tree?",
+    "answer": "For BFS, use a queue/deque starting with the root, pop nodes from the left, visit them, and push children. For DFS, use recursion or an explicit stack for preorder, inorder, or postorder traversal. BFS is useful for level-order and shortest path in unweighted graphs; DFS is useful for exploring structure, recursion problems, and tree properties. Both are O(n) time."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Binary Search",
+    "question": "How would you use binary search to find the first occurrence of a target in a sorted array?",
+    "answer": "Maintain left and right bounds and an answer initialized to -1. When mid equals target, store mid as a candidate answer and move right to mid - 1 to search for an earlier occurrence. If nums[mid] is less than target, move left to mid + 1; otherwise move right to mid - 1. This is O(log n) time and O(1) space."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Heap",
+    "question": "How would you find the top K frequent elements using a heap or Counter in Python?",
+    "answer": "Count frequencies with collections.Counter. For clarity, Counter(nums).most_common(k) returns the top k by frequency. For a heap approach, maintain a min-heap of size k containing (frequency, value); push each item and pop when heap size exceeds k. Counting is O(n), and the heap method is O(m log k), where m is the number of unique elements."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Graphs",
+    "question": "How would you detect whether an undirected graph has a cycle?",
+    "answer": "Use DFS with a visited set and parent tracking. For each unvisited node, DFS through its neighbors; if you see a visited neighbor that is not the parent, a cycle exists. This is O(V + E). Another good approach is Union-Find: for each edge, if both vertices already have the same root, adding that edge creates a cycle."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Recursion",
+    "question": "How do recursion and backtracking work, and what should you watch out for in Python?",
+    "answer": "Recursion solves a problem by calling the same function on smaller subproblems with a clear base case. Backtracking explores choices, recurses, then undoes the choice to explore alternatives, often used for permutations, subsets, combinations, and constraint problems. In Python, watch recursion depth, mutable shared state, missing base cases, and exponential branching; use iterative solutions or memoization when appropriate."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Dynamic Programming",
+    "question": "How would you explain dynamic programming using the climbing stairs problem?",
+    "answer": "Dynamic programming applies when a problem has overlapping subproblems and optimal substructure. In climbing stairs, ways(n) = ways(n - 1) + ways(n - 2), because the last step came from one step below or two steps below. A naive recursive solution repeats work; memoization or bottom-up iteration makes it O(n) time. Since only the last two values are needed, space can be optimized to O(1)."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 54 - DSA for Python Developers Round",
+    "category": "DSA/Interview Strategy",
+    "question": "How do you approach a new DSA problem in an interview from clarification to optimized solution?",
+    "answer": "Clarify inputs, outputs, constraints, edge cases, and whether duplicates/order matter. Start with a simple brute-force solution and explain its complexity. Look for patterns such as hashing, two pointers, sliding window, binary search, stack, heap, graph traversal, or DP. Then propose the optimized approach, walk through an example, code cleanly, test edge cases, and discuss time/space complexity."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "Full Stack/Python",
+    "question": "How would you design and build a full-stack application using Python for the backend and a modern JavaScript frontend?",
+    "answer": "Use a Python backend such as FastAPI or Django for APIs, business logic, auth, database access, background jobs, and integrations. Use React, Next.js, or another frontend framework for UI, routing, state, forms, and API calls. Define API contracts with OpenAPI, use PostgreSQL for transactional data, Redis for caching or sessions, object storage for files, and a queue for slow work. Deploy frontend and backend separately, add CI/CD, tests, observability, and environment-specific configuration."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "Backend/API",
+    "question": "How would you design authentication, authorization, and session management for a full-stack Python application?",
+    "answer": "Use a standard identity flow such as OAuth2/OIDC or secure username/password with hashed passwords and MFA where needed. Store sessions in secure HttpOnly cookies or use short-lived JWTs with refresh-token rotation. Authorization should be enforced server-side with roles, scopes, or policy checks per resource, not only hidden frontend buttons. Add CSRF protection for cookie-based auth, rate limiting on login, audit logs for sensitive actions, and secret storage outside code."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "Backend/Database",
+    "question": "How would you design models, migrations, indexes, and API contracts for a Python backend connected to PostgreSQL?",
+    "answer": "Start from domain entities and access patterns, then design tables with primary keys, foreign keys, unique constraints, and useful indexes. Use SQLAlchemy/Alembic or Django ORM/migrations so schema changes are versioned and reviewed. Keep API request/response schemas explicit with Pydantic, serializers, or OpenAPI. Watch for N+1 queries, missing indexes, unsafe migrations, and backward compatibility between API and database changes during deployment."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "Frontend/Integration",
+    "question": "How would the frontend handle API errors, loading states, pagination, authentication tokens, and form validation?",
+    "answer": "Use a consistent API client layer that attaches auth safely, handles 401/403/429/5xx responses, and maps backend validation errors to user-friendly form messages. Show loading, empty, error, and success states intentionally. Use cursor or page-based pagination depending on backend contract, debounce search/filter requests, and avoid storing sensitive tokens in localStorage when safer cookie-based approaches are available. Frontend validation improves UX, but backend validation remains authoritative."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "DSA/Python",
+    "question": "Which DSA patterns are most important for a Python full-stack engineer, and how would you practice them?",
+    "answer": "Prioritize arrays/strings, hash maps, two pointers, sliding window, stacks, queues/deque, binary search, trees, graphs, heaps, recursion, and basic dynamic programming. Practice by solving pattern-based problems in Python, writing complexity analysis, and explaining tradeoffs out loud. For full-stack roles, DSA matters less than competitive programming depth but still proves problem solving, clean coding, and ability to reason about performance."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "DSA/Coding",
+    "question": "How would you solve a coding problem during a Python interview while explaining complexity and tradeoffs?",
+    "answer": "Clarify inputs, outputs, constraints, and edge cases first. Explain a brute-force approach and complexity, then look for a better pattern such as hashing, two pointers, sliding window, binary search, heap, graph traversal, or DP. Code a clear Python solution with meaningful names, test it on normal and edge cases, then summarize time and space complexity. If there are tradeoffs, explain readability versus performance and when each version is acceptable."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "DevOps/Docker",
+    "question": "How would you Dockerize a full-stack Python application with separate frontend, backend, database, and worker services?",
+    "answer": "Use separate Dockerfiles for frontend and backend, with small production images, pinned dependencies, non-root users, and health checks. Use docker-compose for local development with services for frontend, backend, PostgreSQL, Redis, and workers. Backend and worker can share the same image but run different commands. Keep secrets in environment variables or secret stores, mount code only in development, and use migrations as an explicit release step."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "DevOps/CI-CD",
+    "question": "How would you design a CI/CD pipeline for a full-stack Python application from pull request to production?",
+    "answer": "On pull request, run formatting, linting, unit tests, frontend tests, backend tests, type checks, dependency scanning, and Docker builds. On merge, build immutable images, scan them, push to a registry, run integration tests against a test environment, and deploy to staging. Production should use approvals, database migration checks, smoke tests, progressive rollout, deployment markers, and rollback. The same artifact should be promoted across environments rather than rebuilt."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "DevOps/Kubernetes",
+    "question": "How would you deploy a Python backend, frontend, background worker, and database dependencies on Kubernetes?",
+    "answer": "Deploy the backend as a Deployment and Service with readiness/liveness probes, resource requests, HPA, ConfigMaps, and Secrets. Deploy workers separately so they scale based on queue depth. Serve frontend as static assets via CDN/object storage or as a container behind ingress. Use managed PostgreSQL where possible, Redis/Memorystore for cache/queue support, and Kubernetes Jobs for migrations. Add ingress/TLS, network policies, service accounts, observability, and rollout strategy."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "Observability/SRE",
+    "question": "What monitoring, logging, tracing, alerts, and runbooks would you add for a production full-stack app?",
+    "answer": "Monitor request rate, errors, latency, saturation, frontend errors, API dependencies, database latency, queue depth, worker failures, cache hit rate, and business KPIs. Add structured logs with request IDs and user/tenant context where safe, OpenTelemetry traces from frontend/API/DB/external calls, and dashboards for service health and releases. Alerts should focus on user impact and SLO burn, with runbooks that explain diagnosis, mitigation, rollback, and escalation."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "GenAI/RAG",
+    "question": "How would you add a GenAI chat feature to a full-stack Python application using RAG?",
+    "answer": "Build a backend endpoint that receives the user question, retrieves relevant documents from a vector database, constructs a prompt with context and guardrails, calls the LLM, and returns an answer with citations. Add an ingestion pipeline for documents: parse, chunk, embed, store vectors, and track metadata. The frontend should show streaming responses, sources, loading/error states, and feedback buttons. Add auth, tenant isolation, rate limits, logging, evaluation, and cost controls."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "GenAI/Backend",
+    "question": "How would you design prompt templates, embeddings, vector search, citations, and response streaming in Python?",
+    "answer": "Version prompt templates like code and keep system instructions, retrieved context, and user input clearly separated. Generate embeddings during ingestion and query time using the same model family, store vectors with metadata, and retrieve top-k chunks using similarity plus filters. Include source IDs in context so the answer can cite documents. For UX, stream tokens from the backend to the frontend using SSE or WebSockets while preserving trace IDs and safety checks."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "GenAI/Safety",
+    "question": "How would you protect a GenAI feature from prompt injection, data leakage, hallucinations, and unsafe tool calls?",
+    "answer": "Treat user input and retrieved documents as untrusted. Keep system instructions separate, restrict what context is retrieved by tenant and permission, redact secrets/PII, and validate tool calls against an allowlist with least privilege. Require citations for knowledge-grounded answers, use output validation for structured responses, add refusal behavior for unsafe requests, and log enough metadata to investigate issues without storing sensitive prompts unnecessarily."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "GenAI/Operations",
+    "question": "How would you monitor GenAI quality, latency, token cost, retrieval quality, and user feedback in production?",
+    "answer": "Track latency by stage: retrieval, reranking, LLM call, and streaming. Log token counts, model version, prompt version, retrieved document IDs, cache hit rate, errors, and cost per feature. Measure retrieval quality with offline evaluation sets and production feedback such as thumbs up/down, citation clicks, and escalation rates. Add alerts for cost spikes, latency regressions, model errors, empty retrieval, and quality regression after prompt or model changes."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "System Design",
+    "question": "Design a full-stack AI resume analyzer using Python, React, PostgreSQL, object storage, queues, and an LLM API.",
+    "answer": "Use React for upload, progress, results, and feedback. The Python API creates an upload record, returns a signed URL for object storage, and enqueues parsing/analysis after upload. Workers extract text, store structured resume data in PostgreSQL, call embeddings or LLM APIs for scoring and suggestions, and write results back with status updates. Add authentication, per-user access control, file scanning, PII protection, rate limits, retries, observability, and a clear audit trail for generated recommendations."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "category": "Career/Interview Strategy",
+    "question": "What 90-day learning plan would make someone interview-ready for full-stack Python, DSA, DevOps, and GenAI roles?",
+    "answer": "Days 1-30: Python fundamentals, FastAPI/Django, SQL/PostgreSQL, REST APIs, Git, testing, and core DSA patterns. Days 31-60: build and deploy a full-stack app with React, Docker, CI/CD, Redis, queues, observability, and Kubernetes or Cloud Run. Days 61-90: add GenAI/RAG features, vector search, prompt evaluation, security guardrails, and production monitoring. Throughout, practice DSA daily, write project READMEs, prepare system-design stories, and rehearse explaining tradeoffs clearly."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/System Design",
+    "question": "Scenario: Your Python API suddenly receives 10x traffic after a product launch. How would you redesign the system for scale and reliability?",
+    "answer": "First stabilize: check error rate, latency, CPU/memory, DB pool saturation, queue depth, and autoscaling. Add horizontal replicas, tune Gunicorn/Uvicorn workers, increase database pool carefully, and enable caching for hot reads. Then redesign for sustained load: stateless API behind a load balancer, Redis cache, async workers for slow tasks, rate limits, backpressure, read replicas if needed, autoscaling based on real metrics, and SLO-based alerts."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/Database",
+    "question": "Scenario: A PostgreSQL-backed Python application has slow searches and frequent lock waits. How would you investigate and redesign it?",
+    "answer": "Inspect slow query logs, pg_stat_activity, pg_stat_statements, explain plans, lock waits, missing indexes, N+1 ORM queries, and transaction duration. Short term, add or fix indexes, reduce transaction scope, paginate queries, and kill/avoid runaway queries. Long term, redesign search with proper full-text indexes or a search engine, separate read/write paths, use background jobs for heavy updates, and make migrations safer with online patterns."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/Caching",
+    "question": "Scenario: A dashboard endpoint is slow because it recalculates expensive reports on every request. How would you design caching and background refresh?",
+    "answer": "Move expensive calculation out of the request path. Use a scheduled worker or event-driven job to precompute report snapshots, store them in PostgreSQL or Redis, and serve the dashboard from cached data. Add TTLs, versioned cache keys, invalidation on relevant data changes, and a stale-while-revalidate pattern if freshness can be slightly delayed. Monitor cache hit rate, refresh failures, data age, and report generation latency."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/Queues",
+    "question": "Scenario: Users upload large files and the API times out while processing them. How would you redesign the upload and processing flow?",
+    "answer": "Use signed URLs so users upload directly to object storage instead of sending large files through the API. The API creates metadata and returns an upload target, then a storage event or explicit finalize call enqueues processing. Workers validate, scan, parse, transform, and update status asynchronously. The frontend polls or subscribes for status. Add file size/type limits, retries, dead-letter queues, virus scanning, encryption, and per-user access checks."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/DevOps",
+    "question": "Scenario: A full-stack Python app has manual deployments and frequent production regressions. How would you design the CI/CD and release process?",
+    "answer": "Create a pipeline that runs linting, formatting, unit tests, integration tests, frontend tests, security scans, image builds, and migration checks on pull requests. On merge, build immutable artifacts, deploy to staging, run smoke tests, then promote the same artifacts to production with approval and progressive rollout. Add feature flags, rollback, deployment markers, database migration safety, release notes, and production monitoring gates."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/Kubernetes",
+    "question": "Scenario: Your Kubernetes deployment has intermittent 502 errors during rolling updates. How would you debug and fix the rollout design?",
+    "answer": "Check ingress/load balancer backend health, pod readiness, termination logs, preStop hooks, graceful shutdown, readiness probe behavior, and whether traffic reaches pods before they are ready or after shutdown starts. Fix with correct readiness probes, startup probes for slow apps, preStop delay, terminationGracePeriodSeconds, connection draining, maxUnavailable 0 or low, sufficient replicas, PodDisruptionBudget, and backward-compatible releases."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/Observability",
+    "question": "Scenario: Customers report errors, but logs are hard to correlate across frontend, backend, workers, and database calls. How would you redesign observability?",
+    "answer": "Introduce a correlation/request ID generated at the edge or frontend and propagate it through API calls, worker jobs, logs, traces, and downstream requests. Use structured JSON logs with service, env, version, user or tenant context where safe, and error codes. Add OpenTelemetry tracing across frontend/backend/DB/external calls, metrics for golden signals, dashboards by user journey, and alert runbooks that link to traces and logs."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/Security",
+    "question": "Scenario: A multi-tenant SaaS app accidentally exposes one customer's data to another customer. How would you respond and redesign tenant isolation?",
+    "answer": "First contain the incident: disable the affected path, preserve logs, identify impacted tenants/data, notify stakeholders, and rotate credentials if needed. Redesign by enforcing tenant_id at the data model and query layer, adding authorization checks server-side, using row-level security where appropriate, and preventing tenant IDs from being trusted from the client. Add tests for cross-tenant access, audit logs, scoped caches, and security review for every data access pattern."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/Frontend",
+    "question": "Scenario: The frontend feels slow even though backend latency looks healthy. How would you investigate and improve end-user performance?",
+    "answer": "Measure real user metrics: LCP, INP, CLS, JS bundle size, API waterfall, browser errors, CDN/cache behavior, and client rendering time. Backend latency may be fine while frontend is blocked by large bundles, sequential API calls, slow hydration, inefficient rendering, or poor caching. Improve with code splitting, CDN caching, image optimization, fewer round trips, optimistic UI where safe, pagination/virtualization, and frontend monitoring."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/GenAI RAG",
+    "question": "Scenario: A GenAI chat feature gives outdated or irrelevant answers from your knowledge base. How would you debug and redesign the RAG pipeline?",
+    "answer": "Break the pipeline into ingestion, chunking, embedding, indexing, retrieval, reranking, prompt construction, and generation. Check whether source documents are fresh, chunks are too large/small, embeddings match the query domain, metadata filters are correct, and top-k results are relevant. Add retrieval evaluation sets, citations, recency metadata, document reindexing, hybrid search if needed, reranking, and feedback loops for bad answers."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/GenAI Safety",
+    "question": "Scenario: A user tries prompt injection to make your AI assistant reveal internal documents. How would you prevent and monitor this?",
+    "answer": "Treat all user input and retrieved text as untrusted. Enforce authorization before retrieval, isolate tenants, keep system instructions separate, filter retrieved documents by permission, and never put secrets or hidden policies in retrievable content. Add prompt-injection classifiers or rules, tool allowlists, output checks, refusal behavior, and audit logs. Monitor blocked attempts, unusual retrieval patterns, sensitive-document access, and user reports."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/GenAI Cost",
+    "question": "Scenario: Your LLM API cost increases 5x after adding a new AI feature. How would you investigate and optimize cost without hurting quality?",
+    "answer": "Break cost down by feature, tenant, model, prompt version, token input/output, retrieval size, retries, and cache hit rate. Find whether prompt length, context size, traffic, model choice, or repeated queries caused the spike. Optimize with shorter prompts, smaller models for simple tasks, response length limits, semantic caching, better retrieval top-k, batching where possible, rate limits, and quality evaluations before changing models."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/Resilience",
+    "question": "Scenario: A third-party payment or email API is unreliable. How would you design retries, fallbacks, idempotency, and user experience?",
+    "answer": "Set strict timeouts and retry transient failures with exponential backoff and jitter. Use idempotency keys so repeated requests do not double charge or duplicate messages. Put operations on a durable queue when user-facing latency should not wait for the provider. Add provider-specific circuit breakers, dead-letter queues, status tracking, reconciliation jobs, and user messages that are honest: pending, retrying, failed, or completed."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/Data Pipeline",
+    "question": "Scenario: A background worker pipeline falls behind and queue depth keeps growing. How would you debug and redesign it?",
+    "answer": "Check arrival rate versus processing rate, worker errors, retry storms, poison messages, dependency latency, CPU/memory, DB locks, and queue visibility timeout. Short term, scale workers, pause noisy producers, and isolate poison messages. Long term, partition queues by priority, add backpressure/rate limits, improve task idempotency, batch safe operations, tune concurrency, autoscale on queue age, and add dead-letter handling."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/Migration",
+    "question": "Scenario: You need to migrate a monolithic Django app to services without stopping product delivery. What migration plan would you propose?",
+    "answer": "Start with a modular monolith cleanup: clear boundaries, domain ownership, tests, and observability. Choose one low-risk bounded context, expose APIs/events, and use the strangler pattern to route that capability to a new service while the monolith still runs. Keep shared database changes careful, prefer backward-compatible contracts, migrate data incrementally, and use feature flags. Avoid splitting everything at once; measure reliability and team velocity after each extraction."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "category": "Scenario/Architecture Review",
+    "question": "Scenario: You are asked to review a proposed full-stack AI application before launch. What risks, tradeoffs, and readiness checks would you cover?",
+    "answer": "Review functional requirements, data flow, auth, tenant isolation, threat model, PII handling, model/provider choice, RAG quality, prompt injection risk, cost controls, latency SLOs, fallback behavior, observability, evals, CI/CD, rollback, database migrations, capacity, and incident runbooks. Ask what can fail, who is impacted, how it is detected, how it is mitigated, and what evidence proves the system is ready for production."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 57 - Diagram-Based System Design Round",
+    "category": "Diagram/System Design",
+    "question": "Draw and explain a high-level architecture diagram for a full-stack Python application with React, FastAPI, PostgreSQL, Redis, workers, and object storage.",
+    "answer": "Show Browser/React -> CDN or frontend hosting -> API Gateway/Ingress -> FastAPI -> PostgreSQL, Redis, Object Storage, and Queue -> Worker. Explain synchronous request paths separately from async processing. Label auth, secrets, observability, autoscaling, backups, and failure points. A simple diagram can use boxes for services and arrows for data flow, with Redis for cache/session/rate limit and workers for slow jobs."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 57 - Diagram-Based System Design Round",
+    "category": "Diagram/Data Flow",
+    "question": "Draw the request flow for user login from browser to backend, database, token/session creation, and frontend state update.",
+    "answer": "Draw Browser -> Login API -> User table/password verification -> session/JWT creation -> secure cookie or token response -> frontend state update -> protected API call. Mention password hashing, rate limiting, MFA if needed, CSRF for cookie auth, refresh-token rotation, audit logging, and server-side authorization on every protected request."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 57 - Diagram-Based System Design Round",
+    "category": "Diagram/Upload Flow",
+    "question": "Draw a file upload and async processing architecture using signed URLs, object storage, a queue, workers, and status tracking.",
+    "answer": "Draw Browser -> API creates upload record -> API returns signed URL -> Browser uploads to object storage -> storage event/finalize call -> queue -> worker -> status table -> frontend polls or receives updates. Explain why large files should bypass the API, and include validation, virus scanning, retries, dead-letter queue, encryption, and access control."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 57 - Diagram-Based System Design Round",
+    "category": "Diagram/RAG",
+    "question": "Draw a RAG architecture diagram showing document ingestion, chunking, embeddings, vector database, retrieval, prompt construction, LLM call, and citations.",
+    "answer": "Draw ingestion flow and query flow separately. Ingestion: documents -> parser -> chunks -> embeddings -> vector DB with metadata. Query: user question -> embedding -> vector search/filter -> retrieved chunks -> prompt builder -> LLM -> answer with citations. Add permissions, freshness, evaluation, logging, token cost, and feedback loop."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 57 - Diagram-Based System Design Round",
+    "category": "Diagram/CI-CD",
+    "question": "Draw a CI/CD pipeline diagram for a Python full-stack app from pull request to production deployment and rollback.",
+    "answer": "Draw PR -> lint/test/security scan -> build frontend/backend images -> push registry -> deploy staging -> smoke tests -> approval -> production rollout -> monitor -> rollback. Include database migration checks, artifact promotion, image scanning, environment config, deployment markers, feature flags, and rollback to the previous image or revision."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 57 - Diagram-Based System Design Round",
+    "category": "Diagram/Kubernetes",
+    "question": "Draw a Kubernetes deployment diagram for frontend, backend API, worker, Redis, managed PostgreSQL, ingress, secrets, and autoscaling.",
+    "answer": "Draw Ingress/TLS -> frontend Service and backend Service -> backend Deployment -> Redis/managed cache, managed PostgreSQL, object storage, and queue -> worker Deployment. Add ConfigMaps, Secrets, ServiceAccounts, HPA, readiness/liveness probes, network policies, and observability sidecars/agents if used. Prefer managed databases over running PostgreSQL in the app namespace for production."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 57 - Diagram-Based System Design Round",
+    "category": "Diagram/Observability",
+    "question": "Draw an observability diagram showing metrics, logs, traces, dashboards, alerts, and incident response flow.",
+    "answer": "Draw application services emitting logs, metrics, and traces to collectors/agents, then to monitoring/logging/tracing backends. Dashboards read from telemetry stores, monitors trigger alerts, alerts route to Slack/PagerDuty, and runbooks guide responders. Include correlation IDs, deployment markers, SLO dashboards, and feedback from incidents into backlog improvements."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 57 - Diagram-Based System Design Round",
+    "category": "Diagram/Sequence",
+    "question": "Draw a sequence diagram for a user asking an AI assistant a question and receiving a streamed answer with citations.",
+    "answer": "Show User -> Frontend -> Chat API -> Retriever -> Vector DB -> Prompt Builder -> LLM -> streaming response -> Frontend. Also show metadata logging, citation lookup, safety checks before and after generation, and feedback capture. In a sequence diagram, order matters: retrieval happens before prompt construction, and streaming begins after the LLM starts producing tokens."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 57 - Diagram-Based System Design Round",
+    "category": "Diagram/Resilience",
+    "question": "Draw a failure-handling diagram for an unreliable third-party API using retries, queues, idempotency keys, dead-letter queues, and reconciliation.",
+    "answer": "Draw API request -> durable job queue -> worker -> third-party API. On transient failure, retry with backoff and jitter. On repeated failure, send to dead-letter queue and mark status failed/pending. Use idempotency keys to prevent duplicate side effects, and add reconciliation jobs to compare local state with provider state. Show user-visible statuses like pending, completed, or failed."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 57 - Diagram-Based System Design Round",
+    "category": "Diagram/Security",
+    "question": "Draw a multi-tenant SaaS security diagram showing auth, tenant isolation, database scoping, cache scoping, audit logs, and admin access.",
+    "answer": "Draw identity provider -> backend auth middleware -> tenant resolver -> policy checks -> database queries scoped by tenant_id or row-level security. Show cache keys containing tenant scope, object storage paths scoped by tenant, audit logs for sensitive actions, and admin access through separate privileged workflows. Emphasize that tenant isolation must be enforced server-side, not only in the UI."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 57 - Diagram-Based System Design Round",
+    "category": "Diagram/Scaling",
+    "question": "Draw how the architecture changes when traffic grows from 1,000 users to 1 million users.",
+    "answer": "Start with one frontend, API, database, cache, and worker. At higher scale add CDN, load balancer, horizontal API replicas, Redis cache, async queues, read replicas, database indexes/partitioning, autoscaling workers, object storage, rate limiting, observability, and SLOs. Explain each change as solving a bottleneck, not as adding complexity by default."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 57 - Diagram-Based System Design Round",
+    "category": "Diagram/Interview",
+    "question": "In a system design interview, how do you present a diagram clearly while explaining tradeoffs, bottlenecks, and failure modes?",
+    "answer": "Start with requirements and scale, then draw the main user flow left to right. Keep boxes high-level first, then zoom into storage, async jobs, caching, security, and observability. Label data stores and protocols, explain why each component exists, call out bottlenecks and failure modes, and discuss tradeoffs such as consistency vs availability, cost vs latency, and build vs managed service."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Arrays",
+    "question": "Practice problem: Given an array of integers and a target, return indices of two numbers that add up to the target.",
+    "answer": "Use a dictionary mapping value to index. For each number, compute complement = target - value and check if complement is already seen. If yes, return the two indices; otherwise store the current value and index. Time complexity is O(n), space complexity is O(n). Test duplicates, negative numbers, and no-solution behavior if the prompt allows it."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Strings",
+    "question": "Practice problem: Given a string, find the first non-repeating character.",
+    "answer": "Count characters with collections.Counter or a dictionary, then scan the string again and return the first character whose count is 1. This preserves order and is O(n) time with O(k) space where k is the number of distinct characters. Clarify whether spaces, case, and punctuation count."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Hashing",
+    "question": "Practice problem: Group a list of words into anagram groups.",
+    "answer": "Use a dictionary where the key is either sorted(word) or a 26-count tuple for lowercase English letters. Append each word to the group for that key. Sorting is simple and costs O(m log m) per word; count tuples can be O(m). Return the dictionary values as groups. Clarify case sensitivity and character set."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Sliding Window",
+    "question": "Practice problem: Find the maximum sum of any subarray of size k.",
+    "answer": "Use a fixed-size sliding window. Sum the first k elements, then slide one step at a time by adding the new right element and subtracting the old left element, tracking the maximum. This is O(n) time and O(1) extra space. Validate k <= len(nums) and behavior for negative numbers."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Two Pointers",
+    "question": "Practice problem: Given a sorted array, remove duplicates in place and return the new length.",
+    "answer": "Use two pointers. Keep write at the position for the next unique value, scan read from left to right, and copy nums[read] to nums[write] when it differs from the previous unique value. Return write. Time is O(n), space is O(1). This pattern is common for in-place array compaction."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Stack",
+    "question": "Practice problem: Validate whether a string containing brackets is balanced.",
+    "answer": "Use a stack for opening brackets and a map from closing to opening brackets. Push opens. For each close, the stack must be non-empty and top must match; otherwise return false. At the end, return true only if the stack is empty. Time O(n), space O(n)."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Queue",
+    "question": "Practice problem: Implement a moving average over the last k values in a stream.",
+    "answer": "Use collections.deque to store the last k values and keep a running sum. On each new value, append it and add to sum; if size exceeds k, popleft and subtract. The average is sum divided by current window size. Each operation is O(1). Avoid recomputing sum over the full window every time."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Linked List",
+    "question": "Practice problem: Reverse a singly linked list.",
+    "answer": "Use three pointers: prev = None, curr = head, and next_node. Iterate while curr exists: save curr.next, set curr.next = prev, move prev to curr, and curr to next_node. Return prev as the new head. Time O(n), space O(1). Also mention a recursive version but iterative is safer for Python recursion limits."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Binary Search",
+    "question": "Practice problem: Search for a target in a sorted rotated array.",
+    "answer": "Use modified binary search. At each mid, determine which half is sorted. If the target lies within the sorted half, move into it; otherwise search the other half. This keeps O(log n) time and O(1) space. Clarify whether duplicates exist, because duplicates complicate the sorted-half decision."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Trees",
+    "question": "Practice problem: Return the level-order traversal of a binary tree.",
+    "answer": "Use BFS with collections.deque. Start with root, process one level at a time by reading the current queue length, append node values to a level list, and enqueue children. Return the list of levels. Time O(n), space O(w), where w is the maximum tree width."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Graphs",
+    "question": "Practice problem: Count the number of islands in a 2D grid.",
+    "answer": "Scan every cell. When you find land that is not visited, increment count and run DFS or BFS to mark all connected land cells. Connectivity is usually four-directional unless stated otherwise. Time O(rows * cols), space O(rows * cols) worst case for visited/recursion/queue."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Heap",
+    "question": "Practice problem: Find the kth largest element in an unsorted array.",
+    "answer": "Use a min-heap of size k: push each number and pop when size exceeds k, leaving the kth largest at heap[0]. Time O(n log k), space O(k). Alternatives are sorting O(n log n) or quickselect average O(n). In Python, heapq is a min-heap."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Sorting",
+    "question": "Practice problem: Merge overlapping intervals.",
+    "answer": "Sort intervals by start, then iterate and maintain a merged list. If the next interval starts before or at the current merged end, extend the end; otherwise append a new interval. Sorting dominates at O(n log n), with O(n) output space. Clarify whether touching intervals like [1,2] and [2,3] should merge."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/DP",
+    "question": "Practice problem: Find the minimum cost to climb stairs.",
+    "answer": "Use dynamic programming. dp[i] is the minimum cost to reach step i, and dp[i] = min(dp[i-1] + cost[i-1], dp[i-2] + cost[i-2]). Optimize space by keeping only the previous two values. Time O(n), space O(1). This is similar to climbing stairs but minimizes cost."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Python",
+    "question": "Practice problem: Parse a log file and return the top N most frequent IP addresses.",
+    "answer": "Stream the file line by line, extract IP addresses with split or regex depending on log format, and count with collections.Counter. Return counter.most_common(n). This avoids loading the full file into memory. Mention malformed lines, IPv6 support if needed, and memory concerns if cardinality is huge."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "category": "Coding/Interview",
+    "question": "How should you explain your approach, complexity, and test cases for a LeetCode or HackerRank-style Python problem?",
+    "answer": "Clarify the problem, constraints, and edge cases. Explain brute force first if useful, then identify the pattern that improves it. Walk through the algorithm on a small example, code cleanly, test normal and edge cases, then state time and space complexity. If stuck, communicate hypotheses instead of going silent."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python Automation",
+    "question": "How would you design a Python automation script so it is safe, testable, reusable, and production-ready?",
+    "answer": "Separate core logic from CLI parsing, use functions/classes with clear inputs and outputs, add dry-run mode for risky operations, structured logging, config files/env vars, retries/timeouts, and clear exit codes. Make it idempotent where possible, write unit tests with mocks, and avoid hardcoded credentials or paths. Production automation should be boring, observable, and safe to rerun."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/File Automation",
+    "question": "How would you write a Python script to scan a directory, find large or old files, and generate a cleanup report?",
+    "answer": "Use pathlib or os.scandir to walk files, collect size, modified time, owner/path if needed, and filter by thresholds. Write a CSV/JSON report with recommended actions. Add dry-run by default, exclude patterns, symlink handling, permission-error handling, and logging. Only delete files with explicit confirmation or a separate approved cleanup mode."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/API Automation",
+    "question": "How would you call a paginated REST API in Python, handle retries, and export the results to CSV?",
+    "answer": "Use requests or httpx with timeout settings, loop through next-page tokens or page numbers, and retry transient 429/5xx failures with exponential backoff and jitter. Validate response shape, collect or stream records, and write CSV with the csv module. Store API tokens securely, log progress, and handle partial failures gracefully."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/Cloud Automation",
+    "question": "How would you automate a GCP resource inventory report using Python SDKs?",
+    "answer": "Use Google Cloud client libraries or Cloud Asset Inventory to list projects and resources, collect metadata such as labels, region, owner, machine type, IAM bindings, and cost tags, then export CSV/JSON or write to BigQuery. Use service account least privilege, pagination, retries, and per-project error handling. Schedule it with Cloud Scheduler/Cloud Run or a CI job."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/Kubernetes Automation",
+    "question": "How would you use Python to list Kubernetes pods across namespaces and report CrashLoopBackOff or Pending pods?",
+    "answer": "Use the official Kubernetes Python client, load kubeconfig or in-cluster config, list pods for all namespaces, and inspect pod.status.phase plus container_statuses waiting reasons. Report namespace, pod, container, reason, restart count, node, age, and recent events if possible. Add RBAC least privilege, timeouts, and output as table/CSV/JSON."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/Terraform Automation",
+    "question": "How would you automate Terraform plan validation and summarize risky changes using Python?",
+    "answer": "Run terraform plan with JSON output, parse the plan using json rather than text scraping, and summarize creates, updates, deletes, IAM changes, public network exposure, database changes, and replacements. Fail CI or require approval for risky patterns. Keep the script read-only, deterministic, and covered by tests using sample plan JSON files."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/Subprocess",
+    "question": "When would you use subprocess in Python, and how do you run shell commands safely?",
+    "answer": "Use subprocess when a mature CLI already exists and there is no better SDK/API. Prefer subprocess.run with a list of arguments, shell=False, timeouts, check=True when appropriate, and captured output. Never concatenate untrusted input into shell commands. Log commands safely without secrets, handle return codes, and parse structured output like JSON when the CLI supports it."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/Concurrency",
+    "question": "How would you speed up a Python automation job that checks hundreds of endpoints or servers?",
+    "answer": "For I/O-bound checks, use asyncio with aiohttp/httpx async client or ThreadPoolExecutor with timeouts and bounded concurrency. Avoid unlimited parallelism because it can overload targets or hit rate limits. Add retries with backoff, per-host result collection, progress logging, and summary output. For CPU-bound work, use multiprocessing or move heavy computation elsewhere."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/Logging",
+    "question": "What logging, error handling, exit codes, and dry-run behavior should a production automation script include?",
+    "answer": "Use structured logs with timestamp, operation, target, status, duration, and correlation/run ID. Catch expected errors and continue when safe, but fail fast for invalid config or dangerous states. Use exit code 0 for success, nonzero for failures, and separate partial-success reporting. Dry-run should show exactly what would change without changing anything."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/Security",
+    "question": "How would you handle secrets, credentials, and sensitive output in Python automation?",
+    "answer": "Read secrets from Secret Manager, Vault, environment variables managed by CI, or workload identity. Do not hardcode them, print them, store them in reports, or pass them as CLI args. Redact known secret patterns from logs, scope credentials to least privilege, rotate regularly, and avoid writing sensitive API responses to local files unless encrypted and required."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/CLI",
+    "question": "How would you build a Python CLI tool with arguments, subcommands, config files, and helpful output?",
+    "answer": "Use argparse, Click, or Typer. Define subcommands for different operations, validate arguments, support config files and env var overrides, and provide --dry-run, --verbose, --output json/csv/table, and useful help text. Keep CLI parsing thin and call reusable functions underneath so the logic is testable."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/Data Processing",
+    "question": "How would you process a large CSV or JSONL file in Python without loading everything into memory?",
+    "answer": "Stream input line by line. For CSV, use csv.DictReader over the file object; for JSONL, parse one line at a time with json.loads. Write results incrementally and keep only required aggregates in memory. For very large grouping/sorting, use chunking, external storage, SQLite, pandas chunks, or BigQuery depending on scale."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/Monitoring Automation",
+    "question": "How would you write a Python script that checks service health and sends Slack or email alerts?",
+    "answer": "Read service targets from config, check each endpoint with timeouts, validate status code and optional response content, and collect failures. Send a summarized alert to Slack/email with service, error, latency, and runbook link. Add retries to avoid flapping, rate limit alerts, structured logs, and a nonzero exit code if used in CI or cron."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/Testing",
+    "question": "How would you test Python automation code that calls cloud APIs, shell commands, and external services?",
+    "answer": "Separate side-effecting adapters from core logic. Unit test core logic with sample inputs, mock cloud clients and subprocess calls, and use fixture files for API responses or Terraform plans. Add integration tests in a sandbox project when needed. Test failure paths, retries, dry-run behavior, malformed input, and permission errors."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/Packaging",
+    "question": "How would you package and distribute an internal Python automation tool for a team?",
+    "answer": "Create a proper pyproject.toml package with console_scripts entry points, pinned dependencies, type hints, tests, and documentation. Publish to an internal package registry or distribute through a container image if environment consistency matters. Include versioning, changelog, examples, config templates, and CI that runs tests and security scans before release."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 59 - Python Automation and Scripting Round",
+    "category": "Python/Scenario",
+    "question": "Scenario: A manual weekly operations report takes four hours. How would you automate it end to end with Python?",
+    "answer": "Document the current manual steps, data sources, transformations, validations, and recipients. Build a Python job that fetches data through APIs/SQL/files, validates and cleans it, generates CSV/Excel/HTML output, and sends it by email or uploads it to a shared location. Schedule it, add logging, retries, audit trail, dry-run mode, and alerting when data is missing or report generation fails."
+  },
+  {
     "source": "App Question Bank",
     "section": "GCP / DevOps / SRE Question Bank",
     "category": null,

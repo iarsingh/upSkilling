@@ -1824,5 +1824,588 @@
         "question": "Mock 50 focus - ML platform design: What shared platform capabilities would you build for data scientists and ML engineers to ship models safely and repeatedly?"
       }
     ]
+  },
+  {
+    "id": "set-51",
+    "title": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "focus": "Kubernetes Service networking, kube-proxy, cross-namespace DNS, startup ordering, blue-green traffic switching, Terraform dynamic blocks, for_each, each.value, toset, and repeated S3 resources",
+    "questions": [
+      {
+        "category": "GKE/Kubernetes",
+        "question": "What is kube-proxy?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "Suppose there are two Pods running in different namespaces. What DNS name would you use so that one Pod can communicate with the other?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "There are two applications, a frontend application and a backend application, running in two different Pods. What configuration would you write so that the frontend application starts only after the backend application is up and running?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "We mostly follow blue-green deployment. How do you divert traffic from the Blue environment to the Green environment?"
+      },
+      {
+        "category": "Terraform/IaC",
+        "question": "What is a dynamic block in Terraform?"
+      },
+      {
+        "category": "Terraform/IaC",
+        "question": "What is the use case of a dynamic block?"
+      },
+      {
+        "category": "Terraform/IaC",
+        "question": "How would you create multiple S3 buckets in Terraform?"
+      },
+      {
+        "category": "Terraform/IaC",
+        "question": "What is the meaning of each.value in Terraform?"
+      },
+      {
+        "category": "Terraform/IaC",
+        "question": "Why do we use each.value?"
+      },
+      {
+        "category": "Terraform/IaC",
+        "question": "Why do we use toset() in Terraform?"
+      }
+    ]
+  },
+  {
+    "id": "set-52",
+    "title": "Mock Interview 52 - Datadog Observability Round",
+    "focus": "Datadog Agent, Kubernetes monitoring, APM, logs, traces, dashboards, monitors, SLOs, alert routing, cost control, synthetic monitoring, RUM, and incident investigation",
+    "questions": [
+      {
+        "category": "Datadog/Observability",
+        "question": "How would you install and configure the Datadog Agent on a Kubernetes or GKE cluster?"
+      },
+      {
+        "category": "Datadog/Observability",
+        "question": "How does Datadog collect metrics, logs, and traces from Kubernetes workloads?"
+      },
+      {
+        "category": "Datadog/APM",
+        "question": "How would you enable Datadog APM for a microservice running on Kubernetes?"
+      },
+      {
+        "category": "Datadog/Logs",
+        "question": "How would you correlate Datadog logs with traces for faster debugging?"
+      },
+      {
+        "category": "Datadog/Monitoring",
+        "question": "What Datadog monitors would you create for a production API?"
+      },
+      {
+        "category": "Datadog/SRE",
+        "question": "How would you define SLOs and error-budget alerts in Datadog?"
+      },
+      {
+        "category": "Datadog/Dashboards",
+        "question": "What dashboards would you build in Datadog for application teams, SREs, and leadership?"
+      },
+      {
+        "category": "Datadog/Incident Response",
+        "question": "A Datadog alert shows p95 latency increased after a deployment. How would you investigate?"
+      },
+      {
+        "category": "Datadog/Cost",
+        "question": "How would you control Datadog cost for logs, custom metrics, and high-cardinality tags?"
+      },
+      {
+        "category": "Datadog/Synthetics",
+        "question": "When would you use Datadog Synthetic Monitoring and Real User Monitoring?"
+      },
+      {
+        "category": "Datadog/Integrations",
+        "question": "How would you integrate Datadog with GCP, Slack, PagerDuty, and CI/CD pipelines?"
+      },
+      {
+        "category": "Datadog/Security",
+        "question": "What security and access controls would you apply in Datadog for a large engineering organization?"
+      }
+    ]
+  },
+  {
+    "id": "set-53",
+    "title": "Mock Interview 53 - Python Developer System Design Round",
+    "focus": "Python backend system design, FastAPI/Django APIs, database design, caching, queues, async processing, scalability, reliability, testing, observability, security, and production debugging",
+    "questions": [
+      {
+        "category": "Python/System Design",
+        "question": "How would you design a scalable Python backend API for a high-traffic web application?"
+      },
+      {
+        "category": "Python/API Design",
+        "question": "How would you design REST API endpoints, request validation, pagination, filtering, and versioning in a Python service?"
+      },
+      {
+        "category": "Python/Database Design",
+        "question": "How would you design the database layer for a Python application, including schema design, indexes, migrations, transactions, and connection pooling?"
+      },
+      {
+        "category": "Python/Caching",
+        "question": "How would you add Redis caching to a Python backend, and how would you handle cache invalidation?"
+      },
+      {
+        "category": "Python/Async Processing",
+        "question": "When would you use Celery, RQ, Cloud Tasks, Pub/Sub, or Kafka for background processing in a Python application?"
+      },
+      {
+        "category": "Python/Concurrency",
+        "question": "How would you choose between asyncio, threads, multiprocessing, and worker queues in Python system design?"
+      },
+      {
+        "category": "Python/Reliability",
+        "question": "How would you design retries, timeouts, idempotency, and circuit breakers for a Python service calling external APIs?"
+      },
+      {
+        "category": "Python/Security",
+        "question": "How would you secure a Python backend service, including authentication, authorization, secrets, input validation, and dependency security?"
+      },
+      {
+        "category": "Python/Observability",
+        "question": "What logs, metrics, traces, health checks, and dashboards would you add to a production Python service?"
+      },
+      {
+        "category": "Python/Testing",
+        "question": "How would you test a Python backend system across unit tests, integration tests, contract tests, load tests, and end-to-end tests?"
+      },
+      {
+        "category": "Python/Deployment",
+        "question": "How would you containerize and deploy a Python web service on Kubernetes or Cloud Run?"
+      },
+      {
+        "category": "Python/Performance",
+        "question": "A Python API has high latency and high CPU usage in production. How would you debug and optimize it?"
+      },
+      {
+        "category": "System Design",
+        "question": "Design a URL shortener using Python. What components, data model, caching, scaling, and failure handling would you include?"
+      },
+      {
+        "category": "System Design",
+        "question": "Design a notification system in Python that supports email, SMS, retries, templates, rate limits, and audit logs."
+      },
+      {
+        "category": "System Design",
+        "question": "Design a file upload and processing service in Python for large files, asynchronous processing, status tracking, and secure storage."
+      },
+      {
+        "category": "System Design",
+        "question": "Design a real-time chat or WebSocket service in Python. How would you handle scaling, message delivery, presence, and persistence?"
+      }
+    ]
+  },
+  {
+    "id": "set-54",
+    "title": "Mock Interview 54 - DSA for Python Developers Round",
+    "focus": "Data structures and algorithms in Python, time and space complexity, arrays, strings, hash maps, stacks, queues, linked lists, trees, graphs, heaps, recursion, dynamic programming, and coding interview problem solving",
+    "questions": [
+      {
+        "category": "DSA/Complexity",
+        "question": "How do you analyze time and space complexity for a Python solution?"
+      },
+      {
+        "category": "DSA/Arrays",
+        "question": "How would you solve Two Sum in Python, and what is the time complexity?"
+      },
+      {
+        "category": "DSA/Strings",
+        "question": "How would you check whether two strings are anagrams in Python?"
+      },
+      {
+        "category": "DSA/Sliding Window",
+        "question": "How would you find the longest substring without repeating characters?"
+      },
+      {
+        "category": "DSA/Two Pointers",
+        "question": "When would you use the two-pointer technique, and how would you apply it to a sorted array?"
+      },
+      {
+        "category": "DSA/Hashing",
+        "question": "Why are hash maps useful in coding interviews, and what are common pitfalls in Python dictionaries?"
+      },
+      {
+        "category": "DSA/Stack",
+        "question": "How would you validate balanced parentheses using a stack?"
+      },
+      {
+        "category": "DSA/Queue",
+        "question": "When would you use a queue or deque in Python, and why is list.pop(0) usually avoided?"
+      },
+      {
+        "category": "DSA/Linked List",
+        "question": "How would you detect a cycle in a linked list?"
+      },
+      {
+        "category": "DSA/Trees",
+        "question": "How would you perform BFS and DFS traversal of a binary tree?"
+      },
+      {
+        "category": "DSA/Binary Search",
+        "question": "How would you use binary search to find the first occurrence of a target in a sorted array?"
+      },
+      {
+        "category": "DSA/Heap",
+        "question": "How would you find the top K frequent elements using a heap or Counter in Python?"
+      },
+      {
+        "category": "DSA/Graphs",
+        "question": "How would you detect whether an undirected graph has a cycle?"
+      },
+      {
+        "category": "DSA/Recursion",
+        "question": "How do recursion and backtracking work, and what should you watch out for in Python?"
+      },
+      {
+        "category": "DSA/Dynamic Programming",
+        "question": "How would you explain dynamic programming using the climbing stairs problem?"
+      },
+      {
+        "category": "DSA/Interview Strategy",
+        "question": "How do you approach a new DSA problem in an interview from clarification to optimized solution?"
+      }
+    ]
+  },
+  {
+    "id": "set-55",
+    "title": "Mock Interview 55 - Full Stack Python Engineer with DSA, DevOps, and GenAI Round",
+    "focus": "Full-stack Python engineering, frontend/backend integration, APIs, databases, DSA, DevOps, CI/CD, Docker, Kubernetes, cloud deployment, observability, GenAI, RAG, LLM safety, and production ownership",
+    "questions": [
+      {
+        "category": "Full Stack/Python",
+        "question": "How would you design and build a full-stack application using Python for the backend and a modern JavaScript frontend?"
+      },
+      {
+        "category": "Backend/API",
+        "question": "How would you design authentication, authorization, and session management for a full-stack Python application?"
+      },
+      {
+        "category": "Backend/Database",
+        "question": "How would you design models, migrations, indexes, and API contracts for a Python backend connected to PostgreSQL?"
+      },
+      {
+        "category": "Frontend/Integration",
+        "question": "How would the frontend handle API errors, loading states, pagination, authentication tokens, and form validation?"
+      },
+      {
+        "category": "DSA/Python",
+        "question": "Which DSA patterns are most important for a Python full-stack engineer, and how would you practice them?"
+      },
+      {
+        "category": "DSA/Coding",
+        "question": "How would you solve a coding problem during a Python interview while explaining complexity and tradeoffs?"
+      },
+      {
+        "category": "DevOps/Docker",
+        "question": "How would you Dockerize a full-stack Python application with separate frontend, backend, database, and worker services?"
+      },
+      {
+        "category": "DevOps/CI-CD",
+        "question": "How would you design a CI/CD pipeline for a full-stack Python application from pull request to production?"
+      },
+      {
+        "category": "DevOps/Kubernetes",
+        "question": "How would you deploy a Python backend, frontend, background worker, and database dependencies on Kubernetes?"
+      },
+      {
+        "category": "Observability/SRE",
+        "question": "What monitoring, logging, tracing, alerts, and runbooks would you add for a production full-stack app?"
+      },
+      {
+        "category": "GenAI/RAG",
+        "question": "How would you add a GenAI chat feature to a full-stack Python application using RAG?"
+      },
+      {
+        "category": "GenAI/Backend",
+        "question": "How would you design prompt templates, embeddings, vector search, citations, and response streaming in Python?"
+      },
+      {
+        "category": "GenAI/Safety",
+        "question": "How would you protect a GenAI feature from prompt injection, data leakage, hallucinations, and unsafe tool calls?"
+      },
+      {
+        "category": "GenAI/Operations",
+        "question": "How would you monitor GenAI quality, latency, token cost, retrieval quality, and user feedback in production?"
+      },
+      {
+        "category": "System Design",
+        "question": "Design a full-stack AI resume analyzer using Python, React, PostgreSQL, object storage, queues, and an LLM API."
+      },
+      {
+        "category": "Career/Interview Strategy",
+        "question": "What 90-day learning plan would make someone interview-ready for full-stack Python, DSA, DevOps, and GenAI roles?"
+      }
+    ]
+  },
+  {
+    "id": "set-56",
+    "title": "Mock Interview 56 - Scenario-Based System Design for Full Stack Python and GenAI Round",
+    "focus": "Scenario-based system design for Python backend, frontend integration, databases, queues, caching, DevOps, scaling, reliability, incidents, GenAI, RAG, security, cost, and production tradeoffs",
+    "questions": [
+      {
+        "category": "Scenario/System Design",
+        "question": "Scenario: Your Python API suddenly receives 10x traffic after a product launch. How would you redesign the system for scale and reliability?"
+      },
+      {
+        "category": "Scenario/Database",
+        "question": "Scenario: A PostgreSQL-backed Python application has slow searches and frequent lock waits. How would you investigate and redesign it?"
+      },
+      {
+        "category": "Scenario/Caching",
+        "question": "Scenario: A dashboard endpoint is slow because it recalculates expensive reports on every request. How would you design caching and background refresh?"
+      },
+      {
+        "category": "Scenario/Queues",
+        "question": "Scenario: Users upload large files and the API times out while processing them. How would you redesign the upload and processing flow?"
+      },
+      {
+        "category": "Scenario/DevOps",
+        "question": "Scenario: A full-stack Python app has manual deployments and frequent production regressions. How would you design the CI/CD and release process?"
+      },
+      {
+        "category": "Scenario/Kubernetes",
+        "question": "Scenario: Your Kubernetes deployment has intermittent 502 errors during rolling updates. How would you debug and fix the rollout design?"
+      },
+      {
+        "category": "Scenario/Observability",
+        "question": "Scenario: Customers report errors, but logs are hard to correlate across frontend, backend, workers, and database calls. How would you redesign observability?"
+      },
+      {
+        "category": "Scenario/Security",
+        "question": "Scenario: A multi-tenant SaaS app accidentally exposes one customer's data to another customer. How would you respond and redesign tenant isolation?"
+      },
+      {
+        "category": "Scenario/Frontend",
+        "question": "Scenario: The frontend feels slow even though backend latency looks healthy. How would you investigate and improve end-user performance?"
+      },
+      {
+        "category": "Scenario/GenAI RAG",
+        "question": "Scenario: A GenAI chat feature gives outdated or irrelevant answers from your knowledge base. How would you debug and redesign the RAG pipeline?"
+      },
+      {
+        "category": "Scenario/GenAI Safety",
+        "question": "Scenario: A user tries prompt injection to make your AI assistant reveal internal documents. How would you prevent and monitor this?"
+      },
+      {
+        "category": "Scenario/GenAI Cost",
+        "question": "Scenario: Your LLM API cost increases 5x after adding a new AI feature. How would you investigate and optimize cost without hurting quality?"
+      },
+      {
+        "category": "Scenario/Resilience",
+        "question": "Scenario: A third-party payment or email API is unreliable. How would you design retries, fallbacks, idempotency, and user experience?"
+      },
+      {
+        "category": "Scenario/Data Pipeline",
+        "question": "Scenario: A background worker pipeline falls behind and queue depth keeps growing. How would you debug and redesign it?"
+      },
+      {
+        "category": "Scenario/Migration",
+        "question": "Scenario: You need to migrate a monolithic Django app to services without stopping product delivery. What migration plan would you propose?"
+      },
+      {
+        "category": "Scenario/Architecture Review",
+        "question": "Scenario: You are asked to review a proposed full-stack AI application before launch. What risks, tradeoffs, and readiness checks would you cover?"
+      }
+    ]
+  },
+  {
+    "id": "set-57",
+    "title": "Mock Interview 57 - Diagram-Based System Design Round",
+    "focus": "Architecture diagrams, data-flow diagrams, sequence diagrams, deployment diagrams, RAG diagrams, CI/CD diagrams, observability diagrams, failure paths, scalability, and tradeoff explanation",
+    "questions": [
+      {
+        "category": "Diagram/System Design",
+        "question": "Draw and explain a high-level architecture diagram for a full-stack Python application with React, FastAPI, PostgreSQL, Redis, workers, and object storage."
+      },
+      {
+        "category": "Diagram/Data Flow",
+        "question": "Draw the request flow for user login from browser to backend, database, token/session creation, and frontend state update."
+      },
+      {
+        "category": "Diagram/Upload Flow",
+        "question": "Draw a file upload and async processing architecture using signed URLs, object storage, a queue, workers, and status tracking."
+      },
+      {
+        "category": "Diagram/RAG",
+        "question": "Draw a RAG architecture diagram showing document ingestion, chunking, embeddings, vector database, retrieval, prompt construction, LLM call, and citations."
+      },
+      {
+        "category": "Diagram/CI-CD",
+        "question": "Draw a CI/CD pipeline diagram for a Python full-stack app from pull request to production deployment and rollback."
+      },
+      {
+        "category": "Diagram/Kubernetes",
+        "question": "Draw a Kubernetes deployment diagram for frontend, backend API, worker, Redis, managed PostgreSQL, ingress, secrets, and autoscaling."
+      },
+      {
+        "category": "Diagram/Observability",
+        "question": "Draw an observability diagram showing metrics, logs, traces, dashboards, alerts, and incident response flow."
+      },
+      {
+        "category": "Diagram/Sequence",
+        "question": "Draw a sequence diagram for a user asking an AI assistant a question and receiving a streamed answer with citations."
+      },
+      {
+        "category": "Diagram/Resilience",
+        "question": "Draw a failure-handling diagram for an unreliable third-party API using retries, queues, idempotency keys, dead-letter queues, and reconciliation."
+      },
+      {
+        "category": "Diagram/Security",
+        "question": "Draw a multi-tenant SaaS security diagram showing auth, tenant isolation, database scoping, cache scoping, audit logs, and admin access."
+      },
+      {
+        "category": "Diagram/Scaling",
+        "question": "Draw how the architecture changes when traffic grows from 1,000 users to 1 million users."
+      },
+      {
+        "category": "Diagram/Interview",
+        "question": "In a system design interview, how do you present a diagram clearly while explaining tradeoffs, bottlenecks, and failure modes?"
+      }
+    ]
+  },
+  {
+    "id": "set-58",
+    "title": "Mock Interview 58 - LeetCode and HackerRank Style Python Practice Round",
+    "focus": "Python coding practice for LeetCode/HackerRank-style interviews, arrays, strings, hashing, sliding window, two pointers, stacks, queues, linked lists, trees, graphs, heaps, sorting, binary search, dynamic programming, and clean explanation",
+    "questions": [
+      {
+        "category": "Coding/Arrays",
+        "question": "Practice problem: Given an array of integers and a target, return indices of two numbers that add up to the target."
+      },
+      {
+        "category": "Coding/Strings",
+        "question": "Practice problem: Given a string, find the first non-repeating character."
+      },
+      {
+        "category": "Coding/Hashing",
+        "question": "Practice problem: Group a list of words into anagram groups."
+      },
+      {
+        "category": "Coding/Sliding Window",
+        "question": "Practice problem: Find the maximum sum of any subarray of size k."
+      },
+      {
+        "category": "Coding/Two Pointers",
+        "question": "Practice problem: Given a sorted array, remove duplicates in place and return the new length."
+      },
+      {
+        "category": "Coding/Stack",
+        "question": "Practice problem: Validate whether a string containing brackets is balanced."
+      },
+      {
+        "category": "Coding/Queue",
+        "question": "Practice problem: Implement a moving average over the last k values in a stream."
+      },
+      {
+        "category": "Coding/Linked List",
+        "question": "Practice problem: Reverse a singly linked list."
+      },
+      {
+        "category": "Coding/Binary Search",
+        "question": "Practice problem: Search for a target in a sorted rotated array."
+      },
+      {
+        "category": "Coding/Trees",
+        "question": "Practice problem: Return the level-order traversal of a binary tree."
+      },
+      {
+        "category": "Coding/Graphs",
+        "question": "Practice problem: Count the number of islands in a 2D grid."
+      },
+      {
+        "category": "Coding/Heap",
+        "question": "Practice problem: Find the kth largest element in an unsorted array."
+      },
+      {
+        "category": "Coding/Sorting",
+        "question": "Practice problem: Merge overlapping intervals."
+      },
+      {
+        "category": "Coding/DP",
+        "question": "Practice problem: Find the minimum cost to climb stairs."
+      },
+      {
+        "category": "Coding/Python",
+        "question": "Practice problem: Parse a log file and return the top N most frequent IP addresses."
+      },
+      {
+        "category": "Coding/Interview",
+        "question": "How should you explain your approach, complexity, and test cases for a LeetCode or HackerRank-style Python problem?"
+      }
+    ]
+  },
+  {
+    "id": "set-59",
+    "title": "Mock Interview 59 - Python Automation and Scripting Round",
+    "focus": "Python automation for DevOps and cloud engineering, file processing, APIs, CLIs, subprocess, concurrency, retries, logging, reporting, cloud SDKs, Kubernetes automation, Terraform automation, testing, packaging, and production-grade scripts",
+    "questions": [
+      {
+        "category": "Python Automation",
+        "question": "How would you design a Python automation script so it is safe, testable, reusable, and production-ready?"
+      },
+      {
+        "category": "Python/File Automation",
+        "question": "How would you write a Python script to scan a directory, find large or old files, and generate a cleanup report?"
+      },
+      {
+        "category": "Python/API Automation",
+        "question": "How would you call a paginated REST API in Python, handle retries, and export the results to CSV?"
+      },
+      {
+        "category": "Python/Cloud Automation",
+        "question": "How would you automate a GCP resource inventory report using Python SDKs?"
+      },
+      {
+        "category": "Python/Kubernetes Automation",
+        "question": "How would you use Python to list Kubernetes pods across namespaces and report CrashLoopBackOff or Pending pods?"
+      },
+      {
+        "category": "Python/Terraform Automation",
+        "question": "How would you automate Terraform plan validation and summarize risky changes using Python?"
+      },
+      {
+        "category": "Python/Subprocess",
+        "question": "When would you use subprocess in Python, and how do you run shell commands safely?"
+      },
+      {
+        "category": "Python/Concurrency",
+        "question": "How would you speed up a Python automation job that checks hundreds of endpoints or servers?"
+      },
+      {
+        "category": "Python/Logging",
+        "question": "What logging, error handling, exit codes, and dry-run behavior should a production automation script include?"
+      },
+      {
+        "category": "Python/Security",
+        "question": "How would you handle secrets, credentials, and sensitive output in Python automation?"
+      },
+      {
+        "category": "Python/CLI",
+        "question": "How would you build a Python CLI tool with arguments, subcommands, config files, and helpful output?"
+      },
+      {
+        "category": "Python/Data Processing",
+        "question": "How would you process a large CSV or JSONL file in Python without loading everything into memory?"
+      },
+      {
+        "category": "Python/Monitoring Automation",
+        "question": "How would you write a Python script that checks service health and sends Slack or email alerts?"
+      },
+      {
+        "category": "Python/Testing",
+        "question": "How would you test Python automation code that calls cloud APIs, shell commands, and external services?"
+      },
+      {
+        "category": "Python/Packaging",
+        "question": "How would you package and distribute an internal Python automation tool for a team?"
+      },
+      {
+        "category": "Python/Scenario",
+        "question": "Scenario: A manual weekly operations report takes four hours. How would you automate it end to end with Python?"
+      }
+    ]
   }
 ]

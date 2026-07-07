@@ -139,11 +139,11 @@ async function handleEasyApplyModal(page, profile, jobContext, dryRun = false) {
   // The modal is a wizard: repeatedly fill the visible step, then click Next
   // / Review / Submit until a step no longer advances.
   for (let step = 0; step < 12; step++) {
-    const modal = page.locator("div.jobs-easy-apply-modal, div[role='dialog']").first();
+    const modal = page.locator("dialog[open], div.jobs-easy-apply-modal, div[role='dialog']").first();
     await fillVisibleFields(modal, profile, jobContext);
 
-    const submitBtn = modal.getByRole("button", { name: /submit application/i });
-    if (await submitBtn.count()) {
+    const submitBtn = modal.getByRole("button", { name: /submit application/i }).first();
+    if (await submitBtn.count().catch(() => 0)) {
       if (dryRun) {
         console.log("  [dry-run] Easy Apply form filled, would click Submit application here");
         return "dry_run";
@@ -153,10 +153,12 @@ async function handleEasyApplyModal(page, profile, jobContext, dryRun = false) {
       return true;
     }
 
-    const reviewBtn = modal.getByRole("button", { name: /review/i });
-    const nextBtn = modal.getByRole("button", { name: /next/i });
-    const advance = (await reviewBtn.count()) ? reviewBtn : nextBtn;
-    if (!(await advance.count())) return false; // stuck - unknown step layout
+    const reviewBtn = modal.getByRole("button", { name: /review/i }).first();
+    const nextBtn = modal.getByRole("button", { name: /^next$/i }).first();
+    const hasReview = await reviewBtn.count().catch(() => 0);
+    const hasNext = await nextBtn.count().catch(() => 0);
+    const advance = hasReview ? reviewBtn : nextBtn;
+    if (!hasReview && !hasNext) return false; // stuck - unknown step layout
 
     await advance.click();
     await sleep(1000);
@@ -173,7 +175,14 @@ async function handleEasyApplyModal(page, profile, jobContext, dryRun = false) {
 // allowed since these flows ran 4-6 pages in the postings actually seen.
 async function handleFullPageApply(page, profile, jobContext, dryRun = false) {
   for (let step = 0; step < 15; step++) {
-    const surface = page.locator("main").first();
+    // Some /apply/ postings still render inside an overlay dialog on top of
+    // the page (native <dialog>, not necessarily role="dialog") rather than
+    // truly full-page content. Scoping to that dialog when present avoids
+    // colliding with unrelated buttons elsewhere on the page (a photo
+    // carousel's own "Next" arrow caused exactly this collision - scoping to
+    // `main` alone wasn't narrow enough).
+    const dialog = page.locator("dialog[open], div[role='dialog']").first();
+    const surface = (await dialog.count().catch(() => 0)) ? dialog : page.locator("main").first();
     await fillVisibleFields(surface, profile, jobContext);
 
     const submitBtn = surface.getByRole("button", { name: /submit application/i }).first();
