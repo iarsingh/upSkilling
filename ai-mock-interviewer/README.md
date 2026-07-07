@@ -14,6 +14,7 @@ locally, and works fully offline using a built-in question bank of 2,000+ questi
 - [Requirements](#requirements)
 - [Quick Start](#quick-start)
 - [Run With Local Ollama](#run-with-local-ollama)
+- [Deploy Free On Render Without An AI Key](#deploy-free-on-render-without-an-ai-key)
 - [How To Use](#how-to-use)
 - [Audio Notes](#audio-notes)
 - [Offline Mode](#offline-mode)
@@ -124,6 +125,43 @@ Use another local model:
 ```bash
 OLLAMA_MODEL=mistral npm start
 ```
+
+## Deploy Free On Render Without An AI Key
+
+This repo includes a root-level `render.yaml` blueprint for deploying the app on Render's free web service tier in offline mode.
+
+Offline hosted mode:
+
+- Does not require `ANTHROPIC_API_KEY`, OpenAI keys, Gemini keys, or Ollama.
+- Uses the built-in question bank, fixed mock interview sets, and template feedback.
+- Allows manual JD paste and local JD file upload.
+- Disables public JD URL import because it is an internet fetch.
+
+Deploy steps:
+
+1. Push this repository to GitHub.
+2. Open Render and create a new Blueprint from the GitHub repo.
+3. Render will read `render.yaml` from the repository root.
+4. Confirm the service settings and deploy.
+
+Manual Render settings, if you do not use the blueprint:
+
+```text
+Runtime: Node
+Build command: cd ai-mock-interviewer && npm ci
+Start command: cd ai-mock-interviewer && npm run start:offline
+Health check path: /api/health
+```
+
+Environment variables:
+
+```text
+NODE_ENV=production
+OFFLINE_ONLY=1
+HOST=0.0.0.0
+```
+
+Render provides `PORT` automatically.
 
 ## How To Use
 

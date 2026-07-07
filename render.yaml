@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: ai-mock-interviewer
+    env: node
+    plan: free
+    buildCommand: cd ai-mock-interviewer && npm ci
+    startCommand: cd ai-mock-interviewer && npm run start:offline
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OFFLINE_ONLY
+        value: "1"
+      - key: HOST
+        value: 0.0.0.0

@@ -829,3 +829,24 @@ Focus: Python automation for DevOps and cloud engineering, file processing, APIs
 14. **Python/Testing:** How would you test Python automation code that calls cloud APIs, shell commands, and external services?
 15. **Python/Packaging:** How would you package and distribute an internal Python automation tool for a team?
 16. **Python/Scenario:** Scenario: A manual weekly operations report takes four hours. How would you automate it end to end with Python?
+
+## Mock Interview 60 - GT Bharat DevSecOps Specialist Engineering Round
+
+Focus: GT Bharat DevSecOps Engineer JD, GCP and GKE operations, Linux/Windows administration, incident and change management, CI/CD with GitHub/JIRA/Jenkins/Ansible, Terraform, Vault, Docker/Kubernetes, SQL, Splunk/AppDynamics/xMatters, regulated enterprise operations, automation mindset, and on-call readiness
+
+1. **Introduction/JD Fit:** Walk me through your DevOps or DevSecOps experience and explain how it matches this GT Bharat Specialist Engineering role.
+2. **GCP/GKE:** What hands-on experience do you have with GCP and GKE, and how have you operated production workloads on Kubernetes?
+3. **GKE/Troubleshooting:** A production pod in GKE is stuck in CrashLoopBackOff after a deployment. What exact steps and commands would you use to troubleshoot it?
+4. **Platform Resilience:** How would you design and maintain a highly scalable and resilient application platform on GKE?
+5. **Linux/System Administration:** A RHEL/Linux server has high CPU, low disk space, and failing systemd services. How would you investigate and restore service health?
+6. **Incident Management:** You are on-call during a major outage affecting a CSAT service. How would you lead detection, mitigation, communication, escalation, and RCA?
+7. **Change Management:** How do you plan and execute production changes in a regulated enterprise environment while minimizing risk?
+8. **CI/CD:** Design a CI/CD pipeline using GitHub, JIRA, Jenkins, and Ansible for build, test, deployment, approvals, rollback, and auditability.
+9. **Infrastructure as Code:** How have you used Terraform and Ansible together, and where would you draw the boundary between provisioning and configuration management?
+10. **Secrets Management:** How would you implement secrets management with HashiCorp Vault or cloud secret managers for applications running in Kubernetes?
+11. **Containers/Kubernetes:** Compare Deployment, StatefulSet, and DaemonSet. When would you use each in an enterprise platform?
+12. **Observability:** How would you use Splunk, AppDynamics, and xMatters to monitor services, reduce alert noise, and proactively prevent outages?
+13. **SQL/Database Operations:** What SQL or database troubleshooting experience do you have with PostgreSQL or MSSQL, especially for connectivity, slow queries, or locks?
+14. **Networking:** A service in GKE cannot connect to a database or third-party endpoint. How would you troubleshoot DNS, routes, firewalls, security groups, and application configuration?
+15. **DevSecOps/Security:** What security controls would you add across CI/CD, containers, Kubernetes, cloud IAM, secrets, logging, and audit trails?
+16. **Behavioral/Automation:** Tell me about a time you automated a manual operations task or improved a workflow. What was the impact, and how did you share the learning with the team?

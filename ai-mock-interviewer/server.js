@@ -796,7 +796,7 @@ function serveStatic(req, res) {
   });
 }
 
-const server = http.createServer(async (req, res) => {
+async function handleRequest(req, res) {
   try {
     if (req.method === "OPTIONS") {
       sendJson(res, 200, { ok: true });
@@ -968,6 +968,12 @@ const server = http.createServer(async (req, res) => {
         sendJson(res, 400, { error: "Please provide a job URL." });
         return;
       }
+      if (OFFLINE_ONLY) {
+        sendJson(res, 400, {
+          error: "URL import is disabled in offline-only deployment. Paste the JD text or upload a local file instead."
+        });
+        return;
+      }
       sendJson(res, 200, { text: await importJobDescription(input.url) });
       return;
     }
@@ -995,15 +1001,21 @@ const server = http.createServer(async (req, res) => {
         : error.message
     });
   }
-});
+}
 
-server.listen(PORT, HOST, () => {
-  console.log(`AI Mock Interviewer running at http://${HOST}:${PORT}`);
-  if (OFFLINE_ONLY) {
-    console.log("Offline mode enabled. Using the built-in question bank and feedback templates.");
-  } else if (LLM_PROVIDER === "claude") {
-    console.log(`Using Claude model ${CLAUDE_MODEL}`);
-  } else {
-    console.log(`Using Ollama model ${OLLAMA_MODEL} at ${OLLAMA_URL}`);
-  }
-});
+const server = http.createServer(handleRequest);
+
+if (require.main === module) {
+  server.listen(PORT, HOST, () => {
+    console.log(`AI Mock Interviewer running at http://${HOST}:${PORT}`);
+    if (OFFLINE_ONLY) {
+      console.log("Offline mode enabled. Using the built-in question bank and feedback templates.");
+    } else if (LLM_PROVIDER === "claude") {
+      console.log(`Using Claude model ${CLAUDE_MODEL}`);
+    } else {
+      console.log(`Using Ollama model ${OLLAMA_MODEL} at ${OLLAMA_URL}`);
+    }
+  });
+}
+
+module.exports = handleRequest;

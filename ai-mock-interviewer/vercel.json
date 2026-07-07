@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "env": {
+    "OFFLINE_ONLY": "1",
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "api/[...path].js": {
+      "maxDuration": 10
+    }
+  }
+}
