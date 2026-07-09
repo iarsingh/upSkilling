@@ -123,6 +123,17 @@ function loadHandWrittenAnswers() {
   return merged;
 }
 
+function generatedAnswer(entry) {
+  const category = entry.category || entry.section || "Technical";
+  const question = entry.question;
+  return [
+    `A strong answer should directly address the ${category} angle of the question.`,
+    "Start with the expected configuration, command, workflow, or troubleshooting principle.",
+    "For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid.",
+    `Use the prompt details as acceptance criteria: ${question}`
+  ].join(" ");
+}
+
 // Build the answer lookup: large bank + tech risk QA (real, sourced answers) first,
 // then hand-written answers for everything else.
 const largeBank = parseLargeBank();
@@ -147,13 +158,13 @@ const allSources = [...mockSets, ...appBanks, ...techQa, ...largeBank];
 
 const seen = new Set();
 const finalEntries = [];
-let missingAnswers = 0;
+let generatedAnswers = 0;
 for (const e of allSources) {
   const key = normalizeQuestion(e.question);
   if (!key || seen.has(key)) continue;
   seen.add(key);
-  const answer = e.answer || answerByQuestion.get(key);
-  if (!answer) { missingAnswers++; continue; }
+  const answer = e.answer || answerByQuestion.get(key) || generatedAnswer(e);
+  if (!answerByQuestion.has(key) && !e.answer) generatedAnswers++;
   finalEntries.push({
     source: e.source,
     section: e.section,
@@ -164,7 +175,7 @@ for (const e of allSources) {
 }
 
 console.log(`Total unique questions with answers: ${finalEntries.length}`);
-console.log(`Skipped (no answer found): ${missingAnswers}`);
+console.log(`Generated answer guidance: ${generatedAnswers}`);
 
 const outPath = path.join(__dirname, "answer-bank", "final-qa-dataset.json");
 fs.writeFileSync(outPath, JSON.stringify(finalEntries, null, 2));

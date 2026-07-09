@@ -995,16 +995,46 @@
     "title": "Mock Interview 26 - Technology Risk Fundamentals",
     "focus": "technology risk basics, risk assessment lifecycle, risk appetite, registers, heat maps, and prioritization",
     "questions": [
-      { "category": "Technology Risk", "question": "What is Technology Risk?" },
-      { "category": "Technology Risk", "question": "What are the different types of technology risks?" },
-      { "category": "Technology Risk", "question": "How do you perform a technology risk assessment?" },
-      { "category": "Technology Risk", "question": "What is inherent risk vs residual risk?" },
-      { "category": "Technology Risk", "question": "What is risk appetite and risk tolerance?" },
-      { "category": "Technology Risk", "question": "How do you prioritize risks?" },
-      { "category": "Technology Risk", "question": "Explain the risk management lifecycle." },
-      { "category": "Technology Risk", "question": "What is a risk register?" },
-      { "category": "Technology Risk", "question": "What information should a risk register contain?" },
-      { "category": "Technology Risk", "question": "How do you create a risk heat map?" }
+      {
+        "category": "Technology Risk",
+        "question": "What is Technology Risk?"
+      },
+      {
+        "category": "Technology Risk",
+        "question": "What are the different types of technology risks?"
+      },
+      {
+        "category": "Technology Risk",
+        "question": "How do you perform a technology risk assessment?"
+      },
+      {
+        "category": "Technology Risk",
+        "question": "What is inherent risk vs residual risk?"
+      },
+      {
+        "category": "Technology Risk",
+        "question": "What is risk appetite and risk tolerance?"
+      },
+      {
+        "category": "Technology Risk",
+        "question": "How do you prioritize risks?"
+      },
+      {
+        "category": "Technology Risk",
+        "question": "Explain the risk management lifecycle."
+      },
+      {
+        "category": "Technology Risk",
+        "question": "What is a risk register?"
+      },
+      {
+        "category": "Technology Risk",
+        "question": "What information should a risk register contain?"
+      },
+      {
+        "category": "Technology Risk",
+        "question": "How do you create a risk heat map?"
+      }
     ]
   },
   {
@@ -1012,16 +1042,46 @@
     "title": "Mock Interview 27 - Technology Risk Assessment",
     "focus": "cloud application risk assessment, identification techniques, scoring, FMEA, scenario analysis, and treatment options",
     "questions": [
-      { "category": "Risk Assessment", "question": "Walk me through a risk assessment for deploying a new cloud application." },
-      { "category": "Risk Assessment", "question": "How do you identify technology risks?" },
-      { "category": "Risk Assessment", "question": "What techniques do you use for risk identification?" },
-      { "category": "Risk Assessment", "question": "What is qualitative vs quantitative risk analysis?" },
-      { "category": "Risk Assessment", "question": "Explain likelihood and impact scoring." },
-      { "category": "Risk Assessment", "question": "How do you calculate risk severity?" },
-      { "category": "Risk Assessment", "question": "What is FMEA?" },
-      { "category": "Risk Assessment", "question": "What is scenario analysis?" },
-      { "category": "Risk Assessment", "question": "Explain risk acceptance, avoidance, mitigation, and transfer." },
-      { "category": "Risk Assessment", "question": "Give an example of a risk you mitigated." }
+      {
+        "category": "Risk Assessment",
+        "question": "Walk me through a risk assessment for deploying a new cloud application."
+      },
+      {
+        "category": "Risk Assessment",
+        "question": "How do you identify technology risks?"
+      },
+      {
+        "category": "Risk Assessment",
+        "question": "What techniques do you use for risk identification?"
+      },
+      {
+        "category": "Risk Assessment",
+        "question": "What is qualitative vs quantitative risk analysis?"
+      },
+      {
+        "category": "Risk Assessment",
+        "question": "Explain likelihood and impact scoring."
+      },
+      {
+        "category": "Risk Assessment",
+        "question": "How do you calculate risk severity?"
+      },
+      {
+        "category": "Risk Assessment",
+        "question": "What is FMEA?"
+      },
+      {
+        "category": "Risk Assessment",
+        "question": "What is scenario analysis?"
+      },
+      {
+        "category": "Risk Assessment",
+        "question": "Explain risk acceptance, avoidance, mitigation, and transfer."
+      },
+      {
+        "category": "Risk Assessment",
+        "question": "Give an example of a risk you mitigated."
+      }
     ]
   },
   {
@@ -1029,16 +1089,46 @@
     "title": "Mock Interview 28 - IT Controls",
     "focus": "preventive, detective, corrective, compensating controls, least privilege, RBAC, segregation of duties, and control monitoring",
     "questions": [
-      { "category": "IT Controls", "question": "What are preventive controls?" },
-      { "category": "IT Controls", "question": "What are detective controls?" },
-      { "category": "IT Controls", "question": "What are corrective controls?" },
-      { "category": "IT Controls", "question": "Give examples of each control type in cloud infrastructure." },
-      { "category": "IT Controls", "question": "How do you validate control effectiveness?" },
-      { "category": "IT Controls", "question": "What is segregation of duties?" },
-      { "category": "IT Controls", "question": "What is least privilege?" },
-      { "category": "IT Controls", "question": "Explain RBAC." },
-      { "category": "IT Controls", "question": "What are compensating controls?" },
-      { "category": "IT Controls", "question": "How do you monitor control failures?" }
+      {
+        "category": "IT Controls",
+        "question": "What are preventive controls?"
+      },
+      {
+        "category": "IT Controls",
+        "question": "What are detective controls?"
+      },
+      {
+        "category": "IT Controls",
+        "question": "What are corrective controls?"
+      },
+      {
+        "category": "IT Controls",
+        "question": "Give examples of each control type in cloud infrastructure."
+      },
+      {
+        "category": "IT Controls",
+        "question": "How do you validate control effectiveness?"
+      },
+      {
+        "category": "IT Controls",
+        "question": "What is segregation of duties?"
+      },
+      {
+        "category": "IT Controls",
+        "question": "What is least privilege?"
+      },
+      {
+        "category": "IT Controls",
+        "question": "Explain RBAC."
+      },
+      {
+        "category": "IT Controls",
+        "question": "What are compensating controls?"
+      },
+      {
+        "category": "IT Controls",
+        "question": "How do you monitor control failures?"
+      }
     ]
   },
   {
@@ -1046,16 +1136,46 @@
     "title": "Mock Interview 29 - SDLC and Secure Development Risk",
     "focus": "risk in SDLC, BRD/PRD review, architecture review, Secure SDLC, threat modeling, STRIDE, and DevSecOps",
     "questions": [
-      { "category": "SDLC/Secure Development", "question": "How do you integrate risk into SDLC?" },
-      { "category": "SDLC/Secure Development", "question": "What risks should be reviewed during BRD/PRD?" },
-      { "category": "SDLC/Secure Development", "question": "How do you review architecture from a risk perspective?" },
-      { "category": "SDLC/Secure Development", "question": "What security controls should exist before production deployment?" },
-      { "category": "SDLC/Secure Development", "question": "Explain Secure SDLC." },
-      { "category": "SDLC/Secure Development", "question": "What are threat modeling techniques?" },
-      { "category": "SDLC/Secure Development", "question": "What is STRIDE?" },
-      { "category": "SDLC/Secure Development", "question": "What is attack surface?" },
-      { "category": "SDLC/Secure Development", "question": "What is shift-left security?" },
-      { "category": "SDLC/Secure Development", "question": "How do DevSecOps practices reduce risk?" }
+      {
+        "category": "SDLC/Secure Development",
+        "question": "How do you integrate risk into SDLC?"
+      },
+      {
+        "category": "SDLC/Secure Development",
+        "question": "What risks should be reviewed during BRD/PRD?"
+      },
+      {
+        "category": "SDLC/Secure Development",
+        "question": "How do you review architecture from a risk perspective?"
+      },
+      {
+        "category": "SDLC/Secure Development",
+        "question": "What security controls should exist before production deployment?"
+      },
+      {
+        "category": "SDLC/Secure Development",
+        "question": "Explain Secure SDLC."
+      },
+      {
+        "category": "SDLC/Secure Development",
+        "question": "What are threat modeling techniques?"
+      },
+      {
+        "category": "SDLC/Secure Development",
+        "question": "What is STRIDE?"
+      },
+      {
+        "category": "SDLC/Secure Development",
+        "question": "What is attack surface?"
+      },
+      {
+        "category": "SDLC/Secure Development",
+        "question": "What is shift-left security?"
+      },
+      {
+        "category": "SDLC/Secure Development",
+        "question": "How do DevSecOps practices reduce risk?"
+      }
     ]
   },
   {
@@ -1063,16 +1183,46 @@
     "title": "Mock Interview 30 - Governance and Compliance",
     "focus": "ISO 27001, NIST CSF, COBIT, FAIR, audits, evidence, and audit finding management",
     "questions": [
-      { "category": "Governance/Compliance", "question": "What is ISO 27001?" },
-      { "category": "Governance/Compliance", "question": "Explain the ISO 27001 Annex A controls." },
-      { "category": "Governance/Compliance", "question": "What is NIST Cybersecurity Framework?" },
-      { "category": "Governance/Compliance", "question": "What are the five NIST functions?" },
-      { "category": "Governance/Compliance", "question": "What is COBIT?" },
-      { "category": "Governance/Compliance", "question": "What is the difference between ISO 27001 and NIST?" },
-      { "category": "Governance/Compliance", "question": "What is FAIR?" },
-      { "category": "Governance/Compliance", "question": "What is an IT audit?" },
-      { "category": "Governance/Compliance", "question": "What evidence is typically collected during audits?" },
-      { "category": "Governance/Compliance", "question": "How do you manage audit findings?" }
+      {
+        "category": "Governance/Compliance",
+        "question": "What is ISO 27001?"
+      },
+      {
+        "category": "Governance/Compliance",
+        "question": "Explain the ISO 27001 Annex A controls."
+      },
+      {
+        "category": "Governance/Compliance",
+        "question": "What is NIST Cybersecurity Framework?"
+      },
+      {
+        "category": "Governance/Compliance",
+        "question": "What are the five NIST functions?"
+      },
+      {
+        "category": "Governance/Compliance",
+        "question": "What is COBIT?"
+      },
+      {
+        "category": "Governance/Compliance",
+        "question": "What is the difference between ISO 27001 and NIST?"
+      },
+      {
+        "category": "Governance/Compliance",
+        "question": "What is FAIR?"
+      },
+      {
+        "category": "Governance/Compliance",
+        "question": "What is an IT audit?"
+      },
+      {
+        "category": "Governance/Compliance",
+        "question": "What evidence is typically collected during audits?"
+      },
+      {
+        "category": "Governance/Compliance",
+        "question": "How do you manage audit findings?"
+      }
     ]
   },
   {
@@ -1080,16 +1230,46 @@
     "title": "Mock Interview 31 - Cloud Risk",
     "focus": "cloud shared responsibility, GCP security, IAM, Kubernetes, Terraform, secrets, and misconfiguration risk",
     "questions": [
-      { "category": "Cloud Risk", "question": "What are cloud security risks?" },
-      { "category": "Cloud Risk", "question": "Explain the Shared Responsibility Model." },
-      { "category": "Cloud Risk", "question": "What are the risks of public cloud?" },
-      { "category": "Cloud Risk", "question": "How do you secure GCP projects?" },
-      { "category": "Cloud Risk", "question": "What are IAM best practices?" },
-      { "category": "Cloud Risk", "question": "What risks exist in Kubernetes clusters?" },
-      { "category": "Cloud Risk", "question": "What are the risks of Terraform automation?" },
-      { "category": "Cloud Risk", "question": "How do you secure Terraform state files?" },
-      { "category": "Cloud Risk", "question": "How do you approach secrets management?" },
-      { "category": "Cloud Risk", "question": "What are common cloud misconfiguration risks?" }
+      {
+        "category": "Cloud Risk",
+        "question": "What are cloud security risks?"
+      },
+      {
+        "category": "Cloud Risk",
+        "question": "Explain the Shared Responsibility Model."
+      },
+      {
+        "category": "Cloud Risk",
+        "question": "What are the risks of public cloud?"
+      },
+      {
+        "category": "Cloud Risk",
+        "question": "How do you secure GCP projects?"
+      },
+      {
+        "category": "Cloud Risk",
+        "question": "What are IAM best practices?"
+      },
+      {
+        "category": "Cloud Risk",
+        "question": "What risks exist in Kubernetes clusters?"
+      },
+      {
+        "category": "Cloud Risk",
+        "question": "What are the risks of Terraform automation?"
+      },
+      {
+        "category": "Cloud Risk",
+        "question": "How do you secure Terraform state files?"
+      },
+      {
+        "category": "Cloud Risk",
+        "question": "How do you approach secrets management?"
+      },
+      {
+        "category": "Cloud Risk",
+        "question": "What are common cloud misconfiguration risks?"
+      }
     ]
   },
   {
@@ -1097,16 +1277,46 @@
     "title": "Mock Interview 32 - Kubernetes and DevOps Risk",
     "focus": "CI/CD risks, Jenkins, GitHub Actions, supply chain security, SBOM, image signing, runtime security, Helm, RBAC, and privileged containers",
     "questions": [
-      { "category": "Kubernetes/DevOps Risk", "question": "What are the risks of CI/CD pipelines?" },
-      { "category": "Kubernetes/DevOps Risk", "question": "How do you secure Jenkins?" },
-      { "category": "Kubernetes/DevOps Risk", "question": "What are the risks of GitHub Actions?" },
-      { "category": "Kubernetes/DevOps Risk", "question": "What is supply chain security?" },
-      { "category": "Kubernetes/DevOps Risk", "question": "What is an SBOM?" },
-      { "category": "Kubernetes/DevOps Risk", "question": "Explain image signing." },
-      { "category": "Kubernetes/DevOps Risk", "question": "What is runtime security?" },
-      { "category": "Kubernetes/DevOps Risk", "question": "What are the risks of Helm charts?" },
-      { "category": "Kubernetes/DevOps Risk", "question": "What are Kubernetes RBAC risks?" },
-      { "category": "Kubernetes/DevOps Risk", "question": "What are the risks of privileged containers?" }
+      {
+        "category": "Kubernetes/DevOps Risk",
+        "question": "What are the risks of CI/CD pipelines?"
+      },
+      {
+        "category": "Kubernetes/DevOps Risk",
+        "question": "How do you secure Jenkins?"
+      },
+      {
+        "category": "Kubernetes/DevOps Risk",
+        "question": "What are the risks of GitHub Actions?"
+      },
+      {
+        "category": "Kubernetes/DevOps Risk",
+        "question": "What is supply chain security?"
+      },
+      {
+        "category": "Kubernetes/DevOps Risk",
+        "question": "What is an SBOM?"
+      },
+      {
+        "category": "Kubernetes/DevOps Risk",
+        "question": "Explain image signing."
+      },
+      {
+        "category": "Kubernetes/DevOps Risk",
+        "question": "What is runtime security?"
+      },
+      {
+        "category": "Kubernetes/DevOps Risk",
+        "question": "What are the risks of Helm charts?"
+      },
+      {
+        "category": "Kubernetes/DevOps Risk",
+        "question": "What are Kubernetes RBAC risks?"
+      },
+      {
+        "category": "Kubernetes/DevOps Risk",
+        "question": "What are the risks of privileged containers?"
+      }
     ]
   },
   {
@@ -1114,16 +1324,46 @@
     "title": "Mock Interview 33 - Incident Management Risk",
     "focus": "incident process, problem management, RCA, postmortems, 5 Whys, near misses, recurrence prevention, KPIs, MTTD, and MTTR",
     "questions": [
-      { "category": "Incident Management", "question": "Describe your incident management process." },
-      { "category": "Incident Management", "question": "What is the difference between incident, problem, and risk?" },
-      { "category": "Incident Management", "question": "How do you perform Root Cause Analysis?" },
-      { "category": "Incident Management", "question": "What is a postmortem?" },
-      { "category": "Incident Management", "question": "Explain the 5 Whys technique." },
-      { "category": "Incident Management", "question": "What is a near miss?" },
-      { "category": "Incident Management", "question": "How do you prevent recurring incidents?" },
-      { "category": "Incident Management", "question": "What KPIs do you track?" },
-      { "category": "Incident Management", "question": "What is Mean Time to Detect (MTTD)?" },
-      { "category": "Incident Management", "question": "What is Mean Time to Recover (MTTR)?" }
+      {
+        "category": "Incident Management",
+        "question": "Describe your incident management process."
+      },
+      {
+        "category": "Incident Management",
+        "question": "What is the difference between incident, problem, and risk?"
+      },
+      {
+        "category": "Incident Management",
+        "question": "How do you perform Root Cause Analysis?"
+      },
+      {
+        "category": "Incident Management",
+        "question": "What is a postmortem?"
+      },
+      {
+        "category": "Incident Management",
+        "question": "Explain the 5 Whys technique."
+      },
+      {
+        "category": "Incident Management",
+        "question": "What is a near miss?"
+      },
+      {
+        "category": "Incident Management",
+        "question": "How do you prevent recurring incidents?"
+      },
+      {
+        "category": "Incident Management",
+        "question": "What KPIs do you track?"
+      },
+      {
+        "category": "Incident Management",
+        "question": "What is Mean Time to Detect (MTTD)?"
+      },
+      {
+        "category": "Incident Management",
+        "question": "What is Mean Time to Recover (MTTR)?"
+      }
     ]
   },
   {
@@ -1131,16 +1371,46 @@
     "title": "Mock Interview 34 - Risk Monitoring and Reporting",
     "focus": "risk metrics, dashboards, leadership reporting, KRIs, KPIs, cloud posture, SIEM, vulnerability prioritization, trends, and business impact",
     "questions": [
-      { "category": "Monitoring/Reporting", "question": "What risk metrics do you monitor?" },
-      { "category": "Monitoring/Reporting", "question": "What should a risk dashboard include?" },
-      { "category": "Monitoring/Reporting", "question": "How do you report risks to leadership?" },
-      { "category": "Monitoring/Reporting", "question": "Explain Key Risk Indicators (KRIs)." },
-      { "category": "Monitoring/Reporting", "question": "What is the difference between KRIs and KPIs?" },
-      { "category": "Monitoring/Reporting", "question": "How do you monitor cloud security posture?" },
-      { "category": "Monitoring/Reporting", "question": "What SIEM tools have you used?" },
-      { "category": "Monitoring/Reporting", "question": "How do you prioritize vulnerabilities?" },
-      { "category": "Monitoring/Reporting", "question": "What is risk trending?" },
-      { "category": "Monitoring/Reporting", "question": "How do you communicate business impact?" }
+      {
+        "category": "Monitoring/Reporting",
+        "question": "What risk metrics do you monitor?"
+      },
+      {
+        "category": "Monitoring/Reporting",
+        "question": "What should a risk dashboard include?"
+      },
+      {
+        "category": "Monitoring/Reporting",
+        "question": "How do you report risks to leadership?"
+      },
+      {
+        "category": "Monitoring/Reporting",
+        "question": "Explain Key Risk Indicators (KRIs)."
+      },
+      {
+        "category": "Monitoring/Reporting",
+        "question": "What is the difference between KRIs and KPIs?"
+      },
+      {
+        "category": "Monitoring/Reporting",
+        "question": "How do you monitor cloud security posture?"
+      },
+      {
+        "category": "Monitoring/Reporting",
+        "question": "What SIEM tools have you used?"
+      },
+      {
+        "category": "Monitoring/Reporting",
+        "question": "How do you prioritize vulnerabilities?"
+      },
+      {
+        "category": "Monitoring/Reporting",
+        "question": "What is risk trending?"
+      },
+      {
+        "category": "Monitoring/Reporting",
+        "question": "How do you communicate business impact?"
+      }
     ]
   },
   {
@@ -1148,16 +1418,46 @@
     "title": "Mock Interview 35 - Architecture Review Risk",
     "focus": "architecture approval, third-party risk, SPOFs, HA, DR, RTO/RPO, BCP, Zero Trust, and common architecture risks",
     "questions": [
-      { "category": "Architecture Review", "question": "What do you review before approving an architecture?" },
-      { "category": "Architecture Review", "question": "How do you evaluate third-party risk?" },
-      { "category": "Architecture Review", "question": "What questions do you ask during architecture reviews?" },
-      { "category": "Architecture Review", "question": "How do you identify single points of failure?" },
-      { "category": "Architecture Review", "question": "Explain High Availability from a risk perspective." },
-      { "category": "Architecture Review", "question": "Explain Disaster Recovery." },
-      { "category": "Architecture Review", "question": "What is the difference between RTO and RPO?" },
-      { "category": "Architecture Review", "question": "What is Business Continuity Planning?" },
-      { "category": "Architecture Review", "question": "Explain Zero Trust Architecture." },
-      { "category": "Architecture Review", "question": "What are common architecture risks?" }
+      {
+        "category": "Architecture Review",
+        "question": "What do you review before approving an architecture?"
+      },
+      {
+        "category": "Architecture Review",
+        "question": "How do you evaluate third-party risk?"
+      },
+      {
+        "category": "Architecture Review",
+        "question": "What questions do you ask during architecture reviews?"
+      },
+      {
+        "category": "Architecture Review",
+        "question": "How do you identify single points of failure?"
+      },
+      {
+        "category": "Architecture Review",
+        "question": "Explain High Availability from a risk perspective."
+      },
+      {
+        "category": "Architecture Review",
+        "question": "Explain Disaster Recovery."
+      },
+      {
+        "category": "Architecture Review",
+        "question": "What is the difference between RTO and RPO?"
+      },
+      {
+        "category": "Architecture Review",
+        "question": "What is Business Continuity Planning?"
+      },
+      {
+        "category": "Architecture Review",
+        "question": "Explain Zero Trust Architecture."
+      },
+      {
+        "category": "Architecture Review",
+        "question": "What are common architecture risks?"
+      }
     ]
   },
   {
@@ -1165,16 +1465,46 @@
     "title": "Mock Interview 36 - Audit and Compliance Scenarios",
     "focus": "shared access, Terraform state secrets, Jenkins credentials, public dashboards, GCP Owner access, patching gaps, logging, vulnerabilities, encryption, and public buckets",
     "questions": [
-      { "category": "Audit/Compliance Scenarios", "question": "An auditor finds that production access is shared among developers. What do you do?" },
-      { "category": "Audit/Compliance Scenarios", "question": "Terraform state contains database passwords. How would you fix this?" },
-      { "category": "Audit/Compliance Scenarios", "question": "Jenkins stores credentials in plain text. What actions would you take?" },
-      { "category": "Audit/Compliance Scenarios", "question": "Kubernetes dashboard is publicly accessible. What risks exist?" },
-      { "category": "Audit/Compliance Scenarios", "question": "A developer requests Owner access in GCP. Would you approve it?" },
-      { "category": "Audit/Compliance Scenarios", "question": "Your audit finds that 50 VMs have no patching process. What is your response?" },
-      { "category": "Audit/Compliance Scenarios", "question": "Cloud logging has been disabled. Why is this a risk?" },
-      { "category": "Audit/Compliance Scenarios", "question": "A critical vulnerability is found in production. What steps would you follow?" },
-      { "category": "Audit/Compliance Scenarios", "question": "An application stores customer data without encryption. What are the risks?" },
-      { "category": "Audit/Compliance Scenarios", "question": "Public storage buckets are discovered. How would you respond?" }
+      {
+        "category": "Audit/Compliance Scenarios",
+        "question": "An auditor finds that production access is shared among developers. What do you do?"
+      },
+      {
+        "category": "Audit/Compliance Scenarios",
+        "question": "Terraform state contains database passwords. How would you fix this?"
+      },
+      {
+        "category": "Audit/Compliance Scenarios",
+        "question": "Jenkins stores credentials in plain text. What actions would you take?"
+      },
+      {
+        "category": "Audit/Compliance Scenarios",
+        "question": "Kubernetes dashboard is publicly accessible. What risks exist?"
+      },
+      {
+        "category": "Audit/Compliance Scenarios",
+        "question": "A developer requests Owner access in GCP. Would you approve it?"
+      },
+      {
+        "category": "Audit/Compliance Scenarios",
+        "question": "Your audit finds that 50 VMs have no patching process. What is your response?"
+      },
+      {
+        "category": "Audit/Compliance Scenarios",
+        "question": "Cloud logging has been disabled. Why is this a risk?"
+      },
+      {
+        "category": "Audit/Compliance Scenarios",
+        "question": "A critical vulnerability is found in production. What steps would you follow?"
+      },
+      {
+        "category": "Audit/Compliance Scenarios",
+        "question": "An application stores customer data without encryption. What are the risks?"
+      },
+      {
+        "category": "Audit/Compliance Scenarios",
+        "question": "Public storage buckets are discovered. How would you respond?"
+      }
     ]
   },
   {
@@ -1182,16 +1512,46 @@
     "title": "Mock Interview 37 - Technology Risk Behavioural Questions",
     "focus": "risk leadership, stakeholder influence, audit lessons, incidents, balancing delivery and security, hidden risks, priorities, and career motivation",
     "questions": [
-      { "category": "Leadership/Behavioural", "question": "Tell me about a difficult technology risk you managed." },
-      { "category": "Leadership/Behavioural", "question": "Describe a situation where engineering disagreed with your recommendation." },
-      { "category": "Leadership/Behavioural", "question": "How do you influence stakeholders without authority?" },
-      { "category": "Leadership/Behavioural", "question": "Tell me about an audit that did not go well." },
-      { "category": "Leadership/Behavioural", "question": "Describe a major production incident." },
-      { "category": "Leadership/Behavioural", "question": "How do you balance security and delivery speed?" },
-      { "category": "Leadership/Behavioural", "question": "Tell me about a time you identified a hidden risk." },
-      { "category": "Leadership/Behavioural", "question": "Describe a risk that eventually became an incident." },
-      { "category": "Leadership/Behavioural", "question": "How do you handle conflicting priorities?" },
-      { "category": "Leadership/Behavioural", "question": "Why do you want to move into Technology Risk?" }
+      {
+        "category": "Leadership/Behavioural",
+        "question": "Tell me about a difficult technology risk you managed."
+      },
+      {
+        "category": "Leadership/Behavioural",
+        "question": "Describe a situation where engineering disagreed with your recommendation."
+      },
+      {
+        "category": "Leadership/Behavioural",
+        "question": "How do you influence stakeholders without authority?"
+      },
+      {
+        "category": "Leadership/Behavioural",
+        "question": "Tell me about an audit that did not go well."
+      },
+      {
+        "category": "Leadership/Behavioural",
+        "question": "Describe a major production incident."
+      },
+      {
+        "category": "Leadership/Behavioural",
+        "question": "How do you balance security and delivery speed?"
+      },
+      {
+        "category": "Leadership/Behavioural",
+        "question": "Tell me about a time you identified a hidden risk."
+      },
+      {
+        "category": "Leadership/Behavioural",
+        "question": "Describe a risk that eventually became an incident."
+      },
+      {
+        "category": "Leadership/Behavioural",
+        "question": "How do you handle conflicting priorities?"
+      },
+      {
+        "category": "Leadership/Behavioural",
+        "question": "Why do you want to move into Technology Risk?"
+      }
     ]
   },
   {
@@ -1199,18 +1559,54 @@
     "title": "Mock Interview 38 - GCP DevOps Risk Tailored Round",
     "focus": "GCP, Kubernetes, Terraform, CI/CD, service accounts, least privilege, compliance, cloud security incidents, and risk assessment",
     "questions": [
-      { "category": "GCP DevOps Risk", "question": "How do you secure Terraform state in GCP?" },
-      { "category": "GCP DevOps Risk", "question": "How do you prevent infrastructure drift?" },
-      { "category": "GCP DevOps Risk", "question": "How do you secure GKE clusters?" },
-      { "category": "GCP DevOps Risk", "question": "Explain IAM best practices in GCP." },
-      { "category": "GCP DevOps Risk", "question": "How do you review Terraform code from a risk perspective?" },
-      { "category": "GCP DevOps Risk", "question": "How do you integrate security into CI/CD pipelines?" },
-      { "category": "GCP DevOps Risk", "question": "What risks exist when using service accounts?" },
-      { "category": "GCP DevOps Risk", "question": "How would you implement least privilege across GCP projects?" },
-      { "category": "GCP DevOps Risk", "question": "How do you monitor cloud security and compliance?" },
-      { "category": "GCP DevOps Risk", "question": "How would you perform a risk assessment before deploying a new Kubernetes cluster?" },
-      { "category": "GCP DevOps Risk", "question": "How do you ensure Infrastructure as Code changes are compliant before deployment?" },
-      { "category": "GCP DevOps Risk", "question": "Describe a cloud security incident you investigated and the lessons learned." }
+      {
+        "category": "GCP DevOps Risk",
+        "question": "How do you secure Terraform state in GCP?"
+      },
+      {
+        "category": "GCP DevOps Risk",
+        "question": "How do you prevent infrastructure drift?"
+      },
+      {
+        "category": "GCP DevOps Risk",
+        "question": "How do you secure GKE clusters?"
+      },
+      {
+        "category": "GCP DevOps Risk",
+        "question": "Explain IAM best practices in GCP."
+      },
+      {
+        "category": "GCP DevOps Risk",
+        "question": "How do you review Terraform code from a risk perspective?"
+      },
+      {
+        "category": "GCP DevOps Risk",
+        "question": "How do you integrate security into CI/CD pipelines?"
+      },
+      {
+        "category": "GCP DevOps Risk",
+        "question": "What risks exist when using service accounts?"
+      },
+      {
+        "category": "GCP DevOps Risk",
+        "question": "How would you implement least privilege across GCP projects?"
+      },
+      {
+        "category": "GCP DevOps Risk",
+        "question": "How do you monitor cloud security and compliance?"
+      },
+      {
+        "category": "GCP DevOps Risk",
+        "question": "How would you perform a risk assessment before deploying a new Kubernetes cluster?"
+      },
+      {
+        "category": "GCP DevOps Risk",
+        "question": "How do you ensure Infrastructure as Code changes are compliant before deployment?"
+      },
+      {
+        "category": "GCP DevOps Risk",
+        "question": "Describe a cloud security incident you investigated and the lessons learned."
+      }
     ]
   },
   {
@@ -2476,6 +2872,1069 @@
       {
         "category": "Behavioral/Automation",
         "question": "Tell me about a time you automated a manual operations task or improved a workflow. What was the impact, and how did you share the learning with the team?"
+      }
+    ]
+  },
+  {
+    "id": "set-61",
+    "title": "Mock Interview 61 - Resilinc GCP Production Incident Round",
+    "focus": "Resilinc-style DevOps/GCP production support, GCP incidents, observability, GKE troubleshooting, Terraform, IAM, VPC security, RCA, and follow-up areas like Kafka, PostgreSQL, CI/CD, Grafana, Linux, and scalable cloud infrastructure",
+    "questions": [
+      {
+        "category": "GCP Support",
+        "question": "Starting point, staying on GCP support when a production issue hits networking, storage, or security. What is your usual step-by-step approach to isolate whether it is a platform problem, an application problem, or something in IAM or VPC configuration?"
+      },
+      {
+        "category": "Observability",
+        "question": "What alerts or dashboards have you personally built or tuned?"
+      },
+      {
+        "category": "Observability/Incident",
+        "question": "Can you walk me through one case where the alert fired but the real issue was something different from what the metric suggested?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "Walk me through a production Kubernetes issue you handled where a pod or deployment was failing. Tell me exactly how you diagnosed it from the first symptom to the fix."
+      },
+      {
+        "category": "Terraform/GCP",
+        "question": "What have you actually built with Terraform in GCP? Can you walk me through a real module or stack you owned end-to-end?"
+      },
+      {
+        "category": "IAM/Security",
+        "question": "In a GCP environment, how have you designed IAM or VPC security so that teams could move fast without opening things up too much? What trade-off did you have to make?"
+      },
+      {
+        "category": "Production Outage",
+        "question": "Tell me about a production outage you worked on. What was the root cause? What did you change afterward to prevent it from happening again?"
+      },
+      {
+        "category": "GCP Incident/RCA",
+        "question": "Pick one actual incident you handled in GCP. Walk me through the exact failure, how you found the root cause, and what the post-incident change was."
+      },
+      {
+        "category": "Kubernetes Networking",
+        "question": "How would you troubleshoot Kubernetes networking issues involving CNI, Services, and Ingress?"
+      },
+      {
+        "category": "Docker Internals",
+        "question": "Explain Docker internals that matter during production troubleshooting."
+      },
+      {
+        "category": "Kafka Troubleshooting",
+        "question": "How would you troubleshoot Kafka producer, broker, consumer lag, and consumer group issues?"
+      },
+      {
+        "category": "PostgreSQL HA/Backup",
+        "question": "How would you design and troubleshoot PostgreSQL high availability and backup/restore?"
+      },
+      {
+        "category": "CI/CD",
+        "question": "How would you troubleshoot GitHub Actions or CI/CD pipeline failures in production delivery?"
+      },
+      {
+        "category": "Observability",
+        "question": "What Grafana and Prometheus dashboards would you build for production support?"
+      },
+      {
+        "category": "Terraform",
+        "question": "How do you manage Terraform state, modules, locking, drift, and safe production changes?"
+      },
+      {
+        "category": "GCP Services",
+        "question": "Explain how you have used GKE, IAM, VPC, Cloud SQL, and Load Balancer in production."
+      },
+      {
+        "category": "Linux Troubleshooting",
+        "question": "How do you troubleshoot Linux CPU, memory, disk, network, and process issues during an incident?"
+      },
+      {
+        "category": "Incident Handling",
+        "question": "How do you handle production incidents and write an RCA?"
+      },
+      {
+        "category": "System Design",
+        "question": "Design scalable cloud infrastructure for a production application on GCP."
+      }
+    ]
+  },
+  {
+    "id": "set-62",
+    "title": "Mock Interview 62 - Complete DevOps GCP Kubernetes Screening Bank",
+    "focus": "Full consolidated screening list from shared interviews: background, GCP, Kubernetes, Docker, CI/CD, Terraform, monitoring, Git, Linux, databases, Kafka, production scenarios, behavioral, and MLOps/AI",
+    "questions": [
+      {
+        "category": "Experience & Background",
+        "question": "Tell me about yourself."
+      },
+      {
+        "category": "Experience & Background",
+        "question": "Walk me through your current role at Capgemini."
+      },
+      {
+        "category": "Experience & Background",
+        "question": "What does your day-to-day work look like?"
+      },
+      {
+        "category": "Experience & Background",
+        "question": "What are your major responsibilities?"
+      },
+      {
+        "category": "Experience & Background",
+        "question": "Which project are you currently working on?"
+      },
+      {
+        "category": "Experience & Background",
+        "question": "Why are you looking for a change?"
+      },
+      {
+        "category": "Experience & Background",
+        "question": "Why do you want to join our company?"
+      },
+      {
+        "category": "Cloud & GCP",
+        "question": "Roughly how much of your week would you say was actually spent working in GCP rather than adjacent tools or other clouds?"
+      },
+      {
+        "category": "Cloud & GCP",
+        "question": "Go through the core GCP areas one by one."
+      },
+      {
+        "category": "Cloud & GCP",
+        "question": "On Compute Engine, what kinds of production issues have you personally handled?"
+      },
+      {
+        "category": "Cloud & GCP",
+        "question": "What was the hardest Compute Engine issue you troubleshot end-to-end?"
+      },
+      {
+        "category": "Cloud & GCP",
+        "question": "Which GCP services have you used in production?"
+      },
+      {
+        "category": "Cloud & GCP",
+        "question": "Explain VPC in GCP."
+      },
+      {
+        "category": "Cloud & GCP",
+        "question": "Explain IAM roles and service accounts."
+      },
+      {
+        "category": "Cloud & GCP",
+        "question": "How do you secure workloads in GCP?"
+      },
+      {
+        "category": "Cloud & GCP",
+        "question": "Explain Cloud Storage classes."
+      },
+      {
+        "category": "Cloud & GCP",
+        "question": "What is Cloud SQL?"
+      },
+      {
+        "category": "Cloud & GCP",
+        "question": "Have you worked with GKE?"
+      },
+      {
+        "category": "Cloud & GCP",
+        "question": "Explain GKE architecture."
+      },
+      {
+        "category": "Cloud & GCP",
+        "question": "What is the difference between GKE Autopilot and Standard?"
+      },
+      {
+        "category": "Cloud & GCP",
+        "question": "How do you troubleshoot a GKE cluster?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Explain Kubernetes architecture."
+      },
+      {
+        "category": "Kubernetes",
+        "question": "What are Pods?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "What is the difference between Deployment, StatefulSet, and DaemonSet?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "What is a ReplicaSet?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Explain Services in Kubernetes."
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Explain FQDN in Kubernetes."
+      },
+      {
+        "category": "Kubernetes",
+        "question": "How does pod-to-pod communication work?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "What are liveness and readiness probes?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "What happens if a liveness probe fails?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "What happens if a readiness probe fails?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Explain ConfigMaps and Secrets."
+      },
+      {
+        "category": "Kubernetes",
+        "question": "What are Persistent Volumes and PVCs?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Explain Ingress."
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Explain Network Policies."
+      },
+      {
+        "category": "Kubernetes",
+        "question": "How do you troubleshoot CrashLoopBackOff?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "How do you debug a pending pod?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "What commands do you use for troubleshooting?"
+      },
+      {
+        "category": "Helm",
+        "question": "Explain Helm."
+      },
+      {
+        "category": "Helm",
+        "question": "How have you organized Helm charts?"
+      },
+      {
+        "category": "Helm",
+        "question": "How do you deploy applications using Helm?"
+      },
+      {
+        "category": "Docker",
+        "question": "Explain Docker architecture."
+      },
+      {
+        "category": "Docker",
+        "question": "What is the difference between Docker and Kubernetes?"
+      },
+      {
+        "category": "Docker",
+        "question": "Explain Dockerfile."
+      },
+      {
+        "category": "Docker",
+        "question": "What are Docker volumes?"
+      },
+      {
+        "category": "Docker",
+        "question": "What are Docker networks?"
+      },
+      {
+        "category": "Docker",
+        "question": "What is the difference between CMD and ENTRYPOINT?"
+      },
+      {
+        "category": "Docker",
+        "question": "Explain multi-stage Docker builds."
+      },
+      {
+        "category": "CI/CD",
+        "question": "Explain your CI/CD pipeline."
+      },
+      {
+        "category": "CI/CD",
+        "question": "Which CI/CD tools have you used?"
+      },
+      {
+        "category": "CI/CD",
+        "question": "Explain Jenkins pipeline."
+      },
+      {
+        "category": "CI/CD",
+        "question": "Explain GitLab CI."
+      },
+      {
+        "category": "CI/CD",
+        "question": "Explain Azure DevOps pipelines."
+      },
+      {
+        "category": "CI/CD",
+        "question": "How do you handle deployment failures?"
+      },
+      {
+        "category": "CI/CD",
+        "question": "How do you implement rollback?"
+      },
+      {
+        "category": "CI/CD",
+        "question": "How do you deploy to Kubernetes?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Explain Terraform state."
+      },
+      {
+        "category": "Terraform",
+        "question": "What is a remote backend?"
+      },
+      {
+        "category": "Terraform",
+        "question": "How do you manage Terraform state?"
+      },
+      {
+        "category": "Terraform",
+        "question": "What are Terraform modules?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Explain lifecycle in Terraform."
+      },
+      {
+        "category": "Terraform",
+        "question": "How do you manage secrets?"
+      },
+      {
+        "category": "Terraform",
+        "question": "How do you resolve state conflicts?"
+      },
+      {
+        "category": "Monitoring & Logging",
+        "question": "Which monitoring tools have you used?"
+      },
+      {
+        "category": "Monitoring & Logging",
+        "question": "Explain ELK Stack."
+      },
+      {
+        "category": "Monitoring & Logging",
+        "question": "Explain Grafana."
+      },
+      {
+        "category": "Monitoring & Logging",
+        "question": "How do you troubleshoot production issues?"
+      },
+      {
+        "category": "Monitoring & Logging",
+        "question": "How do you investigate logs?"
+      },
+      {
+        "category": "Git & DevOps",
+        "question": "Explain Git branching strategy."
+      },
+      {
+        "category": "Git & DevOps",
+        "question": "What is the difference between merge and rebase?"
+      },
+      {
+        "category": "Git & DevOps",
+        "question": "Explain GitHub workflow."
+      },
+      {
+        "category": "Git & DevOps",
+        "question": "How do you resolve merge conflicts?"
+      },
+      {
+        "category": "Linux",
+        "question": "Which Linux commands do you use daily?"
+      },
+      {
+        "category": "Linux",
+        "question": "How do you check CPU, memory, and disk usage?"
+      },
+      {
+        "category": "Linux",
+        "question": "How do you troubleshoot a Linux server?"
+      },
+      {
+        "category": "Databases",
+        "question": "Which databases have you worked on?"
+      },
+      {
+        "category": "Databases",
+        "question": "Explain PostgreSQL basics."
+      },
+      {
+        "category": "Databases",
+        "question": "How do you troubleshoot database connectivity?"
+      },
+      {
+        "category": "Kafka",
+        "question": "Have you worked with Kafka?"
+      },
+      {
+        "category": "Kafka",
+        "question": "Explain Kafka architecture."
+      },
+      {
+        "category": "Kafka",
+        "question": "What are topics, partitions, and consumer groups?"
+      },
+      {
+        "category": "Production & Scenarios",
+        "question": "Tell me about a critical production issue you resolved."
+      },
+      {
+        "category": "Production & Scenarios",
+        "question": "What was the toughest issue you have handled?"
+      },
+      {
+        "category": "Production & Scenarios",
+        "question": "Describe a time you had to make a trade-off under pressure."
+      },
+      {
+        "category": "Production & Scenarios",
+        "question": "What production issue did you troubleshoot from start to finish?"
+      },
+      {
+        "category": "Production & Scenarios",
+        "question": "How do you perform root cause analysis (RCA)?"
+      },
+      {
+        "category": "Production & Scenarios",
+        "question": "How do you prioritize incidents?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "Tell me about a challenging project."
+      },
+      {
+        "category": "Behavioral",
+        "question": "Tell me about a conflict with a team member."
+      },
+      {
+        "category": "Behavioral",
+        "question": "How do you handle pressure?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "What is your biggest achievement?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "What are your strengths?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "What are your weaknesses?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "Where do you see yourself in five years?"
+      },
+      {
+        "category": "MLOps / AI",
+        "question": "What is MLOps?"
+      },
+      {
+        "category": "MLOps / AI",
+        "question": "Have you worked with MLflow?"
+      },
+      {
+        "category": "MLOps / AI",
+        "question": "How would you deploy an ML model?"
+      },
+      {
+        "category": "MLOps / AI",
+        "question": "How would you monitor ML models?"
+      },
+      {
+        "category": "MLOps / AI",
+        "question": "What is Kubeflow?"
+      },
+      {
+        "category": "MLOps / AI",
+        "question": "How would you build an end-to-end MLOps pipeline?"
+      }
+    ]
+  },
+  {
+    "id": "set-63",
+    "title": "Mock Interview 63 - Kubernetes Fundamentals Transcript Round",
+    "focus": "Kubernetes DNS/FQDN, CoreDNS, API server, etcd, RBAC, kubelet, probes, pod health, restart flow, service discovery, and control plane versus worker-node responsibilities",
+    "questions": [
+      {
+        "category": "Kubernetes DNS",
+        "question": "How does Kubernetes FQDN resolve to an IP address? Explain service.namespace.svc.cluster.local and how DNS resolves the service name."
+      },
+      {
+        "category": "CoreDNS",
+        "question": "What is the role of CoreDNS in Kubernetes? How does CoreDNS resolve service names, and does it communicate with the API server?"
+      },
+      {
+        "category": "CoreDNS/API Server",
+        "question": "Is CoreDNS a bridge between etcd and the Kubernetes API server? If not, what is its actual role?"
+      },
+      {
+        "category": "Kubernetes RBAC",
+        "question": "What is RBAC in Kubernetes? Why do we use RBAC? Explain Role, ClusterRole, RoleBinding, and ClusterRoleBinding."
+      },
+      {
+        "category": "Kubernetes Health",
+        "question": "Suppose an application goes down in a Kubernetes cluster. How does the master or control plane know that the application is down? How does the signal reach the control plane?"
+      },
+      {
+        "category": "Kubelet",
+        "question": "Which component detects that a pod or application has become unhealthy, and what is the role of kubelet?"
+      },
+      {
+        "category": "Kubelet",
+        "question": "Is kubelet a worker node component or a master/control plane component?"
+      },
+      {
+        "category": "Kubelet/API Server",
+        "question": "How does kubelet communicate with the control plane, and what is the role of the API server?"
+      },
+      {
+        "category": "Liveness Probe",
+        "question": "Explain the Liveness Probe. When is it used, and what happens if it fails?"
+      },
+      {
+        "category": "Readiness Probe",
+        "question": "Explain the Readiness Probe. How is it different from the Liveness Probe?"
+      },
+      {
+        "category": "Container Restart",
+        "question": "If an application gets stuck or becomes unhealthy, does Kubernetes execute a kubectl command to restart it? If not, how is the restart triggered?"
+      },
+      {
+        "category": "Container Runtime",
+        "question": "How does kubelet restart a failed container? Does kubelet communicate directly with the container runtime?"
+      },
+      {
+        "category": "Kubernetes Failure Flow",
+        "question": "What is the complete flow when an application crashes: Application to Kubelet to API Server to etcd to Controller Manager to new Pod or restart?"
+      },
+      {
+        "category": "Content Correlation",
+        "question": "What do you mean by content correlation in the context of Kubernetes or observability?"
+      }
+    ]
+  },
+  {
+    "id": "set-64",
+    "title": "Mock Interview 64 - Security Database Ansible CI/CD Round",
+    "focus": "Application stack, Sentinel antivirus, Prisma Cloud Security, databases, PostgreSQL backup/restore, migrations, slow query analysis, Ansible, CI/CD flow, SonarQube, image scanning, and deployment stages",
+    "questions": [
+      {
+        "category": "Application Stack",
+        "question": "Your application is written in which language? Is it Java, Python, Node.js, or a mix of technologies?"
+      },
+      {
+        "category": "Security/Sentinel",
+        "question": "Have you deployed Sentinel antivirus? Is it scanning the Kubernetes cluster, worker nodes, or container applications?"
+      },
+      {
+        "category": "Security/Sentinel",
+        "question": "How do you integrate Sentinel with your applications? How does it work with GKE/Kubernetes, and when is the image scanned?"
+      },
+      {
+        "category": "Cloud Security",
+        "question": "After deployment, how do you monitor the infrastructure? How is Prisma or Cloud Security used, and what kind of misconfigurations does it detect, such as excessive IAM permissions like Owner role?"
+      },
+      {
+        "category": "Databases",
+        "question": "You mentioned PostgreSQL, MySQL, and MongoDB. Are you working as a DBA?"
+      },
+      {
+        "category": "Databases",
+        "question": "What database-related activities have you performed, such as database migration, role management, cluster creation, backup, and restore?"
+      },
+      {
+        "category": "PostgreSQL",
+        "question": "How do you take a backup of a PostgreSQL database?"
+      },
+      {
+        "category": "PostgreSQL",
+        "question": "How do you restore a PostgreSQL backup?"
+      },
+      {
+        "category": "PostgreSQL",
+        "question": "Have you performed backup and restore activities yourself?"
+      },
+      {
+        "category": "Database Migration",
+        "question": "What database migration have you done, for example AWS to GCP migration?"
+      },
+      {
+        "category": "Database Performance",
+        "question": "How do you identify long-running SQL queries?"
+      },
+      {
+        "category": "Database Performance",
+        "question": "How do you optimize slow-running SQL queries using indexing, EXPLAIN ANALYZE, and query tuning?"
+      },
+      {
+        "category": "Ansible",
+        "question": "You mentioned Terraform and Ansible. Have you worked on Ansible?"
+      },
+      {
+        "category": "Ansible",
+        "question": "What was the purpose of using Ansible, such as VM patching, configuration management, or report generation?"
+      },
+      {
+        "category": "Ansible",
+        "question": "Which Ansible modules have you used, such as yum, apt, service, systemd, shell, command, copy, template, file, setup, and lineinfile?"
+      },
+      {
+        "category": "Ansible",
+        "question": "Can you explain your Ansible playbook, including tasks, inventory, handlers, variables, and execution flow?"
+      },
+      {
+        "category": "CI/CD",
+        "question": "Can you explain the CI/CD process and how it works between Development, QA, DevOps, Security, and Production?"
+      },
+      {
+        "category": "CI/CD",
+        "question": "When developers commit code, what happens next?"
+      },
+      {
+        "category": "Security Scanning",
+        "question": "Do you perform any scanning after every code commit?"
+      },
+      {
+        "category": "Security Scanning",
+        "question": "Which tool do you use for code scanning, such as SonarQube or SonarCloud?"
+      },
+      {
+        "category": "SonarQube",
+        "question": "What does SonarQube check, including bugs, vulnerabilities, code smells, code duplication, and Quality Gates?"
+      },
+      {
+        "category": "SonarQube",
+        "question": "What happens if SonarQube Quality Gate fails?"
+      },
+      {
+        "category": "CI/CD",
+        "question": "After SonarQube, what are the next stages in the CI/CD pipeline, such as build, container image creation, image scanning, push to registry, and deployment to Dev/QA/Prod?"
+      }
+    ]
+  },
+  {
+    "id": "set-65",
+    "title": "Mock Interview 65 - EKS Kubernetes DevOps Operations Round",
+    "focus": "General experience, AWS/Azure/GCP/on-prem, EKS, root cause troubleshooting, Docker, Kubernetes Services and networking, Ingress, NGINX, Gateway API, namespaces, etcd, HPA, storage, backups, Jenkins, Argo CD, ELK/OpenTelemetry, Linux, GCP, Prometheus/Grafana, Helm, and Sentinel deployment",
+    "questions": [
+      {
+        "category": "General",
+        "question": "Tell me something about yourself."
+      },
+      {
+        "category": "General",
+        "question": "You have around 7 years of experience, right?"
+      },
+      {
+        "category": "Cloud",
+        "question": "Have you worked on GCP, AWS, and Azure?"
+      },
+      {
+        "category": "Infrastructure",
+        "question": "Have you worked on on-prem servers or only on cloud?"
+      },
+      {
+        "category": "AWS/EKS",
+        "question": "Have you worked on EKS?"
+      },
+      {
+        "category": "AWS/EKS",
+        "question": "Have you launched an EKS cluster?"
+      },
+      {
+        "category": "AWS/EKS",
+        "question": "Did you create the EKS cluster using Terraform, CloudFormation, or manually?"
+      },
+      {
+        "category": "Troubleshooting",
+        "question": "Suppose an application is down. How will you identify the root cause?"
+      },
+      {
+        "category": "Docker",
+        "question": "What is the difference between ADD and COPY in a Dockerfile?"
+      },
+      {
+        "category": "Docker",
+        "question": "What is the difference between docker build and docker commit?"
+      },
+      {
+        "category": "Docker",
+        "question": "How can you minimize the Docker image size?"
+      },
+      {
+        "category": "Kubernetes Services",
+        "question": "What is a Headless Service?"
+      },
+      {
+        "category": "Kubernetes Services",
+        "question": "What is the default NodePort range?"
+      },
+      {
+        "category": "Kubernetes Services",
+        "question": "If NodePort gives only a port, how do you access the application? What IP do you use?"
+      },
+      {
+        "category": "Kubernetes Services",
+        "question": "If there are 10-20 worker nodes, which node IP will you choose?"
+      },
+      {
+        "category": "Kubernetes Services",
+        "question": "If the Load Balancer is down, how will you troubleshoot the application using NodePort?"
+      },
+      {
+        "category": "Kubernetes Networking",
+        "question": "How do you expose a service outside the Kubernetes cluster?"
+      },
+      {
+        "category": "Kubernetes Ingress",
+        "question": "Which Ingress Controller are you using?"
+      },
+      {
+        "category": "Kubernetes Ingress",
+        "question": "How do you install or setup the NGINX Ingress Controller in GKE?"
+      },
+      {
+        "category": "Kubernetes Ingress",
+        "question": "You already have a GKE cluster. How will you configure an Ingress Controller?"
+      },
+      {
+        "category": "Kubernetes Ingress",
+        "question": "Why do we use an Ingress Controller?"
+      },
+      {
+        "category": "Kubernetes Ingress",
+        "question": "If NGINX Ingress is deprecated, what will you use in the future?"
+      },
+      {
+        "category": "Kubernetes Ingress",
+        "question": "How will you expose applications after moving away from NGINX Ingress?"
+      },
+      {
+        "category": "Kubernetes Services",
+        "question": "How do you expose an application using a Kubernetes Service?"
+      },
+      {
+        "category": "Kubernetes Namespaces",
+        "question": "Why do we use Namespaces?"
+      },
+      {
+        "category": "Kubernetes Control Plane",
+        "question": "What is the role of etcd?"
+      },
+      {
+        "category": "Kubernetes Control Plane",
+        "question": "Can you take a backup of etcd?"
+      },
+      {
+        "category": "Kubernetes Control Plane",
+        "question": "How does the kube-apiserver communicate with etcd?"
+      },
+      {
+        "category": "Kubernetes Workloads",
+        "question": "What is a DaemonSet?"
+      },
+      {
+        "category": "Kubernetes Autoscaling",
+        "question": "How does the Horizontal Pod Autoscaler (HPA) work?"
+      },
+      {
+        "category": "Kubernetes Autoscaling",
+        "question": "Does HPA scale based on resource requests or resource limits?"
+      },
+      {
+        "category": "Kubernetes Storage",
+        "question": "Explain StorageClass, Persistent Volume (PV), and Persistent Volume Claim (PVC)."
+      },
+      {
+        "category": "Kubernetes Storage",
+        "question": "What is the difference between static provisioning and dynamic provisioning?"
+      },
+      {
+        "category": "Kubernetes Backup",
+        "question": "How do you take a backup of your Kubernetes cluster?"
+      },
+      {
+        "category": "Kubernetes Storage",
+        "question": "What is the difference between volume and volumeMount?"
+      },
+      {
+        "category": "CI/CD",
+        "question": "What kind of Jenkins pipelines have you created?"
+      },
+      {
+        "category": "Jenkins",
+        "question": "How do you take a backup of Jenkins?"
+      },
+      {
+        "category": "GitOps/Argo CD",
+        "question": "Have you used Argo CD or Harness?"
+      },
+      {
+        "category": "GitOps/Argo CD",
+        "question": "How does Argo CD work?"
+      },
+      {
+        "category": "GitOps/Argo CD",
+        "question": "If someone changes a Kubernetes resource using kubectl but does not update Git, what happens?"
+      },
+      {
+        "category": "Monitoring/ELK/OpenTelemetry",
+        "question": "Explain the ELK Stack along with OpenTelemetry."
+      },
+      {
+        "category": "Monitoring/ELK/OpenTelemetry",
+        "question": "What is the complete log flow from the application to Kibana?"
+      },
+      {
+        "category": "OpenTelemetry",
+        "question": "What is the role of the OpenTelemetry Collector?"
+      },
+      {
+        "category": "Elastic/APM",
+        "question": "What is the role of the APM Server?"
+      },
+      {
+        "category": "Elasticsearch",
+        "question": "How do you delete old logs from Elasticsearch?"
+      },
+      {
+        "category": "Elasticsearch",
+        "question": "If ILM is not working and Elasticsearch storage is full, how will you clean up the logs?"
+      },
+      {
+        "category": "Kibana",
+        "question": "If Kibana is not working, how will you troubleshoot it?"
+      },
+      {
+        "category": "Linux",
+        "question": "If a Linux server has very high load, how will you reduce it?"
+      },
+      {
+        "category": "Linux",
+        "question": "How do you check whether an application is running?"
+      },
+      {
+        "category": "Linux",
+        "question": "If you cannot log in to the server, how will you check the server load?"
+      },
+      {
+        "category": "GCP",
+        "question": "Have you worked on GKE or GCE?"
+      },
+      {
+        "category": "GCP",
+        "question": "Which GCP services have you worked on?"
+      },
+      {
+        "category": "Monitoring",
+        "question": "Which monitoring tools have you worked on?"
+      },
+      {
+        "category": "Monitoring",
+        "question": "Have you worked on Prometheus and Grafana?"
+      },
+      {
+        "category": "Monitoring",
+        "question": "Did you integrate Prometheus and Grafana?"
+      },
+      {
+        "category": "Helm",
+        "question": "Have you worked with Helm?"
+      },
+      {
+        "category": "Helm/Sentinel",
+        "question": "How did you deploy Sentinel Antivirus using Helm?"
+      },
+      {
+        "category": "Sentinel",
+        "question": "Was Sentinel deployed as a container?"
+      },
+      {
+        "category": "Sentinel",
+        "question": "Was Sentinel deployed on all worker nodes?"
+      }
+    ]
+  },
+  {
+    "id": "set-66",
+    "title": "Mock Interview 66 - Terraform Secret Creation Hands-On Round",
+    "focus": "Terraform hands-on coding task for local provider initialization, input variables, environment-backed secrets, local_file resource creation, file permissions, and clean grading through sudo solve",
+    "questions": [
+      {
+        "category": "Terraform/Hands-On",
+        "question": "Terraform: Secret Creation. You want to deploy a web application using Terraform. Complete /home/ubuntu/1063862-terraform-secret-creation/main.tf using HCL so that it initializes the hashicorp/local provider at version 2.1.0, declares a variable named secret whose value is passed through an environment variable during terraform apply, and creates a local_file resource at /run/secret with permissions 0600 and content from var.secret. The solution must live inside /home/ubuntu/1063862-terraform-secret-creation and be correct when evaluated by running sudo solve from that directory in a clean environment."
+      }
+    ]
+  },
+  {
+    "id": "set-67",
+    "title": "Mock Interview 67 - Kubernetes StatefulSet Basic Implementation Hands-On Round",
+    "focus": "Kubernetes hands-on coding task for StatefulSet creation, namespace placement, headless Service binding, labels and selectors, replicas, container image, and container port configuration",
+    "questions": [
+      {
+        "category": "Kubernetes/Hands-On",
+        "question": "StatefulSet: Basic Implementation. In the hacker-company namespace, an existing headless Service named nginx has selector role: frontend and exposes port 80. Complete /home/ubuntu/171641-kubernetes-statefulset-basic-implementation/definition.yaml by implementing a StatefulSet named frontend in namespace hacker-company. It must use serviceName nginx, deploy 2 replicas, set labels so they match the Service selector role: frontend, run a container named nginx using image nginx:latest, and expose container port 80. Verify with kubectl get statefulset -n hacker-company, kubectl get pods -n hacker-company, kubectl describe statefulset frontend -n hacker-company, then finish with sudo solve."
+      }
+    ]
+  },
+  {
+    "id": "set-68",
+    "title": "Mock Interview 68 - Docker HackerAPI Environment Variable Hands-On Round",
+    "focus": "Docker hands-on scripting task for container creation, image selection, container naming, host environment variable forwarding, detached interactive mode, and avoiding pseudo-TTY allocation",
+    "questions": [
+      {
+        "category": "Docker/Hands-On",
+        "question": "Docker: HackerAPI Deployment, Environment Variables. Complete the script.sh file stub under /home/ubuntu/... so it runs a Docker container named hackerapi using image public.ecr.aws/docker/library/nginx:latest. The container must receive an environment variable named HACKERAPI_SECURITY_TOKEN with its value taken from the existing host environment variable of the same name, run in interactive background mode, and run without pseudo-TTY allocation. The expected command is: docker run -d -i --name hackerapi -e HACKERAPI_SECURITY_TOKEN=$HACKERAPI_SECURITY_TOKEN public.ecr.aws/docker/library/nginx:latest."
+      }
+    ]
+  },
+  {
+    "id": "set-69",
+    "title": "Mock Interview 69 - Terraform Validate Docker Project Round",
+    "focus": "Coderbyte-style Terraform Docker validation assessment covering required_providers, Docker provider configuration, terraform init/validate/fmt/plan/apply/destroy, Docker image and container resources, port mapping, resource references, provider version constraints, and core IaC interview concepts",
+    "questions": [
+      {
+        "category": "Terraform/Docker Provider",
+        "question": "Configure the Docker provider with the correct source and version."
+      },
+      {
+        "category": "Terraform/Providers",
+        "question": "Define the required_providers block for a Terraform Docker project."
+      },
+      {
+        "category": "Terraform/Commands",
+        "question": "How do you initialize a Terraform project, and why is terraform init required before validation?"
+      },
+      {
+        "category": "Terraform/Commands",
+        "question": "How do you validate a Terraform configuration, and what kinds of errors does terraform validate catch?"
+      },
+      {
+        "category": "Terraform/Syntax",
+        "question": "How would you identify and fix syntax errors in a Terraform configuration?"
+      },
+      {
+        "category": "Terraform/Docker Provider",
+        "question": "How do you configure a Docker provider in Terraform?"
+      },
+      {
+        "category": "Terraform/Docker Image",
+        "question": "How do you create a Docker image resource in Terraform?"
+      },
+      {
+        "category": "Terraform/Docker Container",
+        "question": "How do you create a Docker container resource in Terraform?"
+      },
+      {
+        "category": "Terraform/Ports",
+        "question": "How do you expose a container port using the ports block?"
+      },
+      {
+        "category": "Terraform/Ports",
+        "question": "How do you map internal port 80 to external port 8000 in a Terraform Docker container resource?"
+      },
+      {
+        "category": "Terraform/Dependencies",
+        "question": "How do you reference one Terraform resource from another?"
+      },
+      {
+        "category": "Terraform/Docker Image",
+        "question": "How do you use the image_id attribute of a docker_image resource in a docker_container resource?"
+      },
+      {
+        "category": "Terraform/Commands",
+        "question": "Differentiate between terraform init, terraform validate, and terraform apply."
+      },
+      {
+        "category": "Terraform/Versioning",
+        "question": "How do provider version constraints work in Terraform, for example ~> 3.0.1?"
+      },
+      {
+        "category": "Terraform/Troubleshooting",
+        "question": "How would you identify missing Terraform configuration required for successful validation?"
+      },
+      {
+        "category": "Docker/Terraform",
+        "question": "What is the purpose of the Docker provider in Terraform?"
+      },
+      {
+        "category": "Docker/Basics",
+        "question": "What is the difference between a Docker image and a Docker container?"
+      },
+      {
+        "category": "Docker/Networking",
+        "question": "Why do we expose ports for a Docker container?"
+      },
+      {
+        "category": "Docker/Networking",
+        "question": "What is the difference between internal and external ports?"
+      },
+      {
+        "category": "Terraform/Docker Hands-On",
+        "question": "How do you run an Nginx container using Terraform?"
+      },
+      {
+        "category": "Terraform/Versioning",
+        "question": "What happens if the required provider version is incorrect?"
+      },
+      {
+        "category": "Terraform/Commands",
+        "question": "Explain when you would use terraform init, terraform validate, terraform fmt, terraform plan, terraform apply, and terraform destroy."
+      },
+      {
+        "category": "IaC",
+        "question": "What is Infrastructure as Code (IaC)?"
+      },
+      {
+        "category": "Terraform/Basics",
+        "question": "Why do we use Terraform?"
+      },
+      {
+        "category": "Terraform/Basics",
+        "question": "What are providers in Terraform?"
+      },
+      {
+        "category": "Terraform/Basics",
+        "question": "What are resources in Terraform?"
+      },
+      {
+        "category": "Terraform/State",
+        "question": "What is the Terraform state file?"
+      },
+      {
+        "category": "Terraform/Providers",
+        "question": "What is the purpose of required_providers?"
+      },
+      {
+        "category": "Terraform/Dependencies",
+        "question": "Explain resource dependencies in Terraform."
+      },
+      {
+        "category": "Terraform/Commands",
+        "question": "What is the difference between terraform validate and terraform plan?"
+      },
+      {
+        "category": "Terraform/Versioning",
+        "question": "How do you pin a provider version?"
+      },
+      {
+        "category": "Terraform/Docker Hands-On",
+        "question": "How would you deploy a Docker container using Terraform?"
       }
     ]
   }

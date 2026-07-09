@@ -850,3 +850,302 @@ Focus: GT Bharat DevSecOps Engineer JD, GCP and GKE operations, Linux/Windows ad
 14. **Networking:** A service in GKE cannot connect to a database or third-party endpoint. How would you troubleshoot DNS, routes, firewalls, security groups, and application configuration?
 15. **DevSecOps/Security:** What security controls would you add across CI/CD, containers, Kubernetes, cloud IAM, secrets, logging, and audit trails?
 16. **Behavioral/Automation:** Tell me about a time you automated a manual operations task or improved a workflow. What was the impact, and how did you share the learning with the team?
+
+## Mock Interview 61 - Resilinc GCP Production Incident Round
+
+Focus: Resilinc-style DevOps/GCP production support, GCP incidents, observability, GKE troubleshooting, Terraform, IAM, VPC security, RCA, and follow-up areas like Kafka, PostgreSQL, CI/CD, Grafana, Linux, and scalable cloud infrastructure
+
+1. **GCP Support:** Starting point, staying on GCP support when a production issue hits networking, storage, or security. What is your usual step-by-step approach to isolate whether it is a platform problem, an application problem, or something in IAM or VPC configuration?
+2. **Observability:** What alerts or dashboards have you personally built or tuned?
+3. **Observability/Incident:** Can you walk me through one case where the alert fired but the real issue was something different from what the metric suggested?
+4. **GKE/Kubernetes:** Walk me through a production Kubernetes issue you handled where a pod or deployment was failing. Tell me exactly how you diagnosed it from the first symptom to the fix.
+5. **Terraform/GCP:** What have you actually built with Terraform in GCP? Can you walk me through a real module or stack you owned end-to-end?
+6. **IAM/Security:** In a GCP environment, how have you designed IAM or VPC security so that teams could move fast without opening things up too much? What trade-off did you have to make?
+7. **Production Outage:** Tell me about a production outage you worked on. What was the root cause? What did you change afterward to prevent it from happening again?
+8. **GCP Incident/RCA:** Pick one actual incident you handled in GCP. Walk me through the exact failure, how you found the root cause, and what the post-incident change was.
+9. **Kubernetes Networking:** How would you troubleshoot Kubernetes networking issues involving CNI, Services, and Ingress?
+10. **Docker Internals:** Explain Docker internals that matter during production troubleshooting.
+11. **Kafka Troubleshooting:** How would you troubleshoot Kafka producer, broker, consumer lag, and consumer group issues?
+12. **PostgreSQL HA/Backup:** How would you design and troubleshoot PostgreSQL high availability and backup/restore?
+13. **CI/CD:** How would you troubleshoot GitHub Actions or CI/CD pipeline failures in production delivery?
+14. **Observability:** What Grafana and Prometheus dashboards would you build for production support?
+15. **Terraform:** How do you manage Terraform state, modules, locking, drift, and safe production changes?
+16. **GCP Services:** Explain how you have used GKE, IAM, VPC, Cloud SQL, and Load Balancer in production.
+17. **Linux Troubleshooting:** How do you troubleshoot Linux CPU, memory, disk, network, and process issues during an incident?
+18. **Incident Handling:** How do you handle production incidents and write an RCA?
+19. **System Design:** Design scalable cloud infrastructure for a production application on GCP.
+
+
+## Mock Interview 62 - Complete DevOps GCP Kubernetes Screening Bank
+
+Focus: Full consolidated screening list from shared interviews: background, GCP, Kubernetes, Docker, CI/CD, Terraform, monitoring, Git, Linux, databases, Kafka, production scenarios, behavioral, and MLOps/AI
+
+1. **Experience & Background:** Tell me about yourself.
+2. **Experience & Background:** Walk me through your current role at Capgemini.
+3. **Experience & Background:** What does your day-to-day work look like?
+4. **Experience & Background:** What are your major responsibilities?
+5. **Experience & Background:** Which project are you currently working on?
+6. **Experience & Background:** Why are you looking for a change?
+7. **Experience & Background:** Why do you want to join our company?
+8. **Cloud & GCP:** Roughly how much of your week would you say was actually spent working in GCP rather than adjacent tools or other clouds?
+9. **Cloud & GCP:** Go through the core GCP areas one by one.
+10. **Cloud & GCP:** On Compute Engine, what kinds of production issues have you personally handled?
+11. **Cloud & GCP:** What was the hardest Compute Engine issue you troubleshot end-to-end?
+12. **Cloud & GCP:** Which GCP services have you used in production?
+13. **Cloud & GCP:** Explain VPC in GCP.
+14. **Cloud & GCP:** Explain IAM roles and service accounts.
+15. **Cloud & GCP:** How do you secure workloads in GCP?
+16. **Cloud & GCP:** Explain Cloud Storage classes.
+17. **Cloud & GCP:** What is Cloud SQL?
+18. **Cloud & GCP:** Have you worked with GKE?
+19. **Cloud & GCP:** Explain GKE architecture.
+20. **Cloud & GCP:** What is the difference between GKE Autopilot and Standard?
+21. **Cloud & GCP:** How do you troubleshoot a GKE cluster?
+22. **Kubernetes:** Explain Kubernetes architecture.
+23. **Kubernetes:** What are Pods?
+24. **Kubernetes:** What is the difference between Deployment, StatefulSet, and DaemonSet?
+25. **Kubernetes:** What is a ReplicaSet?
+26. **Kubernetes:** Explain Services in Kubernetes.
+27. **Kubernetes:** Explain FQDN in Kubernetes.
+28. **Kubernetes:** How does pod-to-pod communication work?
+29. **Kubernetes:** What are liveness and readiness probes?
+30. **Kubernetes:** What happens if a liveness probe fails?
+31. **Kubernetes:** What happens if a readiness probe fails?
+32. **Kubernetes:** Explain ConfigMaps and Secrets.
+33. **Kubernetes:** What are Persistent Volumes and PVCs?
+34. **Kubernetes:** Explain Ingress.
+35. **Kubernetes:** Explain Network Policies.
+36. **Kubernetes:** How do you troubleshoot CrashLoopBackOff?
+37. **Kubernetes:** How do you debug a pending pod?
+38. **Kubernetes:** What commands do you use for troubleshooting?
+39. **Helm:** Explain Helm.
+40. **Helm:** How have you organized Helm charts?
+41. **Helm:** How do you deploy applications using Helm?
+42. **Docker:** Explain Docker architecture.
+43. **Docker:** What is the difference between Docker and Kubernetes?
+44. **Docker:** Explain Dockerfile.
+45. **Docker:** What are Docker volumes?
+46. **Docker:** What are Docker networks?
+47. **Docker:** What is the difference between CMD and ENTRYPOINT?
+48. **Docker:** Explain multi-stage Docker builds.
+49. **CI/CD:** Explain your CI/CD pipeline.
+50. **CI/CD:** Which CI/CD tools have you used?
+51. **CI/CD:** Explain Jenkins pipeline.
+52. **CI/CD:** Explain GitLab CI.
+53. **CI/CD:** Explain Azure DevOps pipelines.
+54. **CI/CD:** How do you handle deployment failures?
+55. **CI/CD:** How do you implement rollback?
+56. **CI/CD:** How do you deploy to Kubernetes?
+57. **Terraform:** Explain Terraform state.
+58. **Terraform:** What is a remote backend?
+59. **Terraform:** How do you manage Terraform state?
+60. **Terraform:** What are Terraform modules?
+61. **Terraform:** Explain lifecycle in Terraform.
+62. **Terraform:** How do you manage secrets?
+63. **Terraform:** How do you resolve state conflicts?
+64. **Monitoring & Logging:** Which monitoring tools have you used?
+65. **Monitoring & Logging:** Explain ELK Stack.
+66. **Monitoring & Logging:** Explain Grafana.
+67. **Monitoring & Logging:** How do you troubleshoot production issues?
+68. **Monitoring & Logging:** How do you investigate logs?
+69. **Git & DevOps:** Explain Git branching strategy.
+70. **Git & DevOps:** What is the difference between merge and rebase?
+71. **Git & DevOps:** Explain GitHub workflow.
+72. **Git & DevOps:** How do you resolve merge conflicts?
+73. **Linux:** Which Linux commands do you use daily?
+74. **Linux:** How do you check CPU, memory, and disk usage?
+75. **Linux:** How do you troubleshoot a Linux server?
+76. **Databases:** Which databases have you worked on?
+77. **Databases:** Explain PostgreSQL basics.
+78. **Databases:** How do you troubleshoot database connectivity?
+79. **Kafka:** Have you worked with Kafka?
+80. **Kafka:** Explain Kafka architecture.
+81. **Kafka:** What are topics, partitions, and consumer groups?
+82. **Production & Scenarios:** Tell me about a critical production issue you resolved.
+83. **Production & Scenarios:** What was the toughest issue you have handled?
+84. **Production & Scenarios:** Describe a time you had to make a trade-off under pressure.
+85. **Production & Scenarios:** What production issue did you troubleshoot from start to finish?
+86. **Production & Scenarios:** How do you perform root cause analysis (RCA)?
+87. **Production & Scenarios:** How do you prioritize incidents?
+88. **Behavioral:** Tell me about a challenging project.
+89. **Behavioral:** Tell me about a conflict with a team member.
+90. **Behavioral:** How do you handle pressure?
+91. **Behavioral:** What is your biggest achievement?
+92. **Behavioral:** What are your strengths?
+93. **Behavioral:** What are your weaknesses?
+94. **Behavioral:** Where do you see yourself in five years?
+95. **MLOps / AI:** What is MLOps?
+96. **MLOps / AI:** Have you worked with MLflow?
+97. **MLOps / AI:** How would you deploy an ML model?
+98. **MLOps / AI:** How would you monitor ML models?
+99. **MLOps / AI:** What is Kubeflow?
+100. **MLOps / AI:** How would you build an end-to-end MLOps pipeline?
+
+
+## Mock Interview 63 - Kubernetes Fundamentals Transcript Round
+
+Focus: Kubernetes DNS/FQDN, CoreDNS, API server, etcd, RBAC, kubelet, probes, pod health, restart flow, service discovery, and control plane versus worker-node responsibilities
+
+1. **Kubernetes DNS:** How does Kubernetes FQDN resolve to an IP address? Explain service.namespace.svc.cluster.local and how DNS resolves the service name.
+2. **CoreDNS:** What is the role of CoreDNS in Kubernetes? How does CoreDNS resolve service names, and does it communicate with the API server?
+3. **CoreDNS/API Server:** Is CoreDNS a bridge between etcd and the Kubernetes API server? If not, what is its actual role?
+4. **Kubernetes RBAC:** What is RBAC in Kubernetes? Why do we use RBAC? Explain Role, ClusterRole, RoleBinding, and ClusterRoleBinding.
+5. **Kubernetes Health:** Suppose an application goes down in a Kubernetes cluster. How does the master or control plane know that the application is down? How does the signal reach the control plane?
+6. **Kubelet:** Which component detects that a pod or application has become unhealthy, and what is the role of kubelet?
+7. **Kubelet:** Is kubelet a worker node component or a master/control plane component?
+8. **Kubelet/API Server:** How does kubelet communicate with the control plane, and what is the role of the API server?
+9. **Liveness Probe:** Explain the Liveness Probe. When is it used, and what happens if it fails?
+10. **Readiness Probe:** Explain the Readiness Probe. How is it different from the Liveness Probe?
+11. **Container Restart:** If an application gets stuck or becomes unhealthy, does Kubernetes execute a kubectl command to restart it? If not, how is the restart triggered?
+12. **Container Runtime:** How does kubelet restart a failed container? Does kubelet communicate directly with the container runtime?
+13. **Kubernetes Failure Flow:** What is the complete flow when an application crashes: Application to Kubelet to API Server to etcd to Controller Manager to new Pod or restart?
+14. **Content Correlation:** What do you mean by content correlation in the context of Kubernetes or observability?
+
+
+## Mock Interview 64 - Security Database Ansible CI/CD Round
+
+Focus: Application stack, Sentinel antivirus, Prisma Cloud Security, databases, PostgreSQL backup/restore, migrations, slow query analysis, Ansible, CI/CD flow, SonarQube, image scanning, and deployment stages
+
+1. **Application Stack:** Your application is written in which language? Is it Java, Python, Node.js, or a mix of technologies?
+2. **Security/Sentinel:** Have you deployed Sentinel antivirus? Is it scanning the Kubernetes cluster, worker nodes, or container applications?
+3. **Security/Sentinel:** How do you integrate Sentinel with your applications? How does it work with GKE/Kubernetes, and when is the image scanned?
+4. **Cloud Security:** After deployment, how do you monitor the infrastructure? How is Prisma or Cloud Security used, and what kind of misconfigurations does it detect, such as excessive IAM permissions like Owner role?
+5. **Databases:** You mentioned PostgreSQL, MySQL, and MongoDB. Are you working as a DBA?
+6. **Databases:** What database-related activities have you performed, such as database migration, role management, cluster creation, backup, and restore?
+7. **PostgreSQL:** How do you take a backup of a PostgreSQL database?
+8. **PostgreSQL:** How do you restore a PostgreSQL backup?
+9. **PostgreSQL:** Have you performed backup and restore activities yourself?
+10. **Database Migration:** What database migration have you done, for example AWS to GCP migration?
+11. **Database Performance:** How do you identify long-running SQL queries?
+12. **Database Performance:** How do you optimize slow-running SQL queries using indexing, EXPLAIN ANALYZE, and query tuning?
+13. **Ansible:** You mentioned Terraform and Ansible. Have you worked on Ansible?
+14. **Ansible:** What was the purpose of using Ansible, such as VM patching, configuration management, or report generation?
+15. **Ansible:** Which Ansible modules have you used, such as yum, apt, service, systemd, shell, command, copy, template, file, setup, and lineinfile?
+16. **Ansible:** Can you explain your Ansible playbook, including tasks, inventory, handlers, variables, and execution flow?
+17. **CI/CD:** Can you explain the CI/CD process and how it works between Development, QA, DevOps, Security, and Production?
+18. **CI/CD:** When developers commit code, what happens next?
+19. **Security Scanning:** Do you perform any scanning after every code commit?
+20. **Security Scanning:** Which tool do you use for code scanning, such as SonarQube or SonarCloud?
+21. **SonarQube:** What does SonarQube check, including bugs, vulnerabilities, code smells, code duplication, and Quality Gates?
+22. **SonarQube:** What happens if SonarQube Quality Gate fails?
+23. **CI/CD:** After SonarQube, what are the next stages in the CI/CD pipeline, such as build, container image creation, image scanning, push to registry, and deployment to Dev/QA/Prod?
+
+
+## Mock Interview 65 - EKS Kubernetes DevOps Operations Round
+
+Focus: General experience, AWS/Azure/GCP/on-prem, EKS, root cause troubleshooting, Docker, Kubernetes Services and networking, Ingress, NGINX, Gateway API, namespaces, etcd, HPA, storage, backups, Jenkins, Argo CD, ELK/OpenTelemetry, Linux, GCP, Prometheus/Grafana, Helm, and Sentinel deployment
+
+1. **General:** Tell me something about yourself.
+2. **General:** You have around 7 years of experience, right?
+3. **Cloud:** Have you worked on GCP, AWS, and Azure?
+4. **Infrastructure:** Have you worked on on-prem servers or only on cloud?
+5. **AWS/EKS:** Have you worked on EKS?
+6. **AWS/EKS:** Have you launched an EKS cluster?
+7. **AWS/EKS:** Did you create the EKS cluster using Terraform, CloudFormation, or manually?
+8. **Troubleshooting:** Suppose an application is down. How will you identify the root cause?
+9. **Docker:** What is the difference between ADD and COPY in a Dockerfile?
+10. **Docker:** What is the difference between docker build and docker commit?
+11. **Docker:** How can you minimize the Docker image size?
+12. **Kubernetes Services:** What is a Headless Service?
+13. **Kubernetes Services:** What is the default NodePort range?
+14. **Kubernetes Services:** If NodePort gives only a port, how do you access the application? What IP do you use?
+15. **Kubernetes Services:** If there are 10-20 worker nodes, which node IP will you choose?
+16. **Kubernetes Services:** If the Load Balancer is down, how will you troubleshoot the application using NodePort?
+17. **Kubernetes Networking:** How do you expose a service outside the Kubernetes cluster?
+18. **Kubernetes Ingress:** Which Ingress Controller are you using?
+19. **Kubernetes Ingress:** How do you install or setup the NGINX Ingress Controller in GKE?
+20. **Kubernetes Ingress:** You already have a GKE cluster. How will you configure an Ingress Controller?
+21. **Kubernetes Ingress:** Why do we use an Ingress Controller?
+22. **Kubernetes Ingress:** If NGINX Ingress is deprecated, what will you use in the future?
+23. **Kubernetes Ingress:** How will you expose applications after moving away from NGINX Ingress?
+24. **Kubernetes Services:** How do you expose an application using a Kubernetes Service?
+25. **Kubernetes Namespaces:** Why do we use Namespaces?
+26. **Kubernetes Control Plane:** What is the role of etcd?
+27. **Kubernetes Control Plane:** Can you take a backup of etcd?
+28. **Kubernetes Control Plane:** How does the kube-apiserver communicate with etcd?
+29. **Kubernetes Workloads:** What is a DaemonSet?
+30. **Kubernetes Autoscaling:** How does the Horizontal Pod Autoscaler (HPA) work?
+31. **Kubernetes Autoscaling:** Does HPA scale based on resource requests or resource limits?
+32. **Kubernetes Storage:** Explain StorageClass, Persistent Volume (PV), and Persistent Volume Claim (PVC).
+33. **Kubernetes Storage:** What is the difference between static provisioning and dynamic provisioning?
+34. **Kubernetes Backup:** How do you take a backup of your Kubernetes cluster?
+35. **Kubernetes Storage:** What is the difference between volume and volumeMount?
+36. **CI/CD:** What kind of Jenkins pipelines have you created?
+37. **Jenkins:** How do you take a backup of Jenkins?
+38. **GitOps/Argo CD:** Have you used Argo CD or Harness?
+39. **GitOps/Argo CD:** How does Argo CD work?
+40. **GitOps/Argo CD:** If someone changes a Kubernetes resource using kubectl but does not update Git, what happens?
+41. **Monitoring/ELK/OpenTelemetry:** Explain the ELK Stack along with OpenTelemetry.
+42. **Monitoring/ELK/OpenTelemetry:** What is the complete log flow from the application to Kibana?
+43. **OpenTelemetry:** What is the role of the OpenTelemetry Collector?
+44. **Elastic/APM:** What is the role of the APM Server?
+45. **Elasticsearch:** How do you delete old logs from Elasticsearch?
+46. **Elasticsearch:** If ILM is not working and Elasticsearch storage is full, how will you clean up the logs?
+47. **Kibana:** If Kibana is not working, how will you troubleshoot it?
+48. **Linux:** If a Linux server has very high load, how will you reduce it?
+49. **Linux:** How do you check whether an application is running?
+50. **Linux:** If you cannot log in to the server, how will you check the server load?
+51. **GCP:** Have you worked on GKE or GCE?
+52. **GCP:** Which GCP services have you worked on?
+53. **Monitoring:** Which monitoring tools have you worked on?
+54. **Monitoring:** Have you worked on Prometheus and Grafana?
+55. **Monitoring:** Did you integrate Prometheus and Grafana?
+56. **Helm:** Have you worked with Helm?
+57. **Helm/Sentinel:** How did you deploy Sentinel Antivirus using Helm?
+58. **Sentinel:** Was Sentinel deployed as a container?
+59. **Sentinel:** Was Sentinel deployed on all worker nodes?
+
+## Mock Interview 66 - Terraform Secret Creation Hands-On Round
+
+Focus: Terraform hands-on coding task for local provider initialization, input variables, environment-backed secrets, local_file resource creation, file permissions, and clean grading through sudo solve
+
+1. **Terraform/Hands-On:** Terraform: Secret Creation. You want to deploy a web application using Terraform. Complete `/home/ubuntu/1063862-terraform-secret-creation/main.tf` using HCL so that it initializes the `hashicorp/local` provider at version `2.1.0`, declares a variable named `secret` whose value is passed through an environment variable during `terraform apply`, and creates a `local_file` resource at `/run/secret` with permissions `0600` and content from `var.secret`. The solution must live inside `/home/ubuntu/1063862-terraform-secret-creation` and be correct when evaluated by running `sudo solve` from that directory in a clean environment.
+
+## Mock Interview 67 - Kubernetes StatefulSet Basic Implementation Hands-On Round
+
+Focus: Kubernetes hands-on coding task for StatefulSet creation, namespace placement, headless Service binding, labels and selectors, replicas, container image, and container port configuration
+
+1. **Kubernetes/Hands-On:** StatefulSet: Basic Implementation. In the `hacker-company` namespace, an existing headless Service named `nginx` has selector `role: frontend` and exposes port `80`. Complete `/home/ubuntu/171641-kubernetes-statefulset-basic-implementation/definition.yaml` by implementing a StatefulSet named `frontend` in namespace `hacker-company`. It must use `serviceName: nginx`, deploy `2` replicas, set labels so they match the Service selector `role: frontend`, run a container named `nginx` using image `nginx:latest`, and expose container port `80`. Verify with `kubectl get statefulset -n hacker-company`, `kubectl get pods -n hacker-company`, `kubectl describe statefulset frontend -n hacker-company`, then finish with `sudo solve`.
+
+## Mock Interview 68 - Docker HackerAPI Environment Variable Hands-On Round
+
+Focus: Docker hands-on scripting task for container creation, image selection, container naming, host environment variable forwarding, detached interactive mode, and avoiding pseudo-TTY allocation
+
+1. **Docker/Hands-On:** Docker: HackerAPI Deployment, Environment Variables. Complete the `script.sh` file stub under `/home/ubuntu/...` so it runs a Docker container named `hackerapi` using image `public.ecr.aws/docker/library/nginx:latest`. The container must receive an environment variable named `HACKERAPI_SECURITY_TOKEN` with its value taken from the existing host environment variable of the same name, run in interactive background mode, and run without pseudo-TTY allocation. The expected command is: `docker run -d -i --name hackerapi -e HACKERAPI_SECURITY_TOKEN=$HACKERAPI_SECURITY_TOKEN public.ecr.aws/docker/library/nginx:latest`.
+
+## Mock Interview 69 - Terraform Validate Docker Project Round
+
+Focus: Coderbyte-style Terraform Docker validation assessment covering required_providers, Docker provider configuration, terraform init/validate/fmt/plan/apply/destroy, Docker image and container resources, port mapping, resource references, provider version constraints, and core IaC interview concepts
+
+1. **Terraform/Docker Provider:** Configure the Docker provider with the correct source and version.
+2. **Terraform/Providers:** Define the required_providers block for a Terraform Docker project.
+3. **Terraform/Commands:** How do you initialize a Terraform project, and why is terraform init required before validation?
+4. **Terraform/Commands:** How do you validate a Terraform configuration, and what kinds of errors does terraform validate catch?
+5. **Terraform/Syntax:** How would you identify and fix syntax errors in a Terraform configuration?
+6. **Terraform/Docker Provider:** How do you configure a Docker provider in Terraform?
+7. **Terraform/Docker Image:** How do you create a Docker image resource in Terraform?
+8. **Terraform/Docker Container:** How do you create a Docker container resource in Terraform?
+9. **Terraform/Ports:** How do you expose a container port using the ports block?
+10. **Terraform/Ports:** How do you map internal port 80 to external port 8000 in a Terraform Docker container resource?
+11. **Terraform/Dependencies:** How do you reference one Terraform resource from another?
+12. **Terraform/Docker Image:** How do you use the image_id attribute of a docker_image resource in a docker_container resource?
+13. **Terraform/Commands:** Differentiate between terraform init, terraform validate, and terraform apply.
+14. **Terraform/Versioning:** How do provider version constraints work in Terraform, for example ~> 3.0.1?
+15. **Terraform/Troubleshooting:** How would you identify missing Terraform configuration required for successful validation?
+16. **Docker/Terraform:** What is the purpose of the Docker provider in Terraform?
+17. **Docker/Basics:** What is the difference between a Docker image and a Docker container?
+18. **Docker/Networking:** Why do we expose ports for a Docker container?
+19. **Docker/Networking:** What is the difference between internal and external ports?
+20. **Terraform/Docker Hands-On:** How do you run an Nginx container using Terraform?
+21. **Terraform/Versioning:** What happens if the required provider version is incorrect?
+22. **Terraform/Commands:** Explain when you would use terraform init, terraform validate, terraform fmt, terraform plan, terraform apply, and terraform destroy.
+23. **IaC:** What is Infrastructure as Code (IaC)?
+24. **Terraform/Basics:** Why do we use Terraform?
+25. **Terraform/Basics:** What are providers in Terraform?
+26. **Terraform/Basics:** What are resources in Terraform?
+27. **Terraform/State:** What is the Terraform state file?
+28. **Terraform/Providers:** What is the purpose of required_providers?
+29. **Terraform/Dependencies:** Explain resource dependencies in Terraform.
+30. **Terraform/Commands:** What is the difference between terraform validate and terraform plan?
+31. **Terraform/Versioning:** How do you pin a provider version?
+32. **Terraform/Docker Hands-On:** How would you deploy a Docker container using Terraform?
