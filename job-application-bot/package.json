@@ -7,7 +7,10 @@
   "scripts": {
     "review": "node src/cli.js",
     "apply": "node src/cli.js --submit",
-    "login": "node src/cli.js --login-only"
+    "login": "node src/cli.js --login-only",
+    "campaign": "node src/campaign.js",
+    "campaign:apply": "node src/campaign.js --submit",
+    "attach": "node src/attachRunner.js"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

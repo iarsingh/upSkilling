@@ -41978,3 +41978,41 @@ Show examples where you identified systemic problems, aligned stakeholders, desi
 
 1180. Scenario: You are joining this team in the first 90 days. What would your plan be?
 First 30 days: understand services, incidents, architecture, CI/CD, Terraform, cloud accounts, observability, and stakeholders. Next 30 days: identify top reliability, security, and delivery bottlenecks, then deliver quick wins such as alert tuning or pipeline fixes. Final 30 days: propose a roadmap for SLOs, IaC standardization, DevSecOps gates, runbooks, DORA metrics, and platform improvements with measurable outcomes.
+
+Section 118: Kubernetes Services, Service Mesh, AKS and GKE
+
+1181. How do Kubernetes Services work, and when would you use ClusterIP, NodePort, LoadBalancer, or headless Service?
+A Kubernetes Service gives stable networking in front of dynamic Pods by selecting ready endpoints through labels and exposing them through a stable DNS name and virtual IP. Use ClusterIP for internal service-to-service traffic, NodePort mainly for simple external exposure or as a building block behind a load balancer, LoadBalancer when the cloud provider should provision an external or internal load balancer, and a headless Service when clients need direct Pod DNS records, often for StatefulSets or service discovery systems.
+
+1182. Scenario: A frontend Pod cannot reach a backend Service in another namespace. How would you troubleshoot it?
+Start with the DNS name and namespace: the frontend should call something like backend.backend-namespace.svc.cluster.local. Then verify the Service exists, its selector matches the backend Pod labels, endpoints or EndpointSlices are populated, backend Pods are Ready, and NetworkPolicies are not blocking traffic. Use kubectl get svc,endpoints,endpointslice,pods -n <namespace>, test DNS with nslookup from a debug Pod, and test connectivity with curl or nc before checking app logs.
+
+1183. What is service mesh, and when would you introduce Istio or Anthos Service Mesh into a Kubernetes platform?
+A service mesh adds a dedicated traffic, security, and observability layer for service-to-service communication, usually through sidecars or ambient data-plane components. Introduce Istio or Anthos Service Mesh when teams need mTLS, traffic splitting, retries, timeouts, circuit breaking, request-level telemetry, or consistent policy across many services. Avoid adding it only because it is fashionable; it increases operational complexity, so the use case should justify the extra control plane, debugging model, and upgrade process.
+
+1184. Scenario: After enabling service mesh mTLS, some services start failing. What would you check?
+Check whether both client and server workloads are injected into the mesh, whether PeerAuthentication is set to STRICT or PERMISSIVE, whether DestinationRules use the correct TLS mode, and whether any non-mesh workload is still calling a STRICT mTLS service. Then inspect sidecar logs, Envoy config, service identity, certificates, and policies. A practical mitigation is to roll out mTLS namespace by namespace in PERMISSIVE mode first, observe traffic, then move to STRICT once all callers are mesh-aware.
+
+1185. How would you implement canary or blue-green deployment using Kubernetes Services and service mesh traffic splitting?
+With plain Kubernetes Services, blue-green can be done by running two versions with different labels and switching the Service selector from blue to green after validation. With a service mesh, keep both versions behind the same Service and use routing rules such as Istio VirtualService and DestinationRule to split traffic by percentage, header, user segment, or version. For production, combine this with metrics-based rollback, readiness probes, dashboards, and a fast route or selector rollback path.
+
+1186. What is the difference between GKE Standard and GKE Autopilot, and how do you choose between them?
+GKE Autopilot manages nodes and many operational defaults for you, charging mainly by Pod resources and reducing node-management overhead. GKE Standard gives deeper control over node pools, machine types, DaemonSets, networking, upgrades, GPUs, and low-level tuning. Choose Autopilot for simpler, standard workloads where managed operations and secure defaults matter most; choose Standard when you need custom node pools, special hardware, privileged workloads, advanced networking, or tighter cost and scheduling control.
+
+1187. Scenario: A GKE workload gets permission denied when accessing Cloud Storage. How would you debug Workload Identity?
+Verify the Kubernetes ServiceAccount used by the Pod, the mapped Google service account, and the IAM binding that allows the KSA to impersonate the GSA. Then confirm the GSA has the required Cloud Storage role on the right bucket or project. Check Pod annotations, namespace, token projection, metadata server access, and application credentials. Useful commands include kubectl describe pod, kubectl describe serviceaccount, gcloud iam service-accounts get-iam-policy, and gcloud storage buckets get-iam-policy.
+
+1188. How would you design a production GKE platform for multiple teams?
+Use separate projects or clusters where hard isolation is required, and namespaces where shared-cluster isolation is acceptable. Standardize node pools, labels, taints, quotas, RBAC, NetworkPolicies, Workload Identity, Secret Manager integration, ingress, observability, logging, and GitOps deployment. Add guardrails with policy controllers such as Gatekeeper or Kyverno, provide golden-path templates, define SLOs and runbooks, and make ownership visible through labels, dashboards, and escalation paths.
+
+1189. What is AKS, and how is it different from GKE from an operations point of view?
+AKS is Azure Kubernetes Service, the managed Kubernetes offering on Azure. Operationally, both AKS and GKE manage the control plane and integrate with their cloud networking, identity, storage, monitoring, and load-balancing ecosystems. The differences are mainly in platform integration: AKS uses Azure Resource Manager, Azure CNI, managed identities, Azure Monitor, and Azure Load Balancer/Application Gateway patterns, while GKE integrates with Google IAM, VPC-native networking, Cloud Operations, Cloud Load Balancing, and Workload Identity.
+
+1190. Scenario: An AKS or GKE node upgrade is blocked or causing disruption. What would you investigate?
+Check PodDisruptionBudgets, max unavailable settings, node surge settings, unavailable replicas, DaemonSets, local storage usage, long terminationGracePeriodSeconds, pods without safe eviction, cluster autoscaler limits, quota, and node pool health. For disruption, check whether readiness probes, rollout strategy, replica count, topology spread, and PDBs allow enough capacity during upgrade. The safe design is separate node pools, surge upgrades, tested maintenance windows, and workload disruption budgets aligned with real availability needs.
+
+1191. How would you compare Kubernetes Ingress, Gateway API, and service mesh ingress?
+Ingress is the older common abstraction for HTTP routing into a cluster and is simple for standard host/path routing. Gateway API is a newer, more expressive and role-oriented model that separates infrastructure ownership from route ownership and supports richer traffic management. Service mesh ingress, such as Istio ingress gateway, is useful when north-south traffic should share mesh features like mTLS integration, telemetry, advanced routing, and policy. The choice depends on complexity, ownership model, and whether mesh-level traffic controls are needed.
+
+1192. How would you observe and troubleshoot service-to-service latency in a Kubernetes service mesh?
+Start with golden signals: request rate, error rate, latency, and saturation for both client and server. Use mesh telemetry to identify whether latency is from the application, Envoy sidecar, retries, upstream service, DNS, connection pool, or external dependency. Correlate metrics with distributed traces and logs using trace IDs. Check VirtualService retries and timeouts, DestinationRule connection pools, circuit breaking, mTLS handshake issues, resource limits, and whether sidecar overhead is significant under load.

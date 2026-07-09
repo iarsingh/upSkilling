@@ -3277,70 +3277,119 @@
   },
   {
     "source": "Fixed Mock Interview Sets",
-    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
     "category": "GKE/Kubernetes",
     "question": "What is kube-proxy?",
     "answer": "kube-proxy is the Kubernetes node-level networking component that watches Services and Endpoints/EndpointSlices, then programs forwarding rules so traffic sent to a Service virtual IP or NodePort is routed to one of the matching backend Pods. Depending on the mode, it uses iptables, IPVS, or platform-specific mechanisms to implement service load balancing."
   },
   {
     "source": "Fixed Mock Interview Sets",
-    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
     "category": "GKE/Kubernetes",
     "question": "Suppose there are two Pods running in different namespaces. What DNS name would you use so that one Pod can communicate with the other?",
     "answer": "Use the Service DNS name, not the raw Pod IP. For a Service named backend in namespace app2, a Pod in another namespace can call backend.app2.svc.cluster.local, or usually backend.app2. The full Kubernetes DNS pattern is <service-name>.<namespace>.svc.cluster.local."
   },
   {
     "source": "Fixed Mock Interview Sets",
-    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
     "category": "GKE/Kubernetes",
     "question": "There are two applications, a frontend application and a backend application, running in two different Pods. What configuration would you write so that the frontend application starts only after the backend application is up and running?",
     "answer": "In Kubernetes you should not rely on strict Pod startup order for application correctness. Expose the backend through a Service, configure readiness/startup probes on the backend, and make the frontend either retry until the backend Service is ready or use an initContainer that waits for the backend endpoint before starting the main frontend container. For production, readiness probes plus application-level retry/backoff are safer than only an initContainer."
   },
   {
     "source": "Fixed Mock Interview Sets",
-    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
     "category": "CI/CD/GitOps",
     "question": "We mostly follow blue-green deployment. How do you divert traffic from the Blue environment to the Green environment?",
     "answer": "Run both blue and green versions in parallel, validate the green version, then switch the traffic routing layer from blue to green. In Kubernetes this is commonly done by updating the Service selector from labels like version: blue to version: green, or by changing an Ingress/service mesh/load balancer route. Keep blue running briefly so rollback is just switching the selector or route back."
   },
   {
     "source": "Fixed Mock Interview Sets",
-    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
+    "category": "Kubernetes Services",
+    "question": "How do Kubernetes Services work, and when would you use ClusterIP, NodePort, LoadBalancer, or headless Service?",
+    "answer": "A Kubernetes Service gives stable networking in front of dynamic Pods by selecting ready endpoints through labels and exposing them through a stable DNS name and virtual IP. Use ClusterIP for internal service-to-service traffic, NodePort mainly for simple external exposure or as a building block behind a load balancer, LoadBalancer when the cloud provider should provision an external or internal load balancer, and a headless Service when clients need direct Pod DNS records, often for StatefulSets or service discovery systems."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
+    "category": "Kubernetes Services",
+    "question": "Scenario: A frontend Pod cannot reach a backend Service in another namespace. How would you troubleshoot it?",
+    "answer": "Start with the DNS name and namespace: the frontend should call something like backend.backend-namespace.svc.cluster.local. Then verify the Service exists, its selector matches the backend Pod labels, endpoints or EndpointSlices are populated, backend Pods are Ready, and NetworkPolicies are not blocking traffic. Use kubectl get svc,endpoints,endpointslice,pods -n <namespace>, test DNS with nslookup from a debug Pod, and test connectivity with curl or nc before checking app logs."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
+    "category": "Service Mesh",
+    "question": "What is service mesh, and when would you introduce Istio or Anthos Service Mesh into a Kubernetes platform?",
+    "answer": "A service mesh adds a dedicated traffic, security, and observability layer for service-to-service communication, usually through sidecars or ambient data-plane components. Introduce Istio or Anthos Service Mesh when teams need mTLS, traffic splitting, retries, timeouts, circuit breaking, request-level telemetry, or consistent policy across many services. Avoid adding it only because it is fashionable; it increases operational complexity, so the use case should justify the extra control plane, debugging model, and upgrade process."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
+    "category": "Service Mesh",
+    "question": "Scenario: After enabling service mesh mTLS, some services start failing. What would you check?",
+    "answer": "Check whether both client and server workloads are injected into the mesh, whether PeerAuthentication is set to STRICT or PERMISSIVE, whether DestinationRules use the correct TLS mode, and whether any non-mesh workload is still calling a STRICT mTLS service. Then inspect sidecar logs, Envoy config, service identity, certificates, and policies. A practical mitigation is to roll out mTLS namespace by namespace in PERMISSIVE mode first, observe traffic, then move to STRICT once all callers are mesh-aware."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
+    "category": "GKE/Kubernetes",
+    "question": "How would you implement canary or blue-green deployment using Kubernetes Services and service mesh traffic splitting?",
+    "answer": "With plain Kubernetes Services, blue-green can be done by running two versions with different labels and switching the Service selector from blue to green after validation. With a service mesh, keep both versions behind the same Service and use routing rules such as Istio VirtualService and DestinationRule to split traffic by percentage, header, user segment, or version. For production, combine this with metrics-based rollback, readiness probes, dashboards, and a fast route or selector rollback path."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
+    "category": "GKE/AKS",
+    "question": "What is AKS, and how is it different from GKE from an operations point of view?",
+    "answer": "AKS is Azure Kubernetes Service, the managed Kubernetes offering on Azure. Operationally, both AKS and GKE manage the control plane and integrate with their cloud networking, identity, storage, monitoring, and load-balancing ecosystems. The differences are mainly in platform integration: AKS uses Azure Resource Manager, Azure CNI, managed identities, Azure Monitor, and Azure Load Balancer/Application Gateway patterns, while GKE integrates with Google IAM, VPC-native networking, Cloud Operations, Cloud Load Balancing, and Workload Identity."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
+    "category": "GKE/AKS",
+    "question": "Scenario: An AKS or GKE node upgrade is blocked or causing disruption. What would you investigate?",
+    "answer": "Check PodDisruptionBudgets, max unavailable settings, node surge settings, unavailable replicas, DaemonSets, local storage usage, long terminationGracePeriodSeconds, pods without safe eviction, cluster autoscaler limits, quota, and node pool health. For disruption, check whether readiness probes, rollout strategy, replica count, topology spread, and PDBs allow enough capacity during upgrade. The safe design is separate node pools, surge upgrades, tested maintenance windows, and workload disruption budgets aligned with real availability needs."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
     "category": "Terraform/IaC",
     "question": "What is a dynamic block in Terraform?",
     "answer": "A dynamic block in Terraform generates repeatable nested blocks inside a resource, data source, provider, or provisioner from a collection. It is useful when the nested block count or contents are driven by input variables, for example generating multiple ingress rules, egress rules, disks, or lifecycle rules without copying the same nested block many times."
   },
   {
     "source": "Fixed Mock Interview Sets",
-    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
     "category": "Terraform/IaC",
     "question": "What is the use case of a dynamic block?",
     "answer": "Use a dynamic block when a resource has repeatable nested configuration and the number of blocks should be controlled by input data. For example, a security group may need a variable list of ingress rules, or an S3 bucket may need a variable list of lifecycle rules. It keeps modules reusable while avoiding duplicated HCL."
   },
   {
     "source": "Fixed Mock Interview Sets",
-    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
     "category": "Terraform/IaC",
     "question": "How would you create multiple S3 buckets in Terraform?",
     "answer": "Define the desired bucket names as a set or map and use for_each on aws_s3_bucket. For example, variable bucket_names can be a set(string), then resource aws_s3_bucket buckets { for_each = var.bucket_names bucket = each.value }. If each bucket needs different settings, use a map of objects and read fields from each.value."
   },
   {
     "source": "Fixed Mock Interview Sets",
-    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
     "category": "Terraform/IaC",
     "question": "What is the meaning of each.value in Terraform?",
     "answer": "each.value is the value of the current item when a resource, module, or dynamic block uses for_each. If for_each is a set of strings, each.value is the current string. If for_each is a map, each.key is the map key and each.value is the map value, which may be an object containing multiple attributes."
   },
   {
     "source": "Fixed Mock Interview Sets",
-    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
     "category": "Terraform/IaC",
     "question": "Why do we use each.value?",
     "answer": "We use each.value to parameterize each repeated resource or nested block with the data for the current item in a for_each loop. It lets one resource block create many correctly configured resources without hardcoding names, ports, tags, lifecycle rules, or other per-item settings."
   },
   {
     "source": "Fixed Mock Interview Sets",
-    "section": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
+    "section": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
     "category": "Terraform/IaC",
     "question": "Why do we use toset() in Terraform?",
     "answer": "toset() converts a list or tuple into a set, which is often needed because for_each accepts a map or set of strings. It also removes duplicates and makes the collection identity based on values rather than list indexes, which is safer than count for resources where you do not want index shifts to recreate infrastructure."
@@ -18044,5 +18093,40 @@
     "category": null,
     "question": "Scenario: You are joining this team in the first 90 days. What would your plan be?",
     "answer": "First 30 days: understand services, incidents, architecture, CI/CD, Terraform, cloud accounts, observability, and stakeholders. Next 30 days: identify top reliability, security, and delivery bottlenecks, then deliver quick wins such as alert tuning or pipeline fixes. Final 30 days: propose a roadmap for SLOs, IaC standardization, DevSecOps gates, runbooks, DORA metrics, and platform improvements with measurable outcomes."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "Kubernetes Services, Service Mesh, AKS and GKE",
+    "category": null,
+    "question": "What is the difference between GKE Standard and GKE Autopilot, and how do you choose between them?",
+    "answer": "GKE Autopilot manages nodes and many operational defaults for you, charging mainly by Pod resources and reducing node-management overhead. GKE Standard gives deeper control over node pools, machine types, DaemonSets, networking, upgrades, GPUs, and low-level tuning. Choose Autopilot for simpler, standard workloads where managed operations and secure defaults matter most; choose Standard when you need custom node pools, special hardware, privileged workloads, advanced networking, or tighter cost and scheduling control."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "Kubernetes Services, Service Mesh, AKS and GKE",
+    "category": null,
+    "question": "Scenario: A GKE workload gets permission denied when accessing Cloud Storage. How would you debug Workload Identity?",
+    "answer": "Verify the Kubernetes ServiceAccount used by the Pod, the mapped Google service account, and the IAM binding that allows the KSA to impersonate the GSA. Then confirm the GSA has the required Cloud Storage role on the right bucket or project. Check Pod annotations, namespace, token projection, metadata server access, and application credentials. Useful commands include kubectl describe pod, kubectl describe serviceaccount, gcloud iam service-accounts get-iam-policy, and gcloud storage buckets get-iam-policy."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "Kubernetes Services, Service Mesh, AKS and GKE",
+    "category": null,
+    "question": "How would you design a production GKE platform for multiple teams?",
+    "answer": "Use separate projects or clusters where hard isolation is required, and namespaces where shared-cluster isolation is acceptable. Standardize node pools, labels, taints, quotas, RBAC, NetworkPolicies, Workload Identity, Secret Manager integration, ingress, observability, logging, and GitOps deployment. Add guardrails with policy controllers such as Gatekeeper or Kyverno, provide golden-path templates, define SLOs and runbooks, and make ownership visible through labels, dashboards, and escalation paths."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "Kubernetes Services, Service Mesh, AKS and GKE",
+    "category": null,
+    "question": "How would you compare Kubernetes Ingress, Gateway API, and service mesh ingress?",
+    "answer": "Ingress is the older common abstraction for HTTP routing into a cluster and is simple for standard host/path routing. Gateway API is a newer, more expressive and role-oriented model that separates infrastructure ownership from route ownership and supports richer traffic management. Service mesh ingress, such as Istio ingress gateway, is useful when north-south traffic should share mesh features like mTLS integration, telemetry, advanced routing, and policy. The choice depends on complexity, ownership model, and whether mesh-level traffic controls are needed."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "Kubernetes Services, Service Mesh, AKS and GKE",
+    "category": null,
+    "question": "How would you observe and troubleshoot service-to-service latency in a Kubernetes service mesh?",
+    "answer": "Start with golden signals: request rate, error rate, latency, and saturation for both client and server. Use mesh telemetry to identify whether latency is from the application, Envoy sidecar, retries, upstream service, DNS, connection pool, or external dependency. Correlate metrics with distributed traces and logs using trace IDs. Check VirtualService retries and timeouts, DestinationRule connection pools, circuit breaking, mTLS handshake issues, resource limits, and whether sidecar overhead is significant under load."
   }
 ]

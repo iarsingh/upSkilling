@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Job Filler</title>
+    <style>
+      body {
+        width: 360px;
+        margin: 0;
+        padding: 14px;
+        font: 13px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #17202a;
+        background: #f7f9fb;
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-size: 16px;
+      }
+      textarea {
+        width: 100%;
+        height: 170px;
+        box-sizing: border-box;
+        border: 1px solid #c9d3df;
+        border-radius: 6px;
+        padding: 8px;
+        font: 12px ui-monospace, SFMono-Regular, Menlo, monospace;
+        resize: vertical;
+        background: white;
+      }
+      button {
+        border: 1px solid #1f6feb;
+        border-radius: 6px;
+        padding: 8px 10px;
+        color: white;
+        background: #1f6feb;
+        cursor: pointer;
+      }
+      button.secondary {
+        color: #1f2937;
+        border-color: #c9d3df;
+        background: white;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .row button {
+        flex: 1;
+      }
+      #status {
+        min-height: 18px;
+        margin-top: 10px;
+        color: #344054;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Job Filler</h1>
+    <textarea id="profile" spellcheck="false" placeholder="Paste config/profile.json here once, then Save Profile."></textarea>
+    <div class="row">
+      <button id="save">Save Profile</button>
+      <button id="fill">Fill Page</button>
+    </div>
+    <div class="row">
+      <button id="highlight" class="secondary">Highlight Fields</button>
+      <button id="clear" class="secondary">Clear Saved</button>
+    </div>
+    <div id="status"></div>
+    <script src="popup.js"></script>
+  </body>
+</html>

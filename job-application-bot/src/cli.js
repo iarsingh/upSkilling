@@ -119,7 +119,7 @@ async function main() {
     console.log(`\nDone. ${applied} application${applied === 1 ? "" : "s"} ${args.dryRun ? "prepared for review" : "submitted"} this run.`);
     console.log(`Full log: data/applied-jobs.json`);
   } finally {
-    await context.close();
+    await context.close().catch(() => {});
   }
 }
 

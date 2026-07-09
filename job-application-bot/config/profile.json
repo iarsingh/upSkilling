@@ -30,9 +30,9 @@
     "ML Platform Engineer"
   ],
   "preferredKeywords": [
-    "DevOps", "Cloud", "Platform", "GCP", "AWS", "EKS", "Kubernetes", "Docker", "Terraform", "Ansible", "CI/CD", "GitOps",
+    "DevOps", "Cloud", "Platform", "GCP", "AWS", "EKS", "AKS", "GKE", "Kubernetes", "Docker", "Terraform", "Ansible", "CI/CD", "GitOps",
     "ArgoCD", "Jenkins", "GitHub Actions", "MLflow", "Kubeflow", "Vertex AI",
-    "Prometheus", "Grafana", "OpenTelemetry", "Python", "Linux", "SRE", "MLOps"
+    "Prometheus", "Grafana", "OpenTelemetry", "Service Mesh", "Istio", "Python", "Linux", "SRE", "MLOps"
   ],
   "minKeywordMatchesToApply": 3,
   "summary": "Senior DevOps / Platform Engineer with nearly 7 years of experience designing, automating, and operating cloud-native infrastructure across GCP, AWS, and Azure. Strong foundation in GKE, Terraform, CI/CD, and cloud security, plus hands-on experience building production MLOps/LLMOps platforms with Vertex AI, MLflow, KServe, and Kubernetes-based GenAI workloads.",
@@ -71,6 +71,13 @@
     "highest education": "B.Tech",
     "willing to work remote": "Yes",
     "willing to work onsite": "Yes",
-    "willing to work hybrid": "Yes"
+    "willing to work hybrid": "Yes",
+    "kubernetes services": "Hands-on with Kubernetes Services including ClusterIP, NodePort, LoadBalancer, Ingress-backed exposure, service discovery, and troubleshooting service-to-pod routing issues.",
+    "service mesh": "Hands-on with service mesh concepts including mTLS, traffic splitting, retries, timeouts, circuit breaking, observability, and canary or blue-green release patterns using Istio-style architectures.",
+    "istio": "Hands-on with Istio-style service mesh patterns for secure service-to-service communication, traffic management, telemetry, and progressive delivery in Kubernetes environments.",
+    "gke": "Hands-on with Google Kubernetes Engine including cluster operations, workload deployment, autoscaling, networking, IAM integration, observability, and Terraform-based infrastructure automation.",
+    "google kubernetes engine": "Hands-on with Google Kubernetes Engine including cluster operations, workload deployment, autoscaling, networking, IAM integration, observability, and Terraform-based infrastructure automation.",
+    "aks": "Working knowledge of Azure Kubernetes Service including cluster operations, workload deployment, ingress, autoscaling, monitoring, and CI/CD integration for containerized applications.",
+    "azure kubernetes service": "Working knowledge of Azure Kubernetes Service including cluster operations, workload deployment, ingress, autoscaling, monitoring, and CI/CD integration for containerized applications."
   }
 }

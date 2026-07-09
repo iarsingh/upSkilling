@@ -58,6 +58,49 @@ For direct company application links:
 node src/cli.js --site generic-ats --urls "https://boards.greenhouse.io/acme/jobs/123,https://jobs.lever.co/acme/456"
 ```
 
+## Run All Portals
+
+Edit `config/campaigns.json` to control portals, keywords, locations, limits, and direct ATS URLs.
+
+```bash
+npm run campaign
+node src/campaign.js --login-only --only linkedin,naukri,indeed
+node src/campaign.js --only linkedin,naukri,indeed --limit 3
+node src/campaign.js --submit --only naukri --limit 5
+```
+
+The campaign runner continues to the next portal if one site fails. It defaults to review mode unless you pass `--submit` or set a campaign's `mode` to `submit`.
+
+## Run After Manual Login
+
+Use this when you want to log in normally yourself, open the job/application page, and then let the tool fill the current page.
+
+```bash
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=/tmp/job-apply-chrome
+```
+
+After Chrome opens, log in to the portal and open an application page:
+
+```bash
+npm run attach
+node src/attachRunner.js --url-match linkedin.com --steps 3
+```
+
+By default this is review mode and will not click final submit. Add `--submit` only after you have tested that page flow.
+
+## Chrome Extension
+
+The `extension/` folder contains a local Chrome extension for filling the page you are already viewing.
+
+1. Open `chrome://extensions`.
+2. Enable Developer mode.
+3. Click Load unpacked.
+4. Select `job-application-bot/extension`.
+5. Open the extension popup, paste `config/profile.json`, and click Save Profile.
+6. Open any job application page and click Fill Page.
+
+The extension never clicks final submit and cannot upload resume files automatically; review the page before submitting.
+
 ## Submit Mode
 
 Only use this when you are ready for real applications to be submitted:
@@ -97,12 +140,16 @@ src/lib/browserSession.js   Persistent per-site Chrome sessions
 src/lib/applicationLog.js   Application log and dedupe
 src/lib/formFiller.js       Label-to-profile field matching
 src/lib/genericFormPass.js  Generic multi-step form helper
+src/campaign.js             Multi-portal campaign runner
+src/attachRunner.js         Fill an application page in already-open Chrome
 src/sites/linkedin.js       LinkedIn Easy Apply adapter
 src/sites/naukri.js         Naukri adapter
 src/sites/indeed.js         Indeed adapter
 src/sites/genericAts.js     Greenhouse, Lever, Workday public form adapter
 src/sites/uplers.js         Experimental Uplers adapter
 src/sites/cutshort.js       Experimental CutShort adapter
+config/campaigns.json       Multi-portal search/apply campaign config
+extension/                  Local Chrome extension for current-page filling
 data/applied-jobs.json      Local application log
 browser-data/<site>/        Saved login sessions, gitignored
 ```

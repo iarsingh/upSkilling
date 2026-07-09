@@ -1,0 +1,53 @@
+{
+  "default": {
+    "mode": "review",
+    "headless": false,
+    "perSiteDelaySeconds": 8,
+    "sites": [
+      {
+        "site": "linkedin",
+        "enabled": true,
+        "keywords": "MLOps Engineer Kubernetes GCP",
+        "location": "India",
+        "limit": 5
+      },
+      {
+        "site": "naukri",
+        "enabled": true,
+        "keywords": "DevOps Engineer Kubernetes GCP",
+        "location": "India",
+        "limit": 5
+      },
+      {
+        "site": "indeed",
+        "enabled": true,
+        "keywords": "Platform Engineer Kubernetes Cloud",
+        "location": "India",
+        "limit": 5
+      },
+      {
+        "site": "uplers",
+        "enabled": false,
+        "keywords": "MLOps Engineer Kubernetes GCP",
+        "location": "India",
+        "limit": 3
+      },
+      {
+        "site": "cutshort",
+        "enabled": false,
+        "keywords": "DevOps Engineer Kubernetes GCP",
+        "location": "India",
+        "limit": 3
+      },
+      {
+        "site": "generic-ats",
+        "enabled": false,
+        "limit": 5,
+        "urls": [
+          "https://boards.greenhouse.io/example/jobs/123",
+          "https://jobs.lever.co/example/456"
+        ]
+      }
+    ]
+  }
+}

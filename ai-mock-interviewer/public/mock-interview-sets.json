@@ -2223,8 +2223,8 @@
   },
   {
     "id": "set-51",
-    "title": "Mock Interview 51 - Kubernetes Services and Terraform Loops Round",
-    "focus": "Kubernetes Service networking, kube-proxy, cross-namespace DNS, startup ordering, blue-green traffic switching, Terraform dynamic blocks, for_each, each.value, toset, and repeated S3 resources",
+    "title": "Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round",
+    "focus": "Kubernetes Service networking, kube-proxy, cross-namespace DNS, startup ordering, blue-green traffic switching, service mesh, Istio/Anthos Service Mesh, AKS versus GKE operations, Terraform dynamic blocks, for_each, each.value, toset, and repeated S3 resources",
     "questions": [
       {
         "category": "GKE/Kubernetes",
@@ -2241,6 +2241,34 @@
       {
         "category": "CI/CD/GitOps",
         "question": "We mostly follow blue-green deployment. How do you divert traffic from the Blue environment to the Green environment?"
+      },
+      {
+        "category": "Kubernetes Services",
+        "question": "How do Kubernetes Services work, and when would you use ClusterIP, NodePort, LoadBalancer, or headless Service?"
+      },
+      {
+        "category": "Kubernetes Services",
+        "question": "Scenario: A frontend Pod cannot reach a backend Service in another namespace. How would you troubleshoot it?"
+      },
+      {
+        "category": "Service Mesh",
+        "question": "What is service mesh, and when would you introduce Istio or Anthos Service Mesh into a Kubernetes platform?"
+      },
+      {
+        "category": "Service Mesh",
+        "question": "Scenario: After enabling service mesh mTLS, some services start failing. What would you check?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "How would you implement canary or blue-green deployment using Kubernetes Services and service mesh traffic splitting?"
+      },
+      {
+        "category": "GKE/AKS",
+        "question": "What is AKS, and how is it different from GKE from an operations point of view?"
+      },
+      {
+        "category": "GKE/AKS",
+        "question": "Scenario: An AKS or GKE node upgrade is blocked or causing disruption. What would you investigate?"
       },
       {
         "category": "Terraform/IaC",

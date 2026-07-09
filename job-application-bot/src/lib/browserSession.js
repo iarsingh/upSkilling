@@ -27,13 +27,30 @@ async function ensureLoggedIn(page, { checkUrl, loggedInSelector, loginPromptMes
   await page.goto(checkUrl, { waitUntil: "domcontentloaded", timeout: 20000 }).catch((error) => {
     console.log(`Login page navigation warning: ${error.message}`);
   });
+
+  const waitForLogin = (timeout) => Promise.race([
+    page.waitForSelector(loggedInSelector, { timeout }),
+    new Promise((_, reject) => {
+      page.once("close", () => reject(new Error("Browser window was closed before login completed.")));
+    })
+  ]);
+
   try {
-    await page.waitForSelector(loggedInSelector, { timeout: 8000 });
+    if (page.isClosed()) throw new Error("Browser window is already closed.");
+    await waitForLogin(8000);
     return true;
   } catch {
     console.log(`\n${loginPromptMessage}`);
     console.log("Waiting up to 5 minutes for you to finish logging in in the opened browser window...");
-    await page.waitForSelector(loggedInSelector, { timeout: 5 * 60 * 1000 });
+    if (page.isClosed()) {
+      throw new Error("Browser window was closed before login completed. Re-run with --login-only and keep the window open until login is detected.");
+    }
+    await waitForLogin(5 * 60 * 1000).catch((error) => {
+      if (/closed|Target page|browser has been closed/i.test(error.message)) {
+        throw new Error("Browser window was closed before login completed. Re-run with --login-only and keep the window open until login is detected.");
+      }
+      throw error;
+    });
     console.log("Login detected. Session saved for future runs.\n");
     return true;
   }

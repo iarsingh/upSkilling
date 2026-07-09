@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Job Application Page Filler",
+  "version": "1.0.0",
+  "description": "Fill the current job application page from your saved profile. Review-first: it does not click final submit.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "Job Filler",
+    "default_popup": "popup.html"
+  }
+}
