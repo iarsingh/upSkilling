@@ -939,6 +939,48 @@
   },
   {
     "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 17 - GKE Troubleshooting and Reliability Round",
+    "category": "GKE/Backup",
+    "question": "In GKE, can you take a direct etcd backup like a self-managed Kubernetes cluster?",
+    "answer": "In standard managed GKE, Google manages the control plane, including etcd, so you do not SSH into control-plane nodes or run direct etcdctl snapshots yourself. For backup and recovery, focus on backing up Kubernetes resources, persistent volumes, cluster configuration, GitOps/IaC state, and application data. Use Backup for GKE or tools like Velero/Kasten where appropriate, and keep Terraform/Git as the source of truth for cluster and workload configuration."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 17 - GKE Troubleshooting and Reliability Round",
+    "category": "GKE/Backup",
+    "question": "How would you design backup and restore for a production GKE cluster?",
+    "answer": "Start by separating what must be recovered: cluster configuration, Kubernetes manifests, secrets, persistent volumes, databases, object storage, and external dependencies. Keep infrastructure in Terraform, workloads in GitOps, secrets in Secret Manager or a controlled secret workflow, and use Backup for GKE or Velero/Kasten for Kubernetes resources and persistent volumes. Define RTO/RPO, backup frequency, retention, encryption, cross-region storage, restore ownership, and run regular restore drills into an isolated cluster or namespace."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 17 - GKE Troubleshooting and Reliability Round",
+    "category": "GKE/Backup",
+    "question": "What is Backup for GKE, and what problem does it solve?",
+    "answer": "Backup for GKE is Google Cloud's managed backup service for GKE workloads. It helps protect Kubernetes resources and persistent volume data, supports backup plans and restore plans, and reduces the need to build a custom backup controller stack. It is useful for restoring deleted namespaces, workloads, configuration, and stateful workload volumes, but it should still be tested with real restore drills and paired with application-aware database backups where needed."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 17 - GKE Troubleshooting and Reliability Round",
+    "category": "GKE/Backup",
+    "question": "Scenario: A namespace with production workloads is accidentally deleted in GKE. How would you recover it?",
+    "answer": "First stop any automation that might keep deleting or overwriting resources, then assess whether the namespace was managed by GitOps, Terraform, Helm, or a backup tool. Restore manifests from GitOps or Helm history where possible, restore Kubernetes resources and persistent volume data from Backup for GKE or your backup platform, and validate secrets/config maps, service accounts, ingress, network policies, and PVC bindings. After recovery, add guardrails such as RBAC restrictions, deletion protection, policy checks, and a break-glass approval flow for high-risk deletes."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 17 - GKE Troubleshooting and Reliability Round",
+    "category": "GKE/Backup",
+    "question": "How do you test whether a GKE backup is actually restorable?",
+    "answer": "Run scheduled restore drills, not only backup-success checks. Restore into a non-production namespace or temporary cluster, verify Kubernetes objects are recreated, PVC data is mounted, Pods become Ready, services route correctly, secrets and service accounts work, and application-level validation passes. Measure actual recovery time and data loss against RTO/RPO, document gaps, and automate the restore test where possible so backup quality is continuously proven."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 17 - GKE Troubleshooting and Reliability Round",
+    "category": "Kubernetes/etcd",
+    "question": "How do you take and restore an etcd snapshot in self-managed Kubernetes?",
+    "answer": "For self-managed clusters where you operate etcd, use etcdctl snapshot save with the correct endpoints, CA, cert, and key, then verify it with etcdctl snapshot status. Store snapshots encrypted and off-cluster. To restore, stop the API server/control-plane components, restore the snapshot with etcdctl snapshot restore into a new data directory, update etcd configuration if member names or peer URLs changed, restart etcd and the API server, then validate cluster state and controller health. Always rehearse this in a test cluster before relying on it in production."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
     "section": "Mock Interview 18 - Terraform Fundamentals Round",
     "category": "Terraform/IaC",
     "question": "Terraform state basics: Explain Terraform state and why it is important.",
@@ -18128,5 +18170,33 @@
     "category": null,
     "question": "How would you observe and troubleshoot service-to-service latency in a Kubernetes service mesh?",
     "answer": "Start with golden signals: request rate, error rate, latency, and saturation for both client and server. Use mesh telemetry to identify whether latency is from the application, Envoy sidecar, retries, upstream service, DNS, connection pool, or external dependency. Correlate metrics with distributed traces and logs using trace IDs. Check VirtualService retries and timeouts, DestinationRule connection pools, circuit breaking, mTLS handshake issues, resource limits, and whether sidecar overhead is significant under load."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "GKE Backup, Restore and etcd",
+    "category": null,
+    "question": "Scenario: A GKE stateful workload loses data after a bad rollout. How would you restore safely?",
+    "answer": "Avoid restoring over the live workload blindly. Freeze writes if needed, identify the last known-good backup or snapshot, restore into an isolated namespace or cluster first, validate data integrity and application startup, then plan cutover or selective data repair. Check whether the workload needs application-consistent backups, not only disk snapshots, and confirm the restored PVCs, StatefulSet identity, service DNS, secrets, and version compatibility before sending traffic back."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "GKE Backup, Restore and etcd",
+    "category": null,
+    "question": "What should be included in a Kubernetes disaster recovery runbook for GKE?",
+    "answer": "Include RTO/RPO targets, owners, escalation, backup locations, restore commands or console steps, GitOps/Terraform recovery order, secret recovery, persistent volume restore, database restore, DNS/load balancer cutover, validation checks, rollback criteria, and communication templates. The runbook should specify what is managed by Google, what is rebuilt from IaC, what is restored from backup, and how to prove the application is healthy after recovery."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "GKE Backup, Restore and etcd",
+    "category": null,
+    "question": "How would you protect Kubernetes backups from ransomware, accidental deletion, or operator error?",
+    "answer": "Use least-privilege access, separate backup admin roles from cluster admins where possible, store backups in a separate project or protected bucket, enable encryption, retention locks or object versioning where suitable, audit access, and alert on backup deletion or policy changes. Test restore with limited credentials and keep backup metadata outside the failure domain of the primary cluster."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "GKE Backup, Restore and etcd",
+    "category": null,
+    "question": "What is the difference between backing up Kubernetes manifests, persistent volumes, and application databases?",
+    "answer": "Manifests capture desired Kubernetes objects such as Deployments, Services, ConfigMaps, RBAC, and policies; persistent volume backups capture disk data attached to Pods; application database backups capture transactionally consistent data from the database engine. A reliable restore often needs all three, but databases usually require application-aware backups or native backup tools to avoid crash-consistency problems."
   }
 ]

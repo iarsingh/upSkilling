@@ -618,7 +618,7 @@
   {
     "id": "set-17",
     "title": "Mock Interview 17 - GKE Troubleshooting and Reliability Round",
-    "focus": "CrashLoopBackOff, Pending pods, node failure, autoscaling, upgrades, availability, security, and DR",
+    "focus": "CrashLoopBackOff, Pending pods, node failure, autoscaling, upgrades, availability, security, GKE backup/restore, etcd backup nuance, and DR",
     "questions": [
       {
         "category": "GKE/Kubernetes",
@@ -651,6 +651,30 @@
       {
         "category": "SRE/Reliability",
         "question": "Disaster recovery: How would you implement disaster recovery for a production platform?"
+      },
+      {
+        "category": "GKE/Backup",
+        "question": "In GKE, can you take a direct etcd backup like a self-managed Kubernetes cluster?"
+      },
+      {
+        "category": "GKE/Backup",
+        "question": "How would you design backup and restore for a production GKE cluster?"
+      },
+      {
+        "category": "GKE/Backup",
+        "question": "What is Backup for GKE, and what problem does it solve?"
+      },
+      {
+        "category": "GKE/Backup",
+        "question": "Scenario: A namespace with production workloads is accidentally deleted in GKE. How would you recover it?"
+      },
+      {
+        "category": "GKE/Backup",
+        "question": "How do you test whether a GKE backup is actually restorable?"
+      },
+      {
+        "category": "Kubernetes/etcd",
+        "question": "How do you take and restore an etcd snapshot in self-managed Kubernetes?"
       }
     ]
   },
