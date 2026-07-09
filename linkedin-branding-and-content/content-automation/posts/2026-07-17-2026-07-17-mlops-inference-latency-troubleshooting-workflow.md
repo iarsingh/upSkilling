@@ -5,25 +5,46 @@ day: 28
 series: MLOps Series
 topic: Inference latency troubleshooting workflow
 linkedinProfile: https://www.linkedin.com/in/iamarsingh/
+image: ../assets/2026-07-17-2026-07-17-mlops-inference-latency-troubleshooting-workflow.png
 status: scheduled
 ---
 
-Inference latency troubleshooting workflow
+⏱️ Inference latency troubleshooting needs a timeline, not guesswork.
 
 Day 28/60 of my MLOps Series.
 
-Production MLOps is not only training a model. It is the release system around model, data, features, monitoring, rollback, and ownership.
+When a model endpoint becomes slow, I split latency into smaller parts:
 
-Practical checklist:
-1. Track model version, data version, feature version, and code version together.
-2. Define approval, deployment, monitoring, and rollback before production.
-3. Monitor latency, errors, throughput, prediction distribution, and drift.
-4. Keep experiments, artifacts, and production releases auditable.
-5. Document the failure mode before it becomes an incident.
+1. 🌐 Network latency
+Client to gateway, gateway to service, service to model server.
 
-My learning note:
-Small platform improvements compound when they are automated, observable, and easy for teams to repeat.
+2. 🚪 Queue time
+Requests waiting because concurrency, workers, CPU, GPU, or autoscaling are not sized well.
 
-What MLOps failure mode have you seen most often in real projects?
+3. 🧠 Model execution
+Preprocessing, tokenization, feature lookup, model inference, post-processing.
 
-#MLOps #MachineLearning #MLPlatform #DevOps
+4. 📦 Dependency calls
+Feature store, vector DB, object storage, database, third-party API.
+
+5. 📈 Cold starts and scaling
+New pods, model loading time, GPU warmup, cache misses.
+
+6. 🔍 Observability
+Trace every stage. Metrics alone may show slowness, but traces show where time is spent.
+
+A useful dashboard should show:
+- p50, p95, p99 latency
+- error rate
+- throughput
+- queue depth
+- pod CPU/memory/GPU
+- model version
+- dependency latency
+
+The worst debugging pattern is blaming the model first.
+Sometimes the model is fine and the feature lookup is the real bottleneck.
+
+Where have you seen inference latency hide most often: model runtime, feature store, vector DB, autoscaling, or network?
+
+#MLOps #MachineLearning #MLPlatform #Observability #DevOps

@@ -5,25 +5,43 @@ day: 26
 series: Python Automation Series
 topic: Python security checks for config files
 linkedinProfile: https://www.linkedin.com/in/iamarsingh/
+image: ../assets/2026-07-15-2026-07-15-python-python-security-checks-for-config-files.png
 status: scheduled
 ---
 
-Python security checks for config files
+🔐 Python is very useful for catching risky config before it reaches production.
 
 Day 26/60 of my Python Automation Series.
 
-Python becomes career-changing when you use it to remove manual engineering work, not only to solve syntax exercises.
+One practical script idea:
+Scan YAML, JSON, ENV, and Terraform variable files for unsafe patterns before CI/CD continues.
 
-Practical checklist:
-1. Start with one repeated manual task.
-2. Read input safely from files, APIs, CLI flags, or environment variables.
-3. Add timeout, retry, logging, and clear error messages.
-4. Print a useful report before automating destructive actions.
-5. Run the script in CI or cron only after testing edge cases.
+Checks I would add:
 
-My learning note:
-Small platform improvements compound when they are automated, observable, and easy for teams to repeat.
+1. 🕵️ Secret-like values
+Keys such as password, token, secret, private_key, api_key.
 
-Which manual DevOps task would you automate first with Python?
+2. 🌍 Public exposure
+0.0.0.0/0, public buckets, open security groups, public load balancers.
 
-#Python #DevOps #MLOps #CloudComputing #Automation
+3. ⚠️ Unsafe defaults
+debug=true, verify_ssl=false, privileged=true, latest image tags.
+
+4. 🧱 Missing required fields
+owner, environment, cost_center, service_name, backup_policy.
+
+5. 📦 Kubernetes risk signals
+No resource limits, hostPath usage, privileged containers, missing probes.
+
+6. 📊 Clear output
+Print file, line, severity, reason, and suggested fix.
+
+The important part:
+Do not make the script noisy.
+If every warning feels urgent, engineers will ignore all of them.
+
+Good automation should be strict where risk is high and helpful where context matters.
+
+What config mistake would you always block in CI?
+
+#Python #DevOps #CloudSecurity #Automation #PlatformEngineering

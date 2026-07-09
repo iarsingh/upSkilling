@@ -87,7 +87,8 @@ async function main() {
       console.log(`[dry-run] Would publish ${item.id} for ${dateArg}${item.slot ? ` at ${item.slot}` : ""}: ${item.topic}`);
       continue;
     }
-    const linkedInId = await publishPost(item.text);
+    const imagePath = item.imagePath ? path.join(root, item.imagePath) : "";
+    const linkedInId = await publishPost(item.text, imagePath);
     markPublished(item, linkedInId);
     console.log(`Published ${item.id} for ${dateArg}: ${linkedInId}`);
   }

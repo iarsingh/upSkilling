@@ -5,25 +5,42 @@ day: 27
 series: Kubernetes Series
 topic: Helm values structure for repeatable deployments
 linkedinProfile: https://www.linkedin.com/in/iamarsingh/
+image: ../assets/2026-07-16-2026-07-16-k8s-helm-values-structure-for-repeatable-deployments.png
 status: scheduled
 ---
 
-Helm values structure for repeatable deployments
+📦 Helm becomes powerful when values are designed, not dumped.
 
 Day 27/60 of my Kubernetes Series.
 
-Kubernetes becomes powerful when we treat it as a reliability platform, not just a place to run containers.
+A common mistake is putting every environment difference into one large values file until nobody knows what is safe to change.
 
-Practical checklist:
-1. Validate requests, limits, probes, rollout strategy, and autoscaling together.
-2. Check events, logs, endpoints, DNS, and resource pressure during incidents.
-3. Use namespaces, RBAC, NetworkPolicy, and secrets deliberately.
-4. Design rollback before every risky deployment.
-5. Make dashboards and alerts match user-facing reliability.
+A cleaner structure:
 
-My learning note:
-Small platform improvements compound when they are automated, observable, and easy for teams to repeat.
+1. 🧱 base values
+Defaults shared across environments: labels, ports, probes, resource shape, common annotations.
 
-Which Kubernetes issue has taken the most time for you to debug?
+2. 🌱 environment overlays
+dev, stage, prod differences: replica count, autoscaling, ingress host, resource size, feature flags.
 
-#Kubernetes #DevOps #PlatformEngineering #CloudNative
+3. 🔐 secret boundaries
+Do not store secrets directly in values. Reference External Secrets, Secret Manager, Vault, or sealed secrets.
+
+4. 🚦 operational settings
+Probes, PDB, HPA, rollout strategy, tolerations, affinity, and topology spread constraints.
+
+5. 🧪 validation
+Run helm lint, helm template, kubeconform, and policy checks before merge.
+
+6. 🧭 ownership
+Make it clear which values app teams can change and which values platform teams own.
+
+My rule of thumb:
+If changing one value can break production routing, scaling, or security, it deserves review and documentation.
+
+Helm is not just packaging.
+It is a contract between application delivery and platform operations.
+
+How do you separate app-owned and platform-owned Helm values?
+
+#Kubernetes #Helm #DevOps #PlatformEngineering #CloudNative
