@@ -101,6 +101,19 @@ The `extension/` folder contains a local Chrome extension for filling the page y
 
 The extension never clicks final submit and cannot upload resume files automatically; review the page before submitting.
 
+## Mock Interview
+
+The questions in `config/profile.json` under `interviewQuestions` can be used for terminal-based interview practice.
+
+```bash
+npm run mock-interview
+npm run mock-interview -- --category aiMlopsLlm --limit 5
+npm run mock-interview -- --category kubernetesNetworkingDns --no-feedback
+node src/mockInterview.js --list
+```
+
+By default the mock interview asks questions interactively and uses local Ollama for short coaching feedback after each answer. Transcripts are saved under `data/mock-interview-*.json`.
+
 ## Submit Mode
 
 Only use this when you are ready for real applications to be submitted:

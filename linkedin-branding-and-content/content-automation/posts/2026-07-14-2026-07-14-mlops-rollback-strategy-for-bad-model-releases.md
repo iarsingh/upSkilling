@@ -9,36 +9,31 @@ image: ../assets/2026-07-14-2026-07-14-mlops-rollback-strategy-for-bad-model-rel
 status: scheduled
 ---
 
-🔁 A model rollback is not the same as an application rollback.
+🧠 A model rollback is not the same as an application rollback.
 
 Day 25/60 of my MLOps Series.
 
-In normal software, rollback often means deploying the previous container image.
-In MLOps, the failure can come from model weights, features, data, thresholds, prompts, or serving logic.
+Writing this from the lens of a 7-year DevOps / Platform / MLOps engineer:
+the tool is rarely the hard part. The hard part is designing the system so teams can operate it safely after the first release.
 
-A practical rollback plan should include:
+Architect view:
+A bad ML release may involve model weights, features, data, thresholds, prompts, config, or serving logic.
 
-1. 🧾 Version everything
-Model version, feature pipeline version, dataset snapshot, container image, config, and approval metadata.
+My production checklist:
+1. Version model, dataset, feature pipeline, container image, and config together.
+2. Keep the last known-good model deployable.
+3. Define rollback triggers before rollout.
+4. Monitor technical metrics and business outcome metrics.
+5. Document what changed so the next release is safer.
 
-2. 🚦 Define release gates
-Latency, error rate, drift signal, business metric, and manual approval before full rollout.
+Tradeoff I would call out:
+Fast rollback is useful. Controlled recovery is better.
 
-3. 🧪 Use canary or shadow mode
-Compare the new model against production traffic before exposing it fully.
+Principle I keep coming back to:
+Treat every model release as a software release plus a data contract.
 
-4. 🧯 Keep the previous model warm
-Rollback is faster when the last known-good model is already deployable.
+This is the difference between "it works" and "it is ready for production ownership."
 
-5. 📉 Monitor business impact
-A model can be technically healthy and still make worse decisions.
+What would you add to make this safer in a real ML platform?
 
-6. 🧠 Document the trigger
-Write down exactly when to rollback: metric threshold, incident severity, or human review signal.
-
-The real goal is not only fast rollback.
-The goal is controlled recovery without losing trust in the ML platform.
-
-What rollback trigger would you trust most for an ML model: drift, accuracy drop, latency, business KPI, or human review?
-
-#MLOps #MachineLearning #MLPlatform #DevOps
+#MLOps #MachineLearning #MLPlatform #DevOps #AIInfrastructure

@@ -5,25 +5,35 @@ day: 39
 series: MLOps Series
 topic: Batch inference vs real-time inference tradeoffs
 linkedinProfile: https://www.linkedin.com/in/iamarsingh/
+image: ../assets/2026-07-28-2026-07-28-mlops-batch-inference-vs-real-time-inference-tradeoffs.png
 status: scheduled
 ---
 
-Batch inference vs real-time inference tradeoffs
+🧠 Model serving reliability is an end-to-end latency problem.
 
 Day 39/60 of my MLOps Series.
 
-Production MLOps is not only training a model. It is the release system around model, data, features, monitoring, rollback, and ownership.
+Writing this from the lens of a 7-year DevOps / Platform / MLOps engineer:
+the tool is rarely the hard part. The hard part is designing the system so teams can operate it safely after the first release.
 
-Practical checklist:
-1. Track model version, data version, feature version, and code version together.
-2. Define approval, deployment, monitoring, and rollback before production.
-3. Monitor latency, errors, throughput, prediction distribution, and drift.
-4. Keep experiments, artifacts, and production releases auditable.
-5. Document the failure mode before it becomes an incident.
+Architect view:
+I break inference into gateway, queue, preprocessing, feature lookup, model runtime, post-processing, and dependency calls.
 
-My learning note:
-Small platform improvements compound when they are automated, observable, and easy for teams to repeat.
+My production checklist:
+1. Track p50, p95, p99 latency by model version.
+2. Separate queue time from model execution time.
+3. Monitor feature store, vector database, and external API latency.
+4. Keep resource requests, autoscaling, and concurrency aligned.
+5. Trace one slow request before changing infrastructure blindly.
 
-What MLOps failure mode have you seen most often in real projects?
+Tradeoff I would call out:
+The model often gets blamed when the bottleneck is actually dependency latency or cold starts.
 
-#MLOps #MachineLearning #MLPlatform #DevOps
+Principle I keep coming back to:
+Treat every model release as a software release plus a data contract.
+
+This is the difference between "it works" and "it is ready for production ownership."
+
+What would you add to make this safer in a real ML platform?
+
+#MLOps #MachineLearning #MLPlatform #DevOps #AIInfrastructure

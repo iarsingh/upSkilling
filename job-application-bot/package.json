@@ -10,7 +10,8 @@
     "login": "node src/cli.js --login-only",
     "campaign": "node src/campaign.js",
     "campaign:apply": "node src/campaign.js --submit",
-    "attach": "node src/attachRunner.js"
+    "attach": "node src/attachRunner.js",
+    "mock-interview": "node src/mockInterview.js"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

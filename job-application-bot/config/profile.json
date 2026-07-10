@@ -54,6 +54,49 @@
     "default": "platform_engineer"
   },
   "companiesToAvoid": [],
+  "interviewQuestions": {
+    "introductionAndBackground": [
+      "Tell us a little about yourself based on your resume.",
+      "Tell us about your recent experience at Capgemini and Tech Mahindra.",
+      "You have around seven years of experience, right?",
+      "Are you currently based in Noida?",
+      "Tell me about your cloud and DevOps expertise.",
+      "If you want to showcase your strengths, what would you highlight?"
+    ],
+    "aiMlopsLlm": [
+      "You mentioned AI infrastructure and MLOps. Can we talk about that?",
+      "What exactly is your hands-on experience in AI/MLOps?",
+      "What kind of RAG application have you worked on?",
+      "What is the difference between an LLM and Chat?",
+      "What is prompt engineering? Can't we achieve the same thing with a normal LLM?",
+      "Have you used MCP?",
+      "Why do we need MCP? Can't we do the same thing with just an LLM?",
+      "What algorithm does the LLM use for astrology?",
+      "What does MCP stand for?",
+      "Have you integrated any third-party APIs yourself?"
+    ],
+    "kubernetesNetworkingDns": [
+      "Which DNS service are you using?",
+      "What configurations did you do in DNS?",
+      "Have you done those DNS configurations yourself?",
+      "Apart from that, what other Kubernetes experience do you have?",
+      "You mentioned deploying applications through Helm and also without Helm. Have you worked with both?",
+      "What is the difference between deploying with Helm and without Helm?",
+      "Did you decide to use Helm, or were you asked to use it?",
+      "What advantages does Helm provide?",
+      "What challenges are there in packaging everything without Helm?",
+      "Earlier you mentioned NGINX Ingress. Are you still using it?",
+      "If not, what replaced it?",
+      "Have you faced any challenges while using Istio?"
+    ],
+    "automationPythonInfrastructure": [
+      "Overall, what infrastructure automation or Infrastructure as Code are you using?",
+      "What have you done with Python?",
+      "You mentioned billing reports, cost optimization, and health checks. How exactly did you implement those?",
+      "What integrations did your Python script use?",
+      "What exactly did your Python code do internally?"
+    ]
+  },
   "standardAnswers": {
     "years of experience": "7",
     "total experience": "7",

@@ -5,25 +5,35 @@ day: 46
 series: MLOps Series
 topic: Model registry approvals and controlled production releases
 linkedinProfile: https://www.linkedin.com/in/iamarsingh/
+image: ../assets/2026-08-04-2026-08-04-mlops-model-registry-approvals-and-controlled-production-releases.png
 status: scheduled
 ---
 
-Model registry approvals and controlled production releases
+🧠 A model registry should be a control plane, not a storage folder for artifacts.
 
 Day 46/60 of my MLOps Series.
 
-Production MLOps is not only training a model. It is the release system around model, data, features, monitoring, rollback, and ownership.
+Writing this from the lens of a 7-year DevOps / Platform / MLOps engineer:
+the tool is rarely the hard part. The hard part is designing the system so teams can operate it safely after the first release.
 
-Practical checklist:
-1. Track model version, data version, feature version, and code version together.
-2. Define approval, deployment, monitoring, and rollback before production.
-3. Monitor latency, errors, throughput, prediction distribution, and drift.
-4. Keep experiments, artifacts, and production releases auditable.
-5. Document the failure mode before it becomes an incident.
+Architect view:
+For production ML, I want the registry to connect metrics, lineage, approvals, deployment targets, and rollback decisions.
 
-My learning note:
-Small platform improvements compound when they are automated, observable, and easy for teams to repeat.
+My production checklist:
+1. Require model card, dataset snapshot, metrics, owner, and approval metadata.
+2. Separate experiment tracking from production promotion.
+3. Block promotion if evaluation, security, or compliance checks are missing.
+4. Record which model version is deployed to each environment.
+5. Make rollback a first-class workflow, not a manual search through old runs.
 
-What MLOps failure mode have you seen most often in real projects?
+Tradeoff I would call out:
+If nobody can explain why a model reached production, the platform is not audit-ready.
 
-#MLOps #MachineLearning #MLPlatform #DevOps
+Principle I keep coming back to:
+Treat every model release as a software release plus a data contract.
+
+This is the difference between "it works" and "it is ready for production ownership."
+
+What would you add to make this safer in a real ML platform?
+
+#MLOps #MachineLearning #MLPlatform #DevOps #AIInfrastructure

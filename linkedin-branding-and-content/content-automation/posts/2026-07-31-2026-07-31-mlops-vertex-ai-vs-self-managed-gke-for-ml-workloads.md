@@ -5,25 +5,35 @@ day: 42
 series: MLOps Series
 topic: Vertex AI vs self-managed GKE for ML workloads
 linkedinProfile: https://www.linkedin.com/in/iamarsingh/
+image: ../assets/2026-07-31-2026-07-31-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.png
 status: scheduled
 ---
 
-Vertex AI vs self-managed GKE for ML workloads
+🧠 GKE node pool upgrades should be boring by design.
 
 Day 42/60 of my MLOps Series.
 
-Production MLOps is not only training a model. It is the release system around model, data, features, monitoring, rollback, and ownership.
+Writing this from the lens of a 7-year DevOps / Platform / MLOps engineer:
+the tool is rarely the hard part. The hard part is designing the system so teams can operate it safely after the first release.
 
-Practical checklist:
-1. Track model version, data version, feature version, and code version together.
-2. Define approval, deployment, monitoring, and rollback before production.
-3. Monitor latency, errors, throughput, prediction distribution, and drift.
-4. Keep experiments, artifacts, and production releases auditable.
-5. Document the failure mode before it becomes an incident.
+Architect view:
+A safe upgrade strategy combines surge capacity, PDBs, workload spread, observability, and rollback thinking.
 
-My learning note:
-Small platform improvements compound when they are automated, observable, and easy for teams to repeat.
+My production checklist:
+1. Upgrade non-critical pools first.
+2. Check PDBs, replicas, and topology spread before draining nodes.
+3. Use surge upgrades where capacity allows.
+4. Watch workload errors, restarts, scheduling, and latency.
+5. Document the rollback path and maintenance window.
 
-What MLOps failure mode have you seen most often in real projects?
+Tradeoff I would call out:
+The upgrade is not the hard part. Keeping workloads available during it is.
 
-#MLOps #MachineLearning #MLPlatform #DevOps
+Principle I keep coming back to:
+Treat every model release as a software release plus a data contract.
+
+This is the difference between "it works" and "it is ready for production ownership."
+
+What would you add to make this safer in a real ML platform?
+
+#MLOps #MachineLearning #MLPlatform #DevOps #AIInfrastructure

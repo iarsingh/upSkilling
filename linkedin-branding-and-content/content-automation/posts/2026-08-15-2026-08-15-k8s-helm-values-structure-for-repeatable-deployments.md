@@ -5,25 +5,35 @@ day: 57
 series: Kubernetes Series
 topic: Helm values structure for repeatable deployments
 linkedinProfile: https://www.linkedin.com/in/iamarsingh/
+image: ../assets/2026-08-15-2026-08-15-k8s-helm-values-structure-for-repeatable-deployments.png
 status: scheduled
 ---
 
-Helm values structure for repeatable deployments
+☸️ Helm values are a contract between app teams and platform teams.
 
 Day 57/60 of my Kubernetes Series.
 
-Kubernetes becomes powerful when we treat it as a reliability platform, not just a place to run containers.
+Writing this from the lens of a 7-year DevOps / Platform / MLOps engineer:
+the tool is rarely the hard part. The hard part is designing the system so teams can operate it safely after the first release.
 
-Practical checklist:
-1. Validate requests, limits, probes, rollout strategy, and autoscaling together.
-2. Check events, logs, endpoints, DNS, and resource pressure during incidents.
-3. Use namespaces, RBAC, NetworkPolicy, and secrets deliberately.
-4. Design rollback before every risky deployment.
-5. Make dashboards and alerts match user-facing reliability.
+Architect view:
+The best charts separate app-owned configuration from platform-owned reliability, security, and runtime controls.
 
-My learning note:
-Small platform improvements compound when they are automated, observable, and easy for teams to repeat.
+My production checklist:
+1. Keep base values stable and environment overlays small.
+2. Document which values teams can change safely.
+3. Keep secrets out of values files.
+4. Validate rendered manifests before merge.
+5. Version chart changes that affect runtime behavior.
 
-Which Kubernetes issue has taken the most time for you to debug?
+Tradeoff I would call out:
+A giant values file is not flexibility. It is hidden operational coupling.
 
-#Kubernetes #DevOps #PlatformEngineering #CloudNative
+Principle I keep coming back to:
+Design the operating model before scaling the cluster.
+
+This is the difference between "it works" and "it is ready for production ownership."
+
+How would you design this in a production Kubernetes platform?
+
+#Kubernetes #DevOps #PlatformEngineering #CloudNative #SRE

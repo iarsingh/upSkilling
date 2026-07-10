@@ -5,25 +5,35 @@ day: 55
 series: MLOps Series
 topic: Rollback strategy for bad model releases
 linkedinProfile: https://www.linkedin.com/in/iamarsingh/
+image: ../assets/2026-08-13-2026-08-13-mlops-rollback-strategy-for-bad-model-releases.png
 status: scheduled
 ---
 
-Rollback strategy for bad model releases
+🧠 A model rollback is not the same as an application rollback.
 
 Day 55/60 of my MLOps Series.
 
-Production MLOps is not only training a model. It is the release system around model, data, features, monitoring, rollback, and ownership.
+Writing this from the lens of a 7-year DevOps / Platform / MLOps engineer:
+the tool is rarely the hard part. The hard part is designing the system so teams can operate it safely after the first release.
 
-Practical checklist:
-1. Track model version, data version, feature version, and code version together.
-2. Define approval, deployment, monitoring, and rollback before production.
-3. Monitor latency, errors, throughput, prediction distribution, and drift.
-4. Keep experiments, artifacts, and production releases auditable.
-5. Document the failure mode before it becomes an incident.
+Architect view:
+A bad ML release may involve model weights, features, data, thresholds, prompts, config, or serving logic.
 
-My learning note:
-Small platform improvements compound when they are automated, observable, and easy for teams to repeat.
+My production checklist:
+1. Version model, dataset, feature pipeline, container image, and config together.
+2. Keep the last known-good model deployable.
+3. Define rollback triggers before rollout.
+4. Monitor technical metrics and business outcome metrics.
+5. Document what changed so the next release is safer.
 
-What MLOps failure mode have you seen most often in real projects?
+Tradeoff I would call out:
+Fast rollback is useful. Controlled recovery is better.
 
-#MLOps #MachineLearning #MLPlatform #DevOps
+Principle I keep coming back to:
+Treat every model release as a software release plus a data contract.
+
+This is the difference between "it works" and "it is ready for production ownership."
+
+What would you add to make this safer in a real ML platform?
+
+#MLOps #MachineLearning #MLPlatform #DevOps #AIInfrastructure

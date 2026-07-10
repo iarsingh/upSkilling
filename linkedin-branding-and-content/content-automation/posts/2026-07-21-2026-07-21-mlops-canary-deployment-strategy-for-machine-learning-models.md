@@ -5,25 +5,35 @@ day: 32
 series: MLOps Series
 topic: Canary deployment strategy for machine learning models
 linkedinProfile: https://www.linkedin.com/in/iamarsingh/
+image: ../assets/2026-07-21-2026-07-21-mlops-canary-deployment-strategy-for-machine-learning-models.png
 status: scheduled
 ---
 
-Canary deployment strategy for machine learning models
+🧠 Canary releases for ML need more than traffic splitting.
 
 Day 32/60 of my MLOps Series.
 
-Production MLOps is not only training a model. It is the release system around model, data, features, monitoring, rollback, and ownership.
+Writing this from the lens of a 7-year DevOps / Platform / MLOps engineer:
+the tool is rarely the hard part. The hard part is designing the system so teams can operate it safely after the first release.
 
-Practical checklist:
-1. Track model version, data version, feature version, and code version together.
-2. Define approval, deployment, monitoring, and rollback before production.
-3. Monitor latency, errors, throughput, prediction distribution, and drift.
-4. Keep experiments, artifacts, and production releases auditable.
-5. Document the failure mode before it becomes an incident.
+Architect view:
+A model can have healthy infrastructure metrics and still make worse decisions, so canary analysis must include product and prediction signals.
 
-My learning note:
-Small platform improvements compound when they are automated, observable, and easy for teams to repeat.
+My production checklist:
+1. Start with shadow traffic when user impact is high.
+2. Compare latency, error rate, prediction distribution, and business KPI.
+3. Define automatic stop conditions before the rollout begins.
+4. Keep old and new model versions observable side by side.
+5. Promote gradually only when technical and business signals agree.
 
-What MLOps failure mode have you seen most often in real projects?
+Tradeoff I would call out:
+The risky part is not deploying the model. It is trusting the wrong success metric.
 
-#MLOps #MachineLearning #MLPlatform #DevOps
+Principle I keep coming back to:
+Treat every model release as a software release plus a data contract.
+
+This is the difference between "it works" and "it is ready for production ownership."
+
+What would you add to make this safer in a real ML platform?
+
+#MLOps #MachineLearning #MLPlatform #DevOps #AIInfrastructure

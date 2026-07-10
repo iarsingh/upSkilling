@@ -9,39 +9,31 @@ image: ../assets/2026-07-15-2026-07-15-python-python-security-checks-for-config-
 status: scheduled
 ---
 
-🔐 Python is very useful for catching risky config before it reaches production.
+🐍 Secrets management is an operating model, not only a Kubernetes object.
 
 Day 26/60 of my Python Automation Series.
 
-One practical script idea:
-Scan YAML, JSON, ENV, and Terraform variable files for unsafe patterns before CI/CD continues.
+Writing this from the lens of a 7-year DevOps / Platform / MLOps engineer:
+the tool is rarely the hard part. The hard part is designing the system so teams can operate it safely after the first release.
 
-Checks I would add:
+Architect view:
+The goal is controlled access, rotation, auditability, and fewer long-lived credentials in developer workflows.
 
-1. 🕵️ Secret-like values
-Keys such as password, token, secret, private_key, api_key.
+My production checklist:
+1. Keep secrets out of Git and container images.
+2. Use external secret managers where possible.
+3. Limit access with RBAC and workload identity.
+4. Rotate credentials and test rotation behavior.
+5. Audit who can read, update, and mount sensitive values.
 
-2. 🌍 Public exposure
-0.0.0.0/0, public buckets, open security groups, public load balancers.
+Tradeoff I would call out:
+A secret that cannot be rotated safely is already a production risk.
 
-3. ⚠️ Unsafe defaults
-debug=true, verify_ssl=false, privileged=true, latest image tags.
+Principle I keep coming back to:
+Build scripts like internal products: safe defaults, clear logs, and predictable failure behavior.
 
-4. 🧱 Missing required fields
-owner, environment, cost_center, service_name, backup_policy.
+This is the difference between "it works" and "it is ready for production ownership."
 
-5. 📦 Kubernetes risk signals
-No resource limits, hostPath usage, privileged containers, missing probes.
+Which part of this would you automate first in your team?
 
-6. 📊 Clear output
-Print file, line, severity, reason, and suggested fix.
-
-The important part:
-Do not make the script noisy.
-If every warning feels urgent, engineers will ignore all of them.
-
-Good automation should be strict where risk is high and helpful where context matters.
-
-What config mistake would you always block in CI?
-
-#Python #DevOps #CloudSecurity #Automation #PlatformEngineering
+#Python #DevOps #MLOps #CloudComputing #Automation

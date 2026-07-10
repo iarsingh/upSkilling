@@ -5,25 +5,35 @@ day: 45
 series: Kubernetes Series
 topic: Production checklist before deploying to Kubernetes
 linkedinProfile: https://www.linkedin.com/in/iamarsingh/
+image: ../assets/2026-08-03-2026-08-03-k8s-production-checklist-before-deploying-to-kubernetes.png
 status: scheduled
 ---
 
-Production checklist before deploying to Kubernetes
+☸️ A production checklist is not bureaucracy. It is incident prevention.
 
 Day 45/60 of my Kubernetes Series.
 
-Kubernetes becomes powerful when we treat it as a reliability platform, not just a place to run containers.
+Writing this from the lens of a 7-year DevOps / Platform / MLOps engineer:
+the tool is rarely the hard part. The hard part is designing the system so teams can operate it safely after the first release.
 
-Practical checklist:
-1. Validate requests, limits, probes, rollout strategy, and autoscaling together.
-2. Check events, logs, endpoints, DNS, and resource pressure during incidents.
-3. Use namespaces, RBAC, NetworkPolicy, and secrets deliberately.
-4. Design rollback before every risky deployment.
-5. Make dashboards and alerts match user-facing reliability.
+Architect view:
+Before production, I want reliability, security, observability, rollback, and ownership to be explicit.
 
-My learning note:
-Small platform improvements compound when they are automated, observable, and easy for teams to repeat.
+My production checklist:
+1. Requests, limits, probes, PDB, and autoscaling are defined.
+2. Logs, metrics, traces, and alerts map to user impact.
+3. Ingress, DNS, TLS, and NetworkPolicy are tested.
+4. Rollback and escalation paths are documented.
+5. Runbook exists before the first incident.
 
-Which Kubernetes issue has taken the most time for you to debug?
+Tradeoff I would call out:
+If production readiness depends on memory, the system is not ready.
 
-#Kubernetes #DevOps #PlatformEngineering #CloudNative
+Principle I keep coming back to:
+Design the operating model before scaling the cluster.
+
+This is the difference between "it works" and "it is ready for production ownership."
+
+How would you design this in a production Kubernetes platform?
+
+#Kubernetes #DevOps #PlatformEngineering #CloudNative #SRE

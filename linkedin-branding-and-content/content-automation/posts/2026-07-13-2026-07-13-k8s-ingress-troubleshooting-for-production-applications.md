@@ -9,38 +9,31 @@ image: ../assets/2026-07-13-2026-07-13-k8s-ingress-troubleshooting-for-productio
 status: scheduled
 ---
 
-🚦 Ingress issues are rarely "just an Ingress issue".
+☸️ Ingress troubleshooting is a traffic-path exercise.
 
 Day 24/60 of my Kubernetes Series.
 
-When an application is unreachable through Ingress, I like to debug it as a traffic path, not as a single YAML file.
+Writing this from the lens of a 7-year DevOps / Platform / MLOps engineer:
+the tool is rarely the hard part. The hard part is designing the system so teams can operate it safely after the first release.
 
-My practical workflow:
+Architect view:
+I debug from DNS to load balancer, ingress controller, ingress rule, service endpoints, and pod readiness.
 
-1. 🌐 DNS
-Is the hostname resolving to the expected load balancer IP?
+My production checklist:
+1. Confirm DNS resolves to the expected load balancer.
+2. Check controller health, events, and IngressClass.
+3. Verify host, path, TLS secret, and annotations.
+4. Confirm Service selectors produce healthy endpoints.
+5. Trace one request before changing multiple layers.
 
-2. 🧭 Load balancer
-Is the external LB healthy, listening on the right ports, and pointing to the ingress controller?
+Tradeoff I would call out:
+Changing annotations randomly is slower than proving where traffic stops.
 
-3. 🚪 Ingress controller
-Are controller pods running, watching the right IngressClass, and showing useful events?
+Principle I keep coming back to:
+Design the operating model before scaling the cluster.
 
-4. 🧩 Ingress resource
-Do host, path, TLS secret, annotations, and backend service name match the intended route?
+This is the difference between "it works" and "it is ready for production ownership."
 
-5. 🔁 Service and endpoints
-Does the Service have endpoints? If endpoints are empty, the problem is usually labels or pod readiness.
+How would you design this in a production Kubernetes platform?
 
-6. 📦 Pod
-Are readiness probes passing? Are application ports and container ports aligned?
-
-The mistake I try to avoid:
-Changing annotations randomly before proving where traffic stops.
-
-Good troubleshooting is not magic.
-It is a calm path from DNS to pod.
-
-Which Ingress issue has cost you the most time: DNS, TLS, annotations, service endpoints, or controller config?
-
-#Kubernetes #DevOps #PlatformEngineering #CloudNative
+#Kubernetes #DevOps #PlatformEngineering #CloudNative #SRE

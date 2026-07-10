@@ -5,25 +5,35 @@ day: 52
 series: MLOps Series
 topic: Data drift vs concept drift explained clearly
 linkedinProfile: https://www.linkedin.com/in/iamarsingh/
+image: ../assets/2026-08-10-2026-08-10-mlops-data-drift-vs-concept-drift-explained-clearly.png
 status: scheduled
 ---
 
-Data drift vs concept drift explained clearly
+🧠 Drift is not just a data science metric. It is an early warning system for product behavior.
 
 Day 52/60 of my MLOps Series.
 
-Production MLOps is not only training a model. It is the release system around model, data, features, monitoring, rollback, and ownership.
+Writing this from the lens of a 7-year DevOps / Platform / MLOps engineer:
+the tool is rarely the hard part. The hard part is designing the system so teams can operate it safely after the first release.
 
-Practical checklist:
-1. Track model version, data version, feature version, and code version together.
-2. Define approval, deployment, monitoring, and rollback before production.
-3. Monitor latency, errors, throughput, prediction distribution, and drift.
-4. Keep experiments, artifacts, and production releases auditable.
-5. Document the failure mode before it becomes an incident.
+Architect view:
+I separate input drift, feature drift, prediction drift, and business KPI movement before deciding whether to retrain.
 
-My learning note:
-Small platform improvements compound when they are automated, observable, and easy for teams to repeat.
+My production checklist:
+1. Compare live feature distributions against the training baseline.
+2. Track prediction distribution changes by segment, geography, and customer type.
+3. Link drift alerts to model version, dataset version, and feature pipeline version.
+4. Avoid automatic retraining until the business impact and data quality are understood.
+5. Keep a rollback path if the new model improves offline metrics but hurts production behavior.
 
-What MLOps failure mode have you seen most often in real projects?
+Tradeoff I would call out:
+The expensive mistake is retraining on bad data and calling it continuous improvement.
 
-#MLOps #MachineLearning #MLPlatform #DevOps
+Principle I keep coming back to:
+Treat every model release as a software release plus a data contract.
+
+This is the difference between "it works" and "it is ready for production ownership."
+
+What would you add to make this safer in a real ML platform?
+
+#MLOps #MachineLearning #MLPlatform #DevOps #AIInfrastructure

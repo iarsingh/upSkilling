@@ -5,25 +5,35 @@ day: 25
 series: Kubernetes Series
 topic: ImagePullBackOff debugging checklist
 linkedinProfile: https://www.linkedin.com/in/iamarsingh/
+image: ../assets/2026-07-14-2026-07-14-k8s-imagepullbackoff-debugging-checklist.png
 status: scheduled
 ---
 
-ImagePullBackOff debugging checklist
+☸️ Good Kubernetes debugging follows evidence, not random kubectl commands.
 
 Day 25/60 of my Kubernetes Series.
 
-Kubernetes becomes powerful when we treat it as a reliability platform, not just a place to run containers.
+Writing this from the lens of a 7-year DevOps / Platform / MLOps engineer:
+the tool is rarely the hard part. The hard part is designing the system so teams can operate it safely after the first release.
 
-Practical checklist:
-1. Validate requests, limits, probes, rollout strategy, and autoscaling together.
-2. Check events, logs, endpoints, DNS, and resource pressure during incidents.
-3. Use namespaces, RBAC, NetworkPolicy, and secrets deliberately.
-4. Design rollback before every risky deployment.
-5. Make dashboards and alerts match user-facing reliability.
+Architect view:
+I move from symptom to scheduling, image, config, dependency, resource, and application signals.
 
-My learning note:
-Small platform improvements compound when they are automated, observable, and easy for teams to repeat.
+My production checklist:
+1. Read events before changing manifests.
+2. Check image tag, registry auth, and pull secrets.
+3. Inspect env vars, secrets, config maps, and mounted volumes.
+4. Review probes, command args, ports, and startup dependencies.
+5. Correlate logs with recent deploys and resource pressure.
 
-Which Kubernetes issue has taken the most time for you to debug?
+Tradeoff I would call out:
+The fastest fix is often found in events, not in the application logs.
 
-#Kubernetes #DevOps #PlatformEngineering #CloudNative
+Principle I keep coming back to:
+Design the operating model before scaling the cluster.
+
+This is the difference between "it works" and "it is ready for production ownership."
+
+How would you design this in a production Kubernetes platform?
+
+#Kubernetes #DevOps #PlatformEngineering #CloudNative #SRE

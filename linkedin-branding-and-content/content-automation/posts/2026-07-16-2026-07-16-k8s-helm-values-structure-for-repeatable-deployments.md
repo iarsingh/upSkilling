@@ -9,38 +9,31 @@ image: ../assets/2026-07-16-2026-07-16-k8s-helm-values-structure-for-repeatable-
 status: scheduled
 ---
 
-📦 Helm becomes powerful when values are designed, not dumped.
+☸️ Helm values are a contract between app teams and platform teams.
 
 Day 27/60 of my Kubernetes Series.
 
-A common mistake is putting every environment difference into one large values file until nobody knows what is safe to change.
+Writing this from the lens of a 7-year DevOps / Platform / MLOps engineer:
+the tool is rarely the hard part. The hard part is designing the system so teams can operate it safely after the first release.
 
-A cleaner structure:
+Architect view:
+The best charts separate app-owned configuration from platform-owned reliability, security, and runtime controls.
 
-1. 🧱 base values
-Defaults shared across environments: labels, ports, probes, resource shape, common annotations.
+My production checklist:
+1. Keep base values stable and environment overlays small.
+2. Document which values teams can change safely.
+3. Keep secrets out of values files.
+4. Validate rendered manifests before merge.
+5. Version chart changes that affect runtime behavior.
 
-2. 🌱 environment overlays
-dev, stage, prod differences: replica count, autoscaling, ingress host, resource size, feature flags.
+Tradeoff I would call out:
+A giant values file is not flexibility. It is hidden operational coupling.
 
-3. 🔐 secret boundaries
-Do not store secrets directly in values. Reference External Secrets, Secret Manager, Vault, or sealed secrets.
+Principle I keep coming back to:
+Design the operating model before scaling the cluster.
 
-4. 🚦 operational settings
-Probes, PDB, HPA, rollout strategy, tolerations, affinity, and topology spread constraints.
+This is the difference between "it works" and "it is ready for production ownership."
 
-5. 🧪 validation
-Run helm lint, helm template, kubeconform, and policy checks before merge.
+How would you design this in a production Kubernetes platform?
 
-6. 🧭 ownership
-Make it clear which values app teams can change and which values platform teams own.
-
-My rule of thumb:
-If changing one value can break production routing, scaling, or security, it deserves review and documentation.
-
-Helm is not just packaging.
-It is a contract between application delivery and platform operations.
-
-How do you separate app-owned and platform-owned Helm values?
-
-#Kubernetes #Helm #DevOps #PlatformEngineering #CloudNative
+#Kubernetes #DevOps #PlatformEngineering #CloudNative #SRE
