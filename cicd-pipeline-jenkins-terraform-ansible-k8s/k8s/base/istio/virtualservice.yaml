@@ -1,0 +1,28 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: quiz-routes
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - quiz-gateway
+  http:
+    # Expose quiz-api directly under /api for debugging/verification
+    # (e.g. `curl http://$GATEWAY/api/health`); quiz-web itself talks to
+    # quiz-api over its in-cluster Service DNS, not through this route.
+    - match:
+        - uri:
+            prefix: /api/
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: quiz-api
+            port:
+              number: 8000
+    - route:
+        - destination:
+            host: quiz-web
+            port:
+              number: 8080

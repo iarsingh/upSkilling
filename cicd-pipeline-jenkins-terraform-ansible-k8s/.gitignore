@@ -1,0 +1,21 @@
+# Contains embedded cluster client cert/key data -- never commit.
+jenkins/kubeconfig.minikube-internal
+
+# Terraform local state/cache (.terraform.lock.hcl IS committed on purpose --
+# it pins provider versions)
+terraform/**/.terraform/
+terraform/**/*.tfstate
+terraform/**/*.tfstate.backup
+terraform/**/terraform.tfvars
+
+# GCP service account keys, if ever downloaded locally for the demo
+*.json.key
+sa-key.json
+
+# Python test/bytecode artifacts
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv-ci/
+
+.DS_Store

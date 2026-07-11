@@ -1,0 +1,29 @@
+jenkins:
+  systemMessage: "quiz-app CI/CD -- local demo controller (JCasC-seeded)"
+  numExecutors: 2
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: admin
+          password: ${JENKINS_ADMIN_PASSWORD:-admin}
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+jobs:
+  - script: >
+      pipelineJob('quiz-pipeline') {
+        description('Builds quiz-api + quiz-web, deploys to the local minikube cluster via Ansible.')
+        parameters {
+          choiceParam('ENVIRONMENT', ['dev', 'staging', 'prod'], 'Kustomize overlay to deploy')
+          booleanParam('PUSH_TO_REGISTRY', false, 'Push images to Artifact Registry (needs real GCP credentials -- off for local demo)')
+          booleanParam('APPLY_TERRAFORM', false, 'Run terraform plan against real GCP (needs real GCP credentials -- off for local demo)')
+        }
+        definition {
+          cps {
+            script(new File('/workspace/pipeline/Jenkinsfile').text)
+            sandbox(true)
+          }
+        }
+      }

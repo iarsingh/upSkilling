@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: quiz-staging
+resources:
+  - ../../base
+images:
+  - name: quiz-api
+    newName: REGISTRY_PLACEHOLDER/quiz-api
+    newTag: BUILD_TAG_PLACEHOLDER
+  - name: quiz-web
+    newName: REGISTRY_PLACEHOLDER/quiz-web
+    newTag: BUILD_TAG_PLACEHOLDER
+patches:
+  - path: replicas-patch.yaml

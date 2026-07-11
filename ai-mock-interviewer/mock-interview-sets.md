@@ -1,6 +1,6 @@
 # Mock Interview Sets for Senior GCP DevOps / SRE
 
-Use one set as one complete mock interview round. Each set has 8 questions and mixes technical depth, troubleshooting, design, reliability, security, and senior ownership.
+Use one set as one complete mock interview round. Each set mixes technical depth, troubleshooting, design, reliability, security, and senior ownership.
 
 ## Mock Interview 1 - GKE Production Troubleshooting
 
@@ -210,7 +210,7 @@ Focus: Kubernetes architecture, workload objects, services, ingress, rollouts, p
 
 ## Mock Interview 17 - GKE Troubleshooting and Reliability Round
 
-Focus: CrashLoopBackOff, Pending pods, node failure, autoscaling, upgrades, availability, security, and DR
+Focus: CrashLoopBackOff, Pending pods, node failure, autoscaling, upgrades, availability, security, GKE backup/restore, etcd backup nuance, and DR
 
 1. **GKE/Kubernetes:** CrashLoopBackOff: A pod is continuously restarting. How would you troubleshoot it?
 2. **GKE/Kubernetes:** Pending pods: How do you troubleshoot Pending pods?
@@ -220,6 +220,12 @@ Focus: CrashLoopBackOff, Pending pods, node failure, autoscaling, upgrades, avai
 6. **GKE/Kubernetes:** Highly available GKE: How would you design a highly available GKE architecture?
 7. **Security/DevSecOps:** Production Kubernetes security: How would you secure a production Kubernetes cluster?
 8. **SRE/Reliability:** Disaster recovery: How would you implement disaster recovery for a production platform?
+9. **GKE/Backup:** In GKE, can you take a direct etcd backup like a self-managed Kubernetes cluster?
+10. **GKE/Backup:** How would you design backup and restore for a production GKE cluster?
+11. **GKE/Backup:** What is Backup for GKE, and what problem does it solve?
+12. **GKE/Backup:** Scenario: A namespace with production workloads is accidentally deleted in GKE. How would you recover it?
+13. **GKE/Backup:** How do you test whether a GKE backup is actually restorable?
+14. **Kubernetes/etcd:** How do you take and restore an etcd snapshot in self-managed Kubernetes?
 
 ## Mock Interview 18 - Terraform Fundamentals Round
 
@@ -291,6 +297,45 @@ Focus: monitoring tools, alerts, production troubleshooting, resource usage, fai
 6. **SRE/Reliability:** Application inaccessible after deployment: Users cannot access the application after deployment. How would you debug it?
 7. **Networking:** On-prem to GCP migration: How would you migrate an application from on-premises to GCP?
 8. **SRE/Reliability:** Disaster recovery: How would you implement disaster recovery?
+
+## Mock Interview 23 - Technology Risk Lead Technical Round
+
+Focus: technology risk framework, risk assessment, controls, governance, audit, cloud risk, SDLC, and reporting
+
+1. **Technology Risk:** Technology risk framework: How would you design an enterprise technology risk management framework for cloud, applications, infrastructure, SDLC, and third-party integrations?
+2. **Technology Risk:** Risk assessment: A product team is launching a new customer-facing platform on GCP/GKE. How would you assess technology risk from BRD/PRD through architecture review, build, release, and operations?
+3. **Controls:** Control design: For a regulated cloud platform, define preventive, detective, and corrective controls for IAM, network exposure, CI/CD, secrets, vulnerability management, and production changes.
+4. **Governance/Compliance:** Framework mapping: How would you map ISO 27001, NIST, COBIT, and FAIR requirements to practical cloud and DevOps controls without creating checkbox compliance?
+5. **Audit/Remediation:** Audit remediation: An external audit finds weak access reviews, missing evidence, and delayed patching. How would you create a remediation plan, owners, due dates, risk acceptance, and reporting?
+6. **Incident Risk:** Incident risk analysis: A production incident was fixed quickly, but the same failure could repeat. How would you analyze root cause, systemic risk, control failure, and long-term mitigation?
+7. **Risk Reporting:** Cloud risk dashboard: Design a technology risk dashboard for senior leadership. What KRIs, control metrics, exceptions, trends, and escalation signals would you include?
+8. **Risk Automation:** Risk automation: What parts of technology risk assessment and reporting would you automate using cloud logs, CI/CD metadata, vulnerability scanners, policy-as-code, and ticketing workflows?
+
+## Mock Interview 24 - Technology Risk Lead Behavioural Round
+
+Focus: stakeholder management, leadership, executive communication, prioritization, audit partnership, and risk culture
+
+1. **Leadership/Behavioural:** Behavioural risk leadership: Tell me about a time you had to influence engineering or product teams to fix a technology risk they did not initially prioritize.
+2. **Stakeholder Management:** Stakeholder communication: How would you explain a critical cloud security risk to senior leadership in business-impact language without overwhelming them with technical detail?
+3. **Decision-Making:** Conflict handling: Product wants to release quickly, Security wants stricter controls, and Engineering says the control adds toil. How would you drive a decision?
+4. **Stakeholder Management:** Trusted advisor: Describe how you would build trust with IT, Engineering, Product, Security, Audit, and Business stakeholders as a Technology Risk Lead.
+5. **Leadership/Behavioural:** Prioritization: You have critical audit findings, recurring incidents, and a weak risk dashboard. How would you prioritize the next 30, 60, and 90 days?
+6. **Risk Culture:** Risk culture: Give an example of how you would promote a risk-aware culture without making teams feel blocked or blamed.
+7. **Audit/Remediation:** Remediation ownership: A risk issue is overdue because multiple teams disagree on ownership. How would you move it to closure?
+8. **Leadership/Behavioural:** Incident communication: During a major incident with regulatory implications, how would you coordinate technical updates, business impact, risk reporting, and follow-up actions?
+
+## Mock Interview 25 - Python and Go Platform Programming Round
+
+Focus: Python automation, Go programming, cloud APIs, Kubernetes clients, CLIs, controllers, testing, and production readiness
+
+1. **Python:** Python automation: How would you design a Python script that audits GCP IAM bindings, flags risky roles, and exports a remediation report?
+2. **Python:** Python testing: How would you unit test a GCP or Kubernetes automation script without touching real production resources?
+3. **Python:** Python concurrency: When would you use threads, asyncio, multiprocessing, or a worker pool for cloud resource inventory?
+4. **Python:** Python FastAPI: How would you design a small FastAPI service that exposes self-service infrastructure requests with validation, approval, and audit logs?
+5. **Go:** Go fundamentals: What are the main differences between Go and Python for cloud/platform automation, and when would you choose each?
+6. **Go:** Go concurrency: Explain goroutines, channels, context cancellation, and wait groups using a platform automation example.
+7. **Go:** Go Kubernetes: When would you use client-go or controller-runtime, and how would you design a simple Kubernetes controller?
+8. **Go:** Go production readiness: What code review checklist would you use before deploying a Go automation service or controller to production?
 
 ## Mock Interview 26 - Technology Risk Fundamentals
 
@@ -489,6 +534,19 @@ Focus: GCP, Kubernetes, Terraform, CI/CD, service accounts, least privilege, com
 11. **GCP DevOps Risk:** How do you ensure Infrastructure as Code changes are compliant before deployment?
 12. **GCP DevOps Risk:** Describe a cloud security incident you investigated and the lessons learned.
 
+## Mock Interview 39 - FastAPI Backend Round
+
+Focus: FastAPI service design, Pydantic, async endpoints, security, databases, observability, testing, deployment, and production readiness
+
+1. **FastAPI:** FastAPI fundamentals: How would you structure a production FastAPI service with routers, dependencies, schemas, settings, and clear module boundaries?
+2. **FastAPI:** FastAPI request validation: How do Pydantic models, response models, and validation errors help keep APIs safe and predictable?
+3. **FastAPI:** FastAPI async: When should a FastAPI endpoint be async, and what mistakes can block the event loop in production?
+4. **FastAPI:** FastAPI security: How would you implement JWT/OAuth2 authentication, role-based access, secret handling, and least privilege for internal APIs?
+5. **FastAPI:** FastAPI observability: What logs, metrics, traces, request IDs, and health endpoints would you add before deploying a FastAPI service?
+6. **FastAPI:** FastAPI deployment: How would you deploy FastAPI with Uvicorn/Gunicorn, containers, Kubernetes/GKE, autoscaling, probes, and graceful shutdown?
+7. **FastAPI:** FastAPI performance: A FastAPI endpoint has high p95 latency. How would you debug code, database calls, external APIs, concurrency, and infrastructure?
+8. **FastAPI:** FastAPI production readiness: What checklist would you use before approving a FastAPI service for production?
+
 ## Mock Interview 40 - Network Hub Scope and Hub-Spoke Risk Round
 
 Focus: GCP hub-and-spoke networking, Shared VPC, Network Connectivity Center, routing, DNS, firewall governance, NAT, hybrid connectivity, segmentation, and network risk
@@ -592,6 +650,19 @@ Focus: Ansible playbooks, roles, idempotency, Vault secrets, testing, scale, and
 7. **Ansible:** How would you test Ansible roles and playbooks before running them in production, for example with Molecule or a CI pipeline?
 8. **Ansible:** You used Ansible for backup automation and disaster recovery. Walk me through how a playbook-driven DR runbook would work end to end.
 
+## Mock Interview 47 - Today's Audio Interview Recap
+
+Focus: Terraform reusable modules, production change safety, observability triage, SLI/SLO alerting, burn-rate alerts, and senior behavioral introduction
+
+1. **Terraform/IaC:** How do you design reusable infrastructure modules? How do you handle reusable modules with strict state and credential isolation? How do approval workflows reduce the blast radius of infrastructure changes?
+2. **Terraform/IaC:** Terraform change safety: When a Terraform plan shows a destroy and replace for a critical resource, what signals and guardrails do you rely on to decide whether to proceed, redesign, or block the change?
+3. **Observability:** Incident response and observability: Customers report intermittent 5xx errors and P95 latency spikes. Walk me through your observability-driven triage sequence across metrics, logs, and traces. How do you isolate the failing dependency?
+4. **SRE/Reliability:** SLIs, SLOs, and alerting: How do you define customer-centric SLIs, SLOs, and actionable alerts? How do you filter noisy infrastructure signals? How do you catch both fast outages and slow degradation without paging on transient spikes?
+5. **SRE/Reliability:** Multi-window burn-rate alerting: Walk me through how you would implement multi-window burn-rate alerts for a 99.9% availability SLO. Which alert windows would you choose? Which alerts should page an on-call engineer immediately, and which should create a ticket for later investigation?
+6. **Behavioral:** Tell me about yourself.
+7. **Behavioral:** Describe your experience with cloud platforms, Kubernetes, Terraform, and DevOps.
+8. **Production Readiness:** How do you approach infrastructure changes in production to minimize customer impact?
+
 ## Mock Interview 48 - Today AI/Python/Cloud/SRE Recap
 
 Focus: AI engineering libraries, Python equality and multiprocessing, AWS to GCP migration, Terraform IAM recovery, multi-environment architecture, Kubernetes policy guardrails, observability, tracing, burn-rate alerts, and outage mitigation decisions
@@ -655,20 +726,27 @@ Focus: LLM production architecture, prompt lifecycle, LLM evaluation, fine-tunin
 15. **ML Incident:** Mock 50 focus - bad model incident: A model is technically healthy but business KPIs suddenly drop after release. How would you investigate and mitigate?
 16. **ML Platform:** Mock 50 focus - ML platform design: What shared platform capabilities would you build for data scientists and ML engineers to ship models safely and repeatedly?
 
-## Mock Interview 51 - Kubernetes Services and Terraform Loops Round
+## Mock Interview 51 - Kubernetes Services, Service Mesh, AKS/GKE, and Terraform Loops Round
 
-Focus: Kubernetes Service networking, kube-proxy, cross-namespace DNS, startup ordering, blue-green traffic switching, Terraform dynamic blocks, for_each, each.value, toset, and repeated S3 resources
+Focus: Kubernetes Service networking, kube-proxy, cross-namespace DNS, startup ordering, blue-green traffic switching, service mesh, Istio/Anthos Service Mesh, AKS versus GKE operations, Terraform dynamic blocks, for_each, each.value, toset, and repeated S3 resources
 
 1. **GKE/Kubernetes:** What is kube-proxy?
 2. **GKE/Kubernetes:** Suppose there are two Pods running in different namespaces. What DNS name would you use so that one Pod can communicate with the other?
 3. **GKE/Kubernetes:** There are two applications, a frontend application and a backend application, running in two different Pods. What configuration would you write so that the frontend application starts only after the backend application is up and running?
 4. **CI/CD/GitOps:** We mostly follow blue-green deployment. How do you divert traffic from the Blue environment to the Green environment?
-5. **Terraform/IaC:** What is a dynamic block in Terraform?
-6. **Terraform/IaC:** What is the use case of a dynamic block?
-7. **Terraform/IaC:** How would you create multiple S3 buckets in Terraform?
-8. **Terraform/IaC:** What is the meaning of each.value in Terraform?
-9. **Terraform/IaC:** Why do we use each.value?
-10. **Terraform/IaC:** Why do we use toset() in Terraform?
+5. **Kubernetes Services:** How do Kubernetes Services work, and when would you use ClusterIP, NodePort, LoadBalancer, or headless Service?
+6. **Kubernetes Services:** Scenario: A frontend Pod cannot reach a backend Service in another namespace. How would you troubleshoot it?
+7. **Service Mesh:** What is service mesh, and when would you introduce Istio or Anthos Service Mesh into a Kubernetes platform?
+8. **Service Mesh:** Scenario: After enabling service mesh mTLS, some services start failing. What would you check?
+9. **GKE/Kubernetes:** How would you implement canary or blue-green deployment using Kubernetes Services and service mesh traffic splitting?
+10. **GKE/AKS:** What is AKS, and how is it different from GKE from an operations point of view?
+11. **GKE/AKS:** Scenario: An AKS or GKE node upgrade is blocked or causing disruption. What would you investigate?
+12. **Terraform/IaC:** What is a dynamic block in Terraform?
+13. **Terraform/IaC:** What is the use case of a dynamic block?
+14. **Terraform/IaC:** How would you create multiple S3 buckets in Terraform?
+15. **Terraform/IaC:** What is the meaning of each.value in Terraform?
+16. **Terraform/IaC:** Why do we use each.value?
+17. **Terraform/IaC:** Why do we use toset() in Terraform?
 
 ## Mock Interview 52 - Datadog Observability Round
 
@@ -875,7 +953,6 @@ Focus: Resilinc-style DevOps/GCP production support, GCP incidents, observabilit
 18. **Incident Handling:** How do you handle production incidents and write an RCA?
 19. **System Design:** Design scalable cloud infrastructure for a production application on GCP.
 
-
 ## Mock Interview 62 - Complete DevOps GCP Kubernetes Screening Bank
 
 Focus: Full consolidated screening list from shared interviews: background, GCP, Kubernetes, Docker, CI/CD, Terraform, monitoring, Git, Linux, databases, Kafka, production scenarios, behavioral, and MLOps/AI
@@ -981,7 +1058,6 @@ Focus: Full consolidated screening list from shared interviews: background, GCP,
 99. **MLOps / AI:** What is Kubeflow?
 100. **MLOps / AI:** How would you build an end-to-end MLOps pipeline?
 
-
 ## Mock Interview 63 - Kubernetes Fundamentals Transcript Round
 
 Focus: Kubernetes DNS/FQDN, CoreDNS, API server, etcd, RBAC, kubelet, probes, pod health, restart flow, service discovery, and control plane versus worker-node responsibilities
@@ -1000,7 +1076,6 @@ Focus: Kubernetes DNS/FQDN, CoreDNS, API server, etcd, RBAC, kubelet, probes, po
 12. **Container Runtime:** How does kubelet restart a failed container? Does kubelet communicate directly with the container runtime?
 13. **Kubernetes Failure Flow:** What is the complete flow when an application crashes: Application to Kubelet to API Server to etcd to Controller Manager to new Pod or restart?
 14. **Content Correlation:** What do you mean by content correlation in the context of Kubernetes or observability?
-
 
 ## Mock Interview 64 - Security Database Ansible CI/CD Round
 
@@ -1029,7 +1104,6 @@ Focus: Application stack, Sentinel antivirus, Prisma Cloud Security, databases, 
 21. **SonarQube:** What does SonarQube check, including bugs, vulnerabilities, code smells, code duplication, and Quality Gates?
 22. **SonarQube:** What happens if SonarQube Quality Gate fails?
 23. **CI/CD:** After SonarQube, what are the next stages in the CI/CD pipeline, such as build, container image creation, image scanning, push to registry, and deployment to Dev/QA/Prod?
-
 
 ## Mock Interview 65 - EKS Kubernetes DevOps Operations Round
 
@@ -1099,19 +1173,19 @@ Focus: General experience, AWS/Azure/GCP/on-prem, EKS, root cause troubleshootin
 
 Focus: Terraform hands-on coding task for local provider initialization, input variables, environment-backed secrets, local_file resource creation, file permissions, and clean grading through sudo solve
 
-1. **Terraform/Hands-On:** Terraform: Secret Creation. You want to deploy a web application using Terraform. Complete `/home/ubuntu/1063862-terraform-secret-creation/main.tf` using HCL so that it initializes the `hashicorp/local` provider at version `2.1.0`, declares a variable named `secret` whose value is passed through an environment variable during `terraform apply`, and creates a `local_file` resource at `/run/secret` with permissions `0600` and content from `var.secret`. The solution must live inside `/home/ubuntu/1063862-terraform-secret-creation` and be correct when evaluated by running `sudo solve` from that directory in a clean environment.
+1. **Terraform/Hands-On:** Terraform: Secret Creation. You want to deploy a web application using Terraform. Complete /home/ubuntu/1063862-terraform-secret-creation/main.tf using HCL so that it initializes the hashicorp/local provider at version 2.1.0, declares a variable named secret whose value is passed through an environment variable during terraform apply, and creates a local_file resource at /run/secret with permissions 0600 and content from var.secret. The solution must live inside /home/ubuntu/1063862-terraform-secret-creation and be correct when evaluated by running sudo solve from that directory in a clean environment.
 
 ## Mock Interview 67 - Kubernetes StatefulSet Basic Implementation Hands-On Round
 
 Focus: Kubernetes hands-on coding task for StatefulSet creation, namespace placement, headless Service binding, labels and selectors, replicas, container image, and container port configuration
 
-1. **Kubernetes/Hands-On:** StatefulSet: Basic Implementation. In the `hacker-company` namespace, an existing headless Service named `nginx` has selector `role: frontend` and exposes port `80`. Complete `/home/ubuntu/171641-kubernetes-statefulset-basic-implementation/definition.yaml` by implementing a StatefulSet named `frontend` in namespace `hacker-company`. It must use `serviceName: nginx`, deploy `2` replicas, set labels so they match the Service selector `role: frontend`, run a container named `nginx` using image `nginx:latest`, and expose container port `80`. Verify with `kubectl get statefulset -n hacker-company`, `kubectl get pods -n hacker-company`, `kubectl describe statefulset frontend -n hacker-company`, then finish with `sudo solve`.
+1. **Kubernetes/Hands-On:** StatefulSet: Basic Implementation. In the hacker-company namespace, an existing headless Service named nginx has selector role: frontend and exposes port 80. Complete /home/ubuntu/171641-kubernetes-statefulset-basic-implementation/definition.yaml by implementing a StatefulSet named frontend in namespace hacker-company. It must use serviceName nginx, deploy 2 replicas, set labels so they match the Service selector role: frontend, run a container named nginx using image nginx:latest, and expose container port 80. Verify with kubectl get statefulset -n hacker-company, kubectl get pods -n hacker-company, kubectl describe statefulset frontend -n hacker-company, then finish with sudo solve.
 
 ## Mock Interview 68 - Docker HackerAPI Environment Variable Hands-On Round
 
 Focus: Docker hands-on scripting task for container creation, image selection, container naming, host environment variable forwarding, detached interactive mode, and avoiding pseudo-TTY allocation
 
-1. **Docker/Hands-On:** Docker: HackerAPI Deployment, Environment Variables. Complete the `script.sh` file stub under `/home/ubuntu/...` so it runs a Docker container named `hackerapi` using image `public.ecr.aws/docker/library/nginx:latest`. The container must receive an environment variable named `HACKERAPI_SECURITY_TOKEN` with its value taken from the existing host environment variable of the same name, run in interactive background mode, and run without pseudo-TTY allocation. The expected command is: `docker run -d -i --name hackerapi -e HACKERAPI_SECURITY_TOKEN=$HACKERAPI_SECURITY_TOKEN public.ecr.aws/docker/library/nginx:latest`.
+1. **Docker/Hands-On:** Docker: HackerAPI Deployment, Environment Variables. Complete the script.sh file stub under /home/ubuntu/... so it runs a Docker container named hackerapi using image public.ecr.aws/docker/library/nginx:latest. The container must receive an environment variable named HACKERAPI_SECURITY_TOKEN with its value taken from the existing host environment variable of the same name, run in interactive background mode, and run without pseudo-TTY allocation. The expected command is: docker run -d -i --name hackerapi -e HACKERAPI_SECURITY_TOKEN=$HACKERAPI_SECURITY_TOKEN public.ecr.aws/docker/library/nginx:latest.
 
 ## Mock Interview 69 - Terraform Validate Docker Project Round
 
@@ -1149,3 +1223,267 @@ Focus: Coderbyte-style Terraform Docker validation assessment covering required_
 30. **Terraform/Commands:** What is the difference between terraform validate and terraform plan?
 31. **Terraform/Versioning:** How do you pin a provider version?
 32. **Terraform/Docker Hands-On:** How would you deploy a Docker container using Terraform?
+
+## Mock Interview 70 - GCP DevOps and GKE Screening
+
+Focus: DevOps responsibilities, GCP services, GKE, Jenkins, CI/CD, Docker/Kubernetes operations, monitoring and security
+
+1. **DevOps:** Your profile looks more DevOps-focused. What have you done specifically in DevOps?
+2. **DevOps:** In the DevOps area, what exactly are you trying to do? What are your day-to-day responsibilities?
+3. **Cloud:** Which cloud platform are you strongest in: GCP, AWS, or Azure?
+4. **GCP:** What are the last three major DevOps tasks or projects you have done in GCP?
+5. **GCP:** What are the key GCP services you have used?
+6. **GKE/Kubernetes:** What is the difference between GKE Standard Mode and Autopilot Mode?
+7. **GKE/Kubernetes:** Can you explain the GKE architecture?
+8. **GKE/Security:** How do you secure a GKE cluster?
+9. **CI/CD/Jenkins:** Have you used Jenkins CI/CD pipelines with Bitbucket?
+10. **CI/CD/Jenkins:** What is the CI workflow in Jenkins?
+11. **CI/CD/GCP:** How would you design a CI/CD pipeline in GCP? Explain the complete flow.
+12. **CI/CD/Git:** Would you use Cloud Source Repositories or an external Git repository such as GitHub, Bitbucket, or GitLab in your pipeline?
+13. **Data Platform:** Do you have experience implementing GCP with EDM, Salesforce, or any data platform?
+14. **Database Migration:** Do you have experience with Liquibase or database migration?
+15. **Containers/Kubernetes:** Do you have real-time experience with containerization technologies like Docker and Kubernetes?
+16. **Containers/Kubernetes:** Can you explain a real project where you containerized and deployed an application?
+17. **Observability:** How do you monitor containerized applications?
+18. **Logging/Troubleshooting:** How do you perform logging and troubleshoot errors in Docker/Kubernetes environments?
+19. **Observability:** Which monitoring tools have you used for Kubernetes, such as Prometheus, ELK, Datadog, or Cloud Monitoring?
+
+## Mock Interview 71 - Docker Kubernetes CI/CD DevSecOps Deep Dive
+
+Focus: Dockerfile fundamentals, Kubernetes services and manifests, EKS deployment pipeline, ConfigMaps, Secrets, networking, service auth, Azure App Service, APIs, observability, scalability, and MLOps
+
+1. **Docker:** What is the purpose of EXPOSE in a Dockerfile?
+2. **Docker:** What is the difference between CMD and ENTRYPOINT?
+3. **Docker:** What is RUN used for in a Dockerfile?
+4. **Docker/FastAPI:** How do you expose a FastAPI application on port 8000 inside a Docker container?
+5. **Docker:** How does the application code become available inside the Docker container?
+6. **Docker:** What command starts the application inside the container?
+7. **Docker/Networking:** How do you publish a Docker container port to the host?
+8. **Docker/Networking:** What is the purpose of docker run -p?
+9. **Kubernetes/Services:** What are the different types of Kubernetes Services?
+10. **Kubernetes/Services:** How do you expose an application externally?
+11. **Kubernetes/Networking:** What is the equivalent of Docker port mapping in Kubernetes?
+12. **Kubernetes/Services:** How do containerPort, port, and targetPort work?
+13. **Kubernetes/Manifests:** How do you deploy an application using Kubernetes manifest files?
+14. **Kubernetes/Commands:** What is the kubectl apply command?
+15. **EKS/Deployment:** After pushing an image to ECR, what is the next step?
+16. **Kubernetes/Deployment:** How do you update the Deployment manifest with the new image?
+17. **Kubernetes/Deployment:** If the latest image is pushed but the pod is still using the old image, how do you refresh it?
+18. **Helm:** Have you worked on Helm charts?
+19. **CI/CD/EKS:** Explain an automated deployment pipeline for a FastAPI application to EKS.
+20. **DevSecOps:** What checks would you perform before deployment?
+21. **DevSecOps:** How would you perform code formatting, linting, unit testing, vulnerability scanning, secret scanning, and image scanning?
+22. **Container Registry:** Where would you push the Docker image?
+23. **CI/CD/EKS:** How would you deploy the image after pushing it to ECR?
+24. **CI/CD/Automation:** How would you automate the deployment?
+25. **Kubernetes/Config:** What is a ConfigMap?
+26. **Kubernetes/Config:** What is stored inside a ConfigMap?
+27. **Kubernetes/Secrets:** What are Kubernetes Secrets?
+28. **Kubernetes/Secrets:** How do you use Secrets inside a pod?
+29. **Kubernetes/Config:** What is the difference between ConfigMap and Secret?
+30. **Networking:** How can you expose a service only to users inside your organization?
+31. **Networking/Security:** Without using SSO or RBAC, how would you restrict access?
+32. **Kubernetes/NetworkPolicy:** Can NetworkPolicy solve this problem?
+33. **Networking/Security:** How would you whitelist an organization's CIDR/IP range?
+34. **Networking/Load Balancer:** What is the role of an Internal Load Balancer?
+35. **Security/Service Auth:** What is service-to-service authentication?
+36. **Security/Service Auth:** How do two services communicate securely?
+37. **Azure/PostgreSQL:** How would an App Service communicate with PostgreSQL?
+38. **Azure/IAM:** How would you authorize App Service to access PostgreSQL?
+39. **Azure/IAM:** How do Managed Identities work?
+40. **Azure/IAM:** How do you provide Contributor access to an App Service?
+41. **Azure/App Service:** What is Azure App Service?
+42. **Azure/App Service:** What is App Service used for?
+43. **Azure/App Service:** How do applications hosted on App Service connect to a database?
+44. **APIs/Development:** How comfortable are you with API development?
+45. **APIs/Development:** Have you built APIs yourself?
+46. **APIs/Database:** How does an API read and write data to a database?
+47. **APIs/Development:** What is your understanding of API development?
+48. **Observability:** How would you build an observability namespace?
+49. **Observability:** Which services would you use for metrics, logs, and traces?
+50. **Observability/Grafana:** How would you integrate Grafana?
+51. **Observability/OpenTelemetry:** What exactly is OpenTelemetry?
+52. **Observability/OpenTelemetry:** OpenTelemetry is only a collector; what backend services would you use?
+53. **Observability/Grafana:** How would Grafana connect to those services?
+54. **Scalability/Kubernetes:** Suppose millions of users access your API. How would you design a scalable Kubernetes solution?
+55. **Scalability:** How would you determine your scaling strategy?
+56. **Scalability/Kubernetes:** How would you estimate the number of pods?
+57. **Load Testing:** How would you perform load testing?
+58. **Load Testing:** Can you generate 5,000 requests per second?
+59. **Load Testing:** Which load-testing tools would you use?
+60. **MLOps/AI:** How is your understanding of the latest GenAI/MLOps journey?
+61. **HR/Behavioral:** Do you have any questions for me?
+62. **HR/Behavioral:** Where are you currently based?
+63. **HR/Behavioral:** What is your native place?
+
+## Mock Interview 72 - Kubernetes Terraform Observability and MLOps
+
+Focus: Kubernetes CNI, service mesh, workloads, probes, ingress, autoscaling, cloud networking, observability, Terraform, Ansible, compliance, MLOps and AI infrastructure
+
+1. **Kubernetes/Networking:** Explain CNI in Kubernetes.
+2. **Kubernetes/Networking:** Which CNI have you worked on?
+3. **Kubernetes/Service Mesh:** Do you have experience with a Service Mesh?
+4. **Kubernetes/Service Mesh:** Can you explain what a Service Mesh is?
+5. **Kubernetes/Workloads:** What is the difference between a Deployment and a StatefulSet?
+6. **Kubernetes/Probes:** How do Liveness and Readiness probes differ?
+7. **Kubernetes/Containers:** What is a Sidecar container?
+8. **Kubernetes/Ingress:** What is an Ingress Controller?
+9. **Kubernetes/Autoscaling:** How do you handle Pod Autoscaling?
+10. **Kubernetes/Secrets:** What is a Kubernetes Secret?
+11. **Linux/Kubernetes:** What is BusyBox?
+12. **Kubernetes/etcd:** What does etcd store?
+13. **Kubernetes/etcd:** Does etcd store namespaces and storage configurations?
+14. **Deployment Strategies:** What is Blue-Green Deployment?
+15. **Helm:** What is the use of Helm?
+16. **Cloud Networking:** What is the difference between AWS VPC, Azure VNet, and GCP VPC?
+17. **Hybrid Networking:** How do you connect on-premises resources with cloud resources?
+18. **Cloud Networking:** What is a VPC?
+19. **Kubernetes/Architecture:** How many Kubernetes clusters do you require in production?
+20. **Load Balancing:** How does a Load Balancer distribute traffic between services, for example 50-50?
+21. **Security/mTLS:** What is mTLS?
+22. **Observability/Prometheus:** How much experience do you have with Prometheus?
+23. **Observability/Grafana:** How much experience do you have with Grafana?
+24. **Observability/OpenTelemetry:** How much experience do you have with OpenTelemetry?
+25. **Observability/Tracing:** Have you worked with Jaeger?
+26. **Observability/Logging:** Have you integrated ELK?
+27. **Terraform/State:** What is Terraform State?
+28. **Terraform/Security:** Why is Terraform State a security risk?
+29. **Terraform/State:** How do you manage state locking in a team environment?
+30. **Terraform/Modules:** What is a Terraform Module?
+31. **Terraform/Modules:** When should you use a Terraform Module?
+32. **Terraform/Secrets:** How do you handle secret injection in Terraform?
+33. **Ansible:** What is idempotency in Ansible?
+34. **Security/Compliance:** Have you worked in environments with compliance requirements like PCI DSS, GDPR, or SOC 2?
+35. **Security/Compliance:** What was your role in meeting those compliance requirements?
+36. **Certifications:** Are all three of your cloud certifications still valid?
+37. **MLOps/AI:** How is your experience with MLOps and AI infrastructure?
+38. **MLOps/AI:** What kind of MLOps or AI infrastructure work have you done?
+
+## Mock Interview 73 - Senior GKE Architecture Resource Security and Cost
+
+Focus: Current role storytelling, end-to-end infrastructure architecture, Kubernetes resource sizing, quotas, CPU/memory behavior, monitoring, Prisma Cloud, application security, autoscaling, and cost governance
+
+1. **Role/Responsibilities:** Talk in detail about your core roles and responsibilities in your current role.
+2. **Project Architecture:** Can you explain your current project using a specific client or application as an example?
+3. **Project Architecture:** Explain the infrastructure architecture of one application from end to end.
+4. **Runtime Platform:** Where does this application run?
+5. **Infrastructure Architecture:** What are all the infrastructure components required for this application to run?
+6. **Kubernetes/Resources:** Who decides the CPU and memory limits for the application?
+7. **Kubernetes/Resources:** How do you determine the CPU and memory requests and limits?
+8. **Cloud Cost:** Does the application team also approve the resource sizing because of the cloud cost?
+9. **Kubernetes/Quotas:** What resource quotas or limits do you configure in a Kubernetes cluster?
+10. **Kubernetes/Resources:** How do CPU requests and limits work in Kubernetes?
+11. **Kubernetes/Resources:** What happens if a container exceeds its memory limit?
+12. **Kubernetes/Resources:** What happens if a container exceeds its CPU limit?
+13. **Systems/Resources:** What is the difference between CPU utilization and memory utilization?
+14. **Systems/Storage:** How is memory different from disk storage?
+15. **Observability:** What monitoring tools do you use for the application and infrastructure?
+16. **Observability:** Apart from native GCP monitoring, what third-party monitoring tools do you use?
+17. **Security/Prisma Cloud:** What does Prisma Cloud monitor?
+18. **Security/Prisma Cloud:** Does Prisma monitor IAM security and network security only, or does it also cover application security?
+19. **Application Security:** Have you worked on application security?
+20. **Application Security:** Have you worked on penetration testing or vulnerability assessment?
+21. **Application Security:** Can you give an example of an application security vulnerability that you worked on?
+22. **Web Security:** What are some important HTTP security headers that should be present?
+23. **Web Security:** What does Content Security Policy (CSP) do?
+24. **GKE/Autoscaling:** How does Cluster Autoscaler work in Kubernetes/GKE?
+25. **Observability/GKE:** Do you have real-time monitoring for the Kubernetes cluster?
+26. **GKE/Autoscaling:** If there is a sudden spike in traffic, how does autoscaling work in real time?
+27. **GKE/Autoscaling:** I am referring to node autoscaling, not pod autoscaling. How does node autoscaling work?
+28. **GKE/Autoscaling:** What happens if, due to some unknown issue, the Cluster Autoscaler keeps creating new nodes?
+29. **Cloud Cost/Governance:** How do you control the cloud cost when Cluster Autoscaler keeps scaling nodes?
+
+## Mock Interview 74 - Python Automation and FastAPI DevOps Round
+
+Focus: Python scripting, automation design, API development, FastAPI, authentication, databases, testing, Docker, Kubernetes, observability, and production readiness
+
+1. **Python/Automation:** How have you used Python for DevOps automation in real projects?
+2. **Python/Automation:** How would you design a Python script to automate repeated cloud or Kubernetes operational tasks?
+3. **Python/Automation:** How do you handle errors, retries, logging, and exit codes in production Python automation?
+4. **Python/Automation:** When would you choose Python over Bash for automation?
+5. **Python/Automation:** How would you securely handle credentials and secrets in a Python automation script?
+6. **Python/Automation:** How do you make Python automation idempotent?
+7. **Python/Automation:** How would you schedule and run Python automation in production?
+8. **Python/Automation:** How would you package and deploy a Python automation tool for a team?
+9. **Python/API:** What is your understanding of API development?
+10. **FastAPI:** What is FastAPI and why would you choose it for backend APIs?
+11. **FastAPI:** How do you create a basic GET and POST API in FastAPI?
+12. **FastAPI/Validation:** How does request validation work in FastAPI?
+13. **FastAPI/Auth:** How would you implement authentication and authorization in a FastAPI application?
+14. **FastAPI/Database:** How does a FastAPI application read and write data to a database?
+15. **FastAPI/Async:** What is the difference between sync and async endpoints in FastAPI?
+16. **FastAPI/Testing:** How would you test a FastAPI application?
+17. **FastAPI/Docker:** How would you containerize and run a FastAPI application using Docker?
+18. **FastAPI/Kubernetes:** How would you deploy a FastAPI application on Kubernetes?
+19. **FastAPI/Observability:** How would you add logging, metrics, and tracing to a FastAPI application?
+20. **FastAPI/Security:** What security best practices would you follow for FastAPI APIs?
+21. **FastAPI/Performance:** How would you improve performance and scalability for a FastAPI service?
+22. **FastAPI/CI/CD:** How would you design a CI/CD pipeline for a Python FastAPI service?
+23. **FastAPI/Troubleshooting:** A FastAPI service is returning intermittent 500 errors in Kubernetes. How would you troubleshoot it?
+24. **Python/FastAPI/System Design:** Design a production-ready FastAPI service for an internal DevOps automation platform.
+
+## Mock Interview 75 - API Development Production Round
+
+Focus: API fundamentals, REST design, authentication, authorization, database access, error handling, versioning, testing, observability, security, performance, and production troubleshooting
+
+1. **API/Fundamentals:** What is an API and why do we use APIs in modern applications?
+2. **API/Fundamentals:** What is the difference between REST API, GraphQL, and gRPC?
+3. **API/REST:** How would you design REST endpoints for a user or order management service?
+4. **API/HTTP:** What are common HTTP methods and when would you use GET, POST, PUT, PATCH, and DELETE?
+5. **API/HTTP:** What are important HTTP status codes every API developer should know?
+6. **API/Validation:** How do you validate API request payloads and query parameters?
+7. **API/Auth:** How do you implement authentication in an API?
+8. **API/Auth:** What is the difference between authentication and authorization?
+9. **API/Auth:** How do JWT tokens work in API authentication?
+10. **API/Auth:** How would you implement role-based access control for APIs?
+11. **API/Database:** How does an API read and write data to a database?
+12. **API/Database:** How do you handle database transactions in API development?
+13. **API/Error Handling:** How should an API handle errors and return error responses?
+14. **API/Versioning:** How do you handle API versioning without breaking existing clients?
+15. **API/Pagination:** How would you implement pagination, filtering, and sorting in an API?
+16. **API/Idempotency:** What is idempotency in APIs and why is it important?
+17. **API/Rate Limiting:** How would you implement rate limiting and throttling for APIs?
+18. **API/Security:** What API security best practices would you follow in production?
+19. **API/Testing:** How would you test APIs before releasing them to production?
+20. **API/Documentation:** How do you document APIs for frontend teams and external consumers?
+21. **API/Observability:** What logs, metrics, and traces would you add to a production API?
+22. **API/Performance:** How would you improve API performance and reduce latency?
+23. **API/Scalability:** How would you design an API to handle high traffic?
+24. **API/Deployment:** How would you deploy an API using Docker and Kubernetes?
+25. **API/CI/CD:** How would you design a CI/CD pipeline for API development?
+26. **API/Troubleshooting:** An API is returning intermittent 500 errors after deployment. How would you debug it?
+27. **API/Troubleshooting:** An API latency increased suddenly in production. What would you check first?
+28. **API/System Design:** Design a production-ready API platform for internal automation tools.
+
+## Mock Interview 76 - GenAI and LLMOps Production Round
+
+Focus: GenAI fundamentals, RAG, embeddings, vector databases, prompt engineering, model selection, agents, evaluation, safety, observability, cost, deployment, and LLMOps production readiness
+
+1. **GenAI/Fundamentals:** What is Generative AI and how is it different from traditional machine learning?
+2. **GenAI/Fundamentals:** What is an LLM and how does it generate responses?
+3. **GenAI/Use Cases:** What practical GenAI use cases have you seen for DevOps, SRE, or platform engineering?
+4. **GenAI/RAG:** What is RAG and why do we use it with LLM applications?
+5. **GenAI/RAG:** Explain the end-to-end flow of a RAG application.
+6. **GenAI/Embeddings:** What are embeddings and why are they useful in GenAI systems?
+7. **GenAI/Vector DB:** What is a vector database and when would you use one?
+8. **GenAI/RAG:** How would you improve retrieval quality in a RAG system?
+9. **GenAI/Prompt Engineering:** What is prompt engineering and what makes a prompt production-ready?
+10. **GenAI/Model Selection:** How would you choose between OpenAI, Gemini, Claude, open-source LLMs, or self-hosted models?
+11. **GenAI/Fine Tuning:** What is the difference between RAG and fine-tuning?
+12. **GenAI/Agents:** What are AI agents and what risks do they introduce in production?
+13. **GenAI/Tools:** How does tool calling or function calling work in GenAI applications?
+14. **GenAI/Evaluation:** How would you evaluate the quality of an LLM application?
+15. **GenAI/Hallucination:** What is hallucination in LLMs and how would you reduce it?
+16. **GenAI/Safety:** What safety and guardrail controls would you add to a GenAI application?
+17. **GenAI/Security:** What are prompt injection and data leakage risks in GenAI applications?
+18. **GenAI/Privacy:** How would you protect sensitive data when using LLM APIs?
+19. **LLMOps/Architecture:** How would you design a production architecture for a GenAI chatbot using RAG?
+20. **LLMOps/CI-CD:** How would you design CI/CD for prompts, chains, and GenAI application code?
+21. **LLMOps/Observability:** What should you monitor in a production LLM application?
+22. **LLMOps/Cost:** How would you control cost for a high-traffic GenAI application?
+23. **LLMOps/Performance:** How would you reduce latency in an LLM-powered API?
+24. **LLMOps/Reliability:** How would you design fallback and resilience for LLM provider failures?
+25. **LLMOps/Kubernetes:** How would you deploy a GenAI application on Kubernetes?
+26. **LLMOps/MLOps:** How is LLMOps different from traditional MLOps?
+27. **GenAI/Troubleshooting:** A RAG chatbot is giving wrong answers from old documents. How would you troubleshoot it?
+28. **GenAI/System Design:** Design a secure internal GenAI assistant for DevOps teams to query runbooks, incidents, and Kubernetes troubleshooting steps.

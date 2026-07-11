@@ -1,0 +1,6 @@
+---
+- name: Deploy quiz-api / quiz-web to Kubernetes
+  hosts: k8s_control
+  gather_facts: false
+  roles:
+    - k8s_deploy

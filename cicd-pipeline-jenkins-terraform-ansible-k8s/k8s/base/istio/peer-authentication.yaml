@@ -1,0 +1,10 @@
+# Enforces mTLS for all pod-to-pod traffic inside the `quiz` namespace,
+# including quiz-web -> quiz-api. Plaintext traffic between mesh sidecars
+# is rejected once this is applied.
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: default
+spec:
+  mtls:
+    mode: STRICT

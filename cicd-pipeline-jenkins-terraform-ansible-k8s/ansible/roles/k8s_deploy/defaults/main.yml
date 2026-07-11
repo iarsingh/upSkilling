@@ -1,0 +1,4 @@
+---
+k8s_environment: dev
+k8s_namespace: quiz
+k8s_overlay_path: "{{ playbook_dir }}/../../k8s/overlays"

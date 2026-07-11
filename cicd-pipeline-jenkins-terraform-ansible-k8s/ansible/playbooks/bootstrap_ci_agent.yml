@@ -1,0 +1,6 @@
+---
+- name: Bootstrap Jenkins build agent with pipeline tooling
+  hosts: ci_agents
+  gather_facts: true
+  roles:
+    - docker_prereqs

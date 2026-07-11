@@ -1,0 +1,95 @@
+---
+# Bootstraps a Jenkins build agent with the CLIs the pipeline needs.
+# Package-manager steps only run on Debian/Ubuntu AND only for tools not
+# already on PATH, so this is a no-op on an agent that already has them
+# (e.g. this repo's own jenkins/Dockerfile bakes all four in) and only
+# does real work against a bare Debian/Ubuntu VM.
+
+- name: Check which required CLIs are already on PATH
+  ansible.builtin.command: "{{ item }} version"
+  register: tool_check
+  changed_when: false
+  failed_when: false
+  loop:
+    - docker
+    - kubectl
+    - helm
+    - istioctl
+
+- name: Report CLI availability
+  ansible.builtin.debug:
+    msg: "{{ item.item }}: {{ 'OK' if item.rc == 0 else 'MISSING - will be installed on Debian/Ubuntu agents' }}"
+  loop: "{{ tool_check.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+
+- name: Set per-tool missing flags
+  ansible.builtin.set_fact:
+    docker_missing: "{{ tool_check.results[0].rc != 0 }}"
+    kubectl_missing: "{{ tool_check.results[1].rc != 0 }}"
+    helm_missing: "{{ tool_check.results[2].rc != 0 }}"
+    istioctl_missing: "{{ tool_check.results[3].rc != 0 }}"
+
+- name: Install Docker Engine
+  when: ansible_os_family == "Debian" and docker_missing
+  become: true
+  block:
+    - name: Install Docker prerequisite packages
+      ansible.builtin.apt:
+        name: ["ca-certificates", "curl", "gnupg"]
+        state: present
+        update_cache: true
+
+    - name: Add Docker's official GPG key
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        dest: /etc/apt/keyrings/docker.asc
+        mode: "0644"
+
+    - name: Add Docker apt repository
+      ansible.builtin.apt_repository:
+        repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+        state: present
+
+    - name: Install Docker Engine + CLI
+      ansible.builtin.apt:
+        name: ["docker-ce", "docker-ce-cli", "containerd.io"]
+        state: present
+        update_cache: true
+
+    - name: Add jenkins user to the docker group
+      ansible.builtin.user:
+        name: jenkins
+        groups: docker
+        append: true
+
+- name: Install kubectl
+  when: ansible_os_family == "Debian" and kubectl_missing
+  become: true
+  ansible.builtin.get_url:
+    url: "https://dl.k8s.io/release/{{ kubectl_version }}/bin/linux/amd64/kubectl"
+    dest: /usr/local/bin/kubectl
+    mode: "0755"
+
+- name: Install Helm
+  when: ansible_os_family == "Debian" and helm_missing
+  become: true
+  ansible.builtin.shell: |
+    set -euo pipefail
+    curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+  args:
+    creates: /usr/local/bin/helm
+    executable: /bin/bash
+
+- name: Install istioctl
+  when: ansible_os_family == "Debian" and istioctl_missing
+  become: true
+  ansible.builtin.shell: |
+    set -euo pipefail
+    curl -fsSL https://istio.io/downloadIstio | ISTIO_VERSION={{ istio_version }} sh -
+    mv istio-{{ istio_version }}/bin/istioctl /usr/local/bin/istioctl
+    rm -rf istio-{{ istio_version }}
+  args:
+    creates: /usr/local/bin/istioctl
+    executable: /bin/bash
+    chdir: /tmp

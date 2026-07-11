@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quiz-api
+  labels:
+    app: quiz-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quiz-api
+  template:
+    metadata:
+      labels:
+        app: quiz-api
+    spec:
+      containers:
+        - name: quiz-api
+          image: quiz-api:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: QUIZ_API_DB_PATH
+              value: /data/reviews.db
+          volumeMounts:
+            - name: reviews-data
+              mountPath: /data
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+      volumes:
+        - name: reviews-data
+          emptyDir: {}

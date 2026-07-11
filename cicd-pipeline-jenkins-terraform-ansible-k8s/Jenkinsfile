@@ -1,0 +1,126 @@
+// Loaded directly from disk by the JCasC-seeded `quiz-pipeline` job
+// (jenkins/casc.yaml) rather than checked out from SCM -- see
+// jenkins/docker-compose.yml for how this repo and interview-quiz-app
+// get bind-mounted into the controller at /workspace/*.
+//
+// Note: stages intentionally use `sh "cd <path> && ..."` instead of the
+// `dir(path) { sh ... }` step. `dir()` moves Jenkins' own FilePath context
+// there too, and Jenkins then tries to create a `<path>@tmp` control
+// directory as a sibling of that path -- which fails with
+// AccessDeniedException for the bind-mounted /workspace/interview-quiz-app,
+// since its unmounted parent /workspace/ is owned by root inside the
+// container. Plain `cd` inside the script avoids that entirely.
+pipeline {
+    agent any
+
+    options {
+        timestamps()
+        disableConcurrentBuilds()
+    }
+
+    environment {
+        PIPELINE_DIR = '/workspace/pipeline'
+        APP_DIR      = '/workspace/interview-quiz-app'
+        TAG          = "build-${env.BUILD_NUMBER}"
+    }
+
+    stages {
+        stage('Test: quiz-api') {
+            steps {
+                sh """
+                    set -euo pipefail
+                    cd ${PIPELINE_DIR}/services/quiz-api
+                    python3 -m venv .venv-ci
+                    . .venv-ci/bin/activate
+                    pip install -q -r requirements-dev.txt
+                    python -m pytest tests/ -v
+                    deactivate
+                    rm -rf .venv-ci
+                """
+            }
+        }
+
+        stage('Test: quiz-web') {
+            steps {
+                sh """
+                    set -euo pipefail
+                    cd ${APP_DIR}
+                    python3 -m compileall -q src main.py asgi.py
+                """
+            }
+        }
+
+        stage('Build images') {
+            steps {
+                sh """
+                    set -euo pipefail
+                    docker build -t quiz-api:${TAG} -t quiz-api:local ${PIPELINE_DIR}/services/quiz-api
+                    docker build -f ${PIPELINE_DIR}/services/quiz-web/Dockerfile \
+                        -t quiz-web:${TAG} -t quiz-web:local ${APP_DIR}
+                """
+            }
+        }
+
+        stage('Load images into local cluster') {
+            steps {
+                sh """
+                    set -euo pipefail
+                    minikube image load quiz-api:local
+                    minikube image load quiz-web:local
+                """
+            }
+        }
+
+        stage('Push to Artifact Registry') {
+            when { expression { return params.PUSH_TO_REGISTRY } }
+            steps {
+                echo 'Needs a real GCP project + "gcp-sa-key" Jenkins credential. Example:'
+                sh """
+                    echo docker tag quiz-api:${TAG} \$ARTIFACT_REGISTRY_URL/quiz-api:${TAG}
+                    echo docker push \$ARTIFACT_REGISTRY_URL/quiz-api:${TAG}
+                """
+            }
+        }
+
+        stage('Terraform plan (GCP)') {
+            when { expression { return params.APPLY_TERRAFORM } }
+            steps {
+                sh """
+                    set -euo pipefail
+                    cd ${PIPELINE_DIR}/terraform/gcp
+                    terraform init
+                    terraform plan -var="project_id=\$GCP_PROJECT_ID"
+                """
+            }
+        }
+
+        stage('Ansible: bootstrap CI agent') {
+            steps {
+                sh "cd ${PIPELINE_DIR}/ansible && ansible-playbook playbooks/bootstrap_ci_agent.yml"
+            }
+        }
+
+        stage('Ansible: deploy') {
+            steps {
+                sh "cd ${PIPELINE_DIR}/ansible && ansible-playbook playbooks/deploy.yml -e k8s_environment=${params.ENVIRONMENT}"
+            }
+        }
+
+        stage('Smoke test') {
+            steps {
+                sh """
+                    set -euo pipefail
+                    kubectl -n quiz run smoke-test-${env.BUILD_NUMBER} --rm -i --restart=Never \
+                        --image=curlimages/curl --command -- \
+                        curl -sf http://quiz-api:8000/health
+                """
+            }
+        }
+    }
+
+    post {
+        always {
+            sh 'docker image prune -f --filter "until=48h" || true'
+        }
+    }
+}

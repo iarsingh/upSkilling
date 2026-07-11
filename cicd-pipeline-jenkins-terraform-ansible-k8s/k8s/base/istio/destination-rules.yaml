@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: quiz-api
+spec:
+  host: quiz-api
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: quiz-web
+spec:
+  host: quiz-web
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL

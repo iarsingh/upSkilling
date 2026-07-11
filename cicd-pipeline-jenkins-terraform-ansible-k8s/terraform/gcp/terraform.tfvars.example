@@ -1,0 +1,7 @@
+project_id   = "your-gcp-project-id"
+region       = "us-central1"
+zone         = "us-central1-a"
+environment  = "dev"
+cluster_name = "quiz-cluster"
+node_count   = 2
+machine_type = "e2-standard-2"

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quiz-api
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+        - name: quiz-api
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quiz-web
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+        - name: quiz-web
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi

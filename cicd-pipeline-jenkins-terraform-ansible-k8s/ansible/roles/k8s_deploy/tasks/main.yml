@@ -1,0 +1,38 @@
+---
+# Renders the requested Kustomize overlay and applies it declaratively via
+# the kubernetes.core.k8s module (rather than shelling out to `kubectl
+# apply`), so Ansible can report per-resource changed/ok status like any
+# other task.
+
+- name: Render {{ k8s_environment }} overlay with kustomize
+  ansible.builtin.command: "kubectl kustomize {{ k8s_overlay_path }}/{{ k8s_environment }}"
+  register: rendered_manifests
+  changed_when: false
+
+- name: Apply rendered manifests to the cluster
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ rendered_manifests.stdout }}"
+    apply: true
+
+- name: Wait for quiz-api rollout
+  kubernetes.core.k8s_info:
+    kind: Deployment
+    name: quiz-api
+    namespace: "{{ k8s_namespace }}"
+    wait: true
+    wait_condition:
+      type: Available
+      status: "True"
+    wait_timeout: 180
+
+- name: Wait for quiz-web rollout
+  kubernetes.core.k8s_info:
+    kind: Deployment
+    name: quiz-web
+    namespace: "{{ k8s_namespace }}"
+    wait: true
+    wait_condition:
+      type: Available
+      status: "True"
+    wait_timeout: 180

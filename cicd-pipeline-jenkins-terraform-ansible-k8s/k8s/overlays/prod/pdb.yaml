@@ -1,0 +1,19 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: quiz-api-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: quiz-api
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: quiz-web-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: quiz-web
