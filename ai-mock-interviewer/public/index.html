@@ -19,7 +19,7 @@
           <p class="subtitle">Real-time voice mock interviews for DevOps, SRE, Cloud, Platform, and MLOps roles.</p>
         </div>
         <div class="top-actions">
-          <a class="ghost link-button" href="https://github.com/iarsingh" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="ghost link-button" href="https://github.com/iarsingh" target="_blank" rel="noopener noreferrer">GitHub</a>
           <a class="ghost link-button" href="/admin.html">Admin report</a>
           <div class="status" id="status">
             <span class="dot"></span>
@@ -167,6 +167,13 @@
                 CV / profile context
                 <textarea id="cvText" rows="7" placeholder="Paste your resume text here. It is saved in this browser."></textarea>
               </label>
+              <label>
+                Upload CV file (e.g. resume downloaded from Naukri)
+                <input id="cvPdf" type="file" accept=".pdf,.docx,.txt,.md,.png,.jpg,.jpeg,.webp,.tif,.tiff,.bmp,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/markdown,image/*">
+              </label>
+              <div class="button-row">
+                <button id="importCvFile" class="ghost" type="button">Import CV file</button>
+              </div>
               <label>
                 Market skills / job description
                 <textarea id="jdText" rows="7" placeholder="Keep the market skill benchmark here, or paste a JD before a custom JD mock."></textarea>

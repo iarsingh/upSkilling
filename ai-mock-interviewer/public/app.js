@@ -22,6 +22,8 @@ const els = {
   level: document.querySelector("#level"),
   topic: document.querySelector("#topic"),
   cvText: document.querySelector("#cvText"),
+  cvPdf: document.querySelector("#cvPdf"),
+  importCvFile: document.querySelector("#importCvFile"),
   jdText: document.querySelector("#jdText"),
   jdUrl: document.querySelector("#jdUrl"),
   jdPdf: document.querySelector("#jdPdf"),
@@ -490,6 +492,30 @@ const questionBank = [
   "GKE image pull failures: Pods are failing with ImagePullBackOff after a registry migration. How would you debug Artifact Registry permissions, Workload Identity, image tags, network, and pull secrets?",
   "GKE node pressure: Nodes show memory pressure and pods are being evicted. How would you investigate requests, limits, QoS classes, daemonsets, autoscaling, and app behavior?",
   "GKE multi-cluster: When would you use multiple GKE clusters versus one shared cluster, and how would you handle traffic, identity, policy, and operations?",
+  "Kubernetes API server overload: The API server has high latency and controllers are falling behind. How would you use API Priority and Fairness, audit logs, request metrics, and client throttling to find and contain the source?",
+  "Kubernetes etcd performance: A self-managed cluster has slow writes and intermittent leader changes in etcd. How would you investigate disk latency, database size, fragmentation, quorum health, snapshots, and safe recovery?",
+  "Kubernetes scheduler internals: Walk through the scheduling cycle from an unscheduled Pod to node binding. How do filtering, scoring, preemption, topology spread constraints, and scheduler profiles affect the decision?",
+  "Kubernetes scheduling deadlock: Several critical Pods remain Pending even though aggregate cluster capacity appears sufficient. How would you analyze bin-packing, affinity rules, topology constraints, taints, PVC topology, and preemption?",
+  "Kubernetes graceful termination: A service drops requests during every rollout despite passing readiness checks. How would you coordinate endpoint removal, preStop, SIGTERM handling, terminationGracePeriodSeconds, load-balancer draining, and application shutdown?",
+  "Kubernetes PDB failure scenario: A node upgrade is blocked by PodDisruptionBudgets, but relaxing them could violate availability targets. How would you diagnose the constraints and complete the maintenance safely?",
+  "Kubernetes HPA instability: An HPA rapidly scales up and down while latency remains unstable. How would you inspect metric freshness, utilization math, missing requests, stabilization windows, scaling policies, and downstream bottlenecks?",
+  "Kubernetes KEDA event scaling: How would you autoscale queue consumers with KEDA while preventing duplicate work, downstream overload, scale-to-zero delays, and retry storms?",
+  "Kubernetes CNI debugging: Pod-to-pod traffic fails only across nodes. How would you isolate CNI, routing, encapsulation, MTU, network policy, conntrack, and cloud firewall problems?",
+  "Kubernetes DNS at scale: CoreDNS latency and SERVFAIL errors increase during traffic spikes. How would you investigate query amplification, ndots behavior, caching, upstream resolvers, autoscaling, and NodeLocal DNSCache?",
+  "Kubernetes conntrack exhaustion: Services intermittently time out while Pods and nodes look healthy. How would you confirm conntrack exhaustion, identify the traffic pattern, mitigate impact, and prevent recurrence?",
+  "Kubernetes Gateway API migration: How would you migrate production traffic from Ingress to Gateway API while preserving TLS, routing behavior, policy ownership, observability, rollback, and zero downtime?",
+  "Kubernetes zero-trust networking: Design default-deny ingress and egress controls for a multi-tenant cluster. How would you handle DNS, external APIs, service mesh mTLS, policy testing, and emergency access?",
+  "Kubernetes admission webhook outage: A validating webhook is timing out and blocking all deployments. How would you restore service safely and redesign failurePolicy, timeouts, replicas, certificates, and break-glass controls?",
+  "Kubernetes RBAC privilege escalation: How would you detect and prevent indirect privilege escalation through permissions such as creating Pods, binding roles, impersonating users, reading Secrets, or modifying admission webhooks?",
+  "Kubernetes service account token security: How would you replace long-lived tokens with projected bound tokens and external workload identity while controlling audience, expiration, automounting, and token rotation?",
+  "Kubernetes StatefulSet recovery: A zonal failure leaves a quorum-based StatefulSet unavailable and volumes cannot attach in another zone. How would you recover while protecting consistency, ordering, identity, and RPO?",
+  "Kubernetes CSI failure: PVC provisioning and volume attachment are intermittently failing. How would you debug StorageClass parameters, CSI controller and node plugins, topology, quotas, finalizers, and cloud-provider events?",
+  "Kubernetes CRD evolution: You own an operator whose CustomResourceDefinition schema must change without breaking stored objects. How would you handle versioning, conversion webhooks, storage versions, defaulting, and rollback?",
+  "Kubernetes operator reconciliation: How would you design an idempotent controller reconciliation loop with finalizers, status conditions, retries, leader election, and protection against hot loops?",
+  "Kubernetes GitOps disaster recovery: Git is available but a production cluster and its GitOps controller are lost. How would you rebuild cluster dependencies, secrets, CRDs, operators, and workloads in the correct order and prove recovery objectives?",
+  "Kubernetes multi-cluster failover: Design active-active or active-passive application delivery across clusters. How would you solve traffic steering, session state, data consistency, configuration drift, identity, and failback?",
+  "Kubernetes noisy neighbor: One tenant causes CPU throttling, memory pressure, and control-plane churn for others. How would you combine quotas, LimitRanges, priority classes, node isolation, fair queuing, and chargeback?",
+  "Kubernetes forensic debugging: A container was killed and recreated before engineers captured evidence. What logs, events, audit records, runtime data, core dumps, and ephemeral-container workflows would you establish for post-incident analysis?",
   "Cloud Run incident: A Cloud Run service has cold-start latency and failed requests after a traffic spike. How would you debug concurrency, min instances, CPU allocation, revisions, and downstream limits?",
   "Cloud Run security: How would you expose an internal Cloud Run service securely using IAM, ingress settings, VPC connector, load balancer, and service-to-service auth?",
   "Compute Engine migration: How would you migrate legacy Compute Engine workloads to GKE or Cloud Run, and what factors would make you keep them on VMs?",
@@ -879,7 +905,29 @@ const codingQuestionBank = [
   "Anagram check: Write a program to check whether two strings are anagrams of each other.",
   "Find the single unique element: Given an array where every element appears twice except one, write an optimized program to find the unique element.",
   "Time complexity: What is the time and space complexity of your solution to find the single unique element, and why?",
-  "XOR trick limitation: Why does the XOR trick fail to find the unique element when there are multiple non-duplicated elements instead of just one?"
+  "XOR trick limitation: Why does the XOR trick fail to find the unique element when there are multiple non-duplicated elements instead of just one?",
+  "HackerRank arrays - minimum swaps: Given a permutation of integers from 1 to n, implement minimum_swaps(arr) to return the minimum swaps required to sort it. Target O(n) time and explain cycle decomposition. Test cases: [4, 3, 1, 2] -> 3; [1, 2, 3] -> 0; [2, 1] -> 1.",
+  "HackerRank arrays - array manipulation: You are given n zero-initialized elements and queries [left, right, value] that add value to every element in the inclusive range. Return the maximum value without updating every element of every range. Test cases: n=5, queries=[[1,2,100],[2,5,100],[3,4,100]] -> 200; n=1, queries=[] -> 0.",
+  "HackerRank strings - Sherlock anagrams: Given a lowercase string, count unordered pairs of substrings that are anagrams. Define how you canonicalize substrings and analyze complexity. Test cases: 'abba' -> 4; 'abcd' -> 0; 'kkkk' -> 10.",
+  "HackerRank strings - special palindrome: Count substrings whose characters are all identical, or identical except for one different middle character. Design a solution faster than checking every substring. Test cases: 'asasd' -> 7; 'aaaa' -> 10; 'abcbaba' -> 10.",
+  "HackerRank frequency queries: Process insert x, delete one occurrence of x, and check whether any value occurs exactly f times. Each operation should run in average O(1) time. Test case: [[1,5],[1,6],[3,2],[1,5],[1,5],[1,6],[2,5],[3,2]] -> [0,1]. Deleting a missing value must not fail.",
+  "HackerRank greedy - luck balance: Each contest has a luck value and importance flag. You may lose at most k important contests. Return maximum achievable luck and justify the greedy choice. Test cases: k=3, contests=[[5,1],[2,1],[1,1],[8,1],[10,0],[5,0]] -> 29; k=0, [[5,1],[10,0]] -> 5.",
+  "HackerRank sorting - fraudulent activity notifications: Given expenditures and trailing window d, count days where today's value is at least twice the median of the previous d days. Avoid sorting the full window each day. Test cases: [2,3,4,2,3,6,8,4,5], d=5 -> 2; [1,2,3,4,4], d=4 -> 0.",
+  "HackerRank stack - largest rectangle: Given histogram heights, return the largest rectangular area from consecutive bars using an O(n) monotonic stack. Test cases: [1,2,3,4,5] -> 9; [2,1,5,6,2,3] -> 10; [] -> 0; [5] -> 5.",
+  "HackerRank stack - balanced brackets with errors: Validate nested (), [], and {} and return the zero-based index of the first invalid character, or -1 when valid. If opening brackets remain, return the index of the earliest unmatched opener. Test cases: '{[()]}' -> -1; '{[(])}' -> 3; '(()' -> 0; ']' -> 0.",
+  "HackerRank queue - castle on the grid: Given a square grid with open and blocked cells, find minimum rook-like moves from start to goal. Test case: grid=['.X.','.X.','...'], start=(0,0), goal=(0,2) -> 3. Also test start=goal -> 0 and an unreachable goal -> -1.",
+  "HackerRank heap - running median: For a stream of integers, output the median after every insertion using two heaps and state their invariants. Test cases: [12,4,5,3,8,7] -> [12.0,8.0,5.0,4.5,5.0,6.0]; [-1,-2] -> [-1.0,-1.5].",
+  "HackerRank intervals - minimum meeting rooms: Given [start,end) intervals, return minimum rooms required in O(n log n); an ending meeting frees its room before another starts at that time. Test cases: [[0,30],[5,10],[15,20]] -> 2; [[7,10],[10,12]] -> 1; [] -> 0.",
+  "HackerRank linked lists - cycle entry: Return the node where a singly linked-list cycle begins or None, using O(1) space, and prove Floyd's method. Test cases: 3->2->0->-4 with tail pointing to node 2 -> node 2; 1->2 with tail pointing to head -> node 1; 1->2->None -> None.",
+  "HackerRank trees - lowest common ancestor: Given a binary tree and two nodes, return their LCA; explain the change when either node may be absent. Test tree [3,5,1,6,2,0,8,null,null,7,4]: LCA(5,1) -> 3; LCA(5,4) -> 5; missing node -> None in the presence-check version.",
+  "HackerRank binary search - machine production: Machines take different days per item. Given a goal, return minimum production days by binary-searching the answer. Test cases: machines=[2,3,2], goal=10 -> 8; [1,3,4], goal=10 -> 7; [5], goal=0 -> 0.",
+  "HackerRank graphs - shortest reach: Given an unweighted graph and start node, return distances to all other nodes using edge weight 6 and -1 when unreachable. Test case: n=4, edges=[(1,2),(1,3)], start=1 -> [6,6,-1] for nodes [2,3,4]. Also test a graph with no edges.",
+  "HackerRank graphs - roads and libraries: Find minimum cost to give n cities library access using libraries and undirected roads; handle disconnected components. Test cases: n=3, library=2, road=1, edges=[(1,2),(3,1),(2,3)] -> 4; n=6, library=2, road=5, any edges -> 12.",
+  "HackerRank dynamic programming - max subset sum: Return maximum sum of non-adjacent elements. Define empty input as 0 and require choosing an element for non-empty all-negative input. Test cases: [3,7,4,6,5] -> 13; [2,1,5,8,4] -> 11; [-2,-3,-1] -> -1; [] -> 0.",
+  "HackerRank dynamic programming - abbreviation: Can string a become b by deleting lowercase letters and optionally capitalizing lowercase letters, while uppercase letters cannot be deleted? Test cases: ('daBcd','ABC') -> True; ('AbcDE','ABDE') -> True; ('AbcDE','AFDE') -> False.",
+  "HackerRank practical coding - log sessionization: Group unsorted (user_id,timestamp,action) records into sessions where consecutive events are at most 30 minutes apart. Test: u1 events at 10:00, 10:30, 11:01 produce two sessions; events exactly 30 minutes apart stay together; empty input -> [].",
+  "HackerRank practical coding - API dependency order: Given services and dependencies where A depends on B, return a valid deployment order or report a cycle, including isolated services. Test cases: services=[api,db,cache], dependencies=[(api,db)] -> db before api with cache anywhere; [(a,b),(b,a)] -> cycle error.",
+  "HackerRank practical coding - sliding-window rate limiter: Given chronological timestamped requests by user, return rejected indices when each user may make at most k requests in any rolling 60-second window. Test: k=2, requests=[(u1,0),(u1,10),(u1,20),(u2,20),(u1,60),(u1,71)] -> [2]; requests exactly 60 seconds apart are outside the same window."
 ];
 const debugQuestionBank = [
   `Debug this Jenkinsfile: Find every bug before this pipeline runs.
@@ -1827,6 +1875,14 @@ function applyImportedJd(text, message) {
   els.feedbackOutput.innerHTML = markdownToHtml(message);
 }
 
+function applyImportedCv(text, message) {
+  els.cvText.value = text;
+  questionBankIndex = 0;
+  usedQuestionKeys = [];
+  saveState();
+  els.feedbackOutput.innerHTML = markdownToHtml(message);
+}
+
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -2714,6 +2770,39 @@ els.importJdPdf.addEventListener("click", async () => {
     els.feedbackOutput.innerHTML = markdownToHtml(`## File Import Failed\n${error.message}\n\nYou can still paste the JD text manually into the Job description box.`);
   } finally {
     setBusy(els.importJdPdf, false, "Import JD from file");
+  }
+});
+
+els.importCvFile.addEventListener("click", async () => {
+  const file = els.cvPdf.files?.[0];
+  if (!file) {
+    els.feedbackOutput.innerHTML = markdownToHtml("## Missing File\nChoose a CV file first.");
+    return;
+  }
+  const supportedFile = /\.(pdf|docx|txt|md|png|jpe?g|webp|tiff?|bmp)$/i.test(file.name) ||
+    /^(application\/pdf|application\/vnd\.openxmlformats-officedocument\.wordprocessingml\.document|text\/|image\/)/i.test(file.type);
+  if (!supportedFile) {
+    els.feedbackOutput.innerHTML = markdownToHtml("## Invalid File\nPlease choose a PDF, DOCX, TXT, Markdown, or image file.");
+    return;
+  }
+  if (file.size > 5_000_000) {
+    els.feedbackOutput.innerHTML = markdownToHtml("## File Too Large\nPlease upload a file under 5 MB.");
+    return;
+  }
+
+  setBusy(els.importCvFile, true, "Importing");
+  els.feedbackOutput.textContent = "Extracting CV text from file...";
+  try {
+    const data = await api("/api/import-cv-file", {
+      filename: file.name,
+      mimeType: file.type,
+      data: await fileToBase64(file)
+    });
+    applyImportedCv(data.text, `## CV Imported\nExtracted text from \`${file.name}\`. Click Save CV and JD, then New question to start.`);
+  } catch (error) {
+    els.feedbackOutput.innerHTML = markdownToHtml(`## CV Import Failed\n${error.message}\n\nYou can still paste your CV text manually into the CV / profile context box.`);
+  } finally {
+    setBusy(els.importCvFile, false, "Import CV file");
   }
 });
 

@@ -988,6 +988,16 @@ async function handleRequest(req, res) {
       return;
     }
 
+    if (req.method === "POST" && req.url === "/api/import-cv-file") {
+      const input = await readBody(req);
+      if (!String(input.data || "").trim()) {
+        sendJson(res, 400, { error: "Please upload a CV file." });
+        return;
+      }
+      sendJson(res, 200, { text: await extractUploadedJdText(input) });
+      return;
+    }
+
     if (req.method === "GET" || req.method === "HEAD") {
       serveStatic(req, res);
       return;
