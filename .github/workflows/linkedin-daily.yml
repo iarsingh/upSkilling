@@ -6,6 +6,8 @@ on:
     - cron: "30 3 * * 1-5"
     # 10:30 Asia/Kolkata, Saturday.
     - cron: "0 5 * * 6"
+    # 11:30 Asia/Kolkata, Sunday: DevOps & Cloud Fundamentals series.
+    - cron: "0 6 * * 0"
   workflow_dispatch:
     inputs:
       publish_date:
@@ -34,7 +36,7 @@ jobs:
       PUBLISH_DATE: ${{ inputs.publish_date }}
       PUBLISH_SLOT: ${{ inputs.publish_slot }}
       PUBLISH_MODE: weekly-rotation
-      LINKEDIN_ATTACH_IMAGES: "true"
+      LINKEDIN_ATTACH_IMAGES: "false"
 
     steps:
       - name: Checkout repository

@@ -3,7 +3,8 @@ const { root, timezone } = require("./config");
 
 const dailyPublishSchedule = [
   { publishTime: "09:00", days: "1-5" },
-  { publishTime: "10:30", days: "6" }
+  { publishTime: "10:30", days: "6" },
+  { publishTime: "11:30", days: "0" }
 ];
 
 function toCronTime(value, days) {
@@ -32,7 +33,7 @@ if (require.main === module) {
   console.log("");
   console.log(buildCronLine());
   console.log("");
-  console.log("This publishes one scheduled LinkedIn post at 09:00 Monday-Friday and 10:30 Saturday.");
+  console.log("This publishes one scheduled LinkedIn post at 09:00 Monday-Friday, 10:30 Saturday, and 11:30 Sunday.");
 }
 
 module.exports = { buildCronLine, buildCronLines };

@@ -50,7 +50,8 @@ function slotForWeeklyRotation(dateString, timezone = "Asia/Kolkata") {
     3: "19:30", // Wednesday: Python automation
     4: "14:30", // Thursday: Kubernetes / platform engineering
     5: "09:30", // Friday: MLOps / interview-ready systems thinking
-    6: "19:30" // Saturday: Python automation / portfolio update
+    6: "19:30", // Saturday: Python automation / portfolio update
+    0: "11:30" // Sunday: DevOps & Cloud Fundamentals (Terraform, ArgoCD, Linux, etc.)
   };
 
   return slotsByWeekday[weekday] || "";
@@ -63,10 +64,13 @@ async function main() {
   const dryRun = args.has("--dry-run") || String(process.env.DRY_RUN || "").toLowerCase() === "true";
   const dateArg = positional[0] || process.env.PUBLISH_DATE || dateInTimezone(process.env.TIMEZONE);
   const configuredSlot = positional[1] || process.env.PUBLISH_SLOT || "";
+  // Default to one post per day (weekly-rotation) unless a specific slot is
+  // given, or PUBLISH_MODE=all-slots explicitly asks to publish everything
+  // scheduled for the date (e.g. one-off catch-up after a missed run).
   const slotArg = configuredSlot || (
-    process.env.PUBLISH_MODE === "weekly-rotation"
-      ? slotForWeeklyRotation(dateArg, process.env.TIMEZONE)
-      : ""
+    process.env.PUBLISH_MODE === "all-slots"
+      ? ""
+      : slotForWeeklyRotation(dateArg, process.env.TIMEZONE)
   );
   const calendar = loadCalendar();
   const state = loadState();

@@ -98,7 +98,7 @@ doc.add_paragraph()
 desc = doc.add_paragraph()
 desc.add_run(
     "This document combines every question and answer from the ai-mock-interviewer question bank: "
-    "the 46 fixed practice mock interview rounds, the full topic-organized technical question bank "
+    "the 77 fixed practice mock interview rounds, the full topic-organized technical question bank "
     "(GCP, Kubernetes/GKE, Terraform, Docker, CI/CD, Observability, Security, Networking, Linux, System Design, "
     "SRE/behavioral, Python, Go, FastAPI, Ansible, Scripting, Coding Exercises, MLOps, and LLMOps/GenAI), "
     "and the Technology Risk Lead track."
@@ -147,8 +147,8 @@ def add_qa(number, entry):
     a_run = a_para.add_run("A: " + entry["answer"])
     a_run.font.size = Pt(10.5)
 
-# ---- Part 1: Fixed Mock Interview Sets, in order 1..46 ----
-add_heading("Part 1 — Fixed Mock Interview Rounds (1–46)", level=1)
+# ---- Part 1: Fixed Mock Interview Sets, in order 1..77 ----
+add_heading("Part 1 — Fixed Mock Interview Rounds (1–77)", level=1)
 doc.add_paragraph(
     "Each round is a fixed, realistic mock interview set. Use one round per practice session."
 )

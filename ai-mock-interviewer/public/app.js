@@ -45,6 +45,7 @@ const els = {
   nextQuestion: document.querySelector("#nextQuestion"),
   newQuestion: document.querySelector("#newQuestion"),
   micButton: document.querySelector("#micButton"),
+  micVisualizer: document.querySelector("#micVisualizer"),
   clearButton: document.querySelector("#clearButton"),
   micLanguage: document.querySelector("#micLanguage"),
   answerPause: document.querySelector("#answerPause"),
@@ -1508,6 +1509,65 @@ function setBusy(button, busy, text) {
   if (text) button.textContent = text;
 }
 
+function bumpElement(el, className = "stat-bump") {
+  if (!el) return;
+  el.classList.remove(className);
+  void el.offsetWidth;
+  el.classList.add(className);
+}
+
+let micVisualizerStream = null;
+let micVisualizerContext = null;
+let micVisualizerAnalyser = null;
+let micVisualizerRaf = null;
+
+async function startMicVisualizer() {
+  if (!els.micVisualizer || micVisualizerContext || !navigator.mediaDevices?.getUserMedia) return;
+  try {
+    micVisualizerStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    micVisualizerContext = new AudioCtx();
+    const source = micVisualizerContext.createMediaStreamSource(micVisualizerStream);
+    micVisualizerAnalyser = micVisualizerContext.createAnalyser();
+    micVisualizerAnalyser.fftSize = 64;
+    source.connect(micVisualizerAnalyser);
+    const data = new Uint8Array(micVisualizerAnalyser.frequencyBinCount);
+    const bars = els.micVisualizer.querySelectorAll("span");
+    els.micVisualizer.classList.add("active");
+    const tick = () => {
+      micVisualizerAnalyser.getByteFrequencyData(data);
+      bars.forEach((bar, index) => {
+        const value = data[index * Math.floor(data.length / bars.length)] || 0;
+        bar.style.height = `${6 + (value / 255) * 22}px`;
+      });
+      micVisualizerRaf = requestAnimationFrame(tick);
+    };
+    tick();
+  } catch {
+    micVisualizerStream = null;
+    micVisualizerContext = null;
+  }
+}
+
+function stopMicVisualizer() {
+  if (micVisualizerRaf) cancelAnimationFrame(micVisualizerRaf);
+  micVisualizerRaf = null;
+  if (micVisualizerContext) {
+    micVisualizerContext.close().catch(() => {});
+    micVisualizerContext = null;
+  }
+  if (micVisualizerStream) {
+    micVisualizerStream.getTracks().forEach((track) => track.stop());
+    micVisualizerStream = null;
+  }
+  if (els.micVisualizer) {
+    els.micVisualizer.classList.remove("active");
+    els.micVisualizer.querySelectorAll("span").forEach((bar) => {
+      bar.style.height = "6px";
+    });
+  }
+}
+
 function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify({
     answerResetVersion: ANSWER_RESET_VERSION,
@@ -2247,6 +2307,7 @@ function setQuestionFromText(question) {
   stopQuestionAudio();
   questionNumber += 1;
   els.question.textContent = question.replace(/^["']|["']$/g, "");
+  bumpElement(els.question, "question-enter");
   els.answer.value = "";
   finalTranscript = "";
   els.micState.textContent = `Interview question ${questionNumber} ready. ${activeQuestionPoolLabel(questionPool().length)}`;
@@ -2264,6 +2325,7 @@ function setQuestionFromText(question) {
   session.questionHistoryIndex = session.questionHistory.length - 1;
   session.history.push(`Question ${questionNumber}: ${els.question.textContent}`);
   renderSessionStats();
+  bumpElement(els.questionCounter);
   els.previousQuestion.disabled = session.questionHistoryIndex <= 0;
   els.nextQuestion.disabled = session.questionHistoryIndex >= session.questionHistory.length - 1;
   speakQuestionIfEnabled();
@@ -2424,6 +2486,7 @@ async function submitAnswer() {
   els.feedbackOutput.innerHTML = markdownToHtml(`## Answer Saved\nSaved answer ${session.answers.length}. Final feedback will come when you end the interview.`);
   session.finalFeedback = els.feedbackOutput.innerHTML;
   renderSessionStats();
+  bumpElement(els.answerCounter);
   saveState();
 
   try {
@@ -2502,6 +2565,7 @@ function setupSpeech() {
     els.micButton.classList.add("active");
     els.micButton.setAttribute("aria-pressed", "true");
     els.micState.textContent = micStartedBySimulation ? "Simulation listening" : "Listening";
+    startMicVisualizer();
   };
 
   recognition.onresult = (event) => {
@@ -2535,6 +2599,7 @@ function setupSpeech() {
     els.micButton.textContent = "Start mic";
     els.micButton.classList.remove("active");
     els.micButton.setAttribute("aria-pressed", "false");
+    stopMicVisualizer();
     if (els.micState.textContent === "Listening" || els.micState.textContent === "Simulation listening") {
       els.micState.textContent = "Microphone idle";
     }
@@ -2703,6 +2768,7 @@ els.saveContext.addEventListener("click", () => {
   usedQuestionKeys = [];
   saveState();
   els.saveContext.textContent = "Saved";
+  bumpElement(els.saveContext, "confirm-pulse");
   setTimeout(() => {
     els.saveContext.textContent = "Save CV and JD";
   }, 1200);
@@ -2918,6 +2984,7 @@ els.endInterview.addEventListener("click", async () => {
 els.copyButton.addEventListener("click", async () => {
   await navigator.clipboard.writeText(els.feedbackOutput.innerText);
   els.copyButton.textContent = "Copied";
+  bumpElement(els.copyButton, "confirm-pulse");
   setTimeout(() => {
     els.copyButton.textContent = "Copy";
   }, 1200);

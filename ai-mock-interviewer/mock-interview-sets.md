@@ -957,106 +957,105 @@ Focus: Resilinc-style DevOps/GCP production support, GCP incidents, observabilit
 
 Focus: Full consolidated screening list from shared interviews: background, GCP, Kubernetes, Docker, CI/CD, Terraform, monitoring, Git, Linux, databases, Kafka, production scenarios, behavioral, and MLOps/AI
 
-1. **Experience & Background:** Tell me about yourself.
-2. **Experience & Background:** Walk me through your current role at Capgemini.
-3. **Experience & Background:** What does your day-to-day work look like?
-4. **Experience & Background:** What are your major responsibilities?
-5. **Experience & Background:** Which project are you currently working on?
-6. **Experience & Background:** Why are you looking for a change?
-7. **Experience & Background:** Why do you want to join our company?
-8. **Cloud & GCP:** Roughly how much of your week would you say was actually spent working in GCP rather than adjacent tools or other clouds?
-9. **Cloud & GCP:** Go through the core GCP areas one by one.
-10. **Cloud & GCP:** On Compute Engine, what kinds of production issues have you personally handled?
-11. **Cloud & GCP:** What was the hardest Compute Engine issue you troubleshot end-to-end?
-12. **Cloud & GCP:** Which GCP services have you used in production?
-13. **Cloud & GCP:** Explain VPC in GCP.
-14. **Cloud & GCP:** Explain IAM roles and service accounts.
-15. **Cloud & GCP:** How do you secure workloads in GCP?
-16. **Cloud & GCP:** Explain Cloud Storage classes.
-17. **Cloud & GCP:** What is Cloud SQL?
-18. **Cloud & GCP:** Have you worked with GKE?
-19. **Cloud & GCP:** Explain GKE architecture.
-20. **Cloud & GCP:** What is the difference between GKE Autopilot and Standard?
-21. **Cloud & GCP:** How do you troubleshoot a GKE cluster?
-22. **Kubernetes:** Explain Kubernetes architecture.
-23. **Kubernetes:** What are Pods?
-24. **Kubernetes:** What is the difference between Deployment, StatefulSet, and DaemonSet?
-25. **Kubernetes:** What is a ReplicaSet?
-26. **Kubernetes:** Explain Services in Kubernetes.
-27. **Kubernetes:** Explain FQDN in Kubernetes.
-28. **Kubernetes:** How does pod-to-pod communication work?
-29. **Kubernetes:** What are liveness and readiness probes?
-30. **Kubernetes:** What happens if a liveness probe fails?
-31. **Kubernetes:** What happens if a readiness probe fails?
-32. **Kubernetes:** Explain ConfigMaps and Secrets.
-33. **Kubernetes:** What are Persistent Volumes and PVCs?
-34. **Kubernetes:** Explain Ingress.
-35. **Kubernetes:** Explain Network Policies.
-36. **Kubernetes:** How do you troubleshoot CrashLoopBackOff?
-37. **Kubernetes:** How do you debug a pending pod?
-38. **Kubernetes:** What commands do you use for troubleshooting?
-39. **Helm:** Explain Helm.
-40. **Helm:** How have you organized Helm charts?
-41. **Helm:** How do you deploy applications using Helm?
-42. **Docker:** Explain Docker architecture.
-43. **Docker:** What is the difference between Docker and Kubernetes?
-44. **Docker:** Explain Dockerfile.
-45. **Docker:** What are Docker volumes?
-46. **Docker:** What are Docker networks?
-47. **Docker:** What is the difference between CMD and ENTRYPOINT?
-48. **Docker:** Explain multi-stage Docker builds.
-49. **CI/CD:** Explain your CI/CD pipeline.
-50. **CI/CD:** Which CI/CD tools have you used?
-51. **CI/CD:** Explain Jenkins pipeline.
-52. **CI/CD:** Explain GitLab CI.
-53. **CI/CD:** Explain Azure DevOps pipelines.
-54. **CI/CD:** How do you handle deployment failures?
-55. **CI/CD:** How do you implement rollback?
-56. **CI/CD:** How do you deploy to Kubernetes?
-57. **Terraform:** Explain Terraform state.
-58. **Terraform:** What is a remote backend?
-59. **Terraform:** How do you manage Terraform state?
-60. **Terraform:** What are Terraform modules?
-61. **Terraform:** Explain lifecycle in Terraform.
-62. **Terraform:** How do you manage secrets?
-63. **Terraform:** How do you resolve state conflicts?
-64. **Monitoring & Logging:** Which monitoring tools have you used?
-65. **Monitoring & Logging:** Explain ELK Stack.
-66. **Monitoring & Logging:** Explain Grafana.
-67. **Monitoring & Logging:** How do you troubleshoot production issues?
-68. **Monitoring & Logging:** How do you investigate logs?
-69. **Git & DevOps:** Explain Git branching strategy.
-70. **Git & DevOps:** What is the difference between merge and rebase?
-71. **Git & DevOps:** Explain GitHub workflow.
-72. **Git & DevOps:** How do you resolve merge conflicts?
-73. **Linux:** Which Linux commands do you use daily?
-74. **Linux:** How do you check CPU, memory, and disk usage?
-75. **Linux:** How do you troubleshoot a Linux server?
-76. **Databases:** Which databases have you worked on?
-77. **Databases:** Explain PostgreSQL basics.
-78. **Databases:** How do you troubleshoot database connectivity?
-79. **Kafka:** Have you worked with Kafka?
-80. **Kafka:** Explain Kafka architecture.
-81. **Kafka:** What are topics, partitions, and consumer groups?
-82. **Production & Scenarios:** Tell me about a critical production issue you resolved.
-83. **Production & Scenarios:** What was the toughest issue you have handled?
-84. **Production & Scenarios:** Describe a time you had to make a trade-off under pressure.
-85. **Production & Scenarios:** What production issue did you troubleshoot from start to finish?
-86. **Production & Scenarios:** How do you perform root cause analysis (RCA)?
-87. **Production & Scenarios:** How do you prioritize incidents?
-88. **Behavioral:** Tell me about a challenging project.
-89. **Behavioral:** Tell me about a conflict with a team member.
-90. **Behavioral:** How do you handle pressure?
-91. **Behavioral:** What is your biggest achievement?
-92. **Behavioral:** What are your strengths?
-93. **Behavioral:** What are your weaknesses?
-94. **Behavioral:** Where do you see yourself in five years?
-95. **MLOps / AI:** What is MLOps?
-96. **MLOps / AI:** Have you worked with MLflow?
-97. **MLOps / AI:** How would you deploy an ML model?
-98. **MLOps / AI:** How would you monitor ML models?
-99. **MLOps / AI:** What is Kubeflow?
-100. **MLOps / AI:** How would you build an end-to-end MLOps pipeline?
+1. **Experience & Background:** Walk me through your current role at Capgemini.
+2. **Experience & Background:** What does your day-to-day work look like?
+3. **Experience & Background:** What are your major responsibilities?
+4. **Experience & Background:** Which project are you currently working on?
+5. **Experience & Background:** Why are you looking for a change?
+6. **Experience & Background:** Why do you want to join our company?
+7. **Cloud & GCP:** Roughly how much of your week would you say was actually spent working in GCP rather than adjacent tools or other clouds?
+8. **Cloud & GCP:** Go through the core GCP areas one by one.
+9. **Cloud & GCP:** On Compute Engine, what kinds of production issues have you personally handled?
+10. **Cloud & GCP:** What was the hardest Compute Engine issue you troubleshot end-to-end?
+11. **Cloud & GCP:** Which GCP services have you used in production?
+12. **Cloud & GCP:** Explain VPC in GCP.
+13. **Cloud & GCP:** Explain IAM roles and service accounts.
+14. **Cloud & GCP:** How do you secure workloads in GCP?
+15. **Cloud & GCP:** Explain Cloud Storage classes.
+16. **Cloud & GCP:** What is Cloud SQL?
+17. **Cloud & GCP:** Have you worked with GKE?
+18. **Cloud & GCP:** Explain GKE architecture.
+19. **Cloud & GCP:** What is the difference between GKE Autopilot and Standard?
+20. **Cloud & GCP:** How do you troubleshoot a GKE cluster?
+21. **Kubernetes:** Explain Kubernetes architecture.
+22. **Kubernetes:** What are Pods?
+23. **Kubernetes:** What is the difference between Deployment, StatefulSet, and DaemonSet?
+24. **Kubernetes:** What is a ReplicaSet?
+25. **Kubernetes:** Explain Services in Kubernetes.
+26. **Kubernetes:** Explain FQDN in Kubernetes.
+27. **Kubernetes:** How does pod-to-pod communication work?
+28. **Kubernetes:** What are liveness and readiness probes?
+29. **Kubernetes:** What happens if a liveness probe fails?
+30. **Kubernetes:** What happens if a readiness probe fails?
+31. **Kubernetes:** Explain ConfigMaps and Secrets.
+32. **Kubernetes:** What are Persistent Volumes and PVCs?
+33. **Kubernetes:** Explain Ingress.
+34. **Kubernetes:** Explain Network Policies.
+35. **Kubernetes:** How do you troubleshoot CrashLoopBackOff?
+36. **Kubernetes:** How do you debug a pending pod?
+37. **Kubernetes:** What commands do you use for troubleshooting?
+38. **Helm:** Explain Helm.
+39. **Helm:** How have you organized Helm charts?
+40. **Helm:** How do you deploy applications using Helm?
+41. **Docker:** Explain Docker architecture.
+42. **Docker:** What is the difference between Docker and Kubernetes?
+43. **Docker:** Explain Dockerfile.
+44. **Docker:** What are Docker volumes?
+45. **Docker:** What are Docker networks?
+46. **Docker:** What is the difference between CMD and ENTRYPOINT?
+47. **Docker:** Explain multi-stage Docker builds.
+48. **CI/CD:** Explain your CI/CD pipeline.
+49. **CI/CD:** Which CI/CD tools have you used?
+50. **CI/CD:** Explain Jenkins pipeline.
+51. **CI/CD:** Explain GitLab CI.
+52. **CI/CD:** Explain Azure DevOps pipelines.
+53. **CI/CD:** How do you handle deployment failures?
+54. **CI/CD:** How do you implement rollback?
+55. **CI/CD:** How do you deploy to Kubernetes?
+56. **Terraform:** Explain Terraform state.
+57. **Terraform:** What is a remote backend?
+58. **Terraform:** How do you manage Terraform state?
+59. **Terraform:** What are Terraform modules?
+60. **Terraform:** Explain lifecycle in Terraform.
+61. **Terraform:** How do you manage secrets?
+62. **Terraform:** How do you resolve state conflicts?
+63. **Monitoring & Logging:** Which monitoring tools have you used?
+64. **Monitoring & Logging:** Explain ELK Stack.
+65. **Monitoring & Logging:** Explain Grafana.
+66. **Monitoring & Logging:** How do you troubleshoot production issues?
+67. **Monitoring & Logging:** How do you investigate logs?
+68. **Git & DevOps:** Explain Git branching strategy.
+69. **Git & DevOps:** What is the difference between merge and rebase?
+70. **Git & DevOps:** Explain GitHub workflow.
+71. **Git & DevOps:** How do you resolve merge conflicts?
+72. **Linux:** Which Linux commands do you use daily?
+73. **Linux:** How do you check CPU, memory, and disk usage?
+74. **Linux:** How do you troubleshoot a Linux server?
+75. **Databases:** Which databases have you worked on?
+76. **Databases:** Explain PostgreSQL basics.
+77. **Databases:** How do you troubleshoot database connectivity?
+78. **Kafka:** Have you worked with Kafka?
+79. **Kafka:** Explain Kafka architecture.
+80. **Kafka:** What are topics, partitions, and consumer groups?
+81. **Production & Scenarios:** Tell me about a critical production issue you resolved.
+82. **Production & Scenarios:** What was the toughest issue you have handled?
+83. **Production & Scenarios:** Describe a time you had to make a trade-off under pressure.
+84. **Production & Scenarios:** What production issue did you troubleshoot from start to finish?
+85. **Production & Scenarios:** How do you perform root cause analysis (RCA)?
+86. **Production & Scenarios:** How do you prioritize incidents?
+87. **Behavioral:** Tell me about a challenging project.
+88. **Behavioral:** Tell me about a conflict with a team member.
+89. **Behavioral:** How do you handle pressure?
+90. **Behavioral:** What is your biggest achievement?
+91. **Behavioral:** What are your strengths?
+92. **Behavioral:** What are your weaknesses?
+93. **Behavioral:** Where do you see yourself in five years?
+94. **MLOps / AI:** What is MLOps?
+95. **MLOps / AI:** Have you worked with MLflow?
+96. **MLOps / AI:** How would you deploy an ML model?
+97. **MLOps / AI:** How would you monitor ML models?
+98. **MLOps / AI:** What is Kubeflow?
+99. **MLOps / AI:** How would you build an end-to-end MLOps pipeline?
 
 ## Mock Interview 63 - Kubernetes Fundamentals Transcript Round
 
@@ -1253,68 +1252,67 @@ Focus: DevOps responsibilities, GCP services, GKE, Jenkins, CI/CD, Docker/Kubern
 Focus: Dockerfile fundamentals, Kubernetes services and manifests, EKS deployment pipeline, ConfigMaps, Secrets, networking, service auth, Azure App Service, APIs, observability, scalability, and MLOps
 
 1. **Docker:** What is the purpose of EXPOSE in a Dockerfile?
-2. **Docker:** What is the difference between CMD and ENTRYPOINT?
-3. **Docker:** What is RUN used for in a Dockerfile?
-4. **Docker/FastAPI:** How do you expose a FastAPI application on port 8000 inside a Docker container?
-5. **Docker:** How does the application code become available inside the Docker container?
-6. **Docker:** What command starts the application inside the container?
-7. **Docker/Networking:** How do you publish a Docker container port to the host?
-8. **Docker/Networking:** What is the purpose of docker run -p?
-9. **Kubernetes/Services:** What are the different types of Kubernetes Services?
-10. **Kubernetes/Services:** How do you expose an application externally?
-11. **Kubernetes/Networking:** What is the equivalent of Docker port mapping in Kubernetes?
-12. **Kubernetes/Services:** How do containerPort, port, and targetPort work?
-13. **Kubernetes/Manifests:** How do you deploy an application using Kubernetes manifest files?
-14. **Kubernetes/Commands:** What is the kubectl apply command?
-15. **EKS/Deployment:** After pushing an image to ECR, what is the next step?
-16. **Kubernetes/Deployment:** How do you update the Deployment manifest with the new image?
-17. **Kubernetes/Deployment:** If the latest image is pushed but the pod is still using the old image, how do you refresh it?
-18. **Helm:** Have you worked on Helm charts?
-19. **CI/CD/EKS:** Explain an automated deployment pipeline for a FastAPI application to EKS.
-20. **DevSecOps:** What checks would you perform before deployment?
-21. **DevSecOps:** How would you perform code formatting, linting, unit testing, vulnerability scanning, secret scanning, and image scanning?
-22. **Container Registry:** Where would you push the Docker image?
-23. **CI/CD/EKS:** How would you deploy the image after pushing it to ECR?
-24. **CI/CD/Automation:** How would you automate the deployment?
-25. **Kubernetes/Config:** What is a ConfigMap?
-26. **Kubernetes/Config:** What is stored inside a ConfigMap?
-27. **Kubernetes/Secrets:** What are Kubernetes Secrets?
-28. **Kubernetes/Secrets:** How do you use Secrets inside a pod?
-29. **Kubernetes/Config:** What is the difference between ConfigMap and Secret?
-30. **Networking:** How can you expose a service only to users inside your organization?
-31. **Networking/Security:** Without using SSO or RBAC, how would you restrict access?
-32. **Kubernetes/NetworkPolicy:** Can NetworkPolicy solve this problem?
-33. **Networking/Security:** How would you whitelist an organization's CIDR/IP range?
-34. **Networking/Load Balancer:** What is the role of an Internal Load Balancer?
-35. **Security/Service Auth:** What is service-to-service authentication?
-36. **Security/Service Auth:** How do two services communicate securely?
-37. **Azure/PostgreSQL:** How would an App Service communicate with PostgreSQL?
-38. **Azure/IAM:** How would you authorize App Service to access PostgreSQL?
-39. **Azure/IAM:** How do Managed Identities work?
-40. **Azure/IAM:** How do you provide Contributor access to an App Service?
-41. **Azure/App Service:** What is Azure App Service?
-42. **Azure/App Service:** What is App Service used for?
-43. **Azure/App Service:** How do applications hosted on App Service connect to a database?
-44. **APIs/Development:** How comfortable are you with API development?
-45. **APIs/Development:** Have you built APIs yourself?
-46. **APIs/Database:** How does an API read and write data to a database?
-47. **APIs/Development:** What is your understanding of API development?
-48. **Observability:** How would you build an observability namespace?
-49. **Observability:** Which services would you use for metrics, logs, and traces?
-50. **Observability/Grafana:** How would you integrate Grafana?
-51. **Observability/OpenTelemetry:** What exactly is OpenTelemetry?
-52. **Observability/OpenTelemetry:** OpenTelemetry is only a collector; what backend services would you use?
-53. **Observability/Grafana:** How would Grafana connect to those services?
-54. **Scalability/Kubernetes:** Suppose millions of users access your API. How would you design a scalable Kubernetes solution?
-55. **Scalability:** How would you determine your scaling strategy?
-56. **Scalability/Kubernetes:** How would you estimate the number of pods?
-57. **Load Testing:** How would you perform load testing?
-58. **Load Testing:** Can you generate 5,000 requests per second?
-59. **Load Testing:** Which load-testing tools would you use?
-60. **MLOps/AI:** How is your understanding of the latest GenAI/MLOps journey?
-61. **HR/Behavioral:** Do you have any questions for me?
-62. **HR/Behavioral:** Where are you currently based?
-63. **HR/Behavioral:** What is your native place?
+2. **Docker:** What is RUN used for in a Dockerfile?
+3. **Docker/FastAPI:** How do you expose a FastAPI application on port 8000 inside a Docker container?
+4. **Docker:** How does the application code become available inside the Docker container?
+5. **Docker:** What command starts the application inside the container?
+6. **Docker/Networking:** How do you publish a Docker container port to the host?
+7. **Docker/Networking:** What is the purpose of docker run -p?
+8. **Kubernetes/Services:** What are the different types of Kubernetes Services?
+9. **Kubernetes/Services:** How do you expose an application externally?
+10. **Kubernetes/Networking:** What is the equivalent of Docker port mapping in Kubernetes?
+11. **Kubernetes/Services:** How do containerPort, port, and targetPort work?
+12. **Kubernetes/Manifests:** How do you deploy an application using Kubernetes manifest files?
+13. **Kubernetes/Commands:** What is the kubectl apply command?
+14. **EKS/Deployment:** After pushing an image to ECR, what is the next step?
+15. **Kubernetes/Deployment:** How do you update the Deployment manifest with the new image?
+16. **Kubernetes/Deployment:** If the latest image is pushed but the pod is still using the old image, how do you refresh it?
+17. **Helm:** Have you worked on Helm charts?
+18. **CI/CD/EKS:** Explain an automated deployment pipeline for a FastAPI application to EKS.
+19. **DevSecOps:** What checks would you perform before deployment?
+20. **DevSecOps:** How would you perform code formatting, linting, unit testing, vulnerability scanning, secret scanning, and image scanning?
+21. **Container Registry:** Where would you push the Docker image?
+22. **CI/CD/EKS:** How would you deploy the image after pushing it to ECR?
+23. **CI/CD/Automation:** How would you automate the deployment?
+24. **Kubernetes/Config:** What is a ConfigMap?
+25. **Kubernetes/Config:** What is stored inside a ConfigMap?
+26. **Kubernetes/Secrets:** What are Kubernetes Secrets?
+27. **Kubernetes/Secrets:** How do you use Secrets inside a pod?
+28. **Kubernetes/Config:** What is the difference between ConfigMap and Secret?
+29. **Networking:** How can you expose a service only to users inside your organization?
+30. **Networking/Security:** Without using SSO or RBAC, how would you restrict access?
+31. **Kubernetes/NetworkPolicy:** Can NetworkPolicy solve this problem?
+32. **Networking/Security:** How would you whitelist an organization's CIDR/IP range?
+33. **Networking/Load Balancer:** What is the role of an Internal Load Balancer?
+34. **Security/Service Auth:** What is service-to-service authentication?
+35. **Security/Service Auth:** How do two services communicate securely?
+36. **Azure/PostgreSQL:** How would an App Service communicate with PostgreSQL?
+37. **Azure/IAM:** How would you authorize App Service to access PostgreSQL?
+38. **Azure/IAM:** How do Managed Identities work?
+39. **Azure/IAM:** How do you provide Contributor access to an App Service?
+40. **Azure/App Service:** What is Azure App Service?
+41. **Azure/App Service:** What is App Service used for?
+42. **Azure/App Service:** How do applications hosted on App Service connect to a database?
+43. **APIs/Development:** How comfortable are you with API development?
+44. **APIs/Development:** Have you built APIs yourself?
+45. **APIs/Database:** How does an API read and write data to a database?
+46. **APIs/Development:** What is your understanding of API development?
+47. **Observability:** How would you build an observability namespace?
+48. **Observability:** Which services would you use for metrics, logs, and traces?
+49. **Observability/Grafana:** How would you integrate Grafana?
+50. **Observability/OpenTelemetry:** What exactly is OpenTelemetry?
+51. **Observability/OpenTelemetry:** OpenTelemetry is only a collector; what backend services would you use?
+52. **Observability/Grafana:** How would Grafana connect to those services?
+53. **Scalability/Kubernetes:** Suppose millions of users access your API. How would you design a scalable Kubernetes solution?
+54. **Scalability:** How would you determine your scaling strategy?
+55. **Scalability/Kubernetes:** How would you estimate the number of pods?
+56. **Load Testing:** How would you perform load testing?
+57. **Load Testing:** Can you generate 5,000 requests per second?
+58. **Load Testing:** Which load-testing tools would you use?
+59. **MLOps/AI:** How is your understanding of the latest GenAI/MLOps journey?
+60. **HR/Behavioral:** Do you have any questions for me?
+61. **HR/Behavioral:** Where are you currently based?
+62. **HR/Behavioral:** What is your native place?
 
 ## Mock Interview 72 - Kubernetes Terraform Observability and MLOps
 
@@ -1405,22 +1403,21 @@ Focus: Python scripting, automation design, API development, FastAPI, authentica
 6. **Python/Automation:** How do you make Python automation idempotent?
 7. **Python/Automation:** How would you schedule and run Python automation in production?
 8. **Python/Automation:** How would you package and deploy a Python automation tool for a team?
-9. **Python/API:** What is your understanding of API development?
-10. **FastAPI:** What is FastAPI and why would you choose it for backend APIs?
-11. **FastAPI:** How do you create a basic GET and POST API in FastAPI?
-12. **FastAPI/Validation:** How does request validation work in FastAPI?
-13. **FastAPI/Auth:** How would you implement authentication and authorization in a FastAPI application?
-14. **FastAPI/Database:** How does a FastAPI application read and write data to a database?
-15. **FastAPI/Async:** What is the difference between sync and async endpoints in FastAPI?
-16. **FastAPI/Testing:** How would you test a FastAPI application?
-17. **FastAPI/Docker:** How would you containerize and run a FastAPI application using Docker?
-18. **FastAPI/Kubernetes:** How would you deploy a FastAPI application on Kubernetes?
-19. **FastAPI/Observability:** How would you add logging, metrics, and tracing to a FastAPI application?
-20. **FastAPI/Security:** What security best practices would you follow for FastAPI APIs?
-21. **FastAPI/Performance:** How would you improve performance and scalability for a FastAPI service?
-22. **FastAPI/CI/CD:** How would you design a CI/CD pipeline for a Python FastAPI service?
-23. **FastAPI/Troubleshooting:** A FastAPI service is returning intermittent 500 errors in Kubernetes. How would you troubleshoot it?
-24. **Python/FastAPI/System Design:** Design a production-ready FastAPI service for an internal DevOps automation platform.
+9. **FastAPI:** What is FastAPI and why would you choose it for backend APIs?
+10. **FastAPI:** How do you create a basic GET and POST API in FastAPI?
+11. **FastAPI/Validation:** How does request validation work in FastAPI?
+12. **FastAPI/Auth:** How would you implement authentication and authorization in a FastAPI application?
+13. **FastAPI/Database:** How does a FastAPI application read and write data to a database?
+14. **FastAPI/Async:** What is the difference between sync and async endpoints in FastAPI?
+15. **FastAPI/Testing:** How would you test a FastAPI application?
+16. **FastAPI/Docker:** How would you containerize and run a FastAPI application using Docker?
+17. **FastAPI/Kubernetes:** How would you deploy a FastAPI application on Kubernetes?
+18. **FastAPI/Observability:** How would you add logging, metrics, and tracing to a FastAPI application?
+19. **FastAPI/Security:** What security best practices would you follow for FastAPI APIs?
+20. **FastAPI/Performance:** How would you improve performance and scalability for a FastAPI service?
+21. **FastAPI/CI/CD:** How would you design a CI/CD pipeline for a Python FastAPI service?
+22. **FastAPI/Troubleshooting:** A FastAPI service is returning intermittent 500 errors in Kubernetes. How would you troubleshoot it?
+23. **Python/FastAPI/System Design:** Design a production-ready FastAPI service for an internal DevOps automation platform.
 
 ## Mock Interview 75 - API Development Production Round
 
@@ -1436,24 +1433,23 @@ Focus: API fundamentals, REST design, authentication, authorization, database ac
 8. **API/Auth:** What is the difference between authentication and authorization?
 9. **API/Auth:** How do JWT tokens work in API authentication?
 10. **API/Auth:** How would you implement role-based access control for APIs?
-11. **API/Database:** How does an API read and write data to a database?
-12. **API/Database:** How do you handle database transactions in API development?
-13. **API/Error Handling:** How should an API handle errors and return error responses?
-14. **API/Versioning:** How do you handle API versioning without breaking existing clients?
-15. **API/Pagination:** How would you implement pagination, filtering, and sorting in an API?
-16. **API/Idempotency:** What is idempotency in APIs and why is it important?
-17. **API/Rate Limiting:** How would you implement rate limiting and throttling for APIs?
-18. **API/Security:** What API security best practices would you follow in production?
-19. **API/Testing:** How would you test APIs before releasing them to production?
-20. **API/Documentation:** How do you document APIs for frontend teams and external consumers?
-21. **API/Observability:** What logs, metrics, and traces would you add to a production API?
-22. **API/Performance:** How would you improve API performance and reduce latency?
-23. **API/Scalability:** How would you design an API to handle high traffic?
-24. **API/Deployment:** How would you deploy an API using Docker and Kubernetes?
-25. **API/CI/CD:** How would you design a CI/CD pipeline for API development?
-26. **API/Troubleshooting:** An API is returning intermittent 500 errors after deployment. How would you debug it?
-27. **API/Troubleshooting:** An API latency increased suddenly in production. What would you check first?
-28. **API/System Design:** Design a production-ready API platform for internal automation tools.
+11. **API/Database:** How do you handle database transactions in API development?
+12. **API/Error Handling:** How should an API handle errors and return error responses?
+13. **API/Versioning:** How do you handle API versioning without breaking existing clients?
+14. **API/Pagination:** How would you implement pagination, filtering, and sorting in an API?
+15. **API/Idempotency:** What is idempotency in APIs and why is it important?
+16. **API/Rate Limiting:** How would you implement rate limiting and throttling for APIs?
+17. **API/Security:** What API security best practices would you follow in production?
+18. **API/Testing:** How would you test APIs before releasing them to production?
+19. **API/Documentation:** How do you document APIs for frontend teams and external consumers?
+20. **API/Observability:** What logs, metrics, and traces would you add to a production API?
+21. **API/Performance:** How would you improve API performance and reduce latency?
+22. **API/Scalability:** How would you design an API to handle high traffic?
+23. **API/Deployment:** How would you deploy an API using Docker and Kubernetes?
+24. **API/CI/CD:** How would you design a CI/CD pipeline for API development?
+25. **API/Troubleshooting:** An API is returning intermittent 500 errors after deployment. How would you debug it?
+26. **API/Troubleshooting:** An API latency increased suddenly in production. What would you check first?
+27. **API/System Design:** Design a production-ready API platform for internal automation tools.
 
 ## Mock Interview 76 - GenAI and LLMOps Production Round
 
@@ -1487,3 +1483,100 @@ Focus: GenAI fundamentals, RAG, embeddings, vector databases, prompt engineering
 26. **LLMOps/MLOps:** How is LLMOps different from traditional MLOps?
 27. **GenAI/Troubleshooting:** A RAG chatbot is giving wrong answers from old documents. How would you troubleshoot it?
 28. **GenAI/System Design:** Design a secure internal GenAI assistant for DevOps teams to query runbooks, incidents, and Kubernetes troubleshooting steps.
+
+## Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round
+
+Focus: Production troubleshooting, Jenkins and CI/CD design, GCP architecture, Kubernetes operations, Docker, Terraform, observability, Linux, Python, Git, Argo CD, incident response, and security
+
+1. **CI/CD/Jenkins:** Explain your Jenkins pipeline architecture.
+2. **CI/CD/Jenkins:** What stages do you include in your CI/CD pipeline?
+3. **CI/CD/Jenkins:** How do you integrate third-party tools like Prisma Cloud, Stream Security, or Datadog into Jenkins?
+4. **CI/CD/Jenkins:** What is a multi-stage Jenkins pipeline?
+5. **CI/CD/Troubleshooting:** Your Jenkins pipeline suddenly starts failing after hundreds of successful builds. How do you troubleshoot it?
+6. **CI/CD/Troubleshooting:** Where do you start troubleshooting—a cloud service, the application, or Jenkins?
+7. **CI/CD/System Design:** Design a complete CI/CD pipeline for a Java microservices application from code merge to production.
+8. **CI/CD/Jenkins:** Would you use a Scripted Pipeline or Declarative Pipeline? Why?
+9. **CI/CD/Jenkins:** What is a Jenkinsfile?
+10. **CI/CD/Jenkins:** Which type of pipeline is called a Jenkinsfile?
+11. **GCP/Experience:** How would you rate yourself in GCP out of 10?
+12. **GCP/Compute Engine:** What are the advantages of Compute Engine over traditional virtual machines?
+13. **GCP/Compute Engine:** What machine families are available in Compute Engine?
+14. **GCP/Troubleshooting:** A production VM becomes unreachable. How do you troubleshoot it?
+15. **GCP/Disaster Recovery:** If an entire GCP region goes down, what is your disaster recovery strategy?
+16. **GCP/Security:** How would you improve security in GCP?
+17. **GCP/Networking:** A VM in VPC-A cannot communicate with a VM in VPC-B. How do you troubleshoot it?
+18. **GCP/Performance:** CPU utilization is only 20%, but application latency has doubled. How do you investigate it?
+19. **GCP/Architecture:** Compare Cloud Run, GKE, Compute Engine, and App Engine.
+20. **Kubernetes/Networking:** What are the Kubernetes Service types?
+21. **Kubernetes/Troubleshooting:** A Service is not routing traffic to the correct Pod. How do you troubleshoot it?
+22. **Kubernetes/Architecture:** Explain the Kubernetes architecture.
+23. **Kubernetes/Architecture:** Which components communicate with each other in Kubernetes?
+24. **Kubernetes/Configuration:** Where do ConfigMaps and Secrets fit into the Kubernetes architecture?
+25. **Kubernetes/Deployment:** What deployment strategies are available in Kubernetes?
+26. **Kubernetes/Deployment:** Which deployment strategy do you prefer in production and why?
+27. **Kubernetes/Autoscaling:** Explain Horizontal Pod Autoscaler (HPA).
+28. **Kubernetes/Autoscaling:** Explain Vertical Pod Autoscaler (VPA).
+29. **Kubernetes/Troubleshooting:** Pods are getting killed automatically. How do you determine whether it’s OOMKilled, node resource pressure, or another issue?
+30. **Kubernetes/Incident Response:** Multiple pods are in CrashLoopBackOff. How do you restore production quickly?
+31. **Docker/Dockerfile:** Name the common Dockerfile instructions.
+32. **Docker/Security:** How do you scan Docker images for vulnerabilities?
+33. **Docker/Build:** What is a multi-stage Docker build?
+34. **Docker/Runtime:** Do Docker containers have separate kernels or do they share the host kernel?
+35. **Docker/Runtime:** How does a container communicate with the Linux kernel?
+36. **Terraform/Architecture:** Design a multi-cloud deployment using Terraform.
+37. **Terraform/Fundamentals:** What are the basic Terraform commands?
+38. **Terraform/State:** What happens if the S3 bucket storing the Terraform state is accidentally deleted?
+39. **Terraform/State:** If the Terraform state becomes very large, how do you manage it?
+40. **Terraform/Modules:** Did you create Terraform modules from scratch?
+41. **Terraform/Experience:** How many Terraform services/resources have you worked on?
+42. **Terraform/State:** Where do you prefer to store Terraform state?
+43. **Observability/Architecture:** How would you design a monitoring solution for microservices?
+44. **Observability/Fundamentals:** What is the difference between monitoring and observability?
+45. **Observability/Experience:** Have you used Prometheus and Grafana?
+46. **Observability/Deployment:** How do you deploy Prometheus and Grafana?
+47. **Observability/Metrics:** How do you expose application metrics to Prometheus?
+48. **Observability/Alerting:** How do you configure alerts?
+49. **Linux/Security:** Why do we use sudo instead of logging in as the root user?
+50. **Linux/Permissions:** Explain Linux file permissions.
+51. **Linux/Permissions:** Why should we avoid 777 permissions?
+52. **Linux/Security:** Why do we have both /etc/passwd and /etc/shadow?
+53. **Linux/Scripting:** Write a shell script to find files with 777 permissions.
+54. **Python/DevOps:** How have you used Python in DevOps?
+55. **Python/Automation:** Write a Python script to upload a file to an S3 bucket.
+56. **Git/Fundamentals:** Name the common Git commands you use.
+57. **Git/Branches:** How do you clone only a single branch from a repository?
+58. **Git/Workflow:** What is git cherry-pick?
+59. **Git/Fundamentals:** What is the difference between git clone, git fetch, and git pull?
+60. **Argo CD/Experience:** Have you worked with Argo CD?
+61. **Argo CD/GitOps:** What is GitOps?
+62. **Argo CD/Experience:** What is your hands-on experience with Argo CD?
+63. **Production Support/Incident Response:** How do you handle a production incident?
+64. **Production Support/Process:** Do you log in directly to production servers, or do you follow an incident management process?
+65. **Production Support/Communication:** How do you communicate during a Sev-1 incident?
+66. **Security/Application:** How do you improve application security in production?
+67. **Security/Secrets:** How do you manage secrets securely?
+68. **Security/Containers:** How do you secure Docker images?
+69. **HR/Closing:** Do you have any questions for us?
+70. **HR/Closing:** What kind of role are you looking for?
+71. **HR/Closing:** Do you have any feedback for us?
+72. **HR/Closing:** Is there anything else you’d like to ask?
+73. **Python/Debugging:** Debug and complete the following Python script intended to upload a local file to an S3 bucket. Identify the syntax, naming, path, object-key, exception-handling, and AWS credential issues; then provide a production-safe version.
+
+    ```python
+    Import boto3
+    From botocore.exceptions import clientError
+
+    s3_client = boto3.client(“s3”)
+    local_file_path = “/c/data/”
+    bcuket_name = “swapnilAkhi”
+    s3_object_name = ““
+    ```
+
+74. **Linux/Shell Debugging:** Debug and improve the following shell script intended to find regular files with permissions exactly 777. Explain the quoting, variable naming, permission-mode, error-handling, and filesystem-scope considerations.
+
+    ```bash
+    #!/bin/bash
+
+    Search_path=“/”
+    find “$Search_path” -type f -perm 777 2>/dev/null
+    ```

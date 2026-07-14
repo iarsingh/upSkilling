@@ -1,5 +1,30 @@
 const { generateWithOllama } = require("./ollama");
 
+// TODO(you): Fill in one real scenario-based question per pillar below.
+// These are used whenever Ollama is unavailable and the fallback post kicks in,
+// so they matter most when you're offline or the local model times out.
+//
+// Why this is worth writing yourself rather than letting a template generate it:
+// a scenario pulled from something you actually debugged or decided on the job
+// reads as authentic and doubles as interview-prep material (per your career-switch
+// content angle in gke-terraform-content/career-switch-plan). A generic "what would
+// you do if pods crash?" doesn't carry that signal - a specific one
+// ("prod HPA thrashed between 2 and 8 replicas every time a downstream API got slow -
+// what's your first move?") does.
+//
+// Shape: 2-3 sentences describing a concrete situation, ending in a question.
+const scenarioByPillar = {
+  "Kubernetes Series": "", // TODO: e.g. an incident you diagnosed involving requests/limits, autoscaling, or probes
+  "MLOps Series": "", // TODO: e.g. a model rollout or drift situation you had to make a call on
+  "Data Science Series": "", // TODO: e.g. a data quality or leakage issue you caught (or missed) in review
+  "IT Engineering Series": "" // TODO: e.g. an SLO breach, IaC review finding, or on-call decision
+};
+
+function fallbackScenario(topic) {
+  return scenarioByPillar[topic.pillar] ||
+    `You're the on-call engineer and ${topic.topic.toLowerCase()} just became a live production issue. What's your first move?`;
+}
+
 function fallbackPost(topic) {
   const bulletsByPillar = {
     "Kubernetes Series": [
@@ -31,6 +56,7 @@ function fallbackPost(topic) {
   return {
     hook: `${topic.topic}: a practical production note`,
     body: `In real engineering teams, this topic matters because small design choices become operational patterns over time. A clean setup helps teams ship faster, debug faster, and reduce avoidable incidents.`,
+    scenario: fallbackScenario(topic),
     bullets: bulletsByPillar[topic.pillar] || bulletsByPillar["IT Engineering Series"],
     cta: "What is one production lesson you learned around this?",
     hashtags: topic.hashtags,
@@ -44,6 +70,7 @@ function normalizePost(raw, topic) {
     hook: String(raw.hook || topic.topic).trim(),
     body: String(raw.body || "").trim(),
     answer: String(raw.answer || "").trim(),
+    scenario: String(raw.scenario || "").trim(),
     flow: Array.isArray(raw.flow) ? raw.flow.slice(0, 6).map(String) : [],
     bullets: Array.isArray(raw.bullets) ? raw.bullets.slice(0, 5).map(String) : [],
     cta: String(raw.cta || "What would you add from your experience?").trim(),
@@ -75,6 +102,7 @@ function renderLinkedInText(post) {
     post.answer ? `Answer:\n${post.answer}` : "",
     flow ? `Architecture flow:\n${flow}` : "",
     bullets ? `Production checklist:\n${bullets}` : "",
+    post.scenario ? `Scenario:\n${post.scenario}` : "",
     post.cta,
     hashtags
   ].filter(Boolean);

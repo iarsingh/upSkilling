@@ -7707,6 +7707,524 @@
     "answer": "I would design it as an authenticated internal assistant backed by RAG over approved runbooks, incident postmortems, Kubernetes docs, and platform standards. Users authenticate through the company identity provider, and retrieval filters enforce team and environment access. The backend retrieves relevant documents, includes citations, and refuses unsupported answers. For troubleshooting, tool calls can query read-only Kubernetes or monitoring APIs with strict permissions. I would add audit logs, prompt injection protection, DLP checks, feedback collection, evaluation datasets, dashboards for quality and cost, and human approval before any write or remediation action."
   },
   {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "CI/CD/Jenkins",
+    "question": "Explain your Jenkins pipeline architecture.",
+    "answer": "A strong answer should directly address the CI/CD/Jenkins angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Explain your Jenkins pipeline architecture."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "CI/CD/Jenkins",
+    "question": "What stages do you include in your CI/CD pipeline?",
+    "answer": "A strong answer should directly address the CI/CD/Jenkins angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What stages do you include in your CI/CD pipeline?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "CI/CD/Jenkins",
+    "question": "How do you integrate third-party tools like Prisma Cloud, Stream Security, or Datadog into Jenkins?",
+    "answer": "A strong answer should directly address the CI/CD/Jenkins angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How do you integrate third-party tools like Prisma Cloud, Stream Security, or Datadog into Jenkins?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "CI/CD/Jenkins",
+    "question": "What is a multi-stage Jenkins pipeline?",
+    "answer": "A strong answer should directly address the CI/CD/Jenkins angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What is a multi-stage Jenkins pipeline?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "CI/CD/Troubleshooting",
+    "question": "Your Jenkins pipeline suddenly starts failing after hundreds of successful builds. How do you troubleshoot it?",
+    "answer": "A strong answer should directly address the CI/CD/Troubleshooting angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Your Jenkins pipeline suddenly starts failing after hundreds of successful builds. How do you troubleshoot it?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "CI/CD/Troubleshooting",
+    "question": "Where do you start troubleshooting—a cloud service, the application, or Jenkins?",
+    "answer": "A strong answer should directly address the CI/CD/Troubleshooting angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Where do you start troubleshooting—a cloud service, the application, or Jenkins?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "CI/CD/System Design",
+    "question": "Design a complete CI/CD pipeline for a Java microservices application from code merge to production.",
+    "answer": "A strong answer should directly address the CI/CD/System Design angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Design a complete CI/CD pipeline for a Java microservices application from code merge to production."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "CI/CD/Jenkins",
+    "question": "Would you use a Scripted Pipeline or Declarative Pipeline? Why?",
+    "answer": "A strong answer should directly address the CI/CD/Jenkins angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Would you use a Scripted Pipeline or Declarative Pipeline? Why?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "CI/CD/Jenkins",
+    "question": "What is a Jenkinsfile?",
+    "answer": "A Jenkinsfile is a text file, checked into source control alongside the application code, that defines a Jenkins pipeline's stages and steps as code, so the build/test/deploy process is versioned and reviewable like any other code change."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "CI/CD/Jenkins",
+    "question": "Which type of pipeline is called a Jenkinsfile?",
+    "answer": "A strong answer should directly address the CI/CD/Jenkins angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Which type of pipeline is called a Jenkinsfile?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "GCP/Experience",
+    "question": "How would you rate yourself in GCP out of 10?",
+    "answer": "A strong answer should directly address the GCP/Experience angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How would you rate yourself in GCP out of 10?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "GCP/Compute Engine",
+    "question": "What are the advantages of Compute Engine over traditional virtual machines?",
+    "answer": "A strong answer should directly address the GCP/Compute Engine angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What are the advantages of Compute Engine over traditional virtual machines?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "GCP/Compute Engine",
+    "question": "What machine families are available in Compute Engine?",
+    "answer": "A strong answer should directly address the GCP/Compute Engine angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What machine families are available in Compute Engine?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "GCP/Troubleshooting",
+    "question": "A production VM becomes unreachable. How do you troubleshoot it?",
+    "answer": "A strong answer should directly address the GCP/Troubleshooting angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: A production VM becomes unreachable. How do you troubleshoot it?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "GCP/Disaster Recovery",
+    "question": "If an entire GCP region goes down, what is your disaster recovery strategy?",
+    "answer": "A strong answer should directly address the GCP/Disaster Recovery angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: If an entire GCP region goes down, what is your disaster recovery strategy?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "GCP/Security",
+    "question": "How would you improve security in GCP?",
+    "answer": "A strong answer should directly address the GCP/Security angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How would you improve security in GCP?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "GCP/Networking",
+    "question": "A VM in VPC-A cannot communicate with a VM in VPC-B. How do you troubleshoot it?",
+    "answer": "A strong answer should directly address the GCP/Networking angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: A VM in VPC-A cannot communicate with a VM in VPC-B. How do you troubleshoot it?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "GCP/Performance",
+    "question": "CPU utilization is only 20%, but application latency has doubled. How do you investigate it?",
+    "answer": "A strong answer should directly address the GCP/Performance angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: CPU utilization is only 20%, but application latency has doubled. How do you investigate it?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "GCP/Architecture",
+    "question": "Compare Cloud Run, GKE, Compute Engine, and App Engine.",
+    "answer": "A strong answer should directly address the GCP/Architecture angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Compare Cloud Run, GKE, Compute Engine, and App Engine."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Kubernetes/Networking",
+    "question": "What are the Kubernetes Service types?",
+    "answer": "A strong answer should directly address the Kubernetes/Networking angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What are the Kubernetes Service types?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Kubernetes/Troubleshooting",
+    "question": "A Service is not routing traffic to the correct Pod. How do you troubleshoot it?",
+    "answer": "A strong answer should directly address the Kubernetes/Troubleshooting angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: A Service is not routing traffic to the correct Pod. How do you troubleshoot it?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Kubernetes/Architecture",
+    "question": "Explain the Kubernetes architecture.",
+    "answer": "A strong answer should directly address the Kubernetes/Architecture angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Explain the Kubernetes architecture."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Kubernetes/Architecture",
+    "question": "Which components communicate with each other in Kubernetes?",
+    "answer": "A strong answer should directly address the Kubernetes/Architecture angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Which components communicate with each other in Kubernetes?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Kubernetes/Configuration",
+    "question": "Where do ConfigMaps and Secrets fit into the Kubernetes architecture?",
+    "answer": "A strong answer should directly address the Kubernetes/Configuration angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Where do ConfigMaps and Secrets fit into the Kubernetes architecture?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Kubernetes/Deployment",
+    "question": "What deployment strategies are available in Kubernetes?",
+    "answer": "A strong answer should directly address the Kubernetes/Deployment angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What deployment strategies are available in Kubernetes?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Kubernetes/Deployment",
+    "question": "Which deployment strategy do you prefer in production and why?",
+    "answer": "A strong answer should directly address the Kubernetes/Deployment angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Which deployment strategy do you prefer in production and why?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Kubernetes/Autoscaling",
+    "question": "Explain Horizontal Pod Autoscaler (HPA).",
+    "answer": "A strong answer should directly address the Kubernetes/Autoscaling angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Explain Horizontal Pod Autoscaler (HPA)."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Kubernetes/Autoscaling",
+    "question": "Explain Vertical Pod Autoscaler (VPA).",
+    "answer": "A strong answer should directly address the Kubernetes/Autoscaling angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Explain Vertical Pod Autoscaler (VPA)."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Kubernetes/Troubleshooting",
+    "question": "Pods are getting killed automatically. How do you determine whether it’s OOMKilled, node resource pressure, or another issue?",
+    "answer": "A strong answer should directly address the Kubernetes/Troubleshooting angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Pods are getting killed automatically. How do you determine whether it’s OOMKilled, node resource pressure, or another issue?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Kubernetes/Incident Response",
+    "question": "Multiple pods are in CrashLoopBackOff. How do you restore production quickly?",
+    "answer": "A strong answer should directly address the Kubernetes/Incident Response angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Multiple pods are in CrashLoopBackOff. How do you restore production quickly?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Docker/Dockerfile",
+    "question": "Name the common Dockerfile instructions.",
+    "answer": "A strong answer should directly address the Docker/Dockerfile angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Name the common Dockerfile instructions."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Docker/Security",
+    "question": "How do you scan Docker images for vulnerabilities?",
+    "answer": "A strong answer should directly address the Docker/Security angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How do you scan Docker images for vulnerabilities?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Docker/Build",
+    "question": "What is a multi-stage Docker build?",
+    "answer": "A strong answer should directly address the Docker/Build angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What is a multi-stage Docker build?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Docker/Runtime",
+    "question": "Do Docker containers have separate kernels or do they share the host kernel?",
+    "answer": "A strong answer should directly address the Docker/Runtime angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Do Docker containers have separate kernels or do they share the host kernel?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Docker/Runtime",
+    "question": "How does a container communicate with the Linux kernel?",
+    "answer": "A strong answer should directly address the Docker/Runtime angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How does a container communicate with the Linux kernel?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Terraform/Architecture",
+    "question": "Design a multi-cloud deployment using Terraform.",
+    "answer": "A strong answer should directly address the Terraform/Architecture angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Design a multi-cloud deployment using Terraform."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Terraform/Fundamentals",
+    "question": "What are the basic Terraform commands?",
+    "answer": "A strong answer should directly address the Terraform/Fundamentals angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What are the basic Terraform commands?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Terraform/State",
+    "question": "What happens if the S3 bucket storing the Terraform state is accidentally deleted?",
+    "answer": "A strong answer should directly address the Terraform/State angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What happens if the S3 bucket storing the Terraform state is accidentally deleted?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Terraform/State",
+    "question": "If the Terraform state becomes very large, how do you manage it?",
+    "answer": "A strong answer should directly address the Terraform/State angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: If the Terraform state becomes very large, how do you manage it?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Terraform/Modules",
+    "question": "Did you create Terraform modules from scratch?",
+    "answer": "A strong answer should directly address the Terraform/Modules angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Did you create Terraform modules from scratch?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Terraform/Experience",
+    "question": "How many Terraform services/resources have you worked on?",
+    "answer": "A strong answer should directly address the Terraform/Experience angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How many Terraform services/resources have you worked on?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Terraform/State",
+    "question": "Where do you prefer to store Terraform state?",
+    "answer": "A strong answer should directly address the Terraform/State angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Where do you prefer to store Terraform state?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Observability/Architecture",
+    "question": "How would you design a monitoring solution for microservices?",
+    "answer": "A strong answer should directly address the Observability/Architecture angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How would you design a monitoring solution for microservices?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Observability/Fundamentals",
+    "question": "What is the difference between monitoring and observability?",
+    "answer": "A strong answer should directly address the Observability/Fundamentals angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What is the difference between monitoring and observability?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Observability/Experience",
+    "question": "Have you used Prometheus and Grafana?",
+    "answer": "A strong answer should directly address the Observability/Experience angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Have you used Prometheus and Grafana?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Observability/Deployment",
+    "question": "How do you deploy Prometheus and Grafana?",
+    "answer": "A strong answer should directly address the Observability/Deployment angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How do you deploy Prometheus and Grafana?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Observability/Metrics",
+    "question": "How do you expose application metrics to Prometheus?",
+    "answer": "A strong answer should directly address the Observability/Metrics angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How do you expose application metrics to Prometheus?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Observability/Alerting",
+    "question": "How do you configure alerts?",
+    "answer": "A strong answer should directly address the Observability/Alerting angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How do you configure alerts?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Linux/Security",
+    "question": "Why do we use sudo instead of logging in as the root user?",
+    "answer": "A strong answer should directly address the Linux/Security angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Why do we use sudo instead of logging in as the root user?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Linux/Permissions",
+    "question": "Explain Linux file permissions.",
+    "answer": "A strong answer should directly address the Linux/Permissions angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Explain Linux file permissions."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Linux/Permissions",
+    "question": "Why should we avoid 777 permissions?",
+    "answer": "A strong answer should directly address the Linux/Permissions angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Why should we avoid 777 permissions?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Linux/Security",
+    "question": "Why do we have both /etc/passwd and /etc/shadow?",
+    "answer": "A strong answer should directly address the Linux/Security angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Why do we have both /etc/passwd and /etc/shadow?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Linux/Scripting",
+    "question": "Write a shell script to find files with 777 permissions.",
+    "answer": "A strong answer should directly address the Linux/Scripting angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Write a shell script to find files with 777 permissions."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Python/DevOps",
+    "question": "How have you used Python in DevOps?",
+    "answer": "A strong answer should directly address the Python/DevOps angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How have you used Python in DevOps?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Python/Automation",
+    "question": "Write a Python script to upload a file to an S3 bucket.",
+    "answer": "A strong answer should directly address the Python/Automation angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Write a Python script to upload a file to an S3 bucket."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Git/Fundamentals",
+    "question": "Name the common Git commands you use.",
+    "answer": "A strong answer should directly address the Git/Fundamentals angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Name the common Git commands you use."
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Git/Branches",
+    "question": "How do you clone only a single branch from a repository?",
+    "answer": "A strong answer should directly address the Git/Branches angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How do you clone only a single branch from a repository?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Git/Workflow",
+    "question": "What is git cherry-pick?",
+    "answer": "A strong answer should directly address the Git/Workflow angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What is git cherry-pick?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Git/Fundamentals",
+    "question": "What is the difference between git clone, git fetch, and git pull?",
+    "answer": "A strong answer should directly address the Git/Fundamentals angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What is the difference between git clone, git fetch, and git pull?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Argo CD/Experience",
+    "question": "Have you worked with Argo CD?",
+    "answer": "A strong answer should directly address the Argo CD/Experience angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Have you worked with Argo CD?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Argo CD/GitOps",
+    "question": "What is GitOps?",
+    "answer": "A strong answer should directly address the Argo CD/GitOps angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What is GitOps?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Argo CD/Experience",
+    "question": "What is your hands-on experience with Argo CD?",
+    "answer": "A strong answer should directly address the Argo CD/Experience angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What is your hands-on experience with Argo CD?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Production Support/Incident Response",
+    "question": "How do you handle a production incident?",
+    "answer": "A strong answer should directly address the Production Support/Incident Response angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How do you handle a production incident?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Production Support/Process",
+    "question": "Do you log in directly to production servers, or do you follow an incident management process?",
+    "answer": "A strong answer should directly address the Production Support/Process angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Do you log in directly to production servers, or do you follow an incident management process?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Production Support/Communication",
+    "question": "How do you communicate during a Sev-1 incident?",
+    "answer": "A strong answer should directly address the Production Support/Communication angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How do you communicate during a Sev-1 incident?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Security/Application",
+    "question": "How do you improve application security in production?",
+    "answer": "A strong answer should directly address the Security/Application angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How do you improve application security in production?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Security/Secrets",
+    "question": "How do you manage secrets securely?",
+    "answer": "A strong answer should directly address the Security/Secrets angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How do you manage secrets securely?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Security/Containers",
+    "question": "How do you secure Docker images?",
+    "answer": "A strong answer should directly address the Security/Containers angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: How do you secure Docker images?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "HR/Closing",
+    "question": "Do you have any questions for us?",
+    "answer": "A strong answer should directly address the HR/Closing angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Do you have any questions for us?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "HR/Closing",
+    "question": "What kind of role are you looking for?",
+    "answer": "A strong answer should directly address the HR/Closing angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: What kind of role are you looking for?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "HR/Closing",
+    "question": "Do you have any feedback for us?",
+    "answer": "A strong answer should directly address the HR/Closing angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Do you have any feedback for us?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "HR/Closing",
+    "question": "Is there anything else you’d like to ask?",
+    "answer": "A strong answer should directly address the HR/Closing angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Is there anything else you’d like to ask?"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Python/Debugging",
+    "question": "Debug and complete the following Python script intended to upload a local file to an S3 bucket. Identify the syntax, naming, path, object-key, exception-handling, and AWS credential issues; then provide a production-safe version.\n\nImport boto3\nFrom botocore.exceptions import clientError\n\ns3_client = boto3.client(“s3”)\nlocal_file_path = “/c/data/”\nbcuket_name = “swapnilAkhi”\ns3_object_name = ““",
+    "answer": "A strong answer should directly address the Python/Debugging angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Debug and complete the following Python script intended to upload a local file to an S3 bucket. Identify the syntax, naming, path, object-key, exception-handling, and AWS credential issues; then provide a production-safe version.\n\nImport boto3\nFrom botocore.exceptions import clientError\n\ns3_client = boto3.client(“s3”)\nlocal_file_path = “/c/data/”\nbcuket_name = “swapnilAkhi”\ns3_object_name = ““"
+  },
+  {
+    "source": "Fixed Mock Interview Sets",
+    "section": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
+    "category": "Linux/Shell Debugging",
+    "question": "Debug and improve the following shell script intended to find regular files with permissions exactly 777. Explain the quoting, variable naming, permission-mode, error-handling, and filesystem-scope considerations.\n\n#!/bin/bash\n\nSearch_path=“/”\nfind “$Search_path” -type f -perm 777 2>/dev/null",
+    "answer": "A strong answer should directly address the Linux/Shell Debugging angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Debug and improve the following shell script intended to find regular files with permissions exactly 777. Explain the quoting, variable naming, permission-mode, error-handling, and filesystem-scope considerations.\n\n#!/bin/bash\n\nSearch_path=“/”\nfind “$Search_path” -type f -perm 777 2>/dev/null"
+  },
+  {
     "source": "App Question Bank",
     "section": "GCP / DevOps / SRE Question Bank",
     "category": null,
@@ -7957,6 +8475,174 @@
     "category": null,
     "question": "GKE node pressure: Nodes show memory pressure and pods are being evicted. How would you investigate requests, limits, QoS classes, daemonsets, autoscaling, and app behavior?",
     "answer": "Check whether pods are set with accurate resource requests/limits - if requests are too low, the scheduler overpacks nodes and real usage causes pressure; if limits are missing entirely, one runaway pod can starve others. Review QoS classes (Guaranteed pods are evicted last), check DaemonSet overhead consuming node capacity that isn't accounted for in scheduling decisions, and confirm cluster autoscaler is actually adding nodes in response to pressure rather than being capped by a low max node count."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes API server overload: The API server has high latency and controllers are falling behind. How would you use API Priority and Fairness, audit logs, request metrics, and client throttling to find and contain the source?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes API server overload: The API server has high latency and controllers are falling behind. How would you use API Priority and Fairness, audit logs, request metrics, and client throttling to find and contain the source?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes etcd performance: A self-managed cluster has slow writes and intermittent leader changes in etcd. How would you investigate disk latency, database size, fragmentation, quorum health, snapshots, and safe recovery?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes etcd performance: A self-managed cluster has slow writes and intermittent leader changes in etcd. How would you investigate disk latency, database size, fragmentation, quorum health, snapshots, and safe recovery?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes scheduler internals: Walk through the scheduling cycle from an unscheduled Pod to node binding. How do filtering, scoring, preemption, topology spread constraints, and scheduler profiles affect the decision?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes scheduler internals: Walk through the scheduling cycle from an unscheduled Pod to node binding. How do filtering, scoring, preemption, topology spread constraints, and scheduler profiles affect the decision?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes scheduling deadlock: Several critical Pods remain Pending even though aggregate cluster capacity appears sufficient. How would you analyze bin-packing, affinity rules, topology constraints, taints, PVC topology, and preemption?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes scheduling deadlock: Several critical Pods remain Pending even though aggregate cluster capacity appears sufficient. How would you analyze bin-packing, affinity rules, topology constraints, taints, PVC topology, and preemption?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes graceful termination: A service drops requests during every rollout despite passing readiness checks. How would you coordinate endpoint removal, preStop, SIGTERM handling, terminationGracePeriodSeconds, load-balancer draining, and application shutdown?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes graceful termination: A service drops requests during every rollout despite passing readiness checks. How would you coordinate endpoint removal, preStop, SIGTERM handling, terminationGracePeriodSeconds, load-balancer draining, and application shutdown?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes PDB failure scenario: A node upgrade is blocked by PodDisruptionBudgets, but relaxing them could violate availability targets. How would you diagnose the constraints and complete the maintenance safely?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes PDB failure scenario: A node upgrade is blocked by PodDisruptionBudgets, but relaxing them could violate availability targets. How would you diagnose the constraints and complete the maintenance safely?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes HPA instability: An HPA rapidly scales up and down while latency remains unstable. How would you inspect metric freshness, utilization math, missing requests, stabilization windows, scaling policies, and downstream bottlenecks?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes HPA instability: An HPA rapidly scales up and down while latency remains unstable. How would you inspect metric freshness, utilization math, missing requests, stabilization windows, scaling policies, and downstream bottlenecks?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes KEDA event scaling: How would you autoscale queue consumers with KEDA while preventing duplicate work, downstream overload, scale-to-zero delays, and retry storms?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes KEDA event scaling: How would you autoscale queue consumers with KEDA while preventing duplicate work, downstream overload, scale-to-zero delays, and retry storms?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes CNI debugging: Pod-to-pod traffic fails only across nodes. How would you isolate CNI, routing, encapsulation, MTU, network policy, conntrack, and cloud firewall problems?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes CNI debugging: Pod-to-pod traffic fails only across nodes. How would you isolate CNI, routing, encapsulation, MTU, network policy, conntrack, and cloud firewall problems?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes DNS at scale: CoreDNS latency and SERVFAIL errors increase during traffic spikes. How would you investigate query amplification, ndots behavior, caching, upstream resolvers, autoscaling, and NodeLocal DNSCache?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes DNS at scale: CoreDNS latency and SERVFAIL errors increase during traffic spikes. How would you investigate query amplification, ndots behavior, caching, upstream resolvers, autoscaling, and NodeLocal DNSCache?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes conntrack exhaustion: Services intermittently time out while Pods and nodes look healthy. How would you confirm conntrack exhaustion, identify the traffic pattern, mitigate impact, and prevent recurrence?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes conntrack exhaustion: Services intermittently time out while Pods and nodes look healthy. How would you confirm conntrack exhaustion, identify the traffic pattern, mitigate impact, and prevent recurrence?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes Gateway API migration: How would you migrate production traffic from Ingress to Gateway API while preserving TLS, routing behavior, policy ownership, observability, rollback, and zero downtime?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes Gateway API migration: How would you migrate production traffic from Ingress to Gateway API while preserving TLS, routing behavior, policy ownership, observability, rollback, and zero downtime?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes zero-trust networking: Design default-deny ingress and egress controls for a multi-tenant cluster. How would you handle DNS, external APIs, service mesh mTLS, policy testing, and emergency access?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes zero-trust networking: Design default-deny ingress and egress controls for a multi-tenant cluster. How would you handle DNS, external APIs, service mesh mTLS, policy testing, and emergency access?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes admission webhook outage: A validating webhook is timing out and blocking all deployments. How would you restore service safely and redesign failurePolicy, timeouts, replicas, certificates, and break-glass controls?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes admission webhook outage: A validating webhook is timing out and blocking all deployments. How would you restore service safely and redesign failurePolicy, timeouts, replicas, certificates, and break-glass controls?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes RBAC privilege escalation: How would you detect and prevent indirect privilege escalation through permissions such as creating Pods, binding roles, impersonating users, reading Secrets, or modifying admission webhooks?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes RBAC privilege escalation: How would you detect and prevent indirect privilege escalation through permissions such as creating Pods, binding roles, impersonating users, reading Secrets, or modifying admission webhooks?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes service account token security: How would you replace long-lived tokens with projected bound tokens and external workload identity while controlling audience, expiration, automounting, and token rotation?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes service account token security: How would you replace long-lived tokens with projected bound tokens and external workload identity while controlling audience, expiration, automounting, and token rotation?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes StatefulSet recovery: A zonal failure leaves a quorum-based StatefulSet unavailable and volumes cannot attach in another zone. How would you recover while protecting consistency, ordering, identity, and RPO?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes StatefulSet recovery: A zonal failure leaves a quorum-based StatefulSet unavailable and volumes cannot attach in another zone. How would you recover while protecting consistency, ordering, identity, and RPO?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes CSI failure: PVC provisioning and volume attachment are intermittently failing. How would you debug StorageClass parameters, CSI controller and node plugins, topology, quotas, finalizers, and cloud-provider events?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes CSI failure: PVC provisioning and volume attachment are intermittently failing. How would you debug StorageClass parameters, CSI controller and node plugins, topology, quotas, finalizers, and cloud-provider events?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes CRD evolution: You own an operator whose CustomResourceDefinition schema must change without breaking stored objects. How would you handle versioning, conversion webhooks, storage versions, defaulting, and rollback?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes CRD evolution: You own an operator whose CustomResourceDefinition schema must change without breaking stored objects. How would you handle versioning, conversion webhooks, storage versions, defaulting, and rollback?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes operator reconciliation: How would you design an idempotent controller reconciliation loop with finalizers, status conditions, retries, leader election, and protection against hot loops?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes operator reconciliation: How would you design an idempotent controller reconciliation loop with finalizers, status conditions, retries, leader election, and protection against hot loops?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes GitOps disaster recovery: Git is available but a production cluster and its GitOps controller are lost. How would you rebuild cluster dependencies, secrets, CRDs, operators, and workloads in the correct order and prove recovery objectives?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes GitOps disaster recovery: Git is available but a production cluster and its GitOps controller are lost. How would you rebuild cluster dependencies, secrets, CRDs, operators, and workloads in the correct order and prove recovery objectives?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes multi-cluster failover: Design active-active or active-passive application delivery across clusters. How would you solve traffic steering, session state, data consistency, configuration drift, identity, and failback?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes multi-cluster failover: Design active-active or active-passive application delivery across clusters. How would you solve traffic steering, session state, data consistency, configuration drift, identity, and failback?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes noisy neighbor: One tenant causes CPU throttling, memory pressure, and control-plane churn for others. How would you combine quotas, LimitRanges, priority classes, node isolation, fair queuing, and chargeback?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes noisy neighbor: One tenant causes CPU throttling, memory pressure, and control-plane churn for others. How would you combine quotas, LimitRanges, priority classes, node isolation, fair queuing, and chargeback?"
+  },
+  {
+    "source": "App Question Bank",
+    "section": "GCP / DevOps / SRE Question Bank",
+    "category": null,
+    "question": "Kubernetes forensic debugging: A container was killed and recreated before engineers captured evidence. What logs, events, audit records, runtime data, core dumps, and ephemeral-container workflows would you establish for post-incident analysis?",
+    "answer": "A strong answer should directly address the GCP / DevOps / SRE Question Bank angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: Kubernetes forensic debugging: A container was killed and recreated before engineers captured evidence. What logs, events, audit records, runtime data, core dumps, and ephemeral-container workflows would you establish for post-incident analysis?"
   },
   {
     "source": "App Question Bank",
@@ -9815,6 +10501,160 @@
   },
   {
     "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank arrays - minimum swaps: Given a permutation of integers from 1 to n, implement minimum_swaps(arr) to return the minimum swaps required to sort it. Target O(n) time and explain cycle decomposition. Test cases: [4, 3, 1, 2] -> 3; [1, 2, 3] -> 0; [2, 1] -> 1.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank arrays - minimum swaps: Given a permutation of integers from 1 to n, implement minimum_swaps(arr) to return the minimum swaps required to sort it. Target O(n) time and explain cycle decomposition. Test cases: [4, 3, 1, 2] -> 3; [1, 2, 3] -> 0; [2, 1] -> 1."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank arrays - array manipulation: You are given n zero-initialized elements and queries [left, right, value] that add value to every element in the inclusive range. Return the maximum value without updating every element of every range. Test cases: n=5, queries=[[1,2,100],[2,5,100],[3,4,100]] -> 200; n=1, queries=[] -> 0.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank arrays - array manipulation: You are given n zero-initialized elements and queries [left, right, value] that add value to every element in the inclusive range. Return the maximum value without updating every element of every range. Test cases: n=5, queries=[[1,2,100],[2,5,100],[3,4,100]] -> 200; n=1, queries=[] -> 0."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank strings - Sherlock anagrams: Given a lowercase string, count unordered pairs of substrings that are anagrams. Define how you canonicalize substrings and analyze complexity. Test cases: 'abba' -> 4; 'abcd' -> 0; 'kkkk' -> 10.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank strings - Sherlock anagrams: Given a lowercase string, count unordered pairs of substrings that are anagrams. Define how you canonicalize substrings and analyze complexity. Test cases: 'abba' -> 4; 'abcd' -> 0; 'kkkk' -> 10."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank strings - special palindrome: Count substrings whose characters are all identical, or identical except for one different middle character. Design a solution faster than checking every substring. Test cases: 'asasd' -> 7; 'aaaa' -> 10; 'abcbaba' -> 10.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank strings - special palindrome: Count substrings whose characters are all identical, or identical except for one different middle character. Design a solution faster than checking every substring. Test cases: 'asasd' -> 7; 'aaaa' -> 10; 'abcbaba' -> 10."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank frequency queries: Process insert x, delete one occurrence of x, and check whether any value occurs exactly f times. Each operation should run in average O(1) time. Test case: [[1,5],[1,6],[3,2],[1,5],[1,5],[1,6],[2,5],[3,2]] -> [0,1]. Deleting a missing value must not fail.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank frequency queries: Process insert x, delete one occurrence of x, and check whether any value occurs exactly f times. Each operation should run in average O(1) time. Test case: [[1,5],[1,6],[3,2],[1,5],[1,5],[1,6],[2,5],[3,2]] -> [0,1]. Deleting a missing value must not fail."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank greedy - luck balance: Each contest has a luck value and importance flag. You may lose at most k important contests. Return maximum achievable luck and justify the greedy choice. Test cases: k=3, contests=[[5,1],[2,1],[1,1],[8,1],[10,0],[5,0]] -> 29; k=0, [[5,1],[10,0]] -> 5.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank greedy - luck balance: Each contest has a luck value and importance flag. You may lose at most k important contests. Return maximum achievable luck and justify the greedy choice. Test cases: k=3, contests=[[5,1],[2,1],[1,1],[8,1],[10,0],[5,0]] -> 29; k=0, [[5,1],[10,0]] -> 5."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank sorting - fraudulent activity notifications: Given expenditures and trailing window d, count days where today's value is at least twice the median of the previous d days. Avoid sorting the full window each day. Test cases: [2,3,4,2,3,6,8,4,5], d=5 -> 2; [1,2,3,4,4], d=4 -> 0.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank sorting - fraudulent activity notifications: Given expenditures and trailing window d, count days where today's value is at least twice the median of the previous d days. Avoid sorting the full window each day. Test cases: [2,3,4,2,3,6,8,4,5], d=5 -> 2; [1,2,3,4,4], d=4 -> 0."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank stack - largest rectangle: Given histogram heights, return the largest rectangular area from consecutive bars using an O(n) monotonic stack. Test cases: [1,2,3,4,5] -> 9; [2,1,5,6,2,3] -> 10; [] -> 0; [5] -> 5.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank stack - largest rectangle: Given histogram heights, return the largest rectangular area from consecutive bars using an O(n) monotonic stack. Test cases: [1,2,3,4,5] -> 9; [2,1,5,6,2,3] -> 10; [] -> 0; [5] -> 5."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank stack - balanced brackets with errors: Validate nested (), [], and {} and return the zero-based index of the first invalid character, or -1 when valid. If opening brackets remain, return the index of the earliest unmatched opener. Test cases: '{[()]}' -> -1; '{[(])}' -> 3; '(()' -> 0; ']' -> 0.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank stack - balanced brackets with errors: Validate nested (), [], and {} and return the zero-based index of the first invalid character, or -1 when valid. If opening brackets remain, return the index of the earliest unmatched opener. Test cases: '{[()]}' -> -1; '{[(])}' -> 3; '(()' -> 0; ']' -> 0."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank queue - castle on the grid: Given a square grid with open and blocked cells, find minimum rook-like moves from start to goal. Test case: grid=['.X.','.X.','...'], start=(0,0), goal=(0,2) -> 3. Also test start=goal -> 0 and an unreachable goal -> -1.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank queue - castle on the grid: Given a square grid with open and blocked cells, find minimum rook-like moves from start to goal. Test case: grid=['.X.','.X.','...'], start=(0,0), goal=(0,2) -> 3. Also test start=goal -> 0 and an unreachable goal -> -1."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank heap - running median: For a stream of integers, output the median after every insertion using two heaps and state their invariants. Test cases: [12,4,5,3,8,7] -> [12.0,8.0,5.0,4.5,5.0,6.0]; [-1,-2] -> [-1.0,-1.5].",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank heap - running median: For a stream of integers, output the median after every insertion using two heaps and state their invariants. Test cases: [12,4,5,3,8,7] -> [12.0,8.0,5.0,4.5,5.0,6.0]; [-1,-2] -> [-1.0,-1.5]."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank intervals - minimum meeting rooms: Given [start,end) intervals, return minimum rooms required in O(n log n); an ending meeting frees its room before another starts at that time. Test cases: [[0,30],[5,10],[15,20]] -> 2; [[7,10],[10,12]] -> 1; [] -> 0.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank intervals - minimum meeting rooms: Given [start,end) intervals, return minimum rooms required in O(n log n); an ending meeting frees its room before another starts at that time. Test cases: [[0,30],[5,10],[15,20]] -> 2; [[7,10],[10,12]] -> 1; [] -> 0."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank linked lists - cycle entry: Return the node where a singly linked-list cycle begins or None, using O(1) space, and prove Floyd's method. Test cases: 3->2->0->-4 with tail pointing to node 2 -> node 2; 1->2 with tail pointing to head -> node 1; 1->2->None -> None.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank linked lists - cycle entry: Return the node where a singly linked-list cycle begins or None, using O(1) space, and prove Floyd's method. Test cases: 3->2->0->-4 with tail pointing to node 2 -> node 2; 1->2 with tail pointing to head -> node 1; 1->2->None -> None."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank trees - lowest common ancestor: Given a binary tree and two nodes, return their LCA; explain the change when either node may be absent. Test tree [3,5,1,6,2,0,8,null,null,7,4]: LCA(5,1) -> 3; LCA(5,4) -> 5; missing node -> None in the presence-check version.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank trees - lowest common ancestor: Given a binary tree and two nodes, return their LCA; explain the change when either node may be absent. Test tree [3,5,1,6,2,0,8,null,null,7,4]: LCA(5,1) -> 3; LCA(5,4) -> 5; missing node -> None in the presence-check version."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank binary search - machine production: Machines take different days per item. Given a goal, return minimum production days by binary-searching the answer. Test cases: machines=[2,3,2], goal=10 -> 8; [1,3,4], goal=10 -> 7; [5], goal=0 -> 0.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank binary search - machine production: Machines take different days per item. Given a goal, return minimum production days by binary-searching the answer. Test cases: machines=[2,3,2], goal=10 -> 8; [1,3,4], goal=10 -> 7; [5], goal=0 -> 0."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank graphs - shortest reach: Given an unweighted graph and start node, return distances to all other nodes using edge weight 6 and -1 when unreachable. Test case: n=4, edges=[(1,2),(1,3)], start=1 -> [6,6,-1] for nodes [2,3,4]. Also test a graph with no edges.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank graphs - shortest reach: Given an unweighted graph and start node, return distances to all other nodes using edge weight 6 and -1 when unreachable. Test case: n=4, edges=[(1,2),(1,3)], start=1 -> [6,6,-1] for nodes [2,3,4]. Also test a graph with no edges."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank graphs - roads and libraries: Find minimum cost to give n cities library access using libraries and undirected roads; handle disconnected components. Test cases: n=3, library=2, road=1, edges=[(1,2),(3,1),(2,3)] -> 4; n=6, library=2, road=5, any edges -> 12.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank graphs - roads and libraries: Find minimum cost to give n cities library access using libraries and undirected roads; handle disconnected components. Test cases: n=3, library=2, road=1, edges=[(1,2),(3,1),(2,3)] -> 4; n=6, library=2, road=5, any edges -> 12."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank dynamic programming - max subset sum: Return maximum sum of non-adjacent elements. Define empty input as 0 and require choosing an element for non-empty all-negative input. Test cases: [3,7,4,6,5] -> 13; [2,1,5,8,4] -> 11; [-2,-3,-1] -> -1; [] -> 0.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank dynamic programming - max subset sum: Return maximum sum of non-adjacent elements. Define empty input as 0 and require choosing an element for non-empty all-negative input. Test cases: [3,7,4,6,5] -> 13; [2,1,5,8,4] -> 11; [-2,-3,-1] -> -1; [] -> 0."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank dynamic programming - abbreviation: Can string a become b by deleting lowercase letters and optionally capitalizing lowercase letters, while uppercase letters cannot be deleted? Test cases: ('daBcd','ABC') -> True; ('AbcDE','ABDE') -> True; ('AbcDE','AFDE') -> False.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank dynamic programming - abbreviation: Can string a become b by deleting lowercase letters and optionally capitalizing lowercase letters, while uppercase letters cannot be deleted? Test cases: ('daBcd','ABC') -> True; ('AbcDE','ABDE') -> True; ('AbcDE','AFDE') -> False."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank practical coding - log sessionization: Group unsorted (user_id,timestamp,action) records into sessions where consecutive events are at most 30 minutes apart. Test: u1 events at 10:00, 10:30, 11:01 produce two sessions; events exactly 30 minutes apart stay together; empty input -> [].",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank practical coding - log sessionization: Group unsorted (user_id,timestamp,action) records into sessions where consecutive events are at most 30 minutes apart. Test: u1 events at 10:00, 10:30, 11:01 produce two sessions; events exactly 30 minutes apart stay together; empty input -> []."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank practical coding - API dependency order: Given services and dependencies where A depends on B, return a valid deployment order or report a cycle, including isolated services. Test cases: services=[api,db,cache], dependencies=[(api,db)] -> db before api with cache anywhere; [(a,b),(b,a)] -> cycle error.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank practical coding - API dependency order: Given services and dependencies where A depends on B, return a valid deployment order or report a cycle, including isolated services. Test cases: services=[api,db,cache], dependencies=[(api,db)] -> db before api with cache anywhere; [(a,b),(b,a)] -> cycle error."
+  },
+  {
+    "source": "App Question Bank",
+    "section": "Coding Exercises",
+    "category": null,
+    "question": "HackerRank practical coding - sliding-window rate limiter: Given chronological timestamped requests by user, return rejected indices when each user may make at most k requests in any rolling 60-second window. Test: k=2, requests=[(u1,0),(u1,10),(u1,20),(u2,20),(u1,60),(u1,71)] -> [2]; requests exactly 60 seconds apart are outside the same window.",
+    "answer": "A strong answer should directly address the Coding Exercises angle of the question. Start with the expected configuration, command, workflow, or troubleshooting principle. For hands-on assessment questions, state the exact file or command shape first, then explain the key fields, validation step, and common mistakes to avoid. Use the prompt details as acceptance criteria: HackerRank practical coding - sliding-window rate limiter: Given chronological timestamped requests by user, return rejected indices when each user may make at most k requests in any rolling 60-second window. Test: k=2, requests=[(u1,0),(u1,10),(u1,20),(u2,20),(u1,60),(u1,71)] -> [2]; requests exactly 60 seconds apart are outside the same window."
+  },
+  {
+    "source": "App Question Bank",
     "section": "Debug This Script",
     "category": null,
     "question": "Debug this Jenkinsfile: Find every bug before this pipeline runs.\n\npipeline { agent any\n  environment {\n    Docker_image = \"my-app-image\"\n    Docker_tag = \"latest\"\n  }\n  Stages {\n    stage('Checkout Code') {\n      steps {\n        git ''\n      }\n    }\n    stage('Build') {\n      Steps {\n        sh 'echo \"build application\"'\n        sh 'mvn clean package'\n      }\n    }\n    stage('deploy') {\n      steps {\n        Sh 'kubectl apply -f deployment.yaml'\n      }\n    }\n  }\n}",
@@ -11422,13 +12262,6 @@
     "category": null,
     "question": "What is the difference between a Jenkins declarative pipeline and a scripted pipeline?",
     "answer": "A declarative pipeline uses a fixed, structured syntax (pipeline { stages { stage { steps { ... } } } }) that's easier to read and validate but less flexible; a scripted pipeline is written in full Groovy inside a node {} block, giving complete programmatic control at the cost of more complexity - declarative is the recommended default for most teams today."
-  },
-  {
-    "source": "App Question Bank",
-    "section": "Basic / One-Liner Concepts",
-    "category": null,
-    "question": "What is a Jenkinsfile?",
-    "answer": "A Jenkinsfile is a text file, checked into source control alongside the application code, that defines a Jenkins pipeline's stages and steps as code, so the build/test/deploy process is versioned and reviewable like any other code change."
   },
   {
     "source": "App Question Bank",
