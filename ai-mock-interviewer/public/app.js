@@ -46,6 +46,8 @@ const els = {
   newQuestion: document.querySelector("#newQuestion"),
   micButton: document.querySelector("#micButton"),
   micVisualizer: document.querySelector("#micVisualizer"),
+  recordingBadge: document.querySelector("#recordingBadge"),
+  recordingTimer: document.querySelector("#recordingTimer"),
   clearButton: document.querySelector("#clearButton"),
   micLanguage: document.querySelector("#micLanguage"),
   answerPause: document.querySelector("#answerPause"),
@@ -1549,6 +1551,29 @@ async function startMicVisualizer() {
   }
 }
 
+let recordingBadgeInterval = null;
+let recordingBadgeStartedAt = 0;
+
+function startRecordingBadge() {
+  if (!els.recordingBadge) return;
+  recordingBadgeStartedAt = Date.now();
+  els.recordingBadge.hidden = false;
+  els.recordingTimer.textContent = "00:00";
+  clearInterval(recordingBadgeInterval);
+  recordingBadgeInterval = setInterval(() => {
+    const elapsed = Math.floor((Date.now() - recordingBadgeStartedAt) / 1000);
+    const minutes = String(Math.floor(elapsed / 60)).padStart(2, "0");
+    const seconds = String(elapsed % 60).padStart(2, "0");
+    els.recordingTimer.textContent = `${minutes}:${seconds}`;
+  }, 1000);
+}
+
+function stopRecordingBadge() {
+  clearInterval(recordingBadgeInterval);
+  recordingBadgeInterval = null;
+  if (els.recordingBadge) els.recordingBadge.hidden = true;
+}
+
 function stopMicVisualizer() {
   if (micVisualizerRaf) cancelAnimationFrame(micVisualizerRaf);
   micVisualizerRaf = null;
@@ -2566,6 +2591,7 @@ function setupSpeech() {
     els.micButton.setAttribute("aria-pressed", "true");
     els.micState.textContent = micStartedBySimulation ? "Simulation listening" : "Listening";
     startMicVisualizer();
+    startRecordingBadge();
   };
 
   recognition.onresult = (event) => {
@@ -2600,6 +2626,7 @@ function setupSpeech() {
     els.micButton.classList.remove("active");
     els.micButton.setAttribute("aria-pressed", "false");
     stopMicVisualizer();
+    stopRecordingBadge();
     if (els.micState.textContent === "Listening" || els.micState.textContent === "Simulation listening") {
       els.micState.textContent = "Microphone idle";
     }

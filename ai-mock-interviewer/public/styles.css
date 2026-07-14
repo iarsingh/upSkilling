@@ -59,6 +59,42 @@ input[type="file"] {
   padding: 18px 0 42px;
 }
 
+@keyframes panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.topbar,
+.interview-sidebar,
+.setup,
+.interview,
+.feedback {
+  animation: panel-enter 520ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+.interview-sidebar {
+  animation-delay: 70ms;
+}
+
+.setup {
+  animation-delay: 130ms;
+}
+
+.interview {
+  animation-delay: 190ms;
+}
+
+.feedback {
+  animation-delay: 250ms;
+}
+
 .topbar {
   display: flex;
   align-items: center;
@@ -834,22 +870,58 @@ button:disabled {
   display: flex;
   flex: 0 0 auto;
   align-items: flex-end;
-  gap: 3px;
-  height: 28px;
-  padding: 0 2px;
+  gap: 4px;
+  height: 40px;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #0c1016;
 }
 
 .mic-visualizer span {
-  width: 4px;
+  width: 6px;
   height: 6px;
-  border-radius: 2px;
+  border-radius: 3px;
   background: var(--line-strong);
-  transition: height 90ms ease, background 180ms ease;
+  transition: height 80ms ease, background 160ms ease;
 }
 
 .mic-visualizer.active span {
+  background: linear-gradient(180deg, var(--gold), var(--accent));
+  box-shadow: 0 0 8px rgba(240, 111, 95, 0.55);
+}
+
+.recording-badge {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid rgba(240, 111, 95, 0.45);
+  border-radius: 8px;
+  background: rgba(240, 111, 95, 0.12);
+  color: #ffc6be;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+}
+
+.recording-badge[hidden] {
+  display: none;
+}
+
+.recording-badge i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 6px rgba(240, 111, 95, 0.45);
+  animation: record-pulse 1.2s ease-in-out infinite;
+}
+
+.recording-badge b {
+  font-variant-numeric: tabular-nums;
+  color: #fff;
 }
 
 .status.ok .dot {
