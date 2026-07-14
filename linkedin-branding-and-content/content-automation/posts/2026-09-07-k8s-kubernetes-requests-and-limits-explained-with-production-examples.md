@@ -1,0 +1,28 @@
+---
+date: 2026-09-07
+slot: 14:30
+day: 16
+series: Kubernetes Series
+topic: Kubernetes requests and limits explained with production examples
+linkedinProfile: https://www.linkedin.com/in/iamarsingh/
+status: scheduled
+---
+
+Most teams learn Kubernetes requests and limits explained with production examples as a definition. Production exposes the missing tradeoffs.
+
+Topic: Kubernetes requests and limits explained with production examples
+
+Practical breakdown:
+1. Map the topic across workload configuration, scheduling, networking, storage, and cluster capacity.
+2. Define the expected behavior before choosing a tool or configuration.
+3. Measure events, pod status, logs, metrics, endpoints, DNS, and node pressure so assumptions can be verified.
+4. Document the tradeoff, owner, and recovery path before production use.
+
+Production takeaway:
+Good engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.
+
+What is the most important production tradeoff you would explain first for Kubernetes requests and limits explained with production examples?
+
+Day 16/104 of my Kubernetes Series.
+
+#Kubernetes #DevOps #PlatformEngineering #CloudNative
