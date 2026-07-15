@@ -20585,5 +20585,47 @@
     "category": null,
     "question": "What is the difference between backing up Kubernetes manifests, persistent volumes, and application databases?",
     "answer": "Manifests capture desired Kubernetes objects such as Deployments, Services, ConfigMaps, RBAC, and policies; persistent volume backups capture disk data attached to Pods; application database backups capture transactionally consistent data from the database engine. A reliable restore often needs all three, but databases usually require application-aware backups or native backup tools to avoid crash-consistency problems."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "CI/CD & GitOps (261–360)",
+    "category": null,
+    "question": "Jenkins shared library structure: How would you structure a Jenkins shared library repository using the vars/ and src/ directories, and what belongs in each?",
+    "answer": "A Jenkins shared library repo typically has vars/, src/, and optionally resources/. vars/ holds global pipeline steps, one Groovy file per step (e.g. vars/deployApp.groovy), each callable directly as a function in a Jenkinsfile (deployApp(env: 'prod')); an optional matching vars/deployApp.txt provides documentation shown in the Global Variable Reference. src/ holds reusable Groovy classes following standard package layout (src/org/company/DeployHelper.groovy), used for shared logic, models, and utilities that vars/ steps call into rather than duplicating logic across steps. resources/ holds non-Groovy files - templates, shell scripts, JSON/YAML fragments - loaded at runtime via libraryResource(). Keeping vars/ thin (orchestration only) and pushing real logic into src/ classes makes the library unit-testable and easier to reason about."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "CI/CD & GitOps (261–360)",
+    "category": null,
+    "question": "Jenkins shared library versioning: How would you version a Jenkins shared library and safely roll out a breaking change without breaking every pipeline that already uses it?",
+    "answer": "Tag releases in the shared library repo (semantic version tags or branches), and have every consuming Jenkinsfile pin an explicit version rather than trusting a moving default: @Library('deploy-lib@v2.1.0') _. For a breaking change, cut a new major version (v3.x) on its own branch/tag while leaving v2.x fully intact and available, migrate pipelines to v3 gradually team by team, and only retire v2 once nothing references it. Avoid letting teams default to @Library('deploy-lib@master') or 'latest' in production pipelines, since that silently pulls in unreviewed changes; reserve unpinned references for a dedicated dev/test pipeline that intentionally validates the library's HEAD before it gets tagged."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "CI/CD & GitOps (261–360)",
+    "category": null,
+    "question": "Jenkins shared library testing: How would you unit test Jenkins shared library Groovy code before it reaches production pipelines?",
+    "answer": "Use the JenkinsPipelineUnit framework (lesfurets/JenkinsPipelineUnit) to unit test vars/ steps and src/ classes outside of a real Jenkins controller - it mocks the Pipeline DSL (sh, checkout, withCredentials, etc.) so tests run fast in plain JUnit/Spock without needing Jenkins infrastructure. Run these tests automatically in CI on every pull request to the shared library repo, and block merges/tags on failing tests, the same discipline you'd apply to application code. For higher-risk changes, follow up with an integration test against a real staging Jenkins instance running an actual pipeline that uses the library, since DSL mocks can't catch every real-world Jenkins behavior."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "CI/CD & GitOps (261–360)",
+    "category": null,
+    "question": "Jenkins shared library secrets: A shared library step needs to call an internal deployment API. How would you handle credentials inside the shared library safely, without hardcoding secrets into the library code?",
+    "answer": "Never embed secrets in the library's Groovy source - the library code should be credential-agnostic. Store the actual secret in the Jenkins Credentials Store, scoped to the folder/team that owns it, and have the vars/ step accept a credentialsId parameter that the calling Jenkinsfile supplies (deployApp(credentialsId: 'prod-deploy-token')). Inside the step, bind it at call time with withCredentials([string(credentialsId: params.credentialsId, variable: 'TOKEN')]) so the token only exists in memory for the duration of that block and is automatically masked in console logs. This keeps the library reusable across teams while each team controls and scopes its own credential."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "CI/CD & GitOps (261–360)",
+    "category": null,
+    "question": "Global vs @Library shared library: What is the difference between a globally trusted Jenkins shared library and one explicitly loaded with @Library('name@version') in a specific Jenkinsfile?",
+    "answer": "A global shared library is registered under Manage Jenkins > System > Global Pipeline Libraries and, if configured as implicitly loaded, is automatically available to every pipeline without an @Library annotation; it can also be marked 'trusted', meaning it runs outside the Groovy sandbox and is allowed to call sensitive APIs (useful for library code that needs privileged operations, but it means anyone who can edit that repo effectively has elevated trust). A library loaded explicitly via @Library('name@version') in a Jenkinsfile is scoped to that pipeline only, defaults to running inside the Groovy sandbox unless explicitly trusted, and - critically - lets each pipeline pin the exact version it depends on instead of silently inheriting whatever the global default currently points to. Explicit, versioned loading is the safer default for anything beyond a small trusted platform team."
+  },
+  {
+    "source": "Large Technical Bank",
+    "section": "CI/CD & GitOps (261–360)",
+    "category": null,
+    "question": "Jenkins shared library parameters: How would you design a shared library step so different teams can pass their own parameters (e.g. image name, namespace, environment) without copy-pasting pipeline logic?",
+    "answer": "Design the vars/ step to accept a single Map via a call(Map config) signature rather than a long positional argument list, so teams invoke it as deployApp(image: 'svc:1.2.3', namespace: 'team-a', environment: 'staging'). Provide sensible defaults for optional keys, validate required keys up front and fail fast with a clear error message naming the missing key, and document the expected keys in the matching vars/deployApp.txt. This keeps the deployment logic itself in exactly one place while letting every team's Jenkinsfile stay a short, declarative call that only specifies what's different for them - which is exactly the drift problem a shared library is meant to solve."
   }
 ]

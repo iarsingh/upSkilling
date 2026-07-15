@@ -19,8 +19,9 @@
           <p class="subtitle">Track answered questions, remaining practice, and completed feedback reports.</p>
         </div>
         <div class="top-actions">
+          <a class="ghost link-button" href="/">Home</a>
           <button id="refreshReport" class="ghost" type="button">Refresh</button>
-          <a class="ghost link-button" href="/">Back to interview</a>
+          <a class="ghost link-button" href="/session.html">Back to interview</a>
         </div>
       </section>
 
@@ -81,7 +82,17 @@
               <small>Reports</small>
             </div>
           </div>
-          <div id="topicBreakdown" class="topic-list"></div>
+          <div id="topicBreakdown" class="bar-chart"></div>
+        </article>
+
+        <article class="panel admin-card admin-wide">
+          <div class="admin-section-head">
+            <div>
+              <p class="eyebrow">Detailed Analysis</p>
+              <h2>Progress Over Time</h2>
+            </div>
+          </div>
+          <div id="progressChart" class="progress-chart-wrap"></div>
         </article>
 
         <article class="panel admin-card admin-wide">
@@ -105,6 +116,32 @@
         </article>
       </section>
     </main>
+
+    <div class="replay-backdrop" id="replayBackdrop">
+      <div class="replay-modal" role="dialog" aria-modal="true" aria-label="Interview replay">
+        <div class="replay-head">
+          <div>
+            <p class="eyebrow">Interview Replay</p>
+            <strong id="replayTitle">Interview</strong>
+          </div>
+          <button id="replayClose" class="ghost small" type="button">Close</button>
+        </div>
+        <div class="replay-body">
+          <div class="replay-stats">
+            <span id="replayCounter">Question 1</span>
+            <button id="replaySpeak" class="ghost small" type="button">Read question</button>
+          </div>
+          <h3 id="replayQuestion">Question text</h3>
+          <p class="eyebrow">Candidate answer</p>
+          <div id="replayAnswer" class="replay-answer"></div>
+        </div>
+        <div class="replay-actions">
+          <button id="replayPrev" class="ghost" type="button">&larr; Previous</button>
+          <span id="replayProgress"></span>
+          <button id="replayNext" class="ghost" type="button">Next &rarr;</button>
+        </div>
+      </div>
+    </div>
 
     <script src="/admin.js"></script>
   </body>

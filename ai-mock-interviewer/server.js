@@ -419,8 +419,20 @@ function fallbackFinalFeedback(input) {
   const hits = mentioned.filter((item) => item[1]).map((item) => item[0]);
   const misses = mentioned.filter((item) => !item[1]).map((item) => item[0]);
   const score = Math.min(8, Math.max(4, 4 + hits.length));
+  const hireSignal = score >= 7 ? "Lean Hire" : "Lean No Hire";
+  const summary = {
+    score: score * 10,
+    hiringReadiness: hireSignal,
+    hiringReadinessPercent: score >= 8 ? 80 : score >= 7 ? 62 : score >= 5 ? 42 : 25,
+    topSkills: hits.slice(0, 4),
+    needsImprovement: misses.slice(0, 4)
+  };
 
-  return `## What You Told
+  return `\`\`\`json
+${JSON.stringify(summary)}
+\`\`\`
+
+## What You Told
 ${transcript || "No answer transcript was captured."}
 
 ## Overall Score
@@ -477,6 +489,15 @@ Day 7: Do a full mock focused on platform engineering, FinOps, DR, and incident 
 GKE production troubleshooting plus SRE metrics.`;
 }
 
+function moodInstruction(mood) {
+  const presets = {
+    friendly: "Adopt a warm, encouraging interviewer tone - supportive phrasing, patient follow-ups, like a mentor who wants the candidate to succeed.",
+    strict: "Adopt a demanding, high-bar interviewer tone typical of a rigorous FAANG-style loop - press for specifics, do not soften critique, expect precise technical depth.",
+    neutral: "Adopt a professional, neutral, straightforward interviewer tone."
+  };
+  return presets[mood] || presets.neutral;
+}
+
 function feedbackPrompt(input) {
   const role = input.role || "DevOps / MLOps Engineer";
   const level = input.level || "mid-senior";
@@ -487,6 +508,8 @@ function feedbackPrompt(input) {
   const answer = input.answer || "";
 
   return `You are a senior technical interviewer and interview coach.
+
+${moodInstruction(input.mood)}
 
 Interview round: Interview ${interviewNumber}
 Candidate target role: ${role}
@@ -537,6 +560,8 @@ function finalFeedbackPrompt(input) {
 
   return `You are a senior technical interviewer and hiring-bar coach.
 
+${moodInstruction(input.mood)}
+
 Interview round: Interview ${interviewNumber}
 Candidate target role: ${role}
 Seniority: ${level}
@@ -561,7 +586,13 @@ Important rules:
 - Separate technical risk/control feedback from behavioral stakeholder-leadership feedback where relevant.
 - Do not invent experience the candidate did not mention; phrase sample answers as "A stronger answer could be..."
 
-Return markdown with exactly these sections:
+Start your response with exactly one fenced code block containing ONLY valid JSON (no comments, no trailing commas, no extra text inside the fence) in this exact shape:
+
+\`\`\`json
+{"score": <integer 0-100 overall hiring-readiness score>, "hiringReadiness": "<one of: Strong Hire, Hire, Lean Hire, Lean No Hire, No Hire>", "hiringReadinessPercent": <integer 0-100>, "topSkills": ["<skill>", "<skill>", "<skill>"], "needsImprovement": ["<skill>", "<skill>", "<skill>"]}
+\`\`\`
+
+Then, after that fence, continue with the full markdown report using exactly these sections:
 
 ## What You Told
 For each answered question, show:
@@ -700,9 +731,15 @@ function questionPrompt(input) {
   const interviewNumber = input.interviewNumber || 1;
   const cvText = trimContext(input.cvText);
   const jdText = combinedJobContext(input.jdText);
-  const history = Array.isArray(input.history) ? input.history.slice(-6).join("\n") : "";
+  const historyEntries = Array.isArray(input.history) ? input.history.slice(-6) : [];
+  const history = historyEntries.join("\n");
+  const lastEntry = historyEntries[historyEntries.length - 1] || "";
+  const lastAnswerMatch = lastEntry.match(/Answer:\s*([\s\S]+)/);
+  const lastAnswer = lastAnswerMatch ? lastAnswerMatch[1].trim() : "";
 
   return `You are running a mock technical interview.
+
+${moodInstruction(input.mood)}
 
 Interview round: Interview ${interviewNumber}
 Target role: ${role}
@@ -716,6 +753,10 @@ ${jdText}
 
 Recent interview history:
 ${history || "None yet."}
+
+${lastAnswer
+    ? `The candidate's most recent answer was:\n${lastAnswer}\n\nAct like a real interviewer reacting to that specific answer: reference a concrete detail, tool, number, or claim the candidate just made, and ask ONE adaptive follow-up question that digs deeper into it or pressure-tests it - do not jump to an unrelated rotation topic yet. Only move to the next rotation topic below if this specific answer was already thin, fully covered in a prior follow-up, or you are deliberately starting a new section of the interview.`
+    : "There is no prior answer yet, so ask an opening or topic-starting question from the rotation below."}
 
 Priority skill rotation:
 1. GKE expert operations and troubleshooting
@@ -742,6 +783,41 @@ Priority skill rotation:
 20. Behavioral leadership: stakeholder influence, executive communication, risk culture, and decision-making
 
 Ask exactly one interview question. Make it realistic, scenario-based, suitable for spoken practice, and strongly aligned to the JD while testing the candidate's CV claims. Rotate through the priority skills instead of repeating the same topic. Mix technical technology-risk questions with behavioral stakeholder-leadership questions over the interview. For Google/product-company style, prefer system design, tradeoff, debugging, incident, control, governance, and production ownership questions. Do not include the answer.`;
+}
+
+function hintPrompt(input) {
+  const role = input.role || "DevOps / MLOps Engineer";
+  const level = input.level || "mid-senior";
+  const question = input.question || "";
+  const partialAnswer = trimContext(input.answer);
+
+  return `You are a supportive technical interview coach giving a brief hint mid-interview.
+
+Target role: ${role}
+Seniority: ${level}
+Current interview question:
+${question}
+
+Candidate's partial answer so far:
+${partialAnswer || "No answer given yet."}
+
+Give ONE short hint (2-3 sentences max) that nudges the candidate toward a strong answer structure or a key concept they may be missing. Do NOT give away the full answer or a complete solution. Be encouraging and specific to this question, not generic advice.`;
+}
+
+function fallbackHint(input) {
+  const question = String(input.question || "").toLowerCase();
+  const hints = [
+    { match: /kubernetes|k8s|\bpod\b|deployment|helm|gke/, hint: "Think in layers: workload spec (requests/limits/probes), scheduling, and the failure mode you'd see in `kubectl describe` or events before jumping to logs." },
+    { match: /terraform|opentofu|\biac\b/, hint: "Structure your answer around state, modules, and blast radius: how do you isolate environments, review plans safely, and prevent drift?" },
+    { match: /mlops|model|ml pipeline|vertex|mlflow/, hint: "Frame it as a release pipeline: data/feature version, model registry approval, deployment strategy, and rollback - not just training." },
+    { match: /\bsre\b|\bslo\b|\bsli\b|error budget|incident/, hint: "Anchor your answer in a concrete metric and threshold, then walk through detection, alerting, and the decision it triggers." },
+    { match: /security|\biam\b|secrets|devsecops/, hint: "Lead with least privilege and defense in depth: who has access, how is it scoped, and what detects misuse." },
+    { match: /python|script|automation|\bgo\b/, hint: "Describe the shape of the function first (inputs/outputs/edge cases), then how you'd test and productionize it." }
+  ];
+  const matched = hints.find((item) => item.match.test(question));
+  return matched
+    ? matched.hint
+    : "Start by restating the problem in your own words, then walk through your approach step by step before naming the tools you'd use.";
 }
 
 function cleanGeneratedQuestion(text) {
@@ -958,6 +1034,25 @@ async function handleRequest(req, res) {
           question: fallbackQuestion(input),
           fallback: true
         });
+      }
+      return;
+    }
+
+    if (req.method === "POST" && req.url === "/api/hint") {
+      const input = await readBody(req);
+      if (!String(input.question || "").trim()) {
+        sendJson(res, 400, { error: "No active question to hint on." });
+        return;
+      }
+      if (OFFLINE_ONLY) {
+        sendJson(res, 200, { hint: fallbackHint(input), fallback: true });
+        return;
+      }
+      try {
+        const hint = await askLLM(hintPrompt(input), { temperature: 0.4, num_predict: 180 }, 15000);
+        sendJson(res, 200, { hint: String(hint).trim() });
+      } catch {
+        sendJson(res, 200, { hint: fallbackHint(input), fallback: true });
       }
       return;
     }

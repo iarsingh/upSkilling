@@ -4,6 +4,8 @@ const els = {
   interviewList: document.querySelector("#interviewList"),
   progressHistory: document.querySelector("#progressHistory"),
   addInterview: document.querySelector("#addInterview"),
+  removeFromNumber: document.querySelector("#removeFromNumber"),
+  removeFromButton: document.querySelector("#removeFromButton"),
   interviewLabel: document.querySelector("#interviewLabel"),
   previousInterview: document.querySelector("#previousInterview"),
   nextInterview: document.querySelector("#nextInterview"),
@@ -48,6 +50,24 @@ const els = {
   micVisualizer: document.querySelector("#micVisualizer"),
   recordingBadge: document.querySelector("#recordingBadge"),
   recordingTimer: document.querySelector("#recordingTimer"),
+  aiTile: document.querySelector("#aiTile"),
+  aiTileState: document.querySelector("#aiTileState"),
+  aiWaveform: document.querySelector("#aiWaveform"),
+  aiMascot: document.querySelector(".ai-mascot"),
+  userTile: document.querySelector("#userTile"),
+  userTileState: document.querySelector("#userTileState"),
+  userVideo: document.querySelector("#userVideo"),
+  toggleCamera: document.querySelector("#toggleCamera"),
+  skipQuestion: document.querySelector("#skipQuestion"),
+  stageSplit: document.querySelector("#stageSplit"),
+  minimizeInterview: document.querySelector("#minimizeInterview"),
+  interviewerMood: document.querySelector("#interviewerMood"),
+  aiMoodEmoji: document.querySelector("#aiMoodEmoji"),
+  toggleFullscreen: document.querySelector("#toggleFullscreen"),
+  callStage: document.querySelector(".call-stage"),
+  requestHint: document.querySelector("#requestHint"),
+  hintBox: document.querySelector("#hintBox"),
+  hintText: document.querySelector("#hintText"),
   clearButton: document.querySelector("#clearButton"),
   micLanguage: document.querySelector("#micLanguage"),
   answerPause: document.querySelector("#answerPause"),
@@ -374,15 +394,6 @@ const questionBank = [
   "Datadog: Have you used Datadog, and how would you use it for metrics, logs, traces, dashboards, and alerts?",
   "Cloud Functions latency: A newly created Cloud Function had high latency for a few minutes and then automatically recovered. What could be the reason?",
   "GCP cost optimization: How would you reduce the cost of a GCP environment?",
-  "Docker experience: Have you worked on Docker? Explain the workflows and production concerns you handled.",
-  "Dockerfiles: Have you written Dockerfiles? What best practices do you follow?",
-  "Docker build context: What is Docker build context, and why does it matter for build speed, security, and image contents?",
-  "Docker fundamentals: What is Docker, and what problem does it solve?",
-  "Dockerfile fundamentals: What is a Dockerfile, and how is it used to build an image?",
-  "Docker CMD vs ENTRYPOINT: What is the difference between CMD and ENTRYPOINT?",
-  "Docker image optimization: How do you optimize Docker image size?",
-  "Docker multi-stage builds: What are multi-stage builds, and when would you use them?",
-  "Docker image security: How do you secure Docker images before deploying them?",
   "Kubernetes architecture: Explain the architecture of Kubernetes, including control plane and worker-node components.",
   "Kubernetes workload objects: What are Pods, Deployments, ReplicaSets, StatefulSets, and DaemonSets?",
   "Kubernetes Service types: What is a Service, and how do ClusterIP, NodePort, and LoadBalancer differ?",
@@ -602,7 +613,6 @@ const questionBank = [
   "Kubernetes probes: How would you design readiness, liveness, and startup probes for a slow-starting service to avoid cascading failures?",
   "PDB design: How would you use PodDisruptionBudgets during node upgrades, cluster autoscaling, and planned maintenance?",
   "Kubernetes certificate issue: A cluster has certificate or webhook TLS failures. How would you debug certificate chain, rotation, admission webhooks, and API server errors?",
-  "Docker image design: How would you build secure, small, reproducible Docker images for production services?",
   "Container startup: A container works locally but fails in Kubernetes. How would you debug entrypoint, env vars, filesystem, permissions, and security context?",
   "Helm rollback: A Helm upgrade failed and left resources in a partial state. How would you recover and prevent it next time?",
   "DevOps lifecycle: Explain how you would design the full SDLC for a cloud-native service from code commit to production operations.",
@@ -747,6 +757,12 @@ const questionBank = [
   "Scenario - Terraform workspaces vs directories: How would you decide between Terraform workspaces and separate state directories for managing dev, staging, and prod environments?",
   "Scenario - Composer DAG stuck: An Airflow DAG in Cloud Composer has tasks stuck in a queued state for 30 minutes with no errors. How would you triage it?",
   "Scenario - Jenkins shared library: Ten pipelines duplicate the same deployment logic with slight drift between them. How would you refactor this using a Jenkins shared library?",
+  "Jenkins shared library structure: How would you structure a Jenkins shared library repository using the vars/ and src/ directories, and what belongs in each?",
+  "Jenkins shared library versioning: How would you version a Jenkins shared library and safely roll out a breaking change without breaking every pipeline that already uses it?",
+  "Jenkins shared library testing: How would you unit test Jenkins shared library Groovy code before it reaches production pipelines?",
+  "Jenkins shared library secrets: A shared library step needs to call an internal deployment API. How would you handle credentials inside the shared library safely, without hardcoding secrets into the library code?",
+  "Global vs @Library shared library: What is the difference between a globally trusted Jenkins shared library and one explicitly loaded with @Library('name@version') in a specific Jenkinsfile?",
+  "Jenkins shared library parameters: How would you design a shared library step so different teams can pass their own parameters (e.g. image name, namespace, environment) without copy-pasting pipeline logic?",
   "Scenario - IAM conditional binding: Security wants a service account to have Storage Object Viewer only during business hours and only on a specific bucket. How would you implement that in IAM?",
   "Scenario - default-deny NetworkPolicy rollout: You need to introduce a default-deny NetworkPolicy in a shared GKE cluster with many existing teams. How would you roll it out without breaking production traffic?",
   "Today interview 2026-07-06 - AI engineering libraries: What Python libraries are most useful for AI Engineering nowadays?",
@@ -1508,6 +1524,7 @@ function currentInterview() {
 
 function setBusy(button, busy, text) {
   button.disabled = busy;
+  button.classList.toggle("is-busy", busy);
   if (text) button.textContent = text;
 }
 
@@ -1574,6 +1591,47 @@ function stopRecordingBadge() {
   if (els.recordingBadge) els.recordingBadge.hidden = true;
 }
 
+const FILLER_WORD_PATTERN = /\b(um+|uh+|erm+|like|you know|sort of|kind of|i mean|basically|actually)\b/gi;
+
+function updateConfidenceMeter() {
+  const panel = document.querySelector("#confidencePanel");
+  if (!panel) return;
+  const text = els.answer.value.trim();
+  if (!text) {
+    panel.hidden = true;
+    return;
+  }
+  panel.hidden = false;
+
+  const words = text.split(/\s+/).filter(Boolean);
+  const wordCount = words.length;
+  const fillerMatches = text.match(FILLER_WORD_PATTERN) || [];
+
+  let confidence = 100;
+  confidence -= Math.min(50, fillerMatches.length * 6);
+  if (wordCount < 20) confidence -= (20 - wordCount) * 2;
+  confidence = Math.max(5, Math.min(100, Math.round(confidence)));
+
+  const elapsedMinutes = recordingBadgeStartedAt
+    ? Math.max(0.05, (Date.now() - recordingBadgeStartedAt) / 60000)
+    : 0;
+  const pace = elapsedMinutes ? Math.round(wordCount / elapsedMinutes) : 0;
+
+  const fill = document.querySelector("#confidenceFill");
+  const value = document.querySelector("#confidenceValue");
+  const paceValue = document.querySelector("#paceValue");
+  const fillerValue = document.querySelector("#fillerValue");
+  if (fill) fill.style.width = `${confidence}%`;
+  if (value) value.textContent = `${confidence}%`;
+  if (paceValue) paceValue.textContent = pace ? `${pace} wpm` : "-- wpm";
+  if (fillerValue) fillerValue.textContent = String(fillerMatches.length);
+}
+
+function resetConfidenceMeter() {
+  const panel = document.querySelector("#confidencePanel");
+  if (panel) panel.hidden = true;
+}
+
 function stopMicVisualizer() {
   if (micVisualizerRaf) cancelAnimationFrame(micVisualizerRaf);
   micVisualizerRaf = null;
@@ -1617,8 +1675,23 @@ function saveState() {
     realTimeSimulation: els.realTimeSimulation.checked,
     micLanguage: els.micLanguage.value,
     answerPause: els.answerPause.value,
-    interviewMode: currentMode()
+    interviewMode: currentMode(),
+    interviewerMood: els.interviewerMood?.value || "neutral"
   }));
+  flashAutosaveIndicator();
+}
+
+let autosaveIndicatorTimeout = null;
+
+function flashAutosaveIndicator() {
+  const indicator = document.querySelector("#autosaveIndicator");
+  if (!indicator) return;
+  indicator.hidden = false;
+  indicator.classList.add("visible");
+  clearTimeout(autosaveIndicatorTimeout);
+  autosaveIndicatorTimeout = setTimeout(() => {
+    indicator.classList.remove("visible");
+  }, 1200);
 }
 
 function loadState() {
@@ -1639,6 +1712,8 @@ function loadState() {
   els.realTimeSimulation.checked = saved.realTimeSimulation !== false;
   els.micLanguage.value = saved.micLanguage || "en-IN";
   els.answerPause.value = saved.answerPause || "9500";
+  if (els.interviewerMood) els.interviewerMood.value = saved.interviewerMood || "neutral";
+  syncMoodEmoji();
   els.technology.value = saved.technology || "all";
   els.questionOrder.value = saved.questionOrder || "random";
   setMode(saved.interviewMode || "live");
@@ -1714,6 +1789,49 @@ function renderSessionStats() {
   els.answerCounter.textContent = `${answered} answered`;
   els.answerCount.textContent = `${characters} character${characters === 1 ? "" : "s"}`;
   els.sessionProgress.style.width = `${Math.min(100, answered * 10)}%`;
+  renderRoadmap();
+}
+
+const roadmapStages = [
+  { key: "intro", label: "Introduction" },
+  { key: "kubernetes", label: "Kubernetes", keywords: /kubernetes|\bk8s\b|\bgke\b|\bpod\b|\bhelm\b|kustomize/i },
+  { key: "terraform", label: "Terraform / IaC", keywords: /terraform|opentofu|\biac\b/i },
+  { key: "cicd", label: "CI/CD & GitOps", keywords: /ci\/cd|\bcicd\b|argocd|gitops|pipeline|jenkins|github actions/i },
+  { key: "cloud", label: "Cloud & Networking", keywords: /\bgcp\b|\baws\b|\bazure\b|\bvpc\b|networking|\bdns\b|load balanc/i },
+  { key: "observability", label: "Observability / SRE", keywords: /observability|prometheus|grafana|\bslo\b|\bsli\b|error budget|monitoring/i },
+  { key: "security", label: "Security", keywords: /security|\biam\b|secrets|devsecops|vulnerab/i },
+  { key: "systemdesign", label: "System Design", keywords: /system design|architecture|scalab|distributed system/i }
+];
+
+function computeRoadmapStatus() {
+  const session = currentInterview();
+  const answers = session.answers || [];
+  const answeredText = answers.map((item) => `${item.question} ${item.answer}`).join(" ").toLowerCase();
+  const currentQuestionText = (els.question.textContent || "").toLowerCase();
+  const introDone = answers.length > 0 || Boolean(els.question.textContent && !els.question.textContent.startsWith("This is a mock interview"));
+
+  return roadmapStages.map((stage) => {
+    if (stage.key === "intro") {
+      return { ...stage, status: introDone ? "done" : "current" };
+    }
+    const isDone = stage.keywords.test(answeredText);
+    const isCurrent = !isDone && stage.keywords.test(currentQuestionText);
+    return { ...stage, status: isDone ? "done" : isCurrent ? "current" : "upcoming" };
+  });
+}
+
+function renderRoadmap() {
+  const container = document.querySelector("#interviewRoadmap");
+  if (!container) return;
+  container.innerHTML = computeRoadmapStatus().map((stage) => {
+    const icon = stage.status === "done" ? "&#10003;" : stage.status === "current" ? "&#9656;" : "";
+    return `
+      <div class="roadmap-step ${stage.status}">
+        <span class="roadmap-icon">${icon}</span>
+        <span>${escapeHtml(stage.label)}</span>
+      </div>
+    `;
+  }).join("");
 }
 
 function renderInterviewList() {
@@ -1886,6 +2004,9 @@ function deleteSelectedCustomSkill() {
     els.feedbackOutput.innerHTML = markdownToHtml("## No Custom Skill Selected\nSelect a custom skill from Technology practice before deleting.");
     return;
   }
+  if (!window.confirm(`Delete "${skill.name}" and reset all current interview progress? This cannot be undone.`)) {
+    return;
+  }
   customSkills = customSkills.filter((item) => item.id !== id);
   els.technology.querySelector(`option[value="${id}"]`)?.remove();
   els.technology.value = "all";
@@ -1945,8 +2066,16 @@ function contextPayload() {
       : `${technologyLabels[els.technology.value]}. ${els.topic.value}`,
     cvText: els.cvText.value,
     jdText: els.jdText.value,
-    interviewNumber
+    interviewNumber,
+    mood: els.interviewerMood?.value || "neutral"
   };
+}
+
+const moodEmojis = { neutral: "😐", friendly: "🙂", strict: "🧐" };
+
+function syncMoodEmoji() {
+  if (!els.aiMoodEmoji || !els.interviewerMood) return;
+  els.aiMoodEmoji.textContent = moodEmojis[els.interviewerMood.value] || moodEmojis.neutral;
 }
 
 function applyImportedJd(text, message) {
@@ -2326,6 +2455,50 @@ function markdownToHtml(markdown) {
   return html.join("");
 }
 
+function extractResultsSummary(rawText) {
+  const text = String(rawText || "");
+  const match = text.match(/^\s*```json\s*([\s\S]*?)```\s*/);
+  if (!match) return { summary: null, rest: text };
+  try {
+    const summary = JSON.parse(match[1]);
+    if (!summary || typeof summary.score !== "number") return { summary: null, rest: text };
+    return { summary, rest: text.slice(match[0].length) };
+  } catch {
+    return { summary: null, rest: text };
+  }
+}
+
+function renderResultsCardHtml(summary) {
+  if (!summary) return "";
+  const score = Math.max(0, Math.min(100, Math.round(summary.score)));
+  const readinessPercent = Math.max(0, Math.min(100, Math.round(Number(summary.hiringReadinessPercent) || score)));
+  const readinessClass = readinessPercent >= 75 ? "strong" : readinessPercent >= 55 ? "ok" : readinessPercent >= 35 ? "weak" : "poor";
+  const readiness = escapeHtml(String(summary.hiringReadiness || "Unscored"));
+  const topSkills = Array.isArray(summary.topSkills) ? summary.topSkills.slice(0, 4) : [];
+  const needsImprovement = Array.isArray(summary.needsImprovement) ? summary.needsImprovement.slice(0, 4) : [];
+
+  return `
+    <div class="results-card">
+      <div class="results-score">
+        <div class="score-ring" style="--score: ${score}"><span>${score}%</span></div>
+        <div>
+          <p class="eyebrow">Hiring Readiness</p>
+          <strong class="readiness-badge ${readinessClass}">${readiness}</strong>
+        </div>
+      </div>
+      <div class="results-skills">
+        ${topSkills.length ? `<div><p class="eyebrow">Top Skills</p><div class="skill-chips">${topSkills.map((skill) => `<span class="skill-chip good">&#10003; ${escapeHtml(skill)}</span>`).join("")}</div></div>` : ""}
+        ${needsImprovement.length ? `<div><p class="eyebrow">Needs Improvement</p><div class="skill-chips">${needsImprovement.map((skill) => `<span class="skill-chip weak">${escapeHtml(skill)}</span>`).join("")}</div></div>` : ""}
+      </div>
+    </div>
+  `;
+}
+
+function renderFinalFeedbackHtml(rawText) {
+  const { summary, rest } = extractResultsSummary(rawText);
+  return renderResultsCardHtml(summary) + markdownToHtml(rest);
+}
+
 function setQuestionFromText(question) {
   saveCurrentQuestionDraft();
   stopAnswerSilenceTimer();
@@ -2335,6 +2508,7 @@ function setQuestionFromText(question) {
   bumpElement(els.question, "question-enter");
   els.answer.value = "";
   finalTranscript = "";
+  resetConfidenceMeter();
   els.micState.textContent = `Interview question ${questionNumber} ready. ${activeQuestionPoolLabel(questionPool().length)}`;
   const session = currentInterview();
   ensureQuestionHistory();
@@ -2467,8 +2641,31 @@ async function checkHealth() {
   }
 }
 
+let aiThinkingInterval = null;
+
+function startAiThinking(phrases = ["Analyzing your answer...", "Generating a follow-up question..."]) {
+  if (els.aiTileState) els.aiTileState.textContent = phrases[0];
+  els.aiMascot?.classList.add("thinking");
+  els.aiWaveform?.classList.add("thinking");
+  let index = 0;
+  clearInterval(aiThinkingInterval);
+  aiThinkingInterval = setInterval(() => {
+    index = (index + 1) % phrases.length;
+    if (els.aiTileState) els.aiTileState.textContent = phrases[index];
+  }, 1400);
+}
+
+function stopAiThinking() {
+  clearInterval(aiThinkingInterval);
+  aiThinkingInterval = null;
+  els.aiMascot?.classList.remove("thinking");
+  els.aiWaveform?.classList.remove("thinking");
+  if (els.aiTileState) els.aiTileState.textContent = "Ready";
+}
+
 async function loadNextQuestion(button = els.newQuestion) {
   setBusy(button, true, "Thinking");
+  startAiThinking(["Reviewing interview history...", "Picking the next topic...", "Writing your next question..."]);
   try {
     const data = await api("/api/question", {
       ...contextPayload(),
@@ -2479,6 +2676,7 @@ async function loadNextQuestion(button = els.newQuestion) {
     els.feedbackOutput.innerHTML = markdownToHtml(`## Error\n${error.message}`);
   } finally {
     setBusy(button, false, button === els.feedbackButton ? "Save answer" : "New question");
+    stopAiThinking();
   }
 }
 
@@ -2606,6 +2804,7 @@ function setupSpeech() {
     }
     els.answer.value = cleanTranscript(`${finalTranscript}${interim ? ` ${interim}` : ""}`);
     renderSessionStats();
+    updateConfidenceMeter();
     scheduleAnswerSilenceStop();
   };
 
@@ -2690,6 +2889,9 @@ function preferredQuestionVoice(tonePreset = questionVoiceTonePresets.natural) {
 }
 
 function stopQuestionAudio() {
+  els.aiWaveform?.classList.remove("speaking");
+  els.aiMascot?.classList.remove("speaking");
+  if (els.aiTileState) els.aiTileState.textContent = "Ready";
   if (!speechSynthesisApi) return;
   questionAudioCanceled = true;
   questionAudioRunId += 1;
@@ -2718,16 +2920,25 @@ function speakQuestion() {
   utterance.onstart = () => {
     els.questionAudioState.textContent = "Reading question";
     updateQuestionAudioControls();
+    els.aiWaveform?.classList.add("speaking");
+    els.aiMascot?.classList.add("speaking");
+    if (els.aiTileState) els.aiTileState.textContent = "Speaking";
   };
   utterance.onend = () => {
     els.questionAudioState.textContent = "Question audio ready";
     updateQuestionAudioControls();
+    els.aiWaveform?.classList.remove("speaking");
+  els.aiMascot?.classList.remove("speaking");
+    if (els.aiTileState) els.aiTileState.textContent = "Ready";
     if (!questionAudioCanceled && runId === questionAudioRunId) startSimulationMic();
   };
   utterance.onerror = () => {
     if (runId === questionAudioRunId) questionAudioCanceled = false;
     els.questionAudioState.textContent = "Question audio stopped";
     updateQuestionAudioControls();
+    els.aiWaveform?.classList.remove("speaking");
+  els.aiMascot?.classList.remove("speaking");
+    if (els.aiTileState) els.aiTileState.textContent = "Ready";
   };
   speechSynthesisApi.speak(utterance);
 }
@@ -2787,6 +2998,7 @@ els.clearButton.addEventListener("click", () => {
   els.feedbackOutput.textContent = "Your final interview feedback will appear here after you end the interview.";
   captureInterviewState();
   renderSessionStats();
+  resetConfidenceMeter();
   saveState();
 });
 
@@ -2899,6 +3111,11 @@ els.importCvFile.addEventListener("click", async () => {
   }
 });
 
+els.interviewerMood?.addEventListener("change", () => {
+  syncMoodEmoji();
+  saveState();
+});
+
 els.modeInputs.forEach((input) => {
   input.addEventListener("change", () => {
     updateModeUi();
@@ -2924,6 +3141,35 @@ els.addInterview.addEventListener("click", () => {
   saveState();
 });
 
+els.removeFromButton?.addEventListener("click", () => {
+  const fromNumber = Number(els.removeFromNumber.value);
+  if (!fromNumber || fromNumber < 1) {
+    window.alert("Enter the interview number to remove from, e.g. 3.");
+    els.removeFromNumber.focus();
+    return;
+  }
+  if (fromNumber > interviews.length) {
+    window.alert(`You only have ${interviews.length} interview${interviews.length === 1 ? "" : "s"} saved, so there is nothing to remove from Interview ${fromNumber} onward.`);
+    els.removeFromNumber.focus();
+    return;
+  }
+  const removedCount = interviews.length - fromNumber + 1;
+  const confirmed = window.confirm(
+    `Remove Interview ${fromNumber}${removedCount > 1 ? ` through Interview ${interviews.length}` : ""} (${removedCount} interview${removedCount === 1 ? "" : "s"})? This cannot be undone.`
+  );
+  if (!confirmed) return;
+
+  interviews = interviews.slice(0, fromNumber - 1);
+  if (!interviews.length) interviews = [createInterview(1)];
+  if (interviewNumber > interviews.length) interviewNumber = interviews.length;
+  questionNumber = currentInterview().questionNumber || 1;
+  renderInterview();
+  els.removeFromNumber.value = "";
+  els.feedbackOutput.innerHTML = markdownToHtml(`## Interviews Removed\nRemoved ${removedCount} interview${removedCount === 1 ? "" : "s"}. ${interviews.length} interview${interviews.length === 1 ? "" : "s"} remaining.`);
+  currentInterview().finalFeedback = els.feedbackOutput.innerHTML;
+  saveState();
+});
+
 els.previousInterview.addEventListener("click", () => {
   if (interviewNumber <= 1) return;
   captureInterviewState();
@@ -2933,6 +3179,9 @@ els.previousInterview.addEventListener("click", () => {
 });
 
 els.resetInterview.addEventListener("click", () => {
+  if (!window.confirm(`Reset Interview ${interviewNumber}? All questions and answers in this round will be cleared.`)) {
+    return;
+  }
   stopAnswerSilenceTimer();
   stopQuestionAudio();
   interviews[interviewNumber - 1] = createInterview(interviewNumber);
@@ -2976,6 +3225,418 @@ els.newQuestion.addEventListener("click", async () => {
   loadFastQuestion();
 });
 
+els.skipQuestion?.addEventListener("click", () => {
+  els.hintBox.hidden = true;
+  loadFastQuestion();
+});
+
+els.requestHint?.addEventListener("click", async () => {
+  const question = els.question.textContent.trim();
+  if (!question) return;
+  setBusy(els.requestHint, true, "Thinking...");
+  startAiThinking(["Reading your answer so far...", "Thinking of a helpful nudge..."]);
+  try {
+    const data = await api("/api/hint", {
+      question,
+      answer: els.answer.value,
+      role: els.role.value,
+      level: els.level.value,
+      mood: els.interviewerMood?.value || "neutral"
+    });
+    els.hintText.textContent = data.hint;
+  } catch (error) {
+    els.hintText.textContent = `Could not get a hint: ${error.message}`;
+  } finally {
+    els.hintBox.hidden = false;
+    bumpElement(els.hintBox, "question-enter");
+    setBusy(els.requestHint, false, "Request hint");
+    stopAiThinking();
+  }
+});
+
+let userMediaStream = null;
+
+els.toggleCamera?.addEventListener("click", async () => {
+  if (userMediaStream) {
+    userMediaStream.getTracks().forEach((track) => track.stop());
+    userMediaStream = null;
+    els.userVideo.srcObject = null;
+    els.userTile.classList.remove("camera-on");
+    els.userTileState.textContent = "Camera off";
+    els.toggleCamera.textContent = "Enable camera";
+    return;
+  }
+  if (!navigator.mediaDevices?.getUserMedia) {
+    els.userTileState.textContent = "Camera unavailable in this browser";
+    return;
+  }
+  try {
+    setBusy(els.toggleCamera, true, "Starting...");
+    userMediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
+    els.userVideo.srcObject = userMediaStream;
+    els.userTile.classList.add("camera-on");
+    els.userTileState.textContent = "Camera on";
+    els.toggleCamera.textContent = "Disable camera";
+  } catch {
+    els.userTileState.textContent = "Camera blocked or unavailable";
+  } finally {
+    setBusy(els.toggleCamera, false, userMediaStream ? "Disable camera" : "Enable camera");
+  }
+});
+
+const PANEL_OFFSETS_KEY = "aiMockInterviewerPanelOffsets";
+
+function makeDraggable(panel, handle, key) {
+  if (!panel || !handle) return;
+  const allOffsets = JSON.parse(localStorage.getItem(PANEL_OFFSETS_KEY) || "{}");
+  let offset = allOffsets[key] || { x: 0, y: 0 };
+  let dragging = false;
+  let startX = 0;
+  let startY = 0;
+  let startOffsetX = 0;
+  let startOffsetY = 0;
+
+  function applyOffset() {
+    panel.style.transform = offset.x || offset.y ? `translate(${offset.x}px, ${offset.y}px)` : "";
+  }
+  applyOffset();
+
+  handle.addEventListener("pointerdown", (event) => {
+    if (event.target.closest("button, a, input, select, textarea, label")) return;
+    dragging = true;
+    startX = event.clientX;
+    startY = event.clientY;
+    startOffsetX = offset.x;
+    startOffsetY = offset.y;
+    panel.classList.add("dragging");
+    handle.setPointerCapture(event.pointerId);
+  });
+
+  handle.addEventListener("pointermove", (event) => {
+    if (!dragging) return;
+    offset = {
+      x: startOffsetX + (event.clientX - startX),
+      y: startOffsetY + (event.clientY - startY)
+    };
+    applyOffset();
+  });
+
+  function endDrag() {
+    if (!dragging) return;
+    dragging = false;
+    panel.classList.remove("dragging");
+    const saved = JSON.parse(localStorage.getItem(PANEL_OFFSETS_KEY) || "{}");
+    saved[key] = offset;
+    localStorage.setItem(PANEL_OFFSETS_KEY, JSON.stringify(saved));
+  }
+
+  handle.addEventListener("pointerup", endDrag);
+  handle.addEventListener("pointercancel", endDrag);
+}
+
+makeDraggable(document.querySelector(".interview-sidebar"), document.querySelector(".sidebar-head"), "sidebar");
+makeDraggable(document.querySelector(".setup"), document.querySelector(".setup-heading"), "setup");
+makeDraggable(document.querySelector(".interview"), document.querySelector(".stage-head"), "interview");
+makeDraggable(document.querySelector(".feedback"), document.querySelector(".feedback-head"), "feedback");
+
+document.querySelector("#resetLayout")?.addEventListener("click", () => {
+  localStorage.removeItem(PANEL_OFFSETS_KEY);
+  document.querySelectorAll(".panel").forEach((panel) => {
+    panel.style.transform = "";
+  });
+});
+
+els.minimizeInterview?.addEventListener("click", () => {
+  const panel = document.querySelector(".interview");
+  if (!panel) return;
+  const minimized = panel.classList.toggle("minimized");
+  els.minimizeInterview.textContent = minimized ? "□" : "−";
+  els.minimizeInterview.setAttribute("aria-label", minimized ? "Restore interview panel" : "Minimize interview panel");
+  els.minimizeInterview.title = minimized ? "Restore" : "Minimize";
+});
+
+function requestElementFullscreen(el) {
+  const request = el.requestFullscreen || el.webkitRequestFullscreen;
+  request?.call(el);
+}
+
+function exitFullscreenSafely() {
+  const exit = document.exitFullscreen || document.webkitExitFullscreen;
+  exit?.call(document);
+}
+
+function currentFullscreenElement() {
+  return document.fullscreenElement || document.webkitFullscreenElement || null;
+}
+
+els.toggleFullscreen?.addEventListener("click", () => {
+  const panel = document.querySelector(".interview");
+  if (!panel) return;
+  if (currentFullscreenElement()) {
+    exitFullscreenSafely();
+  } else {
+    requestElementFullscreen(panel);
+  }
+});
+
+function syncFullscreenButton() {
+  if (!els.toggleFullscreen) return;
+  const isFullscreen = currentFullscreenElement() === document.querySelector(".interview");
+  els.toggleFullscreen.textContent = isFullscreen ? "✕" : "⛶";
+  els.toggleFullscreen.title = isFullscreen ? "Exit full screen" : "Full screen";
+  els.toggleFullscreen.setAttribute("aria-label", isFullscreen ? "Exit full screen interview panel" : "Full screen interview panel");
+}
+
+document.addEventListener("fullscreenchange", syncFullscreenButton);
+document.addEventListener("webkitfullscreenchange", syncFullscreenButton);
+
+const STAGE_SPLIT_KEY = "aiMockInterviewerStageSplit";
+
+function applyStageSplit(value) {
+  if (!els.callStage) return;
+  els.callStage.style.gridTemplateColumns = `${value}fr ${100 - value}fr`;
+}
+
+if (els.stageSplit) {
+  const savedSplit = Number(localStorage.getItem(STAGE_SPLIT_KEY));
+  if (savedSplit >= 30 && savedSplit <= 70) {
+    els.stageSplit.value = String(savedSplit);
+  }
+  applyStageSplit(Number(els.stageSplit.value));
+  els.stageSplit.addEventListener("input", () => {
+    const value = Number(els.stageSplit.value);
+    applyStageSplit(value);
+    localStorage.setItem(STAGE_SPLIT_KEY, String(value));
+  });
+}
+
+const clockText = document.querySelector("#clockText");
+if (clockText) {
+  const updateClock = () => {
+    clockText.textContent = new Date().toLocaleString(undefined, {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+  };
+  updateClock();
+  setInterval(updateClock, 1000);
+}
+
+const sessionTimerText = document.querySelector("#sessionTimerText");
+if (sessionTimerText) {
+  const sessionStartedAt = Date.now();
+  setInterval(() => {
+    const elapsed = Math.floor((Date.now() - sessionStartedAt) / 1000);
+    const hours = Math.floor(elapsed / 3600);
+    const minutes = String(Math.floor((elapsed % 3600) / 60)).padStart(2, "0");
+    const seconds = String(elapsed % 60).padStart(2, "0");
+    sessionTimerText.textContent = hours
+      ? `Session ${hours}:${minutes}:${seconds}`
+      : `Session ${minutes}:${seconds}`;
+  }, 1000);
+}
+
+document.querySelector("#downloadReport")?.addEventListener("click", () => {
+  const session = currentInterview();
+  const lines = [
+    `# Interview ${interviewNumber} report`,
+    `Role: ${els.role.value} (${els.level.value})`,
+    `Date: ${new Date().toLocaleString()}`,
+    "",
+    "## Answers",
+    ...(session.answers || []).map((item, index) =>
+      `\n### Question ${index + 1}\n${item.question}\n\n**Answer:**\n${item.answer}`
+    ),
+    "",
+    "## Final feedback",
+    plainTextFromHtml(els.feedbackOutput.innerHTML)
+  ];
+  const blob = new Blob([lines.join("\n")], { type: "text/markdown" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `interview-${interviewNumber}-report.md`;
+  link.click();
+  URL.revokeObjectURL(url);
+});
+
+document.querySelector("#downloadReportJson")?.addEventListener("click", () => {
+  const session = currentInterview();
+  const payload = {
+    interview: interviewNumber,
+    role: els.role.value,
+    level: els.level.value,
+    date: new Date().toISOString(),
+    questions: (session.answers || []).map((item) => ({
+      question: item.question,
+      answer: item.answer
+    })),
+    resultsSummary: session.resultsSummary || null
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `interview-${interviewNumber}-report.json`;
+  link.click();
+  URL.revokeObjectURL(url);
+});
+
+document.querySelector("#printReport")?.addEventListener("click", () => {
+  window.print();
+});
+
+document.addEventListener("keydown", (event) => {
+  // Shift is required so this doesn't collide with the OS-reserved
+  // Cmd+M "minimize window" shortcut on macOS.
+  const modifierPressed = event.ctrlKey || event.metaKey;
+  if (!modifierPressed || !event.shiftKey || event.key.toLowerCase() !== "m") return;
+  event.preventDefault();
+  els.micButton?.click();
+});
+
+const commandPaletteBackdrop = document.querySelector("#commandPaletteBackdrop");
+const commandPaletteInput = document.querySelector("#commandPaletteInput");
+const commandPaletteList = document.querySelector("#commandPaletteList");
+
+const commands = [
+  { label: "New question", hint: "Generate", run: () => els.newQuestion?.click() },
+  { label: "Previous question", hint: "Navigate", run: () => els.previousQuestion?.click() },
+  { label: "Next question", hint: "Navigate", run: () => els.nextQuestion?.click() },
+  { label: "Skip question", hint: "Navigate", run: () => els.skipQuestion?.click() },
+  { label: "Request hint", hint: "AI", run: () => els.requestHint?.click() },
+  { label: "Save answer", hint: "Submit", run: () => els.feedbackButton?.click() },
+  { label: "End interview & get feedback", hint: "Finish", run: () => els.endInterview?.click() },
+  { label: "Toggle microphone", hint: "Ctrl/Cmd+Shift+M", run: () => els.micButton?.click() },
+  { label: "Toggle camera", hint: "Video", run: () => els.toggleCamera?.click() },
+  { label: "Full screen interview", hint: "Focus mode", run: () => els.toggleFullscreen?.click() },
+  { label: "Minimize interview panel", hint: "Window", run: () => els.minimizeInterview?.click() },
+  { label: "Reset panel layout", hint: "Window", run: () => document.querySelector("#resetLayout")?.click() },
+  { label: "Copy final feedback", hint: "Clipboard", run: () => els.copyButton?.click() },
+  { label: "Download report as Markdown", hint: "Export", run: () => document.querySelector("#downloadReport")?.click() },
+  { label: "Download report as JSON", hint: "Export", run: () => document.querySelector("#downloadReportJson")?.click() },
+  { label: "Print report / Save as PDF", hint: "Export", run: () => document.querySelector("#printReport")?.click() },
+  { label: "New interview", hint: "Session", run: () => els.addInterview?.click() },
+  { label: "Next interview", hint: "Session", run: () => els.nextInterview?.click() },
+  { label: "Previous interview", hint: "Session", run: () => els.previousInterview?.click() },
+  { label: "Reset current interview", hint: "Session", run: () => els.resetInterview?.click() },
+  { label: "Go to Admin report", hint: "Navigate", run: () => window.location.assign("/admin.html") },
+  { label: "Go to Home", hint: "Navigate", run: () => window.location.assign("/") }
+];
+
+let commandActiveIndex = 0;
+
+function renderCommandList(filter = "") {
+  const query = filter.trim().toLowerCase();
+  const matches = query
+    ? commands.filter((command) => command.label.toLowerCase().includes(query))
+    : commands;
+  commandActiveIndex = 0;
+  if (!matches.length) {
+    commandPaletteList.innerHTML = `<p class="command-empty">No matching commands</p>`;
+    return;
+  }
+  commandPaletteList.innerHTML = matches
+    .map((command, index) => `
+      <div class="command-item${index === 0 ? " active" : ""}" data-index="${index}">
+        <span>${escapeHtml(command.label)}</span>
+        <small>${escapeHtml(command.hint)}</small>
+      </div>
+    `)
+    .join("");
+  commandPaletteList.dataset.matches = JSON.stringify(matches.map((m) => m.label));
+}
+
+function currentCommandMatches() {
+  const query = commandPaletteInput.value.trim().toLowerCase();
+  return query
+    ? commands.filter((command) => command.label.toLowerCase().includes(query))
+    : commands;
+}
+
+function updateCommandActive(index) {
+  const items = commandPaletteList.querySelectorAll(".command-item");
+  commandActiveIndex = Math.max(0, Math.min(index, items.length - 1));
+  items.forEach((item, i) => item.classList.toggle("active", i === commandActiveIndex));
+  items[commandActiveIndex]?.scrollIntoView({ block: "nearest" });
+}
+
+function runActiveCommand() {
+  const matches = currentCommandMatches();
+  const command = matches[commandActiveIndex];
+  if (!command) return;
+  closeCommandPalette();
+  command.run();
+}
+
+function openCommandPalette() {
+  if (!commandPaletteBackdrop) return;
+  commandPaletteBackdrop.classList.add("open");
+  commandPaletteInput.value = "";
+  renderCommandList();
+  commandPaletteInput.focus();
+}
+
+function closeCommandPalette() {
+  if (!commandPaletteBackdrop) return;
+  commandPaletteBackdrop.classList.remove("open");
+}
+
+if (commandPaletteBackdrop) {
+  document.querySelector("#openCommandPalette")?.addEventListener("click", openCommandPalette);
+
+  document.addEventListener("keydown", (event) => {
+    const modifierPressed = event.ctrlKey || event.metaKey;
+    if (!modifierPressed || event.key.toLowerCase() !== "k") return;
+    event.preventDefault();
+    if (commandPaletteBackdrop.classList.contains("open")) {
+      closeCommandPalette();
+    } else {
+      openCommandPalette();
+    }
+  });
+
+  commandPaletteBackdrop.addEventListener("click", (event) => {
+    if (event.target === commandPaletteBackdrop) closeCommandPalette();
+  });
+
+  commandPaletteInput.addEventListener("input", () => {
+    renderCommandList(commandPaletteInput.value);
+  });
+
+  commandPaletteInput.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeCommandPalette();
+    } else if (event.key === "ArrowDown") {
+      event.preventDefault();
+      updateCommandActive(commandActiveIndex + 1);
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      updateCommandActive(commandActiveIndex - 1);
+    } else if (event.key === "Enter") {
+      event.preventDefault();
+      runActiveCommand();
+    }
+  });
+
+  commandPaletteList.addEventListener("mousemove", (event) => {
+    const item = event.target.closest(".command-item");
+    if (!item) return;
+    updateCommandActive(Number(item.dataset.index));
+  });
+
+  commandPaletteList.addEventListener("click", (event) => {
+    const item = event.target.closest(".command-item");
+    if (!item) return;
+    updateCommandActive(Number(item.dataset.index));
+    runActiveCommand();
+  });
+}
+
 els.previousQuestion.addEventListener("click", () => {
   showPreviousQuestion();
 });
@@ -2992,19 +3653,22 @@ els.endInterview.addEventListener("click", async () => {
   captureInterviewState();
   setBusy(els.endInterview, true, "Building report");
   els.feedbackOutput.textContent = "Building final feedback from the full interview...";
+  startAiThinking(["Reviewing the full transcript...", "Scoring your answers...", "Writing the final report..."]);
   try {
     const data = await api("/api/final-feedback", {
       ...contextPayload(),
       transcript: formatTranscript()
     });
-    els.feedbackOutput.innerHTML = markdownToHtml(data.feedback);
+    els.feedbackOutput.innerHTML = renderFinalFeedbackHtml(data.feedback);
     currentInterview().finalFeedback = els.feedbackOutput.innerHTML;
+    currentInterview().resultsSummary = extractResultsSummary(data.feedback).summary;
     archiveCurrentInterview();
     saveState();
   } catch (error) {
     els.feedbackOutput.innerHTML = markdownToHtml(`## Error\n${error.message}`);
   } finally {
     setBusy(els.endInterview, false, "End interview & feedback");
+    stopAiThinking();
   }
 });
 

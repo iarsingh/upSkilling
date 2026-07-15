@@ -58,6 +58,7 @@ const localBankCounts = {
 let mockInterviewSets = [];
 let practicePlan = [];
 let largeQuestionBankCount = 0;
+let currentProgressHistory = [];
 
 function escapeHtml(value) {
   return String(value || "")
@@ -136,6 +137,108 @@ function summarizeTopics(records) {
     .slice(0, 8);
 }
 
+function renderTopicChart(topics) {
+  if (!topics.length) {
+    els.topicBreakdown.innerHTML = `<p class="admin-empty">Completed interview topic summary will appear here.</p>`;
+    return;
+  }
+  const max = Math.max(...topics.map(([, count]) => count), 1);
+  els.topicBreakdown.innerHTML = topics.map(([label, count]) => `
+    <div class="bar-row" title="${escapeHtml(label)}: ${count} question${count === 1 ? "" : "s"} answered">
+      <span class="bar-label">${escapeHtml(label)}</span>
+      <div class="bar-track"><div class="bar-fill" data-target="${Math.max(4, Math.round((count / max) * 100))}" style="width: 0"></div></div>
+      <span class="bar-value">${count}</span>
+    </div>
+  `).join("");
+  requestAnimationFrame(() => {
+    els.topicBreakdown.querySelectorAll(".bar-fill").forEach((bar) => {
+      bar.style.width = `${bar.dataset.target}%`;
+    });
+  });
+}
+
+function renderProgressChart(progressHistory) {
+  const container = document.querySelector("#progressChart");
+  if (!container) return;
+
+  const sorted = progressHistory
+    .filter((record) => record.completedAt)
+    .map((record) => ({
+      date: new Date(record.completedAt),
+      count: Number(record.questionCount || 0),
+      practice: record.practice || "Interview"
+    }))
+    .sort((a, b) => a.date - b.date);
+
+  if (sorted.length < 2) {
+    container.innerHTML = `<p class="admin-empty">Complete at least two interviews to see a progress trend over time.</p>`;
+    return;
+  }
+
+  let cumulative = 0;
+  const points = sorted.map((entry) => {
+    cumulative += entry.count;
+    return { ...entry, total: cumulative };
+  });
+
+  const width = 640;
+  const height = 220;
+  const padding = { top: 16, right: 20, bottom: 26, left: 8 };
+  const minTime = points[0].date.getTime();
+  const maxTime = points[points.length - 1].date.getTime();
+  const maxValue = points[points.length - 1].total;
+
+  const xScale = (time) => {
+    if (maxTime === minTime) return padding.left;
+    return padding.left + ((time - minTime) / (maxTime - minTime)) * (width - padding.left - padding.right);
+  };
+  const yScale = (value) => {
+    if (maxValue === 0) return height - padding.bottom;
+    return height - padding.bottom - (value / maxValue) * (height - padding.top - padding.bottom);
+  };
+
+  const coords = points.map((point) => [xScale(point.date.getTime()), yScale(point.total)]);
+  const linePoints = coords.map(([x, y]) => `${x},${y}`).join(" ");
+  const areaPoints = `${coords[0][0]},${height - padding.bottom} ${linePoints} ${coords[coords.length - 1][0]},${height - padding.bottom}`;
+  const approxLineLength = coords.reduce((sum, [x, y], index) => {
+    if (index === 0) return 0;
+    const [px, py] = coords[index - 1];
+    return sum + Math.hypot(x - px, y - py);
+  }, 0);
+
+  const dots = points.map((point, index) => {
+    const [x, y] = coords[index];
+    const label = `${point.date.toLocaleDateString(undefined, { month: "short", day: "numeric" })} · ${point.total} total answered`;
+    return `<circle class="progress-dot" cx="${x}" cy="${y}" r="4" data-label="${escapeHtml(label)}"></circle>`;
+  }).join("");
+
+  container.innerHTML = `
+    <svg viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" class="progress-svg" role="img" aria-label="Cumulative questions answered over time">
+      <line class="progress-gridline" x1="${padding.left}" y1="${height - padding.bottom}" x2="${width - padding.right}" y2="${height - padding.bottom}"></line>
+      <polyline points="${areaPoints}" class="progress-area"></polyline>
+      <polyline points="${linePoints}" class="progress-line" style="--line-length: ${approxLineLength}"></polyline>
+      ${dots}
+      <text class="progress-axis-label" x="${padding.left}" y="${height - 6}">${escapeHtml(points[0].date.toLocaleDateString())}</text>
+      <text class="progress-axis-label" x="${width - padding.right}" y="${height - 6}" text-anchor="end">${escapeHtml(points[points.length - 1].date.toLocaleDateString())}</text>
+      <text class="progress-axis-label" x="${padding.left}" y="${padding.top}">${maxValue} total answered</text>
+    </svg>
+    <div class="progress-tooltip" id="progressTooltip" hidden></div>
+  `;
+
+  const tooltip = container.querySelector("#progressTooltip");
+  container.querySelectorAll(".progress-dot").forEach((dot) => {
+    dot.addEventListener("mouseenter", () => {
+      tooltip.textContent = dot.dataset.label;
+      tooltip.hidden = false;
+      tooltip.style.left = `${(Number(dot.getAttribute("cx")) / width) * 100}%`;
+      tooltip.style.top = `${(Number(dot.getAttribute("cy")) / height) * 100}%`;
+    });
+    dot.addEventListener("mouseleave", () => {
+      tooltip.hidden = true;
+    });
+  });
+}
+
 function renderAnsweredQuestions(session) {
   const answers = Array.isArray(session.answers) ? session.answers : [];
   if (!answers.length) {
@@ -164,6 +267,7 @@ function renderReportHistory(records) {
     const date = record.completedAt
       ? new Date(record.completedAt).toLocaleString()
       : "Unknown date";
+    const hasAnswers = Array.isArray(record.answers) && record.answers.length > 0;
     return `
       <details class="admin-item">
         <summary>
@@ -171,6 +275,7 @@ function renderReportHistory(records) {
           <strong>${escapeHtml(record.practice || `Interview ${record.interviewNumber || ""}`)}</strong>
           <small>${Number(record.questionCount || 0)} answered</small>
         </summary>
+        ${hasAnswers ? `<div class="admin-replay-row"><button class="ghost small" type="button" data-replay="${escapeHtml(record.id)}">&#9654; Replay interview</button></div>` : ""}
         <div class="admin-report-text">${record.feedbackHtml || escapeHtml(record.feedbackText || "No report text saved.")}</div>
       </details>
     `;
@@ -182,6 +287,7 @@ function renderReport() {
   const session = currentInterview(state);
   const interviews = Array.isArray(state.interviews) ? state.interviews : [];
   const progressHistory = Array.isArray(state.progressHistory) ? state.progressHistory : [];
+  currentProgressHistory = progressHistory;
   const answers = Array.isArray(session.answers) ? session.answers : [];
   const generated = Array.isArray(session.questionHistory) ? session.questionHistory.length : 0;
   const pool = countCurrentPool(state);
@@ -204,10 +310,8 @@ function renderReport() {
   els.interviewCount.textContent = interviews.length || 0;
   els.reportCount.textContent = progressHistory.length;
 
-  const topics = summarizeTopics(progressHistory);
-  els.topicBreakdown.innerHTML = topics.length
-    ? topics.map(([label, count]) => `<div><span>${escapeHtml(label)}</span><strong>${count}</strong></div>`).join("")
-    : `<p class="admin-empty">Completed interview topic summary will appear here.</p>`;
+  renderTopicChart(summarizeTopics(progressHistory));
+  renderProgressChart(progressHistory);
 
   renderAnsweredQuestions(session);
   renderReportHistory(progressHistory);
@@ -237,7 +341,94 @@ async function loadSources() {
   }
 }
 
-els.refreshReport.addEventListener("click", renderReport);
+els.refreshReport.addEventListener("click", () => {
+  els.refreshReport.classList.add("is-busy");
+  els.refreshReport.disabled = true;
+  renderReport();
+  setTimeout(() => {
+    els.refreshReport.classList.remove("is-busy");
+    els.refreshReport.disabled = false;
+  }, 260);
+});
 window.addEventListener("storage", renderReport);
 
 loadSources().then(renderReport);
+
+const replayEls = {
+  backdrop: document.querySelector("#replayBackdrop"),
+  title: document.querySelector("#replayTitle"),
+  counter: document.querySelector("#replayCounter"),
+  question: document.querySelector("#replayQuestion"),
+  answer: document.querySelector("#replayAnswer"),
+  progress: document.querySelector("#replayProgress"),
+  prev: document.querySelector("#replayPrev"),
+  next: document.querySelector("#replayNext"),
+  speak: document.querySelector("#replaySpeak"),
+  close: document.querySelector("#replayClose")
+};
+
+let replayAnswers = [];
+let replayIndex = 0;
+
+function renderReplayStep() {
+  const item = replayAnswers[replayIndex];
+  if (!item) return;
+  replayEls.counter.textContent = `Question ${replayIndex + 1}`;
+  replayEls.question.textContent = item.question || "Untitled question";
+  replayEls.answer.textContent = item.answer || "No answer text saved.";
+  replayEls.progress.textContent = `${replayIndex + 1} / ${replayAnswers.length}`;
+  replayEls.prev.disabled = replayIndex <= 0;
+  replayEls.next.disabled = replayIndex >= replayAnswers.length - 1;
+}
+
+function openReplay(record) {
+  replayAnswers = Array.isArray(record.answers) ? record.answers : [];
+  if (!replayAnswers.length || !replayEls.backdrop) return;
+  replayIndex = 0;
+  replayEls.title.textContent = record.practice || `Interview ${record.interviewNumber || ""}`;
+  renderReplayStep();
+  replayEls.backdrop.classList.add("open");
+}
+
+function closeReplay() {
+  if (!replayEls.backdrop) return;
+  replayEls.backdrop.classList.remove("open");
+  window.speechSynthesis?.cancel();
+}
+
+if (replayEls.backdrop) {
+  els.reportHistory.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-replay]");
+    if (!button) return;
+    const record = currentProgressHistory.find((item) => item.id === button.dataset.replay);
+    if (record) openReplay(record);
+  });
+
+  replayEls.close.addEventListener("click", closeReplay);
+  replayEls.backdrop.addEventListener("click", (event) => {
+    if (event.target === replayEls.backdrop) closeReplay();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && replayEls.backdrop.classList.contains("open")) closeReplay();
+  });
+
+  replayEls.prev.addEventListener("click", () => {
+    if (replayIndex > 0) {
+      replayIndex -= 1;
+      renderReplayStep();
+    }
+  });
+  replayEls.next.addEventListener("click", () => {
+    if (replayIndex < replayAnswers.length - 1) {
+      replayIndex += 1;
+      renderReplayStep();
+    }
+  });
+  replayEls.speak.addEventListener("click", () => {
+    if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+    const item = replayAnswers[replayIndex];
+    if (!item) return;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(new SpeechSynthesisUtterance(item.question || ""));
+  });
+}
