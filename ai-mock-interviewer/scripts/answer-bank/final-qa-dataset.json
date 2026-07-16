@@ -20627,5 +20627,949 @@
     "category": null,
     "question": "Jenkins shared library parameters: How would you design a shared library step so different teams can pass their own parameters (e.g. image name, namespace, environment) without copy-pasting pipeline logic?",
     "answer": "Design the vars/ step to accept a single Map via a call(Map config) signature rather than a long positional argument list, so teams invoke it as deployApp(image: 'svc:1.2.3', namespace: 'team-a', environment: 'staging'). Provide sensible defaults for optional keys, validate required keys up front and fail fast with a clear error message naming the missing key, and document the expected keys in the matching vars/deployApp.txt. This keeps the deployment logic itself in exactly one place while letting every team's Jenkinsfile stay a short, declarative call that only specifies what's different for them - which is exactly the drift problem a shared library is meant to solve."
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "How does Terraform communicate with cloud providers?",
+    "answer": "Via provider plugins: each provider is a separate binary that Terraform core downloads and runs as a subprocess, communicating over an RPC/gRPC protocol to translate the provider's resource schema into calls against the cloud's API (AWS SDK, Google Cloud APIs, etc.) using the credentials configured in the provider block.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "What is the purpose of a provider in Terraform?",
+    "answer": "A provider is a plugin that knows how to create, read, update, and delete a specific set of resource and data source types against one API (AWS, GCP, Kubernetes, Datadog, etc.); it translates Terraform's declarative resource blocks into that provider's actual API calls and maps API responses back into state.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "What is the difference between a resource and a data source?",
+    "answer": "A resource block tells Terraform to create and manage the full lifecycle (create/update/destroy) of an object. A data source is read-only - it looks up information about an existing object, managed by Terraform or not, and exposes it as attributes you can reference elsewhere, without Terraform ever creating, modifying, or destroying it.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "What are input variables, local values, and output values?",
+    "answer": "Input variables (variable blocks) parameterize a module so callers can pass in values. Local values (locals block) are named expressions computed once and reused within a module to avoid repeating logic. Output values (output block) expose selected values from a module to its caller or the CLI, for use by other modules or tooling.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "What are the data types supported in Terraform?",
+    "answer": "Primitive types: string, number, and bool. Complex types: list, set, map, object, and tuple. Plus the special \"any\" type used in type constraints when a variable can accept multiple types.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "Can a list be passed as an input variable?",
+    "answer": "Yes - declare the variable with type = list(string) (or a list of any other type), pass a list literal like [\"a\", \"b\", \"c\"] as its value, and typically iterate it with count or a for expression.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "Can a map be passed as an input variable?",
+    "answer": "Yes - declare type = map(string) (or map of another type), pass a map literal like { key1 = \"value1\", key2 = \"value2\" }, and iterate it with for_each, which natively accepts a map and uses its keys as each.key.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "Can a for expression iterate over a list?",
+    "answer": "Yes - [for item in var.my_list : upper(item)] produces a new list by transforming each element. For expressions can also filter with an if clause, and can produce a map instead of a list using the {for k, v in ... : k => v} syntax.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "Explain the following expression:\nfor_each = {\n  for record in var.records :\n  \"${record.name}-${record.type}\" => record\n}",
+    "answer": "This builds a map keyed by \"name-type\" from a list of record objects: for each record in var.records, it computes the key \"${record.name}-${record.type}\" and maps it to the full record object as the value. The resulting map is what for_each iterates over, so each resource instance is addressed by that composite key instead of a numeric index.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "What is the purpose of:\n\"${record.name}-${record.type}\" => record",
+    "answer": "It defines the map entry: the left side is the unique key Terraform uses to track that specific resource instance in state (accessible as each.key), and the right side is the value available inside the resource block as each.value, giving the full record data used to configure the resource.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "Why do we concatenate the record name and record type?",
+    "answer": "Because DNS allows the same record name to exist with different record types (e.g. an A record and a TXT record both named \"www\"), so name alone isn't unique. Concatenating name and type produces a key that's guaranteed unique across all records, which for_each requires.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "How does Terraform store each resource's metadata?",
+    "answer": "In the state file (terraform.tfstate, or remote state), as a JSON object per resource instance containing its resource address, provider, current attribute values, dependencies, and a private data blob the provider uses internally - this is what Terraform diffs against during plan.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "How are resources stored in the Terraform state file when using for_each?",
+    "answer": "Each instance is stored under a key derived from the for_each map's key, addressed as resource_type.name[\"key\"] instead of resource_type.name[0]. This means reordering or changing the underlying map doesn't reindex or recreate unrelated instances the way count's numeric indices can.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "Can you explain the alias block (or SOA if referring to DNS)?",
+    "answer": "A provider alias block lets you configure multiple instances of the same provider (e.g. two AWS regions) and reference a non-default one explicitly via provider = aws.alias_name in a resource. If referring to DNS SOA: a Start of Authority record defines the primary authoritative nameserver for a zone plus refresh/retry/expire timers and a serial number secondary nameservers use to detect zone changes.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "What is the purpose of terraform import?",
+    "answer": "It brings an already-existing infrastructure object (created outside Terraform, or predating it) under Terraform's management by writing a corresponding entry into the state file, without creating or modifying the real resource - you still have to write matching configuration yourself.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "During code restructuring, why don't we use terraform import?",
+    "answer": "Because the resource already exists in state; import is for adopting unmanaged infrastructure, not for moving already-managed resources between addresses. Restructuring (renaming, moving into a module) uses terraform state mv, or a moved block, so Terraform remaps existing state to the new address without destroying and recreating the real resource.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "How do you modularize Terraform code without destroying existing resources?",
+    "answer": "Move the resource blocks into the module's .tf files, then use terraform state mv (or a moved block) to remap each resource's state address from the old root-level address to the new module-scoped address, so the next plan shows zero changes instead of a destroy/create.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "What precautions do you take while modularizing Terraform?",
+    "answer": "Take a state backup first, do the state moves as a single atomic batch (or use moved blocks so plan can validate before apply), run terraform plan immediately after to confirm zero changes, and coordinate with the team so nobody applies against the old state mid-migration.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "Why do outputs and variable mappings need to be updated during module refactoring?",
+    "answer": "Because references that used to point at root-level resource attributes now need to go through the module's output values, and any variables the module needs must be explicitly passed in via its variable block - Terraform doesn't automatically thread values across module boundaries.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "What happens if a resource is removed from Terraform code only?",
+    "answer": "On the next apply, Terraform sees the resource in state but not in config and treats that as \"should not exist,\" so it destroys the real infrastructure object and removes it from state.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "What happens if a resource is removed from both the code and the state?",
+    "answer": "Terraform apply does nothing to that resource, since as far as Terraform is concerned it was never managed. The real infrastructure object is untouched and keeps existing outside Terraform's control (orphaned) until someone deletes it manually or re-imports it.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "How would you optimize a Terraform pipeline if even a DNS change takes a long time?",
+    "answer": "Narrow the plan/apply scope with -target for emergency fixes (sparingly), split a large monolithic state into smaller state files per domain/service so unrelated resources aren't refreshed on every run, tune provider-level parallelism, and cache provider plugin downloads and module installs in CI so each run isn't paying that cost from scratch.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform Coding",
+    "question": "Create multiple Route53 DNS records using for_each.",
+    "answer": "resource \"aws_route53_record\" \"records\" {\n  for_each = { for r in var.records : \"${r.name}-${r.type}\" => r }\n  zone_id  = var.zone_id\n  name     = each.value.name\n  type     = each.value.type\n  ttl      = 300\n  records  = each.value.values\n}",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform Coding",
+    "question": "Explain every line of the for_each map comprehension.",
+    "answer": "for_each = {...} assigns the resource a map to iterate. for r in var.records loops over each record object in the input list. \"${r.name}-${r.type}\" => r is the key=>value pair added per iteration, keying by name+type and storing the full record as the value. The closing brace ends the map literal that becomes for_each's argument.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform Coding",
+    "question": "Explain how the DNS records are stored in Terraform state.",
+    "answer": "Each record is stored as a separate resource instance addressed by its for_each key, e.g. aws_route53_record.records[\"www-A\"], with its own state entry holding that record's current name, type, TTL, and values - independent of the other instances.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform Coding",
+    "question": "Explain the key used in for_each.",
+    "answer": "The key is the map key computed in the for expression (\"${r.name}-${r.type}\"), available inside the resource as each.key. It's what Terraform uses to identify, diff, and address that specific instance across plans, so it must be unique and stable - don't derive it from something that changes often, or Terraform will destroy and recreate on every change.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform Coding",
+    "question": "Fill the missing vpc_id reference in the given Terraform code.",
+    "answer": "Reference the VPC resource or data source's id attribute, e.g. vpc_id = aws_vpc.main.id (or data.aws_vpc.selected.id if it's looked up rather than managed), so the dependent resource - subnet, security group, etc. - is correctly associated with that VPC and Terraform infers the dependency ordering.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform Coding",
+    "question": "Complete main.tf using the given variables.",
+    "answer": "Wire each variable.name reference into the corresponding resource argument (e.g. instance_type = var.instance_type, tags = var.tags), add any required provider/backend blocks, and ensure every variable declared in variables.tf is actually consumed somewhere so the plan doesn't leave unused inputs.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS Networking",
+    "question": "Layer 4 vs Layer 7 Load Balancer.",
+    "answer": "A Layer 4 (Network) load balancer routes based on IP/TCP/UDP information without inspecting application data - fast, protocol-agnostic, good for raw TCP/UDP traffic (AWS Network Load Balancer). A Layer 7 (Application) load balancer inspects HTTP/HTTPS content - headers, paths, cookies - and can do content-based routing, SSL termination, and WebSocket support (AWS Application Load Balancer).",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS Networking",
+    "question": "Which load balancer supports SSL termination?",
+    "answer": "Both support TLS listeners, but SSL termination - decrypting HTTPS at the load balancer, then optionally forwarding HTTP or re-encrypted traffic onward - is the classic Layer 7 (Application Load Balancer) capability, since it needs to read a certificate and manage TLS handshakes at the application layer. ALB is the standard choice when you also need content-based routing.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS Networking",
+    "question": "What backends can be attached to Layer 7 Load Balancer?",
+    "answer": "EC2 instances, IP addresses, Lambda functions, and, via target groups, ECS/EKS services - an ALB's target group can point at any of these as long as they can respond to HTTP/HTTPS health checks.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS Networking",
+    "question": "What is an SSL certificate?",
+    "answer": "A digitally signed file that binds a public key to an identity (a domain name), issued by a Certificate Authority. It lets clients verify they're talking to the real server via the CA's trust chain, and enables encrypting traffic using the associated key pair.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS Networking",
+    "question": "How do you obtain an SSL certificate?",
+    "answer": "Request one from a Certificate Authority - in AWS, typically via AWS Certificate Manager (ACM), which issues and auto-renews certificates for free when used with ALB/CloudFront and validates domain ownership via a DNS CNAME record or email. Alternatively, use a third-party CA or Let's Encrypt with ACME.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS Networking",
+    "question": "What information is required to obtain an SSL certificate?",
+    "answer": "The fully qualified domain name(s) to secure, including any SANs/wildcards, proof of domain ownership (a DNS TXT/CNAME record or email confirmation to a domain-associated address), and organizational details if requesting an OV/EV certificate rather than a domain-validated one.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS Networking",
+    "question": "Design a three-tier application on AWS.",
+    "answer": "Public subnets host an Application Load Balancer facing the internet. A web/app tier of EC2 instances or containers runs in private subnets behind the ALB, auto-scaled across multiple AZs. A database tier (RDS Multi-AZ) sits in isolated private subnets reachable only from the app tier's security group. NAT gateways in the public subnets give the private tiers outbound internet access, and security groups enforce tier-to-tier access instead of broad subnet-level rules.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS Networking",
+    "question": "Explain Route53 Resolver Inbound Endpoint.",
+    "answer": "An inbound endpoint lets on-premises or other external networks send DNS queries into your VPC to be resolved by Route53 Resolver - e.g. resolving private hosted zone records - via a set of IP addresses in your VPC that on-prem DNS servers forward queries to over a VPN or Direct Connect.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS Networking",
+    "question": "Explain Route53 Resolver Outbound Endpoint.",
+    "answer": "An outbound endpoint lets DNS queries originating inside your VPC be forwarded out to DNS servers outside AWS - e.g. an on-prem Active Directory DNS server - based on conditional forwarding rules, so your VPC resources can resolve on-prem-only domain names.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS Networking",
+    "question": "Two VPCs need communication. How will you establish connectivity?",
+    "answer": "For a small number of VPCs, use VPC Peering - non-transitive, one-to-one connections with route table entries on each side. For many VPCs, or transitive routing and centralized egress, use AWS Transit Gateway, which acts as a hub so every attached VPC can reach every other attached VPC through one set of routes.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS Networking",
+    "question": "What are the limitations of VPC Peering?",
+    "answer": "It's non-transitive (peering A-B and B-C doesn't let A reach C), CIDR blocks must not overlap between peered VPCs, it doesn't support edge-to-edge routing through a peering connection (e.g. can't route through a peered VPC's VPN or internet gateway), and at scale the number of point-to-point connections becomes unmanageable compared to a hub like Transit Gateway.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS Infrastructure",
+    "question": "Suppose an Auto Scaling Group has 10 instances behind a Load Balancer, but the application is inaccessible. How do you troubleshoot?",
+    "answer": "Check target group health checks first - are instances passing or failing, and why (wrong health check path/port, security group blocking the LB, app not listening yet). Check the listener rules and target group routing. Check security groups and NACLs allow traffic from the LB to instances and from clients to the LB. Check the ASG's instance status and recent scaling activity or launch template for a bad AMI or user-data failure. Check DNS to confirm clients actually resolve to the LB.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS Infrastructure",
+    "question": "What does Connection Reset by Peer mean?",
+    "answer": "The remote side - server or a device in between - abruptly closed the TCP connection with a RST packet instead of a graceful FIN, meaning the other end forcibly terminated the connection. The client's read or write then fails immediately rather than timing out.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS Infrastructure",
+    "question": "If the application is healthy, what else could cause Connection Reset by Peer?",
+    "answer": "A load balancer or firewall idle-timeout closing the connection before the client finishes sending/receiving (mismatched keep-alive timeouts between client, LB, and backend), the backend hitting a connection or file-descriptor limit and rejecting new connections, a security appliance actively resetting suspicious traffic, or a network path MTU/asymmetric-routing issue causing mid-stream resets.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS RDS",
+    "question": "Multiple RDS instances have multiple Security Groups. Add one inbound rule to all of them.",
+    "answer": "Script it: enumerate the RDS instances via the AWS CLI/SDK (describe-db-instances), collect their associated security group IDs, dedupe them, then call authorize-security-group-ingress on each SG ID with the new rule - or do it via Terraform/CloudFormation if you want it version-controlled and idempotent going forward.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS RDS",
+    "question": "Those resources are not managed by Terraform. How would you automate it?",
+    "answer": "Either import them into Terraform state (terraform import per resource, then write matching config) so future changes go through Terraform, or, if adoption isn't practical yet, write a one-off idempotent automation script (AWS CLI/boto3) that's safe to rerun, and track it in version control even outside Terraform until proper IaC adoption happens.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "AWS RDS",
+    "question": "How would you discover all the required RDS instances?",
+    "answer": "Use the AWS CLI/SDK (aws rds describe-db-instances) or AWS Config/Resource Groups Tagging API to enumerate instances, filtering by tags, naming convention, or VPC. For a recurring need, build a small script or a Config rule that maintains an inventory, rather than relying on manually maintained lists.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Kubernetes/Terraform",
+    "question": "Can Terraform deploy resources to Kubernetes?",
+    "answer": "Yes, via the Kubernetes provider (kubernetes_deployment, kubernetes_service, etc.) or the Helm provider for chart-based deployments. It's commonly used for cluster-level/platform resources (namespaces, RBAC, CRDs) while application deployments are often left to GitOps tools like Argo CD.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Kubernetes/Terraform",
+    "question": "How does Terraform communicate with Kubernetes?",
+    "answer": "Through the Kubernetes provider, which talks to the cluster's API server over the standard Kubernetes REST API, authenticated using a kubeconfig, a service account token, or cloud-specific auth (e.g. GKE/EKS exec-based auth plugins) configured in the provider block.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Kubernetes/Terraform",
+    "question": "Can Terraform manage Helm charts?",
+    "answer": "Yes, via the Helm provider's helm_release resource, which installs, upgrades, and uninstalls a chart the same way helm install/helm upgrade would, letting you manage Helm-deployed applications declaratively alongside your other Terraform-managed infrastructure.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Observability/Datadog",
+    "question": "Can Terraform manage Datadog configurations?",
+    "answer": "Yes, via the Datadog provider, which manages monitors, dashboards, synthetics tests, SLOs, notebooks, and more as resources, so alerting and dashboard configuration can be version-controlled and code-reviewed like infrastructure.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Observability/Datadog",
+    "question": "Can Terraform configure alerts?",
+    "answer": "Yes - the datadog_monitor resource (or the equivalent in other observability providers like Grafana/PagerDuty) defines the alert query, thresholds, notification message, and recipients as code.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Observability/Datadog",
+    "question": "Can Terraform configure dashboards?",
+    "answer": "Yes - the datadog_dashboard resource, typically authored via its JSON/Terraform DSL widget definitions, lets you define and version dashboards the same way you'd manage any other resource.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Observability/Datadog",
+    "question": "How does Terraform authenticate to Datadog?",
+    "answer": "Via an API key and an application key, typically supplied as provider block arguments sourced from environment variables (DD_API_KEY / DD_APP_KEY) or a secrets manager, rather than hardcoded in the .tf files.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Observability/Datadog",
+    "question": "How are Datadog API credentials passed during CI/CD?",
+    "answer": "As masked/protected CI secrets (GitHub Actions secrets, GitLab CI variables) injected as environment variables at pipeline runtime, or pulled from a secrets manager (AWS Secrets Manager, Vault) during the pipeline run - never committed into the repository.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Linux",
+    "question": "What is RAID?",
+    "answer": "Redundant Array of Independent Disks - combining multiple physical disks into one logical unit to improve performance, redundancy, or both, using different \"levels\" that trade off capacity, speed, and fault tolerance.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Linux",
+    "question": "Explain RAID 0.",
+    "answer": "Striping data across two or more disks with no redundancy - it maximizes read/write performance and usable capacity (the sum of all disks), but a single disk failure destroys the entire array's data.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Linux",
+    "question": "Explain RAID 1.",
+    "answer": "Mirroring - data is duplicated identically across two or more disks. It tolerates a disk failure with no data loss, since the mirror still has a full copy, at the cost of only getting the capacity of one disk despite using two.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Linux",
+    "question": "Explain RAID 5.",
+    "answer": "Striping with distributed parity across at least three disks - data and parity information are spread across all disks, so the array survives a single disk failure (parity rebuilds the lost data), giving good capacity efficiency (N-1 disks worth) at some write performance cost from parity calculation.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Linux",
+    "question": "Explain RAID 10.",
+    "answer": "A combination of mirroring and striping (RAID 1+0): disks are mirrored in pairs, then those mirrored pairs are striped together. It offers both strong performance and the ability to survive multiple disk failures, as long as you don't lose both disks in the same mirror pair, at the cost of only 50% usable capacity.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Linux",
+    "question": "What does mounting a filesystem mean?",
+    "answer": "Attaching a filesystem - from a disk partition, network share, or image - to a specific directory (the mount point) in the OS's directory tree, so files on that filesystem become accessible through that path.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Linux",
+    "question": "Which commands are used to mount a filesystem?",
+    "answer": "mount /dev/sdb1 /mnt/data to mount manually, umount /mnt/data to unmount, lsblk/blkid to identify devices and filesystem types beforehand, and df -h or mount (with no args) to see currently mounted filesystems.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Linux",
+    "question": "What happens after reboot if you only use the mount command?",
+    "answer": "The mount is temporary - it only exists in the current running kernel's mount table, so after a reboot the filesystem is no longer mounted and the mount point directory appears empty again.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Linux",
+    "question": "How do you make a filesystem mount permanent?",
+    "answer": "Add an entry to /etc/fstab specifying the device (preferably by UUID for stability), mount point, filesystem type, mount options, and dump/fsck order, so the OS mounts it automatically at every boot. Test it with mount -a before rebooting to catch fstab errors safely.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Linux",
+    "question": "How do you troubleshoot a crashed Linux node?",
+    "answer": "Check console/serial output or the cloud provider's instance logs for kernel panics or OOM killer messages, check system logs (journalctl -b -1 for the previous boot, /var/log/messages), check disk space and inode exhaustion (df -h, df -i), check dmesg for hardware/driver errors, review recent changes (deployments, package updates, cron jobs), and check monitoring around the crash time for CPU/memory/disk spikes.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Linux",
+    "question": "How do you check whether a port is open from another server?",
+    "answer": "nc -zv <host> <port> or telnet <host> <port> to attempt a TCP connection, or nmap -p <port> <host> for a more thorough scan. On the target itself, ss -tlnp or netstat -tlnp shows what's actually listening.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Linux",
+    "question": "How do you measure network bandwidth between two Linux servers?",
+    "answer": "Use iperf3 - run it in server mode on one host (iperf3 -s) and client mode on the other (iperf3 -c <server-ip>) to measure actual achievable throughput, as opposed to just checking the link's rated speed.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "How does Terraform authenticate with cloud providers?",
+    "answer": "Through provider-specific credentials configured in the provider block or environment - e.g. AWS access keys or an IAM role (including OIDC federation for CI), a GCP service account JSON key or Workload Identity, an Azure service principal. Terraform passes these to the provider plugin, which uses them to authenticate its API calls.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "How does Terraform communicate with provider plugins?",
+    "answer": "Terraform core launches each configured provider as a separate plugin binary/subprocess and communicates with it over a local RPC protocol (gRPC), sending it the resource configuration and receiving back planned changes and applied state - this plugin architecture is why adding a new provider doesn't require changing Terraform core.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "Terraform",
+    "question": "Explain the Terraform workflow (init → plan → apply).",
+    "answer": "terraform init downloads providers and modules and initializes the backend. terraform plan compares the desired configuration against current state, after refreshing real infrastructure, and shows exactly what will be created, changed, or destroyed without making any changes. terraform apply executes that plan against real infrastructure and updates the state file to match the new reality.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "System Design",
+    "question": "Design a three-tier application with 3 Web Servers, 2 Application Servers, a Database, and a Load Balancer.",
+    "answer": "A load balancer in front distributes traffic across 3 web servers (static content/reverse proxy) in a public/DMZ subnet. The web tier forwards application requests to 2 app servers in a private subnet running the business logic. The app tier connects to a database, ideally with a standby/replica, in the most restricted private subnet. Each tier only accepts traffic from the tier in front of it via security groups, and only the LB is internet-facing.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "System Design",
+    "question": "Explain the deployment flow.",
+    "answer": "Code is built and tested in CI, packaged into an artifact/image, deployed first to the app tier (rolling or blue/green to avoid downtime) behind the load balancer with health checks gating traffic shift, then to the web tier if it needs updates, with the database tier updated via separate, carefully sequenced migrations rather than being part of the app deploy.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "System Design",
+    "question": "Explain the network flow.",
+    "answer": "A client request hits the load balancer over HTTPS. The LB terminates TLS and forwards to a web server over the internal network. The web server proxies application requests to an app server, which queries the database over its own restricted internal path. Each hop only traverses the minimum network segments needed, with no tier able to skip ahead to a tier it shouldn't directly reach.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "System Design",
+    "question": "Explain the security groups.",
+    "answer": "The LB security group allows inbound 443/80 from the internet and outbound to the web tier only. The web tier security group allows inbound only from the LB's security group on the app port, and outbound to the app tier. The app tier security group allows inbound only from the web tier, and outbound to the DB tier. The DB security group allows inbound only from the app tier on the database port - each tier is a walled garden that only trusts the tier immediately in front of it.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "category": "System Design",
+    "question": "Explain the deployment pipeline.",
+    "answer": "A source commit triggers CI: build the artifact, run unit/integration tests, scan for vulnerabilities, produce one immutable versioned artifact. CD then promotes that exact artifact through environments - dev, staging, prod - with approval gates, running smoke tests after each deploy, and keeping the previous version ready for immediate rollback if the new one fails its health checks.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "GCP Architecture",
+    "question": "Tell me about the most complex GCP environment you have owned or significantly contributed to.",
+    "answer": "A strong answer describes a real multi-service GCP environment you owned end-to-end - its scale (project count, cluster count, traffic volume), the business function it supported, and your specific ownership scope (architecture, day-to-day operations, or both) - anchored in concrete numbers rather than generic descriptions.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "GCP Architecture",
+    "question": "What was the overall architecture of that environment?",
+    "answer": "Structure the answer around layers: the GCP project/folder hierarchy and IAM boundaries, the compute layer (GKE, Cloud Run, Compute Engine), networking (Shared VPC, load balancers, Cloud NAT), the data layer (Cloud SQL/BigQuery/GCS), and how CI/CD and observability tie it together. Name the actual services and how they connect, not just a service list.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "GCP Architecture",
+    "question": "What GCP native services did you design around?",
+    "answer": "Name the specific services central to the design - e.g. GKE for compute, Cloud SQL or Spanner for data, Cloud Load Balancing and Cloud Armor for edge, Pub/Sub for async messaging, Cloud Monitoring/Logging for observability - and explain why each was chosen over alternatives: managed vs self-hosted, cost, team familiarity, IAM integration.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "GCP Architecture",
+    "question": "How did you handle multi-tenancy or isolation between teams or workloads?",
+    "answer": "Cover the isolation boundary used - separate GCP projects per team/environment (strongest isolation, since the project is the IAM boundary), or namespaces plus RBAC and NetworkPolicies within a shared GKE cluster (cheaper, weaker isolation) - and the tradeoff made between blast-radius isolation and operational/cost overhead.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "GKE/Kubernetes",
+    "question": "Walk me through how you administered a production GKE cluster from initial setup through day-two operations.",
+    "answer": "Cover cluster creation decisions (Autopilot vs Standard, regional vs zonal, private cluster, network setup), initial platform setup (RBAC, namespaces, admission controllers, ingress), then day-two operations - node pool upgrades, monitoring/alerting, backup/DR, cost management, and incident response - showing the full lifecycle, not just the initial cluster create.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "GKE/Kubernetes",
+    "question": "How did you handle node pool upgrades with zero or minimal downtime?",
+    "answer": "Use surge upgrades (new nodes created before old ones drain) with PodDisruptionBudgets set on critical workloads so GKE respects minimum-available replicas during the drain, schedule upgrades during low-traffic windows, and validate with a canary node pool or non-prod cluster before rolling to production.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "GKE/Kubernetes",
+    "question": "What autoscaling strategy did you implement in GKE, and why?",
+    "answer": "Combine the Horizontal Pod Autoscaler (scale pod replicas on CPU/memory/custom metrics) with the Cluster Autoscaler (scale node count to fit pending pods), and optionally the Vertical Pod Autoscaler for right-sizing requests. Name the specific metric scaled on (e.g. requests-per-second via a custom metric) and why CPU alone wasn't a sufficient signal for the workload's actual bottleneck.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "GKE/Kubernetes",
+    "question": "Can you describe a time when a human error or workload caused a production issue?",
+    "answer": "Structure it as: what happened - a specific misconfiguration, bad deploy, or resource contention - the user-visible impact, and how you noticed it. Concrete and specific beats a vague \"we had an outage.\"",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "GKE/Kubernetes",
+    "question": "How did you identify the root cause of that production issue?",
+    "answer": "Walk through the actual investigation path: correlating the deploy/change timeline with the incident start, checking logs, metrics, and traces for the affected service, and narrowing from symptom (errors, latency) to cause (bad config, resource limit, dependency failure) - a methodical, evidence-based process rather than guessing.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "GKE/Kubernetes",
+    "question": "How did you resolve the issue?",
+    "answer": "Describe the immediate mitigation - rollback, scale up, traffic shift, config revert - separately from the underlying fix, and be specific about the mechanism, e.g. kubectl rollout undo, reverting a Terraform apply, or failing over to a replica.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "GKE/Kubernetes",
+    "question": "What preventive measures did you implement to avoid similar incidents in the future?",
+    "answer": "Name concrete guardrails tied directly to the root cause - a new alert or SLO, a pre-deploy validation check, a PodDisruptionBudget, a code review requirement, a runbook - showing the incident produced a durable process or technical change, not just a one-time fix.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "Kubernetes Networking",
+    "question": "How did you manage networking within a Kubernetes cluster?",
+    "answer": "Cover Services (ClusterIP for internal, LoadBalancer/Ingress for external), NetworkPolicies to restrict pod-to-pod traffic by namespace/label, DNS via CoreDNS for service discovery, and how east-west traffic was handled - a service mesh like Istio, or plain Services - depending on the cluster's complexity.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "Kubernetes Networking",
+    "question": "How did you manage networking between multiple Kubernetes clusters?",
+    "answer": "Options include a shared VPC with cluster-to-cluster routing and multi-cluster Services (GKE MCS), a service mesh spanning clusters (Istio multi-cluster), or simpler patterns like internal load balancers plus DNS. Explain which was used and why - traffic pattern, latency requirement, or team boundary.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "Observability",
+    "question": "How did you implement end-to-end observability for production workloads?",
+    "answer": "Describe the three pillars working together: metrics (Cloud Monitoring/Prometheus) for aggregate health and alerting, logs (Cloud Logging or structured JSON logs) for detailed investigation, and traces (Cloud Trace/OpenTelemetry) for following a request across services - and how they cross-reference, e.g. a trace ID in logs, so you can pivot between them during an incident.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "Observability",
+    "question": "What metrics did you monitor?",
+    "answer": "Name specific ones: the four golden signals (latency, traffic, errors, saturation) at the service level, resource metrics (CPU/memory/disk) at the node/pod level, and business metrics tied to user impact - checkout success rate, request success rate - not just infrastructure metrics in isolation.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "Observability",
+    "question": "What logging strategy did you implement?",
+    "answer": "Structured JSON logs with consistent fields (request ID, service name, severity) shipped centrally to Cloud Logging or an ELK-style stack, log-based metrics/alerts for patterns that matter, and retention/sampling policies balancing cost against how far back you need to investigate.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "Observability",
+    "question": "How did you implement distributed tracing?",
+    "answer": "Instrument services with OpenTelemetry (or a vendor SDK) to propagate a trace context across service boundaries via headers, export spans to a backend such as Cloud Trace, Jaeger, or Datadog APM, and correlate trace IDs into logs so you can jump from \"this request was slow\" straight to the exact span that caused it.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "SRE/Reliability",
+    "question": "How do you define an SLI?",
+    "answer": "A Service Level Indicator is a direct, quantitative measurement of some aspect of the service's behavior - e.g. the proportion of successful HTTP requests, or the proportion of requests served under 300ms - measured from data you can actually collect.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "SRE/Reliability",
+    "question": "How do you define an SLO?",
+    "answer": "A Service Level Objective is a target value or range for an SLI over a time window - e.g. \"99.9% of requests succeed over a rolling 28 days\" - representing the reliability bar the team commits to, and that error budgets are calculated against.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "SRE/Reliability",
+    "question": "How do you define an SLA?",
+    "answer": "A Service Level Agreement is an external, often contractual commitment to customers about service reliability, usually with consequences such as credits or penalties for missing it. It's typically set looser than the internal SLO so there's margin to notice and fix problems before breaching the customer-facing promise.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "SRE/Reliability",
+    "question": "Give a concrete example of an SLA/SLO that you implemented.",
+    "answer": "State a specific SLI/SLO pair with real numbers - e.g. \"SLI: proportion of API requests returning 2xx/3xx within 500ms; SLO: 99.5% over a rolling 30-day window\" - and mention how the error budget from that SLO was used to gate risky releases, such as freezing deploys once the budget is exhausted.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "CI/CD/GitOps",
+    "question": "How did you build your CI/CD pipeline for infrastructure and applications?",
+    "answer": "Describe two related but distinct pipelines - application CI/CD (build, test, containerize, deploy) and infrastructure CI/CD (Terraform plan/apply with approval gates) - and how each is triggered (on merge, on tag) and gated (required checks, manual approval for prod).",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "CI/CD/GitOps",
+    "question": "Walk me through the pipeline from developer commit to production deployment.",
+    "answer": "A commit triggers CI - lint, unit tests, build artifact/image, security scan. The artifact is pushed to a registry. CD deploys to a lower environment automatically, runs integration/smoke tests, then requires approval, or meets automated criteria, to promote that exact same artifact to staging and finally production, with health checks gating each promotion.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "CI/CD/GitOps",
+    "question": "What CI/CD tools did you use?",
+    "answer": "Name specific tools - GitHub Actions, Cloud Build, Jenkins, Argo CD - and explain the division of responsibility, e.g. Cloud Build for CI (build/test/scan) and Argo CD for CD (declarative GitOps sync to GKE), rather than one tool doing everything end to end.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "CI/CD/GitOps",
+    "question": "How did you handle secrets and environment variables in the pipeline?",
+    "answer": "Store secrets in a dedicated secrets manager (Secret Manager, Vault) rather than pipeline config, inject them at runtime via short-lived tokens or Workload Identity rather than static keys, and ensure CI logs mask or never print secret values.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "CI/CD/GitOps",
+    "question": "How did you version your application artifacts and Docker images?",
+    "answer": "Tag images immutably with the git commit SHA - never rely on \"latest\" for deployments - optionally also tag semantic release versions for human readability, and store the SHA-to-deployment mapping so you can always trace exactly what code is running in any environment.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "CI/CD/GitOps",
+    "question": "How did you implement rollback for applications?",
+    "answer": "Keep the previous artifact/image deployable, use a deployment strategy - rolling update, blue/green, or canary - that lets you shift traffic back to the last-known-good version quickly (kubectl rollout undo, or re-pointing traffic in blue/green), and practice the rollback path before you need it in a real incident.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "CI/CD/GitOps",
+    "question": "How did you implement rollback for infrastructure changes?",
+    "answer": "Keep Terraform state and configuration versioned in git so you can revert the commit and re-apply, always run terraform plan before apply to catch unexpected changes, and for especially risky changes, prefer expand-contract patterns - add new, migrate, remove old - over destructive in-place changes that are hard to reverse.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "MLOps/AI Infrastructure",
+    "question": "Have you provisioned GPU or TPU node pools?",
+    "answer": "Speak to specifics if you have: which accelerator type (NVIDIA T4/A100, or Cloud TPU), what workload needed it (training vs inference), and how GKE was configured to schedule onto them - node taints, and nodeSelector/resource requests for nvidia.com/gpu.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "MLOps/AI Infrastructure",
+    "question": "Have you worked with Vertex AI endpoints or similar AI infrastructure?",
+    "answer": "Describe the specific use - deploying a trained model to a Vertex AI endpoint for online prediction, or using Vertex Pipelines for training orchestration - and the operational concerns handled: latency, autoscaling, and the cost of always-on endpoints vs batch prediction.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "MLOps/AI Infrastructure",
+    "question": "How did you provision GPU-enabled GKE node pools?",
+    "answer": "Create a node pool with an accelerator type and count specified (--accelerator type=nvidia-tesla-t4,count=1), ensure the NVIDIA device plugin DaemonSet is running so GPUs are exposed as a schedulable resource, and set pod resource requests/limits for nvidia.com/gpu so the scheduler only places pods on nodes with available GPUs.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "MLOps/AI Infrastructure",
+    "question": "How did you manage GPU scheduling and resource allocation?",
+    "answer": "Use node taints on GPU node pools so only GPU-requesting pods land there, avoiding wasted spend on expensive nodes running regular workloads, request GPUs explicitly in pod specs, and consider time-slicing or MIG (Multi-Instance GPU) if multiple smaller workloads need to share a single physical GPU efficiently.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "MLOps/AI Infrastructure",
+    "question": "How did you control GPU infrastructure costs?",
+    "answer": "Use autoscaling node pools that scale to zero when idle, prefer spot/preemptible GPU instances for fault-tolerant training workloads, right-size the accelerator - don't use an A100 when a T4 suffices - and monitor GPU utilization to catch idle-but-allocated capacity.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "MLOps/AI Infrastructure",
+    "question": "How did you deploy and manage models using Vertex AI?",
+    "answer": "Package the model as a custom container or a supported framework format, upload it to the Vertex AI Model Registry, deploy it to an endpoint with a defined machine type, autoscaling, and traffic-splitting for canary rollouts between model versions, and monitor prediction latency and drift via Vertex AI Model Monitoring.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "MLOps/AI Infrastructure",
+    "question": "What metrics did you monitor for AI/ML infrastructure?",
+    "answer": "Prediction latency and throughput, endpoint error rate, GPU/accelerator utilization, model input/output drift - data or prediction distribution shifting away from training data - and cost per prediction, covering both infrastructure health and model quality signals.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "MLOps/AI Infrastructure",
+    "question": "If a data scientist or ML engineer asks you to productionize a model, what would be your first question?",
+    "answer": "Ask what the actual serving requirement is - real-time low-latency inference, or batch/offline prediction - since that decision drives everything downstream: a Vertex AI endpoint vs a scheduled batch job vs embedding the model in an existing service.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "MLOps/AI Infrastructure",
+    "question": "What additional information would you gather before deploying the model?",
+    "answer": "Expected request volume and latency SLA, input data format and validation needs, model size and hardware requirements (CPU vs GPU), how often the model needs retraining/redeployment, and what monitoring for drift or performance degradation is expected.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "MLOps/AI Infrastructure",
+    "question": "What infrastructure would you provision for a production ML model?",
+    "answer": "A serving layer sized to the latency/throughput requirement (Vertex AI endpoint or a containerized service on GKE with HPA), a model registry and versioning system, monitoring for both infrastructure metrics and model-quality metrics (drift, accuracy over time), and a CI/CD pipeline that can safely roll out a new model version with canary traffic splitting and rollback.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "AI Engineering",
+    "question": "Are you using any AI tools in your day-to-day Software/Systems Engineering work?",
+    "answer": "Name specific tools you actually use - GitHub Copilot, Claude, ChatGPT, Cursor - and be specific rather than vague; interviewers are checking for genuine, thoughtful usage, not a buzzword answer.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "AI Engineering",
+    "question": "How do you use AI tools in your daily workflow?",
+    "answer": "Concrete examples carry more weight than generalities: using an AI assistant to draft boilerplate Terraform/Kubernetes manifests, explain unfamiliar error messages or legacy code, generate first-draft documentation, or pair on debugging by pasting logs and asking for hypotheses.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "AI Engineering",
+    "question": "Can you give a practical example of how AI improved your productivity?",
+    "answer": "Describe one specific task - writing a complex regex, generating a Terraform module skeleton, summarizing a long log file to find the relevant error - and the time or effort it saved compared to doing it manually. Specificity is what makes this answer credible.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "AI Engineering",
+    "question": "How do you ensure AI-generated code or recommendations are safe for production?",
+    "answer": "Treat AI output like a junior engineer's PR - review it fully, run it through the same tests, linting, and security scanning as any other code, never apply an AI-suggested infrastructure change without a plan/dry-run review, and verify claims about APIs or library behavior rather than trusting them blindly, since models can confidently state incorrect things.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "AI Engineering",
+    "question": "How do you think the Platform Engineer/DevOps role will evolve as AI becomes more embedded in software systems?",
+    "answer": "A thoughtful answer covers spending less time on repetitive toil - AI handling boilerplate config, first-pass incident triage, log summarization - and more time on architecture, governance and guardrails for AI-assisted changes, and building the platform that safely lets AI agents operate: permissions, policy-as-code, review gates.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "AI Engineering",
+    "question": "What new responsibilities do you think Platform Engineers will have in AI-driven organizations?",
+    "answer": "Building guardrails for AI agents interacting with infrastructure - least-privilege access, approval gates, audit trails - managing GPU/accelerator capacity as a first-class platform concern, and evaluating and integrating AI tooling into the developer platform itself, not just using AI but being responsible for how the org uses it safely.",
+    "dateAdded": "2026-07-16"
+  },
+  {
+    "source": "User-Provided Real Interview Questions",
+    "section": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "category": "AI Engineering",
+    "question": "Do you think AI will replace DevOps engineers, or how will it change the role?",
+    "answer": "A strong answer avoids both extremes - neither \"AI changes nothing\" nor \"AI replaces us\" - and argues instead that AI shifts the job from executing routine operational tasks toward judgment-heavy work: architecture decisions, risk assessment, and being the accountable human in the loop for changes AI proposes but shouldn't autonomously apply to production without review.",
+    "dateAdded": "2026-07-16"
   }
 ]

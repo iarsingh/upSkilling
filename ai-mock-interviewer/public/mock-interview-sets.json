@@ -3991,25 +3991,82 @@
     "title": "Mock Interview 70 - GCP DevOps and GKE Screening",
     "focus": "DevOps responsibilities, GCP services, GKE, Jenkins, CI/CD, Docker/Kubernetes operations, monitoring and security",
     "questions": [
-      { "category": "DevOps", "question": "Your profile looks more DevOps-focused. What have you done specifically in DevOps?" },
-      { "category": "DevOps", "question": "In the DevOps area, what exactly are you trying to do? What are your day-to-day responsibilities?" },
-      { "category": "Cloud", "question": "Which cloud platform are you strongest in: GCP, AWS, or Azure?" },
-      { "category": "GCP", "question": "What are the last three major DevOps tasks or projects you have done in GCP?" },
-      { "category": "GCP", "question": "What are the key GCP services you have used?" },
-      { "category": "GKE/Kubernetes", "question": "What is the difference between GKE Standard Mode and Autopilot Mode?" },
-      { "category": "GKE/Kubernetes", "question": "Can you explain the GKE architecture?" },
-      { "category": "GKE/Security", "question": "How do you secure a GKE cluster?" },
-      { "category": "CI/CD/Jenkins", "question": "Have you used Jenkins CI/CD pipelines with Bitbucket?" },
-      { "category": "CI/CD/Jenkins", "question": "What is the CI workflow in Jenkins?" },
-      { "category": "CI/CD/GCP", "question": "How would you design a CI/CD pipeline in GCP? Explain the complete flow." },
-      { "category": "CI/CD/Git", "question": "Would you use Cloud Source Repositories or an external Git repository such as GitHub, Bitbucket, or GitLab in your pipeline?" },
-      { "category": "Data Platform", "question": "Do you have experience implementing GCP with EDM, Salesforce, or any data platform?" },
-      { "category": "Database Migration", "question": "Do you have experience with Liquibase or database migration?" },
-      { "category": "Containers/Kubernetes", "question": "Do you have real-time experience with containerization technologies like Docker and Kubernetes?" },
-      { "category": "Containers/Kubernetes", "question": "Can you explain a real project where you containerized and deployed an application?" },
-      { "category": "Observability", "question": "How do you monitor containerized applications?" },
-      { "category": "Logging/Troubleshooting", "question": "How do you perform logging and troubleshoot errors in Docker/Kubernetes environments?" },
-      { "category": "Observability", "question": "Which monitoring tools have you used for Kubernetes, such as Prometheus, ELK, Datadog, or Cloud Monitoring?" }
+      {
+        "category": "DevOps",
+        "question": "Your profile looks more DevOps-focused. What have you done specifically in DevOps?"
+      },
+      {
+        "category": "DevOps",
+        "question": "In the DevOps area, what exactly are you trying to do? What are your day-to-day responsibilities?"
+      },
+      {
+        "category": "Cloud",
+        "question": "Which cloud platform are you strongest in: GCP, AWS, or Azure?"
+      },
+      {
+        "category": "GCP",
+        "question": "What are the last three major DevOps tasks or projects you have done in GCP?"
+      },
+      {
+        "category": "GCP",
+        "question": "What are the key GCP services you have used?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "What is the difference between GKE Standard Mode and Autopilot Mode?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "Can you explain the GKE architecture?"
+      },
+      {
+        "category": "GKE/Security",
+        "question": "How do you secure a GKE cluster?"
+      },
+      {
+        "category": "CI/CD/Jenkins",
+        "question": "Have you used Jenkins CI/CD pipelines with Bitbucket?"
+      },
+      {
+        "category": "CI/CD/Jenkins",
+        "question": "What is the CI workflow in Jenkins?"
+      },
+      {
+        "category": "CI/CD/GCP",
+        "question": "How would you design a CI/CD pipeline in GCP? Explain the complete flow."
+      },
+      {
+        "category": "CI/CD/Git",
+        "question": "Would you use Cloud Source Repositories or an external Git repository such as GitHub, Bitbucket, or GitLab in your pipeline?"
+      },
+      {
+        "category": "Data Platform",
+        "question": "Do you have experience implementing GCP with EDM, Salesforce, or any data platform?"
+      },
+      {
+        "category": "Database Migration",
+        "question": "Do you have experience with Liquibase or database migration?"
+      },
+      {
+        "category": "Containers/Kubernetes",
+        "question": "Do you have real-time experience with containerization technologies like Docker and Kubernetes?"
+      },
+      {
+        "category": "Containers/Kubernetes",
+        "question": "Can you explain a real project where you containerized and deployed an application?"
+      },
+      {
+        "category": "Observability",
+        "question": "How do you monitor containerized applications?"
+      },
+      {
+        "category": "Logging/Troubleshooting",
+        "question": "How do you perform logging and troubleshoot errors in Docker/Kubernetes environments?"
+      },
+      {
+        "category": "Observability",
+        "question": "Which monitoring tools have you used for Kubernetes, such as Prometheus, ELK, Datadog, or Cloud Monitoring?"
+      }
     ]
   },
   {
@@ -4017,68 +4074,254 @@
     "title": "Mock Interview 71 - Docker Kubernetes CI/CD DevSecOps Deep Dive",
     "focus": "Dockerfile fundamentals, Kubernetes services and manifests, EKS deployment pipeline, ConfigMaps, Secrets, networking, service auth, Azure App Service, APIs, observability, scalability, and MLOps",
     "questions": [
-      { "category": "Docker", "question": "What is the purpose of EXPOSE in a Dockerfile?" },
-      { "category": "Docker", "question": "What is RUN used for in a Dockerfile?" },
-      { "category": "Docker/FastAPI", "question": "How do you expose a FastAPI application on port 8000 inside a Docker container?" },
-      { "category": "Docker", "question": "How does the application code become available inside the Docker container?" },
-      { "category": "Docker", "question": "What command starts the application inside the container?" },
-      { "category": "Docker/Networking", "question": "How do you publish a Docker container port to the host?" },
-      { "category": "Docker/Networking", "question": "What is the purpose of docker run -p?" },
-      { "category": "Kubernetes/Services", "question": "What are the different types of Kubernetes Services?" },
-      { "category": "Kubernetes/Services", "question": "How do you expose an application externally?" },
-      { "category": "Kubernetes/Networking", "question": "What is the equivalent of Docker port mapping in Kubernetes?" },
-      { "category": "Kubernetes/Services", "question": "How do containerPort, port, and targetPort work?" },
-      { "category": "Kubernetes/Manifests", "question": "How do you deploy an application using Kubernetes manifest files?" },
-      { "category": "Kubernetes/Commands", "question": "What is the kubectl apply command?" },
-      { "category": "EKS/Deployment", "question": "After pushing an image to ECR, what is the next step?" },
-      { "category": "Kubernetes/Deployment", "question": "How do you update the Deployment manifest with the new image?" },
-      { "category": "Kubernetes/Deployment", "question": "If the latest image is pushed but the pod is still using the old image, how do you refresh it?" },
-      { "category": "Helm", "question": "Have you worked on Helm charts?" },
-      { "category": "CI/CD/EKS", "question": "Explain an automated deployment pipeline for a FastAPI application to EKS." },
-      { "category": "DevSecOps", "question": "What checks would you perform before deployment?" },
-      { "category": "DevSecOps", "question": "How would you perform code formatting, linting, unit testing, vulnerability scanning, secret scanning, and image scanning?" },
-      { "category": "Container Registry", "question": "Where would you push the Docker image?" },
-      { "category": "CI/CD/EKS", "question": "How would you deploy the image after pushing it to ECR?" },
-      { "category": "CI/CD/Automation", "question": "How would you automate the deployment?" },
-      { "category": "Kubernetes/Config", "question": "What is a ConfigMap?" },
-      { "category": "Kubernetes/Config", "question": "What is stored inside a ConfigMap?" },
-      { "category": "Kubernetes/Secrets", "question": "What are Kubernetes Secrets?" },
-      { "category": "Kubernetes/Secrets", "question": "How do you use Secrets inside a pod?" },
-      { "category": "Kubernetes/Config", "question": "What is the difference between ConfigMap and Secret?" },
-      { "category": "Networking", "question": "How can you expose a service only to users inside your organization?" },
-      { "category": "Networking/Security", "question": "Without using SSO or RBAC, how would you restrict access?" },
-      { "category": "Kubernetes/NetworkPolicy", "question": "Can NetworkPolicy solve this problem?" },
-      { "category": "Networking/Security", "question": "How would you whitelist an organization's CIDR/IP range?" },
-      { "category": "Networking/Load Balancer", "question": "What is the role of an Internal Load Balancer?" },
-      { "category": "Security/Service Auth", "question": "What is service-to-service authentication?" },
-      { "category": "Security/Service Auth", "question": "How do two services communicate securely?" },
-      { "category": "Azure/PostgreSQL", "question": "How would an App Service communicate with PostgreSQL?" },
-      { "category": "Azure/IAM", "question": "How would you authorize App Service to access PostgreSQL?" },
-      { "category": "Azure/IAM", "question": "How do Managed Identities work?" },
-      { "category": "Azure/IAM", "question": "How do you provide Contributor access to an App Service?" },
-      { "category": "Azure/App Service", "question": "What is Azure App Service?" },
-      { "category": "Azure/App Service", "question": "What is App Service used for?" },
-      { "category": "Azure/App Service", "question": "How do applications hosted on App Service connect to a database?" },
-      { "category": "APIs/Development", "question": "How comfortable are you with API development?" },
-      { "category": "APIs/Development", "question": "Have you built APIs yourself?" },
-      { "category": "APIs/Database", "question": "How does an API read and write data to a database?" },
-      { "category": "APIs/Development", "question": "What is your understanding of API development?" },
-      { "category": "Observability", "question": "How would you build an observability namespace?" },
-      { "category": "Observability", "question": "Which services would you use for metrics, logs, and traces?" },
-      { "category": "Observability/Grafana", "question": "How would you integrate Grafana?" },
-      { "category": "Observability/OpenTelemetry", "question": "What exactly is OpenTelemetry?" },
-      { "category": "Observability/OpenTelemetry", "question": "OpenTelemetry is only a collector; what backend services would you use?" },
-      { "category": "Observability/Grafana", "question": "How would Grafana connect to those services?" },
-      { "category": "Scalability/Kubernetes", "question": "Suppose millions of users access your API. How would you design a scalable Kubernetes solution?" },
-      { "category": "Scalability", "question": "How would you determine your scaling strategy?" },
-      { "category": "Scalability/Kubernetes", "question": "How would you estimate the number of pods?" },
-      { "category": "Load Testing", "question": "How would you perform load testing?" },
-      { "category": "Load Testing", "question": "Can you generate 5,000 requests per second?" },
-      { "category": "Load Testing", "question": "Which load-testing tools would you use?" },
-      { "category": "MLOps/AI", "question": "How is your understanding of the latest GenAI/MLOps journey?" },
-      { "category": "HR/Behavioral", "question": "Do you have any questions for me?" },
-      { "category": "HR/Behavioral", "question": "Where are you currently based?" },
-      { "category": "HR/Behavioral", "question": "What is your native place?" }
+      {
+        "category": "Docker",
+        "question": "What is the purpose of EXPOSE in a Dockerfile?"
+      },
+      {
+        "category": "Docker",
+        "question": "What is RUN used for in a Dockerfile?"
+      },
+      {
+        "category": "Docker/FastAPI",
+        "question": "How do you expose a FastAPI application on port 8000 inside a Docker container?"
+      },
+      {
+        "category": "Docker",
+        "question": "How does the application code become available inside the Docker container?"
+      },
+      {
+        "category": "Docker",
+        "question": "What command starts the application inside the container?"
+      },
+      {
+        "category": "Docker/Networking",
+        "question": "How do you publish a Docker container port to the host?"
+      },
+      {
+        "category": "Docker/Networking",
+        "question": "What is the purpose of docker run -p?"
+      },
+      {
+        "category": "Kubernetes/Services",
+        "question": "What are the different types of Kubernetes Services?"
+      },
+      {
+        "category": "Kubernetes/Services",
+        "question": "How do you expose an application externally?"
+      },
+      {
+        "category": "Kubernetes/Networking",
+        "question": "What is the equivalent of Docker port mapping in Kubernetes?"
+      },
+      {
+        "category": "Kubernetes/Services",
+        "question": "How do containerPort, port, and targetPort work?"
+      },
+      {
+        "category": "Kubernetes/Manifests",
+        "question": "How do you deploy an application using Kubernetes manifest files?"
+      },
+      {
+        "category": "Kubernetes/Commands",
+        "question": "What is the kubectl apply command?"
+      },
+      {
+        "category": "EKS/Deployment",
+        "question": "After pushing an image to ECR, what is the next step?"
+      },
+      {
+        "category": "Kubernetes/Deployment",
+        "question": "How do you update the Deployment manifest with the new image?"
+      },
+      {
+        "category": "Kubernetes/Deployment",
+        "question": "If the latest image is pushed but the pod is still using the old image, how do you refresh it?"
+      },
+      {
+        "category": "Helm",
+        "question": "Have you worked on Helm charts?"
+      },
+      {
+        "category": "CI/CD/EKS",
+        "question": "Explain an automated deployment pipeline for a FastAPI application to EKS."
+      },
+      {
+        "category": "DevSecOps",
+        "question": "What checks would you perform before deployment?"
+      },
+      {
+        "category": "DevSecOps",
+        "question": "How would you perform code formatting, linting, unit testing, vulnerability scanning, secret scanning, and image scanning?"
+      },
+      {
+        "category": "Container Registry",
+        "question": "Where would you push the Docker image?"
+      },
+      {
+        "category": "CI/CD/EKS",
+        "question": "How would you deploy the image after pushing it to ECR?"
+      },
+      {
+        "category": "CI/CD/Automation",
+        "question": "How would you automate the deployment?"
+      },
+      {
+        "category": "Kubernetes/Config",
+        "question": "What is a ConfigMap?"
+      },
+      {
+        "category": "Kubernetes/Config",
+        "question": "What is stored inside a ConfigMap?"
+      },
+      {
+        "category": "Kubernetes/Secrets",
+        "question": "What are Kubernetes Secrets?"
+      },
+      {
+        "category": "Kubernetes/Secrets",
+        "question": "How do you use Secrets inside a pod?"
+      },
+      {
+        "category": "Kubernetes/Config",
+        "question": "What is the difference between ConfigMap and Secret?"
+      },
+      {
+        "category": "Networking",
+        "question": "How can you expose a service only to users inside your organization?"
+      },
+      {
+        "category": "Networking/Security",
+        "question": "Without using SSO or RBAC, how would you restrict access?"
+      },
+      {
+        "category": "Kubernetes/NetworkPolicy",
+        "question": "Can NetworkPolicy solve this problem?"
+      },
+      {
+        "category": "Networking/Security",
+        "question": "How would you whitelist an organization's CIDR/IP range?"
+      },
+      {
+        "category": "Networking/Load Balancer",
+        "question": "What is the role of an Internal Load Balancer?"
+      },
+      {
+        "category": "Security/Service Auth",
+        "question": "What is service-to-service authentication?"
+      },
+      {
+        "category": "Security/Service Auth",
+        "question": "How do two services communicate securely?"
+      },
+      {
+        "category": "Azure/PostgreSQL",
+        "question": "How would an App Service communicate with PostgreSQL?"
+      },
+      {
+        "category": "Azure/IAM",
+        "question": "How would you authorize App Service to access PostgreSQL?"
+      },
+      {
+        "category": "Azure/IAM",
+        "question": "How do Managed Identities work?"
+      },
+      {
+        "category": "Azure/IAM",
+        "question": "How do you provide Contributor access to an App Service?"
+      },
+      {
+        "category": "Azure/App Service",
+        "question": "What is Azure App Service?"
+      },
+      {
+        "category": "Azure/App Service",
+        "question": "What is App Service used for?"
+      },
+      {
+        "category": "Azure/App Service",
+        "question": "How do applications hosted on App Service connect to a database?"
+      },
+      {
+        "category": "APIs/Development",
+        "question": "How comfortable are you with API development?"
+      },
+      {
+        "category": "APIs/Development",
+        "question": "Have you built APIs yourself?"
+      },
+      {
+        "category": "APIs/Database",
+        "question": "How does an API read and write data to a database?"
+      },
+      {
+        "category": "APIs/Development",
+        "question": "What is your understanding of API development?"
+      },
+      {
+        "category": "Observability",
+        "question": "How would you build an observability namespace?"
+      },
+      {
+        "category": "Observability",
+        "question": "Which services would you use for metrics, logs, and traces?"
+      },
+      {
+        "category": "Observability/Grafana",
+        "question": "How would you integrate Grafana?"
+      },
+      {
+        "category": "Observability/OpenTelemetry",
+        "question": "What exactly is OpenTelemetry?"
+      },
+      {
+        "category": "Observability/OpenTelemetry",
+        "question": "OpenTelemetry is only a collector; what backend services would you use?"
+      },
+      {
+        "category": "Observability/Grafana",
+        "question": "How would Grafana connect to those services?"
+      },
+      {
+        "category": "Scalability/Kubernetes",
+        "question": "Suppose millions of users access your API. How would you design a scalable Kubernetes solution?"
+      },
+      {
+        "category": "Scalability",
+        "question": "How would you determine your scaling strategy?"
+      },
+      {
+        "category": "Scalability/Kubernetes",
+        "question": "How would you estimate the number of pods?"
+      },
+      {
+        "category": "Load Testing",
+        "question": "How would you perform load testing?"
+      },
+      {
+        "category": "Load Testing",
+        "question": "Can you generate 5,000 requests per second?"
+      },
+      {
+        "category": "Load Testing",
+        "question": "Which load-testing tools would you use?"
+      },
+      {
+        "category": "MLOps/AI",
+        "question": "How is your understanding of the latest GenAI/MLOps journey?"
+      },
+      {
+        "category": "HR/Behavioral",
+        "question": "Do you have any questions for me?"
+      },
+      {
+        "category": "HR/Behavioral",
+        "question": "Where are you currently based?"
+      },
+      {
+        "category": "HR/Behavioral",
+        "question": "What is your native place?"
+      }
     ]
   },
   {
@@ -4086,44 +4329,158 @@
     "title": "Mock Interview 72 - Kubernetes Terraform Observability and MLOps",
     "focus": "Kubernetes CNI, service mesh, workloads, probes, ingress, autoscaling, cloud networking, observability, Terraform, Ansible, compliance, MLOps and AI infrastructure",
     "questions": [
-      { "category": "Kubernetes/Networking", "question": "Explain CNI in Kubernetes." },
-      { "category": "Kubernetes/Networking", "question": "Which CNI have you worked on?" },
-      { "category": "Kubernetes/Service Mesh", "question": "Do you have experience with a Service Mesh?" },
-      { "category": "Kubernetes/Service Mesh", "question": "Can you explain what a Service Mesh is?" },
-      { "category": "Kubernetes/Workloads", "question": "What is the difference between a Deployment and a StatefulSet?" },
-      { "category": "Kubernetes/Probes", "question": "How do Liveness and Readiness probes differ?" },
-      { "category": "Kubernetes/Containers", "question": "What is a Sidecar container?" },
-      { "category": "Kubernetes/Ingress", "question": "What is an Ingress Controller?" },
-      { "category": "Kubernetes/Autoscaling", "question": "How do you handle Pod Autoscaling?" },
-      { "category": "Kubernetes/Secrets", "question": "What is a Kubernetes Secret?" },
-      { "category": "Linux/Kubernetes", "question": "What is BusyBox?" },
-      { "category": "Kubernetes/etcd", "question": "What does etcd store?" },
-      { "category": "Kubernetes/etcd", "question": "Does etcd store namespaces and storage configurations?" },
-      { "category": "Deployment Strategies", "question": "What is Blue-Green Deployment?" },
-      { "category": "Helm", "question": "What is the use of Helm?" },
-      { "category": "Cloud Networking", "question": "What is the difference between AWS VPC, Azure VNet, and GCP VPC?" },
-      { "category": "Hybrid Networking", "question": "How do you connect on-premises resources with cloud resources?" },
-      { "category": "Cloud Networking", "question": "What is a VPC?" },
-      { "category": "Kubernetes/Architecture", "question": "How many Kubernetes clusters do you require in production?" },
-      { "category": "Load Balancing", "question": "How does a Load Balancer distribute traffic between services, for example 50-50?" },
-      { "category": "Security/mTLS", "question": "What is mTLS?" },
-      { "category": "Observability/Prometheus", "question": "How much experience do you have with Prometheus?" },
-      { "category": "Observability/Grafana", "question": "How much experience do you have with Grafana?" },
-      { "category": "Observability/OpenTelemetry", "question": "How much experience do you have with OpenTelemetry?" },
-      { "category": "Observability/Tracing", "question": "Have you worked with Jaeger?" },
-      { "category": "Observability/Logging", "question": "Have you integrated ELK?" },
-      { "category": "Terraform/State", "question": "What is Terraform State?" },
-      { "category": "Terraform/Security", "question": "Why is Terraform State a security risk?" },
-      { "category": "Terraform/State", "question": "How do you manage state locking in a team environment?" },
-      { "category": "Terraform/Modules", "question": "What is a Terraform Module?" },
-      { "category": "Terraform/Modules", "question": "When should you use a Terraform Module?" },
-      { "category": "Terraform/Secrets", "question": "How do you handle secret injection in Terraform?" },
-      { "category": "Ansible", "question": "What is idempotency in Ansible?" },
-      { "category": "Security/Compliance", "question": "Have you worked in environments with compliance requirements like PCI DSS, GDPR, or SOC 2?" },
-      { "category": "Security/Compliance", "question": "What was your role in meeting those compliance requirements?" },
-      { "category": "Certifications", "question": "Are all three of your cloud certifications still valid?" },
-      { "category": "MLOps/AI", "question": "How is your experience with MLOps and AI infrastructure?" },
-      { "category": "MLOps/AI", "question": "What kind of MLOps or AI infrastructure work have you done?" }
+      {
+        "category": "Kubernetes/Networking",
+        "question": "Explain CNI in Kubernetes."
+      },
+      {
+        "category": "Kubernetes/Networking",
+        "question": "Which CNI have you worked on?"
+      },
+      {
+        "category": "Kubernetes/Service Mesh",
+        "question": "Do you have experience with a Service Mesh?"
+      },
+      {
+        "category": "Kubernetes/Service Mesh",
+        "question": "Can you explain what a Service Mesh is?"
+      },
+      {
+        "category": "Kubernetes/Workloads",
+        "question": "What is the difference between a Deployment and a StatefulSet?"
+      },
+      {
+        "category": "Kubernetes/Probes",
+        "question": "How do Liveness and Readiness probes differ?"
+      },
+      {
+        "category": "Kubernetes/Containers",
+        "question": "What is a Sidecar container?"
+      },
+      {
+        "category": "Kubernetes/Ingress",
+        "question": "What is an Ingress Controller?"
+      },
+      {
+        "category": "Kubernetes/Autoscaling",
+        "question": "How do you handle Pod Autoscaling?"
+      },
+      {
+        "category": "Kubernetes/Secrets",
+        "question": "What is a Kubernetes Secret?"
+      },
+      {
+        "category": "Linux/Kubernetes",
+        "question": "What is BusyBox?"
+      },
+      {
+        "category": "Kubernetes/etcd",
+        "question": "What does etcd store?"
+      },
+      {
+        "category": "Kubernetes/etcd",
+        "question": "Does etcd store namespaces and storage configurations?"
+      },
+      {
+        "category": "Deployment Strategies",
+        "question": "What is Blue-Green Deployment?"
+      },
+      {
+        "category": "Helm",
+        "question": "What is the use of Helm?"
+      },
+      {
+        "category": "Cloud Networking",
+        "question": "What is the difference between AWS VPC, Azure VNet, and GCP VPC?"
+      },
+      {
+        "category": "Hybrid Networking",
+        "question": "How do you connect on-premises resources with cloud resources?"
+      },
+      {
+        "category": "Cloud Networking",
+        "question": "What is a VPC?"
+      },
+      {
+        "category": "Kubernetes/Architecture",
+        "question": "How many Kubernetes clusters do you require in production?"
+      },
+      {
+        "category": "Load Balancing",
+        "question": "How does a Load Balancer distribute traffic between services, for example 50-50?"
+      },
+      {
+        "category": "Security/mTLS",
+        "question": "What is mTLS?"
+      },
+      {
+        "category": "Observability/Prometheus",
+        "question": "How much experience do you have with Prometheus?"
+      },
+      {
+        "category": "Observability/Grafana",
+        "question": "How much experience do you have with Grafana?"
+      },
+      {
+        "category": "Observability/OpenTelemetry",
+        "question": "How much experience do you have with OpenTelemetry?"
+      },
+      {
+        "category": "Observability/Tracing",
+        "question": "Have you worked with Jaeger?"
+      },
+      {
+        "category": "Observability/Logging",
+        "question": "Have you integrated ELK?"
+      },
+      {
+        "category": "Terraform/State",
+        "question": "What is Terraform State?"
+      },
+      {
+        "category": "Terraform/Security",
+        "question": "Why is Terraform State a security risk?"
+      },
+      {
+        "category": "Terraform/State",
+        "question": "How do you manage state locking in a team environment?"
+      },
+      {
+        "category": "Terraform/Modules",
+        "question": "What is a Terraform Module?"
+      },
+      {
+        "category": "Terraform/Modules",
+        "question": "When should you use a Terraform Module?"
+      },
+      {
+        "category": "Terraform/Secrets",
+        "question": "How do you handle secret injection in Terraform?"
+      },
+      {
+        "category": "Ansible",
+        "question": "What is idempotency in Ansible?"
+      },
+      {
+        "category": "Security/Compliance",
+        "question": "Have you worked in environments with compliance requirements like PCI DSS, GDPR, or SOC 2?"
+      },
+      {
+        "category": "Security/Compliance",
+        "question": "What was your role in meeting those compliance requirements?"
+      },
+      {
+        "category": "Certifications",
+        "question": "Are all three of your cloud certifications still valid?"
+      },
+      {
+        "category": "MLOps/AI",
+        "question": "How is your experience with MLOps and AI infrastructure?"
+      },
+      {
+        "category": "MLOps/AI",
+        "question": "What kind of MLOps or AI infrastructure work have you done?"
+      }
     ]
   },
   {
@@ -4131,35 +4488,122 @@
     "title": "Mock Interview 73 - Senior GKE Architecture Resource Security and Cost",
     "focus": "Current role storytelling, end-to-end infrastructure architecture, Kubernetes resource sizing, quotas, CPU/memory behavior, monitoring, Prisma Cloud, application security, autoscaling, and cost governance",
     "questions": [
-      { "category": "Role/Responsibilities", "question": "Talk in detail about your core roles and responsibilities in your current role." },
-      { "category": "Project Architecture", "question": "Can you explain your current project using a specific client or application as an example?" },
-      { "category": "Project Architecture", "question": "Explain the infrastructure architecture of one application from end to end." },
-      { "category": "Runtime Platform", "question": "Where does this application run?" },
-      { "category": "Infrastructure Architecture", "question": "What are all the infrastructure components required for this application to run?" },
-      { "category": "Kubernetes/Resources", "question": "Who decides the CPU and memory limits for the application?" },
-      { "category": "Kubernetes/Resources", "question": "How do you determine the CPU and memory requests and limits?" },
-      { "category": "Cloud Cost", "question": "Does the application team also approve the resource sizing because of the cloud cost?" },
-      { "category": "Kubernetes/Quotas", "question": "What resource quotas or limits do you configure in a Kubernetes cluster?" },
-      { "category": "Kubernetes/Resources", "question": "How do CPU requests and limits work in Kubernetes?" },
-      { "category": "Kubernetes/Resources", "question": "What happens if a container exceeds its memory limit?" },
-      { "category": "Kubernetes/Resources", "question": "What happens if a container exceeds its CPU limit?" },
-      { "category": "Systems/Resources", "question": "What is the difference between CPU utilization and memory utilization?" },
-      { "category": "Systems/Storage", "question": "How is memory different from disk storage?" },
-      { "category": "Observability", "question": "What monitoring tools do you use for the application and infrastructure?" },
-      { "category": "Observability", "question": "Apart from native GCP monitoring, what third-party monitoring tools do you use?" },
-      { "category": "Security/Prisma Cloud", "question": "What does Prisma Cloud monitor?" },
-      { "category": "Security/Prisma Cloud", "question": "Does Prisma monitor IAM security and network security only, or does it also cover application security?" },
-      { "category": "Application Security", "question": "Have you worked on application security?" },
-      { "category": "Application Security", "question": "Have you worked on penetration testing or vulnerability assessment?" },
-      { "category": "Application Security", "question": "Can you give an example of an application security vulnerability that you worked on?" },
-      { "category": "Web Security", "question": "What are some important HTTP security headers that should be present?" },
-      { "category": "Web Security", "question": "What does Content Security Policy (CSP) do?" },
-      { "category": "GKE/Autoscaling", "question": "How does Cluster Autoscaler work in Kubernetes/GKE?" },
-      { "category": "Observability/GKE", "question": "Do you have real-time monitoring for the Kubernetes cluster?" },
-      { "category": "GKE/Autoscaling", "question": "If there is a sudden spike in traffic, how does autoscaling work in real time?" },
-      { "category": "GKE/Autoscaling", "question": "I am referring to node autoscaling, not pod autoscaling. How does node autoscaling work?" },
-      { "category": "GKE/Autoscaling", "question": "What happens if, due to some unknown issue, the Cluster Autoscaler keeps creating new nodes?" },
-      { "category": "Cloud Cost/Governance", "question": "How do you control the cloud cost when Cluster Autoscaler keeps scaling nodes?" }
+      {
+        "category": "Role/Responsibilities",
+        "question": "Talk in detail about your core roles and responsibilities in your current role."
+      },
+      {
+        "category": "Project Architecture",
+        "question": "Can you explain your current project using a specific client or application as an example?"
+      },
+      {
+        "category": "Project Architecture",
+        "question": "Explain the infrastructure architecture of one application from end to end."
+      },
+      {
+        "category": "Runtime Platform",
+        "question": "Where does this application run?"
+      },
+      {
+        "category": "Infrastructure Architecture",
+        "question": "What are all the infrastructure components required for this application to run?"
+      },
+      {
+        "category": "Kubernetes/Resources",
+        "question": "Who decides the CPU and memory limits for the application?"
+      },
+      {
+        "category": "Kubernetes/Resources",
+        "question": "How do you determine the CPU and memory requests and limits?"
+      },
+      {
+        "category": "Cloud Cost",
+        "question": "Does the application team also approve the resource sizing because of the cloud cost?"
+      },
+      {
+        "category": "Kubernetes/Quotas",
+        "question": "What resource quotas or limits do you configure in a Kubernetes cluster?"
+      },
+      {
+        "category": "Kubernetes/Resources",
+        "question": "How do CPU requests and limits work in Kubernetes?"
+      },
+      {
+        "category": "Kubernetes/Resources",
+        "question": "What happens if a container exceeds its memory limit?"
+      },
+      {
+        "category": "Kubernetes/Resources",
+        "question": "What happens if a container exceeds its CPU limit?"
+      },
+      {
+        "category": "Systems/Resources",
+        "question": "What is the difference between CPU utilization and memory utilization?"
+      },
+      {
+        "category": "Systems/Storage",
+        "question": "How is memory different from disk storage?"
+      },
+      {
+        "category": "Observability",
+        "question": "What monitoring tools do you use for the application and infrastructure?"
+      },
+      {
+        "category": "Observability",
+        "question": "Apart from native GCP monitoring, what third-party monitoring tools do you use?"
+      },
+      {
+        "category": "Security/Prisma Cloud",
+        "question": "What does Prisma Cloud monitor?"
+      },
+      {
+        "category": "Security/Prisma Cloud",
+        "question": "Does Prisma monitor IAM security and network security only, or does it also cover application security?"
+      },
+      {
+        "category": "Application Security",
+        "question": "Have you worked on application security?"
+      },
+      {
+        "category": "Application Security",
+        "question": "Have you worked on penetration testing or vulnerability assessment?"
+      },
+      {
+        "category": "Application Security",
+        "question": "Can you give an example of an application security vulnerability that you worked on?"
+      },
+      {
+        "category": "Web Security",
+        "question": "What are some important HTTP security headers that should be present?"
+      },
+      {
+        "category": "Web Security",
+        "question": "What does Content Security Policy (CSP) do?"
+      },
+      {
+        "category": "GKE/Autoscaling",
+        "question": "How does Cluster Autoscaler work in Kubernetes/GKE?"
+      },
+      {
+        "category": "Observability/GKE",
+        "question": "Do you have real-time monitoring for the Kubernetes cluster?"
+      },
+      {
+        "category": "GKE/Autoscaling",
+        "question": "If there is a sudden spike in traffic, how does autoscaling work in real time?"
+      },
+      {
+        "category": "GKE/Autoscaling",
+        "question": "I am referring to node autoscaling, not pod autoscaling. How does node autoscaling work?"
+      },
+      {
+        "category": "GKE/Autoscaling",
+        "question": "What happens if, due to some unknown issue, the Cluster Autoscaler keeps creating new nodes?"
+      },
+      {
+        "category": "Cloud Cost/Governance",
+        "question": "How do you control the cloud cost when Cluster Autoscaler keeps scaling nodes?"
+      }
     ]
   },
   {
@@ -4167,29 +4611,98 @@
     "title": "Mock Interview 74 - Python Automation and FastAPI DevOps Round",
     "focus": "Python scripting, automation design, API development, FastAPI, authentication, databases, testing, Docker, Kubernetes, observability, and production readiness",
     "questions": [
-      { "category": "Python/Automation", "question": "How have you used Python for DevOps automation in real projects?" },
-      { "category": "Python/Automation", "question": "How would you design a Python script to automate repeated cloud or Kubernetes operational tasks?" },
-      { "category": "Python/Automation", "question": "How do you handle errors, retries, logging, and exit codes in production Python automation?" },
-      { "category": "Python/Automation", "question": "When would you choose Python over Bash for automation?" },
-      { "category": "Python/Automation", "question": "How would you securely handle credentials and secrets in a Python automation script?" },
-      { "category": "Python/Automation", "question": "How do you make Python automation idempotent?" },
-      { "category": "Python/Automation", "question": "How would you schedule and run Python automation in production?" },
-      { "category": "Python/Automation", "question": "How would you package and deploy a Python automation tool for a team?" },
-      { "category": "FastAPI", "question": "What is FastAPI and why would you choose it for backend APIs?" },
-      { "category": "FastAPI", "question": "How do you create a basic GET and POST API in FastAPI?" },
-      { "category": "FastAPI/Validation", "question": "How does request validation work in FastAPI?" },
-      { "category": "FastAPI/Auth", "question": "How would you implement authentication and authorization in a FastAPI application?" },
-      { "category": "FastAPI/Database", "question": "How does a FastAPI application read and write data to a database?" },
-      { "category": "FastAPI/Async", "question": "What is the difference between sync and async endpoints in FastAPI?" },
-      { "category": "FastAPI/Testing", "question": "How would you test a FastAPI application?" },
-      { "category": "FastAPI/Docker", "question": "How would you containerize and run a FastAPI application using Docker?" },
-      { "category": "FastAPI/Kubernetes", "question": "How would you deploy a FastAPI application on Kubernetes?" },
-      { "category": "FastAPI/Observability", "question": "How would you add logging, metrics, and tracing to a FastAPI application?" },
-      { "category": "FastAPI/Security", "question": "What security best practices would you follow for FastAPI APIs?" },
-      { "category": "FastAPI/Performance", "question": "How would you improve performance and scalability for a FastAPI service?" },
-      { "category": "FastAPI/CI/CD", "question": "How would you design a CI/CD pipeline for a Python FastAPI service?" },
-      { "category": "FastAPI/Troubleshooting", "question": "A FastAPI service is returning intermittent 500 errors in Kubernetes. How would you troubleshoot it?" },
-      { "category": "Python/FastAPI/System Design", "question": "Design a production-ready FastAPI service for an internal DevOps automation platform." }
+      {
+        "category": "Python/Automation",
+        "question": "How have you used Python for DevOps automation in real projects?"
+      },
+      {
+        "category": "Python/Automation",
+        "question": "How would you design a Python script to automate repeated cloud or Kubernetes operational tasks?"
+      },
+      {
+        "category": "Python/Automation",
+        "question": "How do you handle errors, retries, logging, and exit codes in production Python automation?"
+      },
+      {
+        "category": "Python/Automation",
+        "question": "When would you choose Python over Bash for automation?"
+      },
+      {
+        "category": "Python/Automation",
+        "question": "How would you securely handle credentials and secrets in a Python automation script?"
+      },
+      {
+        "category": "Python/Automation",
+        "question": "How do you make Python automation idempotent?"
+      },
+      {
+        "category": "Python/Automation",
+        "question": "How would you schedule and run Python automation in production?"
+      },
+      {
+        "category": "Python/Automation",
+        "question": "How would you package and deploy a Python automation tool for a team?"
+      },
+      {
+        "category": "FastAPI",
+        "question": "What is FastAPI and why would you choose it for backend APIs?"
+      },
+      {
+        "category": "FastAPI",
+        "question": "How do you create a basic GET and POST API in FastAPI?"
+      },
+      {
+        "category": "FastAPI/Validation",
+        "question": "How does request validation work in FastAPI?"
+      },
+      {
+        "category": "FastAPI/Auth",
+        "question": "How would you implement authentication and authorization in a FastAPI application?"
+      },
+      {
+        "category": "FastAPI/Database",
+        "question": "How does a FastAPI application read and write data to a database?"
+      },
+      {
+        "category": "FastAPI/Async",
+        "question": "What is the difference between sync and async endpoints in FastAPI?"
+      },
+      {
+        "category": "FastAPI/Testing",
+        "question": "How would you test a FastAPI application?"
+      },
+      {
+        "category": "FastAPI/Docker",
+        "question": "How would you containerize and run a FastAPI application using Docker?"
+      },
+      {
+        "category": "FastAPI/Kubernetes",
+        "question": "How would you deploy a FastAPI application on Kubernetes?"
+      },
+      {
+        "category": "FastAPI/Observability",
+        "question": "How would you add logging, metrics, and tracing to a FastAPI application?"
+      },
+      {
+        "category": "FastAPI/Security",
+        "question": "What security best practices would you follow for FastAPI APIs?"
+      },
+      {
+        "category": "FastAPI/Performance",
+        "question": "How would you improve performance and scalability for a FastAPI service?"
+      },
+      {
+        "category": "FastAPI/CI/CD",
+        "question": "How would you design a CI/CD pipeline for a Python FastAPI service?"
+      },
+      {
+        "category": "FastAPI/Troubleshooting",
+        "question": "A FastAPI service is returning intermittent 500 errors in Kubernetes. How would you troubleshoot it?"
+      },
+      {
+        "category": "Python/FastAPI/System Design",
+        "question": "Design a production-ready FastAPI service for an internal DevOps automation platform."
+      }
     ]
   },
   {
@@ -4197,33 +4710,114 @@
     "title": "Mock Interview 75 - API Development Production Round",
     "focus": "API fundamentals, REST design, authentication, authorization, database access, error handling, versioning, testing, observability, security, performance, and production troubleshooting",
     "questions": [
-      { "category": "API/Fundamentals", "question": "What is an API and why do we use APIs in modern applications?" },
-      { "category": "API/Fundamentals", "question": "What is the difference between REST API, GraphQL, and gRPC?" },
-      { "category": "API/REST", "question": "How would you design REST endpoints for a user or order management service?" },
-      { "category": "API/HTTP", "question": "What are common HTTP methods and when would you use GET, POST, PUT, PATCH, and DELETE?" },
-      { "category": "API/HTTP", "question": "What are important HTTP status codes every API developer should know?" },
-      { "category": "API/Validation", "question": "How do you validate API request payloads and query parameters?" },
-      { "category": "API/Auth", "question": "How do you implement authentication in an API?" },
-      { "category": "API/Auth", "question": "What is the difference between authentication and authorization?" },
-      { "category": "API/Auth", "question": "How do JWT tokens work in API authentication?" },
-      { "category": "API/Auth", "question": "How would you implement role-based access control for APIs?" },
-      { "category": "API/Database", "question": "How do you handle database transactions in API development?" },
-      { "category": "API/Error Handling", "question": "How should an API handle errors and return error responses?" },
-      { "category": "API/Versioning", "question": "How do you handle API versioning without breaking existing clients?" },
-      { "category": "API/Pagination", "question": "How would you implement pagination, filtering, and sorting in an API?" },
-      { "category": "API/Idempotency", "question": "What is idempotency in APIs and why is it important?" },
-      { "category": "API/Rate Limiting", "question": "How would you implement rate limiting and throttling for APIs?" },
-      { "category": "API/Security", "question": "What API security best practices would you follow in production?" },
-      { "category": "API/Testing", "question": "How would you test APIs before releasing them to production?" },
-      { "category": "API/Documentation", "question": "How do you document APIs for frontend teams and external consumers?" },
-      { "category": "API/Observability", "question": "What logs, metrics, and traces would you add to a production API?" },
-      { "category": "API/Performance", "question": "How would you improve API performance and reduce latency?" },
-      { "category": "API/Scalability", "question": "How would you design an API to handle high traffic?" },
-      { "category": "API/Deployment", "question": "How would you deploy an API using Docker and Kubernetes?" },
-      { "category": "API/CI/CD", "question": "How would you design a CI/CD pipeline for API development?" },
-      { "category": "API/Troubleshooting", "question": "An API is returning intermittent 500 errors after deployment. How would you debug it?" },
-      { "category": "API/Troubleshooting", "question": "An API latency increased suddenly in production. What would you check first?" },
-      { "category": "API/System Design", "question": "Design a production-ready API platform for internal automation tools." }
+      {
+        "category": "API/Fundamentals",
+        "question": "What is an API and why do we use APIs in modern applications?"
+      },
+      {
+        "category": "API/Fundamentals",
+        "question": "What is the difference between REST API, GraphQL, and gRPC?"
+      },
+      {
+        "category": "API/REST",
+        "question": "How would you design REST endpoints for a user or order management service?"
+      },
+      {
+        "category": "API/HTTP",
+        "question": "What are common HTTP methods and when would you use GET, POST, PUT, PATCH, and DELETE?"
+      },
+      {
+        "category": "API/HTTP",
+        "question": "What are important HTTP status codes every API developer should know?"
+      },
+      {
+        "category": "API/Validation",
+        "question": "How do you validate API request payloads and query parameters?"
+      },
+      {
+        "category": "API/Auth",
+        "question": "How do you implement authentication in an API?"
+      },
+      {
+        "category": "API/Auth",
+        "question": "What is the difference between authentication and authorization?"
+      },
+      {
+        "category": "API/Auth",
+        "question": "How do JWT tokens work in API authentication?"
+      },
+      {
+        "category": "API/Auth",
+        "question": "How would you implement role-based access control for APIs?"
+      },
+      {
+        "category": "API/Database",
+        "question": "How do you handle database transactions in API development?"
+      },
+      {
+        "category": "API/Error Handling",
+        "question": "How should an API handle errors and return error responses?"
+      },
+      {
+        "category": "API/Versioning",
+        "question": "How do you handle API versioning without breaking existing clients?"
+      },
+      {
+        "category": "API/Pagination",
+        "question": "How would you implement pagination, filtering, and sorting in an API?"
+      },
+      {
+        "category": "API/Idempotency",
+        "question": "What is idempotency in APIs and why is it important?"
+      },
+      {
+        "category": "API/Rate Limiting",
+        "question": "How would you implement rate limiting and throttling for APIs?"
+      },
+      {
+        "category": "API/Security",
+        "question": "What API security best practices would you follow in production?"
+      },
+      {
+        "category": "API/Testing",
+        "question": "How would you test APIs before releasing them to production?"
+      },
+      {
+        "category": "API/Documentation",
+        "question": "How do you document APIs for frontend teams and external consumers?"
+      },
+      {
+        "category": "API/Observability",
+        "question": "What logs, metrics, and traces would you add to a production API?"
+      },
+      {
+        "category": "API/Performance",
+        "question": "How would you improve API performance and reduce latency?"
+      },
+      {
+        "category": "API/Scalability",
+        "question": "How would you design an API to handle high traffic?"
+      },
+      {
+        "category": "API/Deployment",
+        "question": "How would you deploy an API using Docker and Kubernetes?"
+      },
+      {
+        "category": "API/CI/CD",
+        "question": "How would you design a CI/CD pipeline for API development?"
+      },
+      {
+        "category": "API/Troubleshooting",
+        "question": "An API is returning intermittent 500 errors after deployment. How would you debug it?"
+      },
+      {
+        "category": "API/Troubleshooting",
+        "question": "An API latency increased suddenly in production. What would you check first?"
+      },
+      {
+        "category": "API/System Design",
+        "question": "Design a production-ready API platform for internal automation tools."
+      }
     ]
   },
   {
@@ -4231,34 +4825,118 @@
     "title": "Mock Interview 76 - GenAI and LLMOps Production Round",
     "focus": "GenAI fundamentals, RAG, embeddings, vector databases, prompt engineering, model selection, agents, evaluation, safety, observability, cost, deployment, and LLMOps production readiness",
     "questions": [
-      { "category": "GenAI/Fundamentals", "question": "What is Generative AI and how is it different from traditional machine learning?" },
-      { "category": "GenAI/Fundamentals", "question": "What is an LLM and how does it generate responses?" },
-      { "category": "GenAI/Use Cases", "question": "What practical GenAI use cases have you seen for DevOps, SRE, or platform engineering?" },
-      { "category": "GenAI/RAG", "question": "What is RAG and why do we use it with LLM applications?" },
-      { "category": "GenAI/RAG", "question": "Explain the end-to-end flow of a RAG application." },
-      { "category": "GenAI/Embeddings", "question": "What are embeddings and why are they useful in GenAI systems?" },
-      { "category": "GenAI/Vector DB", "question": "What is a vector database and when would you use one?" },
-      { "category": "GenAI/RAG", "question": "How would you improve retrieval quality in a RAG system?" },
-      { "category": "GenAI/Prompt Engineering", "question": "What is prompt engineering and what makes a prompt production-ready?" },
-      { "category": "GenAI/Model Selection", "question": "How would you choose between OpenAI, Gemini, Claude, open-source LLMs, or self-hosted models?" },
-      { "category": "GenAI/Fine Tuning", "question": "What is the difference between RAG and fine-tuning?" },
-      { "category": "GenAI/Agents", "question": "What are AI agents and what risks do they introduce in production?" },
-      { "category": "GenAI/Tools", "question": "How does tool calling or function calling work in GenAI applications?" },
-      { "category": "GenAI/Evaluation", "question": "How would you evaluate the quality of an LLM application?" },
-      { "category": "GenAI/Hallucination", "question": "What is hallucination in LLMs and how would you reduce it?" },
-      { "category": "GenAI/Safety", "question": "What safety and guardrail controls would you add to a GenAI application?" },
-      { "category": "GenAI/Security", "question": "What are prompt injection and data leakage risks in GenAI applications?" },
-      { "category": "GenAI/Privacy", "question": "How would you protect sensitive data when using LLM APIs?" },
-      { "category": "LLMOps/Architecture", "question": "How would you design a production architecture for a GenAI chatbot using RAG?" },
-      { "category": "LLMOps/CI-CD", "question": "How would you design CI/CD for prompts, chains, and GenAI application code?" },
-      { "category": "LLMOps/Observability", "question": "What should you monitor in a production LLM application?" },
-      { "category": "LLMOps/Cost", "question": "How would you control cost for a high-traffic GenAI application?" },
-      { "category": "LLMOps/Performance", "question": "How would you reduce latency in an LLM-powered API?" },
-      { "category": "LLMOps/Reliability", "question": "How would you design fallback and resilience for LLM provider failures?" },
-      { "category": "LLMOps/Kubernetes", "question": "How would you deploy a GenAI application on Kubernetes?" },
-      { "category": "LLMOps/MLOps", "question": "How is LLMOps different from traditional MLOps?" },
-      { "category": "GenAI/Troubleshooting", "question": "A RAG chatbot is giving wrong answers from old documents. How would you troubleshoot it?" },
-      { "category": "GenAI/System Design", "question": "Design a secure internal GenAI assistant for DevOps teams to query runbooks, incidents, and Kubernetes troubleshooting steps." }
+      {
+        "category": "GenAI/Fundamentals",
+        "question": "What is Generative AI and how is it different from traditional machine learning?"
+      },
+      {
+        "category": "GenAI/Fundamentals",
+        "question": "What is an LLM and how does it generate responses?"
+      },
+      {
+        "category": "GenAI/Use Cases",
+        "question": "What practical GenAI use cases have you seen for DevOps, SRE, or platform engineering?"
+      },
+      {
+        "category": "GenAI/RAG",
+        "question": "What is RAG and why do we use it with LLM applications?"
+      },
+      {
+        "category": "GenAI/RAG",
+        "question": "Explain the end-to-end flow of a RAG application."
+      },
+      {
+        "category": "GenAI/Embeddings",
+        "question": "What are embeddings and why are they useful in GenAI systems?"
+      },
+      {
+        "category": "GenAI/Vector DB",
+        "question": "What is a vector database and when would you use one?"
+      },
+      {
+        "category": "GenAI/RAG",
+        "question": "How would you improve retrieval quality in a RAG system?"
+      },
+      {
+        "category": "GenAI/Prompt Engineering",
+        "question": "What is prompt engineering and what makes a prompt production-ready?"
+      },
+      {
+        "category": "GenAI/Model Selection",
+        "question": "How would you choose between OpenAI, Gemini, Claude, open-source LLMs, or self-hosted models?"
+      },
+      {
+        "category": "GenAI/Fine Tuning",
+        "question": "What is the difference between RAG and fine-tuning?"
+      },
+      {
+        "category": "GenAI/Agents",
+        "question": "What are AI agents and what risks do they introduce in production?"
+      },
+      {
+        "category": "GenAI/Tools",
+        "question": "How does tool calling or function calling work in GenAI applications?"
+      },
+      {
+        "category": "GenAI/Evaluation",
+        "question": "How would you evaluate the quality of an LLM application?"
+      },
+      {
+        "category": "GenAI/Hallucination",
+        "question": "What is hallucination in LLMs and how would you reduce it?"
+      },
+      {
+        "category": "GenAI/Safety",
+        "question": "What safety and guardrail controls would you add to a GenAI application?"
+      },
+      {
+        "category": "GenAI/Security",
+        "question": "What are prompt injection and data leakage risks in GenAI applications?"
+      },
+      {
+        "category": "GenAI/Privacy",
+        "question": "How would you protect sensitive data when using LLM APIs?"
+      },
+      {
+        "category": "LLMOps/Architecture",
+        "question": "How would you design a production architecture for a GenAI chatbot using RAG?"
+      },
+      {
+        "category": "LLMOps/CI-CD",
+        "question": "How would you design CI/CD for prompts, chains, and GenAI application code?"
+      },
+      {
+        "category": "LLMOps/Observability",
+        "question": "What should you monitor in a production LLM application?"
+      },
+      {
+        "category": "LLMOps/Cost",
+        "question": "How would you control cost for a high-traffic GenAI application?"
+      },
+      {
+        "category": "LLMOps/Performance",
+        "question": "How would you reduce latency in an LLM-powered API?"
+      },
+      {
+        "category": "LLMOps/Reliability",
+        "question": "How would you design fallback and resilience for LLM provider failures?"
+      },
+      {
+        "category": "LLMOps/Kubernetes",
+        "question": "How would you deploy a GenAI application on Kubernetes?"
+      },
+      {
+        "category": "LLMOps/MLOps",
+        "question": "How is LLMOps different from traditional MLOps?"
+      },
+      {
+        "category": "GenAI/Troubleshooting",
+        "question": "A RAG chatbot is giving wrong answers from old documents. How would you troubleshoot it?"
+      },
+      {
+        "category": "GenAI/System Design",
+        "question": "Design a secure internal GenAI assistant for DevOps teams to query runbooks, incidents, and Kubernetes troubleshooting steps."
+      }
     ]
   },
   {
@@ -4266,78 +4944,294 @@
     "title": "Mock Interview 77 - Senior DevOps, GCP, Kubernetes and Terraform Production Round",
     "focus": "Production troubleshooting, Jenkins and CI/CD design, GCP architecture, Kubernetes operations, Docker, Terraform, observability, Linux, Python, Git, Argo CD, incident response, and security",
     "questions": [
-      { "category": "CI/CD/Jenkins", "question": "Explain your Jenkins pipeline architecture." },
-      { "category": "CI/CD/Jenkins", "question": "What stages do you include in your CI/CD pipeline?" },
-      { "category": "CI/CD/Jenkins", "question": "How do you integrate third-party tools like Prisma Cloud, Stream Security, or Datadog into Jenkins?" },
-      { "category": "CI/CD/Jenkins", "question": "What is a multi-stage Jenkins pipeline?" },
-      { "category": "CI/CD/Troubleshooting", "question": "Your Jenkins pipeline suddenly starts failing after hundreds of successful builds. How do you troubleshoot it?" },
-      { "category": "CI/CD/Troubleshooting", "question": "Where do you start troubleshooting—a cloud service, the application, or Jenkins?" },
-      { "category": "CI/CD/System Design", "question": "Design a complete CI/CD pipeline for a Java microservices application from code merge to production." },
-      { "category": "CI/CD/Jenkins", "question": "Would you use a Scripted Pipeline or Declarative Pipeline? Why?" },
-      { "category": "CI/CD/Jenkins", "question": "What is a Jenkinsfile?" },
-      { "category": "CI/CD/Jenkins", "question": "Which type of pipeline is called a Jenkinsfile?" },
-      { "category": "GCP/Experience", "question": "How would you rate yourself in GCP out of 10?" },
-      { "category": "GCP/Compute Engine", "question": "What are the advantages of Compute Engine over traditional virtual machines?" },
-      { "category": "GCP/Compute Engine", "question": "What machine families are available in Compute Engine?" },
-      { "category": "GCP/Troubleshooting", "question": "A production VM becomes unreachable. How do you troubleshoot it?" },
-      { "category": "GCP/Disaster Recovery", "question": "If an entire GCP region goes down, what is your disaster recovery strategy?" },
-      { "category": "GCP/Security", "question": "How would you improve security in GCP?" },
-      { "category": "GCP/Networking", "question": "A VM in VPC-A cannot communicate with a VM in VPC-B. How do you troubleshoot it?" },
-      { "category": "GCP/Performance", "question": "CPU utilization is only 20%, but application latency has doubled. How do you investigate it?" },
-      { "category": "GCP/Architecture", "question": "Compare Cloud Run, GKE, Compute Engine, and App Engine." },
-      { "category": "Kubernetes/Networking", "question": "What are the Kubernetes Service types?" },
-      { "category": "Kubernetes/Troubleshooting", "question": "A Service is not routing traffic to the correct Pod. How do you troubleshoot it?" },
-      { "category": "Kubernetes/Architecture", "question": "Explain the Kubernetes architecture." },
-      { "category": "Kubernetes/Architecture", "question": "Which components communicate with each other in Kubernetes?" },
-      { "category": "Kubernetes/Configuration", "question": "Where do ConfigMaps and Secrets fit into the Kubernetes architecture?" },
-      { "category": "Kubernetes/Deployment", "question": "What deployment strategies are available in Kubernetes?" },
-      { "category": "Kubernetes/Deployment", "question": "Which deployment strategy do you prefer in production and why?" },
-      { "category": "Kubernetes/Autoscaling", "question": "Explain Horizontal Pod Autoscaler (HPA)." },
-      { "category": "Kubernetes/Autoscaling", "question": "Explain Vertical Pod Autoscaler (VPA)." },
-      { "category": "Kubernetes/Troubleshooting", "question": "Pods are getting killed automatically. How do you determine whether it’s OOMKilled, node resource pressure, or another issue?" },
-      { "category": "Kubernetes/Incident Response", "question": "Multiple pods are in CrashLoopBackOff. How do you restore production quickly?" },
-      { "category": "Docker/Dockerfile", "question": "Name the common Dockerfile instructions." },
-      { "category": "Docker/Security", "question": "How do you scan Docker images for vulnerabilities?" },
-      { "category": "Docker/Build", "question": "What is a multi-stage Docker build?" },
-      { "category": "Docker/Runtime", "question": "Do Docker containers have separate kernels or do they share the host kernel?" },
-      { "category": "Docker/Runtime", "question": "How does a container communicate with the Linux kernel?" },
-      { "category": "Terraform/Architecture", "question": "Design a multi-cloud deployment using Terraform." },
-      { "category": "Terraform/Fundamentals", "question": "What are the basic Terraform commands?" },
-      { "category": "Terraform/State", "question": "What happens if the S3 bucket storing the Terraform state is accidentally deleted?" },
-      { "category": "Terraform/State", "question": "If the Terraform state becomes very large, how do you manage it?" },
-      { "category": "Terraform/Modules", "question": "Did you create Terraform modules from scratch?" },
-      { "category": "Terraform/Experience", "question": "How many Terraform services/resources have you worked on?" },
-      { "category": "Terraform/State", "question": "Where do you prefer to store Terraform state?" },
-      { "category": "Observability/Architecture", "question": "How would you design a monitoring solution for microservices?" },
-      { "category": "Observability/Fundamentals", "question": "What is the difference between monitoring and observability?" },
-      { "category": "Observability/Experience", "question": "Have you used Prometheus and Grafana?" },
-      { "category": "Observability/Deployment", "question": "How do you deploy Prometheus and Grafana?" },
-      { "category": "Observability/Metrics", "question": "How do you expose application metrics to Prometheus?" },
-      { "category": "Observability/Alerting", "question": "How do you configure alerts?" },
-      { "category": "Linux/Security", "question": "Why do we use sudo instead of logging in as the root user?" },
-      { "category": "Linux/Permissions", "question": "Explain Linux file permissions." },
-      { "category": "Linux/Permissions", "question": "Why should we avoid 777 permissions?" },
-      { "category": "Linux/Security", "question": "Why do we have both /etc/passwd and /etc/shadow?" },
-      { "category": "Linux/Scripting", "question": "Write a shell script to find files with 777 permissions." },
-      { "category": "Python/DevOps", "question": "How have you used Python in DevOps?" },
-      { "category": "Python/Automation", "question": "Write a Python script to upload a file to an S3 bucket." },
-      { "category": "Git/Fundamentals", "question": "Name the common Git commands you use." },
-      { "category": "Git/Branches", "question": "How do you clone only a single branch from a repository?" },
-      { "category": "Git/Workflow", "question": "What is git cherry-pick?" },
-      { "category": "Git/Fundamentals", "question": "What is the difference between git clone, git fetch, and git pull?" },
-      { "category": "Argo CD/Experience", "question": "Have you worked with Argo CD?" },
-      { "category": "Argo CD/GitOps", "question": "What is GitOps?" },
-      { "category": "Argo CD/Experience", "question": "What is your hands-on experience with Argo CD?" },
-      { "category": "Production Support/Incident Response", "question": "How do you handle a production incident?" },
-      { "category": "Production Support/Process", "question": "Do you log in directly to production servers, or do you follow an incident management process?" },
-      { "category": "Production Support/Communication", "question": "How do you communicate during a Sev-1 incident?" },
-      { "category": "Security/Application", "question": "How do you improve application security in production?" },
-      { "category": "Security/Secrets", "question": "How do you manage secrets securely?" },
-      { "category": "Security/Containers", "question": "How do you secure Docker images?" },
-      { "category": "HR/Closing", "question": "Do you have any questions for us?" },
-      { "category": "HR/Closing", "question": "What kind of role are you looking for?" },
-      { "category": "HR/Closing", "question": "Do you have any feedback for us?" },
-      { "category": "HR/Closing", "question": "Is there anything else you’d like to ask?" },
+      {
+        "category": "CI/CD/Jenkins",
+        "question": "Explain your Jenkins pipeline architecture."
+      },
+      {
+        "category": "CI/CD/Jenkins",
+        "question": "What stages do you include in your CI/CD pipeline?"
+      },
+      {
+        "category": "CI/CD/Jenkins",
+        "question": "How do you integrate third-party tools like Prisma Cloud, Stream Security, or Datadog into Jenkins?"
+      },
+      {
+        "category": "CI/CD/Jenkins",
+        "question": "What is a multi-stage Jenkins pipeline?"
+      },
+      {
+        "category": "CI/CD/Troubleshooting",
+        "question": "Your Jenkins pipeline suddenly starts failing after hundreds of successful builds. How do you troubleshoot it?"
+      },
+      {
+        "category": "CI/CD/Troubleshooting",
+        "question": "Where do you start troubleshooting—a cloud service, the application, or Jenkins?"
+      },
+      {
+        "category": "CI/CD/System Design",
+        "question": "Design a complete CI/CD pipeline for a Java microservices application from code merge to production."
+      },
+      {
+        "category": "CI/CD/Jenkins",
+        "question": "Would you use a Scripted Pipeline or Declarative Pipeline? Why?"
+      },
+      {
+        "category": "CI/CD/Jenkins",
+        "question": "What is a Jenkinsfile?"
+      },
+      {
+        "category": "CI/CD/Jenkins",
+        "question": "Which type of pipeline is called a Jenkinsfile?"
+      },
+      {
+        "category": "GCP/Experience",
+        "question": "How would you rate yourself in GCP out of 10?"
+      },
+      {
+        "category": "GCP/Compute Engine",
+        "question": "What are the advantages of Compute Engine over traditional virtual machines?"
+      },
+      {
+        "category": "GCP/Compute Engine",
+        "question": "What machine families are available in Compute Engine?"
+      },
+      {
+        "category": "GCP/Troubleshooting",
+        "question": "A production VM becomes unreachable. How do you troubleshoot it?"
+      },
+      {
+        "category": "GCP/Disaster Recovery",
+        "question": "If an entire GCP region goes down, what is your disaster recovery strategy?"
+      },
+      {
+        "category": "GCP/Security",
+        "question": "How would you improve security in GCP?"
+      },
+      {
+        "category": "GCP/Networking",
+        "question": "A VM in VPC-A cannot communicate with a VM in VPC-B. How do you troubleshoot it?"
+      },
+      {
+        "category": "GCP/Performance",
+        "question": "CPU utilization is only 20%, but application latency has doubled. How do you investigate it?"
+      },
+      {
+        "category": "GCP/Architecture",
+        "question": "Compare Cloud Run, GKE, Compute Engine, and App Engine."
+      },
+      {
+        "category": "Kubernetes/Networking",
+        "question": "What are the Kubernetes Service types?"
+      },
+      {
+        "category": "Kubernetes/Troubleshooting",
+        "question": "A Service is not routing traffic to the correct Pod. How do you troubleshoot it?"
+      },
+      {
+        "category": "Kubernetes/Architecture",
+        "question": "Explain the Kubernetes architecture."
+      },
+      {
+        "category": "Kubernetes/Architecture",
+        "question": "Which components communicate with each other in Kubernetes?"
+      },
+      {
+        "category": "Kubernetes/Configuration",
+        "question": "Where do ConfigMaps and Secrets fit into the Kubernetes architecture?"
+      },
+      {
+        "category": "Kubernetes/Deployment",
+        "question": "What deployment strategies are available in Kubernetes?"
+      },
+      {
+        "category": "Kubernetes/Deployment",
+        "question": "Which deployment strategy do you prefer in production and why?"
+      },
+      {
+        "category": "Kubernetes/Autoscaling",
+        "question": "Explain Horizontal Pod Autoscaler (HPA)."
+      },
+      {
+        "category": "Kubernetes/Autoscaling",
+        "question": "Explain Vertical Pod Autoscaler (VPA)."
+      },
+      {
+        "category": "Kubernetes/Troubleshooting",
+        "question": "Pods are getting killed automatically. How do you determine whether it’s OOMKilled, node resource pressure, or another issue?"
+      },
+      {
+        "category": "Kubernetes/Incident Response",
+        "question": "Multiple pods are in CrashLoopBackOff. How do you restore production quickly?"
+      },
+      {
+        "category": "Docker/Dockerfile",
+        "question": "Name the common Dockerfile instructions."
+      },
+      {
+        "category": "Docker/Security",
+        "question": "How do you scan Docker images for vulnerabilities?"
+      },
+      {
+        "category": "Docker/Build",
+        "question": "What is a multi-stage Docker build?"
+      },
+      {
+        "category": "Docker/Runtime",
+        "question": "Do Docker containers have separate kernels or do they share the host kernel?"
+      },
+      {
+        "category": "Docker/Runtime",
+        "question": "How does a container communicate with the Linux kernel?"
+      },
+      {
+        "category": "Terraform/Architecture",
+        "question": "Design a multi-cloud deployment using Terraform."
+      },
+      {
+        "category": "Terraform/Fundamentals",
+        "question": "What are the basic Terraform commands?"
+      },
+      {
+        "category": "Terraform/State",
+        "question": "What happens if the S3 bucket storing the Terraform state is accidentally deleted?"
+      },
+      {
+        "category": "Terraform/State",
+        "question": "If the Terraform state becomes very large, how do you manage it?"
+      },
+      {
+        "category": "Terraform/Modules",
+        "question": "Did you create Terraform modules from scratch?"
+      },
+      {
+        "category": "Terraform/Experience",
+        "question": "How many Terraform services/resources have you worked on?"
+      },
+      {
+        "category": "Terraform/State",
+        "question": "Where do you prefer to store Terraform state?"
+      },
+      {
+        "category": "Observability/Architecture",
+        "question": "How would you design a monitoring solution for microservices?"
+      },
+      {
+        "category": "Observability/Fundamentals",
+        "question": "What is the difference between monitoring and observability?"
+      },
+      {
+        "category": "Observability/Experience",
+        "question": "Have you used Prometheus and Grafana?"
+      },
+      {
+        "category": "Observability/Deployment",
+        "question": "How do you deploy Prometheus and Grafana?"
+      },
+      {
+        "category": "Observability/Metrics",
+        "question": "How do you expose application metrics to Prometheus?"
+      },
+      {
+        "category": "Observability/Alerting",
+        "question": "How do you configure alerts?"
+      },
+      {
+        "category": "Linux/Security",
+        "question": "Why do we use sudo instead of logging in as the root user?"
+      },
+      {
+        "category": "Linux/Permissions",
+        "question": "Explain Linux file permissions."
+      },
+      {
+        "category": "Linux/Permissions",
+        "question": "Why should we avoid 777 permissions?"
+      },
+      {
+        "category": "Linux/Security",
+        "question": "Why do we have both /etc/passwd and /etc/shadow?"
+      },
+      {
+        "category": "Linux/Scripting",
+        "question": "Write a shell script to find files with 777 permissions."
+      },
+      {
+        "category": "Python/DevOps",
+        "question": "How have you used Python in DevOps?"
+      },
+      {
+        "category": "Python/Automation",
+        "question": "Write a Python script to upload a file to an S3 bucket."
+      },
+      {
+        "category": "Git/Fundamentals",
+        "question": "Name the common Git commands you use."
+      },
+      {
+        "category": "Git/Branches",
+        "question": "How do you clone only a single branch from a repository?"
+      },
+      {
+        "category": "Git/Workflow",
+        "question": "What is git cherry-pick?"
+      },
+      {
+        "category": "Git/Fundamentals",
+        "question": "What is the difference between git clone, git fetch, and git pull?"
+      },
+      {
+        "category": "Argo CD/Experience",
+        "question": "Have you worked with Argo CD?"
+      },
+      {
+        "category": "Argo CD/GitOps",
+        "question": "What is GitOps?"
+      },
+      {
+        "category": "Argo CD/Experience",
+        "question": "What is your hands-on experience with Argo CD?"
+      },
+      {
+        "category": "Production Support/Incident Response",
+        "question": "How do you handle a production incident?"
+      },
+      {
+        "category": "Production Support/Process",
+        "question": "Do you log in directly to production servers, or do you follow an incident management process?"
+      },
+      {
+        "category": "Production Support/Communication",
+        "question": "How do you communicate during a Sev-1 incident?"
+      },
+      {
+        "category": "Security/Application",
+        "question": "How do you improve application security in production?"
+      },
+      {
+        "category": "Security/Secrets",
+        "question": "How do you manage secrets securely?"
+      },
+      {
+        "category": "Security/Containers",
+        "question": "How do you secure Docker images?"
+      },
+      {
+        "category": "HR/Closing",
+        "question": "Do you have any questions for us?"
+      },
+      {
+        "category": "HR/Closing",
+        "question": "What kind of role are you looking for?"
+      },
+      {
+        "category": "HR/Closing",
+        "question": "Do you have any feedback for us?"
+      },
+      {
+        "category": "HR/Closing",
+        "question": "Is there anything else you’d like to ask?"
+      },
       {
         "category": "Python/Debugging",
         "question": "Debug and complete the following Python script intended to upload a local file to an S3 bucket. Identify the syntax, naming, path, object-key, exception-handling, and AWS credential issues; then provide a production-safe version.\n\nImport boto3\nFrom botocore.exceptions import clientError\n\ns3_client = boto3.client(“s3”)\nlocal_file_path = “/c/data/”\nbcuket_name = “swapnilAkhi”\ns3_object_name = ““"
@@ -4345,6 +5239,492 @@
       {
         "category": "Linux/Shell Debugging",
         "question": "Debug and improve the following shell script intended to find regular files with permissions exactly 777. Explain the quoting, variable naming, permission-mode, error-handling, and filesystem-scope considerations.\n\n#!/bin/bash\n\nSearch_path=“/”\nfind “$Search_path” -type f -perm 777 2>/dev/null"
+      }
+    ]
+  },
+  {
+    "id": "set-78",
+    "title": "Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive",
+    "focus": "Terraform provider internals, state and for_each mechanics, module refactoring, AWS Layer 4/7 load balancing, Route53 resolvers, VPC peering, RDS automation, and Linux fundamentals (RAID, mounting, troubleshooting)",
+    "questions": [
+      {
+        "category": "Terraform",
+        "question": "How does Terraform communicate with cloud providers?"
+      },
+      {
+        "category": "Terraform",
+        "question": "What is the purpose of a provider in Terraform?"
+      },
+      {
+        "category": "Terraform",
+        "question": "What is the difference between a resource and a data source?"
+      },
+      {
+        "category": "Terraform",
+        "question": "What are input variables, local values, and output values?"
+      },
+      {
+        "category": "Terraform",
+        "question": "What are the data types supported in Terraform?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Can a list be passed as an input variable?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Can a map be passed as an input variable?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Can a for expression iterate over a list?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Explain the following expression:\nfor_each = {\n  for record in var.records :\n  \"${record.name}-${record.type}\" => record\n}"
+      },
+      {
+        "category": "Terraform",
+        "question": "What is the purpose of:\n\"${record.name}-${record.type}\" => record"
+      },
+      {
+        "category": "Terraform",
+        "question": "Why do we concatenate the record name and record type?"
+      },
+      {
+        "category": "Terraform",
+        "question": "How does Terraform store each resource's metadata?"
+      },
+      {
+        "category": "Terraform",
+        "question": "How are resources stored in the Terraform state file when using for_each?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Can you explain the alias block (or SOA if referring to DNS)?"
+      },
+      {
+        "category": "Terraform",
+        "question": "What is the purpose of terraform import?"
+      },
+      {
+        "category": "Terraform",
+        "question": "During code restructuring, why don't we use terraform import?"
+      },
+      {
+        "category": "Terraform",
+        "question": "How do you modularize Terraform code without destroying existing resources?"
+      },
+      {
+        "category": "Terraform",
+        "question": "What precautions do you take while modularizing Terraform?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Why do outputs and variable mappings need to be updated during module refactoring?"
+      },
+      {
+        "category": "Terraform",
+        "question": "What happens if a resource is removed from Terraform code only?"
+      },
+      {
+        "category": "Terraform",
+        "question": "What happens if a resource is removed from both the code and the state?"
+      },
+      {
+        "category": "Terraform",
+        "question": "How would you optimize a Terraform pipeline if even a DNS change takes a long time?"
+      },
+      {
+        "category": "Terraform Coding",
+        "question": "Create multiple Route53 DNS records using for_each."
+      },
+      {
+        "category": "Terraform Coding",
+        "question": "Explain every line of the for_each map comprehension."
+      },
+      {
+        "category": "Terraform Coding",
+        "question": "Explain how the DNS records are stored in Terraform state."
+      },
+      {
+        "category": "Terraform Coding",
+        "question": "Explain the key used in for_each."
+      },
+      {
+        "category": "Terraform Coding",
+        "question": "Fill the missing vpc_id reference in the given Terraform code."
+      },
+      {
+        "category": "Terraform Coding",
+        "question": "Complete main.tf using the given variables."
+      },
+      {
+        "category": "AWS Networking",
+        "question": "Layer 4 vs Layer 7 Load Balancer."
+      },
+      {
+        "category": "AWS Networking",
+        "question": "Which load balancer supports SSL termination?"
+      },
+      {
+        "category": "AWS Networking",
+        "question": "What backends can be attached to a Layer 7 Load Balancer?"
+      },
+      {
+        "category": "AWS Networking",
+        "question": "What is an SSL certificate?"
+      },
+      {
+        "category": "AWS Networking",
+        "question": "How do you obtain an SSL certificate?"
+      },
+      {
+        "category": "AWS Networking",
+        "question": "What information is required to obtain an SSL certificate?"
+      },
+      {
+        "category": "AWS Networking",
+        "question": "Design a three-tier application on AWS."
+      },
+      {
+        "category": "AWS Networking",
+        "question": "Explain Route53 Resolver Inbound Endpoint."
+      },
+      {
+        "category": "AWS Networking",
+        "question": "Explain Route53 Resolver Outbound Endpoint."
+      },
+      {
+        "category": "AWS Networking",
+        "question": "Two VPCs need communication. How will you establish connectivity?"
+      },
+      {
+        "category": "AWS Networking",
+        "question": "What are the limitations of VPC Peering?"
+      },
+      {
+        "category": "AWS Infrastructure",
+        "question": "Suppose an Auto Scaling Group has 10 instances behind a Load Balancer, but the application is inaccessible. How do you troubleshoot?"
+      },
+      {
+        "category": "AWS Infrastructure",
+        "question": "What does \"Connection Reset by Peer\" mean?"
+      },
+      {
+        "category": "AWS Infrastructure",
+        "question": "If the application is healthy, what else could cause Connection Reset by Peer?"
+      },
+      {
+        "category": "AWS RDS",
+        "question": "Multiple RDS instances have multiple Security Groups. Add one inbound rule to all of them."
+      },
+      {
+        "category": "AWS RDS",
+        "question": "Those resources are not managed by Terraform. How would you automate it?"
+      },
+      {
+        "category": "AWS RDS",
+        "question": "How would you discover all the required RDS instances?"
+      },
+      {
+        "category": "Kubernetes/Terraform",
+        "question": "Can Terraform deploy resources to Kubernetes?"
+      },
+      {
+        "category": "Kubernetes/Terraform",
+        "question": "How does Terraform communicate with Kubernetes?"
+      },
+      {
+        "category": "Kubernetes/Terraform",
+        "question": "Can Terraform manage Helm charts?"
+      },
+      {
+        "category": "Observability/Datadog",
+        "question": "Can Terraform manage Datadog configurations?"
+      },
+      {
+        "category": "Observability/Datadog",
+        "question": "Can Terraform configure alerts?"
+      },
+      {
+        "category": "Observability/Datadog",
+        "question": "Can Terraform configure dashboards?"
+      },
+      {
+        "category": "Observability/Datadog",
+        "question": "How does Terraform authenticate to Datadog?"
+      },
+      {
+        "category": "Observability/Datadog",
+        "question": "How are Datadog API credentials passed during CI/CD?"
+      },
+      {
+        "category": "Linux",
+        "question": "What is RAID?"
+      },
+      {
+        "category": "Linux",
+        "question": "Explain RAID 0."
+      },
+      {
+        "category": "Linux",
+        "question": "Explain RAID 1."
+      },
+      {
+        "category": "Linux",
+        "question": "Explain RAID 5."
+      },
+      {
+        "category": "Linux",
+        "question": "Explain RAID 10."
+      },
+      {
+        "category": "Linux",
+        "question": "What does mounting a filesystem mean?"
+      },
+      {
+        "category": "Linux",
+        "question": "Which commands are used to mount a filesystem?"
+      },
+      {
+        "category": "Linux",
+        "question": "What happens after reboot if you only use the mount command?"
+      },
+      {
+        "category": "Linux",
+        "question": "How do you make a filesystem mount permanent?"
+      },
+      {
+        "category": "Linux",
+        "question": "How do you troubleshoot a crashed Linux node?"
+      },
+      {
+        "category": "Linux",
+        "question": "How do you check whether a port is open from another server?"
+      },
+      {
+        "category": "Linux",
+        "question": "How do you measure network bandwidth between two Linux servers?"
+      },
+      {
+        "category": "Terraform",
+        "question": "How does Terraform authenticate with cloud providers?"
+      },
+      {
+        "category": "Terraform",
+        "question": "How does Terraform communicate with provider plugins?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Explain the Terraform workflow (init, plan, apply)."
+      },
+      {
+        "category": "System Design",
+        "question": "Design a three-tier application with 3 web servers, 2 application servers, a database, and a load balancer."
+      },
+      {
+        "category": "System Design",
+        "question": "Explain the deployment flow."
+      },
+      {
+        "category": "System Design",
+        "question": "Explain the network flow."
+      },
+      {
+        "category": "System Design",
+        "question": "Explain the security groups."
+      },
+      {
+        "category": "System Design",
+        "question": "Explain the deployment pipeline."
+      }
+    ]
+  },
+  {
+    "id": "set-79",
+    "title": "Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure",
+    "focus": "GCP architecture ownership, production GKE day-two operations, incident root-causing, cross-cluster networking, observability and SLI/SLO/SLA design, CI/CD from commit to production, GPU/TPU and Vertex AI infrastructure, and AI-assisted engineering",
+    "questions": [
+      {
+        "category": "GCP Architecture",
+        "question": "Tell me about the most complex GCP environment you have owned or significantly contributed to."
+      },
+      {
+        "category": "GCP Architecture",
+        "question": "What was the overall architecture of that environment?"
+      },
+      {
+        "category": "GCP Architecture",
+        "question": "What GCP native services did you design around?"
+      },
+      {
+        "category": "GCP Architecture",
+        "question": "How did you handle multi-tenancy or isolation between teams or workloads?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "Walk me through how you administered a production GKE cluster from initial setup through day-two operations."
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "How did you handle node pool upgrades with zero or minimal downtime?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "What autoscaling strategy did you implement in GKE, and why?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "Can you describe a time when a human error or workload caused a production issue?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "How did you identify the root cause of that production issue?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "How did you resolve the issue?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "What preventive measures did you implement to avoid similar incidents in the future?"
+      },
+      {
+        "category": "Kubernetes Networking",
+        "question": "How did you manage networking within a Kubernetes cluster?"
+      },
+      {
+        "category": "Kubernetes Networking",
+        "question": "How did you manage networking between multiple Kubernetes clusters?"
+      },
+      {
+        "category": "Observability",
+        "question": "How did you implement end-to-end observability for production workloads?"
+      },
+      {
+        "category": "Observability",
+        "question": "What metrics did you monitor?"
+      },
+      {
+        "category": "Observability",
+        "question": "What logging strategy did you implement?"
+      },
+      {
+        "category": "Observability",
+        "question": "How did you implement distributed tracing?"
+      },
+      {
+        "category": "SRE/Reliability",
+        "question": "How do you define an SLI?"
+      },
+      {
+        "category": "SRE/Reliability",
+        "question": "How do you define an SLO?"
+      },
+      {
+        "category": "SRE/Reliability",
+        "question": "How do you define an SLA?"
+      },
+      {
+        "category": "SRE/Reliability",
+        "question": "Give a concrete example of an SLA/SLO that you implemented."
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How did you build your CI/CD pipeline for infrastructure and applications?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Walk me through the pipeline from developer commit to production deployment."
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "What CI/CD tools did you use?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How did you handle secrets and environment variables in the pipeline?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How did you version your application artifacts and Docker images?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How did you implement rollback for applications?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How did you implement rollback for infrastructure changes?"
+      },
+      {
+        "category": "MLOps/AI Infrastructure",
+        "question": "Have you provisioned GPU or TPU node pools?"
+      },
+      {
+        "category": "MLOps/AI Infrastructure",
+        "question": "Have you worked with Vertex AI endpoints or similar AI infrastructure?"
+      },
+      {
+        "category": "MLOps/AI Infrastructure",
+        "question": "How did you provision GPU-enabled GKE node pools?"
+      },
+      {
+        "category": "MLOps/AI Infrastructure",
+        "question": "How did you manage GPU scheduling and resource allocation?"
+      },
+      {
+        "category": "MLOps/AI Infrastructure",
+        "question": "How did you control GPU infrastructure costs?"
+      },
+      {
+        "category": "MLOps/AI Infrastructure",
+        "question": "How did you deploy and manage models using Vertex AI?"
+      },
+      {
+        "category": "MLOps/AI Infrastructure",
+        "question": "What metrics did you monitor for AI/ML infrastructure?"
+      },
+      {
+        "category": "MLOps/AI Infrastructure",
+        "question": "If a data scientist or ML engineer asks you to productionize a model, what would be your first question?"
+      },
+      {
+        "category": "MLOps/AI Infrastructure",
+        "question": "What additional information would you gather before deploying the model?"
+      },
+      {
+        "category": "MLOps/AI Infrastructure",
+        "question": "What infrastructure would you provision for a production ML model?"
+      },
+      {
+        "category": "AI Engineering",
+        "question": "Are you using any AI tools in your day-to-day software/systems engineering work?"
+      },
+      {
+        "category": "AI Engineering",
+        "question": "How do you use AI tools in your daily workflow?"
+      },
+      {
+        "category": "AI Engineering",
+        "question": "Can you give a practical example of how AI improved your productivity?"
+      },
+      {
+        "category": "AI Engineering",
+        "question": "How do you ensure AI-generated code or recommendations are safe for production?"
+      },
+      {
+        "category": "AI Engineering",
+        "question": "How do you think the Platform Engineer/DevOps role will evolve as AI becomes more embedded in software systems?"
+      },
+      {
+        "category": "AI Engineering",
+        "question": "What new responsibilities do you think Platform Engineers will have in AI-driven organizations?"
+      },
+      {
+        "category": "AI Engineering",
+        "question": "Do you think AI will replace DevOps engineers, or how will it change the role?"
       }
     ]
   }

@@ -141,6 +141,14 @@ def add_qa(number, entry):
         cat_run.italic = True
         cat_run.font.size = Pt(9)
         cat_run.font.color.rgb = RGBColor(0x88, 0x88, 0x88)
+    if entry.get("dateAdded"):
+        date_para = doc.add_paragraph()
+        date_para.paragraph_format.space_before = Pt(0)
+        date_para.paragraph_format.space_after = Pt(2)
+        date_run = date_para.add_run(f"Added: {entry['dateAdded']}")
+        date_run.italic = True
+        date_run.font.size = Pt(8.5)
+        date_run.font.color.rgb = RGBColor(0x2A, 0x78, 0xD6)
     a_para = doc.add_paragraph()
     a_para.paragraph_format.space_after = Pt(8)
     a_para.paragraph_format.left_indent = Inches(0.15)
@@ -148,7 +156,7 @@ def add_qa(number, entry):
     a_run.font.size = Pt(10.5)
 
 # ---- Part 1: Fixed Mock Interview Sets, in order 1..77 ----
-add_heading("Part 1 — Fixed Mock Interview Rounds (1–77)", level=1)
+add_heading("Part 1 — Fixed Mock Interview Rounds (1–79)", level=1)
 doc.add_paragraph(
     "Each round is a fixed, realistic mock interview set. Use one round per practice session."
 )

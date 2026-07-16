@@ -1,7 +1,7 @@
 All Tech and Mock Interview Questions
 =====================================
 
-Total unique questions: 2947
+Total unique questions: 3065
 Sources: fixed mock interview sets, the full app question bank (GCP/DevOps/SRE, Kubernetes, Docker, Terraform, Python, Go, FastAPI, Ansible, Scripting, Coding Exercises, Debug-This-Script, LLMOps, MLOps, Technology Risk, HR/Behavioral), Technology Risk Q&A, and the 1000+ DevOps/MLOps/Kubernetes/GCP bank.
 
 
@@ -3536,3 +3536,132 @@ CI/CD & GitOps (261–360)
 2945. Jenkins shared library secrets: A shared library step needs to call an internal deployment API. How would you handle credentials inside the shared library safely, without hardcoding secrets into the library code?
 2946. Global vs @Library shared library: What is the difference between a globally trusted Jenkins shared library and one explicitly loaded with @Library('name@version') in a specific Jenkinsfile?
 2947. Jenkins shared library parameters: How would you design a shared library step so different teams can pass their own parameters (e.g. image name, namespace, environment) without copy-pasting pipeline logic?
+
+Mock Interview 78 - Terraform Internals, AWS Networking and Linux Deep Dive
+---------------------------------------------------------------------------
+2948. [Terraform] How does Terraform communicate with cloud providers?
+2949. [Terraform] What is the purpose of a provider in Terraform?
+2950. [Terraform] What is the difference between a resource and a data source?
+2951. [Terraform] What are input variables, local values, and output values?
+2952. [Terraform] What are the data types supported in Terraform?
+2953. [Terraform] Can a list be passed as an input variable?
+2954. [Terraform] Can a map be passed as an input variable?
+2955. [Terraform] Can a for expression iterate over a list?
+2956. [Terraform] Explain the following expression:
+for_each = {
+  for record in var.records :
+  "${record.name}-${record.type}" => record
+}
+2957. [Terraform] What is the purpose of:
+"${record.name}-${record.type}" => record
+2958. [Terraform] Why do we concatenate the record name and record type?
+2959. [Terraform] How does Terraform store each resource's metadata?
+2960. [Terraform] How are resources stored in the Terraform state file when using for_each?
+2961. [Terraform] Can you explain the alias block (or SOA if referring to DNS)?
+2962. [Terraform] What is the purpose of terraform import?
+2963. [Terraform] During code restructuring, why don't we use terraform import?
+2964. [Terraform] How do you modularize Terraform code without destroying existing resources?
+2965. [Terraform] What precautions do you take while modularizing Terraform?
+2966. [Terraform] Why do outputs and variable mappings need to be updated during module refactoring?
+2967. [Terraform] What happens if a resource is removed from Terraform code only?
+2968. [Terraform] What happens if a resource is removed from both the code and the state?
+2969. [Terraform] How would you optimize a Terraform pipeline if even a DNS change takes a long time?
+2970. [Terraform Coding] Create multiple Route53 DNS records using for_each.
+2971. [Terraform Coding] Explain every line of the for_each map comprehension.
+2972. [Terraform Coding] Explain how the DNS records are stored in Terraform state.
+2973. [Terraform Coding] Explain the key used in for_each.
+2974. [Terraform Coding] Fill the missing vpc_id reference in the given Terraform code.
+2975. [Terraform Coding] Complete main.tf using the given variables.
+2976. [AWS Networking] Layer 4 vs Layer 7 Load Balancer.
+2977. [AWS Networking] Which load balancer supports SSL termination?
+2978. [AWS Networking] What backends can be attached to Layer 7 Load Balancer?
+2979. [AWS Networking] What is an SSL certificate?
+2980. [AWS Networking] How do you obtain an SSL certificate?
+2981. [AWS Networking] What information is required to obtain an SSL certificate?
+2982. [AWS Networking] Design a three-tier application on AWS.
+2983. [AWS Networking] Explain Route53 Resolver Inbound Endpoint.
+2984. [AWS Networking] Explain Route53 Resolver Outbound Endpoint.
+2985. [AWS Networking] Two VPCs need communication. How will you establish connectivity?
+2986. [AWS Networking] What are the limitations of VPC Peering?
+2987. [AWS Infrastructure] Suppose an Auto Scaling Group has 10 instances behind a Load Balancer, but the application is inaccessible. How do you troubleshoot?
+2988. [AWS Infrastructure] What does Connection Reset by Peer mean?
+2989. [AWS Infrastructure] If the application is healthy, what else could cause Connection Reset by Peer?
+2990. [AWS RDS] Multiple RDS instances have multiple Security Groups. Add one inbound rule to all of them.
+2991. [AWS RDS] Those resources are not managed by Terraform. How would you automate it?
+2992. [AWS RDS] How would you discover all the required RDS instances?
+2993. [Kubernetes/Terraform] Can Terraform deploy resources to Kubernetes?
+2994. [Kubernetes/Terraform] How does Terraform communicate with Kubernetes?
+2995. [Kubernetes/Terraform] Can Terraform manage Helm charts?
+2996. [Observability/Datadog] Can Terraform manage Datadog configurations?
+2997. [Observability/Datadog] Can Terraform configure alerts?
+2998. [Observability/Datadog] Can Terraform configure dashboards?
+2999. [Observability/Datadog] How does Terraform authenticate to Datadog?
+3000. [Observability/Datadog] How are Datadog API credentials passed during CI/CD?
+3001. [Linux] What is RAID?
+3002. [Linux] Explain RAID 0.
+3003. [Linux] Explain RAID 1.
+3004. [Linux] Explain RAID 5.
+3005. [Linux] Explain RAID 10.
+3006. [Linux] What does mounting a filesystem mean?
+3007. [Linux] Which commands are used to mount a filesystem?
+3008. [Linux] What happens after reboot if you only use the mount command?
+3009. [Linux] How do you make a filesystem mount permanent?
+3010. [Linux] How do you troubleshoot a crashed Linux node?
+3011. [Linux] How do you check whether a port is open from another server?
+3012. [Linux] How do you measure network bandwidth between two Linux servers?
+3013. [Terraform] How does Terraform authenticate with cloud providers?
+3014. [Terraform] How does Terraform communicate with provider plugins?
+3015. [Terraform] Explain the Terraform workflow (init → plan → apply).
+3016. [System Design] Design a three-tier application with 3 Web Servers, 2 Application Servers, a Database, and a Load Balancer.
+3017. [System Design] Explain the deployment flow.
+3018. [System Design] Explain the network flow.
+3019. [System Design] Explain the security groups.
+3020. [System Design] Explain the deployment pipeline.
+
+Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure
+-------------------------------------------------------------------------
+3021. [GCP Architecture] Tell me about the most complex GCP environment you have owned or significantly contributed to.
+3022. [GCP Architecture] What was the overall architecture of that environment?
+3023. [GCP Architecture] What GCP native services did you design around?
+3024. [GCP Architecture] How did you handle multi-tenancy or isolation between teams or workloads?
+3025. [GKE/Kubernetes] Walk me through how you administered a production GKE cluster from initial setup through day-two operations.
+3026. [GKE/Kubernetes] How did you handle node pool upgrades with zero or minimal downtime?
+3027. [GKE/Kubernetes] What autoscaling strategy did you implement in GKE, and why?
+3028. [GKE/Kubernetes] Can you describe a time when a human error or workload caused a production issue?
+3029. [GKE/Kubernetes] How did you identify the root cause of that production issue?
+3030. [GKE/Kubernetes] How did you resolve the issue?
+3031. [GKE/Kubernetes] What preventive measures did you implement to avoid similar incidents in the future?
+3032. [Kubernetes Networking] How did you manage networking within a Kubernetes cluster?
+3033. [Kubernetes Networking] How did you manage networking between multiple Kubernetes clusters?
+3034. [Observability] How did you implement end-to-end observability for production workloads?
+3035. [Observability] What metrics did you monitor?
+3036. [Observability] What logging strategy did you implement?
+3037. [Observability] How did you implement distributed tracing?
+3038. [SRE/Reliability] How do you define an SLI?
+3039. [SRE/Reliability] How do you define an SLO?
+3040. [SRE/Reliability] How do you define an SLA?
+3041. [SRE/Reliability] Give a concrete example of an SLA/SLO that you implemented.
+3042. [CI/CD/GitOps] How did you build your CI/CD pipeline for infrastructure and applications?
+3043. [CI/CD/GitOps] Walk me through the pipeline from developer commit to production deployment.
+3044. [CI/CD/GitOps] What CI/CD tools did you use?
+3045. [CI/CD/GitOps] How did you handle secrets and environment variables in the pipeline?
+3046. [CI/CD/GitOps] How did you version your application artifacts and Docker images?
+3047. [CI/CD/GitOps] How did you implement rollback for applications?
+3048. [CI/CD/GitOps] How did you implement rollback for infrastructure changes?
+3049. [MLOps/AI Infrastructure] Have you provisioned GPU or TPU node pools?
+3050. [MLOps/AI Infrastructure] Have you worked with Vertex AI endpoints or similar AI infrastructure?
+3051. [MLOps/AI Infrastructure] How did you provision GPU-enabled GKE node pools?
+3052. [MLOps/AI Infrastructure] How did you manage GPU scheduling and resource allocation?
+3053. [MLOps/AI Infrastructure] How did you control GPU infrastructure costs?
+3054. [MLOps/AI Infrastructure] How did you deploy and manage models using Vertex AI?
+3055. [MLOps/AI Infrastructure] What metrics did you monitor for AI/ML infrastructure?
+3056. [MLOps/AI Infrastructure] If a data scientist or ML engineer asks you to productionize a model, what would be your first question?
+3057. [MLOps/AI Infrastructure] What additional information would you gather before deploying the model?
+3058. [MLOps/AI Infrastructure] What infrastructure would you provision for a production ML model?
+3059. [AI Engineering] Are you using any AI tools in your day-to-day Software/Systems Engineering work?
+3060. [AI Engineering] How do you use AI tools in your daily workflow?
+3061. [AI Engineering] Can you give a practical example of how AI improved your productivity?
+3062. [AI Engineering] How do you ensure AI-generated code or recommendations are safe for production?
+3063. [AI Engineering] How do you think the Platform Engineer/DevOps role will evolve as AI becomes more embedded in software systems?
+3064. [AI Engineering] What new responsibilities do you think Platform Engineers will have in AI-driven organizations?
+3065. [AI Engineering] Do you think AI will replace DevOps engineers, or how will it change the role?
