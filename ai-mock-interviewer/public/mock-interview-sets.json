@@ -5727,5 +5727,160 @@
         "question": "Do you think AI will replace DevOps engineers, or how will it change the role?"
       }
     ]
+  },
+  {
+    "id": "set-80",
+    "title": "Mock Interview 80 - Senior MLOps and Platform Engineer Round",
+    "focus": "DevOps-to-MLOps transition, FastAPI service design, API authentication, MLflow model registry and rollback, LLM integration and latency troubleshooting, Terraform/Ansible, multi-tenant ML platform design, ML observability, cloud cost optimization, Vertex AI vs Kubernetes, and cross-functional collaboration",
+    "questions": [
+      {
+        "category": "MLOps Experience",
+        "question": "You moved from DevOps to MLOps. How long have you been working in MLOps?"
+      },
+      {
+        "category": "MLOps Experience",
+        "question": "Can you talk about your work in MLOps?"
+      },
+      {
+        "category": "MLOps Experience",
+        "question": "Walk me through one ML application that you helped productionize."
+      },
+      {
+        "category": "FastAPI",
+        "question": "Have you built any FastAPI services?"
+      },
+      {
+        "category": "FastAPI",
+        "question": "Can you describe one FastAPI service you built?"
+      },
+      {
+        "category": "FastAPI",
+        "question": "What endpoints did you expose?"
+      },
+      {
+        "category": "FastAPI",
+        "question": "Why did you design multiple endpoints instead of just one?"
+      },
+      {
+        "category": "FastAPI",
+        "question": "How was the overall API designed?"
+      },
+      {
+        "category": "Authentication & Security",
+        "question": "How did you authenticate and authorize users of your FastAPI endpoint?"
+      },
+      {
+        "category": "Authentication & Security",
+        "question": "How did you ensure only authorized users could access the service?"
+      },
+      {
+        "category": "MLflow",
+        "question": "Where have you used MLflow?"
+      },
+      {
+        "category": "MLflow",
+        "question": "How did you use MLflow in your project?"
+      },
+      {
+        "category": "MLflow",
+        "question": "Was model versioning required?"
+      },
+      {
+        "category": "MLflow",
+        "question": "How did you implement model versioning?"
+      },
+      {
+        "category": "MLflow",
+        "question": "How did rollback work using MLflow?"
+      },
+      {
+        "category": "LLMs & AI",
+        "question": "Which LLMs have you worked with?"
+      },
+      {
+        "category": "LLMs & AI",
+        "question": "Have you integrated LLMs into your services?"
+      },
+      {
+        "category": "LLM Troubleshooting",
+        "question": "Suppose your Vertex AI LLM endpoint usually responds in 300-400 ms, but suddenly starts taking 8-10 seconds. How would you investigate the issue?"
+      },
+      {
+        "category": "Infrastructure as Code",
+        "question": "Have you worked with Terraform or Ansible?"
+      },
+      {
+        "category": "Infrastructure as Code",
+        "question": "Walk me through what you've built using Terraform."
+      },
+      {
+        "category": "Infrastructure as Code",
+        "question": "How have you used Ansible?"
+      },
+      {
+        "category": "Infrastructure as Code",
+        "question": "How do Terraform and Ansible work together in your projects?"
+      },
+      {
+        "category": "Platform Design",
+        "question": "Imagine multiple ML teams need self-service infrastructure for training and deploying models. How would you design such a platform?"
+      },
+      {
+        "category": "Platform Design",
+        "question": "How would you provide isolation between teams?"
+      },
+      {
+        "category": "Platform Design",
+        "question": "How would you allow different teams to move at different speeds?"
+      },
+      {
+        "category": "Platform Design",
+        "question": "How would you handle governance and security?"
+      },
+      {
+        "category": "Observability",
+        "question": "How would you design observability for such an ML platform?"
+      },
+      {
+        "category": "Observability",
+        "question": "From an ML inference service perspective, which observability metrics are most important?"
+      },
+      {
+        "category": "Cost Optimization",
+        "question": "Your resume mentions achieving around 20% cloud cost savings. Can you explain that project?"
+      },
+      {
+        "category": "Cost Optimization",
+        "question": "How did you identify cost optimization opportunities?"
+      },
+      {
+        "category": "Cost Optimization",
+        "question": "What specific actions resulted in the savings?"
+      },
+      {
+        "category": "Vertex AI vs Kubernetes",
+        "question": "If starting a new ML project today, would you choose Vertex AI or Kubernetes-based open-source tools?"
+      },
+      {
+        "category": "Vertex AI vs Kubernetes",
+        "question": "Why would you choose one over the other?"
+      },
+      {
+        "category": "Vertex AI vs Kubernetes",
+        "question": "What are the trade-offs between Vertex AI and Kubernetes?"
+      },
+      {
+        "category": "Collaboration & Conflict",
+        "question": "Have you ever had a disagreement with a Data Scientist or ML Engineer about deploying a model to production?"
+      },
+      {
+        "category": "Collaboration & Conflict",
+        "question": "How did you resolve that disagreement?"
+      },
+      {
+        "category": "Collaboration & Conflict",
+        "question": "What was the outcome?"
+      }
+    ]
   }
 ]

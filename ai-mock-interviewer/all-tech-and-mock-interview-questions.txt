@@ -1,7 +1,7 @@
 All Tech and Mock Interview Questions
 =====================================
 
-Total unique questions: 3065
+Total unique questions: 3102
 Sources: fixed mock interview sets, the full app question bank (GCP/DevOps/SRE, Kubernetes, Docker, Terraform, Python, Go, FastAPI, Ansible, Scripting, Coding Exercises, Debug-This-Script, LLMOps, MLOps, Technology Risk, HR/Behavioral), Technology Risk Q&A, and the 1000+ DevOps/MLOps/Kubernetes/GCP bank.
 
 
@@ -3665,3 +3665,43 @@ Mock Interview 79 - GCP Platform, GKE Operations and AI/ML Infrastructure
 3063. [AI Engineering] How do you think the Platform Engineer/DevOps role will evolve as AI becomes more embedded in software systems?
 3064. [AI Engineering] What new responsibilities do you think Platform Engineers will have in AI-driven organizations?
 3065. [AI Engineering] Do you think AI will replace DevOps engineers, or how will it change the role?
+
+Mock Interview 80 - Senior MLOps and Platform Engineer Round
+------------------------------------------------------------
+3066. [MLOps Experience] You moved from DevOps to MLOps. How long have you been working in MLOps?
+3067. [MLOps Experience] Can you talk about your work in MLOps?
+3068. [MLOps Experience] Walk me through one ML application that you helped productionize.
+3069. [FastAPI] Have you built any FastAPI services?
+3070. [FastAPI] Can you describe one FastAPI service you built?
+3071. [FastAPI] What endpoints did you expose?
+3072. [FastAPI] Why did you design multiple endpoints instead of just one?
+3073. [FastAPI] How was the overall API designed?
+3074. [Authentication & Security] How did you authenticate and authorize users of your FastAPI endpoint?
+3075. [Authentication & Security] How did you ensure only authorized users could access the service?
+3076. [MLflow] Where have you used MLflow?
+3077. [MLflow] How did you use MLflow in your project?
+3078. [MLflow] Was model versioning required?
+3079. [MLflow] How did you implement model versioning?
+3080. [MLflow] How did rollback work using MLflow?
+3081. [LLMs & AI] Which LLMs have you worked with?
+3082. [LLMs & AI] Have you integrated LLMs into your services?
+3083. [LLM Troubleshooting] Suppose your Vertex AI LLM endpoint usually responds in 300-400 ms, but suddenly starts taking 8-10 seconds. How would you investigate the issue?
+3084. [Infrastructure as Code] Have you worked with Terraform or Ansible?
+3085. [Infrastructure as Code] Walk me through what you've built using Terraform.
+3086. [Infrastructure as Code] How have you used Ansible?
+3087. [Infrastructure as Code] How do Terraform and Ansible work together in your projects?
+3088. [Platform Design] Imagine multiple ML teams need self-service infrastructure for training and deploying models. How would you design such a platform?
+3089. [Platform Design] How would you provide isolation between teams?
+3090. [Platform Design] How would you allow different teams to move at different speeds?
+3091. [Platform Design] How would you handle governance and security?
+3092. [Observability] How would you design observability for such an ML platform?
+3093. [Observability] From an ML inference service perspective, which observability metrics are most important?
+3094. [Cost Optimization] Your resume mentions achieving around 20% cloud cost savings. Can you explain that project?
+3095. [Cost Optimization] How did you identify cost optimization opportunities?
+3096. [Cost Optimization] What specific actions resulted in the savings?
+3097. [Vertex AI vs Kubernetes] If starting a new ML project today, would you choose Vertex AI or Kubernetes-based open-source tools?
+3098. [Vertex AI vs Kubernetes] Why would you choose one over the other?
+3099. [Vertex AI vs Kubernetes] What are the trade-offs between Vertex AI and Kubernetes?
+3100. [Collaboration & Conflict] Have you ever had a disagreement with a Data Scientist or ML Engineer about deploying a model to production?
+3101. [Collaboration & Conflict] How did you resolve that disagreement?
+3102. [Collaboration & Conflict] What was the outcome?

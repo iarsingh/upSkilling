@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("aimi-theme");
+          var theme = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create account - AI Mock Interviewer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="auth-body">
+    <div class="auth-shell">
+      <aside class="auth-aside">
+        <a class="auth-back-home" href="/">&larr; Back to home</a>
+        <div class="auth-aside-top">
+          <img class="brand-icon" src="/favicon.svg" alt="" aria-hidden="true">
+          <strong>AI Mock Interviewer</strong>
+        </div>
+        <div class="auth-aside-content">
+          <h2>Create your free account and start practicing today.</h2>
+          <p>Track your interview roadmap, save progress across sessions, and get structured feedback scored against a real interview bar.</p>
+          <ul class="auth-feature-list">
+            <li><span class="auth-feature-icon" aria-hidden="true">&#128196;</span> CV and JD aware question generation</li>
+            <li><span class="auth-feature-icon" aria-hidden="true">&#128202;</span> Progress history and completion tracking</li>
+            <li><span class="auth-feature-icon" aria-hidden="true">&#128274;</span> Runs on your machine - your answers stay local</li>
+          </ul>
+        </div>
+        <p class="auth-aside-foot">Open-source interview lab</p>
+      </aside>
+
+      <main class="auth-main">
+        <button class="theme-toggle auth-theme-toggle" type="button" data-action="toggle-theme" aria-pressed="false" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <span class="theme-icon theme-icon-light" aria-hidden="true">&#9728;&#65039;</span>
+          <span class="theme-icon theme-icon-dark" aria-hidden="true">&#127769;</span>
+        </button>
+        <div class="auth-card">
+          <div class="auth-card-head">
+            <p class="eyebrow">Get started</p>
+            <h1>Create your account</h1>
+            <p class="auth-sub">It takes less than a minute. No credit card, no cloud account required.</p>
+          </div>
+
+          <p class="auth-error" id="authError" role="alert"></p>
+
+          <form id="signupForm" novalidate>
+            <label class="auth-field">
+              Full name
+              <input id="name" type="text" autocomplete="name" placeholder="Your name" required>
+            </label>
+            <label class="auth-field">
+              Email
+              <input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+            </label>
+            <label class="auth-field">
+              Password
+              <input id="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" required>
+            </label>
+            <label class="auth-field">
+              Confirm password
+              <input id="confirmPassword" type="password" autocomplete="new-password" placeholder="Re-enter your password" minlength="8" required>
+            </label>
+            <button id="signupSubmit" class="primary wide" type="submit">Create account</button>
+          </form>
+
+          <p class="auth-switch">Already have an account? <a href="/signin.html">Sign in</a></p>
+        </div>
+      </main>
+    </div>
+
+    <script src="/theme.js"></script>
+    <script>
+      const form = document.querySelector("#signupForm");
+      const submitButton = document.querySelector("#signupSubmit");
+      const errorBox = document.querySelector("#authError");
+
+      function showError(message) {
+        errorBox.textContent = message;
+        errorBox.classList.add("visible");
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        errorBox.classList.remove("visible");
+
+        const password = document.querySelector("#password").value;
+        const confirmPassword = document.querySelector("#confirmPassword").value;
+        if (password !== confirmPassword) {
+          showError("Passwords do not match.");
+          return;
+        }
+        if (password.length < 8) {
+          showError("Password must be at least 8 characters.");
+          return;
+        }
+
+        submitButton.classList.add("is-busy");
+        submitButton.disabled = true;
+        try {
+          const response = await fetch("/api/auth/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "same-origin",
+            body: JSON.stringify({
+              name: document.querySelector("#name").value.trim(),
+              email: document.querySelector("#email").value.trim(),
+              password
+            })
+          });
+          const data = await response.json();
+          if (!response.ok) {
+            showError(data.error || "Could not create your account. Please try again.");
+            return;
+          }
+          window.location.href = "/session.html";
+        } catch {
+          showError("Could not reach the server. Check that it is running and try again.");
+        } finally {
+          submitButton.classList.remove("is-busy");
+          submitButton.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>

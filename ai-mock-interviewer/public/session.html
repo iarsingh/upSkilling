@@ -2,39 +2,80 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("aimi-theme");
+          var theme = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AI Mock Interviewer</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/styles.css">
   </head>
-  <body>
+  <body class="interview-page">
     <main class="shell">
-      <section class="topbar">
+      <section class="topbar session-app-header">
         <div class="brand-block">
           <p class="eyebrow">Open-source interview lab</p>
           <div class="brand-title">
             <img class="brand-icon" src="/favicon.svg" alt="" aria-hidden="true">
             <h1>AI Mock Interviewer</h1>
           </div>
-          <p class="subtitle">Real-time voice mock interviews for DevOps, SRE, Cloud, Platform, and MLOps roles.</p>
+          <p class="subtitle">Real-time voice practice for engineering interviews.</p>
         </div>
         <div class="top-actions">
-          <button id="openCommandPalette" class="ghost link-button" type="button" title="Command palette (Ctrl/Cmd + K)">&#8984;K</button>
-          <a class="ghost link-button" href="/">Home</a>
-          <button id="resetLayout" class="ghost link-button" type="button">Reset layout</button>
-          <a class="ghost link-button" href="https://github.com/iarsingh" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a class="ghost link-button" href="/admin.html">Admin report</a>
-          <div class="status" id="clockBadge">
-            <span id="clockText">--</span>
+          <div class="nav-group quick-actions">
+            <button id="openCommandPalette" class="ghost link-button small command-button" type="button" title="Command palette (Ctrl/Cmd + K)"><span>Commands</span><kbd>&#8984;K</kbd></button>
+            <a class="ghost link-button small" href="/dashboard.html">Skills dashboard</a>
+            <button id="resetLayout" class="ghost link-button small" type="button">Reset layout</button>
+            <a class="ghost link-button small" href="https://github.com/iarsingh" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="ghost link-button small coffee-button" href="https://www.buymeacoffee.com/iarsingh" target="_blank" rel="noopener noreferrer" title="Buy me a coffee">&#9749; Coffee</a>
+            <button class="theme-toggle" type="button" data-action="toggle-theme" aria-pressed="false" aria-label="Toggle dark mode" title="Toggle dark mode">
+              <span class="theme-icon theme-icon-light" aria-hidden="true">&#9728;&#65039;</span>
+              <span class="theme-icon theme-icon-dark" aria-hidden="true">&#127769;</span>
+            </button>
           </div>
-          <div class="status" id="sessionTimerBadge">
-            <span class="dot dot-brand"></span>
-            <span id="sessionTimerText">Session 00:00</span>
+
+          <div class="topbar-stats" title="All-time across your interviews">
+            <div class="topbar-stat">
+              <strong id="topbarAnswered">0</strong>
+              <span>Answered</span>
+            </div>
+            <div class="topbar-stat">
+              <strong id="topbarScore">0%</strong>
+              <span id="topbarScoreLabel">Progress</span>
+            </div>
           </div>
-          <div class="status" id="status">
-            <span class="dot"></span>
-            <span id="statusText">Checking local runtime</span>
+
+          <a class="ghost link-button small admin-report-link" href="/admin.html" data-auth-admin-only hidden><span aria-hidden="true">▦</span> Admin report</a>
+
+          <div class="nav-group status-group">
+            <div class="status" id="clockBadge">
+              <span class="status-label">Local time</span><span id="clockText">--</span>
+            </div>
+            <div class="status" id="sessionTimerBadge">
+              <span class="dot dot-brand"></span>
+              <span class="status-label">Session</span><span id="sessionTimerText">00:00</span>
+            </div>
+            <div class="status" id="status">
+              <span class="dot"></span>
+              <span class="status-label">AI runtime</span><span id="statusText">Checking local runtime</span>
+            </div>
           </div>
+
+          <div class="nav-group nav-auth" data-auth-state="in" hidden>
+            <div class="account-chip">
+              <span class="avatar" data-auth="initial">?</span>
+              <span data-auth="name">Account</span>
+              <span class="role-badge" data-auth="role" hidden></span>
+            </div>
+            <button class="ghost link-button small" type="button" data-action="sign-out">Sign out</button>
+          </div>
+          <a class="ghost link-button small nav-auth" href="/signin.html" data-auth-state="out" hidden>Sign in</a>
         </div>
       </section>
 
@@ -44,6 +85,10 @@
             <p class="eyebrow">Interview Roadmap</p>
           </div>
           <div id="interviewRoadmap" class="roadmap-list"></div>
+          <div class="roadmap-head">
+            <p class="eyebrow">Technology Dashboard</p>
+          </div>
+          <div id="techDashboardSidebar" class="bar-chart tech-dashboard-sidebar"></div>
           <div class="sidebar-head">
             <p class="eyebrow">Interviews</p>
             <button id="addInterview" class="ghost small" type="button">New</button>
@@ -86,6 +131,37 @@
               <span>Mock interview</span>
             </label>
           </div>
+          <section class="career-dashboard" aria-labelledby="careerDashboardTitle">
+            <div class="career-dashboard-head">
+              <div>
+                <p class="eyebrow">Career Skills Dashboard</p>
+                <strong id="careerDashboardTitle">Choose your interview track</strong>
+              </div>
+              <span class="career-dashboard-hint">Skills are grouped by role</span>
+            </div>
+            <div class="career-track-grid">
+              <button class="career-track" type="button" data-role-profile="devops" aria-pressed="false">
+                <span class="career-track-icon" aria-hidden="true">DO</span>
+                <span class="career-track-copy"><strong>DevOps Engineer</strong><small>Delivery, cloud &amp; reliability</small></span>
+                <span class="career-skill-list"><span>Kubernetes</span><span>Docker</span><span>Terraform</span><span>CI/CD</span><span>Linux</span><span>Observability</span></span>
+              </button>
+              <button class="career-track" type="button" data-role-profile="frontend" aria-pressed="false">
+                <span class="career-track-icon" aria-hidden="true">FE</span>
+                <span class="career-track-copy"><strong>Frontend Developer</strong><small>Interfaces, performance &amp; UX</small></span>
+                <span class="career-skill-list"><span>HTML/CSS</span><span>JavaScript</span><span>React</span><span>TypeScript</span><span>Testing</span><span>Web performance</span></span>
+              </button>
+              <button class="career-track" type="button" data-role-profile="backend" aria-pressed="false">
+                <span class="career-track-icon" aria-hidden="true">BE</span>
+                <span class="career-track-copy"><strong>Backend Developer</strong><small>APIs, data &amp; distributed systems</small></span>
+                <span class="career-skill-list"><span>Python</span><span>FastAPI</span><span>Go</span><span>REST APIs</span><span>Databases</span><span>System design</span></span>
+              </button>
+              <button class="career-track" type="button" data-role-profile="mlops" aria-pressed="false">
+                <span class="career-track-icon" aria-hidden="true">ML</span>
+                <span class="career-track-copy"><strong>MLOps Engineer</strong><small>Models, platforms &amp; production AI</small></span>
+                <span class="career-skill-list"><span>Python</span><span>MLflow</span><span>Vertex AI</span><span>Kubeflow</span><span>Model serving</span><span>Monitoring</span></span>
+              </button>
+            </div>
+          </section>
           <label>
             Interviewer mood
             <select id="interviewerMood">
@@ -100,30 +176,25 @@
             Technology practice
             <select id="technology">
               <option value="all">All technologies</option>
-              <option value="kubernetes">Kubernetes / GKE</option>
-              <option value="docker">Docker / Containers</option>
-              <option value="gcp">Google Cloud Platform</option>
-              <option value="terraform">Terraform / IaC</option>
-              <option value="ansible">Ansible / config management</option>
-              <option value="python">Python automation</option>
-              <option value="fastapi">FastAPI backend</option>
-              <option value="go">Go programming</option>
-              <option value="scripting">Scripting &amp; automation</option>
-              <option value="coding">Coding exercises</option>
-              <option value="sre">SRE / reliability</option>
-              <option value="mlops">MLOps / Vertex AI</option>
-              <option value="llmops">LLMOps / GenAI production</option>
-              <option value="cicd">CI/CD / GitOps</option>
-              <option value="observability">Observability</option>
-              <option value="security">Cloud / DevSecOps security</option>
-              <option value="networking">Cloud networking</option>
-              <option value="linux">Linux / systems</option>
-              <option value="platform">Platform engineering</option>
+              <optgroup label="DevOps &amp; Cloud">
+                <option value="kubernetes">Kubernetes / GKE</option><option value="docker">Docker / Containers</option><option value="gcp">Google Cloud Platform</option><option value="terraform">Terraform / IaC</option><option value="ansible">Ansible / config management</option><option value="cicd">CI/CD / GitOps</option><option value="sre">SRE / reliability</option><option value="observability">Observability</option><option value="security">Cloud / DevSecOps security</option><option value="networking">Cloud networking</option><option value="linux">Linux / systems</option><option value="platform">Platform engineering</option>
+              </optgroup>
+              <optgroup label="Frontend Development">
+                <option value="frontend">HTML, CSS, JavaScript, React &amp; TypeScript</option>
+              </optgroup>
+              <optgroup label="Backend Development">
+                <option value="python">Python automation</option><option value="fastapi">FastAPI backend</option><option value="go">Go programming</option><option value="backend">APIs, databases &amp; system design</option><option value="scripting">Scripting &amp; automation</option><option value="coding">Coding exercises</option>
+              </optgroup>
+              <optgroup label="MLOps &amp; AI">
+                <option value="mlops">MLOps / Vertex AI</option><option value="llmops">LLMOps / GenAI production</option>
+              </optgroup>
+              <optgroup label="General Interview Skills">
               <option value="tech-risk-technical">Technology risk - technical</option>
               <option value="tech-risk-behavioral">Technology risk - behavioural</option>
               <option value="hr-behavioral">HR / behavioral basics</option>
               <option value="basic-concepts">Basic / one-liner concepts</option>
               <option value="scenario">Scenario-based questions</option>
+              </optgroup>
             </select>
           </label>
           <label>
@@ -229,7 +300,6 @@
             <input id="realTimeSimulation" type="checkbox" checked>
             <span>Real-time simulation</span>
           </label>
-          <button id="newQuestion" class="ghost wide" type="button">Generate new question</button>
           </details>
         </aside>
 
@@ -324,6 +394,7 @@
           </div>
 
           <div class="stage-actions">
+            <button id="newQuestion" class="primary" type="button">Generate new question</button>
             <button id="previousQuestion" class="ghost" type="button">&larr; Previous</button>
             <button id="nextQuestion" class="ghost" type="button">Next &rarr;</button>
             <button id="skipQuestion" class="ghost" type="button">Skip question</button>
@@ -351,6 +422,8 @@
                 <option value="en-IN">English India</option>
                 <option value="en-US">English US</option>
                 <option value="en-GB">English UK</option>
+                <option value="en-AU">English Australia</option>
+                <option value="en-CA">English Canada</option>
               </select>
             </label>
             <label class="audio-field">
@@ -409,6 +482,36 @@
       </section>
     </main>
 
+    <div id="mediaPermissionBackdrop" class="media-permission-backdrop" hidden>
+      <section class="media-permission-dialog" role="dialog" aria-modal="true" aria-labelledby="mediaPermissionTitle" aria-describedby="mediaPermissionDescription">
+        <div class="media-permission-brand"><img src="/favicon.svg" alt=""><span>Device check</span></div>
+        <p class="eyebrow">Before your interview</p>
+        <h2 id="mediaPermissionTitle">Set up camera, microphone &amp; headphones</h2>
+        <p id="mediaPermissionDescription">Allow access so the interviewer can hear you, show your camera when enabled, and play questions through your preferred audio output.</p>
+        <div class="media-permission-list">
+          <div><span class="device-permission-icon camera-icon" aria-hidden="true">CAM</span><span><strong>Camera</strong><small>Used only when you enable video</small></span><b id="cameraPermissionState">Not checked</b></div>
+          <div><span class="device-permission-icon mic-icon" aria-hidden="true">MIC</span><span><strong>Microphone</strong><small>Transcribes your spoken answers</small></span><b id="micPermissionState">Not checked</b></div>
+          <div><span class="device-permission-icon audio-icon" aria-hidden="true">HP</span><span><strong>Headphones / speaker</strong><small>Plays interviewer questions privately</small></span><b id="audioPermissionState">Not checked</b></div>
+        </div>
+        <label class="permission-accent-field" for="permissionAccent">
+          <span><strong>Your speaking accent</strong><small>Improves speech-to-text recognition</small></span>
+          <select id="permissionAccent">
+            <option value="en-IN">English — India</option>
+            <option value="en-US">English — United States</option>
+            <option value="en-GB">English — United Kingdom</option>
+            <option value="en-AU">English — Australia</option>
+            <option value="en-CA">English — Canada</option>
+          </select>
+        </label>
+        <p id="mediaPermissionMessage" class="media-permission-message">Your browser will show its native camera and microphone permission prompt.</p>
+        <div class="media-permission-actions">
+          <button id="allowMediaPermissions" class="primary" type="button">Allow &amp; check devices</button>
+          <button id="skipMediaPermissions" class="ghost" type="button">Not now</button>
+        </div>
+        <small class="media-privacy-note">Device streams are stopped after this check and are not recorded by the permission screen.</small>
+      </section>
+    </div>
+
     <div class="command-palette-backdrop" id="commandPaletteBackdrop">
       <div class="command-palette" role="dialog" aria-modal="true" aria-label="Command palette">
         <input id="commandPaletteInput" class="command-palette-input" type="text" placeholder="Type a command..." autocomplete="off">
@@ -422,5 +525,8 @@
     </div>
 
     <script src="/app.js"></script>
+    <script src="/topbar-stats.js"></script>
+    <script src="/theme.js"></script>
+    <script src="/auth-client.js"></script>
   </body>
 </html>

@@ -13,6 +13,7 @@ locally, and works fully offline using a built-in question bank of 2,000+ questi
 - [Tech Stack](#tech-stack)
 - [Requirements](#requirements)
 - [Quick Start](#quick-start)
+- [Sign In And Accounts](#sign-in-and-accounts)
 - [Run With Local Ollama](#run-with-local-ollama)
 - [Deploy Free On Render Without An AI Key](#deploy-free-on-render-without-an-ai-key)
 - [How To Use](#how-to-use)
@@ -87,6 +88,36 @@ http://127.0.0.1:3030
 ```
 
 This is the easiest way for another person to run the project. It works with the built-in local question bank and does not require an AI API key.
+
+## Sign In And Accounts
+
+The app is gated behind sign-in. The dashboard (`/session.html`) and the admin report (`/admin.html`) both require an
+account; `/admin.html` additionally requires the `admin` role. The landing page (`/`) stays public.
+
+Accounts live in `data/users.json`, a local JSON file created automatically the first time the server starts (it is
+git-ignored, so it is never committed). Passwords are hashed with Node's built-in `scrypt`; sessions are a signed,
+stateless cookie, so sign-in also works if the app is deployed to a read-only host such as Vercel.
+
+On first boot, five seed accounts are created for trying the app immediately:
+
+| Role  | Email                                   | Password        |
+|-------|------------------------------------------|------------------|
+| User  | asha.rao@aimockinterviewer.app            | User@Practice1   |
+| User  | rohan.mehta@aimockinterviewer.app         | User@Practice2   |
+| User  | emily.chen@aimockinterviewer.app          | User@Practice3   |
+| Admin | akhilesh.admin@aimockinterviewer.app      | Admin@Report1    |
+| Admin | priya.admin@aimockinterviewer.app         | Admin@Report2    |
+
+Anyone can also create their own account from `/signup.html`; new sign-ups get the `user` role. There is no UI yet to
+promote a user to `admin` - do that by editing the `role` field for that user directly in `data/users.json` and
+restarting the server.
+
+Interview progress itself still lives in the browser's `localStorage`, exactly as before - signing in controls who can
+reach the app and the admin report, but it does not (yet) sync interview history to a per-account server-side store.
+
+If you change hosts or want existing sessions to survive a server restart on a read-only deployment, set a
+`SESSION_SECRET` environment variable to a long random string; otherwise a secret is generated once and saved to
+`data/session-secret.txt` (also git-ignored).
 
 ## Run With Local Ollama
 

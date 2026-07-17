@@ -2,6 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("aimi-theme");
+          var theme = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Report - AI Mock Interviewer</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -19,9 +28,26 @@
           <p class="subtitle">Track answered questions, remaining practice, and completed feedback reports.</p>
         </div>
         <div class="top-actions">
-          <a class="ghost link-button" href="/">Home</a>
-          <button id="refreshReport" class="ghost" type="button">Refresh</button>
-          <a class="ghost link-button" href="/session.html">Back to interview</a>
+          <div class="nav-group quick-actions">
+            <a class="ghost link-button" href="/">Home</a>
+            <button id="refreshReport" class="ghost" type="button">Refresh</button>
+            <a class="ghost link-button" href="/session.html">Back to interview</a>
+            <a class="ghost link-button small coffee-button" href="https://www.buymeacoffee.com/iarsingh" target="_blank" rel="noopener noreferrer" title="Buy me a coffee">&#9749; Coffee</a>
+            <button class="theme-toggle" type="button" data-action="toggle-theme" aria-pressed="false" aria-label="Toggle dark mode" title="Toggle dark mode">
+              <span class="theme-icon theme-icon-light" aria-hidden="true">&#9728;&#65039;</span>
+              <span class="theme-icon theme-icon-dark" aria-hidden="true">&#127769;</span>
+            </button>
+          </div>
+
+          <div class="nav-group nav-auth" data-auth-state="in" hidden>
+            <div class="account-chip">
+              <span class="avatar" data-auth="initial">?</span>
+              <span data-auth="name">Account</span>
+              <span class="role-badge" data-auth="role" hidden></span>
+            </div>
+            <button class="ghost link-button small" type="button" data-action="sign-out">Sign out</button>
+          </div>
+          <a class="ghost link-button small nav-auth" href="/signin.html" data-auth-state="out" hidden>Sign in</a>
         </div>
       </section>
 
@@ -88,6 +114,16 @@
         <article class="panel admin-card admin-wide">
           <div class="admin-section-head">
             <div>
+              <p class="eyebrow">Technology Dashboard</p>
+              <h2>Answered Questions by Category</h2>
+            </div>
+          </div>
+          <div id="techDashboard" class="tech-dashboard"></div>
+        </article>
+
+        <article class="panel admin-card admin-wide">
+          <div class="admin-section-head">
+            <div>
               <p class="eyebrow">Detailed Analysis</p>
               <h2>Progress Over Time</h2>
             </div>
@@ -144,5 +180,7 @@
     </div>
 
     <script src="/admin.js"></script>
+    <script src="/theme.js"></script>
+    <script src="/auth-client.js"></script>
   </body>
 </html>

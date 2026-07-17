@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function () { try { var saved = localStorage.getItem("aimi-theme"); document.documentElement.setAttribute("data-theme", saved || "light"); } catch (e) {} })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Skills Dashboard | AI Mock Interviewer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="skills-dashboard-page">
+    <main class="shell dashboard-shell">
+      <section class="topbar">
+        <div class="brand-block">
+          <p class="eyebrow">Interview preparation</p>
+          <div class="brand-title dashboard-brand-title"><img class="brand-icon" src="/favicon.svg" alt=""><h1><span>Career</span> Skills Dashboard</h1></div>
+          <p class="subtitle">Pick a role, check question availability, and launch a focused mock interview.</p>
+        </div>
+        <div class="top-actions">
+          <a class="ghost link-button small" href="/">Home</a>
+          <button class="theme-toggle" type="button" data-action="toggle-theme" aria-pressed="false" aria-label="Toggle dark mode"><span class="theme-icon theme-icon-light">☀️</span><span class="theme-icon theme-icon-dark">🌙</span></button>
+          <div class="nav-group nav-auth" data-auth-state="in" hidden><div class="account-chip"><span class="avatar" data-auth="initial">?</span><span data-auth="name">Account</span></div><button class="ghost link-button small" type="button" data-action="sign-out">Sign out</button></div>
+        </div>
+      </section>
+
+      <section class="dashboard-hero panel">
+        <div class="dashboard-hero-copy"><span class="dashboard-kicker"><i></i>Personalized interview workspace</span><p class="eyebrow">Step 1 of 2</p><h2>Choose a path.<br><span>Build interview confidence.</span></h2><p>Each path activates a curated question pool and updates your interview focus automatically.</p></div>
+        <div class="dashboard-selection"><span>Selected track</span><strong id="selectedTrack">Choose a role below</strong><small id="coverageSummary">Checking question coverage…</small></div>
+      </section>
+
+      <section class="role-dashboard-grid" aria-label="Career tracks">
+        <button class="role-dashboard-card track-devops" type="button" data-dashboard-role="devops" aria-pressed="false">
+          <span class="role-card-top"><span class="role-card-icon">DO</span><span><strong>DevOps Engineer</strong><small>Cloud delivery and reliability</small></span></span>
+          <span class="role-card-description">Build reliable platforms, automate delivery, and operate production systems.</span>
+          <span class="role-skill-group"><b>Platform</b><span>Kubernetes</span><span>Docker</span><span>GCP</span><span>Linux</span></span>
+          <span class="role-skill-group"><b>Delivery</b><span>Terraform</span><span>CI/CD</span><span>GitOps</span><span>Ansible</span></span>
+          <span class="role-skill-group"><b>Operations</b><span>SRE</span><span>Observability</span><span>Security</span></span>
+        </button>
+        <button class="role-dashboard-card track-frontend" type="button" data-dashboard-role="frontend" aria-pressed="false">
+          <span class="role-card-top"><span class="role-card-icon">FE</span><span><strong>Frontend Developer</strong><small>Interfaces and user experience</small></span></span>
+          <span class="role-card-description">Create accessible, responsive, fast web applications at production scale.</span>
+          <span class="role-skill-group"><b>Core</b><span>HTML</span><span>CSS</span><span>JavaScript</span><span>TypeScript</span></span>
+          <span class="role-skill-group"><b>Frameworks</b><span>React</span><span>State management</span><span>Components</span></span>
+          <span class="role-skill-group"><b>Quality</b><span>Testing</span><span>Accessibility</span><span>Performance</span></span>
+        </button>
+        <button class="role-dashboard-card track-backend" type="button" data-dashboard-role="backend" aria-pressed="false">
+          <span class="role-card-top"><span class="role-card-icon">BE</span><span><strong>Backend Developer</strong><small>APIs and distributed systems</small></span></span>
+          <span class="role-card-description">Design secure services, data layers, and scalable system architectures.</span>
+          <span class="role-skill-group"><b>Languages</b><span>Python</span><span>Go</span><span>FastAPI</span></span>
+          <span class="role-skill-group"><b>Data</b><span>SQL</span><span>NoSQL</span><span>Redis</span><span>Queues</span></span>
+          <span class="role-skill-group"><b>Architecture</b><span>REST APIs</span><span>Security</span><span>System design</span></span>
+        </button>
+        <button class="role-dashboard-card track-mlops" type="button" data-dashboard-role="mlops" aria-pressed="false">
+          <span class="role-card-top"><span class="role-card-icon">ML</span><span><strong>MLOps Engineer</strong><small>Production machine learning</small></span></span>
+          <span class="role-card-description">Ship, serve, monitor, and govern machine-learning systems reliably.</span>
+          <span class="role-skill-group"><b>Lifecycle</b><span>MLflow</span><span>Model registry</span><span>Feature stores</span></span>
+          <span class="role-skill-group"><b>Platform</b><span>Vertex AI</span><span>Kubeflow</span><span>Kubernetes</span></span>
+          <span class="role-skill-group"><b>Production</b><span>Model serving</span><span>Drift</span><span>ML CI/CD</span></span>
+        </button>
+      </section>
+
+      <section class="core-rounds-section" aria-labelledby="coreRoundsTitle">
+        <div class="core-rounds-head">
+          <div><p class="eyebrow">Core Interview Rounds</p><h2 id="coreRoundsTitle">System Design &amp; DSA</h2></div>
+          <p>Practice role-independent rounds commonly used in software engineering interviews.</p>
+        </div>
+        <div class="core-rounds-grid">
+          <button class="core-round-card" type="button" data-dashboard-role="system-design" aria-pressed="false">
+            <span class="core-round-icon" aria-hidden="true">SD</span>
+            <span class="core-round-copy"><strong>System Design</strong><small>Design scalable, reliable, and secure production systems.</small></span>
+            <span class="core-round-skills"><span>Requirements</span><span>APIs</span><span>Data modeling</span><span>Caching</span><span>Queues</span><span>Scaling</span><span>Reliability</span><span>Trade-offs</span></span>
+          </button>
+          <button class="core-round-card" type="button" data-dashboard-role="dsa" aria-pressed="false">
+            <span class="core-round-icon" aria-hidden="true">DSA</span>
+            <span class="core-round-copy"><strong>Data Structures &amp; Algorithms</strong><small>Build problem-solving fluency with coding exercises.</small></span>
+            <span class="core-round-skills"><span>Arrays</span><span>Strings</span><span>Hash maps</span><span>Trees</span><span>Graphs</span><span>Recursion</span><span>Dynamic programming</span><span>Complexity</span></span>
+          </button>
+        </div>
+      </section>
+
+      <section class="cumulative-section" aria-labelledby="cumulativeTitle">
+        <button class="cumulative-card" type="button" data-dashboard-role="cumulative" aria-pressed="false">
+          <span class="cumulative-visual" aria-hidden="true"><i>DO</i><i>FE</i><i>BE</i><i>ML</i><b>∞</b></span>
+          <span class="cumulative-copy">
+            <span class="cumulative-label">Complete interview simulation</span>
+            <strong id="cumulativeTitle">Cumulative Random Interview</strong>
+            <small>One mixed interview drawing random questions from every skill category and core round.</small>
+            <span class="cumulative-skills"><span>DevOps</span><span>Frontend</span><span>Backend</span><span>MLOps</span><span>System Design</span><span>DSA</span><span>Behavioral</span><span>Scenarios</span></span>
+          </span>
+          <span class="cumulative-action">Select full interview <b>→</b></span>
+        </button>
+      </section>
+
+      <section class="dashboard-launch panel">
+        <div><p class="eyebrow">Step 2 of 2</p><strong id="launchTitle">Select a career track to continue</strong><p id="launchDescription">Your interview will open on a clean, dedicated page.</p></div>
+        <a id="startTrackInterview" class="primary link-button disabled" href="/session.html" aria-disabled="true">Start focused interview →</a>
+      </section>
+    </main>
+    <script src="/dashboard.js"></script>
+    <script src="/theme.js"></script>
+    <script src="/auth-client.js"></script>
+  </body>
+</html>

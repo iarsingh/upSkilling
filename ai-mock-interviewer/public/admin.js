@@ -15,6 +15,7 @@ const els = {
   interviewCount: document.querySelector("#interviewCount"),
   reportCount: document.querySelector("#reportCount"),
   topicBreakdown: document.querySelector("#topicBreakdown"),
+  techDashboard: document.querySelector("#techDashboard"),
   answeredQuestions: document.querySelector("#answeredQuestions"),
   reportHistory: document.querySelector("#reportHistory")
 };
@@ -135,6 +136,95 @@ function summarizeTopics(records) {
   return Object.entries(counts)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 8);
+}
+
+const macroCategories = [
+  {
+    key: "devops",
+    label: "DevOps",
+    color: "#28b8c7",
+    keywords: /kubernetes|\bk8s\b|\bgke\b|docker|terraform|opentofu|jenkins|ci\/cd|\bcicd\b|gitops|argocd|ansible|\blinux\b|networking|\bvpc\b|\bdns\b|load balanc|observability|prometheus|grafana|\bslo\b|\bsli\b|\biam\b|devsecops|\bhelm\b|finops|disaster recovery|incident|\bsre\b|reliability|route53|raid|security group/i
+  },
+  {
+    key: "mlops",
+    label: "MLOps",
+    color: "#9b8cff",
+    keywords: /mlops|mlflow|vertex ai|model registry|model versioning|feature store|\bgpu\b|\btpu\b|drift|llmops|genai|\bllm\b|kubeflow|inference|ml pipeline|machine learning|model serving/i
+  },
+  {
+    key: "frontend",
+    label: "Frontend",
+    color: "#e6ae48",
+    keywords: /\breact\b|angular|\bvue\b|frontend|front-end|\bcss\b|\bhtml\b|javascript|typescript|\bdom\b|webpack|redux|responsive design|\bui\/ux\b/i
+  },
+  {
+    key: "backend",
+    label: "Backend",
+    color: "#f06f5f",
+    keywords: /fastapi|\bapi\b|rest api|graphql|microservice|backend|back-end|database|\bsql\b|postgres|mongodb|\bredis\b|authentication|authorization|django|\bflask\b|\bspring\b|node\.js|\bexpress\b/i
+  }
+];
+
+function classifyMacroCategory(text) {
+  const lower = (text || "").toLowerCase();
+  for (const category of macroCategories) {
+    if (category.keywords.test(lower)) return category.key;
+  }
+  return null;
+}
+
+function renderTechDashboard(interviews) {
+  const container = els.techDashboard;
+  if (!container) return;
+
+  const allAnswers = interviews.flatMap((interview) => Array.isArray(interview.answers) ? interview.answers : []);
+  const counts = Object.fromEntries(macroCategories.map((c) => [c.key, 0]));
+  let classified = 0;
+
+  for (const answer of allAnswers) {
+    const key = classifyMacroCategory(`${answer.question || ""} ${answer.answer || ""}`);
+    if (key) {
+      counts[key] += 1;
+      classified += 1;
+    }
+  }
+
+  if (!allAnswers.length) {
+    container.innerHTML = `<p class="admin-empty">Answer some questions to see your technology breakdown.</p>`;
+    return;
+  }
+
+  const total = Math.max(1, classified);
+  const tiles = macroCategories.map((category) => {
+    const count = counts[category.key];
+    const pct = Math.round((count / total) * 100);
+    return `
+      <div class="tech-tile" style="--tile-color: ${category.color}">
+        <span>${count}</span>
+        <small>${escapeHtml(category.label)}</small>
+        <span class="tech-pct">${classified ? `${pct}%` : "0%"}</span>
+      </div>
+    `;
+  }).join("");
+
+  const segments = macroCategories.map((category) => {
+    const count = counts[category.key];
+    const pct = Math.max(count ? 2 : 0, Math.round((count / total) * 100));
+    return `<div class="tech-proportion-segment" style="--tile-color: ${category.color}; width: ${pct}%" title="${escapeHtml(category.label)}: ${count}"></div>`;
+  }).join("");
+
+  const legend = macroCategories.map((category) => `
+    <span class="tech-legend-item"><span class="tech-legend-dot" style="--tile-color: ${category.color}"></span>${escapeHtml(category.label)}</span>
+  `).join("");
+
+  const unclassified = allAnswers.length - classified;
+
+  container.innerHTML = `
+    <div class="tech-tiles">${tiles}</div>
+    <div class="tech-proportion">${segments}</div>
+    <div class="tech-legend">${legend}</div>
+    ${unclassified ? `<p class="admin-empty">${unclassified} answered question${unclassified === 1 ? "" : "s"} did not match a category.</p>` : ""}
+  `;
 }
 
 function renderTopicChart(topics) {
@@ -311,6 +401,7 @@ function renderReport() {
   els.reportCount.textContent = progressHistory.length;
 
   renderTopicChart(summarizeTopics(progressHistory));
+  renderTechDashboard(interviews);
   renderProgressChart(progressHistory);
 
   renderAnsweredQuestions(session);

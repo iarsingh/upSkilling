@@ -12,6 +12,7 @@ const els = {
   resetInterview: document.querySelector("#resetInterview"),
   modeInputs: document.querySelectorAll("input[name='interviewMode']"),
   technology: document.querySelector("#technology"),
+  careerTracks: document.querySelectorAll("[data-role-profile]"),
   questionOrder: document.querySelector("#questionOrder"),
   customSkillName: document.querySelector("#customSkillName"),
   customSkillQuestions: document.querySelector("#customSkillQuestions"),
@@ -78,10 +79,19 @@ const els = {
   copyButton: document.querySelector("#copyButton"),
   importJd: document.querySelector("#importJd"),
   importJdPdf: document.querySelector("#importJdPdf"),
-  saveContext: document.querySelector("#saveContext")
+  saveContext: document.querySelector("#saveContext"),
+  mediaPermissionBackdrop: document.querySelector("#mediaPermissionBackdrop"),
+  allowMediaPermissions: document.querySelector("#allowMediaPermissions"),
+  skipMediaPermissions: document.querySelector("#skipMediaPermissions"),
+  cameraPermissionState: document.querySelector("#cameraPermissionState"),
+  micPermissionState: document.querySelector("#micPermissionState"),
+  audioPermissionState: document.querySelector("#audioPermissionState"),
+  mediaPermissionMessage: document.querySelector("#mediaPermissionMessage"),
+  permissionAccent: document.querySelector("#permissionAccent")
 };
 
 const STORAGE_KEY = "aiMockInterviewerState";
+const MEDIA_PERMISSION_KEY = "aimiMediaPermissionReady";
 const ANSWER_RESET_VERSION = "2026-07-03-mock-from-scratch";
 const technologyLabels = {
   all: "All technologies",
@@ -104,6 +114,8 @@ const technologyLabels = {
   networking: "Cloud networking",
   linux: "Linux / systems",
   platform: "Platform engineering",
+  frontend: "Frontend development",
+  backend: "Backend development",
   "tech-risk-technical": "Technology risk - technical",
   "tech-risk-behavioral": "Technology risk - behavioural",
   "hr-behavioral": "HR / behavioral basics",
@@ -130,11 +142,39 @@ const technologyMatchers = {
   networking: /\b(network|networking|vpc|subnet|dns|load balancer|load balancing|firewall|vpn|interconnect|tcp|udp|http|https|tls|nat|routing|route|ingress|egress|gateway|proxy|envoy|apigee)\b/i,
   linux: /\b(linux|kernel|systemd|journald|cron|process|filesystem|memory|cpu|disk|inode|shell|bash|tcpdump|strace|lsof|top|vmstat|iostat|permission|chmod|chown|sudo|ssh|scp|rsync|certificate|tls)\b/i,
   platform: /\b(platform engineering|developer platform|internal developer platform|idp|self-service|golden path|backstage|developer experience|devex|landing zone|governance|multi-tenant)\b/i,
+  frontend: /\b(frontend|front-end|html|css|javascript|typescript|react|next\.js|vue|angular|web performance|accessibility|responsive|browser|dom|state management|component|webpack|vite)\b/i,
+  backend: /\b(backend|back-end|api|rest|graphql|microservice|database|sql|postgres|mysql|mongodb|redis|cache|queue|distributed system|system design|authentication|authorization|fastapi|django|flask|spring boot|node\.js|golang)\b/i,
   "tech-risk-technical": /\b(technology risk|risk assessment|risk register|heatmap|control|preventive|detective|corrective|iso 27001|nist|cobit|fair|audit|compliance|remediation|brd|prd|architecture|sdlc|change risk|cloud risk|incident|near miss|control failure|fmea|scenario analysis)\b/i,
   "tech-risk-behavioral": /\b(behavioral|behavioural|stakeholder|communication|leadership|influenc|senior leadership|trusted advisor|decision|risk culture|conflict|priorit|audit finding|remediation|product|engineering|security|business)\b/i,
   scenario: /\b(scenario|design|troubleshoot|debug|incident|outage|production|failed|failure|latency|unavailable|crash|pending|spike|drift|recover|migration|rollout|rollback|how would you|walk me through|you are|a team|a company)\b/i
 };
 const defaultFocusAreas = "GKE expert, Terraform advanced, Python automation, SRE SLI/SLO/error budgets, Prometheus/Grafana/OpenTelemetry, ArgoCD GitOps, GCP security, platform engineering, Vertex AI and MLOps basics";
+const roleProfiles = {
+  devops: { role: "Senior DevOps Engineer", technology: "kubernetes", focus: "Kubernetes, Docker, Terraform, CI/CD and GitOps, Linux, cloud networking, security, observability, SRE, incident response" },
+  frontend: { role: "Senior Frontend Developer", technology: "frontend", focus: "HTML, CSS, JavaScript, TypeScript, React, state management, accessibility, responsive design, testing, web performance" },
+  backend: { role: "Senior Backend Developer", technology: "backend", focus: "Python, FastAPI, Go, REST and GraphQL APIs, SQL and NoSQL databases, caching, messaging, security, distributed systems, system design" },
+  mlops: { role: "Senior MLOps Engineer", technology: "mlops", focus: "Python, MLflow, Kubeflow, Vertex AI, training pipelines, feature stores, model registry, model serving, drift monitoring, Kubernetes, CI/CD for ML" }
+};
+let selectedCareerProfile = "";
+
+function syncCareerTracks(activeProfile = "") {
+  els.careerTracks.forEach((track) => {
+    const active = track.dataset.roleProfile === activeProfile;
+    track.classList.toggle("active", active);
+    track.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function applyRoleProfile(profileKey) {
+  const profile = roleProfiles[profileKey];
+  if (!profile) return;
+  els.role.value = profile.role;
+  els.topic.value = profile.focus;
+  els.technology.value = profile.technology;
+  selectedCareerProfile = profileKey;
+  syncCareerTracks(profileKey);
+  els.technology.dispatchEvent(new Event("change"));
+}
 const defaultTargetSkills = `Target role family: Senior GCP DevOps / SRE / Cloud Engineer / Platform Engineer / Cloud Reliability Engineer / ML Platform Engineer
 Experience level: 6-8 years
 Target companies: Google-style interviews and product companies
@@ -1540,6 +1580,65 @@ let micVisualizerContext = null;
 let micVisualizerAnalyser = null;
 let micVisualizerRaf = null;
 
+function setPermissionState(element, state, label) {
+  if (!element) return;
+  element.textContent = label;
+  element.dataset.state = state;
+}
+
+async function requestInterviewMediaPermissions() {
+  if (!navigator.mediaDevices?.getUserMedia) {
+    els.mediaPermissionMessage.textContent = "Camera and microphone access is not supported in this browser.";
+    setPermissionState(els.cameraPermissionState, "blocked", "Unavailable");
+    setPermissionState(els.micPermissionState, "blocked", "Unavailable");
+    return;
+  }
+
+  setBusy(els.allowMediaPermissions, true, "Waiting for browser…");
+  els.mediaPermissionMessage.textContent = "Approve the camera and microphone request in your browser.";
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+    const hasCamera = stream.getVideoTracks().length > 0;
+    const hasMic = stream.getAudioTracks().length > 0;
+    setPermissionState(els.cameraPermissionState, hasCamera ? "ready" : "blocked", hasCamera ? "Allowed" : "Not found");
+    setPermissionState(els.micPermissionState, hasMic ? "ready" : "blocked", hasMic ? "Allowed" : "Not found");
+    stream.getTracks().forEach((track) => track.stop());
+
+    let audioLabel = "Audio ready";
+    if (typeof navigator.mediaDevices.selectAudioOutput === "function") {
+      try {
+        const output = await navigator.mediaDevices.selectAudioOutput();
+        audioLabel = output?.label || "Output selected";
+      } catch {
+        audioLabel = "Default output";
+      }
+    } else {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      audioLabel = devices.some((device) => device.kind === "audiooutput") ? "Output found" : "Default output";
+    }
+    setPermissionState(els.audioPermissionState, "ready", audioLabel);
+    els.mediaPermissionMessage.textContent = "Devices are ready. Your interview can now use voice, video, and question audio.";
+    localStorage.setItem(MEDIA_PERMISSION_KEY, "true");
+    setTimeout(() => { els.mediaPermissionBackdrop.hidden = true; }, 700);
+  } catch (error) {
+    const denied = error?.name === "NotAllowedError" || error?.name === "SecurityError";
+    setPermissionState(els.cameraPermissionState, "blocked", denied ? "Permission denied" : "Check failed");
+    setPermissionState(els.micPermissionState, "blocked", denied ? "Permission denied" : "Check failed");
+    setPermissionState(els.audioPermissionState, "ready", "Default output");
+    els.mediaPermissionMessage.textContent = denied
+      ? "Access was not granted. You can enable camera and microphone later from your browser settings."
+      : "Devices could not be checked. Confirm they are connected and not being used by another app.";
+  } finally {
+    setBusy(els.allowMediaPermissions, false, "Try device check again");
+  }
+}
+
+function initializeMediaPermissionPrompt() {
+  if (!els.mediaPermissionBackdrop) return;
+  if (els.permissionAccent && els.micLanguage) els.permissionAccent.value = els.micLanguage.value || "en-IN";
+  els.mediaPermissionBackdrop.hidden = localStorage.getItem(MEDIA_PERMISSION_KEY) === "true";
+}
+
 async function startMicVisualizer() {
   if (!els.micVisualizer || micVisualizerContext || !navigator.mediaDevices?.getUserMedia) return;
   try {
@@ -1676,7 +1775,8 @@ function saveState() {
     micLanguage: els.micLanguage.value,
     answerPause: els.answerPause.value,
     interviewMode: currentMode(),
-    interviewerMood: els.interviewerMood?.value || "neutral"
+    interviewerMood: els.interviewerMood?.value || "neutral",
+    careerProfile: selectedCareerProfile
   }));
   flashAutosaveIndicator();
 }
@@ -1697,6 +1797,8 @@ function flashAutosaveIndicator() {
 function loadState() {
   const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
   const shouldResetAnswers = saved.answerResetVersion !== ANSWER_RESET_VERSION;
+  selectedCareerProfile = saved.careerProfile || "";
+  syncCareerTracks(selectedCareerProfile);
   els.role.value = saved.role || els.role.value;
   els.level.value = saved.level || els.level.value;
   els.topic.value = !saved.topic || saved.topic === els.topic.defaultValue
@@ -1711,6 +1813,7 @@ function loadState() {
   els.questionVoiceTone.value = saved.questionVoiceTone || "natural";
   els.realTimeSimulation.checked = saved.realTimeSimulation !== false;
   els.micLanguage.value = saved.micLanguage || "en-IN";
+  if (els.permissionAccent) els.permissionAccent.value = els.micLanguage.value;
   els.answerPause.value = saved.answerPause || "9500";
   if (els.interviewerMood) els.interviewerMood.value = saved.interviewerMood || "neutral";
   syncMoodEmoji();
@@ -1790,6 +1893,7 @@ function renderSessionStats() {
   els.answerCount.textContent = `${characters} character${characters === 1 ? "" : "s"}`;
   els.sessionProgress.style.width = `${Math.min(100, answered * 10)}%`;
   renderRoadmap();
+  renderTechDashboardSidebar();
 }
 
 const roadmapStages = [
@@ -1829,6 +1933,71 @@ function renderRoadmap() {
       <div class="roadmap-step ${stage.status}">
         <span class="roadmap-icon">${icon}</span>
         <span>${escapeHtml(stage.label)}</span>
+      </div>
+    `;
+  }).join("");
+}
+
+const macroCategories = [
+  {
+    key: "devops",
+    label: "DevOps",
+    color: "#28b8c7",
+    keywords: /kubernetes|\bk8s\b|\bgke\b|docker|terraform|opentofu|jenkins|ci\/cd|\bcicd\b|gitops|argocd|ansible|\blinux\b|networking|\bvpc\b|\bdns\b|load balanc|observability|prometheus|grafana|\bslo\b|\bsli\b|\biam\b|devsecops|\bhelm\b|finops|disaster recovery|incident|\bsre\b|reliability|route53|raid|security group/i
+  },
+  {
+    key: "mlops",
+    label: "MLOps",
+    color: "#9b8cff",
+    keywords: /mlops|mlflow|vertex ai|model registry|model versioning|feature store|\bgpu\b|\btpu\b|drift|llmops|genai|\bllm\b|kubeflow|inference|ml pipeline|machine learning|model serving/i
+  },
+  {
+    key: "frontend",
+    label: "Frontend",
+    color: "#e6ae48",
+    keywords: /\breact\b|angular|\bvue\b|frontend|front-end|\bcss\b|\bhtml\b|javascript|typescript|\bdom\b|webpack|redux|responsive design|\bui\/ux\b/i
+  },
+  {
+    key: "backend",
+    label: "Backend",
+    color: "#f06f5f",
+    keywords: /fastapi|\bapi\b|rest api|graphql|microservice|backend|back-end|database|\bsql\b|postgres|mongodb|\bredis\b|authentication|authorization|django|\bflask\b|\bspring\b|node\.js|\bexpress\b/i
+  }
+];
+
+function classifyMacroCategory(text) {
+  const lower = (text || "").toLowerCase();
+  for (const category of macroCategories) {
+    if (category.keywords.test(lower)) return category.key;
+  }
+  return null;
+}
+
+function renderTechDashboardSidebar() {
+  const container = document.querySelector("#techDashboardSidebar");
+  if (!container) return;
+
+  const allAnswers = interviews.flatMap((interview) => Array.isArray(interview.answers) ? interview.answers : []);
+  if (!allAnswers.length) {
+    container.innerHTML = `<p class="history-empty">Answer questions to see your technology breakdown.</p>`;
+    return;
+  }
+
+  const counts = Object.fromEntries(macroCategories.map((c) => [c.key, 0]));
+  for (const answer of allAnswers) {
+    const key = classifyMacroCategory(`${answer.question || ""} ${answer.answer || ""}`);
+    if (key) counts[key] += 1;
+  }
+
+  const max = Math.max(...macroCategories.map((c) => counts[c.key]), 1);
+  container.innerHTML = macroCategories.map((category) => {
+    const count = counts[category.key];
+    const pct = Math.max(count ? 4 : 0, Math.round((count / max) * 100));
+    return `
+      <div class="bar-row" title="${escapeHtml(category.label)}: ${count} answered">
+        <span class="bar-label">${escapeHtml(category.label)}</span>
+        <div class="bar-track"><div class="bar-fill" style="width: ${pct}%; background: ${category.color}"></div></div>
+        <span class="bar-value">${count}</span>
       </div>
     `;
   }).join("");
@@ -2967,6 +3136,17 @@ els.micButton.addEventListener("click", () => {
   }
 });
 
+els.allowMediaPermissions?.addEventListener("click", requestInterviewMediaPermissions);
+els.permissionAccent?.addEventListener("change", () => {
+  els.micLanguage.value = els.permissionAccent.value;
+  if (!listening) applyRecognitionSettings();
+  saveState();
+});
+els.skipMediaPermissions?.addEventListener("click", () => {
+  els.mediaPermissionBackdrop.hidden = true;
+  els.mediaPermissionMessage.textContent = "Device check skipped. The browser may ask again when you enable the camera or microphone.";
+});
+
 els.speakQuestion.addEventListener("click", speakQuestion);
 els.stopQuestionAudio.addEventListener("click", stopQuestionAudio);
 els.autoReadQuestion.addEventListener("change", () => {
@@ -3014,6 +3194,9 @@ els.saveContext.addEventListener("click", () => {
 });
 
 els.addCustomSkill.addEventListener("click", saveCustomSkill);
+els.careerTracks.forEach((track) => {
+  track.addEventListener("click", () => applyRoleProfile(track.dataset.roleProfile));
+});
 els.deleteCustomSkill.addEventListener("click", deleteSelectedCustomSkill);
 els.customSkillList.addEventListener("click", (event) => {
   const button = event.target.closest("[data-skill]");
@@ -3285,9 +3468,10 @@ els.toggleCamera?.addEventListener("click", async () => {
 });
 
 const PANEL_OFFSETS_KEY = "aiMockInterviewerPanelOffsets";
+const panelLayoutResetters = [];
 
 function makeDraggable(panel, handle, key) {
-  if (!panel || !handle) return;
+  if (!panel || !handle) return null;
   const allOffsets = JSON.parse(localStorage.getItem(PANEL_OFFSETS_KEY) || "{}");
   let offset = allOffsets[key] || { x: 0, y: 0 };
   let dragging = false;
@@ -3332,18 +3516,51 @@ function makeDraggable(panel, handle, key) {
 
   handle.addEventListener("pointerup", endDrag);
   handle.addEventListener("pointercancel", endDrag);
+
+  return () => {
+    dragging = false;
+    offset = { x: 0, y: 0 };
+    panel.classList.remove("dragging");
+    applyOffset();
+  };
 }
 
-makeDraggable(document.querySelector(".interview-sidebar"), document.querySelector(".sidebar-head"), "sidebar");
-makeDraggable(document.querySelector(".setup"), document.querySelector(".setup-heading"), "setup");
-makeDraggable(document.querySelector(".interview"), document.querySelector(".stage-head"), "interview");
-makeDraggable(document.querySelector(".feedback"), document.querySelector(".feedback-head"), "feedback");
+[
+  makeDraggable(document.querySelector(".interview-sidebar"), document.querySelector(".sidebar-head"), "sidebar"),
+  makeDraggable(document.querySelector(".setup"), document.querySelector(".setup-heading"), "setup"),
+  makeDraggable(document.querySelector(".interview"), document.querySelector(".stage-head"), "interview"),
+  makeDraggable(document.querySelector(".feedback"), document.querySelector(".feedback-head"), "feedback")
+].forEach((resetter) => {
+  if (resetter) panelLayoutResetters.push(resetter);
+});
 
-document.querySelector("#resetLayout")?.addEventListener("click", () => {
+document.querySelector("#resetLayout")?.addEventListener("click", async (event) => {
   localStorage.removeItem(PANEL_OFFSETS_KEY);
-  document.querySelectorAll(".panel").forEach((panel) => {
-    panel.style.transform = "";
-  });
+  panelLayoutResetters.forEach((resetter) => resetter());
+
+  const interviewPanel = document.querySelector(".interview");
+  interviewPanel?.classList.remove("minimized");
+  if (els.minimizeInterview) {
+    els.minimizeInterview.textContent = "−";
+    els.minimizeInterview.title = "Minimize";
+    els.minimizeInterview.setAttribute("aria-label", "Minimize interview panel");
+  }
+
+  localStorage.removeItem("aiMockInterviewerStageSplit");
+  if (els.stageSplit) els.stageSplit.value = "57";
+  applyStageSplit(57);
+
+  if (currentFullscreenElement()) await exitFullscreenSafely();
+  syncFullscreenButton();
+
+  const button = event.currentTarget;
+  const originalLabel = button.textContent;
+  button.textContent = "Layout reset ✓";
+  button.classList.add("confirm-pulse");
+  setTimeout(() => {
+    button.textContent = originalLabel;
+    button.classList.remove("confirm-pulse");
+  }, 1200);
 });
 
 els.minimizeInterview?.addEventListener("click", () => {
@@ -3362,7 +3579,7 @@ function requestElementFullscreen(el) {
 
 function exitFullscreenSafely() {
   const exit = document.exitFullscreen || document.webkitExitFullscreen;
-  exit?.call(document);
+  return exit?.call(document);
 }
 
 function currentFullscreenElement() {
@@ -3391,9 +3608,16 @@ document.addEventListener("fullscreenchange", syncFullscreenButton);
 document.addEventListener("webkitfullscreenchange", syncFullscreenButton);
 
 const STAGE_SPLIT_KEY = "aiMockInterviewerStageSplit";
+const stageSplitQuery = window.matchMedia ? window.matchMedia("(max-width: 920px)") : null;
 
 function applyStageSplit(value) {
   if (!els.callStage) return;
+  if (stageSplitQuery && stageSplitQuery.matches) {
+    // Below the stacking breakpoint the tiles go single-column via CSS;
+    // clear any inline split so it doesn't override that.
+    els.callStage.style.gridTemplateColumns = "";
+    return;
+  }
   els.callStage.style.gridTemplateColumns = `${value}fr ${100 - value}fr`;
 }
 
@@ -3408,6 +3632,16 @@ if (els.stageSplit) {
     applyStageSplit(value);
     localStorage.setItem(STAGE_SPLIT_KEY, String(value));
   });
+  if (stageSplitQuery) {
+    const handleStageSplitQueryChange = () => applyStageSplit(Number(els.stageSplit.value));
+    if (stageSplitQuery.addEventListener) {
+      stageSplitQuery.addEventListener("change", handleStageSplitQueryChange);
+    } else if (stageSplitQuery.addListener) {
+      stageSplitQuery.addListener(handleStageSplitQueryChange);
+    }
+  }
+} else if (els.callStage) {
+  applyStageSplit(50);
 }
 
 const clockText = document.querySelector("#clockText");
@@ -3434,8 +3668,8 @@ if (sessionTimerText) {
     const minutes = String(Math.floor((elapsed % 3600) / 60)).padStart(2, "0");
     const seconds = String(elapsed % 60).padStart(2, "0");
     sessionTimerText.textContent = hours
-      ? `Session ${hours}:${minutes}:${seconds}`
-      : `Session ${minutes}:${seconds}`;
+      ? `${hours}:${minutes}:${seconds}`
+      : `${minutes}:${seconds}`;
   }, 1000);
 }
 
@@ -3694,6 +3928,7 @@ flashOnUpdate(els.question);
 flashOnUpdate(els.feedbackOutput);
 
 setupSpeech();
+initializeMediaPermissionPrompt();
 updateQuestionAudioControls();
 loadPracticeSources().then(() => {
   loadState();

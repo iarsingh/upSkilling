@@ -2,6 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("aimi-theme");
+          var theme = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AI Mock Interviewer</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -15,8 +24,29 @@
           <strong>AI Mock Interviewer</strong>
         </div>
         <div class="landing-nav-actions">
-          <a class="ghost link-button" href="https://github.com/iarsingh" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a class="ghost link-button" href="/admin.html">Admin report</a>
+          <div class="nav-group">
+            <a class="ghost link-button" href="https://github.com/iarsingh" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="ghost link-button coffee-button" href="https://www.buymeacoffee.com/iarsingh" target="_blank" rel="noopener noreferrer">&#9749; Buy me a coffee</a>
+            <a class="ghost link-button" href="/admin.html" data-auth-admin-only hidden>Admin report</a>
+            <button class="theme-toggle" type="button" data-action="toggle-theme" aria-pressed="false" aria-label="Toggle dark mode" title="Toggle dark mode">
+              <span class="theme-icon theme-icon-light" aria-hidden="true">&#9728;&#65039;</span>
+              <span class="theme-icon theme-icon-dark" aria-hidden="true">&#127769;</span>
+            </button>
+          </div>
+
+          <div class="nav-group nav-auth" data-auth-state="out" hidden>
+            <a class="ghost link-button" href="/signin.html">Sign in</a>
+            <a class="primary link-button" href="/signup.html">Sign up</a>
+          </div>
+
+          <div class="nav-group nav-auth" data-auth-state="in" hidden>
+            <div class="account-chip">
+              <span class="avatar" data-auth="initial">?</span>
+              <span data-auth="name">Account</span>
+            </div>
+            <a class="ghost link-button" href="/dashboard.html">Open dashboard</a>
+            <button class="ghost link-button" type="button" data-action="sign-out">Sign out</button>
+          </div>
         </div>
       </nav>
 
@@ -29,7 +59,7 @@
           all powered by a local LLM, no data leaves your machine unless you choose cloud mode.
         </p>
         <div class="hero-actions">
-          <a class="primary wide link-button" href="/session.html">Start interview</a>
+          <a class="primary wide link-button" href="/dashboard.html">Choose interview track</a>
           <a class="ghost wide link-button" href="#how-it-works">See how it works</a>
         </div>
       </section>
@@ -80,10 +110,12 @@
 
       <footer class="landing-footer">
         <p>Open source · runs on your machine.</p>
-        <a class="ghost link-button" href="/session.html">Start your first session</a>
+        <a class="ghost link-button" href="/dashboard.html">Start your first session</a>
       </footer>
     </main>
 
+    <script src="/theme.js"></script>
+    <script src="/auth-client.js"></script>
     <script>
       const revealTargets = document.querySelectorAll(".feature-card, .step");
       if ("IntersectionObserver" in window) {

@@ -1,6 +1,7 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const mammoth = require("mammoth");
 const { PDFParse } = require("pdf-parse");
 const tesseract = require("tesseract.js");
@@ -18,6 +19,185 @@ const PUBLIC_DIR = path.join(__dirname, "public");
 const DATA_DIR = path.join(__dirname, "data");
 const PROFILE_PATH = path.join(DATA_DIR, "applicant-profile.json");
 const QUESTION_BANK_PATH = path.join(__dirname, "1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt");
+
+/* -------------------------------------------------------------------------
+ * Auth: local JSON-file user store + stateless signed session cookies.
+ *
+ * This app has no server-side database (see README), so accounts live in
+ * data/users.json (git-ignored on real deployments; auto-created on first
+ * boot with 5 seed accounts below). Sessions are a signed, stateless token
+ * (HMAC-SHA256) stored in an httpOnly cookie, so login also works on
+ * read-only serverless hosts (Vercel) where the filesystem can't persist
+ * new writes between invocations. Passwords are hashed with scrypt.
+ * ---------------------------------------------------------------------- */
+
+const USERS_PATH = path.join(DATA_DIR, "users.json");
+const SESSION_SECRET_PATH = path.join(DATA_DIR, "session-secret.txt");
+const SESSION_COOKIE_NAME = "aimi_session";
+const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 7; // 7 days
+
+function ensureDataDir() {
+  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+
+function getSessionSecret() {
+  if (process.env.SESSION_SECRET) return process.env.SESSION_SECRET;
+  ensureDataDir();
+  try {
+    return fs.readFileSync(SESSION_SECRET_PATH, "utf8").trim();
+  } catch {
+    const secret = crypto.randomBytes(32).toString("hex");
+    try {
+      fs.writeFileSync(SESSION_SECRET_PATH, secret);
+    } catch {
+      // Read-only filesystem (e.g. serverless). Fall back to a per-process
+      // secret; sessions simply won't survive a cold start there unless
+      // SESSION_SECRET is set as an environment variable.
+    }
+    return secret;
+  }
+}
+
+const SESSION_SECRET = getSessionSecret();
+
+function hashPassword(password, salt = crypto.randomBytes(16).toString("hex")) {
+  const hash = crypto.scryptSync(String(password), salt, 64).toString("hex");
+  return `${salt}:${hash}`;
+}
+
+function verifyPassword(password, stored) {
+  const [salt, hash] = String(stored || "").split(":");
+  if (!salt || !hash) return false;
+  const candidate = crypto.scryptSync(String(password), salt, 64).toString("hex");
+  const a = Buffer.from(candidate, "hex");
+  const b = Buffer.from(hash, "hex");
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
+function readUsers() {
+  try {
+    return JSON.parse(fs.readFileSync(USERS_PATH, "utf8"));
+  } catch {
+    return [];
+  }
+}
+
+function writeUsers(users) {
+  ensureDataDir();
+  fs.writeFileSync(USERS_PATH, JSON.stringify(users, null, 2));
+}
+
+function ensureUsersSeeded() {
+  if (fs.existsSync(USERS_PATH)) return;
+  const now = new Date().toISOString();
+  const seed = [
+    { name: "Asha Rao", email: "asha.rao@aimockinterviewer.app", password: "User@Practice1", role: "user" },
+    { name: "Rohan Mehta", email: "rohan.mehta@aimockinterviewer.app", password: "User@Practice2", role: "user" },
+    { name: "Emily Chen", email: "emily.chen@aimockinterviewer.app", password: "User@Practice3", role: "user" },
+    { name: "Akhilesh Singh", email: "akhilesh.admin@aimockinterviewer.app", password: "Admin@Report1", role: "admin" },
+    { name: "Priya Nair", email: "priya.admin@aimockinterviewer.app", password: "Admin@Report2", role: "admin" }
+  ].map((entry, index) => ({
+    id: `seed-${index + 1}`,
+    name: entry.name,
+    email: entry.email,
+    passwordHash: hashPassword(entry.password),
+    role: entry.role,
+    createdAt: now
+  }));
+  writeUsers(seed);
+}
+
+function publicUser(user) {
+  return { id: user.id, name: user.name, email: user.email, role: user.role };
+}
+
+function base64UrlEncode(input) {
+  return Buffer.from(input).toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+function base64UrlDecode(input) {
+  const padded = input.replace(/-/g, "+").replace(/_/g, "/").padEnd(input.length + ((4 - (input.length % 4)) % 4), "=");
+  return Buffer.from(padded, "base64").toString("utf8");
+}
+
+function signToken(payload) {
+  const body = base64UrlEncode(JSON.stringify(payload));
+  const signature = crypto.createHmac("sha256", SESSION_SECRET).update(body).digest("hex");
+  return `${body}.${signature}`;
+}
+
+function verifyToken(token) {
+  if (!token || typeof token !== "string" || !token.includes(".")) return null;
+  const [body, signature] = token.split(".");
+  const expected = crypto.createHmac("sha256", SESSION_SECRET).update(body).digest("hex");
+  const a = Buffer.from(signature || "", "hex");
+  const b = Buffer.from(expected, "hex");
+  if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) return null;
+  try {
+    const payload = JSON.parse(base64UrlDecode(body));
+    if (!payload.exp || Date.now() > payload.exp) return null;
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
+function parseCookies(header) {
+  const out = {};
+  String(header || "").split(";").forEach((part) => {
+    const index = part.indexOf("=");
+    if (index === -1) return;
+    const key = part.slice(0, index).trim();
+    const value = part.slice(index + 1).trim();
+    if (key) out[key] = decodeURIComponent(value);
+  });
+  return out;
+}
+
+function isSecureRequest(req) {
+  return req.headers["x-forwarded-proto"] === "https" || process.env.NODE_ENV === "production";
+}
+
+function setSessionCookie(req, res, token) {
+  const parts = [
+    `${SESSION_COOKIE_NAME}=${encodeURIComponent(token)}`,
+    "Path=/",
+    "HttpOnly",
+    "SameSite=Lax",
+    `Max-Age=${SESSION_MAX_AGE_SECONDS}`
+  ];
+  if (isSecureRequest(req)) parts.push("Secure");
+  res.setHeader("Set-Cookie", parts.join("; "));
+}
+
+function clearSessionCookie(req, res) {
+  const parts = [`${SESSION_COOKIE_NAME}=`, "Path=/", "HttpOnly", "SameSite=Lax", "Max-Age=0"];
+  if (isSecureRequest(req)) parts.push("Secure");
+  res.setHeader("Set-Cookie", parts.join("; "));
+}
+
+function getSession(req) {
+  const cookies = parseCookies(req.headers.cookie);
+  return verifyToken(cookies[SESSION_COOKIE_NAME]);
+}
+
+function createSessionForUser(req, res, user) {
+  const token = signToken({
+    uid: user.id,
+    role: user.role,
+    exp: Date.now() + SESSION_MAX_AGE_SECONDS * 1000
+  });
+  setSessionCookie(req, res, token);
+}
+
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || ""));
+}
+
+const PROTECTED_PAGES = new Set(["/dashboard.html", "/session.html", "/admin.html"]);
+const ADMIN_ONLY_PAGES = new Set(["/admin.html"]);
+
+ensureUsersSeeded();
 const OCR_LANG_PATH = path.join(__dirname, "node_modules", "@tesseract.js-data", "eng", "4.0.0");
 const MARKET_SKILL_BENCHMARK = `Target role family: Senior GCP DevOps / SRE / Cloud Engineer / Platform Engineer / Cloud Reliability Engineer / ML Platform Engineer
 Experience level: 6-8 years
@@ -879,6 +1059,77 @@ async function handleRequest(req, res) {
       return;
     }
 
+    if (req.method === "POST" && req.url === "/api/auth/signup") {
+      const input = await readBody(req);
+      const name = String(input.name || "").trim();
+      const email = String(input.email || "").trim().toLowerCase();
+      const password = String(input.password || "");
+      if (!name || !isValidEmail(email) || password.length < 8) {
+        sendJson(res, 400, { error: "Enter your name, a valid email, and a password of at least 8 characters." });
+        return;
+      }
+      const users = readUsers();
+      if (users.some((user) => user.email.toLowerCase() === email)) {
+        sendJson(res, 409, { error: "An account with this email already exists. Try signing in instead." });
+        return;
+      }
+      const user = {
+        id: crypto.randomUUID(),
+        name,
+        email,
+        passwordHash: hashPassword(password),
+        role: "user",
+        createdAt: new Date().toISOString()
+      };
+      users.push(user);
+      try {
+        writeUsers(users);
+      } catch {
+        sendJson(res, 500, { error: "Could not save your account. If this is running on read-only hosting, sign up locally instead." });
+        return;
+      }
+      createSessionForUser(req, res, user);
+      sendJson(res, 200, { user: publicUser(user) });
+      return;
+    }
+
+    if (req.method === "POST" && req.url === "/api/auth/login") {
+      const input = await readBody(req);
+      const email = String(input.email || "").trim().toLowerCase();
+      const password = String(input.password || "");
+      const users = readUsers();
+      const user = users.find((entry) => entry.email.toLowerCase() === email);
+      if (!user || !verifyPassword(password, user.passwordHash)) {
+        sendJson(res, 401, { error: "Incorrect email or password." });
+        return;
+      }
+      createSessionForUser(req, res, user);
+      sendJson(res, 200, { user: publicUser(user) });
+      return;
+    }
+
+    if (req.method === "POST" && req.url === "/api/auth/logout") {
+      clearSessionCookie(req, res);
+      sendJson(res, 200, { ok: true });
+      return;
+    }
+
+    if (req.method === "GET" && req.url === "/api/auth/me") {
+      const session = getSession(req);
+      if (!session) {
+        sendJson(res, 401, { user: null });
+        return;
+      }
+      const user = readUsers().find((entry) => entry.id === session.uid);
+      if (!user) {
+        clearSessionCookie(req, res);
+        sendJson(res, 401, { user: null });
+        return;
+      }
+      sendJson(res, 200, { user: publicUser(user) });
+      return;
+    }
+
     if (req.method === "GET" && req.url === "/api/health") {
       if (OFFLINE_ONLY) {
         sendJson(res, 200, {
@@ -1094,6 +1345,21 @@ async function handleRequest(req, res) {
     }
 
     if (req.method === "GET" || req.method === "HEAD") {
+      const pathname = new URL(req.url, `http://${req.headers.host}`).pathname;
+      const normalized = pathname === "/" ? "/index.html" : pathname;
+      if (PROTECTED_PAGES.has(normalized)) {
+        const session = getSession(req);
+        if (!session) {
+          res.writeHead(302, { Location: `/signin.html?next=${encodeURIComponent(pathname)}` });
+          res.end();
+          return;
+        }
+        if (ADMIN_ONLY_PAGES.has(normalized) && session.role !== "admin") {
+          res.writeHead(302, { Location: "/session.html?denied=1" });
+          res.end();
+          return;
+        }
+      }
       serveStatic(req, res);
       return;
     }

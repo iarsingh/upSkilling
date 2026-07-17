@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("aimi-theme");
+          var theme = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign in - AI Mock Interviewer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="auth-body">
+    <div class="auth-shell">
+      <aside class="auth-aside">
+        <a class="auth-back-home" href="/">&larr; Back to home</a>
+        <div class="auth-aside-top">
+          <img class="brand-icon" src="/favicon.svg" alt="" aria-hidden="true">
+          <strong>AI Mock Interviewer</strong>
+        </div>
+        <div class="auth-aside-content">
+          <h2>Practice interviews out loud, before the real one.</h2>
+          <p>Sign in to pick up your interview roadmap, progress history, and saved feedback reports right where you left off.</p>
+          <ul class="auth-feature-list">
+            <li><span class="auth-feature-icon" aria-hidden="true">&#127908;</span> Voice-led mock interviews with live transcript</li>
+            <li><span class="auth-feature-icon" aria-hidden="true">&#9889;</span> Instant, structured feedback with a hiring-readiness score</li>
+            <li><span class="auth-feature-icon" aria-hidden="true">&#128274;</span> Runs on your machine - your answers stay local</li>
+          </ul>
+        </div>
+        <p class="auth-aside-foot">Open-source interview lab</p>
+      </aside>
+
+      <main class="auth-main">
+        <button class="theme-toggle auth-theme-toggle" type="button" data-action="toggle-theme" aria-pressed="false" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <span class="theme-icon theme-icon-light" aria-hidden="true">&#9728;&#65039;</span>
+          <span class="theme-icon theme-icon-dark" aria-hidden="true">&#127769;</span>
+        </button>
+        <div class="auth-card">
+          <div class="auth-card-head">
+            <p class="eyebrow">Welcome back</p>
+            <h1>Sign in</h1>
+            <p class="auth-sub">Enter your email and password to continue to your dashboard.</p>
+          </div>
+
+          <p class="auth-error" id="authError" role="alert"></p>
+
+          <form id="signinForm" novalidate>
+            <label class="auth-field">
+              Email
+              <input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+            </label>
+            <label class="auth-field">
+              Password
+              <input id="password" type="password" autocomplete="current-password" placeholder="Your password" required>
+            </label>
+            <button id="signinSubmit" class="primary wide" type="submit">Sign in</button>
+          </form>
+
+          <p class="auth-switch">Don't have an account? <a href="/signup.html">Create one</a></p>
+
+          <div class="auth-demo-box">
+            <strong>Demo credentials</strong>
+            <div class="auth-demo-row"><span>User</span><span>asha.rao@aimockinterviewer.app / User@Practice1</span></div>
+            <div class="auth-demo-row"><span>Admin</span><span>akhilesh.admin@aimockinterviewer.app / Admin@Report1</span></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="/theme.js"></script>
+    <script>
+      const form = document.querySelector("#signinForm");
+      const submitButton = document.querySelector("#signinSubmit");
+      const errorBox = document.querySelector("#authError");
+
+      function showError(message) {
+        errorBox.textContent = message;
+        errorBox.classList.add("visible");
+      }
+
+      function nextDestination() {
+        const params = new URLSearchParams(window.location.search);
+        const next = params.get("next");
+        return next && next.startsWith("/") ? next : "/session.html";
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        errorBox.classList.remove("visible");
+        submitButton.classList.add("is-busy");
+        submitButton.disabled = true;
+        try {
+          const response = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "same-origin",
+            body: JSON.stringify({
+              email: document.querySelector("#email").value.trim(),
+              password: document.querySelector("#password").value
+            })
+          });
+          const data = await response.json();
+          if (!response.ok) {
+            showError(data.error || "Could not sign in. Please try again.");
+            return;
+          }
+          window.location.href = nextDestination();
+        } catch {
+          showError("Could not reach the server. Check that it is running and try again.");
+        } finally {
+          submitButton.classList.remove("is-busy");
+          submitButton.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
