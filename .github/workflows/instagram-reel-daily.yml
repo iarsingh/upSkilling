@@ -11,6 +11,11 @@ on:
         required: false
         default: true
         type: boolean
+      verify_only:
+        description: "Verify Instagram secrets without publishing"
+        required: false
+        default: false
+        type: boolean
       filename:
         description: "Optional exact MP4 filename from reel-generator/output"
         required: false
@@ -34,6 +39,7 @@ jobs:
       INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
       INSTAGRAM_API_VERSION: ${{ vars.INSTAGRAM_API_VERSION }}
       DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || 'false' }}
+      VERIFY_ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.verify_only || 'false' }}
 
     steps:
       - name: Checkout repository
@@ -45,7 +51,7 @@ jobs:
           node-version: "24"
 
       - name: Validate Instagram secrets
-        if: ${{ env.DRY_RUN != 'true' }}
+        if: ${{ env.DRY_RUN != 'true' || env.VERIFY_ONLY == 'true' }}
         run: |
           test -n "$INSTAGRAM_ACCESS_TOKEN"
           test -n "$INSTAGRAM_ACCOUNT_ID"
@@ -55,13 +61,15 @@ jobs:
           REQUESTED_FILENAME: ${{ inputs.filename }}
         run: |
           args=()
-          if [ -n "$REQUESTED_FILENAME" ]; then
+          if [ "$VERIFY_ONLY" = "true" ]; then
+            args+=(--verify)
+          elif [ -n "$REQUESTED_FILENAME" ]; then
             args+=(--filename "$REQUESTED_FILENAME")
           fi
           node src/publish-instagram-reel.js "${args[@]}"
 
       - name: Persist publish state
-        if: ${{ env.DRY_RUN != 'true' }}
+        if: ${{ env.DRY_RUN != 'true' && env.VERIFY_ONLY != 'true' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
