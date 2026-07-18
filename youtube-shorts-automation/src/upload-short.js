@@ -122,7 +122,9 @@ async function main() {
     privacyStatus: youtubePrivacyStatus
   };
   fs.writeFileSync(statePath, `${JSON.stringify(state, null, 2)}\n`);
+  fs.unlinkSync(videoPath);
   console.log(`Uploaded successfully: https://youtu.be/${result.id}`);
+  console.log(`Removed uploaded Short from queue: ${filename}`);
 }
 
 main().catch((error) => {

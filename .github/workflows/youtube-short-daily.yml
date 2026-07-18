@@ -57,12 +57,13 @@ jobs:
           REQUESTED_FILENAME: ${{ inputs.filename }}
         run: node src/upload-short.js
 
-      - name: Persist upload state
+      - name: Persist upload state and remove uploaded Short
         if: ${{ env.DRY_RUN != 'true' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add upload-state.json
+          git add -u content
           if git diff --cached --quiet; then
             exit 0
           fi

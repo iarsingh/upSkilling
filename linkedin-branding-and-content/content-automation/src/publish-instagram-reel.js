@@ -114,7 +114,9 @@ async function main() {
     mediaId: result.mediaId
   });
   saveState(state);
+  fs.unlinkSync(path.join(outputDir, reel.filename));
   console.log(`Published Instagram Reel ${reel.filename}: ${result.mediaId}`);
+  console.log(`Removed published Reel from queue: ${reel.filename}`);
 }
 
 main().catch((error) => {
