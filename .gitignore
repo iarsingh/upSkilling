@@ -3,6 +3,9 @@ __pycache__/
 .pytest_cache/
 .venv/
 node_modules/
+chroma_db/
+audit_log.jsonl
+genai-hands-on-projects/python/meeting-notes-summarizer/outputs/
 .env
 .env.*
 !.env.example
