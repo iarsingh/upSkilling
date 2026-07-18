@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* Bind Tailwind's `dark:` variant to the .dark class toggled in App.tsx,
+   instead of the browser's prefers-color-scheme (Tailwind v4 default). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "Lora", Georgia, serif;
+  --font-display: "Playfair Display", "Lora", serif;
+  --font-heading: "Space Grotesk", "Inter", sans-serif;
+}
+
+/* Custom transitions and printing rules */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+  .print-card {
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+}
+
+/* Smooth background transitions when switching themes */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-width: 320px;
+  text-rendering: optimizeLegibility;
+}
+
+button, a { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid #10b981; outline-offset: 3px; }
+
+.app-shell { position: relative; isolation: isolate; }
+.app-shell::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle at 12% 8%, rgba(79,70,229,.10), transparent 26%), radial-gradient(circle at 88% 18%, rgba(16,185,129,.08), transparent 24%);
+}
+.dark .app-shell::before { background: radial-gradient(circle at 12% 8%, rgba(16,185,129,.10), transparent 25%), radial-gradient(circle at 86% 14%, rgba(79,70,229,.10), transparent 22%); }
+.nav-shell { background:rgba(255,255,255,.76); backdrop-filter:blur(20px) saturate(150%); -webkit-backdrop-filter:blur(20px) saturate(150%); }
+.dark .nav-shell { background:rgba(9,9,11,.78); }
+.hero-grid { min-height:calc(100vh - 9rem); position:relative; }
+.hero-grid::after { content:""; position:absolute; width:260px; height:260px; right:8%; top:15%; z-index:-1; border-radius:999px; background:rgba(99,102,241,.08); filter:blur(70px); animation:float-orb 8s ease-in-out infinite alternate; }
+.dark .hero-grid::after { background:rgba(16,185,129,.08); }
+.text-gradient { background: linear-gradient(110deg,#4f46e5,#7c3aed 46%,#059669); -webkit-background-clip: text; color: transparent; }
+.dark .text-gradient { background: linear-gradient(110deg,#34d399,#22d3ee 55%,#a78bfa); -webkit-background-clip: text; color: transparent; }
+.architecture-console { background: linear-gradient(145deg,rgba(255,255,255,.9),rgba(241,245,249,.7)); }
+.dark .architecture-console { background: linear-gradient(145deg,rgba(24,24,27,.96),rgba(9,9,11,.9)); }
+.architecture-console::before { content:""; position:absolute; inset:0; opacity:.14; background-image:linear-gradient(rgba(100,116,139,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(100,116,139,.3) 1px,transparent 1px); background-size:24px 24px; }
+.status-dot { width:7px; height:7px; border-radius:999px; background:#10b981; box-shadow:0 0 0 5px rgba(16,185,129,.12),0 0 18px #10b981; animation:pulse-dot 2s infinite; }
+.topology-node { position:absolute; z-index:2; display:flex; align-items:center; gap:.45rem; padding:.65rem .8rem; border-radius:.85rem; background:rgba(255,255,255,.88); border:1px solid rgba(148,163,184,.3); box-shadow:0 10px 30px rgba(15,23,42,.08); font:600 10px "JetBrains Mono",monospace; transition:transform .25s ease,border-color .25s ease; }
+.dark .topology-node { background:rgba(24,24,27,.9); border-color:rgba(255,255,255,.1); box-shadow:0 12px 30px rgba(0,0,0,.35); }
+.topology-node:hover { transform:translateY(-4px) scale(1.03); border-color:#10b981; }
+.node-cloud { left:50%; top:8%; transform:translateX(-50%); color:#0284c7; }.node-cloud:hover{transform:translateX(-50%) translateY(-4px) scale(1.03)}
+.node-platform { left:50%; top:43%; transform:translateX(-50%); color:#059669; }.node-platform:hover{transform:translateX(-50%) translateY(-4px) scale(1.03)}
+.node-service { left:4%; bottom:5%; color:#7c3aed; }.node-data { right:4%; bottom:5%; color:#d97706; }
+.topology-line { position:absolute; z-index:1; height:1px; transform-origin:left center; background:linear-gradient(90deg,rgba(16,185,129,.2),rgba(16,185,129,.9),rgba(16,185,129,.2)); }
+.line-a { width:94px; left:50%; top:29%; transform:rotate(90deg); }.line-b { width:126px; left:50%; top:61%; transform:rotate(145deg); }.line-c { width:126px; left:50%; top:61%; transform:rotate(35deg); }
+@keyframes pulse-dot { 50% { opacity:.55; box-shadow:0 0 0 9px rgba(16,185,129,0); } }
+@keyframes float-orb { to { transform:translate(-35px,45px) scale(1.18); } }
+@media (max-width: 767px) { .hero-grid { min-height:auto; } }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; } }

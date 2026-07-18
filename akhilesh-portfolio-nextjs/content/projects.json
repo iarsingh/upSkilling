@@ -1,0 +1,268 @@
+[
+  {
+    "slug": "gke-platform-engineering",
+    "title": "GKE Platform Engineering & GitOps Landing Zone",
+    "category": "Platform Engineering",
+    "subtitle": "Enterprise-grade GKE landing zone provisioned with Terraform and synchronized via ArgoCD GitOps",
+    "problem": "Disjointed Kubernetes clusters across multiple developer domains with no standardized network policies, resource constraints, or synchronized deployment models — leading to cloud waste and security risk.",
+    "approach": "Built a fully declarative landing zone: Terraform provisions the GCP Shared VPC, private GKE clusters, and Cloud Armor. ArgoCD bootstraps in a hub cluster to synchronize state across namespace branches using an App-of-Apps pattern.",
+    "challenges": "IP exhaustion in GCP subnetworks under rapid pod scaling — resolved by migrating to GKE alias IP allocation with custom secondary ranges and tuning the cluster autoscaler.",
+    "solution": "Isolated VPC networking boundaries, GKE Workload Identity for keyless access to Google services, and strict NetworkPolicy enforcement across namespaces.",
+    "results": [
+      "Unified deployment model across multiple developer teams.",
+      "Cut environment provisioning time from days to minutes.",
+      "Enforced consistent compliance on secret injection and network isolation."
+    ],
+    "technologies": ["GCP", "Kubernetes", "Terraform", "ArgoCD", "Helm", "Cloud Armor"],
+    "businessImpact": [
+      "Faster, safer environment provisioning for every application team.",
+      "Reduced security review overhead via standardized, auditable network boundaries."
+    ],
+    "githubUrl": "https://github.com/iarsingh/upSkilling/tree/main/gcp-platform-engineering-portfolio",
+    "imageUrl": null,
+    "architecture": {
+      "nodes": [
+        { "id": "dns", "label": "GCP Cloud DNS", "type": "network" },
+        { "id": "armor", "label": "Cloud Armor (WAF)", "type": "security" },
+        { "id": "lb", "label": "External HTTPS Load Balancer", "type": "network" },
+        { "id": "gke", "label": "Private GKE Nodes", "type": "compute" },
+        { "id": "git", "label": "Git Repository", "type": "storage" },
+        { "id": "argo", "label": "ArgoCD Controller", "type": "compute" },
+        { "id": "vault", "label": "HashiCorp Vault", "type": "security" }
+      ],
+      "edges": [
+        { "from": "dns", "to": "armor", "label": "Traffic" },
+        { "from": "armor", "to": "lb", "label": "Filtered" },
+        { "from": "lb", "to": "gke", "label": "Route" },
+        { "from": "git", "to": "argo", "label": "Sync" },
+        { "from": "argo", "to": "gke", "label": "Apply manifests" },
+        { "from": "vault", "to": "gke", "label": "Inject secrets" }
+      ]
+    }
+  },
+  {
+    "slug": "mlops-kubeflow-vertex-ai",
+    "title": "Kubernetes ML Platform: Vertex AI & Kubeflow",
+    "category": "MLOps & AI",
+    "subtitle": "Automated end-to-end machine learning pipeline hosting Triton inference on GKE",
+    "problem": "Data science teams struggled to move experimental models into production. Containerization was manual, causing inconsistent cold starts and inference failures under load.",
+    "approach": "Serverless Kubeflow pipeline integrated with Vertex AI. Standard container structures, automated GPU scheduling, and Triton Inference Server with dynamic batching.",
+    "challenges": "Costly idle GPU capacity — mitigated with zero-scale node pools that cold-migrate idle models to storage.",
+    "solution": "CI pipelines that build model images, trigger training, run evaluation checks, and roll Triton pods with the newest evaluated model.",
+    "results": [
+      "Cut time-to-production for ML models from weeks to under an hour.",
+      "Lowered inference latency using Triton dynamic batching.",
+      "Improved GPU utilization with zero-scale cold pooling."
+    ],
+    "technologies": ["GCP", "Kubeflow Pipelines", "Vertex AI", "Triton Server", "Docker", "Prometheus"],
+    "businessImpact": [
+      "Data science teams ship models independently without platform-team bottlenecks.",
+      "GPU spend scales with actual usage instead of always-on reservations."
+    ],
+    "githubUrl": "https://github.com/iarsingh/upSkilling/tree/main/gcp-mlops-pipeline-showcase",
+    "imageUrl": null,
+    "architecture": {
+      "nodes": [
+        { "id": "source", "label": "Raw Data (GCS)", "type": "storage" },
+        { "id": "train", "label": "Kubeflow Training Pipeline", "type": "ml" },
+        { "id": "registry", "label": "Vertex AI Model Registry", "type": "ml" },
+        { "id": "deploy", "label": "CI Automation", "type": "compute" },
+        { "id": "triton", "label": "Triton Server (GKE GPU)", "type": "compute" },
+        { "id": "client", "label": "Client Apps", "type": "client" }
+      ],
+      "edges": [
+        { "from": "source", "to": "train", "label": "Fetch data" },
+        { "from": "train", "to": "registry", "label": "Register weights" },
+        { "from": "registry", "to": "deploy", "label": "Trigger deploy" },
+        { "from": "deploy", "to": "triton", "label": "Rolling upgrade" },
+        { "from": "client", "to": "triton", "label": "Inference" }
+      ]
+    }
+  },
+  {
+    "slug": "terraform-landing-zone",
+    "title": "Multi-Environment Terraform Landing Zone",
+    "category": "Infrastructure as Code",
+    "subtitle": "Reusable Terraform module library for multi-environment GCP landing zones",
+    "problem": "Each new environment (dev/stage/prod) was hand-built, causing drift, inconsistent IAM boundaries, and slow onboarding for new product squads.",
+    "approach": "Designed a versioned module library (networking, IAM, GKE, Cloud SQL, secrets) consumed by thin per-environment root configs, with remote state and locking in GCS.",
+    "challenges": "Coordinating module version upgrades across many environments without breaking existing state — solved with semantic versioning and a staged rollout process through non-prod first.",
+    "solution": "A `platform/modules` library plus environment root configs that pin module versions, code-reviewed via pull request with automated `terraform plan` output posted as PR comments.",
+    "results": [
+      "New environment bootstrap time dropped from days to under an hour.",
+      "Configuration drift across environments eliminated.",
+      "Consistent IAM and network policy enforced by default."
+    ],
+    "technologies": ["Terraform", "GCP", "GitHub Actions", "GCS remote state"],
+    "businessImpact": [
+      "New product squads onboard onto compliant infrastructure without platform-team hand-holding.",
+      "Fewer security exceptions since every environment inherits the same guardrails."
+    ],
+    "githubUrl": "https://github.com/iarsingh/upSkilling/tree/main/gcp-cloud-engineering-portfolio",
+    "imageUrl": null,
+    "architecture": {
+      "nodes": [
+        { "id": "modules", "label": "Terraform Module Library", "type": "storage" },
+        { "id": "dev", "label": "Dev Root Config", "type": "compute" },
+        { "id": "stage", "label": "Stage Root Config", "type": "compute" },
+        { "id": "prod", "label": "Prod Root Config", "type": "compute" },
+        { "id": "state", "label": "GCS Remote State", "type": "storage" },
+        { "id": "ci", "label": "GitHub Actions Plan/Apply", "type": "compute" }
+      ],
+      "edges": [
+        { "from": "modules", "to": "dev", "label": "Consume" },
+        { "from": "modules", "to": "stage", "label": "Consume" },
+        { "from": "modules", "to": "prod", "label": "Consume" },
+        { "from": "ci", "to": "state", "label": "Lock/Write" },
+        { "from": "ci", "to": "prod", "label": "Apply (approved)" }
+      ]
+    }
+  },
+  {
+    "slug": "cicd-jenkins-terraform-k8s",
+    "title": "Cloud-Native CI/CD Platform Pipeline",
+    "category": "CI/CD & Automation",
+    "subtitle": "Jenkins builds containerized services, Terraform defines GKE, Ansible + Istio deliver secured workloads",
+    "problem": "Manual deployment scripts made releases slow and inconsistent across services, with no standard security scanning gate before production.",
+    "approach": "A single pipeline template: Jenkins builds and scans container images, Terraform provisions the target GKE environment, Ansible configures node-level tooling, and Istio enforces mTLS between services.",
+    "challenges": "Long build times from redundant dependency installs — fixed with container layer caching and self-hosted runner scale sets.",
+    "solution": "Shared Jenkins library used by every service repo, with mandatory SAST/dependency scan stages and progressive canary rollout via Istio traffic splitting.",
+    "results": [
+      "Cut the build-and-deploy cycle from hours to minutes.",
+      "Standardized security scanning across every service pipeline.",
+      "Canary rollouts reduced bad-deploy blast radius."
+    ],
+    "technologies": ["Jenkins", "Terraform", "Ansible", "Kubernetes", "Istio"],
+    "businessImpact": [
+      "Multiple daily releases became routine instead of risky.",
+      "Security scanning gate caught vulnerable dependencies before production."
+    ],
+    "githubUrl": "https://github.com/iarsingh/upSkilling/tree/main/cicd-pipeline-jenkins-terraform-ansible-k8s",
+    "imageUrl": null,
+    "architecture": {
+      "nodes": [
+        { "id": "repo", "label": "Service Repository", "type": "storage" },
+        { "id": "jenkins", "label": "Jenkins Pipeline", "type": "compute" },
+        { "id": "scan", "label": "SAST / Dependency Scan", "type": "security" },
+        { "id": "tf", "label": "Terraform (GKE)", "type": "compute" },
+        { "id": "istio", "label": "Istio Canary Routing", "type": "network" }
+      ],
+      "edges": [
+        { "from": "repo", "to": "jenkins", "label": "Trigger" },
+        { "from": "jenkins", "to": "scan", "label": "Gate" },
+        { "from": "jenkins", "to": "tf", "label": "Provision" },
+        { "from": "tf", "to": "istio", "label": "Deploy + route" }
+      ]
+    }
+  },
+  {
+    "slug": "cloud-armor-security",
+    "title": "Cloud Armor & Istio Security Perimeter",
+    "category": "DevSecOps",
+    "subtitle": "Layered edge and mesh security for internet-facing GKE workloads",
+    "problem": "Internet-facing services had no consistent WAF layer or service-to-service authentication, leaving them exposed to L7 attacks and lateral movement inside the cluster.",
+    "approach": "Cloud Armor security policies at the load balancer edge (rate limiting, OWASP rule sets, geo-fencing) combined with Istio mutual TLS and authorization policies inside the mesh.",
+    "challenges": "Tuning Cloud Armor rules to avoid false positives on legitimate traffic — addressed with a staged preview mode before enforcing blocks.",
+    "solution": "Defense-in-depth: Cloud Armor filters malicious traffic before it reaches the cluster, Istio enforces mTLS and namespace-scoped authorization policies between services.",
+    "results": [
+      "Blocked a substantial volume of malicious edge traffic before it reached application pods.",
+      "All service-to-service traffic encrypted and authenticated by default.",
+      "Reduced blast radius of any single compromised service."
+    ],
+    "technologies": ["GCP Cloud Armor", "Istio Service Mesh", "Kubernetes", "IAM"],
+    "businessImpact": [
+      "Meaningfully reduced exposure to common web attack patterns without slowing releases.",
+      "Simplified security audits with centrally defined, auditable policy."
+    ],
+    "imageUrl": null,
+    "architecture": {
+      "nodes": [
+        { "id": "internet", "label": "Internet Traffic", "type": "client" },
+        { "id": "armor", "label": "Cloud Armor (Edge WAF)", "type": "security" },
+        { "id": "lb", "label": "Load Balancer", "type": "network" },
+        { "id": "meshgw", "label": "Istio Ingress Gateway", "type": "network" },
+        { "id": "svc", "label": "Authenticated Services (mTLS)", "type": "compute" }
+      ],
+      "edges": [
+        { "from": "internet", "to": "armor", "label": "Filter" },
+        { "from": "armor", "to": "lb", "label": "Clean traffic" },
+        { "from": "lb", "to": "meshgw", "label": "Route" },
+        { "from": "meshgw", "to": "svc", "label": "mTLS" }
+      ]
+    }
+  },
+  {
+    "slug": "elk-observability-monitoring",
+    "title": "ELK & Prometheus Observability Platform",
+    "category": "Observability",
+    "subtitle": "Centralized logging, metrics, and alerting across a multi-cluster GKE fleet",
+    "problem": "Logs and metrics were scattered per cluster with no unified alerting, making incident triage slow and inconsistent.",
+    "approach": "Centralized ELK stack for log aggregation, Prometheus + Grafana for metrics and dashboards, with alert routing standardized through a single on-call pipeline.",
+    "challenges": "Log volume made storage costs balloon — addressed with index lifecycle management and sampling for low-value debug logs.",
+    "solution": "Fluent Bit ships logs to a central Elasticsearch cluster; Prometheus federation aggregates metrics across clusters; Grafana dashboards and alert rules are version-controlled and deployed as code.",
+    "results": [
+      "Cut mean time to detect production issues significantly.",
+      "One dashboard set for on-call, replacing scattered per-cluster tooling.",
+      "Reduced log storage costs via lifecycle policies."
+    ],
+    "technologies": ["ELK Stack", "Prometheus", "Grafana", "Fluent Bit", "Kubernetes"],
+    "businessImpact": [
+      "Faster incident response reduced customer-facing downtime.",
+      "Predictable observability costs instead of runaway log storage spend."
+    ],
+    "imageUrl": null,
+    "architecture": {
+      "nodes": [
+        { "id": "apps", "label": "Application Pods", "type": "compute" },
+        { "id": "fluent", "label": "Fluent Bit", "type": "compute" },
+        { "id": "es", "label": "Elasticsearch", "type": "database" },
+        { "id": "kibana", "label": "Kibana", "type": "client" },
+        { "id": "prom", "label": "Prometheus", "type": "database" },
+        { "id": "grafana", "label": "Grafana Dashboards", "type": "client" }
+      ],
+      "edges": [
+        { "from": "apps", "to": "fluent", "label": "Logs" },
+        { "from": "fluent", "to": "es", "label": "Ship" },
+        { "from": "es", "to": "kibana", "label": "Query" },
+        { "from": "apps", "to": "prom", "label": "Metrics scrape" },
+        { "from": "prom", "to": "grafana", "label": "Dashboards" }
+      ]
+    }
+  },
+  {
+    "slug": "gcp-cost-optimization",
+    "title": "Automated GCP Cost Optimization Engine",
+    "category": "Cloud FinOps",
+    "subtitle": "Serverless orchestration that right-sizes compute, storage, and database spend",
+    "problem": "Idle GPU VMs, oversized disks, and high-tier Cloud SQL instances stayed active outside business hours, causing significant avoidable monthly spend.",
+    "approach": "A serverless scanner rates GCP resource activity using Cloud Logging and API metrics, then executes automated downsizing, snapshotting, or shutdown via Cloud Functions.",
+    "challenges": "Avoiding accidental shutdown of resources developers forgot to tag correctly — solved with a Slack dry-run warning window before any automated action.",
+    "solution": "Cloud Scheduler triggers Cloud Functions to snapshot idle disks, scale non-production GKE node pools to zero after hours, and demote sandbox Cloud SQL tiers.",
+    "results": [
+      "Meaningful year-one cost reduction across non-production environments.",
+      "Full visibility into unutilized resources via a daily Slack digest.",
+      "Improved tagging compliance from the warning feedback loop."
+    ],
+    "technologies": ["GCP Cloud Functions", "Cloud Scheduler", "Python", "Slack API", "Terraform"],
+    "businessImpact": [
+      "Freed budget for platform investment instead of idle infrastructure.",
+      "Gave engineering leadership a clear, ongoing cost-visibility signal."
+    ],
+    "imageUrl": null,
+    "architecture": {
+      "nodes": [
+        { "id": "cron", "label": "Cloud Scheduler", "type": "network" },
+        { "id": "func", "label": "Cost Analyzer Function", "type": "compute" },
+        { "id": "metrics", "label": "Cloud Monitoring / Logging", "type": "database" },
+        { "id": "slack", "label": "Slack Alerts", "type": "client" },
+        { "id": "resources", "label": "GKE / SQL / Disks", "type": "compute" }
+      ],
+      "edges": [
+        { "from": "cron", "to": "func", "label": "Trigger" },
+        { "from": "func", "to": "metrics", "label": "Query usage" },
+        { "from": "func", "to": "slack", "label": "Warn" },
+        { "from": "func", "to": "resources", "label": "Scale/Snapshot" }
+      ]
+    }
+  }
+]

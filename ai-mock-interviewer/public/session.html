@@ -31,8 +31,13 @@
           <div class="nav-group quick-actions">
             <button id="openCommandPalette" class="ghost link-button small command-button" type="button" title="Command palette (Ctrl/Cmd + K)"><span>Commands</span><kbd>&#8984;K</kbd></button>
             <a class="ghost link-button small" href="/dashboard.html">Skills dashboard</a>
+            <a id="openCvJdSetup" class="ghost link-button small setup-shortcut" href="#cv-jd-setup">CV/JD &amp; skills</a>
+            <a class="ghost link-button small" href="/contact.html">Contact</a>
             <button id="resetLayout" class="ghost link-button small" type="button">Reset layout</button>
             <a class="ghost link-button small" href="https://github.com/iarsingh" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="ghost link-button small linkedin-button" href="https://www.linkedin.com/in/iamarsingh/" target="_blank" rel="noopener noreferrer" aria-label="Connect with iarsingh on LinkedIn">LinkedIn</a>
+            <a class="ghost link-button small instagram-button" href="https://www.instagram.com/iarsingh/" target="_blank" rel="noopener noreferrer" aria-label="Follow iarsingh on Instagram">Instagram</a>
+            <a class="ghost link-button small topmate-button" href="https://topmate.io/iamarsingh" target="_blank" rel="noopener noreferrer" aria-label="Book a one-to-one mentorship session on Topmate">&#128197; Book 1:1</a>
             <a class="ghost link-button small coffee-button" href="https://www.buymeacoffee.com/iarsingh" target="_blank" rel="noopener noreferrer" title="Buy me a coffee">&#9749; Coffee</a>
             <button class="theme-toggle" type="button" data-action="toggle-theme" aria-pressed="false" aria-label="Toggle dark mode" title="Toggle dark mode">
               <span class="theme-icon theme-icon-light" aria-hidden="true">&#9728;&#65039;</span>
@@ -170,8 +175,8 @@
               <option value="strict">🧐 Strict</option>
             </select>
           </label>
-          <details class="setup-collapse">
-          <summary>Advanced setup (technology, CV/JD, custom skills)</summary>
+          <section id="advanced-setup" class="setup-collapse setup-always-open" aria-labelledby="advancedSetupTitle">
+          <h2 id="advancedSetupTitle" class="setup-section-heading">Advanced setup — custom skills, CV and JD imports</h2>
           <label>
             Technology practice
             <select id="technology">
@@ -204,8 +209,8 @@
               <option value="sequence">Sequential questions</option>
             </select>
           </label>
-          <details class="setup-details">
-            <summary>Custom skills</summary>
+          <section id="custom-skills-setup" class="setup-details setup-feature-panel" aria-labelledby="customSkillsTitle">
+            <h3 id="customSkillsTitle" class="setup-feature-heading">Custom skills</h3>
             <div class="details-content">
               <label>
                 Skill name
@@ -219,9 +224,10 @@
                 <button id="addCustomSkill" class="ghost" type="button">Add skill</button>
                 <button id="deleteCustomSkill" class="danger" type="button">Delete selected</button>
               </div>
+              <p id="customSkillStatus" class="custom-skill-status" role="status" aria-live="polite"></p>
               <div id="customSkillList" class="custom-skill-list"></div>
             </div>
-          </details>
+          </section>
           <label>
             30-day practice plan
             <select id="practiceDay">
@@ -259,8 +265,8 @@
               </label>
             </div>
           </details>
-          <details class="setup-details">
-            <summary>CV and job description</summary>
+          <section id="cv-jd-setup" class="setup-details setup-feature-panel" aria-labelledby="cvJdTitle">
+            <h3 id="cvJdTitle" class="setup-feature-heading">CV and job description</h3>
             <div class="details-content">
               <label>
                 CV / profile context
@@ -290,8 +296,9 @@
                 <button id="importJdPdf" class="ghost" type="button">Import file</button>
               </div>
               <button id="saveContext" class="ghost" type="button">Save CV and JD</button>
+              <p id="contextImportStatus" class="context-import-status" role="status" aria-live="polite">CV and JD files up to 5 MB are supported.</p>
             </div>
-          </details>
+          </section>
           <label class="toggle">
             <input id="autoNext" type="checkbox" checked>
             <span>Live auto-advance</span>
@@ -300,7 +307,7 @@
             <input id="realTimeSimulation" type="checkbox" checked>
             <span>Real-time simulation</span>
           </label>
-          </details>
+          </section>
         </aside>
 
         <section class="panel interview">

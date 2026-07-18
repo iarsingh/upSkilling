@@ -44,7 +44,7 @@ locally, and works fully offline using a built-in question bank of 2,000+ questi
 
 - **Runtime**: Node.js (built-in `http` module, no framework)
 - **Frontend**: vanilla HTML/CSS/JS, browser Speech Synthesis + Speech Recognition APIs
-- **State**: browser `localStorage` (no server-side database)
+- **State**: browser `localStorage`; PostgreSQL for durable accounts (local JSON fallback)
 - **Optional AI**: local Ollama, or Anthropic Claude via `@anthropic-ai/sdk`
 - **JD file parsing**: `pdf-parse`, `mammoth` (DOCX), `tesseract.js` (OCR)
 - **Browser extension**: Manifest V3 Chrome extension (`chrome-extension/`)
@@ -94,11 +94,29 @@ This is the easiest way for another person to run the project. It works with the
 The app is gated behind sign-in. The dashboard (`/session.html`) and the admin report (`/admin.html`) both require an
 account; `/admin.html` additionally requires the `admin` role. The landing page (`/`) stays public.
 
-Accounts live in `data/users.json`, a local JSON file created automatically the first time the server starts (it is
-git-ignored, so it is never committed). Passwords are hashed with Node's built-in `scrypt`; sessions are a signed,
-stateless cookie, so sign-in also works if the app is deployed to a read-only host such as Vercel.
+Accounts use PostgreSQL when `DATABASE_URL` is configured. The required `users` table is created automatically.
+Without `DATABASE_URL`, local development falls back to `data/users.json`, which is git-ignored. Passwords are hashed
+with Node's built-in `scrypt`; sessions use a signed, stateless cookie.
 
-On first boot, five seed accounts are created for trying the app immediately:
+For persistent hosted accounts, create a PostgreSQL database with your preferred provider and configure:
+
+```text
+DATABASE_URL=postgresql://user:password@host:5432/database
+DATABASE_SSL=true
+SESSION_SECRET=a-long-random-production-secret
+```
+
+The `/api/health` response reports the database engine and connection state without exposing credentials.
+
+## Contact Messages
+
+The public `/contact.html` page accepts mentorship, interview-preparation, collaboration, and project-feedback
+messages. With PostgreSQL configured, submissions are stored in the `contact_messages` table. JSON fallback mode
+stores them in the git-ignored `data/contacts.json` file. The endpoint validates input, includes a honeypot field, and
+limits each source address to five accepted messages per hour.
+
+In JSON fallback mode, five seed accounts are created for trying the app immediately. When PostgreSQL is first
+connected, existing JSON users are imported automatically if the database table is empty:
 
 | Role  | Email                                   | Password        |
 |-------|------------------------------------------|------------------|
@@ -109,8 +127,8 @@ On first boot, five seed accounts are created for trying the app immediately:
 | Admin | priya.admin@aimockinterviewer.app         | Admin@Report2    |
 
 Anyone can also create their own account from `/signup.html`; new sign-ups get the `user` role. There is no UI yet to
-promote a user to `admin` - do that by editing the `role` field for that user directly in `data/users.json` and
-restarting the server.
+promote a user to `admin`. In PostgreSQL, update the user's `role` in the `users` table; in JSON fallback mode, edit
+the `role` field in `data/users.json` and restart the server.
 
 Interview progress itself still lives in the browser's `localStorage`, exactly as before - signing in controls who can
 reach the app and the admin report, but it does not (yet) sync interview history to a per-account server-side store.

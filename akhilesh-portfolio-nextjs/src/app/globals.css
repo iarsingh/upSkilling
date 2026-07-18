@@ -1,0 +1,79 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Bind Tailwind's `dark:` variant to the .dark class toggled by ThemeProvider,
+   instead of the browser's prefers-color-scheme (Tailwind v4 default). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+  --font-devanagari: var(--font-devanagari);
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, a { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 3px;
+}
+
+.text-gradient {
+  background: linear-gradient(110deg, #4f46e5, #7c3aed 46%, #059669);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dark .text-gradient {
+  background: linear-gradient(110deg, #34d399, #22d3ee 55%, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Poetry section always uses a warm, elegant dark theme regardless of the
+   site-wide toggle, per spec: "should feel different... dark elegant theme". */
+.poetry-scope {
+  color-scheme: dark;
+  background: radial-gradient(circle at 12% 8%, rgba(217, 119, 6, .12), transparent 30%),
+              radial-gradient(circle at 88% 20%, rgba(190, 24, 93, .10), transparent 28%),
+              #0c0a09;
+  color: #e7e5e4;
+}
+
+@keyframes float-orb { to { transform: translate(-35px, 45px) scale(1.18); } }
+@keyframes float-a { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(30px, 40px); } }
+@keyframes float-b { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-25px, 30px); } }
+@keyframes blink { 50% { border-color: transparent; } }
+.animate-float-a { animation: float-a 10s ease-in-out infinite; }
+.animate-float-b { animation: float-b 12s ease-in-out infinite; }
+@keyframes pulse-dot { 50% { opacity: .55; box-shadow: 0 0 0 9px rgba(16, 185, 129, 0); } }
+.status-dot {
+  width: 7px; height: 7px; border-radius: 999px; background: #10b981;
+  box-shadow: 0 0 0 5px rgba(16, 185, 129, .12), 0 0 18px #10b981;
+  animation: pulse-dot 2s infinite;
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background-color: white !important; color: black !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

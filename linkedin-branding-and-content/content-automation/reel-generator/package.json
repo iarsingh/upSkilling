@@ -1,0 +1,13 @@
+{
+  "name": "linkedin-reel-generator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "pilot": "node batch.js --pilot",
+    "batch": "node batch.js"
+  },
+  "dependencies": {
+    "playwright": "^1.61.1"
+  }
+}

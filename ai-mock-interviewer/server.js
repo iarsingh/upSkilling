@@ -1,3 +1,5 @@
+require("dotenv").config({ quiet: true });
+
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
@@ -6,11 +8,13 @@ const mammoth = require("mammoth");
 const { PDFParse } = require("pdf-parse");
 const tesseract = require("tesseract.js");
 const Anthropic = require("@anthropic-ai/sdk");
+const { Pool } = require("pg");
 
 const PORT = Number(process.env.PORT || 3030);
 const HOST = process.env.HOST || "127.0.0.1";
 const OLLAMA_URL = process.env.OLLAMA_URL || "http://127.0.0.1:11434";
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || "llama3.1:8b";
+const OLLAMA_KEEP_ALIVE = process.env.OLLAMA_KEEP_ALIVE || "30m";
 const LLM_PROVIDER = process.env.LLM_PROVIDER || "ollama";
 const OFFLINE_ONLY = process.env.OFFLINE_ONLY === "1" || process.env.OFFLINE_ONLY === "true";
 const CLAUDE_MODEL = process.env.CLAUDE_MODEL || "claude-opus-4-8";
@@ -19,19 +23,30 @@ const PUBLIC_DIR = path.join(__dirname, "public");
 const DATA_DIR = path.join(__dirname, "data");
 const PROFILE_PATH = path.join(DATA_DIR, "applicant-profile.json");
 const QUESTION_BANK_PATH = path.join(__dirname, "1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt");
+const DATABASE_URL = process.env.DATABASE_URL || "";
+const databaseUsesSsl = DATABASE_URL && !/localhost|127\.0\.0\.1/.test(DATABASE_URL)
+  && process.env.DATABASE_SSL !== "false";
+const db = DATABASE_URL
+  ? new Pool({
+      connectionString: DATABASE_URL,
+      ssl: databaseUsesSsl ? { rejectUnauthorized: false } : false,
+      max: Number(process.env.DATABASE_POOL_SIZE || 5),
+      connectionTimeoutMillis: 5000
+    })
+  : null;
+let databaseReady;
 
 /* -------------------------------------------------------------------------
- * Auth: local JSON-file user store + stateless signed session cookies.
+ * Auth: PostgreSQL user store (local JSON fallback) + signed cookies.
  *
- * This app has no server-side database (see README), so accounts live in
- * data/users.json (git-ignored on real deployments; auto-created on first
- * boot with 5 seed accounts below). Sessions are a signed, stateless token
- * (HMAC-SHA256) stored in an httpOnly cookie, so login also works on
- * read-only serverless hosts (Vercel) where the filesystem can't persist
- * new writes between invocations. Passwords are hashed with scrypt.
+ * DATABASE_URL enables durable PostgreSQL storage. Without it, accounts live
+ * in data/users.json for zero-configuration local development. Sessions are
+ * stateless HMAC-SHA256 tokens stored in an httpOnly cookie. Passwords use
+ * scrypt hashes.
  * ---------------------------------------------------------------------- */
 
 const USERS_PATH = path.join(DATA_DIR, "users.json");
+const CONTACTS_PATH = path.join(DATA_DIR, "contacts.json");
 const SESSION_SECRET_PATH = path.join(DATA_DIR, "session-secret.txt");
 const SESSION_COOKIE_NAME = "aimi_session";
 const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 7; // 7 days
@@ -105,6 +120,124 @@ function ensureUsersSeeded() {
     createdAt: now
   }));
   writeUsers(seed);
+}
+
+function initializeDatabase() {
+  if (!db) return Promise.resolve(false);
+  if (!databaseReady) {
+    databaseReady = db.query(`
+      CREATE TABLE IF NOT EXISTS users (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL UNIQUE,
+        password_hash TEXT NOT NULL,
+        role TEXT NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'admin')),
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `).then(async () => {
+      await db.query(`
+        CREATE TABLE IF NOT EXISTS contact_messages (
+          id TEXT PRIMARY KEY,
+          name TEXT NOT NULL,
+          email TEXT NOT NULL,
+          subject TEXT NOT NULL,
+          message TEXT NOT NULL,
+          status TEXT NOT NULL DEFAULT 'new',
+          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+      `);
+      const count = await db.query("SELECT COUNT(*)::int AS count FROM users");
+      const localUsers = readUsers();
+      if (count.rows[0].count === 0 && localUsers.length) {
+        for (const user of localUsers) {
+          await db.query(
+            `INSERT INTO users (id, name, email, password_hash, role, created_at)
+             VALUES ($1, $2, $3, $4, $5, $6)
+             ON CONFLICT (email) DO NOTHING`,
+            [user.id, user.name, user.email, user.passwordHash, user.role, user.createdAt]
+          );
+        }
+      }
+      return true;
+    }).catch((error) => {
+      databaseReady = undefined;
+      throw error;
+    });
+  }
+  return databaseReady;
+}
+
+function rowToUser(row) {
+  return {
+    id: row.id,
+    name: row.name,
+    email: row.email,
+    passwordHash: row.password_hash,
+    role: row.role,
+    createdAt: new Date(row.created_at).toISOString()
+  };
+}
+
+async function findUserByEmail(email) {
+  if (!db) return readUsers().find((entry) => entry.email.toLowerCase() === email) || null;
+  await initializeDatabase();
+  const result = await db.query("SELECT * FROM users WHERE LOWER(email) = LOWER($1) LIMIT 1", [email]);
+  return result.rows[0] ? rowToUser(result.rows[0]) : null;
+}
+
+async function findUserById(id) {
+  if (!db) return readUsers().find((entry) => entry.id === id) || null;
+  await initializeDatabase();
+  const result = await db.query("SELECT * FROM users WHERE id = $1 LIMIT 1", [id]);
+  return result.rows[0] ? rowToUser(result.rows[0]) : null;
+}
+
+async function createUser(user) {
+  if (!db) {
+    const users = readUsers();
+    users.push(user);
+    writeUsers(users);
+    return user;
+  }
+  await initializeDatabase();
+  const result = await db.query(
+    `INSERT INTO users (id, name, email, password_hash, role, created_at)
+     VALUES ($1, $2, $3, $4, $5, $6)
+     RETURNING *`,
+    [user.id, user.name, user.email, user.passwordHash, user.role, user.createdAt]
+  );
+  return rowToUser(result.rows[0]);
+}
+
+async function saveContactMessage(contact) {
+  if (!db) {
+    let contacts = [];
+    try {
+      contacts = JSON.parse(fs.readFileSync(CONTACTS_PATH, "utf8"));
+    } catch {}
+    contacts.push(contact);
+    ensureDataDir();
+    fs.writeFileSync(CONTACTS_PATH, JSON.stringify(contacts, null, 2));
+    return;
+  }
+  await initializeDatabase();
+  await db.query(
+    `INSERT INTO contact_messages (id, name, email, subject, message, status, created_at)
+     VALUES ($1, $2, $3, $4, $5, 'new', $6)`,
+    [contact.id, contact.name, contact.email, contact.subject, contact.message, contact.createdAt]
+  );
+}
+
+async function databaseHealth() {
+  if (!db) return { configured: false, connected: false, engine: "json-file" };
+  try {
+    await initializeDatabase();
+    await db.query("SELECT 1");
+    return { configured: true, connected: true, engine: "postgresql" };
+  } catch (error) {
+    console.error("PostgreSQL health check failed:", error.message);
+    return { configured: true, connected: false, engine: "postgresql", error: "connection failed" };
+  }
 }
 
 function publicUser(user) {
@@ -194,10 +327,22 @@ function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || ""));
 }
 
+const contactAttempts = new Map();
+
+function canSubmitContact(req) {
+  const key = String(req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown").split(",")[0].trim();
+  const now = Date.now();
+  const attempts = (contactAttempts.get(key) || []).filter((time) => now - time < 60 * 60 * 1000);
+  if (attempts.length >= 5) return false;
+  attempts.push(now);
+  contactAttempts.set(key, attempts);
+  return true;
+}
+
 const PROTECTED_PAGES = new Set(["/dashboard.html", "/session.html", "/admin.html"]);
 const ADMIN_ONLY_PAGES = new Set(["/admin.html"]);
 
-ensureUsersSeeded();
+if (!db) ensureUsersSeeded();
 const OCR_LANG_PATH = path.join(__dirname, "node_modules", "@tesseract.js-data", "eng", "4.0.0");
 const MARKET_SKILL_BENCHMARK = `Target role family: Senior GCP DevOps / SRE / Cloud Engineer / Platform Engineer / Cloud Reliability Engineer / ML Platform Engineer
 Experience level: 6-8 years
@@ -493,6 +638,7 @@ async function askOllama(prompt, options = {}, timeoutMs = 45000) {
         model: OLLAMA_MODEL,
         prompt,
         stream: false,
+        keep_alive: OLLAMA_KEEP_ALIVE,
         options: {
           temperature: 0.35,
           num_ctx: 4096,
@@ -510,6 +656,21 @@ async function askOllama(prompt, options = {}, timeoutMs = 45000) {
 
   const data = await response.json();
   return String(data.response || "").trim();
+}
+
+async function warmOllama() {
+  if (OFFLINE_ONLY || LLM_PROVIDER !== "ollama") return;
+  try {
+    const response = await fetch(`${OLLAMA_URL}/api/generate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model: OLLAMA_MODEL, prompt: "", stream: false, keep_alive: OLLAMA_KEEP_ALIVE })
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    console.log(`Ollama model ${OLLAMA_MODEL} warmed and kept loaded for ${OLLAMA_KEEP_ALIVE}.`);
+  } catch (error) {
+    console.warn(`Ollama warm-up skipped: ${error.message}`);
+  }
 }
 
 async function askClaude(prompt, options = {}) {
@@ -909,13 +1070,15 @@ function questionPrompt(input) {
   const level = input.level || "mid-senior";
   const topic = input.topic || "Kubernetes, GCP, MLOps, CI/CD, Terraform, SRE";
   const interviewNumber = input.interviewNumber || 1;
-  const cvText = trimContext(input.cvText);
-  const jdText = combinedJobContext(input.jdText);
-  const historyEntries = Array.isArray(input.history) ? input.history.slice(-6) : [];
-  const history = historyEntries.join("\n");
+  const cvText = trimContext(input.cvText, 1600);
+  const isTechnologyRisk = /technology risk|it risk|audit|compliance|governance/i.test(`${role} ${topic} ${input.jdText || ""}`);
+  const providedJd = trimContext(input.jdText, 1600);
+  const jdText = providedJd || (isTechnologyRisk ? trimContext(TECHNOLOGY_RISK_LEAD_BACKGROUND, 1600) : "No JD provided.");
+  const historyEntries = Array.isArray(input.history) ? input.history.slice(-3) : [];
+  const history = trimContext(historyEntries.join("\n"), 1800);
   const lastEntry = historyEntries[historyEntries.length - 1] || "";
   const lastAnswerMatch = lastEntry.match(/Answer:\s*([\s\S]+)/);
-  const lastAnswer = lastAnswerMatch ? lastAnswerMatch[1].trim() : "";
+  const lastAnswer = lastAnswerMatch ? trimContext(lastAnswerMatch[1], 700) : "";
 
   return `You are running a mock technical interview.
 
@@ -935,34 +1098,10 @@ Recent interview history:
 ${history || "None yet."}
 
 ${lastAnswer
-    ? `The candidate's most recent answer was:\n${lastAnswer}\n\nAct like a real interviewer reacting to that specific answer: reference a concrete detail, tool, number, or claim the candidate just made, and ask ONE adaptive follow-up question that digs deeper into it or pressure-tests it - do not jump to an unrelated rotation topic yet. Only move to the next rotation topic below if this specific answer was already thin, fully covered in a prior follow-up, or you are deliberately starting a new section of the interview.`
-    : "There is no prior answer yet, so ask an opening or topic-starting question from the rotation below."}
+    ? `Most recent answer:\n${lastAnswer}\nAsk an adaptive follow-up that references one concrete detail from this answer.`
+    : "Ask an opening question aligned to the role and focus areas."}
 
-Priority skill rotation:
-1. GKE expert operations and troubleshooting
-2. Terraform expert modules, state, Terraform Enterprise, policy as code
-3. Python automation for cloud/platform work
-3a. Go programming for platform CLIs, APIs, Kubernetes controllers/operators, concurrency, and production tooling
-3b. FastAPI backend service design, Pydantic validation, async APIs, testing, observability, and deployment
-4. SRE concepts: SLI, SLO, error budgets, incidents, RCA
-5. Observability: Prometheus, Grafana, OpenTelemetry, Cloud Monitoring, logs
-6. GitOps and CI/CD: ArgoCD, Cloud Build, Jenkins, GitHub Actions
-7. GCP security: IAM, Workload Identity, Cloud Armor, secrets, supply chain
-8. Platform engineering: self-service, golden paths, DevEx, IDP
-9. Vertex AI, MLOps, model serving on Kubernetes, GPU workloads
-10. Networking fundamentals for GCP and Kubernetes
-11. GCP landing zones, org policy, Shared VPC, governance, and guardrails
-12. FinOps, cost optimization, budget controls, and cost-aware architecture
-13. DR, backup/restore, RTO/RPO, failover, and production readiness
-14. Incident leadership, stakeholder communication, runbooks, and postmortems
-15. Linux, TLS, DNS, HTTP, and systems performance fundamentals
-16. Technology risk framework design, risk registers, heatmaps, dashboards, and reporting
-17. Control design and validation: preventive, detective, corrective controls
-18. Governance, audit, compliance, ISO 27001, NIST, COBIT, FAIR, and remediation planning
-19. BRD/PRD, architecture, SDLC, cloud, DevOps, and change risk assessment
-20. Behavioral leadership: stakeholder influence, executive communication, risk culture, and decision-making
-
-Ask exactly one interview question. Make it realistic, scenario-based, suitable for spoken practice, and strongly aligned to the JD while testing the candidate's CV claims. Rotate through the priority skills instead of repeating the same topic. Mix technical technology-risk questions with behavioral stakeholder-leadership questions over the interview. For Google/product-company style, prefer system design, tradeoff, debugging, incident, control, governance, and production ownership questions. Do not include the answer.`;
+Use the recent history to avoid repetition. Prefer realistic scenarios involving design, tradeoffs, debugging, incidents, security, reliability, or production ownership. Ask exactly one concise spoken-interview question. Do not add an answer, explanation, assessment note, preamble, or question number.`;
 }
 
 function hintPrompt(input) {
@@ -1046,7 +1185,10 @@ function serveStatic(req, res) {
     }
 
     res.writeHead(200, {
-      "Content-Type": contentTypes[path.extname(filePath)] || "application/octet-stream"
+      "Content-Type": contentTypes[path.extname(filePath)] || "application/octet-stream",
+      "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+      Pragma: "no-cache",
+      Expires: "0"
     });
     res.end(req.method === "HEAD" ? undefined : data);
   });
@@ -1059,6 +1201,37 @@ async function handleRequest(req, res) {
       return;
     }
 
+    if (req.method === "POST" && req.url === "/api/contact") {
+      const input = await readBody(req);
+      const name = String(input.name || "").trim();
+      const email = String(input.email || "").trim().toLowerCase();
+      const subject = String(input.subject || "General enquiry").trim();
+      const message = String(input.message || "").trim();
+      if (String(input.website || "").trim()) {
+        sendJson(res, 200, { ok: true });
+        return;
+      }
+      if (!name || name.length > 100 || !isValidEmail(email) || email.length > 254
+          || !subject || subject.length > 150 || message.length < 10 || message.length > 5000) {
+        sendJson(res, 400, { error: "Enter a valid name, email, subject, and a message between 10 and 5,000 characters." });
+        return;
+      }
+      if (!canSubmitContact(req)) {
+        sendJson(res, 429, { error: "Too many messages. Please try again later or contact me through LinkedIn." });
+        return;
+      }
+      await saveContactMessage({
+        id: crypto.randomUUID(),
+        name,
+        email,
+        subject,
+        message,
+        createdAt: new Date().toISOString()
+      });
+      sendJson(res, 201, { ok: true, message: "Thanks! Your message has been received." });
+      return;
+    }
+
     if (req.method === "POST" && req.url === "/api/auth/signup") {
       const input = await readBody(req);
       const name = String(input.name || "").trim();
@@ -1068,8 +1241,7 @@ async function handleRequest(req, res) {
         sendJson(res, 400, { error: "Enter your name, a valid email, and a password of at least 8 characters." });
         return;
       }
-      const users = readUsers();
-      if (users.some((user) => user.email.toLowerCase() === email)) {
+      if (await findUserByEmail(email)) {
         sendJson(res, 409, { error: "An account with this email already exists. Try signing in instead." });
         return;
       }
@@ -1081,11 +1253,11 @@ async function handleRequest(req, res) {
         role: "user",
         createdAt: new Date().toISOString()
       };
-      users.push(user);
       try {
-        writeUsers(users);
-      } catch {
-        sendJson(res, 500, { error: "Could not save your account. If this is running on read-only hosting, sign up locally instead." });
+        await createUser(user);
+      } catch (error) {
+        console.error("Could not create account:", error.message);
+        sendJson(res, 500, { error: "Could not save your account. Check the database connection and try again." });
         return;
       }
       createSessionForUser(req, res, user);
@@ -1097,8 +1269,7 @@ async function handleRequest(req, res) {
       const input = await readBody(req);
       const email = String(input.email || "").trim().toLowerCase();
       const password = String(input.password || "");
-      const users = readUsers();
-      const user = users.find((entry) => entry.email.toLowerCase() === email);
+      const user = await findUserByEmail(email);
       if (!user || !verifyPassword(password, user.passwordHash)) {
         sendJson(res, 401, { error: "Incorrect email or password." });
         return;
@@ -1120,7 +1291,7 @@ async function handleRequest(req, res) {
         sendJson(res, 401, { user: null });
         return;
       }
-      const user = readUsers().find((entry) => entry.id === session.uid);
+      const user = await findUserById(session.uid);
       if (!user) {
         clearSessionCookie(req, res);
         sendJson(res, 401, { user: null });
@@ -1131,6 +1302,7 @@ async function handleRequest(req, res) {
     }
 
     if (req.method === "GET" && req.url === "/api/health") {
+      const database = await databaseHealth();
       if (OFFLINE_ONLY) {
         sendJson(res, 200, {
           ok: true,
@@ -1138,7 +1310,8 @@ async function handleRequest(req, res) {
           model: "built-in question bank",
           ollamaUrl: OLLAMA_URL,
           claudeConfigured: false,
-          offlineOnly: true
+          offlineOnly: true,
+          database
         });
         return;
       }
@@ -1147,7 +1320,8 @@ async function handleRequest(req, res) {
           ok: Boolean(claudeClient),
           provider: "claude",
           model: CLAUDE_MODEL,
-          claudeConfigured: Boolean(claudeClient)
+          claudeConfigured: Boolean(claudeClient),
+          database
         });
         return;
       }
@@ -1157,7 +1331,8 @@ async function handleRequest(req, res) {
         provider: "ollama",
         model: OLLAMA_MODEL,
         ollamaUrl: OLLAMA_URL,
-        claudeConfigured: Boolean(claudeClient)
+        claudeConfigured: Boolean(claudeClient),
+        database
       });
       return;
     }
@@ -1278,7 +1453,10 @@ async function handleRequest(req, res) {
         return;
       }
       try {
-        const question = cleanGeneratedQuestion(await askLLM(questionPrompt(input)));
+        const question = cleanGeneratedQuestion(await askLLM(questionPrompt(input), {
+          temperature: 0.3,
+          num_predict: 100
+        }, 18000));
         sendJson(res, 200, { question });
       } catch {
         sendJson(res, 200, {
@@ -1385,6 +1563,7 @@ if (require.main === module) {
       console.log(`Using Claude model ${CLAUDE_MODEL}`);
     } else {
       console.log(`Using Ollama model ${OLLAMA_MODEL} at ${OLLAMA_URL}`);
+      warmOllama();
     }
   });
 }

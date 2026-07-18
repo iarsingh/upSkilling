@@ -18,6 +18,7 @@ const els = {
   customSkillQuestions: document.querySelector("#customSkillQuestions"),
   addCustomSkill: document.querySelector("#addCustomSkill"),
   deleteCustomSkill: document.querySelector("#deleteCustomSkill"),
+  customSkillStatus: document.querySelector("#customSkillStatus"),
   customSkillList: document.querySelector("#customSkillList"),
   practiceDay: document.querySelector("#practiceDay"),
   mockSet: document.querySelector("#mockSet"),
@@ -27,6 +28,7 @@ const els = {
   cvText: document.querySelector("#cvText"),
   cvPdf: document.querySelector("#cvPdf"),
   importCvFile: document.querySelector("#importCvFile"),
+  contextImportStatus: document.querySelector("#contextImportStatus"),
   jdText: document.querySelector("#jdText"),
   jdUrl: document.querySelector("#jdUrl"),
   jdPdf: document.querySelector("#jdPdf"),
@@ -91,6 +93,7 @@ const els = {
 };
 
 const STORAGE_KEY = "aiMockInterviewerState";
+const CUSTOM_SKILLS_STORAGE_KEY = "aiMockInterviewerCustomSkills";
 const MEDIA_PERMISSION_KEY = "aimiMediaPermissionReady";
 const ANSWER_RESET_VERSION = "2026-07-03-mock-from-scratch";
 const technologyLabels = {
@@ -313,8 +316,10 @@ Senior MLOps & Platform Engineer | GCP | Kubernetes | Terraform | AI Infrastruct
 Email: akhileshranjan.ks@gmail.com
 Phone: +91-8002392976
 Location: Noida, India
-LinkedIn: https://linkedin.com/in/iamarsingh
+LinkedIn: https://www.linkedin.com/in/iamarsingh/
 GitHub: https://github.com/iarsingh
+Instagram: https://www.instagram.com/iarsingh/
+Topmate: https://topmate.io/iamarsingh
 
 PROFESSIONAL SUMMARY
 Senior MLOps & Platform Engineer with nearly 7 years of experience designing, automating, and operating cloud-native infrastructure across GCP, AWS, and Azure. Experienced in building production-ready AI platforms using Kubernetes, Terraform, Vertex AI, MLflow, FastAPI, Docker, and GitOps, enabling scalable model deployment, infrastructure automation, and platform reliability. Skilled in Platform Engineering, Infrastructure as Code, and DevSecOps, delivering self-service cloud platforms, standardized landing zones, and automated deployment frameworks. Hands-on experience in LLMOps, RAG pipelines, GPU-accelerated inference, and model lifecycle management, bridging software engineering and intelligent automation.
@@ -1751,7 +1756,7 @@ function stopMicVisualizer() {
 }
 
 function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+  const state = {
     answerResetVersion: ANSWER_RESET_VERSION,
     role: els.role.value,
     level: els.level.value,
@@ -1777,7 +1782,12 @@ function saveState() {
     interviewMode: currentMode(),
     interviewerMood: els.interviewerMood?.value || "neutral",
     careerProfile: selectedCareerProfile
-  }));
+  };
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (error) {
+    console.warn("Could not save full interview state:", error.message);
+  }
   flashAutosaveIndicator();
 }
 
@@ -1795,7 +1805,12 @@ function flashAutosaveIndicator() {
 }
 
 function loadState() {
-  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+  let saved = {};
+  try {
+    saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+  } catch {
+    localStorage.removeItem(STORAGE_KEY);
+  }
   const shouldResetAnswers = saved.answerResetVersion !== ANSWER_RESET_VERSION;
   selectedCareerProfile = saved.careerProfile || "";
   syncCareerTracks(selectedCareerProfile);
@@ -1817,7 +1832,13 @@ function loadState() {
   els.answerPause.value = saved.answerPause || "9500";
   if (els.interviewerMood) els.interviewerMood.value = saved.interviewerMood || "neutral";
   syncMoodEmoji();
-  els.technology.value = saved.technology || "all";
+  customSkills = loadCustomSkills(saved.customSkills);
+  renderCustomSkills();
+  persistCustomSkills();
+  const savedTechnology = saved.technology || "all";
+  els.technology.value = els.technology.querySelector(`option[value="${CSS.escape(savedTechnology)}"]`)
+    ? savedTechnology
+    : "all";
   els.questionOrder.value = saved.questionOrder || "random";
   setMode(saved.interviewMode || "live");
   interviewNumber = shouldResetAnswers ? 1 : Number(saved.interviewNumber || 1);
@@ -1825,8 +1846,6 @@ function loadState() {
     ? saved.interviews
     : [createInterview(1)];
   progressHistory = shouldResetAnswers || !Array.isArray(saved.progressHistory) ? [] : saved.progressHistory;
-  customSkills = Array.isArray(saved.customSkills) ? saved.customSkills : [];
-  renderCustomSkills();
   questionBankIndex = shouldResetAnswers ? 0 : Number(saved.questionBankIndex || 0);
   usedQuestionKeys = shouldResetAnswers || !Array.isArray(saved.usedQuestionKeys) ? [] : saved.usedQuestionKeys;
   els.practiceDay.value = saved.practiceDay || "all";
@@ -2096,6 +2115,45 @@ function customSkillById(id) {
   return customSkills.find((skill) => skill.id === id);
 }
 
+function normalizeCustomSkills(value) {
+  if (!Array.isArray(value)) return [];
+  return value.map((skill) => {
+    const name = String(skill?.name || "").trim();
+    const id = customSkillId(name);
+    if (!name || !id) return null;
+    const questions = Array.isArray(skill.questions)
+      ? skill.questions.map((question) => String(question).trim()).filter(Boolean)
+      : customSkillQuestionsFor(name);
+    return { id, name, questions: questions.length ? questions : customSkillQuestionsFor(name) };
+  }).filter(Boolean);
+}
+
+function loadCustomSkills(legacySkills) {
+  try {
+    const stored = JSON.parse(localStorage.getItem(CUSTOM_SKILLS_STORAGE_KEY) || "null");
+    if (Array.isArray(stored)) return normalizeCustomSkills(stored);
+  } catch {
+    localStorage.removeItem(CUSTOM_SKILLS_STORAGE_KEY);
+  }
+  return normalizeCustomSkills(legacySkills);
+}
+
+function persistCustomSkills() {
+  try {
+    localStorage.setItem(CUSTOM_SKILLS_STORAGE_KEY, JSON.stringify(customSkills));
+    return true;
+  } catch (error) {
+    console.warn("Could not save custom skills:", error.message);
+    return false;
+  }
+}
+
+function setCustomSkillStatus(message, type = "success") {
+  if (!els.customSkillStatus) return;
+  els.customSkillStatus.textContent = message;
+  els.customSkillStatus.className = `custom-skill-status ${type}`;
+}
+
 function customSkillQuestionsFor(name, inputQuestions = "") {
   const manualQuestions = String(inputQuestions || "")
     .split(/\r?\n/)
@@ -2141,7 +2199,9 @@ function renderCustomSkills() {
 function saveCustomSkill() {
   const name = els.customSkillName.value.trim();
   if (!name) {
+    setCustomSkillStatus("Enter a skill name first.", "error");
     els.feedbackOutput.innerHTML = markdownToHtml("## Missing Skill\nAdd a skill name such as Java, React, AWS, or Spring Boot.");
+    els.customSkillName.focus();
     return;
   }
   const id = customSkillId(name);
@@ -2154,6 +2214,10 @@ function saveCustomSkill() {
   } else {
     customSkills.push({ id, name, questions });
   }
+  if (!persistCustomSkills()) {
+    setCustomSkillStatus("The skill could not be saved because browser storage is unavailable.", "error");
+    return;
+  }
   addCustomSkillOption({ id, name });
   els.technology.value = id;
   questionBankIndex = 0;
@@ -2163,6 +2227,7 @@ function saveCustomSkill() {
   renderCustomSkills();
   renderInterview();
   saveState();
+  setCustomSkillStatus(`${name} saved with ${questions.length} questions.`);
   els.feedbackOutput.innerHTML = markdownToHtml(`## Custom Skill Added\n${name} is ready with ${questions.length} questions. Click New question to practice it.`);
 }
 
@@ -2177,6 +2242,7 @@ function deleteSelectedCustomSkill() {
     return;
   }
   customSkills = customSkills.filter((item) => item.id !== id);
+  persistCustomSkills();
   els.technology.querySelector(`option[value="${id}"]`)?.remove();
   els.technology.value = "all";
   questionBankIndex = 0;
@@ -2186,6 +2252,7 @@ function deleteSelectedCustomSkill() {
   renderCustomSkills();
   renderInterview();
   saveState();
+  setCustomSkillStatus(`${skill.name} deleted.`, "success");
   els.feedbackOutput.innerHTML = markdownToHtml(`## Custom Skill Deleted\n${skill.name} was removed from this browser.`);
 }
 
@@ -2255,6 +2322,7 @@ function applyImportedJd(text, message) {
   interviewNumber = 1;
   renderInterview();
   saveState();
+  setContextImportStatus(`JD imported successfully (${text.length.toLocaleString()} characters).`);
   els.feedbackOutput.innerHTML = markdownToHtml(message);
 }
 
@@ -2263,7 +2331,14 @@ function applyImportedCv(text, message) {
   questionBankIndex = 0;
   usedQuestionKeys = [];
   saveState();
+  setContextImportStatus(`CV imported successfully (${text.length.toLocaleString()} characters).`);
   els.feedbackOutput.innerHTML = markdownToHtml(message);
+}
+
+function setContextImportStatus(message, type = "success") {
+  if (!els.contextImportStatus) return;
+  els.contextImportStatus.textContent = message;
+  els.contextImportStatus.className = `context-import-status ${type}`;
 }
 
 function fileToBase64(file) {
@@ -3212,16 +3287,19 @@ els.customSkillList.addEventListener("click", (event) => {
 els.importJd.addEventListener("click", async () => {
   const url = els.jdUrl.value.trim();
   if (!url) {
+    setContextImportStatus("Paste a public job URL first.", "error");
     els.feedbackOutput.innerHTML = markdownToHtml("## Missing URL\nPaste a public job URL first.");
     return;
   }
 
   setBusy(els.importJd, true, "Importing");
+  setContextImportStatus("Importing job description from URL...", "pending");
   els.feedbackOutput.textContent = "Importing job description...";
   try {
     const data = await api("/api/import-jd-url", { url });
     applyImportedJd(data.text, "## JD Imported\nQuestion bank updated from this job description. Click New question to start.");
   } catch (error) {
+    setContextImportStatus(error.message, "error");
     els.feedbackOutput.innerHTML = markdownToHtml(`## Import Failed\n${error.message}\n\nFor blocked sites, paste the JD text manually into the Job description box.`);
   } finally {
     setBusy(els.importJd, false, "Import JD from URL");
@@ -3231,21 +3309,25 @@ els.importJd.addEventListener("click", async () => {
 els.importJdPdf.addEventListener("click", async () => {
   const file = els.jdPdf.files?.[0];
   if (!file) {
+    setContextImportStatus("Choose a JD file first.", "error");
     els.feedbackOutput.innerHTML = markdownToHtml("## Missing File\nChoose a job description file first.");
     return;
   }
   const supportedFile = /\.(pdf|docx|txt|md|png|jpe?g|webp|tiff?|bmp)$/i.test(file.name) ||
     /^(application\/pdf|application\/vnd\.openxmlformats-officedocument\.wordprocessingml\.document|text\/|image\/)/i.test(file.type);
   if (!supportedFile) {
+    setContextImportStatus("Choose a supported PDF, DOCX, text, Markdown, or image file.", "error");
     els.feedbackOutput.innerHTML = markdownToHtml("## Invalid File\nPlease choose a PDF, DOCX, TXT, Markdown, or image file.");
     return;
   }
   if (file.size > 5_000_000) {
+    setContextImportStatus("The JD file must be under 5 MB.", "error");
     els.feedbackOutput.innerHTML = markdownToHtml("## File Too Large\nPlease upload a file under 5 MB.");
     return;
   }
 
   setBusy(els.importJdPdf, true, "Importing");
+  setContextImportStatus(`Extracting ${file.name}...`, "pending");
   els.feedbackOutput.textContent = "Extracting job description from file...";
   try {
     const data = await api("/api/import-jd-file", {
@@ -3255,6 +3337,7 @@ els.importJdPdf.addEventListener("click", async () => {
     });
     applyImportedJd(data.text, `## JD File Imported\nExtracted text from \`${file.name}\`. Question bank updated for this JD. Click New question to start.`);
   } catch (error) {
+    setContextImportStatus(error.message, "error");
     els.feedbackOutput.innerHTML = markdownToHtml(`## File Import Failed\n${error.message}\n\nYou can still paste the JD text manually into the Job description box.`);
   } finally {
     setBusy(els.importJdPdf, false, "Import JD from file");
@@ -3264,21 +3347,25 @@ els.importJdPdf.addEventListener("click", async () => {
 els.importCvFile.addEventListener("click", async () => {
   const file = els.cvPdf.files?.[0];
   if (!file) {
+    setContextImportStatus("Choose a CV file first.", "error");
     els.feedbackOutput.innerHTML = markdownToHtml("## Missing File\nChoose a CV file first.");
     return;
   }
   const supportedFile = /\.(pdf|docx|txt|md|png|jpe?g|webp|tiff?|bmp)$/i.test(file.name) ||
     /^(application\/pdf|application\/vnd\.openxmlformats-officedocument\.wordprocessingml\.document|text\/|image\/)/i.test(file.type);
   if (!supportedFile) {
+    setContextImportStatus("Choose a supported PDF, DOCX, text, Markdown, or image file.", "error");
     els.feedbackOutput.innerHTML = markdownToHtml("## Invalid File\nPlease choose a PDF, DOCX, TXT, Markdown, or image file.");
     return;
   }
   if (file.size > 5_000_000) {
+    setContextImportStatus("The CV file must be under 5 MB.", "error");
     els.feedbackOutput.innerHTML = markdownToHtml("## File Too Large\nPlease upload a file under 5 MB.");
     return;
   }
 
   setBusy(els.importCvFile, true, "Importing");
+  setContextImportStatus(`Extracting ${file.name}...`, "pending");
   els.feedbackOutput.textContent = "Extracting CV text from file...";
   try {
     const data = await api("/api/import-cv-file", {
@@ -3288,6 +3375,7 @@ els.importCvFile.addEventListener("click", async () => {
     });
     applyImportedCv(data.text, `## CV Imported\nExtracted text from \`${file.name}\`. Click Save CV and JD, then New question to start.`);
   } catch (error) {
+    setContextImportStatus(error.message, "error");
     els.feedbackOutput.innerHTML = markdownToHtml(`## CV Import Failed\n${error.message}\n\nYou can still paste your CV text manually into the CV / profile context box.`);
   } finally {
     setBusy(els.importCvFile, false, "Import CV file");
@@ -3934,6 +4022,23 @@ loadPracticeSources().then(() => {
   loadState();
   updateAnswerEditor();
   checkHealth();
+  revealSetupSection(window.location.hash);
+});
+
+function revealSetupSection(hash) {
+  if (!['#advanced-setup', '#cv-jd-setup'].includes(hash)) return;
+  const advancedSetup = document.querySelector('#advanced-setup');
+  const target = document.querySelector(hash);
+  if (!advancedSetup || !target) return;
+  advancedSetup.open = true;
+  if (target instanceof HTMLDetailsElement) target.open = true;
+  requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+}
+
+document.querySelector('#openCvJdSetup')?.addEventListener('click', (event) => {
+  event.preventDefault();
+  history.replaceState(null, '', '#cv-jd-setup');
+  revealSetupSection('#cv-jd-setup');
 });
 
 [els.role, els.level, els.topic, els.cvText, els.jdText, els.questionOrder, els.autoNext].forEach((input) => {

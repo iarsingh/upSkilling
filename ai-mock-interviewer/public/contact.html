@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function () { try { var saved = localStorage.getItem("aimi-theme"); document.documentElement.setAttribute("data-theme", saved || "light"); } catch (e) {} })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Contact Akhilesh Singh for mentorship, interview preparation, collaboration, or technical questions.">
+    <title>Contact | AI Mock Interviewer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="contact-page">
+    <main class="contact-shell">
+      <nav class="contact-nav">
+        <a class="brand-title" href="/">
+          <img class="brand-icon" src="/favicon.svg" alt="" aria-hidden="true">
+          <strong>AI Mock Interviewer</strong>
+        </a>
+        <div class="nav-group">
+          <a class="ghost link-button" href="/">Home</a>
+          <a class="ghost link-button" href="/dashboard.html">Dashboard</a>
+          <button class="theme-toggle" type="button" data-action="toggle-theme" aria-pressed="false" aria-label="Toggle dark mode">
+            <span class="theme-icon theme-icon-light">&#9728;&#65039;</span><span class="theme-icon theme-icon-dark">&#127769;</span>
+          </button>
+        </div>
+      </nav>
+
+      <section class="contact-layout">
+        <div class="contact-intro">
+          <p class="eyebrow">Let&apos;s connect</p>
+          <h1>Have a question or want to work together?</h1>
+          <p>Reach out about interview preparation, DevOps and MLOps mentorship, platform engineering, technical collaboration, or feedback about this project.</p>
+
+          <div class="contact-links">
+            <a class="contact-link-card linkedin-button" href="https://www.linkedin.com/in/iamarsingh/" target="_blank" rel="noopener noreferrer"><strong>LinkedIn</strong><span>Connect professionally &#8599;</span></a>
+            <a class="contact-link-card instagram-button" href="https://www.instagram.com/iarsingh/" target="_blank" rel="noopener noreferrer"><strong>Instagram</strong><span>Follow and message &#8599;</span></a>
+            <a class="contact-link-card topmate-button" href="https://topmate.io/iamarsingh" target="_blank" rel="noopener noreferrer"><strong>Topmate</strong><span>Book a 1:1 session &#8599;</span></a>
+            <a class="contact-link-card coffee-button" href="https://www.buymeacoffee.com/iarsingh" target="_blank" rel="noopener noreferrer"><strong>Buy Me a Coffee</strong><span>Support the project &#8599;</span></a>
+            <a class="contact-link-card" href="mailto:akhileshranjan.ks@gmail.com"><strong>Email</strong><span>akhileshranjan.ks@gmail.com</span></a>
+          </div>
+        </div>
+
+        <section class="contact-form-card panel" aria-labelledby="contactFormTitle">
+          <p class="eyebrow">Send a message</p>
+          <h2 id="contactFormTitle">Tell me how I can help</h2>
+          <form id="contactForm" novalidate>
+            <div class="contact-field-row">
+              <label>Name<input id="contactName" name="name" type="text" maxlength="100" autocomplete="name" required></label>
+              <label>Email<input id="contactEmail" name="email" type="email" maxlength="254" autocomplete="email" required></label>
+            </div>
+            <label>Subject
+              <select id="contactSubject" name="subject" required>
+                <option value="Mentorship">Mentorship</option>
+                <option value="Interview preparation">Interview preparation</option>
+                <option value="Technical collaboration">Technical collaboration</option>
+                <option value="Project feedback">Project feedback</option>
+                <option value="General enquiry">General enquiry</option>
+              </select>
+            </label>
+            <label>Message<textarea id="contactMessage" name="message" rows="7" minlength="10" maxlength="5000" placeholder="Share a little context so I can give you a useful response." required></textarea></label>
+            <label class="contact-honeypot" aria-hidden="true">Website<input id="contactWebsite" name="website" type="text" tabindex="-1" autocomplete="off"></label>
+            <p id="contactStatus" class="contact-status" role="status" aria-live="polite"></p>
+            <button id="contactSubmit" class="primary" type="submit">Send message</button>
+          </form>
+        </section>
+      </section>
+    </main>
+    <script src="/theme.js"></script>
+    <script src="/contact.js"></script>
+  </body>
+</html>

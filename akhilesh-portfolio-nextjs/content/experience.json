@@ -1,0 +1,79 @@
+[
+  {
+    "id": "exp-capgemini",
+    "company": "Capgemini",
+    "role": "Senior Platform Engineer / DevOps Lead",
+    "period": "2023 - Present",
+    "location": "Bengaluru, India",
+    "current": true,
+    "description": "Leading cloud platform engineering focused on secure, self-healing GKE clusters, migrating core banking applications, and integrating MLOps models.",
+    "responsibilities": [
+      "Own the GKE platform architecture and golden-path standards used across application teams.",
+      "Lead GitOps delivery via ArgoCD across multi-region clusters.",
+      "Drive cloud cost governance and FinOps reporting for platform workloads.",
+      "Partner with data science teams to productionize ML pipelines on Vertex AI and Kubeflow."
+    ],
+    "achievements": [
+      "Architected multi-region GKE Enterprise clusters hosting 120+ microservices, improving deployment frequency by 320% through GitOps patterns with ArgoCD.",
+      "Implemented full-stack cloud cost controls using Kubecost and automated GKE auto-scaling, reducing monthly GCP expenditure by 34% ($140K+ annualized).",
+      "Configured network security boundaries using GCP Cloud Armor and Istio Service Mesh.",
+      "Built an end-to-end MLOps pipeline on Kubeflow and Vertex AI, accelerating model deployments from 3 weeks to under 40 minutes."
+    ],
+    "technologies": ["GCP", "Kubernetes", "Terraform", "ArgoCD", "Istio", "Cloud Armor", "Vertex AI"],
+    "impactMetrics": [
+      { "label": "Deployment Velocity", "value": "+320%" },
+      { "label": "Annual Savings", "value": "$140K+" },
+      { "label": "Uptime SLA", "value": "99.99%" }
+    ]
+  },
+  {
+    "id": "exp-techmahindra",
+    "company": "Tech Mahindra",
+    "role": "DevOps Consultant",
+    "period": "2021 - 2023",
+    "location": "Hyderabad, India",
+    "current": false,
+    "description": "Owned high-availability cloud migration efforts, CI/CD pipeline structures, and secrets management systems for global telecom clients.",
+    "responsibilities": [
+      "Led migration of legacy VM-based telecom platforms to AWS EKS.",
+      "Designed reusable Terraform modules used across 40+ product squads.",
+      "Rolled out enterprise HashiCorp Vault integration for secrets management."
+    ],
+    "achievements": [
+      "Migrated legacy VM-based telecommunication platforms to AWS EKS container frameworks, resolving long-standing configuration drift.",
+      "Engineered standardized reusable Terraform modules to enforce organization-wide networking, IAM, and database patterns across 40 distinct product squads.",
+      "Introduced an enterprise HashiCorp Vault cluster integrated with EKS pods via mutating webhook, eliminating hardcoded credentials."
+    ],
+    "technologies": ["AWS", "EKS", "Terraform", "Ansible", "HashiCorp Vault", "Jenkins"],
+    "impactMetrics": [
+      { "label": "Provisioning Speed", "value": "85% Faster" },
+      { "label": "Credential Leaks", "value": "Reduced to 0" },
+      { "label": "Server Cost", "value": "22% Saved" }
+    ]
+  },
+  {
+    "id": "exp-tcs",
+    "company": "Tata Consultancy Services (TCS)",
+    "role": "Assistant Systems Engineer",
+    "period": "2019 - 2021",
+    "location": "Pune, India",
+    "current": false,
+    "description": "Linux system administration, database replication schemes, and shell automation for client bank platforms.",
+    "responsibilities": [
+      "Managed 150+ RHEL Linux enterprise servers.",
+      "Automated backup verification and monitoring for transactional databases.",
+      "Monitored live application status using Prometheus, Grafana, and ELK."
+    ],
+    "achievements": [
+      "Managed 150+ RedHat Linux enterprise servers, automating monthly security patching and vulnerability remediation using Ansible playbooks.",
+      "Wrote Bash and Python utility scripts to automate transactional database backup verifications, cutting manual validation time by 4 hours daily.",
+      "Monitored live application status using Prometheus, Grafana, and ELK stack, resolving alerts, storage overflows, and CPU bottlenecks."
+    ],
+    "technologies": ["RHEL Linux", "Ansible", "Bash Scripting", "Python", "Prometheus", "ELK Stack"],
+    "impactMetrics": [
+      { "label": "Patching Automation", "value": "100%" },
+      { "label": "Daily Manual Time", "value": "-4 Hours" },
+      { "label": "Alert Resolution", "value": "95% Faster" }
+    ]
+  }
+]

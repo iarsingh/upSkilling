@@ -1,0 +1,85 @@
+[
+  {
+    "category": "Cloud",
+    "icon": "Cloud",
+    "items": [
+      { "name": "Google Cloud (GCP)", "level": 95 },
+      { "name": "AWS", "level": 85 },
+      { "name": "Azure", "level": 70 }
+    ]
+  },
+  {
+    "category": "Containers",
+    "icon": "Layers",
+    "items": [
+      { "name": "Docker", "level": 95 },
+      { "name": "Kubernetes", "level": 98 },
+      { "name": "Helm", "level": 90 }
+    ]
+  },
+  {
+    "category": "Infrastructure",
+    "icon": "Cpu",
+    "items": [
+      { "name": "Terraform", "level": 95 },
+      { "name": "Ansible", "level": 85 }
+    ]
+  },
+  {
+    "category": "CI/CD",
+    "icon": "GitBranch",
+    "items": [
+      { "name": "Jenkins", "level": 85 },
+      { "name": "GitHub Actions", "level": 95 },
+      { "name": "GitLab CI", "level": 88 },
+      { "name": "Cloud Build", "level": 82 }
+    ]
+  },
+  {
+    "category": "Programming",
+    "icon": "Terminal",
+    "items": [
+      { "name": "Python", "level": 88 },
+      { "name": "Bash", "level": 92 }
+    ]
+  },
+  {
+    "category": "Observability",
+    "icon": "Activity",
+    "items": [
+      { "name": "ELK Stack", "level": 82 },
+      { "name": "Prometheus", "level": 90 },
+      { "name": "Grafana", "level": 90 },
+      { "name": "Dynatrace", "level": 75 }
+    ]
+  },
+  {
+    "category": "Security",
+    "icon": "ShieldCheck",
+    "items": [
+      { "name": "IAM", "level": 88 },
+      { "name": "RBAC", "level": 88 },
+      { "name": "Cloud Armor", "level": 90 },
+      { "name": "Secret Manager", "level": 86 }
+    ]
+  },
+  {
+    "category": "MLOps & AI Infra",
+    "icon": "BrainCircuit",
+    "items": [
+      { "name": "Kubeflow Pipelines", "level": 85 },
+      { "name": "MLflow", "level": 82 },
+      { "name": "Vertex AI", "level": 85 },
+      { "name": "Triton Inference Server", "level": 78 }
+    ]
+  },
+  {
+    "category": "GenAI & LLMOps",
+    "icon": "Sparkles",
+    "items": [
+      { "name": "Ollama & Local LLMs", "level": 82 },
+      { "name": "Gemini / Vertex AI", "level": 82 },
+      { "name": "RAG Pipelines", "level": 80 }
+    ]
+  }
+]

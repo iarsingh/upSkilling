@@ -1,4 +1,8 @@
 .vercel
+.env
+.DS_Store
+node_modules/
 audio/
 data/users.json
+data/contacts.json
 data/session-secret.txt
