@@ -1,0 +1,15 @@
+{
+  "name": "youtube-shorts-automation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Zero-cost YouTube Shorts upload automation using GitHub Actions and the YouTube Data API.",
+  "type": "commonjs",
+  "scripts": {
+    "auth": "node src/youtube-auth.js",
+    "upload": "node src/upload-short.js",
+    "upload:dry-run": "node src/upload-short.js --dry-run"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
