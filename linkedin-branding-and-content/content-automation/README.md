@@ -144,6 +144,34 @@ Reach is an outcome to measure, not a guarantee. Review LinkedIn combined post a
 - LinkedIn images are disabled by default. Set `LINKEDIN_ATTACH_IMAGES=true` only if you want the publisher to upload and attach generated assets again.
 - LinkedIn publishing requires API access and the correct posting permissions for your LinkedIn app.
 
+## Instagram Reel Publishing
+
+The Reel publisher selects the next unpublished MP4 from `reel-generator/manifest.json`, publishes it through the Instagram API, and records the media ID in `instagram-publish-state.json` so the same file is never selected twice.
+
+Required local `.env` values:
+
+```bash
+INSTAGRAM_ACCESS_TOKEN=your_token
+INSTAGRAM_ACCOUNT_ID=your_instagram_account_id
+```
+
+The token needs `instagram_business_basic` and `instagram_business_content_publish`. Verify the connection and preview the next Reel without publishing:
+
+```bash
+npm run instagram:verify
+npm run instagram:dry-run
+```
+
+Publish one Reel manually:
+
+```bash
+npm run instagram:publish
+```
+
+The GitHub Actions workflow `.github/workflows/instagram-reel-daily.yml` publishes one Reel every day at `19:00 Asia/Kolkata`. Add `INSTAGRAM_ACCESS_TOKEN` and `INSTAGRAM_ACCOUNT_ID` as repository secrets. Manual workflow runs default to dry-run; scheduled runs publish live. The workflow commits only the updated Instagram state file after a successful post.
+
+Meta must be able to download each MP4 from a public HTTPS URL. By default, the publisher uses the tracked MP4 files from this repository through `raw.githubusercontent.com`. Override `INSTAGRAM_REEL_BASE_URL` if the repository becomes private or the files move to object storage.
+
 ## LinkedIn Scope Error
 
 If LinkedIn shows:
