@@ -2,8 +2,8 @@ name: Daily YouTube Short
 
 on:
   schedule:
-    # 20:00 Asia/Kolkata every day.
-    - cron: "30 14 * * *"
+    # 09:00 Asia/Kolkata every day.
+    - cron: "30 3 * * *"
   workflow_dispatch:
     inputs:
       dry_run:

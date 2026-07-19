@@ -2,8 +2,8 @@ name: Daily Instagram Reel
 
 on:
   schedule:
-    # 19:00 Asia/Kolkata every day.
-    - cron: "30 13 * * *"
+    # 09:00 Asia/Kolkata every day.
+    - cron: "30 3 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
