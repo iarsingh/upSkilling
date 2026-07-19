@@ -39,6 +39,39 @@ function titleFromFilename(filename) {
     .slice(0, 100);
 }
 
+// Keyword -> hashtag groups matched against the filename/title text. Mirrors
+// the equivalent rules in publish-instagram-reel.js so both platforms surface
+// topic-relevant tags instead of a single generic fallback.
+const HASHTAG_RULES = [
+  [/kubernetes|k8s/, "#Kubernetes #DevOps #CloudNative #PlatformEngineering"],
+  [/mlops|machine learning|\bml\b/, "#MLOps #MachineLearning #AIEngineering #DevOps"],
+  [/\bpython\b/, "#Python #Automation #DevOps #SoftwareEngineering"],
+  [/data science|dataset/, "#DataScience #MachineLearning #AI #MLOps"],
+  [/terraform|infrastructure as code|\biac\b/, "#Terraform #IaC #DevOps #CloudEngineering"],
+  [/\bgcp\b|google cloud/, "#GCP #GoogleCloud #CloudComputing #DevOps"],
+  [/\baws\b/, "#AWS #CloudComputing #DevOps"],
+  [/\bazure\b/, "#Azure #CloudComputing #DevOps"],
+  [/security|secrets|\biam\b|rbac/, "#CloudSecurity #DevSecOps #Security"],
+  [/ci\/cd|cicd|pipeline/, "#CICD #DevOps #SoftwareEngineering"],
+  [/observability|monitoring|incident|sre\b/, "#Observability #SRE #DevOps"],
+  [/finops|cost/, "#FinOps #CloudCost #DevOps"],
+  [/aiops/, "#AIOps #DevOps #Automation"]
+];
+
+function hashtagsFor(filename) {
+  const text = filename.toLowerCase();
+  const tags = new Set();
+  for (const [pattern, group] of HASHTAG_RULES) {
+    if (pattern.test(text)) group.split(" ").forEach((tag) => tags.add(tag));
+  }
+  if (tags.size === 0) ["#DevOps", "#CloudComputing", "#SRE", "#Engineering"].forEach((tag) => tags.add(tag));
+  return [...tags].slice(0, 10).join(" ");
+}
+
+function descriptionFor(filename) {
+  return `#Shorts ${hashtagsFor(filename)}`;
+}
+
 async function getAccessToken() {
   const response = await fetch("https://oauth2.googleapis.com/token", {
     method: "POST",
@@ -61,7 +94,7 @@ async function upload(videoPath, filename, accessToken) {
   const metadata = {
     snippet: {
       title: titleFromFilename(filename),
-      description: "#Shorts",
+      description: descriptionFor(filename),
       categoryId: "27"
     },
     status: {

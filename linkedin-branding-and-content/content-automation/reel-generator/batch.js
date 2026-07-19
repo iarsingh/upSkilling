@@ -6,7 +6,7 @@ const { renderPost } = require("./render");
 
 const CONTENT_POSTS_DIR = path.join(__dirname, "..", "posts");
 const GKE_POSTS_DIR = path.join(__dirname, "..", "..", "gke-terraform-content", "posts");
-const OUT_DIR = path.join(__dirname, "output");
+const OUT_DIR = path.join(__dirname, "output", "without-narration");
 const MANIFEST_PATH = path.join(__dirname, "manifest.json");
 const CONCURRENCY = 4;
 
@@ -91,7 +91,11 @@ async function main() {
   console.log(`Manifest: ${MANIFEST_PATH}`);
 }
 
-main().catch((err) => {
-  console.error("Batch failed:", err);
-  process.exit(1);
-});
+module.exports = { dedupeByTopic, CONTENT_POSTS_DIR, GKE_POSTS_DIR };
+
+if (require.main === module) {
+  main().catch((err) => {
+    console.error("Batch failed:", err);
+    process.exit(1);
+  });
+}

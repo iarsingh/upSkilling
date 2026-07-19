@@ -5,6 +5,11 @@ const { root, instagramReelBaseUrl } = require("./config");
 
 const manifestPath = path.join(root, "reel-generator", "manifest.json");
 const outputDir = path.join(root, "reel-generator", "output");
+// The numbered queue (NNN-...mp4) holds the narrated reels that actually get
+// posted; the manifest fallback below is a safety net for the older silent
+// renders, which live in a separate subfolder now that output/ is split.
+const queueDir = path.join(outputDir, "narrated");
+const silentDir = path.join(outputDir, "without-narration");
 const statePath = path.join(root, "instagram-publish-state.json");
 
 function loadJson(filePath, fallback) {
@@ -13,13 +18,14 @@ function loadJson(filePath, fallback) {
 }
 
 function loadReels() {
-  const numberedQueue = fs.readdirSync(outputDir)
-    .filter((filename) => /^\d{2}-.*\.mp4$/i.test(filename))
+  const numberedQueue = fs.readdirSync(queueDir)
+    .filter((filename) => /^\d{3}-.*\.mp4$/i.test(filename))
     .sort()
     .map((filename) => ({
       filename,
+      dir: "narrated",
       topic: filename
-        .replace(/^\d{2}-/, "")
+        .replace(/^\d{3}-/, "")
         .replace(/-narrated\.mp4$/i, "")
         .replace(/\.mp4$/i, "")
         .replace(/-/g, " ")
@@ -30,11 +36,11 @@ function loadReels() {
   const seen = new Set();
   return manifest
     .filter((entry) => entry.status === "ok" && entry.outPath)
-    .map((entry) => ({ ...entry, filename: path.basename(entry.outPath) }))
+    .map((entry) => ({ ...entry, filename: path.basename(entry.outPath), dir: "without-narration" }))
     .filter((entry) => {
       if (seen.has(entry.filename)) return false;
       seen.add(entry.filename);
-      return fs.existsSync(path.join(outputDir, entry.filename));
+      return fs.existsSync(path.join(silentDir, entry.filename));
     });
 }
 
@@ -50,17 +56,38 @@ function saveState(state) {
   fs.renameSync(temporaryPath, statePath);
 }
 
-function publicVideoUrl(filename) {
-  return `${instagramReelBaseUrl.replace(/\/$/, "")}/${encodeURIComponent(filename)}`;
+function publicVideoUrl(reel) {
+  return `${instagramReelBaseUrl.replace(/\/$/, "")}/${reel.dir}/${encodeURIComponent(reel.filename)}`;
 }
 
+// Keyword -> hashtag groups, checked against series (when present, e.g. the
+// manifest fallback) and the topic text (always present, including for the
+// numbered-queue reels, which never carry a `series`). Multiple groups can
+// match a single topic; results are merged so reach isn't limited to one bucket.
+const HASHTAG_RULES = [
+  [/kubernetes|k8s/, "#Kubernetes #DevOps #CloudNative #PlatformEngineering"],
+  [/mlops|machine learning|\bml\b/, "#MLOps #MachineLearning #AIEngineering #DevOps"],
+  [/\bpython\b/, "#Python #Automation #DevOps #SoftwareEngineering"],
+  [/data science|dataset/, "#DataScience #MachineLearning #AI #MLOps"],
+  [/terraform|infrastructure as code|\biac\b/, "#Terraform #IaC #DevOps #CloudEngineering"],
+  [/\bgcp\b|google cloud/, "#GCP #GoogleCloud #CloudComputing #DevOps"],
+  [/\baws\b/, "#AWS #CloudComputing #DevOps"],
+  [/\bazure\b/, "#Azure #CloudComputing #DevOps"],
+  [/security|secrets|\biam\b|rbac/, "#CloudSecurity #DevSecOps #Security"],
+  [/ci\/cd|cicd|pipeline/, "#CICD #DevOps #SoftwareEngineering"],
+  [/observability|monitoring|incident|sre\b/, "#Observability #SRE #DevOps"],
+  [/finops|cost/, "#FinOps #CloudCost #DevOps"],
+  [/aiops/, "#AIOps #DevOps #Automation"]
+];
+
 function hashtagsFor(entry) {
-  const series = String(entry.series || "").toLowerCase();
-  if (series.includes("kubernetes")) return "#Kubernetes #DevOps #CloudNative #PlatformEngineering";
-  if (series.includes("mlops")) return "#MLOps #MachineLearning #AIEngineering #DevOps";
-  if (series.includes("python")) return "#Python #Automation #DevOps #SoftwareEngineering";
-  if (series.includes("data science")) return "#DataScience #MachineLearning #AI #MLOps";
-  return "#DevOps #CloudComputing #SRE #Engineering";
+  const text = `${entry.series || ""} ${entry.topic || entry.filename || ""}`.toLowerCase();
+  const tags = new Set();
+  for (const [pattern, group] of HASHTAG_RULES) {
+    if (pattern.test(text)) group.split(" ").forEach((tag) => tags.add(tag));
+  }
+  if (tags.size === 0) return "#DevOps #CloudComputing #SRE #Engineering";
+  return [...tags].slice(0, 10).join(" ");
 }
 
 function captionFor(entry) {
@@ -100,7 +127,7 @@ async function main() {
   }
 
   const reels = loadReels();
-  if (reels.length === 0) throw new Error(`No generated MP4 reels found in ${outputDir}`);
+  if (reels.length === 0) throw new Error(`No generated MP4 reels found in ${queueDir}`);
   const state = loadState();
   const reel = selectReel(reels, state, args.filename);
   if (!reel) {
@@ -108,7 +135,7 @@ async function main() {
     return;
   }
 
-  const videoUrl = publicVideoUrl(reel.filename);
+  const videoUrl = publicVideoUrl(reel);
   const caption = captionFor(reel);
   if (args.dryRun || String(process.env.DRY_RUN || "").toLowerCase() === "true") {
     console.log(`[dry-run] Reel: ${reel.filename}`);
@@ -127,7 +154,7 @@ async function main() {
     mediaId: result.mediaId
   });
   saveState(state);
-  fs.unlinkSync(path.join(outputDir, reel.filename));
+  fs.unlinkSync(path.join(outputDir, reel.dir, reel.filename));
   console.log(`Published Instagram Reel ${reel.filename}: ${result.mediaId}`);
   console.log(`Removed published Reel from queue: ${reel.filename}`);
 }

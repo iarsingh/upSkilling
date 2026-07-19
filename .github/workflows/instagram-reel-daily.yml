@@ -17,7 +17,7 @@ on:
         default: false
         type: boolean
       filename:
-        description: "Optional exact MP4 filename from reel-generator/output"
+        description: "Optional exact MP4 filename from reel-generator/output/narrated"
         required: false
         type: string
 

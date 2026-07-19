@@ -5,7 +5,8 @@
   "type": "commonjs",
   "scripts": {
     "pilot": "node batch.js --pilot",
-    "batch": "node batch.js"
+    "batch": "node batch.js",
+    "batch-narrate": "node batch-narrate.js"
   },
   "dependencies": {
     "playwright": "^1.61.1"

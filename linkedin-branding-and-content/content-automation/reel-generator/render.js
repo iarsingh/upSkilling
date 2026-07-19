@@ -12,9 +12,9 @@ const HEIGHT = 1920;
 // Pass a shared `browser` when rendering many posts in a batch — launching a
 // fresh Chromium per video is the slow part, so batch.js keeps one instance
 // alive across the whole run and only opens/closes contexts per video.
-async function renderPost(filePath, outDir, browser) {
+async function renderPost(filePath, outDir, browser, opts = {}) {
   const post = parsePost(filePath);
-  const { html, total } = buildHTML(post);
+  const { html, total } = buildHTML(post, opts);
 
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "reel-"));
   const htmlPath = path.join(tmpDir, "index.html");
@@ -35,7 +35,7 @@ async function renderPost(filePath, outDir, browser) {
   if (ownBrowser) await activeBrowser.close();
 
   fs.mkdirSync(outDir, { recursive: true });
-  const outPath = path.join(outDir, `${post.slug}.mp4`);
+  const outPath = path.join(outDir, `${post.slug}${opts.suffix || ""}.mp4`);
   execFileSync("ffmpeg", [
     "-y",
     "-i", videoPath,

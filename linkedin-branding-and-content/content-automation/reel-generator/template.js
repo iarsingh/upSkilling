@@ -13,7 +13,13 @@ function hexToRgb(hex) {
 
 // Timing is computed here (not in client JS) so the exact video duration is
 // known up front for the Playwright wait + ffmpeg trim.
-function computeTimeline(post) {
+//
+// opts.targetDuration lets a caller (narrate.js) stretch the whole timeline
+// proportionally so the animation spans exactly as long as a pre-recorded
+// voiceover — used instead of freezing the last frame to wait out the audio,
+// which reads as a stall rather than a paced video. Only ever stretches
+// (never compresses below the natural hand-tuned pace).
+function computeTimeline(post, opts = {}) {
   const STEP_GAP = 1.35;
   const t = { title: 0.3, hook: 1.05, flowLabel: 1.9 };
   t.steps = post.steps.map((_, i) => 2.3 + i * STEP_GAP);
@@ -23,11 +29,21 @@ function computeTimeline(post) {
   t.closing = afterSteps + 0.3;
   t.outro = t.closing + 1.6;
   const total = t.outro + 3.4; // hold outro on screen before cut
-  return { t, total };
+
+  const scale = opts.targetDuration && opts.targetDuration > total
+    ? opts.targetDuration / total
+    : 1;
+  if (scale === 1) return { t, total };
+
+  const scaledT = {};
+  for (const key of Object.keys(t)) {
+    scaledT[key] = Array.isArray(t[key]) ? t[key].map((v) => v * scale) : t[key] * scale;
+  }
+  return { t: scaledT, total: total * scale };
 }
 
-function buildHTML(post) {
-  const { t, total } = computeTimeline(post);
+function buildHTML(post, opts = {}) {
+  const { t, total } = computeTimeline(post, opts);
   const { accent, tag } = post.theme;
   const accentRgb = hexToRgb(accent);
 
