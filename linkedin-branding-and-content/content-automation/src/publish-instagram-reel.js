@@ -13,6 +13,19 @@ function loadJson(filePath, fallback) {
 }
 
 function loadReels() {
+  const numberedQueue = fs.readdirSync(outputDir)
+    .filter((filename) => /^\d{2}-.*\.mp4$/i.test(filename))
+    .sort()
+    .map((filename) => ({
+      filename,
+      topic: filename
+        .replace(/^\d{2}-/, "")
+        .replace(/-narrated\.mp4$/i, "")
+        .replace(/\.mp4$/i, "")
+        .replace(/-/g, " ")
+    }));
+  if (numberedQueue.length > 0) return numberedQueue;
+
   const manifest = loadJson(manifestPath, []);
   const seen = new Set();
   return manifest
