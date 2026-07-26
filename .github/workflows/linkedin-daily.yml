@@ -2,10 +2,12 @@ name: Daily LinkedIn Publish
 
 on:
   schedule:
-    # 09:00 Asia/Kolkata, Monday-Friday.
-    - cron: "30 3 * * 1-5"
-    # 10:30 Asia/Kolkata, Saturday.
-    - cron: "0 5 * * 6"
+    # 14:30 Asia/Kolkata, Monday and Thursday: Kubernetes / platform engineering.
+    - cron: "0 9 * * 1,4"
+    # 09:30 Asia/Kolkata, Tuesday and Friday: MLOps.
+    - cron: "0 4 * * 2,5"
+    # 19:30 Asia/Kolkata, Wednesday and Saturday: Python automation.
+    - cron: "0 14 * * 3,6"
     # 11:30 Asia/Kolkata, Sunday: DevOps & Cloud Fundamentals series.
     - cron: "0 6 * * 0"
   workflow_dispatch:
@@ -36,7 +38,7 @@ jobs:
       PUBLISH_DATE: ${{ inputs.publish_date }}
       PUBLISH_SLOT: ${{ inputs.publish_slot }}
       PUBLISH_MODE: weekly-rotation
-      LINKEDIN_ATTACH_IMAGES: "false"
+      LINKEDIN_ATTACH_IMAGES: "true"
 
     steps:
       - name: Checkout repository
