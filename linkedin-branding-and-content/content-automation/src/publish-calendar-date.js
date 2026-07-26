@@ -57,6 +57,18 @@ function slotForWeeklyRotation(dateString, timezone = "Asia/Kolkata") {
   return slotsByWeekday[weekday] || "";
 }
 
+function resolveImagePath(item) {
+  if (item.imagePath) {
+    const configuredPath = path.join(root, item.imagePath);
+    if (fs.existsSync(configuredPath)) return configuredPath;
+  }
+
+  if (!item.draftPath) return "";
+  const draftStem = path.basename(item.draftPath, path.extname(item.draftPath));
+  const doodlePath = path.join(root, "assets", `${draftStem}-doodle.png`);
+  return fs.existsSync(doodlePath) ? doodlePath : "";
+}
+
 async function main() {
   const rawArgs = process.argv.slice(2);
   const args = new Set(rawArgs);
@@ -91,14 +103,18 @@ async function main() {
       console.log(`[dry-run] Would publish ${item.id} for ${dateArg}${item.slot ? ` at ${item.slot}` : ""}: ${item.topic}`);
       continue;
     }
-    const imagePath = item.imagePath ? path.join(root, item.imagePath) : "";
+    const imagePath = resolveImagePath(item);
     const linkedInId = await publishPost(item.text, imagePath);
     markPublished(item, linkedInId);
     console.log(`Published ${item.id} for ${dateArg}: ${linkedInId}`);
   }
 }
 
-main().catch((error) => {
-  console.error(error.message);
-  process.exitCode = 1;
-});
+if (require.main === module) {
+  main().catch((error) => {
+    console.error(error.message);
+    process.exitCode = 1;
+  });
+}
+
+module.exports = { resolveImagePath };

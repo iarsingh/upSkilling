@@ -141,7 +141,7 @@ Reach is an outcome to measure, not a guarantee. Review LinkedIn combined post a
 - Ollama model default: `llama3.1:8b`.
 - Ollama calls time out after `OLLAMA_TIMEOUT_MS`, then the script uses a fallback content template.
 - Image generation creates an SVG and attempts PNG conversion using macOS `sips`.
-- LinkedIn images are disabled by default. Set `LINKEDIN_ATTACH_IMAGES=true` only if you want the publisher to upload and attach generated assets again.
+- LinkedIn images are enabled for the scheduled workflow. The publisher first uses an item's explicit `imagePath`; otherwise it automatically attaches `assets/<draft-name>-doodle.png` when that file exists.
 - LinkedIn publishing requires API access and the correct posting permissions for your LinkedIn app.
 
 ## Instagram Reel Publishing
