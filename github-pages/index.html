@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Akhilesh Ranjan Singh's live cloud, DevOps, MLOps, and engineering project showcase.">
+    <title>Akhilesh Ranjan Singh | Live Project Showcase</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #07111f;
+        --panel: #101d2e;
+        --line: #263a52;
+        --text: #f7fbff;
+        --muted: #9eb1c7;
+        --accent: #5eead4;
+        --accent2: #60a5fa;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 15% 10%, rgba(37, 99, 235, .22), transparent 28rem),
+          radial-gradient(circle at 85% 85%, rgba(13, 148, 136, .2), transparent 30rem),
+          var(--bg);
+      }
+      main { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 72px 0; }
+      .eyebrow { color: var(--accent); font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+      h1 { max-width: 850px; margin: 12px 0 18px; font-size: clamp(2.5rem, 7vw, 5.4rem); line-height: .98; }
+      .intro { max-width: 720px; color: var(--muted); font-size: 1.12rem; line-height: 1.7; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 18px; margin-top: 48px; }
+      .card {
+        display: flex;
+        min-height: 260px;
+        flex-direction: column;
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        color: inherit;
+        background: linear-gradient(145deg, rgba(22, 38, 58, .94), rgba(10, 24, 40, .92));
+        text-decoration: none;
+        transition: transform .2s ease, border-color .2s ease;
+      }
+      .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+      .tag { align-self: flex-start; padding: 6px 10px; border-radius: 999px; color: var(--accent2); background: rgba(96, 165, 250, .1); font-size: .78rem; font-weight: 800; }
+      h2 { margin: 22px 0 10px; font-size: 1.4rem; }
+      .card p { margin: 0; color: var(--muted); line-height: 1.6; }
+      .open { margin-top: auto; padding-top: 24px; color: var(--accent); font-weight: 800; }
+      footer { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 42px; color: var(--muted); }
+      footer a { color: var(--text); }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">Live engineering portfolio</p>
+      <h1>Projects built for production thinking.</h1>
+      <p class="intro">Interactive work across cloud platforms, DevOps, MLOps, automation, incident response, and developer experience. Choose a project to open its live demonstration.</p>
+
+      <section class="grid" aria-label="Live projects">
+        <a class="card" href="./portfolio/">
+          <span class="tag">Primary portfolio</span>
+          <h2>Cloud &amp; MLOps Portfolio</h2>
+          <p>Experience, architecture case studies, engineering projects, writing, and production-focused platform work.</p>
+          <span class="open">Open project →</span>
+        </a>
+        <a class="card" href="./web-resume/">
+          <span class="tag">Professional profile</span>
+          <h2>Interactive Web Resume</h2>
+          <p>A concise, responsive resume covering GCP, Kubernetes, Terraform, GitOps, observability, and MLOps.</p>
+          <span class="open">Open project →</span>
+        </a>
+        <a class="card" href="./resume-builder/">
+          <span class="tag">Browser application</span>
+          <h2>Resume Web Builder</h2>
+          <p>Upload a resume, customize its presentation, preview multiple themes, and export a deployable HTML version.</p>
+          <span class="open">Open project →</span>
+        </a>
+        <a class="card" href="./cloudops-copilot/">
+          <span class="tag">SRE product demo</span>
+          <h2>CloudOps Copilot</h2>
+          <p>A browser-based incident and startup operations workspace with local analysis and persistent browser state.</p>
+          <span class="open">Open project →</span>
+        </a>
+      </section>
+
+      <footer>
+        <span>Built by Akhilesh Ranjan Singh</span>
+        <a href="https://github.com/iarsingh">GitHub</a>
+        <a href="https://www.linkedin.com/in/iamarsingh/">LinkedIn</a>
+      </footer>
+    </main>
+  </body>
+</html>
