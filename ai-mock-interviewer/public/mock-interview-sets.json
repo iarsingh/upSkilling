@@ -777,6 +777,10 @@
       {
         "category": "Security/DevSecOps",
         "question": "GCP infrastructure security: How do you secure GCP infrastructure?"
+      },
+      {
+        "category": "Networking",
+        "question": "PSA vs PSC: Explain the difference between Private Service Access (PSA) and Private Service Connect (PSC) in GCP. When would you use each to connect privately to managed services (e.g. Cloud SQL, third-party or your own published services), and what does the network topology look like for both?"
       }
     ]
   },
@@ -5880,6 +5884,3029 @@
       {
         "category": "Collaboration & Conflict",
         "question": "What was the outcome?"
+      }
+    ]
+  },
+  {
+    "id": "set-81",
+    "title": "Mock Interview 81 - Docker and Docker Compose Build Design",
+    "focus": "Dockerfile layer order, RUN chaining, Compose env var consistency, multi-variant services",
+    "questions": [
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Dockerfile layer order: In a Go build stage using COPY ./project /project, WORKDIR /project, then a single RUN chaining go mod download, go test ./..., and go build, why place COPY before WORKDIR, and why chain all three commands into one RUN instead of splitting them up?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Compose env var consistency: If a service uses the same .env variable (e.g. ${DEFAULT_NGINX_VERSION}) for both its image tag and a build ARG like NGINX_VERSION, why keep them tied to one variable, and what breaks in the build or runtime image if those two values drift apart?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Adding another Compose variant: To add a fourth service for another NGINX variant alongside three existing ones, what would you change in the Compose file to stay consistent, especially around BUILD_FILE, NGINX_VERSION, and the final image tag?"
+      }
+    ]
+  },
+  {
+    "id": "set-82",
+    "title": "Mock Interview 82 - Production DevOps Scenario Round (CI/CD, Kubernetes, Terraform, MLOps)",
+    "focus": "Large-scale CI/CD optimization, Kubernetes production troubleshooting, scalability, canary deployment, AI/MLOps, Terraform state and import",
+    "questions": [
+      {
+        "category": "CI/CD/GitOps",
+        "question": "CI/CD pipeline optimization: With ~300 microservices on Kubernetes using Jenkins/Bitbucket, Docker, and Helm, developers report the pipeline takes 30-40 minutes. How would you redesign and optimize it to reduce deployment time?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Further deployment optimization: Beyond optimizing the CI stages, what else would you change around Helm deployments, environment-specific deployments, infrastructure, and application dependencies to cut deployment time further?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Production database migration safety: CI completes successfully, but during CD a database migration corrupts the production database. What controls and pipeline steps would you add to prevent this from happening again?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "How many years of hands-on experience do you have with Kubernetes?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "Scenario: ~60% of the pods across your Kubernetes cluster suddenly enter CrashLoopBackOff. How would you investigate, troubleshoot, and recover from this incident?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "Tell me about the last time you actually faced a CrashLoopBackOff issue in production. What was the root cause, and how did you resolve it?"
+      },
+      {
+        "category": "GCP Services",
+        "question": "Which cloud platform are you currently using day to day - GCP, Azure, AWS, or another cloud?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "Scenario: worker nodes have plenty of available CPU, but new pods stay Pending when scheduled. What could be the possible reasons, and how would you troubleshoot it?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "If the Kubernetes API server suddenly becomes unavailable, what happens to existing workloads? Do running pods keep working, and what functionality is affected?"
+      },
+      {
+        "category": "SRE/Reliability",
+        "question": "Your application suddenly receives 10x expected traffic and becomes unavailable. How would you design Kubernetes and the surrounding infrastructure so this doesn't happen again?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Canary deployment: for the first 30 minutes after upgrading an app on Kubernetes, you want only 5% of users on the new version while 95% stay on stable. How would you implement this?"
+      },
+      {
+        "category": "MLOps/AI Infra",
+        "question": "Have you recently worked on any AI/ML use cases or cloud-based AI services? Explain your experience with services such as Vertex AI, Kubeflow, and Cloud Composer."
+      },
+      {
+        "category": "MLOps/AI Infra",
+        "question": "Have you worked on or explored Retrieval-Augmented Generation (RAG) applications? Explain a RAG use case relevant to your domain work."
+      },
+      {
+        "category": "Terraform/IaC",
+        "question": "You join a project where cloud resources were created manually through the Azure/GCP portal. How would you bring those existing resources under Terraform management without recreating or disrupting them?"
+      },
+      {
+        "category": "Terraform/IaC",
+        "question": "Your Terraform state file has become corrupted. How would you recover the state safely without affecting the existing production infrastructure?"
+      }
+    ]
+  },
+  {
+    "id": "set-83",
+    "title": "Mock Interview 83 - Production Reliability and Observability Behavioral Round",
+    "focus": "STAR-style behavioral questions on outages, infrastructure design trade-offs, and observability ownership",
+    "questions": [
+      {
+        "category": "Behavioral/Leadership",
+        "question": "Describe a time when a production system you were responsible for degraded or failed. What happened, how did you detect it, what immediate actions did you take, and how did you prevent recurrence?"
+      },
+      {
+        "category": "Behavioral/Leadership",
+        "question": "Give an example of infrastructure you architected or significantly improved (cloud, IaC, containerized stack). What trade-offs did you weigh - cost, scalability, resilience, maintenance - and what would you do differently now?"
+      },
+      {
+        "category": "Behavioral/Leadership",
+        "question": "Describe a situation where you had to create or improve monitoring, observability, or alerting for a system. What metrics/logs/traces did you choose, how did you set alert thresholds or SLOs, and how did you measure success?"
+      },
+      {
+        "category": "Behavioral/Leadership",
+        "question": "[Incomplete in source - question was cut off after] Have you ever had to write automation or ... (capture the rest next time this screenshot/page is available, then replace this entry)"
+      }
+    ]
+  },
+  {
+    "id": "set-84",
+    "title": "Mock Interview 84 - Fugmo Lead GCP DevOps Engineer Screening",
+    "focus": "Platform reliability and CI/CD focused screening-round questions",
+    "questions": [
+      {
+        "category": "Behavioral/Screening",
+        "question": "Can you describe your professional background and highlight the experiences most relevant to this role?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Walk us through a time when you improved the CI/CD pipeline for a project. What challenges did you face, and how did you address them?"
+      },
+      {
+        "category": "SRE/Reliability",
+        "question": "How have you implemented observability and incident response practices in previous roles? Give an example of how these practices improved system reliability."
+      }
+    ]
+  },
+  {
+    "id": "set-85",
+    "title": "Mock Interview 85 - GenAI and LLM Engineering Round",
+    "focus": "RAG architecture, LLM serving, prompt security, evaluation, and agentic systems for production GenAI",
+    "questions": [
+      {
+        "category": "GenAI/LLM",
+        "question": "RAG architecture: How would you design a production RAG pipeline - chunking strategy, embedding model choice, vector database, retrieval quality, and re-ranking - and how would you measure whether retrieval is actually good?"
+      },
+      {
+        "category": "GenAI/LLM",
+        "question": "LLM serving on Kubernetes: How would you serve an open-weight LLM (e.g. via vLLM or TGI) on GKE - GPU node pools, batching, autoscaling, and request queuing under bursty load?"
+      },
+      {
+        "category": "GenAI/LLM",
+        "question": "Prompt injection and guardrails: How would you defend a production LLM application against prompt injection, data exfiltration through tool calls, and jailbreak attempts?"
+      },
+      {
+        "category": "GenAI/LLM",
+        "question": "Fine-tuning vs RAG vs prompt engineering: What trade-offs would you weigh when choosing between fine-tuning, RAG, and prompt engineering for a new use case, and how would you decide?"
+      },
+      {
+        "category": "GenAI/LLM",
+        "question": "Cost and latency optimization: An LLM feature is too slow and too expensive in production. What levers would you pull - caching, model routing between small and large models, quantization, batching, streaming?"
+      },
+      {
+        "category": "GenAI/LLM",
+        "question": "LLM evaluation in CI: How would you evaluate LLM output quality and catch regressions in CI before deploying a new prompt version or model version?"
+      },
+      {
+        "category": "GenAI/LLM",
+        "question": "Vector database operations: How would you operate and scale a vector database (e.g. pgvector, Pinecone, Weaviate) in production - indexing strategy, freshness, backup/restore, and cost at scale?"
+      },
+      {
+        "category": "GenAI/LLM",
+        "question": "Agentic systems: For a multi-step, tool-calling agent pipeline, how would you design observability, failure handling, and guardrails so a bad tool call or infinite loop doesn't cause damage or runaway cost?"
+      }
+    ]
+  },
+  {
+    "id": "set-86",
+    "title": "Mock Interview 86 - Advanced GCP Networking Round",
+    "focus": "Private connectivity, peering vs Shared VPC, interconnect, load balancing types, VPC-native GKE, serverless networking, CDN, firewall hierarchy, flow logs, and egress control",
+    "questions": [
+      {
+        "category": "Networking",
+        "question": "Private Google Access: What is Private Google Access, why would you enable it on a subnet, and how does it differ from giving an instance a public IP just to reach Google APIs?"
+      },
+      {
+        "category": "Networking",
+        "question": "VPC Peering vs Shared VPC: How do VPC Peering and Shared VPC differ in GCP, and what would push you to choose one over the other for connecting workloads across projects?"
+      },
+      {
+        "category": "Networking",
+        "question": "Cloud Interconnect vs Cloud VPN: When would you choose Dedicated Interconnect, Partner Interconnect, or Cloud VPN for connecting on-premises to GCP, and what factors (bandwidth, latency, SLA, cost) drive that choice?"
+      },
+      {
+        "category": "Networking",
+        "question": "Cloud Load Balancing types: Compare Global external HTTP(S) Load Balancing, regional/internal Load Balancing, TCP/SSL Proxy, and Network Load Balancing in GCP. How would you choose the right one for a given workload?"
+      },
+      {
+        "category": "Networking",
+        "question": "VPC-native GKE clusters: Why do VPC-native GKE clusters use alias IP ranges instead of routes-based networking, and what problems does that solve at scale?"
+      },
+      {
+        "category": "Networking",
+        "question": "Serverless VPC Access: How would you let a Cloud Run or Cloud Functions service reach a private resource (e.g. a VM or Cloud SQL instance via private IP) inside a VPC?"
+      },
+      {
+        "category": "Networking",
+        "question": "Cloud CDN: How does Cloud CDN integrate with GCP load balancing, and how would you design cache keys and invalidation for a mixed static/dynamic site?"
+      },
+      {
+        "category": "Networking",
+        "question": "Firewall hierarchy: How do Hierarchical Firewall Policies at the organization or folder level interact with VPC-level firewall rules, and how would you design this so teams can't accidentally open a risky port?"
+      },
+      {
+        "category": "Networking",
+        "question": "VPC Flow Logs: What would you use VPC Flow Logs for in troubleshooting, security investigation, and cost analysis, and what are the trade-offs of enabling them broadly?"
+      },
+      {
+        "category": "Networking",
+        "question": "Network Intelligence Center: How would you use Network Intelligence Center's connectivity tests and topology view to diagnose a 'service A can't reach service B' problem across projects and VPCs?"
+      },
+      {
+        "category": "Networking",
+        "question": "Egress control: Compare using Cloud NAT, firewall egress-deny rules, and VPC Service Controls to restrict outbound traffic from a production VPC. When would you combine more than one?"
+      },
+      {
+        "category": "Networking",
+        "question": "Multi-region network design: How would you design a GCP network (VPC layout, load balancing, DNS, failover) so an application stays available if an entire region becomes unavailable?"
+      },
+      {
+        "category": "Networking",
+        "question": "Network Connectivity Center: What problem does GCP's Network Connectivity Center (NCC) solve, how does its hub-and-spoke model work for connecting VPCs, on-premises sites, and other clouds, and how does it compare to manually meshing VPC Peering and VPNs together?"
+      }
+    ]
+  },
+  {
+    "id": "set-87",
+    "title": "Mock Interview 87 - GCP Networking Scenario Round",
+    "focus": "Hands-on GCP networking troubleshooting scenarios: Private Google Access, peering, interconnect, load balancing, VPC-native GKE, serverless connectors, firewall precedence, flow logs, and failover",
+    "questions": [
+      {
+        "category": "Networking",
+        "question": "Scenario: A newly added subnet's VMs have no public IP and can't reach any Google API, even though an existing GKE workload reaches Google APIs fine over private IP. Walk through your diagnosis."
+      },
+      {
+        "category": "Networking",
+        "question": "Scenario: Two VPCs are peered and the peering shows ACTIVE, but a service in VPC A still can't reach a service in VPC B. What would you check (CIDR overlap, custom route export/import, firewall rule scope)?"
+      },
+      {
+        "category": "Networking",
+        "question": "Scenario: After migrating from Cloud VPN to Dedicated Interconnect, some traffic intermittently still routes over the old VPN tunnel. How would you debug route priority and BGP behavior?"
+      },
+      {
+        "category": "Networking",
+        "question": "Scenario: Requests to a Global HTTPS Load Balancer intermittently get connection resets, but only from certain regions. How would you debug backend health checks, Cloud CDN cache-fill behavior, and regional backend capacity?"
+      },
+      {
+        "category": "Networking",
+        "question": "Scenario: A VPC-native GKE cluster runs out of usable Pod IPs and new pods can't schedule even though nodes have CPU/memory headroom. How would you diagnose and fix this?"
+      },
+      {
+        "category": "Networking",
+        "question": "Scenario: A Cloud Run service using a Serverless VPC Access connector times out under load but works fine at low traffic. What would you check?"
+      },
+      {
+        "category": "Networking",
+        "question": "Scenario: Firewall rules appear to block SSH from the internet, but an instance is still reachable on port 22 externally. How would you trace hierarchical firewall policy precedence and rule evaluation order to find the gap?"
+      },
+      {
+        "category": "Networking",
+        "question": "Scenario: VPC Flow Logs show a production service repeatedly connecting to an unexpected external IP outside business hours. How would you investigate and contain it?"
+      },
+      {
+        "category": "Networking",
+        "question": "Scenario: Network Intelligence Center reports a connectivity test as unreachable between two GKE clusters in different projects on a Shared VPC, but a manual curl from a debug pod worked five minutes earlier. How would you reconcile the two signals and keep debugging?"
+      },
+      {
+        "category": "Networking",
+        "question": "Scenario: After a region-level outage, DNS failover did not redirect traffic to the healthy region and the app was down for 20 minutes despite a healthy secondary region. How would you redesign for faster or automatic failover?"
+      },
+      {
+        "category": "Networking",
+        "question": "Scenario: You need to migrate an organization from a legacy single flat VPC to a Shared VPC host/service-project model with zero downtime for existing production workloads. How would you plan and execute this network migration - subnet/CIDR re-planning, firewall rule migration, IAM for host/service projects, and cutover sequencing?"
+      }
+    ]
+  },
+  {
+    "id": "set-88",
+    "title": "Mock Interview 88 - Cloud Migration Strategy Round",
+    "focus": "Migration strategy frameworks, wave planning, data migration validation, cutover/rollback, cost estimation, and hybrid connectivity during phased migration",
+    "questions": [
+      {
+        "category": "Cloud Migration",
+        "question": "6 Rs framework: How would you decide between rehost, replatform, refactor, repurchase, retire, and retain when migrating an application portfolio to the cloud?"
+      },
+      {
+        "category": "Cloud Migration",
+        "question": "Migration wave planning: How would you sequence a large-scale migration across dozens of interdependent applications - which move first, which move last, and why?"
+      },
+      {
+        "category": "Cloud Migration",
+        "question": "Data migration validation: How would you validate that migrated data is complete and correct (e.g. using Database Migration Service or Storage Transfer Service) before cutover?"
+      },
+      {
+        "category": "Cloud Migration",
+        "question": "Cutover and rollback: How would you plan the cutover window and rollback plan for a business-critical application migrating from on-prem or another cloud to GCP?"
+      },
+      {
+        "category": "Cloud Migration",
+        "question": "Cost and TCO estimation: How would you estimate and validate cost savings before and after a cloud migration, and what commonly gets underestimated?"
+      },
+      {
+        "category": "Cloud Migration",
+        "question": "Migrate for Compute Engine: When would you use Migrate for Compute Engine (lift-and-shift VM migration) versus rebuilding on managed services like GKE or Cloud Run?"
+      },
+      {
+        "category": "Cloud Migration",
+        "question": "Hybrid connectivity during migration: How would you design network connectivity and identity so an application can run split across on-prem and cloud during a phased migration?"
+      },
+      {
+        "category": "Cloud Migration",
+        "question": "Scenario: Post-migration, a newly migrated GCP workload shows 30% higher latency than it did on its previous platform. How would you diagnose whether the cause is network, compute sizing, storage IOPS, or application configuration?"
+      },
+      {
+        "category": "Cloud Migration",
+        "question": "Scenario: A client wants to migrate a production workload from GCP to AWS. Walk through your approach - service equivalency mapping (GKE to EKS, Cloud SQL to RDS, Cloud Storage to S3, IAM to IAM), data transfer, DNS cutover, and rollback plan."
+      },
+      {
+        "category": "Cloud Migration",
+        "question": "Scenario: A client wants to migrate a production workload from AWS to GCP. Walk through your approach - service equivalency mapping (EKS to GKE, RDS to Cloud SQL, S3 to Cloud Storage, IAM to IAM), data transfer tooling, DNS cutover, and rollback plan."
+      },
+      {
+        "category": "Cloud Migration",
+        "question": "Scenario: A client wants to migrate a workload from Azure to GCP. What would you map AKS, Azure SQL, Blob Storage, and Azure AD to on GCP, and what would you watch for in networking (VNet to VPC) and identity federation during the migration?"
+      },
+      {
+        "category": "Cloud Migration",
+        "question": "Scenario: A client wants to migrate a workload from Azure to AWS. What would you map AKS, Azure SQL, Blob Storage, and Azure AD to on AWS, and what would you watch for in networking (VNet to VPC) and identity federation during the migration?"
+      }
+    ]
+  },
+  {
+    "id": "set-89",
+    "title": "Mock Interview 89 - Agentic AI and ML Production Lifecycle Round",
+    "focus": "ML production lifecycle, model monitoring and drift, agentic AI frameworks, tool calling, agent auth, and MLOps CI/CD",
+    "questions": [
+      {
+        "category": "MLOps/LLMOps",
+        "question": "What kinds of AI models or AI services have you deployed for your team?"
+      },
+      {
+        "category": "MLOps/LLMOps",
+        "question": "Have you completed the full production lifecycle of an ML model—from receiving a model artifact (e.g., Pickle/Joblib) through deployment, data pipeline integration, and production?"
+      },
+      {
+        "category": "MLOps/LLMOps",
+        "question": "When monitoring ML services, do you monitor only infrastructure metrics, or do you also monitor model data, features, and model performance?"
+      },
+      {
+        "category": "MLOps/LLMOps",
+        "question": "What drift metrics or ML monitoring metrics have you worked with?"
+      },
+      {
+        "category": "MLOps/LLMOps",
+        "question": "You mentioned confidence score and F1 score. What model or algorithm was actually deployed by the data science team?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "Have you deployed anything into production for Agentic AI?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "What framework did you use for the agent? (LangGraph, LangChain, CrewAI, AutoGen, etc.)"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "Which LLM did you use? (Vertex AI Gemini, OpenAI GPT, Claude, Llama, etc.)"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How did the agent call tools?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How did you implement authentication and authorization for the agent?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How did you monitor agent executions?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How did you deploy the agent on Kubernetes?"
+      },
+      {
+        "category": "MLOps/LLMOps",
+        "question": "How did you perform model versioning and rollback?"
+      },
+      {
+        "category": "MLOps/LLMOps",
+        "question": "How did you handle data drift?"
+      },
+      {
+        "category": "MLOps/LLMOps",
+        "question": "What happened when drift was detected?"
+      },
+      {
+        "category": "MLOps/LLMOps",
+        "question": "How did you retrain or redeploy models?"
+      },
+      {
+        "category": "MLOps/LLMOps",
+        "question": "What CI/CD pipeline was used for ML deployments?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "What was your role versus the data scientist's role?"
+      }
+    ]
+  },
+  {
+    "id": "set-90",
+    "title": "Mock Interview 90 - CI/CD, Jenkins and Kubernetes Scaling Round",
+    "focus": "Jenkins/GitHub CI-CD integration, branch filtering, on-call incidents, Go for automation, multi-cloud/multi-region, and Kubernetes autoscaling at scale",
+    "questions": [
+      {
+        "category": "CI/CD/GitOps",
+        "question": "What was your contribution to the CI/CD process?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Which CI/CD tools did you use for deploying the microservices application?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "What SCM tool are you using?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How did you integrate GitHub with Jenkins?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you prevent Jenkins builds from triggering for selected branches?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Where would you configure the branch exclusion?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Apart from the Jenkinsfile, where else can branch filtering be configured?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Which Jenkins plugins would you use to integrate Jenkins with GitHub?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "Do you participate in calls in your current role?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "Can you describe a major production incident you handled while on call?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "What happened during that incident, and how did you resolve it?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "What programming languages have you worked with?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "Do you have experience with Go?"
+      },
+      {
+        "category": "Automation/Platform",
+        "question": "How have you used Go for troubleshooting or automation?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "Can you describe your experience with multi-cloud platforms?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "Can you describe your experience with multi-region platforms?"
+      },
+      {
+        "category": "Kubernetes Fundamentals",
+        "question": "Have you deployed Kubernetes at scale?"
+      },
+      {
+        "category": "Kubernetes Fundamentals",
+        "question": "What challenges did you face while running Kubernetes at scale?"
+      },
+      {
+        "category": "Kubernetes Fundamentals",
+        "question": "How did you implement Horizontal Pod Autoscaling?"
+      },
+      {
+        "category": "Kubernetes Fundamentals",
+        "question": "How did you use Vertical Pod Autoscaling?"
+      },
+      {
+        "category": "Kubernetes Fundamentals",
+        "question": "How did you configure node or cluster autoscaling?"
+      },
+      {
+        "category": "Kubernetes Fundamentals",
+        "question": "How did you handle pods remaining in the Pending state because of insufficient resources?"
+      },
+      {
+        "category": "Behavioral",
+        "question": "What questions do you have for the interviewer?"
+      }
+    ]
+  },
+  {
+    "id": "set-91",
+    "title": "Mock Interview 91 - Additional Production Scenario Round",
+    "focus": "Retry storms, silent pipeline failures, Terraform state races, secret leakage, webhook upgrade failures, cost spikes, health-check mismatches, noisy neighbors, GitOps drift, and cross-service latency contention",
+    "questions": [
+      {
+        "category": "SRE/Reliability",
+        "question": "Cascading retries: A downstream service outage causes upstream services to retry aggressively, tripling load on an already degraded dependency and turning a partial outage into a full outage. How would you diagnose this and what would you change to prevent it?"
+      },
+      {
+        "category": "Automation/Platform",
+        "question": "Silent data pipeline failure: A daily ETL job has been silently writing zero rows for three days because an upstream API started returning an empty-but-200-OK response, and nobody noticed until a downstream dashboard looked wrong. How would you redesign monitoring to catch this class of failure?"
+      },
+      {
+        "category": "Terraform/IaC",
+        "question": "Terraform state conflict: Two engineers ran terraform apply on the same workspace within minutes of each other and now the state file shows resources that don't match what's actually deployed. How would you recover, and how would you prevent this going forward?"
+      },
+      {
+        "category": "Security/DevSecOps",
+        "question": "Secrets left in Docker image layers: A security scan finds an old API key baked into an intermediate layer of a production container image, even though the final layer doesn't show it in docker inspect. How do you fix the current image and prevent recurrence?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "Kubernetes upgrade breaking a webhook: After upgrading a GKE cluster's control plane, an admission webhook starts timing out and blocks all new pod creation cluster-wide. How would you triage this live, and how would you avoid this failure mode on the next upgrade?"
+      },
+      {
+        "category": "GCP Services",
+        "question": "Cost spike investigation: Cloud spend jumped 40% overnight with no corresponding traffic increase. Walk through how you'd find the cause."
+      },
+      {
+        "category": "Networking",
+        "question": "Zombie load balancer backend: A load balancer keeps routing a small percentage of traffic to a pod that Kubernetes considers Ready but that is actually returning 500s for every request. How would you debug the mismatch between Kubernetes health and real health, and how would you fix it?"
+      },
+      {
+        "category": "GKE/Kubernetes",
+        "question": "Multi-tenant noisy neighbor: One team's batch job is starving other teams' latency-sensitive services on a shared GKE cluster during business hours. How would you resolve this without giving every team a dedicated cluster?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "GitOps drift under pressure: During an incident, an engineer manually ran kubectl edit to hotfix a Deployment directly on the cluster, but the fix later got silently reverted. Why did that happen, and how should emergency changes be made in a GitOps-managed cluster?"
+      },
+      {
+        "category": "Networking",
+        "question": "Cross-region latency regression: After adding a new microservice, p99 latency for an existing endpoint doubled even though the new service isn't in its direct call path. How would you find the cause?"
+      }
+    ]
+  },
+  {
+    "id": "set-92",
+    "title": "Mock Interview 92 - Generative AI, Agentic AI and AIOps Deep Dive",
+    "focus": "Advanced GenAI/LLMOps (fine-tuning, evaluation, guardrails, caching, multi-tenant cost control), agentic AI (memory, multi-agent orchestration, safety), and AIOps (anomaly detection, log clustering, alert correlation, auto-remediation)",
+    "questions": [
+      {
+        "category": "GenAI/LLMOps",
+        "question": "How would you fine-tune an LLM using LoRA or QLoRA, and when is fine-tuning worth it over RAG or prompting?"
+      },
+      {
+        "category": "GenAI/LLMOps",
+        "question": "How would you design an evaluation pipeline for an LLM application, including LLM-as-judge and regression testing for prompts?"
+      },
+      {
+        "category": "GenAI/LLMOps",
+        "question": "What guardrail frameworks or techniques would you use to enforce structured output and block unsafe responses in production?"
+      },
+      {
+        "category": "GenAI/LLMOps",
+        "question": "How would you choose chunk size and overlap when building a RAG pipeline, and how would you validate the choice?"
+      },
+      {
+        "category": "GenAI/LLMOps",
+        "question": "How would you manage context window and token budget for a long conversation or a large document in an LLM application?"
+      },
+      {
+        "category": "GenAI/LLMOps",
+        "question": "How would you design prompt caching to reduce cost and latency for a high-traffic LLM application?"
+      },
+      {
+        "category": "GenAI/LLMOps",
+        "question": "How would you curate and validate a fine-tuning dataset to avoid degrading model quality or introducing bias?"
+      },
+      {
+        "category": "GenAI/LLMOps",
+        "question": "How would you design multi-tenant rate limiting and cost chargeback for an internal LLM platform used by multiple teams?"
+      },
+      {
+        "category": "GenAI/LLMOps",
+        "question": "A model provider announces they are deprecating the model version your production application depends on. How would you plan the migration?"
+      },
+      {
+        "category": "GenAI/LLMOps",
+        "question": "What data security risks exist when fine-tuning on internal company data, and how would you mitigate them?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How would you design memory for an agent - what goes in short-term context versus a long-term memory store, and how do you retrieve from it?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How would you design a multi-agent system with a supervisor/orchestrator agent and specialized worker agents, and how do they hand off work?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How would you prevent an agent from getting stuck in an infinite tool-call loop or runaway cost spiral?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How would you test and evaluate an agent's behavior before deploying a change to its prompt or tool set?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "What guardrails would you put around an agent that can take destructive or irreversible actions (e.g. deleting resources, deploying to production)?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How would you debug an agent that produced a wrong or unsafe action - what would you look at first?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How would you version and roll back an agent's prompt, tool definitions, and orchestration graph together as one deployable unit?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How would you simulate or replay agent runs for regression testing when the underlying LLM is non-deterministic?"
+      },
+      {
+        "category": "AIOps",
+        "question": "What is AIOps, and how is it different from traditional monitoring and observability?"
+      },
+      {
+        "category": "AIOps",
+        "question": "How would you design anomaly detection for a metric that has strong daily and weekly seasonality, without generating constant false positives?"
+      },
+      {
+        "category": "AIOps",
+        "question": "How would you use log clustering to reduce thousands of raw log lines into a handful of actionable patterns during an incident?"
+      },
+      {
+        "category": "AIOps",
+        "question": "How would you design alert correlation to group related alerts from multiple services into a single incident instead of paging on-call for each one?"
+      },
+      {
+        "category": "AIOps",
+        "question": "How would you use a service dependency/topology graph to help automatically localize the root cause of an incident?"
+      },
+      {
+        "category": "AIOps",
+        "question": "How would you design safe auto-remediation - for example, automatically restarting a service or scaling up - without it making an incident worse?"
+      },
+      {
+        "category": "AIOps",
+        "question": "How would you use historical metrics to forecast capacity needs (e.g. storage growth, traffic growth) and alert before a hard limit is hit?"
+      },
+      {
+        "category": "AIOps",
+        "question": "How would you decide between buying an AIOps platform (Datadog Watchdog, BigPanda, Moogsoft) versus building anomaly detection in-house on top of Prometheus/BigQuery?"
+      },
+      {
+        "category": "AIOps",
+        "question": "How would you measure whether an AIOps or auto-remediation system is actually helping - what metrics would prove it reduces MTTR rather than adding noise?"
+      },
+      {
+        "category": "AIOps",
+        "question": "What are the failure modes of AIOps systems, and how would you prevent the AIOps layer itself from becoming a source of alert fatigue or blind trust?"
+      }
+    ]
+  },
+  {
+    "id": "set-93",
+    "title": "Mock Interview 93 - ArgoCD, GitOps, GitHub Actions and Jenkins Multibranch Round",
+    "focus": "ArgoCD/GitOps patterns (App of Apps, secrets, progressive delivery), GitHub Actions (monorepo builds, OIDC auth, caching, reusable workflows), and Jenkins multibranch pipelines in depth",
+    "questions": [
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you structure ArgoCD Applications and Projects for a platform serving many teams - one Application per service, or a different pattern?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you use the App of Apps pattern (or ApplicationSets) to manage dozens of ArgoCD Applications without manually creating each one?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you handle secrets in a GitOps repository, since Git is not a safe place to store plaintext secrets?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "What is the difference between ArgoCD's sync and self-heal, and what problems does each solve?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you design progressive delivery (canary or blue-green) with ArgoCD, and what triggers a rollback?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you structure Git repositories for GitOps - a single monorepo of manifests, or one repo per environment/team?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "An ArgoCD Application is stuck in 'OutOfSync' and won't reconcile even though the diff looks trivial. How would you debug it?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you promote a change from dev to staging to production in a GitOps workflow without copy-pasting manifests between environment folders?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you design a GitHub Actions workflow for a monorepo so only the services that actually changed get built and deployed?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you securely authenticate a GitHub Actions workflow to GCP without storing a long-lived service account key as a secret?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you cache dependencies in GitHub Actions to speed up build times without caching stale or incorrect artifacts?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you design reusable GitHub Actions workflows or composite actions to avoid duplicating the same CI steps across many repositories?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you gate a GitHub Actions deployment job behind manual approval for production, while keeping dev/staging fully automatic?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "A GitHub Actions workflow passes on every PR but the same code fails when merged to main. What would you check?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you control GitHub Actions runner costs and concurrency so a burst of PRs doesn't queue for hours or run up a large bill?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you design a Jenkins Shared Library so multiple teams' Jenkinsfiles can reuse common pipeline stages instead of duplicating Groovy code?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "In a Jenkins multibranch pipeline, how would you make certain stages run only on the main branch or only on pull requests, and skip them elsewhere?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you handle Jenkins agent/executor scarcity so a burst of multibranch builds (many open PRs) doesn't starve other jobs?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you clean up orphaned Jenkins multibranch jobs automatically after their corresponding Git branch or PR is deleted?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you pass secrets into a Jenkins multibranch pipeline safely, given that Jenkinsfiles from any branch (including PRs from forks) are executed?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How would you version and test changes to a Jenkinsfile itself before merging, given that a broken Jenkinsfile can break CI for the whole team?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "A specific branch's Jenkins multibranch job keeps re-triggering builds even with no new commits. How would you diagnose and fix it?"
+      }
+    ]
+  },
+  {
+    "id": "set-94",
+    "title": "Mock Interview 94 - RAG (Retrieval-Augmented Generation) Deep Dive",
+    "focus": "Hybrid search, multi-hop retrieval, chunking strategy, groundedness evaluation, access control, and production RAG monitoring",
+    "questions": [
+      {
+        "category": "RAG",
+        "question": "What is hybrid search in RAG, and why combine keyword (BM25) search with vector similarity search instead of using vector search alone?"
+      },
+      {
+        "category": "RAG",
+        "question": "How would you handle multi-hop questions in a RAG system where the answer requires combining information from two or more separate documents?"
+      },
+      {
+        "category": "RAG",
+        "question": "What is query rewriting/query expansion in RAG, and when would you add it to a pipeline?"
+      },
+      {
+        "category": "RAG",
+        "question": "How would you evaluate whether a RAG system is hallucinating versus grounding its answer in retrieved context?"
+      },
+      {
+        "category": "RAG",
+        "question": "What is the \"lost in the middle\" problem with long-context LLMs, and how does it affect RAG design decisions around how many chunks to retrieve?"
+      },
+      {
+        "category": "RAG",
+        "question": "How would you design a RAG system to cite its sources so users can verify an answer?"
+      },
+      {
+        "category": "RAG",
+        "question": "What is contextual/late-chunking, and how does it differ from naive fixed-size chunking?"
+      },
+      {
+        "category": "RAG",
+        "question": "How would you handle a RAG knowledge base that contains outdated or conflicting information across documents?"
+      },
+      {
+        "category": "RAG",
+        "question": "When would you choose long-context (stuffing a huge context window) over RAG entirely, and what are the cost/latency tradeoffs?"
+      },
+      {
+        "category": "RAG",
+        "question": "How would you design access control in a RAG system so a user only retrieves and sees content they're authorized to see?"
+      },
+      {
+        "category": "RAG",
+        "question": "What is a reranker's role in a RAG pipeline, and why isn't embedding similarity alone sufficient for good retrieval?"
+      },
+      {
+        "category": "RAG",
+        "question": "How would you debug a RAG system that retrieves the right document but the LLM still gives a wrong answer?"
+      },
+      {
+        "category": "RAG",
+        "question": "How would you design RAG for structured/tabular data (e.g. answering questions against a CSV or SQL database) versus unstructured documents?"
+      },
+      {
+        "category": "RAG",
+        "question": "What monitoring would you put on a production RAG system to catch retrieval quality degradation over time?"
+      }
+    ]
+  },
+  {
+    "id": "set-95",
+    "title": "Mock Interview 95 - LLM Engineering Fundamentals",
+    "focus": "Transformer internals, tokenization, sampling parameters, function calling internals, structured output, model selection, embeddings",
+    "questions": [
+      {
+        "category": "LLM",
+        "question": "Explain how the transformer attention mechanism works at a high level, and why it enables parallelization that RNNs didn't."
+      },
+      {
+        "category": "LLM",
+        "question": "What is tokenization, and why can the same prompt cost different amounts for different languages?"
+      },
+      {
+        "category": "LLM",
+        "question": "What does temperature control in LLM sampling, and how would you choose it for a factual QA task versus a creative writing task?"
+      },
+      {
+        "category": "LLM",
+        "question": "What is top-p (nucleus) sampling, and how does it differ from top-k sampling?"
+      },
+      {
+        "category": "LLM",
+        "question": "What is the context window, and what happens when you exceed it?"
+      },
+      {
+        "category": "LLM",
+        "question": "How does function/tool calling actually work under the hood - does the model literally execute code?"
+      },
+      {
+        "category": "LLM",
+        "question": "What is structured output / JSON mode, and how would you enforce a strict schema on an LLM's response?"
+      },
+      {
+        "category": "LLM",
+        "question": "How would you compare and choose between OpenAI, Anthropic Claude, Google Gemini, and an open-weight model for a new production feature?"
+      },
+      {
+        "category": "LLM",
+        "question": "What is the difference between a base model, an instruction-tuned model, and a chat model?"
+      },
+      {
+        "category": "LLM",
+        "question": "What are embeddings, and why do semantically similar texts end up close together in vector space?"
+      },
+      {
+        "category": "LLM",
+        "question": "How would you reduce hallucination in an LLM application beyond just using RAG?"
+      },
+      {
+        "category": "LLM",
+        "question": "What security risks does calling an LLM with user-supplied input introduce that a traditional API call doesn't have?"
+      },
+      {
+        "category": "LLM",
+        "question": "How would you design a fallback strategy if your primary LLM provider has an outage or is rate-limiting you?"
+      },
+      {
+        "category": "LLM",
+        "question": "What is few-shot prompting, and when does it help versus when does it just waste context/tokens?"
+      }
+    ]
+  },
+  {
+    "id": "set-96",
+    "title": "Mock Interview 96 - LLMOps Production Operations",
+    "focus": "Prompt versioning, cost tracking, regression testing for non-deterministic output, prompt caching, observability tooling, PII handling",
+    "questions": [
+      {
+        "category": "LLMOps",
+        "question": "How would you version and roll out a prompt template change safely to production, the same way you'd version application code?"
+      },
+      {
+        "category": "LLMOps",
+        "question": "How would you track and control LLM API costs across multiple teams/features sharing the same provider account?"
+      },
+      {
+        "category": "LLMOps",
+        "question": "What would you monitor for a production LLM feature beyond uptime - what LLM-specific signals matter?"
+      },
+      {
+        "category": "LLMOps",
+        "question": "How would you build a regression test suite for an LLM application when outputs aren't deterministic?"
+      },
+      {
+        "category": "LLMOps",
+        "question": "What is prompt caching, and how does it reduce cost/latency for production LLM applications?"
+      },
+      {
+        "category": "LLMOps",
+        "question": "How would you design rate limiting and quota management for an internal LLM platform used by multiple teams?"
+      },
+      {
+        "category": "LLMOps",
+        "question": "How would you handle a production incident where an LLM provider silently changed model behavior after a \"minor\" version update?"
+      },
+      {
+        "category": "LLMOps",
+        "question": "What observability tools (LangSmith, Langfuse, Arize Phoenix) would you use for tracing LLM application requests, and what do they give you that generic APM doesn't?"
+      },
+      {
+        "category": "LLMOps",
+        "question": "How would you implement human-in-the-loop review for a subset of LLM outputs in production without slowing down the whole system?"
+      },
+      {
+        "category": "LLMOps",
+        "question": "How would you handle PII/sensitive data that might appear in prompts, logs, or LLM provider training data policies?"
+      },
+      {
+        "category": "LLMOps",
+        "question": "What is the role of an LLM gateway/proxy layer in a production architecture with multiple models and providers?"
+      },
+      {
+        "category": "LLMOps",
+        "question": "How would you design CI/CD for a GenAI application that includes prompts, RAG indexes, and application code all needing to move together?"
+      },
+      {
+        "category": "LLMOps",
+        "question": "How would you decide when to deprecate/sunset an older prompt or model version safely without breaking existing integrations?"
+      }
+    ]
+  },
+  {
+    "id": "set-97",
+    "title": "Mock Interview 97 - Agentic AI Architecture Deep Dive",
+    "focus": "ReAct vs Plan-and-Execute, agent memory design, OWASP LLM Top 10 for agents, multi-agent communication, agentic RAG",
+    "questions": [
+      {
+        "category": "Agentic AI",
+        "question": "Explain the ReAct (Reason + Act) pattern for agents, and how it differs from a simple single-shot tool-calling LLM call."
+      },
+      {
+        "category": "Agentic AI",
+        "question": "What is the Plan-and-Execute agent pattern, and when would you prefer it over ReAct?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How would you design an agent's \"memory\" to distinguish between short-term working memory and long-term persistent memory?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "What are the OWASP Top 10 risks for LLM applications that specifically apply to agentic systems (e.g. excessive agency, insecure tool use)?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How would you design communication between multiple agents in a multi-agent system - shared memory, message passing, or a blackboard pattern?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How would you prevent an agent from taking a destructive action based on a hallucinated belief about system state?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "What's the difference between a deterministic workflow (a DAG) and an autonomous agent, and how would you decide which one a given automation task actually needs?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How would you design evaluation for an agent that can take multiple different valid paths to the same correct outcome?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How would you handle an agent that needs to ask a clarifying question mid-task rather than guessing at ambiguous instructions?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "What does \"agentic RAG\" mean, and how does it differ from a standard single-shot RAG pipeline?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How would you rate-limit or budget an agent's autonomy so a single user request can't spawn unbounded sub-tasks?"
+      },
+      {
+        "category": "Agentic AI",
+        "question": "How would you design a rollback/undo mechanism for actions an agent has already taken, if a later step reveals the plan was wrong?"
+      }
+    ]
+  },
+  {
+    "id": "set-98",
+    "title": "Mock Interview 98 - Generative AI Beyond Text",
+    "focus": "Diffusion models, enterprise GenAI use cases, ethics/bias/copyright, content moderation, synthetic data, watermarking",
+    "questions": [
+      {
+        "category": "Generative AI",
+        "question": "At a high level, how do diffusion models generate images, and how does that differ conceptually from how an LLM generates text?"
+      },
+      {
+        "category": "Generative AI",
+        "question": "What are common enterprise use cases for generative AI beyond chatbots (e.g. document summarization, code generation, synthetic data)?"
+      },
+      {
+        "category": "Generative AI",
+        "question": "What ethical and legal considerations (copyright, bias, deepfakes) should a team weigh before shipping a generative AI feature?"
+      },
+      {
+        "category": "Generative AI",
+        "question": "How would you detect and mitigate bias in a generative AI system's outputs?"
+      },
+      {
+        "category": "Generative AI",
+        "question": "What is content moderation for generative AI, and how would you design a pipeline to catch unsafe outputs before they reach users?"
+      },
+      {
+        "category": "Generative AI",
+        "question": "How would you evaluate the quality of generated content (image, text, or audio) at scale, without manually reviewing every output?"
+      },
+      {
+        "category": "Generative AI",
+        "question": "What is synthetic data generation, and when is it a legitimate strategy versus a risky shortcut for training data?"
+      },
+      {
+        "category": "Generative AI",
+        "question": "How would you design a system to watermark or detect AI-generated content?"
+      },
+      {
+        "category": "Generative AI",
+        "question": "What is the difference between a foundation model and a fine-tuned/specialized model, and how does that affect a build-vs-buy decision?"
+      },
+      {
+        "category": "Generative AI",
+        "question": "How would you estimate and control the cost of a generative AI feature at scale before launching it broadly?"
+      }
+    ]
+  },
+  {
+    "id": "set-99",
+    "title": "Mock Interview 99 - Python Developer Round",
+    "focus": "GIL, generators, decorators, context managers, garbage collection, type hints, asyncio, metaclasses, common pitfalls",
+    "questions": [
+      {
+        "category": "Python",
+        "question": "Explain the GIL (Global Interpreter Lock) in CPython, and what it means for concurrent versus parallel execution."
+      },
+      {
+        "category": "Python",
+        "question": "What is the difference between a Python generator and a regular function, and when would you use one over returning a list?"
+      },
+      {
+        "category": "Python",
+        "question": "Explain Python decorators - how do they work under the hood, and give an example of a practical use case."
+      },
+      {
+        "category": "Python",
+        "question": "What are context managers, and how does the `with` statement use `__enter__`/`__exit__`?"
+      },
+      {
+        "category": "Python",
+        "question": "What's the difference between `@staticmethod`, `@classmethod`, and a regular instance method?"
+      },
+      {
+        "category": "Python",
+        "question": "How does Python's garbage collection work, and what causes a reference cycle that reference counting alone can't clean up?"
+      },
+      {
+        "category": "Python",
+        "question": "What is the difference between `deepcopy` and `copy`, and when does the distinction actually matter?"
+      },
+      {
+        "category": "Python",
+        "question": "How would you profile a slow Python function to find the actual bottleneck?"
+      },
+      {
+        "category": "Python",
+        "question": "What are Python type hints, and do they get enforced at runtime?"
+      },
+      {
+        "category": "Python",
+        "question": "How would you structure a Python project for testing, packaging, and dependency management in a modern, production-ready way?"
+      },
+      {
+        "category": "Python",
+        "question": "Explain asyncio and async/await - when does async actually help versus when is it pointless overhead?"
+      },
+      {
+        "category": "Python",
+        "question": "What is a Python metaclass, and can you give a realistic scenario where you'd actually need one?"
+      },
+      {
+        "category": "Python",
+        "question": "How would you handle mutable default arguments, and why are they a common bug source in Python?"
+      },
+      {
+        "category": "Python",
+        "question": "What's the difference between `is` and `==` in Python, and when does that distinction cause a subtle bug?"
+      }
+    ]
+  },
+  {
+    "id": "set-100",
+    "title": "Mock Interview 100 - Go Developer Round",
+    "focus": "Goroutines/channels, select, error handling philosophy, interfaces, race detection, context.Context, pprof, table-driven tests",
+    "questions": [
+      {
+        "category": "Go",
+        "question": "Explain goroutines and channels - how do they enable Go's concurrency model, and how is that different from OS threads?"
+      },
+      {
+        "category": "Go",
+        "question": "What is the difference between a buffered and unbuffered channel, and when would you use each?"
+      },
+      {
+        "category": "Go",
+        "question": "How does Go's `select` statement work with multiple channels?"
+      },
+      {
+        "category": "Go",
+        "question": "Explain Go's error handling philosophy (returning errors as values) versus exceptions in other languages - what are the tradeoffs?"
+      },
+      {
+        "category": "Go",
+        "question": "What is a Go interface, and how does Go's implicit interface satisfaction differ from explicit interface implementation in Java/C#?"
+      },
+      {
+        "category": "Go",
+        "question": "What is a race condition in Go, and how would you detect one using the built-in race detector?"
+      },
+      {
+        "category": "Go",
+        "question": "Explain the difference between a pointer receiver and a value receiver for a method in Go, and when you'd choose one over the other."
+      },
+      {
+        "category": "Go",
+        "question": "How does Go's garbage collector work, and what should you know about it when writing performance-sensitive code?"
+      },
+      {
+        "category": "Go",
+        "question": "What is a `sync.WaitGroup`, and how does it differ from using channels to wait for goroutines to finish?"
+      },
+      {
+        "category": "Go",
+        "question": "How would you structure a Go module with multiple packages for a production service?"
+      },
+      {
+        "category": "Go",
+        "question": "What is context.Context in Go used for, and how does it help with cancellation and timeouts across goroutines?"
+      },
+      {
+        "category": "Go",
+        "question": "How would you profile a Go application for CPU or memory issues (pprof)?"
+      },
+      {
+        "category": "Go",
+        "question": "What is a common pitfall with capturing loop variables in a goroutine closure, and how was this fixed in recent Go versions?"
+      },
+      {
+        "category": "Go",
+        "question": "How would you write table-driven tests in Go, and why is this the idiomatic testing pattern?"
+      }
+    ]
+  },
+  {
+    "id": "set-101",
+    "title": "Mock Interview 101 - JavaScript Developer Round",
+    "focus": "Closures, event loop and microtask/macrotask ordering, prototypal inheritance, this binding, Promises/async-await, hoisting, ==/===, debounce/throttle, memory leaks, CommonJS vs ESM, WeakMap/WeakSet, TypeScript tradeoffs",
+    "questions": [
+      {
+        "category": "JavaScript",
+        "question": "Explain closures in JavaScript - how does an inner function retain access to its outer function's variables after the outer function has returned?"
+      },
+      {
+        "category": "JavaScript",
+        "question": "Explain the JavaScript event loop - how do the call stack, task queue (macrotasks), and microtask queue interact, and why do Promises resolve before setTimeout callbacks?"
+      },
+      {
+        "category": "JavaScript",
+        "question": "How does prototypal inheritance work in JavaScript, and how does it differ from classical (class-based) inheritance?"
+      },
+      {
+        "category": "JavaScript",
+        "question": "Explain how `this` binding works in JavaScript - how does it differ between a regular function, an arrow function, and a method called on an object?"
+      },
+      {
+        "category": "JavaScript",
+        "question": "Explain Promises and async/await - what does 'await' actually do under the hood, and what happens if you forget to handle a rejected Promise?"
+      },
+      {
+        "category": "JavaScript",
+        "question": "What is variable hoisting in JavaScript, and why does `var` behave differently from `let`/`const` with respect to it?"
+      },
+      {
+        "category": "JavaScript",
+        "question": "What is the difference between `==` and `===` in JavaScript, and what specific type coercion rules make `==` risky to use?"
+      },
+      {
+        "category": "JavaScript",
+        "question": "What is debounce versus throttle, and give a practical use case for each in frontend development."
+      },
+      {
+        "category": "JavaScript",
+        "question": "What causes a memory leak in JavaScript, and give a common example involving event listeners or closures."
+      },
+      {
+        "category": "JavaScript",
+        "question": "What is the difference between CommonJS (`require`/`module.exports`) and ES Modules (`import`/`export`), and why can mixing them in the same project cause issues?"
+      },
+      {
+        "category": "JavaScript",
+        "question": "Explain destructuring and the spread/rest operators in modern JavaScript - how do they simplify working with objects and arrays?"
+      },
+      {
+        "category": "JavaScript",
+        "question": "When would you use array methods like `map`/`filter`/`reduce` instead of a traditional `for` loop, and are there performance tradeoffs?"
+      },
+      {
+        "category": "JavaScript",
+        "question": "What are WeakMap and WeakSet in JavaScript, and why would you use one instead of a regular Map or Set?"
+      },
+      {
+        "category": "JavaScript",
+        "question": "What are the main tradeoffs of adopting TypeScript over plain JavaScript for a production codebase?"
+      }
+    ]
+  },
+  {
+    "id": "set-102",
+    "title": "Mock Interview 102 - Shell and Bash Scripting Round",
+    "focus": "set -euo pipefail, quoting pitfalls, trap for cleanup, process substitution, heredocs, exit code handling, arrays, parameter expansion, cron robustness, debugging with set -x, sh vs bash, xargs pitfalls, sed/awk vs parameter expansion, Bats testing",
+    "questions": [
+      {
+        "category": "Shell/Bash",
+        "question": "What does `set -euo pipefail` do at the top of a Bash script, and why is it considered a best practice for production scripts?"
+      },
+      {
+        "category": "Shell/Bash",
+        "question": "Why does quoting matter in Bash - what's the difference between `$var`, `\"$var\"`, and `'$var'`, and what bugs does unquoted variable expansion cause?"
+      },
+      {
+        "category": "Shell/Bash",
+        "question": "How would you use `trap` to guarantee cleanup (e.g. removing a temp file) even if a script exits unexpectedly or is interrupted?"
+      },
+      {
+        "category": "Shell/Bash",
+        "question": "What is process substitution in Bash (`<(...)`), and give a practical example of when you'd use it instead of a temporary file?"
+      },
+      {
+        "category": "Shell/Bash",
+        "question": "What is a heredoc in Bash, and how does `<<'EOF'` differ from `<<EOF` in terms of variable expansion inside the block?"
+      },
+      {
+        "category": "Shell/Bash",
+        "question": "How does Bash handle exit codes, and what is the difference between `$?` and directly checking `if command; then`?"
+      },
+      {
+        "category": "Shell/Bash",
+        "question": "How would you declare and iterate over an array in Bash, and what's the difference between `${array[@]}` and `${array[*]}`?"
+      },
+      {
+        "category": "Shell/Bash",
+        "question": "Explain Bash parameter expansion defaults - what do `${VAR:-default}`, `${VAR:=default}`, and `${VAR:?error message}` each do?"
+      },
+      {
+        "category": "Shell/Bash",
+        "question": "How would you write a cron-scheduled script robustly, given that cron runs with a minimal environment (no interactive shell, limited PATH)?"
+      },
+      {
+        "category": "Shell/Bash",
+        "question": "How would you debug a Bash script that's behaving unexpectedly - what does `set -x` show you, and how would you debug just one section of a script?"
+      },
+      {
+        "category": "Shell/Bash",
+        "question": "What is the difference between running a script with `sh script.sh`, `bash script.sh`, and `./script.sh`, and why does the shebang line matter?"
+      },
+      {
+        "category": "Shell/Bash",
+        "question": "When would you use `xargs` instead of a `for` loop to process a list of items, and what's a common pitfall with filenames containing spaces?"
+      },
+      {
+        "category": "Shell/Bash",
+        "question": "What are common string manipulation techniques in Bash (parameter expansion for substring/replace) versus reaching for `sed`/`awk`, and when would you choose each?"
+      },
+      {
+        "category": "Shell/Bash",
+        "question": "How would you write automated tests for a Bash script, and what does a tool like Bats (Bash Automated Testing System) provide over manually running the script and checking output?"
+      }
+    ]
+  },
+  {
+    "id": "set-103",
+    "title": "Mock Interview 103 - RAG, MLflow, LLM, Kubeflow and Model Monitoring",
+    "focus": "Advanced production AI platform round covering RAG reliability, MLflow, Kubeflow, LLM observability, and model monitoring.",
+    "questions": [
+      {
+        "category": "RAG",
+        "question": "RAG evaluation: How would you separate and measure retrieval quality, generation quality, and end-to-end answer quality?"
+      },
+      {
+        "category": "RAG",
+        "question": "RAG ingestion: How would you update a large vector index after documents change without downtime or mixing incompatible embedding versions?"
+      },
+      {
+        "category": "RAG Security",
+        "question": "RAG security: What prompt-injection risks come from retrieved documents, and how would you defend against them?"
+      },
+      {
+        "category": "RAG Operations",
+        "question": "RAG production incident: Answer quality dropped after an embedding-model upgrade. How would you investigate and recover?"
+      },
+      {
+        "category": "MLflow",
+        "question": "MLflow lineage: How would you connect a production prediction back to the exact MLflow run, code, data, and model artifact that produced it?"
+      },
+      {
+        "category": "MLflow",
+        "question": "MLflow deployment safety: How would you promote, canary, and roll back models when using MLflow Model Registry?"
+      },
+      {
+        "category": "MLflow Operations",
+        "question": "MLflow operations: What would you monitor for the MLflow tracking server, backend database, and artifact store?"
+      },
+      {
+        "category": "Kubeflow",
+        "question": "Kubeflow pipeline reliability: How would you make a training pipeline idempotent, resumable, and safe to retry?"
+      },
+      {
+        "category": "Kubeflow",
+        "question": "Kubeflow cost and capacity: How would you manage CPU, GPU, quotas, scheduling, and autoscaling for multiple ML teams?"
+      },
+      {
+        "category": "Kubeflow / MLflow",
+        "question": "Kubeflow and MLflow: How would you use them together without creating two conflicting sources of truth?"
+      },
+      {
+        "category": "LLM",
+        "question": "LLM fundamentals: How do temperature, top-p, context length, and output-token limits affect quality, latency, cost, and reproducibility?"
+      },
+      {
+        "category": "LLM",
+        "question": "LLM model selection: How would you choose between a large frontier model, a smaller model, and a fine-tuned model for production?"
+      },
+      {
+        "category": "LLM Monitoring",
+        "question": "LLM monitoring: What production signals would you monitor beyond API uptime?"
+      },
+      {
+        "category": "LLM Monitoring",
+        "question": "LLM monitoring: How would you detect prompt or response drift when there is no immediate ground-truth label?"
+      },
+      {
+        "category": "LLM Observability",
+        "question": "LLM observability: How would you trace an agentic LLM request across retrieval, model calls, and tools while protecting sensitive data?"
+      },
+      {
+        "category": "Model Monitoring",
+        "question": "Model monitoring: What is the difference between data drift, concept drift, prediction drift, training-serving skew, and model-performance degradation?"
+      },
+      {
+        "category": "Model Monitoring",
+        "question": "Model monitoring with delayed labels: How would you monitor quality when ground truth arrives days or weeks after prediction?"
+      },
+      {
+        "category": "Model Monitoring",
+        "question": "Model monitoring response: When should drift trigger an alert, rollback, recalibration, or retraining?"
+      },
+      {
+        "category": "AI Observability",
+        "question": "Monitoring architecture: How would you combine Prometheus, Grafana, MLflow, and an LLM observability platform for one AI service?"
+      }
+    ]
+  },
+  {
+    "id": "set-104",
+    "title": "Mock Interview 104 - CI/CD, Jenkins, Helm, ArgoCD, GitOps Drift and Audit Logs",
+    "focus": "Full deployment chain: Jenkins CI/CD, Docker image promotion, Helm templating, GitOps/ArgoCD reconciliation, drift detection, Kubernetes/GKE audit logs, and ArgoCD setup/RBAC/secrets/notifications",
+    "questions": [
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Can you please introduce yourself?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "What kind of tasks/activities do you do on a day-to-day basis?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Can you explain your CI/CD flow?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Can you explain the CI/CD flow specifically for application deployment?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How does the deployment stage work?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How does your multi-stage deployment flow work across environments?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "What tools do you use for application build and deployment?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "Once the Docker image tag is updated in the Helm chart, what actually triggers the Helm chart deployment to the Kubernetes cluster?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "What is Jenkins's role, Helm's role, and Kubernetes's role in the deployment process?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "If someone makes a manual change directly in the Kubernetes cluster, how do you manage it?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How does GitOps/Argo CD detect configuration drift?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How do you get a notification when someone makes a manual change in the cluster?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How do you identify who made the manual change?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "What information/components do you check in Kubernetes/GKE audit logs?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "What are the important audit-log details, such as user/service account, operation, resource, and timestamp?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How do you set up Argo CD for application deployment?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "What components/configurations are required while setting up Argo CD?"
+      },
+      {
+        "category": "CI/CD/GitOps",
+        "question": "How do you configure service accounts, RBAC, Secrets, Git repository access, webhooks, and notifications for Argo CD?"
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "Design a deployment order using ArgoCD sync waves and PreSync/PostSync hooks for an application needing a database migration before the new Pods roll out, and a smoke test after. What happens if the PreSync hook fails?"
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "You need to deploy the same application to 50 clusters with per-cluster config differences. Design an ApplicationSet using the cluster generator, and explain how you'd avoid one bad cluster blocking the rollout to the other 49."
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "How would you configure ArgoCD sync windows to block automatic production syncs during a change freeze, while still allowing manual emergency syncs?"
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "Design a hub-and-spoke ArgoCD architecture managing 20 remote clusters from one central ArgoCD instance. What are the failure modes if the hub cluster goes down?"
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "ArgoCD shows a custom CRD-backed Application as 'Progressing' forever even though the underlying resource is actually healthy. How do you fix this?"
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "An HPA-managed Deployment's replica count constantly fights with ArgoCD reporting OutOfSync. Diagnose and fix this without disabling self-heal entirely."
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "Your ArgoCD control-plane cluster is destroyed, but your application clusters and Git repos are intact. Walk through recovering ArgoCD itself and reconciling without applications going down in the meantime."
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "Design a process to rotate a database credential referenced via External Secrets Operator across 40 ArgoCD-managed Applications without triggering a full redeploy of every application."
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "A PostSync hook Job fails intermittently due to a flaky external dependency. How does this affect the Application's sync status, and how would you design the hook to be safely retryable?"
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "You're evaluating ArgoCD vs Flux for an org with 300+ microservices across 15 teams. What specific factors would actually change your decision?"
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "A developer with 'sync' permission on one ArgoCD Project can somehow deploy to a cluster outside their team's scope. How would you audit and fix this?"
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "Your root 'app of apps' Application itself gets deleted accidentally. What's actually still running, what breaks, and how do you recover?"
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "Design an automated canary using Argo Rollouts and a service mesh where a regression should trigger automatic rollback within 2 minutes of the canary starting."
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "Your GitOps manifests repo has grown to thousands of files across 15 teams and ArgoCD's repo-server is now slow to detect changes. Diagnose and fix the actual bottleneck."
+      },
+      {
+        "category": "ArgoCD/GitOps Deep Dive",
+        "question": "Two ArgoCD Applications with overlapping resource selectors both claim ownership of the same Kubernetes resource. What happens, and how do you prevent this at the design level?"
+      }
+    ]
+  },
+  {
+    "id": "set-105",
+    "title": "Mock Interview 105 - Senior GCP Cloud Engineer (Azure Migration, Vault, KMS, MongoDB Atlas, PCI-DSS)",
+    "focus": "Azure-to-GCP migration strategy, HashiCorp Vault on GKE, Cloud KMS envelope encryption, MongoDB Atlas private networking, PCI-DSS scope reduction for FinTech workloads",
+    "questions": [
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "How would you plan and execute a phased migration of a production application from Azure to GCP with minimal downtime?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "What are the GCP equivalents of core Azure services (VNet, NSG, Azure AD, Blob Storage, AKS) you'd map during a migration assessment?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "How would you handle DNS cutover during an Azure-to-GCP migration to avoid a hard outage?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "How would you migrate persistent data (databases, blob storage) from Azure to GCP with validation that nothing was lost or corrupted?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "What's your rollback strategy if a migrated workload on GCP shows problems in production after cutover?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "How would you run Development, SIT, and Production environments in parallel across two clouds during a multi-month migration, and what does that cost/complexity tradeoff look like?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "How would you integrate HashiCorp Vault with GKE workloads for dynamic secret injection?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "What's the difference between Vault's dynamic secrets and static secrets, and when would you use each for a GCP-hosted application?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "How do you handle Vault's own high availability and unsealing in a production GKE deployment?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "How would you rotate a database credential stored in Vault without restarting every consuming application?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "When would you use HashiCorp Vault versus GCP Secret Manager, given both are in this JD's requirements?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "What is Cloud KMS used for, and how does it differ from Secret Manager?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "How would you implement envelope encryption using Cloud KMS for sensitive data stored in Cloud Storage or a database?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "How would you design a key rotation policy in Cloud KMS for a FinTech application needing to demonstrate compliance?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "How would you set up private network connectivity (VPC Peering or Private Service Connect) between GKE workloads and a MongoDB Atlas cluster?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "What security controls would you put around a MongoDB Atlas cluster serving a FinTech application on GCP?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "How would you troubleshoot intermittent connectivity between a GKE-hosted application and MongoDB Atlas?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "What does PCI-DSS require at the infrastructure level, and how would that shape your GCP network segmentation design for a lending platform?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "How would you design audit logging and access controls to support a PCI-DSS compliance audit on GCP?"
+      },
+      {
+        "category": "Cloud Migration & FinTech Security",
+        "question": "What GCP-specific controls (VPC Service Controls, CMEK, IAP) would you use to reduce PCI-DSS scope for a subset of your infrastructure?"
+      }
+    ]
+  },
+  {
+    "id": "set-106",
+    "title": "Mock Interview 106 - Harness CI/CD Platform",
+    "focus": "Harness Delegate architecture, native canary/blue-green strategies, Pipeline/Stage/Step structure, GitOps module, Feature Flags, Cloud Cost Management, Chaos Engineering, STO security scanning, Connectors/secrets, and Harness vs Jenkins+ArgoCD+Spinnaker tradeoffs",
+    "questions": [
+      {
+        "category": "Harness CI/CD",
+        "question": "What is Harness, and how does its Continuous Delivery module differ from a traditional Jenkins pipeline?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "Explain the Harness Delegate - what is it, and why does Harness need one instead of connecting directly to your infrastructure?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "How does Harness implement canary and blue-green deployment strategies natively, compared to building the same thing yourself in Jenkins?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "What is a Harness Pipeline, Stage, and Step - how are they structured?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "How does Harness's GitOps module differ from just using ArgoCD directly?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "How would you migrate a set of Jenkins pipelines to Harness, and what would you need to redesign versus what maps over directly?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "What is Harness Feature Flags, and how would you use it to decouple deployment from release?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "How would you design an approval workflow in a Harness pipeline for a production deployment?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "What is Harness Cloud Cost Management (CCM), and how does it help with cost optimization?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "What is Harness Chaos Engineering, and how would you use it to test a service's resilience?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "How does Harness Security Testing Orchestration (STO) integrate security scanning into a pipeline?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "How do Harness Connectors work, and what's the security model for storing credentials?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "How would you troubleshoot a Harness pipeline that's stuck or a Delegate that's disconnected?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "What is a Harness Environment and Infrastructure Definition, and how do they relate to a Service?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "How would you implement a rollback strategy in Harness if a deployment fails health checks?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "How does Harness handle secrets management - native Harness secrets vs. an external Vault/Secret Manager?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "When would you choose Harness over Jenkins + ArgoCD + Spinnaker as separate tools, and what's the tradeoff?"
+      },
+      {
+        "category": "Harness CI/CD",
+        "question": "How would you set up multi-environment promotion (dev -> staging -> prod) in Harness with different approval requirements per environment?"
+      }
+    ]
+  },
+  {
+    "id": "set-107",
+    "title": "Mock Interview 107 - Resume-Personalized Round 1 Screening (Naukri AI Question Bank)",
+    "focus": "Real resume-grounded Round 1 screening questions pulled from Naukri's AI question bank - Terraform Enterprise, ArgoCD/GitOps, Prometheus/Grafana/ELK, Jenkins/GitHub Actions CI/CD, GKE operations, DevSecOps (Prisma Cloud, IONIX, Stream Security), JFrog Artifactory, Veeam/Kasten K10 DR, and behavioral questions tied to specific past roles",
+    "questions": [
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you applied YAML configuration standards to enforce security best practices in Kubernetes environments during your tenure at TCS?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Can you explain your practice of integrating DevSecOps tools into YAML configurations to enhance security compliance for deployed applications at Tech Mahindra?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "What strategies did you follow at TCS to monitor and alert on Kubernetes autoscaling and node pool lifecycle events?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How did you implement shared VPC and network segmentation principles in GCP to maintain security and governance compliance?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you leveraged your expertise in cloud security tools like Google Cloud Armor and Prisma Cloud to enhance network security in a multi-cloud environment?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "What strategies did you implement for build artifact management and version control using tools like JFrog Artifactory at Tech Mahindra?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "What approach did you take to incorporate DevSecOps practices such as vulnerability scanning and secrets management in build workflows at Tech Mahindra?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Describe your experience managing build environments, including version control systems like GitHub, GitLab, and branching strategies, in large-scale projects."
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Hello AKHILESH RANJAN SINGH, How do you stay organized and manage your time between various tasks or projects?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Describe how you automated deployment and lifecycle management of Kubernetes workloads through CI/CD pipelines in your previous roles."
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How did you implement cloud security posture management and attack surface monitoring using tools like IONIX and Stream Security at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you incorporated containerization technologies like Docker and orchestration tools like Kubernetes in build and deployment pipelines at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Describe your approach to resolving CI/CD pipeline failures using Jenkins and Terraform in your role at Tech Mahindra?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Hello AKHILESH RANJAN SINGH, Can you talk about a challenging situation you faced at work and how you overcame it?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "What are the key considerations and best practices you followed to establish cloud governance models at Capgemini using GCP IAM and Shared VPC architecture?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Can you detail your experience enhancing alerting for MLOps infrastructure monitoring, including the use of Prometheus and custom metrics?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Can you detail your approach to automating testing and quality gates within your CI/CD pipelines to ensure reliable deployments?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Describe your approach to managing production Kubernetes clusters including autoscaling, upgrades, and RBAC in your current role at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you utilized Terraform in Capgemini to manage infrastructure as code for multi-cloud environments including GCP and AWS?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you customized and reused Terraform modules in your CI/CD workflows to improve infrastructure deployment efficiency at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Could you explain how you integrated security best practices such as DevSecOps into CI/CD pipelines during your work with Jenkins and Terraform at Tech Mahindra?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How did your certifications like Google Professional Cloud DevOps Engineer and Network Engineer enhance your practical skills in your cloud engineering roles?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "What strategies did you use to manage configuration drift and maintain consistency across Kubernetes clusters using GitOps tools like ArgoCD, as experienced at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Could you explain how monitoring and observability tools like Prometheus and ELK Stack were integrated in build pipelines at your roles in Capgemini and Tech Mahindra?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Explain your process for identifying and mitigating vulnerabilities during DevSecOps workflows including Prisma Cloud integrations."
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Can you explain how you handled cloud security posture issues during monitoring with IONIX and Stream Security at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Can you detail your experience automating network infrastructure provisioning and lifecycle management using Terraform Enterprise in Capgemini's cloud projects?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "What strategies did you use to implement cloud security and governance on GCP platforms, especially involving cloud armor and DevSecOps tools at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Can you explain your experience designing and managing Kubernetes configurations using Helm and YAML for AI/ML workloads at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Can you explain your approach towards monitoring and observability using tools like Prometheus, Grafana, and ELK stack for cloud native platforms?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Describe your approach to designing and implementing monitoring solutions using the ELK stack for cloud-native applications at Tech Mahindra."
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Can you explain how Kubernetes networking works and your experience managing network policies in GKE clusters at Capgemini, Noida?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you automated operating system patching and monitored its effectiveness in production environments?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How did you diagnose and fix deployment issues related to Kubernetes workload troubleshooting and performance optimization at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Describe your experience automating infrastructure provisioning and deployment workflows using Terraform Enterprise and Harness integration at Capgemini."
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "In your experience at Capgemini, how did you secure sensitive configuration data in YAML for Kubernetes deployments?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How did you enhance observability and alerting capabilities in GKE clusters managed at TCS using cloud-native tools?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How did you implement self-service infrastructure provisioning in your CI/CD workflows to enhance developer productivity at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Could you elaborate on your experience with implementing CI/CD pipelines using tools like Jenkins, GitHub Actions, and ArgoCD at Tech Mahindra and Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "What key lessons have you learned managing production Kubernetes environments with focus on upgrades, autoscaling, and security at TCS and Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How did you manage cross-cloud network connectivity challenges integrating AWS, Azure, and GCP environments in your previous roles?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How did you integrate infrastructure as code tools like Terraform and Ansible within build pipelines across multi-cloud platforms at Tech Mahindra?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How did you integrate CI/CD platforms with monitoring and alerting to improve deployment reliability at Tech Mahindra?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Explain how you managed multi-cloud CI/CD pipelines across GCP, AWS, and Azure to maintain consistency and reliability in your deployments."
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you implemented Terraform Enterprise modules to enhance deployment efficiency at Capgemini, Noida?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "What strategies did you implement to resolve incidents and improve observability with ELK Stack and Prometheus monitoring in your work at Tech Mahindra?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you optimized build and deployment workflows leveraging GitOps tools like ArgoCD in your recent projects at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you utilized Prometheus and Grafana in your role at Capgemini for proactive monitoring and alerting?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Explain your use of RBAC and IAM for network access control within multi-project GCP environments during your role at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you applied your expertise in MLOps and AI infrastructure incorporating tools like MLflow, Vertex AI, and FastAPI in your DevOps roles?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Describe your approach to designing scalable network architectures in GCP using Terraform modules as implemented during your tenure at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Could you detail your experience creating and maintaining Infrastructure as Code workflows integrating Jenkins and YAML pipelines at Tech Mahindra?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Can you explain how you architected and implemented secure cloud platform foundations using Terraform Enterprise at Capgemini, Noida?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you integrated monitoring and observability tools like Prometheus, Grafana, and ELK Stack to improve cloud platform reliability at your past workplaces?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you used Kubernetes and GKE to support AI/ML workloads and MLOps initiatives in your role at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you applied Infrastructure as Code principles within CI/CD pipelines, specifically using Terraform Enterprise in your role at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How do you approach troubleshooting and resolving network architecture issues in hybrid cloud environments?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you managed disaster recovery and backup failures using Veeam and Kasten K10 in cross-cloud environments?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Can you describe your experience in creating reusable Terraform modules to optimize build and infrastructure provisioning at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you utilized Jenkins in your CI/CD pipelines to automate build management at Capgemini and Tech Mahindra?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "What strategies did you adopt to monitor and troubleshoot network performance in containerized and cloud-native applications using tools like Prometheus and ELK Stack?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Tell me about your experience and challenges in integrating network security with DevSecOps pipelines in multi-cloud environments?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "What strategies did you use to integrate monitoring and observability tools like Prometheus and ELK stack within CI/CD pipeline deployments at Tech Mahindra?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Can you describe your experience designing and implementing CI/CD pipelines using Jenkins and GitHub Actions at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Can you discuss your experience designing and automating CI/CD pipelines for multi-cloud environments using Jenkins, GitHub Actions, and Terraform during your time at Tech Mahindra, Mumbai?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you troubleshooted production issues in GKE clusters while managing node pools and autoscaling at Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you managed Kubernetes clusters across multi-cloud environments including GCP, AWS, and Azure in your roles at Tech Mahindra and Capgemini?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Can you share your experience in diagnosing Linux system issues and patching automation to minimize downtime in your roles?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Discuss your experience employing log-based alerting and monitoring in multi-cloud environments involving Azure, AWS, and GCP."
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "Can you describe your experience managing production-grade GKE environments and ensuring platform reliability?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How have you leveraged CI/CD and GitOps tools like Jenkins, GitHub Actions, and ArgoCD in your DevOps roles?"
+      },
+      {
+        "category": "Resume-Personalized (Round 1)",
+        "question": "How did you incorporate monitoring configurations like Prometheus and Grafana into your YAML-based Kubernetes deployments at Capgemini?"
+      }
+    ]
+  },
+  {
+    "id": "set-108",
+    "title": "Mock Interview 108 - Azure DevOps, AWS DevOps and Workload Identity Federation",
+    "focus": "Azure DevOps (Pipelines, Service Connections, Environments, Artifacts, templates), AWS-native CI/CD (CodePipeline, CodeBuild, CodeDeploy, CodeArtifact), and workload identity federation (OIDC) across GitHub Actions, Azure DevOps, EKS IRSA, and GCP/AWS/Azure",
+    "questions": [
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "What is Azure DevOps, and how do its components (Boards, Repos, Pipelines, Artifacts, Test Plans) fit together?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "Explain an Azure Pipelines YAML pipeline structure - stages, jobs, and steps - and how it compares to a GitHub Actions workflow."
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "How would you set up a multi-stage Azure Pipeline for build and deployment across dev/staging/production with approval gates?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "What is an Azure DevOps Service Connection, and how would you configure one to deploy to GCP or AWS securely?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "How do Azure Pipelines templates work, and how would you use them to share common pipeline logic across multiple repos/teams?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "How would you troubleshoot an Azure Pipelines agent pool running out of capacity during a burst of concurrent pipeline runs?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "What is Azure Artifacts, and how would you use it for package/dependency management across teams?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "How would you migrate a set of Azure DevOps pipelines to GitHub Actions, and what maps over directly versus needing redesign?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "What is AWS CodePipeline, and how do CodeCommit, CodeBuild, and CodeDeploy fit into it as stages?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "How does AWS CodeBuild's buildspec.yml work, and how does it compare to a GitHub Actions workflow file or a Jenkinsfile?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "How does AWS CodeDeploy perform a blue-green deployment to an EC2 Auto Scaling group or ECS service?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "What is AWS CodeArtifact, and when would you use it over a third-party artifact registry?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "How would you design a CI/CD pipeline entirely within AWS-native tooling (CodePipeline/CodeBuild/CodeDeploy) for a containerized application deploying to EKS?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "How would you troubleshoot a CodeBuild job that fails intermittently with no clear error in the build logs?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "How do CodePipeline manual approval actions work, and how would you gate a production deployment behind one?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "How does GitHub Actions OIDC-based Workload Identity Federation work for authenticating to AWS, Azure, or GCP without storing long-lived credentials?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "How would you configure an Azure DevOps Service Connection using Workload Identity Federation instead of a service principal secret?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "What's the difference between AWS IAM Roles for Service Accounts (IRSA) on EKS and GitHub Actions' OIDC federation to AWS - and how are they actually related under the hood?"
+      },
+      {
+        "category": "Azure DevOps / AWS DevOps / Workload Identity",
+        "question": "How would you design a CI/CD pipeline's workload (the actual compute running your build/deploy jobs) to scale elastically without over-provisioning idle runners/agents?"
+      }
+    ]
+  },
+  {
+    "id": "set-109",
+    "title": "Mock Interview 109 - CI/CD Trigger and Workflow Event Mechanics",
+    "focus": "GitHub Actions trigger events (push, pull_request, schedule, workflow_dispatch, workflow_call, repository_dispatch, pull_request_target security), Azure Pipelines trigger types and pipeline resource triggers, and AWS CodePipeline webhook/polling/EventBridge triggering",
+    "questions": [
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "What are the main GitHub Actions trigger events (push, pull_request, schedule, workflow_dispatch, workflow_call), and when would you use each?"
+      },
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "What's the difference between workflow_dispatch and repository_dispatch as manual/external triggers?"
+      },
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "How does workflow_call work for reusable workflows, and how does it differ from a composite action?"
+      },
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "How would you configure a GitHub Actions workflow to run on a schedule (cron) reliably, and what are the known limitations of scheduled workflows on GitHub?"
+      },
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "How would you trigger a GitHub Actions workflow in one repo from an event in a different repo?"
+      },
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "What's the difference between on: pull_request and on: pull_request_target, and why does that distinction matter for security?"
+      },
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "How would you use path filters and branch filters together to prevent a workflow from running on irrelevant changes?"
+      },
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "What are the different trigger types in Azure Pipelines (CI triggers, PR triggers, scheduled triggers, pipeline triggers), and how do they differ?"
+      },
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "How would you configure a pipeline to trigger only when a specific upstream pipeline completes successfully (pipeline resource trigger)?"
+      },
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "How do path-based and branch-based trigger filters work in Azure Pipelines YAML?"
+      },
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "What actually triggers a CodePipeline execution - webhook vs polling - and which would you choose and why?"
+      },
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "How would you configure CodePipeline to trigger from an EventBridge rule instead of the default source polling/webhook mechanism, and why would you want to?"
+      },
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "How would you chain multiple CodePipelines together so one pipeline's completion triggers another?"
+      },
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "Compare how GitHub Actions, Azure Pipelines, and AWS CodePipeline each handle \"trigger on new commit\" under the hood - polling vs webhook vs event-driven."
+      },
+      {
+        "category": "CI/CD Triggers & Events",
+        "question": "How would you debug a workflow/pipeline that isn't triggering at all despite the triggering event clearly happening (a push, a PR)?"
+      }
+    ]
+  },
+  {
+    "id": "set-110",
+    "title": "Mock Interview 110 - GCP Architecture, Networking, GKE, CI/CD and Terraform",
+    "focus": "End-to-end GCP project architecture, Shared VPC and hybrid networking, GKE application hosting, Artifact Registry, Jenkins delivery, Terraform Enterprise, imports, remote state, locking and recovery",
+    "questions": [
+      {
+        "category": "Project & Application Architecture",
+        "question": "Can you explain your current/last GCP project and your day-to-day activities?"
+      },
+      {
+        "category": "Project & Application Architecture",
+        "question": "Can you explain the complete architecture and flow of your application?"
+      },
+      {
+        "category": "Project & Application Architecture",
+        "question": "What kind of application are you supporting, and where is it hosted?"
+      },
+      {
+        "category": "Project & Application Architecture",
+        "question": "Is your application internet-facing or internal-facing?"
+      },
+      {
+        "category": "Project & Application Architecture",
+        "question": "Is it a web application or an API-based application?"
+      },
+      {
+        "category": "Project & Application Architecture",
+        "question": "How do consumers/users access your application?"
+      },
+      {
+        "category": "Project & Application Architecture",
+        "question": "How do you ensure that only legitimate users can access your environment?"
+      },
+      {
+        "category": "Project & Application Architecture",
+        "question": "Where do you implement those security restrictions?"
+      },
+      {
+        "category": "Project & Application Architecture",
+        "question": "How do you identify whether a user/request is legitimate?"
+      },
+      {
+        "category": "GCP Networking & Hybrid Connectivity",
+        "question": "How would you design a GCP network architecture where you have full control over networking?"
+      },
+      {
+        "category": "GCP Networking & Hybrid Connectivity",
+        "question": "If all networking components need to be centrally controlled from one Host Project, how would you design it?"
+      },
+      {
+        "category": "GCP Networking & Hybrid Connectivity",
+        "question": "Which GCP components would you use in a Shared VPC Host Project architecture?"
+      },
+      {
+        "category": "GCP Networking & Hybrid Connectivity",
+        "question": "How would you establish connectivity between an on-premises network and GCP?"
+      },
+      {
+        "category": "GCP Networking & Hybrid Connectivity",
+        "question": "How would on-premises users and applications privately access services running in GCP?"
+      },
+      {
+        "category": "GCP Networking & Hybrid Connectivity",
+        "question": "Would you use Partner Interconnect, Dedicated Interconnect, or VPN for on-prem-to-GCP connectivity?"
+      },
+      {
+        "category": "GCP Networking & Hybrid Connectivity",
+        "question": "How would you establish on-prem-to-GCP connectivity using VPN?"
+      },
+      {
+        "category": "GCP Networking & Hybrid Connectivity",
+        "question": "How would you use HA VPN, Cloud Router, and BGP for hybrid connectivity?"
+      },
+      {
+        "category": "GCP Networking & Hybrid Connectivity",
+        "question": "How are routes exchanged between the on-premises network and GCP?"
+      },
+      {
+        "category": "GCP Networking & Hybrid Connectivity",
+        "question": "Which GCP networking components have you worked with?"
+      },
+      {
+        "category": "GCP Networking & Hybrid Connectivity",
+        "question": "When and where did you implement those networking components?"
+      },
+      {
+        "category": "GCP Networking & Hybrid Connectivity",
+        "question": "Have you worked with VPCs, subnets, firewall rules, network tags, routes, and related networking components?"
+      },
+      {
+        "category": "GCP Application Hosting",
+        "question": "Have you designed or architected a complete end-to-end application hosting solution?"
+      },
+      {
+        "category": "GCP Application Hosting",
+        "question": "What type of application did you host?"
+      },
+      {
+        "category": "GCP Application Hosting",
+        "question": "Which GCP services did you use to host the application end to end?"
+      },
+      {
+        "category": "GCP Application Hosting",
+        "question": "How is your application exposed to the internet?"
+      },
+      {
+        "category": "GCP Application Hosting",
+        "question": "How does Cloud DNS map your application domain to the load balancer?"
+      },
+      {
+        "category": "GCP Application Hosting",
+        "question": "How does traffic flow from the Global Load Balancer to GKE?"
+      },
+      {
+        "category": "GCP Application Hosting",
+        "question": "Where does Cloud Armor fit into your application traffic flow?"
+      },
+      {
+        "category": "GCP Application Hosting",
+        "question": "How does traffic reach the application pods running inside GKE?"
+      },
+      {
+        "category": "GCP Application Hosting",
+        "question": "How do pods/microservices communicate with each other inside GKE?"
+      },
+      {
+        "category": "GCP Application Hosting",
+        "question": "How does the application connect to the database?"
+      },
+      {
+        "category": "Docker & GKE",
+        "question": "What activities do you perform with Docker and Google Kubernetes Engine (GKE)?"
+      },
+      {
+        "category": "Docker & GKE",
+        "question": "How do you provision a GKE cluster?"
+      },
+      {
+        "category": "Docker & GKE",
+        "question": "How do you deploy Kubernetes resources and applications using Helm?"
+      },
+      {
+        "category": "Docker & GKE",
+        "question": "What are the different types/modes of GKE clusters?"
+      },
+      {
+        "category": "Docker & GKE",
+        "question": "What is the difference between GKE Standard and Autopilot?"
+      },
+      {
+        "category": "Docker & GKE",
+        "question": "What is the role of autoscaling in GKE?"
+      },
+      {
+        "category": "Cross-Project Connectivity",
+        "question": "If you have two separate GCP projects, can resources in those projects communicate with each other by default?"
+      },
+      {
+        "category": "Cross-Project Connectivity",
+        "question": "How would you establish private communication between two GCP projects?"
+      },
+      {
+        "category": "Cross-Project Connectivity",
+        "question": "When would you use Shared VPC, VPC Network Peering, or Private Service Connect?"
+      },
+      {
+        "category": "Artifact Registry",
+        "question": "Have you worked with Google Artifact Registry?"
+      },
+      {
+        "category": "Artifact Registry",
+        "question": "What is Google Artifact Registry used for?"
+      },
+      {
+        "category": "Artifact Registry",
+        "question": "How have you used Artifact Registry in your project?"
+      },
+      {
+        "category": "Artifact Registry",
+        "question": "How do you push Docker images to Artifact Registry?"
+      },
+      {
+        "category": "Artifact Registry",
+        "question": "How does GKE pull Docker images from Artifact Registry?"
+      },
+      {
+        "category": "Artifact Registry",
+        "question": "Can you use the normal docker pull command with Artifact Registry, or do you need GCP-specific commands?"
+      },
+      {
+        "category": "Artifact Registry",
+        "question": "How do you authenticate Docker with Google Artifact Registry?"
+      },
+      {
+        "category": "CI/CD & Jenkins",
+        "question": "Which CI/CD tools are you using for infrastructure and application deployments?"
+      },
+      {
+        "category": "CI/CD & Jenkins",
+        "question": "Are both infrastructure and application deployments performed through Jenkins?"
+      },
+      {
+        "category": "CI/CD & Jenkins",
+        "question": "Why are you using Bitbucket Pipelines for infrastructure and Jenkins for application deployments?"
+      },
+      {
+        "category": "CI/CD & Jenkins",
+        "question": "What are the steps in your Jenkins pipeline to build and deploy an application to GKE?"
+      },
+      {
+        "category": "CI/CD & Jenkins",
+        "question": "How does Jenkins authenticate to GCP/GKE?"
+      },
+      {
+        "category": "CI/CD & Jenkins",
+        "question": "How do you configure the GCP service account in Jenkins?"
+      },
+      {
+        "category": "CI/CD & Jenkins",
+        "question": "Do you store the GCP service-account credentials in Jenkins Credentials Manager?"
+      },
+      {
+        "category": "CI/CD & Jenkins",
+        "question": "Which Jenkins credential type do you use for a GCP service-account JSON key?"
+      },
+      {
+        "category": "CI/CD & Jenkins",
+        "question": "How do you securely use Jenkins credentials inside a Jenkins pipeline?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "What Infrastructure-as-Code tool are you using?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "Are you using Terraform or any GCP-native infrastructure provisioning tool?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "Which platform are you using to execute Terraform?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "Are you using Terraform Enterprise?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "What is the biggest challenge you have faced while provisioning GCP resources using Terraform?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "Have you faced differences between what Terraform supports and what the GCP API/service actually supports?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "How do you handle new GCP features that are not yet properly supported by the Terraform provider?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "How do you handle Terraform provider and module upgrades when GCP introduces changes?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "If a GCP resource was created manually and is not present in Terraform, how would you bring it under Terraform management?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "How do you use terraform import for an existing GCP resource?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "What happens after importing an existing resource into Terraform state?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "Where do you store your Terraform state file?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "Do you store Terraform state in a GCS bucket?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "How does Terraform state locking work with the GCS backend?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "How do you secure the Terraform state file?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "How do you prevent multiple Terraform executions from modifying the same state simultaneously?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "Do you back up the Terraform state file?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "How would you recover if the Terraform state file became corrupted or was accidentally deleted?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "Do you use GCS Object Versioning/soft-delete for Terraform state recovery?"
+      },
+      {
+        "category": "Terraform & State Management",
+        "question": "After restoring a Terraform state file, how would you verify that it matches the actual GCP infrastructure?"
+      }
+    ]
+  },
+  {
+    "id": "set-111",
+    "title": "Mock Interview 111 - GCP Network Engineer JD Round",
+    "focus": "Enterprise GCP network architecture, Shared VPC, hybrid connectivity, BGP, load balancing, DNS, PSC, NCC, Cloud NAT, network security, troubleshooting, Terraform and production ownership",
+    "questions": [
+      {
+        "category": "Architecture & Shared VPC",
+        "question": "GCP Network Engineer introduction: Walk me through your experience designing and supporting enterprise-scale GCP networks."
+      },
+      {
+        "category": "Architecture & Shared VPC",
+        "question": "Design a secure, highly available GCP network architecture for a large enterprise with development, test, and production environments."
+      },
+      {
+        "category": "Architecture & Shared VPC",
+        "question": "How would you design a Shared VPC operating model across many application teams and projects?"
+      },
+      {
+        "category": "Architecture & Shared VPC",
+        "question": "How would you plan IP addressing and CIDR allocation for a multi-region, multi-environment GCP estate?"
+      },
+      {
+        "category": "Architecture & Shared VPC",
+        "question": "What is the difference between custom-mode and auto-mode VPC networks, and which would you use for an enterprise?"
+      },
+      {
+        "category": "Routing & Hybrid Connectivity",
+        "question": "Explain how routes are selected in a GCP VPC when static, subnet, peering, and dynamic routes exist."
+      },
+      {
+        "category": "Routing & Hybrid Connectivity",
+        "question": "How do regional and global dynamic routing modes affect Cloud Router route propagation?"
+      },
+      {
+        "category": "Routing & Hybrid Connectivity",
+        "question": "Design highly available hybrid connectivity between two on-premises data centers and GCP."
+      },
+      {
+        "category": "Routing & Hybrid Connectivity",
+        "question": "When would you choose HA VPN, Dedicated Interconnect, or Partner Interconnect?"
+      },
+      {
+        "category": "Routing & Hybrid Connectivity",
+        "question": "How do Cloud Router and BGP work with HA VPN or Cloud Interconnect?"
+      },
+      {
+        "category": "Routing & Hybrid Connectivity",
+        "question": "A BGP session between an on-premises router and Cloud Router is down. How would you troubleshoot it?"
+      },
+      {
+        "category": "Routing & Hybrid Connectivity",
+        "question": "Traffic works from on-premises to GCP but not from GCP to on-premises. What would you investigate?"
+      },
+      {
+        "category": "Private Connectivity, NCC & DNS",
+        "question": "How would you design Cloud NAT for private workloads across multiple regions?"
+      },
+      {
+        "category": "Private Connectivity, NCC & DNS",
+        "question": "A Cloud NAT gateway is dropping connections under load. How would you diagnose and fix it?"
+      },
+      {
+        "category": "Private Connectivity, NCC & DNS",
+        "question": "What is Private Google Access, and how does it differ from Private Service Connect?"
+      },
+      {
+        "category": "Private Connectivity, NCC & DNS",
+        "question": "How would you use Private Service Connect to expose a service privately to consumers in other projects or VPCs?"
+      },
+      {
+        "category": "Private Connectivity, NCC & DNS",
+        "question": "Compare Shared VPC, VPC Network Peering, Private Service Connect, and Network Connectivity Center."
+      },
+      {
+        "category": "Private Connectivity, NCC & DNS",
+        "question": "What problem does Network Connectivity Center solve, and how would you design its hub-and-spoke topology?"
+      },
+      {
+        "category": "Private Connectivity, NCC & DNS",
+        "question": "How would you design Cloud DNS for public, private, and hybrid name resolution?"
+      },
+      {
+        "category": "Private Connectivity, NCC & DNS",
+        "question": "An on-premises client cannot resolve a private GCP DNS name. How would you troubleshoot it?"
+      },
+      {
+        "category": "Load Balancing",
+        "question": "How do you choose between a global external Application Load Balancer, regional external load balancer, and internal load balancer?"
+      },
+      {
+        "category": "Load Balancing",
+        "question": "Explain the main GCP load-balancing components: forwarding rule, target proxy, URL map, backend service, health check, and NEG."
+      },
+      {
+        "category": "Load Balancing",
+        "question": "A backend is healthy directly but marked unhealthy by the load balancer. How would you troubleshoot it?"
+      },
+      {
+        "category": "Load Balancing",
+        "question": "How would you design active-active application delivery across two GCP regions?"
+      },
+      {
+        "category": "Load Balancing",
+        "question": "Where would you use TCP Proxy, SSL Proxy, passthrough Network Load Balancing, and HTTP(S) Load Balancing?"
+      },
+      {
+        "category": "Network Security",
+        "question": "How would you implement layered network security for an internet-facing GCP application?"
+      },
+      {
+        "category": "Network Security",
+        "question": "What is the difference between hierarchical firewall policies and VPC firewall rules?"
+      },
+      {
+        "category": "Network Security",
+        "question": "How would you migrate from network tags to service-account-based firewall targeting?"
+      },
+      {
+        "category": "Network Security",
+        "question": "How does Cloud Armor protect an application, and how would you roll out a new WAF rule safely?"
+      },
+      {
+        "category": "Network Security",
+        "question": "What problem does VPC Service Controls solve, and what operational risks does it introduce?"
+      },
+      {
+        "category": "Network Security",
+        "question": "How would you apply zero-trust networking principles in GCP?"
+      },
+      {
+        "category": "Troubleshooting & Operations",
+        "question": "How would you troubleshoot a connectivity failure between two GCP workloads?"
+      },
+      {
+        "category": "Troubleshooting & Operations",
+        "question": "How would you use VPC Flow Logs, Firewall Rules Logging, and Network Intelligence Center during an incident?"
+      },
+      {
+        "category": "Troubleshooting & Operations",
+        "question": "Users report intermittent latency through a GCP load balancer. What would you investigate?"
+      },
+      {
+        "category": "Troubleshooting & Operations",
+        "question": "How would you perform an RCA for a production network outage?"
+      },
+      {
+        "category": "Troubleshooting & Operations",
+        "question": "How would you monitor GCP network availability, performance, and capacity?"
+      },
+      {
+        "category": "Terraform & CI/CD",
+        "question": "How would you build reusable Terraform modules for GCP networking?"
+      },
+      {
+        "category": "Terraform & CI/CD",
+        "question": "How would you structure Terraform state for an enterprise GCP network platform?"
+      },
+      {
+        "category": "Terraform & CI/CD",
+        "question": "What checks should a CI/CD pipeline perform before applying GCP network changes?"
+      },
+      {
+        "category": "Terraform & CI/CD",
+        "question": "How would you prevent a Terraform change from accidentally causing a network outage?"
+      },
+      {
+        "category": "Behavioral & Ownership",
+        "question": "How would you manage Git branching and approvals for network Infrastructure as Code?"
+      },
+      {
+        "category": "Behavioral & Ownership",
+        "question": "Describe a difficult GCP networking incident you handled and how you resolved it."
+      },
+      {
+        "category": "Behavioral & Ownership",
+        "question": "What would your first 90 days look like as a GCP Network Engineer?"
+      }
+    ]
+  },
+  {
+    "id": "set-112",
+    "title": "Mock Interview 112 - Expanded Technology Coverage Round",
+    "focus": "Previously missing or under-covered cloud, Kubernetes, Terraform, CI/CD, security, observability, MLOps, backup, identity, messaging, and multi-region topics",
+    "questions": [
+      {
+        "category": "AI, ML & MLOps",
+        "question": "Vertex AI Workbench: How would you design a secure managed notebook environment for a data-science team?"
+      },
+      {
+        "category": "AI, ML & MLOps",
+        "question": "Vertex AI Workbench troubleshooting: A notebook cannot access BigQuery or Cloud Storage. What would you check?"
+      },
+      {
+        "category": "Cloud Architecture & Networking",
+        "question": "CIDR planning: How would you allocate address space for Shared VPC, GKE Pods, Services, hybrid connectivity, and future growth?"
+      },
+      {
+        "category": "Expanded Technology Coverage",
+        "question": "CIDR Planning overlap scenario: A newly acquired company's network overlaps your GCP VPC. How would you integrate it safely?"
+      },
+      {
+        "category": "Cloud Architecture & Networking",
+        "question": "Network Endpoint Groups: Compare zonal, internet, serverless, and hybrid NEGs and give a use case for each."
+      },
+      {
+        "category": "Expanded Technology Coverage",
+        "question": "Network Endpoint Groups troubleshooting: A GKE Pod is ready but absent or unhealthy in the load balancer NEG. What would you inspect?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Terraform drift management: How would you detect and remediate drift across many GCP workspaces?"
+      },
+      {
+        "category": "Expanded Technology Coverage",
+        "question": "Terraform Drift Management incident: A console change fixed production but now Terraform wants to reverse it. What should happen next?"
+      },
+      {
+        "category": "Security & Observability",
+        "question": "Wiz: How would you integrate Wiz into a GCP security operating model without creating noisy, ownerless findings?"
+      },
+      {
+        "category": "Security & Observability",
+        "question": "Wiz scenario: Wiz reports a publicly reachable GKE workload with a vulnerable image and broad IAM. How would you respond?"
+      },
+      {
+        "category": "Security & Observability",
+        "question": "Dynatrace: How would you monitor a GKE-hosted application end to end with Dynatrace?"
+      },
+      {
+        "category": "Security & Observability",
+        "question": "Dynatrace troubleshooting: Latency increased after a release. How would you isolate the bottleneck?"
+      },
+      {
+        "category": "Identity & Access",
+        "question": "Okta: How would you integrate Okta with a cloud application using OIDC?"
+      },
+      {
+        "category": "Identity & Access",
+        "question": "Okta incident: Users can authenticate but receive authorization errors after a group change. How would you troubleshoot it?"
+      },
+      {
+        "category": "AI, ML & MLOps",
+        "question": "Data drift monitoring: What is data drift, and how would you monitor it for a production model?"
+      },
+      {
+        "category": "Expanded Technology Coverage",
+        "question": "Data Drift Monitoring scenario: A drift alert fires but business KPIs and model accuracy remain stable. What would you do?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Spring Boot production design: How would you prepare a Spring Boot API for deployment on Kubernetes?"
+      },
+      {
+        "category": "Application & Messaging",
+        "question": "Spring Boot troubleshooting: A service has high latency and exhausted database connections. How would you investigate it?"
+      },
+      {
+        "category": "FinOps & Capacity",
+        "question": "Resource rightsizing: How would you right-size GCE and GKE workloads without risking availability?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Resource rightsizing scenario: A cost initiative proposes reducing every Kubernetes request by 50 percent. How would you respond?"
+      },
+      {
+        "category": "Google Cloud Platform",
+        "question": "Google Cloud Platform fundamentals: How do projects, folders, organizations, billing accounts, and IAM policies relate?"
+      },
+      {
+        "category": "Google Cloud Platform",
+        "question": "Google Cloud Platform scenario: How would you structure projects for a regulated multi-environment application?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Google Kubernetes Engine architecture: Explain the GKE control plane, nodes, Pods, networking, and responsibility boundaries."
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Google Kubernetes Engine upgrade scenario: How would you upgrade a production regional cluster safely?"
+      },
+      {
+        "category": "Google Cloud Platform",
+        "question": "Dataproc: When would you use Dataproc instead of BigQuery or Dataflow?"
+      },
+      {
+        "category": "Google Cloud Platform",
+        "question": "Dataproc troubleshooting: A Spark job is slow and repeatedly spills to disk. What would you examine?"
+      },
+      {
+        "category": "Google Cloud Platform",
+        "question": "Organization Policies: How do organization policies differ from IAM and firewall rules?"
+      },
+      {
+        "category": "Google Cloud Platform",
+        "question": "Organization Policy scenario: A team needs a temporary exception to a constraint. How would you govern it?"
+      },
+      {
+        "category": "Google Cloud Platform",
+        "question": "Hierarchical Firewall Policies: How are rules evaluated across organization, folder, and VPC levels?"
+      },
+      {
+        "category": "Google Cloud Platform",
+        "question": "Hierarchical firewall scenario: How would you prevent every project from exposing SSH or RDP to the internet?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Kubernetes Gateway API: How does Gateway API improve on Ingress?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Kubernetes Gateway troubleshooting: An HTTPRoute is not receiving traffic. What would you inspect?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "StorageClass: Explain provisioner, reclaimPolicy, volumeBindingMode, allowVolumeExpansion, and mount options."
+      },
+      {
+        "category": "Kubernetes",
+        "question": "StorageClass scenario: A StatefulSet Pod is Pending because its volume is in another zone. How would you prevent this?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Vertical Pod Autoscaler: When should you use recommendation, initial, auto, or recreate modes?"
+      },
+      {
+        "category": "Additional Technology Coverage",
+        "question": "VPA scenario: How would you introduce VPA to a production service currently using HPA?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Terraform state locking: Why is locking necessary, and how do you recover from a stale lock safely?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Terraform state locking incident: Two pipelines target the same workspace. How would you prevent recurrence?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Terraform state recovery: What is your tested recovery procedure for a deleted or corrupted state?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Terraform state recovery scenario: State is restored but the plan wants to recreate critical resources. What should you do?"
+      },
+      {
+        "category": "CI/CD, Security & ITSM",
+        "question": "Jenkins Credentials Manager: Which credential types would you use for tokens, SSH keys, usernames/passwords, and files?"
+      },
+      {
+        "category": "CI/CD, Security & ITSM",
+        "question": "Jenkins Credentials Manager incident: A secret appears in console logs. How would you respond and prevent recurrence?"
+      },
+      {
+        "category": "Terraform",
+        "question": "Bitbucket Pipelines: How would you build a secure Terraform plan-and-apply workflow?"
+      },
+      {
+        "category": "CI/CD, Security & ITSM",
+        "question": "Bitbucket Pipelines troubleshooting: A deployment works locally but fails in the pipeline. What would you compare?"
+      },
+      {
+        "category": "CI/CD, Security & ITSM",
+        "question": "GitLab CI/CD: How do stages, jobs, runners, artifacts, cache, environments, and rules work together?"
+      },
+      {
+        "category": "CI/CD, Security & ITSM",
+        "question": "GitLab CI/CD security: How would you protect a production deployment pipeline?"
+      },
+      {
+        "category": "CI/CD, Security & ITSM",
+        "question": "DAST: Where should dynamic application security testing run in a CI/CD pipeline?"
+      },
+      {
+        "category": "CI/CD, Security & ITSM",
+        "question": "DAST scenario: A scanner reports SQL injection, but the team believes it is a false positive. What evidence is required?"
+      },
+      {
+        "category": "Security & Observability",
+        "question": "Jaeger: Explain traces, spans, context propagation, sampling, and baggage."
+      },
+      {
+        "category": "Security & Observability",
+        "question": "Jaeger troubleshooting: A trace stops at one microservice. What would you check?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Kasten K10: How would you design backup and recovery for stateful Kubernetes applications?"
+      },
+      {
+        "category": "Kubernetes",
+        "question": "Kasten K10 disaster recovery: A cluster is lost. What is the recovery order?"
+      },
+      {
+        "category": "Backup & Recovery",
+        "question": "Veeam: How would you protect cloud VMs and application data while meeting RPO and RTO targets?"
+      },
+      {
+        "category": "Backup & Recovery",
+        "question": "Veeam incident: Backups succeed but a restore test fails. How would you handle it?"
+      },
+      {
+        "category": "CI/CD, Security & ITSM",
+        "question": "JFrog Artifactory: How would you organize repositories for development, release, and third-party dependencies?"
+      },
+      {
+        "category": "CI/CD, Security & ITSM",
+        "question": "JFrog security scenario: A vulnerable dependency exists in many builds. How would you contain and remediate it?"
+      },
+      {
+        "category": "CI/CD, Security & ITSM",
+        "question": "ServiceNow: How would you integrate infrastructure automation with change management without creating manual bottlenecks?"
+      },
+      {
+        "category": "CI/CD, Security & ITSM",
+        "question": "ServiceNow incident workflow: What information should network automation attach to an incident or change?"
+      },
+      {
+        "category": "AI, ML & MLOps",
+        "question": "MLflow Model Registry: Explain model versions, aliases/stages, lineage, approvals, and promotion."
+      },
+      {
+        "category": "AI, ML & MLOps",
+        "question": "MLflow Model Registry scenario: A newly promoted model degrades in production. What is the rollback process?"
+      },
+      {
+        "category": "Application & Messaging",
+        "question": "RabbitMQ: Explain exchanges, queues, bindings, acknowledgements, prefetch, and dead-letter exchanges."
+      },
+      {
+        "category": "Application & Messaging",
+        "question": "RabbitMQ incident: Consumers are healthy but queue depth keeps growing. How would you investigate it?"
+      },
+      {
+        "category": "Cloud Architecture & Networking",
+        "question": "Multi-region architecture: What application and data-layer requirements must be solved beyond deploying compute in two regions?"
+      },
+      {
+        "category": "Cloud Architecture & Networking",
+        "question": "Multi-region failure scenario: How would you fail over and safely fail back after a regional outage?"
+      }
+    ]
+  },
+  {
+    "id": "set-113",
+    "title": "Mock Interview 113 - Topic Selector Coverage Round",
+    "focus": "Dedicated coverage for compound topic selections across DevSecOps, databases, DSA, observability, event-driven systems, ITSM, multi-cloud, APIs and application frameworks",
+    "questions": [
+      {
+        "category": "WAF, OWASP, SAST and DAST",
+        "question": "WAF, OWASP, SAST and DAST: How do these controls work together in a DevSecOps program?"
+      },
+      {
+        "category": "WAF and OWASP scenario",
+        "question": "WAF and OWASP scenario: A new managed WAF rule blocks legitimate checkout requests. How would you respond?"
+      },
+      {
+        "category": "SAST and DAST pipeline design",
+        "question": "SAST and DAST pipeline design: Where should each test run, and what should block a release?"
+      },
+      {
+        "category": "MongoDB and Redis",
+        "question": "MongoDB and Redis: When would you use each technology in the same application architecture?"
+      },
+      {
+        "category": "MongoDB and Redis failure scenario",
+        "question": "MongoDB and Redis failure scenario: Redis is unavailable but MongoDB remains healthy. How should the application behave?"
+      },
+      {
+        "category": "MongoDB and Redis performance",
+        "question": "MongoDB and Redis performance: How would you diagnose rising API latency involving both data stores?"
+      },
+      {
+        "category": "Data structures and algorithms",
+        "question": "Data structures and algorithms: How do you choose the right data structure for a production problem?"
+      },
+      {
+        "category": "Data structures and algorithms coding question",
+        "question": "Data structures and algorithms coding question: Given a stream of events, how would you return the top K most frequent keys?"
+      },
+      {
+        "category": "Data structures and algorithms scenario",
+        "question": "Data structures and algorithms scenario: How would you detect a cycle in a directed dependency graph?"
+      },
+      {
+        "category": "ELK, OpenTelemetry and Jaeger",
+        "question": "ELK, OpenTelemetry and Jaeger: How would you combine them for production observability?"
+      },
+      {
+        "category": "ELK and OpenTelemetry incident",
+        "question": "ELK and OpenTelemetry incident: Logs are present but cannot be correlated with Jaeger traces. What would you fix?"
+      },
+      {
+        "category": "OpenTelemetry and Jaeger scaling",
+        "question": "OpenTelemetry and Jaeger scaling: How would you control telemetry volume and cost without losing critical traces?"
+      },
+      {
+        "category": "PostgreSQL and MySQL",
+        "question": "PostgreSQL and MySQL: What factors would drive your choice for a new transactional service?"
+      },
+      {
+        "category": "PostgreSQL and MySQL migration",
+        "question": "PostgreSQL and MySQL migration: How would you migrate with minimal downtime?"
+      },
+      {
+        "category": "PostgreSQL and MySQL troubleshooting",
+        "question": "PostgreSQL and MySQL troubleshooting: A database-backed API slows down under peak load. What would you inspect?"
+      },
+      {
+        "category": "Event-driven architecture",
+        "question": "Event-driven architecture: What are the benefits and trade-offs compared with synchronous request/response?"
+      },
+      {
+        "category": "Event-driven architecture design",
+        "question": "Event-driven architecture design: How would you guarantee reliable processing without claiming exactly-once delivery?"
+      },
+      {
+        "category": "Event-driven architecture incident",
+        "question": "Event-driven architecture incident: A poison event causes a retry storm. How would you contain and prevent it?"
+      },
+      {
+        "category": "Jira workflow design",
+        "question": "Jira workflow design: How would you model incident, problem, change, and engineering work without turning Jira into bureaucracy?"
+      },
+      {
+        "category": "Jira automation",
+        "question": "Jira automation: How would you integrate CI/CD deployments and production incidents with Jira?"
+      },
+      {
+        "category": "Jira reporting",
+        "question": "Jira reporting: Which metrics are useful for platform and SRE teams, and which can be misleading?"
+      },
+      {
+        "category": "Multi-cloud architecture",
+        "question": "Multi-cloud architecture: When is using multiple cloud providers justified?"
+      },
+      {
+        "category": "Multi-cloud architecture design",
+        "question": "Multi-cloud architecture design: How would you connect GCP and AWS or Azure securely?"
+      },
+      {
+        "category": "Multi-cloud architecture operations",
+        "question": "Multi-cloud architecture operations: How would you prevent configuration and security drift across providers?"
+      },
+      {
+        "category": "REST APIs and microservices",
+        "question": "REST APIs and microservices: How would you define service boundaries and API contracts?"
+      },
+      {
+        "category": "REST APIs and microservices reliability",
+        "question": "REST APIs and microservices reliability: Which resilience patterns would you implement?"
+      },
+      {
+        "category": "REST APIs and microservices security",
+        "question": "REST APIs and microservices security: How would you implement authentication and authorization?"
+      },
+      {
+        "category": "FastAPI, Spring Boot and Node.js",
+        "question": "FastAPI, Spring Boot and Node.js: How would you choose a framework for a new API service?"
+      },
+      {
+        "category": "FastAPI, Spring Boot and Node.js observability",
+        "question": "FastAPI, Spring Boot and Node.js observability: How would you standardize telemetry across all three?"
+      },
+      {
+        "category": "FastAPI, Spring Boot and Node.js deployment",
+        "question": "FastAPI, Spring Boot and Node.js deployment: What common Kubernetes controls should every service implement?"
       }
     ]
   }

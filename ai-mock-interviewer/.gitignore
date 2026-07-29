@@ -6,3 +6,9 @@ audio/
 data/users.json
 data/contacts.json
 data/session-secret.txt
+data/*.sqlite
+data/*.sqlite-shm
+data/*.sqlite-wal
+.youtube-token.json
+youtube-client-secret.json
+youtube-podcast-videos/

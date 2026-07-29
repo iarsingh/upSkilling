@@ -31,6 +31,8 @@
           <div class="nav-group quick-actions">
             <button id="openCommandPalette" class="ghost link-button small command-button" type="button" title="Command palette (Ctrl/Cmd + K)"><span>Commands</span><kbd>&#8984;K</kbd></button>
             <a class="ghost link-button small" href="/dashboard.html">Skills dashboard</a>
+            <a class="ghost link-button small" href="/question-bank.html">Question Bank</a>
+            <button id="openCheatSheet" class="ghost link-button small" type="button" title="Quick reference cheat sheet">Cheat Sheet</button>
             <a id="openCvJdSetup" class="ghost link-button small setup-shortcut" href="#cv-jd-setup">CV/JD &amp; skills</a>
             <a class="ghost link-button small" href="/contact.html">Contact</a>
             <button id="resetLayout" class="ghost link-button small" type="button">Reset layout</button>
@@ -46,6 +48,10 @@
           </div>
 
           <div class="topbar-stats" title="All-time across your interviews">
+            <div class="topbar-stat">
+              <strong id="topbarRounds">0</strong>
+              <span>Rounds</span>
+            </div>
             <div class="topbar-stat">
               <strong id="topbarAnswered">0</strong>
               <span>Answered</span>
@@ -229,7 +235,7 @@
             </div>
           </section>
           <label>
-            30-day practice plan
+            50-day practice plan
             <select id="practiceDay">
               <option value="all">All questions</option>
             </select>
@@ -327,6 +333,11 @@
                 <button id="toggleFullscreen" class="ghost small" type="button" title="Full screen" aria-label="Full screen interview panel">&#9974;</button>
               </div>
             </div>
+          </div>
+
+          <div id="activeTopicBanner" class="active-topic-banner" hidden>
+            <span>Topic-only interview</span>
+            <strong>Questions are being asked only from: <b id="activeTopicName"></b></strong>
           </div>
 
           <div class="call-stage">
@@ -490,33 +501,70 @@
     </main>
 
     <div id="mediaPermissionBackdrop" class="media-permission-backdrop" hidden>
-      <section class="media-permission-dialog" role="dialog" aria-modal="true" aria-labelledby="mediaPermissionTitle" aria-describedby="mediaPermissionDescription">
-        <div class="media-permission-brand"><img src="/favicon.svg" alt=""><span>Device check</span></div>
-        <p class="eyebrow">Before your interview</p>
-        <h2 id="mediaPermissionTitle">Set up camera, microphone &amp; headphones</h2>
-        <p id="mediaPermissionDescription">Allow access so the interviewer can hear you, show your camera when enabled, and play questions through your preferred audio output.</p>
-        <div class="media-permission-list">
-          <div><span class="device-permission-icon camera-icon" aria-hidden="true">CAM</span><span><strong>Camera</strong><small>Used only when you enable video</small></span><b id="cameraPermissionState">Not checked</b></div>
-          <div><span class="device-permission-icon mic-icon" aria-hidden="true">MIC</span><span><strong>Microphone</strong><small>Transcribes your spoken answers</small></span><b id="micPermissionState">Not checked</b></div>
-          <div><span class="device-permission-icon audio-icon" aria-hidden="true">HP</span><span><strong>Headphones / speaker</strong><small>Plays interviewer questions privately</small></span><b id="audioPermissionState">Not checked</b></div>
+      <section class="device-setup-dialog" role="dialog" aria-modal="true" aria-labelledby="mediaPermissionTitle" aria-describedby="mediaPermissionDescription">
+        <div class="device-setup-header">
+          <div class="media-permission-brand"><img src="/favicon.svg" alt=""><span id="mediaPermissionTitle">AI interview device setup</span></div>
         </div>
-        <label class="permission-accent-field" for="permissionAccent">
-          <span><strong>Your speaking accent</strong><small>Improves speech-to-text recognition</small></span>
-          <select id="permissionAccent">
-            <option value="en-IN">English — India</option>
-            <option value="en-US">English — United States</option>
-            <option value="en-GB">English — United Kingdom</option>
-            <option value="en-AU">English — Australia</option>
-            <option value="en-CA">English — Canada</option>
-          </select>
-        </label>
-        <p id="mediaPermissionMessage" class="media-permission-message">Your browser will show its native camera and microphone permission prompt.</p>
-        <div class="media-permission-actions">
-          <button id="allowMediaPermissions" class="primary" type="button">Allow &amp; check devices</button>
-          <button id="skipMediaPermissions" class="ghost" type="button">Not now</button>
+        <p id="mediaPermissionDescription" class="sr-only">Choose your microphone, speaker, and camera before starting the interview.</p>
+        <div class="device-setup-grid">
+          <div class="device-setup-controls">
+            <label class="device-select-field" for="micDeviceSelect">
+              <span>Microphone</span>
+              <select id="micDeviceSelect"><option value="">Default microphone</option></select>
+            </label>
+            <label class="device-select-field" for="speakerDeviceSelect">
+              <span>Speaker</span>
+              <select id="speakerDeviceSelect"><option value="">Default speaker</option></select>
+            </label>
+            <div class="device-select-field device-video-toggle-row">
+              <span>Video</span>
+              <label class="video-toggle">
+                <input type="checkbox" id="videoDeviceToggle" checked>
+                <span class="video-toggle-track" aria-hidden="true"></span>
+                <span id="videoToggleLabel">On</span>
+              </label>
+            </div>
+            <label class="device-select-field" for="cameraDeviceSelect">
+              <span>Camera</span>
+              <select id="cameraDeviceSelect"><option value="">Default camera</option></select>
+            </label>
+            <label class="permission-accent-field" for="permissionAccent">
+              <span><strong>Your speaking accent</strong><small>Improves speech-to-text recognition</small></span>
+              <select id="permissionAccent">
+                <option value="en-IN">English — India</option>
+                <option value="en-US">English — United States</option>
+                <option value="en-GB">English — United Kingdom</option>
+                <option value="en-AU">English — Australia</option>
+                <option value="en-CA">English — Canada</option>
+              </select>
+            </label>
+            <p id="mediaPermissionMessage" class="media-permission-message">Your browser will show its native camera and microphone permission prompt.</p>
+          </div>
+          <div class="device-setup-preview">
+            <div class="device-preview-frame">
+              <video id="devicePreviewVideo" autoplay playsinline muted></video>
+              <div id="devicePreviewPlaceholder" class="device-preview-placeholder">Camera preview will appear here</div>
+              <span id="devicePreviewBadge" class="device-preview-badge" hidden>Live preview</span>
+            </div>
+            <button id="allowMediaPermissions" class="primary device-start-btn" type="button">Start interview</button>
+            <button id="skipMediaPermissions" class="ghost" type="button">Not now</button>
+          </div>
         </div>
-        <small class="media-privacy-note">Device streams are stopped after this check and are not recorded by the permission screen.</small>
+        <small class="media-privacy-note">Speech recognition uses your system's default microphone regardless of the selection above — browsers don't allow websites to redirect it. The dropdowns control your camera preview and playback device preference. Device streams are only active during setup and your session; nothing here is uploaded.</small>
       </section>
+    </div>
+
+    <div class="command-palette-backdrop" id="cheatSheetBackdrop">
+      <div class="command-palette cheat-sheet-panel" role="dialog" aria-modal="true" aria-label="Quick reference cheat sheet">
+        <div class="cheat-sheet-head">
+          <strong>Quick Reference Cheat Sheet</strong>
+          <button class="ghost link-button small" type="button" data-action="close-cheat-sheet">Close</button>
+        </div>
+        <div class="cheat-sheet-layout">
+          <div class="cheat-sheet-topics" id="cheatSheetTopics"></div>
+          <div class="cheat-sheet-points" id="cheatSheetPoints"></div>
+        </div>
+      </div>
     </div>
 
     <div class="command-palette-backdrop" id="commandPaletteBackdrop">

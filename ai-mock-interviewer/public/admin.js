@@ -417,7 +417,7 @@ async function loadSources() {
   }
 
   try {
-    const response = await fetch("/30-day-plan.json");
+    const response = await fetch("/50-day-plan.json");
     practicePlan = await response.json();
   } catch {
     practicePlan = [];

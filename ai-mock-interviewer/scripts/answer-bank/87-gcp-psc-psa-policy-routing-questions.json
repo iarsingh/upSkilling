@@ -1,0 +1,146 @@
+[
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Private Service Connect",
+    "questionType": "Conceptual",
+    "question": "What is Private Service Connect (PSC), and what problem does it solve?",
+    "answer": "Private Service Connect provides service-oriented private connectivity between consumers and managed-service producers. A consumer reaches a Google, third-party, or privately published service through an internal IP address in the consumer VPC, while the producer remains in a separate VPC. Traffic stays on Google's network and the consumer does not need public exposure or broad network peering."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Private Service Connect",
+    "questionType": "Implementation / Workflow",
+    "question": "What are PSC endpoints, backends, published services, service attachments, and interfaces?",
+    "answer": "An endpoint gives a consumer Layer 4 access to a service through an internal IP. A PSC backend represents a published service behind a consumer load balancer when load-balancing features are needed. A producer publishes a service by placing it behind a supported load balancer and creating a service attachment. A PSC interface supports producer-initiated connectivity into destinations in an accepted consumer network attachment."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Private Service Connect",
+    "questionType": "Design / Architecture",
+    "question": "How would you design producer and consumer VPCs for a PSC published service?",
+    "answer": "Place the producer application behind a supported internal load balancer and publish it through a regional service attachment with explicit connection preferences or an accept list. In the consumer VPC, reserve an internal address and create a PSC endpoint that targets the service attachment. Add private DNS, least-privilege IAM, firewall controls, logging, monitoring, quotas, and connection-status checks. Test reachability and failure handling from every required consumer region."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Private Service Connect",
+    "questionType": "Comparison",
+    "question": "How is PSC different from VPC Network Peering?",
+    "answer": "VPC Network Peering connects networks and exchanges selected routes, which creates broader network-level reachability and requires non-overlapping address space. PSC exposes a specific service through a consumer-local internal IP without establishing general network connectivity or exchanging routes. Choose PSC when consumers need controlled access to a service rather than access to the producer network."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Private Service Connect",
+    "questionType": "Troubleshooting",
+    "question": "A PSC endpoint is created but clients cannot reach the service. How would you troubleshoot it?",
+    "answer": "Check the endpoint forwarding rule, target service attachment, region, endpoint IP and subnet, and the PSC connection status. On the producer side, verify that the connection is accepted, the service attachment and load balancer are healthy, backends pass health checks, and NAT subnet capacity is available where required. Then validate consumer DNS, routes, firewall policy, protocol and port, organization policies, quotas, and application logs."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Private Service Connect",
+    "questionType": "Design / Architecture",
+    "question": "How would you provide private access to Google APIs with PSC?",
+    "answer": "Create a PSC endpoint for Google APIs in the consumer VPC using an internal address, then configure private DNS so the required Google API domain resolves to that endpoint. Ensure firewall and routing policies allow the traffic and that IAM still authorizes the API request. Treat network reachability and application identity as separate controls."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Private Services Access",
+    "questionType": "Conceptual",
+    "question": "What is Private Services Access (PSA), and how does it work?",
+    "answer": "Private Services Access creates private connectivity between a consumer VPC and a Google or third-party service producer VPC by using a private Service Networking connection based on VPC Network Peering. The consumer reserves an allocated IP range for producer resources, creates the private connection, and provisions supported managed services such as Cloud SQL or AlloyDB with private addresses from that range."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Private Services Access",
+    "questionType": "Implementation / Workflow",
+    "question": "What are the implementation steps for configuring PSA?",
+    "answer": "Enable the Service Networking API, choose the consumer VPC, reserve a non-overlapping allocated global address range with purpose VPC_PEERING, and create a private services connection to servicenetworking.googleapis.com using that range. Then provision the supported managed service with private networking enabled. Validate imported producer routes, DNS, firewall policy, IAM, and connectivity from the intended clients."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Private Services Access",
+    "questionType": "Design / Architecture",
+    "question": "How should you size and manage the allocated IP range for PSA?",
+    "answer": "Estimate the supported services, regions, growth, and producer subnet allocation behavior before reserving a range. Use address space that does not overlap consumer, producer, peered, or on-premises networks, and keep capacity for future regional service instances. Monitor utilization and document ownership because the allocated range cannot simultaneously be used for ordinary subnets or custom static-route destinations."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Private Services Access",
+    "questionType": "Troubleshooting",
+    "question": "A Cloud SQL private-IP deployment fails because no address range is available. How would you troubleshoot PSA?",
+    "answer": "Verify that a global internal allocated range exists in the correct VPC with purpose VPC_PEERING and that the Service Networking connection includes it. Check for CIDR overlap, exhausted producer allocations, an incorrect project or Shared VPC network, missing Service Networking API permissions, and Terraform ordering problems. Expand the connection with an additional valid allocated range when supported, then rerun provisioning and verify the peering routes."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "PSC vs PSA",
+    "questionType": "Comparison",
+    "question": "What is the difference between PSC and PSA, and when would you choose each?",
+    "answer": "PSC gives service-level access through a consumer-local endpoint or backend and avoids broad network peering; it is suitable for Google APIs, published services, and supported managed services that offer PSC. PSA creates a peering-based private connection to a producer network and allocates consumer address space for supported managed-service instances. Choose according to service support, isolation requirements, IP planning, DNS, transitivity constraints, and whether you want endpoint-level or peering-based connectivity."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "PSC vs PSA",
+    "questionType": "Scenario",
+    "question": "You need private Cloud SQL access from multiple projects with overlapping VPC CIDRs. Would PSC or PSA be the better design?",
+    "answer": "Prefer PSC when the selected Cloud SQL configuration supports it because each consumer can use a local endpoint address without peering the entire networks, which avoids the non-overlapping-CIDR requirement of PSA peering. Confirm regional and product support, DNS, connection policies, quotas, and client access requirements before deciding. If PSA is required, redesign address space or use an intermediary architecture because overlapping peered ranges are not supported."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Policy-Based Routing",
+    "questionType": "Conceptual",
+    "question": "What is policy-based routing in Google Cloud?",
+    "answer": "A Google Cloud policy-based route selects a next hop using packet attributes beyond only the destination, including source IP range, destination IP range, and protocol. Matching traffic can be redirected to an internal passthrough Network Load Balancer, commonly to insert virtual firewall or inspection appliances into the traffic path."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Policy-Based Routing",
+    "questionType": "Comparison",
+    "question": "How do policy-based routes differ from static and dynamic routes?",
+    "answer": "Static and dynamic routes primarily select paths by destination prefix, with dynamic routes learned through Cloud Router and BGP. Policy-based routes can additionally match source and protocol and are evaluated earlier in the VPC route-selection order, after special routing paths but before subnet, static, and dynamic routes. Policy-based routes are prioritized explicitly and do not use longest-prefix matching between equal-priority policy rules."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Policy-Based Routing",
+    "questionType": "Design / Architecture",
+    "question": "How would you use policy-based routes to insert a firewall appliance into a traffic path?",
+    "answer": "Deploy redundant firewall appliances as backends of an internal passthrough Network Load Balancer, enable IP forwarding on the backend VMs, and configure health checks and global access when cross-region clients require it. Create narrowly scoped policy-based routes using source, destination, protocol, and network tags or hybrid-ingress scope, with the load balancer as next hop. Design symmetric forward and return paths, explicit bypass rules, monitoring, and a tested rollback."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Policy-Based Routing",
+    "questionType": "Implementation / Workflow",
+    "question": "How are policy-based-route priority and matching evaluated?",
+    "answer": "Google Cloud evaluates matching policy-based routes by priority, where a lower numeric value represents a higher priority. Policy-based routes do not use longest-prefix matching to choose among rules with the same priority; equal-priority matches can therefore produce an unintended selection. Assign unique priorities and create more specific high-priority bypass rules when some traffic must continue through normal destination-based routing."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Policy-Based Routing",
+    "questionType": "Troubleshooting",
+    "question": "Traffic stops reaching Google APIs after a broad policy-based route is added. What would you check?",
+    "answer": "Check whether the route matches Google API destinations or PSC endpoint addresses and incorrectly sends them to an inspection next hop. Policy-based routes cannot route packets to PSC endpoints or backends, and Google APIs cannot be reached through arbitrary VM next hops. Scope the inspection rule with network tags and narrow CIDRs, then add a higher-priority rule that skips other policy-based routes for the relevant Google API or PSC destinations so normal routing is used."
+  },
+  {
+    "source": "Curated GCP Networking Questions",
+    "section": "GCP Private Connectivity and Policy-Based Routing",
+    "category": "Policy-Based Routing",
+    "questionType": "Troubleshooting",
+    "question": "What limitations and failure risks should you review before deploying policy-based routes?",
+    "answer": "Review that policy-based routes are not exchanged through VPC Peering or Network Connectivity Center, do not match ports, cannot be updated in place, and require a valid internal passthrough Network Load Balancer next hop with IP-forwarding backends. Check PSC and Google API exclusions, GKE control-plane connectivity, VLAN attachment dataplane requirements, unique priorities, asymmetric routing, health-check behavior, appliance capacity, quotas, and a safe bypass or deletion rollback."
+  }
+]

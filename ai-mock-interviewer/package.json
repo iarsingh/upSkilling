@@ -5,15 +5,21 @@
   "description": "Local Ollama-powered mock interview coach with browser microphone input.",
   "main": "server.js",
   "scripts": {
+    "prestart": "npm run sync:question-bank",
     "start": "node server.js",
-    "start:offline": "OFFLINE_ONLY=1 node server.js"
+    "prestart:offline": "npm run sync:question-bank",
+    "start:offline": "OFFLINE_ONLY=1 node server.js",
+    "sync:question-bank": "node scripts/generate-full-qa-document.js && node scripts/generate-txt-exports.js && ../.venv/bin/python scripts/build-docx.py && ../.venv/bin/python ../interview-quiz-app/scripts/build_question_bank.py",
+    "test": "node --test tests/*.test.js",
+    "stop": "lsof -ti:${PORT:-3030} | xargs kill 2>/dev/null || echo 'No process running on port '${PORT:-3030}"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.109.1",
     "@tesseract.js-data/eng": "^1.0.0",
+    "better-sqlite3": "11.10.0",
     "dotenv": "^17.4.2",
     "mammoth": "^1.12.0",
     "pdf-parse": "^2.4.5",

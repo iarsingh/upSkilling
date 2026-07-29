@@ -258,6 +258,7 @@ Focus: GCP project architecture, Shared VPC, hub-and-spoke, DNS, NAT, VPN, routi
 10. **Security/DevSecOps:** Cloud Identity: What is Cloud Identity, and how does it relate to users and groups?
 11. **Security/DevSecOps:** GCP user access: How do you provide read-only or admin access to users safely?
 12. **Security/DevSecOps:** GCP infrastructure security: How do you secure GCP infrastructure?
+13. **Networking:** PSA vs PSC: Explain the difference between Private Service Access (PSA) and Private Service Connect (PSC) in GCP. When would you use each to connect privately to managed services (e.g. Cloud SQL, third-party or your own published services), and what does the network topology look like for both?
 
 ## Mock Interview 20 - Networking Fundamentals Round
 
@@ -1580,3 +1581,114 @@ Focus: Production troubleshooting, Jenkins and CI/CD design, GCP architecture, K
     Search_path=“/”
     find “$Search_path” -type f -perm 777 2>/dev/null
     ```
+
+## Mock Interview 81 - Docker and Docker Compose Build Design
+
+Focus: Dockerfile layer order, RUN chaining, Compose env var consistency, multi-variant services
+
+1. **CI/CD/GitOps:** Dockerfile layer order: In a Go build stage using COPY ./project /project, WORKDIR /project, then a single RUN chaining go mod download, go test ./..., and go build, why place COPY before WORKDIR, and why chain all three commands into one RUN instead of splitting them up?
+2. **CI/CD/GitOps:** Compose env var consistency: If a service uses the same .env variable (e.g. ${DEFAULT_NGINX_VERSION}) for both its image tag and a build ARG like NGINX_VERSION, why keep them tied to one variable, and what breaks in the build or runtime image if those two values drift apart?
+3. **CI/CD/GitOps:** Adding another Compose variant: To add a fourth service for another NGINX variant alongside three existing ones, what would you change in the Compose file to stay consistent, especially around BUILD_FILE, NGINX_VERSION, and the final image tag?
+
+## Mock Interview 82 - Production DevOps Scenario Round (CI/CD, Kubernetes, Terraform, MLOps)
+
+Focus: Large-scale CI/CD optimization, Kubernetes production troubleshooting, scalability, canary deployment, AI/MLOps, Terraform state and import
+
+1. **CI/CD/GitOps:** CI/CD pipeline optimization: With ~300 microservices on Kubernetes using Jenkins/Bitbucket, Docker, and Helm, developers report the pipeline takes 30-40 minutes. How would you redesign and optimize it to reduce deployment time?
+2. **CI/CD/GitOps:** Further deployment optimization: Beyond optimizing the CI stages, what else would you change around Helm deployments, environment-specific deployments, infrastructure, and application dependencies to cut deployment time further?
+3. **CI/CD/GitOps:** Production database migration safety: CI completes successfully, but during CD a database migration corrupts the production database. What controls and pipeline steps would you add to prevent this from happening again?
+4. **GKE/Kubernetes:** How many years of hands-on experience do you have with Kubernetes?
+5. **GKE/Kubernetes:** Scenario: ~60% of the pods across your Kubernetes cluster suddenly enter CrashLoopBackOff. How would you investigate, troubleshoot, and recover from this incident?
+6. **GKE/Kubernetes:** Tell me about the last time you actually faced a CrashLoopBackOff issue in production. What was the root cause, and how did you resolve it?
+7. **GCP Services:** Which cloud platform are you currently using day to day - GCP, Azure, AWS, or another cloud?
+8. **GKE/Kubernetes:** Scenario: worker nodes have plenty of available CPU, but new pods stay Pending when scheduled. What could be the possible reasons, and how would you troubleshoot it?
+9. **GKE/Kubernetes:** If the Kubernetes API server suddenly becomes unavailable, what happens to existing workloads? Do running pods keep working, and what functionality is affected?
+10. **SRE/Reliability:** Your application suddenly receives 10x expected traffic and becomes unavailable. How would you design Kubernetes and the surrounding infrastructure so this doesn't happen again?
+11. **CI/CD/GitOps:** Canary deployment: for the first 30 minutes after upgrading an app on Kubernetes, you want only 5% of users on the new version while 95% stay on stable. How would you implement this?
+12. **MLOps/AI Infra:** Have you recently worked on any AI/ML use cases or cloud-based AI services? Explain your experience with services such as Vertex AI, Kubeflow, and Cloud Composer.
+13. **MLOps/AI Infra:** Have you worked on or explored Retrieval-Augmented Generation (RAG) applications? Explain a RAG use case relevant to your domain work.
+14. **Terraform/IaC:** You join a project where cloud resources were created manually through the Azure/GCP portal. How would you bring those existing resources under Terraform management without recreating or disrupting them?
+15. **Terraform/IaC:** Your Terraform state file has become corrupted. How would you recover the state safely without affecting the existing production infrastructure?
+
+## Mock Interview 83 - Production Reliability and Observability Behavioral Round
+
+Focus: STAR-style behavioral questions on outages, infrastructure design trade-offs, and observability ownership
+
+1. **Behavioral/Leadership:** Describe a time when a production system you were responsible for degraded or failed. What happened, how did you detect it, what immediate actions did you take, and how did you prevent recurrence?
+2. **Behavioral/Leadership:** Give an example of infrastructure you architected or significantly improved (cloud, IaC, containerized stack). What trade-offs did you weigh - cost, scalability, resilience, maintenance - and what would you do differently now?
+3. **Behavioral/Leadership:** Describe a situation where you had to create or improve monitoring, observability, or alerting for a system. What metrics/logs/traces did you choose, how did you set alert thresholds or SLOs, and how did you measure success?
+4. **Behavioral/Leadership:** [Incomplete in source - question was cut off after] Have you ever had to write automation or ... (capture the rest next time this screenshot/page is available, then replace this entry)
+
+## Mock Interview 84 - Fugmo Lead GCP DevOps Engineer Screening
+
+Focus: Platform reliability and CI/CD focused screening-round questions
+
+1. **Behavioral/Screening:** Can you describe your professional background and highlight the experiences most relevant to this role?
+2. **CI/CD/GitOps:** Walk us through a time when you improved the CI/CD pipeline for a project. What challenges did you face, and how did you address them?
+3. **SRE/Reliability:** How have you implemented observability and incident response practices in previous roles? Give an example of how these practices improved system reliability.
+
+
+## Mock Interview 85 - GenAI and LLM Engineering Round
+
+Focus: RAG architecture, LLM serving, prompt security, evaluation, and agentic systems for production GenAI
+
+1. **GenAI/LLM:** RAG architecture: How would you design a production RAG pipeline - chunking strategy, embedding model choice, vector database, retrieval quality, and re-ranking - and how would you measure whether retrieval is actually good?
+2. **GenAI/LLM:** LLM serving on Kubernetes: How would you serve an open-weight LLM (e.g. via vLLM or TGI) on GKE - GPU node pools, batching, autoscaling, and request queuing under bursty load?
+3. **GenAI/LLM:** Prompt injection and guardrails: How would you defend a production LLM application against prompt injection, data exfiltration through tool calls, and jailbreak attempts?
+4. **GenAI/LLM:** Fine-tuning vs RAG vs prompt engineering: What trade-offs would you weigh when choosing between fine-tuning, RAG, and prompt engineering for a new use case, and how would you decide?
+5. **GenAI/LLM:** Cost and latency optimization: An LLM feature is too slow and too expensive in production. What levers would you pull - caching, model routing between small and large models, quantization, batching, streaming?
+6. **GenAI/LLM:** LLM evaluation in CI: How would you evaluate LLM output quality and catch regressions in CI before deploying a new prompt version or model version?
+7. **GenAI/LLM:** Vector database operations: How would you operate and scale a vector database (e.g. pgvector, Pinecone, Weaviate) in production - indexing strategy, freshness, backup/restore, and cost at scale?
+8. **GenAI/LLM:** Agentic systems: For a multi-step, tool-calling agent pipeline, how would you design observability, failure handling, and guardrails so a bad tool call or infinite loop doesn't cause damage or runaway cost?
+
+
+## Mock Interview 86 - Advanced GCP Networking Round
+
+Focus: Private connectivity, peering vs Shared VPC, interconnect, load balancing types, VPC-native GKE, serverless networking, CDN, firewall hierarchy, flow logs, and egress control
+
+1. **Networking:** Private Google Access: What is Private Google Access, why would you enable it on a subnet, and how does it differ from giving an instance a public IP just to reach Google APIs?
+2. **Networking:** VPC Peering vs Shared VPC: How do VPC Peering and Shared VPC differ in GCP, and what would push you to choose one over the other for connecting workloads across projects?
+3. **Networking:** Cloud Interconnect vs Cloud VPN: When would you choose Dedicated Interconnect, Partner Interconnect, or Cloud VPN for connecting on-premises to GCP, and what factors (bandwidth, latency, SLA, cost) drive that choice?
+4. **Networking:** Cloud Load Balancing types: Compare Global external HTTP(S) Load Balancing, regional/internal Load Balancing, TCP/SSL Proxy, and Network Load Balancing in GCP. How would you choose the right one for a given workload?
+5. **Networking:** VPC-native GKE clusters: Why do VPC-native GKE clusters use alias IP ranges instead of routes-based networking, and what problems does that solve at scale?
+6. **Networking:** Serverless VPC Access: How would you let a Cloud Run or Cloud Functions service reach a private resource (e.g. a VM or Cloud SQL instance via private IP) inside a VPC?
+7. **Networking:** Cloud CDN: How does Cloud CDN integrate with GCP load balancing, and how would you design cache keys and invalidation for a mixed static/dynamic site?
+8. **Networking:** Firewall hierarchy: How do Hierarchical Firewall Policies at the organization or folder level interact with VPC-level firewall rules, and how would you design this so teams can't accidentally open a risky port?
+9. **Networking:** VPC Flow Logs: What would you use VPC Flow Logs for in troubleshooting, security investigation, and cost analysis, and what are the trade-offs of enabling them broadly?
+10. **Networking:** Network Intelligence Center: How would you use Network Intelligence Center's connectivity tests and topology view to diagnose a 'service A can't reach service B' problem across projects and VPCs?
+11. **Networking:** Egress control: Compare using Cloud NAT, firewall egress-deny rules, and VPC Service Controls to restrict outbound traffic from a production VPC. When would you combine more than one?
+12. **Networking:** Multi-region network design: How would you design a GCP network (VPC layout, load balancing, DNS, failover) so an application stays available if an entire region becomes unavailable?
+13. **Networking:** Network Connectivity Center: What problem does GCP's Network Connectivity Center (NCC) solve, how does its hub-and-spoke model work for connecting VPCs, on-premises sites, and other clouds, and how does it compare to manually meshing VPC Peering and VPNs together?
+
+## Mock Interview 87 - GCP Networking Scenario Round
+
+Focus: Hands-on GCP networking troubleshooting scenarios: Private Google Access, peering, interconnect, load balancing, VPC-native GKE, serverless connectors, firewall precedence, flow logs, and failover
+
+1. **Networking:** Scenario: A newly added subnet's VMs have no public IP and can't reach any Google API, even though an existing GKE workload reaches Google APIs fine over private IP. Walk through your diagnosis.
+2. **Networking:** Scenario: Two VPCs are peered and the peering shows ACTIVE, but a service in VPC A still can't reach a service in VPC B. What would you check (CIDR overlap, custom route export/import, firewall rule scope)?
+3. **Networking:** Scenario: After migrating from Cloud VPN to Dedicated Interconnect, some traffic intermittently still routes over the old VPN tunnel. How would you debug route priority and BGP behavior?
+4. **Networking:** Scenario: Requests to a Global HTTPS Load Balancer intermittently get connection resets, but only from certain regions. How would you debug backend health checks, Cloud CDN cache-fill behavior, and regional backend capacity?
+5. **Networking:** Scenario: A VPC-native GKE cluster runs out of usable Pod IPs and new pods can't schedule even though nodes have CPU/memory headroom. How would you diagnose and fix this?
+6. **Networking:** Scenario: A Cloud Run service using a Serverless VPC Access connector times out under load but works fine at low traffic. What would you check?
+7. **Networking:** Scenario: Firewall rules appear to block SSH from the internet, but an instance is still reachable on port 22 externally. How would you trace hierarchical firewall policy precedence and rule evaluation order to find the gap?
+8. **Networking:** Scenario: VPC Flow Logs show a production service repeatedly connecting to an unexpected external IP outside business hours. How would you investigate and contain it?
+9. **Networking:** Scenario: Network Intelligence Center reports a connectivity test as unreachable between two GKE clusters in different projects on a Shared VPC, but a manual curl from a debug pod worked five minutes earlier. How would you reconcile the two signals and keep debugging?
+10. **Networking:** Scenario: After a region-level outage, DNS failover did not redirect traffic to the healthy region and the app was down for 20 minutes despite a healthy secondary region. How would you redesign for faster or automatic failover?
+11. **Networking:** Scenario: You need to migrate an organization from a legacy single flat VPC to a Shared VPC host/service-project model with zero downtime for existing production workloads. How would you plan and execute this network migration - subnet/CIDR re-planning, firewall rule migration, IAM for host/service projects, and cutover sequencing?
+
+## Mock Interview 88 - Cloud Migration Strategy Round
+
+Focus: Migration strategy frameworks, wave planning, data migration validation, cutover/rollback, cost estimation, and hybrid connectivity during phased migration
+
+1. **Cloud Migration:** 6 Rs framework: How would you decide between rehost, replatform, refactor, repurchase, retire, and retain when migrating an application portfolio to the cloud?
+2. **Cloud Migration:** Migration wave planning: How would you sequence a large-scale migration across dozens of interdependent applications - which move first, which move last, and why?
+3. **Cloud Migration:** Data migration validation: How would you validate that migrated data is complete and correct (e.g. using Database Migration Service or Storage Transfer Service) before cutover?
+4. **Cloud Migration:** Cutover and rollback: How would you plan the cutover window and rollback plan for a business-critical application migrating from on-prem or another cloud to GCP?
+5. **Cloud Migration:** Cost and TCO estimation: How would you estimate and validate cost savings before and after a cloud migration, and what commonly gets underestimated?
+6. **Cloud Migration:** Migrate for Compute Engine: When would you use Migrate for Compute Engine (lift-and-shift VM migration) versus rebuilding on managed services like GKE or Cloud Run?
+7. **Cloud Migration:** Hybrid connectivity during migration: How would you design network connectivity and identity so an application can run split across on-prem and cloud during a phased migration?
+8. **Cloud Migration:** Scenario: Post-migration, a newly migrated GCP workload shows 30% higher latency than it did on its previous platform. How would you diagnose whether the cause is network, compute sizing, storage IOPS, or application configuration?
+9. **Cloud Migration:** Scenario: A client wants to migrate a production workload from GCP to AWS. Walk through your approach - service equivalency mapping (GKE to EKS, Cloud SQL to RDS, Cloud Storage to S3, IAM to IAM), data transfer, DNS cutover, and rollback plan.
+10. **Cloud Migration:** Scenario: A client wants to migrate a production workload from AWS to GCP. Walk through your approach - service equivalency mapping (EKS to GKE, RDS to Cloud SQL, S3 to Cloud Storage, IAM to IAM), data transfer tooling, DNS cutover, and rollback plan.
+11. **Cloud Migration:** Scenario: A client wants to migrate a workload from Azure to GCP. What would you map AKS, Azure SQL, Blob Storage, and Azure AD to on GCP, and what would you watch for in networking (VNet to VPC) and identity federation during the migration?
+12. **Cloud Migration:** Scenario: A client wants to migrate a workload from Azure to AWS. What would you map AKS, Azure SQL, Blob Storage, and Azure AD to on AWS, and what would you watch for in networking (VNet to VPC) and identity federation during the migration?

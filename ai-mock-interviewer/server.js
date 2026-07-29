@@ -9,6 +9,12 @@ const { PDFParse } = require("pdf-parse");
 const tesseract = require("tesseract.js");
 const Anthropic = require("@anthropic-ai/sdk");
 const { Pool } = require("pg");
+const { createDatabase } = require("./src/database/sqlite");
+const { InterviewRepository } = require("./src/repositories/interview.repository");
+const { InterviewService } = require("./src/services/interview.service");
+const { AiGateway } = require("./src/ai/ai.gateway");
+const { isQuestionRelevant } = require("./src/services/topic.service");
+const { createInterviewRoutes } = require("./src/routes/interview.routes");
 
 const PORT = Number(process.env.PORT || 3030);
 const HOST = process.env.HOST || "127.0.0.1";
@@ -23,6 +29,8 @@ const PUBLIC_DIR = path.join(__dirname, "public");
 const DATA_DIR = path.join(__dirname, "data");
 const PROFILE_PATH = path.join(DATA_DIR, "applicant-profile.json");
 const QUESTION_BANK_PATH = path.join(__dirname, "1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt");
+const IMPORTED_QUESTION_BANK_PATH = path.join(__dirname, "scripts", "answer-bank", "imported-conversation-questions.json");
+const FINAL_QA_DATASET_PATH = path.join(__dirname, "scripts", "answer-bank", "final-qa-dataset.json");
 const DATABASE_URL = process.env.DATABASE_URL || "";
 const databaseUsesSsl = DATABASE_URL && !/localhost|127\.0\.0\.1/.test(DATABASE_URL)
   && process.env.DATABASE_SSL !== "false";
@@ -35,6 +43,7 @@ const db = DATABASE_URL
     })
   : null;
 let databaseReady;
+let interviewRoutes;
 
 /* -------------------------------------------------------------------------
  * Auth: PostgreSQL user store (local JSON fallback) + signed cookies.
@@ -345,8 +354,11 @@ const ADMIN_ONLY_PAGES = new Set(["/admin.html"]);
 if (!db) ensureUsersSeeded();
 const OCR_LANG_PATH = path.join(__dirname, "node_modules", "@tesseract.js-data", "eng", "4.0.0");
 const MARKET_SKILL_BENCHMARK = `Target role family: Senior GCP DevOps / SRE / Cloud Engineer / Platform Engineer / Cloud Reliability Engineer / ML Platform Engineer
-Experience level: 6-8 years
-Target companies: Google-style interviews and product companies
+Actual experience: 7 years
+Interview calibration: assess at the architecture depth, production ownership, ambiguity handling, cross-team leadership, and trade-off rigor commonly expected from 10-15 year candidates. Never represent the candidate as having more than 7 years of actual experience.
+Compensation target: ₹25 LPA
+Preparation window: 50 days
+Target companies: product companies and senior cloud/platform/SRE teams
 
 Core skills to test:
 - GCP: GKE, Cloud Run, Compute Engine, VPC, Load Balancing, Cloud DNS, IAM, Security, Cloud Storage, Pub/Sub, Cloud SQL / AlloyDB, Vertex AI awareness
@@ -551,6 +563,14 @@ function extractJsonArray(text) {
 
 let cachedQuestionBank = null;
 
+function normalizeQuestion(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/^[a-z0-9/ &+-]+:\s+/, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
 function readQuestionBank() {
   if (cachedQuestionBank) return cachedQuestionBank;
 
@@ -579,6 +599,26 @@ function readQuestionBank() {
       section: currentSection
     });
     lastQuestionNumber = number;
+  }
+
+  const supplementalPath = fs.existsSync(FINAL_QA_DATASET_PATH)
+    ? FINAL_QA_DATASET_PATH
+    : IMPORTED_QUESTION_BANK_PATH;
+  if (fs.existsSync(supplementalPath)) {
+    const imported = JSON.parse(fs.readFileSync(supplementalPath, "utf8"));
+    const seen = new Set(questions.map((item) => normalizeQuestion(item.question)));
+    for (const item of imported) {
+      const key = normalizeQuestion(item.question);
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
+      questions.push({
+        number: questions.length + 1,
+        question: item.question,
+        section: item.section || "Imported Conversation Questions",
+        category: item.category || null,
+        questionType: item.questionType || null
+      });
+    }
   }
 
   cachedQuestionBank = questions;
@@ -702,14 +742,48 @@ function fallbackQuestion(input) {
     [...historyText.matchAll(/Question\s+\d+:\s*(.+?)(?:\n|$)/g)]
       .map((match) => match[1].trim().toLowerCase())
   );
-  const bank = readQuestionBank().map((item) => item.question);
-  const fallbackBank = bank.length ? bank : [
+  const ignoredTopicWords = new Set([
+    "about", "advanced", "and", "developer", "engineer", "engineering", "focus",
+    "for", "interview", "mid", "mock", "role", "senior", "specialist", "the", "with"
+  ]);
+  const topic = String(input.topic || input.role || "").trim();
+  const allowedTopics = Array.isArray(input.allowedTopics) && input.allowedTopics.length
+    ? input.allowedTopics.map((item) => String(item).trim()).filter(Boolean)
+    : [topic];
+  const topicGroups = allowedTopics.map((entry) =>
+    [...new Set((entry.toLowerCase().match(/[a-z0-9+#.-]{3,}/g) || [])
+      .filter((word) => !ignoredTopicWords.has(word)))]
+  ).filter((words) => words.length);
+  const rankedBank = readQuestionBank()
+    .map((item) => {
+      const searchable = `${item.section || ""} ${item.category || ""} ${item.question}`.toLowerCase();
+      const score = Math.max(0, ...topicGroups.map((words) => {
+        const matches = words.reduce((total, word) => total + (searchable.includes(word) ? 1 : 0), 0);
+        const required = words.length > 1 ? 2 : 1;
+        return matches >= required ? matches : 0;
+      }));
+      return { question: item.question, score };
+    })
+    .filter((item) => item.score > 0 && !used.has(item.question.trim().toLowerCase()))
+    .sort((left, right) => right.score - left.score);
+  const bestTopicScore = rankedBank[0]?.score || 0;
+  const bank = rankedBank
+    .filter((item) => !input.topicOnly || (bestTopicScore > 0 && item.score === bestTopicScore))
+    .map((item) => item.question);
+  const topicFallback = topic
+    ? `Topic focus — ${topic}: Explain the core concepts, then walk through a realistic production scenario, key trade-offs, troubleshooting signals, and best practices.`
+    : "Platform engineering: What self-service golden paths would you build, and what guardrails would you enforce?";
+  const generalFallbackBank = [
     "GKE troubleshooting: A production service has intermittent 5xx errors. Walk me through your investigation from load balancer to pod metrics.",
     "Terraform safety: How would you design modules, remote state, approvals, and drift detection for a senior GCP platform role?",
     "SRE: Define SLIs, SLOs, error budget policy, alerting, and incident response for a user-facing API.",
-    "Cloud security: How would you secure GKE workloads, IAM permissions, secrets, image supply chain, and ingress traffic?",
-    "Platform engineering: What self-service golden paths would you build, and what guardrails would you enforce?"
+    "Cloud security: How would you secure GKE workloads, IAM permissions, secrets, image supply chain, and ingress traffic?"
   ];
+  const fallbackBank = bank.length
+    ? bank
+    : input.topicOnly
+      ? [topicFallback]
+      : [topicFallback, ...generalFallbackBank];
   const next = fallbackBank.find((question) => !used.has(question.trim().toLowerCase()));
   return next || fallbackBank[Math.floor(Math.random() * fallbackBank.length)];
 }
@@ -1080,6 +1154,13 @@ function questionPrompt(input) {
   const lastAnswerMatch = lastEntry.match(/Answer:\s*([\s\S]+)/);
   const lastAnswer = lastAnswerMatch ? trimContext(lastAnswerMatch[1], 700) : "";
 
+  const allowedTopicText = Array.isArray(input.allowedTopics) && input.allowedTopics.length
+    ? input.allowedTopics.join(", ")
+    : topic;
+  const topicConstraint = input.topicOnly
+    ? `STRICT TOPIC MODE: The only allowed topics are: ${allowedTopicText}. Every question must be directly about at least one of these selected topics. Do not ask about any unselected technology or general role competency unless necessary for the selected topic. Rotate fairly across the selected topics. If recent history contains another subject, ignore it.`
+    : "Use the focus areas to guide the interview.";
+
   return `You are running a mock technical interview.
 
 ${moodInstruction(input.mood)}
@@ -1088,6 +1169,7 @@ Interview round: Interview ${interviewNumber}
 Target role: ${role}
 Seniority: ${level}
 Focus areas: ${topic}
+${topicConstraint}
 Candidate CV/profile context:
 ${cvText || "No CV context provided."}
 
@@ -1166,6 +1248,36 @@ function cleanGeneratedQuestion(text) {
   return questionLine || candidate;
 }
 
+function getInterviewRoutes() {
+  if (interviewRoutes) return interviewRoutes;
+  const sqlite = createDatabase({ filename: process.env.SQLITE_PATH || path.join(DATA_DIR, "interviews.sqlite") });
+  const repository = new InterviewRepository(sqlite);
+  const aiGateway = new AiGateway({
+    validate: isQuestionRelevant,
+    generate: async (input) => {
+      if (OFFLINE_ONLY) throw new Error("AI providers are disabled in offline mode.");
+      const question = cleanGeneratedQuestion(await askLLM(questionPrompt(input), {
+        temperature: 0.3,
+        num_predict: 100
+      }, 18000));
+      return { question, topic: input.topic, source: LLM_PROVIDER };
+    },
+    fallback: async (input) => ({
+      question: fallbackQuestion(input),
+      topic: input.topic,
+      source: "question-bank"
+    })
+  });
+  const service = new InterviewService(repository, aiGateway);
+  interviewRoutes = createInterviewRoutes({
+    service,
+    readBody,
+    sendJson,
+    currentUserId: (req) => getSession(req)?.uid || null
+  });
+  return interviewRoutes;
+}
+
 function serveStatic(req, res) {
   const url = new URL(req.url, `http://${req.headers.host}`);
   const requested = url.pathname === "/" ? "/index.html" : url.pathname;
@@ -1199,6 +1311,24 @@ async function handleRequest(req, res) {
     if (req.method === "OPTIONS") {
       sendJson(res, 200, { ok: true });
       return;
+    }
+
+    const requestUrl = new URL(req.url, `http://${req.headers.host}`);
+    if (req.method === "GET" && requestUrl.pathname === "/health/live") {
+      sendJson(res, 200, { status: "UP", service: "ai-mock-interviewer" });
+      return;
+    }
+    if (req.method === "GET" && requestUrl.pathname === "/health/ready") {
+      try {
+        getInterviewRoutes();
+        sendJson(res, 200, { status: "READY", persistence: "sqlite", aiMode: OFFLINE_ONLY ? "offline" : LLM_PROVIDER });
+      } catch (error) {
+        sendJson(res, 503, { status: "NOT_READY", error: error.message });
+      }
+      return;
+    }
+    if (requestUrl.pathname.startsWith("/api/v1/interviews")) {
+      if (await getInterviewRoutes()(req, res, requestUrl)) return;
     }
 
     if (req.method === "POST" && req.url === "/api/contact") {
@@ -1383,7 +1513,7 @@ async function handleRequest(req, res) {
         });
       } catch {
         sendJson(res, 200, {
-          coverLetter: `Dear Hiring Team,\n\nI am interested in this opportunity because it aligns strongly with my background as a Senior DevOps and Platform Engineer with 6.9+ years of experience across GCP, Kubernetes, Terraform, CI/CD, cloud security, observability, and reliability engineering. I have designed secure GCP platform foundations, built reusable Terraform modules, managed production GKE clusters, improved monitoring with Prometheus, Grafana, ELK, and Google Cloud Operations, and supported highly available cloud-native platforms across enterprise environments.\n\nMy recent work includes GCP landing zones, Shared VPC, IAM governance, Cloud Armor, Terraform Enterprise, Git-based delivery workflows, and Kubernetes operations. I also bring hands-on exposure to MLOps and AI infrastructure, including MLflow, FastAPI model serving, Vertex AI, and Kubernetes-based ML deployment workflows.\n\nI would welcome the chance to contribute to your engineering team by improving platform reliability, delivery speed, security posture, and developer experience.\n\nBest regards,\nAkhilesh Ranjan Singh`,
+          coverLetter: `Dear Hiring Team,\n\nI am interested in this opportunity because it aligns strongly with my background as a Senior DevOps and Platform Engineer with 7 years of experience across GCP, Kubernetes, Terraform, CI/CD, cloud security, observability, and reliability engineering. I have designed secure GCP platform foundations, built reusable Terraform modules, managed production GKE clusters, improved monitoring with Prometheus, Grafana, ELK, and Google Cloud Operations, and supported highly available cloud-native platforms across enterprise environments.\n\nMy recent work includes GCP landing zones, Shared VPC, IAM governance, Cloud Armor, Terraform Enterprise, Git-based delivery workflows, and Kubernetes operations. I also bring hands-on exposure to MLOps and AI infrastructure, including MLflow, FastAPI model serving, Vertex AI, and Kubernetes-based ML deployment workflows.\n\nI would welcome the chance to contribute to your engineering team by improving platform reliability, delivery speed, security posture, and developer experience.\n\nBest regards,\nAkhilesh Ranjan Singh`,
           fallback: true
         });
       }

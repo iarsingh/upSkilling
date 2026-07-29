@@ -63,7 +63,7 @@ User opens http://127.0.0.1:3030
   -> app.js loads saved localStorage state
   -> app.js loads question sources:
        /api/question-bank
-       /30-day-plan.json
+       /50-day-plan.json
        /mock-interview-sets.json
   -> UI becomes ready
 ```
@@ -74,7 +74,7 @@ Important files:
 - `public/index.html`
 - `public/app.js`
 - `public/styles.css`
-- `public/30-day-plan.json`
+- `public/50-day-plan.json`
 - `public/mock-interview-sets.json`
 
 ## 4. Health Check Flow
@@ -98,7 +98,7 @@ Questions can come from multiple sources.
 Built-in arrays in public/app.js
   + large bank from /api/question-bank
   + fixed mock sets from public/mock-interview-sets.json
-  + 30-day plan from public/30-day-plan.json
+  + 50-day plan from public/50-day-plan.json
   + custom JD questions
   + custom skill questions in localStorage
   + optional LLM generated question from /api/question
@@ -109,7 +109,7 @@ The browser chooses the pool based on UI selections:
 ```text
 Technology practice
 Mock interview set
-30-day practice plan
+50-day practice plan
 Question order
 Custom skill
 Custom JD mode
@@ -382,7 +382,7 @@ data/applicant-profile.json
 public/mock-interview-sets.json
   -> fixed interview rounds
 
-public/30-day-plan.json
+public/50-day-plan.json
   -> daily practice plan
 
 1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt

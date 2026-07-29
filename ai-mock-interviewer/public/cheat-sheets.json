@@ -1,0 +1,95 @@
+{
+  "kubernetes": {
+    "label": "Kubernetes",
+    "points": [
+      "Pending pod: kubectl describe pod -> FailedScheduling event tells you CPU/mem/affinity/taint shortfall.",
+      "CrashLoopBackOff: kubectl logs --previous first, then check probes and resource limits (OOMKilled = exit 137).",
+      "HPA scales on requests, not limits; pick a metric that reflects load (concurrency for I/O-bound, not just CPU).",
+      "VPA and HPA should not both scale the same resource metric - VPA for right-sizing, HPA for horizontal scale.",
+      "Cluster autoscaler scales up on unschedulable pods, scales down on underutilized nodes (respects PDBs).",
+      "Readiness probe should check real dependency health, not just a TCP/port check - avoids zombie backends.",
+      "GitOps (ArgoCD/Flux) reverts manual kubectl edits - emergency fixes must go through Git, not live edits."
+    ]
+  },
+  "cicd": {
+    "label": "CI/CD & Jenkins",
+    "points": [
+      "Jenkins + GitHub: GitHub Branch Source plugin + webhook to /github-webhook/, credentials via Jenkins Credentials store.",
+      "Branch exclusion: Branch Source behaviors (regex filter) in the multibranch job, or a when { branch } guard in Jenkinsfile.",
+      "Promotion pattern: build -> test -> containerize -> push to registry -> deploy to staging -> canary/blue-green to prod.",
+      "GitOps drift: controller reconciles live state back to Git - any out-of-band change gets silently reverted.",
+      "Trunk-based + PR review + required status checks is the default safe branch strategy to name.",
+      "Rollback should be a one-step operation (revert commit / repoint traffic), not a manual multi-step scramble."
+    ]
+  },
+  "agentic-ai": {
+    "label": "Agentic AI / LLMOps",
+    "points": [
+      "LangChain = building blocks; LangGraph = explicit state machine + checkpointing for reliable multi-step agents.",
+      "CrewAI/AutoGen = multi-agent, role-based orchestration.",
+      "Tool calls: LLM returns structured function name + JSON args; orchestrator validates and executes, feeds result back.",
+      "Agent auth: workload identity / short-lived tokens for the agent itself; per-tool authorization scope for user actions.",
+      "Observability: trace every step (prompt, tool calls, tokens, latency, cost) - LangSmith/Langfuse/Phoenix or custom logging.",
+      "Deploy on K8s: HPA on concurrency (not CPU); external store (Redis/DB) for conversation/checkpoint state, never in-pod memory."
+    ]
+  },
+  "mlops": {
+    "label": "MLOps / Model Monitoring",
+    "points": [
+      "Monitor both layers: infra (latency, errors, replicas) AND model (data drift, prediction drift, accuracy/F1).",
+      "Drift metrics: PSI / KL divergence / KS test on feature distributions vs. training baseline.",
+      "Model versioning: registry-based (Vertex AI Model Registry / MLflow), canary new versions, one-step rollback by version ID.",
+      "Drift detected -> alert -> runbook: sanity-check upstream schema, then retrain / rollback / accept as a defined decision path.",
+      "Retraining is a pipeline (Vertex AI Pipelines/Kubeflow/Composer), not a manual step - same eval gates as the original model.",
+      "Clean ownership line: data science owns model/training/eval; platform owns serving, CI/CD, scaling, and monitoring."
+    ]
+  },
+  "terraform": {
+    "label": "Terraform / IaC",
+    "points": [
+      "State conflicts: terraform plan first (no changes), terraform state show/import to reconcile - never blind re-apply.",
+      "Prevent conflicts: remote state + native locking (GCS backend / Terraform Cloud), CI/CD-only applies, no local applies.",
+      "Validation blocks on variables + OPA/Sentinel policy-as-code in CI to hard-block risky changes before apply.",
+      "6 Rs for migration decisions: rehost, replatform, refactor, repurchase, retire, retain."
+    ]
+  },
+  "sre": {
+    "label": "SRE / Incident Response",
+    "points": [
+      "Incident STAR: situation/impact -> diagnostic steps in order -> the fix -> RCA + concrete prevention.",
+      "Multi-window multi-burn-rate alerting: fast burn = page now, slow burn = ticket, tuned off SLO error budget.",
+      "Retry storms: exponential backoff + jitter, circuit breakers, short timeouts, load shedding/bulkheads.",
+      "Cost spikes: billing breakdown by service/day, cross-reference with deploy/Terraform change history first.",
+      "Noisy neighbor: PriorityClass + ResourceQuota + tainted/dedicated node pool beats one-cluster-per-team."
+    ]
+  },
+  "networking": {
+    "label": "GCP Networking",
+    "points": [
+      "404/502 debug path: DNS -> load balancer -> ingress controller -> service -> pod endpoints, in that order.",
+      "VPC Service Controls: prevents data exfiltration across project boundaries; adds operational friction - know both sides.",
+      "Cross-service latency regressions are usually shared-resource contention (node, DB, cache), not the new code path itself.",
+      "LB health check and Kubernetes readiness probe must check the same real signal, or you get zombie backends."
+    ]
+  },
+  "coding": {
+    "label": "Coding Patterns",
+    "points": [
+      "Median of two sorted arrays: binary search the smaller array for a partition, O(log(min(m,n))).",
+      "Longest palindromic substring: expand-around-center from every index (odd + even), O(n^2).",
+      "Sliding window (longest substring without repeat): track last-seen index, jump window start past repeat.",
+      "Two Sum: single pass with a value->index hash map, O(n).",
+      "Cycle detection: Floyd's tortoise and hare, O(1) space.",
+      "Topological sort / cycle detection in a dependency graph: Kahn's algorithm (indegree + queue)."
+    ]
+  },
+  "behavioral": {
+    "label": "Behavioral / STAR",
+    "points": [
+      "Tell me about yourself: 3 parts, under 90s - summary, relevant career thread, close tied to this role.",
+      "Always have 2-3 questions ready for the interviewer: technical depth, team process, growth/first-90-days.",
+      "Frame contributions around ownership + measurable impact, not just tool names.",
+      "When experience is thin on a topic, say so honestly and pivot to the adjacent thing you do own."
+    ]
+  }
+}

@@ -15325,7 +15325,7 @@ Where audit logs are stored
 Audit logs can be sent to:
                * File system on control plane
                * Logging systems (ELK, Splunk)
-               * Cloud logging (CloudWatch, Stackdriver, Azure Monitor)
+               * Cloud logging (CloudWatch, Google Cloud Logging, Azure Monitor)
 ________________
 
 
