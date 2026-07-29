@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("aimi-theme");
+          var theme = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Question Bank | AI Mock Interviewer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="question-bank-page">
+    <main class="shell qb-shell">
+      <section class="topbar">
+        <div class="brand-block">
+          <p class="eyebrow">Interview preparation</p>
+          <div class="brand-title">
+            <img class="brand-icon" src="/favicon.svg" alt="" aria-hidden="true">
+            <h1>Question Bank</h1>
+          </div>
+          <p class="subtitle">Every question and answer in one scrollable reader. Pause to read and your place is saved automatically.</p>
+        </div>
+        <div class="top-actions">
+          <a class="ghost link-button small" href="/">Home</a>
+          <a class="ghost link-button small" href="/dashboard.html">Dashboard</a>
+          <a class="ghost link-button small" href="/session.html">Practice</a>
+          <button class="theme-toggle" type="button" data-action="toggle-theme" aria-pressed="false" aria-label="Toggle dark mode">
+            <span class="theme-icon theme-icon-light" aria-hidden="true">&#9728;&#65039;</span>
+            <span class="theme-icon theme-icon-dark" aria-hidden="true">&#127769;</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="panel qb-progress-panel">
+        <div class="qb-progress-info">
+          <strong id="qbProgressCount">0 / 0 read</strong>
+          <div class="qb-progress-bar"><span id="qbProgressFill"></span></div>
+        </div>
+        <div class="qb-progress-actions">
+          <input id="qbSearch" type="search" placeholder="Filter questions…" aria-label="Filter questions">
+          <button id="qbJumpToLast" class="ghost link-button small" type="button">Jump to where I left off</button>
+          <button id="qbResetProgress" class="ghost link-button small" type="button">Reset read ticks</button>
+        </div>
+      </section>
+
+      <nav class="panel qb-topic-index" aria-labelledby="qbTopicIndexTitle">
+        <div class="qb-topic-index-head">
+          <div>
+            <p class="eyebrow">Topic index</p>
+            <h2 id="qbTopicIndexTitle">Questions by topic</h2>
+            <p class="qb-topic-index-help">Select any topic to read its questions and answers below.</p>
+          </div>
+          <strong id="qbTopicIndexTotal">Loading…</strong>
+        </div>
+        <div id="qbTopicIndex" class="qb-topic-index-grid" role="list"></div>
+      </nav>
+
+      <div class="qb-reader-status">
+        <strong id="qbReaderStatus">Showing all questions</strong>
+        <button id="qbClearTopic" class="ghost link-button small" type="button" hidden>Show all topics</button>
+      </div>
+
+      <section id="qbContent" class="qb-content" aria-live="polite">
+        <p class="qb-loading">Loading question bank…</p>
+      </section>
+    </main>
+    <script src="/question-bank.js"></script>
+    <script src="/theme.js"></script>
+  </body>
+</html>
