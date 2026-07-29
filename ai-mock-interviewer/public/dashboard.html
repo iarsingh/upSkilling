@@ -20,6 +20,7 @@
         </div>
         <div class="top-actions">
           <a class="ghost link-button small" href="/">Home</a>
+          <a class="ghost link-button small" href="/question-bank.html">Question Bank</a>
           <a class="ghost link-button small" href="/contact.html">Contact</a>
           <a class="ghost link-button small linkedin-button" href="https://www.linkedin.com/in/iamarsingh/" target="_blank" rel="noopener noreferrer" aria-label="Connect with iarsingh on LinkedIn">LinkedIn</a>
           <a class="ghost link-button small instagram-button" href="https://www.instagram.com/iarsingh/" target="_blank" rel="noopener noreferrer" aria-label="Follow iarsingh on Instagram">Instagram</a>
@@ -65,6 +66,16 @@
         </button>
       </section>
 
+      <section class="question-types-section panel" aria-labelledby="questionTypesTitle">
+        <div class="core-rounds-head">
+          <div><p class="eyebrow">Question taxonomy</p><h2 id="questionTypesTitle">Question types in your bank</h2></div>
+          <p>Coverage is calculated from the same deduplicated bank used by mock interviews.</p>
+        </div>
+        <div id="questionTypeCoverage" class="question-type-grid" aria-live="polite">
+          <span class="question-type-card"><strong>Loading…</strong><small>Checking question types</small></span>
+        </div>
+      </section>
+
       <section class="core-rounds-section" aria-labelledby="coreRoundsTitle">
         <div class="core-rounds-head">
           <div><p class="eyebrow">Core Interview Rounds</p><h2 id="coreRoundsTitle">System Design &amp; DSA</h2></div>
@@ -81,6 +92,109 @@
             <span class="core-round-copy"><strong>Data Structures &amp; Algorithms</strong><small>Build problem-solving fluency with coding exercises.</small></span>
             <span class="core-round-skills"><span>Arrays</span><span>Strings</span><span>Hash maps</span><span>Trees</span><span>Graphs</span><span>Recursion</span><span>Dynamic programming</span><span>Complexity</span></span>
           </button>
+        </div>
+      </section>
+
+      <section class="specialized-rounds-section" aria-labelledby="specializedRoundsTitle">
+        <div class="core-rounds-head">
+          <div><p class="eyebrow">Specialized Focus Rounds</p><h2 id="specializedRoundsTitle">GenAI, LLM &amp; Language-Specific Rounds</h2></div>
+          <p>Deep-dive practice for one specialized topic instead of a broad role.</p>
+        </div>
+        <div class="specialized-rounds-picker">
+          <select id="specializedRoundSelect" aria-label="Choose a specialized round">
+            <option value="">Choose a topic&hellip;</option>
+            <option value="python-dev">Python Developer</option>
+            <option value="go-dev">Go Developer</option>
+            <option value="javascript-dev">JavaScript Developer</option>
+            <option value="bash-scripting">Shell and Bash Scripting</option>
+            <option value="gcp-network-engineer">GCP Network Engineer</option>
+            <option value="rag">RAG (Retrieval-Augmented Generation)</option>
+            <option value="llm">LLM Engineering Fundamentals</option>
+            <option value="llmops">LLMOps Production Operations</option>
+            <option value="agentic-ai">Agentic AI Architecture</option>
+            <option value="genai">Generative AI Beyond Text</option>
+          </select>
+          <div class="custom-topic-picker">
+            <label>Choose one or more topics</label>
+            <div id="topicMultiSelect" class="topic-multi-select">
+              <button id="topicMultiSelectTrigger" class="topic-select-trigger" type="button" aria-label="Choose interview topics" aria-expanded="false" aria-controls="topicOptions"><span id="topicMultiSelectLabel">Select topics…</span><b aria-hidden="true">⌄</b></button>
+              <div id="topicOptions" class="topic-options" role="group" aria-label="Interview topic selector" data-testid="topic-selector" hidden>
+                <div class="topic-options-head">
+                  <div>
+                    <strong>Choose your interview topics</strong>
+                    <small>Search and select one or multiple topics.</small>
+                  </div>
+                  <span id="topicSelectedCount" class="topic-selected-count">0 selected</span>
+                </div>
+                <div class="topic-search-wrap">
+                  <label class="sr-only" for="topicSearchInput">Search interview topics</label>
+                  <input id="topicSearchInput" type="text" inputmode="search" placeholder="Search topics, e.g. GKE, Jenkins, Terraform…" autocomplete="off" autocapitalize="none" spellcheck="false">
+                </div>
+                <p id="topicSearchStatus" class="topic-search-status" role="status" aria-live="polite"></p>
+                <fieldset class="topic-option-group"><legend>Cloud Platforms &amp; GCP Services</legend>
+                  <label><input type="checkbox" value="Google Cloud Platform">Google Cloud Platform</label><label><input type="checkbox" value="AWS">AWS</label><label><input type="checkbox" value="Azure">Azure</label><label><input type="checkbox" value="GCP managed services">GCP Managed Services</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>GCP Networking</legend>
+                  <label><input type="checkbox" value="GCP Networking">GCP Networking</label><label><input type="checkbox" value="Shared VPC and hybrid connectivity">Shared VPC &amp; Hybrid</label><label><input type="checkbox" value="GCP load balancing">Load Balancing</label><label><input type="checkbox" value="Cloud DNS, NAT and private connectivity">DNS, NAT &amp; Private Connectivity</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>Kubernetes &amp; Containerization</legend>
+                  <label><input type="checkbox" value="Kubernetes">Kubernetes</label><label><input type="checkbox" value="Docker">Docker</label><label><input type="checkbox" value="Helm">Helm</label><label><input type="checkbox" value="GKE operations and troubleshooting">GKE Operations</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>Infrastructure as Code (IaC)</legend>
+                  <label><input type="checkbox" value="Terraform">Terraform</label><label><input type="checkbox" value="Terraform Enterprise">Terraform Enterprise</label><label><input type="checkbox" value="Ansible">Ansible</label><label><input type="checkbox" value="Infrastructure as Code">IaC Architecture</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>CI/CD &amp; GitOps</legend>
+                  <label><input type="checkbox" value="CI/CD and GitOps">CI/CD &amp; GitOps</label><label><input type="checkbox" value="Jenkins">Jenkins</label><label><input type="checkbox" value="GitHub Actions and GitLab CI/CD">GitHub Actions &amp; GitLab CI/CD</label><label><input type="checkbox" value="Argo CD">Argo CD</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>MLOps &amp; AI Platforms</legend>
+                  <label><input type="checkbox" value="MLOps">MLOps</label><label><input type="checkbox" value="Vertex AI, Kubeflow and MLflow">Vertex AI, Kubeflow &amp; MLflow</label><label><input type="checkbox" value="Generative AI and LLM engineering">GenAI &amp; LLMs</label><label><input type="checkbox" value="Agentic AI and RAG">Agentic AI &amp; RAG</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>DevSecOps &amp; Cloud Security</legend>
+                  <label><input type="checkbox" value="Cloud security and DevSecOps">Cloud Security &amp; DevSecOps</label><label><input type="checkbox" value="IAM and workload identity">IAM &amp; Workload Identity</label><label><input type="checkbox" value="WAF, OWASP, SAST and DAST">WAF, OWASP, SAST &amp; DAST</label><label><input type="checkbox" value="Secrets and supply chain security">Secrets &amp; Supply Chain</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>Monitoring, Logging &amp; Observability</legend>
+                  <label><input type="checkbox" value="Observability">Observability</label><label><input type="checkbox" value="Prometheus and Grafana">Prometheus &amp; Grafana</label><label><input type="checkbox" value="ELK, OpenTelemetry and Jaeger">ELK, OpenTelemetry &amp; Jaeger</label><label><input type="checkbox" value="Cloud Monitoring and Cloud Logging">Cloud Monitoring &amp; Logging</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>Programming &amp; Scripting</legend>
+                  <label><input type="checkbox" value="Python">Python</label><label><input type="checkbox" value="Linux and Bash scripting">Linux &amp; Bash</label><label><input type="checkbox" value="Go programming">Go</label><label><input type="checkbox" value="Java and JavaScript">Java &amp; JavaScript</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>Databases &amp; Data Services</legend>
+                  <label><input type="checkbox" value="PostgreSQL and MySQL">PostgreSQL &amp; MySQL</label><label><input type="checkbox" value="MongoDB and Redis">MongoDB &amp; Redis</label><label><input type="checkbox" value="Cloud SQL, AlloyDB and BigQuery">Cloud SQL, AlloyDB &amp; BigQuery</label><label><input type="checkbox" value="Data platform engineering">Data Platforms</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>Messaging &amp; Streaming</legend>
+                  <label><input type="checkbox" value="Kafka">Kafka</label><label><input type="checkbox" value="RabbitMQ">RabbitMQ</label><label><input type="checkbox" value="Google Cloud Pub/Sub">Cloud Pub/Sub</label><label><input type="checkbox" value="Event-driven architecture">Event-Driven Architecture</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>Source Control &amp; Artifact Management</legend>
+                  <label><input type="checkbox" value="Git, GitHub, GitLab and Bitbucket">Git Platforms</label><label><input type="checkbox" value="Artifact Registry">Artifact Registry</label><label><input type="checkbox" value="JFrog Artifactory">JFrog Artifactory</label><label><input type="checkbox" value="Artifact security and promotion">Artifact Promotion</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>Backup &amp; Disaster Recovery</legend>
+                  <label><input type="checkbox" value="Backup and disaster recovery">Backup &amp; DR</label><label><input type="checkbox" value="Kasten K10">Kasten K10</label><label><input type="checkbox" value="Veeam">Veeam</label><label><input type="checkbox" value="RTO, RPO and failover">RTO, RPO &amp; Failover</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>ITSM &amp; Enterprise Tools</legend>
+                  <label><input type="checkbox" value="ServiceNow">ServiceNow</label><label><input type="checkbox" value="Jira">Jira</label><label><input type="checkbox" value="Incident and change management">Incident &amp; Change Management</label><label><input type="checkbox" value="Enterprise platform governance">Enterprise Governance</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>Platform Engineering &amp; SRE</legend>
+                  <label><input type="checkbox" value="Platform engineering">Platform Engineering</label><label><input type="checkbox" value="SRE and incident response">SRE &amp; Incidents</label><label><input type="checkbox" value="SLI, SLO and error budgets">SLI, SLO &amp; Error Budgets</label><label><input type="checkbox" value="Capacity planning and cost optimization">Capacity &amp; Cost</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>Hybrid &amp; Multi-Cloud</legend>
+                  <label><input type="checkbox" value="Hybrid cloud connectivity">Hybrid Cloud</label><label><input type="checkbox" value="Multi-cloud architecture">Multi-Cloud</label><label><input type="checkbox" value="Multi-region architecture">Multi-Region</label><label><input type="checkbox" value="Cloud migration strategy">Cloud Migration</label>
+                </fieldset>
+                <fieldset class="topic-option-group"><legend>Application &amp; API Technologies</legend>
+                  <label><input type="checkbox" value="Backend system design">Backend System Design</label><label><input type="checkbox" value="REST APIs and microservices">REST APIs &amp; Microservices</label><label><input type="checkbox" value="FastAPI, Spring Boot and Node.js">FastAPI, Spring Boot &amp; Node.js</label><label><input type="checkbox" value="React">React</label><label><input type="checkbox" value="Data structures and algorithms">DSA</label>
+                </fieldset>
+                <div class="topic-picker-actions">
+                  <button id="clearTopicSelection" class="topic-clear-button" type="button">Clear selection</button>
+                  <button id="confirmTopicSelection" class="topic-confirm-button" type="button">OK — use selected topics</button>
+                </div>
+              </div>
+            </div>
+            <label for="customTopicInput">Optional custom topic</label>
+            <div class="custom-topic-controls">
+              <input id="customTopicInput" type="text" maxlength="120" placeholder="e.g. Kubernetes rolling updates" autocomplete="off">
+              <button id="useCustomTopic" class="ghost link-button" type="button">Use selected topics</button>
+            </div>
+            <small id="customTopicError" class="custom-topic-error" role="alert" hidden></small>
+          </div>
         </div>
       </section>
 

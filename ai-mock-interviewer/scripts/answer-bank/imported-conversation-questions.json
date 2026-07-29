@@ -1,0 +1,2130 @@
+[
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD, GitHub Actions, Jenkins",
+    "category": "CI/CD, GitHub Actions, Jenkins",
+    "questionType": "Conceptual",
+    "question": "Your application is containerized and deployed using AWS services. Would you use GitHub Actions or Argo CD for deployment, and why?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD, GitHub Actions, Jenkins",
+    "category": "CI/CD, GitHub Actions, Jenkins",
+    "questionType": "Comparison",
+    "question": "If the application is running on Fargate instead of EKS, would your deployment-tool choice change?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD, GitHub Actions, Jenkins",
+    "category": "CI/CD, GitHub Actions, Jenkins",
+    "questionType": "Design / Architecture",
+    "question": "How would you design a pipeline where every feature-branch commit triggers build, unit tests, and static analysis, but the Docker image is pushed to ECR only after a PR is approved and merged?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD, GitHub Actions, Jenkins",
+    "category": "CI/CD, GitHub Actions, Jenkins",
+    "questionType": "Conceptual",
+    "question": "What trigger condition would you use when a PR is created from a feature branch to dev?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD, GitHub Actions, Jenkins",
+    "category": "CI/CD, GitHub Actions, Jenkins",
+    "questionType": "Troubleshooting",
+    "question": "If a PR is already open and the test pipeline fails, how do you trigger the pipeline again after fixing the code?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD, GitHub Actions, Jenkins",
+    "category": "CI/CD, GitHub Actions, Jenkins",
+    "questionType": "Comparison",
+    "question": "What is the difference between synchronize and reopened events in GitHub pull requests?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD, GitHub Actions, Jenkins",
+    "category": "CI/CD, GitHub Actions, Jenkins",
+    "questionType": "Scenario",
+    "question": "When would you reopen a PR, and how would you do it?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD, GitHub Actions, Jenkins",
+    "category": "CI/CD, GitHub Actions, Jenkins",
+    "questionType": "Conceptual",
+    "question": "In GitHub Actions, how would you add a manual approval between terraform plan and terraform apply?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD, GitHub Actions, Jenkins",
+    "category": "CI/CD, GitHub Actions, Jenkins",
+    "questionType": "Conceptual",
+    "question": "In what format does the end user/reviewer provide approval?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD, GitHub Actions, Jenkins",
+    "category": "CI/CD, GitHub Actions, Jenkins",
+    "questionType": "Conceptual",
+    "question": "Can approval notifications be integrated with email, Slack, or Teams?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD, GitHub Actions, Jenkins",
+    "category": "CI/CD, GitHub Actions, Jenkins",
+    "questionType": "Implementation / Workflow",
+    "question": "How does manual approval work in Jenkins?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD, GitHub Actions, Jenkins",
+    "category": "CI/CD, GitHub Actions, Jenkins",
+    "questionType": "Scenario",
+    "question": "If Jenkins accepts Approve and Deny but someone enters Okay, what happens?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD, GitHub Actions, Jenkins",
+    "category": "CI/CD, GitHub Actions, Jenkins",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you restrict Jenkins approval input to only valid values?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Artifacts, JFrog, Nexus, ECR",
+    "category": "Artifacts, JFrog, Nexus, ECR",
+    "questionType": "Comparison",
+    "question": "If a pipeline generates an artifact and you need to store it externally, would you choose Nexus or JFrog Artifactory?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Artifacts, JFrog, Nexus, ECR",
+    "category": "Artifacts, JFrog, Nexus, ECR",
+    "questionType": "Conceptual",
+    "question": "After building and tagging a Docker image, how do you verify connectivity between the pipeline and JFrog?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Artifacts, JFrog, Nexus, ECR",
+    "category": "Artifacts, JFrog, Nexus, ECR",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you authenticate and push a Docker image to JFrog Artifactory?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Artifacts, JFrog, Nexus, ECR",
+    "category": "Artifacts, JFrog, Nexus, ECR",
+    "questionType": "Conceptual",
+    "question": "What does “build once, promote many” mean in an artifact-management strategy?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "category": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you deploy a public-facing static website in AWS?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "category": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "questionType": "Conceptual",
+    "question": "Do you require ACM when using S3?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "category": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "questionType": "Scenario",
+    "question": "If a custom domain is required, what additional AWS services would you use?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "category": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "questionType": "Conceptual",
+    "question": "From a security standpoint, how would you secure a public-facing static website?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "category": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "questionType": "Implementation / Workflow",
+    "question": "How does CloudFront help with security apart from being a CDN?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "category": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "questionType": "Implementation / Workflow",
+    "question": "How does an SSL/TLS certificate improve security?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "category": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "questionType": "Conceptual",
+    "question": "What type of ACM certificate would you use for a public custom domain?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "category": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you map the ACM certificate with CloudFront?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "category": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you map a custom domain to artifacts stored in S3?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "category": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "questionType": "Design / Architecture",
+    "question": "What is the complete request flow when a user opens a static website hosted using S3 and CloudFront?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "category": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "questionType": "Implementation / Workflow",
+    "question": "How does Route 53 participate in the request flow?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "category": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "questionType": "Scenario",
+    "question": "What happens when a user sends hundreds or thousands of requests continuously to the website?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "category": "AWS Static Website, S3, CloudFront, Route 53, ACM",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you protect the website from abusive traffic or DDoS-style request patterns?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "category": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "questionType": "Scenario",
+    "question": "A customer has a restrictive on-prem network and needs to access applications running in AWS. What connectivity services would you use?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "category": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "questionType": "Comparison",
+    "question": "When would you use Site-to-Site VPN versus Direct Connect?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "category": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "questionType": "Conceptual",
+    "question": "Where would AWS PrivateLink fit in this architecture?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "category": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "questionType": "Conceptual",
+    "question": "What are the other VPN types besides Site-to-Site VPN?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "category": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "questionType": "Comparison",
+    "question": "What is the difference between Site-to-Site VPN and AWS Client VPN?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "category": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "questionType": "Implementation / Workflow",
+    "question": "What inputs are required from the customer side to configure a Site-to-Site VPN?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "category": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "questionType": "Implementation / Workflow",
+    "question": "What inputs and components are required on the AWS side?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "category": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "questionType": "Conceptual",
+    "question": "Once the VPN tunnel is established, how does traffic flow inside AWS?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "category": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "questionType": "Conceptual",
+    "question": "How do route tables, Security Groups, NACLs, and internal load balancers participate in the request flow?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "category": "Hybrid Connectivity, VPN, On-Prem to AWS",
+    "questionType": "Implementation / Workflow",
+    "question": "What should be verified for the return traffic from AWS back to on-prem?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Experience",
+    "question": "Are you comfortable writing Terraform scripts?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Experience",
+    "question": "Have you worked with Terraform modules?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you create 10 EC2 instances using Terraform?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Comparison",
+    "question": "When would you use count versus for_each?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Scenario",
+    "question": "If you use modules, how do you pass a value from one Terraform module to another?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you pass an output from a VPC module into an EC2 module?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Conceptual",
+    "question": "From parent/root module to child module, what mechanism do you use to pass values?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Scenario",
+    "question": "If dev, QA, and prod use the same Terraform code but different values, how do you segregate those values?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you pass environment-specific values during provisioning?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you separate Terraform state for dev, QA, and prod?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Scenario",
+    "question": "If a variable has a default value in variables.tf and a different value in .tfvars, which one is used?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Scenario",
+    "question": "What happens if the same variable is explicitly set to an empty string \"\" in .tfvars?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "Where do you store your Terraform backend/state file?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Troubleshooting",
+    "question": "What happens if a Terraform state file in a GCS bucket is accidentally deleted and object versioning is not enabled?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Troubleshooting",
+    "question": "How would you recover from a deleted Terraform state file?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Conceptual",
+    "question": "What preventive controls would you enable for Terraform state?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Conceptual",
+    "question": "What deployment strategy do you use for Kubernetes applications?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Implementation / Workflow",
+    "question": "How does Blue-Green deployment work?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Conceptual",
+    "question": "In Blue-Green deployment, how is traffic switched from Blue to Green?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Scenario",
+    "question": "If you use a LoadBalancer Service, can you switch Blue to Green using labels and selectors?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you switch traffic using an Ingress manifest?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you achieve zero downtime during Blue-Green deployment?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Conceptual",
+    "question": "Is maxUnavailable relevant to Blue-Green deployment?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Conceptual",
+    "question": "From the end-user perspective, how does the request flow while switching from Blue to Green?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Conceptual",
+    "question": "During the switchover, what happens to requests before the Ingress routing update is complete?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Conceptual",
+    "question": "What exactly do you change in the Ingress to move traffic from Blue to Green?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Experience",
+    "question": "In your environment, what are you doing to switch traffic from Blue to Green?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Conceptual",
+    "question": "What Kubernetes services or mechanisms have you used to expose applications?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Experience",
+    "question": "Have you used Istio?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Experience",
+    "question": "What was your use case for Istio?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Conceptual",
+    "question": "Can Istio send controlled traffic to multiple versions of an application?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Scenario",
+    "question": "If there is only one version of an application receiving 100% traffic, do you still need Istio?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Conceptual",
+    "question": "Even with one application version, what are valid Istio use cases?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Deployment Strategies",
+    "category": "Kubernetes Deployment Strategies",
+    "questionType": "Conceptual",
+    "question": "How can Istio help with mTLS, authorization, retries, timeouts, circuit breaking, and observability?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "You scale a ReplicaSet from 3 to 5. The 4th pod comes up, but the 5th pod remains Pending. How would you troubleshoot it?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "What commands would you use first to investigate a Pending pod?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "If CPU and memory are available, what other reasons can cause a pod to remain Pending?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "Can image pull issues, PVC issues, taints/tolerations, affinity rules, or quotas cause pod startup problems?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "Can maximum pod limits or IP exhaustion cause a pod to remain Pending?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you identify IP exhaustion in EKS?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Scenario",
+    "question": "If pod IPs are exhausted, what would be your immediate mitigation?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "What is the long-term fix for EKS pod IP exhaustion?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "Would deleting or restarting pods solve real subnet IP exhaustion?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How can subnet sizing and VPC CNI configuration help avoid IP exhaustion?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Scenario",
+    "question": "If the current cluster CIDR is insufficient, how would you migrate to a new cluster?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "Do you migrate Kubernetes nodes from one cluster to another?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Scenario",
+    "question": "If not, what exactly gets migrated?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you gradually move workloads and traffic from the old cluster to the new cluster?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "What additional planning is required for stateful workloads during cluster migration?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project & Architecture",
+    "category": "Project & Architecture",
+    "questionType": "Experience",
+    "question": "Tell me about your current/last project."
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project & Architecture",
+    "category": "Project & Architecture",
+    "questionType": "Conceptual",
+    "question": "What are your day-to-day activities related to GCP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project & Architecture",
+    "category": "Project & Architecture",
+    "questionType": "Conceptual",
+    "question": "What kind of application are you supporting?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project & Architecture",
+    "category": "Project & Architecture",
+    "questionType": "Conceptual",
+    "question": "Where is the application hosted?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project & Architecture",
+    "category": "Project & Architecture",
+    "questionType": "Conceptual",
+    "question": "Is the application internet-facing or internal-facing?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project & Architecture",
+    "category": "Project & Architecture",
+    "questionType": "Conceptual",
+    "question": "Is it a web application or an API?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project & Architecture",
+    "category": "Project & Architecture",
+    "questionType": "Conceptual",
+    "question": "How do consumers access your application?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project & Architecture",
+    "category": "Project & Architecture",
+    "questionType": "Design / Architecture",
+    "question": "Explain the complete end-to-end architecture of your project."
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project & Architecture",
+    "category": "Project & Architecture",
+    "questionType": "Experience",
+    "question": "Have you designed or hosted a complete application end to end?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project & Architecture",
+    "category": "Project & Architecture",
+    "questionType": "Conceptual",
+    "question": "What kind of application did you host?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project & Architecture",
+    "category": "Project & Architecture",
+    "questionType": "Conceptual",
+    "question": "Which GCP services did you use for end-to-end application hosting?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Application Exposure & Security",
+    "category": "Application Exposure & Security",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you expose your application outside GCP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Application Exposure & Security",
+    "category": "Application Exposure & Security",
+    "questionType": "Implementation / Workflow",
+    "question": "How does a user access www.platform.com?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Application Exposure & Security",
+    "category": "Application Exposure & Security",
+    "questionType": "Conceptual",
+    "question": "How is Cloud DNS configured with the load balancer?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Application Exposure & Security",
+    "category": "Application Exposure & Security",
+    "questionType": "Design / Architecture",
+    "question": "How does traffic flow from the global load balancer to GKE?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Application Exposure & Security",
+    "category": "Application Exposure & Security",
+    "questionType": "Conceptual",
+    "question": "Where does Cloud Armor sit in the traffic flow?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Application Exposure & Security",
+    "category": "Application Exposure & Security",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you ensure that only legitimate users access your application?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Application Exposure & Security",
+    "category": "Application Exposure & Security",
+    "questionType": "Implementation / Workflow",
+    "question": "Where do you apply access restrictions?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Application Exposure & Security",
+    "category": "Application Exposure & Security",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you identify whether a request/user is legitimate?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Application Exposure & Security",
+    "category": "Application Exposure & Security",
+    "questionType": "Conceptual",
+    "question": "What Cloud Armor rules have you configured?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Application Exposure & Security",
+    "category": "Application Exposure & Security",
+    "questionType": "Implementation / Workflow",
+    "question": "How does HTTPS/TLS termination happen?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Application Exposure & Security",
+    "category": "Application Exposure & Security",
+    "questionType": "Implementation / Workflow",
+    "question": "How does the load balancer reach the application pods?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Application Exposure & Security",
+    "category": "Application Exposure & Security",
+    "questionType": "Conceptual",
+    "question": "What is the role of NEG in GKE load balancing?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Application Exposure & Security",
+    "category": "Application Exposure & Security",
+    "questionType": "Conceptual",
+    "question": "How do microservices communicate internally?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Application Exposure & Security",
+    "category": "Application Exposure & Security",
+    "questionType": "Implementation / Workflow",
+    "question": "How does the application connect to the database?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "Which GCP networking components have you worked on?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Scenario",
+    "question": "When and where did you implement those networking components?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Experience",
+    "question": "Have you worked with VPCs?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Experience",
+    "question": "Have you worked with subnets?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Experience",
+    "question": "Have you worked with firewall rules?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Experience",
+    "question": "Have you worked with network tags?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Experience",
+    "question": "Have you worked with routes?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you design a GCP network architecture with full centralized control?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you keep all networking resources in one project?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "What is a Shared VPC Host Project?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "What is a Service Project?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "Which networking resources would you keep in the Host Project?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "How do service projects consume Shared VPC subnets?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "What IAM permissions are required for Shared VPC?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Comparison",
+    "question": "What is the difference between Shared VPC and VPC Peering?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "What is Private Service Connect?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Comparison",
+    "question": "When would you use PSC instead of VPC Peering?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "What is Private Service Access?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "What is Private Google Access?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "What is Cloud NAT?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "Why would you use Cloud NAT?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "What is Cloud Router?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "What is BGP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "What is a hierarchical firewall policy?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you centrally control firewall rules across projects?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Conceptual",
+    "question": "What is VPC Flow Logs used for?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you plan CIDR ranges?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Networking",
+    "category": "GCP Networking",
+    "questionType": "Scenario",
+    "question": "What happens if GCP and on-prem CIDR ranges overlap?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project-to-Project Connectivity",
+    "category": "Project-to-Project Connectivity",
+    "questionType": "Scenario",
+    "question": "If you have two GCP projects, can they communicate by default?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project-to-Project Connectivity",
+    "category": "Project-to-Project Connectivity",
+    "questionType": "Conceptual",
+    "question": "Can resources in two separate VPCs communicate privately by default?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project-to-Project Connectivity",
+    "category": "Project-to-Project Connectivity",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you establish connectivity between two GCP projects?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project-to-Project Connectivity",
+    "category": "Project-to-Project Connectivity",
+    "questionType": "Conceptual",
+    "question": "Would you use Shared VPC, VPC Peering, or PSC?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project-to-Project Connectivity",
+    "category": "Project-to-Project Connectivity",
+    "questionType": "Conceptual",
+    "question": "Even after network connectivity is established, what other controls are required?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project-to-Project Connectivity",
+    "category": "Project-to-Project Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do firewall rules affect project-to-project communication?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project-to-Project Connectivity",
+    "category": "Project-to-Project Connectivity",
+    "questionType": "Implementation / Workflow",
+    "question": "How does IAM differ from network connectivity?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you connect an on-premises network to GCP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Conceptual",
+    "question": "How would on-prem users access GCP applications privately?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Conceptual",
+    "question": "How would an on-prem application connect to a GCP application?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Comparison",
+    "question": "Would you choose VPN or Cloud Interconnect?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Conceptual",
+    "question": "What is HA VPN?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you configure HA VPN?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Conceptual",
+    "question": "How many interfaces does an HA VPN gateway have?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you create VPN tunnels between on-prem and GCP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Conceptual",
+    "question": "What protocol is used for the VPN tunnel?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Conceptual",
+    "question": "What is the role of Cloud Router in VPN connectivity?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Conceptual",
+    "question": "How is BGP configured between GCP and on-prem?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Conceptual",
+    "question": "How are routes exchanged between on-prem and GCP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Conceptual",
+    "question": "What is an ASN?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Scenario",
+    "question": "What happens if one VPN tunnel goes down?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Comparison",
+    "question": "Why would you choose HA VPN over Classic VPN?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Conceptual",
+    "question": "What is Dedicated Interconnect?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Conceptual",
+    "question": "What is Partner Interconnect?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Experience",
+    "question": "Have you worked with third-party connectivity providers such as Megaport?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Scenario",
+    "question": "When would you use Partner Interconnect?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Scenario",
+    "question": "When would you use Dedicated Interconnect?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Conceptual",
+    "question": "Can VPN be used as a backup for Interconnect?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you expose an internal GCP application to on-prem users?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you configure DNS between on-prem and GCP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Hybrid Connectivity / On-Prem to GCP",
+    "category": "Hybrid Connectivity / On-Prem to GCP",
+    "questionType": "Conceptual",
+    "question": "What firewall rules would you configure for hybrid connectivity?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Experience",
+    "question": "What activities do you perform on GKE?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you provision a GKE cluster?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "Do you provision GKE using Terraform?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What do you configure while provisioning a GKE cluster?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you create namespaces?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you deploy applications to GKE?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you deploy using Helm?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What are the different GKE cluster modes?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What is GKE Standard?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What is GKE Autopilot?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Comparison",
+    "question": "What is the difference between Standard and Autopilot?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "Is autoscaler a GKE cluster type?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What is HPA?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What is VPA?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What is Cluster Autoscaler?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Comparison",
+    "question": "What is the difference between HPA, VPA, and Cluster Autoscaler?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What are node pools?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What are taints and tolerations?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What are labels and selectors?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What is Workload Identity?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What is a private GKE cluster?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Comparison",
+    "question": "What is the difference between zonal and regional GKE clusters?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Comparison",
+    "question": "Which type of GKE cluster would you prefer for production?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "How do pods communicate inside GKE?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What is a Kubernetes Service?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What is Ingress?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What is Gateway API?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "What is a Network Endpoint Group?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Conceptual",
+    "question": "How do readiness and liveness probes work?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot a pod that is Pending?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot CrashLoopBackOff?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you handle pod scaling?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GKE & Kubernetes",
+    "category": "GKE & Kubernetes",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you handle node scaling?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Experience",
+    "question": "Have you worked with Google Artifact Registry?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Conceptual",
+    "question": "What is Artifact Registry used for?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you use Artifact Registry in your project?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you build Docker images?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you push Docker images to Artifact Registry?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Implementation / Workflow",
+    "question": "How does GKE pull images from Artifact Registry?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Conceptual",
+    "question": "Can you use a normal docker pull command for Artifact Registry?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Conceptual",
+    "question": "Do you need any GCP-specific authentication before Docker pull?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Conceptual",
+    "question": "What does gcloud auth configure-docker do?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Conceptual",
+    "question": "What does an Artifact Registry image URL look like?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you tag Docker images?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Conceptual",
+    "question": "Why should you avoid using latest in production?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Implementation / Workflow",
+    "question": "Which IAM roles are required to push images?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Implementation / Workflow",
+    "question": "Which IAM roles are required to pull images?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Comparison",
+    "question": "Why use Artifact Registry instead of Docker Hub?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Docker & Artifact Registry",
+    "category": "Docker & Artifact Registry",
+    "questionType": "Conceptual",
+    "question": "What artifact types can Artifact Registry store apart from Docker images?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Experience",
+    "question": "Which tool do you use for infrastructure deployment?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Experience",
+    "question": "Which tool do you use for application deployment?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Conceptual",
+    "question": "Are both infrastructure and application deployments done through Jenkins?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Conceptual",
+    "question": "Why do you use Bitbucket Pipelines for infrastructure and Jenkins for applications?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Conceptual",
+    "question": "Explain your Jenkins application deployment pipeline."
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How does Jenkins build the application?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How does Jenkins build the Docker image?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How does Jenkins push the image to Artifact Registry?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How does Jenkins authenticate to GCP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How does Jenkins authenticate to GKE?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you retrieve GKE cluster credentials?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Conceptual",
+    "question": "What does gcloud container clusters get-credentials do?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How does Jenkins execute kubectl commands?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How does Jenkins deploy using Helm?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you update the Docker image tag during deployment?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you verify the rollout after deployment?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins & CI/CD",
+    "category": "Jenkins & CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you roll back an unsuccessful deployment?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins Credentials / Service Account",
+    "category": "Jenkins Credentials / Service Account",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you configure a GCP service account in Jenkins?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins Credentials / Service Account",
+    "category": "Jenkins Credentials / Service Account",
+    "questionType": "Experience",
+    "question": "Do you use Jenkins Credentials Manager?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins Credentials / Service Account",
+    "category": "Jenkins Credentials / Service Account",
+    "questionType": "Conceptual",
+    "question": "Which credential type do you use for a GCP JSON key?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins Credentials / Service Account",
+    "category": "Jenkins Credentials / Service Account",
+    "questionType": "Conceptual",
+    "question": "What is a Secret File credential?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins Credentials / Service Account",
+    "category": "Jenkins Credentials / Service Account",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you reference credentials in a Jenkinsfile?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins Credentials / Service Account",
+    "category": "Jenkins Credentials / Service Account",
+    "questionType": "Conceptual",
+    "question": "What is withCredentials?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins Credentials / Service Account",
+    "category": "Jenkins Credentials / Service Account",
+    "questionType": "Conceptual",
+    "question": "Should service-account keys be hardcoded in Jenkinsfile?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins Credentials / Service Account",
+    "category": "Jenkins Credentials / Service Account",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you protect GCP credentials in Jenkins?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins Credentials / Service Account",
+    "category": "Jenkins Credentials / Service Account",
+    "questionType": "Conceptual",
+    "question": "What permissions should the Jenkins service account have?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins Credentials / Service Account",
+    "category": "Jenkins Credentials / Service Account",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you restrict Jenkins access to a particular Kubernetes namespace?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins Credentials / Service Account",
+    "category": "Jenkins Credentials / Service Account",
+    "questionType": "Conceptual",
+    "question": "What is Kubernetes RBAC?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins Credentials / Service Account",
+    "category": "Jenkins Credentials / Service Account",
+    "questionType": "Conceptual",
+    "question": "Can Jenkins authenticate to GCP without a service-account key?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins Credentials / Service Account",
+    "category": "Jenkins Credentials / Service Account",
+    "questionType": "Conceptual",
+    "question": "What is Workload Identity Federation?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins Credentials / Service Account",
+    "category": "Jenkins Credentials / Service Account",
+    "questionType": "Conceptual",
+    "question": "Why is keyless authentication better than long-lived JSON keys?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Conceptual",
+    "question": "Which Infrastructure-as-Code tool do you use?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Experience",
+    "question": "Are you using Terraform or a GCP-native IaC tool?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "Where do you execute Terraform?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Experience",
+    "question": "Are you using Terraform Enterprise?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Conceptual",
+    "question": "What is the biggest Terraform challenge you have faced in GCP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Experience",
+    "question": "Have you faced Terraform provider and GCP API compatibility issues?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Experience",
+    "question": "Have you faced cases where Terraform says a feature is supported but GCP has restrictions?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you handle a GCP feature that Terraform does not yet support?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you handle Terraform provider upgrades?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you handle deprecated Terraform arguments?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you update reusable Terraform modules?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you prevent a provider upgrade from breaking production?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you pin Terraform provider versions?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you test Terraform upgrades?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Conceptual",
+    "question": "What is Terraform drift?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you detect manual changes made in GCP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you reconcile infrastructure drift?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Conceptual",
+    "question": "What do you do if the security team requires a configuration unsupported by Terraform?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Experience",
+    "question": "Have you worked with SSL/TLS policies through Terraform?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Experience",
+    "question": "Have you faced GCP API limitations while configuring TLS/cipher suites?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Experience",
+    "question": "Have you worked with Terraform for Cloud SQL/AlloyDB?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Experience",
+    "question": "Have you faced issues enabling Query Insights or similar features?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform Import",
+    "category": "Terraform Import",
+    "questionType": "Scenario",
+    "question": "Suppose a resource was manually created in GCP. How do you bring it under Terraform management?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform Import",
+    "category": "Terraform Import",
+    "questionType": "Conceptual",
+    "question": "What is terraform import?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform Import",
+    "category": "Terraform Import",
+    "questionType": "Conceptual",
+    "question": "Does terraform import recreate the resource?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform Import",
+    "category": "Terraform Import",
+    "questionType": "Implementation / Workflow",
+    "question": "What should you do before importing an existing resource?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform Import",
+    "category": "Terraform Import",
+    "questionType": "Implementation / Workflow",
+    "question": "What should you do after terraform import?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform Import",
+    "category": "Terraform Import",
+    "questionType": "Conceptual",
+    "question": "Why should you run terraform plan after importing?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform Import",
+    "category": "Terraform Import",
+    "questionType": "Scenario",
+    "question": "What happens if Terraform code does not match the imported resource?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform Import",
+    "category": "Terraform Import",
+    "questionType": "Conceptual",
+    "question": "What is a Terraform import block?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform Import",
+    "category": "Terraform Import",
+    "questionType": "Conceptual",
+    "question": "What was introduced around Terraform 1.5 for importing resources?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Implementation / Workflow",
+    "question": "Where do you store your Terraform state?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Conceptual",
+    "question": "Do you store state in GCS?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Conceptual",
+    "question": "Why use remote Terraform state?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you configure a GCS backend?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Implementation / Workflow",
+    "question": "How does Terraform state locking work?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you prevent two pipelines from updating the same state?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you secure the Terraform state bucket?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Conceptual",
+    "question": "Who should have access to the state bucket?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Conceptual",
+    "question": "Can Terraform state contain sensitive information?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you protect state from accidental deletion?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Conceptual",
+    "question": "Do you back up Terraform state?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Conceptual",
+    "question": "Do you enable GCS Object Versioning?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Conceptual",
+    "question": "What is GCS soft delete?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Conceptual",
+    "question": "What would you do if the Terraform state file became corrupted?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Troubleshooting",
+    "question": "How would you restore a previous state version?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Implementation / Workflow",
+    "question": "What should you do before restoring state?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Implementation / Workflow",
+    "question": "What should you do after restoring state?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you verify restored state against actual GCP resources?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Conceptual",
+    "question": "Why should you run terraform plan after state recovery?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform State",
+    "category": "Terraform State",
+    "questionType": "Comparison",
+    "question": "What is the difference between state locking and state backup/versioning?"
+  }
+]

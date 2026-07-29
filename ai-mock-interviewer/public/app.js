@@ -25,6 +25,8 @@ const els = {
   role: document.querySelector("#role"),
   level: document.querySelector("#level"),
   topic: document.querySelector("#topic"),
+  activeTopicBanner: document.querySelector("#activeTopicBanner"),
+  activeTopicName: document.querySelector("#activeTopicName"),
   cvText: document.querySelector("#cvText"),
   cvPdf: document.querySelector("#cvPdf"),
   importCvFile: document.querySelector("#importCvFile"),
@@ -85,11 +87,16 @@ const els = {
   mediaPermissionBackdrop: document.querySelector("#mediaPermissionBackdrop"),
   allowMediaPermissions: document.querySelector("#allowMediaPermissions"),
   skipMediaPermissions: document.querySelector("#skipMediaPermissions"),
-  cameraPermissionState: document.querySelector("#cameraPermissionState"),
-  micPermissionState: document.querySelector("#micPermissionState"),
-  audioPermissionState: document.querySelector("#audioPermissionState"),
   mediaPermissionMessage: document.querySelector("#mediaPermissionMessage"),
-  permissionAccent: document.querySelector("#permissionAccent")
+  permissionAccent: document.querySelector("#permissionAccent"),
+  micDeviceSelect: document.querySelector("#micDeviceSelect"),
+  speakerDeviceSelect: document.querySelector("#speakerDeviceSelect"),
+  cameraDeviceSelect: document.querySelector("#cameraDeviceSelect"),
+  videoDeviceToggle: document.querySelector("#videoDeviceToggle"),
+  videoToggleLabel: document.querySelector("#videoToggleLabel"),
+  devicePreviewVideo: document.querySelector("#devicePreviewVideo"),
+  devicePreviewPlaceholder: document.querySelector("#devicePreviewPlaceholder"),
+  devicePreviewBadge: document.querySelector("#devicePreviewBadge")
 };
 
 const STORAGE_KEY = "aiMockInterviewerState";
@@ -159,6 +166,9 @@ const roleProfiles = {
   mlops: { role: "Senior MLOps Engineer", technology: "mlops", focus: "Python, MLflow, Kubeflow, Vertex AI, training pipelines, feature stores, model registry, model serving, drift monitoring, Kubernetes, CI/CD for ML" }
 };
 let selectedCareerProfile = "";
+let selectedInterviewTopics = [];
+const serverInterviewId = new URLSearchParams(window.location.search).get("id");
+let currentServerQuestionId = null;
 
 function syncCareerTracks(activeProfile = "") {
   els.careerTracks.forEach((track) => {
@@ -166,6 +176,14 @@ function syncCareerTracks(activeProfile = "") {
     track.classList.toggle("active", active);
     track.setAttribute("aria-pressed", String(active));
   });
+}
+
+function syncActiveTopicBanner() {
+  if (!els.activeTopicBanner || !els.activeTopicName) return;
+  const isTopicOnly = selectedCareerProfile === "custom-topic";
+  const topic = els.topic.value.trim();
+  els.activeTopicBanner.hidden = !isTopicOnly || !topic;
+  els.activeTopicName.textContent = topic;
 }
 
 function applyRoleProfile(profileKey) {
@@ -176,11 +194,15 @@ function applyRoleProfile(profileKey) {
   els.technology.value = profile.technology;
   selectedCareerProfile = profileKey;
   syncCareerTracks(profileKey);
+  syncActiveTopicBanner();
   els.technology.dispatchEvent(new Event("change"));
 }
 const defaultTargetSkills = `Target role family: Senior GCP DevOps / SRE / Cloud Engineer / Platform Engineer / Cloud Reliability Engineer / ML Platform Engineer
-Experience level: 6-8 years
-Target companies: Google-style interviews and product companies
+Actual experience: 7 years
+Interview calibration: questions and evaluation should match the architecture depth, production ownership, ambiguity handling, cross-team leadership, and trade-off analysis commonly expected from 10-15 year candidates. Never claim more than 7 years of actual experience.
+Compensation target: ₹25 LPA
+Preparation window: 50 days
+Target companies: product companies and senior cloud/platform/SRE teams
 
 Core skills to test:
 
@@ -322,7 +344,7 @@ Instagram: https://www.instagram.com/iarsingh/
 Topmate: https://topmate.io/iamarsingh
 
 PROFESSIONAL SUMMARY
-Senior MLOps & Platform Engineer with nearly 7 years of experience designing, automating, and operating cloud-native infrastructure across GCP, AWS, and Azure. Experienced in building production-ready AI platforms using Kubernetes, Terraform, Vertex AI, MLflow, FastAPI, Docker, and GitOps, enabling scalable model deployment, infrastructure automation, and platform reliability. Skilled in Platform Engineering, Infrastructure as Code, and DevSecOps, delivering self-service cloud platforms, standardized landing zones, and automated deployment frameworks. Hands-on experience in LLMOps, RAG pipelines, GPU-accelerated inference, and model lifecycle management, bridging software engineering and intelligent automation.
+Senior MLOps & Platform Engineer with 7 years of experience designing, automating, and operating cloud-native infrastructure across GCP, AWS, and Azure. Experienced in building production-ready AI platforms using Kubernetes, Terraform, Vertex AI, MLflow, FastAPI, Docker, and GitOps, enabling scalable model deployment, infrastructure automation, and platform reliability. Skilled in Platform Engineering, Infrastructure as Code, and DevSecOps, delivering self-service cloud platforms, standardized landing zones, and automated deployment frameworks. Hands-on experience in LLMOps, RAG pipelines, GPU-accelerated inference, and model lifecycle management, bridging software engineering and intelligent automation.
 
 CORE COMPETENCIES
 DevOps & Platform Engineering, Cloud Platform Engineering, Kubernetes & Container Orchestration, Infrastructure as Code (Terraform Enterprise), CI/CD Automation & GitOps, Multi-Cloud Architecture (GCP, AWS, Azure), DevSecOps & Cloud Security Governance, Site Reliability Engineering (SRE), Observability & Performance Monitoring, MLOps & AI Infrastructure Engineering
@@ -1545,6 +1567,7 @@ let mockInterviewSets = [];
 let largeQuestionBank = [];
 let progressHistory = [];
 let customSkills = [];
+let cheatSheets = {};
 
 function createInterview(number) {
   return {
@@ -1585,64 +1608,168 @@ let micVisualizerContext = null;
 let micVisualizerAnalyser = null;
 let micVisualizerRaf = null;
 
-function setPermissionState(element, state, label) {
-  if (!element) return;
-  element.textContent = label;
-  element.dataset.state = state;
+const DEVICE_SELECTION_KEY = "aimiDeviceSelections";
+
+let deviceSetupStream = null;
+let selectedDeviceIds = { mic: "", speaker: "", camera: "" };
+
+function loadSavedDeviceSelections() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(DEVICE_SELECTION_KEY) || "{}");
+    selectedDeviceIds = { mic: saved.mic || "", speaker: saved.speaker || "", camera: saved.camera || "" };
+  } catch {
+    selectedDeviceIds = { mic: "", speaker: "", camera: "" };
+  }
+}
+
+function saveDeviceSelections() {
+  localStorage.setItem(DEVICE_SELECTION_KEY, JSON.stringify(selectedDeviceIds));
+}
+
+function populateDeviceSelect(select, devices, kind, fallbackLabel) {
+  if (!select) return;
+  const matches = devices.filter((device) => device.kind === kind);
+  const previousValue = select.value;
+  select.innerHTML = "";
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = fallbackLabel;
+  select.appendChild(defaultOption);
+  matches.forEach((device, index) => {
+    const option = document.createElement("option");
+    option.value = device.deviceId;
+    option.textContent = device.label || `${fallbackLabel.replace("Default ", "")} ${index + 1}`;
+    select.appendChild(option);
+  });
+  const remembered = kind === "audioinput" ? selectedDeviceIds.mic : kind === "audiooutput" ? selectedDeviceIds.speaker : selectedDeviceIds.camera;
+  if (remembered && matches.some((device) => device.deviceId === remembered)) {
+    select.value = remembered;
+  } else if (previousValue && matches.some((device) => device.deviceId === previousValue)) {
+    select.value = previousValue;
+  }
+  select.disabled = matches.length === 0;
+}
+
+async function refreshDeviceLists() {
+  if (!navigator.mediaDevices?.enumerateDevices) return;
+  try {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    populateDeviceSelect(els.micDeviceSelect, devices, "audioinput", "Default microphone");
+    populateDeviceSelect(els.speakerDeviceSelect, devices, "audiooutput", "Default speaker");
+    populateDeviceSelect(els.cameraDeviceSelect, devices, "videoinput", "Default camera");
+  } catch {
+    /* enumeration failed - leave defaults in place */
+  }
+}
+
+function stopDeviceSetupStream() {
+  if (deviceSetupStream) {
+    deviceSetupStream.getTracks().forEach((track) => track.stop());
+    deviceSetupStream = null;
+  }
+}
+
+async function startDevicePreview() {
+  if (!navigator.mediaDevices?.getUserMedia) {
+    els.mediaPermissionMessage.textContent = "Camera and microphone access is not supported in this browser.";
+    return;
+  }
+  stopDeviceSetupStream();
+  const videoOn = !!els.videoDeviceToggle?.checked;
+  const audioConstraint = selectedDeviceIds.mic ? { deviceId: { exact: selectedDeviceIds.mic } } : true;
+  const videoConstraint = videoOn
+    ? (selectedDeviceIds.camera ? { deviceId: { exact: selectedDeviceIds.camera } } : true)
+    : false;
+
+  try {
+    els.mediaPermissionMessage.textContent = "Approve the camera and microphone request in your browser.";
+    deviceSetupStream = await navigator.mediaDevices.getUserMedia({ audio: audioConstraint, video: videoConstraint });
+
+    if (videoOn && deviceSetupStream.getVideoTracks().length) {
+      els.devicePreviewVideo.srcObject = deviceSetupStream;
+      els.devicePreviewVideo.hidden = false;
+      if (els.devicePreviewPlaceholder) els.devicePreviewPlaceholder.hidden = true;
+      if (els.devicePreviewBadge) els.devicePreviewBadge.hidden = false;
+    } else {
+      els.devicePreviewVideo.srcObject = null;
+      els.devicePreviewVideo.hidden = true;
+      if (els.devicePreviewPlaceholder) {
+        els.devicePreviewPlaceholder.hidden = false;
+        els.devicePreviewPlaceholder.textContent = videoOn ? "No camera found" : "Video is off";
+      }
+      if (els.devicePreviewBadge) els.devicePreviewBadge.hidden = true;
+    }
+
+    // Labels are only populated by the browser after permission is granted, so refresh once more.
+    await refreshDeviceLists();
+    localStorage.setItem(MEDIA_PERMISSION_KEY, "true");
+    els.mediaPermissionMessage.textContent = "Devices are ready. Choose your camera and microphone, then start when you're ready.";
+  } catch (error) {
+    const denied = error?.name === "NotAllowedError" || error?.name === "SecurityError";
+    if (els.devicePreviewPlaceholder) {
+      els.devicePreviewPlaceholder.hidden = false;
+      els.devicePreviewPlaceholder.textContent = denied ? "Camera access denied" : "Camera unavailable";
+    }
+    if (els.devicePreviewBadge) els.devicePreviewBadge.hidden = true;
+    els.mediaPermissionMessage.textContent = denied
+      ? "Access was not granted. You can enable camera and microphone later from your browser settings."
+      : "Devices could not be started. Confirm they are connected and not being used by another app.";
+  }
+}
+
+function applySpeakerSelection() {
+  if (typeof els.devicePreviewVideo?.setSinkId === "function" && selectedDeviceIds.speaker) {
+    els.devicePreviewVideo.setSinkId(selectedDeviceIds.speaker).catch(() => {});
+  }
 }
 
 async function requestInterviewMediaPermissions() {
-  if (!navigator.mediaDevices?.getUserMedia) {
-    els.mediaPermissionMessage.textContent = "Camera and microphone access is not supported in this browser.";
-    setPermissionState(els.cameraPermissionState, "blocked", "Unavailable");
-    setPermissionState(els.micPermissionState, "blocked", "Unavailable");
-    return;
-  }
-
-  setBusy(els.allowMediaPermissions, true, "Waiting for browser…");
-  els.mediaPermissionMessage.textContent = "Approve the camera and microphone request in your browser.";
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
-    const hasCamera = stream.getVideoTracks().length > 0;
-    const hasMic = stream.getAudioTracks().length > 0;
-    setPermissionState(els.cameraPermissionState, hasCamera ? "ready" : "blocked", hasCamera ? "Allowed" : "Not found");
-    setPermissionState(els.micPermissionState, hasMic ? "ready" : "blocked", hasMic ? "Allowed" : "Not found");
-    stream.getTracks().forEach((track) => track.stop());
-
-    let audioLabel = "Audio ready";
-    if (typeof navigator.mediaDevices.selectAudioOutput === "function") {
-      try {
-        const output = await navigator.mediaDevices.selectAudioOutput();
-        audioLabel = output?.label || "Output selected";
-      } catch {
-        audioLabel = "Default output";
-      }
-    } else {
-      const devices = await navigator.mediaDevices.enumerateDevices();
-      audioLabel = devices.some((device) => device.kind === "audiooutput") ? "Output found" : "Default output";
+  stopDeviceSetupStream();
+  if (els.videoDeviceToggle?.checked && selectedDeviceIds.camera) {
+    // Hand the chosen camera off to the real interview camera tile so the selection carries through.
+    try {
+      userMediaStream = await navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: selectedDeviceIds.camera } } });
+      if (els.userVideo) els.userVideo.srcObject = userMediaStream;
+      els.userTile?.classList.add("camera-on");
+      if (els.userTileState) els.userTileState.textContent = "Camera on";
+      if (els.toggleCamera) els.toggleCamera.textContent = "Disable camera";
+    } catch {
+      /* fall back to manual camera toggle inside the interview */
     }
-    setPermissionState(els.audioPermissionState, "ready", audioLabel);
-    els.mediaPermissionMessage.textContent = "Devices are ready. Your interview can now use voice, video, and question audio.";
-    localStorage.setItem(MEDIA_PERMISSION_KEY, "true");
-    setTimeout(() => { els.mediaPermissionBackdrop.hidden = true; }, 700);
-  } catch (error) {
-    const denied = error?.name === "NotAllowedError" || error?.name === "SecurityError";
-    setPermissionState(els.cameraPermissionState, "blocked", denied ? "Permission denied" : "Check failed");
-    setPermissionState(els.micPermissionState, "blocked", denied ? "Permission denied" : "Check failed");
-    setPermissionState(els.audioPermissionState, "ready", "Default output");
-    els.mediaPermissionMessage.textContent = denied
-      ? "Access was not granted. You can enable camera and microphone later from your browser settings."
-      : "Devices could not be checked. Confirm they are connected and not being used by another app.";
-  } finally {
-    setBusy(els.allowMediaPermissions, false, "Try device check again");
   }
+  els.mediaPermissionBackdrop.hidden = true;
 }
 
 function initializeMediaPermissionPrompt() {
   if (!els.mediaPermissionBackdrop) return;
   if (els.permissionAccent && els.micLanguage) els.permissionAccent.value = els.micLanguage.value || "en-IN";
-  els.mediaPermissionBackdrop.hidden = localStorage.getItem(MEDIA_PERMISSION_KEY) === "true";
+  loadSavedDeviceSelections();
+  const alreadySetUp = localStorage.getItem(MEDIA_PERMISSION_KEY) === "true";
+  els.mediaPermissionBackdrop.hidden = alreadySetUp;
+  if (!alreadySetUp) {
+    refreshDeviceLists();
+    startDevicePreview();
+  }
 }
+
+els.micDeviceSelect?.addEventListener("change", () => {
+  selectedDeviceIds.mic = els.micDeviceSelect.value;
+  saveDeviceSelections();
+});
+els.speakerDeviceSelect?.addEventListener("change", () => {
+  selectedDeviceIds.speaker = els.speakerDeviceSelect.value;
+  saveDeviceSelections();
+  applySpeakerSelection();
+});
+els.cameraDeviceSelect?.addEventListener("change", () => {
+  selectedDeviceIds.camera = els.cameraDeviceSelect.value;
+  saveDeviceSelections();
+  startDevicePreview();
+});
+els.videoDeviceToggle?.addEventListener("change", () => {
+  if (els.videoToggleLabel) els.videoToggleLabel.textContent = els.videoDeviceToggle.checked ? "On" : "Off";
+  startDevicePreview();
+});
 
 async function startMicVisualizer() {
   if (!els.micVisualizer || micVisualizerContext || !navigator.mediaDevices?.getUserMedia) return;
@@ -1781,7 +1908,8 @@ function saveState() {
     answerPause: els.answerPause.value,
     interviewMode: currentMode(),
     interviewerMood: els.interviewerMood?.value || "neutral",
-    careerProfile: selectedCareerProfile
+    careerProfile: selectedCareerProfile,
+    selectedTopics: selectedInterviewTopics
   };
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -1813,12 +1941,14 @@ function loadState() {
   }
   const shouldResetAnswers = saved.answerResetVersion !== ANSWER_RESET_VERSION;
   selectedCareerProfile = saved.careerProfile || "";
+  selectedInterviewTopics = Array.isArray(saved.selectedTopics) ? saved.selectedTopics : [];
   syncCareerTracks(selectedCareerProfile);
   els.role.value = saved.role || els.role.value;
   els.level.value = saved.level || els.level.value;
   els.topic.value = !saved.topic || saved.topic === els.topic.defaultValue
     ? defaultFocusAreas
     : saved.topic;
+  syncActiveTopicBanner();
   els.cvText.value = !saved.cvText || saved.cvText.includes("Paste the full CV text here")
     ? defaultCvText
     : saved.cvText;
@@ -2303,8 +2433,37 @@ function contextPayload() {
     cvText: els.cvText.value,
     jdText: els.jdText.value,
     interviewNumber,
-    mood: els.interviewerMood?.value || "neutral"
+    mood: els.interviewerMood?.value || "neutral",
+    topicOnly: selectedCareerProfile === "custom-topic",
+    allowedTopics: selectedInterviewTopics.length ? selectedInterviewTopics : [els.topic.value.trim()]
   };
+}
+
+async function loadServerInterview() {
+  if (!serverInterviewId) return;
+  let response = await fetch(`/api/v1/interviews/${encodeURIComponent(serverInterviewId)}`);
+  let data = await response.json();
+  if (!response.ok) throw new Error(data.error?.message || "Could not restore the interview.");
+  let interview = data.interview;
+  if (interview.status === "READY") {
+    response = await fetch(`/api/v1/interviews/${encodeURIComponent(serverInterviewId)}/start`, { method: "POST" });
+    data = await response.json();
+    if (!response.ok) throw new Error(data.error?.message || "Could not start the interview.");
+    interview = data.interview;
+  }
+  els.role.value = interview.role;
+  selectedCareerProfile = "custom-topic";
+  selectedInterviewTopics = interview.topics.map((topic) => topic.name);
+  els.topic.value = selectedInterviewTopics.join(", ");
+  els.technology.value = "all";
+  syncCareerTracks("");
+  syncActiveTopicBanner();
+  const latestQuestion = interview.questions[interview.questions.length - 1];
+  if (latestQuestion) {
+    currentServerQuestionId = latestQuestion.id;
+    setQuestionFromText(latestQuestion.question);
+  }
+  saveState();
 }
 
 const moodEmojis = { neutral: "😐", friendly: "🙂", strict: "🧐" };
@@ -2549,7 +2708,45 @@ function buildCustomJdMockQuestions() {
   ]).slice(0, 10);
 }
 
+function customTopicQuestionPool() {
+  const ignoredWords = new Set([
+    "about", "advanced", "and", "developer", "engineer", "engineering", "focus",
+    "for", "interview", "mock", "role", "senior", "specialist", "the", "with"
+  ]);
+  const topic = els.topic.value.trim();
+  const topicGroups = (selectedInterviewTopics.length ? selectedInterviewTopics : [topic]).map((entry) =>
+    [...new Set((entry.toLowerCase().match(/[a-z0-9+#.-]{3,}/g) || [])
+      .filter((word) => !ignoredWords.has(word)))]
+  ).filter((words) => words.length);
+  const candidates = uniqueQuestions([
+    ...specializedQuestions(),
+    ...largeQuestionBank.map((item) => item.question),
+    ...questionBank
+  ]);
+  const ranked = candidates
+    .map((question) => ({
+      question,
+      score: Math.max(0, ...topicGroups.map((words) => {
+        const matches = words.reduce((total, word) => total + (question.toLowerCase().includes(word) ? 1 : 0), 0);
+        const required = words.length > 1 ? 2 : 1;
+        return matches >= required ? matches : 0;
+      }))
+    }))
+    .filter((item) => item.score > 0)
+    .sort((left, right) => right.score - left.score);
+  const bestScore = ranked[0]?.score || 0;
+  const strictMatches = bestScore > 0
+    ? ranked.filter((item) => item.score === bestScore).map((item) => item.question)
+    : [];
+  return strictMatches.length ? strictMatches : [
+    `Topic focus — ${topic}: Explain the core concepts, then walk through a realistic production scenario, important trade-offs, troubleshooting signals, and best practices.`
+  ];
+}
+
 function questionPool() {
+  if (selectedCareerProfile === "custom-topic") {
+    return customTopicQuestionPool();
+  }
   if (els.technology.value.startsWith("custom-")) {
     return uniqueQuestions(customSkillById(els.technology.value)?.questions || []);
   }
@@ -2616,7 +2813,7 @@ async function loadPracticeSources() {
   }
 
   try {
-    const response = await fetch("/30-day-plan.json");
+    const response = await fetch("/50-day-plan.json");
     practicePlan = await response.json();
     for (const day of practicePlan) {
       const option = document.createElement("option");
@@ -2649,6 +2846,102 @@ async function loadPracticeSources() {
   } catch {
     mockInterviewSets = [];
   }
+
+  try {
+    const response = await fetch("/cheat-sheets.json");
+    cheatSheets = await response.json();
+  } catch {
+    cheatSheets = {};
+  }
+}
+
+// Quick reference for last-minute review: open DevTools during a session and run
+// cheatSheet() to list topics, or cheatSheet('kubernetes') for one topic's key points.
+window.cheatSheet = function (topic) {
+  const topics = Object.keys(cheatSheets);
+  if (!topics.length) {
+    console.warn("Cheat sheets not loaded yet - try again in a moment.");
+    return;
+  }
+  if (!topic) {
+    console.log("%cAvailable cheat sheet topics:", "font-weight: bold");
+    console.table(topics.map((key) => ({ topic: key, label: cheatSheets[key].label })));
+    console.log("Run cheatSheet('<topic>') for one, e.g. cheatSheet('kubernetes').");
+    return;
+  }
+  const key = topics.find((k) => k === topic || k.toLowerCase() === String(topic).toLowerCase());
+  const entry = key ? cheatSheets[key] : null;
+  if (!entry) {
+    console.warn(`No cheat sheet for "${topic}". Available topics: ${topics.join(", ")}`);
+    return;
+  }
+  console.log(`%c${entry.label} cheat sheet`, "font-weight: bold; font-size: 13px;");
+  entry.points.forEach((point) => console.log(`• ${point}`));
+};
+
+const cheatSheetBackdrop = document.querySelector("#cheatSheetBackdrop");
+const cheatSheetTopicsEl = document.querySelector("#cheatSheetTopics");
+const cheatSheetPointsEl = document.querySelector("#cheatSheetPoints");
+let cheatSheetActiveTopic = null;
+
+function renderCheatSheetTopics() {
+  const topics = Object.keys(cheatSheets);
+  if (!cheatSheetActiveTopic || !cheatSheets[cheatSheetActiveTopic]) {
+    cheatSheetActiveTopic = topics[0] || null;
+  }
+  cheatSheetTopicsEl.innerHTML = topics
+    .map((key) => `
+      <button class="cheat-sheet-topic-btn${key === cheatSheetActiveTopic ? " active" : ""}" type="button" data-topic="${key}">
+        ${escapeHtml(cheatSheets[key].label)}
+      </button>
+    `)
+    .join("");
+  renderCheatSheetPoints();
+}
+
+function renderCheatSheetPoints() {
+  const entry = cheatSheetActiveTopic ? cheatSheets[cheatSheetActiveTopic] : null;
+  if (!entry) {
+    cheatSheetPointsEl.innerHTML = `<p class="cheat-sheet-empty">No cheat sheet topics loaded yet.</p>`;
+    return;
+  }
+  cheatSheetPointsEl.innerHTML = `
+    <h3>${escapeHtml(entry.label)}</h3>
+    <ul>${entry.points.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}</ul>
+  `;
+}
+
+function openCheatSheet() {
+  if (!cheatSheetBackdrop) return;
+  cheatSheetBackdrop.classList.add("open");
+  renderCheatSheetTopics();
+}
+
+function closeCheatSheet() {
+  cheatSheetBackdrop?.classList.remove("open");
+}
+
+if (cheatSheetBackdrop) {
+  document.querySelector("#openCheatSheet")?.addEventListener("click", openCheatSheet);
+
+  cheatSheetBackdrop.addEventListener("click", (event) => {
+    if (event.target === cheatSheetBackdrop) closeCheatSheet();
+  });
+
+  cheatSheetBackdrop.querySelector('[data-action="close-cheat-sheet"]')?.addEventListener("click", closeCheatSheet);
+
+  cheatSheetTopicsEl.addEventListener("click", (event) => {
+    const button = event.target.closest(".cheat-sheet-topic-btn");
+    if (!button) return;
+    cheatSheetActiveTopic = button.dataset.topic;
+    renderCheatSheetTopics();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && cheatSheetBackdrop.classList.contains("open")) {
+      closeCheatSheet();
+    }
+  });
 }
 
 function questionKey(question) {
@@ -2863,7 +3156,7 @@ async function api(path, payload) {
     body: JSON.stringify(payload)
   });
   const data = await response.json();
-  if (!response.ok) throw new Error(data.error || "Request failed.");
+  if (!response.ok) throw new Error(data.error?.message || data.error || "Request failed.");
   return data;
 }
 
@@ -2911,6 +3204,12 @@ async function loadNextQuestion(button = els.newQuestion) {
   setBusy(button, true, "Thinking");
   startAiThinking(["Reviewing interview history...", "Picking the next topic...", "Writing your next question..."]);
   try {
+    if (serverInterviewId) {
+      const data = await api(`/api/v1/interviews/${encodeURIComponent(serverInterviewId)}/questions/next`, {});
+      currentServerQuestionId = data.id;
+      setQuestionFromText(data.question);
+      return;
+    }
     const data = await api("/api/question", {
       ...contextPayload(),
       history: currentInterview().history
@@ -2957,8 +3256,16 @@ async function submitAnswer() {
   saveState();
 
   try {
+    if (serverInterviewId && currentServerQuestionId) {
+      await api(`/api/v1/interviews/${encodeURIComponent(serverInterviewId)}/answers`, {
+        questionId: currentServerQuestionId,
+        answerType: "TEXT",
+        answer
+      });
+    }
     if (liveMode || els.autoNext.checked) {
-      loadFastQuestion();
+      if (serverInterviewId) await loadNextQuestion();
+      else loadFastQuestion();
     }
   } catch (error) {
     els.feedbackOutput.innerHTML = markdownToHtml(`## Error\n${error.message}`);
@@ -3218,6 +3525,7 @@ els.permissionAccent?.addEventListener("change", () => {
   saveState();
 });
 els.skipMediaPermissions?.addEventListener("click", () => {
+  stopDeviceSetupStream();
   els.mediaPermissionBackdrop.hidden = true;
   els.mediaPermissionMessage.textContent = "Device check skipped. The browser may ask again when you enable the camera or microphone.";
 });
@@ -3543,7 +3851,8 @@ els.toggleCamera?.addEventListener("click", async () => {
   }
   try {
     setBusy(els.toggleCamera, true, "Starting...");
-    userMediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
+    const videoConstraint = selectedDeviceIds.camera ? { deviceId: { exact: selectedDeviceIds.camera } } : true;
+    userMediaStream = await navigator.mediaDevices.getUserMedia({ video: videoConstraint });
     els.userVideo.srcObject = userMediaStream;
     els.userTile.classList.add("camera-on");
     els.userTileState.textContent = "Camera on";
@@ -3986,6 +4295,9 @@ els.endInterview.addEventListener("click", async () => {
     currentInterview().resultsSummary = extractResultsSummary(data.feedback).summary;
     archiveCurrentInterview();
     saveState();
+    if (serverInterviewId) {
+      await api(`/api/v1/interviews/${encodeURIComponent(serverInterviewId)}/complete`, {});
+    }
   } catch (error) {
     els.feedbackOutput.innerHTML = markdownToHtml(`## Error\n${error.message}`);
   } finally {
@@ -4023,6 +4335,9 @@ loadPracticeSources().then(() => {
   updateAnswerEditor();
   checkHealth();
   revealSetupSection(window.location.hash);
+  loadServerInterview().catch((error) => {
+    els.feedbackOutput.innerHTML = markdownToHtml(`## Interview Recovery Error\n${error.message}`);
+  });
 });
 
 function revealSetupSection(hash) {
@@ -4044,6 +4359,7 @@ document.querySelector('#openCvJdSetup')?.addEventListener('click', (event) => {
 [els.role, els.level, els.topic, els.cvText, els.jdText, els.questionOrder, els.autoNext].forEach((input) => {
   input.addEventListener("change", saveState);
 });
+els.topic.addEventListener("input", syncActiveTopicBanner);
 
 els.technology.addEventListener("change", () => {
   questionBankIndex = 0;

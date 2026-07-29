@@ -11,6 +11,46 @@ function normalizeQuestion(value) {
     .trim();
 }
 
+function classifyQuestionType(question) {
+  const text = String(question || "").toLowerCase();
+  if (/\b(troubleshoot|debug|investigate|fails?|failure|pending|crashloop|exhaust|corrupt|deleted|recover|restore)\b/.test(text)) return "Troubleshooting";
+  if (/^(tell me|have you|are you|do you use|what activities|what was your|in your environment|which tool do you use)/.test(text)) return "Experience";
+  if (/\b(difference|compare|versus| vs |choose|prefer|instead of)\b/.test(text)) return "Comparison";
+  if (/^(how would you design|design |explain the complete|what is the complete request flow|how does traffic flow)/.test(text)) return "Design / Architecture";
+  if (/^(suppose|if |when |a customer|you scale|what happens)/.test(text)) return "Scenario";
+  if (/^(how do you|how would you|how does|what should|what inputs|where do you|which .* required)/.test(text)) return "Implementation / Workflow";
+  return "Conceptual";
+}
+
+const TOPIC_RULES = [
+  ["Kubernetes", ["kubernetes", "k8s", "gke", "eks", "helm", "ingress", "kubelet", "etcd", "coredns", "rbac"]],
+  ["Docker & Containers", ["docker", "container", "containerd"]],
+  ["Terraform / IaC", ["terraform", "iac", "infrastructure as code"]],
+  ["GCP / Cloud", ["gcp", "cloud", "azure", "aws", "landing zone", "iam"]],
+  ["Networking", ["network", "dns", "load balanc", "mtls", "hybrid networking"]],
+  ["Observability", ["observability", "monitoring", "logging", "tracing", "datadog", "prometheus", "grafana", "opentelemetry", "elastic", "kibana"]],
+  ["CI/CD & GitOps", ["ci/cd", "gitops", "jenkins", "argo"]],
+  ["Security & Risk", ["security", "risk", "compliance", "audit", "governance", "sentinel", "devsecops"]],
+  ["SRE & Incident Response", ["sre", "reliability", "incident", "outage", "troubleshoot"]],
+  ["Ansible & Automation", ["ansible", "automation"]],
+  ["Python", ["python"]],
+  ["FastAPI / APIs", ["fastapi", "api"]],
+  ["Linux", ["linux"]],
+  ["DSA / Coding", ["dsa", "coding", "leetcode", "algorithm"]],
+  ["System Design", ["system design", "architecture"]],
+  ["MLOps / LLMOps / GenAI", ["mlops", "llmops", "genai", "llm ", "rag", "kubeflow", "mlflow", "machine learning", "prompt engineering"]],
+  ["Databases", ["database", "postgres", "sql", "kafka"]],
+  ["Behavioral / HR", ["behav", "hr", "leadership", "stakeholder", "experience"]]
+];
+
+function classifyTopic(entry) {
+  const text = [entry.category, entry.section, entry.question].filter(Boolean).join(" ").toLowerCase();
+  for (const [topic, keywords] of TOPIC_RULES) {
+    if (keywords.some((keyword) => text.includes(keyword))) return topic;
+  }
+  return "General";
+}
+
 function parseLargeBank() {
   const text = fs.readFileSync(path.join(ROOT, "1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt"), "utf8");
   const lines = text.split(/\r?\n/);
@@ -98,15 +138,51 @@ function loadAppBanks() {
   return entries;
 }
 
+// Sets that read better grouped by topic (Part 2) than as another numbered
+// practice round (Part 1) - map their title to the topic section name to file under.
+const SECTION_TOPIC_OVERRIDES = {
+  "Mock Interview 81 - Docker and Docker Compose Build Design": "Docker & Docker Compose (Build Design)",
+  "Mock Interview 82 - Production DevOps Scenario Round (CI/CD, Kubernetes, Terraform, MLOps)": "Production DevOps Scenario Round (CI/CD, Kubernetes, Terraform, MLOps)",
+  "Mock Interview 83 - Production Reliability and Observability Behavioral Round": "Behavioral - Reliability & Observability",
+  "Mock Interview 84 - Fugmo Lead GCP DevOps Engineer Screening": "Behavioral - Screening Rounds",
+  "Mock Interview 85 - GenAI and LLM Engineering Round": "GenAI & LLM Engineering",
+  "Mock Interview 86 - Advanced GCP Networking Round": "GCP Networking - Advanced Concepts",
+  "Mock Interview 87 - GCP Networking Scenario Round": "GCP Networking - Troubleshooting Scenarios",
+  "Mock Interview 88 - Cloud Migration Strategy Round": "Cloud Migration Strategy"
+};
+
 function loadMockSets() {
   const sets = JSON.parse(fs.readFileSync(path.join(ROOT, "public", "mock-interview-sets.json"), "utf8"));
   const entries = [];
   for (const set of sets) {
+    const section = SECTION_TOPIC_OVERRIDES[set.title] || set.title;
     for (const item of set.questions) {
-      entries.push({ source: "Fixed Mock Interview Sets", section: set.title, category: item.category, question: item.question });
+      entries.push({ source: "Fixed Mock Interview Sets", section, category: item.category, question: item.question });
     }
   }
   return entries;
+}
+
+function loadCodingAnswerBank() {
+  const p = path.join(__dirname, "answer-bank", "08-coding.json");
+  const obj = JSON.parse(fs.readFileSync(p, "utf8"));
+  const entries = [];
+  for (const [question, answer] of Object.entries(obj)) {
+    entries.push({ source: "Coding Answer Bank", section: "Coding Exercises", category: null, question, answer });
+  }
+  return entries;
+}
+
+function loadImportedConversationQuestions() {
+  const p = path.join(__dirname, "answer-bank", "imported-conversation-questions.json");
+  if (!fs.existsSync(p)) return [];
+  return JSON.parse(fs.readFileSync(p, "utf8"));
+}
+
+function loadGcpPrivateConnectivityQuestions() {
+  const p = path.join(__dirname, "answer-bank", "87-gcp-psc-psa-policy-routing-questions.json");
+  if (!fs.existsSync(p)) return [];
+  return JSON.parse(fs.readFileSync(p, "utf8"));
 }
 
 function loadHandWrittenAnswers() {
@@ -153,8 +229,11 @@ for (const [key, answer] of handWritten) {
 // (the primary practice pool), then large bank / tech-risk txt as supplementary depth.
 const mockSets = loadMockSets();
 const appBanks = loadAppBanks();
+const codingBank = loadCodingAnswerBank();
+const importedConversationQuestions = loadImportedConversationQuestions();
+const gcpPrivateConnectivityQuestions = loadGcpPrivateConnectivityQuestions();
 
-const allSources = [...mockSets, ...appBanks, ...techQa, ...largeBank];
+const allSources = [...mockSets, ...codingBank, ...appBanks, ...importedConversationQuestions, ...gcpPrivateConnectivityQuestions, ...techQa, ...largeBank];
 
 const seen = new Set();
 const finalEntries = [];
@@ -169,6 +248,8 @@ for (const e of allSources) {
     source: e.source,
     section: e.section,
     category: e.category || null,
+    topic: classifyTopic(e),
+    questionType: e.questionType || classifyQuestionType(e.question),
     question: e.question,
     answer
   });
@@ -180,3 +261,10 @@ console.log(`Generated answer guidance: ${generatedAnswers}`);
 const outPath = path.join(__dirname, "answer-bank", "final-qa-dataset.json");
 fs.writeFileSync(outPath, JSON.stringify(finalEntries, null, 2));
 console.log("Wrote", path.relative(ROOT, outPath));
+
+// Slim copy served to the browser: powers the in-app question bank reader
+// and the "questions covered" stat. Excludes nothing sensitive - same data,
+// just placed where the client can fetch it directly.
+const publicPath = path.join(ROOT, "public", "qa-dataset.json");
+fs.writeFileSync(publicPath, JSON.stringify(finalEntries));
+console.log("Wrote", path.relative(ROOT, publicPath));

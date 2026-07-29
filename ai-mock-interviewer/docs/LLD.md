@@ -15,7 +15,7 @@ ai-mock-interviewer/
     admin.html
     admin.js
     mock-interview-sets.json
-    30-day-plan.json
+    50-day-plan.json
   scripts/
     answer-bank/
     generate-full-qa-document.js
@@ -401,7 +401,7 @@ Question pool sources:
 
 - Built-in topic arrays.
 - Large bank from `/api/question-bank`.
-- Practice plan from `/30-day-plan.json`.
+- Practice plan from `/50-day-plan.json`.
 - Fixed sets from `/mock-interview-sets.json`.
 - Custom JD questions.
 - Custom skill questions.

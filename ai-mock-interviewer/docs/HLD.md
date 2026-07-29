@@ -89,7 +89,7 @@ Local files:
   - data/applicant-profile.json
   - 1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt
   - public/mock-interview-sets.json
-  - public/30-day-plan.json
+  - public/50-day-plan.json
 ```
 
 ## 7. Major Components
@@ -139,7 +139,7 @@ Sources:
 - Built-in arrays in `public/app.js`.
 - Large text bank: `1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt`.
 - Fixed sets: `public/mock-interview-sets.json`.
-- Daily plan: `public/30-day-plan.json`.
+- Daily plan: `public/50-day-plan.json`.
 - Custom skill questions stored in browser local storage.
 - Custom JD-generated question pool built in the browser.
 - Optional LLM-generated question from `/api/question`.
