@@ -1,3 +1,5 @@
+const { aiEngineerInterviewTopics } = require("./ai-engineer-interview-topics");
+
 const pillars = [
   {
     name: "Kubernetes Series",
@@ -40,6 +42,12 @@ const pillars = [
       "How to communicate model results to business teams"
     ],
     hashtags: ["#DataScience", "#MachineLearning", "#AI", "#Analytics"]
+  },
+  {
+    name: "AI Engineer Revision Series",
+    audience: "data scientists, ML engineers, and engineers revising production AI concepts in public",
+    topics: aiEngineerInterviewTopics,
+    hashtags: ["#AIEngineering", "#GenerativeAI", "#MLOps", "#MachineLearning"]
   },
   {
     name: "IT Engineering Series",

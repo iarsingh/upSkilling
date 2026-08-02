@@ -1,0 +1,4291 @@
+{
+  "series": "AI Engineer Revision Series",
+  "purpose": "date-ordered private revision drafts",
+  "publishingEnabled": false,
+  "cadence": "daily ordering only",
+  "startDate": "2026-08-12",
+  "endDate": "2027-10-13",
+  "total": 428,
+  "items": [
+    {
+      "sequence": 1,
+      "date": "2026-08-12",
+      "level": "Beginner",
+      "topic": "[Beginner] Python and software engineering: Python memory management generators iterators and profiling for ML workloads",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-001-beginner-python-and-software-engineering-python-memory-management-generators-iterators-and-profiling.md",
+      "imagePath": "assets/ai-revision-001-beginner-python-and-software-engineering-python-memory-management-generators-iterators-and-profiling.png"
+    },
+    {
+      "sequence": 2,
+      "date": "2026-08-13",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Python and software engineering: Python memory management generators iterators and profiling for ML workloads",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-002-intermediate-python-and-software-engineering-python-memory-management-generators-iterators-and-profi.md",
+      "imagePath": "assets/ai-revision-002-intermediate-python-and-software-engineering-python-memory-management-generators-iterators-and-profi.png"
+    },
+    {
+      "sequence": 3,
+      "date": "2026-08-14",
+      "level": "Advanced",
+      "topic": "[Advanced] Python and software engineering: Python memory management generators iterators and profiling for ML workloads",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-003-advanced-python-and-software-engineering-python-memory-management-generators-iterators-and-profiling.md",
+      "imagePath": "assets/ai-revision-003-advanced-python-and-software-engineering-python-memory-management-generators-iterators-and-profiling.png"
+    },
+    {
+      "sequence": 4,
+      "date": "2026-08-15",
+      "level": "Expert",
+      "topic": "[Expert] Python and software engineering: Python memory management generators iterators and profiling for ML workloads",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-004-expert-python-and-software-engineering-python-memory-management-generators-iterators-and-profiling-f.md",
+      "imagePath": "assets/ai-revision-004-expert-python-and-software-engineering-python-memory-management-generators-iterators-and-profiling-f.png"
+    },
+    {
+      "sequence": 5,
+      "date": "2026-08-16",
+      "level": "Beginner",
+      "topic": "[Beginner] Python and software engineering: Concurrency vs parallelism with asyncio threads processes and the GIL",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-005-beginner-python-and-software-engineering-concurrency-vs-parallelism-with-asyncio-threads-processes-a.md",
+      "imagePath": "assets/ai-revision-005-beginner-python-and-software-engineering-concurrency-vs-parallelism-with-asyncio-threads-processes-a.png"
+    },
+    {
+      "sequence": 6,
+      "date": "2026-08-17",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Python and software engineering: Concurrency vs parallelism with asyncio threads processes and the GIL",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-006-intermediate-python-and-software-engineering-concurrency-vs-parallelism-with-asyncio-threads-process.md",
+      "imagePath": "assets/ai-revision-006-intermediate-python-and-software-engineering-concurrency-vs-parallelism-with-asyncio-threads-process.png"
+    },
+    {
+      "sequence": 7,
+      "date": "2026-08-18",
+      "level": "Advanced",
+      "topic": "[Advanced] Python and software engineering: Concurrency vs parallelism with asyncio threads processes and the GIL",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-007-advanced-python-and-software-engineering-concurrency-vs-parallelism-with-asyncio-threads-processes-a.md",
+      "imagePath": "assets/ai-revision-007-advanced-python-and-software-engineering-concurrency-vs-parallelism-with-asyncio-threads-processes-a.png"
+    },
+    {
+      "sequence": 8,
+      "date": "2026-08-19",
+      "level": "Expert",
+      "topic": "[Expert] Python and software engineering: Concurrency vs parallelism with asyncio threads processes and the GIL",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-008-expert-python-and-software-engineering-concurrency-vs-parallelism-with-asyncio-threads-processes-and.md",
+      "imagePath": "assets/ai-revision-008-expert-python-and-software-engineering-concurrency-vs-parallelism-with-asyncio-threads-processes-and.png"
+    },
+    {
+      "sequence": 9,
+      "date": "2026-08-20",
+      "level": "Beginner",
+      "topic": "[Beginner] Python and software engineering: Designing typed testable Python services and reproducible packages",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-009-beginner-python-and-software-engineering-designing-typed-testable-python-services-and-reproducible-p.md",
+      "imagePath": "assets/ai-revision-009-beginner-python-and-software-engineering-designing-typed-testable-python-services-and-reproducible-p.png"
+    },
+    {
+      "sequence": 10,
+      "date": "2026-08-21",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Python and software engineering: Designing typed testable Python services and reproducible packages",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-010-intermediate-python-and-software-engineering-designing-typed-testable-python-services-and-reproducib.md",
+      "imagePath": "assets/ai-revision-010-intermediate-python-and-software-engineering-designing-typed-testable-python-services-and-reproducib.png"
+    },
+    {
+      "sequence": 11,
+      "date": "2026-08-22",
+      "level": "Advanced",
+      "topic": "[Advanced] Python and software engineering: Designing typed testable Python services and reproducible packages",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-011-advanced-python-and-software-engineering-designing-typed-testable-python-services-and-reproducible-p.md",
+      "imagePath": "assets/ai-revision-011-advanced-python-and-software-engineering-designing-typed-testable-python-services-and-reproducible-p.png"
+    },
+    {
+      "sequence": 12,
+      "date": "2026-08-23",
+      "level": "Expert",
+      "topic": "[Expert] Python and software engineering: Designing typed testable Python services and reproducible packages",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-012-expert-python-and-software-engineering-designing-typed-testable-python-services-and-reproducible-pac.md",
+      "imagePath": "assets/ai-revision-012-expert-python-and-software-engineering-designing-typed-testable-python-services-and-reproducible-pac.png"
+    },
+    {
+      "sequence": 13,
+      "date": "2026-08-24",
+      "level": "Beginner",
+      "topic": "[Beginner] Python and software engineering: Retries timeouts circuit breakers idempotency REST and gRPC for AI APIs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-013-beginner-python-and-software-engineering-retries-timeouts-circuit-breakers-idempotency-rest-and-grpc.md",
+      "imagePath": "assets/ai-revision-013-beginner-python-and-software-engineering-retries-timeouts-circuit-breakers-idempotency-rest-and-grpc.png"
+    },
+    {
+      "sequence": 14,
+      "date": "2026-08-25",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Python and software engineering: Retries timeouts circuit breakers idempotency REST and gRPC for AI APIs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-014-intermediate-python-and-software-engineering-retries-timeouts-circuit-breakers-idempotency-rest-and-.md",
+      "imagePath": "assets/ai-revision-014-intermediate-python-and-software-engineering-retries-timeouts-circuit-breakers-idempotency-rest-and-.png"
+    },
+    {
+      "sequence": 15,
+      "date": "2026-08-26",
+      "level": "Advanced",
+      "topic": "[Advanced] Python and software engineering: Retries timeouts circuit breakers idempotency REST and gRPC for AI APIs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "posts/ai-engineer-revision/ai-revision-015-advanced-python-and-software-engineering-retries-timeouts-circuit-breakers-idempotency-rest-and-grpc.md",
+      "imagePath": "assets/ai-revision-015-advanced-python-and-software-engineering-retries-timeouts-circuit-breakers-idempotency-rest-and-grpc.png"
+    },
+    {
+      "sequence": 16,
+      "date": "2026-08-27",
+      "level": "Expert",
+      "topic": "[Expert] Python and software engineering: Retries timeouts circuit breakers idempotency REST and gRPC for AI APIs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 17,
+      "date": "2026-08-28",
+      "level": "Beginner",
+      "topic": "[Beginner] SQL and data systems: SQL joins window functions CTEs and query plans for feature pipelines",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 18,
+      "date": "2026-08-29",
+      "level": "Intermediate",
+      "topic": "[Intermediate] SQL and data systems: SQL joins window functions CTEs and query plans for feature pipelines",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 19,
+      "date": "2026-08-30",
+      "level": "Advanced",
+      "topic": "[Advanced] SQL and data systems: SQL joins window functions CTEs and query plans for feature pipelines",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 20,
+      "date": "2026-08-31",
+      "level": "Expert",
+      "topic": "[Expert] SQL and data systems: SQL joins window functions CTEs and query plans for feature pipelines",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 21,
+      "date": "2026-09-01",
+      "level": "Beginner",
+      "topic": "[Beginner] SQL and data systems: Preventing point in time leakage in training datasets",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 22,
+      "date": "2026-09-02",
+      "level": "Intermediate",
+      "topic": "[Intermediate] SQL and data systems: Preventing point in time leakage in training datasets",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 23,
+      "date": "2026-09-03",
+      "level": "Advanced",
+      "topic": "[Advanced] SQL and data systems: Preventing point in time leakage in training datasets",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 24,
+      "date": "2026-09-04",
+      "level": "Expert",
+      "topic": "[Expert] SQL and data systems: Preventing point in time leakage in training datasets",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 25,
+      "date": "2026-09-05",
+      "level": "Beginner",
+      "topic": "[Beginner] SQL and data systems: Indexes partitioning transactions and consistency for AI applications",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 26,
+      "date": "2026-09-06",
+      "level": "Intermediate",
+      "topic": "[Intermediate] SQL and data systems: Indexes partitioning transactions and consistency for AI applications",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 27,
+      "date": "2026-09-07",
+      "level": "Advanced",
+      "topic": "[Advanced] SQL and data systems: Indexes partitioning transactions and consistency for AI applications",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 28,
+      "date": "2026-09-08",
+      "level": "Expert",
+      "topic": "[Expert] SQL and data systems: Indexes partitioning transactions and consistency for AI applications",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 29,
+      "date": "2026-09-09",
+      "level": "Beginner",
+      "topic": "[Beginner] SQL and data systems: Batch vs streaming pipelines data contracts and schema evolution",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 30,
+      "date": "2026-09-10",
+      "level": "Intermediate",
+      "topic": "[Intermediate] SQL and data systems: Batch vs streaming pipelines data contracts and schema evolution",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 31,
+      "date": "2026-09-11",
+      "level": "Advanced",
+      "topic": "[Advanced] SQL and data systems: Batch vs streaming pipelines data contracts and schema evolution",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 32,
+      "date": "2026-09-12",
+      "level": "Expert",
+      "topic": "[Expert] SQL and data systems: Batch vs streaming pipelines data contracts and schema evolution",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 33,
+      "date": "2026-09-13",
+      "level": "Beginner",
+      "topic": "[Beginner] Mathematics and statistics: Bias variance regularization learning curves and model debugging",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 34,
+      "date": "2026-09-14",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Mathematics and statistics: Bias variance regularization learning curves and model debugging",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 35,
+      "date": "2026-09-15",
+      "level": "Advanced",
+      "topic": "[Advanced] Mathematics and statistics: Bias variance regularization learning curves and model debugging",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 36,
+      "date": "2026-09-16",
+      "level": "Expert",
+      "topic": "[Expert] Mathematics and statistics: Bias variance regularization learning curves and model debugging",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 37,
+      "date": "2026-09-17",
+      "level": "Beginner",
+      "topic": "[Beginner] Mathematics and statistics: Probability distributions Bayes theorem and uncertainty in practice",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 38,
+      "date": "2026-09-18",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Mathematics and statistics: Probability distributions Bayes theorem and uncertainty in practice",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 39,
+      "date": "2026-09-19",
+      "level": "Advanced",
+      "topic": "[Advanced] Mathematics and statistics: Probability distributions Bayes theorem and uncertainty in practice",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 40,
+      "date": "2026-09-20",
+      "level": "Expert",
+      "topic": "[Expert] Mathematics and statistics: Probability distributions Bayes theorem and uncertainty in practice",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 41,
+      "date": "2026-09-21",
+      "level": "Beginner",
+      "topic": "[Beginner] Mathematics and statistics: Hypothesis tests confidence intervals power and multiple comparisons",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 42,
+      "date": "2026-09-22",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Mathematics and statistics: Hypothesis tests confidence intervals power and multiple comparisons",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 43,
+      "date": "2026-09-23",
+      "level": "Advanced",
+      "topic": "[Advanced] Mathematics and statistics: Hypothesis tests confidence intervals power and multiple comparisons",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 44,
+      "date": "2026-09-24",
+      "level": "Expert",
+      "topic": "[Expert] Mathematics and statistics: Hypothesis tests confidence intervals power and multiple comparisons",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 45,
+      "date": "2026-09-25",
+      "level": "Beginner",
+      "topic": "[Beginner] Mathematics and statistics: Loss functions gradients optimization calibration and thresholds",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 46,
+      "date": "2026-09-26",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Mathematics and statistics: Loss functions gradients optimization calibration and thresholds",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 47,
+      "date": "2026-09-27",
+      "level": "Advanced",
+      "topic": "[Advanced] Mathematics and statistics: Loss functions gradients optimization calibration and thresholds",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 48,
+      "date": "2026-09-28",
+      "level": "Expert",
+      "topic": "[Expert] Mathematics and statistics: Loss functions gradients optimization calibration and thresholds",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 49,
+      "date": "2026-09-29",
+      "level": "Beginner",
+      "topic": "[Beginner] Classical machine learning: Linear and logistic regression assumptions diagnostics and regularization",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 50,
+      "date": "2026-09-30",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Classical machine learning: Linear and logistic regression assumptions diagnostics and regularization",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 51,
+      "date": "2026-10-01",
+      "level": "Advanced",
+      "topic": "[Advanced] Classical machine learning: Linear and logistic regression assumptions diagnostics and regularization",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 52,
+      "date": "2026-10-02",
+      "level": "Expert",
+      "topic": "[Expert] Classical machine learning: Linear and logistic regression assumptions diagnostics and regularization",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 53,
+      "date": "2026-10-03",
+      "level": "Beginner",
+      "topic": "[Beginner] Classical machine learning: Trees random forests XGBoost LightGBM and CatBoost tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 54,
+      "date": "2026-10-04",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Classical machine learning: Trees random forests XGBoost LightGBM and CatBoost tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 55,
+      "date": "2026-10-05",
+      "level": "Advanced",
+      "topic": "[Advanced] Classical machine learning: Trees random forests XGBoost LightGBM and CatBoost tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 56,
+      "date": "2026-10-06",
+      "level": "Expert",
+      "topic": "[Expert] Classical machine learning: Trees random forests XGBoost LightGBM and CatBoost tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 57,
+      "date": "2026-10-07",
+      "level": "Beginner",
+      "topic": "[Beginner] Classical machine learning: SVM KNN Naive Bayes PCA K Means and DBSCAN selection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 58,
+      "date": "2026-10-08",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Classical machine learning: SVM KNN Naive Bayes PCA K Means and DBSCAN selection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 59,
+      "date": "2026-10-09",
+      "level": "Advanced",
+      "topic": "[Advanced] Classical machine learning: SVM KNN Naive Bayes PCA K Means and DBSCAN selection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 60,
+      "date": "2026-10-10",
+      "level": "Expert",
+      "topic": "[Expert] Classical machine learning: SVM KNN Naive Bayes PCA K Means and DBSCAN selection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 61,
+      "date": "2026-10-11",
+      "level": "Beginner",
+      "topic": "[Beginner] Classical machine learning: Time series validation forecasting leakage and backtesting",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 62,
+      "date": "2026-10-12",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Classical machine learning: Time series validation forecasting leakage and backtesting",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 63,
+      "date": "2026-10-13",
+      "level": "Advanced",
+      "topic": "[Advanced] Classical machine learning: Time series validation forecasting leakage and backtesting",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 64,
+      "date": "2026-10-14",
+      "level": "Expert",
+      "topic": "[Expert] Classical machine learning: Time series validation forecasting leakage and backtesting",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 65,
+      "date": "2026-10-15",
+      "level": "Beginner",
+      "topic": "[Beginner] Features and evaluation: Missing values outliers encoding scaling and feature selection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 66,
+      "date": "2026-10-16",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Features and evaluation: Missing values outliers encoding scaling and feature selection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 67,
+      "date": "2026-10-17",
+      "level": "Advanced",
+      "topic": "[Advanced] Features and evaluation: Missing values outliers encoding scaling and feature selection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 68,
+      "date": "2026-10-18",
+      "level": "Expert",
+      "topic": "[Expert] Features and evaluation: Missing values outliers encoding scaling and feature selection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 69,
+      "date": "2026-10-19",
+      "level": "Beginner",
+      "topic": "[Beginner] Features and evaluation: Imbalanced classification metrics and decision threshold tuning",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 70,
+      "date": "2026-10-20",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Features and evaluation: Imbalanced classification metrics and decision threshold tuning",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 71,
+      "date": "2026-10-21",
+      "level": "Advanced",
+      "topic": "[Advanced] Features and evaluation: Imbalanced classification metrics and decision threshold tuning",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 72,
+      "date": "2026-10-22",
+      "level": "Expert",
+      "topic": "[Expert] Features and evaluation: Imbalanced classification metrics and decision threshold tuning",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 73,
+      "date": "2026-10-23",
+      "level": "Beginner",
+      "topic": "[Beginner] Features and evaluation: Ranking recommendation and retrieval metrics offline and online",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 74,
+      "date": "2026-10-24",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Features and evaluation: Ranking recommendation and retrieval metrics offline and online",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 75,
+      "date": "2026-10-25",
+      "level": "Advanced",
+      "topic": "[Advanced] Features and evaluation: Ranking recommendation and retrieval metrics offline and online",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 76,
+      "date": "2026-10-26",
+      "level": "Expert",
+      "topic": "[Expert] Features and evaluation: Ranking recommendation and retrieval metrics offline and online",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 77,
+      "date": "2026-10-27",
+      "level": "Beginner",
+      "topic": "[Beginner] Features and evaluation: Dataset shift drift delayed labels and train serve skew",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 78,
+      "date": "2026-10-28",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Features and evaluation: Dataset shift drift delayed labels and train serve skew",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 79,
+      "date": "2026-10-29",
+      "level": "Advanced",
+      "topic": "[Advanced] Features and evaluation: Dataset shift drift delayed labels and train serve skew",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 80,
+      "date": "2026-10-30",
+      "level": "Expert",
+      "topic": "[Expert] Features and evaluation: Dataset shift drift delayed labels and train serve skew",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 81,
+      "date": "2026-10-31",
+      "level": "Beginner",
+      "topic": "[Beginner] Deep learning: Backpropagation activations initialization and gradient flow",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 82,
+      "date": "2026-11-01",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Deep learning: Backpropagation activations initialization and gradient flow",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 83,
+      "date": "2026-11-02",
+      "level": "Advanced",
+      "topic": "[Advanced] Deep learning: Backpropagation activations initialization and gradient flow",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 84,
+      "date": "2026-11-03",
+      "level": "Expert",
+      "topic": "[Expert] Deep learning: Backpropagation activations initialization and gradient flow",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 85,
+      "date": "2026-11-04",
+      "level": "Beginner",
+      "topic": "[Beginner] Deep learning: Normalization dropout regularization and training stability",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 86,
+      "date": "2026-11-05",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Deep learning: Normalization dropout regularization and training stability",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 87,
+      "date": "2026-11-06",
+      "level": "Advanced",
+      "topic": "[Advanced] Deep learning: Normalization dropout regularization and training stability",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 88,
+      "date": "2026-11-07",
+      "level": "Expert",
+      "topic": "[Expert] Deep learning: Normalization dropout regularization and training stability",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 89,
+      "date": "2026-11-08",
+      "level": "Beginner",
+      "topic": "[Beginner] Deep learning: CNN RNN LSTM GRU transfer learning and failure analysis",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 90,
+      "date": "2026-11-09",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Deep learning: CNN RNN LSTM GRU transfer learning and failure analysis",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 91,
+      "date": "2026-11-10",
+      "level": "Advanced",
+      "topic": "[Advanced] Deep learning: CNN RNN LSTM GRU transfer learning and failure analysis",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 92,
+      "date": "2026-11-11",
+      "level": "Expert",
+      "topic": "[Expert] Deep learning: CNN RNN LSTM GRU transfer learning and failure analysis",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 93,
+      "date": "2026-11-12",
+      "level": "Beginner",
+      "topic": "[Beginner] Deep learning: Transformers attention positional encoding and KV cache internals",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 94,
+      "date": "2026-11-13",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Deep learning: Transformers attention positional encoding and KV cache internals",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 95,
+      "date": "2026-11-14",
+      "level": "Advanced",
+      "topic": "[Advanced] Deep learning: Transformers attention positional encoding and KV cache internals",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 96,
+      "date": "2026-11-15",
+      "level": "Expert",
+      "topic": "[Expert] Deep learning: Transformers attention positional encoding and KV cache internals",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 97,
+      "date": "2026-11-16",
+      "level": "Beginner",
+      "topic": "[Beginner] LLM foundations: Tokenization embeddings context windows and next token prediction",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 98,
+      "date": "2026-11-17",
+      "level": "Intermediate",
+      "topic": "[Intermediate] LLM foundations: Tokenization embeddings context windows and next token prediction",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 99,
+      "date": "2026-11-18",
+      "level": "Advanced",
+      "topic": "[Advanced] LLM foundations: Tokenization embeddings context windows and next token prediction",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 100,
+      "date": "2026-11-19",
+      "level": "Expert",
+      "topic": "[Expert] LLM foundations: Tokenization embeddings context windows and next token prediction",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 101,
+      "date": "2026-11-20",
+      "level": "Beginner",
+      "topic": "[Beginner] LLM foundations: Pretraining instruction tuning preference optimization and alignment",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 102,
+      "date": "2026-11-21",
+      "level": "Intermediate",
+      "topic": "[Intermediate] LLM foundations: Pretraining instruction tuning preference optimization and alignment",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 103,
+      "date": "2026-11-22",
+      "level": "Advanced",
+      "topic": "[Advanced] LLM foundations: Pretraining instruction tuning preference optimization and alignment",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 104,
+      "date": "2026-11-23",
+      "level": "Expert",
+      "topic": "[Expert] LLM foundations: Pretraining instruction tuning preference optimization and alignment",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 105,
+      "date": "2026-11-24",
+      "level": "Beginner",
+      "topic": "[Beginner] LLM foundations: Temperature top p decoding and context management tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 106,
+      "date": "2026-11-25",
+      "level": "Intermediate",
+      "topic": "[Intermediate] LLM foundations: Temperature top p decoding and context management tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 107,
+      "date": "2026-11-26",
+      "level": "Advanced",
+      "topic": "[Advanced] LLM foundations: Temperature top p decoding and context management tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 108,
+      "date": "2026-11-27",
+      "level": "Expert",
+      "topic": "[Expert] LLM foundations: Temperature top p decoding and context management tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 109,
+      "date": "2026-11-28",
+      "level": "Beginner",
+      "topic": "[Beginner] LLM foundations: Tool calling structured outputs validation and recovery",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 110,
+      "date": "2026-11-29",
+      "level": "Intermediate",
+      "topic": "[Intermediate] LLM foundations: Tool calling structured outputs validation and recovery",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 111,
+      "date": "2026-11-30",
+      "level": "Advanced",
+      "topic": "[Advanced] LLM foundations: Tool calling structured outputs validation and recovery",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 112,
+      "date": "2026-12-01",
+      "level": "Expert",
+      "topic": "[Expert] LLM foundations: Tool calling structured outputs validation and recovery",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 113,
+      "date": "2026-12-02",
+      "level": "Beginner",
+      "topic": "[Beginner] RAG and search: Production RAG architecture from ingestion to grounded answers",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 114,
+      "date": "2026-12-03",
+      "level": "Intermediate",
+      "topic": "[Intermediate] RAG and search: Production RAG architecture from ingestion to grounded answers",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 115,
+      "date": "2026-12-04",
+      "level": "Advanced",
+      "topic": "[Advanced] RAG and search: Production RAG architecture from ingestion to grounded answers",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 116,
+      "date": "2026-12-05",
+      "level": "Expert",
+      "topic": "[Expert] RAG and search: Production RAG architecture from ingestion to grounded answers",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 117,
+      "date": "2026-12-06",
+      "level": "Beginner",
+      "topic": "[Beginner] RAG and search: Chunking metadata parsing dense sparse hybrid retrieval and reranking",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 118,
+      "date": "2026-12-07",
+      "level": "Intermediate",
+      "topic": "[Intermediate] RAG and search: Chunking metadata parsing dense sparse hybrid retrieval and reranking",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 119,
+      "date": "2026-12-08",
+      "level": "Advanced",
+      "topic": "[Advanced] RAG and search: Chunking metadata parsing dense sparse hybrid retrieval and reranking",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 120,
+      "date": "2026-12-09",
+      "level": "Expert",
+      "topic": "[Expert] RAG and search: Chunking metadata parsing dense sparse hybrid retrieval and reranking",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 121,
+      "date": "2026-12-10",
+      "level": "Beginner",
+      "topic": "[Beginner] RAG and search: Embedding selection distance metrics normalization and migration",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 122,
+      "date": "2026-12-11",
+      "level": "Intermediate",
+      "topic": "[Intermediate] RAG and search: Embedding selection distance metrics normalization and migration",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 123,
+      "date": "2026-12-12",
+      "level": "Advanced",
+      "topic": "[Advanced] RAG and search: Embedding selection distance metrics normalization and migration",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 124,
+      "date": "2026-12-13",
+      "level": "Expert",
+      "topic": "[Expert] RAG and search: Embedding selection distance metrics normalization and migration",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 125,
+      "date": "2026-12-14",
+      "level": "Beginner",
+      "topic": "[Beginner] RAG and search: RAG evaluation debugging citations and hallucination reduction",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 126,
+      "date": "2026-12-15",
+      "level": "Intermediate",
+      "topic": "[Intermediate] RAG and search: RAG evaluation debugging citations and hallucination reduction",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 127,
+      "date": "2026-12-16",
+      "level": "Advanced",
+      "topic": "[Advanced] RAG and search: RAG evaluation debugging citations and hallucination reduction",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 128,
+      "date": "2026-12-17",
+      "level": "Expert",
+      "topic": "[Expert] RAG and search: RAG evaluation debugging citations and hallucination reduction",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 129,
+      "date": "2026-12-18",
+      "level": "Beginner",
+      "topic": "[Beginner] Vector databases: HNSW IVF and product quantization internals and tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 130,
+      "date": "2026-12-19",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Vector databases: HNSW IVF and product quantization internals and tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 131,
+      "date": "2026-12-20",
+      "level": "Advanced",
+      "topic": "[Advanced] Vector databases: HNSW IVF and product quantization internals and tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 132,
+      "date": "2026-12-21",
+      "level": "Expert",
+      "topic": "[Expert] Vector databases: HNSW IVF and product quantization internals and tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 133,
+      "date": "2026-12-22",
+      "level": "Beginner",
+      "topic": "[Beginner] Vector databases: Choosing FAISS pgvector Pinecone Weaviate Milvus or Chroma",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 134,
+      "date": "2026-12-23",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Vector databases: Choosing FAISS pgvector Pinecone Weaviate Milvus or Chroma",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 135,
+      "date": "2026-12-24",
+      "level": "Advanced",
+      "topic": "[Advanced] Vector databases: Choosing FAISS pgvector Pinecone Weaviate Milvus or Chroma",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 136,
+      "date": "2026-12-25",
+      "level": "Expert",
+      "topic": "[Expert] Vector databases: Choosing FAISS pgvector Pinecone Weaviate Milvus or Chroma",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 137,
+      "date": "2026-12-26",
+      "level": "Beginner",
+      "topic": "[Beginner] Vector databases: Filtering multitenancy sharding consistency and security",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 138,
+      "date": "2026-12-27",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Vector databases: Filtering multitenancy sharding consistency and security",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 139,
+      "date": "2026-12-28",
+      "level": "Advanced",
+      "topic": "[Advanced] Vector databases: Filtering multitenancy sharding consistency and security",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 140,
+      "date": "2026-12-29",
+      "level": "Expert",
+      "topic": "[Expert] Vector databases: Filtering multitenancy sharding consistency and security",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 141,
+      "date": "2026-12-30",
+      "level": "Beginner",
+      "topic": "[Beginner] Vector databases: Capacity planning latency recall cost reindexing and migration",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 142,
+      "date": "2026-12-31",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Vector databases: Capacity planning latency recall cost reindexing and migration",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 143,
+      "date": "2027-01-01",
+      "level": "Advanced",
+      "topic": "[Advanced] Vector databases: Capacity planning latency recall cost reindexing and migration",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 144,
+      "date": "2027-01-02",
+      "level": "Expert",
+      "topic": "[Expert] Vector databases: Capacity planning latency recall cost reindexing and migration",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 145,
+      "date": "2027-01-03",
+      "level": "Beginner",
+      "topic": "[Beginner] Fine tuning: Prompting vs RAG vs fine tuning decision framework",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 146,
+      "date": "2027-01-04",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Fine tuning: Prompting vs RAG vs fine tuning decision framework",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 147,
+      "date": "2027-01-05",
+      "level": "Advanced",
+      "topic": "[Advanced] Fine tuning: Prompting vs RAG vs fine tuning decision framework",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 148,
+      "date": "2027-01-06",
+      "level": "Expert",
+      "topic": "[Expert] Fine tuning: Prompting vs RAG vs fine tuning decision framework",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 149,
+      "date": "2027-01-07",
+      "level": "Beginner",
+      "topic": "[Beginner] Fine tuning: Supervised fine tuning dataset formatting and quality controls",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 150,
+      "date": "2027-01-08",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Fine tuning: Supervised fine tuning dataset formatting and quality controls",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 151,
+      "date": "2027-01-09",
+      "level": "Advanced",
+      "topic": "[Advanced] Fine tuning: Supervised fine tuning dataset formatting and quality controls",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 152,
+      "date": "2027-01-10",
+      "level": "Expert",
+      "topic": "[Expert] Fine tuning: Supervised fine tuning dataset formatting and quality controls",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 153,
+      "date": "2027-01-11",
+      "level": "Beginner",
+      "topic": "[Beginner] Fine tuning: LoRA QLoRA PEFT adapters ranks and quantization tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 154,
+      "date": "2027-01-12",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Fine tuning: LoRA QLoRA PEFT adapters ranks and quantization tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 155,
+      "date": "2027-01-13",
+      "level": "Advanced",
+      "topic": "[Advanced] Fine tuning: LoRA QLoRA PEFT adapters ranks and quantization tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 156,
+      "date": "2027-01-14",
+      "level": "Expert",
+      "topic": "[Expert] Fine tuning: LoRA QLoRA PEFT adapters ranks and quantization tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 157,
+      "date": "2027-01-15",
+      "level": "Beginner",
+      "topic": "[Beginner] Fine tuning: Evaluation catastrophic forgetting regression tests and adapter serving",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 158,
+      "date": "2027-01-16",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Fine tuning: Evaluation catastrophic forgetting regression tests and adapter serving",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 159,
+      "date": "2027-01-17",
+      "level": "Advanced",
+      "topic": "[Advanced] Fine tuning: Evaluation catastrophic forgetting regression tests and adapter serving",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 160,
+      "date": "2027-01-18",
+      "level": "Expert",
+      "topic": "[Expert] Fine tuning: Evaluation catastrophic forgetting regression tests and adapter serving",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 161,
+      "date": "2027-01-19",
+      "level": "Beginner",
+      "topic": "[Beginner] Agents and MCP: Workflows vs agents vs deterministic application logic",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 162,
+      "date": "2027-01-20",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Agents and MCP: Workflows vs agents vs deterministic application logic",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 163,
+      "date": "2027-01-21",
+      "level": "Advanced",
+      "topic": "[Advanced] Agents and MCP: Workflows vs agents vs deterministic application logic",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 164,
+      "date": "2027-01-22",
+      "level": "Expert",
+      "topic": "[Expert] Agents and MCP: Workflows vs agents vs deterministic application logic",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 165,
+      "date": "2027-01-23",
+      "level": "Beginner",
+      "topic": "[Beginner] Agents and MCP: Agent planning tools memory state permissions and idempotency",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 166,
+      "date": "2027-01-24",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Agents and MCP: Agent planning tools memory state permissions and idempotency",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 167,
+      "date": "2027-01-25",
+      "level": "Advanced",
+      "topic": "[Advanced] Agents and MCP: Agent planning tools memory state permissions and idempotency",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 168,
+      "date": "2027-01-26",
+      "level": "Expert",
+      "topic": "[Expert] Agents and MCP: Agent planning tools memory state permissions and idempotency",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 169,
+      "date": "2027-01-27",
+      "level": "Beginner",
+      "topic": "[Beginner] Agents and MCP: Single agent vs multi agent coordination cost and failure modes",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 170,
+      "date": "2027-01-28",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Agents and MCP: Single agent vs multi agent coordination cost and failure modes",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 171,
+      "date": "2027-01-29",
+      "level": "Advanced",
+      "topic": "[Advanced] Agents and MCP: Single agent vs multi agent coordination cost and failure modes",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 172,
+      "date": "2027-01-30",
+      "level": "Expert",
+      "topic": "[Expert] Agents and MCP: Single agent vs multi agent coordination cost and failure modes",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 173,
+      "date": "2027-01-31",
+      "level": "Beginner",
+      "topic": "[Beginner] Agents and MCP: MCP clients servers tools resources security and evaluation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 174,
+      "date": "2027-02-01",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Agents and MCP: MCP clients servers tools resources security and evaluation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 175,
+      "date": "2027-02-02",
+      "level": "Advanced",
+      "topic": "[Advanced] Agents and MCP: MCP clients servers tools resources security and evaluation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 176,
+      "date": "2027-02-03",
+      "level": "Expert",
+      "topic": "[Expert] Agents and MCP: MCP clients servers tools resources security and evaluation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 177,
+      "date": "2027-02-04",
+      "level": "Beginner",
+      "topic": "[Beginner] MLOps lifecycle: Experiment tracking reproducibility lineage and MLflow",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 178,
+      "date": "2027-02-05",
+      "level": "Intermediate",
+      "topic": "[Intermediate] MLOps lifecycle: Experiment tracking reproducibility lineage and MLflow",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 179,
+      "date": "2027-02-06",
+      "level": "Advanced",
+      "topic": "[Advanced] MLOps lifecycle: Experiment tracking reproducibility lineage and MLflow",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 180,
+      "date": "2027-02-07",
+      "level": "Expert",
+      "topic": "[Expert] MLOps lifecycle: Experiment tracking reproducibility lineage and MLflow",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 181,
+      "date": "2027-02-08",
+      "level": "Beginner",
+      "topic": "[Beginner] MLOps lifecycle: Model registry approvals aliases promotion and rollback",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 182,
+      "date": "2027-02-09",
+      "level": "Intermediate",
+      "topic": "[Intermediate] MLOps lifecycle: Model registry approvals aliases promotion and rollback",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 183,
+      "date": "2027-02-10",
+      "level": "Advanced",
+      "topic": "[Advanced] MLOps lifecycle: Model registry approvals aliases promotion and rollback",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 184,
+      "date": "2027-02-11",
+      "level": "Expert",
+      "topic": "[Expert] MLOps lifecycle: Model registry approvals aliases promotion and rollback",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 185,
+      "date": "2027-02-12",
+      "level": "Beginner",
+      "topic": "[Beginner] MLOps lifecycle: Feature stores offline online consistency and correctness",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 186,
+      "date": "2027-02-13",
+      "level": "Intermediate",
+      "topic": "[Intermediate] MLOps lifecycle: Feature stores offline online consistency and correctness",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 187,
+      "date": "2027-02-14",
+      "level": "Advanced",
+      "topic": "[Advanced] MLOps lifecycle: Feature stores offline online consistency and correctness",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 188,
+      "date": "2027-02-15",
+      "level": "Expert",
+      "topic": "[Expert] MLOps lifecycle: Feature stores offline online consistency and correctness",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 189,
+      "date": "2027-02-16",
+      "level": "Beginner",
+      "topic": "[Beginner] MLOps lifecycle: Orchestration continuous training versioning and governance",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 190,
+      "date": "2027-02-17",
+      "level": "Intermediate",
+      "topic": "[Intermediate] MLOps lifecycle: Orchestration continuous training versioning and governance",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 191,
+      "date": "2027-02-18",
+      "level": "Advanced",
+      "topic": "[Advanced] MLOps lifecycle: Orchestration continuous training versioning and governance",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 192,
+      "date": "2027-02-19",
+      "level": "Expert",
+      "topic": "[Expert] MLOps lifecycle: Orchestration continuous training versioning and governance",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 193,
+      "date": "2027-02-20",
+      "level": "Beginner",
+      "topic": "[Beginner] Serving and deployment: Synchronous asynchronous batch and streaming inference design",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 194,
+      "date": "2027-02-21",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Serving and deployment: Synchronous asynchronous batch and streaming inference design",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 195,
+      "date": "2027-02-22",
+      "level": "Advanced",
+      "topic": "[Advanced] Serving and deployment: Synchronous asynchronous batch and streaming inference design",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 196,
+      "date": "2027-02-23",
+      "level": "Expert",
+      "topic": "[Expert] Serving and deployment: Synchronous asynchronous batch and streaming inference design",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 197,
+      "date": "2027-02-24",
+      "level": "Beginner",
+      "topic": "[Beginner] Serving and deployment: FastAPI BentoML KServe Ray Serve and Triton selection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 198,
+      "date": "2027-02-25",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Serving and deployment: FastAPI BentoML KServe Ray Serve and Triton selection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 199,
+      "date": "2027-02-26",
+      "level": "Advanced",
+      "topic": "[Advanced] Serving and deployment: FastAPI BentoML KServe Ray Serve and Triton selection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 200,
+      "date": "2027-02-27",
+      "level": "Expert",
+      "topic": "[Expert] Serving and deployment: FastAPI BentoML KServe Ray Serve and Triton selection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 201,
+      "date": "2027-02-28",
+      "level": "Beginner",
+      "topic": "[Beginner] Serving and deployment: Batching caching concurrency backpressure and load testing",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 202,
+      "date": "2027-03-01",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Serving and deployment: Batching caching concurrency backpressure and load testing",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 203,
+      "date": "2027-03-02",
+      "level": "Advanced",
+      "topic": "[Advanced] Serving and deployment: Batching caching concurrency backpressure and load testing",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 204,
+      "date": "2027-03-03",
+      "level": "Expert",
+      "topic": "[Expert] Serving and deployment: Batching caching concurrency backpressure and load testing",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 205,
+      "date": "2027-03-04",
+      "level": "Beginner",
+      "topic": "[Beginner] Serving and deployment: Canary shadow blue green A B rollout and rollback",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 206,
+      "date": "2027-03-05",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Serving and deployment: Canary shadow blue green A B rollout and rollback",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 207,
+      "date": "2027-03-06",
+      "level": "Advanced",
+      "topic": "[Advanced] Serving and deployment: Canary shadow blue green A B rollout and rollback",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 208,
+      "date": "2027-03-07",
+      "level": "Expert",
+      "topic": "[Expert] Serving and deployment: Canary shadow blue green A B rollout and rollback",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 209,
+      "date": "2027-03-08",
+      "level": "Beginner",
+      "topic": "[Beginner] Docker and Kubernetes: Secure reproducible ML containers and dependency management",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 210,
+      "date": "2027-03-09",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Docker and Kubernetes: Secure reproducible ML containers and dependency management",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 211,
+      "date": "2027-03-10",
+      "level": "Advanced",
+      "topic": "[Advanced] Docker and Kubernetes: Secure reproducible ML containers and dependency management",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 212,
+      "date": "2027-03-11",
+      "level": "Expert",
+      "topic": "[Expert] Docker and Kubernetes: Secure reproducible ML containers and dependency management",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 213,
+      "date": "2027-03-12",
+      "level": "Beginner",
+      "topic": "[Beginner] Docker and Kubernetes: Requests limits probes graceful shutdown and autoscaling",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 214,
+      "date": "2027-03-13",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Docker and Kubernetes: Requests limits probes graceful shutdown and autoscaling",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 215,
+      "date": "2027-03-14",
+      "level": "Advanced",
+      "topic": "[Advanced] Docker and Kubernetes: Requests limits probes graceful shutdown and autoscaling",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 216,
+      "date": "2027-03-15",
+      "level": "Expert",
+      "topic": "[Expert] Docker and Kubernetes: Requests limits probes graceful shutdown and autoscaling",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 217,
+      "date": "2027-03-16",
+      "level": "Beginner",
+      "topic": "[Beginner] Docker and Kubernetes: GPU scheduling node pools taints device plugins and KServe",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 218,
+      "date": "2027-03-17",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Docker and Kubernetes: GPU scheduling node pools taints device plugins and KServe",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 219,
+      "date": "2027-03-18",
+      "level": "Advanced",
+      "topic": "[Advanced] Docker and Kubernetes: GPU scheduling node pools taints device plugins and KServe",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 220,
+      "date": "2027-03-19",
+      "level": "Expert",
+      "topic": "[Expert] Docker and Kubernetes: GPU scheduling node pools taints device plugins and KServe",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 221,
+      "date": "2027-03-20",
+      "level": "Beginner",
+      "topic": "[Beginner] Docker and Kubernetes: Debugging CrashLoopBackOff OOMKilled latency and networking",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 222,
+      "date": "2027-03-21",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Docker and Kubernetes: Debugging CrashLoopBackOff OOMKilled latency and networking",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 223,
+      "date": "2027-03-22",
+      "level": "Advanced",
+      "topic": "[Advanced] Docker and Kubernetes: Debugging CrashLoopBackOff OOMKilled latency and networking",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 224,
+      "date": "2027-03-23",
+      "level": "Expert",
+      "topic": "[Expert] Docker and Kubernetes: Debugging CrashLoopBackOff OOMKilled latency and networking",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 225,
+      "date": "2027-03-24",
+      "level": "Beginner",
+      "topic": "[Beginner] Cloud and infrastructure: Vertex AI vs SageMaker vs Azure ML vs self managed Kubernetes",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 226,
+      "date": "2027-03-25",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Cloud and infrastructure: Vertex AI vs SageMaker vs Azure ML vs self managed Kubernetes",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 227,
+      "date": "2027-03-26",
+      "level": "Advanced",
+      "topic": "[Advanced] Cloud and infrastructure: Vertex AI vs SageMaker vs Azure ML vs self managed Kubernetes",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 228,
+      "date": "2027-03-27",
+      "level": "Expert",
+      "topic": "[Expert] Cloud and infrastructure: Vertex AI vs SageMaker vs Azure ML vs self managed Kubernetes",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 229,
+      "date": "2027-03-28",
+      "level": "Beginner",
+      "topic": "[Beginner] Cloud and infrastructure: Private networking IAM secrets encryption and tenant isolation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 230,
+      "date": "2027-03-29",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Cloud and infrastructure: Private networking IAM secrets encryption and tenant isolation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 231,
+      "date": "2027-03-30",
+      "level": "Advanced",
+      "topic": "[Advanced] Cloud and infrastructure: Private networking IAM secrets encryption and tenant isolation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 232,
+      "date": "2027-03-31",
+      "level": "Expert",
+      "topic": "[Expert] Cloud and infrastructure: Private networking IAM secrets encryption and tenant isolation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 233,
+      "date": "2027-04-01",
+      "level": "Beginner",
+      "topic": "[Beginner] Cloud and infrastructure: Terraform modules state environments and MLOps promotion",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 234,
+      "date": "2027-04-02",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Cloud and infrastructure: Terraform modules state environments and MLOps promotion",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 235,
+      "date": "2027-04-03",
+      "level": "Advanced",
+      "topic": "[Advanced] Cloud and infrastructure: Terraform modules state environments and MLOps promotion",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 236,
+      "date": "2027-04-04",
+      "level": "Expert",
+      "topic": "[Expert] Cloud and infrastructure: Terraform modules state environments and MLOps promotion",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 237,
+      "date": "2027-04-05",
+      "level": "Beginner",
+      "topic": "[Beginner] Cloud and infrastructure: Multi region availability disaster recovery RTO and RPO",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 238,
+      "date": "2027-04-06",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Cloud and infrastructure: Multi region availability disaster recovery RTO and RPO",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 239,
+      "date": "2027-04-07",
+      "level": "Advanced",
+      "topic": "[Advanced] Cloud and infrastructure: Multi region availability disaster recovery RTO and RPO",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 240,
+      "date": "2027-04-08",
+      "level": "Expert",
+      "topic": "[Expert] Cloud and infrastructure: Multi region availability disaster recovery RTO and RPO",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 241,
+      "date": "2027-04-09",
+      "level": "Beginner",
+      "topic": "[Beginner] GPU and inference: GPU CUDA memory bandwidth compute and utilization fundamentals",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 242,
+      "date": "2027-04-10",
+      "level": "Intermediate",
+      "topic": "[Intermediate] GPU and inference: GPU CUDA memory bandwidth compute and utilization fundamentals",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 243,
+      "date": "2027-04-11",
+      "level": "Advanced",
+      "topic": "[Advanced] GPU and inference: GPU CUDA memory bandwidth compute and utilization fundamentals",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 244,
+      "date": "2027-04-12",
+      "level": "Expert",
+      "topic": "[Expert] GPU and inference: GPU CUDA memory bandwidth compute and utilization fundamentals",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 245,
+      "date": "2027-04-13",
+      "level": "Beginner",
+      "topic": "[Beginner] GPU and inference: Quantization pruning distillation and compilation tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 246,
+      "date": "2027-04-14",
+      "level": "Intermediate",
+      "topic": "[Intermediate] GPU and inference: Quantization pruning distillation and compilation tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 247,
+      "date": "2027-04-15",
+      "level": "Advanced",
+      "topic": "[Advanced] GPU and inference: Quantization pruning distillation and compilation tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 248,
+      "date": "2027-04-16",
+      "level": "Expert",
+      "topic": "[Expert] GPU and inference: Quantization pruning distillation and compilation tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 249,
+      "date": "2027-04-17",
+      "level": "Beginner",
+      "topic": "[Beginner] GPU and inference: vLLM paged attention continuous batching and throughput tuning",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 250,
+      "date": "2027-04-18",
+      "level": "Intermediate",
+      "topic": "[Intermediate] GPU and inference: vLLM paged attention continuous batching and throughput tuning",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 251,
+      "date": "2027-04-19",
+      "level": "Advanced",
+      "topic": "[Advanced] GPU and inference: vLLM paged attention continuous batching and throughput tuning",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 252,
+      "date": "2027-04-20",
+      "level": "Expert",
+      "topic": "[Expert] GPU and inference: vLLM paged attention continuous batching and throughput tuning",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 253,
+      "date": "2027-04-21",
+      "level": "Beginner",
+      "topic": "[Beginner] GPU and inference: Triton TensorRT LLM and multi GPU inference architecture",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 254,
+      "date": "2027-04-22",
+      "level": "Intermediate",
+      "topic": "[Intermediate] GPU and inference: Triton TensorRT LLM and multi GPU inference architecture",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 255,
+      "date": "2027-04-23",
+      "level": "Advanced",
+      "topic": "[Advanced] GPU and inference: Triton TensorRT LLM and multi GPU inference architecture",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 256,
+      "date": "2027-04-24",
+      "level": "Expert",
+      "topic": "[Expert] GPU and inference: Triton TensorRT LLM and multi GPU inference architecture",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 257,
+      "date": "2027-04-25",
+      "level": "Beginner",
+      "topic": "[Beginner] Observability: Model quality data quality drift latency traffic errors and saturation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 258,
+      "date": "2027-04-26",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Observability: Model quality data quality drift latency traffic errors and saturation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 259,
+      "date": "2027-04-27",
+      "level": "Advanced",
+      "topic": "[Advanced] Observability: Model quality data quality drift latency traffic errors and saturation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 260,
+      "date": "2027-04-28",
+      "level": "Expert",
+      "topic": "[Expert] Observability: Model quality data quality drift latency traffic errors and saturation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 261,
+      "date": "2027-04-29",
+      "level": "Beginner",
+      "topic": "[Beginner] Observability: Metrics logs traces correlation IDs Prometheus and OpenTelemetry",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 262,
+      "date": "2027-04-30",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Observability: Metrics logs traces correlation IDs Prometheus and OpenTelemetry",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 263,
+      "date": "2027-05-01",
+      "level": "Advanced",
+      "topic": "[Advanced] Observability: Metrics logs traces correlation IDs Prometheus and OpenTelemetry",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 264,
+      "date": "2027-05-02",
+      "level": "Expert",
+      "topic": "[Expert] Observability: Metrics logs traces correlation IDs Prometheus and OpenTelemetry",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 265,
+      "date": "2027-05-03",
+      "level": "Beginner",
+      "topic": "[Beginner] Observability: LLM token cost retrieval tool safety and quality observability",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 266,
+      "date": "2027-05-04",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Observability: LLM token cost retrieval tool safety and quality observability",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 267,
+      "date": "2027-05-05",
+      "level": "Advanced",
+      "topic": "[Advanced] Observability: LLM token cost retrieval tool safety and quality observability",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 268,
+      "date": "2027-05-06",
+      "level": "Expert",
+      "topic": "[Expert] Observability: LLM token cost retrieval tool safety and quality observability",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 269,
+      "date": "2027-05-07",
+      "level": "Beginner",
+      "topic": "[Beginner] Observability: SLOs alerts error budgets feedback loops and human review",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 270,
+      "date": "2027-05-08",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Observability: SLOs alerts error budgets feedback loops and human review",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 271,
+      "date": "2027-05-09",
+      "level": "Advanced",
+      "topic": "[Advanced] Observability: SLOs alerts error budgets feedback loops and human review",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 272,
+      "date": "2027-05-10",
+      "level": "Expert",
+      "topic": "[Expert] Observability: SLOs alerts error budgets feedback loops and human review",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 273,
+      "date": "2027-05-11",
+      "level": "Beginner",
+      "topic": "[Beginner] Security and governance: Threat modeling prompt injection exfiltration and retrieval poisoning",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 274,
+      "date": "2027-05-12",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Security and governance: Threat modeling prompt injection exfiltration and retrieval poisoning",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 275,
+      "date": "2027-05-13",
+      "level": "Advanced",
+      "topic": "[Advanced] Security and governance: Threat modeling prompt injection exfiltration and retrieval poisoning",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 276,
+      "date": "2027-05-14",
+      "level": "Expert",
+      "topic": "[Expert] Security and governance: Threat modeling prompt injection exfiltration and retrieval poisoning",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 277,
+      "date": "2027-05-15",
+      "level": "Beginner",
+      "topic": "[Beginner] Security and governance: PII redaction retention authorization and tenant boundaries",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 278,
+      "date": "2027-05-16",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Security and governance: PII redaction retention authorization and tenant boundaries",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 279,
+      "date": "2027-05-17",
+      "level": "Advanced",
+      "topic": "[Advanced] Security and governance: PII redaction retention authorization and tenant boundaries",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 280,
+      "date": "2027-05-18",
+      "level": "Expert",
+      "topic": "[Expert] Security and governance: PII redaction retention authorization and tenant boundaries",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 281,
+      "date": "2027-05-19",
+      "level": "Beginner",
+      "topic": "[Beginner] Security and governance: Model supply chain SBOM signing provenance and artifact controls",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 282,
+      "date": "2027-05-20",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Security and governance: Model supply chain SBOM signing provenance and artifact controls",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 283,
+      "date": "2027-05-21",
+      "level": "Advanced",
+      "topic": "[Advanced] Security and governance: Model supply chain SBOM signing provenance and artifact controls",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 284,
+      "date": "2027-05-22",
+      "level": "Expert",
+      "topic": "[Expert] Security and governance: Model supply chain SBOM signing provenance and artifact controls",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 285,
+      "date": "2027-05-23",
+      "level": "Beginner",
+      "topic": "[Beginner] Security and governance: Bias explainability audit trails approvals and human oversight",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 286,
+      "date": "2027-05-24",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Security and governance: Bias explainability audit trails approvals and human oversight",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 287,
+      "date": "2027-05-25",
+      "level": "Advanced",
+      "topic": "[Advanced] Security and governance: Bias explainability audit trails approvals and human oversight",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 288,
+      "date": "2027-05-26",
+      "level": "Expert",
+      "topic": "[Expert] Security and governance: Bias explainability audit trails approvals and human oversight",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 289,
+      "date": "2027-05-27",
+      "level": "Beginner",
+      "topic": "[Beginner] System design interviews: Design an enterprise document question answering platform",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 290,
+      "date": "2027-05-28",
+      "level": "Intermediate",
+      "topic": "[Intermediate] System design interviews: Design an enterprise document question answering platform",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 291,
+      "date": "2027-05-29",
+      "level": "Advanced",
+      "topic": "[Advanced] System design interviews: Design an enterprise document question answering platform",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 292,
+      "date": "2027-05-30",
+      "level": "Expert",
+      "topic": "[Expert] System design interviews: Design an enterprise document question answering platform",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 293,
+      "date": "2027-05-31",
+      "level": "Beginner",
+      "topic": "[Beginner] System design interviews: Design a real time recommendation and ranking platform",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 294,
+      "date": "2027-06-01",
+      "level": "Intermediate",
+      "topic": "[Intermediate] System design interviews: Design a real time recommendation and ranking platform",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 295,
+      "date": "2027-06-02",
+      "level": "Advanced",
+      "topic": "[Advanced] System design interviews: Design a real time recommendation and ranking platform",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 296,
+      "date": "2027-06-03",
+      "level": "Expert",
+      "topic": "[Expert] System design interviews: Design a real time recommendation and ranking platform",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 297,
+      "date": "2027-06-04",
+      "level": "Beginner",
+      "topic": "[Beginner] System design interviews: Design a multi tenant LLM gateway with quotas and fallbacks",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 298,
+      "date": "2027-06-05",
+      "level": "Intermediate",
+      "topic": "[Intermediate] System design interviews: Design a multi tenant LLM gateway with quotas and fallbacks",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 299,
+      "date": "2027-06-06",
+      "level": "Advanced",
+      "topic": "[Advanced] System design interviews: Design a multi tenant LLM gateway with quotas and fallbacks",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 300,
+      "date": "2027-06-07",
+      "level": "Expert",
+      "topic": "[Expert] System design interviews: Design a multi tenant LLM gateway with quotas and fallbacks",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 301,
+      "date": "2027-06-08",
+      "level": "Beginner",
+      "topic": "[Beginner] System design interviews: Design a production computer vision or fraud detection platform",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 302,
+      "date": "2027-06-09",
+      "level": "Intermediate",
+      "topic": "[Intermediate] System design interviews: Design a production computer vision or fraud detection platform",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 303,
+      "date": "2027-06-10",
+      "level": "Advanced",
+      "topic": "[Advanced] System design interviews: Design a production computer vision or fraud detection platform",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 304,
+      "date": "2027-06-11",
+      "level": "Expert",
+      "topic": "[Expert] System design interviews: Design a production computer vision or fraud detection platform",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 305,
+      "date": "2027-06-12",
+      "level": "Beginner",
+      "topic": "[Beginner] System design interviews: Estimate capacity throughput storage bandwidth and latency budgets",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 306,
+      "date": "2027-06-13",
+      "level": "Intermediate",
+      "topic": "[Intermediate] System design interviews: Estimate capacity throughput storage bandwidth and latency budgets",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 307,
+      "date": "2027-06-14",
+      "level": "Advanced",
+      "topic": "[Advanced] System design interviews: Estimate capacity throughput storage bandwidth and latency budgets",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 308,
+      "date": "2027-06-15",
+      "level": "Expert",
+      "topic": "[Expert] System design interviews: Estimate capacity throughput storage bandwidth and latency budgets",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 309,
+      "date": "2027-06-16",
+      "level": "Beginner",
+      "topic": "[Beginner] System design interviews: Choose consistency availability partitioning and replication strategies",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 310,
+      "date": "2027-06-17",
+      "level": "Intermediate",
+      "topic": "[Intermediate] System design interviews: Choose consistency availability partitioning and replication strategies",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 311,
+      "date": "2027-06-18",
+      "level": "Advanced",
+      "topic": "[Advanced] System design interviews: Choose consistency availability partitioning and replication strategies",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 312,
+      "date": "2027-06-19",
+      "level": "Expert",
+      "topic": "[Expert] System design interviews: Choose consistency availability partitioning and replication strategies",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 313,
+      "date": "2027-06-20",
+      "level": "Beginner",
+      "topic": "[Beginner] System design interviews: Design caching rate limiting load balancing and backpressure",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 314,
+      "date": "2027-06-21",
+      "level": "Intermediate",
+      "topic": "[Intermediate] System design interviews: Design caching rate limiting load balancing and backpressure",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 315,
+      "date": "2027-06-22",
+      "level": "Advanced",
+      "topic": "[Advanced] System design interviews: Design caching rate limiting load balancing and backpressure",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 316,
+      "date": "2027-06-23",
+      "level": "Expert",
+      "topic": "[Expert] System design interviews: Design caching rate limiting load balancing and backpressure",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 317,
+      "date": "2027-06-24",
+      "level": "Beginner",
+      "topic": "[Beginner] System design interviews: Design queues event streams idempotent consumers and dead letter handling",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 318,
+      "date": "2027-06-25",
+      "level": "Intermediate",
+      "topic": "[Intermediate] System design interviews: Design queues event streams idempotent consumers and dead letter handling",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 319,
+      "date": "2027-06-26",
+      "level": "Advanced",
+      "topic": "[Advanced] System design interviews: Design queues event streams idempotent consumers and dead letter handling",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 320,
+      "date": "2027-06-27",
+      "level": "Expert",
+      "topic": "[Expert] System design interviews: Design queues event streams idempotent consumers and dead letter handling",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 321,
+      "date": "2027-06-28",
+      "level": "Beginner",
+      "topic": "[Beginner] System design interviews: Design database partitioning sharding indexing and migration workflows",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 322,
+      "date": "2027-06-29",
+      "level": "Intermediate",
+      "topic": "[Intermediate] System design interviews: Design database partitioning sharding indexing and migration workflows",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 323,
+      "date": "2027-06-30",
+      "level": "Advanced",
+      "topic": "[Advanced] System design interviews: Design database partitioning sharding indexing and migration workflows",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 324,
+      "date": "2027-07-01",
+      "level": "Expert",
+      "topic": "[Expert] System design interviews: Design database partitioning sharding indexing and migration workflows",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 325,
+      "date": "2027-07-02",
+      "level": "Beginner",
+      "topic": "[Beginner] System design interviews: Design high availability disaster recovery and multi region failover",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 326,
+      "date": "2027-07-03",
+      "level": "Intermediate",
+      "topic": "[Intermediate] System design interviews: Design high availability disaster recovery and multi region failover",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 327,
+      "date": "2027-07-04",
+      "level": "Advanced",
+      "topic": "[Advanced] System design interviews: Design high availability disaster recovery and multi region failover",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 328,
+      "date": "2027-07-05",
+      "level": "Expert",
+      "topic": "[Expert] System design interviews: Design high availability disaster recovery and multi region failover",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 329,
+      "date": "2027-07-06",
+      "level": "Beginner",
+      "topic": "[Beginner] System design interviews: Explain observability SLOs security cost and operational ownership",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 330,
+      "date": "2027-07-07",
+      "level": "Intermediate",
+      "topic": "[Intermediate] System design interviews: Explain observability SLOs security cost and operational ownership",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 331,
+      "date": "2027-07-08",
+      "level": "Advanced",
+      "topic": "[Advanced] System design interviews: Explain observability SLOs security cost and operational ownership",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 332,
+      "date": "2027-07-09",
+      "level": "Expert",
+      "topic": "[Expert] System design interviews: Explain observability SLOs security cost and operational ownership",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 333,
+      "date": "2027-07-10",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Big O time space complexity and practical performance analysis",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 334,
+      "date": "2027-07-11",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Big O time space complexity and practical performance analysis",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 335,
+      "date": "2027-07-12",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Big O time space complexity and practical performance analysis",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 336,
+      "date": "2027-07-13",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Big O time space complexity and practical performance analysis",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 337,
+      "date": "2027-07-14",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Arrays strings two pointers sliding windows and prefix sums",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 338,
+      "date": "2027-07-15",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Arrays strings two pointers sliding windows and prefix sums",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 339,
+      "date": "2027-07-16",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Arrays strings two pointers sliding windows and prefix sums",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 340,
+      "date": "2027-07-17",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Arrays strings two pointers sliding windows and prefix sums",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 341,
+      "date": "2027-07-18",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Hash maps hash sets collision behavior and frequency problems",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 342,
+      "date": "2027-07-19",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Hash maps hash sets collision behavior and frequency problems",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 343,
+      "date": "2027-07-20",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Hash maps hash sets collision behavior and frequency problems",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 344,
+      "date": "2027-07-21",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Hash maps hash sets collision behavior and frequency problems",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 345,
+      "date": "2027-07-22",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Linked lists fast slow pointers reversal and cycle detection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 346,
+      "date": "2027-07-23",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Linked lists fast slow pointers reversal and cycle detection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 347,
+      "date": "2027-07-24",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Linked lists fast slow pointers reversal and cycle detection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 348,
+      "date": "2027-07-25",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Linked lists fast slow pointers reversal and cycle detection",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 349,
+      "date": "2027-07-26",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Stacks queues monotonic structures and streaming problems",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 350,
+      "date": "2027-07-27",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Stacks queues monotonic structures and streaming problems",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 351,
+      "date": "2027-07-28",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Stacks queues monotonic structures and streaming problems",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 352,
+      "date": "2027-07-29",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Stacks queues monotonic structures and streaming problems",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 353,
+      "date": "2027-07-30",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Binary search boundaries rotated arrays and search on answers",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 354,
+      "date": "2027-07-31",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Binary search boundaries rotated arrays and search on answers",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 355,
+      "date": "2027-08-01",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Binary search boundaries rotated arrays and search on answers",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 356,
+      "date": "2027-08-02",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Binary search boundaries rotated arrays and search on answers",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 357,
+      "date": "2027-08-03",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Trees traversals recursion depth and binary search tree invariants",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 358,
+      "date": "2027-08-04",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Trees traversals recursion depth and binary search tree invariants",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 359,
+      "date": "2027-08-05",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Trees traversals recursion depth and binary search tree invariants",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 360,
+      "date": "2027-08-06",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Trees traversals recursion depth and binary search tree invariants",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 361,
+      "date": "2027-08-07",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Heaps priority queues top K selection and streaming aggregation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 362,
+      "date": "2027-08-08",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Heaps priority queues top K selection and streaming aggregation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 363,
+      "date": "2027-08-09",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Heaps priority queues top K selection and streaming aggregation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 364,
+      "date": "2027-08-10",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Heaps priority queues top K selection and streaming aggregation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 365,
+      "date": "2027-08-11",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Graphs BFS DFS topological sorting and connected components",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 366,
+      "date": "2027-08-12",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Graphs BFS DFS topological sorting and connected components",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 367,
+      "date": "2027-08-13",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Graphs BFS DFS topological sorting and connected components",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 368,
+      "date": "2027-08-14",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Graphs BFS DFS topological sorting and connected components",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 369,
+      "date": "2027-08-15",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Shortest paths Dijkstra Bellman Ford and weighted graph tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 370,
+      "date": "2027-08-16",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Shortest paths Dijkstra Bellman Ford and weighted graph tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 371,
+      "date": "2027-08-17",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Shortest paths Dijkstra Bellman Ford and weighted graph tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 372,
+      "date": "2027-08-18",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Shortest paths Dijkstra Bellman Ford and weighted graph tradeoffs",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 373,
+      "date": "2027-08-19",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Union find connectivity path compression and minimum spanning trees",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 374,
+      "date": "2027-08-20",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Union find connectivity path compression and minimum spanning trees",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 375,
+      "date": "2027-08-21",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Union find connectivity path compression and minimum spanning trees",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 376,
+      "date": "2027-08-22",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Union find connectivity path compression and minimum spanning trees",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 377,
+      "date": "2027-08-23",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Recursion backtracking subsets permutations and constraint search",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 378,
+      "date": "2027-08-24",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Recursion backtracking subsets permutations and constraint search",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 379,
+      "date": "2027-08-25",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Recursion backtracking subsets permutations and constraint search",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 380,
+      "date": "2027-08-26",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Recursion backtracking subsets permutations and constraint search",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 381,
+      "date": "2027-08-27",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Dynamic programming states transitions memoization and tabulation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 382,
+      "date": "2027-08-28",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Dynamic programming states transitions memoization and tabulation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 383,
+      "date": "2027-08-29",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Dynamic programming states transitions memoization and tabulation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 384,
+      "date": "2027-08-30",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Dynamic programming states transitions memoization and tabulation",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 385,
+      "date": "2027-08-31",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Greedy algorithms interval scheduling and proof of correctness",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 386,
+      "date": "2027-09-01",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Greedy algorithms interval scheduling and proof of correctness",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 387,
+      "date": "2027-09-02",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Greedy algorithms interval scheduling and proof of correctness",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 388,
+      "date": "2027-09-03",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Greedy algorithms interval scheduling and proof of correctness",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 389,
+      "date": "2027-09-04",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Tries suffix structures and text retrieval applications",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 390,
+      "date": "2027-09-05",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Tries suffix structures and text retrieval applications",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 391,
+      "date": "2027-09-06",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Tries suffix structures and text retrieval applications",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 392,
+      "date": "2027-09-07",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Tries suffix structures and text retrieval applications",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 393,
+      "date": "2027-09-08",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Sorting selection partitioning stability and external sorting",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 394,
+      "date": "2027-09-09",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Sorting selection partitioning stability and external sorting",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 395,
+      "date": "2027-09-10",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Sorting selection partitioning stability and external sorting",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 396,
+      "date": "2027-09-11",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Sorting selection partitioning stability and external sorting",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 397,
+      "date": "2027-09-12",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Bit manipulation masks sets counters and low level optimization",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 398,
+      "date": "2027-09-13",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Bit manipulation masks sets counters and low level optimization",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 399,
+      "date": "2027-09-14",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Bit manipulation masks sets counters and low level optimization",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 400,
+      "date": "2027-09-15",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Bit manipulation masks sets counters and low level optimization",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 401,
+      "date": "2027-09-16",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Reservoir sampling randomized algorithms and approximate counting",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 402,
+      "date": "2027-09-17",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Reservoir sampling randomized algorithms and approximate counting",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 403,
+      "date": "2027-09-18",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Reservoir sampling randomized algorithms and approximate counting",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 404,
+      "date": "2027-09-19",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Reservoir sampling randomized algorithms and approximate counting",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 405,
+      "date": "2027-09-20",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Concurrency safe data structures queues locks and contention",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 406,
+      "date": "2027-09-21",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Concurrency safe data structures queues locks and contention",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 407,
+      "date": "2027-09-22",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Concurrency safe data structures queues locks and contention",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 408,
+      "date": "2027-09-23",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Concurrency safe data structures queues locks and contention",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 409,
+      "date": "2027-09-24",
+      "level": "Beginner",
+      "topic": "[Beginner] Data structures and algorithms: Applying DSA to feature pipelines vector search and model serving",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 410,
+      "date": "2027-09-25",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Data structures and algorithms: Applying DSA to feature pipelines vector search and model serving",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 411,
+      "date": "2027-09-26",
+      "level": "Advanced",
+      "topic": "[Advanced] Data structures and algorithms: Applying DSA to feature pipelines vector search and model serving",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 412,
+      "date": "2027-09-27",
+      "level": "Expert",
+      "topic": "[Expert] Data structures and algorithms: Applying DSA to feature pipelines vector search and model serving",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 413,
+      "date": "2027-09-28",
+      "level": "Beginner",
+      "topic": "[Beginner] Debugging interviews: Debug a model that succeeds offline but fails in production",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 414,
+      "date": "2027-09-29",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Debugging interviews: Debug a model that succeeds offline but fails in production",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 415,
+      "date": "2027-09-30",
+      "level": "Advanced",
+      "topic": "[Advanced] Debugging interviews: Debug a model that succeeds offline but fails in production",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 416,
+      "date": "2027-10-01",
+      "level": "Expert",
+      "topic": "[Expert] Debugging interviews: Debug a model that succeeds offline but fails in production",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 417,
+      "date": "2027-10-02",
+      "level": "Beginner",
+      "topic": "[Beginner] Debugging interviews: Investigate rising LLM latency and cost without losing quality",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 418,
+      "date": "2027-10-03",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Debugging interviews: Investigate rising LLM latency and cost without losing quality",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 419,
+      "date": "2027-10-04",
+      "level": "Advanced",
+      "topic": "[Advanced] Debugging interviews: Investigate rising LLM latency and cost without losing quality",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 420,
+      "date": "2027-10-05",
+      "level": "Expert",
+      "topic": "[Expert] Debugging interviews: Investigate rising LLM latency and cost without losing quality",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 421,
+      "date": "2027-10-06",
+      "level": "Beginner",
+      "topic": "[Beginner] Debugging interviews: Recover a RAG service producing unsupported answers",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 422,
+      "date": "2027-10-07",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Debugging interviews: Recover a RAG service producing unsupported answers",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 423,
+      "date": "2027-10-08",
+      "level": "Advanced",
+      "topic": "[Advanced] Debugging interviews: Recover a RAG service producing unsupported answers",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 424,
+      "date": "2027-10-09",
+      "level": "Expert",
+      "topic": "[Expert] Debugging interviews: Recover a RAG service producing unsupported answers",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 425,
+      "date": "2027-10-10",
+      "level": "Beginner",
+      "topic": "[Beginner] Debugging interviews: Diagnose low GPU utilization and unsafe deployment controls",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 426,
+      "date": "2027-10-11",
+      "level": "Intermediate",
+      "topic": "[Intermediate] Debugging interviews: Diagnose low GPU utilization and unsafe deployment controls",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 427,
+      "date": "2027-10-12",
+      "level": "Advanced",
+      "topic": "[Advanced] Debugging interviews: Diagnose low GPU utilization and unsafe deployment controls",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    },
+    {
+      "sequence": 428,
+      "date": "2027-10-13",
+      "level": "Expert",
+      "topic": "[Expert] Debugging interviews: Diagnose low GPU utilization and unsafe deployment controls",
+      "status": "draft",
+      "publish": false,
+      "postPath": "",
+      "imagePath": ""
+    }
+  ]
+}

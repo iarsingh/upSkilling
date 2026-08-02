@@ -17,6 +17,7 @@ const scenarioByPillar = {
   "Kubernetes Series": "", // TODO: e.g. an incident you diagnosed involving requests/limits, autoscaling, or probes
   "MLOps Series": "", // TODO: e.g. a model rollout or drift situation you had to make a call on
   "Data Science Series": "", // TODO: e.g. a data quality or leakage issue you caught (or missed) in review
+  "AI Engineer Revision Series": "", // TODO: e.g. an LLM quality, cost, retrieval, or serving tradeoff you handled
   "IT Engineering Series": "" // TODO: e.g. an SLO breach, IaC review finding, or on-call decision
 };
 
@@ -45,6 +46,13 @@ function fallbackPost(topic) {
       "Choose metrics that match business cost, not only leaderboard performance.",
       "Keep explanations simple enough for non-ML stakeholders to challenge."
     ],
+    "AI Engineer Revision Series": [
+      "Recall: define the concept in one sentence and name the problem it solves.",
+      "Compare: know when to use it, when not to use it, and the main alternative.",
+      "Production: check quality, safety, latency, cost, observability, and rollback.",
+      "Interview: explain one tradeoff using a concrete system or failure scenario.",
+      "Practice: build or test one small end-to-end example instead of only reading."
+    ],
     "IT Engineering Series": [
       "Reliable platforms are built from repeatable operating habits.",
       "Automate the boring paths first: deploy, rollback, backup, alert, and audit.",
@@ -58,7 +66,7 @@ function fallbackPost(topic) {
     body: `In real engineering teams, this topic matters because small design choices become operational patterns over time. A clean setup helps teams ship faster, debug faster, and reduce avoidable incidents.`,
     scenario: fallbackScenario(topic),
     bullets: bulletsByPillar[topic.pillar] || bulletsByPillar["IT Engineering Series"],
-    cta: "What is one production lesson you learned around this?",
+    cta: "Save this as a production revision note and apply the checklist in a small implementation.",
     hashtags: topic.hashtags,
     imageTitle: topic.pillar,
     imageSubtitle: topic.topic
@@ -66,13 +74,20 @@ function fallbackPost(topic) {
 }
 
 function normalizePost(raw, topic) {
+  const listItem = (value) => {
+    if (typeof value === "string") return value.trim();
+    if (value && typeof value === "object") {
+      return Object.values(value).map((part) => String(part).trim()).filter(Boolean).join(": ");
+    }
+    return String(value || "").trim();
+  };
   return {
     hook: String(raw.hook || topic.topic).trim(),
     body: String(raw.body || "").trim(),
     answer: String(raw.answer || "").trim(),
     scenario: String(raw.scenario || "").trim(),
-    flow: Array.isArray(raw.flow) ? raw.flow.slice(0, 6).map(String) : [],
-    bullets: Array.isArray(raw.bullets) ? raw.bullets.slice(0, 5).map(String) : [],
+    flow: Array.isArray(raw.flow) ? raw.flow.slice(0, 6).map(listItem).filter(Boolean) : [],
+    bullets: Array.isArray(raw.bullets) ? raw.bullets.slice(0, 5).map(listItem).filter(Boolean) : [],
     cta: String(raw.cta || "What would you add from your experience?").trim(),
     hashtags: Array.isArray(raw.hashtags) && raw.hashtags.length ? raw.hashtags : topic.hashtags,
     imageTitle: String(raw.imageTitle || topic.pillar).trim(),
@@ -99,10 +114,10 @@ function renderLinkedInText(post) {
   const sections = [
     post.hook,
     post.body,
-    post.answer ? `Answer:\n${post.answer}` : "",
-    flow ? `Architecture flow:\n${flow}` : "",
-    bullets ? `Production checklist:\n${bullets}` : "",
-    post.scenario ? `Scenario:\n${post.scenario}` : "",
+    post.answer,
+    flow ? `A practical implementation path:\n${flow}` : "",
+    bullets ? `What matters in production:\n${bullets}` : "",
+    post.scenario,
     post.cta,
     hashtags
   ].filter(Boolean);

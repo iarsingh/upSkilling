@@ -1,6 +1,8 @@
 # LinkedIn Daily Content Automation
 
-Local automation for generating daily LinkedIn posts about Kubernetes, MLOps, Data Science, GenAI, DevOps, and cloud engineering.
+Local automation for generating daily LinkedIn posts about Kubernetes, MLOps, Data Science, AI Engineering, GenAI, DevOps, and cloud engineering.
+
+The AI Engineer Revision Series is an open-ended interview knowledge library rather than a fixed-day challenge. It covers software engineering, statistics, ML, deep learning, LLMs, RAG, agents, MCP, MLOps, serving, Kubernetes, cloud, GPUs, observability, security, system design, and debugging. Every core subject is a four-post progression—Beginner, Intermediate, Advanced, and Expert—so each post remains readable while the complete sequence reaches production and staff-level depth. Posts reinforce internals, implementation, architecture flow, production tradeoffs, failure analysis, interviewer follow-ups, and hands-on work.
 
 ## What It Does
 
