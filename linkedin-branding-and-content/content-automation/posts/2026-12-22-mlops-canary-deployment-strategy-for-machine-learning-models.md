@@ -1,6 +1,6 @@
 ---
-date: 2026-12-22
-slot: 09:30
+date: 2026-09-12
+slot: 19:30
 day: 47
 series: MLOps Series
 topic: Canary deployment strategy for machine learning models

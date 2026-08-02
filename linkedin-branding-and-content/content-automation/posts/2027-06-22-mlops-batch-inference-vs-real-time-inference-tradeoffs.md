@@ -1,5 +1,5 @@
 ---
-date: 2027-06-22
+date: 2026-11-03
 slot: 09:30
 day: 99
 series: MLOps Series

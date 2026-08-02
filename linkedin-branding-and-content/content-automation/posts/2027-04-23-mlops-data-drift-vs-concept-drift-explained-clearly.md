@@ -1,6 +1,6 @@
 ---
-date: 2027-04-23
-slot: 09:30
+date: 2026-10-17
+slot: 19:30
 day: 82
 series: MLOps Series
 topic: Data drift vs concept drift explained clearly

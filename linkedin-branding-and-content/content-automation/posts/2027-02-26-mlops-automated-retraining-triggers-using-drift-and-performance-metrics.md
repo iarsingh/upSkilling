@@ -1,6 +1,6 @@
 ---
-date: 2027-02-26
-slot: 09:30
+date: 2026-10-01
+slot: 14:30
 day: 66
 series: MLOps Series
 topic: Automated retraining triggers using drift and performance metrics

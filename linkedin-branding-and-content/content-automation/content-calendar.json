@@ -1,6 +1,6 @@
 {
   "createdAt": "2026-07-14T00:32:25.319Z",
-  "schedule": "one-post-per-day",
+  "schedule": "daily-ai-ml-focus",
   "days": 119,
   "startDate": "2026-07-14",
   "items": [
@@ -453,10 +453,10 @@
       "draftPath": "posts/2026-08-02-fundamentals-linux-performance-troubleshooting-with-strace-perf-and-proc.md"
     },
     {
-      "id": "2026-08-04-mlops",
+      "id": "2026-08-03-mlops",
       "day": 7,
-      "date": "2026-08-04",
-      "slot": "09:30",
+      "date": "2026-08-03",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Data drift vs concept drift explained clearly",
@@ -472,12 +472,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Data drift vs concept drift explained clearly fails, random changes make recovery slower. Start with evidence.\n\nTopic: Data drift vs concept drift explained clearly\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Data drift vs concept drift explained clearly failed in production, which signal would you check first—and why?\n\nDay 7/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-08-04-mlops-data-drift-vs-concept-drift-explained-clearly.md"
+      "draftPath": "posts/2026-08-04-mlops-data-drift-vs-concept-drift-explained-clearly.md",
+      "imagePath": "assets/2026-08-04-mlops-data-drift-vs-concept-drift-explained-clearly-doodle.png"
     },
     {
-      "id": "2026-08-07-mlops",
+      "id": "2026-08-04-mlops",
       "day": 8,
-      "date": "2026-08-07",
+      "date": "2026-08-04",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -494,13 +495,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Building audit-ready ML lineage on cloud platforms: the real design question is which failure the system can tolerate.\n\nTopic: Building audit-ready ML lineage on cloud platforms\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Building audit-ready ML lineage on cloud platforms creates the largest operational risk?\n\nDay 8/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-08-07-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.md"
+      "draftPath": "posts/2026-08-07-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.md",
+      "imagePath": "assets/2026-08-07-mlops-building-audit-ready-ml-lineage-on-cloud-platforms-doodle.png"
     },
     {
-      "id": "2026-08-11-mlops",
+      "id": "2026-08-05-mlops",
       "day": 9,
-      "date": "2026-08-11",
-      "slot": "09:30",
+      "date": "2026-08-05",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Batch inference vs real-time inference tradeoffs",
@@ -516,13 +518,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about Batch inference vs real-time inference tradeoffs will not demonstrate senior-level judgment.\n\nTopic: Batch inference vs real-time inference tradeoffs\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain Batch inference vs real-time inference tradeoffs in two minutes without sounding theoretical?\n\nDay 9/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-08-11-mlops-batch-inference-vs-real-time-inference-tradeoffs.md"
+      "draftPath": "posts/2026-08-11-mlops-batch-inference-vs-real-time-inference-tradeoffs.md",
+      "imagePath": "assets/2026-08-11-mlops-batch-inference-vs-real-time-inference-tradeoffs-doodle.png"
     },
     {
-      "id": "2026-08-14-mlops",
+      "id": "2026-08-06-mlops",
       "day": 10,
-      "date": "2026-08-14",
-      "slot": "09:30",
+      "date": "2026-08-06",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Rollback strategy for bad model releases",
@@ -538,12 +541,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Rollback strategy for bad model releases? Build it small, break it deliberately, and observe the failure.\n\nTopic: Rollback strategy for bad model releases\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Rollback strategy for bad model releases?\n\nDay 10/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-08-14-mlops-rollback-strategy-for-bad-model-releases.md"
+      "draftPath": "posts/2026-08-14-mlops-rollback-strategy-for-bad-model-releases.md",
+      "imagePath": "assets/2026-08-14-mlops-rollback-strategy-for-bad-model-releases-doodle.png"
     },
     {
-      "id": "2026-08-18-mlops",
+      "id": "2026-08-07-mlops",
       "day": 11,
-      "date": "2026-08-18",
+      "date": "2026-08-07",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -560,13 +564,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Model serving on Kubernetes with FastAPI as a definition. Production exposes the missing tradeoffs.\n\nTopic: Model serving on Kubernetes with FastAPI\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Model serving on Kubernetes with FastAPI?\n\nDay 11/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-08-18-mlops-model-serving-on-kubernetes-with-fastapi.md"
+      "draftPath": "posts/2026-08-18-mlops-model-serving-on-kubernetes-with-fastapi.md",
+      "imagePath": "assets/2026-08-18-mlops-model-serving-on-kubernetes-with-fastapi-doodle.png"
     },
     {
-      "id": "2026-08-21-mlops",
+      "id": "2026-08-08-mlops",
       "day": 12,
-      "date": "2026-08-21",
-      "slot": "09:30",
+      "date": "2026-08-08",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Vertex AI vs self-managed GKE for ML workloads",
@@ -582,13 +587,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Vertex AI vs self-managed GKE for ML workloads fails, random changes make recovery slower. Start with evidence.\n\nTopic: Vertex AI vs self-managed GKE for ML workloads\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Vertex AI vs self-managed GKE for ML workloads failed in production, which signal would you check first—and why?\n\nDay 12/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-08-21-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.md"
+      "draftPath": "posts/2026-08-21-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.md",
+      "imagePath": "assets/2026-08-21-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads-doodle.png"
     },
     {
-      "id": "2026-08-25-mlops",
+      "id": "2026-08-09-mlops",
       "day": 13,
-      "date": "2026-08-25",
-      "slot": "09:30",
+      "date": "2026-08-09",
+      "slot": "11:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Inference latency troubleshooting workflow",
@@ -604,13 +610,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Inference latency troubleshooting workflow: the real design question is which failure the system can tolerate.\n\nTopic: Inference latency troubleshooting workflow\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Inference latency troubleshooting workflow creates the largest operational risk?\n\nDay 13/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-08-25-mlops-inference-latency-troubleshooting-workflow.md"
+      "draftPath": "posts/2026-08-25-mlops-inference-latency-troubleshooting-workflow.md",
+      "imagePath": "assets/2026-08-25-mlops-inference-latency-troubleshooting-workflow-doodle.png"
     },
     {
-      "id": "2026-08-28-mlops",
+      "id": "2026-08-10-mlops",
       "day": 14,
-      "date": "2026-08-28",
-      "slot": "09:30",
+      "date": "2026-08-10",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Feature pipeline quality checks before training",
@@ -626,12 +633,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about Feature pipeline quality checks before training will not demonstrate senior-level judgment.\n\nTopic: Feature pipeline quality checks before training\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain Feature pipeline quality checks before training in two minutes without sounding theoretical?\n\nDay 14/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-08-28-mlops-feature-pipeline-quality-checks-before-training.md"
+      "draftPath": "posts/2026-08-28-mlops-feature-pipeline-quality-checks-before-training.md",
+      "imagePath": "assets/2026-08-17-2026-08-17-mlops-feature-pipeline-quality-checks-before-training.png"
     },
     {
-      "id": "2026-09-01-mlops",
+      "id": "2026-08-11-mlops",
       "day": 15,
-      "date": "2026-09-01",
+      "date": "2026-08-11",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -648,13 +656,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Production checklist for ML model deployment? Build it small, break it deliberately, and observe the failure.\n\nTopic: Production checklist for ML model deployment\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Production checklist for ML model deployment?\n\nDay 15/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-09-01-mlops-production-checklist-for-ml-model-deployment.md"
+      "draftPath": "posts/2026-09-01-mlops-production-checklist-for-ml-model-deployment.md",
+      "imagePath": "assets/2026-08-18-2026-08-18-mlops-production-checklist-for-ml-model-deployment.png"
     },
     {
-      "id": "2026-09-04-mlops",
+      "id": "2026-08-12-mlops",
       "day": 16,
-      "date": "2026-09-04",
-      "slot": "09:30",
+      "date": "2026-08-12",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Model registry approvals and controlled production releases",
@@ -670,13 +679,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Model registry approvals and controlled production releases as a definition. Production exposes the missing tradeoffs.\n\nTopic: Model registry approvals and controlled production releases\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Model registry approvals and controlled production releases?\n\nDay 16/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-09-04-mlops-model-registry-approvals-and-controlled-production-releases.md"
+      "draftPath": "posts/2026-09-04-mlops-model-registry-approvals-and-controlled-production-releases.md",
+      "imagePath": "assets/2026-09-04-day-086-model-registry-approvals-and-controlled-production-releases.png"
     },
     {
-      "id": "2026-09-08-mlops",
+      "id": "2026-08-13-mlops",
       "day": 17,
-      "date": "2026-09-08",
-      "slot": "09:30",
+      "date": "2026-08-13",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Canary deployment strategy for machine learning models",
@@ -692,12 +702,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Canary deployment strategy for machine learning models fails, random changes make recovery slower. Start with evidence.\n\nTopic: Canary deployment strategy for machine learning models\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Canary deployment strategy for machine learning models failed in production, which signal would you check first—and why?\n\nDay 17/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-09-08-mlops-canary-deployment-strategy-for-machine-learning-models.md"
+      "draftPath": "posts/2026-09-08-mlops-canary-deployment-strategy-for-machine-learning-models.md",
+      "imagePath": "assets/2026-09-08-day-090-canary-deployment-strategy-for-machine-learning-models.png"
     },
     {
-      "id": "2026-09-11-mlops",
+      "id": "2026-08-14-mlops",
       "day": 18,
-      "date": "2026-09-11",
+      "date": "2026-08-14",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -714,13 +725,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Feature store governance for production ML: the real design question is which failure the system can tolerate.\n\nTopic: Feature store governance for production ML\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Feature store governance for production ML creates the largest operational risk?\n\nDay 18/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-09-11-mlops-feature-store-governance-for-production-ml.md"
+      "draftPath": "posts/2026-09-11-mlops-feature-store-governance-for-production-ml.md",
+      "imagePath": "assets/2026-09-12-day-094-feature-store-governance-for-production-ml.png"
     },
     {
-      "id": "2026-09-15-mlops",
+      "id": "2026-08-15-mlops",
       "day": 19,
-      "date": "2026-09-15",
-      "slot": "09:30",
+      "date": "2026-08-15",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "MLflow and Kubeflow pipeline design for reproducibility",
@@ -736,13 +748,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about MLflow and Kubeflow pipeline design for reproducibility will not demonstrate senior-level judgment.\n\nTopic: MLflow and Kubeflow pipeline design for reproducibility\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain MLflow and Kubeflow pipeline design for reproducibility in two minutes without sounding theoretical?\n\nDay 19/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-09-15-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility.md"
+      "draftPath": "posts/2026-09-15-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility.md",
+      "imagePath": "assets/2026-09-16-day-098-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png"
     },
     {
-      "id": "2026-09-18-mlops",
+      "id": "2026-08-16-mlops",
       "day": 20,
-      "date": "2026-09-18",
-      "slot": "09:30",
+      "date": "2026-08-16",
+      "slot": "11:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Model monitoring signals every ML platform should track",
@@ -758,13 +771,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Model monitoring signals every ML platform should track? Build it small, break it deliberately, and observe the failure.\n\nTopic: Model monitoring signals every ML platform should track\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Model monitoring signals every ML platform should track?\n\nDay 20/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-09-18-mlops-model-monitoring-signals-every-ml-platform-should-track.md"
+      "draftPath": "posts/2026-09-18-mlops-model-monitoring-signals-every-ml-platform-should-track.md",
+      "imagePath": "assets/2026-08-23-day-074-model-monitoring-signals-every-ml-platform-should-track.png"
     },
     {
-      "id": "2026-09-22-mlops",
+      "id": "2026-08-17-mlops",
       "day": 21,
-      "date": "2026-09-22",
-      "slot": "09:30",
+      "date": "2026-08-17",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Automated retraining triggers using drift and performance metrics",
@@ -780,12 +794,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Automated retraining triggers using drift and performance metrics as a definition. Production exposes the missing tradeoffs.\n\nTopic: Automated retraining triggers using drift and performance metrics\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Automated retraining triggers using drift and performance metrics?\n\nDay 21/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-09-22-mlops-automated-retraining-triggers-using-drift-and-performance-metrics.md"
+      "draftPath": "posts/2026-09-22-mlops-automated-retraining-triggers-using-drift-and-performance-metrics.md",
+      "imagePath": "assets/2026-08-27-day-078-automated-retraining-triggers-using-drift-and-performance-metrics.png"
     },
     {
-      "id": "2026-09-25-mlops",
+      "id": "2026-08-18-mlops",
       "day": 22,
-      "date": "2026-09-25",
+      "date": "2026-08-18",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -802,13 +817,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Data drift vs concept drift explained clearly fails, random changes make recovery slower. Start with evidence.\n\nTopic: Data drift vs concept drift explained clearly\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Data drift vs concept drift explained clearly failed in production, which signal would you check first—and why?\n\nDay 22/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-09-25-mlops-data-drift-vs-concept-drift-explained-clearly.md"
+      "draftPath": "posts/2026-09-25-mlops-data-drift-vs-concept-drift-explained-clearly.md",
+      "imagePath": "assets/2026-08-28-day-079-data-drift-vs-concept-drift-explained-clearly.png"
     },
     {
-      "id": "2026-09-29-mlops",
+      "id": "2026-08-19-mlops",
       "day": 23,
-      "date": "2026-09-29",
-      "slot": "09:30",
+      "date": "2026-08-19",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Building audit-ready ML lineage on cloud platforms",
@@ -824,13 +840,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Building audit-ready ML lineage on cloud platforms: the real design question is which failure the system can tolerate.\n\nTopic: Building audit-ready ML lineage on cloud platforms\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Building audit-ready ML lineage on cloud platforms creates the largest operational risk?\n\nDay 23/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-09-29-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.md"
+      "draftPath": "posts/2026-09-29-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.md",
+      "imagePath": "assets/2026-08-31-day-082-building-audit-ready-ml-lineage-on-cloud-platforms.png"
     },
     {
-      "id": "2026-10-02-mlops",
+      "id": "2026-08-20-mlops",
       "day": 24,
-      "date": "2026-10-02",
-      "slot": "09:30",
+      "date": "2026-08-20",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Batch inference vs real-time inference tradeoffs",
@@ -846,12 +863,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about Batch inference vs real-time inference tradeoffs will not demonstrate senior-level judgment.\n\nTopic: Batch inference vs real-time inference tradeoffs\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain Batch inference vs real-time inference tradeoffs in two minutes without sounding theoretical?\n\nDay 24/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-10-02-mlops-batch-inference-vs-real-time-inference-tradeoffs.md"
+      "draftPath": "posts/2026-10-02-mlops-batch-inference-vs-real-time-inference-tradeoffs.md",
+      "imagePath": "assets/2026-08-12-2026-08-12-mlops-batch-inference-vs-real-time-inference-tradeoffs.png"
     },
     {
-      "id": "2026-10-06-mlops",
+      "id": "2026-08-21-mlops",
       "day": 25,
-      "date": "2026-10-06",
+      "date": "2026-08-21",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -868,13 +886,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Rollback strategy for bad model releases? Build it small, break it deliberately, and observe the failure.\n\nTopic: Rollback strategy for bad model releases\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Rollback strategy for bad model releases?\n\nDay 25/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-10-06-mlops-rollback-strategy-for-bad-model-releases.md"
+      "draftPath": "posts/2026-10-06-mlops-rollback-strategy-for-bad-model-releases.md",
+      "imagePath": "assets/2026-08-14-mlops-rollback-strategy-for-bad-model-releases-doodle.png"
     },
     {
-      "id": "2026-10-09-mlops",
+      "id": "2026-08-22-mlops",
       "day": 26,
-      "date": "2026-10-09",
-      "slot": "09:30",
+      "date": "2026-08-22",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Model serving on Kubernetes with FastAPI",
@@ -890,13 +909,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Model serving on Kubernetes with FastAPI as a definition. Production exposes the missing tradeoffs.\n\nTopic: Model serving on Kubernetes with FastAPI\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Model serving on Kubernetes with FastAPI?\n\nDay 26/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-10-09-mlops-model-serving-on-kubernetes-with-fastapi.md"
+      "draftPath": "posts/2026-10-09-mlops-model-serving-on-kubernetes-with-fastapi.md",
+      "imagePath": "assets/2026-08-18-mlops-model-serving-on-kubernetes-with-fastapi-doodle.png"
     },
     {
-      "id": "2026-10-13-mlops",
+      "id": "2026-08-23-mlops",
       "day": 27,
-      "date": "2026-10-13",
-      "slot": "09:30",
+      "date": "2026-08-23",
+      "slot": "11:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Vertex AI vs self-managed GKE for ML workloads",
@@ -912,13 +932,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Vertex AI vs self-managed GKE for ML workloads fails, random changes make recovery slower. Start with evidence.\n\nTopic: Vertex AI vs self-managed GKE for ML workloads\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Vertex AI vs self-managed GKE for ML workloads failed in production, which signal would you check first—and why?\n\nDay 27/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-10-13-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.md"
+      "draftPath": "posts/2026-10-13-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.md",
+      "imagePath": "assets/2026-08-21-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads-doodle.png"
     },
     {
-      "id": "2026-10-16-mlops",
+      "id": "2026-08-24-mlops",
       "day": 28,
-      "date": "2026-10-16",
-      "slot": "09:30",
+      "date": "2026-08-24",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Inference latency troubleshooting workflow",
@@ -934,12 +955,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Inference latency troubleshooting workflow: the real design question is which failure the system can tolerate.\n\nTopic: Inference latency troubleshooting workflow\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Inference latency troubleshooting workflow creates the largest operational risk?\n\nDay 28/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-10-16-mlops-inference-latency-troubleshooting-workflow.md"
+      "draftPath": "posts/2026-10-16-mlops-inference-latency-troubleshooting-workflow.md",
+      "imagePath": "assets/2026-08-25-mlops-inference-latency-troubleshooting-workflow-doodle.png"
     },
     {
-      "id": "2026-10-20-mlops",
+      "id": "2026-08-25-mlops",
       "day": 29,
-      "date": "2026-10-20",
+      "date": "2026-08-25",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -956,13 +978,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about Feature pipeline quality checks before training will not demonstrate senior-level judgment.\n\nTopic: Feature pipeline quality checks before training\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain Feature pipeline quality checks before training in two minutes without sounding theoretical?\n\nDay 29/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-10-20-mlops-feature-pipeline-quality-checks-before-training.md"
+      "draftPath": "posts/2026-10-20-mlops-feature-pipeline-quality-checks-before-training.md",
+      "imagePath": "assets/2026-08-17-2026-08-17-mlops-feature-pipeline-quality-checks-before-training.png"
     },
     {
-      "id": "2026-10-23-mlops",
+      "id": "2026-08-26-mlops",
       "day": 30,
-      "date": "2026-10-23",
-      "slot": "09:30",
+      "date": "2026-08-26",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Production checklist for ML model deployment",
@@ -978,13 +1001,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Production checklist for ML model deployment? Build it small, break it deliberately, and observe the failure.\n\nTopic: Production checklist for ML model deployment\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Production checklist for ML model deployment?\n\nDay 30/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-10-23-mlops-production-checklist-for-ml-model-deployment.md"
+      "draftPath": "posts/2026-10-23-mlops-production-checklist-for-ml-model-deployment.md",
+      "imagePath": "assets/2026-08-18-2026-08-18-mlops-production-checklist-for-ml-model-deployment.png"
     },
     {
-      "id": "2026-10-27-mlops",
+      "id": "2026-08-27-mlops",
       "day": 31,
-      "date": "2026-10-27",
-      "slot": "09:30",
+      "date": "2026-08-27",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Model registry approvals and controlled production releases",
@@ -1000,12 +1024,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Model registry approvals and controlled production releases as a definition. Production exposes the missing tradeoffs.\n\nTopic: Model registry approvals and controlled production releases\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Model registry approvals and controlled production releases?\n\nDay 31/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-10-27-mlops-model-registry-approvals-and-controlled-production-releases.md"
+      "draftPath": "posts/2026-10-27-mlops-model-registry-approvals-and-controlled-production-releases.md",
+      "imagePath": "assets/2026-09-04-day-086-model-registry-approvals-and-controlled-production-releases.png"
     },
     {
-      "id": "2026-10-30-mlops",
+      "id": "2026-08-28-mlops",
       "day": 32,
-      "date": "2026-10-30",
+      "date": "2026-08-28",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -1022,13 +1047,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Canary deployment strategy for machine learning models fails, random changes make recovery slower. Start with evidence.\n\nTopic: Canary deployment strategy for machine learning models\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Canary deployment strategy for machine learning models failed in production, which signal would you check first—and why?\n\nDay 32/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-10-30-mlops-canary-deployment-strategy-for-machine-learning-models.md"
+      "draftPath": "posts/2026-10-30-mlops-canary-deployment-strategy-for-machine-learning-models.md",
+      "imagePath": "assets/2026-09-08-day-090-canary-deployment-strategy-for-machine-learning-models.png"
     },
     {
-      "id": "2026-11-03-mlops",
+      "id": "2026-08-29-mlops",
       "day": 33,
-      "date": "2026-11-03",
-      "slot": "09:30",
+      "date": "2026-08-29",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Feature store governance for production ML",
@@ -1044,13 +1070,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Feature store governance for production ML: the real design question is which failure the system can tolerate.\n\nTopic: Feature store governance for production ML\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Feature store governance for production ML creates the largest operational risk?\n\nDay 33/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-11-03-mlops-feature-store-governance-for-production-ml.md"
+      "draftPath": "posts/2026-11-03-mlops-feature-store-governance-for-production-ml.md",
+      "imagePath": "assets/2026-09-12-day-094-feature-store-governance-for-production-ml.png"
     },
     {
-      "id": "2026-11-06-mlops",
+      "id": "2026-08-30-mlops",
       "day": 34,
-      "date": "2026-11-06",
-      "slot": "09:30",
+      "date": "2026-08-30",
+      "slot": "11:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "MLflow and Kubeflow pipeline design for reproducibility",
@@ -1066,13 +1093,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about MLflow and Kubeflow pipeline design for reproducibility will not demonstrate senior-level judgment.\n\nTopic: MLflow and Kubeflow pipeline design for reproducibility\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain MLflow and Kubeflow pipeline design for reproducibility in two minutes without sounding theoretical?\n\nDay 34/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-11-06-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility.md"
+      "draftPath": "posts/2026-11-06-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility.md",
+      "imagePath": "assets/2026-09-16-day-098-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png"
     },
     {
-      "id": "2026-11-10-mlops",
+      "id": "2026-08-31-mlops",
       "day": 35,
-      "date": "2026-11-10",
-      "slot": "09:30",
+      "date": "2026-08-31",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Model monitoring signals every ML platform should track",
@@ -1088,12 +1116,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Model monitoring signals every ML platform should track? Build it small, break it deliberately, and observe the failure.\n\nTopic: Model monitoring signals every ML platform should track\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Model monitoring signals every ML platform should track?\n\nDay 35/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-11-10-mlops-model-monitoring-signals-every-ml-platform-should-track.md"
+      "draftPath": "posts/2026-11-10-mlops-model-monitoring-signals-every-ml-platform-should-track.md",
+      "imagePath": "assets/2026-08-23-day-074-model-monitoring-signals-every-ml-platform-should-track.png"
     },
     {
-      "id": "2026-11-13-mlops",
+      "id": "2026-09-01-mlops",
       "day": 36,
-      "date": "2026-11-13",
+      "date": "2026-09-01",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -1110,13 +1139,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Automated retraining triggers using drift and performance metrics as a definition. Production exposes the missing tradeoffs.\n\nTopic: Automated retraining triggers using drift and performance metrics\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Automated retraining triggers using drift and performance metrics?\n\nDay 36/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-11-13-mlops-automated-retraining-triggers-using-drift-and-performance-metrics.md"
+      "draftPath": "posts/2026-11-13-mlops-automated-retraining-triggers-using-drift-and-performance-metrics.md",
+      "imagePath": "assets/2026-08-27-day-078-automated-retraining-triggers-using-drift-and-performance-metrics.png"
     },
     {
-      "id": "2026-11-17-mlops",
+      "id": "2026-09-02-mlops",
       "day": 37,
-      "date": "2026-11-17",
-      "slot": "09:30",
+      "date": "2026-09-02",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Data drift vs concept drift explained clearly",
@@ -1132,13 +1162,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Data drift vs concept drift explained clearly fails, random changes make recovery slower. Start with evidence.\n\nTopic: Data drift vs concept drift explained clearly\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Data drift vs concept drift explained clearly failed in production, which signal would you check first—and why?\n\nDay 37/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-11-17-mlops-data-drift-vs-concept-drift-explained-clearly.md"
+      "draftPath": "posts/2026-11-17-mlops-data-drift-vs-concept-drift-explained-clearly.md",
+      "imagePath": "assets/2026-08-28-day-079-data-drift-vs-concept-drift-explained-clearly.png"
     },
     {
-      "id": "2026-11-20-mlops",
+      "id": "2026-09-03-mlops",
       "day": 38,
-      "date": "2026-11-20",
-      "slot": "09:30",
+      "date": "2026-09-03",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Building audit-ready ML lineage on cloud platforms",
@@ -1154,12 +1185,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Building audit-ready ML lineage on cloud platforms: the real design question is which failure the system can tolerate.\n\nTopic: Building audit-ready ML lineage on cloud platforms\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Building audit-ready ML lineage on cloud platforms creates the largest operational risk?\n\nDay 38/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-11-20-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.md"
+      "draftPath": "posts/2026-11-20-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.md",
+      "imagePath": "assets/2026-08-31-day-082-building-audit-ready-ml-lineage-on-cloud-platforms.png"
     },
     {
-      "id": "2026-11-24-mlops",
+      "id": "2026-09-04-mlops",
       "day": 39,
-      "date": "2026-11-24",
+      "date": "2026-09-04",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -1176,13 +1208,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about Batch inference vs real-time inference tradeoffs will not demonstrate senior-level judgment.\n\nTopic: Batch inference vs real-time inference tradeoffs\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain Batch inference vs real-time inference tradeoffs in two minutes without sounding theoretical?\n\nDay 39/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-11-24-mlops-batch-inference-vs-real-time-inference-tradeoffs.md"
+      "draftPath": "posts/2026-11-24-mlops-batch-inference-vs-real-time-inference-tradeoffs.md",
+      "imagePath": "assets/2026-08-12-2026-08-12-mlops-batch-inference-vs-real-time-inference-tradeoffs.png"
     },
     {
-      "id": "2026-11-27-mlops",
+      "id": "2026-09-05-mlops",
       "day": 40,
-      "date": "2026-11-27",
-      "slot": "09:30",
+      "date": "2026-09-05",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Rollback strategy for bad model releases",
@@ -1198,13 +1231,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Rollback strategy for bad model releases? Build it small, break it deliberately, and observe the failure.\n\nTopic: Rollback strategy for bad model releases\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Rollback strategy for bad model releases?\n\nDay 40/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-11-27-mlops-rollback-strategy-for-bad-model-releases.md"
+      "draftPath": "posts/2026-11-27-mlops-rollback-strategy-for-bad-model-releases.md",
+      "imagePath": "assets/2026-08-14-mlops-rollback-strategy-for-bad-model-releases-doodle.png"
     },
     {
-      "id": "2026-12-01-mlops",
+      "id": "2026-09-06-mlops",
       "day": 41,
-      "date": "2026-12-01",
-      "slot": "09:30",
+      "date": "2026-09-06",
+      "slot": "11:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Model serving on Kubernetes with FastAPI",
@@ -1220,13 +1254,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Model serving on Kubernetes with FastAPI as a definition. Production exposes the missing tradeoffs.\n\nTopic: Model serving on Kubernetes with FastAPI\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Model serving on Kubernetes with FastAPI?\n\nDay 41/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-12-01-mlops-model-serving-on-kubernetes-with-fastapi.md"
+      "draftPath": "posts/2026-12-01-mlops-model-serving-on-kubernetes-with-fastapi.md",
+      "imagePath": "assets/2026-08-18-mlops-model-serving-on-kubernetes-with-fastapi-doodle.png"
     },
     {
-      "id": "2026-12-04-mlops",
+      "id": "2026-09-07-mlops",
       "day": 42,
-      "date": "2026-12-04",
-      "slot": "09:30",
+      "date": "2026-09-07",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Vertex AI vs self-managed GKE for ML workloads",
@@ -1242,12 +1277,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Vertex AI vs self-managed GKE for ML workloads fails, random changes make recovery slower. Start with evidence.\n\nTopic: Vertex AI vs self-managed GKE for ML workloads\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Vertex AI vs self-managed GKE for ML workloads failed in production, which signal would you check first—and why?\n\nDay 42/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-12-04-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.md"
+      "draftPath": "posts/2026-12-04-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.md",
+      "imagePath": "assets/2026-08-21-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads-doodle.png"
     },
     {
-      "id": "2026-12-08-mlops",
+      "id": "2026-09-08-mlops",
       "day": 43,
-      "date": "2026-12-08",
+      "date": "2026-09-08",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -1264,13 +1300,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Inference latency troubleshooting workflow: the real design question is which failure the system can tolerate.\n\nTopic: Inference latency troubleshooting workflow\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Inference latency troubleshooting workflow creates the largest operational risk?\n\nDay 43/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-12-08-mlops-inference-latency-troubleshooting-workflow.md"
+      "draftPath": "posts/2026-12-08-mlops-inference-latency-troubleshooting-workflow.md",
+      "imagePath": "assets/2026-08-25-mlops-inference-latency-troubleshooting-workflow-doodle.png"
     },
     {
-      "id": "2026-12-11-mlops",
+      "id": "2026-09-09-mlops",
       "day": 44,
-      "date": "2026-12-11",
-      "slot": "09:30",
+      "date": "2026-09-09",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Feature pipeline quality checks before training",
@@ -1286,13 +1323,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about Feature pipeline quality checks before training will not demonstrate senior-level judgment.\n\nTopic: Feature pipeline quality checks before training\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain Feature pipeline quality checks before training in two minutes without sounding theoretical?\n\nDay 44/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-12-11-mlops-feature-pipeline-quality-checks-before-training.md"
+      "draftPath": "posts/2026-12-11-mlops-feature-pipeline-quality-checks-before-training.md",
+      "imagePath": "assets/2026-08-17-2026-08-17-mlops-feature-pipeline-quality-checks-before-training.png"
     },
     {
-      "id": "2026-12-15-mlops",
+      "id": "2026-09-10-mlops",
       "day": 45,
-      "date": "2026-12-15",
-      "slot": "09:30",
+      "date": "2026-09-10",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Production checklist for ML model deployment",
@@ -1308,12 +1346,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Production checklist for ML model deployment? Build it small, break it deliberately, and observe the failure.\n\nTopic: Production checklist for ML model deployment\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Production checklist for ML model deployment?\n\nDay 45/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-12-15-mlops-production-checklist-for-ml-model-deployment.md"
+      "draftPath": "posts/2026-12-15-mlops-production-checklist-for-ml-model-deployment.md",
+      "imagePath": "assets/2026-08-18-2026-08-18-mlops-production-checklist-for-ml-model-deployment.png"
     },
     {
-      "id": "2026-12-18-mlops",
+      "id": "2026-09-11-mlops",
       "day": 46,
-      "date": "2026-12-18",
+      "date": "2026-09-11",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -1330,13 +1369,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Model registry approvals and controlled production releases as a definition. Production exposes the missing tradeoffs.\n\nTopic: Model registry approvals and controlled production releases\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Model registry approvals and controlled production releases?\n\nDay 46/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-12-18-mlops-model-registry-approvals-and-controlled-production-releases.md"
+      "draftPath": "posts/2026-12-18-mlops-model-registry-approvals-and-controlled-production-releases.md",
+      "imagePath": "assets/2026-09-04-day-086-model-registry-approvals-and-controlled-production-releases.png"
     },
     {
-      "id": "2026-12-22-mlops",
+      "id": "2026-09-12-mlops",
       "day": 47,
-      "date": "2026-12-22",
-      "slot": "09:30",
+      "date": "2026-09-12",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Canary deployment strategy for machine learning models",
@@ -1352,13 +1392,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Canary deployment strategy for machine learning models fails, random changes make recovery slower. Start with evidence.\n\nTopic: Canary deployment strategy for machine learning models\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Canary deployment strategy for machine learning models failed in production, which signal would you check first—and why?\n\nDay 47/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-12-22-mlops-canary-deployment-strategy-for-machine-learning-models.md"
+      "draftPath": "posts/2026-12-22-mlops-canary-deployment-strategy-for-machine-learning-models.md",
+      "imagePath": "assets/2026-09-08-day-090-canary-deployment-strategy-for-machine-learning-models.png"
     },
     {
-      "id": "2026-12-25-mlops",
+      "id": "2026-09-13-mlops",
       "day": 48,
-      "date": "2026-12-25",
-      "slot": "09:30",
+      "date": "2026-09-13",
+      "slot": "11:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Feature store governance for production ML",
@@ -1374,13 +1415,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Feature store governance for production ML: the real design question is which failure the system can tolerate.\n\nTopic: Feature store governance for production ML\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Feature store governance for production ML creates the largest operational risk?\n\nDay 48/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-12-25-mlops-feature-store-governance-for-production-ml.md"
+      "draftPath": "posts/2026-12-25-mlops-feature-store-governance-for-production-ml.md",
+      "imagePath": "assets/2026-09-12-day-094-feature-store-governance-for-production-ml.png"
     },
     {
-      "id": "2026-12-29-mlops",
+      "id": "2026-09-14-mlops",
       "day": 49,
-      "date": "2026-12-29",
-      "slot": "09:30",
+      "date": "2026-09-14",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "MLflow and Kubeflow pipeline design for reproducibility",
@@ -1396,12 +1438,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about MLflow and Kubeflow pipeline design for reproducibility will not demonstrate senior-level judgment.\n\nTopic: MLflow and Kubeflow pipeline design for reproducibility\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain MLflow and Kubeflow pipeline design for reproducibility in two minutes without sounding theoretical?\n\nDay 49/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2026-12-29-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility.md"
+      "draftPath": "posts/2026-12-29-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility.md",
+      "imagePath": "assets/2026-09-16-day-098-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png"
     },
     {
-      "id": "2027-01-01-mlops",
+      "id": "2026-09-15-mlops",
       "day": 50,
-      "date": "2027-01-01",
+      "date": "2026-09-15",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -1418,13 +1461,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Model monitoring signals every ML platform should track? Build it small, break it deliberately, and observe the failure.\n\nTopic: Model monitoring signals every ML platform should track\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Model monitoring signals every ML platform should track?\n\nDay 50/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-01-01-mlops-model-monitoring-signals-every-ml-platform-should-track.md"
+      "draftPath": "posts/2027-01-01-mlops-model-monitoring-signals-every-ml-platform-should-track.md",
+      "imagePath": "assets/2026-08-23-day-074-model-monitoring-signals-every-ml-platform-should-track.png"
     },
     {
-      "id": "2027-01-05-mlops",
+      "id": "2026-09-16-mlops",
       "day": 51,
-      "date": "2027-01-05",
-      "slot": "09:30",
+      "date": "2026-09-16",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Automated retraining triggers using drift and performance metrics",
@@ -1440,13 +1484,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Automated retraining triggers using drift and performance metrics as a definition. Production exposes the missing tradeoffs.\n\nTopic: Automated retraining triggers using drift and performance metrics\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Automated retraining triggers using drift and performance metrics?\n\nDay 51/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-01-05-mlops-automated-retraining-triggers-using-drift-and-performance-metrics.md"
+      "draftPath": "posts/2027-01-05-mlops-automated-retraining-triggers-using-drift-and-performance-metrics.md",
+      "imagePath": "assets/2026-08-27-day-078-automated-retraining-triggers-using-drift-and-performance-metrics.png"
     },
     {
-      "id": "2027-01-08-mlops",
+      "id": "2026-09-17-mlops",
       "day": 52,
-      "date": "2027-01-08",
-      "slot": "09:30",
+      "date": "2026-09-17",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Data drift vs concept drift explained clearly",
@@ -1462,12 +1507,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Data drift vs concept drift explained clearly fails, random changes make recovery slower. Start with evidence.\n\nTopic: Data drift vs concept drift explained clearly\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Data drift vs concept drift explained clearly failed in production, which signal would you check first—and why?\n\nDay 52/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-01-08-mlops-data-drift-vs-concept-drift-explained-clearly.md"
+      "draftPath": "posts/2027-01-08-mlops-data-drift-vs-concept-drift-explained-clearly.md",
+      "imagePath": "assets/2026-08-28-day-079-data-drift-vs-concept-drift-explained-clearly.png"
     },
     {
-      "id": "2027-01-12-mlops",
+      "id": "2026-09-18-mlops",
       "day": 53,
-      "date": "2027-01-12",
+      "date": "2026-09-18",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -1484,13 +1530,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Building audit-ready ML lineage on cloud platforms: the real design question is which failure the system can tolerate.\n\nTopic: Building audit-ready ML lineage on cloud platforms\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Building audit-ready ML lineage on cloud platforms creates the largest operational risk?\n\nDay 53/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-01-12-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.md"
+      "draftPath": "posts/2027-01-12-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.md",
+      "imagePath": "assets/2026-08-31-day-082-building-audit-ready-ml-lineage-on-cloud-platforms.png"
     },
     {
-      "id": "2027-01-15-mlops",
+      "id": "2026-09-19-mlops",
       "day": 54,
-      "date": "2027-01-15",
-      "slot": "09:30",
+      "date": "2026-09-19",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Batch inference vs real-time inference tradeoffs",
@@ -1506,13 +1553,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about Batch inference vs real-time inference tradeoffs will not demonstrate senior-level judgment.\n\nTopic: Batch inference vs real-time inference tradeoffs\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain Batch inference vs real-time inference tradeoffs in two minutes without sounding theoretical?\n\nDay 54/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-01-15-mlops-batch-inference-vs-real-time-inference-tradeoffs.md"
+      "draftPath": "posts/2027-01-15-mlops-batch-inference-vs-real-time-inference-tradeoffs.md",
+      "imagePath": "assets/2026-08-12-2026-08-12-mlops-batch-inference-vs-real-time-inference-tradeoffs.png"
     },
     {
-      "id": "2027-01-19-mlops",
+      "id": "2026-09-20-mlops",
       "day": 55,
-      "date": "2027-01-19",
-      "slot": "09:30",
+      "date": "2026-09-20",
+      "slot": "11:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Rollback strategy for bad model releases",
@@ -1528,13 +1576,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Rollback strategy for bad model releases? Build it small, break it deliberately, and observe the failure.\n\nTopic: Rollback strategy for bad model releases\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Rollback strategy for bad model releases?\n\nDay 55/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-01-19-mlops-rollback-strategy-for-bad-model-releases.md"
+      "draftPath": "posts/2027-01-19-mlops-rollback-strategy-for-bad-model-releases.md",
+      "imagePath": "assets/2026-08-14-mlops-rollback-strategy-for-bad-model-releases-doodle.png"
     },
     {
-      "id": "2027-01-22-mlops",
+      "id": "2026-09-21-mlops",
       "day": 56,
-      "date": "2027-01-22",
-      "slot": "09:30",
+      "date": "2026-09-21",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Model serving on Kubernetes with FastAPI",
@@ -1550,12 +1599,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Model serving on Kubernetes with FastAPI as a definition. Production exposes the missing tradeoffs.\n\nTopic: Model serving on Kubernetes with FastAPI\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Model serving on Kubernetes with FastAPI?\n\nDay 56/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-01-22-mlops-model-serving-on-kubernetes-with-fastapi.md"
+      "draftPath": "posts/2027-01-22-mlops-model-serving-on-kubernetes-with-fastapi.md",
+      "imagePath": "assets/2026-08-18-mlops-model-serving-on-kubernetes-with-fastapi-doodle.png"
     },
     {
-      "id": "2027-01-26-mlops",
+      "id": "2026-09-22-mlops",
       "day": 57,
-      "date": "2027-01-26",
+      "date": "2026-09-22",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -1572,13 +1622,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Vertex AI vs self-managed GKE for ML workloads fails, random changes make recovery slower. Start with evidence.\n\nTopic: Vertex AI vs self-managed GKE for ML workloads\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Vertex AI vs self-managed GKE for ML workloads failed in production, which signal would you check first—and why?\n\nDay 57/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-01-26-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.md"
+      "draftPath": "posts/2027-01-26-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.md",
+      "imagePath": "assets/2026-08-21-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads-doodle.png"
     },
     {
-      "id": "2027-01-29-mlops",
+      "id": "2026-09-23-mlops",
       "day": 58,
-      "date": "2027-01-29",
-      "slot": "09:30",
+      "date": "2026-09-23",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Inference latency troubleshooting workflow",
@@ -1594,13 +1645,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Inference latency troubleshooting workflow: the real design question is which failure the system can tolerate.\n\nTopic: Inference latency troubleshooting workflow\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Inference latency troubleshooting workflow creates the largest operational risk?\n\nDay 58/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-01-29-mlops-inference-latency-troubleshooting-workflow.md"
+      "draftPath": "posts/2027-01-29-mlops-inference-latency-troubleshooting-workflow.md",
+      "imagePath": "assets/2026-08-25-mlops-inference-latency-troubleshooting-workflow-doodle.png"
     },
     {
-      "id": "2027-02-02-mlops",
+      "id": "2026-09-24-mlops",
       "day": 59,
-      "date": "2027-02-02",
-      "slot": "09:30",
+      "date": "2026-09-24",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Feature pipeline quality checks before training",
@@ -1616,12 +1668,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about Feature pipeline quality checks before training will not demonstrate senior-level judgment.\n\nTopic: Feature pipeline quality checks before training\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain Feature pipeline quality checks before training in two minutes without sounding theoretical?\n\nDay 59/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-02-02-mlops-feature-pipeline-quality-checks-before-training.md"
+      "draftPath": "posts/2027-02-02-mlops-feature-pipeline-quality-checks-before-training.md",
+      "imagePath": "assets/2026-08-17-2026-08-17-mlops-feature-pipeline-quality-checks-before-training.png"
     },
     {
-      "id": "2027-02-05-mlops",
+      "id": "2026-09-25-mlops",
       "day": 60,
-      "date": "2027-02-05",
+      "date": "2026-09-25",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -1638,13 +1691,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Production checklist for ML model deployment? Build it small, break it deliberately, and observe the failure.\n\nTopic: Production checklist for ML model deployment\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Production checklist for ML model deployment?\n\nDay 60/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-02-05-mlops-production-checklist-for-ml-model-deployment.md"
+      "draftPath": "posts/2027-02-05-mlops-production-checklist-for-ml-model-deployment.md",
+      "imagePath": "assets/2026-08-18-2026-08-18-mlops-production-checklist-for-ml-model-deployment.png"
     },
     {
-      "id": "2027-02-09-mlops",
+      "id": "2026-09-26-mlops",
       "day": 61,
-      "date": "2027-02-09",
-      "slot": "09:30",
+      "date": "2026-09-26",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Model registry approvals and controlled production releases",
@@ -1660,13 +1714,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Model registry approvals and controlled production releases as a definition. Production exposes the missing tradeoffs.\n\nTopic: Model registry approvals and controlled production releases\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Model registry approvals and controlled production releases?\n\nDay 61/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-02-09-mlops-model-registry-approvals-and-controlled-production-releases.md"
+      "draftPath": "posts/2027-02-09-mlops-model-registry-approvals-and-controlled-production-releases.md",
+      "imagePath": "assets/2026-09-04-day-086-model-registry-approvals-and-controlled-production-releases.png"
     },
     {
-      "id": "2027-02-12-mlops",
+      "id": "2026-09-27-mlops",
       "day": 62,
-      "date": "2027-02-12",
-      "slot": "09:30",
+      "date": "2026-09-27",
+      "slot": "11:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Canary deployment strategy for machine learning models",
@@ -1682,13 +1737,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Canary deployment strategy for machine learning models fails, random changes make recovery slower. Start with evidence.\n\nTopic: Canary deployment strategy for machine learning models\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Canary deployment strategy for machine learning models failed in production, which signal would you check first—and why?\n\nDay 62/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-02-12-mlops-canary-deployment-strategy-for-machine-learning-models.md"
+      "draftPath": "posts/2027-02-12-mlops-canary-deployment-strategy-for-machine-learning-models.md",
+      "imagePath": "assets/2026-09-08-day-090-canary-deployment-strategy-for-machine-learning-models.png"
     },
     {
-      "id": "2027-02-16-mlops",
+      "id": "2026-09-28-mlops",
       "day": 63,
-      "date": "2027-02-16",
-      "slot": "09:30",
+      "date": "2026-09-28",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Feature store governance for production ML",
@@ -1704,12 +1760,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Feature store governance for production ML: the real design question is which failure the system can tolerate.\n\nTopic: Feature store governance for production ML\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Feature store governance for production ML creates the largest operational risk?\n\nDay 63/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-02-16-mlops-feature-store-governance-for-production-ml.md"
+      "draftPath": "posts/2027-02-16-mlops-feature-store-governance-for-production-ml.md",
+      "imagePath": "assets/2026-09-12-day-094-feature-store-governance-for-production-ml.png"
     },
     {
-      "id": "2027-02-19-mlops",
+      "id": "2026-09-29-mlops",
       "day": 64,
-      "date": "2027-02-19",
+      "date": "2026-09-29",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -1726,13 +1783,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about MLflow and Kubeflow pipeline design for reproducibility will not demonstrate senior-level judgment.\n\nTopic: MLflow and Kubeflow pipeline design for reproducibility\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain MLflow and Kubeflow pipeline design for reproducibility in two minutes without sounding theoretical?\n\nDay 64/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-02-19-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility.md"
+      "draftPath": "posts/2027-02-19-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility.md",
+      "imagePath": "assets/2026-09-16-day-098-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png"
     },
     {
-      "id": "2027-02-23-mlops",
+      "id": "2026-09-30-mlops",
       "day": 65,
-      "date": "2027-02-23",
-      "slot": "09:30",
+      "date": "2026-09-30",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Model monitoring signals every ML platform should track",
@@ -1748,13 +1806,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Model monitoring signals every ML platform should track? Build it small, break it deliberately, and observe the failure.\n\nTopic: Model monitoring signals every ML platform should track\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Model monitoring signals every ML platform should track?\n\nDay 65/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-02-23-mlops-model-monitoring-signals-every-ml-platform-should-track.md"
+      "draftPath": "posts/2027-02-23-mlops-model-monitoring-signals-every-ml-platform-should-track.md",
+      "imagePath": "assets/2026-08-23-day-074-model-monitoring-signals-every-ml-platform-should-track.png"
     },
     {
-      "id": "2027-02-26-mlops",
+      "id": "2026-10-01-mlops",
       "day": 66,
-      "date": "2027-02-26",
-      "slot": "09:30",
+      "date": "2026-10-01",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Automated retraining triggers using drift and performance metrics",
@@ -1770,12 +1829,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Automated retraining triggers using drift and performance metrics as a definition. Production exposes the missing tradeoffs.\n\nTopic: Automated retraining triggers using drift and performance metrics\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Automated retraining triggers using drift and performance metrics?\n\nDay 66/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-02-26-mlops-automated-retraining-triggers-using-drift-and-performance-metrics.md"
+      "draftPath": "posts/2027-02-26-mlops-automated-retraining-triggers-using-drift-and-performance-metrics.md",
+      "imagePath": "assets/2026-08-27-day-078-automated-retraining-triggers-using-drift-and-performance-metrics.png"
     },
     {
-      "id": "2027-03-02-mlops",
+      "id": "2026-10-02-mlops",
       "day": 67,
-      "date": "2027-03-02",
+      "date": "2026-10-02",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -1792,13 +1852,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Data drift vs concept drift explained clearly fails, random changes make recovery slower. Start with evidence.\n\nTopic: Data drift vs concept drift explained clearly\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Data drift vs concept drift explained clearly failed in production, which signal would you check first—and why?\n\nDay 67/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-03-02-mlops-data-drift-vs-concept-drift-explained-clearly.md"
+      "draftPath": "posts/2027-03-02-mlops-data-drift-vs-concept-drift-explained-clearly.md",
+      "imagePath": "assets/2026-08-28-day-079-data-drift-vs-concept-drift-explained-clearly.png"
     },
     {
-      "id": "2027-03-05-mlops",
+      "id": "2026-10-03-mlops",
       "day": 68,
-      "date": "2027-03-05",
-      "slot": "09:30",
+      "date": "2026-10-03",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Building audit-ready ML lineage on cloud platforms",
@@ -1814,13 +1875,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Building audit-ready ML lineage on cloud platforms: the real design question is which failure the system can tolerate.\n\nTopic: Building audit-ready ML lineage on cloud platforms\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Building audit-ready ML lineage on cloud platforms creates the largest operational risk?\n\nDay 68/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-03-05-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.md"
+      "draftPath": "posts/2027-03-05-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.md",
+      "imagePath": "assets/2026-08-31-day-082-building-audit-ready-ml-lineage-on-cloud-platforms.png"
     },
     {
-      "id": "2027-03-09-mlops",
+      "id": "2026-10-04-mlops",
       "day": 69,
-      "date": "2027-03-09",
-      "slot": "09:30",
+      "date": "2026-10-04",
+      "slot": "11:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Batch inference vs real-time inference tradeoffs",
@@ -1836,13 +1898,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about Batch inference vs real-time inference tradeoffs will not demonstrate senior-level judgment.\n\nTopic: Batch inference vs real-time inference tradeoffs\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain Batch inference vs real-time inference tradeoffs in two minutes without sounding theoretical?\n\nDay 69/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-03-09-mlops-batch-inference-vs-real-time-inference-tradeoffs.md"
+      "draftPath": "posts/2027-03-09-mlops-batch-inference-vs-real-time-inference-tradeoffs.md",
+      "imagePath": "assets/2026-08-12-2026-08-12-mlops-batch-inference-vs-real-time-inference-tradeoffs.png"
     },
     {
-      "id": "2027-03-12-mlops",
+      "id": "2026-10-05-mlops",
       "day": 70,
-      "date": "2027-03-12",
-      "slot": "09:30",
+      "date": "2026-10-05",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Rollback strategy for bad model releases",
@@ -1858,12 +1921,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Rollback strategy for bad model releases? Build it small, break it deliberately, and observe the failure.\n\nTopic: Rollback strategy for bad model releases\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Rollback strategy for bad model releases?\n\nDay 70/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-03-12-mlops-rollback-strategy-for-bad-model-releases.md"
+      "draftPath": "posts/2027-03-12-mlops-rollback-strategy-for-bad-model-releases.md",
+      "imagePath": "assets/2026-08-14-mlops-rollback-strategy-for-bad-model-releases-doodle.png"
     },
     {
-      "id": "2027-03-16-mlops",
+      "id": "2026-10-06-mlops",
       "day": 71,
-      "date": "2027-03-16",
+      "date": "2026-10-06",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -1880,13 +1944,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Model serving on Kubernetes with FastAPI as a definition. Production exposes the missing tradeoffs.\n\nTopic: Model serving on Kubernetes with FastAPI\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Model serving on Kubernetes with FastAPI?\n\nDay 71/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-03-16-mlops-model-serving-on-kubernetes-with-fastapi.md"
+      "draftPath": "posts/2027-03-16-mlops-model-serving-on-kubernetes-with-fastapi.md",
+      "imagePath": "assets/2026-08-18-mlops-model-serving-on-kubernetes-with-fastapi-doodle.png"
     },
     {
-      "id": "2027-03-19-mlops",
+      "id": "2026-10-07-mlops",
       "day": 72,
-      "date": "2027-03-19",
-      "slot": "09:30",
+      "date": "2026-10-07",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Vertex AI vs self-managed GKE for ML workloads",
@@ -1902,13 +1967,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Vertex AI vs self-managed GKE for ML workloads fails, random changes make recovery slower. Start with evidence.\n\nTopic: Vertex AI vs self-managed GKE for ML workloads\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Vertex AI vs self-managed GKE for ML workloads failed in production, which signal would you check first—and why?\n\nDay 72/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-03-19-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.md"
+      "draftPath": "posts/2027-03-19-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.md",
+      "imagePath": "assets/2026-08-21-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads-doodle.png"
     },
     {
-      "id": "2027-03-23-mlops",
+      "id": "2026-10-08-mlops",
       "day": 73,
-      "date": "2027-03-23",
-      "slot": "09:30",
+      "date": "2026-10-08",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Inference latency troubleshooting workflow",
@@ -1924,12 +1990,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Inference latency troubleshooting workflow: the real design question is which failure the system can tolerate.\n\nTopic: Inference latency troubleshooting workflow\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Inference latency troubleshooting workflow creates the largest operational risk?\n\nDay 73/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-03-23-mlops-inference-latency-troubleshooting-workflow.md"
+      "draftPath": "posts/2027-03-23-mlops-inference-latency-troubleshooting-workflow.md",
+      "imagePath": "assets/2026-08-25-mlops-inference-latency-troubleshooting-workflow-doodle.png"
     },
     {
-      "id": "2027-03-26-mlops",
+      "id": "2026-10-09-mlops",
       "day": 74,
-      "date": "2027-03-26",
+      "date": "2026-10-09",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -1946,13 +2013,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about Feature pipeline quality checks before training will not demonstrate senior-level judgment.\n\nTopic: Feature pipeline quality checks before training\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain Feature pipeline quality checks before training in two minutes without sounding theoretical?\n\nDay 74/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-03-26-mlops-feature-pipeline-quality-checks-before-training.md"
+      "draftPath": "posts/2027-03-26-mlops-feature-pipeline-quality-checks-before-training.md",
+      "imagePath": "assets/2026-08-17-2026-08-17-mlops-feature-pipeline-quality-checks-before-training.png"
     },
     {
-      "id": "2027-03-30-mlops",
+      "id": "2026-10-10-mlops",
       "day": 75,
-      "date": "2027-03-30",
-      "slot": "09:30",
+      "date": "2026-10-10",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Production checklist for ML model deployment",
@@ -1968,13 +2036,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Production checklist for ML model deployment? Build it small, break it deliberately, and observe the failure.\n\nTopic: Production checklist for ML model deployment\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Production checklist for ML model deployment?\n\nDay 75/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-03-30-mlops-production-checklist-for-ml-model-deployment.md"
+      "draftPath": "posts/2027-03-30-mlops-production-checklist-for-ml-model-deployment.md",
+      "imagePath": "assets/2026-08-18-2026-08-18-mlops-production-checklist-for-ml-model-deployment.png"
     },
     {
-      "id": "2027-04-02-mlops",
+      "id": "2026-10-11-mlops",
       "day": 76,
-      "date": "2027-04-02",
-      "slot": "09:30",
+      "date": "2026-10-11",
+      "slot": "11:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Model registry approvals and controlled production releases",
@@ -1990,13 +2059,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Model registry approvals and controlled production releases as a definition. Production exposes the missing tradeoffs.\n\nTopic: Model registry approvals and controlled production releases\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Model registry approvals and controlled production releases?\n\nDay 76/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-04-02-mlops-model-registry-approvals-and-controlled-production-releases.md"
+      "draftPath": "posts/2027-04-02-mlops-model-registry-approvals-and-controlled-production-releases.md",
+      "imagePath": "assets/2026-09-04-day-086-model-registry-approvals-and-controlled-production-releases.png"
     },
     {
-      "id": "2027-04-06-mlops",
+      "id": "2026-10-12-mlops",
       "day": 77,
-      "date": "2027-04-06",
-      "slot": "09:30",
+      "date": "2026-10-12",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Canary deployment strategy for machine learning models",
@@ -2012,12 +2082,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Canary deployment strategy for machine learning models fails, random changes make recovery slower. Start with evidence.\n\nTopic: Canary deployment strategy for machine learning models\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Canary deployment strategy for machine learning models failed in production, which signal would you check first—and why?\n\nDay 77/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-04-06-mlops-canary-deployment-strategy-for-machine-learning-models.md"
+      "draftPath": "posts/2027-04-06-mlops-canary-deployment-strategy-for-machine-learning-models.md",
+      "imagePath": "assets/2026-09-08-day-090-canary-deployment-strategy-for-machine-learning-models.png"
     },
     {
-      "id": "2027-04-09-mlops",
+      "id": "2026-10-13-mlops",
       "day": 78,
-      "date": "2027-04-09",
+      "date": "2026-10-13",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -2034,13 +2105,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Feature store governance for production ML: the real design question is which failure the system can tolerate.\n\nTopic: Feature store governance for production ML\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Feature store governance for production ML creates the largest operational risk?\n\nDay 78/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-04-09-mlops-feature-store-governance-for-production-ml.md"
+      "draftPath": "posts/2027-04-09-mlops-feature-store-governance-for-production-ml.md",
+      "imagePath": "assets/2026-09-12-day-094-feature-store-governance-for-production-ml.png"
     },
     {
-      "id": "2027-04-13-mlops",
+      "id": "2026-10-14-mlops",
       "day": 79,
-      "date": "2027-04-13",
-      "slot": "09:30",
+      "date": "2026-10-14",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "MLflow and Kubeflow pipeline design for reproducibility",
@@ -2056,13 +2128,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about MLflow and Kubeflow pipeline design for reproducibility will not demonstrate senior-level judgment.\n\nTopic: MLflow and Kubeflow pipeline design for reproducibility\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain MLflow and Kubeflow pipeline design for reproducibility in two minutes without sounding theoretical?\n\nDay 79/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-04-13-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility.md"
+      "draftPath": "posts/2027-04-13-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility.md",
+      "imagePath": "assets/2026-09-16-day-098-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png"
     },
     {
-      "id": "2027-04-16-mlops",
+      "id": "2026-10-15-mlops",
       "day": 80,
-      "date": "2027-04-16",
-      "slot": "09:30",
+      "date": "2026-10-15",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Model monitoring signals every ML platform should track",
@@ -2078,12 +2151,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Model monitoring signals every ML platform should track? Build it small, break it deliberately, and observe the failure.\n\nTopic: Model monitoring signals every ML platform should track\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Model monitoring signals every ML platform should track?\n\nDay 80/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-04-16-mlops-model-monitoring-signals-every-ml-platform-should-track.md"
+      "draftPath": "posts/2027-04-16-mlops-model-monitoring-signals-every-ml-platform-should-track.md",
+      "imagePath": "assets/2026-08-23-day-074-model-monitoring-signals-every-ml-platform-should-track.png"
     },
     {
-      "id": "2027-04-20-mlops",
+      "id": "2026-10-16-mlops",
       "day": 81,
-      "date": "2027-04-20",
+      "date": "2026-10-16",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -2100,13 +2174,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Automated retraining triggers using drift and performance metrics as a definition. Production exposes the missing tradeoffs.\n\nTopic: Automated retraining triggers using drift and performance metrics\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Automated retraining triggers using drift and performance metrics?\n\nDay 81/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-04-20-mlops-automated-retraining-triggers-using-drift-and-performance-metrics.md"
+      "draftPath": "posts/2027-04-20-mlops-automated-retraining-triggers-using-drift-and-performance-metrics.md",
+      "imagePath": "assets/2026-08-27-day-078-automated-retraining-triggers-using-drift-and-performance-metrics.png"
     },
     {
-      "id": "2027-04-23-mlops",
+      "id": "2026-10-17-mlops",
       "day": 82,
-      "date": "2027-04-23",
-      "slot": "09:30",
+      "date": "2026-10-17",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Data drift vs concept drift explained clearly",
@@ -2122,13 +2197,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Data drift vs concept drift explained clearly fails, random changes make recovery slower. Start with evidence.\n\nTopic: Data drift vs concept drift explained clearly\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Data drift vs concept drift explained clearly failed in production, which signal would you check first—and why?\n\nDay 82/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-04-23-mlops-data-drift-vs-concept-drift-explained-clearly.md"
+      "draftPath": "posts/2027-04-23-mlops-data-drift-vs-concept-drift-explained-clearly.md",
+      "imagePath": "assets/2026-08-28-day-079-data-drift-vs-concept-drift-explained-clearly.png"
     },
     {
-      "id": "2027-04-27-mlops",
+      "id": "2026-10-18-mlops",
       "day": 83,
-      "date": "2027-04-27",
-      "slot": "09:30",
+      "date": "2026-10-18",
+      "slot": "11:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Building audit-ready ML lineage on cloud platforms",
@@ -2144,13 +2220,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Building audit-ready ML lineage on cloud platforms: the real design question is which failure the system can tolerate.\n\nTopic: Building audit-ready ML lineage on cloud platforms\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Building audit-ready ML lineage on cloud platforms creates the largest operational risk?\n\nDay 83/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-04-27-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.md"
+      "draftPath": "posts/2027-04-27-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.md",
+      "imagePath": "assets/2026-08-31-day-082-building-audit-ready-ml-lineage-on-cloud-platforms.png"
     },
     {
-      "id": "2027-04-30-mlops",
+      "id": "2026-10-19-mlops",
       "day": 84,
-      "date": "2027-04-30",
-      "slot": "09:30",
+      "date": "2026-10-19",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Batch inference vs real-time inference tradeoffs",
@@ -2166,12 +2243,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about Batch inference vs real-time inference tradeoffs will not demonstrate senior-level judgment.\n\nTopic: Batch inference vs real-time inference tradeoffs\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain Batch inference vs real-time inference tradeoffs in two minutes without sounding theoretical?\n\nDay 84/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-04-30-mlops-batch-inference-vs-real-time-inference-tradeoffs.md"
+      "draftPath": "posts/2027-04-30-mlops-batch-inference-vs-real-time-inference-tradeoffs.md",
+      "imagePath": "assets/2026-08-12-2026-08-12-mlops-batch-inference-vs-real-time-inference-tradeoffs.png"
     },
     {
-      "id": "2027-05-04-mlops",
+      "id": "2026-10-20-mlops",
       "day": 85,
-      "date": "2027-05-04",
+      "date": "2026-10-20",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -2188,13 +2266,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Rollback strategy for bad model releases? Build it small, break it deliberately, and observe the failure.\n\nTopic: Rollback strategy for bad model releases\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Rollback strategy for bad model releases?\n\nDay 85/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-05-04-mlops-rollback-strategy-for-bad-model-releases.md"
+      "draftPath": "posts/2027-05-04-mlops-rollback-strategy-for-bad-model-releases.md",
+      "imagePath": "assets/2026-08-14-mlops-rollback-strategy-for-bad-model-releases-doodle.png"
     },
     {
-      "id": "2027-05-07-mlops",
+      "id": "2026-10-21-mlops",
       "day": 86,
-      "date": "2027-05-07",
-      "slot": "09:30",
+      "date": "2026-10-21",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Model serving on Kubernetes with FastAPI",
@@ -2210,13 +2289,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Model serving on Kubernetes with FastAPI as a definition. Production exposes the missing tradeoffs.\n\nTopic: Model serving on Kubernetes with FastAPI\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Model serving on Kubernetes with FastAPI?\n\nDay 86/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-05-07-mlops-model-serving-on-kubernetes-with-fastapi.md"
+      "draftPath": "posts/2027-05-07-mlops-model-serving-on-kubernetes-with-fastapi.md",
+      "imagePath": "assets/2026-08-18-mlops-model-serving-on-kubernetes-with-fastapi-doodle.png"
     },
     {
-      "id": "2027-05-11-mlops",
+      "id": "2026-10-22-mlops",
       "day": 87,
-      "date": "2027-05-11",
-      "slot": "09:30",
+      "date": "2026-10-22",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Vertex AI vs self-managed GKE for ML workloads",
@@ -2232,12 +2312,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Vertex AI vs self-managed GKE for ML workloads fails, random changes make recovery slower. Start with evidence.\n\nTopic: Vertex AI vs self-managed GKE for ML workloads\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Vertex AI vs self-managed GKE for ML workloads failed in production, which signal would you check first—and why?\n\nDay 87/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-05-11-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.md"
+      "draftPath": "posts/2027-05-11-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.md",
+      "imagePath": "assets/2026-08-21-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads-doodle.png"
     },
     {
-      "id": "2027-05-14-mlops",
+      "id": "2026-10-23-mlops",
       "day": 88,
-      "date": "2027-05-14",
+      "date": "2026-10-23",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -2254,13 +2335,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Inference latency troubleshooting workflow: the real design question is which failure the system can tolerate.\n\nTopic: Inference latency troubleshooting workflow\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Inference latency troubleshooting workflow creates the largest operational risk?\n\nDay 88/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-05-14-mlops-inference-latency-troubleshooting-workflow.md"
+      "draftPath": "posts/2027-05-14-mlops-inference-latency-troubleshooting-workflow.md",
+      "imagePath": "assets/2026-08-25-mlops-inference-latency-troubleshooting-workflow-doodle.png"
     },
     {
-      "id": "2027-05-18-mlops",
+      "id": "2026-10-24-mlops",
       "day": 89,
-      "date": "2027-05-18",
-      "slot": "09:30",
+      "date": "2026-10-24",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Feature pipeline quality checks before training",
@@ -2276,13 +2358,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about Feature pipeline quality checks before training will not demonstrate senior-level judgment.\n\nTopic: Feature pipeline quality checks before training\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain Feature pipeline quality checks before training in two minutes without sounding theoretical?\n\nDay 89/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-05-18-mlops-feature-pipeline-quality-checks-before-training.md"
+      "draftPath": "posts/2027-05-18-mlops-feature-pipeline-quality-checks-before-training.md",
+      "imagePath": "assets/2026-08-17-2026-08-17-mlops-feature-pipeline-quality-checks-before-training.png"
     },
     {
-      "id": "2027-05-21-mlops",
+      "id": "2026-10-25-mlops",
       "day": 90,
-      "date": "2027-05-21",
-      "slot": "09:30",
+      "date": "2026-10-25",
+      "slot": "11:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Production checklist for ML model deployment",
@@ -2298,13 +2381,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Production checklist for ML model deployment? Build it small, break it deliberately, and observe the failure.\n\nTopic: Production checklist for ML model deployment\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Production checklist for ML model deployment?\n\nDay 90/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-05-21-mlops-production-checklist-for-ml-model-deployment.md"
+      "draftPath": "posts/2027-05-21-mlops-production-checklist-for-ml-model-deployment.md",
+      "imagePath": "assets/2026-08-18-2026-08-18-mlops-production-checklist-for-ml-model-deployment.png"
     },
     {
-      "id": "2027-05-25-mlops",
+      "id": "2026-10-26-mlops",
       "day": 91,
-      "date": "2027-05-25",
-      "slot": "09:30",
+      "date": "2026-10-26",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Model registry approvals and controlled production releases",
@@ -2320,12 +2404,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Model registry approvals and controlled production releases as a definition. Production exposes the missing tradeoffs.\n\nTopic: Model registry approvals and controlled production releases\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Model registry approvals and controlled production releases?\n\nDay 91/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-05-25-mlops-model-registry-approvals-and-controlled-production-releases.md"
+      "draftPath": "posts/2027-05-25-mlops-model-registry-approvals-and-controlled-production-releases.md",
+      "imagePath": "assets/2026-09-04-day-086-model-registry-approvals-and-controlled-production-releases.png"
     },
     {
-      "id": "2027-05-28-mlops",
+      "id": "2026-10-27-mlops",
       "day": 92,
-      "date": "2027-05-28",
+      "date": "2026-10-27",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -2342,13 +2427,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Canary deployment strategy for machine learning models fails, random changes make recovery slower. Start with evidence.\n\nTopic: Canary deployment strategy for machine learning models\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Canary deployment strategy for machine learning models failed in production, which signal would you check first—and why?\n\nDay 92/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-05-28-mlops-canary-deployment-strategy-for-machine-learning-models.md"
+      "draftPath": "posts/2027-05-28-mlops-canary-deployment-strategy-for-machine-learning-models.md",
+      "imagePath": "assets/2026-09-08-day-090-canary-deployment-strategy-for-machine-learning-models.png"
     },
     {
-      "id": "2027-06-01-mlops",
+      "id": "2026-10-28-mlops",
       "day": 93,
-      "date": "2027-06-01",
-      "slot": "09:30",
+      "date": "2026-10-28",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Feature store governance for production ML",
@@ -2364,13 +2450,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Feature store governance for production ML: the real design question is which failure the system can tolerate.\n\nTopic: Feature store governance for production ML\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Feature store governance for production ML creates the largest operational risk?\n\nDay 93/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-06-01-mlops-feature-store-governance-for-production-ml.md"
+      "draftPath": "posts/2027-06-01-mlops-feature-store-governance-for-production-ml.md",
+      "imagePath": "assets/2026-09-12-day-094-feature-store-governance-for-production-ml.png"
     },
     {
-      "id": "2027-06-04-mlops",
+      "id": "2026-10-29-mlops",
       "day": 94,
-      "date": "2027-06-04",
-      "slot": "09:30",
+      "date": "2026-10-29",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "MLflow and Kubeflow pipeline design for reproducibility",
@@ -2386,12 +2473,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about MLflow and Kubeflow pipeline design for reproducibility will not demonstrate senior-level judgment.\n\nTopic: MLflow and Kubeflow pipeline design for reproducibility\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain MLflow and Kubeflow pipeline design for reproducibility in two minutes without sounding theoretical?\n\nDay 94/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-06-04-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility.md"
+      "draftPath": "posts/2027-06-04-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility.md",
+      "imagePath": "assets/2026-09-16-day-098-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png"
     },
     {
-      "id": "2027-06-08-mlops",
+      "id": "2026-10-30-mlops",
       "day": 95,
-      "date": "2027-06-08",
+      "date": "2026-10-30",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -2408,13 +2496,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Model monitoring signals every ML platform should track? Build it small, break it deliberately, and observe the failure.\n\nTopic: Model monitoring signals every ML platform should track\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Model monitoring signals every ML platform should track?\n\nDay 95/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-06-08-mlops-model-monitoring-signals-every-ml-platform-should-track.md"
+      "draftPath": "posts/2027-06-08-mlops-model-monitoring-signals-every-ml-platform-should-track.md",
+      "imagePath": "assets/2026-08-23-day-074-model-monitoring-signals-every-ml-platform-should-track.png"
     },
     {
-      "id": "2027-06-11-mlops",
+      "id": "2026-10-31-mlops",
       "day": 96,
-      "date": "2027-06-11",
-      "slot": "09:30",
+      "date": "2026-10-31",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Automated retraining triggers using drift and performance metrics",
@@ -2430,13 +2519,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Automated retraining triggers using drift and performance metrics as a definition. Production exposes the missing tradeoffs.\n\nTopic: Automated retraining triggers using drift and performance metrics\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Automated retraining triggers using drift and performance metrics?\n\nDay 96/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-06-11-mlops-automated-retraining-triggers-using-drift-and-performance-metrics.md"
+      "draftPath": "posts/2027-06-11-mlops-automated-retraining-triggers-using-drift-and-performance-metrics.md",
+      "imagePath": "assets/2026-08-27-day-078-automated-retraining-triggers-using-drift-and-performance-metrics.png"
     },
     {
-      "id": "2027-06-15-mlops",
+      "id": "2026-11-01-mlops",
       "day": 97,
-      "date": "2027-06-15",
-      "slot": "09:30",
+      "date": "2026-11-01",
+      "slot": "11:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Data drift vs concept drift explained clearly",
@@ -2452,13 +2542,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Data drift vs concept drift explained clearly fails, random changes make recovery slower. Start with evidence.\n\nTopic: Data drift vs concept drift explained clearly\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Data drift vs concept drift explained clearly failed in production, which signal would you check first—and why?\n\nDay 97/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-06-15-mlops-data-drift-vs-concept-drift-explained-clearly.md"
+      "draftPath": "posts/2027-06-15-mlops-data-drift-vs-concept-drift-explained-clearly.md",
+      "imagePath": "assets/2026-08-28-day-079-data-drift-vs-concept-drift-explained-clearly.png"
     },
     {
-      "id": "2027-06-18-mlops",
+      "id": "2026-11-02-mlops",
       "day": 98,
-      "date": "2027-06-18",
-      "slot": "09:30",
+      "date": "2026-11-02",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Building audit-ready ML lineage on cloud platforms",
@@ -2474,12 +2565,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Building audit-ready ML lineage on cloud platforms: the real design question is which failure the system can tolerate.\n\nTopic: Building audit-ready ML lineage on cloud platforms\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Building audit-ready ML lineage on cloud platforms creates the largest operational risk?\n\nDay 98/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-06-18-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.md"
+      "draftPath": "posts/2027-06-18-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.md",
+      "imagePath": "assets/2026-08-31-day-082-building-audit-ready-ml-lineage-on-cloud-platforms.png"
     },
     {
-      "id": "2027-06-22-mlops",
+      "id": "2026-11-03-mlops",
       "day": 99,
-      "date": "2027-06-22",
+      "date": "2026-11-03",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -2496,13 +2588,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about Batch inference vs real-time inference tradeoffs will not demonstrate senior-level judgment.\n\nTopic: Batch inference vs real-time inference tradeoffs\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain Batch inference vs real-time inference tradeoffs in two minutes without sounding theoretical?\n\nDay 99/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-06-22-mlops-batch-inference-vs-real-time-inference-tradeoffs.md"
+      "draftPath": "posts/2027-06-22-mlops-batch-inference-vs-real-time-inference-tradeoffs.md",
+      "imagePath": "assets/2026-08-12-2026-08-12-mlops-batch-inference-vs-real-time-inference-tradeoffs.png"
     },
     {
-      "id": "2027-06-25-mlops",
+      "id": "2026-11-04-mlops",
       "day": 100,
-      "date": "2027-06-25",
-      "slot": "09:30",
+      "date": "2026-11-04",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Rollback strategy for bad model releases",
@@ -2518,13 +2611,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Rollback strategy for bad model releases? Build it small, break it deliberately, and observe the failure.\n\nTopic: Rollback strategy for bad model releases\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Rollback strategy for bad model releases?\n\nDay 100/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-06-25-mlops-rollback-strategy-for-bad-model-releases.md"
+      "draftPath": "posts/2027-06-25-mlops-rollback-strategy-for-bad-model-releases.md",
+      "imagePath": "assets/2026-08-14-mlops-rollback-strategy-for-bad-model-releases-doodle.png"
     },
     {
-      "id": "2027-06-29-mlops",
+      "id": "2026-11-05-mlops",
       "day": 101,
-      "date": "2027-06-29",
-      "slot": "09:30",
+      "date": "2026-11-05",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Model serving on Kubernetes with FastAPI",
@@ -2540,12 +2634,13 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Most teams learn Model serving on Kubernetes with FastAPI as a definition. Production exposes the missing tradeoffs.\n\nTopic: Model serving on Kubernetes with FastAPI\n\nPractical breakdown:\n1. Map the topic across the model, data, feature, deployment, and monitoring lifecycle.\n2. Define the expected behavior before choosing a tool or configuration.\n3. Measure model quality, drift, latency, throughput, errors, and cost so assumptions can be verified.\n4. Document the tradeoff, owner, and recovery path before production use.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat is the most important production tradeoff you would explain first for Model serving on Kubernetes with FastAPI?\n\nDay 101/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-06-29-mlops-model-serving-on-kubernetes-with-fastapi.md"
+      "draftPath": "posts/2027-06-29-mlops-model-serving-on-kubernetes-with-fastapi.md",
+      "imagePath": "assets/2026-08-18-mlops-model-serving-on-kubernetes-with-fastapi-doodle.png"
     },
     {
-      "id": "2027-07-02-mlops",
+      "id": "2026-11-06-mlops",
       "day": 102,
-      "date": "2027-07-02",
+      "date": "2026-11-06",
       "slot": "09:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
@@ -2562,13 +2657,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "When Vertex AI vs self-managed GKE for ML workloads fails, random changes make recovery slower. Start with evidence.\n\nTopic: Vertex AI vs self-managed GKE for ML workloads\n\nTroubleshooting lens:\n1. Confirm impact and identify what changed most recently.\n2. Trace the path through the model, data, feature, deployment, and monitoring lifecycle.\n3. Use model quality, drift, latency, throughput, errors, and cost to isolate the first failing boundary.\n4. Mitigate safely, validate recovery, and capture the missing alert or runbook step.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nIf Vertex AI vs self-managed GKE for ML workloads failed in production, which signal would you check first—and why?\n\nDay 102/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-07-02-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.md"
+      "draftPath": "posts/2027-07-02-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.md",
+      "imagePath": "assets/2026-08-21-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads-doodle.png"
     },
     {
-      "id": "2027-07-06-mlops",
+      "id": "2026-11-07-mlops",
       "day": 103,
-      "date": "2027-07-06",
-      "slot": "09:30",
+      "date": "2026-11-07",
+      "slot": "19:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Inference latency troubleshooting workflow",
@@ -2584,13 +2680,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Inference latency troubleshooting workflow: the real design question is which failure the system can tolerate.\n\nTopic: Inference latency troubleshooting workflow\n\nArchitecture review:\n1. Start with scale, availability, security, recovery, and ownership requirements.\n2. Separate components by responsibility and blast radius.\n3. Build in versioning, approval gates, canary rollout, lineage, and rollback.\n4. Test degraded behavior instead of validating only the happy path.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhich architecture decision around Inference latency troubleshooting workflow creates the largest operational risk?\n\nDay 103/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-07-06-mlops-inference-latency-troubleshooting-workflow.md"
+      "draftPath": "posts/2027-07-06-mlops-inference-latency-troubleshooting-workflow.md",
+      "imagePath": "assets/2026-08-25-mlops-inference-latency-troubleshooting-workflow-doodle.png"
     },
     {
-      "id": "2027-07-09-mlops",
+      "id": "2026-11-08-mlops",
       "day": 104,
-      "date": "2027-07-09",
-      "slot": "09:30",
+      "date": "2026-11-08",
+      "slot": "11:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Feature pipeline quality checks before training",
@@ -2606,13 +2703,14 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "A definition-only answer about Feature pipeline quality checks before training will not demonstrate senior-level judgment.\n\nTopic: Feature pipeline quality checks before training\n\nInterview lens:\n1. Explain the concept in one clear sentence.\n2. Give a real use case and the reason it fits.\n3. Discuss one alternative, one tradeoff, and one failure mode.\n4. Finish with how you would validate, monitor, and recover it in production.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nHow would you explain Feature pipeline quality checks before training in two minutes without sounding theoretical?\n\nDay 104/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-07-09-mlops-feature-pipeline-quality-checks-before-training.md"
+      "draftPath": "posts/2027-07-09-mlops-feature-pipeline-quality-checks-before-training.md",
+      "imagePath": "assets/2026-08-17-2026-08-17-mlops-feature-pipeline-quality-checks-before-training.png"
     },
     {
-      "id": "2027-07-13-mlops",
+      "id": "2026-11-09-mlops",
       "day": 105,
-      "date": "2027-07-13",
-      "slot": "09:30",
+      "date": "2026-11-09",
+      "slot": "14:30",
       "pillar": "MLOps Series",
       "audience": "MLOps, ML platform, DevOps, and cloud engineers",
       "topic": "Production checklist for ML model deployment",
@@ -2628,7 +2726,10 @@
       "linkedinProfile": "https://www.linkedin.com/in/iamarsingh/",
       "status": "scheduled",
       "text": "Want to understand Production checklist for ML model deployment? Build it small, break it deliberately, and observe the failure.\n\nTopic: Production checklist for ML model deployment\n\nHands-on lab:\n1. Create the smallest reproducible environment with one clear success condition.\n2. Add versioning, approval gates, canary rollout, lineage, and rollback.\n3. Inject one realistic failure and observe model quality, drift, latency, throughput, errors, and cost.\n4. Write a short runbook covering diagnosis, mitigation, validation, and cleanup.\n\nProduction takeaway:\nGood engineering makes the expected behavior observable, the risky change reversible, and the recovery path testable.\n\nWhat small hands-on lab would you build to practice Production checklist for ML model deployment?\n\nDay 105/105 of my MLOps Series.\n\n#MLOps #MachineLearning #MLPlatform #DevOps",
-      "draftPath": "posts/2027-07-13-mlops-production-checklist-for-ml-model-deployment.md"
+      "draftPath": "posts/2027-07-13-mlops-production-checklist-for-ml-model-deployment.md",
+      "imagePath": "assets/2026-08-18-2026-08-18-mlops-production-checklist-for-ml-model-deployment.png"
     }
-  ]
+  ],
+  "syncedFrom": "2026-08-03",
+  "syncedAt": "2026-08-02T08:22:31.664Z"
 }

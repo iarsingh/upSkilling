@@ -1,6 +1,6 @@
 ---
-date: 2026-08-11
-slot: 09:30
+date: 2026-08-05
+slot: 19:30
 day: 9
 series: MLOps Series
 topic: Batch inference vs real-time inference tradeoffs

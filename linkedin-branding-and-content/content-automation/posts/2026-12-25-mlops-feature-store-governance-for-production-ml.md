@@ -1,6 +1,6 @@
 ---
-date: 2026-12-25
-slot: 09:30
+date: 2026-09-13
+slot: 11:30
 day: 48
 series: MLOps Series
 topic: Feature store governance for production ML

@@ -1,6 +1,6 @@
 ---
-date: 2026-12-29
-slot: 09:30
+date: 2026-09-14
+slot: 14:30
 day: 49
 series: MLOps Series
 topic: MLflow and Kubeflow pipeline design for reproducibility
