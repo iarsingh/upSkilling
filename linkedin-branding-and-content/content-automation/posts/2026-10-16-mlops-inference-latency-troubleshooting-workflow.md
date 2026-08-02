@@ -1,6 +1,6 @@
 ---
-date: 2026-10-16
-slot: 09:30
+date: 2026-08-24
+slot: 14:30
 day: 28
 series: MLOps Series
 topic: Inference latency troubleshooting workflow

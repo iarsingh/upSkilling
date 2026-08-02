@@ -1,6 +1,6 @@
 ---
-date: 2027-07-13
-slot: 09:30
+date: 2026-11-09
+slot: 14:30
 day: 105
 series: MLOps Series
 topic: Production checklist for ML model deployment

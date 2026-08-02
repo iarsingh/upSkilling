@@ -1,6 +1,6 @@
 ---
-date: 2026-11-27
-slot: 09:30
+date: 2026-09-05
+slot: 19:30
 day: 40
 series: MLOps Series
 topic: Rollback strategy for bad model releases
