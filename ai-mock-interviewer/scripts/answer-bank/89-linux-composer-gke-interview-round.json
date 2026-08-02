@@ -1,0 +1,178 @@
+[
+  {
+    "source": "Conversation Interview Round",
+    "section": "Linux, Cloud Composer & GKE Migration Interview Round",
+    "category": "Linux Experience",
+    "questionType": "Experience",
+    "question": "Can you brief me about your Linux experience and your day-to-day tasks with Linux, in short?",
+    "answer": "Give a concise, evidence-based summary: years and distributions used, production scale, and personal ownership. A strong response covers user and permission management, systemd services, packages, filesystems, CPU and memory analysis, networking, logs, patching, security hardening, shell automation, monitoring, incident response, and RCA. Close with one measurable result, but do not claim tools or experience you cannot defend in follow-up questions."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Linux, Cloud Composer & GKE Migration Interview Round",
+    "category": "Linux Troubleshooting",
+    "questionType": "Experience",
+    "question": "You mentioned troubleshooting experience. Can you give me one Linux troubleshooting scenario or production incident you handled?",
+    "answer": "Use STAR and choose one concrete incident. State the customer impact and alerts, then explain how you checked load, CPU, memory, disk, network, processes, services, and logs to narrow the fault. Describe the immediate mitigation, verified recovery, root cause, and preventive action such as alerting, capacity changes, configuration validation, or a runbook. Be explicit about your own decisions and quantify downtime or improvement where possible."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Linux, Cloud Composer & GKE Migration Interview Round",
+    "category": "Linux Troubleshooting",
+    "questionType": "Experience",
+    "question": "Can you explain one specific problem you faced, how you troubleshot it, and what solution you provided?",
+    "answer": "Select a problem with enough technical depth and structure the response as symptom, hypothesis, evidence, mitigation, root cause, permanent fix, and prevention. Mention the exact signals and commands that changed your hypothesis rather than listing tools randomly. Explain why the solution was safe, how you validated it, and what monitoring or process change prevented recurrence."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Linux, Cloud Composer & GKE Migration Interview Round",
+    "category": "Linux Performance",
+    "questionType": "Conceptual",
+    "question": "Explain the three Linux load averages and what they indicate.",
+    "answer": "The three values are the average number of tasks that were runnable or in uninterruptible sleep over approximately 1, 5, and 15 minutes. Compare them with available logical CPUs and their trend: on an 8-vCPU host, sustained load near 8 means the CPUs or uninterruptible resources are fully occupied, while much higher values indicate a queue. Load is not CPU utilization alone; blocked I/O tasks can raise it, so correlate with CPU, iowait, run queue, process state, memory, and storage metrics."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Linux, Cloud Composer & GKE Migration Interview Round",
+    "category": "Linux Performance",
+    "questionType": "Implementation / Workflow",
+    "question": "Which commands can be used to view the load average in Linux?",
+    "answer": "Use `uptime`, `top` or `htop`, `cat /proc/loadavg`, and tools such as `w` or `sar -q` when sysstat is available. `uptime` and `top` show the 1-, 5-, and 15-minute averages. `/proc/loadavg` also shows running versus total schedulable entities and the latest PID. Follow with `vmstat`, `mpstat`, `pidstat`, `ps`, and `iostat` to determine whether the queue is caused by CPU, I/O, memory pressure, or a specific process."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Linux, Cloud Composer & GKE Migration Interview Round",
+    "category": "Cloud Composer & GKE",
+    "questionType": "Troubleshooting",
+    "question": "We are running Cloud Composer DAGs, and the DAGs are triggering or training workloads on GKE. How would you troubleshoot or mitigate issues in this setup?",
+    "answer": "Trace one failed run end to end: DAG parse and schedule, task instance, operator or API call, identity, GKE job creation, pod scheduling, container startup, training logs, and artifact completion. Check Composer scheduler and worker health, Airflow task logs, retries and concurrency, network and DNS paths, IAM and Workload Identity, Kubernetes events, quotas, node capacity, image pulls, secrets, and downstream storage or API access. Mitigate by making tasks idempotent, setting bounded retries and timeouts, separating orchestration from long-running compute, adding resource and quota alerts, and preserving correlation IDs between the DAG, job, and pod."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Linux, Cloud Composer & GKE Migration Interview Round",
+    "category": "GKE IP Exhaustion",
+    "questionType": "Troubleshooting",
+    "question": "If GKE pods are not getting created or are stuck because the pod IP range or IP pool is exhausted, how would you resolve the issue?",
+    "answer": "Confirm the cause through pod events, IP allocation metrics, node and subnet details, and secondary-range utilization; do not assume every Pending pod is an IP problem. Stop uncontrolled scaling and reclaim completed or leaked workloads where safe. For a VPC-native cluster, add an additional Pod secondary range and enable or use multi-Pod CIDR support when the cluster and node-pool configuration supports it, then create node pools that draw from the new range. If the existing cluster cannot be expanded safely, build a correctly sized replacement cluster and migrate workloads."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Linux, Cloud Composer & GKE Migration Interview Round",
+    "category": "GKE IP Planning",
+    "questionType": "Design / Architecture",
+    "question": "If you need a larger IP or CIDR range, would you create a new subnet or secondary range and a new GKE cluster? Explain your approach.",
+    "answer": "First determine whether the current VPC-native cluster supports adding Pod IP ranges and assigning a new range to new node pools. If so, expand in place with a non-overlapping secondary range, validate routes and firewall policy, create a node pool using it, and migrate pods gradually. Build a new cluster only when the cluster mode, subnet capacity, architectural cleanup, risk, or product constraints make in-place expansion unsuitable. Size Pod and Service ranges from maximum nodes, maximum Pods per node, regions, growth, and migration overlap rather than choosing a CIDR by guesswork."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Linux, Cloud Composer & GKE Migration Interview Round",
+    "category": "GKE Migration",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you migrate workloads from the existing GKE cluster to a newly created cluster with a larger IP range?",
+    "answer": "Treat it as a blue-green cluster migration. Recreate the cluster foundation through IaC, including networking, node pools, Workload Identity, policies, secrets integration, observability, ingress, storage classes, quotas, and add-ons. Deploy workloads from Git or CI/CD, restore or replicate state through application-aware methods, validate functional, performance, security, and failure tests, then shift traffic gradually using load-balancer backends, DNS, or service-routing controls. Monitor and retain rollback to the old cluster until data, jobs, and traffic are verified, then drain and decommission it."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Linux, Cloud Composer & GKE Migration Interview Round",
+    "category": "GKE Migration",
+    "questionType": "Conceptual",
+    "question": "Can existing Kubernetes nodes be attached or migrated directly from the old GKE cluster to the new cluster? If not, how would you handle the node pools and workload migration?",
+    "answer": "No. GKE nodes and node pools are registered, configured, and managed as part of one cluster and should not be detached and attached to another cluster. Create new node pools in the target cluster with the required machine types, images, labels, taints, autoscaling, security, and Pod ranges. Redeploy stateless workloads declaratively, migrate persistent data with supported replication, backup, restore, or application-native methods, validate disruption budgets and capacity, then cordon and drain old nodes during the controlled cutover."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Linux Production Troubleshooting Scenarios",
+    "category": "Linux Performance",
+    "questionType": "Scenario",
+    "question": "A Linux server has a load average of 20 on an 8-vCPU machine, but CPU utilization is only 35 percent. How would you investigate?",
+    "answer": "High load with moderate CPU suggests tasks may be blocked in uninterruptible sleep, often on storage or network filesystems. Use `vmstat`, `iostat -xz`, `pidstat`, `ps` with process states and wait channels, `dmesg`, mount and filesystem checks, and storage or NFS metrics. Identify D-state processes and the dependency they await, mitigate the failing or saturated I/O path, and avoid killing processes blindly because uninterruptible tasks may not exit until the kernel operation returns."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Linux Production Troubleshooting Scenarios",
+    "category": "Linux Memory",
+    "questionType": "Scenario",
+    "question": "A Linux application is repeatedly killed by the OOM killer. How would you troubleshoot and prevent recurrence?",
+    "answer": "Confirm OOM events in kernel logs and identify the killed process, cgroup, allocation pattern, and memory pressure at that time. Inspect RSS, virtual memory, swap, page faults, slab, container limits, overcommit, and application heap metrics. Mitigate through safe capacity or limit changes and restart controls, then fix leaks, unbounded caches, concurrency, or incorrect requests and limits. Add memory and OOM alerts, load tests, and headroom rather than simply disabling the OOM mechanism."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Linux Production Troubleshooting Scenarios",
+    "category": "Linux Storage",
+    "questionType": "Scenario",
+    "question": "The filesystem reports no space left, but deleting a large log file does not free disk space. What would you check?",
+    "answer": "Check both block and inode usage with `df -h` and `df -i`, then use `lsof +L1` to find deleted files still held open by running processes. A process can retain the unlinked inode until it closes or restarts. Rotate or reopen logs safely, restart only the responsible service if necessary, and validate reclaimed space. Also inspect reserved blocks, mount points, and container layers, then correct log rotation and alerting."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Linux Production Troubleshooting Scenarios",
+    "category": "Linux Networking",
+    "questionType": "Scenario",
+    "question": "A service is listening on a Linux server but remote clients receive connection timeouts. What troubleshooting sequence would you follow?",
+    "answer": "Confirm the process listens on the expected IP and port with `ss -lntup`, then test locally and from the client. Check DNS, client route, server route, host firewall or nftables, cloud firewall, security policy, load balancer, return path, and packet capture on the server. Distinguish timeout from refusal, verify source-address assumptions and TLS separately, and use counters or flow logs to identify the layer dropping traffic."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Composer to GKE Production Scenarios",
+    "category": "Cloud Composer",
+    "questionType": "Scenario",
+    "question": "A Cloud Composer DAG is scheduled, but the task that should create a GKE training job remains queued. How would you troubleshoot it?",
+    "answer": "Check Airflow scheduler health, queued task counts, pools, concurrency, worker capacity, executor status, dependencies, and task logs before investigating GKE. Confirm the DAG is not paused and the task's trigger rules and start date are correct. If the worker starts the task, then inspect the GKE API call, connection configuration, identity, network access, and quota. Add queue-time alerts and separate Composer scheduling latency from Kubernetes job-start latency."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Composer to GKE Production Scenarios",
+    "category": "Cloud Composer & IAM",
+    "questionType": "Scenario",
+    "question": "Composer can reach the GKE API, but the DAG receives a permission-denied error when creating Kubernetes jobs. What would you inspect?",
+    "answer": "Identify the exact Google service account and Kubernetes identity used at runtime, then separate Google IAM authorization from Kubernetes RBAC. Verify Composer connection or operator configuration, Workload Identity mappings, cluster access, namespace RoleBindings, and whether credentials are stale or from the wrong project. Grant only the required verbs and resources in the intended namespace, retest with the same identity, and log authorization failures."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Composer to GKE Production Scenarios",
+    "category": "GKE Scheduling",
+    "questionType": "Scenario",
+    "question": "Composer successfully creates a GKE training job, but its pods remain Pending even though the cluster autoscaler is enabled. How would you troubleshoot it?",
+    "answer": "Read pod scheduling events first. Check resource requests, accelerators, node selectors, affinity, taints and tolerations, Pod IP availability, quotas, node-pool limits, regional capacity, persistent-volume binding, and autoscaler messages. Autoscaling cannot help when no configured node pool can satisfy the pod or a cloud quota or IP range prevents new nodes. Correct the unsatisfied constraint or add a suitable node pool, then validate startup time and capacity alerts."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "Composer to GKE Production Scenarios",
+    "category": "GKE Reliability",
+    "questionType": "Scenario",
+    "question": "A Composer retry creates duplicate GKE training jobs and increases cost. How would you redesign the workflow?",
+    "answer": "Make submission idempotent using a deterministic job name or external run identifier derived from the DAG and task run. Before creation, check whether the job already exists and whether it is running, succeeded, or failed; resume observation instead of creating another. Use bounded retries, timeouts, cleanup policy, concurrency controls, and labels for cost attribution. Separate job submission from monitoring so a transient Airflow worker failure does not duplicate compute."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "GKE IP Exhaustion & Migration Scenarios",
+    "category": "GKE IP Exhaustion",
+    "questionType": "Scenario",
+    "question": "A GKE cluster has free node CPU and memory, but new pods remain Pending with failed IP allocation events. What immediate and permanent actions would you take?",
+    "answer": "Confirm secondary Pod-range exhaustion and identify whether completed pods, excess replicas, or node density accelerated consumption. Contain by stopping nonessential scaling and cleaning safe terminated workloads; do not treat node capacity as IP capacity. Permanently add and use an additional Pod range with compatible node pools when supported, or migrate to a properly sized cluster. Add IP utilization forecasting and alerts based on maximum Pods, upgrade surge, autoscaling, and migration headroom."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "GKE IP Exhaustion & Migration Scenarios",
+    "category": "GKE IP Planning",
+    "questionType": "Design / Architecture",
+    "question": "How would you calculate Pod CIDR capacity for a regional GKE cluster before production deployment?",
+    "answer": "Start with maximum nodes across all zones, maximum Pods per node, GKE's per-node alias-IP allocation behavior, system pods, autoscaling, surge upgrades, failure capacity, and growth. Include concurrent old and new node pools during upgrades or migrations and reserve operational headroom. Size Service ranges separately. Validate the proposed ranges against enterprise IPAM, on-premises, peering, PSC, and future regions, and document the assumptions so capacity can be monitored."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "GKE IP Exhaustion & Migration Scenarios",
+    "category": "GKE Migration",
+    "questionType": "Scenario",
+    "question": "During a blue-green GKE migration, stateless services work in the new cluster but stateful workloads cannot mount their existing volumes. How would you proceed?",
+    "answer": "Stop the cutover for affected workloads and identify storage type, zone or region scope, access mode, CSI driver, encryption, snapshot support, and application consistency requirements. Nodes cannot simply attach every volume across clusters or regions. Use supported snapshots, backup and restore, replication, or application-native data migration into target volumes, test consistency and recovery, and shift writers only through a controlled quiesce or replication cutover with rollback."
+  },
+  {
+    "source": "Conversation Interview Round",
+    "section": "GKE IP Exhaustion & Migration Scenarios",
+    "category": "GKE Migration",
+    "questionType": "Scenario",
+    "question": "How would you shift production traffic gradually from an old GKE cluster to a new cluster and roll back safely?",
+    "answer": "Register both clusters behind a supported multi-cluster or load-balancing design, or use controlled DNS or service-routing weights where appropriate. Validate health, observability, policies, data compatibility, and capacity before sending a small canary percentage. Increase traffic in stages with error, latency, saturation, and business thresholds; keep schema and state backward compatible. Roll back routing immediately when abort thresholds are crossed and retain the old cluster until the agreed soak period completes."
+  }
+]

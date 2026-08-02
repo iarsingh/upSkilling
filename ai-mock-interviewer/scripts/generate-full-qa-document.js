@@ -11,6 +11,32 @@ function normalizeQuestion(value) {
     .trim();
 }
 
+// Collapse harmless interview-prompt variations without merging detailed
+// scenarios. For short definition/comparison prompts, token order is not
+// meaningful ("GKE Standard and Autopilot" vs "Autopilot and Standard").
+function canonicalQuestionKey(value) {
+  const normalized = normalizeQuestion(value)
+    .replace(/\bworked on\b/g, "worked with")
+    .replace(/\brequest user\b/g, "user request")
+    .replace(/\s+/g, " ")
+    .trim();
+  const isShort = normalized.split(" ").length <= 14;
+  const isDefinitionOrComparison = /^(what (is|are)|explain|describe|define|difference between|what is the difference between)\b/.test(normalized);
+  if (!isShort || !isDefinitionOrComparison) {
+    return normalized
+      .replace(/^(can you|could you|please)\s+/, "")
+      .replace(/\b(a|an|the)\b/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+  return normalized
+    .replace(/^(what (is|are)|explain|describe|define|what is the difference between|difference between)\s+/, "")
+    .split(" ")
+    .filter((token) => !["a", "an", "the", "in", "on"].includes(token))
+    .sort()
+    .join(" ");
+}
+
 function classifyQuestionType(question) {
   const text = String(question || "").toLowerCase();
   if (/\b(troubleshoot|debug|investigate|fails?|failure|pending|crashloop|exhaust|corrupt|deleted|recover|restore)\b/.test(text)) return "Troubleshooting";
@@ -185,6 +211,18 @@ function loadGcpPrivateConnectivityQuestions() {
   return JSON.parse(fs.readFileSync(p, "utf8"));
 }
 
+function loadGcpNetworkEngineerAdvancedQuestions() {
+  const p = path.join(__dirname, "answer-bank", "88-gcp-network-engineer-jd-advanced.json");
+  if (!fs.existsSync(p)) return [];
+  return JSON.parse(fs.readFileSync(p, "utf8"));
+}
+
+function loadLinuxComposerGkeInterviewQuestions() {
+  const p = path.join(__dirname, "answer-bank", "89-linux-composer-gke-interview-round.json");
+  if (!fs.existsSync(p)) return [];
+  return JSON.parse(fs.readFileSync(p, "utf8"));
+}
+
 function loadHandWrittenAnswers() {
   const dir = path.join(__dirname, "answer-bank");
   const merged = new Map();
@@ -232,16 +270,25 @@ const appBanks = loadAppBanks();
 const codingBank = loadCodingAnswerBank();
 const importedConversationQuestions = loadImportedConversationQuestions();
 const gcpPrivateConnectivityQuestions = loadGcpPrivateConnectivityQuestions();
+const gcpNetworkEngineerAdvancedQuestions = loadGcpNetworkEngineerAdvancedQuestions();
+const linuxComposerGkeInterviewQuestions = loadLinuxComposerGkeInterviewQuestions();
 
-const allSources = [...mockSets, ...codingBank, ...appBanks, ...importedConversationQuestions, ...gcpPrivateConnectivityQuestions, ...techQa, ...largeBank];
+const allSources = [...mockSets, ...codingBank, ...appBanks, ...importedConversationQuestions, ...gcpPrivateConnectivityQuestions, ...gcpNetworkEngineerAdvancedQuestions, ...linuxComposerGkeInterviewQuestions, ...techQa, ...largeBank];
 
 const seen = new Set();
+const seenCanonical = new Set();
 const finalEntries = [];
 let generatedAnswers = 0;
+let duplicatesRemoved = 0;
 for (const e of allSources) {
   const key = normalizeQuestion(e.question);
-  if (!key || seen.has(key)) continue;
+  const canonicalKey = canonicalQuestionKey(e.question);
+  if (!key || seen.has(key) || seenCanonical.has(canonicalKey)) {
+    duplicatesRemoved++;
+    continue;
+  }
   seen.add(key);
+  seenCanonical.add(canonicalKey);
   const answer = e.answer || answerByQuestion.get(key) || generatedAnswer(e);
   if (!answerByQuestion.has(key) && !e.answer) generatedAnswers++;
   finalEntries.push({
@@ -256,6 +303,7 @@ for (const e of allSources) {
 }
 
 console.log(`Total unique questions with answers: ${finalEntries.length}`);
+console.log(`Duplicate source questions removed: ${duplicatesRemoved}`);
 console.log(`Generated answer guidance: ${generatedAnswers}`);
 
 const outPath = path.join(__dirname, "answer-bank", "final-qa-dataset.json");

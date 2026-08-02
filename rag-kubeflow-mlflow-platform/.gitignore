@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+mlflow.db
+mlartifacts/
+mlruns/
+mlflow-server.log
+app.log
+pipelines/pipeline.yaml

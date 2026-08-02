@@ -1,0 +1,127 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<flow-definition plugin="workflow-job">
+  <actions/>
+  <description>Verifies Docker Jenkins access to Minikube and deploys a namespaced integration marker.</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps">
+    <script><![CDATA[
+pipeline {
+    agent any
+
+    environment {
+        DEPLOYER = 'system:serviceaccount:jenkins:jenkins-deployer'
+    }
+
+    stages {
+        stage('Verify Kubernetes') {
+            steps {
+                sh '''
+                    set -eu
+                    kubectl version --client=true
+                    kubectl get namespace jenkins
+                    kubectl auth can-i create configmaps \
+                        --as="${DEPLOYER}" \
+                        --namespace=jenkins
+                '''
+            }
+        }
+
+        stage('Deploy integration marker') {
+            steps {
+                sh '''
+                    set -eu
+                    kubectl create configmap jenkins-kubernetes-integration \
+                        --namespace=jenkins \
+                        --from-literal=managed-by=jenkins \
+                        --from-literal=build-number="${BUILD_NUMBER}" \
+                        --dry-run=client \
+                        --output=yaml |
+                    kubectl apply \
+                        --as="${DEPLOYER}" \
+                        --namespace=jenkins \
+                        --filename=-
+
+                    kubectl get configmap jenkins-kubernetes-integration \
+                        --as="${DEPLOYER}" \
+                        --namespace=jenkins \
+                        --output=yaml
+                '''
+            }
+        }
+
+        stage('Deploy workload') {
+            steps {
+                sh '''
+                    set -eu
+                    kubectl create deployment jenkins-kubernetes-demo \
+                        --namespace=jenkins \
+                        --image=nginx:alpine \
+                        --replicas=1 \
+                        --dry-run=client \
+                        --output=yaml |
+                    kubectl apply \
+                        --as="${DEPLOYER}" \
+                        --namespace=jenkins \
+                        --filename=-
+
+                    kubectl rollout status deployment/jenkins-kubernetes-demo \
+                        --as="${DEPLOYER}" \
+                        --namespace=jenkins \
+                        --timeout=120s
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Kubernetes deployment completed successfully.'
+            sh '''
+                kubectl get deployment jenkins-kubernetes-demo \
+                    --as="${DEPLOYER}" \
+                    --namespace=jenkins \
+                    --output=wide
+            '''
+        }
+
+        failure {
+            echo 'Build failed; collecting Kubernetes diagnostics.'
+            sh '''
+                kubectl get pods \
+                    --as="${DEPLOYER}" \
+                    --namespace=jenkins \
+                    --output=wide || true
+                kubectl get events \
+                    --as="${DEPLOYER}" \
+                    --namespace=jenkins \
+                    --sort-by=.lastTimestamp || true
+                kubectl describe deployment jenkins-kubernetes-demo \
+                    --as="${DEPLOYER}" \
+                    --namespace=jenkins || true
+            '''
+        }
+
+        always {
+            script {
+                env.FINAL_BUILD_RESULT = currentBuild.currentResult
+            }
+            sh '''
+                payload=$(printf '{"job":"%s","build_number":"%s","result":"%s","target":"minikube"}' \
+                    "${JOB_NAME}" "${BUILD_NUMBER}" "${FINAL_BUILD_RESULT}")
+                curl -fsS -X POST \
+                    -H 'Content-Type: application/json' \
+                    --data "${payload}" \
+                    http://logstash:5001/ >/dev/null \
+                    || echo "Post-build telemetry could not be published"
+            '''
+            deleteDir()
+        }
+    }
+}
+]]></script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>

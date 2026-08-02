@@ -1,0 +1,442 @@
+[
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "IP Addressing & IPv6",
+    "questionType": "Design / Architecture",
+    "question": "How would you create an enterprise IPAM and CIDR governance model for GCP, on-premises, and future cloud environments?",
+    "answer": "Create a centrally owned IPAM source of truth with non-overlapping supernets allocated by environment, region, workload type, and growth horizon. Reserve space for GKE Pod and Service ranges, proxy-only subnets, PSC endpoints, hybrid links, acquisitions, and migrations. Make CIDR allocation an automated workflow with overlap validation, approvals, ownership metadata, utilization reporting, and reclaim procedures. Terraform pipelines should query or validate against IPAM before creating a subnet."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "IP Addressing & IPv6",
+    "questionType": "Design / Architecture",
+    "question": "How would you introduce IPv6 into an existing IPv4 GCP environment without disrupting production?",
+    "answer": "Begin with an inventory of application, operating-system, security-tool, DNS, load-balancer, and hybrid-network IPv6 readiness. Use a phased dual-stack design, enable IPv6 only on selected subnets and supported load-balancer frontends, publish AAAA records after end-to-end validation, and mirror IPv4 security controls for IPv6. Test routing, logging, monitoring, MTU, application binding, and fallback behavior, then expand gradually while retaining a documented rollback."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Routing & Hybrid Connectivity",
+    "questionType": "Troubleshooting",
+    "question": "An HA VPN reports healthy tunnels, but application traffic drops intermittently. How would you troubleshoot the issue?",
+    "answer": "Separate control-plane health from data-plane health. Correlate tunnel, BGP, packet-loss, latency, and application timestamps; inspect learned and advertised routes, route priorities, ECMP behavior, return-path symmetry, MTU and fragmentation, firewall logs, rekey events, and on-premises device counters. Test each tunnel independently, capture packets at both ends, and compare working versus failing flows before changing routing."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Routing & Hybrid Connectivity",
+    "questionType": "Scenario",
+    "question": "How would you migrate production traffic from HA VPN to Dedicated Interconnect with minimal risk and downtime?",
+    "answer": "Build and validate redundant Interconnect attachments and BGP sessions in parallel with VPN. Advertise test prefixes first, verify reachability and monitoring, then shift selected routes by adjusting BGP priorities in controlled stages while watching traffic, latency, and errors. Preserve symmetric return paths and keep HA VPN as a tested backup. Document explicit abort thresholds, rollback priorities, stakeholder communications, and post-cutover validation."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Routing & Hybrid Connectivity",
+    "questionType": "Troubleshooting",
+    "question": "A route learned through Cloud Router is visible but is not being used by a VM. What would you check?",
+    "answer": "Inspect the VM NIC's effective routes and compare destination-prefix specificity, route priority, route type, region, and VPC dynamic-routing mode. Verify the route is not suppressed by an overlapping subnet route, a more specific static or peering route, or an invalid next hop. Confirm the VM is in the expected VPC, BGP advertisements cover the return path, firewall policy permits the flow, and policy-based routes are not taking precedence."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Load Balancing & TLS",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you rotate TLS certificates on a production global HTTPS load balancer without downtime?",
+    "answer": "Provision and validate the replacement certificate before removing the current one, attach both certificates to the target HTTPS proxy or certificate map, and confirm domain coverage, chain validity, activation status, and SNI behavior. Test from multiple client types and regions, monitor TLS and load-balancer errors, then remove the old certificate only after the new certificate is serving reliably. Automate expiry alerts and renewal through Certificate Manager where possible."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Load Balancing & TLS",
+    "questionType": "Troubleshooting",
+    "question": "A URL-map change sends one application path to the wrong backend. How would you diagnose and recover?",
+    "answer": "Confirm the affected host, path, query behavior, and deployed URL-map version, then inspect host rules, path matchers, route-rule priorities, rewrites, redirects, and default backends. Use URL-map validation tests and load-balancer request logs to prove the match. Restore the last known-good reviewed configuration or apply a narrow correction, validate every critical route, and add automated URL-map tests to the CI pipeline."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Load Balancing & TLS",
+    "questionType": "Comparison",
+    "question": "When would you choose a proxy load balancer instead of a passthrough load balancer in GCP?",
+    "answer": "Choose a proxy load balancer when Google should terminate client connections and provide capabilities such as TLS offload, global anycast, Layer 7 routing, Cloud Armor, CDN, or connection multiplexing. Choose passthrough when the backend must receive the original packets or client source IP, when UDP is required, or when the application must terminate the connection itself. Evaluate protocol, scope, source-IP requirements, backend type, performance, security controls, and failure behavior."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Network Security",
+    "questionType": "Troubleshooting",
+    "question": "A hierarchical firewall policy and a VPC firewall rule appear to conflict. How would you determine which rule wins?",
+    "answer": "Use the documented firewall-policy evaluation hierarchy and inspect the effective firewall policy for the workload, including organization, folder, global or regional network firewall policy, and VPC rules. Compare direction, priority, action, target, source, protocol, and port; remember that a higher-level goto_next can delegate evaluation while an enforced allow or deny can decide it. Confirm the result with Connectivity Tests and firewall-rule logging rather than inferring it from rule names."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Network Security",
+    "questionType": "Scenario",
+    "question": "A new VPC Service Controls perimeter blocks a legitimate CI/CD deployment. How would you restore service securely?",
+    "answer": "Use violation logs and the unique identifier to identify the blocked service, source identity, project, network, and access path. Prefer a narrowly scoped ingress or egress rule, access level, or supported perimeter bridge rather than disabling the perimeter. Validate the pipeline's service account and private access design in dry-run mode, restore the deployment, then document the dependency and add a pre-deployment perimeter test."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Network Security",
+    "questionType": "Scenario",
+    "question": "How would you design controlled internet egress for workloads that may access only approved external destinations?",
+    "answer": "Keep workloads private, route egress through a governed path such as secure web proxies or inspected firewall appliances, and use Cloud NAT only for address translation. Enforce destination controls with hierarchical firewall policies, secure proxies, FQDN-aware controls where required, and organization policies; publish stable NAT IPs for external allow-lists. Log DNS and flows, alert on denied or unusual destinations, use separate policies by workload identity, and test fail-closed behavior."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Private Connectivity & NCC",
+    "questionType": "Scenario",
+    "question": "Two consumer VPCs use overlapping CIDRs but both need private access to the same producer service. How would you design it?",
+    "answer": "Use Private Service Connect so each consumer creates a local endpoint in its own VPC while the producer publishes one service attachment. This provides service-level connectivity without peering the consumer address spaces and avoids exposing the entire producer network. Plan consumer endpoint addresses, producer NAT subnets, DNS, connection acceptance, quotas, regional placement, authentication, and monitoring."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Private Connectivity & NCC",
+    "questionType": "Design / Architecture",
+    "question": "How would you prevent unintended transitive connectivity when using Network Connectivity Center?",
+    "answer": "Define explicit trust and routing domains before attaching spokes, separate hubs or use supported route tables and policies to control route exchange, and advertise only approved prefixes. Combine routing segmentation with hierarchical firewall policies because reachability does not equal authorization. Review effective routes, automate policy validation, monitor route changes, and test prohibited as well as permitted paths during onboarding."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Operations & RCA",
+    "questionType": "Scenario",
+    "question": "A production network incident begins immediately after an automated Terraform deployment. What are your first actions?",
+    "answer": "Declare and scope the incident, freeze further applies, compare the exact reviewed plan and applied changes with the affected traffic path, and protect evidence. Restore service through the safest tested rollback or forward fix while maintaining communications and out-of-band access. Validate routes, firewall evaluation, BGP, load-balancer health, DNS, and flow logs, then complete an RCA covering why review, policy checks, staged rollout, or post-deployment tests did not catch the failure."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Terraform & CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you test GCP networking Terraform beyond terraform validate and terraform plan?",
+    "answer": "Add linting, security and policy-as-code checks, CIDR-overlap and firewall-exposure validation, module unit tests, and ephemeral integration tests that create representative networks. After apply, run Connectivity Tests, DNS queries, health checks, route assertions, and permitted-and-denied flow tests. Test redundancy by failing tunnels or backends where safe, retain evidence, and destroy temporary resources automatically."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Terraform & CI/CD",
+    "questionType": "Scenario",
+    "question": "How would you import manually created GCP network resources into Terraform without causing an outage?",
+    "answer": "Inventory the live resource and dependencies, write configuration that matches its current attributes, back up state, and import into the correct small-blast-radius state. Run a refresh-only review and repeated plans until no unintended update or replacement remains. Resolve defaults and immutable fields carefully, obtain peer approval, and only then let the pipeline manage the resource; do not apply a plan containing unexplained destructive actions."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Collaboration & Production Support",
+    "questionType": "Experience",
+    "question": "How do you handle a request from an application team to open broad network access urgently in production?",
+    "answer": "Clarify the exact source, destination, protocol, port, identity, duration, and business impact, then use logs or Connectivity Tests to confirm the requirement. Offer the narrowest time-bound rule or safer private-service design, require the appropriate emergency approval, enable logging, and define automatic expiry. Validate the application, monitor the change, and complete a follow-up review so urgency does not create permanent broad access."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Advanced JD Round",
+    "category": "Collaboration & Production Support",
+    "questionType": "Experience",
+    "question": "What evidence would you present during an audit to demonstrate that GCP network changes are controlled?",
+    "answer": "Provide protected-repository settings, CODEOWNERS, pull-request reviews, approved Terraform plans, policy-check results, CI/CD identity and apply logs, change tickets, and production approvals. Add effective firewall-policy exports, IAM history, flow and firewall logs, exception records with expiry, state-backend audit logs, and proof of periodic access, rule, resilience, and recovery reviews. The evidence should connect each production change to an owner, reviewer, tested artifact, deployment, and outcome."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Enterprise Network Architecture",
+    "questionType": "Design / Architecture",
+    "question": "Design the target-state GCP network architecture for an enterprise with hundreds of projects, multiple business units, regulated workloads, and centralized network operations.",
+    "answer": "Start with organization and folder boundaries aligned to governance and regulatory domains. Use centrally owned custom-mode Shared VPC host projects, separate production and non-production trust domains, service projects for workload ownership, deliberate regional IP allocation, and NCC or controlled hybrid hubs for route exchange. Centralize DNS, hybrid connectivity, hierarchical firewall policies, inspection, logging, IPAM, and approved Terraform modules while delegating subnet consumption through least-privilege IAM. Define blast-radius boundaries, exception processes, SLOs, DR paths, and an operating model alongside the topology."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Enterprise Network Architecture",
+    "questionType": "Comparison",
+    "question": "Would you use one enterprise Shared VPC, multiple Shared VPCs, or independent VPCs? Explain the decision framework.",
+    "answer": "Evaluate trust boundaries, regulatory separation, organizational ownership, blast radius, IP scale, route scale, quota limits, lifecycle independence, and cross-environment connectivity. One Shared VPC simplifies centralized governance but increases coupling and blast radius. Multiple Shared VPCs usually provide better isolation by environment, region, business unit, or compliance domain while retaining central control. Independent VPCs suit strong autonomy or isolation but require deliberate service exposure and connectivity. Choose the smallest number of networks that preserves necessary isolation and operability."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Multi-Region Resilience",
+    "questionType": "Design / Architecture",
+    "question": "Design a multi-region GCP application network that must survive a complete regional failure with an aggressive RTO and RPO.",
+    "answer": "Use independent regional application stacks behind a global external or cross-region internal Application Load Balancer, with health checks that reflect real service readiness. Keep regional subnets, NAT, proxies, dependencies, and capacity independent; make DNS and certificate management globally resilient. The data tier must explicitly meet the RPO and consistency target through an appropriate multi-region design. Remove hidden regional dependencies, automate traffic failover and failback, monitor capacity, and prove the architecture through regular regional evacuation exercises."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Multi-Region Resilience",
+    "questionType": "Scenario",
+    "question": "The business requires active-active delivery, but the application has stateful sessions and a single-region database. How would you challenge and reshape the requirement?",
+    "answer": "Explain that multi-region compute alone does not produce active-active availability when session and data dependencies remain regional. Quantify the real RTO, RPO, consistency, latency, and cost requirements, then offer options: externalize sessions, redesign the data tier, use active-passive with tested automated failover, or accept degraded read-only operation. Record residual risks and choose a design whose failure behavior is explicit. Architecture should reconcile business outcomes with application constraints rather than label an unready system active-active."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Hybrid & Multi-Cloud Architecture",
+    "questionType": "Design / Architecture",
+    "question": "Design resilient connectivity between GCP, two on-premises data centers, AWS, and Azure while preventing an unmanageable full mesh.",
+    "answer": "Create defined regional connectivity hubs and routing domains instead of pairwise tunnels. Use redundant Interconnect or provider connectivity for primary paths, HA VPN for diverse backup where appropriate, Cloud Router and BGP with controlled advertisements, and NCC to govern GCP and hybrid spokes. Coordinate non-overlapping IPAM, ASNs, route summarization, DNS, security inspection, encryption, and failure priorities across clouds. Avoid accidental transit, test each circuit and site failure, and use end-to-end observability plus a shared operating model."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Hybrid & Multi-Cloud Architecture",
+    "questionType": "Design / Architecture",
+    "question": "How would you design BGP advertisements and route priorities for primary Interconnect, backup VPN, and dual on-premises sites?",
+    "answer": "Define intended traffic paths for normal operation and every failure state before assigning metrics. Advertise summarized prefixes where safe, use MED or advertised route priority consistently, preserve symmetric forward and return paths, and avoid accepting more routes than required. Use redundant Cloud Routers and sessions across failure domains, prevent a backup path from becoming unintended transit, and document convergence expectations. Validate by shutting individual BGP sessions, circuits, routers, and sites while measuring loss and recovery."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Security Architecture",
+    "questionType": "Design / Architecture",
+    "question": "Design a zero-trust network architecture for internal applications used by employees, contractors, and workloads across hybrid environments.",
+    "answer": "Make identity and context the primary control rather than source network location. Use centralized identity, strong authentication, device or workload posture, IAP or identity-aware proxies, short-lived workload identities, least-privilege IAM, and application authorization. Keep services private through internal load balancing or PSC, segment east-west paths, use mTLS where justified, and control egress. Centralize telemetry and continuous policy evaluation, define break-glass access, and ensure network rules limit blast radius without becoming the sole trust mechanism."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Security Architecture",
+    "questionType": "Design / Architecture",
+    "question": "How would you architect centralized traffic inspection without creating a single point of failure or asymmetric routing?",
+    "answer": "Deploy redundant inspection appliances across zones and, where required, regions behind supported internal passthrough load balancers. Use narrowly scoped policy-based routes or an approved hub design for service insertion, and design identical forward and return paths. Separate trust zones, size for failure capacity, enable autoscaling only when state behavior supports it, and preserve health-based bypass or fail-closed behavior according to risk. Monitor appliance, route, and flow health and test zonal, appliance, and control-plane failures."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Private Service Architecture",
+    "questionType": "Comparison",
+    "question": "An enterprise wants every team to consume shared APIs privately. When would you choose Shared VPC, VPC Peering, PSC, or an internal API gateway pattern?",
+    "answer": "Use Shared VPC when consumers share a governance boundary and need common network resources. Use peering only when broader bidirectional IP reachability between independent networks is necessary and non-transitivity and CIDR constraints are acceptable. Prefer PSC for service-oriented, producer-consumer isolation with local endpoints and no full network adjacency. Add an internal API gateway when authentication, authorization, quotas, transformation, versioning, and API analytics are required. Many mature designs combine PSC transport with an API gateway."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "DNS Architecture",
+    "questionType": "Design / Architecture",
+    "question": "Design an enterprise DNS architecture spanning GCP, on-premises, multiple regions, and several independently managed business units.",
+    "answer": "Define authoritative ownership and a delegated namespace hierarchy first. Use Cloud DNS public zones for internet names, private zones for internal domains, cross-project binding or approved associations for shared resolution, inbound forwarding for on-premises queries, and forwarding or alternative name-server policies for legacy domains. Deploy redundant on-premises resolvers and connectivity, prevent forwarding loops and ambiguous overlapping zones, log queries, secure public zones with DNSSEC where suitable, and document failover, change, and domain-lifecycle processes."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Migration Architecture",
+    "questionType": "Design / Architecture",
+    "question": "How would you migrate a legacy flat on-premises network into segmented GCP Shared VPCs without a big-bang cutover?",
+    "answer": "Discover applications, dependencies, flows, addresses, DNS, and ownership; classify workloads into target trust zones and resolve CIDR overlap early. Establish redundant hybrid connectivity and transitional DNS, create landing-zone Shared VPCs and security controls through Terraform, then migrate application waves using temporary controlled routes and dual connectivity. Validate each wave with flow evidence and rollback criteria, progressively tighten rules, and retire legacy paths only after dependency and business-owner confirmation."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Migration Architecture",
+    "questionType": "Scenario",
+    "question": "A company acquisition brings networks whose CIDRs overlap both GCP and on-premises ranges. What transition and target-state options would you evaluate?",
+    "answer": "Do not attempt direct routing of overlapping address spaces. Inventory which ranges and services actually need communication, then consider application-layer proxies, PSC service exposure, load balancers, controlled NAT, isolated landing VPCs, or temporary broker services for transition. The durable target is usually renumbering into governed IPAM ranges, executed in waves with DNS abstraction and dependency testing. Compare each option by duration, scale, observability, protocol support, security, operational debt, and migration cost."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Governance & Operating Model",
+    "questionType": "Design / Architecture",
+    "question": "What should a GCP network architecture governance model contain beyond diagrams and Terraform modules?",
+    "answer": "Define decision rights, ownership boundaries, service catalog, supported patterns, IPAM, naming, labels, security baselines, exception and risk acceptance, change tiers, incident escalation, capacity management, SLOs, lifecycle and deprecation policies, cost allocation, and evidence retention. Include architecture decision records, threat models, failure-mode analysis, runbooks, testing requirements, and measurable standards. Governance succeeds when teams can obtain compliant connectivity quickly through paved roads and exceptions remain visible and temporary."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Cost & Capacity Architecture",
+    "questionType": "Design / Architecture",
+    "question": "How would you optimize GCP network cost without weakening resilience or security?",
+    "answer": "Build a cost model for internet and inter-region egress, load balancer processing, Cloud NAT, Interconnect capacity, logging volume, appliances, and idle public IPs. Place communicating services deliberately, use CDN and caching, choose appropriate connectivity tiers, aggregate predictable hybrid bandwidth, right-size NAT and appliances, and apply sampling or exclusions to logs only after security requirements are met. Tie every saving to SLO, failure-mode, and security impact; optimize architecture and traffic patterns before removing redundancy."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Architecture Review",
+    "questionType": "Scenario",
+    "question": "During an architecture review, what questions would you ask before approving a new internet-facing service on GCP?",
+    "answer": "Ask who the users are, what protocols and data are involved, expected scale and regions, availability and recovery targets, authentication and authorization model, TLS ownership, backend exposure, WAF and DDoS needs, rate limits, egress dependencies, and logging requirements. Review load-balancer type, DNS, certificates, Cloud Armor, private backends, health checks, data residency, secrets, CI/CD, rollback, monitoring, threat model, cost, and operational ownership. Approval should depend on tested controls and failure behavior, not only a topology diagram."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Architect - Enterprise Design Round",
+    "category": "Architecture Review",
+    "questionType": "Scenario",
+    "question": "How would you evaluate whether a proposed GCP network architecture is truly production ready?",
+    "answer": "Trace every critical user and service flow through normal and failure states. Verify isolation, least privilege, IP and route scale, quotas, DNS, certificate lifecycle, capacity, observability, IaC ownership, deployment safety, backup access, and dependency resilience. Challenge zone, region, circuit, router, appliance, identity, DNS, and control-plane failures; confirm RTO and RPO with evidence. Require runbooks, alerts, rollback, cost ownership, security review, and game-day results before accepting production readiness."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Shared VPC",
+    "questionType": "Scenario",
+    "question": "A newly attached Shared VPC service project can create VMs, but the VMs cannot communicate with workloads in another service project. How would you troubleshoot it?",
+    "answer": "Confirm both service projects are attached to the intended host project and that the VM NICs use the expected Shared VPC subnets. Check subnet-level Network User permissions, effective routes, hierarchical and VPC firewall policies, service-account targets, and whether the destination application is listening. Use Connectivity Tests and flow or firewall logs with the exact source, destination, protocol, and port. Also verify there is no mistaken assumption that project attachment itself creates an allow rule."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Routing",
+    "questionType": "Scenario",
+    "question": "After adding a more specific static route, traffic to an on-premises application starts blackholing even though BGP is healthy. What happened and how would you recover?",
+    "answer": "The more specific destination prefix normally wins over a less-specific dynamic route, so the static route can attract traffic even when its next hop is unusable. Inspect effective routes and next-hop health, confirm the exact prefix and priority, and remove or correct the offending route to restore the intended BGP path. Validate return routing and affected flows, then add policy checks that flag static routes overlapping learned enterprise prefixes."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "HA VPN & BGP",
+    "questionType": "Scenario",
+    "question": "One HA VPN tunnel fails, but instead of clean failover users experience intermittent sessions. What would you investigate?",
+    "answer": "Check whether both tunnels and BGP sessions previously carried ECMP traffic and whether the remaining path has sufficient capacity. Inspect route withdrawal and convergence timing, stale routes, asymmetric return paths, stateful on-premises firewalls, MTU, NAT, and applications sensitive to source-path changes. Compare packet loss and flow logs per path, stabilize routing or session symmetry, and test tunnel failures regularly with documented convergence and capacity expectations."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Cloud Interconnect",
+    "questionType": "Scenario",
+    "question": "Both Interconnect VLAN attachments show operational, but throughput has dropped by half and latency has increased. How would you isolate the problem?",
+    "answer": "Correlate utilization, dropped packets, errors, BGP paths, and maintenance events for each attachment and physical circuit. Verify traffic is still distributed as designed and one path has not lost routes or become deprioritized. Check provider and on-premises interface errors, optics, MTU, QoS, congestion, appliance capacity, and application flow distribution. Test paths independently and engage the provider or Google with timestamps and circuit evidence when the fault boundary is external."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Cloud NAT",
+    "questionType": "Scenario",
+    "question": "Only a subset of private GKE nodes lose outbound connectivity during peak traffic, while other nodes using the same Cloud NAT gateway work normally. How would you diagnose it?",
+    "answer": "Segment NAT metrics by gateway, NAT IP, source VM or node, and time, looking for port exhaustion, allocation failures, dropped packets, and endpoint-specific connection counts. Check minimum ports per VM, dynamic allocation, NAT IP capacity, destination concentration, and whether affected applications create excessive short-lived connections. Also validate node routes, firewall egress, DNS, and destination limits. Add NAT capacity or tune ports, and fix connection pooling or retry storms at the application layer."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Cloud DNS",
+    "questionType": "Scenario",
+    "question": "GCP workloads intermittently resolve an internal hostname to different addresses depending on the project. What would you check?",
+    "answer": "Inventory all private zones, forwarding zones, peering zones, response policies, and VPC associations for the hostname and its parent domains. Look for overlapping zones, split-horizon differences, stale records, forwarding loops, resolver caching, and business-unit VPCs associated with different authoritative zones. Query the metadata resolver from representative workloads, enable DNS logging, establish one intended ownership path, and remove ambiguous namespace configurations carefully."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Cloud DNS",
+    "questionType": "Scenario",
+    "question": "Public DNS was updated during a migration, but some users still reach the old load balancer hours later. How would you respond?",
+    "answer": "Check the authoritative record, TTL before and after the change, resolver caches, negative caching, delegated name servers, CDN or proxy layers, and whether multiple records or weighted policies remain. Compare results from multiple public resolvers and regions. Keep the old endpoint healthy during the planned TTL window, lower TTL well before future cutovers, monitor traffic on both endpoints, and remove the old service only after queries and traffic confirm convergence."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Load Balancing",
+    "questionType": "Scenario",
+    "question": "A global HTTPS load balancer returns 502 errors only for one region, while all backends appear healthy. How would you investigate?",
+    "answer": "Break down load-balancer logs by client region, backend region, proxy status, response details, latency, and request path. Verify regional backend capacity, connection timeouts, TLS from proxy to backend, application resets, health-check coverage, firewall rules, and cross-region traffic behavior. Compare direct and synthetic tests from affected locations, inspect backend and network telemetry at matching timestamps, and temporarily shift traffic or reduce capacity for the suspect backend while correcting the root cause."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Load Balancing",
+    "questionType": "Scenario",
+    "question": "A new application deployment passes its local health check but receives no production traffic from the load balancer. What would you verify?",
+    "answer": "Confirm the endpoint is registered in the correct instance group or NEG and attached to the intended backend service. Inspect backend health, serving port, named port, health-check path and host header, firewall access from health-check and proxy ranges, capacity scaler, balancing mode, URL-map match, and target proxy or forwarding rule. Validate that application readiness reflects its dependencies and use load-balancer logs to determine whether requests are routed elsewhere or the endpoint is excluded."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Private Service Connect",
+    "questionType": "Scenario",
+    "question": "A PSC endpoint remains in a pending state after the consumer creates it. What would you troubleshoot?",
+    "answer": "Check the producer service attachment's connection preference, consumer accept or reject lists, project identity, regional alignment, endpoint target, and quotas. Confirm the producer load balancer and service attachment are healthy and the required NAT subnet has capacity. Review connection status on both sides, approve the connection if manual acceptance is configured, then verify consumer DNS and firewall policy after the endpoint becomes accepted."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Private Google Access",
+    "questionType": "Scenario",
+    "question": "Private VMs can reach the internet through Cloud NAT but cannot access Google APIs using private connectivity. What would you check?",
+    "answer": "Determine whether the requirement is Private Google Access, restricted or private Google API virtual IPs, or PSC for Google APIs. Verify Private Google Access on the subnet, DNS resolution for googleapis.com, routes to the selected VIP range, firewall egress, VPC Service Controls, and the VM service account's IAM. Cloud NAT internet access does not prove private Google API configuration is correct. Test DNS and TCP reachability separately, then validate an authenticated API request."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "NCC",
+    "questionType": "Scenario",
+    "question": "After onboarding a new NCC spoke, two previously isolated environments can unexpectedly communicate. What are your immediate and long-term actions?",
+    "answer": "Contain the exposure by detaching or disabling the new route exchange or applying an explicit security control without destroying evidence. Inspect hub route tables, policies, spoke associations, imported and exported prefixes, effective routes, and firewall evaluation to establish the unintended transit path. Restore intended segmentation, test prohibited flows, and then add pre-onboarding reachability simulation, policy-as-code, route-change review, and continuous detection of new cross-domain paths."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Firewall Policies",
+    "questionType": "Scenario",
+    "question": "An organization-level firewall deny rule blocks a critical production flow after a security rollout. How would you restore service without weakening the enterprise guardrail broadly?",
+    "answer": "Use effective firewall-policy inspection and logs to prove the matching rule, target, source, protocol, and priority. Create the narrowest approved exception at the appropriate hierarchy level using workload identity, exact CIDRs, ports, and a time bound, or adjust the higher-level rule scope if its intent was encoded incorrectly. Validate the critical flow and prohibited neighboring flows, document the emergency decision, then correct the policy design and add tests before removing the temporary exception."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Cloud Armor",
+    "questionType": "Scenario",
+    "question": "A Cloud Armor rule reduces malicious traffic but also blocks legitimate mobile users. How would you tune it safely?",
+    "answer": "Analyze Cloud Armor logs by rule, matched expression, request attributes, geography, ASN, path, user agent, and verified application behavior. Move the revised rule to preview or create a higher-priority narrow exception for confirmed legitimate traffic, avoiding broad bypasses. Tune WAF exclusions or rate limits at the smallest path and field scope, validate with replay or controlled tests, then re-enforce gradually while monitoring attacks and false positives."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "VPC Service Controls",
+    "questionType": "Scenario",
+    "question": "Data engineers can access BigQuery from the console but scheduled jobs fail after a service perimeter change. How would you troubleshoot it?",
+    "answer": "Use VPC Service Controls violation logs to identify the scheduled job's actual service account, source project, network, accessed resource, and blocked ingress or egress direction. Compare interactive user context with the job's runtime identity and location. Add only the required access level, ingress or egress rule, or perimeter relationship, validate in dry-run where possible, and confirm IAM separately because perimeter authorization does not replace resource authorization."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "IPv6",
+    "questionType": "Scenario",
+    "question": "After publishing an AAAA record, IPv6-capable clients fail while IPv4 clients remain healthy. How would you diagnose the issue?",
+    "answer": "Verify the AAAA record points to the intended IPv6-capable frontend and that the selected GCP load balancer, network tier, certificate, and application support IPv6. Test IPv6 DNS, routing, TCP, and TLS independently from multiple networks. Check firewall and security controls for IPv6 parity, backend behavior, logging, and client fallback timing. Remove or correct the AAAA record to restore service, then repeat end-to-end dual-stack validation before republishing."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Terraform & CI/CD",
+    "questionType": "Scenario",
+    "question": "A Terraform plan proposes replacing a Cloud Router used by production VPN and Interconnect sessions. What should you do?",
+    "answer": "Do not apply until the replacement cause and blast radius are understood. Identify the immutable attribute or state mismatch, inspect dependent interfaces, peers, advertisements, NAT, VPN tunnels, and attachments, and determine whether configuration can be corrected without replacement. If replacement is unavoidable, design parallel infrastructure and a staged routing migration with tested rollback. Add lifecycle protection and pipeline checks for future replacement of critical network resources."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Terraform & CI/CD",
+    "questionType": "Scenario",
+    "question": "Two teams apply different Terraform states that both manage the same firewall rule. How would you resolve and prevent the conflict?",
+    "answer": "Freeze applies, identify the authoritative owner, compare state and live configuration, and preserve the rule required for current traffic. Remove the resource from the non-authoritative state safely rather than deleting it from GCP, then import or reconcile it in the owning state until plans are clean. Prevent recurrence through clear state ownership, repository boundaries, naming conventions, inventory checks, CI concurrency controls, and policy that rejects duplicate management."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Regional Failure",
+    "questionType": "Scenario",
+    "question": "A regional outage occurs, but traffic does not fail over because the secondary region has healthy backends with insufficient capacity. How would you respond and improve the design?",
+    "answer": "Reduce impact by prioritizing critical traffic, scaling the secondary region, shifting or shedding nonessential load, and communicating the degraded capacity. Confirm load-balancer health and capacity settings rather than forcing traffic to saturated backends. After recovery, model N-minus-one regional demand, maintain warm or autoscalable reserve capacity with quota headroom, test data and dependency readiness, add capacity-aware alerts, and run regional evacuation exercises that measure actual RTO."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Observability & RCA",
+    "questionType": "Scenario",
+    "question": "Users report a five-minute connectivity outage, but dashboards show all GCP network resources as healthy. How would you investigate a transient incident?",
+    "answer": "Build a high-resolution timeline and avoid equating current health with historical health. Query load-balancer logs, VPC Flow Logs, firewall logs, Cloud Router and VPN status, DNS logs, NAT metrics, application telemetry, change events, and synthetic probes for the exact interval. Segment by user location and traffic path, look for route convergence, DNS, capacity, or dependency failures, and preserve evidence quickly. Close monitoring gaps identified by the investigation even if the single trigger cannot be proven."
+  },
+  {
+    "source": "GCP Network Engineer JD",
+    "section": "GCP Network Engineer - Production Scenarios",
+    "category": "Security Incident",
+    "questionType": "Scenario",
+    "question": "VPC Flow Logs show a private workload contacting an unknown external IP at regular intervals. How would you investigate and contain it?",
+    "answer": "Validate the flow, workload identity, destination ownership, port, volume, timing, DNS history, and whether the behavior is expected software telemetry. Preserve logs and coordinate with security before making destructive changes. Contain through a narrow egress deny, workload isolation, or proxy policy while maintaining forensic access; rotate credentials if compromise is plausible. Inspect process, image, IAM, recent deployments, and related flows, then remove persistence, restore from trusted artifacts, and improve egress controls and detection."
+  }
+]

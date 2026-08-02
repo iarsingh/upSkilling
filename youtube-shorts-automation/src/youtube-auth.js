@@ -19,7 +19,7 @@ function authorizationUrl() {
     scope,
     access_type: "offline",
     include_granted_scopes: "true",
-    prompt: "consent",
+    prompt: "select_account consent",
     state
   });
   return `https://accounts.google.com/o/oauth2/v2/auth?${parameters}`;

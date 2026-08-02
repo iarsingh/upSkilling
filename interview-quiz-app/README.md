@@ -4,7 +4,7 @@ An interview prep app built with [Flet](https://flet.dev) (Python, renders via
 the Flutter engine), with two study modes:
 
 - **Flashcards** — question content pulled from the `ai-mock-interviewer`
-  project's answer bank: 2,822 open-ended questions across 17 topics, weighted
+  project's answer bank: 4,124 open-ended questions across 17 topics, weighted
   toward Kubernetes/GCP/Terraform/Docker with MLOps/LLMOps/GenAI as a smaller
   slice.
 - **MCQ Practice** — 1,000 hand-written multiple-choice questions (125 each)
