@@ -26,7 +26,10 @@
     "install:cron": "node src/install-cron.js"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2"
   },
   "license": "MIT"
 }

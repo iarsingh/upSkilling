@@ -3,6 +3,7 @@ const path = require("path");
 const { publishPost } = require("./linkedin");
 const { root } = require("./config");
 const { loadState, markPublished } = require("./calendar");
+const { createImage } = require("./image");
 
 const calendarPath = path.join(root, "content-calendar.json");
 
@@ -58,15 +59,31 @@ function slotForWeeklyRotation(dateString, timezone = "Asia/Kolkata") {
 }
 
 function resolveImagePath(item) {
+  const draftStem = item.draftPath
+    ? path.basename(item.draftPath, path.extname(item.draftPath))
+    : item.id;
+  const doodleSlug = `${draftStem}-doodle`;
+  const doodlePath = path.join(root, "assets", `${doodleSlug}.png`);
+  if (fs.existsSync(doodlePath)) return doodlePath;
+
+  // Calendar entries created before the doodle renderer point at generic
+  // fallback PNGs. Generate a topic-aware diagram on first publication.
+  if (item.topic || item.baseTopic) {
+    return createImage({
+      pillar: item.pillar,
+      topic: item.baseTopic || item.topic,
+      imageTitle: item.pillar,
+      imageSubtitle: item.topic
+    }, doodleSlug).pngPath;
+  }
+
   if (item.imagePath) {
     const configuredPath = path.join(root, item.imagePath);
     if (fs.existsSync(configuredPath)) return configuredPath;
   }
 
   if (!item.draftPath) return "";
-  const draftStem = path.basename(item.draftPath, path.extname(item.draftPath));
-  const doodlePath = path.join(root, "assets", `${draftStem}-doodle.png`);
-  return fs.existsSync(doodlePath) ? doodlePath : "";
+  return "";
 }
 
 async function main() {
