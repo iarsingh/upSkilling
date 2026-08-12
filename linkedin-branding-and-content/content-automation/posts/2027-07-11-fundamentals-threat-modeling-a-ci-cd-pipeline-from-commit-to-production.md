@@ -1,6 +1,6 @@
 ---
 date: 2027-07-11
-slot: 11:30
+slot: 08:00
 day: 48
 series: DevOps & Cloud Fundamentals Series
 topic: Threat modeling a CI/CD pipeline from commit to production

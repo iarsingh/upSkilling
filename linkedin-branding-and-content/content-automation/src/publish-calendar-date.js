@@ -46,13 +46,13 @@ function weekdayForLocalDate(dateString, timezone = "Asia/Kolkata") {
 function slotForWeeklyRotation(dateString, timezone = "Asia/Kolkata") {
   const weekday = weekdayForLocalDate(dateString, timezone);
   const slotsByWeekday = {
-    1: "14:30", // Monday: Kubernetes / GKE
-    2: "09:30", // Tuesday: MLOps
-    3: "19:30", // Wednesday: Python automation
-    4: "14:30", // Thursday: Kubernetes / platform engineering
-    5: "09:30", // Friday: MLOps / interview-ready systems thinking
-    6: "19:30", // Saturday: Python automation / portfolio update
-    0: "11:30" // Sunday: DevOps & Cloud Fundamentals (Terraform, ArgoCD, Linux, etc.)
+    1: "08:00",
+    2: "08:00",
+    3: "08:00",
+    4: "08:00",
+    5: "08:00",
+    6: "08:00",
+    0: "08:00"
   };
 
   return slotsByWeekday[weekday] || "";

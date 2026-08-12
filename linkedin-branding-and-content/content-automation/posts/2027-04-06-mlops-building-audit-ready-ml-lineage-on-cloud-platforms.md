@@ -1,6 +1,6 @@
 ---
 date: 2027-04-06
-slot: 09:30
+slot: 08:00
 day: 68
 series: MLOps Series
 topic: Building audit-ready ML lineage on cloud platforms

@@ -1,6 +1,6 @@
 ---
 date: 2026-12-28
-slot: 14:30
+slot: 08:00
 day: 40
 series: Kubernetes Series
 topic: ImagePullBackOff debugging checklist

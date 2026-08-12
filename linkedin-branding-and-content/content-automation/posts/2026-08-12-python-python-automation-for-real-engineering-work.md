@@ -1,6 +1,6 @@
 ---
 date: 2026-08-12
-slot: 19:30
+slot: 08:00
 day: 1
 series: Python Automation Series
 topic: Python automation for real engineering work

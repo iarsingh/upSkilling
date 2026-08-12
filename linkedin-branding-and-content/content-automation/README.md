@@ -95,7 +95,7 @@ It uses `PUBLISH_MODE=weekly-rotation`, so the local schedule publishes one sele
 
 ## GitHub Actions Publishing
 
-The repository includes `.github/workflows/linkedin-daily.yml`, which publishes scheduled text-only posts at `09:00 Asia/Kolkata` Monday-Friday, `10:30 Asia/Kolkata` on Saturday, and `11:30 Asia/Kolkata` on Sunday.
+The repository includes `.github/workflows/linkedin-daily.yml`, which publishes one scheduled post every day at `08:00 Asia/Kolkata` (`02:30 UTC`).
 
 Add these repository secrets in GitHub:
 
@@ -111,7 +111,7 @@ The workflow reads `content-calendar.json` and publishes one item whose `date` m
 - Wednesday and Saturday: Python automation / portfolio update
 - Sunday: DevOps & Cloud Fundamentals (105 post ideas: three practical angles for each of 35 technology pillars, including Terraform/OpenTofu, Linux, Networking, Docker internals, CI/CD, Git, GCP/AWS/Azure, Observability, System Design, Python, Ansible, DevSecOps, Platform Engineering, MLOps/AI infra, SRE, GitOps, Helm/Kustomize, landing zones, IAM, databases, messaging, microservices, service mesh, secrets, policy as code, FinOps, HA/DR, incidents, performance, artifacts, supply-chain security, Go, Bash, and distributed systems)
 
-You can also run it manually from the GitHub Actions tab and provide `publish_date` in `YYYY-MM-DD` format. To publish a specific stream manually, provide `publish_slot` as `09:30`, `14:30`, `19:30`, or `11:30`.
+You can also run it manually from the GitHub Actions tab and provide `publish_date` in `YYYY-MM-DD` format. To publish the scheduled item manually, provide `publish_slot` as `08:00`.
 
 ## Calendar Streams
 
@@ -125,10 +125,10 @@ By default, this creates 365 days of calendar items, **exactly one per day**, ro
 node scripts/schedule-three-daily-series.js 365 2026-07-14
 ```
 
-- Monday and Thursday: Kubernetes (slot `14:30`)
-- Tuesday and Friday: MLOps (slot `09:30`)
-- Wednesday and Saturday: Python Automation (slot `19:30`)
-- Sunday: DevOps & Cloud Fundamentals (slot `11:30` - see topic list above)
+- Monday and Thursday: Kubernetes (slot `08:00`)
+- Tuesday and Friday: MLOps (slot `08:00`)
+- Wednesday and Saturday: Python Automation (slot `08:00`)
+- Sunday: DevOps & Cloud Fundamentals (slot `08:00` - see topic list above)
 
 This weekday assignment is defined in `weekdayStream` in `scripts/schedule-three-daily-series.js` and mirrors `slotForWeeklyRotation` in `src/publish-calendar-date.js`, so generation and publishing always agree on the single item due each day - the calendar file itself never contains more than one item per date. `publish-calendar-date.js` also defaults to this one-per-day selection even without `PUBLISH_MODE` set; pass `PUBLISH_MODE=all-slots` only for a deliberate catch-up run. Manual GitHub workflow runs can still provide `publish_date` and an optional `publish_slot` for one-off recovery.
 

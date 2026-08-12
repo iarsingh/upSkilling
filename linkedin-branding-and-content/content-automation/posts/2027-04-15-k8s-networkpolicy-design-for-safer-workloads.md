@@ -1,6 +1,6 @@
 ---
 date: 2027-04-15
-slot: 14:30
+slot: 08:00
 day: 71
 series: Kubernetes Series
 topic: NetworkPolicy design for safer workloads

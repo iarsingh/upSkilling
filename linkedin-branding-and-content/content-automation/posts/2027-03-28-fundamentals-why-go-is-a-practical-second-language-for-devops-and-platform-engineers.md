@@ -1,6 +1,6 @@
 ---
 date: 2027-03-28
-slot: 11:30
+slot: 08:00
 day: 33
 series: DevOps & Cloud Fundamentals Series
 topic: Why Go is a practical second language for DevOps and platform engineers

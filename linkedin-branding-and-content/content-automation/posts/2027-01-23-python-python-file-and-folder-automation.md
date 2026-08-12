@@ -1,6 +1,6 @@
 ---
 date: 2027-01-23
-slot: 19:30
+slot: 08:00
 day: 48
 series: Python Automation Series
 topic: Python file and folder automation

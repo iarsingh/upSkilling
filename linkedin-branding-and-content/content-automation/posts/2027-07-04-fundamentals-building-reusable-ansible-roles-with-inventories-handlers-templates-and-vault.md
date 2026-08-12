@@ -1,6 +1,6 @@
 ---
 date: 2027-07-04
-slot: 11:30
+slot: 08:00
 day: 47
 series: DevOps & Cloud Fundamentals Series
 topic: Building reusable Ansible roles with inventories, handlers, templates, and Vault

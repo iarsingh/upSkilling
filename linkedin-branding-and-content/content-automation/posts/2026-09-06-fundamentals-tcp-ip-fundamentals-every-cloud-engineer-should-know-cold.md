@@ -1,6 +1,6 @@
 ---
 date: 2026-09-06
-slot: 11:30
+slot: 08:00
 day: 4
 series: DevOps & Cloud Fundamentals Series
 topic: TCP/IP fundamentals every cloud engineer should know cold

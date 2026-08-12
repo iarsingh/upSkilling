@@ -1,6 +1,6 @@
 ---
 date: 2027-05-22
-slot: 19:30
+slot: 08:00
 day: 82
 series: Python Automation Series
 topic: Python API health monitoring

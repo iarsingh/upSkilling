@@ -1,6 +1,6 @@
 ---
 date: 2027-06-20
-slot: 11:30
+slot: 08:00
 day: 45
 series: DevOps & Cloud Fundamentals Series
 topic: Designing a URL shortener: APIs, data model, caching, and scaling tradeoffs

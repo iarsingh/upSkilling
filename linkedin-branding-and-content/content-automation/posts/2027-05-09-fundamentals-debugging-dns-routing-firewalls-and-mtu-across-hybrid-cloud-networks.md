@@ -1,6 +1,6 @@
 ---
 date: 2027-05-09
-slot: 11:30
+slot: 08:00
 day: 39
 series: DevOps & Cloud Fundamentals Series
 topic: Debugging DNS, routing, firewalls, and MTU across hybrid cloud networks

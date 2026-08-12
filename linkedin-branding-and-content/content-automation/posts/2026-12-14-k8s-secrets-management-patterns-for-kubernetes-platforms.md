@@ -1,6 +1,6 @@
 ---
 date: 2026-12-14
-slot: 14:30
+slot: 08:00
 day: 36
 series: Kubernetes Series
 topic: Secrets management patterns for Kubernetes platforms

@@ -1,6 +1,6 @@
 ---
 date: 2027-06-13
-slot: 11:30
+slot: 08:00
 day: 44
 series: DevOps & Cloud Fundamentals Series
 topic: Designing actionable alerts with SLOs, burn rates, and clear ownership

@@ -1,6 +1,6 @@
 ---
 date: 2027-04-07
-slot: 19:30
+slot: 08:00
 day: 69
 series: Python Automation Series
 topic: Python SRE incident summaries

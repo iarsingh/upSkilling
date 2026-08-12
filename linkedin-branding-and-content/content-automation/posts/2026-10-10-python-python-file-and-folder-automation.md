@@ -1,6 +1,6 @@
 ---
 date: 2026-10-10
-slot: 19:30
+slot: 08:00
 day: 18
 series: Python Automation Series
 topic: Python file and folder automation

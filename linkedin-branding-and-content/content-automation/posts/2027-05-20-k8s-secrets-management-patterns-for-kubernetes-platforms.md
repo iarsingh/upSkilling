@@ -1,6 +1,6 @@
 ---
 date: 2027-05-20
-slot: 14:30
+slot: 08:00
 day: 81
 series: Kubernetes Series
 topic: Secrets management patterns for Kubernetes platforms

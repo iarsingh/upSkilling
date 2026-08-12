@@ -1,6 +1,6 @@
 ---
 date: 2026-11-22
-slot: 11:30
+slot: 08:00
 day: 15
 series: DevOps & Cloud Fundamentals Series
 topic: GPU scheduling and cost tradeoffs for LLM inference workloads

@@ -1,6 +1,6 @@
 ---
 date: 2026-11-29
-slot: 11:30
+slot: 08:00
 day: 16
 series: DevOps & Cloud Fundamentals Series
 topic: Error budgets: how to use them to balance velocity and reliability

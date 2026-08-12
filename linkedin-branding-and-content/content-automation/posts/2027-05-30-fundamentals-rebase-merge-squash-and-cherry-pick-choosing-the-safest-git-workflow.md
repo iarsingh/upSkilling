@@ -1,6 +1,6 @@
 ---
 date: 2027-05-30
-slot: 11:30
+slot: 08:00
 day: 42
 series: DevOps & Cloud Fundamentals Series
 topic: Rebase, merge, squash, and cherry-pick: choosing the safest Git workflow

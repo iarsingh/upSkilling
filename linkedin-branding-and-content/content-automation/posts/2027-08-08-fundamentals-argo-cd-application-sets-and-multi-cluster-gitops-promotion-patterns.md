@@ -1,6 +1,6 @@
 ---
 date: 2027-08-08
-slot: 11:30
+slot: 08:00
 day: 52
 series: DevOps & Cloud Fundamentals Series
 topic: Argo CD application sets and multi-cluster GitOps promotion patterns

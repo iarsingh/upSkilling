@@ -1,6 +1,6 @@
 ---
 date: 2027-03-21
-slot: 11:30
+slot: 08:00
 day: 32
 series: DevOps & Cloud Fundamentals Series
 topic: Signing and verifying container images with Cosign and SLSA provenance

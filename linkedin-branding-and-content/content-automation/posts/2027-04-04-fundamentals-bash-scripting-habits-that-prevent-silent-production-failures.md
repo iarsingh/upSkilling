@@ -1,6 +1,6 @@
 ---
 date: 2027-04-04
-slot: 11:30
+slot: 08:00
 day: 34
 series: DevOps & Cloud Fundamentals Series
 topic: Bash scripting habits that prevent silent production failures

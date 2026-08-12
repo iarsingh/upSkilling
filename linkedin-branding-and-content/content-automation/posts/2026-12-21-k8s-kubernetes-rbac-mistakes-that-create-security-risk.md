@@ -1,6 +1,6 @@
 ---
 date: 2026-12-21
-slot: 14:30
+slot: 08:00
 day: 38
 series: Kubernetes Series
 topic: Kubernetes RBAC mistakes that create security risk

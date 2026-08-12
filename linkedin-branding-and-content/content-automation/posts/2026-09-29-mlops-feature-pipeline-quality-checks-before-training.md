@@ -1,6 +1,6 @@
 ---
 date: 2026-09-29
-slot: 09:30
+slot: 08:00
 day: 14
 series: MLOps Series
 topic: Feature pipeline quality checks before training

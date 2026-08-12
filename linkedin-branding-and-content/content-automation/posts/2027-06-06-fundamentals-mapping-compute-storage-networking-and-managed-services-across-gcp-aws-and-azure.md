@@ -1,6 +1,6 @@
 ---
 date: 2027-06-06
-slot: 11:30
+slot: 08:00
 day: 43
 series: DevOps & Cloud Fundamentals Series
 topic: Mapping compute, storage, networking, and managed services across GCP, AWS, and Azure

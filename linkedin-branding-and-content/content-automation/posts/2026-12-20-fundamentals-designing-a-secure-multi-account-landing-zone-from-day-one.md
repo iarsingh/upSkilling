@@ -1,6 +1,6 @@
 ---
 date: 2026-12-20
-slot: 11:30
+slot: 08:00
 day: 19
 series: DevOps & Cloud Fundamentals Series
 topic: Designing a secure multi-account landing zone from day one

@@ -1,6 +1,6 @@
 ---
 date: 2027-03-04
-slot: 14:30
+slot: 08:00
 day: 59
 series: Kubernetes Series
 topic: Kubernetes service discovery explained practically

@@ -1,6 +1,6 @@
 ---
 date: 2027-05-16
-slot: 11:30
+slot: 08:00
 day: 40
 series: DevOps & Cloud Fundamentals Series
 topic: Container image layers, copy-on-write filesystems, and build cache behavior

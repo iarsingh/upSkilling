@@ -2,15 +2,8 @@ name: Daily LinkedIn Publish
 
 on:
   schedule:
-    # Daily AI/ML publishing slots in Asia/Kolkata.
-    # Monday and Thursday at 14:30.
-    - cron: "0 9 * * 1,4"
-    # Tuesday and Friday at 09:30.
-    - cron: "0 4 * * 2,5"
-    # Wednesday and Saturday at 19:30.
-    - cron: "0 14 * * 3,6"
-    # Sunday at 11:30.
-    - cron: "0 6 * * 0"
+    # Every day at 08:00 Asia/Kolkata (02:30 UTC).
+    - cron: "30 2 * * *"
   workflow_dispatch:
     inputs:
       publish_date:

@@ -1,6 +1,6 @@
 ---
 date: 2027-04-18
-slot: 11:30
+slot: 08:00
 day: 36
 series: DevOps & Cloud Fundamentals Series
 topic: Kubernetes scheduler decisions: requests, affinity, taints, and topology spread

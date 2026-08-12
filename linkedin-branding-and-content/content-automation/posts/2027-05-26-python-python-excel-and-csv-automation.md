@@ -1,6 +1,6 @@
 ---
 date: 2027-05-26
-slot: 19:30
+slot: 08:00
 day: 83
 series: Python Automation Series
 topic: Python Excel and CSV automation

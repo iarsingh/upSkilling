@@ -13,7 +13,7 @@ const startDate = process.argv[3] || process.env.START_DATE || todayInTimezone()
 const streams = [
   {
     key: "mlops",
-    slot: "09:30",
+    slot: "08:00",
     pillar: "MLOps Series",
     audience: "MLOps, ML platform, DevOps, and cloud engineers",
     hashtags: ["#MLOps", "#MachineLearning", "#MLPlatform", "#DevOps"],
@@ -37,7 +37,7 @@ const streams = [
   },
   {
     key: "k8s",
-    slot: "14:30",
+    slot: "08:00",
     pillar: "Kubernetes Series",
     audience: "DevOps, platform, SRE, and cloud-native engineers",
     hashtags: ["#Kubernetes", "#DevOps", "#PlatformEngineering", "#CloudNative"],
@@ -61,7 +61,7 @@ const streams = [
   },
   {
     key: "python",
-    slot: "19:30",
+    slot: "08:00",
     pillar: "Python Automation Series",
     audience: "DevOps, Cloud, SRE, MLOps, and backend learners",
     hashtags: ["#Python", "#DevOps", "#MLOps", "#CloudComputing", "#Automation"],
@@ -85,7 +85,7 @@ const streams = [
   },
   {
     key: "fundamentals",
-    slot: "11:30",
+    slot: "08:00",
     pillar: "DevOps & Cloud Fundamentals Series",
     audience: "DevOps, platform, cloud, and SRE engineers",
     hashtags: ["#DevOps", "#CloudComputing", "#PlatformEngineering", "#SRE"],

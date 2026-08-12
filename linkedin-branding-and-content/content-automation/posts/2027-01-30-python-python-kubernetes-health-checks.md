@@ -1,6 +1,6 @@
 ---
 date: 2027-01-30
-slot: 19:30
+slot: 08:00
 day: 50
 series: Python Automation Series
 topic: Python Kubernetes health checks

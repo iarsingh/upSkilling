@@ -1,6 +1,6 @@
 ---
 date: 2026-11-27
-slot: 09:30
+slot: 08:00
 day: 31
 series: MLOps Series
 topic: Model registry approvals and controlled production releases

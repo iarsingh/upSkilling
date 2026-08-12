@@ -1,6 +1,6 @@
 ---
 date: 2026-08-26
-slot: 19:30
+slot: 08:00
 day: 5
 series: Python Automation Series
 topic: Python Kubernetes health checks

@@ -1,6 +1,6 @@
 ---
 date: 2027-06-23
-slot: 19:30
+slot: 08:00
 day: 91
 series: Python Automation Series
 topic: Python automation for real engineering work

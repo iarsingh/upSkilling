@@ -1,6 +1,6 @@
 ---
 date: 2026-09-13
-slot: 11:30
+slot: 08:00
 day: 5
 series: DevOps & Cloud Fundamentals Series
 topic: How containers actually isolate processes: namespaces and cgroups explained

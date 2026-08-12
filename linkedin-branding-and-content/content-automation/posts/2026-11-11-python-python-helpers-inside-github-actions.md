@@ -1,6 +1,6 @@
 ---
 date: 2026-11-11
-slot: 19:30
+slot: 08:00
 day: 27
 series: Python Automation Series
 topic: Python helpers inside GitHub Actions

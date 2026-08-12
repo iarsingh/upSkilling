@@ -1,6 +1,6 @@
 ---
 date: 2027-06-28
-slot: 14:30
+slot: 08:00
 day: 92
 series: Kubernetes Series
 topic: How HPA, VPA, and Cluster Autoscaler work together

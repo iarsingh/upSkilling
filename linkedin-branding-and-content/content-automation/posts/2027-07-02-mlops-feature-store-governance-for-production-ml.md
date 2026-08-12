@@ -1,6 +1,6 @@
 ---
 date: 2027-07-02
-slot: 09:30
+slot: 08:00
 day: 93
 series: MLOps Series
 topic: Feature store governance for production ML

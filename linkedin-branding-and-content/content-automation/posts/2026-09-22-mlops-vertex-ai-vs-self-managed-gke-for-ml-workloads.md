@@ -1,6 +1,6 @@
 ---
 date: 2026-09-22
-slot: 09:30
+slot: 08:00
 day: 12
 series: MLOps Series
 topic: Vertex AI vs self-managed GKE for ML workloads

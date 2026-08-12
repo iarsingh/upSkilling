@@ -1,6 +1,6 @@
 ---
 date: 2026-12-27
-slot: 11:30
+slot: 08:00
 day: 20
 series: DevOps & Cloud Fundamentals Series
 topic: Least privilege IAM policies that don't break on-call engineers

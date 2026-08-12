@@ -1,6 +1,6 @@
 ---
 date: 2026-08-30
-slot: 11:30
+slot: 08:00
 day: 3
 series: DevOps & Cloud Fundamentals Series
 topic: Linux performance troubleshooting with strace, perf, and /proc

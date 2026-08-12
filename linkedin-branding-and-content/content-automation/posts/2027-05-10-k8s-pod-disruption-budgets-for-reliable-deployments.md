@@ -1,6 +1,6 @@
 ---
 date: 2027-05-10
-slot: 14:30
+slot: 08:00
 day: 78
 series: Kubernetes Series
 topic: Pod disruption budgets for reliable deployments

@@ -1,6 +1,6 @@
 ---
 date: 2027-03-26
-slot: 09:30
+slot: 08:00
 day: 65
 series: MLOps Series
 topic: Model monitoring signals every ML platform should track

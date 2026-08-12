@@ -1,6 +1,6 @@
 ---
 date: 2027-02-07
-slot: 11:30
+slot: 08:00
 day: 26
 series: DevOps & Cloud Fundamentals Series
 topic: Enforcing infrastructure guardrails with OPA and Conftest before merge

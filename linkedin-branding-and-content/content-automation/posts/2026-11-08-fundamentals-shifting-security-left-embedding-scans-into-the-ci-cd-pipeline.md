@@ -1,6 +1,6 @@
 ---
 date: 2026-11-08
-slot: 11:30
+slot: 08:00
 day: 13
 series: DevOps & Cloud Fundamentals Series
 topic: Shifting security left: embedding scans into the CI/CD pipeline

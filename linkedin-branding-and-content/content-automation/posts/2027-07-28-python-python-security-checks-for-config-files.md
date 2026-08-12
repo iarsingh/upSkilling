@@ -1,6 +1,6 @@
 ---
 date: 2027-07-28
-slot: 19:30
+slot: 08:00
 day: 101
 series: Python Automation Series
 topic: Python security checks for config files

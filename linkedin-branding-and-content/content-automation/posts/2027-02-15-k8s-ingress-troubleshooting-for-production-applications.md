@@ -1,6 +1,6 @@
 ---
 date: 2027-02-15
-slot: 14:30
+slot: 08:00
 day: 54
 series: Kubernetes Series
 topic: Ingress troubleshooting for production applications

@@ -1,6 +1,6 @@
 ---
 date: 2026-09-12
-slot: 19:30
+slot: 08:00
 day: 10
 series: Python Automation Series
 topic: Python MLOps data drift checks

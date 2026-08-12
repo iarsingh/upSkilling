@@ -1,6 +1,6 @@
 ---
 date: 2027-08-01
-slot: 11:30
+slot: 08:00
 day: 51
 series: DevOps & Cloud Fundamentals Series
 topic: SLIs, SLOs, error budgets, and release decisions explained with one service

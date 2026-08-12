@@ -1,6 +1,6 @@
 ---
 date: 2026-12-10
-slot: 14:30
+slot: 08:00
 day: 35
 series: Kubernetes Series
 topic: Readiness probes vs liveness probes in real workloads

@@ -1,6 +1,6 @@
 ---
 date: 2027-06-27
-slot: 11:30
+slot: 08:00
 day: 46
 series: DevOps & Cloud Fundamentals Series
 topic: Production Python automation: retries, timeouts, logging, testing, and idempotency

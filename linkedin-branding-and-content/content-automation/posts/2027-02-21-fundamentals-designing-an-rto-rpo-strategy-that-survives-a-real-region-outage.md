@@ -1,6 +1,6 @@
 ---
 date: 2027-02-21
-slot: 11:30
+slot: 08:00
 day: 28
 series: DevOps & Cloud Fundamentals Series
 topic: Designing an RTO/RPO strategy that survives a real region outage

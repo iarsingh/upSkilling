@@ -1,6 +1,6 @@
 ---
 date: 2027-03-03
-slot: 19:30
+slot: 08:00
 day: 59
 series: Python Automation Series
 topic: Python CLI tools for DevOps engineers

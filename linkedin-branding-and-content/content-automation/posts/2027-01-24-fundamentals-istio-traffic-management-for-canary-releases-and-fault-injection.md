@@ -1,6 +1,6 @@
 ---
 date: 2027-01-24
-slot: 11:30
+slot: 08:00
 day: 24
 series: DevOps & Cloud Fundamentals Series
 topic: Istio traffic management for canary releases and fault injection

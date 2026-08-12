@@ -1,6 +1,6 @@
 ---
 date: 2027-01-17
-slot: 11:30
+slot: 08:00
 day: 23
 series: DevOps & Cloud Fundamentals Series
 topic: API versioning strategies that don't break your consumers

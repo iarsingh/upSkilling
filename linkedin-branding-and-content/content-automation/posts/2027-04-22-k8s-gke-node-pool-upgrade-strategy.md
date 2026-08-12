@@ -1,6 +1,6 @@
 ---
 date: 2027-04-22
-slot: 14:30
+slot: 08:00
 day: 73
 series: Kubernetes Series
 topic: GKE node pool upgrade strategy

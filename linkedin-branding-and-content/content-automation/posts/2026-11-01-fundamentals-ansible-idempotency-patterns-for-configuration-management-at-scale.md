@@ -1,6 +1,6 @@
 ---
 date: 2026-11-01
-slot: 11:30
+slot: 08:00
 day: 12
 series: DevOps & Cloud Fundamentals Series
 topic: Ansible idempotency patterns for configuration management at scale

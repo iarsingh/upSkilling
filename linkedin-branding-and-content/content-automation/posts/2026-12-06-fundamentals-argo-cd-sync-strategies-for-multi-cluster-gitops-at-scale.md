@@ -1,6 +1,6 @@
 ---
 date: 2026-12-06
-slot: 11:30
+slot: 08:00
 day: 17
 series: DevOps & Cloud Fundamentals Series
 topic: Argo CD sync strategies for multi-cluster GitOps at scale

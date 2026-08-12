@@ -1,6 +1,6 @@
 ---
 date: 2026-11-23
-slot: 14:30
+slot: 08:00
 day: 30
 series: Kubernetes Series
 topic: Production checklist before deploying to Kubernetes

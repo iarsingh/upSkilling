@@ -1,6 +1,6 @@
 ---
 date: 2026-10-04
-slot: 11:30
+slot: 08:00
 day: 8
 series: DevOps & Cloud Fundamentals Series
 topic: Choosing between GCP, AWS, and Azure for a new platform: a practical framework

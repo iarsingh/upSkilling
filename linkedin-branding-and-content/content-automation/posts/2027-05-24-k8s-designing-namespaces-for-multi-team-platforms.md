@@ -1,6 +1,6 @@
 ---
 date: 2027-05-24
-slot: 14:30
+slot: 08:00
 day: 82
 series: Kubernetes Series
 topic: Designing namespaces for multi-team platforms

@@ -1,6 +1,6 @@
 ---
 date: 2026-08-16
-slot: 11:30
+slot: 08:00
 day: 1
 series: DevOps & Cloud Fundamentals Series
 topic: Kubernetes multi-tenancy patterns for shared clusters

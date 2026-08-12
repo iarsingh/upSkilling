@@ -1,6 +1,6 @@
 ---
 date: 2026-11-21
-slot: 19:30
+slot: 08:00
 day: 30
 series: Python Automation Series
 topic: Python learning roadmap for DevOps and MLOps

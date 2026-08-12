@@ -1,6 +1,6 @@
 ---
 date: 2027-07-06
-slot: 09:30
+slot: 08:00
 day: 94
 series: MLOps Series
 topic: MLflow and Kubeflow pipeline design for reproducibility

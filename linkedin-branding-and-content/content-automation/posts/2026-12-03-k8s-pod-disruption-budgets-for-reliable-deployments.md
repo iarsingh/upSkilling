@@ -1,6 +1,6 @@
 ---
 date: 2026-12-03
-slot: 14:30
+slot: 08:00
 day: 33
 series: Kubernetes Series
 topic: Pod disruption budgets for reliable deployments

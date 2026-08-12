@@ -1,6 +1,6 @@
 ---
 date: 2026-10-18
-slot: 11:30
+slot: 08:00
 day: 10
 series: DevOps & Cloud Fundamentals Series
 topic: Designing a rate limiter for a high-traffic API

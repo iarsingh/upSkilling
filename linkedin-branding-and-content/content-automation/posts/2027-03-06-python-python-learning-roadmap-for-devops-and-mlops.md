@@ -1,6 +1,6 @@
 ---
 date: 2027-03-06
-slot: 19:30
+slot: 08:00
 day: 60
 series: Python Automation Series
 topic: Python learning roadmap for DevOps and MLOps

@@ -1,6 +1,6 @@
 ---
 date: 2027-06-24
-slot: 14:30
+slot: 08:00
 day: 91
 series: Kubernetes Series
 topic: Kubernetes requests and limits explained with production examples

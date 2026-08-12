@@ -1,6 +1,6 @@
 ---
 date: 2026-12-13
-slot: 11:30
+slot: 08:00
 day: 18
 series: DevOps & Cloud Fundamentals Series
 topic: Helm vs Kustomize: choosing the right templating approach for your team

@@ -1,6 +1,6 @@
 ---
 date: 2027-02-14
-slot: 11:30
+slot: 08:00
 day: 27
 series: DevOps & Cloud Fundamentals Series
 topic: A practical FinOps framework for cutting cloud waste without breaking reliability

@@ -1,6 +1,6 @@
 ---
 date: 2027-04-11
-slot: 11:30
+slot: 08:00
 day: 35
 series: DevOps & Cloud Fundamentals Series
 topic: CAP theorem in practice: the tradeoffs behind every distributed system

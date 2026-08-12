@@ -1,6 +1,6 @@
 ---
 date: 2027-01-31
-slot: 11:30
+slot: 08:00
 day: 25
 series: DevOps & Cloud Fundamentals Series
 topic: Rotating secrets automatically with Vault and dynamic credentials

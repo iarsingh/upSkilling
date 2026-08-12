@@ -1,6 +1,6 @@
 ---
 date: 2026-08-24
-slot: 14:30
+slot: 08:00
 day: 4
 series: Kubernetes Series
 topic: Debugging CrashLoopBackOff step by step

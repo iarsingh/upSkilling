@@ -1,6 +1,6 @@
 ---
 date: 2027-06-26
-slot: 19:30
+slot: 08:00
 day: 92
 series: Python Automation Series
 topic: Build a log analyzer with Python

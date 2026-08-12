@@ -1,6 +1,6 @@
 ---
 date: 2026-08-23
-slot: 11:30
+slot: 08:00
 day: 2
 series: DevOps & Cloud Fundamentals Series
 topic: Terraform state management and locking for multi-team environments

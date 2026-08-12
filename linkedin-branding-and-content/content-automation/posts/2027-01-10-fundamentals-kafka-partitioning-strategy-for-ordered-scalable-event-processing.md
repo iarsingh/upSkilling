@@ -1,6 +1,6 @@
 ---
 date: 2027-01-10
-slot: 11:30
+slot: 08:00
 day: 22
 series: DevOps & Cloud Fundamentals Series
 topic: Kafka partitioning strategy for ordered, scalable event processing

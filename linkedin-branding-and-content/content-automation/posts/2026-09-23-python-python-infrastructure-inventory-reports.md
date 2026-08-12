@@ -1,6 +1,6 @@
 ---
 date: 2026-09-23
-slot: 19:30
+slot: 08:00
 day: 13
 series: Python Automation Series
 topic: Python infrastructure inventory reports

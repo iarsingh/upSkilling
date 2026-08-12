@@ -1,6 +1,6 @@
 ---
 date: 2027-03-07
-slot: 11:30
+slot: 08:00
 day: 30
 series: DevOps & Cloud Fundamentals Series
 topic: Capacity planning for traffic spikes without over-provisioning

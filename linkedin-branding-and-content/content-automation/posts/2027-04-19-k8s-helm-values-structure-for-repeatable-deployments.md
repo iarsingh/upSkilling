@@ -1,6 +1,6 @@
 ---
 date: 2027-04-19
-slot: 14:30
+slot: 08:00
 day: 72
 series: Kubernetes Series
 topic: Helm values structure for repeatable deployments

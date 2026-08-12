@@ -1,6 +1,6 @@
 ---
 date: 2026-10-25
-slot: 11:30
+slot: 08:00
 day: 11
 series: DevOps & Cloud Fundamentals Series
 topic: Writing Python automation scripts that are safe to run in production

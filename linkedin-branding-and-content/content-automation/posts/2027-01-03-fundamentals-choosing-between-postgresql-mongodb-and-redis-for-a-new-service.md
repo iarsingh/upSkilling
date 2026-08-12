@@ -1,6 +1,6 @@
 ---
 date: 2027-01-03
-slot: 11:30
+slot: 08:00
 day: 21
 series: DevOps & Cloud Fundamentals Series
 topic: Choosing between PostgreSQL, MongoDB, and Redis for a new service

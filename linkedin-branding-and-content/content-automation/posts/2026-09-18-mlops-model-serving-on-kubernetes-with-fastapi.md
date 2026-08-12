@@ -1,6 +1,6 @@
 ---
 date: 2026-09-18
-slot: 09:30
+slot: 08:00
 day: 11
 series: MLOps Series
 topic: Model serving on Kubernetes with FastAPI

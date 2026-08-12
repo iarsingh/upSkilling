@@ -1,6 +1,6 @@
 ---
 date: 2026-09-10
-slot: 14:30
+slot: 08:00
 day: 9
 series: Kubernetes Series
 topic: Ingress troubleshooting for production applications

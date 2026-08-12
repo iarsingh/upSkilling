@@ -1,6 +1,6 @@
 ---
 date: 2027-05-19
-slot: 19:30
+slot: 08:00
 day: 81
 series: Python Automation Series
 topic: Python CI/CD validation scripts

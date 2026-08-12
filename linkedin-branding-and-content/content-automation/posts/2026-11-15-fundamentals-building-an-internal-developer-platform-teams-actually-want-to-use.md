@@ -1,6 +1,6 @@
 ---
 date: 2026-11-15
-slot: 11:30
+slot: 08:00
 day: 14
 series: DevOps & Cloud Fundamentals Series
 topic: Building an internal developer platform teams actually want to use

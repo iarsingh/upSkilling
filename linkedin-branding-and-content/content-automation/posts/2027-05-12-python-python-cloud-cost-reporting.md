@@ -1,6 +1,6 @@
 ---
 date: 2027-05-12
-slot: 19:30
+slot: 08:00
 day: 79
 series: Python Automation Series
 topic: Python cloud cost reporting

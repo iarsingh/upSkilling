@@ -1,6 +1,6 @@
 ---
 date: 2026-09-09
-slot: 19:30
+slot: 08:00
 day: 9
 series: Python Automation Series
 topic: Python SRE incident summaries

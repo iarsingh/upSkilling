@@ -1,6 +1,6 @@
 ---
 date: 2027-04-21
-slot: 19:30
+slot: 08:00
 day: 73
 series: Python Automation Series
 topic: Python infrastructure inventory reports
