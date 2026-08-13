@@ -41,7 +41,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: linkedin-branding-and-content/content-automation/package-lock.json
+
+      - name: Install image renderer
+        run: npm ci --omit=dev
 
       - name: Validate LinkedIn secrets
         run: |
