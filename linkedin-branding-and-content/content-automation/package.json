@@ -20,6 +20,7 @@
     "index:all-content": "node scripts/build-all-content-index.js",
     "dedupe:active": "node scripts/deduplicate-active-calendar.js",
     "normalize:ai-revision": "node scripts/normalize-ai-revision-posts.js",
+    "render:doodles": "node scripts/render-upcoming-doodles.js",
     "schedule:three-daily": "node scripts/schedule-three-daily-series.js",
     "linkedin:auth": "node src/oauth.js",
     "schedule:cron": "node src/schedule-cron.js",
