@@ -1,1 +1,0 @@
-"""GCP MLOps pipeline showcase."""

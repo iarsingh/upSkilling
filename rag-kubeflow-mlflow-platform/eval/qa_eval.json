@@ -1,8 +1,0 @@
-[
-  { "question": "What problem does Retrieval-Augmented Generation solve for an LLM?", "expected_doc": "rag-overview" },
-  { "question": "What is a pipeline made of in Kubeflow Pipelines?", "expected_doc": "kubeflow-pipelines" },
-  { "question": "What does the MLflow Model Registry let a team do with model versions?", "expected_doc": "mlflow-overview" },
-  { "question": "Why do vector databases use approximate nearest neighbor search instead of exact search?", "expected_doc": "vector-db" },
-  { "question": "What is the purpose of overlap between consecutive chunks in a RAG pipeline?", "expected_doc": "chunking-strategy" },
-  { "question": "What should gate whether a new model version gets promoted to production?", "expected_doc": "model-promotion" }
-]

@@ -1,7 +1,0 @@
-CREATE TABLE IF NOT EXISTS services (
-  id UUID PRIMARY KEY,
-  name TEXT NOT NULL UNIQUE,
-  owner TEXT NOT NULL,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
-);
-

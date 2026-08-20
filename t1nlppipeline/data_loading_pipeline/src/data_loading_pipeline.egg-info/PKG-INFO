@@ -1,7 +1,0 @@
-Metadata-Version: 2.4
-Name: data-loading-pipeline
-Version: 0.1.0
-Summary: Generator-based gzip data-loading pipeline with batch processing
-Requires-Python: >=3.10
-Provides-Extra: dev
-Requires-Dist: pytest>=8.0; extra == "dev"

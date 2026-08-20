@@ -1,7 +1,0 @@
----
-- name: Linux baseline setup
-  hosts: linux_servers
-  become: true
-  roles:
-    - common
-

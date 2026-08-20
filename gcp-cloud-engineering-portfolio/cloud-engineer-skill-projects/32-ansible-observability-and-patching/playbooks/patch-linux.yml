@@ -1,8 +1,0 @@
----
-- name: Patch Linux servers
-  hosts: linux
-  become: true
-  serial: 1
-  roles:
-    - patching
-

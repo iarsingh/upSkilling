@@ -1,7 +1,0 @@
----
-- name: Install node exporter
-  hosts: linux
-  become: true
-  roles:
-    - node_exporter
-

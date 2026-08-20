@@ -1,7 +1,0 @@
----
-- name: Bootstrap Linux servers
-  hosts: linux
-  become: true
-  roles:
-    - common
-
