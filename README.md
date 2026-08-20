@@ -1,5 +1,9 @@
 # upSkilling Portfolio
 
+<!-- repository-summary -->
+A curated learning and engineering portfolio spanning DevOps, GCP, Kubernetes, platform engineering, SRE, MLOps, AIOps, generative AI, automation, and interview preparation.
+<!-- /repository-summary -->
+
 Senior SRE, GCP DevOps, Platform Engineering, and MLOps portfolio.
 
 This repository is organized as a hands-on showcase for a 7-year cloud engineering profile. It demonstrates practical work across GCP, Kubernetes, Terraform, CI/CD, SRE, observability, security, FinOps, MLOps, Vertex AI, AIOps, GenAI, automation, and technical interview preparation.
