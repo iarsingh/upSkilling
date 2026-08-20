@@ -1,0 +1,38 @@
+Vertex AI, Cloud Security, and CSPM
+
+1. Can you go a little deeper into your experience with Vertex AI? What exactly have you done in this space?
+2. What have you done in the cybersecurity space?
+3. How did you identify cloud misconfigurations, and which tool did you use?
+4. Can you walk me through the approach for securing a landing zone built on GCP?
+5. Which CSPM tools have you worked with?
+6. How have you applied security frameworks such as NIST, CIS, ISO 27001, or SOC 2 in practice?
+7. Why exactly are you looking for a job change?
+
+Vulnerability Management and DevSecOps
+
+8. We are getting security alerts regarding vulnerabilities and CVEs. Can you walk me through your vulnerability management process?
+9. What would be your main KPI strategy for vulnerability management?
+10. How do you identify the actual risk exposure of a vulnerability?
+11. Suppose a scan identifies more than 2,000 vulnerabilities. How would you prioritize, triage, and distribute them to the respective teams?
+12. If the same vulnerabilities keep appearing in an application after every release, how would you prevent their recurrence?
+13. How do you identify, validate, and handle a false positive in vulnerability management?
+14. You have two vulnerabilities: one is Critical but not exploitable, while another is Medium but exploitable. Which one would you prioritize first, and why?
+15. How would you explain a critical security risk to a non-technical stakeholder?
+16. Explain the Secure Software Development Lifecycle and how security is integrated into it.
+17. What is a Software Bill of Materials, and why is it useful?
+18. Have you heard of the Lockforge tool, and how familiar are you with it?
+19. How familiar are you with automation and scripting?
+20. How have you used or understood OPA and policy as code?
+21. Describe a security initiative you drove: what problem were you solving, how did you drive it, what challenges did you face, and what were the major successes?
+22. How do you ensure that buckets and other cloud resources deployed through Infrastructure as Code are secure?
+23. What security fundamentals have you worked on from the compliance side?
+24. Suppose you join a team with 100 applications that must become UCRA compliant. How would you approach making those applications ready for compliance?
+25. What is the fundamental difference between SCA and SAST?
+26. What is the benefit of penetration testing when security assessments and scanning are already performed?
+
+Python Coding - Email Validation
+
+27. Write Python code using regular expressions to validate an email address, including valid and invalid test cases.
+28. Explain your email-validation approach and each part of the regular expression.
+29. How do you debug an email-validation regex and ensure that only one at-sign is accepted?
+30. Correct a faulty Python email-validation implementation and explain the fix.

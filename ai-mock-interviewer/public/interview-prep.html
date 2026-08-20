@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("aimi-theme");
+          var theme = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Interview Prep | AI Mock Interviewer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="interview-prep-page">
+    <main class="shell prep-shell">
+      <section class="topbar">
+        <div class="brand-block">
+          <p class="eyebrow">Structured learning paths</p>
+          <div class="brand-title">
+            <img class="brand-icon" src="/favicon.svg" alt="" aria-hidden="true">
+            <h1>Interview Prep</h1>
+          </div>
+          <p class="subtitle">Explore the complete interview curriculum by domain, then jump directly into matching questions and answers.</p>
+        </div>
+        <div class="top-actions">
+          <a class="ghost link-button small" href="/">Home</a>
+          <a class="ghost link-button small" href="/dashboard.html">Dashboard</a>
+          <a class="ghost link-button small" href="/question-bank.html">Question Bank</a>
+          <a class="ghost link-button small" href="/data-science-path.html">Data Science Path</a>
+          <a class="ghost link-button small" href="/ai-agent-engineer-path.html">AI Agent Path</a>
+          <button class="theme-toggle" type="button" data-action="toggle-theme" aria-pressed="false" aria-label="Toggle dark mode">
+            <span class="theme-icon theme-icon-light" aria-hidden="true">&#9728;&#65039;</span>
+            <span class="theme-icon theme-icon-dark" aria-hidden="true">&#127769;</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="panel prep-overview">
+        <div>
+          <p class="eyebrow">Complete curriculum</p>
+          <h2>Build breadth first, then deepen each interview domain.</h2>
+          <p class="prep-overview-copy">Use search to find a technology, expand a domain, and open focused question-bank results without losing your reading progress.</p>
+        </div>
+        <div class="prep-stats" aria-label="Curriculum totals">
+          <div><strong id="prepDomainCount">0</strong><span>domains</span></div>
+          <div><strong id="prepTopicCount">0</strong><span>topics</span></div>
+        </div>
+      </section>
+
+      <section class="panel prep-role-map" aria-labelledby="prepRoleMapTitle">
+        <div class="prep-section-heading">
+          <div>
+            <p class="eyebrow">2026 role map</p>
+            <h2 id="prepRoleMapTitle">Data Scientist and Machine Learning Engineer priorities</h2>
+            <p>Both roles require strong Python and ML foundations. Their emphasis separates at experimentation, deployment, infrastructure, and operational ownership.</p>
+          </div>
+          <span class="prep-role-badge">Production AI focus</span>
+        </div>
+        <div class="prep-table-wrap">
+          <table class="prep-role-table">
+            <thead><tr><th>Skill area</th><th>Data Scientist</th><th>ML Engineer</th></tr></thead>
+            <tbody id="prepRoleMatrix"></tbody>
+          </table>
+        </div>
+        <div class="prep-ai-engineer-callout">
+          <strong id="prepAiEngineerTitle"></strong>
+          <span id="prepAiEngineerSummary"></span>
+        </div>
+      </section>
+
+      <section class="panel prep-controls">
+        <label for="prepSearch">Find a skill or domain</label>
+        <div class="prep-search-row">
+          <input id="prepSearch" type="search" placeholder="Try PyTorch, RAG, Kubernetes, statistics…" autocomplete="off">
+          <button id="prepClear" class="ghost link-button small" type="button" hidden>Clear</button>
+        </div>
+        <p id="prepStatus" class="prep-status" aria-live="polite"></p>
+      </section>
+
+      <section id="prepDomains" class="prep-domain-grid" aria-live="polite"></section>
+    </main>
+    <script src="/interview-prep-data.js"></script>
+    <script src="/interview-prep.js"></script>
+    <script src="/theme.js"></script>
+  </body>
+</html>

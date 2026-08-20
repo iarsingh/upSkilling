@@ -1,13 +1,10 @@
 # AI Mock Interviewer
 
 A local-first, voice-led mock interview simulator for DevOps, SRE, Cloud, Platform Engineering, and MLOps
-preparation — runs entirely in your browser against a local Node server, with zero cloud dependency
-required.
+preparation. It runs against a local Node server and requires no cloud service in offline mode.
 
 The app asks interview questions, reads them aloud, records or accepts typed answers, saves progress
-locally, and works fully offline using a deduplicated built-in question bank of 4,124 questions with answers and question-type metadata.
-
-Current preparation calibration: **7 years of actual experience**, **₹25 LPA target**, **50 days remaining**, with question depth raised to the architecture and ownership expectations commonly used for 10–15-year roles without overstating tenure.
+locally, and works fully offline using a deduplicated built-in bank of more than 8,000 questions with answers and question-type metadata.
 
 ## Contents
 
@@ -54,7 +51,7 @@ Current preparation calibration: **7 years of actual experience**, **₹25 LPA t
 
 ## Requirements
 
-- Node.js 18 or newer
+- Node.js 20 or newer
 - npm
 - Git
 - Chrome or Edge recommended for microphone features
@@ -68,7 +65,7 @@ Optional:
 Clone the repo:
 
 ```bash
-git clone <your-github-repo-url>
+git clone https://github.com/iarsingh/ai-mock-interviewer.git
 cd ai-mock-interviewer
 ```
 
@@ -76,6 +73,12 @@ Install dependencies:
 
 ```bash
 npm install
+```
+
+Optional: create a private local profile for job autofill and cover-letter features. This file is git-ignored:
+
+```bash
+cp data/applicant-profile.example.json data/applicant-profile.json
 ```
 
 Run offline:
@@ -147,20 +150,10 @@ messages. With PostgreSQL configured, submissions are stored in the `contact_mes
 stores them in the git-ignored `data/contacts.json` file. The endpoint validates input, includes a honeypot field, and
 limits each source address to five accepted messages per hour.
 
-In JSON fallback mode, five seed accounts are created for trying the app immediately. When PostgreSQL is first
-connected, existing JSON users are imported automatically if the database table is empty:
-
-| Role  | Email                                   | Password        |
-|-------|------------------------------------------|------------------|
-| User  | asha.rao@aimockinterviewer.app            | User@Practice1   |
-| User  | rohan.mehta@aimockinterviewer.app         | User@Practice2   |
-| User  | emily.chen@aimockinterviewer.app          | User@Practice3   |
-| Admin | akhilesh.admin@aimockinterviewer.app      | Admin@Report1    |
-| Admin | priya.admin@aimockinterviewer.app         | Admin@Report2    |
-
-Anyone can also create their own account from `/signup.html`; new sign-ups get the `user` role. There is no UI yet to
-promote a user to `admin`. In PostgreSQL, update the user's `role` in the `users` table; in JSON fallback mode, edit
-the `role` field in `data/users.json` and restart the server.
+No default accounts or shared passwords are included. Create a user from `/signup.html`; new sign-ups receive the
+`user` role. For local administration, set `BOOTSTRAP_ADMIN_NAME`, `BOOTSTRAP_ADMIN_EMAIL`, and a unique
+`BOOTSTRAP_ADMIN_PASSWORD` of at least 12 characters before the first start, then remove those values after the
+account is created. Existing local JSON users can be imported into PostgreSQL when the database table is empty.
 
 Interview progress itself still lives in the browser's `localStorage`, exactly as before - signing in controls who can
 reach the app and the admin report, but it does not (yet) sync interview history to a per-account server-side store.
@@ -241,10 +234,46 @@ Deploy steps:
 1. Push this repository to GitHub.
 2. Import the repo into Vercel.
 3. Vercel reads `vercel.json` automatically; no separate build command is needed.
-4. Optionally add `DATABASE_URL`, `DATABASE_SSL`, and `SESSION_SECRET` in the Vercel project's environment
-   variables for persistent accounts, or set `OFFLINE_ONLY=0` and `ANTHROPIC_API_KEY` to enable Claude-backed
-   feedback instead of offline templates.
-5. Deploy.
+4. Add `DATABASE_URL`, `DATABASE_SSL=true`, and a unique random `SESSION_SECRET` of at least 32 characters in
+   the Vercel project's environment variables. Production startup intentionally fails without durable account
+   storage and a stable session secret.
+5. Keep `OFFLINE_ONLY=1` for cost-free built-in feedback, or set `OFFLINE_ONLY=0`, choose `LLM_PROVIDER`, and add
+   the corresponding provider key.
+6. Run `npm run check:production` with the production environment variables before deploying.
+7. Deploy.
+
+Vercel uses `/tmp` for SQLite interview sessions. That storage is writable but ephemeral across serverless cold
+starts. The browser still retains its local progress, but durable server-side interview sessions require a
+long-running Node host with a persistent volume or a future PostgreSQL interview-store migration.
+
+## Production deployment
+
+For a public instance with durable SQLite interview sessions, deploy the included `Dockerfile` to a long-running
+container host and mount persistent storage at `/app/data`. Configure at minimum:
+
+```text
+NODE_ENV=production
+HOST=0.0.0.0
+PORT=3030
+OFFLINE_ONLY=1
+DATABASE_URL=postgresql://user:password@host:5432/database
+DATABASE_SSL=true
+SESSION_SECRET=<unique random value with at least 32 characters>
+SQLITE_PATH=/app/data/interviews.sqlite
+```
+
+Build and run locally with production-like settings:
+
+```bash
+docker build -t ai-mock-interviewer .
+docker run --rm -p 3030:3030 --env-file .env -v aimi-data:/app/data ai-mock-interviewer
+```
+
+The server applies same-origin request enforcement, signed secure session cookies, authentication on private APIs,
+per-address request limits, cross-user interview isolation, security headers, bounded JSON request bodies, readiness
+checks, and graceful shutdown. Set `ALLOWED_ORIGINS` only when a separately hosted trusted frontend must call the API.
+Do not set `ALLOW_FILE_STORAGE_IN_PRODUCTION=true` for a real public deployment; it is only an explicit ephemeral-demo
+escape hatch.
 
 ## How To Use
 
@@ -424,7 +453,7 @@ npm -v
 npm install
 ```
 
-Make sure Node.js is version 18 or newer.
+Make sure Node.js is version 20 or newer.
 
 Microphone does not work:
 
@@ -447,33 +476,21 @@ npm run start:offline
 
 ## GitHub Publishing Notes
 
-Commit these:
+Before publishing a fork, review the entire working tree and Git history for secrets and personal data. Never commit
+`.env`, `data/applicant-profile.json`, local account/contact files, SQLite databases, logs, API credentials, session
+secrets, résumés, or OAuth tokens. The repository includes safe examples and ignore rules, but those do not remove
+data that was committed previously.
 
-- Source files
-- `package.json`
-- `package-lock.json`
-- `public/`
-- `data/`
-- Question bank files
-- README and docs
-
-Do not commit:
-
-- `node_modules/`
-- Local secrets or API keys
-- Personal browser data
-
-Recommended `.gitignore` entries:
-
-```text
-node_modules/
-.env
-.DS_Store
-```
+If sensitive data has ever been committed, removing it in a later commit is insufficient. Rotate exposed credentials
+and use a history-rewriting tool such as `git filter-repo` before making the repository public, then coordinate the
+forced update with every collaborator.
 
 ## License
 
-No license file is included yet, which by default means all rights are reserved and others may not
-reuse, modify, or redistribute this code. Add a `LICENSE` file (MIT is a common, permissive choice for a
-portfolio tool like this) before publishing the repository publicly, if you want others to be able to use
-it.
+This project is available under the [MIT License](LICENSE). See [CONTRIBUTING.md](CONTRIBUTING.md),
+[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), and [SECURITY.md](SECURITY.md) before contributing or reporting a problem.
+
+## Maintainer
+
+Maintained by [Akhilesh Ranjan Singh](https://github.com/iarsingh). For project questions, contact
+[akhileshranjan.ks@gmail.com](mailto:akhileshranjan.ks@gmail.com) or open a GitHub issue.

@@ -22,7 +22,7 @@ SHOW_DESC = (
 )
 SHOW_LINK = f"https://github.com/{REPO}"
 AUTHOR = "Akhilesh Ranjan Singh"
-OWNER_EMAIL = "akhileshranjan.ks@gmail.com"
+OWNER_EMAIL = "podcast@example.com"
 
 SERIES_ORDER = [
     "01-gcp-networking", "02-devops-cicd", "03-kubernetes-gke", "04-behavioral-screening",

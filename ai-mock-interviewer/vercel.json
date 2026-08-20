@@ -2,7 +2,8 @@
   "version": 2,
   "env": {
     "OFFLINE_ONLY": "1",
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "SQLITE_PATH": "/tmp/ai-mock-interviewer/interviews.sqlite"
   },
   "functions": {
     "api/[...path].js": {

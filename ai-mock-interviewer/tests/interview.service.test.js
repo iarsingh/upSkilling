@@ -17,7 +17,7 @@ function createService() {
 test("persists an interview and restores its configuration", () => {
   const service = createService();
   const created = service.create({ role: "Platform Engineer", topics: ["Kubernetes", "Terraform"] }, "user-1");
-  const restored = service.get(created.id);
+  const restored = service.get(created.id, "user-1");
   assert.equal(restored.status, "READY");
   assert.deepEqual(restored.topics.map((topic) => topic.name), ["Kubernetes", "Terraform"]);
 });
@@ -49,4 +49,13 @@ test("rejects answers for questions outside the interview", () => {
   const service = createService();
   const interview = service.create({ role: "SRE", topics: ["SRE"] });
   assert.throws(() => service.submitAnswer(interview.id, { questionId: "missing", answer: "answer" }), /does not belong/);
+});
+
+test("prevents one user from reading or changing another user's interview", async () => {
+  const service = createService();
+  const interview = service.create({ role: "SRE", topics: ["SRE"] }, "user-1");
+  assert.throws(() => service.get(interview.id, "user-2"), /does not exist/);
+  assert.throws(() => service.start(interview.id, "user-2"), /does not exist/);
+  await assert.rejects(() => service.nextQuestion(interview.id, "user-2"), /does not exist/);
+  assert.throws(() => service.complete(interview.id, "user-2"), /does not exist/);
 });

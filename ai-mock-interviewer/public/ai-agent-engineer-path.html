@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script>(function(){try{var s=localStorage.getItem("aimi-theme");var t=s||(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Agent Engineer Interview Path | AI Mock Interviewer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="interview-prep-page">
+    <main class="shell prep-shell">
+      <section class="topbar">
+        <div class="brand-block">
+          <p class="eyebrow">Job-aligned learning path</p>
+          <div class="brand-title"><img class="brand-icon" src="/favicon.svg" alt="" aria-hidden="true"><h1>AI Agent Engineer Path</h1></div>
+          <p class="subtitle">Prepare for client-facing roles that transform business workflows into reliable, production-grade agentic AI systems.</p>
+        </div>
+        <div class="top-actions">
+          <a class="ghost link-button small" href="/">Home</a>
+          <a class="ghost link-button small" href="/interview-prep.html">Complete Curriculum</a>
+          <a class="ghost link-button small" href="/data-science-path.html">Data Science Path</a>
+          <a class="ghost link-button small" href="/question-bank.html">Question Bank</a>
+          <button class="theme-toggle" type="button" data-action="toggle-theme" aria-pressed="false" aria-label="Toggle dark mode"><span class="theme-icon theme-icon-light" aria-hidden="true">&#9728;&#65039;</span><span class="theme-icon theme-icon-dark" aria-hidden="true">&#127769;</span></button>
+        </div>
+      </section>
+      <section class="panel prep-overview">
+        <div><p class="eyebrow">Beginner to expert</p><h2>Learn to discover, design, build, deploy, and defend agent systems.</h2><p class="prep-overview-copy">The path mirrors the complete project lifecycle: secure APIs, LLM agents, RAG, enterprise integrations, safety, evaluation, AWS operations, and stakeholder delivery.</p></div>
+        <div class="prep-stats"><div><strong id="agentStageCount">0</strong><span>stages</span></div><div><strong id="agentTopicCount">0</strong><span>topics</span></div><div><strong id="agentQuestionCount">0</strong><span>scenarios</span></div></div>
+      </section>
+      <section class="panel prep-controls">
+        <label for="agentSearch">Find an AI Agent Engineer skill</label>
+        <div class="prep-search-row"><input id="agentSearch" type="search" placeholder="Try MCP, Strands, AgentCore, guardrails, SharePoint…" autocomplete="off"><button id="agentClear" class="ghost link-button small" type="button" hidden>Clear</button></div>
+        <p id="agentStatus" class="prep-status" aria-live="polite"></p>
+      </section>
+      <section id="agentStages" class="prep-domain-grid" aria-live="polite"></section>
+    </main>
+    <script src="/interview-prep-data.js"></script>
+    <script src="/ai-agent-engineer-path.js"></script>
+    <script src="/theme.js"></script>
+  </body>
+</html>

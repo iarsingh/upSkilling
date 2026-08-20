@@ -1,0 +1,15 @@
+Kubernetes / GKE
+
+1. If a Kubernetes pod is stuck in Pending state or CrashLoopBackOff, how would you troubleshoot it?
+2. What is the difference between GKE Standard and GKE Autopilot?
+
+ELK / Elasticsearch
+
+3. Explain the ELK stack flow.
+4. If Elasticsearch/ELK is running out of disk space, what would you do?
+5. Can we attach another Persistent Volume/PVC to an Elasticsearch pod when it is running out of disk space?
+
+Monitoring & Observability
+
+6. How is Dynatrace different from Prometheus and Grafana?
+7. How do you monitor an application using Dynatrace?

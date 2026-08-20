@@ -198,10 +198,8 @@ function applyRoleProfile(profileKey) {
   els.technology.dispatchEvent(new Event("change"));
 }
 const defaultTargetSkills = `Target role family: Senior GCP DevOps / SRE / Cloud Engineer / Platform Engineer / Cloud Reliability Engineer / ML Platform Engineer
-Actual experience: 7 years
-Interview calibration: questions and evaluation should match the architecture depth, production ownership, ambiguity handling, cross-team leadership, and trade-off analysis commonly expected from 10-15 year candidates. Never claim more than 7 years of actual experience.
-Compensation target: ₹25 LPA
-Preparation window: 50 days
+Interview calibration: adapt questions and evaluation to the experience and target role supplied by the user. Never invent or exaggerate candidate experience.
+Preparation window: user-defined
 Target companies: product companies and senior cloud/platform/SRE teams
 
 Core skills to test:
@@ -333,81 +331,19 @@ Responsibilities include enterprise technology risk framework design, risk regis
 Qualifications include 8-12+ years in technology risk, IT audit, information security, cloud/platform risk, strong SDLC and enterprise architecture understanding, regulated-industry exposure, cloud/DevOps/Agile familiarity, and CISA/CRISC/CISSP-style governance depth.
 Key skills: risk assessment, analytical thinking, communication, stakeholder management, problem solving, technical-risk-to-business-impact translation, leadership, influencing, and decision-making.
 Success metrics: fewer critical technology risks/incidents, timely closure of audit/risk findings, improved risk visibility/reporting, and adoption of risk frameworks.`;
-const defaultCvText = `AKHILESH RANJAN SINGH
-Senior MLOps & Platform Engineer | GCP | Kubernetes | Terraform | AI Infrastructure
-Email: akhileshranjan.ks@gmail.com
-Phone: +91-8002392976
-Location: Noida, India
-LinkedIn: https://www.linkedin.com/in/iamarsingh/
-GitHub: https://github.com/iarsingh
-Instagram: https://www.instagram.com/iarsingh/
-Topmate: https://topmate.io/iamarsingh
+const defaultCvText = `EXAMPLE CANDIDATE
+Platform Engineer | Cloud | Kubernetes | Terraform
+Email: candidate.com
+Location: Remote
 
 PROFESSIONAL SUMMARY
-Senior MLOps & Platform Engineer with 7 years of experience designing, automating, and operating cloud-native infrastructure across GCP, AWS, and Azure. Experienced in building production-ready AI platforms using Kubernetes, Terraform, Vertex AI, MLflow, FastAPI, Docker, and GitOps, enabling scalable model deployment, infrastructure automation, and platform reliability. Skilled in Platform Engineering, Infrastructure as Code, and DevSecOps, delivering self-service cloud platforms, standardized landing zones, and automated deployment frameworks. Hands-on experience in LLMOps, RAG pipelines, GPU-accelerated inference, and model lifecycle management, bridging software engineering and intelligent automation.
-
-CORE COMPETENCIES
-DevOps & Platform Engineering, Cloud Platform Engineering, Kubernetes & Container Orchestration, Infrastructure as Code (Terraform Enterprise), CI/CD Automation & GitOps, Multi-Cloud Architecture (GCP, AWS, Azure), DevSecOps & Cloud Security Governance, Site Reliability Engineering (SRE), Observability & Performance Monitoring, MLOps & AI Infrastructure Engineering
+Platform engineer experienced with cloud infrastructure, Kubernetes, Terraform, CI/CD, reliability, security, and observability. Replace this example with your own profile before starting an interview.
 
 TECHNICAL SKILLS
-Cloud Platforms: Google Cloud Platform (GCP), AWS, Azure
-Infrastructure as Code: Terraform Enterprise, Ansible
-Security & Governance: IAM, RBAC, Cloud Armor, WAF, DevSecOps, Prisma Cloud, IONIX, Stream Security, SAST/DAST, Vulnerability Management, Binary Authorization
-Programming & Scripting: Python, Bash, Go
-Databases: PostgreSQL, MySQL, MongoDB, Vector Databases
-Containers & Orchestration: Kubernetes, Docker, Helm, GKE, HPA, RBAC, Network Policies
-CI/CD & GitOps: Jenkins, GitHub Actions, GitLab CI/CD, Google Cloud Build, ArgoCD, GitOps, Bitbucket, Harness
-Monitoring & Observability: ELK Stack (Elasticsearch, Logstash, Kibana), Prometheus, Grafana, OpenTelemetry
-MLOps & AI Infrastructure: Vertex AI, Vertex AI Pipelines, MLflow, Kubeflow, Model Registry, Model Serving, Model Monitoring, Experiment Tracking, Feature Store, FastAPI, KServe, Seldon Core, TensorFlow Serving, LLMOps, RAG, Vector Databases
-LLM & Generative AI: LangChain, LangGraph, OpenAI API, Gemini API, Hugging Face, Ollama, vLLM, Llama 3, Mistral
+Cloud, Kubernetes, Terraform, CI/CD, Python, Linux, Prometheus, Grafana
 
 PROFESSIONAL EXPERIENCE
-DevOps Engineer, Capgemini, Noida | 09/2024 - Present
-- Designed and implemented end-to-end MLOps platforms on GCP, enabling automated model training, deployment, monitoring, and lifecycle management for AI/ML applications.
-- Built and managed Vertex AI Pipelines, Vertex AI Model Registry, and model deployment workflows for scalable production ML environments.
-- Implemented MLflow for experiment tracking, model versioning, artifact management, and model registry, enabling reproducible ML workflows.
-- Developed CI/CD pipelines for ML workloads using GitHub Actions/Jenkins, Terraform, Docker, Kubernetes, and Helm, automating model build, validation, deployment, and rollback.
-- Deployed and managed scalable inference services using FastAPI, KServe, TensorFlow Serving, and Kubernetes with autoscaling and high availability.
-- Implemented LLMOps workflows by deploying and operating Llama 3, Mistral, Ollama, and vLLM on Kubernetes-based infrastructure for enterprise AI applications.
-- Built RAG (Retrieval-Augmented Generation) pipelines integrating vector databases, embedding models, and LLMs for production GenAI use cases.
-- Implemented model monitoring, data drift, concept drift, and prediction quality monitoring using Vertex AI Model Monitoring, Evidently AI, and custom dashboards.
-- Automated model retraining pipelines triggered by drift detection, performance degradation, and scheduled workflows to maintain model accuracy in production.
-- Provisioned and optimized GPU-enabled Kubernetes clusters (NVIDIA L4/A100) for distributed training and low-latency inference, improving GPU utilization and cost efficiency.
-- Implemented centralized observability for ML platforms using Prometheus, Grafana, ELK, OpenTelemetry, and Cloud Monitoring across infrastructure, application, and model performance metrics.
-- Designed reusable Terraform modules for AI infrastructure, including GKE, Vertex AI, Cloud Storage, IAM, networking, monitoring, and security services.
-- Integrated Feature Store capabilities for consistent feature management across training and inference workflows.
-- Implemented secure MLOps practices including IAM, RBAC, Secrets Manager, Binary Authorization, image scanning, and policy-as-code for AI workloads.
-- Optimized AI infrastructure costs through GPU scheduling, cluster autoscaling, spot/preemptible instances, and storage lifecycle policies, reducing cloud expenditure by over 20%.
-- Led production incident response and root cause analysis for AI/ML services, ensuring high availability and SLA compliance.
-- Built GitOps-based deployment workflows using ArgoCD and Helm for version-controlled, automated AI application deployments across multiple Kubernetes environments.
-- Designed and governed enterprise-scale GCP landing zones using Shared VPC, project hierarchies, remote state management, IAM governance, and policy-as-code.
-- Enabled self-service infrastructure delivery by integrating Terraform Enterprise with Git-based CI/CD, Harness, Jira, and ServiceNow.
-- Enhanced cloud security and observability with Cloud Armor WAF policies, rate limiting, Adaptive Protection, and continuous attack-surface monitoring using IONIX and Stream Security.
-- Led a GitHub-to-Bitbucket migration, improving engineering productivity and operational efficiency by 30%.
-
-Senior Software Engineer - DevOps, Tech Mahindra, Mumbai | 07/2022 - 09/2024
-- Drove enterprise-scale CI/CD platform engineering using Jenkins, GitHub Actions, Terraform, Docker, Kubernetes, Helm, and Ansible.
-- Delivered Infrastructure as Code across GCP, AWS, and Azure using Terraform and Ansible for provisioning, configuration management, backup automation, and disaster recovery.
-- Administered highly available Kubernetes platforms using Docker and Helm, maintaining 99.9% service availability through proactive monitoring.
-- Implemented DevSecOps controls including Prisma Cloud, SAST/DAST, RBAC, IAM governance, and secrets management.
-- Managed enterprise backup and disaster recovery using Veeam and Kasten K10.
-- Integrated cloud object storage (S3, GCS, Azure Blob) with CI/CD pipelines and Kubernetes workloads for artifact storage, state file management, and application data persistence.
-- Administered artifact lifecycle management through JFrog Artifactory.
-- Partnered with Google Cloud, Microsoft, and AWS engineering teams to optimize platform performance and accelerate cloud transformation.
-
-System Engineer - Cloud & DevOps, TCS, Bengaluru | 09/2019 - 07/2022
-- Managed production Kubernetes and GKE environments for business-critical applications.
-- Automated CI/CD pipelines using Jenkins, Cloud Build, and Terraform, reducing deployment effort by 40%.
-- Provisioned GCP infrastructure via Terraform, supported on-premises to GCP migration, and performed Linux administration and performance optimization.
-- Managed end-to-end monitoring and alerting, led incident response and RCA, and maintained SLA compliance.
-
-CERTIFICATIONS
-- Google Professional Cloud DevOps Engineer — 2025
-- Google Professional Cloud Network Engineer — 2025
-- Google Associate Cloud Engineer — 2024
-
-EDUCATION
-Bachelor of Engineering - Computer Science, RGPV, Bhopal | 2019`;
+Add your real roles, responsibilities, and measurable outcomes here. Never include claims you cannot support in an interview.`;
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const speechSynthesisApi = window.speechSynthesis;
 let recognition = null;

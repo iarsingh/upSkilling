@@ -2,14 +2,35 @@
   "name": "ai-mock-interviewer",
   "version": "1.0.0",
   "private": true,
-  "description": "Local Ollama-powered mock interview coach with browser microphone input.",
+  "description": "Local-first, voice-led technical mock interview coach with offline and optional AI feedback.",
+  "author": {
+    "name": "Akhilesh Ranjan Singh",
+    "email": "akhileshranjan.ks@gmail.com",
+    "url": "https://github.com/iarsingh"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iarsingh/ai-mock-interviewer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iarsingh/ai-mock-interviewer/issues"
+  },
+  "homepage": "https://github.com/iarsingh/ai-mock-interviewer#readme",
+  "keywords": ["mock-interview", "devops", "sre", "kubernetes", "gcp", "ollama"],
   "main": "server.js",
   "scripts": {
     "prestart": "npm run sync:question-bank",
     "start": "node server.js",
     "prestart:offline": "npm run sync:question-bank",
     "start:offline": "OFFLINE_ONLY=1 node server.js",
-    "sync:question-bank": "node scripts/generate-full-qa-document.js && node scripts/generate-txt-exports.js && ../.venv/bin/python scripts/build-docx.py && ../.venv/bin/python ../interview-quiz-app/scripts/build_question_bank.py",
+    "start:production": "node server.js",
+    "sync:question-bank": "node scripts/generate-full-qa-document.js && node scripts/generate-txt-exports.js && ../.venv/bin/python scripts/build-docx.py",
+    "sync:actual-interviews": "node scripts/sync-actual-interview-mock-set.js && node scripts/generate-full-qa-document.js && node scripts/audit-answer-quality.js && node scripts/generate-txt-exports.js && ../.venv/bin/python scripts/build-docx.py && node scripts/build-actual-interview-qa.js && ../.venv/bin/python scripts/build-actual-interview-docx.py",
+    "sync:interview-prep": "../.venv/bin/python scripts/build-interview-prep-document.py",
+    "audit:answer-quality": "node scripts/audit-answer-quality.js",
+    "check:production": "node scripts/check-production-readiness.js",
+    "check:release": "npm test && npm run audit:answer-quality && npm run check:production",
     "test": "node --test tests/*.test.js",
     "stop": "lsof -ti:${PORT:-3030} | xargs kill 2>/dev/null || echo 'No process running on port '${PORT:-3030}"
   },

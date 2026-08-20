@@ -1,0 +1,105 @@
+GCP Landing Zone / Governance
+
+1. Explain the GCP Landing Zone architecture that you have designed.
+2. How do you organize folders in your GCP Landing Zone?
+3. What did you set up on the governance side of the Landing Zone?
+4. What is Terraform?
+5. What is the difference between Terraform open-source/community usage and Terraform Enterprise?
+6. What challenges did you face while working with Terraform / the Landing Zone platform?
+7. What happens if the Terraform state gets corrupted?
+8. How would you recover Terraform if you don’t have a state backup?
+9. Explain the GCP resource/project hierarchy.
+10. Can a GCP project belong to multiple folders?
+11. Where does the Billing Account fit in the GCP hierarchy?
+12. What is the difference between Shared VPC and VPC Peering?
+13. Is VPC Peering transitive?
+14. When would you choose Shared VPC vs VPC Peering?
+15. What governance/IAM roles did you configure for the Landing Zone?
+16. What are the different types of GCP IAM roles?
+17. Explain Basic/Primitive vs Predefined vs Custom IAM roles.
+18. Why wouldn’t you create custom IAM roles for everything?
+
+GKE / Kubernetes
+
+19. Explain the GKE architecture.
+20. Explain the GKE node pool lifecycle.
+21. What does the Kubernetes Controller Manager do?
+22. What is the difference between Ingress and Egress traffic?
+23. What is the difference between HPA and VPA?
+24. In what situations would you use HPA?
+25. In what situations would you use VPA?
+26. Can we use HPA and VPA together?
+27. What problems can occur when HPA and VPA both operate using CPU/memory metrics?
+28. If HPA scales Pods and the Cluster Autoscaler scales nodes, couldn’t that cause unnecessary cluster scaling?
+29. How would you mitigate over-scaling between HPA/VPA/Cluster Autoscaler?
+30. Can we implement Cluster Autoscaler together with HPA and VPA?
+31. A Pod is stuck in Pending state. How would you troubleshoot it?
+32. What if nodes have enough CPU and memory but the Pod is still Pending?
+
+Jenkins / CI-CD
+
+33. How do Jenkins agents work?
+34. What is the difference between the Jenkins Controller and Agent?
+35. How does Jenkins determine which agent should execute a job?
+36. How do dynamic Kubernetes Jenkins agents work?
+37. What happens when a Jenkins agent goes down?
+
+Logging & Monitoring
+
+38. How do you configure alerts based on logs?
+39. How would you create log-based alerts in GCP?
+40. How would you alert on a specific error message in application logs?
+41. How do you avoid alert noise/alert fatigue?
+
+GitHub / Bitbucket
+
+42. You have a very large GitHub repository that you’re migrating to Bitbucket, and the migration is failing. How would you troubleshoot/fix it?
+43. Why would you use git clone --mirror / git push --mirror during repository migration?
+44. How would you migrate Git LFS objects?
+45. What would you do if large binary files in Git history were causing the migration failure?
+
+Python
+
+46. How does garbage collection in Python work?
+47. What is reference counting?
+48. How does Python handle circular references?
+49. What is generational garbage collection?
+50. What is a variable in Python?
+51. What are the constraints/rules for naming Python variables?
+52. Can Python reserved keywords be used as variable names?
+53. What are mutable and immutable objects in Python?
+54. Give examples of mutable and immutable Python objects.
+55. Is a tuple completely immutable if it contains a mutable object?
+56. Given "Akhilesh Kumar Singh", create a dictionary containing the frequency of each character.
+57. Given a list containing duplicate elements, remove the duplicates.
+58. How can you improve duplicate removal using a set?
+59. What is the time complexity of removing duplicates using a seen set?
+60. Can XOR be used for duplicate-related problems?
+61. Given an array where every number appears twice except one, find the unique number using XOR.
+62. When should you use XOR vs Set for duplicate/unique-element problems?
+
+Linux / Unix
+
+63. When you enter a command such as nslookup in Linux and press Enter, what happens internally from shell to kernel?
+64. What are fork() and execve()?
+65. How does a user-space process communicate with the Linux kernel?
+66. Given a file, get the 7th column of the 7th row using Unix/Linux commands.
+67. What is the sed command used for?
+68. How do you use sed to print a specific line?
+69. How do you use sed for search and replace?
+70. What is the difference between the typical uses of grep, awk, and sed?
+
+SQL
+
+71. You have an employee table. How would you create employee1 with the same columns/structure but without copying data?
+72. What is the purpose of CREATE TABLE employee1 AS SELECT * FROM employee WHERE 1 = 0?
+73. Given Orders_df and Customers_df, find customer IDs that exist in Orders_df but not in Customers_df.
+74. Solve the above using NOT EXISTS.
+75. Solve the same problem using a LEFT JOIN.
+76. For each city, find the second-highest order amount.
+77. Find the second-highest order amount using DENSE_RANK().
+78. Find the second-highest order amount using MAX() without a window function.
+79. If city is directly available in Orders_df, solve the second-highest problem without joining Customers_df.
+80. Find customers/orders whose order amount is greater than the average order amount.
+81. Find an order whose amount is greater than the average order amount of that specific customer.
+82. How does a correlated subquery calculate the average separately for each customer?

@@ -1,0 +1,23 @@
+GCP and GKE
+
+1. Tell me a few Google Cloud services that you extensively use at the organization level.
+2. Let’s talk about GKE. Why is GKE different from an on-premises Kubernetes cluster?
+3. How does autoscaling work in GKE? How does GKE Cluster Autoscaler work?
+4. Let’s say you’re trying to increase the CPU, but the node doesn’t have enough capacity. What will happen?
+5. If you want to automatically increase the number of nodes, what needs to be enabled in the GKE cluster? What is that feature called?
+6. Can we create new nodes in a GKE cluster without a node pool?
+
+Terraform Execution and State
+
+7. Have you used any tool or mechanism to create infrastructure in the cloud?
+8. You mentioned Terraform. Where do you run the Terraform commands to create infrastructure?
+9. Where is your CI/CD/Jenkins platform hosted, and where exactly are the Terraform commands executed?
+10. Why do you keep the Terraform state file in GCS? Why do you need a remote backend?
+11. What will happen if we don’t use Terraform state locking? What problems can occur?
+
+Terraform Architecture and Multi-Environment Design
+
+12. Suppose you have six environments in the cloud and Terraform is used to provision infrastructure in all six. How would you approach this scenario? How would you structure your Terraform repository?
+13. If I open the root directory of your Terraform repository, what files and directories would I see?
+14. Are you saying that you keep your reusable Terraform modules and infrastructure/environment configuration in the same repository?
+15. In your actual approach, would you keep Terraform modules and live infrastructure configuration in the same repository or separate repositories? Why?

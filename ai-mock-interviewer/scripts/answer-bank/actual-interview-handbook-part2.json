@@ -1,0 +1,3922 @@
+[
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is CI/CD?",
+    "originalNumber": 211
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between Continuous Integration, Continuous Delivery and Continuous Deployment?",
+    "originalNumber": 212
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Explain the CI/CD pipeline you are currently using.",
+    "originalNumber": 213
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What stages are included in your application pipeline?",
+    "originalNumber": 214
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What stages are included in your infrastructure pipeline?",
+    "originalNumber": 215
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How does code move from development to production?",
+    "originalNumber": 216
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What happens after a developer commits code?",
+    "originalNumber": 217
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How is a pipeline triggered?",
+    "originalNumber": 218
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between manual and automatic pipeline triggers?",
+    "originalNumber": 219
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you design a pipeline for microservices?",
+    "originalNumber": 220
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you design a pipeline for infrastructure provisioning?",
+    "originalNumber": 221
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you manage separate pipelines for infrastructure and applications?",
+    "originalNumber": 222
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you handle multiple environments in CI/CD?",
+    "originalNumber": 223
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you promote builds from development to staging and production?",
+    "originalNumber": 224
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you ensure that the same artifact is deployed across environments?",
+    "originalNumber": 225
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Why should you build an artifact only once?",
+    "originalNumber": 226
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an immutable artifact?",
+    "originalNumber": 227
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you store pipeline artifacts?",
+    "originalNumber": 228
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you version artifacts?",
+    "originalNumber": 229
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you manage pipeline dependencies?",
+    "originalNumber": 230
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you pass variables between pipeline stages?",
+    "originalNumber": 231
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you manage environment-specific configuration?",
+    "originalNumber": 232
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you handle secrets inside pipelines?",
+    "originalNumber": 233
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you prevent secrets from appearing in logs?",
+    "originalNumber": 234
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a pipeline runner or agent?",
+    "originalNumber": 235
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between a hosted and self-hosted runner?",
+    "originalNumber": 236
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you select the correct runner for a job?",
+    "originalNumber": 237
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot a failed pipeline?",
+    "originalNumber": 238
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Troubleshooting",
+    "question": "How do you retry only a failed stage?",
+    "originalNumber": 239
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you prevent unnecessary pipeline execution?",
+    "originalNumber": 240
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you reduce pipeline execution time?",
+    "originalNumber": 241
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you run pipeline jobs in parallel?",
+    "originalNumber": 242
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you cache dependencies in a pipeline?",
+    "originalNumber": 243
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What should and should not be cached?",
+    "originalNumber": 244
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you manage pipeline timeouts?",
+    "originalNumber": 245
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Troubleshooting",
+    "question": "How do you handle a pipeline that is stuck?",
+    "originalNumber": 246
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you cancel an in-progress deployment safely?",
+    "originalNumber": 247
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you handle concurrent deployments?",
+    "originalNumber": 248
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you prevent two production deployments from running simultaneously?",
+    "originalNumber": 249
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "CI/CD Fundamentals",
+    "category": "CI/CD Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you implement deployment approvals?",
+    "originalNumber": 250
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What testing stages do you generally add to a CI/CD pipeline?",
+    "originalNumber": 251
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "Where do you run unit tests?",
+    "originalNumber": 252
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "Where do you run integration tests?",
+    "originalNumber": 253
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is regression testing?",
+    "originalNumber": 254
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is smoke testing?",
+    "originalNumber": 255
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is sanity testing?",
+    "originalNumber": 256
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is end-to-end testing?",
+    "originalNumber": 257
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is performance testing?",
+    "originalNumber": 258
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is load testing?",
+    "originalNumber": 259
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is security testing?",
+    "originalNumber": 260
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is SAST?",
+    "originalNumber": 261
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is DAST?",
+    "originalNumber": 262
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is dependency scanning?",
+    "originalNumber": 263
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is container image scanning?",
+    "originalNumber": 264
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is Infrastructure-as-Code scanning?",
+    "originalNumber": 265
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is secret scanning?",
+    "originalNumber": 266
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is license compliance scanning?",
+    "originalNumber": 267
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is code-quality scanning?",
+    "originalNumber": 268
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "How do you integrate SonarQube into a pipeline?",
+    "originalNumber": 269
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is a quality gate?",
+    "originalNumber": 270
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Troubleshooting",
+    "question": "What happens when the SonarQube quality gate fails?",
+    "originalNumber": 271
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Troubleshooting",
+    "question": "How do you fail a pipeline based on vulnerability severity?",
+    "originalNumber": 272
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "How do you define acceptable vulnerability thresholds?",
+    "originalNumber": 273
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "How do you handle false-positive security findings?",
+    "originalNumber": 274
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "Should all tests run for every commit?",
+    "originalNumber": 275
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "If multiple testing mechanisms add 30 minutes, how would you optimize the pipeline?",
+    "originalNumber": 276
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "Which tests should run on pull requests?",
+    "originalNumber": 277
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "Which tests should run before production?",
+    "originalNumber": 278
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "How do you parallelize testing stages?",
+    "originalNumber": 279
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "How do you avoid running unchanged-module tests?",
+    "originalNumber": 280
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "What is test impact analysis?",
+    "originalNumber": 281
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "How do you use path-based pipeline triggers?",
+    "originalNumber": 282
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "How do you use caching to reduce build time?",
+    "originalNumber": 283
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "Can security tests be shifted left?",
+    "originalNumber": 284
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "Which checks should block deployment?",
+    "originalNumber": 285
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "Which checks may be non-blocking?",
+    "originalNumber": 286
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "How do you preserve test reports?",
+    "originalNumber": 287
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "How do you publish code-coverage reports?",
+    "originalNumber": 288
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Troubleshooting",
+    "question": "How do you notify developers when tests fail?",
+    "originalNumber": 289
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Testing and Quality Gates",
+    "category": "Pipeline Testing and Quality Gates",
+    "questionType": "Conceptual",
+    "question": "How do you ensure broken code cannot merge?",
+    "originalNumber": 290
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "How do you perform a rolling deployment?",
+    "originalNumber": 291
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "What is a recreate deployment?",
+    "originalNumber": 292
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "What is blue-green deployment?",
+    "originalNumber": 293
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "What is canary deployment?",
+    "originalNumber": 294
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "What is feature-flag-based deployment?",
+    "originalNumber": 295
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "Which deployment strategy do you use in production?",
+    "originalNumber": 296
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Comparison",
+    "question": "When would you prefer blue-green over canary?",
+    "originalNumber": 297
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Comparison",
+    "question": "When would you prefer canary over rolling deployment?",
+    "originalNumber": 298
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "How do you route 5% traffic to a canary version?",
+    "originalNumber": 299
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "What metrics do you observe during a canary release?",
+    "originalNumber": 300
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "How long should a canary be monitored?",
+    "originalNumber": 301
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Troubleshooting",
+    "question": "What happens if the canary version shows high latency?",
+    "originalNumber": 302
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Troubleshooting",
+    "question": "How do you automatically stop a failed canary release?",
+    "originalNumber": 303
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "How do you roll back an application deployment?",
+    "originalNumber": 304
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Troubleshooting",
+    "question": "How quickly can you complete a rollback?",
+    "originalNumber": 305
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Troubleshooting",
+    "question": "Can a rollback be automated?",
+    "originalNumber": 306
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "When is manual intervention still required?",
+    "originalNumber": 307
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Troubleshooting",
+    "question": "What conditions should trigger automatic rollback?",
+    "originalNumber": 308
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "How do you roll back a Kubernetes deployment?",
+    "originalNumber": 309
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "How do you roll back a Helm release?",
+    "originalNumber": 310
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "How do you roll back a database change?",
+    "originalNumber": 311
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Troubleshooting",
+    "question": "Why are database rollbacks difficult?",
+    "originalNumber": 312
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "How do you make database changes backward compatible?",
+    "originalNumber": 313
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "What is an expand-and-contract database migration?",
+    "originalNumber": 314
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Troubleshooting",
+    "question": "How do you handle rollback when the new version has already modified data?",
+    "originalNumber": 315
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "How do you validate a deployment after release?",
+    "originalNumber": 316
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "What are post-deployment smoke tests?",
+    "originalNumber": 317
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "How do you achieve zero-downtime deployment?",
+    "originalNumber": 318
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "How do readiness probes help during deployment?",
+    "originalNumber": 319
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Deployment Strategies and Rollback",
+    "category": "Deployment Strategies and Rollback",
+    "questionType": "Conceptual",
+    "question": "What happens when readiness probes are incorrectly configured?",
+    "originalNumber": 320
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you secure a CI/CD pipeline?",
+    "originalNumber": 321
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you implement least privilege in pipelines?",
+    "originalNumber": 322
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do pipelines authenticate to cloud environments?",
+    "originalNumber": 323
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "Should pipelines use service-account keys?",
+    "originalNumber": 324
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you avoid long-lived credentials?",
+    "originalNumber": 325
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "What is Workload Identity Federation?",
+    "originalNumber": 326
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How can GitHub Actions authenticate to GCP without a service-account key?",
+    "originalNumber": 327
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you secure self-hosted runners?",
+    "originalNumber": 328
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "What are the risks of using self-hosted runners?",
+    "originalNumber": 329
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you isolate runners for different projects?",
+    "originalNumber": 330
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you restrict production deployment permissions?",
+    "originalNumber": 331
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you protect production environments?",
+    "originalNumber": 332
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you configure branch protection?",
+    "originalNumber": 333
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you configure required reviewers?",
+    "originalNumber": 334
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you restrict who can approve deployments?",
+    "originalNumber": 335
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you prevent direct deployment from a developer branch?",
+    "originalNumber": 336
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you protect pipeline configuration files?",
+    "originalNumber": 337
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you protect secrets stored in CI/CD tools?",
+    "originalNumber": 338
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you rotate pipeline credentials?",
+    "originalNumber": 339
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you audit pipeline activity?",
+    "originalNumber": 340
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you prevent artifact tampering?",
+    "originalNumber": 341
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you verify artifact integrity?",
+    "originalNumber": 342
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "What is image signing?",
+    "originalNumber": 343
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "What is software-supply-chain security?",
+    "originalNumber": 344
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "What is an SBOM?",
+    "originalNumber": 345
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you generate and validate an SBOM?",
+    "originalNumber": 346
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "What is provenance in a software build?",
+    "originalNumber": 347
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you prevent untrusted pull requests from accessing secrets?",
+    "originalNumber": 348
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you scan Docker images before deployment?",
+    "originalNumber": 349
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Pipeline Security",
+    "category": "Pipeline Security",
+    "questionType": "Conceptual",
+    "question": "How do you prevent vulnerable images from reaching production?",
+    "originalNumber": 350
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What is Jenkins?",
+    "originalNumber": 351
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "Explain Jenkins architecture.",
+    "originalNumber": 352
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What is the role of the Jenkins controller?",
+    "originalNumber": 353
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What is a Jenkins agent?",
+    "originalNumber": 354
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Comparison",
+    "question": "What is the difference between a permanent and ephemeral agent?",
+    "originalNumber": 355
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What is a Jenkins job?",
+    "originalNumber": 356
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What is a Jenkins pipeline?",
+    "originalNumber": 357
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What is a Jenkinsfile?",
+    "originalNumber": 358
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Comparison",
+    "question": "What is the difference between a declarative and scripted pipeline?",
+    "originalNumber": 359
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "Which pipeline type have you worked with?",
+    "originalNumber": 360
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "Explain the stages in your Jenkins pipeline.",
+    "originalNumber": 361
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What is the agent block?",
+    "originalNumber": 362
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What is the environment block?",
+    "originalNumber": 363
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What is the parameters block?",
+    "originalNumber": 364
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What is the post block?",
+    "originalNumber": 365
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What is the when condition?",
+    "originalNumber": 366
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Comparison",
+    "question": "What is the difference between stages and steps?",
+    "originalNumber": 367
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you run stages in parallel?",
+    "originalNumber": 368
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you handle credentials in Jenkins?",
+    "originalNumber": 369
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What is the Jenkins Credentials Store?",
+    "originalNumber": 370
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you inject credentials into a pipeline?",
+    "originalNumber": 371
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you prevent Jenkins from printing credentials?",
+    "originalNumber": 372
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What are shared libraries?",
+    "originalNumber": 373
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "Why do you use Jenkins shared libraries?",
+    "originalNumber": 374
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you create reusable Jenkins pipeline code?",
+    "originalNumber": 375
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you trigger Jenkins from Git?",
+    "originalNumber": 376
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What is a webhook?",
+    "originalNumber": 377
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What is polling SCM?",
+    "originalNumber": 378
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Comparison",
+    "question": "Why are webhooks preferred over polling?",
+    "originalNumber": 379
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you trigger one Jenkins job from another?",
+    "originalNumber": 380
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you pass parameters between Jenkins jobs?",
+    "originalNumber": 381
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you archive artifacts?",
+    "originalNumber": 382
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you retain build logs?",
+    "originalNumber": 383
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you manage build history?",
+    "originalNumber": 384
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you clean old Jenkins workspaces?",
+    "originalNumber": 385
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot a Jenkins agent that is offline?",
+    "originalNumber": 386
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot a stuck Jenkins build?",
+    "originalNumber": 387
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you scale Jenkins agents?",
+    "originalNumber": 388
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you run Jenkins agents on Kubernetes?",
+    "originalNumber": 389
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you back up Jenkins?",
+    "originalNumber": 390
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Troubleshooting",
+    "question": "How do you restore Jenkins after failure?",
+    "originalNumber": 391
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you upgrade Jenkins safely?",
+    "originalNumber": 392
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you manage Jenkins plugins?",
+    "originalNumber": 393
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "What risks are associated with Jenkins plugins?",
+    "originalNumber": 394
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you secure Jenkins?",
+    "originalNumber": 395
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you integrate Jenkins with SonarQube?",
+    "originalNumber": 396
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you integrate Jenkins with Docker?",
+    "originalNumber": 397
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you integrate Jenkins with Kubernetes?",
+    "originalNumber": 398
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you deploy a Helm chart through Jenkins?",
+    "originalNumber": 399
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Jenkins",
+    "category": "Jenkins",
+    "questionType": "Conceptual",
+    "question": "How do you implement approval before production deployment?",
+    "originalNumber": 400
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What is GitHub Actions?",
+    "originalNumber": 401
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What is a GitHub Actions workflow?",
+    "originalNumber": 402
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "Where are workflow files stored?",
+    "originalNumber": 403
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What is the purpose of the .github/workflows directory?",
+    "originalNumber": 404
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What is an event trigger?",
+    "originalNumber": 405
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What is workflow_dispatch?",
+    "originalNumber": 406
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Troubleshooting",
+    "question": "Why does gh workflow run fail when workflow_dispatch is missing?",
+    "originalNumber": 407
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you add a manual trigger to a workflow?",
+    "originalNumber": 408
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What is push trigger?",
+    "originalNumber": 409
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What is pull_request trigger?",
+    "originalNumber": 410
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What is schedule trigger?",
+    "originalNumber": 411
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What is workflow_call?",
+    "originalNumber": 412
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Comparison",
+    "question": "What is the difference between a workflow and a job?",
+    "originalNumber": 413
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Comparison",
+    "question": "What is the difference between a job and a step?",
+    "originalNumber": 414
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What is a GitHub Actions runner?",
+    "originalNumber": 415
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Comparison",
+    "question": "What is the difference between GitHub-hosted and self-hosted runners?",
+    "originalNumber": 416
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you select a runner using runs-on?",
+    "originalNumber": 417
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What are GitHub Actions?",
+    "originalNumber": 418
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you use a marketplace action?",
+    "originalNumber": 419
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What are reusable workflows?",
+    "originalNumber": 420
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What are composite actions?",
+    "originalNumber": 421
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What is a matrix strategy?",
+    "originalNumber": 422
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you test multiple versions using a matrix?",
+    "originalNumber": 423
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you pass output from one job to another?",
+    "originalNumber": 424
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you define job dependencies using needs?",
+    "originalNumber": 425
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you run jobs conditionally?",
+    "originalNumber": 426
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What is the if condition?",
+    "originalNumber": 427
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you store secrets in GitHub?",
+    "originalNumber": 428
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Comparison",
+    "question": "What is the difference between repository and environment secrets?",
+    "originalNumber": 429
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What are GitHub environments?",
+    "originalNumber": 430
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you configure environment approvals?",
+    "originalNumber": 431
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you restrict deployment branches?",
+    "originalNumber": 432
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you cache dependencies in GitHub Actions?",
+    "originalNumber": 433
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you upload and download artifacts?",
+    "originalNumber": 434
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you authenticate GitHub Actions to GCP?",
+    "originalNumber": 435
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you authenticate GitHub Actions to Kubernetes?",
+    "originalNumber": 436
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you deploy to GKE using GitHub Actions?",
+    "originalNumber": 437
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you build and push an image to Artifact Registry?",
+    "originalNumber": 438
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Troubleshooting",
+    "question": "How do you debug a failed GitHub Actions workflow?",
+    "originalNumber": 439
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Troubleshooting",
+    "question": "How do you rerun only failed jobs?",
+    "originalNumber": 440
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you use the GitHub CLI to check workflows?",
+    "originalNumber": 441
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What does gh run watch do?",
+    "originalNumber": 442
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "Why might gh run watch show no in-progress runs?",
+    "originalNumber": 443
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you list enabled workflows?",
+    "originalNumber": 444
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you trigger a workflow from the command line?",
+    "originalNumber": 445
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you protect workflows from untrusted forks?",
+    "originalNumber": 446
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What permissions should be assigned to GITHUB_TOKEN?",
+    "originalNumber": 447
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "What is OIDC authentication in GitHub Actions?",
+    "originalNumber": 448
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you control workflow concurrency?",
+    "originalNumber": 449
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitHub Actions",
+    "category": "GitHub Actions",
+    "questionType": "Conceptual",
+    "question": "How do you cancel an older workflow when a new commit arrives?",
+    "originalNumber": 450
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What is GitLab CI/CD?",
+    "originalNumber": 451
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What is the purpose of .gitlab-ci.yml?",
+    "originalNumber": 452
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What is a GitLab Runner?",
+    "originalNumber": 453
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Comparison",
+    "question": "What is the difference between shared, group and project runners?",
+    "originalNumber": 454
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What are stages in GitLab CI?",
+    "originalNumber": 455
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What is a GitLab job?",
+    "originalNumber": 456
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you define job dependencies?",
+    "originalNumber": 457
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Comparison",
+    "question": "What is the difference between needs and dependencies?",
+    "originalNumber": 458
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What are GitLab artifacts?",
+    "originalNumber": 459
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What is GitLab cache?",
+    "originalNumber": 460
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Comparison",
+    "question": "What is the difference between cache and artifacts?",
+    "originalNumber": 461
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you define variables in GitLab CI?",
+    "originalNumber": 462
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you protect sensitive variables?",
+    "originalNumber": 463
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What are masked variables?",
+    "originalNumber": 464
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What are protected variables?",
+    "originalNumber": 465
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What is a protected branch?",
+    "originalNumber": 466
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you restrict production deployments?",
+    "originalNumber": 467
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you configure manual jobs?",
+    "originalNumber": 468
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What is when: manual?",
+    "originalNumber": 469
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you configure pipeline rules?",
+    "originalNumber": 470
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Comparison",
+    "question": "What is the difference between only/except and rules?",
+    "originalNumber": 471
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you trigger pipelines for specific file changes?",
+    "originalNumber": 472
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you create child pipelines?",
+    "originalNumber": 473
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What are parent-child pipelines?",
+    "originalNumber": 474
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What are multi-project pipelines?",
+    "originalNumber": 475
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you reuse GitLab pipeline templates?",
+    "originalNumber": 476
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you run jobs in parallel?",
+    "originalNumber": 477
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you build Docker images in GitLab CI?",
+    "originalNumber": 478
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What is Docker-in-Docker?",
+    "originalNumber": 479
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "What are the security risks of Docker-in-Docker?",
+    "originalNumber": 480
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you push an image to a container registry?",
+    "originalNumber": 481
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you deploy to Kubernetes from GitLab?",
+    "originalNumber": 482
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you integrate GitLab with Helm?",
+    "originalNumber": 483
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you integrate SonarQube with GitLab?",
+    "originalNumber": 484
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot a GitLab Runner?",
+    "originalNumber": 485
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you scale GitLab Runners?",
+    "originalNumber": 486
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you use Kubernetes executors?",
+    "originalNumber": 487
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you implement approval gates?",
+    "originalNumber": 488
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you retain artifacts?",
+    "originalNumber": 489
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "GitLab CI/CD",
+    "category": "GitLab CI/CD",
+    "questionType": "Conceptual",
+    "question": "How do you optimize GitLab pipeline performance?",
+    "originalNumber": 490
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "What is Bitbucket Pipelines?",
+    "originalNumber": 491
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "Where is the Bitbucket pipeline configuration stored?",
+    "originalNumber": 492
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "What is bitbucket-pipelines.yml?",
+    "originalNumber": 493
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "Explain the Bitbucket infrastructure pipeline you use.",
+    "originalNumber": 494
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you trigger a Bitbucket pipeline?",
+    "originalNumber": 495
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you create custom pipelines?",
+    "originalNumber": 496
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you trigger a custom pipeline manually?",
+    "originalNumber": 497
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "What are Bitbucket deployment environments?",
+    "originalNumber": 498
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you configure deployment variables?",
+    "originalNumber": 499
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Comparison",
+    "question": "What is the difference between repository and deployment variables?",
+    "originalNumber": 500
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you store secrets in Bitbucket?",
+    "originalNumber": 501
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you use secured variables?",
+    "originalNumber": 502
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you configure branch-specific pipelines?",
+    "originalNumber": 503
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you configure pull-request pipelines?",
+    "originalNumber": 504
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you configure path-based execution?",
+    "originalNumber": 505
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you use pipeline artifacts?",
+    "originalNumber": 506
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you use cache in Bitbucket Pipelines?",
+    "originalNumber": 507
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you pass artifacts between steps?",
+    "originalNumber": 508
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you run steps in parallel?",
+    "originalNumber": 509
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "What are Bitbucket pipes?",
+    "originalNumber": 510
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you build a Docker image in Bitbucket?",
+    "originalNumber": 511
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you push an image to Artifact Registry?",
+    "originalNumber": 512
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you authenticate Bitbucket Pipelines to GCP?",
+    "originalNumber": 513
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you run Terraform from Bitbucket Pipelines?",
+    "originalNumber": 514
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you manage Terraform plan and apply separately?",
+    "originalNumber": 515
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you add approval before Terraform apply?",
+    "originalNumber": 516
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you store a Terraform plan file?",
+    "originalNumber": 517
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you deploy to GKE from Bitbucket?",
+    "originalNumber": 518
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot a failed Bitbucket pipeline?",
+    "originalNumber": 519
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Bitbucket Pipelines",
+    "category": "Bitbucket Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you migrate a pipeline from GitHub or GitLab to Bitbucket?",
+    "originalNumber": 520
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is GitOps?",
+    "originalNumber": 521
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What are the core principles of GitOps?",
+    "originalNumber": 522
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is Argo CD?",
+    "originalNumber": 523
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How does Argo CD work?",
+    "originalNumber": 524
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Comparison",
+    "question": "What is the difference between push-based and pull-based deployment?",
+    "originalNumber": 525
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "Why is Argo CD considered a pull-based tool?",
+    "originalNumber": 526
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is an Argo CD Application?",
+    "originalNumber": 527
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is an Argo CD Project?",
+    "originalNumber": 528
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is the desired state?",
+    "originalNumber": 529
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is the live state?",
+    "originalNumber": 530
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is sync status?",
+    "originalNumber": 531
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is health status?",
+    "originalNumber": 532
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What does OutOfSync mean?",
+    "originalNumber": 533
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is automatic synchronization?",
+    "originalNumber": 534
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is manual synchronization?",
+    "originalNumber": 535
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is self-healing?",
+    "originalNumber": 536
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is automatic pruning?",
+    "originalNumber": 537
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What are the risks of automatic pruning?",
+    "originalNumber": 538
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you deploy a Helm chart through Argo CD?",
+    "originalNumber": 539
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you deploy Kustomize manifests through Argo CD?",
+    "originalNumber": 540
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is the App-of-Apps pattern?",
+    "originalNumber": 541
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is an ApplicationSet?",
+    "originalNumber": 542
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you manage multiple clusters using Argo CD?",
+    "originalNumber": 543
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you manage multiple environments?",
+    "originalNumber": 544
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you structure Git repositories for GitOps?",
+    "originalNumber": 545
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is a mono-repository GitOps structure?",
+    "originalNumber": 546
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is a multi-repository GitOps structure?",
+    "originalNumber": 547
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you promote an application between environments?",
+    "originalNumber": 548
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you handle secrets in GitOps?",
+    "originalNumber": 549
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "Why should plain-text secrets not be stored in Git?",
+    "originalNumber": 550
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do Sealed Secrets work?",
+    "originalNumber": 551
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How does External Secrets Operator work?",
+    "originalNumber": 552
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you integrate Secret Manager or Vault with Argo CD?",
+    "originalNumber": 553
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you roll back using Argo CD?",
+    "originalNumber": 554
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot an OutOfSync application?",
+    "originalNumber": 555
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What causes a sync loop?",
+    "originalNumber": 556
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you handle manually changed Kubernetes resources?",
+    "originalNumber": 557
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you configure RBAC in Argo CD?",
+    "originalNumber": 558
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you secure the Argo CD API server?",
+    "originalNumber": 559
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you integrate SSO with Argo CD?",
+    "originalNumber": 560
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you create sync waves?",
+    "originalNumber": 561
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What are Argo CD hooks?",
+    "originalNumber": 562
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you run database migrations with Argo CD?",
+    "originalNumber": 563
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What is progressive delivery?",
+    "originalNumber": 564
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Comparison",
+    "question": "What is the difference between Argo CD and Argo Rollouts?",
+    "originalNumber": 565
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How does Argo Rollouts implement canary deployment?",
+    "originalNumber": 566
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you integrate Argo Rollouts with service mesh?",
+    "originalNumber": 567
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you monitor Argo CD?",
+    "originalNumber": 568
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "How do you back up Argo CD?",
+    "originalNumber": 569
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Argo CD and GitOps",
+    "category": "Argo CD and GitOps",
+    "questionType": "Conceptual",
+    "question": "What limitations have you experienced with Argo CD?",
+    "originalNumber": 570
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is Helm?",
+    "originalNumber": 571
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "Why is Helm called a Kubernetes package manager?",
+    "originalNumber": 572
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is a Helm chart?",
+    "originalNumber": 573
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "Explain the structure of a Helm chart.",
+    "originalNumber": 574
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is Chart.yaml?",
+    "originalNumber": 575
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is values.yaml?",
+    "originalNumber": 576
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is the templates directory?",
+    "originalNumber": 577
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is the purpose of the charts directory?",
+    "originalNumber": 578
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is a Helm release?",
+    "originalNumber": 579
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Comparison",
+    "question": "What is the difference between a chart and a release?",
+    "originalNumber": 580
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What does helm install do?",
+    "originalNumber": 581
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What does helm upgrade do?",
+    "originalNumber": 582
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What does helm upgrade --install do?",
+    "originalNumber": 583
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Troubleshooting",
+    "question": "What does helm rollback do?",
+    "originalNumber": 584
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you check Helm release history?",
+    "originalNumber": 585
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you uninstall a release?",
+    "originalNumber": 586
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you override values during installation?",
+    "originalNumber": 587
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Comparison",
+    "question": "What is the difference between --set and -f?",
+    "originalNumber": 588
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you manage environment-specific values?",
+    "originalNumber": 589
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you create reusable Helm templates?",
+    "originalNumber": 590
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What are named templates?",
+    "originalNumber": 591
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is the _helpers.tpl file?",
+    "originalNumber": 592
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What are Helm functions?",
+    "originalNumber": 593
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is a Helm pipeline?",
+    "originalNumber": 594
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What are conditional statements in Helm?",
+    "originalNumber": 595
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you use loops in Helm?",
+    "originalNumber": 596
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you validate required values?",
+    "originalNumber": 597
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is helm lint?",
+    "originalNumber": 598
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is helm template?",
+    "originalNumber": 599
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Troubleshooting",
+    "question": "How do you debug a Helm chart?",
+    "originalNumber": 600
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you perform a dry run with Helm?",
+    "originalNumber": 601
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you package a Helm chart?",
+    "originalNumber": 602
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you publish a Helm chart?",
+    "originalNumber": 603
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you manage chart versions?",
+    "originalNumber": 604
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is appVersion?",
+    "originalNumber": 605
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What are chart dependencies?",
+    "originalNumber": 606
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you update chart dependencies?",
+    "originalNumber": 607
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What are Helm hooks?",
+    "originalNumber": 608
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is a pre-install hook?",
+    "originalNumber": 609
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is a post-install hook?",
+    "originalNumber": 610
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is a pre-upgrade hook?",
+    "originalNumber": 611
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Troubleshooting",
+    "question": "How do you handle hook failures?",
+    "originalNumber": 612
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you store secrets in Helm?",
+    "originalNumber": 613
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "Why is encoding a secret with Base64 not secure?",
+    "originalNumber": 614
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you use Helm with Argo CD?",
+    "originalNumber": 615
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "How do you use Helm in a CI/CD pipeline?",
+    "originalNumber": 616
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Troubleshooting",
+    "question": "How do you roll back a failed Helm deployment?",
+    "originalNumber": 617
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Troubleshooting",
+    "question": "What happens when a Helm upgrade partially fails?",
+    "originalNumber": 618
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is the --atomic option?",
+    "originalNumber": 619
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Helm",
+    "category": "Helm",
+    "questionType": "Conceptual",
+    "question": "What is the --wait option?",
+    "originalNumber": 620
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is Ansible?",
+    "originalNumber": 621
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "Why is Ansible agentless?",
+    "originalNumber": 622
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is an Ansible inventory?",
+    "originalNumber": 623
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is a static inventory?",
+    "originalNumber": 624
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is a dynamic inventory?",
+    "originalNumber": 625
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is an Ansible playbook?",
+    "originalNumber": 626
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is a play?",
+    "originalNumber": 627
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is a task?",
+    "originalNumber": 628
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is a handler?",
+    "originalNumber": 629
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is an Ansible role?",
+    "originalNumber": 630
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "Explain the directory structure of an Ansible role.",
+    "originalNumber": 631
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What are Ansible modules?",
+    "originalNumber": 632
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Comparison",
+    "question": "What is the difference between command and shell modules?",
+    "originalNumber": 633
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is idempotency?",
+    "originalNumber": 634
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How does Ansible maintain idempotency?",
+    "originalNumber": 635
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What are Ansible facts?",
+    "originalNumber": 636
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What does the gather_facts option do?",
+    "originalNumber": 637
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What are variables in Ansible?",
+    "originalNumber": 638
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "Explain variable precedence.",
+    "originalNumber": 639
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What are group variables?",
+    "originalNumber": 640
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What are host variables?",
+    "originalNumber": 641
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is an Ansible template?",
+    "originalNumber": 642
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How does Jinja2 work in Ansible?",
+    "originalNumber": 643
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What are conditionals in Ansible?",
+    "originalNumber": 644
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do loops work in Ansible?",
+    "originalNumber": 645
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What are tags?",
+    "originalNumber": 646
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you run selected tasks using tags?",
+    "originalNumber": 647
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you encrypt secrets with Ansible Vault?",
+    "originalNumber": 648
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you decrypt Vault data in a pipeline?",
+    "originalNumber": 649
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you handle sensitive variables?",
+    "originalNumber": 650
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you use Ansible with SSH?",
+    "originalNumber": 651
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you manage SSH keys?",
+    "originalNumber": 652
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you use privilege escalation?",
+    "originalNumber": 653
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is become?",
+    "originalNumber": 654
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot an unreachable host?",
+    "originalNumber": 655
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you perform a dry run with Ansible?",
+    "originalNumber": 656
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is check mode?",
+    "originalNumber": 657
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is diff mode?",
+    "originalNumber": 658
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you limit execution to selected hosts?",
+    "originalNumber": 659
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you run tasks serially?",
+    "originalNumber": 660
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you control parallel execution?",
+    "originalNumber": 661
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What is an Ansible strategy?",
+    "originalNumber": 662
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "Can Ansible be integrated into CI/CD?",
+    "originalNumber": 663
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "In which scenarios would you use Ansible in a pipeline?",
+    "originalNumber": 664
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How would you use Terraform and Ansible together?",
+    "originalNumber": 665
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "What should Terraform manage and what should Ansible manage?",
+    "originalNumber": 666
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you configure virtual machines after Terraform provisioning?",
+    "originalNumber": 667
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you use Ansible to deploy to multiple clusters and VMs?",
+    "originalNumber": 668
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you roll back an Ansible change?",
+    "originalNumber": 669
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Ansible",
+    "category": "Ansible",
+    "questionType": "Conceptual",
+    "question": "How do you test Ansible roles?",
+    "originalNumber": 670
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Troubleshooting",
+    "question": "A production deployment introduces high latency. What steps would you take?",
+    "originalNumber": 671
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Troubleshooting",
+    "question": "How would you decide whether to roll back or continue troubleshooting?",
+    "originalNumber": 672
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Troubleshooting",
+    "question": "How would you automatically roll back based on latency or error-rate thresholds?",
+    "originalNumber": 673
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Troubleshooting",
+    "question": "Your deployment is successful, but application health checks are failing. What would you check?",
+    "originalNumber": 674
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "A pipeline takes 40 minutes for 300 microservices. How would you optimize it?",
+    "originalNumber": 675
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "Would you build all 300 microservices after every code change?",
+    "originalNumber": 676
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How would you identify which microservices changed?",
+    "originalNumber": 677
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How would you execute builds only for affected services?",
+    "originalNumber": 678
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How would you handle shared-library changes affecting multiple services?",
+    "originalNumber": 679
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "Your test suite adds 30 minutes. How would you reduce it without compromising quality?",
+    "originalNumber": 680
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "A production approval is delayed. How would you design the pipeline to resume safely?",
+    "originalNumber": 681
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "A deployment is running while another release is triggered. What should happen?",
+    "originalNumber": 682
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "A pipeline succeeded but deployed the wrong image version. How would you investigate?",
+    "originalNumber": 683
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Troubleshooting",
+    "question": "The same Helm chart works in development but fails in production. What would you inspect?",
+    "originalNumber": 684
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "Argo CD continuously changes a resource back after manual modification. Why?",
+    "originalNumber": 685
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "An Argo CD application remains OutOfSync after synchronization. What could cause it?",
+    "originalNumber": 686
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "A GitHub Actions workflow cannot be manually triggered. What is the likely reason?",
+    "originalNumber": 687
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "The GitHub CLI returns HTTP 422 while dispatching a workflow. How would you fix it?",
+    "originalNumber": 688
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Troubleshooting",
+    "question": "A Jenkins agent suddenly goes offline during deployment. What would you do?",
+    "originalNumber": 689
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "A Bitbucket Terraform pipeline loses the saved plan before approval. How would you redesign it?",
+    "originalNumber": 690
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Troubleshooting",
+    "question": "A GitLab Runner has no capacity and jobs remain pending. How would you troubleshoot it?",
+    "originalNumber": 691
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Troubleshooting",
+    "question": "A Helm release is stuck in a pending-upgrade state. How would you recover it?",
+    "originalNumber": 692
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "A Docker image passes scanning initially but is later found vulnerable. What would you do?",
+    "originalNumber": 693
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "A secret is accidentally printed in pipeline logs. What immediate actions would you take?",
+    "originalNumber": 694
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "A developer changes the production deployment directly using kubectl. How would GitOps react?",
+    "originalNumber": 695
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How would you prevent configuration drift between Git and the cluster?",
+    "originalNumber": 696
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Troubleshooting",
+    "question": "A database migration succeeds but application deployment fails. What is your rollback plan?",
+    "originalNumber": 697
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How would you deploy a breaking API change without downtime?",
+    "originalNumber": 698
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How would you design CI/CD for clusters and virtual machines in the same project?",
+    "originalNumber": 699
+  },
+  {
+    "source": "Actual Interview Handbook - Part 2",
+    "section": "Scenario-Based Questions",
+    "category": "Scenario-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How would you prove that only approved and scanned artifacts reached production?",
+    "originalNumber": 700
+  }
+]

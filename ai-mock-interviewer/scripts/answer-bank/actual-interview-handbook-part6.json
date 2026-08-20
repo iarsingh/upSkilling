@@ -1,0 +1,5611 @@
+[
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is AWS?",
+    "originalNumber": 2521
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Which AWS services have you worked with?",
+    "originalNumber": 2522
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Explain the AWS global infrastructure.",
+    "originalNumber": 2523
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an AWS Region?",
+    "originalNumber": 2524
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an Availability Zone?",
+    "originalNumber": 2525
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an Edge Location?",
+    "originalNumber": 2526
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do Regions and Availability Zones support high availability?",
+    "originalNumber": 2527
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an AWS account?",
+    "originalNumber": 2528
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you manage multiple AWS accounts?",
+    "originalNumber": 2529
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is AWS Organizations?",
+    "originalNumber": 2530
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an Organizational Unit?",
+    "originalNumber": 2531
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a Service Control Policy?",
+    "originalNumber": 2532
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is AWS Control Tower?",
+    "originalNumber": 2533
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Comparison",
+    "question": "How is AWS Control Tower different from AWS Organizations?",
+    "originalNumber": 2534
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a landing zone in AWS?",
+    "originalNumber": 2535
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is the shared-responsibility model?",
+    "originalNumber": 2536
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What security responsibilities belong to AWS?",
+    "originalNumber": 2537
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What security responsibilities belong to the customer?",
+    "originalNumber": 2538
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is AWS IAM?",
+    "originalNumber": 2539
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between a user, group and role?",
+    "originalNumber": 2540
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an IAM policy?",
+    "originalNumber": 2541
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between identity-based and resource-based policies?",
+    "originalNumber": 2542
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an IAM role?",
+    "originalNumber": 2543
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Comparison",
+    "question": "Why should applications use roles instead of access keys?",
+    "originalNumber": 2544
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is role assumption?",
+    "originalNumber": 2545
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is AWS STS?",
+    "originalNumber": 2546
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What are temporary credentials?",
+    "originalNumber": 2547
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an instance profile?",
+    "originalNumber": 2548
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How does an EC2 instance obtain AWS permissions?",
+    "originalNumber": 2549
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Fundamentals",
+    "category": "AWS Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you implement least privilege in AWS?",
+    "originalNumber": 2550
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What is an AWS VPC?",
+    "originalNumber": 2551
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "Is an AWS VPC regional or global?",
+    "originalNumber": 2552
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What is a subnet in AWS?",
+    "originalQuestion": "What is a subnet?",
+    "originalNumber": 2553
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Comparison",
+    "question": "What is the difference between a public and private subnet?",
+    "originalNumber": 2554
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What makes a subnet public?",
+    "originalNumber": 2555
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What is an Internet Gateway?",
+    "originalNumber": 2556
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What is a NAT Gateway?",
+    "originalNumber": 2557
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "Why is a NAT Gateway used?",
+    "originalNumber": 2558
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Comparison",
+    "question": "What is the difference between a NAT Gateway and NAT instance?",
+    "originalNumber": 2559
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What is a route table?",
+    "originalNumber": 2560
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "How does route-table association work?",
+    "originalNumber": 2561
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What is a security group?",
+    "originalNumber": 2562
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "Are security groups stateful or stateless?",
+    "originalNumber": 2563
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What is a Network ACL?",
+    "originalNumber": 2564
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "Are Network ACLs stateful or stateless?",
+    "originalNumber": 2565
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Comparison",
+    "question": "What is the difference between a security group and Network ACL?",
+    "originalNumber": 2566
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What is VPC peering in AWS?",
+    "originalQuestion": "What is VPC peering?",
+    "originalNumber": 2567
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "Is AWS VPC peering transitive?",
+    "originalQuestion": "Is VPC peering transitive?",
+    "originalNumber": 2568
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What is AWS Transit Gateway?",
+    "originalNumber": 2569
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Comparison",
+    "question": "When would you use Transit Gateway instead of VPC peering?",
+    "originalNumber": 2570
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What is a VPC endpoint?",
+    "originalNumber": 2571
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Comparison",
+    "question": "What is the difference between gateway and interface endpoints?",
+    "originalNumber": 2572
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What is AWS PrivateLink?",
+    "originalNumber": 2573
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "How does PrivateLink provide private service connectivity?",
+    "originalNumber": 2574
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What is Route 53?",
+    "originalNumber": 2575
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What routing policies are available in Route 53?",
+    "originalNumber": 2576
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What is weighted routing?",
+    "originalNumber": 2577
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "What is latency-based routing?",
+    "originalNumber": 2578
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Troubleshooting",
+    "question": "What is failover routing?",
+    "originalNumber": 2579
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "AWS Networking",
+    "category": "AWS Networking",
+    "questionType": "Conceptual",
+    "question": "How do health checks work in Route 53?",
+    "originalNumber": 2580
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is Amazon EC2?",
+    "originalNumber": 2581
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is an Amazon Machine Image?",
+    "originalNumber": 2582
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is an EC2 instance type?",
+    "originalNumber": 2583
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "How do you choose an EC2 instance type?",
+    "originalNumber": 2584
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is an Auto Scaling Group?",
+    "originalNumber": 2585
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "How does EC2 Auto Scaling work?",
+    "originalNumber": 2586
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is a launch template?",
+    "originalNumber": 2587
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Comparison",
+    "question": "What is the difference between a launch configuration and launch template?",
+    "originalNumber": 2588
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is Amazon EBS?",
+    "originalNumber": 2589
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What EBS volume types are available?",
+    "originalNumber": 2590
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is an EBS snapshot?",
+    "originalNumber": 2591
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "Can one EBS volume be mounted to multiple instances?",
+    "originalNumber": 2592
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is Amazon EFS?",
+    "originalNumber": 2593
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Comparison",
+    "question": "What is the difference between EBS and EFS?",
+    "originalNumber": 2594
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is Amazon S3?",
+    "originalNumber": 2595
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What are S3 storage classes?",
+    "originalNumber": 2596
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is S3 versioning?",
+    "originalNumber": 2597
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is an S3 lifecycle policy?",
+    "originalNumber": 2598
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "How do you prevent public access to an S3 bucket?",
+    "originalNumber": 2599
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is server-side encryption in S3?",
+    "originalNumber": 2600
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is an AWS Application Load Balancer?",
+    "originalQuestion": "What is an Application Load Balancer?",
+    "originalNumber": 2601
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is an AWS Network Load Balancer?",
+    "originalQuestion": "What is a Network Load Balancer?",
+    "originalNumber": 2602
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is a Gateway Load Balancer?",
+    "originalNumber": 2603
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Comparison",
+    "question": "What is the difference between ALB and NLB?",
+    "originalNumber": 2604
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is a target group?",
+    "originalNumber": 2605
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "How do load-balancer health checks work?",
+    "originalNumber": 2606
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is path-based routing in an ALB?",
+    "originalNumber": 2607
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is host-based routing in an AWS ALB?",
+    "originalQuestion": "What is host-based routing?",
+    "originalNumber": 2608
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "How do you terminate TLS at the load balancer?",
+    "originalNumber": 2609
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EC2, Storage and Load Balancing",
+    "category": "EC2, Storage and Load Balancing",
+    "questionType": "Conceptual",
+    "question": "What is AWS Certificate Manager?",
+    "originalNumber": 2610
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What is Amazon EKS?",
+    "originalNumber": 2611
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "Explain EKS architecture.",
+    "originalNumber": 2612
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "Which EKS components are managed by AWS?",
+    "originalNumber": 2613
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What is the EKS control plane?",
+    "originalNumber": 2614
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What components run on EKS worker nodes?",
+    "originalNumber": 2615
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "How do you create an EKS cluster?",
+    "originalNumber": 2616
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What prerequisites are required before creating EKS?",
+    "originalNumber": 2617
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What IAM roles are required for EKS?",
+    "originalNumber": 2618
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What networking resources are required?",
+    "originalNumber": 2619
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What is an EKS node group?",
+    "originalNumber": 2620
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What is a managed node group?",
+    "originalNumber": 2621
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What is a self-managed node group?",
+    "originalNumber": 2622
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Comparison",
+    "question": "What is the difference between managed and self-managed nodes?",
+    "originalNumber": 2623
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "When would you choose a managed node group?",
+    "originalNumber": 2624
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "When would you choose self-managed nodes?",
+    "originalNumber": 2625
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What is AWS Fargate for EKS?",
+    "originalNumber": 2626
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What is a Fargate profile?",
+    "originalNumber": 2627
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "When should Fargate be used with EKS?",
+    "originalNumber": 2628
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What are the limitations of Fargate?",
+    "originalNumber": 2629
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "How do worker nodes join the EKS cluster?",
+    "originalNumber": 2630
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What is the aws-auth ConfigMap?",
+    "originalNumber": 2631
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "How is IAM access mapped to Kubernetes RBAC?",
+    "originalNumber": 2632
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What is EKS access entry?",
+    "originalNumber": 2633
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "How do users authenticate to an EKS cluster?",
+    "originalNumber": 2634
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "How does the AWS CLI generate a Kubernetes authentication token?",
+    "originalNumber": 2635
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "How do you make an EKS API endpoint private?",
+    "originalNumber": 2636
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "What is a public EKS endpoint?",
+    "originalNumber": 2637
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "How do you restrict access to the public endpoint?",
+    "originalNumber": 2638
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "How do you design a private EKS cluster?",
+    "originalNumber": 2639
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Fundamentals and Architecture",
+    "category": "EKS Fundamentals and Architecture",
+    "questionType": "Conceptual",
+    "question": "How do private worker nodes pull container images?",
+    "originalNumber": 2640
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "What are EKS add-ons?",
+    "originalNumber": 2641
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "What is an AWS-managed EKS add-on?",
+    "originalNumber": 2642
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "Which add-ons do you normally install in EKS?",
+    "originalNumber": 2643
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "What is the Amazon VPC CNI plugin?",
+    "originalNumber": 2644
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "How does the VPC CNI assign pod IP addresses?",
+    "originalNumber": 2645
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "What is kube-proxy in EKS?",
+    "originalNumber": 2646
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "What is CoreDNS?",
+    "originalNumber": 2647
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "Why is CoreDNS required?",
+    "originalNumber": 2648
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "What is the EBS CSI driver?",
+    "originalNumber": 2649
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "Why is the EBS CSI driver used?",
+    "originalNumber": 2650
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "What is the EFS CSI driver?",
+    "originalNumber": 2651
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Comparison",
+    "question": "When would you use EFS instead of EBS?",
+    "originalNumber": 2652
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "What is Metrics Server?",
+    "originalNumber": 2653
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "Is Metrics Server installed by default in EKS?",
+    "originalNumber": 2654
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "Why is Metrics Server required for HPA?",
+    "originalNumber": 2655
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "What is AWS Load Balancer Controller?",
+    "originalNumber": 2656
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "How does AWS Load Balancer Controller create ALBs?",
+    "originalNumber": 2657
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Comparison",
+    "question": "What is the difference between the legacy Ingress Controller and AWS Load Balancer Controller?",
+    "originalNumber": 2658
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "What is ExternalDNS?",
+    "originalNumber": 2659
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "How does ExternalDNS update Route 53 records?",
+    "originalNumber": 2660
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "What is Cluster Autoscaler in EKS?",
+    "originalQuestion": "What is Cluster Autoscaler?",
+    "originalNumber": 2661
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "How does Cluster Autoscaler interact with an Auto Scaling Group?",
+    "originalNumber": 2662
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "What is Karpenter?",
+    "originalNumber": 2663
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Comparison",
+    "question": "How is Karpenter different from Cluster Autoscaler?",
+    "originalNumber": 2664
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "What is the NVIDIA device plugin?",
+    "originalNumber": 2665
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "How do you install and upgrade EKS add-ons?",
+    "originalNumber": 2666
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "What happens when an add-on version is incompatible?",
+    "originalNumber": 2667
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "How do you verify add-on health?",
+    "originalNumber": 2668
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Conceptual",
+    "question": "How do you manage add-ons through Terraform?",
+    "originalNumber": 2669
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Add-ons",
+    "category": "EKS Add-ons",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot an add-on pod failure?",
+    "originalNumber": 2670
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How do you secure workloads on EKS?",
+    "originalNumber": 2671
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "What is IAM Roles for Service Accounts?",
+    "originalNumber": 2672
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How does IRSA work?",
+    "originalNumber": 2673
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "What is the relationship between OIDC and IRSA?",
+    "originalNumber": 2674
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How do you create an IAM role for a Kubernetes service account?",
+    "originalNumber": 2675
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "What problems does IRSA solve?",
+    "originalNumber": 2676
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Comparison",
+    "question": "How is EKS Pod Identity different from IRSA?",
+    "originalNumber": 2677
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How do network policies work in EKS?",
+    "originalNumber": 2678
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "Does the default VPC CNI enforce network policies?",
+    "originalNumber": 2679
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "Which tools can enforce network policies in EKS?",
+    "originalNumber": 2680
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "What are security groups for pods?",
+    "originalNumber": 2681
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "When should security groups for pods be used?",
+    "originalNumber": 2682
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How do you encrypt Kubernetes secrets in EKS?",
+    "originalNumber": 2683
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How do you integrate EKS with AWS KMS?",
+    "originalNumber": 2684
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How do you integrate Secrets Manager with EKS?",
+    "originalNumber": 2685
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "What is the Secrets Store CSI driver?",
+    "originalNumber": 2686
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How do you scan EKS images?",
+    "originalNumber": 2687
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How do you restrict privileged containers?",
+    "originalNumber": 2688
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How do you implement Pod Security Standards?",
+    "originalNumber": 2689
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How do you audit EKS API activity?",
+    "originalNumber": 2690
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "What is CloudTrail?",
+    "originalNumber": 2691
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "What is the EKS control-plane logging feature?",
+    "originalNumber": 2692
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "Which EKS control-plane logs can be enabled?",
+    "originalNumber": 2693
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How do you monitor EKS using CloudWatch?",
+    "originalNumber": 2694
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How do you collect application logs from EKS?",
+    "originalNumber": 2695
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot pod-IP exhaustion?",
+    "originalNumber": 2696
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "What is VPC CNI prefix delegation?",
+    "originalNumber": 2697
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How does prefix delegation increase pod density?",
+    "originalNumber": 2698
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "What is custom networking in the VPC CNI?",
+    "originalNumber": 2699
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "EKS Security and Networking",
+    "category": "EKS Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How do you upgrade EKS securely?",
+    "originalNumber": 2700
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is Git?",
+    "originalNumber": 2701
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is distributed version control?",
+    "originalNumber": 2702
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a Git repository?",
+    "originalNumber": 2703
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a working tree?",
+    "originalNumber": 2704
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is the staging area?",
+    "originalNumber": 2705
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a commit?",
+    "originalNumber": 2706
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a branch?",
+    "originalNumber": 2707
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is the default branch?",
+    "originalNumber": 2708
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between Git and GitHub?",
+    "originalNumber": 2709
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between GitHub, GitLab and Bitbucket?",
+    "originalNumber": 2710
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What does git clone do?",
+    "originalNumber": 2711
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What does git fetch do?",
+    "originalNumber": 2712
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What does git pull do?",
+    "originalNumber": 2713
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between git fetch and git pull?",
+    "originalNumber": 2714
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What does git push do?",
+    "originalNumber": 2715
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What does git status show?",
+    "originalNumber": 2716
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What does git log show?",
+    "originalNumber": 2717
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What does git diff show?",
+    "originalNumber": 2718
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a remote repository?",
+    "originalNumber": 2719
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is origin?",
+    "originalNumber": 2720
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an upstream branch?",
+    "originalNumber": 2721
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you create and switch to a branch?",
+    "originalNumber": 2722
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a merge?",
+    "originalNumber": 2723
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a rebase?",
+    "originalNumber": 2724
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between merge and rebase?",
+    "originalNumber": 2725
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "When should rebase be avoided?",
+    "originalNumber": 2726
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a merge conflict?",
+    "originalNumber": 2727
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you resolve a merge conflict?",
+    "originalNumber": 2728
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a fast-forward merge?",
+    "originalNumber": 2729
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Fundamentals",
+    "category": "Git Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a three-way merge?",
+    "originalNumber": 2730
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is git cherry-pick?",
+    "originalNumber": 2731
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "When would you use cherry-pick?",
+    "originalNumber": 2732
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is git revert?",
+    "originalNumber": 2733
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is git reset?",
+    "originalNumber": 2734
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Comparison",
+    "question": "What is the difference between reset and revert?",
+    "originalNumber": 2735
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is a soft reset?",
+    "originalNumber": 2736
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is a mixed reset?",
+    "originalNumber": 2737
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is a hard reset?",
+    "originalNumber": 2738
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "Why is hard reset dangerous?",
+    "originalNumber": 2739
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is git stash?",
+    "originalNumber": 2740
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "How do you apply a stash?",
+    "originalNumber": 2741
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is git reflog?",
+    "originalNumber": 2742
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "How can reflog recover a lost commit?",
+    "originalNumber": 2743
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is an annotated tag?",
+    "originalNumber": 2744
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is a lightweight tag?",
+    "originalNumber": 2745
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "How do you create a release tag?",
+    "originalNumber": 2746
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is a detached HEAD state?",
+    "originalNumber": 2747
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "How do you recover from detached HEAD?",
+    "originalNumber": 2748
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is squashing?",
+    "originalNumber": 2749
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "Why should commits be squashed?",
+    "originalNumber": 2750
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is interactive rebase?",
+    "originalNumber": 2751
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "How do you edit commit history?",
+    "originalNumber": 2752
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is .gitignore?",
+    "originalNumber": 2753
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What should never be committed to Git?",
+    "originalNumber": 2754
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is Git LFS?",
+    "originalNumber": 2755
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "When is Git LFS required?",
+    "originalNumber": 2756
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What are Git hooks?",
+    "originalNumber": 2757
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "What is a pre-commit hook?",
+    "originalNumber": 2758
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "How can hooks enforce code quality?",
+    "originalNumber": 2759
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Git",
+    "category": "Advanced Git",
+    "questionType": "Conceptual",
+    "question": "How do you remove an accidentally committed secret?",
+    "originalNumber": 2760
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "What is GitFlow?",
+    "originalNumber": 2761
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "What branches are used in GitFlow?",
+    "originalNumber": 2762
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "What is trunk-based development?",
+    "originalNumber": 2763
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Comparison",
+    "question": "How is trunk-based development different from GitFlow?",
+    "originalNumber": 2764
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "What is a feature branch?",
+    "originalNumber": 2765
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "What is a release branch?",
+    "originalNumber": 2766
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "What is a hotfix branch?",
+    "originalNumber": 2767
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "What is a pull request?",
+    "originalNumber": 2768
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "What is a merge request?",
+    "originalNumber": 2769
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "What checks should run on a pull request?",
+    "originalNumber": 2770
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "What is branch protection?",
+    "originalNumber": 2771
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you enforce mandatory reviews?",
+    "originalNumber": 2772
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you prevent direct pushes to production branches?",
+    "originalNumber": 2773
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you enforce signed commits?",
+    "originalNumber": 2774
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "What is semantic versioning?",
+    "originalNumber": 2775
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "What do major, minor and patch versions represent?",
+    "originalNumber": 2776
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "What is conventional commits?",
+    "originalNumber": 2777
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "How can conventional commits automate releases?",
+    "originalNumber": 2778
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you manage release notes?",
+    "originalNumber": 2779
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Git Branching Strategies",
+    "category": "Git Branching Strategies",
+    "questionType": "Conceptual",
+    "question": "Which branching strategy is best for continuous delivery?",
+    "originalNumber": 2780
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "What is a shell?",
+    "originalNumber": 2781
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "What is Bash?",
+    "originalNumber": 2782
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Comparison",
+    "question": "What is the difference between sh and Bash?",
+    "originalNumber": 2783
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "What is a shebang?",
+    "originalNumber": 2784
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "Why is #!/usr/bin/env bash used?",
+    "originalNumber": 2785
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "How do you define a variable in Bash?",
+    "originalNumber": 2786
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "How do you access environment variables?",
+    "originalNumber": 2787
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "What is command substitution?",
+    "originalNumber": 2788
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Comparison",
+    "question": "What is the difference between single and double quotes?",
+    "originalNumber": 2789
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "What is an exit code?",
+    "originalNumber": 2790
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "What does exit code zero mean?",
+    "originalNumber": 2791
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "How do you check the previous command’s exit status?",
+    "originalNumber": 2792
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "What does set -e do?",
+    "originalNumber": 2793
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "What does set -u do?",
+    "originalNumber": 2794
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Troubleshooting",
+    "question": "What does set -o pipefail do?",
+    "originalNumber": 2795
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Troubleshooting",
+    "question": "Why is set -euo pipefail commonly used?",
+    "originalNumber": 2796
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "How do you write an if condition?",
+    "originalNumber": 2797
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "How do you write a case statement?",
+    "originalNumber": 2798
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "How do you create a for loop?",
+    "originalNumber": 2799
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "How do you create a while loop?",
+    "originalNumber": 2800
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "How do you define a function in Bash?",
+    "originalQuestion": "How do you define a function?",
+    "originalNumber": 2801
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "How do you pass arguments to a script?",
+    "originalNumber": 2802
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "What are $0, $1, $# and $@?",
+    "originalNumber": 2803
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "What is input redirection?",
+    "originalNumber": 2804
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "What is output redirection?",
+    "originalNumber": 2805
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Comparison",
+    "question": "What is the difference between > and >>?",
+    "originalNumber": 2806
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "What is standard error?",
+    "originalNumber": 2807
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "How do you redirect standard error?",
+    "originalNumber": 2808
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "What is a pipe?",
+    "originalNumber": 2809
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Bash and Shell Scripting",
+    "category": "Bash and Shell Scripting",
+    "questionType": "Conceptual",
+    "question": "How do you debug a Bash script?",
+    "originalNumber": 2810
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "What is grep?",
+    "originalNumber": 2811
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you search recursively using grep?",
+    "originalNumber": 2812
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "What is awk?",
+    "originalNumber": 2813
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "When would you use awk?",
+    "originalNumber": 2814
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "What is sed?",
+    "originalNumber": 2815
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you replace text using sed?",
+    "originalNumber": 2816
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "What is cut?",
+    "originalNumber": 2817
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "What is sort?",
+    "originalNumber": 2818
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "What is uniq?",
+    "originalNumber": 2819
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "What is xargs?",
+    "originalNumber": 2820
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "What is find?",
+    "originalNumber": 2821
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you find files modified recently?",
+    "originalNumber": 2822
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you find and delete files older than a specified number of days?",
+    "originalNumber": 2823
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you parse JSON in a shell script?",
+    "originalNumber": 2824
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "What is jq?",
+    "originalNumber": 2825
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you parse YAML in automation?",
+    "originalNumber": 2826
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you validate whether a file exists?",
+    "originalNumber": 2827
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you validate whether a command is installed?",
+    "originalNumber": 2828
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Behavioral",
+    "question": "How do you handle errors in a script?",
+    "originalNumber": 2829
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "What is the trap command?",
+    "originalNumber": 2830
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Troubleshooting",
+    "question": "How do you clean temporary files when a script fails?",
+    "originalNumber": 2831
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you write logs from a shell script?",
+    "originalNumber": 2832
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you add timestamps to log messages?",
+    "originalNumber": 2833
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you make a script idempotent?",
+    "originalNumber": 2834
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Troubleshooting",
+    "question": "How do you retry a failed command?",
+    "originalNumber": 2835
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you add exponential backoff?",
+    "originalNumber": 2836
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you run a script through cron?",
+    "originalNumber": 2837
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you prevent multiple instances of a script?",
+    "originalNumber": 2838
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "What is flock?",
+    "originalNumber": 2839
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Linux Text Processing and Automation",
+    "category": "Linux Text Processing and Automation",
+    "questionType": "Conceptual",
+    "question": "How do you securely handle passwords in scripts?",
+    "originalNumber": 2840
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "Why is Python used in DevOps?",
+    "originalNumber": 2841
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "What Python automation have you written?",
+    "originalNumber": 2842
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you execute operating-system commands from Python?",
+    "originalNumber": 2843
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "What is the subprocess module?",
+    "originalNumber": 2844
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "Why is subprocess preferred over os.system?",
+    "originalNumber": 2845
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you capture command output?",
+    "originalNumber": 2846
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you check a command’s return code?",
+    "originalNumber": 2847
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Behavioral",
+    "question": "How do you handle exceptions?",
+    "originalNumber": 2848
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Troubleshooting",
+    "question": "What is a try-except-finally block?",
+    "originalNumber": 2849
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you read and write files?",
+    "originalNumber": 2850
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you parse JSON in Python?",
+    "originalNumber": 2851
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you parse YAML?",
+    "originalNumber": 2852
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you call a REST API using Python?",
+    "originalNumber": 2853
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "What is the requests library?",
+    "originalNumber": 2854
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Behavioral",
+    "question": "How do you handle API pagination?",
+    "originalNumber": 2855
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Behavioral",
+    "question": "How do you handle API rate limits?",
+    "originalNumber": 2856
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you implement retries?",
+    "originalNumber": 2857
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you authenticate to cloud APIs?",
+    "originalNumber": 2858
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you use the GCP Python SDK?",
+    "originalNumber": 2859
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you use the Kubernetes Python client?",
+    "originalNumber": 2860
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you write a CLI in Python?",
+    "originalNumber": 2861
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "What is argparse?",
+    "originalNumber": 2862
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "What is a virtual environment?",
+    "originalNumber": 2863
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "Why should virtual environments be used?",
+    "originalNumber": 2864
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "What is requirements.txt?",
+    "originalNumber": 2865
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "What is pyproject.toml?",
+    "originalNumber": 2866
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you package a Python project?",
+    "originalNumber": 2867
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you write unit tests using Pytest?",
+    "originalNumber": 2868
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "What is a fixture?",
+    "originalNumber": 2869
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Python Automation",
+    "category": "Python Automation",
+    "questionType": "Conceptual",
+    "question": "How do you mock an external API?",
+    "originalNumber": 2870
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "What is PowerShell?",
+    "originalNumber": 2871
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Comparison",
+    "question": "How is PowerShell different from Command Prompt?",
+    "originalNumber": 2872
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "What is a cmdlet?",
+    "originalNumber": 2873
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "What is the PowerShell pipeline?",
+    "originalNumber": 2874
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do PowerShell objects differ from plain text?",
+    "originalNumber": 2875
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you declare a variable in PowerShell?",
+    "originalNumber": 2876
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you define a function in PowerShell?",
+    "originalQuestion": "How do you define a function?",
+    "originalNumber": 2877
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Behavioral",
+    "question": "How do you handle errors?",
+    "originalNumber": 2878
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "What is Try-Catch-Finally?",
+    "originalNumber": 2879
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Comparison",
+    "question": "What is the difference between terminating and non-terminating errors?",
+    "originalNumber": 2880
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you execute a remote command?",
+    "originalNumber": 2881
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "What is PowerShell remoting?",
+    "originalNumber": 2882
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "What is WinRM?",
+    "originalNumber": 2883
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you manage Windows services?",
+    "originalNumber": 2884
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you check event logs?",
+    "originalNumber": 2885
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you schedule a PowerShell script?",
+    "originalNumber": 2886
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you work with JSON in PowerShell?",
+    "originalNumber": 2887
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you call a REST API?",
+    "originalNumber": 2888
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you manage environment variables?",
+    "originalNumber": 2889
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you securely store credentials?",
+    "originalNumber": 2890
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "What is a PowerShell module?",
+    "originalNumber": 2891
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you install modules?",
+    "originalNumber": 2892
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you automate Azure or AWS operations through PowerShell?",
+    "originalNumber": 2893
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you write reusable PowerShell scripts?",
+    "originalNumber": 2894
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you log script activity?",
+    "originalNumber": 2895
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you pass parameters to a script?",
+    "originalNumber": 2896
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "What is Desired State Configuration?",
+    "originalNumber": 2897
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "When would you use PowerShell DSC?",
+    "originalNumber": 2898
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you test PowerShell scripts?",
+    "originalNumber": 2899
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PowerShell and Windows Automation",
+    "category": "PowerShell and Windows Automation",
+    "questionType": "Conceptual",
+    "question": "How do you integrate PowerShell into CI/CD?",
+    "originalNumber": 2900
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a relational database?",
+    "originalNumber": 2901
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is SQL?",
+    "originalNumber": 2902
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a table?",
+    "originalNumber": 2903
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a primary key?",
+    "originalNumber": 2904
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a foreign key?",
+    "originalNumber": 2905
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a unique constraint?",
+    "originalNumber": 2906
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an index?",
+    "originalNumber": 2907
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How does an index improve performance?",
+    "originalNumber": 2908
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What are the disadvantages of too many indexes?",
+    "originalNumber": 2909
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is normalization?",
+    "originalNumber": 2910
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is denormalization?",
+    "originalNumber": 2911
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a transaction?",
+    "originalNumber": 2912
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What are ACID properties?",
+    "originalNumber": 2913
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is atomicity?",
+    "originalNumber": 2914
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is consistency?",
+    "originalNumber": 2915
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is isolation?",
+    "originalNumber": 2916
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is durability?",
+    "originalNumber": 2917
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a database lock?",
+    "originalNumber": 2918
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a deadlock?",
+    "originalNumber": 2919
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you identify a database deadlock?",
+    "originalNumber": 2920
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is connection pooling?",
+    "originalNumber": 2921
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Why is connection pooling necessary?",
+    "originalNumber": 2922
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Troubleshooting",
+    "question": "What causes connection-pool exhaustion?",
+    "originalNumber": 2923
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Troubleshooting",
+    "question": "What is a slow query?",
+    "originalNumber": 2924
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Troubleshooting",
+    "question": "How do you identify slow queries?",
+    "originalNumber": 2925
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a query-execution plan?",
+    "originalNumber": 2926
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you optimize a query?",
+    "originalNumber": 2927
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is replication?",
+    "originalNumber": 2928
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is read replication?",
+    "originalNumber": 2929
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Relational Database Fundamentals",
+    "category": "Relational Database Fundamentals",
+    "questionType": "Troubleshooting",
+    "question": "What is database failover?",
+    "originalNumber": 2930
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "What is PostgreSQL?",
+    "originalNumber": 2931
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "Which PostgreSQL features have you used?",
+    "originalNumber": 2932
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "How do you back up PostgreSQL?",
+    "originalNumber": 2933
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "What is point-in-time recovery?",
+    "originalNumber": 2934
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "What is Write-Ahead Logging?",
+    "originalNumber": 2935
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "How does PostgreSQL replication work?",
+    "originalNumber": 2936
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "What is streaming replication?",
+    "originalNumber": 2937
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "What is logical replication?",
+    "originalNumber": 2938
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Comparison",
+    "question": "What is the difference between physical and logical replication?",
+    "originalNumber": 2939
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "What is vacuuming?",
+    "originalNumber": 2940
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "What is autovacuum?",
+    "originalNumber": 2941
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "What is table bloat?",
+    "originalNumber": 2942
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "How do you monitor PostgreSQL?",
+    "originalNumber": 2943
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "How do you monitor active connections?",
+    "originalNumber": 2944
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Troubleshooting",
+    "question": "How do you identify blocking queries?",
+    "originalNumber": 2945
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "What is pg_stat_activity?",
+    "originalNumber": 2946
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "What is EXPLAIN ANALYZE?",
+    "originalNumber": 2947
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot high CPU in PostgreSQL?",
+    "originalNumber": 2948
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot high database latency?",
+    "originalNumber": 2949
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "What is Cloud SQL?",
+    "originalNumber": 2950
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "How do applications connect privately to Cloud SQL?",
+    "originalNumber": 2951
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "What is the Cloud SQL Auth Proxy?",
+    "originalNumber": 2952
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "What is the Cloud SQL Auth Connector?",
+    "originalNumber": 2953
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "How do you configure Cloud SQL high availability?",
+    "originalNumber": 2954
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "What is a regional Cloud SQL instance?",
+    "originalNumber": 2955
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "How do automated backups work?",
+    "originalNumber": 2956
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "How do you create a read replica?",
+    "originalNumber": 2957
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Troubleshooting",
+    "question": "How do you fail over Cloud SQL?",
+    "originalNumber": 2958
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "How do you securely store database credentials?",
+    "originalNumber": 2959
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "PostgreSQL and Cloud SQL",
+    "category": "PostgreSQL and Cloud SQL",
+    "questionType": "Conceptual",
+    "question": "How do you migrate a database to Cloud SQL?",
+    "originalNumber": 2960
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is a NoSQL database?",
+    "originalNumber": 2961
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "When would you choose NoSQL over SQL?",
+    "originalNumber": 2962
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is MongoDB?",
+    "originalNumber": 2963
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is a MongoDB document?",
+    "originalNumber": 2964
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is a collection?",
+    "originalNumber": 2965
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is a replica set?",
+    "originalNumber": 2966
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Troubleshooting",
+    "question": "How does MongoDB failover work?",
+    "originalNumber": 2967
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is MongoDB sharding?",
+    "originalNumber": 2968
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "When is sharding required?",
+    "originalNumber": 2969
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is a shard key?",
+    "originalNumber": 2970
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "How do you back up MongoDB?",
+    "originalNumber": 2971
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "How do you monitor MongoDB?",
+    "originalNumber": 2972
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is Redis?",
+    "originalNumber": 2973
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "Is Redis only a cache?",
+    "originalNumber": 2974
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What data structures does Redis support?",
+    "originalNumber": 2975
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is cache expiration?",
+    "originalNumber": 2976
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is TTL in Redis?",
+    "originalNumber": 2977
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is cache eviction?",
+    "originalNumber": 2978
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "Which Redis eviction policies are available?",
+    "originalNumber": 2979
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is cache-aside?",
+    "originalNumber": 2980
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is write-through caching?",
+    "originalNumber": 2981
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is write-behind caching?",
+    "originalNumber": 2982
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is cache invalidation?",
+    "originalNumber": 2983
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "Why is cache invalidation difficult?",
+    "originalNumber": 2984
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is Redis replication?",
+    "originalNumber": 2985
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is Redis Sentinel?",
+    "originalNumber": 2986
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is Redis Cluster?",
+    "originalNumber": 2987
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot high Redis memory usage?",
+    "originalNumber": 2988
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "What is a cache stampede?",
+    "originalNumber": 2989
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "NoSQL and Caching",
+    "category": "NoSQL and Caching",
+    "questionType": "Conceptual",
+    "question": "How do you prevent a cache stampede?",
+    "originalNumber": 2990
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is a message broker?",
+    "originalNumber": 2991
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "Why is asynchronous messaging used?",
+    "originalNumber": 2992
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is Apache Kafka?",
+    "originalNumber": 2993
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is a Kafka broker?",
+    "originalNumber": 2994
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is a Kafka topic?",
+    "originalNumber": 2995
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is a partition?",
+    "originalNumber": 2996
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "Why are partitions used?",
+    "originalNumber": 2997
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is a producer?",
+    "originalNumber": 2998
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is a consumer?",
+    "originalNumber": 2999
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is a consumer group?",
+    "originalNumber": 3000
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "How does Kafka distribute partitions among consumers?",
+    "originalNumber": 3001
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is an offset?",
+    "originalNumber": 3002
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "How are offsets committed?",
+    "originalNumber": 3003
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Troubleshooting",
+    "question": "What is consumer lag?",
+    "originalNumber": 3004
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Troubleshooting",
+    "question": "How do you monitor consumer lag?",
+    "originalNumber": 3005
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is a replication factor?",
+    "originalNumber": 3006
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is an in-sync replica?",
+    "originalNumber": 3007
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Troubleshooting",
+    "question": "What happens when a broker fails?",
+    "originalNumber": 3008
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is message retention?",
+    "originalNumber": 3009
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is log compaction?",
+    "originalNumber": 3010
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is at-most-once delivery?",
+    "originalNumber": 3011
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is at-least-once delivery?",
+    "originalNumber": 3012
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is exactly-once processing?",
+    "originalNumber": 3013
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "How do duplicate messages occur?",
+    "originalNumber": 3014
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "How do consumers handle duplicate messages?",
+    "originalNumber": 3015
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is a dead-letter topic?",
+    "originalNumber": 3016
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is schema registry?",
+    "originalNumber": 3017
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is Google Cloud Pub/Sub?",
+    "originalNumber": 3018
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is a Pub/Sub topic?",
+    "originalNumber": 3019
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is a subscription?",
+    "originalNumber": 3020
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Comparison",
+    "question": "What is the difference between pull and push subscriptions?",
+    "originalNumber": 3021
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is the acknowledgement deadline?",
+    "originalNumber": 3022
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What happens if a message is not acknowledged?",
+    "originalNumber": 3023
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is a dead-letter topic in Pub/Sub?",
+    "originalNumber": 3024
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is message ordering?",
+    "originalNumber": 3025
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "How do you monitor Pub/Sub backlog?",
+    "originalNumber": 3026
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "How do you scale subscribers?",
+    "originalNumber": 3027
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot increasing unacknowledged messages?",
+    "originalNumber": 3028
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Conceptual",
+    "question": "What is RabbitMQ?",
+    "originalNumber": 3029
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Kafka, Pub/Sub and Messaging",
+    "category": "Kafka, Pub/Sub and Messaging",
+    "questionType": "Comparison",
+    "question": "When would you use RabbitMQ instead of Kafka?",
+    "originalNumber": 3030
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is an API?",
+    "originalNumber": 3031
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is REST?",
+    "originalNumber": 3032
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What are HTTP methods?",
+    "originalNumber": 3033
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Comparison",
+    "question": "What is the difference between GET and POST?",
+    "originalNumber": 3034
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Comparison",
+    "question": "What is the difference between PUT and PATCH?",
+    "originalNumber": 3035
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is DELETE?",
+    "originalNumber": 3036
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is an HTTP status code?",
+    "originalNumber": 3037
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What does HTTP 200 mean?",
+    "originalNumber": 3038
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What does HTTP 201 mean?",
+    "originalNumber": 3039
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What does HTTP 400 mean?",
+    "originalNumber": 3040
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What does HTTP 401 mean?",
+    "originalNumber": 3041
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What does HTTP 403 mean?",
+    "originalNumber": 3042
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What does HTTP 404 mean?",
+    "originalNumber": 3043
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What does HTTP 429 mean?",
+    "originalNumber": 3044
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What does HTTP 500 mean?",
+    "originalNumber": 3045
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Comparison",
+    "question": "What is the difference between HTTP 502, 503 and 504?",
+    "originalNumber": 3046
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is API authentication?",
+    "originalNumber": 3047
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is API authorization?",
+    "originalNumber": 3048
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is an API key?",
+    "originalNumber": 3049
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is OAuth 2.0?",
+    "originalNumber": 3050
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is OpenID Connect?",
+    "originalNumber": 3051
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is a JWT?",
+    "originalNumber": 3052
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What information is stored in a JWT?",
+    "originalNumber": 3053
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you validate a JWT?",
+    "originalNumber": 3054
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is token expiration?",
+    "originalNumber": 3055
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is a refresh token?",
+    "originalNumber": 3056
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is API rate limiting?",
+    "originalNumber": 3057
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is API versioning?",
+    "originalNumber": 3058
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you introduce a breaking API change?",
+    "originalNumber": 3059
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "API Engineering",
+    "category": "API Engineering",
+    "questionType": "Conceptual",
+    "question": "What is API idempotency?",
+    "originalNumber": 3060
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is a service mesh?",
+    "originalNumber": 3061
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "Why is a service mesh used?",
+    "originalNumber": 3062
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is Istio?",
+    "originalNumber": 3063
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "Explain Istio architecture.",
+    "originalNumber": 3064
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is the Istio control plane?",
+    "originalNumber": 3065
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is Istiod?",
+    "originalNumber": 3066
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is a sidecar proxy?",
+    "originalNumber": 3067
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is Envoy?",
+    "originalNumber": 3068
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "How is Envoy injected into a pod?",
+    "originalNumber": 3069
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is automatic sidecar injection?",
+    "originalNumber": 3070
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is an Istio Gateway?",
+    "originalNumber": 3071
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is a VirtualService?",
+    "originalNumber": 3072
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is a DestinationRule?",
+    "originalNumber": 3073
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is a ServiceEntry?",
+    "originalNumber": 3074
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is a PeerAuthentication resource?",
+    "originalNumber": 3075
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is an AuthorizationPolicy?",
+    "originalNumber": 3076
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "How does mutual TLS work in Istio?",
+    "originalNumber": 3077
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is strict mTLS mode?",
+    "originalNumber": 3078
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "How do you implement traffic splitting?",
+    "originalNumber": 3079
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "How do you send 5% of traffic to a canary?",
+    "originalNumber": 3080
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "How do you perform retries using Istio?",
+    "originalNumber": 3081
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "How do you configure timeouts?",
+    "originalNumber": 3082
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "How do you implement circuit breaking?",
+    "originalNumber": 3083
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What is outlier detection?",
+    "originalNumber": 3084
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "How do you implement fault injection?",
+    "originalNumber": 3085
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "How do you inject latency for testing?",
+    "originalNumber": 3086
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "How do you observe service-to-service traffic?",
+    "originalNumber": 3087
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "How does Istio provide distributed tracing?",
+    "originalNumber": 3088
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "What are the operational disadvantages of a service mesh?",
+    "originalNumber": 3089
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Service Mesh and Istio",
+    "category": "Service Mesh and Istio",
+    "questionType": "Conceptual",
+    "question": "When should you avoid using a service mesh?",
+    "originalNumber": 3090
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is HashiCorp Vault?",
+    "originalNumber": 3091
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "Why is Vault used?",
+    "originalNumber": 3092
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is a Vault secret engine?",
+    "originalNumber": 3093
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is a KV secret engine?",
+    "originalNumber": 3094
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What are dynamic secrets?",
+    "originalNumber": 3095
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "Why are dynamic secrets safer?",
+    "originalNumber": 3096
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is a lease?",
+    "originalNumber": 3097
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is secret renewal?",
+    "originalNumber": 3098
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is secret revocation?",
+    "originalNumber": 3099
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is a Vault policy?",
+    "originalNumber": 3100
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "How do Vault policies implement least privilege?",
+    "originalNumber": 3101
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What authentication methods does Vault support?",
+    "originalNumber": 3102
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "How does Kubernetes authentication work?",
+    "originalNumber": 3103
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "How does an application authenticate to Vault?",
+    "originalNumber": 3104
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is AppRole authentication?",
+    "originalNumber": 3105
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "When would you use AppRole?",
+    "originalNumber": 3106
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is a Vault token?",
+    "originalNumber": 3107
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is token TTL?",
+    "originalNumber": 3108
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is a periodic token?",
+    "originalNumber": 3109
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is a root token?",
+    "originalNumber": 3110
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "Why should the root token not be used regularly?",
+    "originalNumber": 3111
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is Vault sealing?",
+    "originalNumber": 3112
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is unsealing?",
+    "originalNumber": 3113
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is auto-unseal?",
+    "originalNumber": 3114
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "How do you make Vault highly available?",
+    "originalNumber": 3115
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What storage backends can Vault use?",
+    "originalNumber": 3116
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "What is integrated storage using Raft?",
+    "originalNumber": 3117
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "How do you deploy Vault on Kubernetes?",
+    "originalNumber": 3118
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "How do you inject Vault secrets into pods?",
+    "originalNumber": 3119
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "HashiCorp Vault",
+    "category": "HashiCorp Vault",
+    "questionType": "Conceptual",
+    "question": "How do you rotate database credentials using Vault?",
+    "originalNumber": 3120
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "What is policy as code?",
+    "originalNumber": 3121
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "What is Open Policy Agent?",
+    "originalNumber": 3122
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "What is Rego?",
+    "originalNumber": 3123
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "Where can OPA be used?",
+    "originalNumber": 3124
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "What is OPA Gatekeeper?",
+    "originalNumber": 3125
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "How does Gatekeeper work with Kubernetes admission control?",
+    "originalNumber": 3126
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "What is a ConstraintTemplate?",
+    "originalNumber": 3127
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "What is a Constraint?",
+    "originalNumber": 3128
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "How do you prevent privileged containers?",
+    "originalNumber": 3129
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "How do you require CPU and memory limits?",
+    "originalNumber": 3130
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "How do you enforce approved container registries?",
+    "originalNumber": 3131
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "How do you require labels on Kubernetes resources?",
+    "originalNumber": 3132
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Troubleshooting",
+    "question": "How do you block host networking?",
+    "originalNumber": 3133
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "How do you prevent hostPath volumes?",
+    "originalNumber": 3134
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "What is audit mode in Gatekeeper?",
+    "originalNumber": 3135
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "What is enforcement mode?",
+    "originalNumber": 3136
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "How do you test a new policy safely?",
+    "originalNumber": 3137
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "What is Conftest?",
+    "originalNumber": 3138
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "How do you use Conftest in CI/CD?",
+    "originalNumber": 3139
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "How do you validate Terraform plans using OPA?",
+    "originalNumber": 3140
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "How do you validate Kubernetes manifests before deployment?",
+    "originalNumber": 3141
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "What is policy exception management?",
+    "originalNumber": 3142
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "How do you prevent policy bypass?",
+    "originalNumber": 3143
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "How do you version policies?",
+    "originalNumber": 3144
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "How do you test Rego policies?",
+    "originalNumber": 3145
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Comparison",
+    "question": "What is the difference between OPA and Kyverno?",
+    "originalNumber": 3146
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "When would you use Kyverno?",
+    "originalNumber": 3147
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "What is a validating admission webhook?",
+    "originalNumber": 3148
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "What is a mutating admission webhook?",
+    "originalNumber": 3149
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "OPA, Gatekeeper and Policy as Code",
+    "category": "OPA, Gatekeeper and Policy as Code",
+    "questionType": "Conceptual",
+    "question": "How do policies improve platform governance?",
+    "originalNumber": 3150
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "An EKS pod cannot assume its IAM role. What would you check?",
+    "originalNumber": 3151
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "The EKS OIDC provider is missing. What impact does that have?",
+    "originalNumber": 3152
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "An EKS service works internally but is unavailable through the ALB. What would you inspect?",
+    "originalNumber": 3153
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "The AWS Load Balancer Controller fails to create an ALB. What are likely causes?",
+    "originalNumber": 3154
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "EKS pods remain Pending even though nodes have free CPU. What else could block scheduling?",
+    "originalNumber": 3155
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "EKS nodes are Ready, but CoreDNS pods are failing. What impact would users see?",
+    "originalNumber": 3156
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "Pods cannot obtain IP addresses from the VPC CNI. How would you troubleshoot?",
+    "originalNumber": 3157
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "An EBS-backed pod cannot move to another Availability Zone. Why?",
+    "originalNumber": 3158
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "A StatefulSet requires shared storage across replicas. Would you use EBS or EFS?",
+    "originalNumber": 3159
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "Karpenter launches nodes, but workloads still remain Pending. What would you inspect?",
+    "originalNumber": 3160
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "A Git rebase causes missing commits. How do you recover them?",
+    "originalNumber": 3161
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "A secret was committed and later deleted. Is it removed from Git history?",
+    "originalNumber": 3162
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "A CI pipeline checks out the wrong branch. How would you troubleshoot?",
+    "originalNumber": 3163
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "A Bash script works manually but fails in cron. What differences would you check?",
+    "originalNumber": 3164
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "A script succeeds even when one piped command fails. How do you fix that?",
+    "originalNumber": 3165
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "A Python automation receives HTTP 429. How should it respond?",
+    "originalNumber": 3166
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "An API call succeeds intermittently. How would you implement safe retries?",
+    "originalNumber": 3167
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "A database is slow only during peak traffic. Which metrics would you inspect?",
+    "originalNumber": 3168
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "Database connections are exhausted even though CPU is low. What might be wrong?",
+    "originalNumber": 3169
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "A read replica is several minutes behind. What could cause replication lag?",
+    "originalNumber": 3170
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "Redis memory is full and keys are being evicted. How would you investigate?",
+    "originalNumber": 3171
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "A stale cache returns outdated user data. How would you correct the design?",
+    "originalNumber": 3172
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "Kafka consumer lag keeps growing. How do you determine the bottleneck?",
+    "originalNumber": 3173
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "A Kafka consumer processes the same event more than once. How should the application handle it?",
+    "originalNumber": 3174
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "Pub/Sub repeatedly redelivers a failing message. How would you manage it?",
+    "originalNumber": 3175
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "An API returns 504 through the load balancer but succeeds directly. What would you check?",
+    "originalNumber": 3176
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "An Istio policy blocks communication between two services. How do you diagnose it?",
+    "originalNumber": 3177
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "An Istio canary receives no traffic despite a configured weight. What might be wrong?",
+    "originalNumber": 3178
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "A Vault pod is sealed after a restart. How do you restore service safely?",
+    "originalNumber": 3179
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "An application receives an expired Vault secret. How should renewal work?",
+    "originalNumber": 3180
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "Gatekeeper blocks an emergency production deployment. How do you manage a controlled exception?",
+    "originalNumber": 3181
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "A policy exists in Git but is not enforced in the cluster. What would you inspect?",
+    "originalNumber": 3182
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "Terraform and Ansible both modify the same configuration. What problem can this create?",
+    "originalNumber": 3183
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you clearly separate Terraform and Ansible ownership?",
+    "originalNumber": 3184
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "A database migration takes longer than the deployment timeout. How would you redesign it?",
+    "originalNumber": 3185
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "A messaging consumer causes duplicate financial transactions. How would idempotency help?",
+    "originalNumber": 3186
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "A microservice repeatedly retries a failed dependency and causes an outage. What reliability pattern is missing?",
+    "originalNumber": 3187
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "A high-cardinality label crashes the monitoring system. How do you prevent recurrence?",
+    "originalNumber": 3188
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "A certificate expires unexpectedly. How would you prevent this operationally?",
+    "originalNumber": 3189
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Advanced Production Scenarios",
+    "category": "Advanced Production Scenarios",
+    "questionType": "Conceptual",
+    "question": "A production cluster has configuration drift across namespaces. How would you detect and correct it?",
+    "originalNumber": 3190
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Behavioral",
+    "question": "How do you handle a team member who repeatedly ignores deployment procedures?",
+    "originalNumber": 3191
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Behavioral",
+    "question": "How do you handle a developer requesting administrator access?",
+    "originalNumber": 3192
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Behavioral",
+    "question": "How do you respond when security requirements delay a release?",
+    "originalNumber": 3193
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Behavioral",
+    "question": "How do you handle an urgent production deployment without complete testing?",
+    "originalNumber": 3194
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you decide whether to approve an emergency change?",
+    "originalNumber": 3195
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you manage communication when several teams are affected?",
+    "originalNumber": 3196
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Behavioral",
+    "question": "How do you handle disagreement between development and operations?",
+    "originalNumber": 3197
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you ensure accountability without blaming individuals?",
+    "originalNumber": 3198
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you prioritize reliability work against feature delivery?",
+    "originalNumber": 3199
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Behavioral",
+    "question": "How do you convince management to invest in automation?",
+    "originalNumber": 3200
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you justify observability costs?",
+    "originalNumber": 3201
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you explain cloud-cost increases to leadership?",
+    "originalNumber": 3202
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you evaluate whether a tool should be introduced?",
+    "originalNumber": 3203
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you avoid unnecessary tool proliferation?",
+    "originalNumber": 3204
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you plan a migration from one CI/CD platform to another?",
+    "originalNumber": 3205
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you manage technical debt in infrastructure?",
+    "originalNumber": 3206
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you document an architecture decision?",
+    "originalNumber": 3207
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "What is an Architecture Decision Record?",
+    "originalNumber": 3208
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you conduct a production-readiness review?",
+    "originalNumber": 3209
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "What questions do you ask before taking ownership of a service?",
+    "originalNumber": 3210
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you define service ownership?",
+    "originalNumber": 3211
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you build trust with application teams?",
+    "originalNumber": 3212
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Troubleshooting",
+    "question": "How do you mentor engineers in troubleshooting?",
+    "originalNumber": 3213
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you conduct a blameless review?",
+    "originalNumber": 3214
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Behavioral",
+    "question": "How do you respond when an interviewer asks about a tool you have not used?",
+    "originalNumber": 3215
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you distinguish hands-on experience from conceptual knowledge?",
+    "originalNumber": 3216
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Behavioral",
+    "question": "How do you present a project without exaggerating your contribution?",
+    "originalNumber": 3217
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Troubleshooting",
+    "question": "How do you handle a question when you cannot remember the exact command?",
+    "originalNumber": 3218
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you structure a scenario-based interview answer?",
+    "originalNumber": 3219
+  },
+  {
+    "source": "Actual Interview Handbook - Part 6",
+    "section": "Managerial and Situational Questions",
+    "category": "Managerial and Situational Questions",
+    "questionType": "Conceptual",
+    "question": "How do you explain technical trade-offs clearly?",
+    "originalNumber": 3220
+  }
+]

@@ -1,0 +1,3842 @@
+[
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "Explain the GCP resource hierarchy.",
+    "originalNumber": 701
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What is the relationship between Organization, Folder and Project?",
+    "originalNumber": 702
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "Why do organizations use folders in GCP?",
+    "originalNumber": 703
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "Can IAM permissions be inherited from the organization level?",
+    "originalNumber": 704
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How does IAM inheritance work in GCP?",
+    "originalNumber": 705
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "Can a child project remove an inherited IAM permission?",
+    "originalNumber": 706
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Comparison",
+    "question": "What is the difference between an IAM role and an IAM policy?",
+    "originalNumber": 707
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What is an IAM binding?",
+    "originalNumber": 708
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What are basic roles in GCP?",
+    "originalNumber": 709
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "Why should basic roles such as Owner and Editor be avoided?",
+    "originalNumber": 710
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What are predefined IAM roles?",
+    "originalNumber": 711
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What are custom IAM roles?",
+    "originalNumber": 712
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "When would you create a custom IAM role?",
+    "originalNumber": 713
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What is the principle of least privilege?",
+    "originalNumber": 714
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How do you identify excessive IAM permissions?",
+    "originalNumber": 715
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How do you grant access to a user in GCP?",
+    "originalNumber": 716
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How do you grant access to a group?",
+    "originalNumber": 717
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Comparison",
+    "question": "Why are groups preferred over individual user bindings?",
+    "originalNumber": 718
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What is a Google-managed service account?",
+    "originalNumber": 719
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What is a user-managed service account?",
+    "originalNumber": 720
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Comparison",
+    "question": "What is the difference between a user account and a service account?",
+    "originalNumber": 721
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How does an application authenticate using a service account?",
+    "originalNumber": 722
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What is service-account impersonation?",
+    "originalNumber": 723
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Comparison",
+    "question": "Why is service-account impersonation safer than downloading a key?",
+    "originalNumber": 724
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What is a service-account key?",
+    "originalNumber": 725
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What are the risks of long-lived service-account keys?",
+    "originalNumber": 726
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How do you rotate service-account keys?",
+    "originalNumber": 727
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How do you disable service-account key creation across an organization?",
+    "originalNumber": 728
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "Which organization policy can restrict service-account key creation?",
+    "originalNumber": 729
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How do you identify unused service-account keys?",
+    "originalNumber": 730
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How do you secure service accounts used by CI/CD pipelines?",
+    "originalNumber": 731
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What is Workload Identity Federation?",
+    "originalNumber": 732
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How does Workload Identity Federation avoid static credentials?",
+    "originalNumber": 733
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How can GitHub Actions authenticate to GCP without storing a JSON key?",
+    "originalNumber": 734
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How does GKE Workload Identity work?",
+    "originalNumber": 735
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What is the relationship between a Kubernetes service account and Google service account?",
+    "originalNumber": 736
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How do you bind a Kubernetes service account to a Google service account?",
+    "originalNumber": 737
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What happens if a workload uses the default Kubernetes service account?",
+    "originalNumber": 738
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How do you prevent service-account privilege escalation?",
+    "originalNumber": 739
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Comparison",
+    "question": "What is the difference between roles/iam.serviceAccountUser and roles/iam.serviceAccountTokenCreator?",
+    "originalNumber": 740
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How do you audit IAM changes?",
+    "originalNumber": 741
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "Which GCP logs record IAM policy modifications?",
+    "originalNumber": 742
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot an IAM permission-denied error?",
+    "originalNumber": 743
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How do you determine the exact permission missing for an operation?",
+    "originalNumber": 744
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Troubleshooting",
+    "question": "What is IAM Policy Troubleshooter?",
+    "originalNumber": 745
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What is Policy Analyzer?",
+    "originalNumber": 746
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "What are IAM Conditions?",
+    "originalNumber": 747
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How can IAM access be restricted by time?",
+    "originalNumber": 748
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How can IAM access be restricted using resource tags?",
+    "originalNumber": 749
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "GCP Resource Hierarchy and IAM",
+    "category": "GCP Resource Hierarchy and IAM",
+    "questionType": "Conceptual",
+    "question": "How would you provide temporary production access?",
+    "originalNumber": 750
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How does SSO work with Google Cloud?",
+    "originalNumber": 751
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How can an enterprise identity provider integrate with Google Cloud?",
+    "originalNumber": 752
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "What is identity federation?",
+    "originalNumber": 753
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Comparison",
+    "question": "What is the difference between SAML and OIDC?",
+    "originalNumber": 754
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "Can external-domain users access GCP resources?",
+    "originalNumber": 755
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How would you give a user from another company access to a GCP project?",
+    "originalNumber": 756
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "Can a user with an external email address be added directly to IAM?",
+    "originalNumber": 757
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "What restrictions may prevent external identities from receiving access?",
+    "originalNumber": 758
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "What is domain-restricted sharing?",
+    "originalNumber": 759
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How does the iam.allowedPolicyMemberDomains organization policy work?",
+    "originalNumber": 760
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How would you allow one external partner while blocking all other external domains?",
+    "originalNumber": 761
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "What is Workforce Identity Federation?",
+    "originalNumber": 762
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Comparison",
+    "question": "What is the difference between Workforce Identity Federation and Workload Identity Federation?",
+    "originalNumber": 763
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How do employees authenticate through an external identity provider?",
+    "originalNumber": 764
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How do applications authenticate without human identity?",
+    "originalNumber": 765
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How do you implement role-based access for developers, operators and auditors?",
+    "originalNumber": 766
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How do you provide break-glass access?",
+    "originalNumber": 767
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How should break-glass accounts be protected?",
+    "originalNumber": 768
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How do you enforce multi-factor authentication?",
+    "originalNumber": 769
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How do you revoke access immediately when an employee leaves?",
+    "originalNumber": 770
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How do you conduct periodic IAM access reviews?",
+    "originalNumber": 771
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How do you separate production and non-production access?",
+    "originalNumber": 772
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How do you prevent developers from accessing production secrets?",
+    "originalNumber": 773
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Troubleshooting",
+    "question": "How do you provide read-only troubleshooting access?",
+    "originalNumber": 774
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Identity, SSO and External Users",
+    "category": "Identity, SSO and External Users",
+    "questionType": "Conceptual",
+    "question": "How would you design access for 150 GCP projects?",
+    "originalNumber": 775
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "What are GCP organization policies?",
+    "originalNumber": 776
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "What is an organization-policy constraint?",
+    "originalNumber": 777
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Comparison",
+    "question": "What is the difference between managed and custom constraints?",
+    "originalNumber": 778
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Comparison",
+    "question": "What is the difference between Boolean and list constraints?",
+    "originalNumber": 779
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "At which resource levels can organization policies be applied?",
+    "originalNumber": 780
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How does organization-policy inheritance work?",
+    "originalNumber": 781
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "Can a project override a policy inherited from a folder?",
+    "originalNumber": 782
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you test an organization policy safely?",
+    "originalNumber": 783
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you apply policies to selected projects only?",
+    "originalNumber": 784
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "Suppose you have 150 projects but want a restriction on only 100. How would you implement it?",
+    "originalNumber": 785
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "Would you use folders, tags or individual project policies?",
+    "originalNumber": 786
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "When should folders be used for policy management?",
+    "originalNumber": 787
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "When should resource tags be used for policy management?",
+    "originalNumber": 788
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do tag-based organization policies work?",
+    "originalNumber": 789
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Comparison",
+    "question": "What is the difference between network tags and resource-manager tags?",
+    "originalNumber": 790
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you attach a tag to a GCP project?",
+    "originalNumber": 791
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "Can IAM Conditions reference resource tags?",
+    "originalNumber": 792
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you prevent resources from receiving public IP addresses?",
+    "originalNumber": 793
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you prevent public access to Cloud Storage buckets?",
+    "originalNumber": 794
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you enforce uniform bucket-level access?",
+    "originalNumber": 795
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you restrict VM creation to approved regions?",
+    "originalNumber": 796
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you restrict allowed machine types?",
+    "originalNumber": 797
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you restrict external IP usage?",
+    "originalNumber": 798
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you disable serial-port access?",
+    "originalNumber": 799
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you prevent service-account key creation?",
+    "originalNumber": 800
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you enforce Shielded VM settings?",
+    "originalNumber": 801
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you restrict APIs and services across projects?",
+    "originalNumber": 802
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you detect organization-policy violations?",
+    "originalNumber": 803
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you roll out a new policy without breaking workloads?",
+    "originalNumber": 804
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "What is dry-run mode for organization policies?",
+    "originalNumber": 805
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you handle policy exceptions?",
+    "originalNumber": 806
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you document policy exemptions?",
+    "originalNumber": 807
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you monitor whether teams remove required tags?",
+    "originalNumber": 808
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Conceptual",
+    "question": "How do you manage organization policies using Terraform?",
+    "originalNumber": 809
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Organization Policies and Governance",
+    "category": "Organization Policies and Governance",
+    "questionType": "Troubleshooting",
+    "question": "What happens if Terraform tries to create a resource blocked by organization policy?",
+    "originalNumber": 810
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "What is Security Command Center?",
+    "originalNumber": 811
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "Can Security Command Center be enabled at the organization level?",
+    "originalNumber": 812
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Comparison",
+    "question": "What is the difference between Standard, Premium and Enterprise capabilities?",
+    "originalNumber": 813
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "What types of findings does Security Command Center generate?",
+    "originalNumber": 814
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "What are misconfiguration findings?",
+    "originalNumber": 815
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "What are vulnerability findings?",
+    "originalNumber": 816
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "What are threat findings?",
+    "originalNumber": 817
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How do you enable Security Command Center for an organization?",
+    "originalNumber": 818
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How do findings flow from projects to the organization?",
+    "originalNumber": 819
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "What are Security Health Analytics findings?",
+    "originalNumber": 820
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "What is Event Threat Detection?",
+    "originalNumber": 821
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "What is Container Threat Detection?",
+    "originalNumber": 822
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "What is Virtual Machine Threat Detection?",
+    "originalNumber": 823
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How do you prioritize Security Command Center findings?",
+    "originalNumber": 824
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How do you assign findings to remediation teams?",
+    "originalNumber": 825
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How do you export findings to BigQuery?",
+    "originalNumber": 826
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How do you send findings to Pub/Sub?",
+    "originalNumber": 827
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How do you integrate Security Command Center with a SIEM?",
+    "originalNumber": 828
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How do you suppress accepted-risk findings?",
+    "originalNumber": 829
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How do you manage muted findings?",
+    "originalNumber": 830
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How do you automate remediation for critical findings?",
+    "originalNumber": 831
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "What is attack-path analysis?",
+    "originalNumber": 832
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How do you use Security Command Center in a multi-project environment?",
+    "originalNumber": 833
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Troubleshooting",
+    "question": "How would you detect a publicly exposed storage bucket?",
+    "originalNumber": 834
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How would you detect an overly privileged service account?",
+    "originalNumber": 835
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Troubleshooting",
+    "question": "How do you investigate a compromised VM finding?",
+    "originalNumber": 836
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How do you integrate third-party security tools with GCP?",
+    "originalNumber": 837
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How would Prisma Cloud complement Security Command Center?",
+    "originalNumber": 838
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How do you track remediation SLAs?",
+    "originalNumber": 839
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Security Command Center",
+    "category": "Security Command Center",
+    "questionType": "Conceptual",
+    "question": "How do you prevent repeated security misconfigurations?",
+    "originalNumber": 840
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a VPC in GCP?",
+    "originalNumber": 841
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Is a GCP VPC regional or global?",
+    "originalNumber": 842
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Are GCP subnets regional or global?",
+    "originalNumber": 843
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between Auto Mode and Custom Mode VPC?",
+    "originalNumber": 844
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Comparison",
+    "question": "Why is Custom Mode preferred for production?",
+    "originalNumber": 845
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What happens when an Auto Mode VPC is converted to Custom Mode?",
+    "originalNumber": 846
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Can a Custom Mode VPC be converted back to Auto Mode?",
+    "originalNumber": 847
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a subnet?",
+    "originalNumber": 848
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Can a subnet span multiple regions?",
+    "originalNumber": 849
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Can two subnets in the same VPC have overlapping CIDR ranges?",
+    "originalNumber": 850
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What are primary and secondary IP ranges?",
+    "originalNumber": 851
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Why are secondary ranges required for VPC-native GKE?",
+    "originalNumber": 852
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is alias IP?",
+    "originalNumber": 853
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How are pod IP addresses assigned in GKE?",
+    "originalNumber": 854
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How are service ClusterIP ranges assigned?",
+    "originalNumber": 855
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an RFC 1918 private address?",
+    "originalNumber": 856
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Can GCP use privately used public IP ranges?",
+    "originalNumber": 857
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is Private Google Access?",
+    "originalNumber": 858
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Why is Private Google Access required for private VMs?",
+    "originalNumber": 859
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is Private Service Access?",
+    "originalNumber": 860
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is Private Service Connect?",
+    "originalNumber": 861
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between Private Google Access, Private Service Access and Private Service Connect?",
+    "originalNumber": 862
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you connect to managed services privately?",
+    "originalNumber": 863
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is VPC peering?",
+    "originalNumber": 864
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What are the limitations of VPC peering?",
+    "originalNumber": 865
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Is VPC peering transitive?",
+    "originalNumber": 866
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Can firewall rules be shared across peered VPCs?",
+    "originalNumber": 867
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Can routes be imported and exported over VPC peering?",
+    "originalNumber": 868
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is Shared VPC?",
+    "originalNumber": 869
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a host project?",
+    "originalNumber": 870
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a service project?",
+    "originalNumber": 871
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Who manages networking in a Shared VPC?",
+    "originalNumber": 872
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Can resources in multiple service projects use the same subnet?",
+    "originalNumber": 873
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you delegate subnet usage to application teams?",
+    "originalNumber": 874
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "VPC Fundamentals",
+    "category": "VPC Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What IAM role allows a service project to use a Shared VPC subnet?",
+    "originalNumber": 875
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "How does routing work in GCP?",
+    "originalNumber": 876
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What are system-generated routes?",
+    "originalNumber": 877
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What is a custom static route?",
+    "originalNumber": 878
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What is a dynamic route?",
+    "originalNumber": 879
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What is the next hop of a route?",
+    "originalNumber": 880
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "How is route priority evaluated?",
+    "originalNumber": 881
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What happens when two routes have the same priority?",
+    "originalNumber": 882
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What is the longest-prefix-match rule?",
+    "originalNumber": 883
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What are policy-based routes?",
+    "originalNumber": 884
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "When would you use policy-based routing?",
+    "originalNumber": 885
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "How would you route traffic through a firewall appliance?",
+    "originalNumber": 886
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What is a network virtual appliance?",
+    "originalNumber": 887
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "How do firewall rules work in GCP?",
+    "originalNumber": 888
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "Are GCP firewall rules stateful or stateless?",
+    "originalNumber": 889
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Comparison",
+    "question": "What is the difference between ingress and egress firewall rules?",
+    "originalNumber": 890
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What is the default implied deny rule?",
+    "originalNumber": 891
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What is the default implied allow-egress rule?",
+    "originalNumber": 892
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "How is firewall-rule priority evaluated?",
+    "originalNumber": 893
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What happens when allow and deny rules have the same priority?",
+    "originalNumber": 894
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What are network tags in firewall rules?",
+    "originalNumber": 895
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "How can service accounts be used as firewall targets?",
+    "originalNumber": 896
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Comparison",
+    "question": "Which is safer: network tags or service-account-based firewall rules?",
+    "originalNumber": 897
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What are hierarchical firewall policies?",
+    "originalNumber": 898
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What is a global network firewall policy?",
+    "originalNumber": 899
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "How do you centrally manage firewall rules across projects?",
+    "originalNumber": 900
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What are firewall-rule logs?",
+    "originalNumber": 901
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot traffic being denied by a firewall rule?",
+    "originalNumber": 902
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What is Connectivity Tests?",
+    "originalNumber": 903
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What is Network Intelligence Center?",
+    "originalNumber": 904
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "How do you verify whether a port is reachable?",
+    "originalNumber": 905
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "What happens if an egress rule blocks DNS?",
+    "originalNumber": 906
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "How do you allow health-check probe ranges?",
+    "originalNumber": 907
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "Why must load-balancer health-check IP ranges be allowed?",
+    "originalNumber": 908
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "How do you restrict SSH access to a VM?",
+    "originalNumber": 909
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Routes and Firewall Rules",
+    "category": "Routes and Firewall Rules",
+    "questionType": "Conceptual",
+    "question": "How does Identity-Aware Proxy TCP forwarding improve SSH security?",
+    "originalNumber": 910
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is Cloud NAT?",
+    "originalNumber": 911
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "Why is Cloud NAT used?",
+    "originalNumber": 912
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "Is Cloud NAT a proxy?",
+    "originalNumber": 913
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "Does inbound traffic pass through Cloud NAT?",
+    "originalNumber": 914
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "Can Cloud NAT provide internet access to VMs without public IPs?",
+    "originalNumber": 915
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is Cloud Router’s role in Cloud NAT?",
+    "originalNumber": 916
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "Does Cloud NAT require BGP?",
+    "originalNumber": 917
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "How are NAT IP addresses allocated?",
+    "originalNumber": 918
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is automatic NAT IP allocation?",
+    "originalNumber": 919
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is manual NAT IP allocation?",
+    "originalNumber": 920
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "What are NAT ports?",
+    "originalNumber": 921
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is port exhaustion in Cloud NAT?",
+    "originalNumber": 922
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do you identify Cloud NAT port exhaustion?",
+    "originalNumber": 923
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do you increase NAT capacity?",
+    "originalNumber": 924
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is dynamic port allocation?",
+    "originalNumber": 925
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do you monitor Cloud NAT?",
+    "originalNumber": 926
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "What logs are available for Cloud NAT?",
+    "originalNumber": 927
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do private GKE nodes access the internet?",
+    "originalNumber": 928
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do Cloud Run services access resources through a VPC?",
+    "originalNumber": 929
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do you restrict outbound internet access?",
+    "originalNumber": 930
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do you route all egress through a security appliance?",
+    "originalNumber": 931
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is secure web proxy?",
+    "originalNumber": 932
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "How would you allow only approved external domains?",
+    "originalNumber": 933
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Comparison",
+    "question": "What is the difference between Cloud NAT and an internet gateway?",
+    "originalNumber": 934
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud NAT and Internet Connectivity",
+    "category": "Cloud NAT and Internet Connectivity",
+    "questionType": "Conceptual",
+    "question": "Can Cloud NAT be shared across regions?",
+    "originalNumber": 935
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is Cloud Router?",
+    "originalNumber": 936
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is BGP?",
+    "originalNumber": 937
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "Why does Cloud VPN use Cloud Router?",
+    "originalNumber": 938
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Comparison",
+    "question": "What is the difference between static and dynamic routing?",
+    "originalNumber": 939
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is a BGP ASN?",
+    "originalNumber": 940
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Comparison",
+    "question": "What is the difference between public and private ASN ranges?",
+    "originalNumber": 941
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is Cloud VPN?",
+    "originalNumber": 942
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Comparison",
+    "question": "What is the difference between Classic VPN and HA VPN?",
+    "originalNumber": 943
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Comparison",
+    "question": "Why is HA VPN preferred?",
+    "originalNumber": 944
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What availability SLA can HA VPN provide when correctly configured?",
+    "originalNumber": 945
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What components are required for a site-to-site VPN?",
+    "originalNumber": 946
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "Explain the traffic flow from on-premises to GCP through VPN.",
+    "originalNumber": 947
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is a VPN tunnel?",
+    "originalNumber": 948
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is an external VPN gateway?",
+    "originalNumber": 949
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is an on-premises peer gateway?",
+    "originalNumber": 950
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is IKE?",
+    "originalNumber": 951
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Comparison",
+    "question": "What is the difference between IKEv1 and IKEv2?",
+    "originalNumber": 952
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is a pre-shared key?",
+    "originalNumber": 953
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot a VPN tunnel that is down?",
+    "originalNumber": 954
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot a tunnel that is up but passing no traffic?",
+    "originalNumber": 955
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What logs do you check for Cloud VPN?",
+    "originalNumber": 956
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do you validate BGP learned routes?",
+    "originalNumber": 957
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is Cloud Interconnect?",
+    "originalNumber": 958
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Comparison",
+    "question": "What is the difference between Dedicated and Partner Interconnect?",
+    "originalNumber": 959
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is Cloud Router route advertisement?",
+    "originalNumber": 960
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is custom route advertisement?",
+    "originalNumber": 961
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do you advertise only selected subnets to on-premises?",
+    "originalNumber": 962
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do you implement redundant hybrid connectivity?",
+    "originalNumber": 963
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do you avoid asymmetric routing?",
+    "originalNumber": 964
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Router, VPN and Hybrid Connectivity",
+    "category": "Cloud Router, VPN and Hybrid Connectivity",
+    "questionType": "Troubleshooting",
+    "question": "What happens when one VPN tunnel fails?",
+    "originalNumber": 965
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "What is Cloud DNS?",
+    "originalNumber": 966
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "What is a public DNS zone?",
+    "originalNumber": 967
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "What is a private DNS zone?",
+    "originalNumber": 968
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "What is a forwarding zone?",
+    "originalNumber": 969
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "What is a peering DNS zone?",
+    "originalNumber": 970
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "What is a DNS record?",
+    "originalNumber": 971
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "What are A, AAAA, CNAME, TXT, MX and PTR records?",
+    "originalNumber": 972
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "What is TTL?",
+    "originalNumber": 973
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "How does TTL affect DNS changes?",
+    "originalNumber": 974
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "Why may a DNS update not appear immediately?",
+    "originalNumber": 975
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "What is split-horizon DNS?",
+    "originalNumber": 976
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "How do you resolve on-premises DNS names from GCP?",
+    "originalNumber": 977
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "How do on-premises systems resolve private GCP DNS names?",
+    "originalNumber": 978
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "What is DNS forwarding?",
+    "originalNumber": 979
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "What is an inbound DNS server policy?",
+    "originalNumber": 980
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "What is an outbound DNS server policy?",
+    "originalNumber": 981
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot DNS resolution from a GKE pod?",
+    "originalNumber": 982
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "How do you check CoreDNS logs?",
+    "originalNumber": 983
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "What happens if the kube-dns service is unavailable?",
+    "originalNumber": 984
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "How do you route multiple domain names to one load balancer?",
+    "originalNumber": 985
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "Can multiple DNS records point to the same load-balancer IP?",
+    "originalNumber": 986
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "How do wildcard DNS records work?",
+    "originalNumber": 987
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "What is DNSSEC?",
+    "originalNumber": 988
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "Why is DNSSEC used?",
+    "originalNumber": 989
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "DNS",
+    "category": "DNS",
+    "questionType": "Conceptual",
+    "question": "How do you manage DNS records using Terraform?",
+    "originalNumber": 990
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What types of load balancers are available in GCP?",
+    "originalNumber": 991
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between Layer 4 and Layer 7 load balancing?",
+    "originalNumber": 992
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an Application Load Balancer?",
+    "originalNumber": 993
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a Network Load Balancer?",
+    "originalNumber": 994
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between an external and internal load balancer?",
+    "originalNumber": 995
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between global and regional load balancing?",
+    "originalNumber": 996
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a frontend configuration?",
+    "originalNumber": 997
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a backend service?",
+    "originalNumber": 998
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a backend bucket?",
+    "originalNumber": 999
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a forwarding rule?",
+    "originalNumber": 1000
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a target proxy?",
+    "originalNumber": 1001
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a URL map?",
+    "originalNumber": 1002
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a health check?",
+    "originalNumber": 1003
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Why are health checks necessary?",
+    "originalNumber": 1004
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Troubleshooting",
+    "question": "What happens when all backends are unhealthy?",
+    "originalNumber": 1005
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How does a load balancer choose a backend?",
+    "originalNumber": 1006
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is balancing mode?",
+    "originalNumber": 1007
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is utilization-based balancing?",
+    "originalNumber": 1008
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is rate-based balancing?",
+    "originalNumber": 1009
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is connection-based balancing?",
+    "originalNumber": 1010
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is session affinity?",
+    "originalNumber": 1011
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "When should session affinity be avoided?",
+    "originalNumber": 1012
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is connection draining?",
+    "originalNumber": 1013
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How does connection draining help during deployments?",
+    "originalNumber": 1014
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is backend timeout?",
+    "originalNumber": 1015
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you configure SSL certificates?",
+    "originalNumber": 1016
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a Google-managed certificate?",
+    "originalNumber": 1017
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a self-managed certificate?",
+    "originalNumber": 1018
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is certificate rotation?",
+    "originalNumber": 1019
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Load Balancing Fundamentals",
+    "category": "Load Balancing Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an SSL policy?",
+    "originalNumber": 1020
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "Explain the request flow through a global external HTTPS load balancer.",
+    "originalNumber": 1021
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "How does a browser request reach the backend application?",
+    "originalNumber": 1022
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "What role does DNS play before the load balancer receives traffic?",
+    "originalNumber": 1023
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "How does the URL map select a backend?",
+    "originalNumber": 1024
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "What is host-based routing?",
+    "originalNumber": 1025
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "What is path-based routing?",
+    "originalNumber": 1026
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "How can one load balancer serve multiple domain names?",
+    "originalNumber": 1027
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "How do you route api.example.com and app.example.com to different services?",
+    "originalNumber": 1028
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "How do you route /api and /web to separate backends?",
+    "originalNumber": 1029
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "What is URL rewriting?",
+    "originalNumber": 1030
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "How do you remove a path prefix before forwarding traffic?",
+    "originalNumber": 1031
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "What is a redirect action?",
+    "originalNumber": 1032
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "How do you redirect HTTP to HTTPS?",
+    "originalNumber": 1033
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "How do you redirect one domain to another?",
+    "originalNumber": 1034
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "What are header actions?",
+    "originalNumber": 1035
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "How can a load balancer add a request header?",
+    "originalNumber": 1036
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "How can a load balancer remove a response header?",
+    "originalNumber": 1037
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "How do you preserve the original client IP?",
+    "originalNumber": 1038
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "What is the X-Forwarded-For header?",
+    "originalNumber": 1039
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "What is the X-Forwarded-Proto header?",
+    "originalNumber": 1040
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "What is a serverless network endpoint group?",
+    "originalNumber": 1041
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "How do you connect Cloud Run to a load balancer?",
+    "originalNumber": 1042
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "How do you restrict Cloud Run so users can access it only through the load balancer?",
+    "originalNumber": 1043
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "What is an internet network endpoint group?",
+    "originalNumber": 1044
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "HTTP(S) Load Balancing and Routing",
+    "category": "HTTP(S) Load Balancing and Routing",
+    "questionType": "Conceptual",
+    "question": "How do you load-balance external or on-premises backends?",
+    "originalNumber": 1045
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is an internal Application Load Balancer?",
+    "originalNumber": 1046
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is an internal passthrough Network Load Balancer?",
+    "originalNumber": 1047
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Comparison",
+    "question": "What is the difference between proxy and passthrough load balancers?",
+    "originalNumber": 1048
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Conceptual",
+    "question": "How does an internal load balancer receive a private IP?",
+    "originalNumber": 1049
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Conceptual",
+    "question": "Can an internal load balancer be accessed from another VPC?",
+    "originalNumber": 1050
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Conceptual",
+    "question": "Can an internal load balancer be accessed from on-premises?",
+    "originalNumber": 1051
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do you expose a private service to multiple consumer VPCs?",
+    "originalNumber": 1052
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is Private Service Connect service attachment?",
+    "originalNumber": 1053
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Conceptual",
+    "question": "How does a PSC consumer endpoint work?",
+    "originalNumber": 1054
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Conceptual",
+    "question": "How would you route Apigee PSC traffic through a Linux router?",
+    "originalNumber": 1055
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Conceptual",
+    "question": "What is a regional internal Layer 3 load balancer?",
+    "originalNumber": 1056
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Conceptual",
+    "question": "How can policy-based routing send traffic to an appliance?",
+    "originalNumber": 1057
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Conceptual",
+    "question": "What are the risks of routing traffic through a Linux router VM?",
+    "originalNumber": 1058
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do you make a network appliance highly available?",
+    "originalNumber": 1059
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Internal Load Balancers and Private Connectivity",
+    "category": "Internal Load Balancers and Private Connectivity",
+    "questionType": "Conceptual",
+    "question": "How do you preserve symmetric traffic flow through an appliance?",
+    "originalNumber": 1060
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is Cloud Armor?",
+    "originalNumber": 1061
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "At which load balancers can Cloud Armor be attached?",
+    "originalNumber": 1062
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is a Cloud Armor security policy?",
+    "originalNumber": 1063
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is a Cloud Armor rule?",
+    "originalNumber": 1064
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How is rule priority evaluated?",
+    "originalNumber": 1065
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "Why is a default rule required?",
+    "originalNumber": 1066
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What happens if two Cloud Armor rules use the same priority?",
+    "originalNumber": 1067
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is preview mode?",
+    "originalNumber": 1068
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "Why should new WAF rules first be deployed in preview mode?",
+    "originalNumber": 1069
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What are preconfigured WAF rules?",
+    "originalNumber": 1070
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How do preconfigured rules protect against SQL injection?",
+    "originalNumber": 1071
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How do preconfigured rules protect against cross-site scripting?",
+    "originalNumber": 1072
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is remote file inclusion?",
+    "originalNumber": 1073
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is local file inclusion?",
+    "originalNumber": 1074
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is remote-code execution?",
+    "originalNumber": 1075
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is scanner detection?",
+    "originalNumber": 1076
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is protocol-attack detection?",
+    "originalNumber": 1077
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is session-fixation protection?",
+    "originalNumber": 1078
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is Log4j protection?",
+    "originalNumber": 1079
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How do you configure WAF sensitivity levels?",
+    "originalNumber": 1080
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is an opt-in rule?",
+    "originalNumber": 1081
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is an opt-out rule?",
+    "originalNumber": 1082
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How do you exclude a legitimate request from a WAF signature?",
+    "originalNumber": 1083
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How do you exclude a user agent from a Cloud Armor rule?",
+    "originalNumber": 1084
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How do you avoid false positives?",
+    "originalNumber": 1085
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How do you inspect request headers in Cloud Armor expressions?",
+    "originalNumber": 1086
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How do you block traffic by country?",
+    "originalNumber": 1087
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How do you allow only traffic from approved IP ranges?",
+    "originalNumber": 1088
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is SRC_IPS_V1?",
+    "originalNumber": 1089
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How do you define source-IP-based matching in Terraform?",
+    "originalNumber": 1090
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is threat-intelligence-based filtering?",
+    "originalNumber": 1091
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How do you block known malicious IP addresses?",
+    "originalNumber": 1092
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How do you restrict traffic from Tor exit nodes?",
+    "originalNumber": 1093
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What is Adaptive Protection?",
+    "originalNumber": 1094
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How does Adaptive Protection detect Layer 7 DDoS attacks?",
+    "originalNumber": 1095
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "What are Adaptive Protection alerts?",
+    "originalNumber": 1096
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "Can Adaptive Protection recommendations be applied automatically?",
+    "originalNumber": 1097
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Troubleshooting",
+    "question": "How do you investigate a sudden rise in denied requests?",
+    "originalNumber": 1098
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "How do you enable Cloud Armor logging?",
+    "originalNumber": 1099
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Cloud Armor and WAF",
+    "category": "Cloud Armor and WAF",
+    "questionType": "Conceptual",
+    "question": "Which logs show the matched security-policy rule?",
+    "originalNumber": 1100
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "What is Cloud Armor rate limiting?",
+    "originalNumber": 1101
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Comparison",
+    "question": "What is the difference between rate-based ban and throttle?",
+    "originalNumber": 1102
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "How do you return HTTP 429 for excessive requests?",
+    "originalNumber": 1103
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "What should be used as the rate-limit key?",
+    "originalNumber": 1104
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "How do you rate-limit by source IP?",
+    "originalNumber": 1105
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "Can you rate-limit by HTTP header?",
+    "originalNumber": 1106
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "Can you rate-limit by cookie?",
+    "originalNumber": 1107
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "How do you rate-limit an API token?",
+    "originalNumber": 1108
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "What is a conform action?",
+    "originalNumber": 1109
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "What is an exceed action?",
+    "originalNumber": 1110
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "What is a ban duration?",
+    "originalNumber": 1111
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "How do you prevent one NAT IP from causing all users to be rate-limited?",
+    "originalNumber": 1112
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "How do you rate-limit login requests?",
+    "originalNumber": 1113
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "How do you rate-limit expensive API endpoints?",
+    "originalNumber": 1114
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "How do you differentiate bots from normal users?",
+    "originalNumber": 1115
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "What is reCAPTCHA Enterprise integration?",
+    "originalNumber": 1116
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "How can suspicious traffic be redirected to reCAPTCHA?",
+    "originalNumber": 1117
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "What is a redirect action in Cloud Armor?",
+    "originalNumber": 1118
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "How do you protect an application from credential-stuffing attacks?",
+    "originalNumber": 1119
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Rate Limiting and Bot Protection",
+    "category": "Rate Limiting and Bot Protection",
+    "questionType": "Conceptual",
+    "question": "How would you protect an API against scraping?",
+    "originalNumber": 1120
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is Secret Manager?",
+    "originalNumber": 1121
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "How are secrets versioned?",
+    "originalNumber": 1122
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "How do you access a specific secret version?",
+    "originalNumber": 1123
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "How do you rotate secrets?",
+    "originalNumber": 1124
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "How do you disable an old secret version?",
+    "originalNumber": 1125
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "How do applications authenticate to Secret Manager?",
+    "originalNumber": 1126
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "How do you access Secret Manager from GKE?",
+    "originalNumber": 1127
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "How do you access Secret Manager from Cloud Run?",
+    "originalNumber": 1128
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "How do you prevent secrets from being stored in Kubernetes manifests?",
+    "originalNumber": 1129
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is the Secret Manager CSI driver?",
+    "originalNumber": 1130
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is External Secrets Operator?",
+    "originalNumber": 1131
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is customer-managed encryption?",
+    "originalNumber": 1132
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is Cloud KMS?",
+    "originalNumber": 1133
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is a key ring?",
+    "originalNumber": 1134
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is a crypto key?",
+    "originalNumber": 1135
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is a key version?",
+    "originalNumber": 1136
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is automatic key rotation?",
+    "originalNumber": 1137
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is CMEK?",
+    "originalNumber": 1138
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Comparison",
+    "question": "What is the difference between Google-managed encryption and CMEK?",
+    "originalNumber": 1139
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What happens if a CMEK key is disabled?",
+    "originalNumber": 1140
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "How do you restrict who can encrypt and decrypt data?",
+    "originalNumber": 1141
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is separation of duties for encryption keys?",
+    "originalNumber": 1142
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is VPC Service Controls?",
+    "originalNumber": 1143
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What problem does VPC Service Controls solve?",
+    "originalNumber": 1144
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is a service perimeter?",
+    "originalNumber": 1145
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "How does VPC Service Controls reduce data-exfiltration risk?",
+    "originalNumber": 1146
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is an access level?",
+    "originalNumber": 1147
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is Access Context Manager?",
+    "originalNumber": 1148
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Conceptual",
+    "question": "What is a perimeter bridge?",
+    "originalNumber": 1149
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Secrets and Data Protection",
+    "category": "Secrets and Data Protection",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot a VPC Service Controls denial?",
+    "originalNumber": 1150
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "Users report HTTP 403 responses after a new Cloud Armor policy deployment. How would you investigate?",
+    "originalNumber": 1151
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "A legitimate mobile application is blocked by an XSS rule. How would you fix it safely?",
+    "originalNumber": 1152
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "An API is receiving a sudden increase in requests from a small set of IP addresses. What would you do?",
+    "originalNumber": 1153
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "A rate-limit rule blocks many users because they share one corporate NAT IP. How would you redesign it?",
+    "originalNumber": 1154
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "A backend is healthy when accessed directly but unhealthy behind the load balancer. What would you check?",
+    "originalNumber": 1155
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "A load balancer returns HTTP 502. What are the likely causes?",
+    "originalNumber": 1156
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "A load balancer returns HTTP 503. What would you inspect?",
+    "originalNumber": 1157
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "A newly deployed service is not receiving traffic even though the deployment succeeded. How would you troubleshoot?",
+    "originalNumber": 1158
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "One hostname works through the load balancer but another returns a certificate error. What would you check?",
+    "originalNumber": 1159
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "A DNS record points to the correct IP, but users still reach the old endpoint. Why?",
+    "originalNumber": 1160
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "GKE private nodes cannot pull container images. What would you verify?",
+    "originalNumber": 1161
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "A VM without a public IP cannot access package repositories. What would you check?",
+    "originalNumber": 1162
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "Cloud NAT logs show dropped connections. What might be causing them?",
+    "originalNumber": 1163
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "A VPN tunnel is up, but on-premises users cannot reach a GCP subnet. What would you verify?",
+    "originalNumber": 1164
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "GCP learns the on-premises route, but on-premises does not learn the GCP subnet. What would you inspect?",
+    "originalNumber": 1165
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "Traffic through a network appliance is asymmetric. How would you correct it?",
+    "originalNumber": 1166
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "An external user cannot be added to a project IAM policy. Which controls might be blocking it?",
+    "originalNumber": 1167
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "A developer receives iam.serviceAccounts.actAs denied. What does it mean?",
+    "originalNumber": 1168
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "A pipeline receives permission denied while deploying to GKE. How would you identify the missing role?",
+    "originalNumber": 1169
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "A service-account JSON key is exposed in a public repository. What immediate actions would you take?",
+    "originalNumber": 1170
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "A production bucket is accidentally made public. How would you remediate and prevent recurrence?",
+    "originalNumber": 1171
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "You need to enforce a security policy on 100 out of 150 projects. What design would you choose?",
+    "originalNumber": 1172
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "An organization policy blocks a valid production deployment. How would you manage the exception?",
+    "originalNumber": 1173
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "Security Command Center reports a critical public-exposure finding. What is your response process?",
+    "originalNumber": 1174
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "A Cloud Armor rule works in the console but fails when deployed through Terraform. What would you inspect?",
+    "originalNumber": 1175
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Troubleshooting",
+    "question": "Terraform reports a provider-schema mismatch for a Cloud Armor action. How would you resolve it?",
+    "originalNumber": 1176
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "An application requires several domains and paths behind one internal load balancer. How would you design the routing?",
+    "originalNumber": 1177
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "A path /hello must reach a service that expects /. How would you implement the rewrite?",
+    "originalNumber": 1178
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "A load-balancer Terraform module currently supports one hostname. How would you extend it for multiple hostnames?",
+    "originalNumber": 1179
+  },
+  {
+    "source": "Actual Interview Handbook - Part 3",
+    "section": "Scenario-Based Security and Networking",
+    "category": "Scenario-Based Security and Networking",
+    "questionType": "Conceptual",
+    "question": "How would you implement DNS, certificates, URL maps and backend routing in a reusable Terraform module?",
+    "originalNumber": 1180
+  }
+]

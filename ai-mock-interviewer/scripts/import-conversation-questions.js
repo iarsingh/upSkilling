@@ -2,7 +2,13 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
-const OUT_PATH = path.join(__dirname, "answer-bank", "imported-conversation-questions.json");
+const ACTUAL_MODE = process.argv.includes("--actual");
+const APPEND_MODE = process.argv.includes("--append");
+const OUT_PATH = path.join(
+  __dirname,
+  "answer-bank",
+  ACTUAL_MODE ? "actual-interview-new-questions.json" : "imported-conversation-questions.json"
+);
 
 function normalizeQuestion(value) {
   return String(value || "")
@@ -10,6 +16,29 @@ function normalizeQuestion(value) {
     .replace(/^[a-z0-9/ &+-]+:\s+/, "")
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
+}
+
+function canonicalQuestionKey(value) {
+  const normalized = normalizeQuestion(value)
+    .replace(/\bworked on\b/g, "worked with")
+    .replace(/\brequest user\b/g, "user request")
+    .replace(/\s+/g, " ")
+    .trim();
+  const isShort = normalized.split(" ").length <= 14;
+  const isDefinitionOrComparison = /^(what (is|are)|explain|describe|define|difference between|what is the difference between)\b/.test(normalized);
+  if (!isShort || !isDefinitionOrComparison) {
+    return normalized
+      .replace(/^(can you|could you|please)\s+/, "")
+      .replace(/\b(a|an|the)\b/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+  return normalized
+    .replace(/^(what (is|are)|explain|describe|define|what is the difference between|difference between)\s+/, "")
+    .split(" ")
+    .filter((token) => !["a", "an", "the", "in", "on"].includes(token))
+    .sort()
+    .join(" ");
 }
 
 function classifyQuestionType(question) {
@@ -28,14 +57,17 @@ function parseFile(filePath) {
   const entries = [];
   let section = "General";
 
-  for (const rawLine of lines) {
+  for (let index = 0; index < lines.length; index++) {
+    const rawLine = lines[index];
     const line = rawLine.trim();
     const match = line.match(/^\d+\.\s+(.+)$/);
     if (match) {
-      const question = match[1].trim();
-      if (!question.endsWith("?") && !/^(tell|explain|describe|design)\b/i.test(question)) continue;
+      const question = match[1].trim() === "What is the relationship between:"
+        ? "What is the relationship between a Kubernetes Deployment, ReplicaSet, and Pods?"
+        : match[1].trim();
+      if (!question.endsWith("?") && !question.endsWith(":") && !/^(tell|explain|describe|design|write|correct|give)\b/i.test(question)) continue;
       entries.push({
-        source: "Imported Conversation Questions",
+        source: ACTUAL_MODE ? "Actual Interview Questions - August 2026 Rounds" : "Imported Conversation Questions",
         section,
         category: section,
         questionType: classifyQuestionType(question),
@@ -43,8 +75,11 @@ function parseFile(filePath) {
       });
       continue;
     }
+    const separatedHeading = !String(lines[index - 1] || "").trim()
+      && !String(lines[index + 1] || "").trim();
     if (
-      line
+      separatedHeading
+      && line
       && !/^Here are all the interview questions/i.test(line)
       && !/^These were the main technical areas/i.test(line)
       && !/^Important rapid-fire questions/i.test(line)
@@ -57,9 +92,9 @@ function parseFile(filePath) {
   return entries;
 }
 
-const inputPaths = process.argv.slice(2);
+const inputPaths = process.argv.slice(2).filter((arg) => !["--actual", "--append"].includes(arg));
 if (!inputPaths.length) {
-  console.error("Usage: node scripts/import-conversation-questions.js <pasted-text.txt> [...]");
+  console.error("Usage: node scripts/import-conversation-questions.js [--actual] <pasted-text.txt> [...]");
   process.exit(1);
 }
 
@@ -71,6 +106,28 @@ for (const inputPath of inputPaths) {
   }
 }
 
-const entries = [...unique.values()];
+let entries = [...unique.values()];
+let existingOutputKeys = new Set();
+if (APPEND_MODE && fs.existsSync(OUT_PATH)) {
+  const existingOutput = JSON.parse(fs.readFileSync(OUT_PATH, "utf8"));
+  existingOutputKeys = new Set(existingOutput.map((entry) => normalizeQuestion(entry.question)).filter(Boolean));
+  for (const entry of existingOutput) unique.set(normalizeQuestion(entry.question), entry);
+  for (const entry of entries) unique.set(normalizeQuestion(entry.question), entry);
+  entries = [...unique.values()];
+}
+if (ACTUAL_MODE) {
+  const finalPath = path.join(__dirname, "answer-bank", "final-qa-dataset.json");
+  const existing = fs.existsSync(finalPath) ? JSON.parse(fs.readFileSync(finalPath, "utf8")) : [];
+  const comparisonEntries = APPEND_MODE
+    ? existing.filter((entry) => entry.source !== "Imported Conversation Questions")
+    : existing;
+  const existingExact = new Set(comparisonEntries.map((entry) => normalizeQuestion(entry.question)).filter(Boolean));
+  const existingCanonical = new Set(comparisonEntries.map((entry) => canonicalQuestionKey(entry.question)).filter(Boolean));
+  entries = entries.filter((entry) => {
+    const exact = normalizeQuestion(entry.question);
+    const canonical = canonicalQuestionKey(entry.question);
+    return exact && (existingOutputKeys.has(exact) || (!existingExact.has(exact) && !existingCanonical.has(canonical)));
+  });
+}
 fs.writeFileSync(OUT_PATH, `${JSON.stringify(entries, null, 2)}\n`);
-console.log(`Wrote ${entries.length} unique imported questions to ${path.relative(ROOT, OUT_PATH)}`);
+console.log(`Wrote ${entries.length} unique ${ACTUAL_MODE ? "new actual-interview" : "imported"} questions to ${path.relative(ROOT, OUT_PATH)}`);

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("aimi-theme");
+          var theme = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Science Interview Path | AI Mock Interviewer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="interview-prep-page">
+    <main class="shell prep-shell">
+      <section class="topbar">
+        <div class="brand-block">
+          <p class="eyebrow">Role-focused learning path</p>
+          <div class="brand-title">
+            <img class="brand-icon" src="/favicon.svg" alt="" aria-hidden="true">
+            <h1>Data Science Interview Path</h1>
+          </div>
+          <p class="subtitle">Progress from fundamentals to senior-level practical depth without forcing the curriculum into an arbitrary number of days.</p>
+        </div>
+        <div class="top-actions">
+          <a class="ghost link-button small" href="/">Home</a>
+          <a class="ghost link-button small" href="/interview-prep.html">Complete Curriculum</a>
+          <a class="ghost link-button small" href="/question-bank.html">Question Bank</a>
+          <a class="ghost link-button small" href="/ai-agent-engineer-path.html">AI Agent Path</a>
+          <button class="theme-toggle" type="button" data-action="toggle-theme" aria-pressed="false" aria-label="Toggle dark mode">
+            <span class="theme-icon theme-icon-light" aria-hidden="true">&#9728;&#65039;</span>
+            <span class="theme-icon theme-icon-dark" aria-hidden="true">&#127769;</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="panel prep-overview">
+        <div>
+          <p class="eyebrow">Beginner to expert</p>
+          <h2>Master concepts, implementation, trade-offs, and production use.</h2>
+          <p class="prep-overview-copy">Each stage builds on the previous one. Revise concepts, implement them, explain decisions, and validate your knowledge against focused interview material.</p>
+        </div>
+        <div class="prep-stats" aria-label="Data Science path totals">
+          <div><strong id="dsStageCount">0</strong><span>stages</span></div>
+          <div><strong id="dsTopicCount">0</strong><span>topics</span></div>
+        </div>
+      </section>
+
+      <section class="panel prep-controls">
+        <label for="dsSearch">Find a Data Science skill</label>
+        <div class="prep-search-row">
+          <input id="dsSearch" type="search" placeholder="Try hypothesis testing, XGBoost, RAG, Spark…" autocomplete="off">
+          <button id="dsClear" class="ghost link-button small" type="button" hidden>Clear</button>
+        </div>
+        <p id="dsStatus" class="prep-status" aria-live="polite"></p>
+      </section>
+
+      <section id="dsStages" class="prep-domain-grid" aria-live="polite"></section>
+    </main>
+    <script src="/interview-prep-data.js"></script>
+    <script src="/data-science-path.js"></script>
+    <script src="/theme.js"></script>
+  </body>
+</html>

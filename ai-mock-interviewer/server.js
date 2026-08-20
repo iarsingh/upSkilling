@@ -18,20 +18,32 @@ const { createInterviewRoutes } = require("./src/routes/interview.routes");
 
 const PORT = Number(process.env.PORT || 3030);
 const HOST = process.env.HOST || "127.0.0.1";
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
 const OLLAMA_URL = process.env.OLLAMA_URL || "http://127.0.0.1:11434";
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || "llama3.1:8b";
 const OLLAMA_KEEP_ALIVE = process.env.OLLAMA_KEEP_ALIVE || "30m";
+const OLLAMA_TIMEOUT_MS = Number(process.env.OLLAMA_TIMEOUT_MS || 90000);
 const LLM_PROVIDER = process.env.LLM_PROVIDER || "ollama";
 const OFFLINE_ONLY = process.env.OFFLINE_ONLY === "1" || process.env.OFFLINE_ONLY === "true";
 const CLAUDE_MODEL = process.env.CLAUDE_MODEL || "claude-opus-4-8";
+const OPENAI_MODEL = process.env.OPENAI_MODEL || "gpt-5-mini";
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";
 const claudeClient = process.env.ANTHROPIC_API_KEY ? new Anthropic() : null;
 const PUBLIC_DIR = path.join(__dirname, "public");
+const FRONTEND_DIST_DIR = path.join(__dirname, "frontend", "dist");
 const DATA_DIR = path.join(__dirname, "data");
 const PROFILE_PATH = path.join(DATA_DIR, "applicant-profile.json");
 const QUESTION_BANK_PATH = path.join(__dirname, "1000 DevOps + MLOps + Kubernetes + GCP Interview Questions.txt");
 const IMPORTED_QUESTION_BANK_PATH = path.join(__dirname, "scripts", "answer-bank", "imported-conversation-questions.json");
 const FINAL_QA_DATASET_PATH = path.join(__dirname, "scripts", "answer-bank", "final-qa-dataset.json");
 const DATABASE_URL = process.env.DATABASE_URL || "";
+const SESSION_SECRET_VALUE = String(process.env.SESSION_SECRET || "");
+if (IS_PRODUCTION && SESSION_SECRET_VALUE.length < 32) {
+  throw new Error("SESSION_SECRET must be set to at least 32 characters in production.");
+}
+if (IS_PRODUCTION && !DATABASE_URL && process.env.ALLOW_FILE_STORAGE_IN_PRODUCTION !== "true") {
+  throw new Error("DATABASE_URL is required in production. Set ALLOW_FILE_STORAGE_IN_PRODUCTION=true only for an explicitly ephemeral demo.");
+}
 const databaseUsesSsl = DATABASE_URL && !/localhost|127\.0\.0\.1/.test(DATABASE_URL)
   && process.env.DATABASE_SSL !== "false";
 const db = DATABASE_URL
@@ -65,7 +77,7 @@ function ensureDataDir() {
 }
 
 function getSessionSecret() {
-  if (process.env.SESSION_SECRET) return process.env.SESSION_SECRET;
+  if (SESSION_SECRET_VALUE) return SESSION_SECRET_VALUE;
   ensureDataDir();
   try {
     return fs.readFileSync(SESSION_SECRET_PATH, "utf8").trim();
@@ -113,22 +125,21 @@ function writeUsers(users) {
 
 function ensureUsersSeeded() {
   if (fs.existsSync(USERS_PATH)) return;
-  const now = new Date().toISOString();
-  const seed = [
-    { name: "Asha Rao", email: "asha.rao@aimockinterviewer.app", password: "User@Practice1", role: "user" },
-    { name: "Rohan Mehta", email: "rohan.mehta@aimockinterviewer.app", password: "User@Practice2", role: "user" },
-    { name: "Emily Chen", email: "emily.chen@aimockinterviewer.app", password: "User@Practice3", role: "user" },
-    { name: "Akhilesh Singh", email: "akhilesh.admin@aimockinterviewer.app", password: "Admin@Report1", role: "admin" },
-    { name: "Priya Nair", email: "priya.admin@aimockinterviewer.app", password: "Admin@Report2", role: "admin" }
-  ].map((entry, index) => ({
-    id: `seed-${index + 1}`,
-    name: entry.name,
-    email: entry.email,
-    passwordHash: hashPassword(entry.password),
-    role: entry.role,
-    createdAt: now
-  }));
-  writeUsers(seed);
+  const email = String(process.env.BOOTSTRAP_ADMIN_EMAIL || "").trim().toLowerCase();
+  const password = String(process.env.BOOTSTRAP_ADMIN_PASSWORD || "");
+  const name = String(process.env.BOOTSTRAP_ADMIN_NAME || "Administrator").trim();
+  if (!email || password.length < 12) {
+    writeUsers([]);
+    return;
+  }
+  writeUsers([{
+    id: crypto.randomUUID(),
+    name,
+    email,
+    passwordHash: hashPassword(password),
+    role: "admin",
+    createdAt: new Date().toISOString()
+  }]);
 }
 
 function initializeDatabase() {
@@ -337,9 +348,24 @@ function isValidEmail(value) {
 }
 
 const contactAttempts = new Map();
+const requestAttempts = new Map();
+
+function clientAddress(req) {
+  return String(req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown").split(",")[0].trim();
+}
+
+function allowRequest(req, bucket, limit, windowMs) {
+  const key = `${bucket}:${clientAddress(req)}`;
+  const now = Date.now();
+  const attempts = (requestAttempts.get(key) || []).filter((time) => now - time < windowMs);
+  if (attempts.length >= limit) return false;
+  attempts.push(now);
+  requestAttempts.set(key, attempts);
+  return true;
+}
 
 function canSubmitContact(req) {
-  const key = String(req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown").split(",")[0].trim();
+  const key = clientAddress(req);
   const now = Date.now();
   const attempts = (contactAttempts.get(key) || []).filter((time) => now - time < 60 * 60 * 1000);
   if (attempts.length >= 5) return false;
@@ -351,13 +377,11 @@ function canSubmitContact(req) {
 const PROTECTED_PAGES = new Set(["/dashboard.html", "/session.html", "/admin.html"]);
 const ADMIN_ONLY_PAGES = new Set(["/admin.html"]);
 
-if (!db) ensureUsersSeeded();
+if (!db && !IS_PRODUCTION) ensureUsersSeeded();
 const OCR_LANG_PATH = path.join(__dirname, "node_modules", "@tesseract.js-data", "eng", "4.0.0");
 const MARKET_SKILL_BENCHMARK = `Target role family: Senior GCP DevOps / SRE / Cloud Engineer / Platform Engineer / Cloud Reliability Engineer / ML Platform Engineer
-Actual experience: 7 years
-Interview calibration: assess at the architecture depth, production ownership, ambiguity handling, cross-team leadership, and trade-off rigor commonly expected from 10-15 year candidates. Never represent the candidate as having more than 7 years of actual experience.
-Compensation target: ₹25 LPA
-Preparation window: 50 days
+Interview calibration: adapt depth to the experience and target role supplied by the user. Never invent or exaggerate candidate experience.
+Preparation window: user-defined
 Target companies: product companies and senior cloud/platform/SRE teams
 
 Core skills to test:
@@ -441,15 +465,15 @@ const contentTypes = {
 function sendJson(res, status, payload) {
   res.writeHead(status, {
     "Content-Type": "application/json; charset=utf-8",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "GET,POST,OPTIONS"
+    "Cache-Control": "no-store"
   });
   res.end(JSON.stringify(payload));
 }
 
 function readProfile() {
-  return JSON.parse(fs.readFileSync(PROFILE_PATH, "utf8"));
+  const examplePath = path.join(DATA_DIR, "applicant-profile.example.json");
+  const selectedPath = fs.existsSync(PROFILE_PATH) ? PROFILE_PATH : examplePath;
+  return JSON.parse(fs.readFileSync(selectedPath, "utf8"));
 }
 
 function readBody(req) {
@@ -458,11 +482,17 @@ function readBody(req) {
     req.on("data", (chunk) => {
       data += chunk;
       if (data.length > 8_000_000) {
-        reject(new Error("Request body is too large."));
+        reject(Object.assign(new Error("Request body is too large."), { statusCode: 413 }));
         req.destroy();
       }
     });
-    req.on("end", () => resolve(data ? JSON.parse(data) : {}));
+    req.on("end", () => {
+      try {
+        resolve(data ? JSON.parse(data) : {});
+      } catch {
+        reject(Object.assign(new Error("Request body must be valid JSON."), { statusCode: 400 }));
+      }
+    });
     req.on("error", reject);
   });
 }
@@ -665,7 +695,7 @@ async function importJobDescription(url) {
   return trimContext(text, 10000);
 }
 
-async function askOllama(prompt, options = {}, timeoutMs = 45000) {
+async function askOllama(prompt, options = {}, timeoutMs = OLLAMA_TIMEOUT_MS) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
   let response;
@@ -726,13 +756,49 @@ async function askClaude(prompt, options = {}) {
   return String(textBlock?.text || "").trim();
 }
 
-async function askLLM(prompt, ollamaOptions = {}, timeoutMs = 45000) {
-  if (OFFLINE_ONLY && LLM_PROVIDER === "claude") {
-    throw new Error("Offline mode is enabled. Claude API calls are disabled.");
+function openAIOutputText(response) {
+  if (typeof response.output_text === "string") return response.output_text.trim();
+  return (Array.isArray(response.output) ? response.output : [])
+    .flatMap((item) => Array.isArray(item.content) ? item.content : [])
+    .filter((item) => item.type === "output_text" && typeof item.text === "string")
+    .map((item) => item.text)
+    .join("\n")
+    .trim();
+}
+
+async function askOpenAI(prompt, options = {}, timeoutMs = OLLAMA_TIMEOUT_MS) {
+  if (!OPENAI_API_KEY) throw new Error("OPENAI_API_KEY is not set.");
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  let response;
+  try {
+    response = await fetch("https://api.openai.com/v1/responses", {
+      method: "POST",
+      signal: controller.signal,
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${OPENAI_API_KEY}` },
+      body: JSON.stringify({
+        model: OPENAI_MODEL,
+        input: prompt,
+        max_output_tokens: options.num_predict || options.maxTokens || 2000
+      })
+    });
+  } finally {
+    clearTimeout(timeout);
+  }
+  if (!response.ok) throw new Error(`OpenAI returned ${response.status}: ${await response.text()}`);
+  const text = openAIOutputText(await response.json());
+  if (!text) throw new Error("OpenAI returned an empty response.");
+  return text;
+}
+
+async function askLLM(prompt, ollamaOptions = {}, timeoutMs = OLLAMA_TIMEOUT_MS) {
+  if (OFFLINE_ONLY && ["claude", "openai"].includes(LLM_PROVIDER)) {
+    throw new Error("Offline mode is enabled. Cloud API calls are disabled.");
   }
   if (LLM_PROVIDER === "claude") {
     return askClaude(prompt, { maxTokens: ollamaOptions.num_predict });
   }
+  if (LLM_PROVIDER === "openai") return askOpenAI(prompt, ollamaOptions, timeoutMs);
   return askOllama(prompt, ollamaOptions, timeoutMs);
 }
 
@@ -943,6 +1009,8 @@ ${answer}
 
 Give direct, practical feedback. Return markdown with exactly these sections:
 
+Technical accuracy is mandatory. Do not invent commands, flags, Kubernetes fields, product features, metrics, or mechanisms. If a claim is uncertain, omit it. Check that every technical correction is directly relevant to the question before returning the response.
+
 ## Score
 Give a score out of 10 and one sentence explaining it.
 
@@ -963,6 +1031,17 @@ Ask one realistic follow-up question.
 
 ## Practice Tip
 Give one specific practice task for the candidate.`;
+}
+
+function isValidQuestionFeedback(feedback) {
+  const value = String(feedback || "").trim();
+  const requiredSections = [
+    "Score", "What Went Well", "Gaps", "Job Fit Coaching",
+    "Stronger Answer", "Follow Up Question", "Practice Tip"
+  ];
+  if (value.length < 500 || requiredSections.some((section) => !value.includes(`## ${section}`))) return false;
+  if (/\b(?:maxConcurrent limit|Helm UI|--keep-empty|--validate-values|--template-dir)\b/i.test(value)) return false;
+  return true;
 }
 
 function finalFeedbackPrompt(input) {
@@ -1281,39 +1360,94 @@ function getInterviewRoutes() {
 function serveStatic(req, res) {
   const url = new URL(req.url, `http://${req.headers.host}`);
   const requested = url.pathname === "/" ? "/index.html" : url.pathname;
-  const filePath = path.normalize(path.join(PUBLIC_DIR, requested));
+  const candidatePaths = [
+    path.normalize(path.join(FRONTEND_DIST_DIR, requested)),
+    path.normalize(path.join(PUBLIC_DIR, requested))
+  ];
 
-  if (!filePath.startsWith(PUBLIC_DIR)) {
-    res.writeHead(403);
-    res.end("Forbidden");
+  for (const filePath of candidatePaths) {
+    const rootDir = filePath.startsWith(FRONTEND_DIST_DIR) ? FRONTEND_DIST_DIR : PUBLIC_DIR;
+    const relative = path.relative(rootDir, filePath);
+    if (relative.startsWith("..") || path.isAbsolute(relative)) continue;
+    if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) continue;
+
+    const contentType = contentTypes[path.extname(filePath)] || "application/octet-stream";
+    const data = fs.readFileSync(filePath);
+    const cacheControl = [".html", ".json"].includes(path.extname(filePath))
+      ? "no-cache"
+      : "public, max-age=3600, stale-while-revalidate=86400";
+    res.writeHead(200, {
+      "Content-Type": contentType,
+      "Cache-Control": cacheControl
+    });
+    res.end(req.method === "HEAD" ? undefined : data);
     return;
   }
 
-  fs.readFile(filePath, (error, data) => {
-    if (error) {
-      res.writeHead(404);
-      res.end("Not found");
-      return;
-    }
+  res.writeHead(404);
+  res.end("Not found");
+}
 
-    res.writeHead(200, {
-      "Content-Type": contentTypes[path.extname(filePath)] || "application/octet-stream",
-      "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
-      Pragma: "no-cache",
-      Expires: "0"
-    });
-    res.end(req.method === "HEAD" ? undefined : data);
-  });
+function setSecurityHeaders(req, res) {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Permissions-Policy", "camera=(), geolocation=(), payment=(), usb=()");
+  res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'");
+  if (IS_PRODUCTION) res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+}
+
+function requestOriginAllowed(req) {
+  const origin = String(req.headers.origin || "");
+  if (!origin) return true;
+  const forwardedProto = String(req.headers["x-forwarded-proto"] || "").split(",")[0].trim();
+  const protocol = forwardedProto || (req.socket.encrypted ? "https" : "http");
+  const expected = `${protocol}://${req.headers.host}`;
+  const configured = String(process.env.ALLOWED_ORIGINS || "").split(",").map((value) => value.trim()).filter(Boolean);
+  return origin === expected || configured.includes(origin);
+}
+
+function apiRequiresSession(pathname) {
+  if (!pathname.startsWith("/api/")) return false;
+  return ![
+    "/api/contact", "/api/auth/signup", "/api/auth/login", "/api/auth/logout",
+    "/api/auth/me", "/api/health", "/api/question-bank"
+  ].includes(pathname);
+}
+
+function apiRequiresAdmin(pathname) {
+  return ["/api/autofill-profile", "/api/autofill-suggestions", "/api/cover-letter"].includes(pathname);
 }
 
 async function handleRequest(req, res) {
   try {
+    setSecurityHeaders(req, res);
+    const requestUrl = new URL(req.url, `http://${req.headers.host}`);
+    if (!requestOriginAllowed(req)) {
+      sendJson(res, 403, { error: "Request origin is not allowed." });
+      return;
+    }
     if (req.method === "OPTIONS") {
-      sendJson(res, 200, { ok: true });
+      res.setHeader("Allow", "GET, HEAD, POST, OPTIONS");
+      sendJson(res, 204, {});
       return;
     }
 
-    const requestUrl = new URL(req.url, `http://${req.headers.host}`);
+    const session = getSession(req);
+    if (apiRequiresSession(requestUrl.pathname) && !session) {
+      sendJson(res, 401, { error: "Sign in to use this feature." });
+      return;
+    }
+    if (apiRequiresAdmin(requestUrl.pathname) && session?.role !== "admin") {
+      sendJson(res, 403, { error: "Administrator access is required." });
+      return;
+    }
+    if (req.method === "POST" && requestUrl.pathname.startsWith("/api/")
+        && !allowRequest(req, "api-post", 120, 15 * 60 * 1000)) {
+      res.setHeader("Retry-After", "900");
+      sendJson(res, 429, { error: "Too many requests. Please try again later." });
+      return;
+    }
     if (req.method === "GET" && requestUrl.pathname === "/health/live") {
       sendJson(res, 200, { status: "UP", service: "ai-mock-interviewer" });
       return;
@@ -1321,7 +1455,9 @@ async function handleRequest(req, res) {
     if (req.method === "GET" && requestUrl.pathname === "/health/ready") {
       try {
         getInterviewRoutes();
-        sendJson(res, 200, { status: "READY", persistence: "sqlite", aiMode: OFFLINE_ONLY ? "offline" : LLM_PROVIDER });
+        const database = await databaseHealth();
+        if (database.configured && !database.connected) throw new Error("Account database is unavailable.");
+        sendJson(res, 200, { status: "READY", persistence: "sqlite", accounts: database.engine, aiMode: OFFLINE_ONLY ? "offline" : LLM_PROVIDER });
       } catch (error) {
         sendJson(res, 503, { status: "NOT_READY", error: error.message });
       }
@@ -1363,12 +1499,17 @@ async function handleRequest(req, res) {
     }
 
     if (req.method === "POST" && req.url === "/api/auth/signup") {
+      if (!allowRequest(req, "signup", 5, 60 * 60 * 1000)) {
+        res.setHeader("Retry-After", "3600");
+        sendJson(res, 429, { error: "Too many signup attempts. Please try again later." });
+        return;
+      }
       const input = await readBody(req);
       const name = String(input.name || "").trim();
       const email = String(input.email || "").trim().toLowerCase();
       const password = String(input.password || "");
-      if (!name || !isValidEmail(email) || password.length < 8) {
-        sendJson(res, 400, { error: "Enter your name, a valid email, and a password of at least 8 characters." });
+      if (!name || name.length > 100 || !isValidEmail(email) || email.length > 254 || password.length < 8 || password.length > 128) {
+        sendJson(res, 400, { error: "Enter a valid name and email, plus a password between 8 and 128 characters." });
         return;
       }
       if (await findUserByEmail(email)) {
@@ -1396,9 +1537,18 @@ async function handleRequest(req, res) {
     }
 
     if (req.method === "POST" && req.url === "/api/auth/login") {
+      if (!allowRequest(req, "login", 10, 15 * 60 * 1000)) {
+        res.setHeader("Retry-After", "900");
+        sendJson(res, 429, { error: "Too many login attempts. Please try again later." });
+        return;
+      }
       const input = await readBody(req);
       const email = String(input.email || "").trim().toLowerCase();
       const password = String(input.password || "");
+      if (email.length > 254 || password.length > 128) {
+        sendJson(res, 401, { error: "Incorrect email or password." });
+        return;
+      }
       const user = await findUserByEmail(email);
       if (!user || !verifyPassword(password, user.passwordHash)) {
         sendJson(res, 401, { error: "Incorrect email or password." });
@@ -1451,6 +1601,16 @@ async function handleRequest(req, res) {
           provider: "claude",
           model: CLAUDE_MODEL,
           claudeConfigured: Boolean(claudeClient),
+          database
+        });
+        return;
+      }
+      if (LLM_PROVIDER === "openai") {
+        sendJson(res, 200, {
+          ok: Boolean(OPENAI_API_KEY),
+          provider: "openai",
+          model: OPENAI_MODEL,
+          openaiConfigured: Boolean(OPENAI_API_KEY),
           database
         });
         return;
@@ -1513,7 +1673,7 @@ async function handleRequest(req, res) {
         });
       } catch {
         sendJson(res, 200, {
-          coverLetter: `Dear Hiring Team,\n\nI am interested in this opportunity because it aligns strongly with my background as a Senior DevOps and Platform Engineer with 7 years of experience across GCP, Kubernetes, Terraform, CI/CD, cloud security, observability, and reliability engineering. I have designed secure GCP platform foundations, built reusable Terraform modules, managed production GKE clusters, improved monitoring with Prometheus, Grafana, ELK, and Google Cloud Operations, and supported highly available cloud-native platforms across enterprise environments.\n\nMy recent work includes GCP landing zones, Shared VPC, IAM governance, Cloud Armor, Terraform Enterprise, Git-based delivery workflows, and Kubernetes operations. I also bring hands-on exposure to MLOps and AI infrastructure, including MLflow, FastAPI model serving, Vertex AI, and Kubernetes-based ML deployment workflows.\n\nI would welcome the chance to contribute to your engineering team by improving platform reliability, delivery speed, security posture, and developer experience.\n\nBest regards,\nAkhilesh Ranjan Singh`,
+          coverLetter: `Dear Hiring Team,\n\nI am interested in this opportunity because it aligns with the experience and skills in my saved applicant profile. My background includes cloud infrastructure, automation, delivery pipelines, reliability, security, and observability.\n\nI would welcome the opportunity to discuss how that experience could contribute to your engineering team.\n\nBest regards,\n${profile.fullName || "Candidate"}`,
           fallback: true
         });
       }
@@ -1534,7 +1694,9 @@ async function handleRequest(req, res) {
         return;
       }
       try {
-        sendJson(res, 200, { feedback: await askLLM(feedbackPrompt(input)) });
+        const feedback = await askLLM(feedbackPrompt(input));
+        if (!isValidQuestionFeedback(feedback)) throw new Error("LLM feedback failed the accuracy or format gate.");
+        sendJson(res, 200, { feedback, validated: true, fallback: false });
       } catch {
         sendJson(res, 200, {
           feedback: fallbackQuestionFeedback(input),
@@ -1674,15 +1836,20 @@ async function handleRequest(req, res) {
 
     sendJson(res, 405, { error: "Method not allowed." });
   } catch (error) {
-    sendJson(res, 500, {
+    const status = Number(error.statusCode) || 500;
+    if (status >= 500) console.error("Request failed:", error.message);
+    sendJson(res, status, {
       error: error.message.includes("fetch failed")
-        ? "Could not reach Ollama. Start it with `ollama serve` and try again."
+        ? (LLM_PROVIDER === "openai" ? "Could not reach the OpenAI API." : "Could not reach Ollama. Start it with `ollama serve` and try again.")
         : error.message
     });
   }
 }
 
 const server = http.createServer(handleRequest);
+server.headersTimeout = 15_000;
+server.requestTimeout = 120_000;
+server.keepAliveTimeout = 5_000;
 
 if (require.main === module) {
   server.listen(PORT, HOST, () => {
@@ -1691,11 +1858,23 @@ if (require.main === module) {
       console.log("Offline mode enabled. Using the built-in question bank and feedback templates.");
     } else if (LLM_PROVIDER === "claude") {
       console.log(`Using Claude model ${CLAUDE_MODEL}`);
+    } else if (LLM_PROVIDER === "openai") {
+      console.log(`Using OpenAI model ${OPENAI_MODEL}`);
     } else {
       console.log(`Using Ollama model ${OLLAMA_MODEL} at ${OLLAMA_URL}`);
       warmOllama();
     }
   });
+  const shutdown = (signal) => {
+    console.log(`${signal} received; shutting down.`);
+    server.close(async () => {
+      if (db) await db.end().catch(() => {});
+      process.exit(0);
+    });
+    setTimeout(() => process.exit(1), 10_000).unref();
+  };
+  process.once("SIGTERM", () => shutdown("SIGTERM"));
+  process.once("SIGINT", () => shutdown("SIGINT"));
 }
 
 module.exports = handleRequest;

@@ -17,13 +17,14 @@ function createInterviewRoutes(options) {
     const match = pathname.match(/^\/api\/v1\/interviews\/([^/]+)(?:\/(start|questions\/next|answers|complete|report))?$/);
     if (!match) return false;
     const [, id, action] = match;
+    const userId = currentUserId(req);
     try {
-      if (req.method === "GET" && !action) sendJson(res, 200, { interview: service.get(id) });
-      else if (req.method === "POST" && action === "start") sendJson(res, 200, { interview: service.start(id) });
-      else if (req.method === "POST" && action === "questions/next") sendJson(res, 200, await service.nextQuestion(id));
-      else if (req.method === "POST" && action === "answers") sendJson(res, 201, { answer: service.submitAnswer(id, await readBody(req)) });
-      else if (req.method === "POST" && action === "complete") sendJson(res, 200, { interview: service.complete(id) });
-      else if (req.method === "GET" && action === "report") sendJson(res, 200, { report: service.report(id) });
+      if (req.method === "GET" && !action) sendJson(res, 200, { interview: service.get(id, userId) });
+      else if (req.method === "POST" && action === "start") sendJson(res, 200, { interview: service.start(id, userId) });
+      else if (req.method === "POST" && action === "questions/next") sendJson(res, 200, await service.nextQuestion(id, userId));
+      else if (req.method === "POST" && action === "answers") sendJson(res, 201, { answer: service.submitAnswer(id, await readBody(req), userId) });
+      else if (req.method === "POST" && action === "complete") sendJson(res, 200, { interview: service.complete(id, userId) });
+      else if (req.method === "GET" && action === "report") sendJson(res, 200, { report: service.report(id, userId) });
       else sendJson(res, 405, { error: { code: "METHOD_NOT_ALLOWED", message: "Method not allowed.", requestId } });
     } catch (error) { errorResponse(res, error, requestId); }
     return true;

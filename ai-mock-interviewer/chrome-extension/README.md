@@ -38,5 +38,5 @@ manually select your résumé file from the file picker.
 
 ## Update Your Data
 
-Edit `data/applicant-profile.json` (in the project root) to add expected CTC, current CTC, notice period,
+Copy `data/applicant-profile.example.json` to the git-ignored `data/applicant-profile.json`, then edit it to add expected CTC, current CTC, notice period,
 portfolio links, or preferred locations — the autofill and cover-letter generator both read from this file.

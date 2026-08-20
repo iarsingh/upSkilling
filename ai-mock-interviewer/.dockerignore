@@ -1,0 +1,14 @@
+.git
+.vercel
+.env
+.DS_Store
+node_modules
+logs
+*.bak
+data/*.sqlite
+data/*.sqlite-shm
+data/*.sqlite-wal
+data/users.json
+data/contacts.json
+data/session-secret.txt
+youtube-podcast-videos

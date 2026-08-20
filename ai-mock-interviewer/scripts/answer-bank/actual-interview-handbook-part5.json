@@ -1,0 +1,5202 @@
+[
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is MLOps?",
+    "originalNumber": 1871
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Comparison",
+    "question": "How is MLOps different from DevOps?",
+    "originalNumber": 1872
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What are the main stages of an ML lifecycle?",
+    "originalNumber": 1873
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between model training and model serving?",
+    "originalNumber": 1874
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a machine-learning pipeline?",
+    "originalNumber": 1875
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is model experimentation?",
+    "originalNumber": 1876
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is feature engineering?",
+    "originalNumber": 1877
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is model validation?",
+    "originalNumber": 1878
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is model deployment?",
+    "originalNumber": 1879
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is model monitoring?",
+    "originalNumber": 1880
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is model retraining?",
+    "originalNumber": 1881
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is model governance?",
+    "originalNumber": 1882
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is model versioning?",
+    "originalNumber": 1883
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is experiment tracking?",
+    "originalNumber": 1884
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a model registry?",
+    "originalNumber": 1885
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an ML metadata store?",
+    "originalNumber": 1886
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is reproducibility in machine learning?",
+    "originalNumber": 1887
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Why is reproducibility important?",
+    "originalNumber": 1888
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you make an ML experiment reproducible?",
+    "originalNumber": 1889
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you version training data?",
+    "originalNumber": 1890
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you version model code?",
+    "originalNumber": 1891
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you version model artifacts?",
+    "originalNumber": 1892
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you version configuration?",
+    "originalNumber": 1893
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you track hyperparameters?",
+    "originalNumber": 1894
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you track evaluation metrics?",
+    "originalNumber": 1895
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Comparison",
+    "question": "How do you compare multiple model runs?",
+    "originalNumber": 1896
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is lineage in MLOps?",
+    "originalNumber": 1897
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you trace a production model back to its data and code?",
+    "originalNumber": 1898
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a champion model?",
+    "originalNumber": 1899
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLOps Fundamentals",
+    "category": "MLOps Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a challenger model?",
+    "originalNumber": 1900
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "How do you automate model training?",
+    "originalNumber": 1901
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "How do you schedule model training?",
+    "originalNumber": 1902
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "How do you trigger retraining based on new data?",
+    "originalNumber": 1903
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Troubleshooting",
+    "question": "How do you trigger retraining based on model drift?",
+    "originalNumber": 1904
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "How do you choose compute for model training?",
+    "originalNumber": 1905
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Comparison",
+    "question": "When would you use CPU versus GPU for training?",
+    "originalNumber": 1906
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "How do you scale distributed training?",
+    "originalNumber": 1907
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "What is hyperparameter tuning?",
+    "originalNumber": 1908
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "How do you automate hyperparameter tuning?",
+    "originalNumber": 1909
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "What metrics do you use to evaluate a classification model?",
+    "originalNumber": 1910
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "What metrics do you use to evaluate a regression model?",
+    "originalNumber": 1911
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "What is precision?",
+    "originalNumber": 1912
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "What is recall?",
+    "originalNumber": 1913
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "What is F1 score?",
+    "originalNumber": 1914
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "What is accuracy?",
+    "originalNumber": 1915
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "Why can accuracy be misleading?",
+    "originalNumber": 1916
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "What is ROC-AUC?",
+    "originalNumber": 1917
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "What is a confusion matrix?",
+    "originalNumber": 1918
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "What is mean absolute error?",
+    "originalNumber": 1919
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "What is root mean square error?",
+    "originalNumber": 1920
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "How do you define model acceptance criteria?",
+    "originalNumber": 1921
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Troubleshooting",
+    "question": "What should happen if a model fails validation?",
+    "originalNumber": 1922
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Comparison",
+    "question": "How do you compare a new model with the current production model?",
+    "originalNumber": 1923
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "How do you validate model performance before deployment?",
+    "originalNumber": 1924
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "How do you validate a model on unseen data?",
+    "originalNumber": 1925
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "What is data leakage?",
+    "originalNumber": 1926
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "How do you prevent data leakage?",
+    "originalNumber": 1927
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "What is cross-validation?",
+    "originalNumber": 1928
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "How do you detect overfitting?",
+    "originalNumber": 1929
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Training and Validation",
+    "category": "Model Training and Validation",
+    "questionType": "Conceptual",
+    "question": "How do you detect underfitting?",
+    "originalNumber": 1930
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How do you deploy an ML model to production?",
+    "originalNumber": 1931
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "What deployment patterns are used for ML models?",
+    "originalNumber": 1932
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "What is online inference?",
+    "originalNumber": 1933
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "What is batch inference?",
+    "originalNumber": 1934
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "What is streaming inference?",
+    "originalNumber": 1935
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "When would you choose online inference?",
+    "originalNumber": 1936
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "When would you choose batch inference?",
+    "originalNumber": 1937
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How do you package an ML model?",
+    "originalNumber": 1938
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How do you containerize a model-serving application?",
+    "originalNumber": 1939
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How do you expose a model through FastAPI?",
+    "originalNumber": 1940
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How do you deploy a model to Kubernetes?",
+    "originalNumber": 1941
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How do you deploy a model to Cloud Run?",
+    "originalNumber": 1942
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How do you deploy a model to Vertex AI Endpoint?",
+    "originalNumber": 1943
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Comparison",
+    "question": "How do you select between GKE, Cloud Run and Vertex AI Endpoint?",
+    "originalNumber": 1944
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "What is model serving?",
+    "originalNumber": 1945
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "What is an inference server?",
+    "originalNumber": 1946
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "What is TensorFlow Serving?",
+    "originalNumber": 1947
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "What is TorchServe?",
+    "originalNumber": 1948
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "What is Triton Inference Server?",
+    "originalNumber": 1949
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "What is vLLM?",
+    "originalNumber": 1950
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How do you deploy a large language model using vLLM?",
+    "originalNumber": 1951
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How do you expose GPU inference through Kubernetes?",
+    "originalNumber": 1952
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How do you handle model initialization time?",
+    "originalNumber": 1953
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Troubleshooting",
+    "question": "How do you reduce cold-start latency?",
+    "originalNumber": 1954
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How do you manage large model files?",
+    "originalNumber": 1955
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "Where do you store model artifacts?",
+    "originalNumber": 1956
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How does a serving container download a model artifact?",
+    "originalNumber": 1957
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How do you authenticate access to model artifacts?",
+    "originalNumber": 1958
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How do you roll back a model deployment?",
+    "originalNumber": 1959
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Deployment",
+    "category": "Model Deployment",
+    "questionType": "Conceptual",
+    "question": "How do you perform zero-downtime model deployment?",
+    "originalNumber": 1960
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you perform canary deployment for an ML model?",
+    "originalNumber": 1961
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you perform blue-green deployment for a model?",
+    "originalNumber": 1962
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "What is shadow deployment?",
+    "originalNumber": 1963
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "What is A/B testing for models?",
+    "originalNumber": 1964
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Comparison",
+    "question": "What is the difference between canary and A/B testing?",
+    "originalNumber": 1965
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "What is champion-challenger deployment?",
+    "originalNumber": 1966
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you send a small percentage of traffic to a new model?",
+    "originalNumber": 1967
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "What metrics do you observe during a model canary?",
+    "originalNumber": 1968
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Comparison",
+    "question": "How do you compare business metrics between model versions?",
+    "originalNumber": 1969
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you automatically roll back a poor-performing model?",
+    "originalNumber": 1970
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "What happens if a model is technically healthy but produces bad predictions?",
+    "originalNumber": 1971
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you validate a model after production deployment?",
+    "originalNumber": 1972
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you manage model approvals?",
+    "originalNumber": 1973
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "Who should approve a model before production?",
+    "originalNumber": 1974
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you implement a manual approval gate?",
+    "originalNumber": 1975
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you promote a model from staging to production?",
+    "originalNumber": 1976
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you ensure the same model artifact is promoted?",
+    "originalNumber": 1977
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you prevent model retraining during deployment?",
+    "originalNumber": 1978
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you handle incompatible feature changes?",
+    "originalNumber": 1979
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Release Strategies",
+    "category": "Model Release Strategies",
+    "questionType": "Conceptual",
+    "question": "How do you roll out a new feature schema safely?",
+    "originalNumber": 1980
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "What do you monitor for an ML model in production?",
+    "originalNumber": 1981
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Comparison",
+    "question": "How is model monitoring different from application monitoring?",
+    "originalNumber": 1982
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Troubleshooting",
+    "question": "What is prediction drift?",
+    "originalNumber": 1983
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Troubleshooting",
+    "question": "What is data drift?",
+    "originalNumber": 1984
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Troubleshooting",
+    "question": "What is concept drift?",
+    "originalNumber": 1985
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Troubleshooting",
+    "question": "What is feature drift?",
+    "originalNumber": 1986
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Troubleshooting",
+    "question": "What is label drift?",
+    "originalNumber": 1987
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Troubleshooting",
+    "question": "How do you detect drift?",
+    "originalNumber": 1988
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Troubleshooting",
+    "question": "What statistical methods can detect data drift?",
+    "originalNumber": 1989
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "What is population stability index?",
+    "originalNumber": 1990
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "What is KL divergence?",
+    "originalNumber": 1991
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "What is Jensen-Shannon divergence?",
+    "originalNumber": 1992
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "What is Kolmogorov-Smirnov testing?",
+    "originalNumber": 1993
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "How do you monitor feature distributions?",
+    "originalNumber": 1994
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "How do you monitor prediction distributions?",
+    "originalNumber": 1995
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "How do you monitor model confidence?",
+    "originalNumber": 1996
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "How do you detect model degradation without immediate labels?",
+    "originalNumber": 1997
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "How do delayed labels affect monitoring?",
+    "originalNumber": 1998
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "How do you correlate model performance with data changes?",
+    "originalNumber": 1999
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "What threshold should trigger retraining?",
+    "originalNumber": 2000
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "How do you avoid retraining too frequently?",
+    "originalNumber": 2001
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "What operational metrics should a model endpoint expose?",
+    "originalNumber": 2002
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Troubleshooting",
+    "question": "How do you monitor p95 and p99 inference latency?",
+    "originalNumber": 2003
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "How do you monitor model throughput?",
+    "originalNumber": 2004
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Troubleshooting",
+    "question": "How do you monitor failed predictions?",
+    "originalNumber": 2005
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "How do you monitor GPU utilization?",
+    "originalNumber": 2006
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "How do you monitor memory consumption of a model server?",
+    "originalNumber": 2007
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "How do you detect model-serving saturation?",
+    "originalNumber": 2008
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "How do you monitor model fairness?",
+    "originalNumber": 2009
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Model Monitoring",
+    "category": "Model Monitoring",
+    "questionType": "Conceptual",
+    "question": "How do you alert on model-quality degradation?",
+    "originalNumber": 2010
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "What is MLflow?",
+    "originalNumber": 2011
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "What are the main components of MLflow?",
+    "originalNumber": 2012
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "What is MLflow Tracking?",
+    "originalNumber": 2013
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "What is MLflow Models?",
+    "originalNumber": 2014
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "What is MLflow Model Registry?",
+    "originalNumber": 2015
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "What is an MLflow experiment?",
+    "originalNumber": 2016
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "What is an MLflow run?",
+    "originalNumber": 2017
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "What information can be logged in an MLflow run?",
+    "originalNumber": 2018
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you log parameters?",
+    "originalNumber": 2019
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you log metrics?",
+    "originalNumber": 2020
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you log artifacts?",
+    "originalNumber": 2021
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Comparison",
+    "question": "How do you compare MLflow runs?",
+    "originalNumber": 2022
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you organize experiments?",
+    "originalNumber": 2023
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "Where does MLflow store metadata?",
+    "originalNumber": 2024
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "Where does MLflow store artifacts?",
+    "originalNumber": 2025
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you configure MLflow with Cloud Storage?",
+    "originalNumber": 2026
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you use PostgreSQL as the MLflow backend store?",
+    "originalNumber": 2027
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you deploy MLflow on Kubernetes?",
+    "originalNumber": 2028
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you make MLflow highly available?",
+    "originalNumber": 2029
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you secure the MLflow tracking server?",
+    "originalNumber": 2030
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you add authentication to MLflow?",
+    "originalNumber": 2031
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you manage model versions in MLflow?",
+    "originalNumber": 2032
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "What are model aliases?",
+    "originalNumber": 2033
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "What are model stages?",
+    "originalNumber": 2034
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you promote a model to production?",
+    "originalNumber": 2035
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you implement approval before model promotion?",
+    "originalNumber": 2036
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you retrieve a registered model?",
+    "originalNumber": 2037
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you roll back to a previous model version?",
+    "originalNumber": 2038
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How do you integrate MLflow with CI/CD?",
+    "originalNumber": 2039
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "MLflow",
+    "category": "MLflow",
+    "questionType": "Conceptual",
+    "question": "How did you reduce model promotion time using MLflow?",
+    "originalNumber": 2040
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "What is Kubeflow?",
+    "originalNumber": 2041
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "What problems does Kubeflow solve?",
+    "originalNumber": 2042
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "What are Kubeflow Pipelines?",
+    "originalNumber": 2043
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "What is a pipeline component?",
+    "originalNumber": 2044
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "What is a pipeline run?",
+    "originalNumber": 2045
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you define dependencies between pipeline steps?",
+    "originalNumber": 2046
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you pass artifacts between components?",
+    "originalNumber": 2047
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you pass parameters between components?",
+    "originalNumber": 2048
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "What is pipeline caching?",
+    "originalNumber": 2049
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you disable caching for a pipeline step?",
+    "originalNumber": 2050
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you schedule a Kubeflow pipeline?",
+    "originalNumber": 2051
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Troubleshooting",
+    "question": "How do you retry a failed pipeline step?",
+    "originalNumber": 2052
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Troubleshooting",
+    "question": "How do you resume a failed pipeline?",
+    "originalNumber": 2053
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you manage secrets in Kubeflow?",
+    "originalNumber": 2054
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do Kubeflow workloads access Cloud Storage?",
+    "originalNumber": 2055
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you use Workload Identity with Kubeflow?",
+    "originalNumber": 2056
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "What is Katib?",
+    "originalNumber": 2057
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How does Katib perform hyperparameter tuning?",
+    "originalNumber": 2058
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "What are Kubeflow notebooks?",
+    "originalNumber": 2059
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you isolate notebook users?",
+    "originalNumber": 2060
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you allocate GPUs to training jobs?",
+    "originalNumber": 2061
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you deploy Kubeflow on GKE?",
+    "originalNumber": 2062
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you upgrade Kubeflow?",
+    "originalNumber": 2063
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you monitor Kubeflow pipelines?",
+    "originalNumber": 2064
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot failed pipeline pods?",
+    "originalNumber": 2065
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you handle large pipeline artifacts?",
+    "originalNumber": 2066
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Comparison",
+    "question": "How do you manage namespaces for different teams?",
+    "originalNumber": 2067
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you implement multi-tenancy in Kubeflow?",
+    "originalNumber": 2068
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Conceptual",
+    "question": "How do you integrate Kubeflow with MLflow?",
+    "originalNumber": 2069
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Kubeflow",
+    "category": "Kubeflow",
+    "questionType": "Behavioral",
+    "question": "What challenges have you faced while operating Kubeflow?",
+    "originalNumber": 2070
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "What is Vertex AI?",
+    "originalNumber": 2071
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Behavioral",
+    "question": "Which Vertex AI services have you used?",
+    "originalNumber": 2072
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "What is Vertex AI Workbench?",
+    "originalNumber": 2073
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "What is Vertex AI Pipelines?",
+    "originalNumber": 2074
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "What is a custom training job?",
+    "originalNumber": 2075
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "What is a custom prediction routine?",
+    "originalNumber": 2076
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "What is Vertex AI Model Registry?",
+    "originalNumber": 2077
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "What is a Vertex AI Endpoint?",
+    "originalNumber": 2078
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you deploy a model to a Vertex AI Endpoint?",
+    "originalNumber": 2079
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you split traffic between deployed models?",
+    "originalNumber": 2080
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you autoscale a Vertex AI Endpoint?",
+    "originalNumber": 2081
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you configure minimum and maximum replicas?",
+    "originalNumber": 2082
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you deploy a custom container to Vertex AI?",
+    "originalNumber": 2083
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "What is a pre-built prediction container?",
+    "originalNumber": 2084
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you use GPUs with Vertex AI?",
+    "originalNumber": 2085
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you store training data for Vertex AI?",
+    "originalNumber": 2086
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do Vertex AI Pipelines access Cloud Storage and BigQuery?",
+    "originalNumber": 2087
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you secure Vertex AI resources?",
+    "originalNumber": 2088
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you use service accounts with Vertex AI?",
+    "originalNumber": 2089
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you use VPC connectivity with Vertex AI?",
+    "originalNumber": 2090
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "What is Vertex AI Model Monitoring?",
+    "originalNumber": 2091
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you configure skew detection?",
+    "originalNumber": 2092
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Troubleshooting",
+    "question": "How do you configure drift detection?",
+    "originalNumber": 2093
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you log prediction requests?",
+    "originalNumber": 2094
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Troubleshooting",
+    "question": "How do you monitor endpoint latency?",
+    "originalNumber": 2095
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot endpoint deployment failure?",
+    "originalNumber": 2096
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you manage model versions in Vertex AI?",
+    "originalNumber": 2097
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you automate Vertex AI deployment using Terraform?",
+    "originalNumber": 2098
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "How do you integrate Vertex AI with CI/CD?",
+    "originalNumber": 2099
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Vertex AI",
+    "category": "Vertex AI",
+    "questionType": "Conceptual",
+    "question": "When would you prefer Vertex AI over self-managed GKE?",
+    "originalNumber": 2100
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "What infrastructure is required to host an LLM?",
+    "originalNumber": 2101
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "How do you choose GPU types for inference?",
+    "originalNumber": 2102
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "What is GPU memory?",
+    "originalNumber": 2103
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "What is model quantization?",
+    "originalNumber": 2104
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "How does quantization reduce resource usage?",
+    "originalNumber": 2105
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "What is tensor parallelism?",
+    "originalNumber": 2106
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "What is pipeline parallelism?",
+    "originalNumber": 2107
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "What is model parallelism?",
+    "originalNumber": 2108
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "What is data parallelism?",
+    "originalNumber": 2109
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "What is continuous batching?",
+    "originalNumber": 2110
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "How does vLLM improve inference throughput?",
+    "originalNumber": 2111
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "What is KV cache?",
+    "originalNumber": 2112
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "Why is KV-cache memory important?",
+    "originalNumber": 2113
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "What is token throughput?",
+    "originalNumber": 2114
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "What is time to first token?",
+    "originalNumber": 2115
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Troubleshooting",
+    "question": "What is inter-token latency?",
+    "originalNumber": 2116
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "How do you monitor LLM inference performance?",
+    "originalNumber": 2117
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "How do you autoscale LLM workloads?",
+    "originalNumber": 2118
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "Why is CPU-based HPA insufficient for some GPU workloads?",
+    "originalNumber": 2119
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "What custom metrics can be used for LLM autoscaling?",
+    "originalNumber": 2120
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "How do you schedule GPU workloads in Kubernetes?",
+    "originalNumber": 2121
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "What is the NVIDIA device plugin?",
+    "originalNumber": 2122
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "How do you isolate GPUs between workloads?",
+    "originalNumber": 2123
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "What are GPU node pools?",
+    "originalNumber": 2124
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "How do you reduce GPU cost?",
+    "originalNumber": 2125
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "How do you prevent GPU nodes from sitting idle?",
+    "originalNumber": 2126
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "How do you handle model-loading time during autoscaling?",
+    "originalNumber": 2127
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "How do you store and distribute large model weights?",
+    "originalNumber": 2128
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "How do you secure an LLM endpoint?",
+    "originalNumber": 2129
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LLM and AI Infrastructure",
+    "category": "LLM and AI Infrastructure",
+    "questionType": "Conceptual",
+    "question": "How do you rate-limit an LLM API?",
+    "originalNumber": 2130
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "What is LangFuse?",
+    "originalNumber": 2131
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "What problems does LangFuse solve?",
+    "originalNumber": 2132
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "What is LLM observability?",
+    "originalNumber": 2133
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "What is a prompt trace?",
+    "originalNumber": 2134
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "How do you track prompt versions?",
+    "originalNumber": 2135
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "How do you measure token usage?",
+    "originalNumber": 2136
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "How do you monitor LLM cost?",
+    "originalNumber": 2137
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Troubleshooting",
+    "question": "How do you monitor LLM latency?",
+    "originalNumber": 2138
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "How do you track user feedback?",
+    "originalNumber": 2139
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "How do you evaluate response quality?",
+    "originalNumber": 2140
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "What is hallucination monitoring?",
+    "originalNumber": 2141
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Troubleshooting",
+    "question": "How do you detect failed or low-quality generations?",
+    "originalNumber": 2142
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "How do you correlate an LLM response with its prompt and model version?",
+    "originalNumber": 2143
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "How do you monitor retrieval-augmented generation?",
+    "originalNumber": 2144
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "What is a vector database?",
+    "originalNumber": 2145
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "Why are vector databases used in AI applications?",
+    "originalNumber": 2146
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "What is an embedding?",
+    "originalNumber": 2147
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "What is similarity search?",
+    "originalNumber": 2148
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "What is cosine similarity?",
+    "originalNumber": 2149
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "What is approximate nearest-neighbour search?",
+    "originalNumber": 2150
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Behavioral",
+    "question": "Which vector databases have you worked with?",
+    "originalNumber": 2151
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "How do you choose a vector database?",
+    "originalNumber": 2152
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "How do you update embeddings?",
+    "originalNumber": 2153
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "How do you version an embedding model?",
+    "originalNumber": 2154
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "What happens if the embedding model changes?",
+    "originalNumber": 2155
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Troubleshooting",
+    "question": "How do you monitor vector-search latency?",
+    "originalNumber": 2156
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "How do you secure vector data?",
+    "originalNumber": 2157
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "How do you handle data deletion in a vector database?",
+    "originalNumber": 2158
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "How do you scale vector search?",
+    "originalNumber": 2159
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "LangFuse, LLM Observability and Vector Databases",
+    "category": "LangFuse, LLM Observability and Vector Databases",
+    "questionType": "Conceptual",
+    "question": "How do you back up a vector database?",
+    "originalNumber": 2160
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "What is a data pipeline?",
+    "originalNumber": 2161
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Comparison",
+    "question": "What is the difference between ETL and ELT?",
+    "originalNumber": 2162
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "What is batch processing?",
+    "originalNumber": 2163
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "What is stream processing?",
+    "originalNumber": 2164
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "What is data ingestion?",
+    "originalNumber": 2165
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you validate incoming data?",
+    "originalNumber": 2166
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "What is schema validation?",
+    "originalNumber": 2167
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you handle schema evolution?",
+    "originalNumber": 2168
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "What is data-quality monitoring?",
+    "originalNumber": 2169
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "What data-quality checks would you add?",
+    "originalNumber": 2170
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you handle duplicate records?",
+    "originalNumber": 2171
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you make a data pipeline idempotent?",
+    "originalNumber": 2172
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you handle late-arriving data?",
+    "originalNumber": 2173
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Troubleshooting",
+    "question": "How do you retry failed batches?",
+    "originalNumber": 2174
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you avoid processing the same batch twice?",
+    "originalNumber": 2175
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you track data lineage?",
+    "originalNumber": 2176
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you monitor pipeline throughput?",
+    "originalNumber": 2177
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you monitor pipeline lag?",
+    "originalNumber": 2178
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you handle poison records?",
+    "originalNumber": 2179
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Troubleshooting",
+    "question": "How do you send failed records to a dead-letter queue?",
+    "originalNumber": 2180
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you package a Python data pipeline?",
+    "originalNumber": 2181
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you expose a pipeline through a CLI?",
+    "originalNumber": 2182
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you test a data pipeline locally?",
+    "originalNumber": 2183
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you write unit tests for pipeline components?",
+    "originalNumber": 2184
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you write integration tests for a pipeline?",
+    "originalNumber": 2185
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you run the pipeline in GitHub Actions?",
+    "originalNumber": 2186
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you test multiple batch sizes?",
+    "originalNumber": 2187
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you manage sample input data?",
+    "originalNumber": 2188
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot a failed pipeline test?",
+    "originalNumber": 2189
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Data Pipelines",
+    "category": "Data Pipelines",
+    "questionType": "Conceptual",
+    "question": "How do you deploy a data pipeline to production?",
+    "originalNumber": 2190
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "Explain one production application architecture you designed on GCP.",
+    "originalNumber": 2191
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "Explain the complete request flow from user to backend.",
+    "originalNumber": 2192
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "How does DNS resolve the application hostname?",
+    "originalNumber": 2193
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "How does traffic reach the global load balancer?",
+    "originalNumber": 2194
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "How does Cloud Armor inspect the request?",
+    "originalNumber": 2195
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "How does the load balancer choose the backend?",
+    "originalNumber": 2196
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "How does traffic reach GKE or Cloud Run?",
+    "originalNumber": 2197
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "How does the application access a database?",
+    "originalNumber": 2198
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "How does the application access secrets?",
+    "originalNumber": 2199
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "How are application logs and metrics collected?",
+    "originalNumber": 2200
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Design / Architecture",
+    "question": "How do you design for high availability?",
+    "originalNumber": 2201
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Troubleshooting",
+    "question": "How do you remove single points of failure?",
+    "originalNumber": 2202
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Design / Architecture",
+    "question": "How do you design a multi-zone application?",
+    "originalNumber": 2203
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "When would you choose a multi-region architecture?",
+    "originalNumber": 2204
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Troubleshooting",
+    "question": "How do you handle regional failure?",
+    "originalNumber": 2205
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "How do you route users to a secondary region?",
+    "originalNumber": 2206
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "How do you replicate application data?",
+    "originalNumber": 2207
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Design / Architecture",
+    "question": "How do you design disaster recovery?",
+    "originalNumber": 2208
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "What are the RTO and RPO of your architecture?",
+    "originalNumber": 2209
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Cloud and Platform Architecture",
+    "category": "Cloud and Platform Architecture",
+    "questionType": "Conceptual",
+    "question": "How do you test the DR architecture?",
+    "originalNumber": 2210
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design a highly available web application on GCP.",
+    "originalNumber": 2211
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design an application capable of handling 10× traffic.",
+    "originalNumber": 2212
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design a Kubernetes platform for multiple development teams.",
+    "originalNumber": 2213
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design a secure GKE cluster for production.",
+    "originalNumber": 2214
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design a centralized CI/CD platform for 300 microservices.",
+    "originalNumber": 2215
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design a GitOps deployment architecture.",
+    "originalNumber": 2216
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design a multi-project GCP landing zone.",
+    "originalNumber": 2217
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design Shared VPC for production and non-production projects.",
+    "originalNumber": 2218
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design IAM for developers, operations and security teams.",
+    "originalNumber": 2219
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design organization policies for 150 projects.",
+    "originalNumber": 2220
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design a centralized secrets-management solution.",
+    "originalNumber": 2221
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design centralized monitoring and logging.",
+    "originalNumber": 2222
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design an incident-management process.",
+    "originalNumber": 2223
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design a multi-region disaster-recovery architecture.",
+    "originalNumber": 2224
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design an ML platform on GKE.",
+    "originalNumber": 2225
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design an end-to-end model-training pipeline.",
+    "originalNumber": 2226
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design a real-time model-inference platform.",
+    "originalNumber": 2227
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design an LLM-serving platform using GPUs.",
+    "originalNumber": 2228
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design a secure external API using Cloud Armor.",
+    "originalNumber": 2229
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design an internal API accessible from on-premises.",
+    "originalNumber": 2230
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design site-to-site connectivity between on-premises and GCP.",
+    "originalNumber": 2231
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design a private Cloud Run architecture.",
+    "originalNumber": 2232
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design a multi-tenant Kubernetes platform.",
+    "originalNumber": 2233
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design artifact promotion from development to production.",
+    "originalNumber": 2234
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design automated rollback based on application metrics.",
+    "originalNumber": 2235
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design database migration without downtime.",
+    "originalNumber": 2236
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design backup and restore for Kubernetes workloads.",
+    "originalNumber": 2237
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design observability for microservices.",
+    "originalNumber": 2238
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design a scalable log-processing platform.",
+    "originalNumber": 2239
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "System Design Scenarios",
+    "category": "System Design Scenarios",
+    "questionType": "Design / Architecture",
+    "question": "Design a platform that supports both VMs and Kubernetes.",
+    "originalNumber": 2240
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "What is platform engineering?",
+    "originalNumber": 2241
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Comparison",
+    "question": "How is platform engineering different from DevOps?",
+    "originalNumber": 2242
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "What is an internal developer platform?",
+    "originalNumber": 2243
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "What is developer self-service?",
+    "originalNumber": 2244
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "What is a golden path?",
+    "originalNumber": 2245
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "What is a paved road?",
+    "originalNumber": 2246
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "What services should a platform team provide?",
+    "originalNumber": 2247
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you standardize CI/CD across teams?",
+    "originalNumber": 2248
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you standardize Terraform modules?",
+    "originalNumber": 2249
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you standardize Kubernetes deployments?",
+    "originalNumber": 2250
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you offer self-service infrastructure?",
+    "originalNumber": 2251
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you control self-service without losing governance?",
+    "originalNumber": 2252
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "What is a service catalogue?",
+    "originalNumber": 2253
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "What is a developer portal?",
+    "originalNumber": 2254
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "What is Backstage?",
+    "originalNumber": 2255
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you measure developer experience?",
+    "originalNumber": 2256
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you measure platform adoption?",
+    "originalNumber": 2257
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you reduce cognitive load for developers?",
+    "originalNumber": 2258
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you maintain reusable platform templates?",
+    "originalNumber": 2259
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you enforce security policies in a platform?",
+    "originalNumber": 2260
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you manage platform version upgrades?",
+    "originalNumber": 2261
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you prevent teams from bypassing the platform?",
+    "originalNumber": 2262
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you gather feedback from developers?",
+    "originalNumber": 2263
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you prioritize platform features?",
+    "originalNumber": 2264
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you manage platform reliability?",
+    "originalNumber": 2265
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "What SLOs would you define for an internal platform?",
+    "originalNumber": 2266
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you support multiple cloud environments?",
+    "originalNumber": 2267
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you implement policy as code?",
+    "originalNumber": 2268
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Conceptual",
+    "question": "How do you implement cost visibility?",
+    "originalNumber": 2269
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Platform Engineering",
+    "category": "Platform Engineering",
+    "questionType": "Design / Architecture",
+    "question": "How do you design a platform roadmap?",
+    "originalNumber": 2270
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "What is FinOps?",
+    "originalNumber": 2271
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you reduce cloud cost?",
+    "originalNumber": 2272
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you identify idle resources?",
+    "originalNumber": 2273
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you right-size virtual machines?",
+    "originalNumber": 2274
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you optimize GKE cost?",
+    "originalNumber": 2275
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you optimize Cloud Run cost?",
+    "originalNumber": 2276
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you optimize storage cost?",
+    "originalNumber": 2277
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you optimize logging cost?",
+    "originalNumber": 2278
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you optimize network-egress cost?",
+    "originalNumber": 2279
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "What are committed-use discounts?",
+    "originalNumber": 2280
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "What are sustained-use discounts?",
+    "originalNumber": 2281
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "What are Spot VMs?",
+    "originalNumber": 2282
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "When should Spot VMs not be used?",
+    "originalNumber": 2283
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you schedule non-production resources?",
+    "originalNumber": 2284
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you enforce labels for cost allocation?",
+    "originalNumber": 2285
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you create project-level budgets?",
+    "originalNumber": 2286
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you configure budget alerts?",
+    "originalNumber": 2287
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you perform chargeback or showback?",
+    "originalNumber": 2288
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you attribute Kubernetes cost to teams?",
+    "originalNumber": 2289
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How did you achieve approximately 20% cloud savings?",
+    "originalNumber": 2290
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you verify that cost optimization did not reduce reliability?",
+    "originalNumber": 2291
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you forecast cloud spend?",
+    "originalNumber": 2292
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you detect unexpected cost spikes?",
+    "originalNumber": 2293
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you control GPU cost?",
+    "originalNumber": 2294
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you optimize artifact-storage cost?",
+    "originalNumber": 2295
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you manage snapshot retention?",
+    "originalNumber": 2296
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you reduce unused static IP costs?",
+    "originalNumber": 2297
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you identify overprovisioned node pools?",
+    "originalNumber": 2298
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you optimize autoscaling thresholds?",
+    "originalNumber": 2299
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "FinOps and Cost Optimization",
+    "category": "FinOps and Cost Optimization",
+    "questionType": "Conceptual",
+    "question": "How do you present cost-saving recommendations to management?",
+    "originalNumber": 2300
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "What is DevSecOps?",
+    "originalNumber": 2301
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you integrate security into CI/CD?",
+    "originalNumber": 2302
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "What is shift-left security?",
+    "originalNumber": 2303
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "What is threat modelling?",
+    "originalNumber": 2304
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you secure an ML platform?",
+    "originalNumber": 2305
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you secure training data?",
+    "originalNumber": 2306
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you protect model artifacts?",
+    "originalNumber": 2307
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you prevent model tampering?",
+    "originalNumber": 2308
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you sign container images?",
+    "originalNumber": 2309
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you verify an image before deployment?",
+    "originalNumber": 2310
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "What is Binary Authorization?",
+    "originalNumber": 2311
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you enforce approved images in GKE?",
+    "originalNumber": 2312
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you scan Terraform code?",
+    "originalNumber": 2313
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you scan Kubernetes manifests?",
+    "originalNumber": 2314
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you scan Helm charts?",
+    "originalNumber": 2315
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you manage security exceptions?",
+    "originalNumber": 2316
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you handle a critical vulnerability before production release?",
+    "originalNumber": 2317
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you remediate a vulnerability in a running container?",
+    "originalNumber": 2318
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you rotate a compromised secret?",
+    "originalNumber": 2319
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you respond to an exposed service-account key?",
+    "originalNumber": 2320
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you secure a public API?",
+    "originalNumber": 2321
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you protect against DDoS?",
+    "originalNumber": 2322
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you implement least privilege in Kubernetes?",
+    "originalNumber": 2323
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you audit privileged workloads?",
+    "originalNumber": 2324
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you detect containers running as root?",
+    "originalNumber": 2325
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you enforce Pod Security Standards?",
+    "originalNumber": 2326
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you secure supply-chain dependencies?",
+    "originalNumber": 2327
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do tools such as Prisma Cloud, Wiz or Security Command Center fit together?",
+    "originalNumber": 2328
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you prioritize vulnerability remediation?",
+    "originalNumber": 2329
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Security and DevSecOps Scenarios",
+    "category": "Security and DevSecOps Scenarios",
+    "questionType": "Conceptual",
+    "question": "How do you prove compliance to an auditor?",
+    "originalNumber": 2330
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "Explain your Kubernetes-native ML platform project.",
+    "originalNumber": 2331
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "What business problem did the platform solve?",
+    "originalNumber": 2332
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "What was your exact responsibility?",
+    "originalNumber": 2333
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "What architecture did you use?",
+    "originalNumber": 2334
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "Why did you choose GKE?",
+    "originalNumber": 2335
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "Why did you use MLflow?",
+    "originalNumber": 2336
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "Why did you use Kubeflow?",
+    "originalNumber": 2337
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did Docker and Helm fit into the platform?",
+    "originalNumber": 2338
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did Terraform provision the platform?",
+    "originalNumber": 2339
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did Argo CD support deployment?",
+    "originalNumber": 2340
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you secure the platform?",
+    "originalNumber": 2341
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did data scientists access it?",
+    "originalNumber": 2342
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Comparison",
+    "question": "How did you isolate different users or teams?",
+    "originalNumber": 2343
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you store model artifacts?",
+    "originalNumber": 2344
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you monitor model endpoints?",
+    "originalNumber": 2345
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you improve reliability by approximately 45%?",
+    "originalNumber": 2346
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you reduce model-promotion time from four days to under four hours?",
+    "originalNumber": 2347
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Troubleshooting",
+    "question": "How did you reduce p99 inference latency?",
+    "originalNumber": 2348
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you tune HPA and resource requests?",
+    "originalNumber": 2349
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "What production issues did you face?",
+    "originalNumber": 2350
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "Explain your Cloud Armor Terraform project.",
+    "originalNumber": 2351
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "Which WAF rules did you implement?",
+    "originalNumber": 2352
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you handle false positives?",
+    "originalNumber": 2353
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you implement rate limiting?",
+    "originalNumber": 2354
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you implement threat-intelligence rules?",
+    "originalNumber": 2355
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "What Terraform issues did you encounter?",
+    "originalNumber": 2356
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you resolve provider-schema mismatches?",
+    "originalNumber": 2357
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "Explain your Terraform GKE module.",
+    "originalNumber": 2358
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Design / Architecture",
+    "question": "How did you design reusable node-pool configuration?",
+    "originalNumber": 2359
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you implement Workload Identity?",
+    "originalNumber": 2360
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you manage Terraform state?",
+    "originalNumber": 2361
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you test Terraform changes?",
+    "originalNumber": 2362
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "Explain your CI/CD platform project.",
+    "originalNumber": 2363
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "What stages were included?",
+    "originalNumber": 2364
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you improve deployment efficiency by approximately 30%?",
+    "originalNumber": 2365
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you reduce manual effort by approximately 60%?",
+    "originalNumber": 2366
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you integrate ServiceNow?",
+    "originalNumber": 2367
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "How did you migrate pipelines between source-control platforms?",
+    "originalNumber": 2368
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "Explain your school-management-system deployment.",
+    "originalNumber": 2369
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Project-Based Questions",
+    "category": "Project-Based Questions",
+    "questionType": "Conceptual",
+    "question": "Explain your Apigee PSC and policy-based-routing design.",
+    "originalNumber": 2370
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "A model endpoint is healthy but predictions are incorrect. What would you investigate?",
+    "originalNumber": 2371
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "Model latency increased after a new release. How would you isolate the cause?",
+    "originalNumber": 2372
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "GPU utilization is low while requests are queuing. What could be wrong?",
+    "originalNumber": 2373
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "A model-serving pod is OOMKilled. What would you check?",
+    "originalNumber": 2374
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "Kubeflow pipeline pods remain Pending. How would you troubleshoot?",
+    "originalNumber": 2375
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Conceptual",
+    "question": "MLflow cannot upload artifacts to Cloud Storage. What would you verify?",
+    "originalNumber": 2376
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "Vertex AI endpoint deployment fails. What logs and permissions would you inspect?",
+    "originalNumber": 2377
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "A retraining pipeline succeeds but the wrong model is promoted. How do you investigate?",
+    "originalNumber": 2378
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "Drift alerts occur even though business performance is stable. What could cause false positives?",
+    "originalNumber": 2379
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Conceptual",
+    "question": "An embedding-model change reduces vector-search quality. How would you roll back?",
+    "originalNumber": 2380
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Conceptual",
+    "question": "Cloud Run model inference suffers from cold starts. How would you reduce them?",
+    "originalNumber": 2381
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "A FastAPI model endpoint returns timeouts under load. What would you inspect?",
+    "originalNumber": 2382
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "HPA scales pods, but latency remains high. Why?",
+    "originalNumber": 2383
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Conceptual",
+    "question": "Cluster Autoscaler adds nodes too slowly for model traffic. How would you prepare capacity?",
+    "originalNumber": 2384
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Conceptual",
+    "question": "A new model requires more GPU memory than available. What options do you have?",
+    "originalNumber": 2385
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "An LLM endpoint has high time-to-first-token but normal token throughput. What could be wrong?",
+    "originalNumber": 2386
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Conceptual",
+    "question": "LangFuse traces are missing for some requests. What would you check?",
+    "originalNumber": 2387
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Conceptual",
+    "question": "A data pipeline creates duplicate records after retries. How would you fix it?",
+    "originalNumber": 2388
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "A pipeline passes locally but fails in GitHub Actions. What differences would you inspect?",
+    "originalNumber": 2389
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Troubleshooting Scenarios",
+    "category": "Troubleshooting Scenarios",
+    "questionType": "Troubleshooting",
+    "question": "Model artifacts are accessible from an unauthorized workload. How do you remediate?",
+    "originalNumber": 2390
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Behavioral",
+    "question": "Tell me about yourself.",
+    "originalNumber": 2391
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "Walk me through your professional experience.",
+    "originalNumber": 2392
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "Explain your current role.",
+    "originalNumber": 2393
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "What are your day-to-day responsibilities?",
+    "originalNumber": 2394
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "Which technologies do you use regularly?",
+    "originalNumber": 2395
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "What is your strongest technical area?",
+    "originalNumber": 2396
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "Which area are you currently improving?",
+    "originalNumber": 2397
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "Why did you choose DevOps and cloud engineering?",
+    "originalNumber": 2398
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "Why are you moving toward platform engineering?",
+    "originalNumber": 2399
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "Why are you interested in SRE?",
+    "originalNumber": 2400
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "Why are you interested in MLOps?",
+    "originalNumber": 2401
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "Why are you looking for a job change?",
+    "originalNumber": 2402
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Behavioral",
+    "question": "Why do you want to leave your current company?",
+    "originalNumber": 2403
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Behavioral",
+    "question": "Why do you want to leave your current shift?",
+    "originalNumber": 2404
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "What type of project do you prefer?",
+    "originalNumber": 2405
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "What type of project environment do you want to avoid?",
+    "originalNumber": 2406
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "Do you prefer Agile or another delivery model?",
+    "originalNumber": 2407
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "How has Agile affected your work?",
+    "originalNumber": 2408
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "How do you work with developers?",
+    "originalNumber": 2409
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "How do you communicate with backend developers?",
+    "originalNumber": 2410
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "How do you communicate blockers?",
+    "originalNumber": 2411
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "How do you raise production risks?",
+    "originalNumber": 2412
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "How do you handle disagreements with developers?",
+    "originalNumber": 2413
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "How do you handle disagreements with architects?",
+    "originalNumber": 2414
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "How do you explain technical risks to management?",
+    "originalNumber": 2415
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "How do you prioritize multiple tasks?",
+    "originalNumber": 2416
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "How do you manage production support and sprint work together?",
+    "originalNumber": 2417
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "How do you handle a critical issue under pressure?",
+    "originalNumber": 2418
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "How do you respond when you do not know an answer?",
+    "originalNumber": 2419
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Behavioural and Communication",
+    "category": "Behavioural and Communication",
+    "questionType": "Conceptual",
+    "question": "How do you learn a new technology quickly?",
+    "originalNumber": 2420
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Conceptual",
+    "question": "Describe a project you owned end to end.",
+    "originalNumber": 2421
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Conceptual",
+    "question": "Describe a difficult technical decision you made.",
+    "originalNumber": 2422
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Behavioral",
+    "question": "Describe a time you challenged an existing process.",
+    "originalNumber": 2423
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Behavioral",
+    "question": "Describe a time you introduced automation.",
+    "originalNumber": 2424
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Behavioral",
+    "question": "Describe a time you reduced cost.",
+    "originalNumber": 2425
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Behavioral",
+    "question": "Describe a time you improved reliability.",
+    "originalNumber": 2426
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Behavioral",
+    "question": "Describe a time you improved deployment speed.",
+    "originalNumber": 2427
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Behavioral",
+    "question": "Describe a time you handled a production outage.",
+    "originalNumber": 2428
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Behavioral",
+    "question": "Describe a time you made a mistake.",
+    "originalNumber": 2429
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Conceptual",
+    "question": "How did you recover from that mistake?",
+    "originalNumber": 2430
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Behavioral",
+    "question": "Describe a time you helped a teammate.",
+    "originalNumber": 2431
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Behavioral",
+    "question": "Describe a time you mentored a junior engineer.",
+    "originalNumber": 2432
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Conceptual",
+    "question": "How do you review infrastructure code?",
+    "originalNumber": 2433
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Conceptual",
+    "question": "How do you enforce engineering standards?",
+    "originalNumber": 2434
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Conceptual",
+    "question": "How do you handle repeated mistakes by another team?",
+    "originalNumber": 2435
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Conceptual",
+    "question": "How do you influence without formal authority?",
+    "originalNumber": 2436
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Conceptual",
+    "question": "How do you manage conflicting stakeholder priorities?",
+    "originalNumber": 2437
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Conceptual",
+    "question": "How do you handle an unrealistic deadline?",
+    "originalNumber": 2438
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Conceptual",
+    "question": "How do you decide whether to take technical debt?",
+    "originalNumber": 2439
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Leadership and Ownership",
+    "category": "Leadership and Ownership",
+    "questionType": "Conceptual",
+    "question": "How do you communicate that a release is unsafe?",
+    "originalNumber": 2440
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Behavioral",
+    "question": "Why do you want to join our company?",
+    "originalNumber": 2441
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Conceptual",
+    "question": "What attracted you to this role?",
+    "originalNumber": 2442
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Conceptual",
+    "question": "What do you know about our company?",
+    "originalNumber": 2443
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Conceptual",
+    "question": "Why should we hire you?",
+    "originalNumber": 2444
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Conceptual",
+    "question": "What skills make you a strong fit?",
+    "originalNumber": 2445
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Conceptual",
+    "question": "Which part of the job description matches your experience best?",
+    "originalNumber": 2446
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Conceptual",
+    "question": "Where does your experience not fully match the role?",
+    "originalNumber": 2447
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Conceptual",
+    "question": "How will you close any skill gap?",
+    "originalNumber": 2448
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Conceptual",
+    "question": "What are your career goals for the next three years?",
+    "originalNumber": 2449
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Conceptual",
+    "question": "Where do you see yourself in five years?",
+    "originalNumber": 2450
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Conceptual",
+    "question": "What type of team do you work best in?",
+    "originalNumber": 2451
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Conceptual",
+    "question": "What do you expect from your manager?",
+    "originalNumber": 2452
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Conceptual",
+    "question": "What do you expect from your next organization?",
+    "originalNumber": 2453
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Behavioral",
+    "question": "What motivates you?",
+    "originalNumber": 2454
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Conceptual",
+    "question": "What demotivates you?",
+    "originalNumber": 2455
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Behavioral",
+    "question": "Are you comfortable working from the office?",
+    "originalNumber": 2456
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Behavioral",
+    "question": "Are you comfortable working from a client location?",
+    "originalNumber": 2457
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Behavioral",
+    "question": "Are you willing to relocate?",
+    "originalNumber": 2458
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Behavioral",
+    "question": "Are you willing to travel?",
+    "originalNumber": 2459
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Company and Role Fit",
+    "category": "Company and Role Fit",
+    "questionType": "Behavioral",
+    "question": "Are you comfortable with rotational shifts?",
+    "originalNumber": 2460
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your total experience?",
+    "originalNumber": 2461
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your relevant DevOps experience?",
+    "originalNumber": 2462
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your relevant Kubernetes experience?",
+    "originalNumber": 2463
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your relevant GCP experience?",
+    "originalNumber": 2464
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your relevant Terraform experience?",
+    "originalNumber": 2465
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your scripting experience?",
+    "originalNumber": 2466
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Behavioral",
+    "question": "Which scripting languages have you used?",
+    "originalNumber": 2467
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your current company?",
+    "originalNumber": 2468
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your current designation?",
+    "originalNumber": 2469
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your current location?",
+    "originalNumber": 2470
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your preferred location?",
+    "originalNumber": 2471
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your current CTC?",
+    "originalNumber": 2472
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is the fixed and variable split?",
+    "originalNumber": 2473
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your expected CTC?",
+    "originalNumber": 2474
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "Is your expected CTC negotiable?",
+    "originalNumber": 2475
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your official notice period?",
+    "originalNumber": 2476
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "Are you currently serving notice?",
+    "originalNumber": 2477
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your last working day?",
+    "originalNumber": 2478
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "Can your notice period be reduced?",
+    "originalNumber": 2479
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "When can you join?",
+    "originalNumber": 2480
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "Do you hold any offers?",
+    "originalNumber": 2481
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "Which company has made the offer?",
+    "originalNumber": 2482
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is the offered compensation?",
+    "originalNumber": 2483
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is the expected joining date for that offer?",
+    "originalNumber": 2484
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "Why are you still exploring roles despite having an offer?",
+    "originalNumber": 2485
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Behavioral",
+    "question": "Have you interviewed with our company previously?",
+    "originalNumber": 2486
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Behavioral",
+    "question": "Have you worked with our client directly or as a vendor?",
+    "originalNumber": 2487
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "Do you have relatives working in the organization?",
+    "originalNumber": 2488
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Behavioral",
+    "question": "Are you comfortable with a contractual role?",
+    "originalNumber": 2489
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Behavioral",
+    "question": "Are you comfortable with hybrid working?",
+    "originalNumber": 2490
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Behavioral",
+    "question": "Are you comfortable working from the office five days a week?",
+    "originalNumber": 2491
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Behavioral",
+    "question": "Are you comfortable with a face-to-face interview?",
+    "originalNumber": 2492
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "Are you available for a weekday interview?",
+    "originalNumber": 2493
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "Are you available for the proposed screening call?",
+    "originalNumber": 2494
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your highest educational qualification?",
+    "originalNumber": 2495
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your reason for changing jobs?",
+    "originalNumber": 2496
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "What is your salary-increment cycle?",
+    "originalNumber": 2497
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "Do you have any employment gaps?",
+    "originalNumber": 2498
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "Can you share your updated resume?",
+    "originalNumber": 2499
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "HR and Recruiter Questions",
+    "category": "HR and Recruiter Questions",
+    "questionType": "Conceptual",
+    "question": "Can you provide your education years and percentages?",
+    "originalNumber": 2500
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "What are the main responsibilities during the first three months?",
+    "originalNumber": 2501
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "What are the biggest technical challenges the team is currently facing?",
+    "originalNumber": 2502
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "How is the platform or DevOps team structured?",
+    "originalNumber": 2503
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "What is the current cloud and Kubernetes environment?",
+    "originalNumber": 2504
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "Which CI/CD and GitOps tools are used?",
+    "originalNumber": 2505
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "How mature is the organization’s infrastructure-as-code adoption?",
+    "originalNumber": 2506
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Comparison",
+    "question": "What percentage of work is project delivery versus production support?",
+    "originalNumber": 2507
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "Is there a 24/7 on-call rotation?",
+    "originalNumber": 2508
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "How frequently does the team handle production incidents?",
+    "originalNumber": 2509
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "How are reliability and SLOs measured?",
+    "originalNumber": 2510
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "What is the deployment frequency?",
+    "originalNumber": 2511
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "What is the current release process?",
+    "originalNumber": 2512
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "What level of ownership will this role have?",
+    "originalNumber": 2513
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "How are architectural decisions made?",
+    "originalNumber": 2514
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "How does the team collaborate with developers and security teams?",
+    "originalNumber": 2515
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "What learning and certification support is available?",
+    "originalNumber": 2516
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "What would success look like in this role after six months?",
+    "originalNumber": 2517
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "What are the next interview stages?",
+    "originalNumber": 2518
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "Is the role focused more on operations, engineering or platform development?",
+    "originalNumber": 2519
+  },
+  {
+    "source": "Actual Interview Handbook - Part 5",
+    "section": "Questions You Can Ask the Interviewer",
+    "category": "Questions You Can Ask the Interviewer",
+    "questionType": "Conceptual",
+    "question": "Are there opportunities to work on MLOps or AI infrastructure?",
+    "originalNumber": 2520
+  }
+]

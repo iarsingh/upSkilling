@@ -22,21 +22,24 @@ class InterviewService {
     });
   }
 
-  get(id) {
+  get(id, userId = null) {
     const interview = this.repository.getById(id);
     if (!interview) throw Object.assign(new Error("Interview does not exist."), { statusCode: 404, code: "INTERVIEW_NOT_FOUND" });
+    if (interview.userId && interview.userId !== userId) {
+      throw Object.assign(new Error("Interview does not exist."), { statusCode: 404, code: "INTERVIEW_NOT_FOUND" });
+    }
     return interview;
   }
 
-  start(id) {
-    const interview = this.get(id);
+  start(id, userId = null) {
+    const interview = this.get(id, userId);
     if (interview.status === "COMPLETED") throw Object.assign(new Error("Interview is already completed."), { statusCode: 409, code: "INTERVIEW_COMPLETED" });
     return interview.status === "ACTIVE" ? interview : this.repository.updateStatus(id, "ACTIVE", "started_at");
   }
 
-  async nextQuestion(id) {
-    let interview = this.get(id);
-    if (interview.status === "READY") interview = this.start(id);
+  async nextQuestion(id, userId = null) {
+    let interview = this.get(id, userId);
+    if (interview.status === "READY") interview = this.start(id, userId);
     if (interview.status !== "ACTIVE") throw Object.assign(new Error("Interview is not active."), { statusCode: 409, code: "INTERVIEW_NOT_ACTIVE" });
     if (interview.questions.length >= interview.questionLimit) throw Object.assign(new Error("Question limit reached."), { statusCode: 409, code: "QUESTION_LIMIT_REACHED" });
     const targetTopic = chooseNextTopic(interview.topics);
@@ -53,8 +56,8 @@ class InterviewService {
     return this.repository.addQuestion(id, question);
   }
 
-  submitAnswer(id, input) {
-    const interview = this.get(id);
+  submitAnswer(id, input, userId = null) {
+    const interview = this.get(id, userId);
     const question = interview.questions.find((item) => item.id === input.questionId);
     if (!question) throw Object.assign(new Error("Question does not belong to this interview."), { statusCode: 400, code: "INVALID_QUESTION" });
     const answer = String(input.answer || "").trim();
@@ -63,13 +66,13 @@ class InterviewService {
       answerType: String(input.answerType || "TEXT").toUpperCase(), answer, submittedAt: new Date().toISOString() });
   }
 
-  complete(id) {
-    this.get(id);
+  complete(id, userId = null) {
+    this.get(id, userId);
     return this.repository.updateStatus(id, "COMPLETED", "completed_at");
   }
 
-  report(id) {
-    const interview = this.get(id);
+  report(id, userId = null) {
+    const interview = this.get(id, userId);
     return { interviewId: id, status: interview.status, role: interview.role, topics: interview.topics,
       questionsAsked: interview.questions.length, answersSubmitted: interview.answers.length,
       completionPercent: interview.questions.length ? Math.round((interview.answers.length / interview.questions.length) * 100) : 0 };

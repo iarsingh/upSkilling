@@ -1,0 +1,2060 @@
+[
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Current Tools and Delivery Experience",
+    "category": "Current Tools and Delivery Experience",
+    "questionType": "Conceptual",
+    "question": "Which tools and technologies are you currently working with in your organization?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Current Tools and Delivery Experience",
+    "category": "Current Tools and Delivery Experience",
+    "questionType": "Experience",
+    "question": "Have you recently delivered any end-to-end solution?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Current Tools and Delivery Experience",
+    "category": "Current Tools and Delivery Experience",
+    "questionType": "Conceptual",
+    "question": "Can you explain that end-to-end solution and your contribution to it?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Legacy GCP Environment",
+    "category": "Legacy GCP Environment",
+    "questionType": "Conceptual",
+    "question": "You mentioned that you are working on a legacy environment. What do you mean by a legacy environment?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Legacy GCP Environment",
+    "category": "Legacy GCP Environment",
+    "questionType": "Conceptual",
+    "question": "What is meant by legacy GCP / a legacy GCP environment?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP and GKE",
+    "category": "GCP and GKE",
+    "questionType": "Experience",
+    "question": "Tell me a few Google Cloud services that you extensively use at the organization level."
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP and GKE",
+    "category": "GCP and GKE",
+    "questionType": "Conceptual",
+    "question": "Let’s talk about GKE. Why is GKE different from an on-premises Kubernetes cluster?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP and GKE",
+    "category": "GCP and GKE",
+    "questionType": "Implementation / Workflow",
+    "question": "How does autoscaling work in GKE? How does GKE Cluster Autoscaler work?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP and GKE",
+    "category": "GCP and GKE",
+    "questionType": "Conceptual",
+    "question": "Let’s say you’re trying to increase the CPU, but the node doesn’t have enough capacity. What will happen?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP and GKE",
+    "category": "GCP and GKE",
+    "questionType": "Scenario",
+    "question": "If you want to automatically increase the number of nodes, what needs to be enabled in the GKE cluster? What is that feature called?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP and GKE",
+    "category": "GCP and GKE",
+    "questionType": "Conceptual",
+    "question": "Can we create new nodes in a GKE cluster without a node pool?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform Execution and State",
+    "category": "Terraform Execution and State",
+    "questionType": "Experience",
+    "question": "Have you used any tool or mechanism to create infrastructure in the cloud?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform Execution and State",
+    "category": "Terraform Execution and State",
+    "questionType": "Conceptual",
+    "question": "You mentioned Terraform. Where do you run the Terraform commands to create infrastructure?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform Execution and State",
+    "category": "Terraform Execution and State",
+    "questionType": "Conceptual",
+    "question": "Where is your CI/CD/Jenkins platform hosted, and where exactly are the Terraform commands executed?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform Execution and State",
+    "category": "Terraform Execution and State",
+    "questionType": "Conceptual",
+    "question": "Why do you keep the Terraform state file in GCS? Why do you need a remote backend?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform Execution and State",
+    "category": "Terraform Execution and State",
+    "questionType": "Conceptual",
+    "question": "What will happen if we don’t use Terraform state locking? What problems can occur?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform Architecture and Multi-Environment Design",
+    "category": "Terraform Architecture and Multi-Environment Design",
+    "questionType": "Scenario",
+    "question": "Suppose you have six environments in the cloud and Terraform is used to provision infrastructure in all six. How would you approach this scenario? How would you structure your Terraform repository?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform Architecture and Multi-Environment Design",
+    "category": "Terraform Architecture and Multi-Environment Design",
+    "questionType": "Scenario",
+    "question": "If I open the root directory of your Terraform repository, what files and directories would I see?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform Architecture and Multi-Environment Design",
+    "category": "Terraform Architecture and Multi-Environment Design",
+    "questionType": "Experience",
+    "question": "Are you saying that you keep your reusable Terraform modules and infrastructure/environment configuration in the same repository?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform Architecture and Multi-Environment Design",
+    "category": "Terraform Architecture and Multi-Environment Design",
+    "questionType": "Conceptual",
+    "question": "In your actual approach, would you keep Terraform modules and live infrastructure configuration in the same repository or separate repositories? Why?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Project & day-to-day work",
+    "category": "Project & day-to-day work",
+    "questionType": "Conceptual",
+    "question": "In your current project assignment, what are your day-to-day activities?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Project & day-to-day work",
+    "category": "Project & day-to-day work",
+    "questionType": "Conceptual",
+    "question": "Once you receive an infrastructure requirement, what do you do next?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Project & day-to-day work",
+    "category": "Project & day-to-day work",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you design, structure, manage, and deploy the required infrastructure?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Scenario",
+    "question": "Suppose you receive a requirement to create a Load Balancer for an application. How would you structure the Terraform code?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Conceptual",
+    "question": "Would you put the new infrastructure code in an existing repository or create a new repository?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you plan the deployment of that infrastructure?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Scenario",
+    "question": "When using a shared Terraform module, how does the shared module work?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Implementation / Workflow",
+    "question": "Where do you store your shared Terraform modules?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Implementation / Workflow",
+    "question": "How does an application/infrastructure repository consume a shared Terraform module?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Scenario",
+    "question": "When deploying to multiple environments, how do you structure the Terraform inputs?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you maintain different values for Dev, QA, UAT, and Prod?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Conceptual",
+    "question": "Do different environments have separate Terraform state files?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform CI/CD",
+    "category": "Terraform CI/CD",
+    "questionType": "Conceptual",
+    "question": "Do you maintain separate pipelines for each environment or use one pipeline for all environments?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform CI/CD",
+    "category": "Terraform CI/CD",
+    "questionType": "Scenario",
+    "question": "If you use a single pipeline, how does it know which environment to deploy?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform CI/CD",
+    "category": "Terraform CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How does the pipeline detect which folder has changed?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform CI/CD",
+    "category": "Terraform CI/CD",
+    "questionType": "Scenario",
+    "question": "If only the QA folder changes, how do you prevent Dev/UAT/Prod from running?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform CI/CD",
+    "category": "Terraform CI/CD",
+    "questionType": "Scenario",
+    "question": "What happens if a shared Terraform module changes?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform CI/CD",
+    "category": "Terraform CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you determine which environments need to run when a shared module changes?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP project provisioning",
+    "category": "GCP project provisioning",
+    "questionType": "Conceptual",
+    "question": "You mentioned project/product creation. What exactly does that mean?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP project provisioning",
+    "category": "GCP project provisioning",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you create a new GCP project?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP project provisioning",
+    "category": "GCP project provisioning",
+    "questionType": "Conceptual",
+    "question": "Is repository bootstrap the same as creating the actual GCP project?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP project provisioning",
+    "category": "GCP project provisioning",
+    "questionType": "Scenario",
+    "question": "Suppose an application isn’t containerized and needs Compute Engine, Load Balancer, etc. in a dedicated project. How would you provision it?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP project provisioning",
+    "category": "GCP project provisioning",
+    "questionType": "Conceptual",
+    "question": "Why would you create a dedicated GCP project for an application?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP project provisioning",
+    "category": "GCP project provisioning",
+    "questionType": "Conceptual",
+    "question": "Is new GCP project creation handled as an incident, service request, or change?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP project provisioning",
+    "category": "GCP project provisioning",
+    "questionType": "Conceptual",
+    "question": "What process initiates creation of a new GCP project?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP identity & IAM",
+    "category": "GCP identity & IAM",
+    "questionType": "Conceptual",
+    "question": "What type of identity do you use for automated GCP project creation?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP identity & IAM",
+    "category": "GCP identity & IAM",
+    "questionType": "Conceptual",
+    "question": "What permissions are required to create a GCP project?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP identity & IAM",
+    "category": "GCP identity & IAM",
+    "questionType": "Conceptual",
+    "question": "What is the minimum permission required to create a project?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP identity & IAM",
+    "category": "GCP identity & IAM",
+    "questionType": "Conceptual",
+    "question": "Which IAM role provides project creation permissions?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP identity & IAM",
+    "category": "GCP identity & IAM",
+    "questionType": "Conceptual",
+    "question": "What permission is required to associate the project with a billing account?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP identity & IAM",
+    "category": "GCP identity & IAM",
+    "questionType": "Conceptual",
+    "question": "Where does the project-creation service account exist if the new project hasn’t been created yet?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Event-driven architecture",
+    "category": "Event-driven architecture",
+    "questionType": "Experience",
+    "question": "Have you worked on any event-driven solutions in GCP?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Event-driven architecture",
+    "category": "Event-driven architecture",
+    "questionType": "Conceptual",
+    "question": "Can you give an example of an event-driven architecture?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Event-driven architecture",
+    "category": "Event-driven architecture",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you implement an event-driven solution using Pub/Sub, Eventarc, Cloud Run, or Cloud Functions?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Scenario",
+    "question": "Suppose you need to create a Python-based Cloud Function and fully automate both infrastructure and application-code deployment. How would you design it?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you structure the repository for Cloud Functions?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Conceptual",
+    "question": "Who should own the Cloud Function infrastructure—the infrastructure team or application team?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Conceptual",
+    "question": "Who should own the Python/Node.js application code?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Conceptual",
+    "question": "Would you keep Terraform and Cloud Function source code in the same repository or separate repositories?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Scenario",
+    "question": "When a Cloud Function is initially created with sample/Hello World code, how do you replace it with the actual application code?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Implementation / Workflow",
+    "question": "How does the application pipeline package and deploy the Python/Node.js source?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Implementation / Workflow",
+    "question": "How does Terraform know which application artifact/version to deploy?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Conceptual",
+    "question": "Should Terraform deploy every application-code change, or should the application pipeline handle code releases?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Experience",
+    "question": "Have you worked with GCP Organization Policies?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Conceptual",
+    "question": "Give an example of an Organization Policy you’ve implemented."
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Experience",
+    "question": "Have you worked with custom Organization Policies?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you deploy a custom Organization Policy?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Conceptual",
+    "question": "Do you create Organization Policies manually from the GCP Console or through automation?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you deploy Organization Policies through Terraform/CI/CD?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Conceptual",
+    "question": "In which language are custom Organization Policy conditions written?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Conceptual",
+    "question": "What is CEL (Common Expression Language)?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Conceptual",
+    "question": "In which format can a custom constraint definition be written?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Comparison",
+    "question": "What is the difference between YAML, HCL, and CEL in the context of Organization Policies?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Experience",
+    "question": "Have you deployed policies through a pipeline?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you structure a policy-as-code repository?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Scenario",
+    "question": "If you’re not a security engineer, who defines the policy requirement and who implements it?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you collect and manage application logs?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "Where are application logs stored?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you capture logs from GKE applications?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you generate alerts based on logs?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Scenario",
+    "question": "If you don’t want to use Datadog or another third-party tool, how would you implement logging and monitoring using only GCP?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What is the role of Cloud Logging?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What is the role of Cloud Monitoring?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What different types of alerts can you configure in GCP?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What is a metric-threshold alert?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What is a metric-absence alert?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What is a log-based alert?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What is a log-based metric?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Comparison",
+    "question": "What is the difference between a log-based alert and a log-based metric alert?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What are uptime-check alerts?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What are SLO/burn-rate alerts?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Scenario",
+    "question": "Suppose a database query/report is running for too long. How would you detect it and notify the monitoring/business team?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you identify long-running queries using Cloud Logging?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Conceptual",
+    "question": "After creating a log search/filter for long-running queries, what do you do next?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you create a log-based metric from those logs?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you create a Cloud Monitoring alerting policy from that metric?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you configure the threshold and duration?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you send an email notification to the monitoring/business team?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Scenario",
+    "question": "If the business needs a customized email containing query ID, report name, duration, etc., how would you implement that?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "CI/CD pipeline",
+    "category": "CI/CD pipeline",
+    "questionType": "Conceptual",
+    "question": "Can you explain your application deployment pipeline flow?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "CI/CD pipeline",
+    "category": "CI/CD pipeline",
+    "questionType": "Conceptual",
+    "question": "What stages/steps do you have in your pipeline?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "CI/CD pipeline",
+    "category": "CI/CD pipeline",
+    "questionType": "Conceptual",
+    "question": "Which pipeline stages execute scripts?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "CI/CD pipeline",
+    "category": "CI/CD pipeline",
+    "questionType": "Conceptual",
+    "question": "What kinds of Shell/Python/PowerShell scripts do you execute from pipelines?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "CI/CD pipeline",
+    "category": "CI/CD pipeline",
+    "questionType": "Conceptual",
+    "question": "What does your Terraform infrastructure pipeline look like?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "CI/CD pipeline",
+    "category": "CI/CD pipeline",
+    "questionType": "Scenario",
+    "question": "What happens after an application deployment?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "CI/CD pipeline",
+    "category": "CI/CD pipeline",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you perform post-deployment validation?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Pipeline notifications",
+    "category": "Pipeline notifications",
+    "questionType": "Troubleshooting",
+    "question": "How do you notify users when a pipeline succeeds or fails?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Pipeline notifications",
+    "category": "Pipeline notifications",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you send email notifications from Jenkins?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Pipeline notifications",
+    "category": "Pipeline notifications",
+    "questionType": "Conceptual",
+    "question": "Which Jenkins plugin do you use for email notifications?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Pipeline notifications",
+    "category": "Pipeline notifications",
+    "questionType": "Implementation / Workflow",
+    "question": "How does the Jenkins Email Extension Plugin work?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Pipeline notifications",
+    "category": "Pipeline notifications",
+    "questionType": "Conceptual",
+    "question": "What is emailext?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Pipeline notifications",
+    "category": "Pipeline notifications",
+    "questionType": "Implementation / Workflow",
+    "question": "How does Jenkins’s SMTP configuration work?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins vs Bitbucket",
+    "category": "Jenkins vs Bitbucket",
+    "questionType": "Conceptual",
+    "question": "You use Jenkins for application deployment and Bitbucket Pipelines for infrastructure deployment. Why are you using two different tools?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins vs Bitbucket",
+    "category": "Jenkins vs Bitbucket",
+    "questionType": "Conceptual",
+    "question": "Why not standardize everything on Jenkins or Bitbucket?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins vs Bitbucket",
+    "category": "Jenkins vs Bitbucket",
+    "questionType": "Experience",
+    "question": "Have you considered the additional cost of maintaining two CI/CD tools?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins vs Bitbucket",
+    "category": "Jenkins vs Bitbucket",
+    "questionType": "Conceptual",
+    "question": "What additional operational overhead does using Jenkins and Bitbucket create?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins vs Bitbucket",
+    "category": "Jenkins vs Bitbucket",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you determine whether consolidating the two platforms is worth it?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins vs Bitbucket",
+    "category": "Jenkins vs Bitbucket",
+    "questionType": "Scenario",
+    "question": "If you were designing the CI/CD platform from scratch, would you still use two tools?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "Where are your Jenkins agents running?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "Are Jenkins agents running on virtual machines or Kubernetes?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "How are Jenkins Kubernetes agents deployed?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Implementation / Workflow",
+    "question": "How does a Jenkins agent running in GKE communicate with an on-premises environment?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "What is the network path from a Jenkins agent pod to an on-prem server?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Experience",
+    "question": "Do you use VPN or Interconnect for GCP-to-on-prem connectivity?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Implementation / Workflow",
+    "question": "How does GKE activate/connect to the VPN?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "Is VPN configured inside GKE?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Implementation / Workflow",
+    "question": "How does the GCP VPC know the route to the on-prem network?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "What is the role of Cloud Router?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "What is the role of BGP?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "What source IP does on-prem see—Pod IP or Node IP?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Implementation / Workflow",
+    "question": "How does return traffic from on-prem reach the Jenkins pod?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Conceptual",
+    "question": "In Jenkins you use shared libraries. Do you have something similar for Bitbucket?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Conceptual",
+    "question": "Does Bitbucket use YAML to define pipelines?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Conceptual",
+    "question": "Do you write everything directly in each repository’s YAML file?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Experience",
+    "question": "Do you use reusable Bitbucket pipeline templates?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you define reusable steps in Bitbucket?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Implementation / Workflow",
+    "question": "Where do you store your Bitbucket pipeline templates?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Conceptual",
+    "question": "Are the templates stored in the same repository or a separate shared repository?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Scenario",
+    "question": "If they’re stored in a shared repository, how do child repositories consume them?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Implementation / Workflow",
+    "question": "How does a child repository connect to the shared Bitbucket pipeline template?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you version shared pipeline templates?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "Your Terraform modules are stored in a private remote Bitbucket repository. How does Terraform access them?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Scenario",
+    "question": "What happens when terraform init encounters a private Git module source?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Implementation / Workflow",
+    "question": "How does authentication happen between your infrastructure repository and private module repository?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Experience",
+    "question": "Do you use SSH or HTTPS authentication?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "Where is the SSH private key/access token stored?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "Where exactly in the pipeline do you configure that authentication?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "Is the credential passed directly in bitbucket-pipelines.yml?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "How do secured Bitbucket variables work?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "Why must private-repository authentication be configured before terraform init?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "Is the GCP service account used to authenticate to the private Bitbucket repository?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Comparison",
+    "question": "What is the difference between Git repository authentication and GCP authentication?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "Can the authentication/setup logic be implemented using Shell, PowerShell, or Python?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Scenario",
+    "question": "What happens if the pipeline doesn’t have permission to access the private Terraform module repository?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "Where does your certificate-expiry script get the information that a certificate is about to expire?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "Is the certificate expiration date manually provided to the script?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you retrieve the certificate’s expiry date?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you check certificate validity?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you use OpenSSL to check a certificate?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "What are notBefore and notAfter?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you determine whether a certificate expires within the next 30 days?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "How is the certificate-monitoring script triggered?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "Why did you schedule the script for the last day of every month?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "Why use a scheduled script if Certificate Manager can provide certificate monitoring/events?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "Would an event-driven/native monitoring approach be better than polling?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Scenario",
+    "question": "What happens if your script runs at month-end but the certificate expires on the first or second day of the next month?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "Isn’t monthly certificate checking risky because you may discover expiration too late?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "What would be a better certificate-monitoring frequency?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "Would you use thresholds such as 30, 15, 7, and 1 day?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Comparison",
+    "question": "When would you still use a custom OpenSSL script instead of native certificate monitoring?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Conceptual",
+    "question": "The same Terraform variable is defined in terraform.tfvars, an environment variable (TF_VAR_*), and using CLI -var/-var-file. Which value takes precedence?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Scenario",
+    "question": "When would you use a Terraform module?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you test a Terraform/platform module?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Conceptual",
+    "question": "Is there a more automated way to test Terraform modules?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you use terraform test or Terratest to automate module testing?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Design / Architecture",
+    "question": "Design a hub-and-spoke network architecture in Azure."
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "Internet traffic connects to an external load balancer/WAF. What does WAF stand for?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "What Azure service/resource would you use for WAF?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "What types of security rules can you configure in a WAF, such as SQL injection and XSS protection?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you connect an on-premises network to the Azure hub?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "Apart from VPN, what other option can connect on-premises infrastructure to Azure?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "What is Azure ExpressRoute?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Comparison",
+    "question": "When would you choose ExpressRoute instead of VPN?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "What resources/services would normally exist inside the hub VNet?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Design / Architecture",
+    "question": "How does traffic flow from the hub to a spoke VNet?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "How do spoke VNets connect to the hub?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "What is VNet Peering?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "Apart from connecting two VNets, what are the limitations of VNet Peering?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "Is VNet Peering transitive?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you enable spoke-to-spoke communication when centralized inspection is required?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "What is gateway transit in VNet Peering?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "How can a spoke use the VPN/ExpressRoute gateway located in the hub?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "What is the role of Azure Firewall in a hub-and-spoke architecture?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "How do UDRs route traffic through Azure Firewall?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Networking — Hub & Spoke",
+    "category": "Azure Networking — Hub & Spoke",
+    "questionType": "Conceptual",
+    "question": "What role does DNS play in a hub-and-spoke architecture?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Governance & Cost",
+    "category": "Azure Governance & Cost",
+    "questionType": "Comparison",
+    "question": "What is the difference between Azure RBAC and Azure Policy?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Governance & Cost",
+    "category": "Azure Governance & Cost",
+    "questionType": "Conceptual",
+    "question": "Can Azure Policy deny resource creation even if the user has Contributor access?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Governance & Cost",
+    "category": "Azure Governance & Cost",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you monitor costs in Azure?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Governance & Cost",
+    "category": "Azure Governance & Cost",
+    "questionType": "Conceptual",
+    "question": "What is Microsoft Cost Management?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Governance & Cost",
+    "category": "Azure Governance & Cost",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you configure budgets and cost alerts?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Governance & Cost",
+    "category": "Azure Governance & Cost",
+    "questionType": "Conceptual",
+    "question": "How can Azure Advisor help with cost optimization?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Governance & Cost",
+    "category": "Azure Governance & Cost",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you use tags for cost allocation?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Azure Governance & Cost",
+    "category": "Azure Governance & Cost",
+    "questionType": "Scenario",
+    "question": "When would you consider Azure Reservations or Azure Savings Plans?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "CI/CD",
+    "category": "CI/CD",
+    "questionType": "Conceptual",
+    "question": "What is Continuous Integration (CI)?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "CI/CD",
+    "category": "CI/CD",
+    "questionType": "Conceptual",
+    "question": "What is the purpose of integration in Continuous Integration?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "CI/CD",
+    "category": "CI/CD",
+    "questionType": "Conceptual",
+    "question": "What normally happens in a CI pipeline?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "CI/CD",
+    "category": "CI/CD",
+    "questionType": "Scenario",
+    "question": "What happens after all automated tests and quality gates pass in Continuous Deployment?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Branching",
+    "category": "Git — Branching",
+    "questionType": "Conceptual",
+    "question": "Which Git branching strategies are you familiar with?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Branching",
+    "category": "Git — Branching",
+    "questionType": "Conceptual",
+    "question": "Explain the branches used in GitFlow: main, develop, feature, release, and hotfix."
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Branching",
+    "category": "Git — Branching",
+    "questionType": "Conceptual",
+    "question": "What is GitHub Flow?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Branching",
+    "category": "Git — Branching",
+    "questionType": "Comparison",
+    "question": "What is the difference between GitFlow, GitHub Flow, and Trunk-Based Development?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Branching",
+    "category": "Git — Branching",
+    "questionType": "Conceptual",
+    "question": "Why are short-lived branches useful?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Branching",
+    "category": "Git — Branching",
+    "questionType": "Conceptual",
+    "question": "How are feature flags used with Trunk-Based Development?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Branching",
+    "category": "Git — Branching",
+    "questionType": "Comparison",
+    "question": "Which branching strategy would you choose for a team doing frequent CI/CD deployments?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Merge Strategies",
+    "category": "Git — Merge Strategies",
+    "questionType": "Conceptual",
+    "question": "Which Git merge strategies are you familiar with?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Merge Strategies",
+    "category": "Git — Merge Strategies",
+    "questionType": "Conceptual",
+    "question": "What is a Merge Commit?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Merge Strategies",
+    "category": "Git — Merge Strategies",
+    "questionType": "Conceptual",
+    "question": "What is Squash and Merge?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Merge Strategies",
+    "category": "Git — Merge Strategies",
+    "questionType": "Conceptual",
+    "question": "What is Rebase and Merge?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Merge Strategies",
+    "category": "Git — Merge Strategies",
+    "questionType": "Comparison",
+    "question": "What is the difference between merge, squash, and rebase?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Merge Strategies",
+    "category": "Git — Merge Strategies",
+    "questionType": "Comparison",
+    "question": "Which merge strategy would you choose and why?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Merge Strategies",
+    "category": "Git — Merge Strategies",
+    "questionType": "Comparison",
+    "question": "When would you prefer squash merging?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Git — Merge Strategies",
+    "category": "Git — Merge Strategies",
+    "questionType": "Scenario",
+    "question": "When would preserving the complete Git history be important?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Architecture Decisions",
+    "category": "Kubernetes — Architecture Decisions",
+    "questionType": "Conceptual",
+    "question": "Kubernetes is powerful, but when would you not recommend Kubernetes?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Architecture Decisions",
+    "category": "Kubernetes — Architecture Decisions",
+    "questionType": "Conceptual",
+    "question": "Why might Kubernetes be overkill for a small/simple application?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Architecture Decisions",
+    "category": "Kubernetes — Architecture Decisions",
+    "questionType": "Scenario",
+    "question": "When would serverless be a better choice than Kubernetes?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Architecture Decisions",
+    "category": "Kubernetes — Architecture Decisions",
+    "questionType": "Conceptual",
+    "question": "Why might you avoid moving some legacy applications directly to Kubernetes?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Architecture Decisions",
+    "category": "Kubernetes — Architecture Decisions",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you define a legacy application?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Architecture Decisions",
+    "category": "Kubernetes — Architecture Decisions",
+    "questionType": "Conceptual",
+    "question": "Does “legacy” simply mean an application is old?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Architecture Decisions",
+    "category": "Kubernetes — Architecture Decisions",
+    "questionType": "Conceptual",
+    "question": "What characteristics make an application difficult to containerize?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Architecture Decisions",
+    "category": "Kubernetes — Architecture Decisions",
+    "questionType": "Conceptual",
+    "question": "Can Kubernetes run stateful applications?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Architecture Decisions",
+    "category": "Kubernetes — Architecture Decisions",
+    "questionType": "Scenario",
+    "question": "If Kubernetes supports StatefulSets and persistent volumes, why might you still avoid Kubernetes for some stateful workloads?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Architecture Decisions",
+    "category": "Kubernetes — Architecture Decisions",
+    "questionType": "Comparison",
+    "question": "When would you choose a managed database instead of running a database on Kubernetes?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Deployment",
+    "category": "Kubernetes — Deployment",
+    "questionType": "Conceptual",
+    "question": "What is the relationship between a Kubernetes Deployment, ReplicaSet, and Pods?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Deployment",
+    "category": "Kubernetes — Deployment",
+    "questionType": "Conceptual",
+    "question": "What Kubernetes resources do you normally use when deploying an application?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Deployment",
+    "category": "Kubernetes — Deployment",
+    "questionType": "Conceptual",
+    "question": "What is the role of a Kubernetes Service?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Deployment",
+    "category": "Kubernetes — Deployment",
+    "questionType": "Scenario",
+    "question": "When would you use ConfigMaps?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Deployment",
+    "category": "Kubernetes — Deployment",
+    "questionType": "Scenario",
+    "question": "When would you use Kubernetes Secrets?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Deployment",
+    "category": "Kubernetes — Deployment",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you expose an application externally using Ingress or Gateway API?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Deployment",
+    "category": "Kubernetes — Deployment",
+    "questionType": "Conceptual",
+    "question": "What is HPA and when would you use it?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — Deployment",
+    "category": "Kubernetes — Deployment",
+    "questionType": "Scenario",
+    "question": "When would an application require a PVC?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — What Happens Behind the Scenes",
+    "category": "Kubernetes — What Happens Behind the Scenes",
+    "questionType": "Scenario",
+    "question": "What happens behind the scenes when you create a Kubernetes Deployment?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — What Happens Behind the Scenes",
+    "category": "Kubernetes — What Happens Behind the Scenes",
+    "questionType": "Scenario",
+    "question": "What happens when you execute kubectl apply -f deployment.yaml?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — What Happens Behind the Scenes",
+    "category": "Kubernetes — What Happens Behind the Scenes",
+    "questionType": "Conceptual",
+    "question": "What is the role of the Kubernetes API Server?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — What Happens Behind the Scenes",
+    "category": "Kubernetes — What Happens Behind the Scenes",
+    "questionType": "Scenario",
+    "question": "What happens during authentication, authorization, and admission control?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — What Happens Behind the Scenes",
+    "category": "Kubernetes — What Happens Behind the Scenes",
+    "questionType": "Conceptual",
+    "question": "Where does Kubernetes store the desired state?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — What Happens Behind the Scenes",
+    "category": "Kubernetes — What Happens Behind the Scenes",
+    "questionType": "Conceptual",
+    "question": "What does the Deployment Controller do?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — What Happens Behind the Scenes",
+    "category": "Kubernetes — What Happens Behind the Scenes",
+    "questionType": "Conceptual",
+    "question": "What does the ReplicaSet Controller do?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — What Happens Behind the Scenes",
+    "category": "Kubernetes — What Happens Behind the Scenes",
+    "questionType": "Conceptual",
+    "question": "Who creates the Pods?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — What Happens Behind the Scenes",
+    "category": "Kubernetes — What Happens Behind the Scenes",
+    "questionType": "Conceptual",
+    "question": "What does kube-scheduler do?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — What Happens Behind the Scenes",
+    "category": "Kubernetes — What Happens Behind the Scenes",
+    "questionType": "Implementation / Workflow",
+    "question": "How does the scheduler decide which node should run a Pod?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — What Happens Behind the Scenes",
+    "category": "Kubernetes — What Happens Behind the Scenes",
+    "questionType": "Conceptual",
+    "question": "What does kubelet do?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — What Happens Behind the Scenes",
+    "category": "Kubernetes — What Happens Behind the Scenes",
+    "questionType": "Conceptual",
+    "question": "What role does containerd/the container runtime play?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — What Happens Behind the Scenes",
+    "category": "Kubernetes — What Happens Behind the Scenes",
+    "questionType": "Conceptual",
+    "question": "What is the Kubernetes reconciliation loop?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Kubernetes — What Happens Behind the Scenes",
+    "category": "Kubernetes — What Happens Behind the Scenes",
+    "questionType": "Conceptual",
+    "question": "Does a Deployment directly create containers?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "AKS — Secret Management",
+    "category": "AKS — Secret Management",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you manage secrets in AKS?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "AKS — Secret Management",
+    "category": "AKS — Secret Management",
+    "questionType": "Conceptual",
+    "question": "Why shouldn’t production secrets be stored directly in Kubernetes YAML or Git?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "AKS — Secret Management",
+    "category": "AKS — Secret Management",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you integrate Azure Key Vault with AKS?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "AKS — Secret Management",
+    "category": "AKS — Secret Management",
+    "questionType": "Conceptual",
+    "question": "What is the Azure Key Vault Provider for Secrets Store CSI Driver?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "AKS — Secret Management",
+    "category": "AKS — Secret Management",
+    "questionType": "Conceptual",
+    "question": "How can an AKS Pod authenticate to Azure Key Vault?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "AKS — Secret Management",
+    "category": "AKS — Secret Management",
+    "questionType": "Conceptual",
+    "question": "What is Microsoft Entra Workload ID?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "AKS — Secret Management",
+    "category": "AKS — Secret Management",
+    "questionType": "Conceptual",
+    "question": "Why is Workload Identity preferable to storing Azure credentials?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "AKS — Secret Management",
+    "category": "AKS — Secret Management",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you implement secret rotation?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "AKS — Secret Management",
+    "category": "AKS — Secret Management",
+    "questionType": "Conceptual",
+    "question": "Are Kubernetes Secrets encrypted simply because they’re Base64 encoded?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "AKS — Secret Management",
+    "category": "AKS — Secret Management",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you restrict access to Kubernetes Secrets?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vertex AI, Cloud Security, and CSPM",
+    "category": "Vertex AI, Cloud Security, and CSPM",
+    "questionType": "Conceptual",
+    "question": "Can you go a little deeper into your experience with Vertex AI? What exactly have you done in this space?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vertex AI, Cloud Security, and CSPM",
+    "category": "Vertex AI, Cloud Security, and CSPM",
+    "questionType": "Conceptual",
+    "question": "What have you done in the cybersecurity space?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vertex AI, Cloud Security, and CSPM",
+    "category": "Vertex AI, Cloud Security, and CSPM",
+    "questionType": "Conceptual",
+    "question": "How did you identify cloud misconfigurations, and which tool did you use?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vertex AI, Cloud Security, and CSPM",
+    "category": "Vertex AI, Cloud Security, and CSPM",
+    "questionType": "Conceptual",
+    "question": "Can you walk me through the approach for securing a landing zone built on GCP?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vertex AI, Cloud Security, and CSPM",
+    "category": "Vertex AI, Cloud Security, and CSPM",
+    "questionType": "Conceptual",
+    "question": "Which CSPM tools have you worked with?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vertex AI, Cloud Security, and CSPM",
+    "category": "Vertex AI, Cloud Security, and CSPM",
+    "questionType": "Conceptual",
+    "question": "How have you applied security frameworks such as NIST, CIS, ISO 27001, or SOC 2 in practice?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vertex AI, Cloud Security, and CSPM",
+    "category": "Vertex AI, Cloud Security, and CSPM",
+    "questionType": "Conceptual",
+    "question": "Why exactly are you looking for a job change?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Conceptual",
+    "question": "We are getting security alerts regarding vulnerabilities and CVEs. Can you walk me through your vulnerability management process?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Conceptual",
+    "question": "What would be your main KPI strategy for vulnerability management?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you identify the actual risk exposure of a vulnerability?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Scenario",
+    "question": "Suppose a scan identifies more than 2,000 vulnerabilities. How would you prioritize, triage, and distribute them to the respective teams?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Scenario",
+    "question": "If the same vulnerabilities keep appearing in an application after every release, how would you prevent their recurrence?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you identify, validate, and handle a false positive in vulnerability management?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Conceptual",
+    "question": "You have two vulnerabilities: one is Critical but not exploitable, while another is Medium but exploitable. Which one would you prioritize first, and why?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you explain a critical security risk to a non-technical stakeholder?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Conceptual",
+    "question": "Explain the Secure Software Development Lifecycle and how security is integrated into it."
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Conceptual",
+    "question": "What is a Software Bill of Materials, and why is it useful?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Experience",
+    "question": "Have you heard of the Lockforge tool, and how familiar are you with it?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Conceptual",
+    "question": "How familiar are you with automation and scripting?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Conceptual",
+    "question": "How have you used or understood OPA and policy as code?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Conceptual",
+    "question": "Describe a security initiative you drove: what problem were you solving, how did you drive it, what challenges did you face, and what were the major successes?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you ensure that buckets and other cloud resources deployed through Infrastructure as Code are secure?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Conceptual",
+    "question": "What security fundamentals have you worked on from the compliance side?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Scenario",
+    "question": "Suppose you join a team with 100 applications that must become UCRA compliant. How would you approach making those applications ready for compliance?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Comparison",
+    "question": "What is the fundamental difference between SCA and SAST?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Vulnerability Management and DevSecOps",
+    "category": "Vulnerability Management and DevSecOps",
+    "questionType": "Conceptual",
+    "question": "What is the benefit of penetration testing when security assessments and scanning are already performed?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Python Coding - Email Validation",
+    "category": "Python Coding - Email Validation",
+    "questionType": "Conceptual",
+    "question": "Write Python code using regular expressions to validate an email address, including valid and invalid test cases."
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Python Coding - Email Validation",
+    "category": "Python Coding - Email Validation",
+    "questionType": "Conceptual",
+    "question": "Explain your email-validation approach and each part of the regular expression."
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Python Coding - Email Validation",
+    "category": "Python Coding - Email Validation",
+    "questionType": "Troubleshooting",
+    "question": "How do you debug an email-validation regex and ensure that only one at-sign is accepted?"
+  },
+  {
+    "source": "Actual Interview Questions - August 2026 Rounds",
+    "section": "Python Coding - Email Validation",
+    "category": "Python Coding - Email Validation",
+    "questionType": "Conceptual",
+    "question": "Correct a faulty Python email-validation implementation and explain the fix."
+  }
+]

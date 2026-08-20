@@ -2,7 +2,10 @@
 .env
 .DS_Store
 node_modules/
+logs/
+*.bak
 audio/
+data/applicant-profile.json
 data/users.json
 data/contacts.json
 data/session-secret.txt

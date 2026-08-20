@@ -12,7 +12,7 @@
   const clearTopicButton = document.querySelector("#qbClearTopic");
 
   let entries = [];
-  let activeTopic = "All topics";
+  let activeCategory = "All categories";
   let seen = new Set();
   let lastId = null;
   let saveTimer = null;
@@ -72,49 +72,49 @@
       .replaceAll(">", "&gt;");
   }
 
-  function groupBySection(list) {
-    const order = [];
+  function groupByCategory(list) {
     const groups = new Map();
     for (const entry of list) {
-      const key = entry.section || "General";
+      const key = entry.category || entry.topic || "General";
       if (!groups.has(key)) {
         groups.set(key, []);
-        order.push(key);
       }
       groups.get(key).push(entry);
     }
-    return order.map((key) => ({ section: key, items: groups.get(key) }));
+    return [...groups.keys()]
+      .sort((left, right) => left.localeCompare(right))
+      .map((key) => ({ category: key, items: groups.get(key) }));
   }
 
   function renderTopicIndex() {
     const counts = new Map();
     for (const entry of entries) {
-      const topic = entry.topic || "General";
-      counts.set(topic, (counts.get(topic) || 0) + 1);
+      const category = entry.category || entry.topic || "General";
+      counts.set(category, (counts.get(category) || 0) + 1);
     }
-    const topics = [...counts.entries()].sort((left, right) => right[1] - left[1]);
-    topicIndexTotalEl.textContent = `${entries.length.toLocaleString()} total questions · ${topics.length} topics`;
-    topicIndexEl.innerHTML = [["All topics", entries.length], ...topics].map(([topic, count]) => `
-      <button class="qb-topic-index-item${topic === activeTopic ? " active" : ""}" type="button" role="listitem" data-topic="${escapeHtml(topic)}" aria-pressed="${topic === activeTopic}">
-        <span>${escapeHtml(topic)}</span><strong>${count.toLocaleString()}</strong>
+    const categories = [...counts.entries()].sort((left, right) => left[0].localeCompare(right[0]));
+    topicIndexTotalEl.textContent = `${entries.length.toLocaleString()} total questions · ${categories.length} categories`;
+    topicIndexEl.innerHTML = [["All categories", entries.length], ...categories].map(([category, count]) => `
+      <button class="qb-topic-index-item${category === activeCategory ? " active" : ""}" type="button" role="listitem" data-category="${escapeHtml(category)}" aria-pressed="${category === activeCategory}">
+        <span>${escapeHtml(category)}</span><strong>${count.toLocaleString()}</strong>
       </button>
     `).join("");
   }
 
   function render(list) {
-    const sections = groupBySection(list);
-    if (!sections.length) {
+    const categories = groupByCategory(list);
+    if (!categories.length) {
       content.innerHTML = `<p class="qb-loading">No questions match your filter.</p>`;
       return;
     }
-    content.innerHTML = sections.map((group) => `
+    content.innerHTML = categories.map((group) => `
       <details class="qb-section" open>
-        <summary>${escapeHtml(group.section)} <span class="qb-section-count">${group.items.length}</span></summary>
+        <summary>${escapeHtml(group.category)} <span class="qb-section-count">${group.items.length}</span></summary>
         <div class="qb-section-body">
           ${group.items.map((entry) => `
             <article class="qb-question${seen.has(entry.qid) ? " qb-seen" : ""}" id="q-${entry.qid}" data-qid="${entry.qid}">
               <div class="qb-question-meta">
-                ${entry.category ? `<span class="qb-category">${escapeHtml(entry.category)}</span>` : ""}
+                ${entry.topic && entry.topic !== group.category ? `<span class="qb-category">${escapeHtml(entry.topic)}</span>` : ""}
                 ${entry.questionType ? `<span class="qb-category qb-question-type">${escapeHtml(entry.questionType)}</span>` : ""}
               </div>
               <p class="qb-q">${escapeHtml(entry.question)}</p>
@@ -211,30 +211,32 @@
   function applyFilter(query = searchEl.value) {
     const term = query.trim().toLowerCase();
     const filtered = entries.filter((entry) => {
-      const matchesTopic = activeTopic === "All topics" || (entry.topic || "General") === activeTopic;
+      const category = entry.category || entry.topic || "General";
+      const matchesCategory = activeCategory === "All categories" || category === activeCategory;
       const matchesSearch = !term
         || entry.question.toLowerCase().includes(term)
         || entry.answer.toLowerCase().includes(term)
-        || (entry.category || "").toLowerCase().includes(term);
-      return matchesTopic && matchesSearch;
+        || (entry.category || "").toLowerCase().includes(term)
+        || (entry.topic || "").toLowerCase().includes(term);
+      return matchesCategory && matchesSearch;
     });
-    const topicLabel = activeTopic === "All topics" ? "all topics" : activeTopic;
-    readerStatusEl.textContent = `Showing ${filtered.length.toLocaleString()} questions from ${topicLabel}`;
-    clearTopicButton.hidden = activeTopic === "All topics";
+    const categoryLabel = activeCategory === "All categories" ? "all categories" : activeCategory;
+    readerStatusEl.textContent = `Showing ${filtered.length.toLocaleString()} questions from ${categoryLabel}`;
+    clearTopicButton.hidden = activeCategory === "All categories";
     render(filtered);
   }
 
   topicIndexEl.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-topic]");
+    const button = event.target.closest("[data-category]");
     if (!button) return;
-    activeTopic = button.dataset.topic;
+    activeCategory = button.dataset.category;
     renderTopicIndex();
     applyFilter();
     content.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
   clearTopicButton.addEventListener("click", () => {
-    activeTopic = "All topics";
+    activeCategory = "All categories";
     renderTopicIndex();
     applyFilter();
   });
@@ -275,6 +277,8 @@
 
   async function init() {
     loadProgress();
+    const initialSearch = new URLSearchParams(window.location.search).get("search") || "";
+    if (initialSearch) searchEl.value = initialSearch;
     try {
       const response = await fetch("/qa-dataset.json");
       const data = await response.json();
@@ -287,7 +291,7 @@
       return;
     }
     renderTopicIndex();
-    applyFilter();
+    applyFilter(initialSearch);
     updateProgressUi();
   }
 

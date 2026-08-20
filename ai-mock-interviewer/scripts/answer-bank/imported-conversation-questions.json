@@ -1,6 +1,1063 @@
 [
   {
     "source": "Imported Conversation Questions",
+    "section": "Project & day-to-day work",
+    "category": "Project & day-to-day work",
+    "questionType": "Conceptual",
+    "question": "In your current project assignment, what are your day-to-day activities?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project & day-to-day work",
+    "category": "Project & day-to-day work",
+    "questionType": "Conceptual",
+    "question": "Once you receive an infrastructure requirement, what do you do next?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Project & day-to-day work",
+    "category": "Project & day-to-day work",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you design, structure, manage, and deploy the required infrastructure?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Scenario",
+    "question": "Suppose you receive a requirement to create a Load Balancer for an application. How would you structure the Terraform code?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Conceptual",
+    "question": "Would you put the new infrastructure code in an existing repository or create a new repository?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you plan the deployment of that infrastructure?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Scenario",
+    "question": "When using a shared Terraform module, how does the shared module work?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Implementation / Workflow",
+    "question": "Where do you store your shared Terraform modules?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Implementation / Workflow",
+    "question": "How does an application/infrastructure repository consume a shared Terraform module?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Scenario",
+    "question": "When deploying to multiple environments, how do you structure the Terraform inputs?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you maintain different values for Dev, QA, UAT, and Prod?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform repository structure",
+    "category": "Terraform repository structure",
+    "questionType": "Conceptual",
+    "question": "Do different environments have separate Terraform state files?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform CI/CD",
+    "category": "Terraform CI/CD",
+    "questionType": "Conceptual",
+    "question": "Do you maintain separate pipelines for each environment or use one pipeline for all environments?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform CI/CD",
+    "category": "Terraform CI/CD",
+    "questionType": "Scenario",
+    "question": "If you use a single pipeline, how does it know which environment to deploy?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform CI/CD",
+    "category": "Terraform CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How does the pipeline detect which folder has changed?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform CI/CD",
+    "category": "Terraform CI/CD",
+    "questionType": "Scenario",
+    "question": "If only the QA folder changes, how do you prevent Dev/UAT/Prod from running?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform CI/CD",
+    "category": "Terraform CI/CD",
+    "questionType": "Scenario",
+    "question": "What happens if a shared Terraform module changes?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Terraform CI/CD",
+    "category": "Terraform CI/CD",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you determine which environments need to run when a shared module changes?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP project provisioning",
+    "category": "GCP project provisioning",
+    "questionType": "Conceptual",
+    "question": "You mentioned project/product creation. What exactly does that mean?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP project provisioning",
+    "category": "GCP project provisioning",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you create a new GCP project?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP project provisioning",
+    "category": "GCP project provisioning",
+    "questionType": "Conceptual",
+    "question": "Is repository bootstrap the same as creating the actual GCP project?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP project provisioning",
+    "category": "GCP project provisioning",
+    "questionType": "Scenario",
+    "question": "Suppose an application isn’t containerized and needs Compute Engine, Load Balancer, etc. in a dedicated project. How would you provision it?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP project provisioning",
+    "category": "GCP project provisioning",
+    "questionType": "Conceptual",
+    "question": "Why would you create a dedicated GCP project for an application?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP project provisioning",
+    "category": "GCP project provisioning",
+    "questionType": "Conceptual",
+    "question": "Is new GCP project creation handled as an incident, service request, or change?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP project provisioning",
+    "category": "GCP project provisioning",
+    "questionType": "Conceptual",
+    "question": "What process initiates creation of a new GCP project?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP identity & IAM",
+    "category": "GCP identity & IAM",
+    "questionType": "Conceptual",
+    "question": "What type of identity do you use for automated GCP project creation?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP identity & IAM",
+    "category": "GCP identity & IAM",
+    "questionType": "Conceptual",
+    "question": "What permissions are required to create a GCP project?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP identity & IAM",
+    "category": "GCP identity & IAM",
+    "questionType": "Conceptual",
+    "question": "What is the minimum permission required to create a project?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP identity & IAM",
+    "category": "GCP identity & IAM",
+    "questionType": "Conceptual",
+    "question": "Which IAM role provides project creation permissions?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP identity & IAM",
+    "category": "GCP identity & IAM",
+    "questionType": "Conceptual",
+    "question": "What permission is required to associate the project with a billing account?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP identity & IAM",
+    "category": "GCP identity & IAM",
+    "questionType": "Conceptual",
+    "question": "Where does the project-creation service account exist if the new project hasn’t been created yet?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Event-driven architecture",
+    "category": "Event-driven architecture",
+    "questionType": "Experience",
+    "question": "Have you worked on any event-driven solutions in GCP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Event-driven architecture",
+    "category": "Event-driven architecture",
+    "questionType": "Conceptual",
+    "question": "Can you give an example of an event-driven architecture?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Event-driven architecture",
+    "category": "Event-driven architecture",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you implement an event-driven solution using Pub/Sub, Eventarc, Cloud Run, or Cloud Functions?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Scenario",
+    "question": "Suppose you need to create a Python-based Cloud Function and fully automate both infrastructure and application-code deployment. How would you design it?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you structure the repository for Cloud Functions?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Conceptual",
+    "question": "Who should own the Cloud Function infrastructure—the infrastructure team or application team?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Conceptual",
+    "question": "Who should own the Python/Node.js application code?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Conceptual",
+    "question": "Would you keep Terraform and Cloud Function source code in the same repository or separate repositories?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Scenario",
+    "question": "When a Cloud Function is initially created with sample/Hello World code, how do you replace it with the actual application code?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Implementation / Workflow",
+    "question": "How does the application pipeline package and deploy the Python/Node.js source?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Implementation / Workflow",
+    "question": "How does Terraform know which application artifact/version to deploy?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Cloud Functions & repository design",
+    "category": "Cloud Functions & repository design",
+    "questionType": "Conceptual",
+    "question": "Should Terraform deploy every application-code change, or should the application pipeline handle code releases?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Experience",
+    "question": "Have you worked with GCP Organization Policies?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Conceptual",
+    "question": "Give an example of an Organization Policy you’ve implemented."
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Experience",
+    "question": "Have you worked with custom Organization Policies?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you deploy a custom Organization Policy?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Conceptual",
+    "question": "Do you create Organization Policies manually from the GCP Console or through automation?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you deploy Organization Policies through Terraform/CI/CD?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Conceptual",
+    "question": "In which language are custom Organization Policy conditions written?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Conceptual",
+    "question": "What is CEL (Common Expression Language)?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Conceptual",
+    "question": "In which format can a custom constraint definition be written?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Comparison",
+    "question": "What is the difference between YAML, HCL, and CEL in the context of Organization Policies?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Experience",
+    "question": "Have you deployed policies through a pipeline?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you structure a policy-as-code repository?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP Organization Policies",
+    "category": "GCP Organization Policies",
+    "questionType": "Scenario",
+    "question": "If you’re not a security engineer, who defines the policy requirement and who implements it?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you collect and manage application logs?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "Where are application logs stored?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you capture logs from GKE applications?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you generate alerts based on logs?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Scenario",
+    "question": "If you don’t want to use Datadog or another third-party tool, how would you implement logging and monitoring using only GCP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What is the role of Cloud Logging?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What is the role of Cloud Monitoring?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What different types of alerts can you configure in GCP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What is a metric-threshold alert?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What is a metric-absence alert?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What is a log-based alert?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What is a log-based metric?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Comparison",
+    "question": "What is the difference between a log-based alert and a log-based metric alert?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What are uptime-check alerts?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "GCP logging & monitoring",
+    "category": "GCP logging & monitoring",
+    "questionType": "Conceptual",
+    "question": "What are SLO/burn-rate alerts?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Scenario",
+    "question": "Suppose a database query/report is running for too long. How would you detect it and notify the monitoring/business team?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you identify long-running queries using Cloud Logging?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Conceptual",
+    "question": "After creating a log search/filter for long-running queries, what do you do next?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you create a log-based metric from those logs?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you create a Cloud Monitoring alerting policy from that metric?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you configure the threshold and duration?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you send an email notification to the monitoring/business team?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Long-running database query monitoring",
+    "category": "Long-running database query monitoring",
+    "questionType": "Scenario",
+    "question": "If the business needs a customized email containing query ID, report name, duration, etc., how would you implement that?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD pipeline",
+    "category": "CI/CD pipeline",
+    "questionType": "Conceptual",
+    "question": "Can you explain your application deployment pipeline flow?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD pipeline",
+    "category": "CI/CD pipeline",
+    "questionType": "Conceptual",
+    "question": "What stages/steps do you have in your pipeline?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD pipeline",
+    "category": "CI/CD pipeline",
+    "questionType": "Conceptual",
+    "question": "Which pipeline stages execute scripts?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD pipeline",
+    "category": "CI/CD pipeline",
+    "questionType": "Conceptual",
+    "question": "What kinds of Shell/Python/PowerShell scripts do you execute from pipelines?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD pipeline",
+    "category": "CI/CD pipeline",
+    "questionType": "Conceptual",
+    "question": "What does your Terraform infrastructure pipeline look like?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD pipeline",
+    "category": "CI/CD pipeline",
+    "questionType": "Scenario",
+    "question": "What happens after an application deployment?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "CI/CD pipeline",
+    "category": "CI/CD pipeline",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you perform post-deployment validation?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Pipeline notifications",
+    "category": "Pipeline notifications",
+    "questionType": "Troubleshooting",
+    "question": "How do you notify users when a pipeline succeeds or fails?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Pipeline notifications",
+    "category": "Pipeline notifications",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you send email notifications from Jenkins?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Pipeline notifications",
+    "category": "Pipeline notifications",
+    "questionType": "Conceptual",
+    "question": "Which Jenkins plugin do you use for email notifications?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Pipeline notifications",
+    "category": "Pipeline notifications",
+    "questionType": "Implementation / Workflow",
+    "question": "How does the Jenkins Email Extension Plugin work?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Pipeline notifications",
+    "category": "Pipeline notifications",
+    "questionType": "Conceptual",
+    "question": "What is emailext?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Pipeline notifications",
+    "category": "Pipeline notifications",
+    "questionType": "Implementation / Workflow",
+    "question": "How does Jenkins’s SMTP configuration work?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins vs Bitbucket",
+    "category": "Jenkins vs Bitbucket",
+    "questionType": "Conceptual",
+    "question": "You use Jenkins for application deployment and Bitbucket Pipelines for infrastructure deployment. Why are you using two different tools?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins vs Bitbucket",
+    "category": "Jenkins vs Bitbucket",
+    "questionType": "Conceptual",
+    "question": "Why not standardize everything on Jenkins or Bitbucket?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins vs Bitbucket",
+    "category": "Jenkins vs Bitbucket",
+    "questionType": "Experience",
+    "question": "Have you considered the additional cost of maintaining two CI/CD tools?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins vs Bitbucket",
+    "category": "Jenkins vs Bitbucket",
+    "questionType": "Conceptual",
+    "question": "What additional operational overhead does using Jenkins and Bitbucket create?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins vs Bitbucket",
+    "category": "Jenkins vs Bitbucket",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you determine whether consolidating the two platforms is worth it?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins vs Bitbucket",
+    "category": "Jenkins vs Bitbucket",
+    "questionType": "Scenario",
+    "question": "If you were designing the CI/CD platform from scratch, would you still use two tools?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "Where are your Jenkins agents running?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "Are Jenkins agents running on virtual machines or Kubernetes?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "How are Jenkins Kubernetes agents deployed?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Implementation / Workflow",
+    "question": "How does a Jenkins agent running in GKE communicate with an on-premises environment?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "What is the network path from a Jenkins agent pod to an on-prem server?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Experience",
+    "question": "Do you use VPN or Interconnect for GCP-to-on-prem connectivity?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Implementation / Workflow",
+    "question": "How does GKE activate/connect to the VPN?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "Is VPN configured inside GKE?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Implementation / Workflow",
+    "question": "How does the GCP VPC know the route to the on-prem network?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "What is the role of Cloud Router?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "What is the role of BGP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Conceptual",
+    "question": "What source IP does on-prem see—Pod IP or Node IP?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Jenkins agents & GKE networking",
+    "category": "Jenkins agents & GKE networking",
+    "questionType": "Implementation / Workflow",
+    "question": "How does return traffic from on-prem reach the Jenkins pod?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Conceptual",
+    "question": "In Jenkins you use shared libraries. Do you have something similar for Bitbucket?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Conceptual",
+    "question": "Does Bitbucket use YAML to define pipelines?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Conceptual",
+    "question": "What is bitbucket-pipelines.yml?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Conceptual",
+    "question": "Do you write everything directly in each repository’s YAML file?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Experience",
+    "question": "Do you use reusable Bitbucket pipeline templates?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you define reusable steps in Bitbucket?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Implementation / Workflow",
+    "question": "Where do you store your Bitbucket pipeline templates?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Conceptual",
+    "question": "Are the templates stored in the same repository or a separate shared repository?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Scenario",
+    "question": "If they’re stored in a shared repository, how do child repositories consume them?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Implementation / Workflow",
+    "question": "How does a child repository connect to the shared Bitbucket pipeline template?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Bitbucket pipeline templates",
+    "category": "Bitbucket pipeline templates",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you version shared pipeline templates?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "Your Terraform modules are stored in a private remote Bitbucket repository. How does Terraform access them?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Scenario",
+    "question": "What happens when terraform init encounters a private Git module source?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Implementation / Workflow",
+    "question": "How does authentication happen between your infrastructure repository and private module repository?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Experience",
+    "question": "Do you use SSH or HTTPS authentication?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "Where is the SSH private key/access token stored?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "Where exactly in the pipeline do you configure that authentication?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "Is the credential passed directly in bitbucket-pipelines.yml?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "How do secured Bitbucket variables work?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "Why must private-repository authentication be configured before terraform init?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "Is the GCP service account used to authenticate to the private Bitbucket repository?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Comparison",
+    "question": "What is the difference between Git repository authentication and GCP authentication?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Conceptual",
+    "question": "Can the authentication/setup logic be implemented using Shell, PowerShell, or Python?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Private Terraform module authentication",
+    "category": "Private Terraform module authentication",
+    "questionType": "Scenario",
+    "question": "What happens if the pipeline doesn’t have permission to access the private Terraform module repository?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "Where does your certificate-expiry script get the information that a certificate is about to expire?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "Is the certificate expiration date manually provided to the script?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you retrieve the certificate’s expiry date?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you check certificate validity?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you use OpenSSL to check a certificate?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "What are notBefore and notAfter?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you determine whether a certificate expires within the next 30 days?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "How is the certificate-monitoring script triggered?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "Why did you schedule the script for the last day of every month?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "Why use a scheduled script if Certificate Manager can provide certificate monitoring/events?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "Would an event-driven/native monitoring approach be better than polling?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Scenario",
+    "question": "What happens if your script runs at month-end but the certificate expires on the first or second day of the next month?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "Isn’t monthly certificate checking risky because you may discover expiration too late?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "What would be a better certificate-monitoring frequency?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Conceptual",
+    "question": "Would you use thresholds such as 30, 15, 7, and 1 day?"
+  },
+  {
+    "source": "Imported Conversation Questions",
+    "section": "Certificate monitoring",
+    "category": "Certificate monitoring",
+    "questionType": "Comparison",
+    "question": "When would you still use a custom OpenSSL script instead of native certificate monitoring?"
+  },
+  {
+    "source": "Imported Conversation Questions",
     "section": "CI/CD, GitHub Actions, Jenkins",
     "category": "CI/CD, GitHub Actions, Jenkins",
     "questionType": "Conceptual",
@@ -2126,5 +3183,250 @@
     "category": "Terraform State",
     "questionType": "Comparison",
     "question": "What is the difference between state locking and state backup/versioning?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Architecture & Project Experience",
+    "category": "Architecture & Project Experience",
+    "questionType": "Experience",
+    "question": "Tell me about the most complicated project you have handled."
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Architecture & Project Experience",
+    "category": "Architecture & Project Experience",
+    "questionType": "Design / Architecture",
+    "question": "Can you walk me through the current architecture of that project?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Architecture & Project Experience",
+    "category": "Architecture & Project Experience",
+    "questionType": "Experience",
+    "question": "Describe an interesting production problem you faced."
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Architecture & Project Experience",
+    "category": "Architecture & Project Experience",
+    "questionType": "Implementation / Workflow",
+    "question": "How did you perform the RCA (Root Cause Analysis)?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Architecture & Project Experience",
+    "category": "Architecture & Project Experience",
+    "questionType": "Conceptual",
+    "question": "Do you know the formal way of doing an RCA?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Kubernetes",
+    "category": "Kubernetes",
+    "questionType": "Troubleshooting",
+    "question": "A pod is stuck in the Pending state. How would you troubleshoot it?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Kubernetes",
+    "category": "Kubernetes",
+    "questionType": "Scenario",
+    "question": "What happens when a user accesses an application through an Ingress in GKE?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Kubernetes",
+    "category": "Kubernetes",
+    "questionType": "Troubleshooting",
+    "question": "If a pod is running behind a Service but traffic is not reaching it, what could be the reasons?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Kubernetes",
+    "category": "Kubernetes",
+    "questionType": "Comparison",
+    "question": "What is the difference between CrashLoopBackOff, ImagePullBackOff, and ErrImagePull?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Kubernetes",
+    "category": "Kubernetes",
+    "questionType": "Comparison",
+    "question": "What is the difference between a Deployment, StatefulSet, and DaemonSet?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Kubernetes",
+    "category": "Kubernetes",
+    "questionType": "Implementation / Workflow",
+    "question": "How does HPA (Horizontal Pod Autoscaler) work?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Kubernetes",
+    "category": "Kubernetes",
+    "questionType": "Troubleshooting",
+    "question": "How do you investigate if a Kubernetes application suddenly becomes unavailable?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Kubernetes",
+    "category": "Kubernetes",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you secure a Kubernetes cluster?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Conceptual",
+    "question": "Can you explain how the Terraform state file works?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you store the Terraform state file in a remote location?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you manage Terraform drift?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Terraform",
+    "category": "Terraform",
+    "questionType": "Comparison",
+    "question": "What is the difference between count and for_each?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "CI/CD & GitOps",
+    "category": "CI/CD & GitOps",
+    "questionType": "Design / Architecture",
+    "question": "Design a CI/CD pipeline for a microservice."
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "CI/CD & GitOps",
+    "category": "CI/CD & GitOps",
+    "questionType": "Conceptual",
+    "question": "What components would you include in the pipeline?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "CI/CD & GitOps",
+    "category": "CI/CD & GitOps",
+    "questionType": "Conceptual",
+    "question": "What is GitOps?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "CI/CD & GitOps",
+    "category": "CI/CD & GitOps",
+    "questionType": "Conceptual",
+    "question": "What are the advantages of GitOps?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "GCP",
+    "category": "GCP",
+    "questionType": "Conceptual",
+    "question": "What is a Shared VPC?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "GCP",
+    "category": "GCP",
+    "questionType": "Comparison",
+    "question": "How is Cloud Armor different from a WAF?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Observability",
+    "category": "Observability",
+    "questionType": "Experience",
+    "question": "Have you worked on observability?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Observability",
+    "category": "Observability",
+    "questionType": "Conceptual",
+    "question": "What does observability mean to you?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Observability",
+    "category": "Observability",
+    "questionType": "Troubleshooting",
+    "question": "If application latency suddenly increases 2-3 times, how would you investigate it?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Observability",
+    "category": "Observability",
+    "questionType": "Troubleshooting",
+    "question": "What metrics would you check?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Observability",
+    "category": "Observability",
+    "questionType": "Comparison",
+    "question": "What is the difference between logs, metrics, and traces?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Networking & Security",
+    "category": "Networking & Security",
+    "questionType": "Scenario",
+    "question": "When you type www.idfcbank.com in a browser, how do you know you're talking to the real IDFC Bank server and not an attacker?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Networking & Security",
+    "category": "Networking & Security",
+    "questionType": "Conceptual",
+    "question": "Explain how HTTPS/TLS certificate validation works."
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Networking & Security",
+    "category": "Networking & Security",
+    "questionType": "Conceptual",
+    "question": "How does the browser trust the server?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "MLOps",
+    "category": "MLOps",
+    "questionType": "Conceptual",
+    "question": "What problem does MLflow solve?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "MLOps",
+    "category": "MLOps",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you deploy a machine learning model on Kubernetes?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Python",
+    "category": "Python",
+    "questionType": "Experience",
+    "question": "What is the largest Python script you have written?"
+  },
+  {
+    "source": "Imported Interview Segment",
+    "section": "Python",
+    "category": "Python",
+    "questionType": "Experience",
+    "question": "What was its functionality?"
   }
 ]

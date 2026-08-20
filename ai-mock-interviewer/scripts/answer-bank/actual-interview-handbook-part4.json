@@ -1,0 +1,5522 @@
+[
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is Site Reliability Engineering?",
+    "originalNumber": 1181
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Comparison",
+    "question": "How is SRE different from traditional operations?",
+    "originalNumber": 1182
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Comparison",
+    "question": "How is SRE different from DevOps?",
+    "originalNumber": 1183
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What are the main responsibilities of an SRE?",
+    "originalNumber": 1184
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is reliability?",
+    "originalNumber": 1185
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you measure application reliability?",
+    "originalNumber": 1186
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is availability?",
+    "originalNumber": 1187
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you calculate availability?",
+    "originalNumber": 1188
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What does 99.9% availability mean?",
+    "originalNumber": 1189
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How much downtime is allowed with 99.9% availability?",
+    "originalNumber": 1190
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between availability and reliability?",
+    "originalNumber": 1191
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is resilience?",
+    "originalNumber": 1192
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is fault tolerance?",
+    "originalNumber": 1193
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is high availability?",
+    "originalNumber": 1194
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is scalability?",
+    "originalNumber": 1195
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is elasticity?",
+    "originalNumber": 1196
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is maintainability?",
+    "originalNumber": 1197
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is operational excellence?",
+    "originalNumber": 1198
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is toil in SRE?",
+    "originalNumber": 1199
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you identify operational toil?",
+    "originalNumber": 1200
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you reduce toil?",
+    "originalNumber": 1201
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What percentage of an SRE’s time should be spent on toil?",
+    "originalNumber": 1202
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is an error budget?",
+    "originalNumber": 1203
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Why are error budgets important?",
+    "originalNumber": 1204
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do error budgets balance reliability and feature delivery?",
+    "originalNumber": 1205
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Troubleshooting",
+    "question": "What happens when an error budget is exhausted?",
+    "originalNumber": 1206
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Should deployment stop when the error budget is consumed?",
+    "originalNumber": 1207
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Who should own reliability?",
+    "originalNumber": 1208
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do developers and SRE teams collaborate?",
+    "originalNumber": 1209
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a reliability review?",
+    "originalNumber": 1210
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "What is an SLI?",
+    "originalNumber": 1211
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "What is an SLO?",
+    "originalNumber": 1212
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "What is an SLA?",
+    "originalNumber": 1213
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Comparison",
+    "question": "What is the difference between SLI, SLO and SLA?",
+    "originalNumber": 1214
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Behavioral",
+    "question": "Give an example of an availability SLI.",
+    "originalNumber": 1215
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Troubleshooting",
+    "question": "Give an example of a latency SLI.",
+    "originalNumber": 1216
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Behavioral",
+    "question": "Give an example of an error-rate SLI.",
+    "originalNumber": 1217
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "How do you choose the right SLI?",
+    "originalNumber": 1218
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "Should CPU utilization be used as an SLI?",
+    "originalNumber": 1219
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "What is a user-centric SLI?",
+    "originalNumber": 1220
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "What is a service-centric SLI?",
+    "originalNumber": 1221
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "How do you define an SLO for an API?",
+    "originalNumber": 1222
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "How do you define an SLO for a batch job?",
+    "originalNumber": 1223
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "How do you define an SLO for a data pipeline?",
+    "originalNumber": 1224
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "How do you define an SLO for an ML inference service?",
+    "originalNumber": 1225
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "What is an availability target?",
+    "originalNumber": 1226
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "How do you calculate error budget from an SLO?",
+    "originalNumber": 1227
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "How do you track error-budget consumption?",
+    "originalNumber": 1228
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "What is error-budget burn rate?",
+    "originalNumber": 1229
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "What is a fast-burn alert?",
+    "originalNumber": 1230
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "What is a slow-burn alert?",
+    "originalNumber": 1231
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "Why are multi-window burn-rate alerts useful?",
+    "originalNumber": 1232
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "How do you avoid alerting on every small SLO violation?",
+    "originalNumber": 1233
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "How do you report SLO compliance?",
+    "originalNumber": 1234
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "Should every service have the same SLO?",
+    "originalNumber": 1235
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "How do business criticality and SLOs relate?",
+    "originalNumber": 1236
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "Can an internal service have an SLA?",
+    "originalNumber": 1237
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "How do dependencies affect SLOs?",
+    "originalNumber": 1238
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "What happens if an upstream dependency has a lower SLO?",
+    "originalNumber": 1239
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "SLI, SLO and SLA",
+    "category": "SLI, SLO and SLA",
+    "questionType": "Conceptual",
+    "question": "How do you negotiate realistic SLOs with product teams?",
+    "originalNumber": 1240
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is monitoring?",
+    "originalNumber": 1241
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is observability?",
+    "originalNumber": 1242
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between monitoring and observability?",
+    "originalNumber": 1243
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What are the three pillars of observability?",
+    "originalNumber": 1244
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What are metrics?",
+    "originalNumber": 1245
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What are logs?",
+    "originalNumber": 1246
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What are traces?",
+    "originalNumber": 1247
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Why are metrics useful?",
+    "originalNumber": 1248
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Why are logs useful?",
+    "originalNumber": 1249
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "Why are traces useful?",
+    "originalNumber": 1250
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What are events in observability?",
+    "originalNumber": 1251
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is telemetry?",
+    "originalNumber": 1252
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is instrumentation?",
+    "originalNumber": 1253
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is black-box monitoring?",
+    "originalNumber": 1254
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is white-box monitoring?",
+    "originalNumber": 1255
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is synthetic monitoring?",
+    "originalNumber": 1256
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is real-user monitoring?",
+    "originalNumber": 1257
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is infrastructure monitoring?",
+    "originalNumber": 1258
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is application-performance monitoring?",
+    "originalNumber": 1259
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is business monitoring?",
+    "originalNumber": 1260
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Comparison",
+    "question": "What is the difference between proactive and reactive monitoring?",
+    "originalNumber": 1261
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What is a monitoring strategy?",
+    "originalNumber": 1262
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "What should you monitor for a production application?",
+    "originalNumber": 1263
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you monitor a microservices architecture?",
+    "originalNumber": 1264
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you monitor a Kubernetes cluster?",
+    "originalNumber": 1265
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you monitor a CI/CD pipeline?",
+    "originalNumber": 1266
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you monitor a load balancer?",
+    "originalNumber": 1267
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you monitor a database?",
+    "originalNumber": 1268
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you monitor a message queue?",
+    "originalNumber": 1269
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Monitoring Fundamentals",
+    "category": "Monitoring Fundamentals",
+    "questionType": "Conceptual",
+    "question": "How do you monitor third-party dependencies?",
+    "originalNumber": 1270
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "What are the four golden signals?",
+    "originalNumber": 1271
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Troubleshooting",
+    "question": "What is latency?",
+    "originalNumber": 1272
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "What is traffic?",
+    "originalNumber": 1273
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "What is error rate?",
+    "originalNumber": 1274
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "What is saturation?",
+    "originalNumber": 1275
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "Why are the golden signals useful?",
+    "originalNumber": 1276
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "What is the RED method?",
+    "originalNumber": 1277
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "What do Rate, Errors and Duration mean?",
+    "originalNumber": 1278
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "When should you use the RED method?",
+    "originalNumber": 1279
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "What is the USE method?",
+    "originalNumber": 1280
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "What do Utilization, Saturation and Errors mean?",
+    "originalNumber": 1281
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "When should you use the USE method?",
+    "originalNumber": 1282
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "Which method is more suitable for applications?",
+    "originalNumber": 1283
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "Which method is more suitable for infrastructure?",
+    "originalNumber": 1284
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "How would you monitor an API using RED?",
+    "originalNumber": 1285
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "How would you monitor a node using USE?",
+    "originalNumber": 1286
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "What is queue saturation?",
+    "originalNumber": 1287
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "What is thread-pool saturation?",
+    "originalNumber": 1288
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Conceptual",
+    "question": "What is connection-pool saturation?",
+    "originalNumber": 1289
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Golden Signals and RED/USE Methods",
+    "category": "Golden Signals and RED/USE Methods",
+    "questionType": "Troubleshooting",
+    "question": "How do you detect resource exhaustion before failure?",
+    "originalNumber": 1290
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What is a time-series metric?",
+    "originalNumber": 1291
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What is a metric label?",
+    "originalNumber": 1292
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What is metric cardinality?",
+    "originalNumber": 1293
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "Why is high cardinality problematic?",
+    "originalNumber": 1294
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What labels should be avoided?",
+    "originalNumber": 1295
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "Why should user IDs not be used as metric labels?",
+    "originalNumber": 1296
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What is a counter?",
+    "originalNumber": 1297
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What is a gauge?",
+    "originalNumber": 1298
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What is a histogram?",
+    "originalNumber": 1299
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What is a summary?",
+    "originalNumber": 1300
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Comparison",
+    "question": "What is the difference between a histogram and summary?",
+    "originalNumber": 1301
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "When should you use a counter?",
+    "originalNumber": 1302
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "When should you use a gauge?",
+    "originalNumber": 1303
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Troubleshooting",
+    "question": "How do you measure request latency?",
+    "originalNumber": 1304
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What is a percentile?",
+    "originalNumber": 1305
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Troubleshooting",
+    "question": "What is p50 latency?",
+    "originalNumber": 1306
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Troubleshooting",
+    "question": "What is p95 latency?",
+    "originalNumber": 1307
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Troubleshooting",
+    "question": "What is p99 latency?",
+    "originalNumber": 1308
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Troubleshooting",
+    "question": "Why is average latency sometimes misleading?",
+    "originalNumber": 1309
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "How do you calculate an error rate?",
+    "originalNumber": 1310
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What is a rate function?",
+    "originalNumber": 1311
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What is a rolling average?",
+    "originalNumber": 1312
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What is a moving window?",
+    "originalNumber": 1313
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "How do you aggregate metrics across replicas?",
+    "originalNumber": 1314
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "How do you avoid double-counting metrics?",
+    "originalNumber": 1315
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What is metric scraping?",
+    "originalNumber": 1316
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What is push-based metrics collection?",
+    "originalNumber": 1317
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "What is pull-based metrics collection?",
+    "originalNumber": 1318
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Comparison",
+    "question": "What is the difference between push and pull monitoring?",
+    "originalNumber": 1319
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Metrics",
+    "category": "Metrics",
+    "questionType": "Conceptual",
+    "question": "How do you retain historical metrics?",
+    "originalNumber": 1320
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is Prometheus?",
+    "originalNumber": 1321
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "Explain Prometheus architecture.",
+    "originalNumber": 1322
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "How does Prometheus collect metrics?",
+    "originalNumber": 1323
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is a Prometheus target?",
+    "originalNumber": 1324
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is a scrape configuration?",
+    "originalNumber": 1325
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is a scrape interval?",
+    "originalNumber": 1326
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is an evaluation interval?",
+    "originalNumber": 1327
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is service discovery in Prometheus?",
+    "originalNumber": 1328
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "How does Prometheus discover Kubernetes targets?",
+    "originalNumber": 1329
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is an exporter?",
+    "originalNumber": 1330
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is Node Exporter?",
+    "originalNumber": 1331
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is kube-state-metrics?",
+    "originalNumber": 1332
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Comparison",
+    "question": "What is the difference between metrics-server and kube-state-metrics?",
+    "originalNumber": 1333
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is cAdvisor?",
+    "originalNumber": 1334
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is the Prometheus Operator?",
+    "originalNumber": 1335
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is a ServiceMonitor?",
+    "originalNumber": 1336
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is a PodMonitor?",
+    "originalNumber": 1337
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is a PrometheusRule?",
+    "originalNumber": 1338
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is PromQL?",
+    "originalNumber": 1339
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "How do you calculate request rate in PromQL?",
+    "originalNumber": 1340
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "How do you calculate error percentage in PromQL?",
+    "originalNumber": 1341
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Troubleshooting",
+    "question": "How do you calculate p95 latency in PromQL?",
+    "originalNumber": 1342
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What does the rate() function do?",
+    "originalNumber": 1343
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What does the increase() function do?",
+    "originalNumber": 1344
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Comparison",
+    "question": "What is the difference between rate() and irate()?",
+    "originalNumber": 1345
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What does histogram_quantile() do?",
+    "originalNumber": 1346
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is recording rule?",
+    "originalNumber": 1347
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "Why are recording rules used?",
+    "originalNumber": 1348
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is Alertmanager?",
+    "originalNumber": 1349
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "How does Alertmanager work?",
+    "originalNumber": 1350
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is alert grouping?",
+    "originalNumber": 1351
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is alert inhibition?",
+    "originalNumber": 1352
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What is alert silencing?",
+    "originalNumber": 1353
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Comparison",
+    "question": "How do you route alerts to different teams?",
+    "originalNumber": 1354
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "How do you prevent duplicate alerts?",
+    "originalNumber": 1355
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "How do you monitor Prometheus itself?",
+    "originalNumber": 1356
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What happens if Prometheus goes down?",
+    "originalNumber": 1357
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "How do you make Prometheus highly available?",
+    "originalNumber": 1358
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "How do you scale Prometheus?",
+    "originalNumber": 1359
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Prometheus",
+    "category": "Prometheus",
+    "questionType": "Conceptual",
+    "question": "What are Thanos, Cortex and Mimir used for?",
+    "originalNumber": 1360
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "What is Grafana?",
+    "originalNumber": 1361
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "How does Grafana connect to data sources?",
+    "originalNumber": 1362
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Behavioral",
+    "question": "Which data sources have you used with Grafana?",
+    "originalNumber": 1363
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "What is a Grafana dashboard?",
+    "originalNumber": 1364
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "What is a Grafana panel?",
+    "originalNumber": 1365
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "What is a dashboard variable?",
+    "originalNumber": 1366
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "What is dashboard templating?",
+    "originalNumber": 1367
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "How do you build a Kubernetes dashboard?",
+    "originalNumber": 1368
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "What metrics would you show on an application dashboard?",
+    "originalNumber": 1369
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "What metrics would you show on an infrastructure dashboard?",
+    "originalNumber": 1370
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "How do you create alerts in Grafana?",
+    "originalNumber": 1371
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "What is Grafana Alerting?",
+    "originalNumber": 1372
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "How do you manage Grafana dashboards as code?",
+    "originalNumber": 1373
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "How do you provision dashboards automatically?",
+    "originalNumber": 1374
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "How do you manage dashboard versions?",
+    "originalNumber": 1375
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "How do you restrict dashboard access?",
+    "originalNumber": 1376
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "How do you implement SSO in Grafana?",
+    "originalNumber": 1377
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot a dashboard showing no data?",
+    "originalNumber": 1378
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "How do you reduce slow dashboard queries?",
+    "originalNumber": 1379
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Grafana",
+    "category": "Grafana",
+    "questionType": "Conceptual",
+    "question": "What makes a dashboard operationally useful?",
+    "originalNumber": 1380
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "What is Google Cloud Monitoring?",
+    "originalNumber": 1381
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "What is Google Cloud Logging?",
+    "originalNumber": 1382
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "What is the Google Cloud Operations Suite?",
+    "originalNumber": 1383
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "What is a Cloud Monitoring workspace?",
+    "originalNumber": 1384
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "What are monitored resources?",
+    "originalNumber": 1385
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "What are log-based metrics?",
+    "originalNumber": 1386
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do you create a log-based metric?",
+    "originalNumber": 1387
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "When would you use a counter log-based metric?",
+    "originalNumber": 1388
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "When would you use a distribution log-based metric?",
+    "originalNumber": 1389
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "What is an uptime check?",
+    "originalNumber": 1390
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do you create an alerting policy?",
+    "originalNumber": 1391
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "What are notification channels?",
+    "originalNumber": 1392
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do you monitor multiple GCP projects centrally?",
+    "originalNumber": 1393
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do you create custom metrics in GCP?",
+    "originalNumber": 1394
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do applications send custom metrics?",
+    "originalNumber": 1395
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "What is Managed Service for Prometheus?",
+    "originalNumber": 1396
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do you use PromQL in Cloud Monitoring?",
+    "originalNumber": 1397
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do you monitor GKE with Cloud Monitoring?",
+    "originalNumber": 1398
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "What Kubernetes metrics are collected automatically?",
+    "originalNumber": 1399
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do you monitor Cloud Run?",
+    "originalNumber": 1400
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Troubleshooting",
+    "question": "How do you monitor load-balancer latency?",
+    "originalNumber": 1401
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do you monitor Cloud Armor denied requests?",
+    "originalNumber": 1402
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do you monitor Cloud NAT?",
+    "originalNumber": 1403
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do you monitor VPN tunnels?",
+    "originalNumber": 1404
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do you monitor database connections?",
+    "originalNumber": 1405
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "What are logs-based alerts?",
+    "originalNumber": 1406
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "What is a log sink?",
+    "originalNumber": 1407
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do you export logs to BigQuery?",
+    "originalNumber": 1408
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do you export logs to Cloud Storage?",
+    "originalNumber": 1409
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Google Cloud Monitoring and Logging",
+    "category": "Google Cloud Monitoring and Logging",
+    "questionType": "Conceptual",
+    "question": "How do you export logs to Pub/Sub?",
+    "originalNumber": 1410
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is centralized logging?",
+    "originalNumber": 1411
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "Why is centralized logging required?",
+    "originalNumber": 1412
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is the ELK Stack?",
+    "originalNumber": 1413
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is Elasticsearch?",
+    "originalNumber": 1414
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is Logstash?",
+    "originalNumber": 1415
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is Kibana?",
+    "originalNumber": 1416
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is Beats?",
+    "originalNumber": 1417
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is Filebeat?",
+    "originalNumber": 1418
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "How do logs move from an application to Elasticsearch?",
+    "originalNumber": 1419
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "How do you collect container logs?",
+    "originalNumber": 1420
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is structured logging?",
+    "originalNumber": 1421
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "Why is JSON logging preferred?",
+    "originalNumber": 1422
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What fields should every application log contain?",
+    "originalNumber": 1423
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is a correlation ID?",
+    "originalNumber": 1424
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is a request ID?",
+    "originalNumber": 1425
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "How do you trace a request across microservices using logs?",
+    "originalNumber": 1426
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is log parsing?",
+    "originalNumber": 1427
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is log enrichment?",
+    "originalNumber": 1428
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is an Elasticsearch index?",
+    "originalNumber": 1429
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is an index pattern?",
+    "originalNumber": 1430
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is index lifecycle management?",
+    "originalNumber": 1431
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "How do you manage log retention?",
+    "originalNumber": 1432
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "How do you avoid excessive logging costs?",
+    "originalNumber": 1433
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "How do you prevent sensitive information from being logged?",
+    "originalNumber": 1434
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "How do you mask passwords and tokens?",
+    "originalNumber": 1435
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "What is log sampling?",
+    "originalNumber": 1436
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot missing logs?",
+    "originalNumber": 1437
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot Elasticsearch high disk usage?",
+    "originalNumber": 1438
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "How do you scale Elasticsearch?",
+    "originalNumber": 1439
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Logging and ELK Stack",
+    "category": "Logging and ELK Stack",
+    "questionType": "Conceptual",
+    "question": "How do you secure Elasticsearch and Kibana?",
+    "originalNumber": 1440
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is distributed tracing?",
+    "originalNumber": 1441
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "Why is tracing useful in microservices?",
+    "originalNumber": 1442
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is a trace?",
+    "originalNumber": 1443
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is a span?",
+    "originalNumber": 1444
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is a parent span?",
+    "originalNumber": 1445
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is a child span?",
+    "originalNumber": 1446
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is trace context?",
+    "originalNumber": 1447
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "How is trace context propagated?",
+    "originalNumber": 1448
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is a trace ID?",
+    "originalNumber": 1449
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is a span ID?",
+    "originalNumber": 1450
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is sampling in tracing?",
+    "originalNumber": 1451
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is head-based sampling?",
+    "originalNumber": 1452
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is tail-based sampling?",
+    "originalNumber": 1453
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is OpenTelemetry?",
+    "originalNumber": 1454
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What are the components of OpenTelemetry?",
+    "originalNumber": 1455
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is the OpenTelemetry Collector?",
+    "originalNumber": 1456
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is auto-instrumentation?",
+    "originalNumber": 1457
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is manual instrumentation?",
+    "originalNumber": 1458
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is context propagation?",
+    "originalNumber": 1459
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is Jaeger?",
+    "originalNumber": 1460
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "How does Jaeger collect and display traces?",
+    "originalNumber": 1461
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Troubleshooting",
+    "question": "How do you trace latency across multiple services?",
+    "originalNumber": 1462
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "How do you identify the slowest service in a request path?",
+    "originalNumber": 1463
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "How do you correlate logs, metrics and traces?",
+    "originalNumber": 1464
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What is exemplars support?",
+    "originalNumber": 1465
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "What causes broken traces?",
+    "originalNumber": 1466
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "How do you reduce tracing costs?",
+    "originalNumber": 1467
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "Which requests should be sampled?",
+    "originalNumber": 1468
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "How do you trace asynchronous messaging?",
+    "originalNumber": 1469
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Distributed Tracing and OpenTelemetry",
+    "category": "Distributed Tracing and OpenTelemetry",
+    "questionType": "Conceptual",
+    "question": "How do you trace Kafka or Pub/Sub workflows?",
+    "originalNumber": 1470
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "What is Dynatrace?",
+    "originalNumber": 1471
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "What is application-performance monitoring?",
+    "originalNumber": 1472
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "What is OneAgent?",
+    "originalNumber": 1473
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "What is ActiveGate?",
+    "originalNumber": 1474
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "How does Dynatrace discover services?",
+    "originalNumber": 1475
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "What is Smartscape?",
+    "originalNumber": 1476
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "What is PurePath?",
+    "originalNumber": 1477
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "What is Davis AI?",
+    "originalNumber": 1478
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "How does Dynatrace perform root-cause analysis?",
+    "originalNumber": 1479
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "What is a Dynatrace problem?",
+    "originalNumber": 1480
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "What is anomaly detection?",
+    "originalNumber": 1481
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "How do you monitor Kubernetes using Dynatrace?",
+    "originalNumber": 1482
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "How do you monitor GKE with Dynatrace?",
+    "originalNumber": 1483
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "How do you deploy OneAgent in Kubernetes?",
+    "originalNumber": 1484
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "What is the Dynatrace Operator?",
+    "originalNumber": 1485
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "How do you create custom alerts in Dynatrace?",
+    "originalNumber": 1486
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "How do you create management zones?",
+    "originalNumber": 1487
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "What are tags in Dynatrace?",
+    "originalNumber": 1488
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "How do you separate environments in Dynatrace?",
+    "originalNumber": 1489
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "How do you integrate Dynatrace with ServiceNow?",
+    "originalNumber": 1490
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "How do you integrate Dynatrace with Slack or email?",
+    "originalNumber": 1491
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "How do you analyze high response time using Dynatrace?",
+    "originalNumber": 1492
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "How do you identify a memory leak?",
+    "originalNumber": 1493
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Conceptual",
+    "question": "How do you identify database bottlenecks?",
+    "originalNumber": 1494
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Dynatrace and APM",
+    "category": "Dynatrace and APM",
+    "questionType": "Comparison",
+    "question": "How do you compare Dynatrace with Prometheus and Grafana?",
+    "originalNumber": 1495
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is an alert?",
+    "originalNumber": 1496
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What should trigger an alert?",
+    "originalNumber": 1497
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What should not trigger an alert?",
+    "originalNumber": 1498
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is an actionable alert?",
+    "originalNumber": 1499
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is alert fatigue?",
+    "originalNumber": 1500
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "How do you reduce alert fatigue?",
+    "originalNumber": 1501
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is a warning alert?",
+    "originalNumber": 1502
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is a critical alert?",
+    "originalNumber": 1503
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "How do you define alert severity?",
+    "originalNumber": 1504
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is a static threshold?",
+    "originalNumber": 1505
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is a dynamic threshold?",
+    "originalNumber": 1506
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is anomaly-based alerting?",
+    "originalNumber": 1507
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is symptom-based alerting?",
+    "originalNumber": 1508
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "Why should you alert on symptoms rather than causes?",
+    "originalNumber": 1509
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is alert deduplication?",
+    "originalNumber": 1510
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is alert aggregation?",
+    "originalNumber": 1511
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is alert suppression?",
+    "originalNumber": 1512
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is an alert escalation policy?",
+    "originalNumber": 1513
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What information should an alert contain?",
+    "originalNumber": 1514
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "Should every alert have a runbook?",
+    "originalNumber": 1515
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is an alert runbook?",
+    "originalNumber": 1516
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "How do you test alerting policies?",
+    "originalNumber": 1517
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "How do you prevent alerts during planned maintenance?",
+    "originalNumber": 1518
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "What is a maintenance window?",
+    "originalNumber": 1519
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Alerting",
+    "category": "Alerting",
+    "questionType": "Conceptual",
+    "question": "How do you route alerts based on service ownership?",
+    "originalNumber": 1520
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What is an incident?",
+    "originalNumber": 1521
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What is incident management?",
+    "originalNumber": 1522
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What is the incident lifecycle?",
+    "originalNumber": 1523
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What is incident detection?",
+    "originalNumber": 1524
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What is incident triage?",
+    "originalNumber": 1525
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What is incident containment?",
+    "originalNumber": 1526
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What is incident resolution?",
+    "originalNumber": 1527
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What is incident recovery?",
+    "originalNumber": 1528
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What is an incident commander?",
+    "originalNumber": 1529
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What are the responsibilities of an incident commander?",
+    "originalNumber": 1530
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What is a technical lead during an incident?",
+    "originalNumber": 1531
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Conceptual",
+    "question": "What is the role of a communications lead?",
+    "originalNumber": 1532
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What is a major incident?",
+    "originalNumber": 1533
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "How do you classify incidents by severity?",
+    "originalNumber": 1534
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What is a Severity 1 incident?",
+    "originalNumber": 1535
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What is a Severity 2 incident?",
+    "originalNumber": 1536
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "How do you decide incident priority?",
+    "originalNumber": 1537
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What should be your first action during a production outage?",
+    "originalNumber": 1538
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "How do you communicate during an incident?",
+    "originalNumber": 1539
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Conceptual",
+    "question": "How frequently should stakeholders receive updates?",
+    "originalNumber": 1540
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Conceptual",
+    "question": "How do you avoid multiple people making conflicting changes?",
+    "originalNumber": 1541
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "How do you maintain an incident timeline?",
+    "originalNumber": 1542
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What information should be recorded during an incident?",
+    "originalNumber": 1543
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "When should you escalate an incident?",
+    "originalNumber": 1544
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "How do you hand over an incident between shifts?",
+    "originalNumber": 1545
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "How do you close an incident?",
+    "originalNumber": 1546
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Troubleshooting",
+    "question": "What is a post-incident review?",
+    "originalNumber": 1547
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Conceptual",
+    "question": "What is a blameless postmortem?",
+    "originalNumber": 1548
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Conceptual",
+    "question": "Why should postmortems be blameless?",
+    "originalNumber": 1549
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Incident Management",
+    "category": "Incident Management",
+    "questionType": "Conceptual",
+    "question": "What are corrective and preventive actions?",
+    "originalNumber": 1550
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "What is root-cause analysis?",
+    "originalNumber": 1551
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Comparison",
+    "question": "What is the difference between root cause and contributing factor?",
+    "originalNumber": 1552
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "What is the five-whys technique?",
+    "originalNumber": 1553
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "What is a fishbone diagram?",
+    "originalNumber": 1554
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "What is fault-tree analysis?",
+    "originalNumber": 1555
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "How do you perform RCA for a production issue?",
+    "originalNumber": 1556
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "What should an RCA document contain?",
+    "originalNumber": 1557
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "How do you distinguish symptoms from root cause?",
+    "originalNumber": 1558
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "Why is “human error” usually not a sufficient root cause?",
+    "originalNumber": 1559
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "How do you verify that a root cause is correct?",
+    "originalNumber": 1560
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "How do you create actionable remediation items?",
+    "originalNumber": 1561
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "How do you assign ownership to RCA actions?",
+    "originalNumber": 1562
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "How do you track RCA actions to completion?",
+    "originalNumber": 1563
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Troubleshooting",
+    "question": "How do you prevent the same incident from recurring?",
+    "originalNumber": 1564
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Troubleshooting",
+    "question": "Should every incident require a postmortem?",
+    "originalNumber": 1565
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Troubleshooting",
+    "question": "What incidents deserve a formal postmortem?",
+    "originalNumber": 1566
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "How do you measure whether corrective actions worked?",
+    "originalNumber": 1567
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "How do you share lessons across teams?",
+    "originalNumber": 1568
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Conceptual",
+    "question": "How do you avoid blame in an RCA meeting?",
+    "originalNumber": 1569
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "RCA and Postmortems",
+    "category": "RCA and Postmortems",
+    "questionType": "Behavioral",
+    "question": "Give an example of an RCA you performed.",
+    "originalNumber": 1570
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "What is MTTD?",
+    "originalNumber": 1571
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "What is MTTA?",
+    "originalNumber": 1572
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "What is MTTR?",
+    "originalNumber": 1573
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "What is MTBF?",
+    "originalNumber": 1574
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "What is MTTF?",
+    "originalNumber": 1575
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Comparison",
+    "question": "What is the difference between MTTR and MTBF?",
+    "originalNumber": 1576
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "How do you calculate MTTR?",
+    "originalNumber": 1577
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "How do you reduce MTTD?",
+    "originalNumber": 1578
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "How do you reduce MTTA?",
+    "originalNumber": 1579
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "How do you reduce MTTR?",
+    "originalNumber": 1580
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "How do runbooks reduce MTTR?",
+    "originalNumber": 1581
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "How does automation reduce MTTR?",
+    "originalNumber": 1582
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "How does observability reduce MTTR?",
+    "originalNumber": 1583
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "How do deployment strategies affect MTTR?",
+    "originalNumber": 1584
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Troubleshooting",
+    "question": "What is change-failure rate?",
+    "originalNumber": 1585
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "What is deployment frequency?",
+    "originalNumber": 1586
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "What is lead time for change?",
+    "originalNumber": 1587
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "What are DORA metrics?",
+    "originalNumber": 1588
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "How do DORA metrics relate to DevOps performance?",
+    "originalNumber": 1589
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "MTTR, MTTD and Reliability Metrics",
+    "category": "MTTR, MTTD and Reliability Metrics",
+    "questionType": "Conceptual",
+    "question": "Which reliability metrics do you report to management?",
+    "originalNumber": 1590
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "What is an on-call rotation?",
+    "originalNumber": 1591
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Behavioral",
+    "question": "Have you worked in a 24/7 rotational shift?",
+    "originalNumber": 1592
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "What makes an effective on-call process?",
+    "originalNumber": 1593
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "How do you prepare before starting on-call duty?",
+    "originalNumber": 1594
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "What is an escalation matrix?",
+    "originalNumber": 1595
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "How do you handle an alert received at midnight?",
+    "originalNumber": 1596
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "When should an on-call engineer escalate?",
+    "originalNumber": 1597
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "How do you prevent on-call burnout?",
+    "originalNumber": 1598
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "What is a follow-the-sun support model?",
+    "originalNumber": 1599
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "How do you manage shift handovers?",
+    "originalNumber": 1600
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "What is a runbook?",
+    "originalNumber": 1601
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "What is a playbook?",
+    "originalNumber": 1602
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Comparison",
+    "question": "What is the difference between a runbook and playbook?",
+    "originalNumber": 1603
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "What should a production runbook include?",
+    "originalNumber": 1604
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "How often should runbooks be reviewed?",
+    "originalNumber": 1605
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "How do you test runbooks?",
+    "originalNumber": 1606
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "How do you automate common runbook steps?",
+    "originalNumber": 1607
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "What is self-healing automation?",
+    "originalNumber": 1608
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "When should automation require human approval?",
+    "originalNumber": 1609
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "On-Call and Runbooks",
+    "category": "On-Call and Runbooks",
+    "questionType": "Conceptual",
+    "question": "How do you avoid dangerous automated remediation?",
+    "originalNumber": 1610
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "What is capacity planning?",
+    "originalNumber": 1611
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "Why is capacity planning important?",
+    "originalNumber": 1612
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "How do you estimate future infrastructure capacity?",
+    "originalNumber": 1613
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "What metrics are used for capacity planning?",
+    "originalNumber": 1614
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "How do you plan capacity for Kubernetes?",
+    "originalNumber": 1615
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "How do you plan capacity for databases?",
+    "originalNumber": 1616
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "What is headroom?",
+    "originalNumber": 1617
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "How much resource headroom should production maintain?",
+    "originalNumber": 1618
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "What is performance testing?",
+    "originalNumber": 1619
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "What is load testing?",
+    "originalNumber": 1620
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "What is stress testing?",
+    "originalNumber": 1621
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "What is spike testing?",
+    "originalNumber": 1622
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "What is endurance testing?",
+    "originalNumber": 1623
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "What is soak testing?",
+    "originalNumber": 1624
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "What is a performance baseline?",
+    "originalNumber": 1625
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "How do you identify a performance regression?",
+    "originalNumber": 1626
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "What is throughput?",
+    "originalNumber": 1627
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "What is response time?",
+    "originalNumber": 1628
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "What is concurrency?",
+    "originalNumber": 1629
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "What is requests per second?",
+    "originalNumber": 1630
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "How do you determine the bottleneck in an application?",
+    "originalNumber": 1631
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot high latency?",
+    "originalNumber": 1632
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot low throughput?",
+    "originalNumber": 1633
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot CPU saturation?",
+    "originalNumber": 1634
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot memory saturation?",
+    "originalNumber": 1635
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot disk I/O bottlenecks?",
+    "originalNumber": 1636
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot network latency?",
+    "originalNumber": 1637
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot database connection-pool exhaustion?",
+    "originalNumber": 1638
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "How do caching and performance relate?",
+    "originalNumber": 1639
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Capacity Planning and Performance",
+    "category": "Capacity Planning and Performance",
+    "questionType": "Conceptual",
+    "question": "When can caching create reliability problems?",
+    "originalNumber": 1640
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "How do you design a highly available application?",
+    "originalNumber": 1641
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Troubleshooting",
+    "question": "What is a single point of failure?",
+    "originalNumber": 1642
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Troubleshooting",
+    "question": "How do you identify single points of failure?",
+    "originalNumber": 1643
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is active-active architecture?",
+    "originalNumber": 1644
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is active-passive architecture?",
+    "originalNumber": 1645
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Troubleshooting",
+    "question": "What is failover?",
+    "originalNumber": 1646
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Troubleshooting",
+    "question": "What is automatic failover?",
+    "originalNumber": 1647
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is graceful degradation?",
+    "originalNumber": 1648
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is a circuit breaker?",
+    "originalNumber": 1649
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is a retry mechanism?",
+    "originalNumber": 1650
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is exponential backoff?",
+    "originalNumber": 1651
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is jitter?",
+    "originalNumber": 1652
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Troubleshooting",
+    "question": "Why can excessive retries make an outage worse?",
+    "originalNumber": 1653
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is retry storm?",
+    "originalNumber": 1654
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is a timeout?",
+    "originalNumber": 1655
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "How do you choose a proper timeout?",
+    "originalNumber": 1656
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is bulkhead isolation?",
+    "originalNumber": 1657
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is rate limiting?",
+    "originalNumber": 1658
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is load shedding?",
+    "originalNumber": 1659
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Troubleshooting",
+    "question": "What is backpressure?",
+    "originalNumber": 1660
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "How do queues improve resilience?",
+    "originalNumber": 1661
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is idempotency?",
+    "originalNumber": 1662
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "Why is idempotency important for retries?",
+    "originalNumber": 1663
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is a dead-letter queue?",
+    "originalNumber": 1664
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "How do you handle poison messages?",
+    "originalNumber": 1665
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Troubleshooting",
+    "question": "How do you design for dependency failure?",
+    "originalNumber": 1666
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Troubleshooting",
+    "question": "How do you handle third-party API failure?",
+    "originalNumber": 1667
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is chaos engineering?",
+    "originalNumber": 1668
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Conceptual",
+    "question": "What is fault injection?",
+    "originalNumber": 1669
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "High Availability and Resilience",
+    "category": "High Availability and Resilience",
+    "questionType": "Behavioral",
+    "question": "Have you performed a game day?",
+    "originalNumber": 1670
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "What is disaster recovery?",
+    "originalNumber": 1671
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "What is business continuity?",
+    "originalNumber": 1672
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Comparison",
+    "question": "What is the difference between high availability and disaster recovery?",
+    "originalNumber": 1673
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "What is RTO?",
+    "originalNumber": 1674
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "What is RPO?",
+    "originalNumber": 1675
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "How do RTO and RPO influence architecture?",
+    "originalNumber": 1676
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "What is a backup strategy?",
+    "originalNumber": 1677
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "What is full backup?",
+    "originalNumber": 1678
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "What is incremental backup?",
+    "originalNumber": 1679
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Comparison",
+    "question": "What is differential backup?",
+    "originalNumber": 1680
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "How do you verify backups?",
+    "originalNumber": 1681
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "Why is an untested backup not reliable?",
+    "originalNumber": 1682
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "How frequently should restore tests be performed?",
+    "originalNumber": 1683
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "What is cross-region backup?",
+    "originalNumber": 1684
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "What is immutable backup?",
+    "originalNumber": 1685
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "What is air-gapped backup?",
+    "originalNumber": 1686
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "How do you back up Kubernetes resources?",
+    "originalNumber": 1687
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "How do you back up persistent volumes?",
+    "originalNumber": 1688
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "How do you back up etcd?",
+    "originalNumber": 1689
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "How do you restore a Kubernetes cluster?",
+    "originalNumber": 1690
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Behavioral",
+    "question": "How have you used Kasten K10?",
+    "originalNumber": 1691
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Behavioral",
+    "question": "How have you used Veeam?",
+    "originalNumber": 1692
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "What is a disaster-recovery drill?",
+    "originalNumber": 1693
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "How do you document a DR procedure?",
+    "originalNumber": 1694
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Troubleshooting",
+    "question": "How do you fail over to a secondary region?",
+    "originalNumber": 1695
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Troubleshooting",
+    "question": "How do you fail back to the primary region?",
+    "originalNumber": 1696
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "What is pilot-light architecture?",
+    "originalNumber": 1697
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "What is warm-standby architecture?",
+    "originalNumber": 1698
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "What is multi-site active-active DR?",
+    "originalNumber": 1699
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Disaster Recovery and Backup",
+    "category": "Disaster Recovery and Backup",
+    "questionType": "Conceptual",
+    "question": "How do you choose the right DR strategy?",
+    "originalNumber": 1700
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "A pod is in CrashLoopBackOff. How do you troubleshoot it?",
+    "originalNumber": 1701
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "What commands do you use for CrashLoopBackOff?",
+    "originalNumber": 1702
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do you inspect the previous container logs?",
+    "originalNumber": 1703
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "What can cause a container to restart repeatedly?",
+    "originalNumber": 1704
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How can incorrect probes cause CrashLoopBackOff?",
+    "originalNumber": 1705
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "A pod is Pending. What do you check?",
+    "originalNumber": 1706
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do you identify insufficient CPU or memory?",
+    "originalNumber": 1707
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do taints prevent pod scheduling?",
+    "originalNumber": 1708
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How can affinity rules cause a pod to remain Pending?",
+    "originalNumber": 1709
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How can an unbound PVC block pod scheduling?",
+    "originalNumber": 1710
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "A pod is in ImagePullBackOff. What do you check?",
+    "originalNumber": 1711
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do you verify the image name and tag?",
+    "originalNumber": 1712
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot registry authentication?",
+    "originalNumber": 1713
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "A pod is running but not receiving traffic. What do you inspect?",
+    "originalNumber": 1714
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do you validate service selectors?",
+    "originalNumber": 1715
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do you validate endpoint objects?",
+    "originalNumber": 1716
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How can readiness probes remove a pod from service endpoints?",
+    "originalNumber": 1717
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot Kubernetes DNS?",
+    "originalNumber": 1718
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot pod-to-pod connectivity?",
+    "originalNumber": 1719
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot pod-to-service connectivity?",
+    "originalNumber": 1720
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot ingress connectivity?",
+    "originalNumber": 1721
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do network policies affect connectivity?",
+    "originalNumber": 1722
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "A node is NotReady. What do you check?",
+    "originalNumber": 1723
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do you inspect kubelet status?",
+    "originalNumber": 1724
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot disk pressure?",
+    "originalNumber": 1725
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot memory pressure?",
+    "originalNumber": 1726
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "What is PID pressure?",
+    "originalNumber": 1727
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "What is pod eviction?",
+    "originalNumber": 1728
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "Why are pods being OOMKilled?",
+    "originalNumber": 1729
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do you identify the correct memory limit?",
+    "originalNumber": 1730
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "What is CPU throttling?",
+    "originalNumber": 1731
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do you detect CPU throttling?",
+    "originalNumber": 1732
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "Why might HPA not scale?",
+    "originalNumber": 1733
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "Why might metrics-server not return data?",
+    "originalNumber": 1734
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "Why might Cluster Autoscaler not add a node?",
+    "originalNumber": 1735
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "What happens if pod requests are not defined?",
+    "originalNumber": 1736
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot a failed rollout?",
+    "originalNumber": 1737
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do you pause a rollout?",
+    "originalNumber": 1738
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do you undo a deployment?",
+    "originalNumber": 1739
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Kubernetes Production Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "How do you determine whether a new release caused the incident?",
+    "originalNumber": 1740
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "A Compute Engine VM is unreachable. What do you check?",
+    "originalNumber": 1741
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do you distinguish a firewall issue from an OS issue?",
+    "originalNumber": 1742
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "How do you connect to a VM if SSH is unavailable?",
+    "originalNumber": 1743
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "What is the serial console?",
+    "originalNumber": 1744
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot a full boot disk?",
+    "originalNumber": 1745
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "A GKE cluster has IP exhaustion. What symptoms appear?",
+    "originalNumber": 1746
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "How do you confirm pod-IP exhaustion?",
+    "originalNumber": 1747
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "How did you resolve subnet exhaustion in GKE?",
+    "originalNumber": 1748
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "Can a GKE cluster be moved to another subnet?",
+    "originalNumber": 1749
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "When is cluster recreation required?",
+    "originalNumber": 1750
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "A Cloud Run service has high latency. What would you inspect?",
+    "originalNumber": 1751
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do cold starts affect Cloud Run?",
+    "originalNumber": 1752
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do minimum instances reduce cold starts?",
+    "originalNumber": 1753
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "How do CPU allocation and concurrency affect Cloud Run?",
+    "originalNumber": 1754
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "A serverless VPC connector has scaled out. Will it scale down automatically?",
+    "originalNumber": 1755
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "Why can connector capacity remain high after traffic decreases?",
+    "originalNumber": 1756
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "How do you troubleshoot serverless VPC connector exhaustion?",
+    "originalNumber": 1757
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "A load balancer reports unhealthy backends. What do you check?",
+    "originalNumber": 1758
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "A Cloud Armor policy suddenly blocks legitimate users. What do you do?",
+    "originalNumber": 1759
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "A service account receives permission denied. How do you investigate?",
+    "originalNumber": 1760
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "A Cloud Storage upload fails intermittently. What would you inspect?",
+    "originalNumber": 1761
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "A Cloud SQL application reports too many connections. What do you do?",
+    "originalNumber": 1762
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Troubleshooting",
+    "question": "A Pub/Sub subscriber has an increasing backlog. How do you troubleshoot?",
+    "originalNumber": 1763
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "A VPN tunnel is flapping. What metrics and logs do you inspect?",
+    "originalNumber": 1764
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "GCP Production Troubleshooting",
+    "category": "GCP Production Troubleshooting",
+    "questionType": "Conceptual",
+    "question": "Cloud NAT is dropping connections. What are likely causes?",
+    "originalNumber": 1765
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Troubleshooting",
+    "question": "A deployment introduces high latency. What is your immediate response?",
+    "originalNumber": 1766
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Troubleshooting",
+    "question": "How do you decide between rollback and roll-forward?",
+    "originalNumber": 1767
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Troubleshooting",
+    "question": "How quickly should rollback happen?",
+    "originalNumber": 1768
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Troubleshooting",
+    "question": "Can rollback be fully automated?",
+    "originalNumber": 1769
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Troubleshooting",
+    "question": "What signals should trigger an automated rollback?",
+    "originalNumber": 1770
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Troubleshooting",
+    "question": "What if latency increases but error rate remains normal?",
+    "originalNumber": 1771
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Conceptual",
+    "question": "What if only one region is affected?",
+    "originalNumber": 1772
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Troubleshooting",
+    "question": "A canary deployment has higher p99 latency. What do you do?",
+    "originalNumber": 1773
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Conceptual",
+    "question": "A rolling deployment gets stuck halfway. How do you recover?",
+    "originalNumber": 1774
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Troubleshooting",
+    "question": "A new version fails readiness checks. What happens to traffic?",
+    "originalNumber": 1775
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Troubleshooting",
+    "question": "A release succeeds technically, but a business transaction fails. How do you detect it?",
+    "originalNumber": 1776
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Conceptual",
+    "question": "How do synthetic transactions help validate releases?",
+    "originalNumber": 1777
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Troubleshooting",
+    "question": "A database migration is incompatible with rollback. What is your strategy?",
+    "originalNumber": 1778
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Conceptual",
+    "question": "How do feature flags reduce deployment risk?",
+    "originalNumber": 1779
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Conceptual",
+    "question": "How do you perform a safe emergency change?",
+    "originalNumber": 1780
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Conceptual",
+    "question": "What is a change freeze?",
+    "originalNumber": 1781
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Conceptual",
+    "question": "When should a change freeze be applied?",
+    "originalNumber": 1782
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Troubleshooting",
+    "question": "How do you validate production after rollback?",
+    "originalNumber": 1783
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Conceptual",
+    "question": "How do you prevent the same faulty build from being redeployed?",
+    "originalNumber": 1784
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Deployment and Release Incidents",
+    "category": "Deployment and Release Incidents",
+    "questionType": "Troubleshooting",
+    "question": "How do you preserve evidence for RCA after rollback?",
+    "originalNumber": 1785
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Conceptual",
+    "question": "Users report slowness, but infrastructure metrics look normal. What would you inspect next?",
+    "originalNumber": 1786
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "CPU is low, but latency is high. What could be wrong?",
+    "originalNumber": 1787
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Conceptual",
+    "question": "CPU is high, but traffic has not increased. What could be happening?",
+    "originalNumber": 1788
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "Memory consumption keeps increasing over time. How do you investigate?",
+    "originalNumber": 1789
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Conceptual",
+    "question": "Disk usage reaches 95%. What immediate and long-term actions do you take?",
+    "originalNumber": 1790
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Conceptual",
+    "question": "Error rate spikes for only one API endpoint. How do you isolate the issue?",
+    "originalNumber": 1791
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Conceptual",
+    "question": "One Kubernetes replica receives more traffic than the others. What might cause it?",
+    "originalNumber": 1792
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Conceptual",
+    "question": "A service is healthy, but users receive timeouts. Where could the issue be?",
+    "originalNumber": 1793
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "Database latency rises after a deployment. How would you determine whether the release caused it?",
+    "originalNumber": 1794
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "Logs show no errors, but requests are failing. What else would you check?",
+    "originalNumber": 1795
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "Monitoring itself is unavailable during an outage. How do you troubleshoot?",
+    "originalNumber": 1796
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Conceptual",
+    "question": "Alerts arrive after users have already reported the issue. How would you improve detection?",
+    "originalNumber": 1797
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "Hundreds of alerts fire from one underlying failure. How do you manage the alert storm?",
+    "originalNumber": 1798
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Conceptual",
+    "question": "A dependency is slow but not completely down. How should the application respond?",
+    "originalNumber": 1799
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Conceptual",
+    "question": "A queue backlog keeps growing. How do you determine whether producers or consumers are responsible?",
+    "originalNumber": 1800
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Conceptual",
+    "question": "Autoscaling is active, but performance does not improve. Why might that happen?",
+    "originalNumber": 1801
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Conceptual",
+    "question": "A 10× traffic spike is expected. How do you prepare?",
+    "originalNumber": 1802
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Conceptual",
+    "question": "How would you perform capacity testing before a major event?",
+    "originalNumber": 1803
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "How would you test the failure of an availability zone?",
+    "originalNumber": 1804
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Conceptual",
+    "question": "How would you test backup restoration without affecting production?",
+    "originalNumber": 1805
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "A critical incident occurs during a shift handover. How would you manage ownership?",
+    "originalNumber": 1806
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "Two teams blame each other during an outage. How do you keep the incident productive?",
+    "originalNumber": 1807
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Conceptual",
+    "question": "Management asks for an immediate root cause before investigation is complete. How do you respond?",
+    "originalNumber": 1808
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "A temporary manual fix resolved the incident. What should happen afterward?",
+    "originalNumber": 1809
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Scenario-Based SRE Questions",
+    "category": "Scenario-Based SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "A repeated alert has been ignored for weeks and later becomes a major incident. What process failed?",
+    "originalNumber": 1810
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "Describe a major production incident you handled.",
+    "originalNumber": 1811
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "What was your role during the incident?",
+    "originalNumber": 1812
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "How did you identify the root cause?",
+    "originalNumber": 1813
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "How did you communicate with stakeholders?",
+    "originalNumber": 1814
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "What actions did you take to prevent recurrence?",
+    "originalNumber": 1815
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Behavioral",
+    "question": "Describe a time you reduced MTTR.",
+    "originalNumber": 1816
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Behavioral",
+    "question": "Describe a time you automated a manual operational task.",
+    "originalNumber": 1817
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "Describe a time monitoring helped prevent an outage.",
+    "originalNumber": 1818
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Behavioral",
+    "question": "Describe a time an alert was misleading.",
+    "originalNumber": 1819
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Behavioral",
+    "question": "Describe a time you improved application reliability.",
+    "originalNumber": 1820
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Behavioral",
+    "question": "Describe a time you disagreed with a developer about production risk.",
+    "originalNumber": 1821
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "How do you communicate blockers and risks?",
+    "originalNumber": 1822
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "How do you communicate with backend developers?",
+    "originalNumber": 1823
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "What information do you provide developers when reporting an infrastructure issue?",
+    "originalNumber": 1824
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "How do you handle pressure during a production outage?",
+    "originalNumber": 1825
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "How do you prioritize multiple simultaneous incidents?",
+    "originalNumber": 1826
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "How do you explain a technical incident to a non-technical stakeholder?",
+    "originalNumber": 1827
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Behavioral",
+    "question": "Have you ever made a production mistake?",
+    "originalNumber": 1828
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "How did you respond after making the mistake?",
+    "originalNumber": 1829
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "What did you learn from the incident?",
+    "originalNumber": 1830
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "How do you ensure your changes do not break production?",
+    "originalNumber": 1831
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Behavioral",
+    "question": "What release best practices have you followed?",
+    "originalNumber": 1832
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "How has Agile affected your DevOps or SRE work?",
+    "originalNumber": 1833
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "How do you participate in sprint planning?",
+    "originalNumber": 1834
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "How do you estimate operational work?",
+    "originalNumber": 1835
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "How do you manage unplanned production work during a sprint?",
+    "originalNumber": 1836
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "How do you balance feature delivery with reliability work?",
+    "originalNumber": 1837
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Troubleshooting",
+    "question": "What would make a DevOps engineer fail a project completely?",
+    "originalNumber": 1838
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "What practices can destroy reliability in a project?",
+    "originalNumber": 1839
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Behavioural SRE Questions",
+    "category": "Behavioural SRE Questions",
+    "questionType": "Conceptual",
+    "question": "What information do you need from a solution architect before planning monitoring and CI/CD?",
+    "originalNumber": 1840
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you design observability for 300 microservices?",
+    "originalNumber": 1841
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you standardize logs across hundreds of services?",
+    "originalNumber": 1842
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you control metric cardinality across multiple teams?",
+    "originalNumber": 1843
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you implement distributed tracing at scale?",
+    "originalNumber": 1844
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you design multi-tenant monitoring?",
+    "originalNumber": 1845
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you isolate monitoring data between teams?",
+    "originalNumber": 1846
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you create global SLO dashboards?",
+    "originalNumber": 1847
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you design alert routing for hundreds of services?",
+    "originalNumber": 1848
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you establish service ownership?",
+    "originalNumber": 1849
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "What is a service catalogue?",
+    "originalNumber": 1850
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you map dependencies between services?",
+    "originalNumber": 1851
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Troubleshooting",
+    "question": "How would you detect cascading failures?",
+    "originalNumber": 1852
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Troubleshooting",
+    "question": "How would you design for regional failure?",
+    "originalNumber": 1853
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Troubleshooting",
+    "question": "How would you design for control-plane failure?",
+    "originalNumber": 1854
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you monitor an active-active deployment?",
+    "originalNumber": 1855
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you avoid split-brain conditions?",
+    "originalNumber": 1856
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you design a globally available API?",
+    "originalNumber": 1857
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you select between synchronous and asynchronous communication?",
+    "originalNumber": 1858
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you design graceful degradation for a recommendation service?",
+    "originalNumber": 1859
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you protect a platform from noisy-neighbour workloads?",
+    "originalNumber": 1860
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you implement resource quotas across teams?",
+    "originalNumber": 1861
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you define platform-level SLOs?",
+    "originalNumber": 1862
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you measure developer-platform reliability?",
+    "originalNumber": 1863
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you design a self-service operational platform?",
+    "originalNumber": 1864
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Troubleshooting",
+    "question": "How would you automate incident remediation safely?",
+    "originalNumber": 1865
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you use policy as code to improve reliability?",
+    "originalNumber": 1866
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you combine Cloud Monitoring, Prometheus, Grafana, Dynatrace and ELK without unnecessary duplication?",
+    "originalNumber": 1867
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "Which observability data should be retained long term?",
+    "originalNumber": 1868
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you control observability costs?",
+    "originalNumber": 1869
+  },
+  {
+    "source": "Actual Interview Handbook - Part 4",
+    "section": "Advanced Reliability Architecture",
+    "category": "Advanced Reliability Architecture",
+    "questionType": "Conceptual",
+    "question": "How would you demonstrate reliability improvement to management?",
+    "originalNumber": 1870
+  }
+]

@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run audit:answer-quality
+      - name: Validate production configuration and assets
+        run: npm run check:production
+        env:
+          OFFLINE_ONLY: "1"
+          SESSION_SECRET: ci-only-production-readiness-secret-123456
+          DATABASE_URL: postgresql://ci:ci@database.invalid:5432/ci
+      - name: Build production container
+        run: docker build -t ai-mock-interviewer:ci .
