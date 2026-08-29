@@ -3,6 +3,9 @@ __pycache__/
 .pytest_cache/
 .venv/
 node_modules/
+chroma_db/
+rag-deployment-projects/python/*/uploads/*
+!rag-deployment-projects/python/*/uploads/.gitkeep
 .env
 .env.*
 !.env.example
