@@ -1,0 +1,83 @@
+[
+  {
+    "section": "GCP Platform Experience",
+    "category": "GCP / Cloud",
+    "topic": "GCP / Cloud",
+    "difficulty": "Intermediate",
+    "questionType": "Experience",
+    "question": "Can you explain your current roles and responsibilities in your GCP project, including the services you use and your day-to-day work?",
+    "answer": "My role covers platform delivery and production reliability. I provision GCP projects, Shared VPC networking, IAM, GKE, Artifact Registry, Secret Manager, Cloud SQL, load balancing, logging and monitoring through Terraform and reviewed pipelines. Day to day, I check production health and failed jobs, review infrastructure and application changes, support releases, troubleshoot GKE and network issues, remediate vulnerabilities, tune alerts, control cost and capacity, and improve automation and runbooks. I work with application, networking, security and data teams and communicate risks and incident status to stakeholders. In an interview I connect this scope to one recent delivery and one reliability improvement with real results."
+  },
+  {
+    "section": "GCP Landing Zone",
+    "category": "GCP / Cloud",
+    "topic": "GCP / Cloud",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "The organization is adopting Google Cloud, and you must create a GCP Landing Zone. How would you design, govern, secure, monitor, and automate it?",
+    "answer": "I begin with business units, workloads, regulations, identity sources, connectivity, data residency, availability, ownership and operating model. The hierarchy uses the organization root, governance-oriented folders such as platform, production, non-production and sandbox—or business-unit folders where delegation requires them—and separate projects for clear billing, IAM, API, quota and blast-radius boundaries. Central identity groups receive least-privilege predefined roles, privileged access is time-bound, service accounts use workload federation and key creation is restricted. Organization Policies enforce approved locations, sharing, networking and security baselines with tested exceptions. Dedicated host projects provide Shared VPC, IP planning, DNS, NAT, firewall policies, VPN or Interconnect and centralized inspection; production and non-production can have separate network domains. Audit logs, security findings, asset inventory, monitoring, budgets and exports flow to protected central projects. Versioned Terraform modules bootstrap folders, projects, policies, networks, logging and controls through reviewed plans and protected remote state. I roll out guardrails in stages, validate inherited behavior and treat the landing zone as a continuously operated product, not a one-time build."
+  },
+  {
+    "section": "Migration",
+    "category": "GCP / Migration",
+    "topic": "GCP / Cloud",
+    "difficulty": "Advanced",
+    "questionType": "Experience",
+    "question": "Do you have migration experience, including bringing manually created cloud resources under Terraform management, and how would you perform that safely?",
+    "answer": "I first inventory the real resources, dependencies, owners, configuration, data and current drift, then classify each item as import, rebuild, replace or retire. I write Terraform that matches the existing resource, back up state and critical data, import through supported import blocks or terraform import, and run a refresh-only review plus a normal plan. The target after import is no unexpected change; I never apply a large destructive plan merely to force alignment. I handle immutable fields and sensitive resources in small waves, use moved blocks when addresses change, protect critical resources from accidental deletion, validate monitoring and traffic after every wave, and record rollback. Once ownership transfers, I restrict manual mutation, enable drift detection and document the module and state boundary. I describe actual migrations honestly rather than claiming a manual-to-Terraform conversion I only designed."
+  },
+  {
+    "section": "Migration",
+    "category": "GCP / Migration",
+    "topic": "GCP / Cloud",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "An on-premises data-center lease expires in six months. How would you discover, plan, migrate, cut over, and validate applications and databases in GCP within that deadline?",
+    "answer": "I establish a six-month program with executive ownership, a non-negotiable exit date, weekly dependency and risk tracking, and an early contingency for workloads that cannot modernize. In weeks one to four, discovery combines CMDB data, network and process observation, interviews and dependency mapping; workloads receive business criticality, RTO/RPO, compliance, data size, licensing, performance and owner. Each uses a deliberate 6R decision: retire or retain first, rehost time-critical legacy VMs, replatform databases or runtimes where testing permits, and refactor only when value and schedule justify it. The GCP landing zone, IAM, Shared VPC, logging, security and budgets are built in parallel. HA VPN provides rapid initial connectivity, with Interconnect added if throughput, latency and economics require it. Database migration uses engine-native replication or Database Migration Service where supported, repeated rehearsal, validation and a final low-downtime cutover; simple files or bulk data use transfer services with incremental synchronization. Pilot applications prove the factory, then waves group dependency-compatible services from low risk to critical. Every wave has entry criteria, performance and security testing, data reconciliation, freeze window, DNS or load-balancer cutover, business validation and a timed rollback trigger. A migration control board tracks blockers, capacity and wave burndown; buffer is reserved before lease expiry, and decommission happens only after retention, audit and rollback periods complete."
+  },
+  {
+    "section": "GKE Experience",
+    "category": "GCP / GKE",
+    "topic": "Kubernetes",
+    "difficulty": "Intermediate",
+    "questionType": "Experience",
+    "question": "On a scale of 1–10, how would you rate yourself in Kubernetes Engine/GKE, and why might you choose around 7/10?",
+    "answer": "I would rate myself 7/10 if that accurately reflects my experience. I can independently provision and operate GKE; deploy workloads; configure Services, Gateway or Ingress, Workload Identity, RBAC, policies, storage, probes, requests and limits; use HPA and Cluster Autoscaler; troubleshoot Pending, CrashLoopBackOff, DNS, networking and resource pressure; and plan upgrades and monitoring. I leave room because Kubernetes is broad: deep control-plane internals, custom scheduler or CNI development, large multi-cluster fleet design and complex operator development may not be daily hands-on areas. I then support the rating with one production example and identify what I am actively improving."
+  },
+  {
+    "section": "Compute Engine Instance Groups",
+    "category": "GCP / Compute Engine",
+    "topic": "GCP / Cloud",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "What is the difference between Managed and Unmanaged Instance Groups, and why or when would you use an unmanaged group?",
+    "answer": "A Managed Instance Group maintains homogeneous or policy-managed VMs from an instance template and supports autoscaling, autohealing, rolling updates and zonal or regional deployment. An Unmanaged Instance Group is a zonal collection of existing, potentially heterogeneous VMs that you add and manage yourself; it has no autoscaling, autohealing, rolling-update service, regional deployment or instance-template management. I use a UIG only for legacy or specialized VMs that cannot yet be standardized but must be addressed as one load-balancer backend or operational group. Grouping gives the load balancer a backend membership object, named ports and health-based traffic distribution; it does not add VM lifecycle management. You can create its VMs from templates separately, but the UIG itself does not use an instance template. For new scalable services, a MIG or NEG is usually preferable."
+  },
+  {
+    "section": "Network Endpoint Groups",
+    "category": "GCP / Networking",
+    "topic": "Networking",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "What is a Network Endpoint Group in GCP, how does it differ from an Instance Group, where does it fit in load balancing, and how is it used with GKE Pods?",
+    "answer": "A NEG is a backend-membership object containing endpoints or services rather than a VM fleet. Types include zonal IP or IP:port endpoints, serverless, internet, hybrid and Private Service Connect NEGs. An instance group represents VMs and often exposes one named serving port per backend configuration; a NEG can target a more granular endpoint such as an individual GKE Pod IP and port or represent a serverless service. In the load-balancer chain, one or more NEGs attach to the backend service, which applies health checking, balancing and capacity policy. With VPC-native GKE, Gateway, Ingress or standalone-NEG integration keeps zonal GCE_VM_IP_PORT membership synchronized with ready Pods. The load balancer then establishes connections directly to healthy Pod endpoints, avoiding an extra node-level hop and enabling Pod-level health and balancing."
+  },
+  {
+    "section": "GCP Load Balancing",
+    "category": "GCP / Networking",
+    "topic": "Networking",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "How would you place an instance group or NEG behind a Google Cloud Load Balancer, what does the Backend Service do, and what is the end-to-end traffic flow?",
+    "answer": "I first choose internal versus external, Layer 4 versus Layer 7, and regional versus global from protocol, clients, backend geography and availability. For an Application Load Balancer, I configure healthy application instances and named ports or NEG endpoints, a health check, a backend service containing the instance groups or NEGs with balancing and capacity policy, and a URL map that sends host and path rules to that backend service. The target HTTP(S) proxy references the URL map and TLS certificate, and a forwarding rule binds the frontend IP and port to the proxy. DNS points the hostname to the frontend IP and firewall policy permits required data and health-check paths. Traffic is Client → forwarding rule/frontend → target proxy → URL map → backend service → healthy instance-group or NEG endpoint → application. For a Network Load Balancer the target and routing components differ, so I do not force the Layer-7 URL-map flow onto a Layer-4 design."
+  },
+  {
+    "section": "Compute Engine Disaster Recovery",
+    "category": "GCP / Disaster Recovery",
+    "topic": "SRE",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "How would you design backup, cross-region restore, and disaster recovery for an application running on Compute Engine VMs based on RTO and RPO?",
+    "answer": "I start with business-approved RTO and RPO, because they determine whether the service uses backup/restore, pilot light, warm standby or active-active. Stateless VM configuration is captured in images, startup configuration and Terraform rather than relying only on boot-disk backups. Scheduled standard snapshots or Backup and DR policies protect persistent disks in locations chosen outside the primary failure domain, with encryption, retention, immutability controls and restore tests; a snapshot can create a new disk in another region, subject to location and network-cost considerations. Databases inside VMs need engine-native, application-consistent backups and preferably continuous replication or log shipping to the secondary region—crash-consistent disk snapshots alone may not meet database RPO. Terraform predefines the secondary network, IAM, firewall, instance templates, load balancing, secrets and monitoring. For warm standby, critical data and minimal capacity remain ready and automation scales application instances during declaration; tighter RTO may require active service capacity and automated data failover. Global load balancing or controlled DNS changes redirect traffic only after data and application validation, with split-brain protection and a failback plan. Regular drills restore into isolation, measure actual RTO/RPO, validate data and dependencies, exercise roles and communications, and turn gaps into owned actions."
+  }
+]

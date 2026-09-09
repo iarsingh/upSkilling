@@ -1,0 +1,82 @@
+[
+  {
+    "source": "Actual Interview - GCP SRE Operations - 2026-08-26",
+    "section": "GCP Infrastructure Delivery",
+    "category": "GCP / Cloud",
+    "topic": "GCP / Cloud",
+    "difficulty": "Intermediate",
+    "questionType": "Experience",
+    "question": "Can you walk me through a time when you provisioned and configured cloud infrastructure on Google Cloud Platform?",
+    "answer": "In one project, I provisioned a production GKE application platform in GCP. I first converted the application, security, availability, networking and compliance requirements into a design covering projects, Shared VPC subnets, private GKE, Artifact Registry, service accounts, Workload Identity, Secret Manager, logging and alerting. I implemented reusable Terraform modules, stored state in a protected GCS backend, and used a reviewed CI/CD pipeline for validation, security checks, plan approval and apply. After provisioning, GitOps installed namespaces, policies and workloads, and smoke tests verified DNS, connectivity, identity, secrets and application health. The result was a repeatable environment build with controlled changes and substantially less manual configuration; in an interview I would replace that final statement with the actual delivery time or reliability improvement from my project."
+  },
+  {
+    "source": "Actual Interview - GCP SRE Operations - 2026-08-26",
+    "section": "Terraform Engineering",
+    "category": "Terraform",
+    "topic": "Terraform",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "Can you tell me more about how you structured the Terraform modules for reusability?",
+    "answer": "I keep modules focused on a coherent capability, such as a VPC, GKE cluster or internal load balancer, instead of building one module for an entire environment. Each module has typed and validated inputs, useful outputs, safe defaults, explicit dependencies, provider constraints, examples and documentation. Environment or application root modules compose these building blocks and hold environment-specific values; reusable modules do not embed project IDs, regions or credentials. I avoid excessive flags and nested conditionals because they make a module hard to test and upgrade. Automated formatting, validation, linting, security checks and example plans run on every change, and breaking interface changes require a new major version plus a migration guide."
+  },
+  {
+    "source": "Actual Interview - GCP SRE Operations - 2026-08-26",
+    "section": "Terraform Engineering",
+    "category": "Terraform",
+    "topic": "Terraform",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Can you clarify how you manage version control for those Terraform modules?",
+    "answer": "I store reusable modules in Git, either in separate repositories or clearly owned module directories, and protect the main branch with pull requests, reviews and automated checks. Releases use semantic version tags: patch for compatible fixes, minor for backward-compatible features and major for breaking interfaces. Consumers pin an immutable tag or commit rather than following main, and dependency automation can propose controlled upgrades. Each release includes a changelog, provider and Terraform compatibility, deprecation notes and migration steps. I test the new version against representative consumers before promotion, and roll back by restoring the previous pinned version if the plan or deployment validation fails."
+  },
+  {
+    "source": "Actual Interview - GCP SRE Operations - 2026-08-26",
+    "section": "Terraform Engineering",
+    "category": "Terraform",
+    "topic": "Terraform",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you typically test Terraform changes before rolling them out to production?",
+    "answer": "The pipeline runs terraform fmt -check, init with controlled backend behavior, validate, linting, provider lock-file checks, security scanning and policy-as-code tests. Module unit or contract tests exercise validations and outputs, while integration tests create short-lived resources in an isolated project and verify them through APIs before cleanup. For each target environment I generate a saved plan, inspect replacements, deletions, IAM and network changes, and require peer approval. Changes move through development and staging with post-apply smoke tests before production. Production uses the reviewed plan artifact, protected remote state and serialization, followed by health checks and drift detection. For risky changes I document rollback or recovery because Terraform itself does not automatically undo every partially applied infrastructure change."
+  },
+  {
+    "source": "Actual Interview - GCP SRE Operations - 2026-08-26",
+    "section": "Monitoring and Alerting",
+    "category": "Observability",
+    "topic": "Observability",
+    "difficulty": "Advanced",
+    "questionType": "Experience",
+    "question": "Can you tell me about how you handle monitoring and alerting for the infrastructure you’ve built?",
+    "answer": "I define monitoring with the infrastructure rather than adding it after deployment. For user-facing services I build dashboards and SLOs around latency, traffic, errors and saturation, then add GKE, VM, load-balancer, database, queue, certificate, backup and quota signals where they indicate actionable risk. Metrics, logs and traces share service, environment and release labels so responders can correlate a symptom with a deployment or dependency. Alerts are managed as code with an owner, severity, threshold, evaluation window, routing policy and runbook link. Paging is reserved for urgent user impact that requires immediate action; lower-priority conditions create tickets or dashboard signals. I review alert volume, precision, missed incidents and response outcomes regularly."
+  },
+  {
+    "source": "Actual Interview - GCP SRE Operations - 2026-08-26",
+    "section": "Monitoring and Alerting",
+    "category": "Observability",
+    "topic": "Observability",
+    "difficulty": "Advanced",
+    "questionType": "Experience",
+    "question": "Could you give an example of a specific alert you set up and how you fine-tuned it to avoid false positives?",
+    "answer": "I configured an alert for elevated HTTP 5xx errors on a production service. A raw count paged during low-traffic periods and brief deployment transients, so I changed it to an error-rate signal with a minimum request-volume condition and separate fast and slow burn-rate windows against the service's error budget. The policy required sustained breach, grouped notifications by service and region, suppressed expected maintenance through the deployment workflow, and linked a runbook showing recent releases, logs and dependency checks. I tested the thresholds against historical incidents and normal peaks, then reviewed pages for several weeks. This reduced non-actionable notifications while still detecting both severe spikes and slower reliability degradation."
+  },
+  {
+    "source": "Actual Interview - GCP SRE Operations - 2026-08-26",
+    "section": "Incident Management",
+    "category": "SRE / Incident Response",
+    "topic": "SRE",
+    "difficulty": "Advanced",
+    "questionType": "Experience",
+    "question": "How do you typically handle incident response once an alert is triggered? Can you walk me through your process?",
+    "answer": "I acknowledge and validate the alert, determine user impact and severity, and open the incident channel and timeline. For a major incident I assign an incident commander, technical lead and communications owner so investigation and stakeholder updates can proceed in parallel. I check recent changes and the golden signals, correlate metrics, logs, traces and events, and follow the runbook while testing hypotheses. Restoration comes before perfect diagnosis: I may roll back, fail over, scale, isolate a dependency or disable a feature, recording every action and result. After recovery I verify service health, monitor for recurrence and communicate resolution. A blameless RCA then documents the timeline, technical and systemic causes, detection and response gaps, and prioritized preventive actions with owners and due dates."
+  },
+  {
+    "source": "Actual Interview - GCP SRE Operations - 2026-08-26",
+    "section": "Incident Management",
+    "category": "SRE / Incident Response",
+    "topic": "SRE",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you ensure that your runbooks stay up to date?",
+    "answer": "Each runbook has a named owner, service, last-reviewed date and review interval, and it lives in version control near the operational configuration when practical. Alert definitions link directly to the relevant runbook, and changes to architecture, dependencies, deployment or access require a documentation update in the same pull request. Responders annotate unclear or incorrect steps during incidents; RCA actions then update and validate the procedure. Scheduled game days and restore or failover exercises test commands, permissions, contacts and expected results. I also report stale or unowned runbooks and remove obsolete copies so responders have one authoritative path during an incident."
+  }
+]

@@ -2056,5 +2056,253 @@
     "category": "Python Coding - Email Validation",
     "questionType": "Conceptual",
     "question": "Correct a faulty Python email-validation implementation and explain the fix."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "SRE Fundamentals & Reliability",
+    "category": "SRE Fundamentals & Reliability",
+    "questionType": "Experience",
+    "question": "Tell me about yourself and your experience relevant to the Site Reliability Engineer role.",
+    "answer": "I am a [CURRENT ROLE] with [YEARS] years of experience across [CLOUD/PLATFORM], Kubernetes, infrastructure as code, CI/CD, and production operations. In my current role I own [SYSTEM OR SERVICE], where I improved [RELIABILITY METRIC] from [BEFORE] to [AFTER] by implementing [SLOs/AUTOMATION/OBSERVABILITY]. I have handled incidents involving [REAL EXAMPLE], coordinated recovery, and converted lessons into runbooks and engineering actions. My strongest SRE contribution is reducing toil while making reliability measurable, and I am interested in this role because [TRUTHFUL ROLE-SPECIFIC REASON]."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "SRE Fundamentals & Reliability",
+    "category": "SRE Fundamentals & Reliability",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you define and track Service Level Objectives (SLOs) and Service Level Indicators (SLIs) to ensure system reliability?",
+    "answer": "Start with a user journey and choose an SLI that measures its success, such as successful requests divided by valid requests or the proportion completing below a latency threshold. Set an SLO such as 99.9% success over a rolling 30-day window, document exclusions and data sources, and derive the error budget: 0.1% of eligible events. Track compliance and fast/slow burn rates on dashboards, alert on multi-window budget consumption, and review SLOs with product owners. Avoid infrastructure-only indicators that do not represent user experience."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "SRE Fundamentals & Reliability",
+    "category": "SRE Fundamentals & Reliability",
+    "questionType": "Experience",
+    "question": "Can you explain a specific incident where you used root cause analysis (RCA) to prevent recurring system downtime? What steps did you take post-incident to improve system resiliency?",
+    "answer": "Use a truthful example: [SERVICE] suffered [IMPACT] for [DURATION] after [TRIGGER]. I first stabilized it by [MITIGATION], preserved logs and metrics, and built a timestamped event and change timeline. A five-whys or fault-tree analysis showed the technical cause was [CAUSE], while [MISSING TEST/GUARDRAIL/OWNERSHIP] allowed it to reach production. We added [AUTOMATED CONTROL], improved [ALERT/RUNBOOK/FAILOVER], assigned owners and deadlines, and tested the fix with [LOAD/FAILURE EXERCISE]. The measurable result was [RECOVERY OR RECURRENCE METRIC]; describe only facts you can defend."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "SRE Fundamentals & Reliability",
+    "category": "SRE Fundamentals & Reliability",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you incorporate error budget policies to balance feature releases with system reliability?",
+    "answer": "For a 99.9% 30-day availability SLO, the error budget is 0.1%, roughly 43.2 minutes if measured by time. The policy defines actions at consumption thresholds: normal delivery while burn is healthy, extra review or reduced rollout velocity when risk rises, and a reliability freeze when the budget is exhausted. Exceptions require an explicit owner and risk acceptance. Release health, incident impact, and burn rate determine the response rather than one isolated outage. The policy should encourage safe delivery, not punish teams, and reset only with the agreed SLO window."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "SRE Fundamentals & Reliability",
+    "category": "SRE Fundamentals & Reliability",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you ensure your monitoring and alerting mechanisms reduce alert fatigue while still catching critical issues early?",
+    "answer": "Page on actionable user-impact symptoms such as multi-window SLO burn, not every component anomaly. Give each alert an owner, severity, runbook, deduplication key, and clear recovery condition. Use dashboards or tickets for nonurgent capacity trends, group correlated events, inhibit downstream alerts when a dependency fails, and tune thresholds using historical data. I review page frequency, false positives, duplicates, acknowledgements, and time to action; alerts that never cause a useful action are removed or redesigned. Synthetic checks and complementary black-box and white-box signals protect against blind spots."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Infrastructure as Code - Terraform & Ansible",
+    "category": "Infrastructure as Code - Terraform & Ansible",
+    "questionType": "Experience",
+    "question": "How have you implemented Infrastructure as Code using tools like Terraform or Ansible to automate infrastructure provisioning and improve deployment consistency?",
+    "answer": "In [REAL PROJECT], I used Terraform modules to provision [NETWORK/COMPUTE/GKE/IAM] and Ansible roles to configure [OS/APPLICATION], with environment-specific inputs separated from reusable code. Changes went through pull requests, `terraform fmt`, `validate`, security scans, a reviewed plan, and an approved apply using a locked remote state backend. Ansible roles were idempotent and tested in a disposable environment. Version pinning, immutable artifacts, drift detection, and documented rollback made runs repeatable. This reduced [MANUAL TIME/FAILURE RATE] by [VERIFIED METRIC]; replace placeholders only with defensible experience."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Infrastructure as Code - Terraform & Ansible",
+    "category": "Infrastructure as Code - Terraform & Ansible",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you handle secrets and sensitive data management within your IaC workflows to ensure security?",
+    "answer": "IaC code contains secret references, never secret values. CI authenticates with short-lived workload identity and retrieves secrets from Vault or a cloud secret manager at runtime. State is treated as sensitive because providers may store values there: use encrypted remote storage, restricted IAM, locking, versioning, audit logs, and prevent state or plan files from entering build artifacts. Marking a Terraform variable `sensitive` only redacts output; it does not remove the value from state. Add secret scanning, mask logs, rotate exposed credentials, and grant each pipeline the minimum environment-specific access."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Infrastructure as Code - Terraform & Ansible",
+    "category": "Infrastructure as Code - Terraform & Ansible",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you automate and test your infrastructure deployments to ensure consistent and error-free provisioning across environments?",
+    "answer": "The pull-request pipeline runs formatting, linting, `terraform validate`, policy and security checks, module unit tests, and a speculative plan. Reusable modules and pinned provider/module versions keep environments consistent while separate state and reviewed variables isolate them. After approval, CI applies the exact saved plan using short-lived credentials, then runs smoke, connectivity, policy, and monitoring checks. Disposable integration environments test create-update-destroy behavior; scheduled plans detect drift. Production uses protected approvals, concurrency controls, backups, and a recovery plan because Terraform rollback normally means applying a known-good configuration, not reversing a transaction."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Infrastructure as Code - Terraform & Ansible",
+    "category": "Infrastructure as Code - Terraform & Ansible",
+    "questionType": "Troubleshooting",
+    "question": "Can you explain a challenging scenario where you had to troubleshoot and fix an infrastructure provisioning failure using your IaC and automation tools?",
+    "answer": "Use your real incident: an apply failed while creating [RESOURCE] with [ERROR], leaving [PARTIAL STATE/IMPACT]. I stopped concurrent runs, captured the plan and provider logs, verified backend locking and state, then compared configuration, state, and the cloud API. The cause was [IAM/QUOTA/DEPENDENCY/PROVIDER ISSUE]. I corrected [SPECIFIC CHANGE], imported or removed only the confirmed orphaned object if required, reran `plan`, and applied after review. Prevention included [PRECHECK/TEST/POLICY], provider pinning, and a runbook. State edits were backed up and used only as a last resort."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Kubernetes / GKE",
+    "category": "Kubernetes / GKE",
+    "questionType": "Experience",
+    "question": "How have you managed and optimized Kubernetes clusters in production to ensure scalability and performance?",
+    "answer": "In [REAL ENVIRONMENT], I managed [CLUSTER TYPE/SCALE] using declarative configuration and controlled upgrade channels. Workloads had measured requests and limits, readiness/startup probes, PodDisruptionBudgets, topology spread, and HPA based on useful workload signals; Cluster Autoscaler supplied node capacity. I monitored API-server health, scheduling latency, node and pod saturation, throttling, OOMs, DNS, and application percentiles. Rightsizing and load tests validated changes before gradual rollout. Add your actual result, such as [LATENCY/COST/AVAILABILITY IMPROVEMENT], and distinguish work you personally owned from team responsibilities."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Kubernetes / GKE",
+    "category": "Kubernetes / GKE",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you handle Kubernetes cluster upgrades and ensure zero downtime during maintenance windows?",
+    "answer": "First check version skew, deprecated APIs, add-on compatibility, quotas, and release notes, then rehearse in a representative nonproduction cluster. Upgrade the managed control plane before nodes, and replace or surge-upgrade node pools gradually. Workloads need multiple replicas across zones, correct readiness and startup probes, PodDisruptionBudgets, graceful termination, and spare capacity. Use canary node pools with cordon and drain, monitor SLOs during each stage, and pause or roll back workloads when signals degrade. Absolute zero downtime cannot be guaranteed, but redundancy and tested disruption controls make it an explicit target."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Kubernetes / GKE",
+    "category": "Kubernetes / GKE",
+    "questionType": "Troubleshooting",
+    "question": "How do you approach troubleshooting and resolving networking issues within Kubernetes clusters, especially related to service discovery and pod communication?",
+    "answer": "Trace one failing request layer by layer. Confirm pod IPs, readiness, routes and application listeners; verify Service selectors, EndpointSlices and ports; test DNS from the affected namespace with `getent hosts` or `dig`; then check NetworkPolicies, CNI health, kube-proxy or eBPF programming, node routes, firewall rules and MTU. Compare a working and failing pod and inspect `kubectl describe`, events, CoreDNS logs and flow logs. Use an ephemeral debug container when images lack tools. Fix the narrowest proven cause and add a synthetic connectivity check or policy test to catch recurrence."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Kubernetes / GKE",
+    "category": "Kubernetes / GKE",
+    "questionType": "Experience",
+    "question": "Can you share an example where you resolved a complex Kubernetes networking problem that impacted production services? What steps did you take to prevent it from recurring?",
+    "answer": "Use a verified incident: [SERVICE] returned [ERROR/IMPACT] after [CHANGE]. I traced traffic from client to load balancer, Ingress, Service EndpointSlices and pods, comparing healthy and unhealthy paths. Evidence from [FLOW LOGS/COREDNS/CNI/POLICY] showed [ACTUAL CAUSE], so I mitigated with [SAFE REVERSIBLE ACTION] and verified recovery through error rate, latency and synthetic requests. We then added [POLICY TEST/CANARY/MONITOR], documented the traffic path, and changed the rollout process. Include real duration and metrics; do not claim a NetworkPolicy, MTU or DNS cause unless your evidence established it."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Monitoring & Observability",
+    "category": "Monitoring & Observability",
+    "questionType": "Experience",
+    "question": "How have you designed and implemented monitoring dashboards and alerting systems to quickly detect and respond to production issues?",
+    "answer": "For [REAL SERVICE], I built dashboards around traffic, errors, latency and saturation, then added dependency, deployment and business signals so responders could correlate impact with cause. SLO panels showed compliance and multi-window burn rates; pages were symptom-based, routed by ownership, deduplicated and linked to tested runbooks. Structured logs carried trace and correlation IDs, while distributed traces exposed slow paths. I validated alerts using controlled failures and reviewed false positives and time-to-detect. State the actual stack you used and quantify [MTTD/MTTR/NOISE REDUCTION] only when supported by records."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Monitoring & Observability",
+    "category": "Monitoring & Observability",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you manage incident response workflows and coordinate with different teams to resolve production issues efficiently?",
+    "answer": "Declare severity and appoint one incident commander, with separate operations and communications leads for major incidents. Open a shared channel and timeline, define user impact and current hypothesis, assign explicit owners, and use fixed update intervals. Stabilize service before deep root-cause work, keep stakeholders informed in plain language, and escalate dependencies early. Every change is logged with its result and rollback option. After recovery, verify customer health, conduct a blameless review, and track corrective actions to owners and dates. Regular drills and clear service ownership make cross-team coordination faster."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Monitoring & Observability",
+    "category": "Monitoring & Observability",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you leverage automation or runbooks during incidents to speed up detection, mitigation, and recovery?",
+    "answer": "An alert links to a versioned runbook containing impact checks, prerequisites, exact diagnostic queries, safe mitigation, rollback, escalation, and recovery verification. I automate deterministic, repeatable actions such as gathering diagnostics, scaling within limits, restarting a known-safe component, disabling a feature flag, or rolling back a release. Automation uses least privilege, idempotency, timeouts, audit logs and guardrails; high-blast-radius steps require approval. Game days validate both runbooks and permissions. After incidents, successful manual sequences become tested automation, while ambiguous diagnosis remains human-led."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Monitoring & Observability",
+    "category": "Monitoring & Observability",
+    "questionType": "Experience",
+    "question": "Can you share an example where automating incident response significantly reduced downtime or improved reliability?",
+    "answer": "Use your real example: [FAILURE MODE] previously required [MANUAL STEPS] and took [OLD TIME] to mitigate. I encoded the proven procedure in [TOOL], with precondition checks, bounded retries, concurrency protection, an approval gate for [RISKY STEP], and verification against [SLO/HEALTH SIGNAL]. On failure it stopped safely and paged an operator rather than looping. After rollout, mitigation time changed to [NEW TIME] across [NUMBER] events and [ERROR BUDGET/AVAILABILITY] improved by [METRIC]. Explain how you tested rollback and avoided automating an uncertain diagnosis."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Python / Scripting / Automation",
+    "category": "Python / Scripting / Automation",
+    "questionType": "Experience",
+    "question": "Can you describe a script or automation you developed that improved operational efficiency or integrated monitoring?",
+    "answer": "I built [SCRIPT/AUTOMATION] in [PYTHON/SHELL] to replace [MANUAL PROCESS]. It read [INPUT/API], validated data, performed an idempotent [ACTION], and emitted structured logs and metrics to [MONITORING SYSTEM]. Network calls had timeouts, bounded exponential-backoff retries and pagination; secrets came from [SECRET STORE], not code. Unit tests mocked external APIs, and a dry-run mode plus change summary made production use safe. It reduced [TIME/ERROR RATE] from [BEFORE] to [AFTER]. Replace every placeholder with your actual design and measurable result."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Python / Scripting / Automation",
+    "category": "Python / Scripting / Automation",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you ensure your scripts are maintainable, secure, and handle exceptions effectively in production environments?",
+    "answer": "Use small typed functions, clear interfaces, configuration outside code, pinned dependencies, linting, tests and packaging with a documented entry point. Validate inputs and distinguish retryable failures from permanent ones; external calls need timeouts, bounded jittered backoff, and meaningful exit codes. Catch exceptions only where context or recovery can be added, preserve the cause, and clean up with context managers. Keep secrets in a managed store, minimize privileges, avoid logging sensitive data, and scan dependencies. Add structured logs, metrics, dry-run support, idempotency and graceful cancellation so automation is observable and safe to rerun."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Python / Scripting / Automation",
+    "category": "Python / Scripting / Automation",
+    "questionType": "Experience",
+    "question": "Can you share an example where you used scripting to automate integration between different tools or systems in your SRE workflow?",
+    "answer": "In [REAL WORKFLOW], a [MONITORING/ITSM/CI] event needed to create or update [TARGET SYSTEM] without duplicate records. I wrote a [LANGUAGE] service that validated the webhook signature, normalized the payload, mapped ownership and severity, and called the target API using an idempotency key. It handled pagination, rate limits, timeouts and retries, sent poison events to [DLQ/REVIEW], and exposed success, latency and failure metrics. Secrets used short-lived identity or [SECRET STORE]. This reduced [MANUAL EFFORT/DELAY] by [VERIFIED RESULT]."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Coding / Kubernetes Controller Round",
+    "category": "Coding / Kubernetes Controller Round",
+    "questionType": "Design / Architecture",
+    "question": "Design a custom Kubernetes controller that watches all Pods and dynamically applies labels based on resource usage and pending duration, removing labels when their conditions no longer apply.",
+    "answer": "Use a cluster-scoped Pod informer and rate-limiting workqueue. Reconciliation reads the latest pod from the lister, sums CPU and memory requests across regular containers (and uses the maximum init-container request according to scheduling semantics), then derives labels. Set `high-resource=true` only when phase is Running and CPU exceeds 500m or memory exceeds 512Mi. Set `long-pending=true` only after the chosen Pending start timestamp exceeds five minutes; schedule `AddAfter` for the remainder. Create a merge/JSON patch only when managed labels differ, remove stale managed labels, handle conflicts by retrying, and never overwrite unrelated labels."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Coding / Kubernetes Controller Round",
+    "category": "Coding / Kubernetes Controller Round",
+    "questionType": "Design / Architecture",
+    "question": "How would you implement this using Kubernetes client-go concepts such as Informers, Listers, and WorkQueues?",
+    "answer": "Create a shared informer factory for Pods across all namespaces, register lightweight add/update/delete handlers, and enqueue `namespace/name`. Start the factory, wait for cache sync, then run multiple workers with `wait.UntilWithContext`. Each worker calls `Get`, splits the key, and reads the latest Pod from the lister cache. Reconcile computes desired managed labels, schedules delayed work when necessary, and patches through the typed client. On success call `Forget`; on transient failure use `AddRateLimited`; after a retry limit, report and `Forget`. Informers reduce API reads, listers provide current cached state, and the queue decouples events from writes."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Coding / Kubernetes Controller Round",
+    "category": "Coding / Kubernetes Controller Round",
+    "questionType": "Coding",
+    "question": "Write pseudocode showing how your controller watches Pod changes, processes events, and applies the appropriate labels.",
+    "answer": "`onAdd(p) => queue.Add(key(p)); onUpdate(old,p) => { if old.resourceVersion != p.resourceVersion { queue.Add(key(p)) } }; onDelete(p) => queue.Add(keyFromObjectOrTombstone(p))`. A worker executes `key,quit := queue.Get(); defer queue.Done(key); err := reconcile(key)`. Reconcile gets the latest pod from the lister; NotFound succeeds. It computes `(desired,nextCheck)`, calls `queue.AddAfter(key,nextCheck)` when needed, and returns if managed labels already match. Otherwise it patches only `/metadata/labels/high-resource` and `/metadata/labels/long-pending`. Success calls `Forget`; retryable errors call `AddRateLimited`; terminal or exhausted errors are recorded and forgotten."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Coding / Kubernetes Controller Round",
+    "category": "Coding / Kubernetes Controller Round",
+    "questionType": "Implementation / Workflow",
+    "question": "How would your controller handle Pod ADD, UPDATE, and DELETE events?",
+    "answer": "ADD enqueues the pod key. UPDATE enqueues the new key when its resource version changes; optional predicates can suppress updates that cannot affect the derived labels, but correctness should not depend on them. DELETE normally requires no pod-label cleanup because the object is gone, yet its key can be enqueued to clear controller-owned external state; handle `DeletedFinalStateUnknown` tombstones safely. Handlers must not patch or perform slow work. They only extract keys and enqueue, leaving reconciliation to read current cached state and making rapid, duplicate, or out-of-order notifications harmless."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Coding / Kubernetes Controller Round",
+    "category": "Coding / Kubernetes Controller Round",
+    "questionType": "Conceptual",
+    "question": "Why would you use a WorkQueue instead of directly modifying the Pod inside the Informer event handler?",
+    "answer": "A workqueue keeps informer handlers fast and prevents API latency from blocking event delivery. It deduplicates keys that are already queued, coalesces bursts, bounds concurrency through workers, supports delayed items, and provides rate-limited retries with backoff. The event becomes only a hint; reconciliation reads current state rather than acting on a stale event object. This cleanly separates observation from business logic and makes shutdown, metrics and error handling manageable. Direct writes in a handler can create feedback loops, miss events while blocked, overload the API server and provide no consistent retry or backpressure strategy."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Coding / Kubernetes Controller Round",
+    "category": "Coding / Kubernetes Controller Round",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you make the controller reconciliation idempotent?",
+    "answer": "Treat reconciliation as a pure desired-state calculation followed by a minimal write. Read the latest Pod, compute only the two labels owned by this controller, and compare them with current values. If they match, return successfully without patching. If not, patch only changed managed keys, including removal when a condition becomes false, while preserving every unrelated label. Never base correctness on how many events occurred or on in-memory transition history. Repeated calls with the same Pod state therefore converge to the same metadata. Use optimistic concurrency or retry conflicts and ensure any external side effects have stable idempotency keys."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Coding / Kubernetes Controller Round",
+    "category": "Coding / Kubernetes Controller Round",
+    "questionType": "Troubleshooting",
+    "question": "How would the controller remain resilient and eventually consistent if Kubernetes API operations fail temporarily?",
+    "answer": "Return transient API errors to the worker and call `AddRateLimited(key)` using an exponential failure rate limiter; call `Forget(key)` only after success or a deliberate terminal decision. Cap retries, emit an event and metric when exhausted, and rely on later informer updates or periodic resync to enqueue the key again. Honor context cancellation and API timeouts, limit worker concurrency, and distinguish conflicts, throttling and server errors from validation or authorization failures. Because reconciliation is idempotent and always reads the latest cached state, retries safely converge after the API recovers without replaying stale desired state."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Coding / Kubernetes Controller Round",
+    "category": "Coding / Kubernetes Controller Round",
+    "questionType": "Scenario",
+    "question": "If a Pod becomes Pending, how will your controller know when it has remained Pending for five minutes if Kubernetes does not generate another event exactly five minutes later?",
+    "answer": "When reconciling a Pending pod, calculate `remaining = fiveMinutes - (now - pendingSince)`. If remaining is positive, call `queue.AddAfter(key, remaining)`; if it is zero or negative, set `long-pending=true`. The important design choice is a reliable `pendingSince`: `creationTimestamp` works only if the requirement means five minutes since creation while still Pending. For repeated phase transitions, persist a controller-owned timestamp annotation or track a relevant status-condition transition timestamp when available, because in-memory state is lost on restart. The delayed event is only a wake-up; reconciliation must reread current state."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Coding / Kubernetes Controller Round",
+    "category": "Coding / Kubernetes Controller Round",
+    "questionType": "Implementation / Workflow",
+    "question": "If you also need to check the Pod's readiness condition, how would this change your labeling logic?",
+    "answer": "Add an `isReady` helper that finds the `PodReady` condition and returns true only when its status is `ConditionTrue`; missing or Unknown means not ready. Keep readiness separate from phase because Running only means containers have started, while Ready controls Service endpoint eligibility. Define the exact policy, for example `high-resource=true` only when `phase == Running && ready && (cpu > 500m || memory > 512Mi)`, then include readiness-condition changes in update handling. Reconciliation still calculates desired labels from the latest cached Pod and removes the label immediately if readiness becomes false."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Coding / Kubernetes Controller Round",
+    "category": "Coding / Kubernetes Controller Round",
+    "questionType": "Scenario",
+    "question": "How would your controller behave if a Pod transitions rapidly between Running and Pending phases within a few seconds?",
+    "answer": "Each notification merely enqueues the stable key; the queue may coalesce duplicates. When a worker processes it, reconciliation fetches the latest Pod from the informer cache and derives labels from that state, not from the old event payload. If another transition occurs during a patch, its informer update enqueues the key again; optimistic-concurrency conflicts are retried. Thus an obsolete Running event cannot permanently apply a Running-derived label. The controller may briefly expose an intermediate label under extreme churn, but repeated reconciliation converges. Track queue depth, retries and reconcile latency so sustained churn or a slow API is visible."
+  },
+  {
+    "source": "Complete SRE Interview - 2026-08-22",
+    "section": "Coding / Kubernetes Controller Round",
+    "category": "Coding / Kubernetes Controller Round",
+    "questionType": "Scenario",
+    "question": "What happens if you schedule a five-minute delayed reconciliation while a Pod is Pending, but it becomes Running before those five minutes expire?",
+    "answer": "The Pending-to-Running update immediately enqueues the same key, so reconciliation removes or avoids `long-pending` and evaluates the Running resource rule. The old delayed queue item may still become ready later; it is harmless because the worker rereads the latest Pod, sees Running, and keeps `long-pending` absent. Correctness must never rely on cancelling delayed entries or preserving the old event object. If a new Pod reuses the same namespace/name, compare UID or include it in persisted timing state so a delayed item from the deleted object cannot apply an old Pending timestamp to the replacement."
   }
 ]

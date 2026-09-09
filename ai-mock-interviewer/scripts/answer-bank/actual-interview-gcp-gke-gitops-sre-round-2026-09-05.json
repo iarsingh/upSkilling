@@ -1,0 +1,192 @@
+[
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "Enterprise GCP Architecture",
+    "category": "GCP / Cloud",
+    "topic": "Landing Zone Architecture",
+    "difficulty": "Expert",
+    "questionType": "Experience / Architecture",
+    "question": "Can you explain the enterprise-scale GCP architecture you designed, including the organization, projects, networking, security and shared services?",
+    "answer": "I structured the platform from the organization root into folders aligned to governance boundaries such as platform, production, non-production and sandbox, with business-unit folders where delegation required them. Separate projects created IAM, quota, billing and blast-radius boundaries for applications, Shared VPC hosts, security, centralized logging, CI/CD and common services. A project factory used versioned Terraform modules to create projects, enable APIs, attach billing, apply labels and budgets, configure logging sinks and inherit Organization Policies. Central host projects provided Shared VPC subnets, IP planning, DNS, Cloud NAT, hybrid connectivity and hierarchical firewall controls, with production separated from lower environments. Identity was federated and group-based; workloads used Workload Identity instead of keys; privileged access was time-bound; secrets and encryption keys had dedicated ownership. Security Command Center, audit logs, asset inventory and monitoring flowed into protected central projects and the SIEM. GKE golden paths included private clusters, policy enforcement, signed images, network policies, autoscaling, backups and GitOps. Exceptions were reviewed, expiring and visible. I measured onboarding time, policy compliance, reliability and cost, treating the landing zone as an operated platform product."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "Production Availability",
+    "category": "SRE Fundamentals",
+    "topic": "Availability",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "For a production GKE application requiring minimal or near-zero downtime, what availability target would you recommend and what is a good production availability percentage?",
+    "answer": "There is no universally correct production percentage. I derive the target from customer impact, transaction criticality, dependency capability, support model and the cost of redundancy. A common starting point for an important service is 99.9%, while a critical customer-facing path may justify 99.95% or 99.99% only if every dependency and the operating model can support it. At 99.9%, the monthly error budget is roughly 43 minutes; at 99.99%, it is roughly 4.3 minutes. The SLO applies to a precise user journey and measurement window, not simply Pod uptime. Multi-zone GKE, redundant replicas, disruption budgets, controlled upgrades, progressive delivery, resilient dependencies, tested failover and actionable observability support the target. I avoid saying zero downtime or 100% because it is generally unachievable and leaves no error budget for safe change. The business approves the reliability-versus-cost trade-off, and we review the target using actual incidents and user expectations."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "GKE Autoscaling",
+    "category": "Kubernetes",
+    "topic": "Autoscaling",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "What is HPA, how does it work, and what is the difference between HPA and Cluster Autoscaler?",
+    "answer": "Horizontal Pod Autoscaler changes the replica count of a scalable workload such as a Deployment from observed CPU, memory, custom or external metrics relative to a target. It periodically calculates desired replicas, applies tolerance and stabilization behavior and updates the workload's scale subresource. Correct resource requests are essential for utilization-based targets. Cluster Autoscaler operates at a different layer: it adds nodes when Pods remain unschedulable and removes underused nodes only when their Pods can move safely. HPA creates demand for more Pods; the scheduler places them; Cluster Autoscaler supplies node capacity if no existing node can fit them. HPA does not resize nodes, and Cluster Autoscaler does not normally create application replicas. Limits, quotas, disruption budgets, topology, scale-down safety and realistic load tests must be designed across both layers."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "GKE Autoscaling",
+    "category": "Kubernetes Production Troubleshooting",
+    "topic": "Cluster Autoscaler",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "If HPA creates more pods but Cluster Autoscaler is not adding nodes, how would you investigate?",
+    "answer": "I first confirm that the new Pods are actually Pending and inspect `kubectl describe pod` scheduling events. Cluster Autoscaler scales for unschedulable resource demand, not simply high CPU on running Pods. I verify autoscaling is enabled on a suitable node pool and check its minimum and maximum, Pod requests, selectors, affinity, topology constraints, taints and tolerations. A Pod too large for every configured machine type, an unbound zonal volume or an incompatible label will remain unschedulable without useful scale-out. I then inspect autoscaler status, events and logs for `NotTriggerScaleUp`, backoff or scale-up errors and check Compute Engine quota, regional capacity, subnet or secondary-range exhaustion, maximum cluster resources and service-agent IAM. I compare the pool's instance template with the Pod requirements. After correcting the exact constraint, I create controlled demand and measure node provisioning, scheduling and readiness time rather than repeatedly deleting Pods."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "GKE Service Access",
+    "category": "GCP / GKE",
+    "topic": "Workload Identity",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "How do applications or pods running on GKE securely access GCP services such as Cloud Storage, BigQuery, Secret Manager and Cloud SQL?",
+    "answer": "I use Workload Identity Federation for GKE so each Kubernetes service account receives only the IAM permissions required by its workload, without a downloaded key. Depending on the supported pattern, I grant the Kubernetes principal direct resource permissions or bind it to a Google service account; the Pod uses Application Default Credentials and the metadata service obtains short-lived tokens. Cloud Storage and BigQuery permissions are scoped to the required bucket, dataset or table; Secret Manager access is scoped to named secrets; and Cloud SQL uses private IP or an approved connector plus database authentication and authorization. Network paths use private Google access, Private Service Connect or private service access where appropriate, and egress policy permits only required destinations. I keep Kubernetes RBAC separate from Google Cloud IAM, audit both, test denied access and avoid granting broad project roles to the cluster node service account."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "Workload Identity",
+    "category": "Security",
+    "topic": "Workload Identity",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "Why is Workload Identity better than putting a service-account JSON key in a Kubernetes Secret, and why should static keys be avoided?",
+    "answer": "Workload Identity issues short-lived credentials tied to the Pod's Kubernetes identity and the authorized workload context. There is no private key to distribute, mount, rotate or accidentally commit, and access can be revoked by changing IAM or the workload binding. A JSON key in a Kubernetes Secret is still a long-lived bearer credential: anyone who reads the Secret, Pod filesystem, backup or diagnostic output may reuse it outside the cluster until it is revoked. Rotation is operationally difficult, attribution is weaker and leaked keys often outlive the workload. With Workload Identity I give each service its own least-privilege principal, keep the node identity narrow and use Cloud Audit Logs for attribution. Kubernetes Secrets remain useful for some application secrets, but base64 encoding does not make a static cloud key safe."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "Terraform Modules",
+    "category": "Terraform",
+    "topic": "Module Design",
+    "difficulty": "Advanced",
+    "questionType": "Experience",
+    "question": "Explain the structure of a Terraform module you personally developed, including its files and what you implemented inside it.",
+    "answer": "One example is a reusable GKE node-pool module. `main.tf` defines the node pool, autoscaling, management and upgrade settings; `variables.tf` exposes validated inputs such as project, cluster, location, machine type, disk, labels, taints, service account and min/max nodes; `outputs.tf` returns the pool name and identifiers; `versions.tf` pins Terraform and provider constraints; and `README.md` documents behavior, examples and upgrade notes. Examples and tests live in dedicated directories, while changelog and CI checks support releases. I included secure defaults such as no broad OAuth scopes, an explicit least-privilege node service account, auto-repair, controlled upgrades and consistent labels. I used validation and preconditions for incompatible inputs, avoided embedding environment-specific values and released immutable module versions. Consumer root modules supplied environment values and owned remote state. I explain both the resources I wrote and why I chose that module boundary."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "Terraform Drift",
+    "category": "Terraform",
+    "topic": "State and Drift",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "What happens if someone manually deletes a GCP resource managed by Terraform, and what happens during the next terraform plan and apply?",
+    "answer": "Terraform state still records the resource until the next refresh or plan reads the provider. The plan detects that the remote object is missing and, if it remains in configuration, normally proposes creating it again. The next approved apply recreates it, but the new resource may receive a different identifier, IP or generated property and dependent services may have been disrupted. If configuration also removed the resource, Terraform updates state without recreation. Importantly, recreation can fail because of retained names, dependencies, quotas or data loss; Terraform cannot restore deleted business data merely because it knows the resource definition. I investigate the audit log, recover data where required, review the plan and then apply through the controlled pipeline. Preventive controls include least-privilege IAM, deletion protection where supported, backups, policy and drift alerts—not automatic unreviewed applies for every drift event."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "Terraform State",
+    "category": "Terraform",
+    "topic": "State Locking",
+    "difficulty": "Advanced",
+    "questionType": "Conceptual",
+    "question": "How does Terraform state locking work, what happens when another pipeline targets the same state, and how do you prevent simultaneous applies?",
+    "answer": "For operations that can write state, Terraform asks the configured backend for an exclusive lock when that backend supports locking. A second pipeline targeting the same state waits up to its lock timeout or fails with lock metadata instead of applying concurrently. This prevents two writers from reading the same old state and overwriting each other's results. I use a backend with supported locking semantics, one remote state per clear environment or component boundary, serialized deployment concurrency in CI and protected apply stages. Plans are generated from the same reviewed commit and applies run with least-privilege identity. I never use `-lock=false` for normal changes. If a pipeline crashes, I verify that no operation is active and that the recorded lock belongs to the failed run before using `terraform force-unlock`; blindly removing a valid lock can corrupt state. State versioning and backups provide recovery but do not replace locking."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "Cloud Build and Jenkins",
+    "category": "CI/CD",
+    "topic": "Cloud Build versus Jenkins",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "Why would you choose Google Cloud Build over Jenkins, and what are its advantages and disadvantages?",
+    "answer": "I choose Cloud Build when workloads are centered on Google Cloud and the team values a managed build control plane, ephemeral workers, straightforward IAM and integrations with Artifact Registry, source repositories, Secret Manager and Cloud Deploy. It reduces controller, plugin, patching, backup and agent-fleet maintenance. Private pools can address isolation and network-access needs. Jenkins remains attractive when an organization has substantial existing shared libraries, plugins, heterogeneous environments, complex custom workflows or cross-cloud and on-premises integrations that would be expensive to migrate. Its flexibility also creates operational cost: controller availability, plugin compatibility, credentials, scaling and upgrades belong to the team. Cloud Build can introduce service limits, product coupling, migration work and different cost behavior, and private connectivity needs careful design. I compare security, workload location, required integrations, portability, developer experience, compliance evidence and total operating cost, then migrate incrementally rather than choosing solely because one service is managed."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "Argo CD GitOps",
+    "category": "GitOps",
+    "topic": "Argo CD",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "What is the difference between traditional CI/CD deployment and Argo CD deployment, including push-based deployment versus pull-based GitOps?",
+    "answer": "In a traditional push model, the CI runner holds cluster credentials and executes Helm or kubectl against the target environment after building the artifact. Its completion proves that a command ran, but not necessarily that the cluster remains aligned later. With Argo CD, CI builds, tests, scans and publishes an immutable artifact, then updates the desired version in a Git environment repository. Argo CD runs inside or near the cluster, pulls the approved desired state, compares it with live resources and continuously reconciles differences. Git becomes the auditable deployment intent and rollback is normally a reviewed revert. The pull model reduces inbound CI access to clusters and detects drift, but it introduces controller availability, repository and promotion design, credential scope, multi-tenant controls and reconciliation risks. CI and GitOps are complementary: CI produces trusted artifacts, while Argo CD performs continuous delivery and convergence."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "Argo CD Drift",
+    "category": "GitOps",
+    "topic": "Argo CD",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "If someone manually changes a Kubernetes resource managed by Argo CD, what will Argo CD do, and what happens when self-healing is enabled?",
+    "answer": "Argo CD compares live state with the manifests rendered from Git. A manual change normally makes the Application `OutOfSync` and the UI and metrics show the diff. If automated sync with self-heal is enabled and the field is managed rather than deliberately ignored, Argo CD reconciles the live resource back to the Git-defined value. Without self-heal, it reports drift until an authorized sync or another change corrects it. Prune is a separate option governing resources removed from desired state. For incidents, manual changes may be overwritten quickly, so break-glass procedures either update Git first or temporarily suspend the relevant reconciliation with approval, audit and a deadline. Afterward I commit the correct desired state and re-enable convergence; the cluster is not the permanent source of truth."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "Canary Deployment",
+    "category": "Deployment and Release Incidents",
+    "topic": "Progressive Delivery",
+    "difficulty": "Advanced",
+    "questionType": "Experience / Implementation",
+    "question": "Describe a rollout strategy you implemented, how you implemented Canary deployment and why you used it instead of a normal Kubernetes RollingUpdate.",
+    "answer": "For a high-risk API change, I used canary delivery with two versions behind controlled traffic routing. The pipeline built and signed one image, deployed the new version at zero or a small traffic share and ran smoke tests. Traffic then advanced through stages such as 1%, 5%, 25%, 50% and 100%, with an observation window at each stage. Promotion required readiness plus error rate, latency, saturation and business-success metrics within thresholds compared with the stable version; a failure automatically returned traffic to stable and stopped the rollout. Database changes were backward compatible and both versions could run concurrently. A standard RollingUpdate replaces Pods gradually but usually lacks explicit user-traffic percentages, baseline comparison and analysis gates. Canary costs more capacity and operational complexity, so I use it for changes whose failure risk justifies exposure control, while routine low-risk releases can use a well-configured RollingUpdate."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "Network Security",
+    "category": "Networking",
+    "topic": "Firewall and NetworkPolicy",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "What is the difference between a GCP VPC firewall and Kubernetes NetworkPolicy, and at what level does each control traffic?",
+    "answer": "GCP VPC firewall policy controls traffic at the VPC and network-interface layer for supported cloud resources, using direction, priority, protocol, ports, sources, destinations and targets such as service accounts or secure tags. It protects paths to nodes and other VPC resources and is administered through Google Cloud networking. Kubernetes NetworkPolicy controls allowed ingress and egress for selected Pods at the cluster workload layer, based on namespace and Pod selectors plus IP blocks and ports, and requires an enforcing network-policy implementation. It is useful for east-west microsegmentation but does not configure the VPC firewall, protect resources outside its scope or control every host-network path. In GKE I use both: hierarchical or VPC firewall controls establish network boundaries and required infrastructure paths, while default-deny NetworkPolicies permit only necessary workload-to-workload and egress flows. I test the combined packet path because either layer can block connectivity."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "Kubernetes RBAC",
+    "category": "Security",
+    "topic": "Least-Privilege Access",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "How would you give a developer read-only access to application pod logs without allowing deployment changes, including temporary access?",
+    "answer": "I create a namespace-scoped Role granting only `get`, `list` and `watch` on Pods and `get` on the `pods/log` subresource, then bind it to an identity group with a RoleBinding. I do not grant verbs on Deployments, Secrets, `pods/exec`, port-forward or cluster-wide resources. GKE authentication and Google Cloud IAM must allow the user to reach and authenticate to the cluster, while Kubernetes RBAC controls the log operation. I test with `kubectl auth can-i get pods/log -n NAME` and confirm that patching a Deployment and reading Secrets are denied. Temporary access is delivered through the organization's just-in-time privileged-access workflow with approval, incident or ticket context, automatic expiry and protected audit logs. If no native expiry exists for the binding, automation creates and removes it at the approved times and verifies revocation. Application logs themselves must avoid secrets and sensitive customer data because read-only access can still disclose information."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "GKE Security Review",
+    "category": "Security and DevSecOps",
+    "topic": "GKE Security",
+    "difficulty": "Expert",
+    "questionType": "Security Review",
+    "question": "What areas would you check during a security review of a production GKE platform, including IAM, networking, workloads, secrets, images and auditing?",
+    "answer": "I begin with scope, data classification, threat model and cluster inventory. For identity I review Google Cloud IAM, groups, privileged access, Workload Identity, node service accounts, Kubernetes RBAC, anonymous access and stale bindings. Networking covers private nodes and control-plane exposure, authorized access, Shared VPC firewalls, load balancers, Cloud Armor, DNS, egress, default-deny NetworkPolicies and metadata protection. Workload checks include Pod Security, privileged containers, host namespaces and mounts, capabilities, seccomp, non-root execution, read-only filesystems, requests and limits, quotas and tenant boundaries. I verify secrets-manager integration, rotation, CMEK requirements and absence of credentials in Git, images or logs. Supply-chain controls include trusted registries, vulnerability and malware scanning, SBOM, signatures, provenance, Binary Authorization and patch SLAs. I review supported versions, release channels, node hardening, upgrades, backups and recovery tests. Audit logs, policy violations, Security Command Center findings, runtime alerts and log retention must reach protected central storage with clear owners and response SLAs. Findings are risk-ranked, evidence-backed and tracked through remediation or expiring exception."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "GKE 502 and 503 Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "topic": "Load Balancing",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "A GKE deployment succeeded and application logs are visible, but users receive 502 or 503 errors. How would you troubleshoot pods, probes, Services, endpoints, Ingress, NEGs, backends, firewalls and NetworkPolicies?",
+    "answer": "I trace one request from DNS and frontend to the Pod and identify which component emitted the status. I verify the expected Deployment revision, available replicas, readiness and recent events; a running Pod is not necessarily ready. I test the application on its container port and check whether the readiness path, protocol and timing reflect real serving health. I inspect the Service selector, port and targetPort, then EndpointSlices to confirm ready Pod IPs exist. From an approved debug Pod I test Service DNS and direct endpoint connectivity. At the GKE edge I inspect Ingress or Gateway events, URL map, backend service, NEG membership and backend health, including health-check port and path. A 503 often means no healthy backend or exhausted capacity; a 502 often indicates a bad upstream response, reset, protocol or timeout, but I confirm from logs rather than assuming. I verify health-check and data-plane firewall access plus NetworkPolicy ingress from the actual source. After correcting the smallest fault, I validate external traffic, latency and errors and add a deployment or monitoring gate for the missed condition."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "SRE Fundamentals",
+    "category": "SRE Fundamentals",
+    "topic": "SLI SLO SLA",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "What are SLI, SLO and SLA, and what is the difference between them?",
+    "answer": "An SLI is the measured indicator of service behavior, such as the proportion of valid requests completed successfully within 300 milliseconds. An SLO is the internal reliability target for that SLI over a stated window—for example, 99.9% of eligible requests in 30 days. The difference between perfect performance and the SLO creates an error budget that guides release and reliability decisions. An SLA is the external or contractual commitment to a customer and defines measurement, exclusions, responsibilities and consequences such as service credits. The SLA is often no stricter than the engineering SLO, allowing operating margin. All three require precise event definitions and data sources; vague statements such as 'the server should be up' are not enough."
+  },
+  {
+    "source": "Actual Interview - GCP, GKE, GitOps and SRE Round - 2026-09-05",
+    "section": "SRE Availability Math",
+    "category": "SRE Fundamentals",
+    "topic": "Availability Calculation",
+    "difficulty": "Intermediate",
+    "questionType": "Calculation",
+    "question": "If the SLA is 99.9% availability, approximately how much downtime is allowed per month and per year?",
+    "answer": "99.9% availability permits 0.1% unavailability. For a 30-day month, 30 × 24 × 60 = 43,200 minutes, and 0.001 × 43,200 = 43.2 minutes. For a 365-day year, 365 × 24 × 60 = 525,600 minutes, and 0.001 × 525,600 = 525.6 minutes, which is 8 hours 45 minutes 36 seconds—approximately 8 hours 46 minutes. The exact monthly allowance varies with the month's length and, in practice, the SLA must specify the measurement window, eligible requests, maintenance exclusions and rounding rules."
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "section": "CI/CD Engineering",
+    "category": "CI/CD",
+    "topic": "CI/CD",
+    "difficulty": "Advanced",
+    "questionType": "Experience",
+    "question": "Tell us about a CI/CD pipeline you designed or significantly improved using GitLab CI/CD, Jenkins, or Cloud Build. Explain how it promoted code through environments and handled testing, approvals, rollback, and deployment failures.",
+    "answer": "In one representative project, I redesigned a Jenkins pipeline for containerized services on GKE. Pull requests ran formatting, unit tests, static analysis, secret and dependency scans. After merge, the pipeline built the image once, generated an SBOM, scanned and signed it, and published the immutable digest to Artifact Registry. That same digest moved automatically through DEV and UAT, with integration, smoke and contract tests after each deployment; production used a protected approval gate with separation of duties. The release used a canary rollout, promoting traffic only while readiness, error rate, latency and business checks stayed within thresholds. A failed test stopped promotion, while an unhealthy canary automatically returned traffic to the known-good digest. Database changes followed expand-and-contract so rollback remained compatible. I also added deployment concurrency controls, timeouts, structured notifications and retained evidence linking commit, artifact, approvals and release. In a real interview, I would finish with the actual improvement in lead time, failure rate or recovery time from my project."
+  },
+  {
+    "section": "Observability and Alerting",
+    "category": "Observability",
+    "topic": "Observability",
+    "difficulty": "Advanced",
+    "questionType": "Experience",
+    "question": "Describe an observability solution you implemented using Google Cloud Monitoring, Prometheus, Grafana, or related alerting tools. Explain how you selected meaningful metrics while avoiding alert noise.",
+    "answer": "I implemented a layered observability model for GKE services using Prometheus-compatible application and Kubernetes metrics, Grafana service dashboards, and Google Cloud Logging and Monitoring for platform signals and centralized alert routing. I started from customer journeys and SLOs rather than every available metric: request success, latency percentiles, traffic and saturation formed the service view, supported by Pod readiness, restarts, OOM kills, CPU throttling, memory, pending Pods, node pressure, autoscaling, PVC capacity, dependency latency and critical business outcomes. Metrics, logs and traces carried service, environment, region and release identifiers so responders could move from an SLO alert to the affected revision and request path. Pages used multi-window burn rates or sustained actionable thresholds, minimum traffic, grouping and deduplication; symptoms without immediate action became dashboards or tickets. Every page had an owner and runbook. I reviewed false positives, duplicates, acknowledgement time and missed incidents, then replayed historical incidents when tuning. This helped responders identify whether failures came from a deployment, resource saturation or an external dependency and reduced time spent on non-actionable alerts."
+  },
+  {
+    "section": "Linux Systems Administration",
+    "category": "Linux / Troubleshooting",
+    "topic": "Linux",
+    "difficulty": "Advanced",
+    "questionType": "Experience",
+    "question": "Describe a Linux systems administration issue that affected a cloud or Kubernetes workload and how you diagnosed it using system-level evidence and restored reliable operation.",
+    "answer": "A representative incident involved Kubernetes nodes becoming NotReady and evicting workloads because the node filesystem filled unexpectedly. I confirmed impact through Kubernetes events and node conditions, then used df -h and df -i to distinguish block from inode exhaustion, du -x and find to locate growth, journalctl and systemctl status to inspect kubelet and container-runtime errors, and crictl plus runtime logs to correlate unused images and oversized container logs. Disk I/O and process checks with iostat, vmstat, top and ps ruled out a broader CPU or memory failure. The evidence showed application debug logging combined with ineffective rotation had consumed the runtime filesystem. We restored capacity by cordoning the node, safely removing eligible runtime artifacts through supported tooling, rotating logs and restarting only the affected services, then uncordoned after kubelet health and workload readiness recovered. Prevention included bounded log rotation, lower production log levels, ephemeral-storage requests and limits, image garbage-collection thresholds, disk and inode alerts, centralized log shipping, node-disk sizing review and a tested runbook. I would present actual commands and timings from my own incident rather than claim this example as personal history."
+  }
+]

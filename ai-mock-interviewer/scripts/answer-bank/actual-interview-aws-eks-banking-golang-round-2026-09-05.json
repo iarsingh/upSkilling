@@ -1,0 +1,92 @@
+[
+  {
+    "source": "Actual Interview - AWS, EKS, Banking and Golang Round - 2026-09-05",
+    "section": "AWS Compute Selection",
+    "category": "AWS",
+    "topic": "EC2 and Lambda",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "When would you choose AWS Lambda over EC2 for a workload, and what constraints would push you back toward EC2?",
+    "answer": "I choose Lambda for event-driven, stateless and short-lived work with variable or bursty demand—for example processing an S3 event, handling an API request, responding to EventBridge or transforming queue messages. It removes server lifecycle work, scales by concurrency and can be cost-effective when idle time would otherwise dominate. I design for idempotency, bounded retries, downstream protection and external state. I choose EC2 when the workload needs full OS or kernel control, long-running processes, specialized agents or drivers, uncommon networking, local persistent state, GPUs or hardware not supported by the serverless runtime, or predictable sustained utilization where instances or commitments are more economical. Lambda also has runtime, package, memory, ephemeral-storage, concurrency and request limits, and cold starts may conflict with strict latency. The decision uses execution profile, security boundary, operational control, scaling behavior and total cost; I also consider containers or managed batch services rather than forcing every workload into either Lambda or EC2."
+  },
+  {
+    "source": "Actual Interview - AWS, EKS, Banking and Golang Round - 2026-09-05",
+    "section": "AWS Glue ETL",
+    "category": "AWS / Data Engineering",
+    "topic": "AWS Glue",
+    "difficulty": "Advanced",
+    "questionType": "Experience / Architecture",
+    "question": "Describe a scenario where you used AWS Glue Jobs, the data pipelines involved, and how you handled job failures and data-quality issues.",
+    "answer": "A representative pipeline ingested daily transaction and reference files into an encrypted S3 raw zone. EventBridge or an orchestrator started a Glue workflow after arrival checks; a crawler or explicitly managed schema updated the Data Catalog; and a versioned PySpark Glue Job validated, normalized, deduplicated and joined the data before writing partitioned Parquet into processed and curated zones. Every run carried a batch ID and source checksum so retries were idempotent and did not duplicate output. Quality rules checked schema, mandatory fields, ranges, referential integrity, duplicate transaction IDs and record-count or financial-control totals. Invalid records went to a restricted quarantine prefix with reason codes instead of silently disappearing. Operational failures emitted CloudWatch logs, metrics and alarms, retried only transient errors with limits, and sent terminal failures to the incident path. Bookmarks or a controlled watermark tracked progress, while atomic publish or manifest patterns kept consumers from reading partial output. Backfills used isolated run IDs and reconciled totals before promotion. IAM, KMS, private connectivity, lineage, retention and audit controls were part of the pipeline, not afterthoughts."
+  },
+  {
+    "source": "Actual Interview - AWS, EKS, Banking and Golang Round - 2026-09-05",
+    "section": "Banking Data Lake",
+    "category": "AWS / Data Engineering",
+    "topic": "S3 Data Lake",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "How would you design an S3-based data lake for a banking application while ensuring compliance with data requirements?",
+    "answer": "I begin with data classification, residency, retention, legal hold, RPO/RTO and separation-of-duties requirements. Separate accounts or strongly isolated buckets hold immutable raw, validated processed and consumer-ready curated zones; sensitive domains receive further boundaries. S3 Block Public Access is enforced, bucket policies require TLS and approved VPC endpoints, and least-privilege roles replace long-lived credentials. Data is encrypted with carefully governed KMS keys, with separate key administration and data access. Lake Formation provides database, table, column and row-level permissions where applicable, while Glue Catalog records schemas and ownership. Macie and quality jobs detect sensitive data or misplaced records; CloudTrail data events, S3 access evidence and centralized security findings support audit. Versioning, replication or backups and Object Lock in the correct compliance mode protect required records from alteration or deletion, with lifecycle rules moving data to appropriate archival tiers and expiring it only under approved policy. Ingestion validates schema, malware and control totals, quarantines bad data and preserves lineage from source to curated output. Analytics runs through private paths, query results are protected, and every exception has an owner, approval and expiry."
+  },
+  {
+    "source": "Actual Interview - AWS, EKS, Banking and Golang Round - 2026-09-05",
+    "section": "Banking Databases",
+    "category": "AWS / Databases",
+    "topic": "RDS and Aurora",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "How do you choose between Amazon RDS and Aurora for a transactional banking workload?",
+    "answer": "I start with the required database engine and compatibility, transaction behavior, peak and steady throughput, latency, availability, RPO/RTO, regional recovery, operational model and cost. Standard RDS is often suitable when the workload needs a supported commercial or open-source engine, conventional instance behavior and Multi-AZ availability at a predictable scale. Read replicas serve read scaling but are not a substitute for the writer's HA design. Aurora is a strong candidate for MySQL- or PostgreSQL-compatible workloads that benefit from its distributed storage, faster failover options, multiple replicas, reader scaling and capabilities such as Global Database for cross-region recovery. I still validate application compatibility, connection storms, failover behavior, replication lag and write limits with realistic load tests. For banking, I use private subnets, encryption and KMS, IAM or rotated secrets, TLS, auditing, protected backups and point-in-time recovery. I rehearse failover and restore against the business RTO/RPO. Aurora is not automatically better: engine features, migration risk and steady-state cost may favor RDS, while stricter scale and recovery requirements may justify Aurora's premium."
+  },
+  {
+    "source": "Actual Interview - AWS, EKS, Banking and Golang Round - 2026-09-05",
+    "section": "Multi-Tenant EKS",
+    "category": "AWS / EKS",
+    "topic": "Kubernetes Multi-Tenancy",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "How would you design a multi-tenant EKS cluster for a banking platform using namespace isolation, RBAC and NetworkPolicies?",
+    "answer": "I first decide whether tenants are trusted internal teams or require a hard security boundary. Namespaces are administrative boundaries, not complete isolation, so regulated or mutually untrusted workloads may require separate clusters and accounts. Within an approved shared cluster, each tenant receives dedicated namespaces, ResourceQuota, LimitRange, priority rules and ownership labels. IAM access is mapped to narrow Kubernetes RBAC roles; workloads use EKS Pod Identity or IRSA with a distinct least-privilege IAM role per service, never the node role. A compatible network-policy engine enforces default-deny ingress and egress, then permits only named application, DNS and dependency paths. Pod Security admission, policy-as-code, signed images, read-only filesystems and restricted privileges establish workload guardrails. Secrets come from AWS Secrets Manager or Parameter Store through workload identity. Sensitive or specialized tenants can use dedicated node groups with taints, tolerations and topology rules, although node separation alone is not a hard tenant boundary. Central audit logs, runtime findings, flow telemetry, cost allocation and admission-policy reports identify every action and resource owner. Cluster-wide resources and privileged controllers remain platform-team controlled."
+  },
+  {
+    "source": "Actual Interview - AWS, EKS, Banking and Golang Round - 2026-09-05",
+    "section": "EKS Autoscaling",
+    "category": "AWS / EKS",
+    "topic": "Karpenter and Cluster Autoscaler",
+    "difficulty": "Advanced",
+    "questionType": "Comparison / Architecture",
+    "question": "How do you manage EKS node scaling for unpredictable banking transaction spikes while controlling cost, and how do you choose between Cluster Autoscaler and Karpenter?",
+    "answer": "I scale in layers. HPA increases Pod replicas from demand signals such as request rate, queue depth or latency, while accurate resource requests make unschedulable demand visible to the node scaler. Cluster Autoscaler changes capacity inside predefined Auto Scaling groups or managed node groups; it is mature and predictable when the organization wants a small, controlled set of instance types. Karpenter evaluates pending Pods and provisions suitable EC2 capacity directly from flexible constraints, which can react efficiently across instance families, zones and purchase options and later consolidate underused capacity. For critical banking paths I maintain minimum warm On-Demand capacity across zones, use topology spread and PodDisruptionBudgets, and protect databases and downstream services from unconstrained scaling. Spot is appropriate only for interruption-tolerant, redundant or batch capacity with disruption handling. Karpenter NodePools and NodeClasses restrict architecture, instance families, zones, capacity type and limits; consolidation is tested so it does not create churn. I monitor Pending Pods, scheduling and EC2 launch latency, HPA behavior, utilization, interruptions, errors and cost per transaction. Load tests and quota checks prove the entire scale-out path before a peak event."
+  },
+  {
+    "source": "Actual Interview - AWS, EKS, Banking and Golang Round - 2026-09-05",
+    "section": "EKS Production Troubleshooting",
+    "category": "AWS / EKS",
+    "topic": "Production Incident",
+    "difficulty": "Advanced",
+    "questionType": "Experience / Troubleshooting",
+    "question": "Describe an EKS production issue you resolved, including the failure mode, diagnostic process and architectural change that prevented recurrence.",
+    "answer": "During a transaction spike, the load balancer began returning 502 and 503 responses and latency rose. HPA correctly created more application replicas, but many stayed Pending because the existing nodes lacked allocatable CPU and the node group was slow to add capacity near its configured maximum. I correlated ALB target health and response codes with application latency, HPA events, kubectl scheduling events and node-group metrics. Pod events showed insufficient CPU; the autoscaler logs and EC2 events then exposed the capacity and scaling constraint. We first protected customers by shedding noncritical work, raising safe capacity within quota and monitoring downstream saturation. The durable change combined realistic requests from load tests, higher minimum warm capacity for the critical path, wider multi-AZ instance flexibility, earlier scaling from demand signals, corrected node-scaler limits and topology spread plus disruption budgets. We isolated batch work from transaction services and added alerts for unschedulable Pods, node-provisioning latency and headroom. A peak-load exercise verified recovery time and confirmed that scaling one layer no longer waited for the next layer to fail."
+  },
+  {
+    "source": "Actual Interview - AWS, EKS, Banking and Golang Round - 2026-09-05",
+    "section": "Container Platform Selection",
+    "category": "AWS / Containers",
+    "topic": "ECS Fargate and EKS",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "When would you choose ECS Fargate over EKS, and what trade-offs does that carry for observability and operational control?",
+    "answer": "I choose ECS on Fargate for standard stateless or asynchronous containers when the team wants AWS-native task and service orchestration without operating Kubernetes or worker nodes. It fits services with supported CPU, memory, networking and runtime constraints and can reduce platform toil for smaller teams. I choose EKS when Kubernetes APIs and ecosystem portability, custom controllers, richer scheduling, specialized node or GPU control, service-mesh patterns or an existing Kubernetes platform justify the added complexity. With Fargate, CloudWatch logs, Container Insights, application metrics and OpenTelemetry provide strong service-level visibility, but there is less host-level access and fewer node, daemon or kernel controls; unsupported privileged or DaemonSet-style tooling may require another design. EKS offers deeper scheduling and infrastructure observability but the team must operate add-ons, node capacity, upgrades and policy consistently. I compare workload fit, isolation, startup and scaling behavior, telemetry requirements, team skill and total cost—serverless operations do not guarantee the lowest cost at sustained high utilization."
+  },
+  {
+    "source": "Actual Interview - AWS, EKS, Banking and Golang Round - 2026-09-05",
+    "section": "Golang Coding",
+    "category": "Golang",
+    "topic": "HTTP APIs",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Write a Go HTTP handler that accepts a JSON POST request containing a transaction amount and account ID, validates the inputs, returns structured JSON errors and implements proper error handling.",
+    "answer": "I would represent money as an integer number of minor units, such as cents, rather than float64, to avoid binary floating-point rounding. The handler restricts the method and content type, limits the body, rejects unknown or trailing JSON, validates both fields and returns one consistent JSON envelope.\n\n```go\npackage api\n\nimport (\n    \"encoding/json\"\n    \"errors\"\n    \"io\"\n    \"net/http\"\n    \"strings\"\n)\n\ntype transactionRequest struct {\n    AccountID  string `json:\"account_id\"`\n    AmountCents int64 `json:\"amount_cents\"`\n}\n\ntype errorResponse struct {\n    Error struct {\n        Code    string `json:\"code\"`\n        Message string `json:\"message\"`\n    } `json:\"error\"`\n}\n\nfunc writeJSON(w http.ResponseWriter, status int, value any) {\n    w.Header().Set(\"Content-Type\", \"application/json\")\n    w.WriteHeader(status)\n    _ = json.NewEncoder(w).Encode(value)\n}\n\nfunc writeError(w http.ResponseWriter, status int, code, message string) {\n    var response errorResponse\n    response.Error.Code = code\n    response.Error.Message = message\n    writeJSON(w, status, response)\n}\n\nfunc TransactionHandler(w http.ResponseWriter, r *http.Request) {\n    if r.Method != http.MethodPost {\n        w.Header().Set(\"Allow\", http.MethodPost)\n        writeError(w, http.StatusMethodNotAllowed, \"method_not_allowed\", \"use POST\")\n        return\n    }\n    mediaType := strings.ToLower(strings.TrimSpace(strings.Split(r.Header.Get(\"Content-Type\"), \";\")[0]))\n    if mediaType != \"application/json\" {\n        writeError(w, http.StatusUnsupportedMediaType, \"unsupported_media_type\", \"Content-Type must be application/json\")\n        return\n    }\n\n    r.Body = http.MaxBytesReader(w, r.Body, 1<<20)\n    decoder := json.NewDecoder(r.Body)\n    decoder.DisallowUnknownFields()\n\n    var request transactionRequest\n    if err := decoder.Decode(&request); err != nil {\n        var maxBytesError *http.MaxBytesError\n        if errors.As(err, &maxBytesError) {\n            writeError(w, http.StatusRequestEntityTooLarge, \"body_too_large\", \"request body is too large\")\n            return\n        }\n        writeError(w, http.StatusBadRequest, \"invalid_json\", \"request body must be valid JSON\")\n        return\n    }\n    if err := decoder.Decode(&struct{}{}); err != io.EOF {\n        writeError(w, http.StatusBadRequest, \"invalid_json\", \"request body must contain one JSON object\")\n        return\n    }\n\n    request.AccountID = strings.TrimSpace(request.AccountID)\n    if request.AccountID == \"\" {\n        writeError(w, http.StatusUnprocessableEntity, \"invalid_account_id\", \"account_id is required\")\n        return\n    }\n    if request.AmountCents <= 0 {\n        writeError(w, http.StatusUnprocessableEntity, \"invalid_amount\", \"amount_cents must be greater than zero\")\n        return\n    }\n\n    writeJSON(w, http.StatusAccepted, map[string]any{\n        \"status\":       \"accepted\",\n        \"account_id\":   request.AccountID,\n        \"amount_cents\": request.AmountCents,\n    })\n}\n```\n\nIn production I would inject a transaction service into a handler type, pass r.Context() to it, map typed domain errors to safe status codes, log only non-sensitive correlation data and test malformed bodies, unknown fields, oversized requests, cancellation and service failures."
+  }
+]

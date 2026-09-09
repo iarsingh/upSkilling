@@ -1,0 +1,119 @@
+[
+  {
+    "section": "GCP Landing Zone",
+    "category": "GCP / Cloud",
+    "topic": "Platform Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Experience / Architecture",
+    "question": "Walk me through a specific case where you implemented an enterprise-scale GCP landing zone. What policies and controls did you implement, and how did you restrict resources to approved regions such as us-east1 and us-west4 while handling regional resources and secrets?",
+    "answer": "In one enterprise landing-zone implementation, my scope covered the organization and folder hierarchy for platform, production, non-production and sandbox workloads, plus separate billing, logging, security and Shared VPC host projects. Identity was group-based and federated; predefined roles, privileged access approvals, Workload Identity Federation and a restriction on service-account key creation reduced standing privilege. At the organization or folder level, I applied Organization Policy constraints for allowed resource locations, external IP use, domain-restricted sharing, public access, uniform bucket-level access and approved networking patterns. Central projects collected audit logs, Security Command Center findings and billing exports. Terraform modules created projects, APIs, budgets, IAM, networking, logging and baseline controls through reviewed pipelines with protected remote state. For residency, I tested and enforced the Resource Location Restriction constraint using the appropriate location value group or an explicit allow list containing us-east1 and us-west4, first in dry-run where supported and then in enforcement. I verified service-specific behavior because the constraint applies only to supported resource types and resource location is not always the same as where data is stored or processed. Global resources needed a documented exception or a design change. Secrets were created in Secret Manager with user-managed replication pinned to approved regions when residency required it, and regional services such as GKE, Cloud SQL and storage were parameterized so the pipeline rejected any unapproved location. Policy tests, Cloud Asset Inventory queries and drift alerts continuously detected exceptions. I measured the result through onboarding lead time, policy compliance and audit findings and operated the landing zone as an evolving platform product."
+  },
+  {
+    "section": "GCP Security Controls",
+    "category": "Security and DevSecOps",
+    "topic": "GCP Security",
+    "difficulty": "Advanced",
+    "questionType": "Experience / Conceptual",
+    "question": "Have you worked with VPC Service Controls, Binary Authorization, and Security Command Center? What is VPC Service Controls, and how did you implement or use these controls in your project?",
+    "answer": "VPC Service Controls creates service perimeters around supported Google-managed services and projects to reduce data exfiltration risk, even when IAM credentials are compromised; it complements IAM and does not replace firewall rules. In a project example, I place sensitive services such as Cloud Storage, BigQuery, Secret Manager and Artifact Registry inside carefully designed perimeters, use access levels for trusted identities and devices, and define narrow ingress and egress rules for approved cross-perimeter flows. I start in dry-run, analyze violation logs, account for CI/CD, Google-managed service agents and developer workflows, then enforce in stages with an exception owner and expiry. Security Command Center is the central finding and asset layer: I enable the appropriate tier and detectors, export findings to the security project or SIEM, assign severity-based SLAs, suppress only documented false positives and track remediation. Binary Authorization is the deployment gate: CI builds in a trusted service, scans the image, signs or attests the immutable digest after tests pass, and GKE admission policy permits only approved registries and required attestations. Break-glass use is tightly authorized, alerted and audited. The important design is the combination: SCC detects posture and threats, VPC Service Controls limits data movement, and Binary Authorization controls what software can run. I would state exactly which parts I operated hands-on and which were owned jointly with security."
+  },
+  {
+    "section": "Shared VPC Governance",
+    "category": "GCP / Networking",
+    "topic": "Networking",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "With multiple service projects attached to a Shared VPC, how do you prevent firewall misconfigurations or rules from different teams overlapping?",
+    "answer": "I separate network administration from workload administration. The central network team owns the Shared VPC host project, subnets, routes, Cloud NAT, DNS and baseline firewall policy; application teams receive only the subnet-level and workload permissions they need in their service projects, not broad firewall administration in the host project. Organization- and folder-level hierarchical firewall policies establish non-negotiable deny and allow guardrails, while centrally reviewed network firewall policies or host-project VPC rules implement shared controls. Rules use service accounts or secure tags instead of fragile IP ranges wherever possible, with reserved priority bands, naming conventions, explicit owners and expiry dates. Terraform modules validate duplicate priorities, broad CIDRs, unrestricted ports and conflicting intent before merge; plans require network or security approval and run policy-as-code tests. Firewall Rules Logging, Connectivity Tests, flow logs and periodic reachability reviews verify actual behavior. Emergency exceptions are time-bound and automatically removed. Because GCP evaluates applicable policies and rules by defined hierarchy and priority, I document that evaluation model and test changes in a non-production network so an apparently harmless team rule cannot silently override the intended control."
+  },
+  {
+    "section": "Centralized Firewall Management",
+    "category": "GCP / Networking",
+    "topic": "Networking",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "Can firewall rules be managed centrally, and how would you implement centralized firewall governance in GCP?",
+    "answer": "Yes. I use hierarchical firewall policies attached at the organization or folder level for enterprise-wide guardrails and network firewall policies or centrally managed VPC rules for environment-specific controls. The organization policy defines mandatory controls such as blocking prohibited ingress, while folder policies distinguish production from non-production and host-project policies handle shared application paths. A dedicated network-security repository stores rules as code with reusable Terraform modules, reserved priority ranges, secure tags or service-account targets, ownership metadata and expiry for temporary access. Pull requests run formatting, validation, policy tests and a Terraform plan, then require the correct network and security approvers before a controlled apply. Teams request connectivity through a small contract—source identity or tag, destination, protocol, business reason and duration—instead of editing rules directly. Firewall logging, flow logs, Connectivity Tests, Cloud Asset Inventory and drift detection provide evidence and identify shadow rules. I include a tested emergency process, but every bypass is short-lived, independently approved and audited. This gives central governance without turning the network team into a manual ticket bottleneck."
+  },
+  {
+    "section": "Terraform Enterprise",
+    "category": "Terraform",
+    "topic": "Infrastructure as Code",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "What is the difference between Terraform Community or open-source and Terraform Enterprise, and why would an organization use Terraform Enterprise?",
+    "answer": "Terraform Community Edition gives the core CLI workflow: providers, modules, plan, apply and state. The organization must design and operate its own remote execution, state backend and locking, access control, secrets, policy checks, approvals, audit trail and high availability around it. Terraform Enterprise is the self-hosted commercial platform for centralized Terraform workflows; it adds managed workspaces and remote runs, team-based access, policy enforcement, private module and provider distribution, governance and audit capabilities, with vendor support and enterprise deployment features. HCP Terraform provides a related SaaS operating model, so I would not use its name interchangeably with Terraform Enterprise. An organization chooses Enterprise when regulatory, data-residency or network-isolation requirements demand a self-hosted control plane and when the cost of consistently building those governance capabilities across many teams exceeds the license and platform-operating cost. Open source may remain the better choice for a small team with a mature CI/CD platform and modest governance needs. I decide from tenancy, compliance, scale, integration, availability, support and total cost—not from the assumption that Enterprise makes Terraform code itself better."
+  },
+  {
+    "section": "Production GKE Upgrades",
+    "category": "GCP / GKE",
+    "topic": "Kubernetes",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you upgrade GKE node pools in production without affecting workload availability?",
+    "answer": "I first review GKE release notes, version skew, API deprecations, add-on and workload compatibility, maintenance windows and rollback constraints, then reproduce the upgrade in a representative lower environment. Production workloads must already have multiple replicas across zones, PodDisruptionBudgets that reflect real availability, topology spread or anti-affinity, readiness and startup probes, realistic requests and limits, and enough quota and spare capacity. I upgrade the control plane before nodes when required by GKE's supported sequence. For nodes, I prefer a blue-green node-pool upgrade for strict control: create a new pool at the target version with equivalent labels, taints, service account, disk, networking and security settings; validate DaemonSets, GPUs or drivers and a canary workload; then cordon and drain old nodes gradually while watching SLOs, Pending pods, disruption budgets and capacity. GKE surge upgrades are suitable when configured with safe max-surge and max-unavailable values. I pause or roll back traffic if error rate, latency, saturation or scheduling breaches thresholds. After all workloads stabilize, I observe for a defined soak period and only then remove the old pool. Stateful workloads receive application-specific failover and data-safety checks. Zero impact is an objective backed by redundancy and validation, not a promise that the infrastructure change can never fail."
+  },
+  {
+    "section": "OpenTelemetry",
+    "category": "Observability",
+    "topic": "OpenTelemetry",
+    "difficulty": "Advanced",
+    "questionType": "Conceptual",
+    "question": "If GCP already provides Cloud Logging and Cloud Monitoring, what is the specific purpose of OpenTelemetry instrumentation?",
+    "answer": "Cloud Logging, Cloud Monitoring and Cloud Trace are observability backends and managed analysis services; OpenTelemetry is the vendor-neutral instrumentation, context-propagation and collection layer. Infrastructure telemetry can show that a GKE service is slow or CPU is high, but application instrumentation creates spans and business-relevant metrics that explain which request, method, dependency or database call caused the latency. The SDK propagates trace context across services; automatic and manual instrumentation emit traces, metrics and logs; and an OpenTelemetry Collector receives, enriches, samples and exports that telemetry to Google Cloud or another backend. This produces end-to-end correlation across GKE, VMs, serverless components and third-party services while reducing application coupling to one vendor's API. I control cardinality, redact sensitive attributes, use tail or probabilistic sampling deliberately and monitor collector loss and backpressure. OpenTelemetry does not replace Cloud Operations—it makes application telemetry consistent, portable and rich enough for the backend to diagnose distributed systems."
+  },
+  {
+    "section": "GPU Supply-Chain Security",
+    "category": "Security and DevSecOps",
+    "topic": "Container Security",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "For a GPU workload with a CI/CD pipeline, how would you prevent container images containing vulnerabilities from being deployed?",
+    "answer": "I secure the path from source to admission. The build uses pinned base-image digests from approved NVIDIA or internal repositories, an isolated ephemeral builder and short-lived workload identity. CI runs secret, dependency, OS-package, malware and container scans, creates an SBOM, executes tests, and fails on an agreed policy such as exploitable critical or high findings with a fix available; exceptions require a named risk owner and expiry. The pipeline pushes only to a protected Artifact Registry, signs the immutable image digest and records provenance or an attestation after every gate passes. GKE Binary Authorization or another admission policy accepts only approved registries, signatures and attestations, so changing an image tag cannot bypass the result. I also validate GPU driver and CUDA compatibility, because a secure image that cannot run is still a failed release. Runtime controls include least privilege, a read-only filesystem where possible, Workload Identity, network policy and continuous scanning. Scanning alone is insufficient: enforcement must occur against the exact digest at deployment time."
+  },
+  {
+    "section": "Vulnerability Response",
+    "category": "Security and DevSecOps",
+    "topic": "Container Security",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "How would you prevent vulnerable images from reaching production, and what would you do if a vulnerable image were already deployed?",
+    "answer": "Prevention combines trusted dependencies, continuous scanning, SBOM and provenance generation, severity and exploitability gates, immutable digests, signing, protected registries and admission enforcement. I define remediation SLAs and a narrow, expiring exception process so teams cannot normalize bypasses. If an image is already running, I treat it as an incident based on exposure and exploitability rather than CVSS alone. I identify every workload using the digest, determine whether the vulnerable component is reachable, inspect runtime and audit signals for exploitation, and apply compensating controls such as disabling the affected feature, restricting ingress or egress, or isolating the workload. If active compromise is suspected, I preserve evidence, rotate exposed credentials and follow incident-response procedures. In parallel I rebuild from a patched base or dependency, rerun all gates, sign a new digest, deploy it through canary or rolling replacement and verify health and security signals. If no patch exists and risk is unacceptable, I roll back to a known-safe digest or remove the service. I never patch a running container as the final fix; I replace it immutably, confirm the old digest is no longer running, and add a control that would have caught the gap earlier."
+  },
+  {
+    "section": "GCP FinOps",
+    "category": "FinOps and Cost Optimization",
+    "topic": "FinOps",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "The client wants a specific percentage reduction in the GCP bill. How would you reduce cost without affecting production performance or reliability?",
+    "answer": "I convert the requested percentage into a measured baseline, scope and deadline before promising it. Billing export to BigQuery, labels and project ownership show cost by service, environment and unit such as cost per request; I separate contractual spend, growth and anomalies from addressable waste. Quick, low-risk actions include deleting unattached disks and stale snapshots or IPs, applying storage lifecycle policies, scheduling non-production resources, controlling log volume and retention, and stopping idle development clusters. Next I rightsize GKE requests and node pools from percentile usage while preserving SLO-based headroom, use autoscaling and Spot VMs only for disruption-tolerant workloads, tune Cloud SQL and data-processing capacity, reduce avoidable cross-region egress and choose suitable storage classes. Stable baseline usage may justify committed-use discounts after forecasting; commitments do not fix waste. Every proposal includes expected monthly savings, engineering effort, risk, owner and validation metric. I test changes through canaries or lower environments, protect redundancy, latency and error-budget thresholds, and automatically revert if SLOs regress. Budgets, anomaly alerts, quotas, showback and monthly unit-economics reviews make savings persistent. I report realized rather than forecast savings and openly identify if the target cannot be safely achieved within the deadline."
+  },
+  {
+    "section": "Traffic Spike Investigation",
+    "category": "Advanced Production Scenarios",
+    "topic": "Security and Reliability",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "A GKE application has a sudden traffic spike on a busy sales day. How would you determine whether it is genuine or malicious and protect the application without blocking genuine customers?",
+    "answer": "I start from user impact and preserve capacity while investigating: verify load-balancer, GKE and dependency saturation; allow HPA and Cluster Autoscaler to scale within tested limits; and protect databases with queues, caching, concurrency limits and graceful degradation. I compare the spike with campaign schedules and historical sales patterns, then analyze Cloud Armor and load-balancer logs by geography, ASN, IP or client fingerprint, path, method, response code, user agent, session and authenticated-account behavior. Genuine demand typically has plausible browsing-to-checkout journeys and conversion; attacks often show concentrated sources, impossible request rates, repeated expensive endpoints, invalid payloads, low session continuity or credential abuse. No single indicator is proof. I apply progressive controls at the edge: cache static content, rate-limit by the most reliable key, challenge suspicious clients, block known malicious signatures or geographies only when justified, and protect expensive endpoints more tightly than browsing. New Cloud Armor rules begin in preview or with a small scope, and I watch false positives, conversion, latency and error rate before expanding them. Security, SRE and business teams share one incident view. Afterward I retain evidence, tune autoscaling and capacity tests, refine WAF and bot rules, and quantify both attack mitigation and legitimate revenue protected."
+  },
+  {
+    "section": "Emergency Production Access",
+    "category": "Security and DevSecOps",
+    "topic": "Kubernetes RBAC",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "A team member needs kubectl access to production for urgent debugging and RCA. Would you provide admin permissions, and how would you manage secure temporary access?",
+    "answer": "I would not grant standing cluster-admin merely because the issue is urgent. I first ask what diagnostic actions are required and provide the smallest namespace, resource and verb set—for example get, list, watch and logs, with exec or port-forward granted only when justified. Access goes to an identity group rather than a personal static credential, is approved through a just-in-time or privileged-access workflow, has a short expiry and requires strong authentication. GKE IAM determines who can authenticate and Kubernetes RBAC determines what that identity can do; both layers must be correct. If normal least privilege cannot recover a severe incident, a separate break-glass role can provide broader access with dual approval, a declared incident, immediate alerting and automatic revocation. Audit logs, Kubernetes audit events and shell or command evidence where available are sent to a protected logging project. Secrets shown during debugging are treated as exposed and rotated when necessary. After recovery, I revoke and verify access, review all actions during the RCA, and convert repeated emergency steps into safe runbooks or automation. The goal is fast restoration with attributable, temporary privilege—not a choice between security and incident response."
+  },
+  {
+    "section": "Rapid Business-Unit Onboarding",
+    "category": "Platform Engineering",
+    "topic": "Landing Zone Automation",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "A new business unit needs multiple GCP projects and team environments under a very short deadline. How would you provision it quickly without compromising governance or security?",
+    "answer": "I use the existing landing zone as a product and treat the deadline as an onboarding configuration problem, not a reason to invent a parallel platform. A business-unit manifest captures owners, environments, billing, data classification, approved regions, connectivity, quotas and required services. Versioned Terraform modules create the folder and projects, attach Shared VPC subnets, enable APIs, budgets and logging, assign group-based IAM, apply inherited Organization Policies, configure service identities and, where needed, deploy a GKE golden template with Workload Identity, policy enforcement, observability, backups and approved CI/CD. The pipeline produces reviewed plans, policy-as-code results and automated smoke tests. I split work into parallel but coordinated streams for identity and billing, networking and IP allocation, project factory, GKE or data services, CI/CD and security validation, with one dependency board and explicit acceptance criteria. Standard paths are self-service; only genuine exceptions enter a time-bound risk process with compensating controls and an owner. I deliver a thin production-ready slice first, then add optional capabilities after the deadline. Readiness checks cover access, connectivity, logging, alerts, backup or recovery, cost controls and operational ownership. This shortens lead time through preapproved golden paths while retaining the same audit evidence and guardrails as every other business unit."
+  }
+]

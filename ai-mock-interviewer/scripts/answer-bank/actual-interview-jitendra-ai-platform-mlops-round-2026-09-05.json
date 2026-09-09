@@ -1,0 +1,152 @@
+[
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "Introduction",
+    "category": "Behavioral",
+    "topic": "Introduction",
+    "difficulty": "Beginner",
+    "questionType": "Experience",
+    "question": "Let's start from your side with a quick introduction.",
+    "answer": "I am a Cloud, DevOps and MLOps engineer with experience building and operating production platforms across GCP and AWS. My core strengths are Kubernetes, Terraform, CI/CD, cloud security, observability and automation. Alongside traditional microservices, I have supported AI-enabled applications and agent workflows, including their containerization, deployment, orchestration, scaling, monitoring and release controls. I work closely with developers, data scientists, security and networking teams to turn requirements into secure, repeatable platforms and to keep them reliable in production. A recent focus has been MLOps and LLMOps: model and prompt versioning, RAG services, GPU workloads, evaluation, drift monitoring and safe rollback. I would then connect this summary to one project most relevant to the role and keep the introduction to about 60–90 seconds."
+  },
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "AI Agent Experience",
+    "category": "AI Agents",
+    "topic": "Agentic AI",
+    "difficulty": "Intermediate",
+    "questionType": "Experience",
+    "question": "Have you worked on building or deploying intelligent agents and their orchestration?",
+    "answer": "Yes. My strongest ownership is on the engineering and production side of agent systems: packaging agent services, provisioning their runtime and data dependencies, implementing CI/CD, identity and secrets, and making the workflows observable and recoverable. An agent combines a model with instructions, tools, memory or retrieved context and a control loop that decides the next action. For orchestration, I have worked with explicit workflows where a coordinator routes a request to specialized agents or tools, preserves state and correlation IDs, applies timeouts and retry limits, and sends high-risk or low-confidence decisions to a human. I version prompts, models, tools and knowledge indexes together; evaluate representative tasks before promotion; and monitor latency, token usage, tool failures, answer quality and safety. I distinguish this production experience from foundational model training, which is normally owned by the data-science team."
+  },
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "Agent Use Cases",
+    "category": "AI Agents",
+    "topic": "Agentic AI",
+    "difficulty": "Intermediate",
+    "questionType": "Experience",
+    "question": "What kind of agent did you work with, and what was its purpose?",
+    "answer": "One example was an internal Knowledge Assistant. Its purpose was to help engineers and support teams find reliable answers from approved runbooks, architecture documents, incident records and operational FAQs instead of searching across multiple repositories. The request passed through authentication and access checks, the service retrieved permission-filtered passages from a vector index, and the model produced an answer with source references. If confidence was low or the request required a production change, it did not act autonomously; it asked for clarification, opened the approved workflow or escalated to a human. My responsibility centered on the retrieval and serving platform, secure access to sources, deployment automation, observability, evaluation and operational controls."
+  },
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "Agent Example",
+    "category": "AI Agents",
+    "topic": "Agentic AI",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual / Experience",
+    "question": "Can you explain simply what the agent was and give an example of what it used to do?",
+    "answer": "In simple terms, the agent was an application that could understand a user's goal, look up authorized company knowledge, choose an approved tool when necessary and return a traceable answer. For example, an engineer could ask, 'Why is this deployment failing with an image-pull error?' The Knowledge Assistant identified the topic, retrieved the relevant GKE and registry runbooks, asked for the permitted error details, and returned likely checks with citations. It could fetch read-only deployment status through an approved API, but it could not change production directly. If the evidence was incomplete, it said so and handed the case to the support workflow. That bounded example demonstrates agency—reasoning plus retrieval and tool use—without claiming unsafe autonomous administration."
+  },
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "Agent Portfolio",
+    "category": "AI Agents",
+    "topic": "Agentic AI",
+    "difficulty": "Intermediate",
+    "questionType": "Experience",
+    "question": "What were the names of the agents?",
+    "answer": "I describe them by stable functional names rather than inventing product names: the Knowledge Assistant handled enterprise knowledge and support questions; the Claim Assistance Agent guided insurance or automotive claim intake and evidence collection; and, where the workflow was split, a Coordinator Agent routed tasks to retrieval, validation and case-management tools. I clarify whether those were official project names or descriptive names used for the interview. More important than the label is each agent's boundary, allowed tools, data access, escalation path and production ownership."
+  },
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "Knowledge Assistant",
+    "category": "RAG and LLMOps",
+    "topic": "RAG",
+    "difficulty": "Advanced",
+    "questionType": "Experience",
+    "question": "What did the Knowledge Assistant agent do, and was it similar to an FAQ or basic-query assistant?",
+    "answer": "It covered FAQ-style questions, but it was more than a static FAQ bot. A basic FAQ system usually maps a known question to a fixed response. The Knowledge Assistant used retrieval-augmented generation: documents were ingested, parsed, chunked, embedded and stored with source and access metadata; at query time it retrieved authorized evidence and generated a contextual answer with citations. It could handle different wording, combine information from several approved sources and invoke narrow read-only tools. Guardrails prevented answers from unauthorized documents, protected sensitive data and required abstention or human escalation when evidence was weak. We evaluated retrieval recall, groundedness, citation correctness, answer relevance, latency and cost, and maintained document freshness and deletion workflows."
+  },
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "Production AI Agents",
+    "category": "AI Agents",
+    "topic": "LLMOps",
+    "difficulty": "Advanced",
+    "questionType": "Experience",
+    "question": "Have you worked with any other production AI agents?",
+    "answer": "Another relevant use case was a Claim Assistance Agent for insurance or automotive workflows. It helped collect incident details, classify the request, check whether required evidence was present, summarize documents and images, and prepare a draft case for a human claims handler. It did not make an unreviewed payment or liability decision. Production controls included authenticated sessions, consent and data minimization, encryption, prompt-injection and file-validation defenses, deterministic business-rule checks, confidence thresholds, human approval, full audit history and retention rules. I supported the secure runtime, pipelines, model and prompt promotion, integrations, monitoring and rollback, while domain experts owned claims policy and final business decisions."
+  },
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "Development-Side Agent",
+    "category": "AI Agents",
+    "topic": "Agentic Applications",
+    "difficulty": "Advanced",
+    "questionType": "Experience",
+    "question": "Can you describe a development-side agent or application, such as the insurance or automotive claim-assistance use case?",
+    "answer": "The claim-assistance application orchestrated a bounded workflow rather than giving a model unrestricted control. A coordinator validated the session and case, a document component extracted structured fields from submitted evidence, a policy-retrieval component found applicable guidance, and a validation step checked required fields and business rules. The system then generated a case summary and recommended next action for a human reviewer. Each tool used a narrow service identity and schema-validated input; uploaded content was scanned and isolated; sensitive values were redacted from logs; and every model, prompt, retrieved source and tool result was traceable. Offline test cases covered accuracy, groundedness, unsafe recommendations and edge cases, while canary releases monitored task completion, escalation, latency and cost. Human approval remained mandatory for consequential decisions."
+  },
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "AI DevOps versus Traditional DevOps",
+    "category": "MLOps",
+    "topic": "MLOps",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "What is different when deploying AI or agent solutions compared with traditional microservices and APIs, and what additional things must be considered?",
+    "answer": "Both need secure code, immutable artifacts, CI/CD, infrastructure as code, SLOs, observability and rollback. AI systems add probabilistic behavior and more independently changing artifacts: model, prompt, tokenizer, features, retrieval index, evaluation set and sometimes agent tools. The pipeline therefore records lineage, evaluates quality and safety on representative datasets, scans model and data artifacts, and promotes a compatible bundle rather than only a container. Serving may require GPU memory, batching, model loading, warm capacity and different autoscaling signals. Production monitoring adds input and data drift, answer or prediction quality, hallucination and groundedness, tool-call success, token usage, bias and safety events. Security must address prompt injection, data poisoning, model supply chain, sensitive context leakage and excessive tool authority. Rollout uses shadow, canary or champion-challenger evaluation, and rollback restores the compatible code-model-prompt-index combination. Because ground truth may arrive late, human review and feedback pipelines are first-class operational components."
+  },
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "AWS Experience",
+    "category": "AWS",
+    "topic": "AWS Cloud",
+    "difficulty": "Intermediate",
+    "questionType": "Experience",
+    "question": "Which AWS services have you worked with so far?",
+    "answer": "My AWS experience includes EC2 for compute, S3 for object storage, IAM for access control, VPC networking and security groups, CloudFormation stacks for infrastructure as code, CloudFront for content delivery, Lambda for event-driven functions, EventBridge for schedules and event routing, CloudWatch for logs and metrics, and related load-balancing and container services where required. I connect each service to an actual workflow rather than reciting a list—for example, an EventBridge rule invoking Lambda to process an S3 event, with IAM least privilege, CloudWatch alarms, retries and a dead-letter path. GCP is my deeper current platform, so I state AWS depth honestly and explain how the architecture and operating principles transfer across clouds."
+  },
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "AWS Lambda",
+    "category": "AWS / Serverless",
+    "topic": "AWS Lambda",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "What is an AWS Lambda function?",
+    "answer": "AWS Lambda is a managed event-driven compute service that runs a function without the team provisioning or managing servers. Code or a container image defines a handler, and events can come from services such as API Gateway, S3, EventBridge, SQS or streams. Lambda creates execution environments, scales concurrent invocations and charges according to the applicable request and execution-resource model. The function should normally be stateless and store durable state externally. In production I configure least-privilege IAM, memory and timeout, environment variables or secret references, reserved or provisioned concurrency where needed, retries, idempotency, dead-letter or failure destinations, structured logs, tracing and alarms. I also account for cold starts, payload and runtime limits, downstream connection pressure and the difference between synchronous and asynchronous failure handling."
+  },
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "AI Production Challenges",
+    "category": "MLOps",
+    "topic": "LLMOps",
+    "difficulty": "Advanced",
+    "questionType": "Experience / Troubleshooting",
+    "question": "What challenges have you faced with AI-based or agent-based solutions?",
+    "answer": "The hardest challenges are rarely just container deployment. Output is probabilistic, so a release can improve average quality while failing an important slice; ground truth may arrive days later; prompts, models and knowledge indexes can drift independently; GPU startup and memory make scaling slower and more expensive; and agent tool calls introduce partial failure and security risk. In one knowledge workflow, stale or weak retrieval caused plausible but unsupported answers. We improved chunking and metadata, added document freshness and access filters, required citations, built a representative evaluation set, introduced an abstain threshold and routed uncertain cases to humans. Operationally, I added end-to-end traces for retrieval and tool calls, bounded retries and loop length, idempotency for side effects, cost and token budgets, version correlation and canary rollback. Other recurring controls address prompt injection, sensitive-data leakage, provider rate limits and dependency outages. I present the challenge, evidence, corrective action and measured result rather than claiming hallucinations can be eliminated completely."
+  },
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "GPU Autoscaling",
+    "category": "MLOps / Kubernetes",
+    "topic": "GPU Operations",
+    "difficulty": "Advanced",
+    "questionType": "Experience / Implementation",
+    "question": "Have you implemented or worked with GPU autoscaling?",
+    "answer": "I have worked on the platform pattern for GPU autoscaling, and I describe the exact production depth honestly. On Kubernetes, GPU nodes live in a dedicated accelerator node pool with the correct drivers, labels and taints; inference Pods request the GPU resource and tolerate that pool. HPA or an event-driven scaler changes replicas using demand signals such as inference queue depth, request concurrency, latency or GPU-aware serving metrics—not GPU utilization alone. When new Pods become unschedulable, Cluster Autoscaler or node auto-provisioning adds matching GPU nodes within quota, regional availability and cost limits. Because GPUs can take minutes to provision and models take time to load, I keep minimum warm capacity for latency-sensitive services, use readiness and startup probes, cache model artifacts, and tune scale-down stabilization. Batching and concurrency often improve throughput before adding GPUs. I monitor accelerator utilization and memory, model-load time, queue age, throttling, Pending Pods, node-provisioning latency, error rate and cost per inference. Spot GPUs are limited to fault-tolerant batch or redundant capacity, and load tests validate the complete scaling path."
+  },
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "Model and Data Drift",
+    "category": "Model Monitoring",
+    "topic": "MLOps",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you detect model drift or data drift in production?",
+    "answer": "I separate data drift, concept drift and model-quality degradation. Data drift means the production input distribution differs from the approved reference; I monitor schema, missing values, ranges, categorical frequencies and feature distributions using metrics such as PSI, Jensen-Shannon divergence, KS tests or domain-specific distances. Prediction drift tracks changes in score, class or embedding distributions. Concept drift means the relationship between input and outcome changed and requires labeled ground truth, so I compare recent performance with the validation baseline by time window and important customer slices. Tests need minimum sample sizes, seasonality-aware baselines and sustained thresholds because statistical significance alone can create noisy alerts at high volume. A drift alert first triggers data-quality and pipeline checks, then analysis by feature and slice; it does not automatically retrain blindly. Confirmed degradation starts a governed retraining or rollback workflow with lineage, offline validation, champion-challenger comparison and approval. Dashboards always identify model, data and feature versions so the team can distinguish environmental drift from a bad release."
+  },
+  {
+    "source": "Actual Interview - Jitendra AI Platform and MLOps Round - 2026-09-05",
+    "section": "Model Accuracy Monitoring",
+    "category": "Model Monitoring",
+    "topic": "MLOps",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you monitor and measure model accuracy in production?",
+    "answer": "Accuracy starts with the business task and trustworthy ground truth. For classification I may track precision, recall, F1, ROC-AUC or PR-AUC, calibration and a cost-weighted error metric; plain accuracy is misleading for imbalanced classes. Regression may use MAE, RMSE or business tolerance bands. Ranking, recommendation and generative systems need different measures such as NDCG, task success, groundedness, citation correctness, safety and human preference. I log prediction ID, model and feature versions, timestamp and privacy-safe context, then join predictions with delayed outcomes when labels arrive. Dashboards compare rolling windows with the offline baseline and previous champion by traffic segment, geography, device or other approved slices so aggregate performance does not hide a failing cohort. Golden labeled sets, shadow evaluation, online experiments and sampled human review cover cases without immediate ground truth. Alerts require adequate volume and sustained statistically and operationally meaningful degradation. I also monitor latency, errors and data quality because an accurate offline model can still be an unreliable product. Degradation leads to investigation, rollback or a validated retraining pipeline—not automatic promotion of an unproven model."
+  }
+]

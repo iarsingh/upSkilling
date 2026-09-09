@@ -1,0 +1,12 @@
+[
+  {
+    "source": "Actual Interview - GKE and Anthos Workload Management Round - 2026-09-05",
+    "section": "GKE and Anthos Operations",
+    "category": "GCP / GKE",
+    "topic": "Anthos / GKE Enterprise",
+    "difficulty": "Advanced",
+    "questionType": "Experience",
+    "question": "How do you manage Kubernetes workloads on GKE and Anthos in your current role?",
+    "answer": "I manage GKE workloads through a standardized platform rather than giving every team unrestricted cluster access. Terraform provisions projects, networks, private clusters, node pools, Workload Identity, logging, monitoring and security controls. Application teams use versioned Helm charts or Kustomize overlays, and GitOps reconciles reviewed environment repositories into clusters. Each workload receives namespaces, group-based RBAC, dedicated service accounts, resource requests and limits, quotas, probes, PodDisruptionBudgets, topology spread, autoscaling, NetworkPolicies and secret-manager integration. CI builds and scans the image once, signs the immutable digest, validates manifests and policy, and promotes the same artifact through canary or rolling deployment with SLO-based rollback.\n\nFor Anthos—now represented through GKE Enterprise capabilities in current Google Cloud terminology—I manage registered clusters as fleets so common configuration, policy and observability can be applied consistently across GKE and approved hybrid or multi-cloud clusters. Config Sync or the fleet configuration mechanism distributes namespace and platform configuration from Git; Policy Controller audits and enforces admission guardrails; fleet-level identity and team scopes support controlled tenancy; and service-mesh capabilities are used only where uniform mTLS, traffic policy and cross-cluster telemetry justify the complexity. I use staged rollout rings for policies, platform add-ons and upgrades, with development clusters first and production only after validation. Day-to-day operations include release support, Pending or CrashLoopBackOff diagnosis, capacity and cost reviews, vulnerability remediation, certificate and secret rotation, drift checks, backup and recovery tests, and incident follow-up. I make my actual scope clear: Google manages the GKE control plane, the platform team manages fleet and cluster guardrails, and application teams own service code and business behavior."
+  }
+]

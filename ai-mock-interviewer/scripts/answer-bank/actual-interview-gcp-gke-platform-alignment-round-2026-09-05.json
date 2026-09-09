@@ -1,0 +1,62 @@
+[
+  {
+    "source": "Actual Interview - GCP and GKE Platform Alignment Round - 2026-09-05",
+    "section": "JD and Experience Alignment",
+    "category": "Behavioral and Communication",
+    "topic": "Role Fit",
+    "difficulty": "Intermediate",
+    "questionType": "Experience",
+    "question": "Can you explain your project experience and how it fits with the job description?",
+    "answer": "My experience aligns with a GCP/GKE platform-engineering role across infrastructure automation, Kubernetes operations, delivery, security and production support. In my current project I provision GCP projects, Shared VPC networking, IAM, private GKE clusters, node pools, Artifact Registry, Secret Manager, logging and monitoring through reusable Terraform modules and reviewed pipelines. I package and deploy applications with Docker, Helm and GitOps or CI/CD; configure Workload Identity, RBAC, network policies, probes, autoscaling and disruption controls; and troubleshoot scheduling, networking, memory and release incidents. I also work with security and networking teams on organization policies, vulnerability remediation, firewall governance and audit evidence. This maps directly to the role's need for secure self-service platforms and reliable GKE operations. I support the alignment with one specific delivery and one production incident, quantify the result and state any JD area where my experience is adjacent rather than claiming depth I do not have."
+  },
+  {
+    "source": "Actual Interview - GCP and GKE Platform Alignment Round - 2026-09-05",
+    "section": "Helm Charts",
+    "category": "Kubernetes",
+    "topic": "Helm",
+    "difficulty": "Intermediate",
+    "questionType": "Experience",
+    "question": "Do you have experience with Helm charts, including deploying common components across clusters and managing similar deployments for multiple microservices?",
+    "answer": "Yes. I use Helm to package reusable Kubernetes resources such as Deployments, Services, service accounts, autoscaling, disruption budgets, ConfigMaps, Ingress or Gateway resources and policy-compatible security settings. A common library chart holds approved labels, probes, resource configuration and security defaults, while each microservice supplies a small values file for image digest, ports, capacity and environment-specific integration. For shared components such as monitoring agents, policy controllers or security defenders, I maintain a separately versioned chart and deploy it through GitOps to selected clusters using cluster-specific values and staged rollout rings. CI runs `helm lint`, renders templates, validates schemas and Kubernetes policy, scans images and tests upgrades before publishing an immutable chart version. I avoid one chart with excessive conditionals, never place secret values in ordinary values files and document ownership, supported versions, rollback and CRD handling."
+  },
+  {
+    "source": "Actual Interview - GCP and GKE Platform Alignment Round - 2026-09-05",
+    "section": "Private GKE Cluster",
+    "category": "GCP / GKE",
+    "topic": "Private Cluster Networking",
+    "difficulty": "Intermediate",
+    "questionType": "Design / Architecture",
+    "question": "At a high level, how do you create a private GKE cluster and securely access it?",
+    "answer": "I first create or select a VPC-native network and subnet with non-overlapping secondary ranges for Pods and Services, required routes, DNS, firewall rules and Private Google Access; Cloud NAT provides controlled outbound internet access only if workloads need it. Terraform then creates a regional private GKE cluster with private nodes, Workload Identity, release channel, logging, monitoring, policy controls and an appropriately restricted control-plane endpoint. Access depends on the endpoint design: administrators connect from an approved corporate network through VPN or Interconnect, from a tightly controlled bastion or management environment, or through supported DNS-based or authorized control-plane access. IAM controls who can authenticate and Kubernetes RBAC controls what they can do. I avoid public node IPs, broad authorized networks and standing cluster-admin. After creation I validate control-plane reachability, DNS, image pulls, private Google API access, NAT egress, Pod and Service routing, logging and a least-privilege kubectl operation."
+  },
+  {
+    "source": "Actual Interview - GCP and GKE Platform Alignment Round - 2026-09-05",
+    "section": "GKE Workload Identity",
+    "category": "Security",
+    "topic": "Workload Identity",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "If pods running in GKE need to access GCP services such as Cloud Storage or BigQuery, how would you provide that access securely?",
+    "answer": "I enable Workload Identity Federation for GKE and give each workload its own Kubernetes service account. I grant that principal the smallest required IAM permissions directly or, where the selected integration requires it, bind it to a dedicated Google service account. The application uses Google client libraries and Application Default Credentials; the GKE metadata service exchanges workload identity for short-lived tokens, so no JSON key is mounted. Cloud Storage permissions are scoped to the required bucket and operations, while BigQuery access is scoped to the necessary project, dataset or tables and job-creation needs. The Deployment explicitly selects the Kubernetes service account, and network policy and private Google API paths restrict connectivity. I verify access from the Pod, inspect IAM and Audit Logs and confirm unrelated buckets or datasets are denied. Static service-account keys are avoided because they are reusable outside the cluster, difficult to rotate and easily leaked through Secrets, images, backups or logs."
+  },
+  {
+    "source": "Actual Interview - GCP and GKE Platform Alignment Round - 2026-09-05",
+    "section": "Traffic Spike Troubleshooting",
+    "category": "Kubernetes Production Troubleshooting",
+    "topic": "Scaling and Pod Failures",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Suppose there is a sudden traffic spike and pods start crashing. What would you check first?",
+    "answer": "I first confirm user impact and use `kubectl get pods` plus `kubectl describe pod` to identify whether containers are OOMKilled, failing probes, exiting with an application error or being evicted. I capture current and previous container logs and correlate restart time with request rate, latency, CPU, memory, throttling and downstream errors. OOMKilled suggests limits, a memory leak, unbounded concurrency or caches; CPU saturation may cause probe timeouts; dependency exhaustion can crash healthy application code during load. I check HPA metrics, desired versus available replicas, Pending Pods, node allocatable capacity and Cluster Autoscaler events to see whether Pod scaling outpaced node provisioning. Immediate mitigation may include rollback, safe capacity increase, rate limiting, caching, queueing or graceful degradation while protecting the database. I then fix the actual constraint, tune requests, limits, probes and autoscaling from load-test evidence, add headroom and verify the full Pod-to-node scale-out path under a repeatable spike."
+  },
+  {
+    "source": "Actual Interview - GCP and GKE Platform Alignment Round - 2026-09-05",
+    "section": "Multi-Environment VPC Design",
+    "category": "GCP / Networking",
+    "topic": "VPC Architecture",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "How would you design VPC networking for Development, Staging and Production environments?",
+    "answer": "I place environments in separate projects and use separate VPC or Shared VPC network domains where blast radius and policy require it; production is never simply another subnet that every developer can administer. A common enterprise design has dedicated production and non-production Shared VPC host projects, with Dev and Staging separated by projects and subnets and stricter isolation added when their trust differs. IP planning reserves non-overlapping regional subnet, Pod and Service ranges so VPN, Interconnect, peering or Private Service Connect remain possible. Central network teams own subnets, DNS, NAT, routes and hierarchical firewall guardrails, while application teams receive limited subnet use. Workloads use private IPs, Private Google Access and controlled egress; public exposure occurs only through approved load balancers, WAF and identity controls. Shared services such as CI/CD, artifact storage, DNS forwarding and observability sit in dedicated projects and expose narrow interfaces rather than broad transitive access. Terraform modules, connectivity tests, flow logs, firewall logging and policy checks keep environments consistent, while production requires stronger approvals, restricted access, redundancy and audit retention."
+  }
+]

@@ -6,6 +6,101 @@ const sourcePath = path.join(__dirname, "answer-bank", "actual-interview-new-que
 const mockSetsPath = path.join(root, "public", "mock-interview-sets.json");
 const generatedAnswersPath = path.join(__dirname, "answer-bank", "actual-interview-generated-answers.json");
 const finalDatasetPath = path.join(__dirname, "answer-bank", "final-qa-dataset.json");
+const gcpCloudRunRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-gcp-cloud-run-round-2026-08-26.json"
+);
+const gkeAiOperationsRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-gke-ai-operations-round-2026-08-26.json"
+);
+const gcpSreOperationsRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-gcp-sre-operations-round-2026-08-26.json"
+);
+const gcpCicdTroubleshootingRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-gcp-cicd-troubleshooting-round-2026-08-26.json"
+);
+const sreControllerRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-sre-kubernetes-controller-round-2026-08-26.json"
+);
+const gcpNetworkingActionsRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-gcp-networking-github-actions-round-2026-08-26.json"
+);
+const cicdObservabilityLinuxRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-cicd-observability-linux-round-2026-08-26.json"
+);
+const gcpLandingMigrationDrRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-gcp-landing-migration-dr-round-2026-08-26.json"
+);
+const gcpPlatformGovernanceRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-gcp-platform-governance-round-2026-09-05.json"
+);
+const jitendraAiPlatformMlopsRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-jitendra-ai-platform-mlops-round-2026-09-05.json"
+);
+const gkeJenkinsProductionTroubleshootingRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-gke-jenkins-production-troubleshooting-round-2026-09-05.json"
+);
+const awsEksBankingGolangRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-aws-eks-banking-golang-round-2026-09-05.json"
+);
+const codingMulticloudSolutionDesignRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-coding-multicloud-solution-design-round-2026-09-05.json"
+);
+const gkeAnthosWorkloadManagementRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-gke-anthos-workload-management-round-2026-09-05.json"
+);
+const gcpGkeGitopsSreRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-gcp-gke-gitops-sre-round-2026-09-05.json"
+);
+const gcpMonitoringDriftRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-gcp-monitoring-drift-round-2026-09-05.json"
+);
+const gcpGkePlatformAlignmentRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-gcp-gke-platform-alignment-round-2026-09-05.json"
+);
+const terraformGcpProjectExperiencePath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-terraform-gcp-project-experience-2026-09-05.json"
+);
+const gkeGatewayGitopsMicroservicesRoundPath = path.join(
+  __dirname,
+  "answer-bank",
+  "actual-interview-gke-gateway-gitops-microservices-round-2026-09-05.json"
+);
 const reservedId = "actual-interview-latest";
 
 function normalize(value) {
@@ -31,6 +126,25 @@ function parseNumberedRound(fileName) {
 
 const source = [
   ...JSON.parse(fs.readFileSync(sourcePath, "utf8")),
+  ...JSON.parse(fs.readFileSync(gcpCloudRunRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(gkeAiOperationsRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(gcpSreOperationsRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(gcpCicdTroubleshootingRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(sreControllerRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(gcpNetworkingActionsRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(cicdObservabilityLinuxRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(gcpLandingMigrationDrRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(gcpPlatformGovernanceRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(jitendraAiPlatformMlopsRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(gkeJenkinsProductionTroubleshootingRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(awsEksBankingGolangRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(codingMulticloudSolutionDesignRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(gkeAnthosWorkloadManagementRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(gcpGkeGitopsSreRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(gcpMonitoringDriftRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(gcpGkePlatformAlignmentRoundPath, "utf8")),
+  ...JSON.parse(fs.readFileSync(terraformGcpProjectExperiencePath, "utf8")),
+  ...JSON.parse(fs.readFileSync(gkeGatewayGitopsMicroservicesRoundPath, "utf8")),
   ...parseNumberedRound("actual-interview-landing-zone-gke-coding-round-2026-08-20.txt"),
   ...parseNumberedRound("actual-interview-kubernetes-elk-dynatrace-round-2026-08-20.txt"),
 ];
@@ -43,7 +157,11 @@ const reviewedAnswers = fs.existsSync(finalDatasetPath)
 const unique = new Map();
 for (const entry of source) {
   const key = normalize(entry.question);
-  if (key && !unique.has(key)) unique.set(key, entry);
+  if (!key) continue;
+  const existing = unique.get(key);
+  if (!existing || (entry.answer && entry.answer !== existing.answer)) {
+    unique.set(key, entry);
+  }
 }
 
 const sets = JSON.parse(fs.readFileSync(mockSetsPath, "utf8")).filter((set) => set.id !== reservedId);

@@ -1,0 +1,152 @@
+[
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "GCP Platform Experience",
+    "category": "GCP / Cloud",
+    "topic": "GCP / Cloud",
+    "difficulty": "Intermediate",
+    "questionType": "Experience",
+    "question": "You are currently working more on GCP. Can you explain in detail what your day-to-day tasks and responsibilities are?",
+    "answer": "My day starts with production health, overnight alerts, failed pipelines and planned changes. I manage GCP infrastructure through Terraform, review plans and IAM or network changes, support GKE releases, investigate reliability and performance issues, remediate security findings, and improve monitoring, backups, cost controls and automation. I coordinate with application, networking, security and data teams, communicate risk and progress to stakeholders, and turn incident findings into owned engineering work and updated runbooks. In an interview I anchor this in one recent change and one incident, including my exact role and a measurable outcome."
+  },
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "Build and Artifact Management",
+    "category": "CI/CD",
+    "topic": "CI/CD",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "What is a build artifact?",
+    "answer": "A build artifact is an immutable output produced by a build process and consumed by later delivery stages. Examples include a compiled JAR or binary, container image, package, Helm chart, SBOM, test report or deployment bundle. A production artifact should have a unique version or digest, provenance and checksums, live in a controlled repository, and be promoted unchanged through environments. Rebuilding separately for production weakens traceability because the tested bytes may differ from the deployed bytes."
+  },
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "Build and Artifact Management",
+    "category": "CI/CD",
+    "topic": "CI/CD",
+    "difficulty": "Intermediate",
+    "questionType": "Experience",
+    "question": "Have you used build artifacts in any of your projects earlier? How were you using them?",
+    "answer": "Yes. In one application pipeline, CI compiled and tested the service, built a container image, generated an SBOM, scanned and signed the image, then pushed it to Artifact Registry under the commit SHA and immutable digest. Deployment manifests referenced the digest, and the same approved image was promoted from development to staging and production rather than rebuilt. Test reports and Terraform plans were retained as pipeline artifacts for review and audit. Repository retention, vulnerability rescanning and access policies protected the lifecycle, and rollback selected a previously approved digest."
+  },
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "GCP Landing Zone",
+    "category": "Terraform",
+    "topic": "Terraform",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "If you are tasked with creating standardized landing zones for multiple business units within a single GCP Organization using Terraform, how would you structure the codebase?",
+    "answer": "I separate reusable platform modules from live organization configuration. Versioned modules cover folders, projects, APIs, IAM, Shared VPC, DNS, logging, security controls, budgets and organization policies; a live repository composes them through organization, common-foundation, business-unit and environment layers. Each business unit has explicit configuration and ownership, while shared guardrails and naming standards are inherited from central layers. State is split by stable blast radius—for example bootstrap, organization policy, networking and each business unit—using protected backends and separate deployment identities. CI detects affected stacks, runs tests and policy checks, creates reviewed plans and promotes module versions deliberately. Exceptions are data-driven, approved and auditable rather than implemented as copied code."
+  },
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "GCP Landing Zone",
+    "category": "GCP / Cloud",
+    "topic": "GCP / Cloud",
+    "difficulty": "Advanced",
+    "questionType": "Conceptual",
+    "question": "If multiple businesses are involved in one GCP Organization, can we have multiple landing zones within that organization?",
+    "answer": "Yes, if landing zone means separate governed workload foundations for different business units, regulatory boundaries or operating models. I would keep one coherent organization-level baseline for identity, audit logging, mandatory policies and central oversight, then create business-unit folder hierarchies with delegated administration, projects, network domains, billing controls and stricter inherited policies as required. Some units may use separate Shared VPC hosts or connectivity boundaries. Calling them multiple landing zones is reasonable, but they must not become disconnected copies with inconsistent controls; shared modules, policy inheritance, central inventory and exception governance keep the organization manageable."
+  },
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "Terraform and Jenkins Troubleshooting",
+    "category": "Terraform",
+    "topic": "Terraform",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Terraform apply is being executed through Jenkins, but it is failing intermittently or continuously. How would you troubleshoot it?",
+    "answer": "I first preserve the Jenkins console output, Terraform exit code and timestamps, identify whether failure occurs during init, refresh, provider API calls or a specific resource, and compare failed and successful runs. I verify the agent's CPU, memory, disk, network, proxy and tool versions; workload identity and token lifetime; IAM, API enablement and quota; provider rate limits; backend access; state consistency; and concurrent builds targeting the same state. Detailed Terraform logs can be enabled briefly with sensitive-output controls. I reproduce with the saved plan and same identity in a safe environment, then fix the cause—for example serialize applies, increase a bounded timeout, add retry/backoff for transient APIs, pin versions, repair permissions or replace an unstable agent. I do not blindly rerun apply until I know whether partial resources or state changes occurred."
+  },
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "Release Engineering",
+    "category": "CI/CD",
+    "topic": "CI/CD",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "One of your applications has a 24/7 availability requirement with near-zero downtime. How would you design the deployment process?",
+    "answer": "I run multiple replicas across failure domains behind health-checked load balancing, with readiness and startup probes, graceful termination, topology spread, PodDisruptionBudgets and enough surge capacity. CI builds and signs one immutable artifact, tests it, deploys a canary or green version without replacing all healthy capacity, and promotes traffic only while error rate, latency, saturation and business metrics remain within gates. Database changes use expand-and-contract so old and new versions can run together. A failed gate automatically returns traffic to the known-good version. Near-zero downtime also requires dependency redundancy, capacity testing, maintenance controls and rehearsed rollback; the deployment strategy alone cannot provide it."
+  },
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "CI/CD Lifecycle",
+    "category": "CI/CD",
+    "topic": "CI/CD",
+    "difficulty": "Beginner",
+    "questionType": "Experience",
+    "question": "Have you worked in a CI/CD-based environment? Which tools have you worked with?",
+    "answer": "Yes. I have used Git-based pull-request workflows with Jenkins or cloud-native runners, Terraform for infrastructure, Docker and Artifact Registry for immutable images, Helm or Kustomize plus GitOps for Kubernetes delivery, and SonarQube and container or dependency scanners for quality and security. Prometheus, Grafana, centralized logs and cloud monitoring provide release validation. I explain which stages I designed or operated and one improvement I delivered, rather than presenting every tool as equal hands-on expertise."
+  },
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "CI/CD Lifecycle",
+    "category": "CI/CD",
+    "topic": "CI/CD",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "Can you explain the complete development and deployment lifecycle through your CI/CD pipeline?",
+    "answer": "A developer branches from current code, makes a small change and opens a pull request. CI runs formatting, unit tests, static analysis, secret and dependency scanning, then reviewers approve. After merge, the pipeline builds once, generates an SBOM, scans and signs the immutable artifact, publishes it by digest, deploys to a test environment and runs integration and smoke tests. Promotion uses the same digest with environment-specific configuration, approvals and progressive rollout. Production gates evaluate readiness, errors, latency and business checks; failure stops promotion and rolls back traffic. The pipeline records commit, artifact, approvals and deployment evidence, then continuous monitoring and feedback create follow-up fixes. Infrastructure follows a parallel plan-review-apply workflow with protected remote state."
+  },
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "Monitoring and Observability",
+    "category": "Observability",
+    "topic": "Observability",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "What resources and metrics do you monitor from the infrastructure and application perspectives?",
+    "answer": "For infrastructure I monitor node and VM CPU, memory, disk capacity and latency, network errors, quotas, load balancers, node-pool capacity, control-plane signals, PVC usage, Pod scheduling, restarts, OOM kills, readiness and desired versus available replicas. For applications I monitor availability, request rate, latency percentiles, 4xx and 5xx rates, saturation, dependency and database performance, queues, cache behavior and critical business transactions. I add deployment version to telemetry and correlate metrics with logs, traces and Kubernetes events. Alerts focus on sustained, actionable user impact or imminent capacity risk, while dashboards can retain broader diagnostic signals."
+  },
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "Incident Management",
+    "category": "SRE / Incident Response",
+    "topic": "SRE",
+    "difficulty": "Advanced",
+    "questionType": "Experience",
+    "question": "Can you tell me about an incident that you had to deal with and how you performed the root cause analysis?",
+    "answer": "In one representative incident, latency and 5xx alerts rose shortly after a release. I confirmed customer impact, opened an incident channel, compared the new and previous revisions, and correlated traces with pod metrics and events. The new version exhausted its database connection pool under production concurrency, causing queued requests and readiness failures. We restored service by shifting traffic to the previous revision and temporarily protecting the database with bounded capacity. The RCA used the timeline, deployment diff, telemetry and load-test evidence to identify both the code-level cause and systemic gaps: staging load was unrepresentative and the release gate did not watch connection-pool saturation. Actions included corrected pooling and timeouts, production-like load tests, a canary saturation gate, dashboard and runbook updates, each with an owner and due date. I would substitute details from my actual incident rather than present this example as personal history."
+  },
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "Kubernetes Troubleshooting",
+    "category": "Kubernetes",
+    "topic": "Kubernetes",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "How do we check and troubleshoot latency spikes in a Kubernetes environment?",
+    "answer": "I establish scope first: affected endpoint, percentile, region, version and time window, then compare traffic, errors and saturation before and during the spike. Distributed traces show whether time is spent in ingress, application code, service-to-service calls, DNS, database or an external dependency. I inspect pod CPU throttling, memory pressure, garbage collection, thread or connection pools, restarts and readiness; Kubernetes events, HPA behavior, pending Pods, node pressure, network errors and ingress metrics reveal platform constraints. I correlate the spike with releases, config changes and scaling events, test from inside the cluster to isolate network paths, and avoid restarting blindly. Mitigation may be rollback, scaling or traffic reduction; the permanent fix follows evidence and is verified with load tests and SLO monitoring."
+  },
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "DevSecOps",
+    "category": "Security",
+    "topic": "Security",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Suppose a vulnerability is detected in production. How would you handle it using a DevSecOps approach?",
+    "answer": "I validate the affected component and deployed digest, assess exploitability, exposure, privileges, available indicators and business criticality, and involve security and service owners. If actively exploited or critical and reachable, I contain first by restricting traffic, disabling the feature, rotating exposed credentials or isolating the workload while preserving evidence. The fix updates the dependency or base image in source, rebuilds through CI, generates an SBOM, scans and tests the immutable image, then uses a controlled expedited rollout with health monitoring and rollback. I rescan production, check logs for compromise and update the incident record. Finally, I add or improve dependency, image, admission and continuous-registry gates so the vulnerable component is detected earlier, with time-bound exceptions rather than permanent suppression."
+  },
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "CI/CD Troubleshooting",
+    "category": "CI/CD",
+    "topic": "CI/CD",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "A software developer reports that the CI/CD pipeline is running very slowly. How would you troubleshoot and optimize it?",
+    "answer": "I use stage timestamps and queue metrics to separate waiting time from checkout, dependency download, build, tests, scans, artifact upload and deployment. I compare recent baselines and changes, inspect runner CPU, memory, disk and network, cache hit rates, repository size, external-service latency, test retries and concurrency limits. Improvements may include right-sizing or autoscaling agents, shallow or sparse checkout, deterministic dependency and layer caching, smaller build contexts, parallel independent tests, test-impact selection with a full scheduled suite, reusable artifacts, and moving non-blocking deep scans to appropriate asynchronous gates. I preserve correctness and security, set cache keys and invalidation carefully, cap parallelism to avoid downstream overload, and measure median and high-percentile duration plus failure rate after each change."
+  },
+  {
+    "source": "Actual Interview - GCP CI/CD and Troubleshooting - 2026-08-26",
+    "section": "Monitoring and Observability",
+    "category": "Observability",
+    "topic": "Observability",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "You have monitoring tools like Elasticsearch, Prometheus, and Grafana. What are the differences between them, and when would you use each one?",
+    "answer": "Prometheus collects and queries time-series metrics, commonly by scraping instrumented targets, and evaluates alert rules; I use it for rates, latency histograms, capacity and Kubernetes health. Elasticsearch indexes and searches document-oriented data, so it is commonly used behind centralized log analysis, though it can store other searchable events and requires careful retention and sizing. Grafana is primarily a visualization and exploration layer that builds dashboards over data sources such as Prometheus and Elasticsearch and can participate in alerting. They are complementary rather than direct substitutes: an incident might start with a Grafana panel backed by Prometheus metrics, then pivot to application logs stored in Elasticsearch and correlate both with traces."
+  }
+]

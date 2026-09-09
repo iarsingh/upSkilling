@@ -1,0 +1,162 @@
+[
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "GCP Landing Zone and Networking",
+    "category": "GCP / Cloud",
+    "topic": "GCP / Cloud",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "What is a Landing Zone in GCP?",
+    "answer": "A GCP Landing Zone is a governed foundation for onboarding and operating cloud workloads consistently. It normally defines the organization, folder and project hierarchy; billing; identity and IAM; Shared VPC and connectivity; DNS; logging and monitoring; security controls; Organization Policies; and an infrastructure-as-code delivery model. I would build it as reusable Terraform modules and pipelines so new workload projects inherit guardrails such as least privilege, approved locations, restricted external IPs, centralized audit logs, budgets, and standard network connectivity. The goal is not just an initial setup: it is a repeatable operating model that lets teams deploy safely without rebuilding governance for every project."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "GCP Landing Zone and Networking",
+    "category": "GCP / Cloud",
+    "topic": "GCP / Cloud",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "You have a Compute Engine VM in GCP. How would you enable port 22/SSH for that particular server?",
+    "answer": "First I would avoid exposing SSH broadly and prefer IAP TCP forwarding or OS Login. For direct SSH, I would give the VM a unique network tag or service account, create an ingress VPC firewall rule with TCP port 22, target only that tag or service account, and restrict the source to the administrator's trusted CIDR rather than 0.0.0.0/0. I would verify that a higher-priority hierarchical or VPC firewall policy does not deny the traffic, that sshd is running and the guest OS firewall allows port 22, and that IAM and OS Login permissions are correct. If IAP is used, the firewall source range is 35.235.240.0/20 and the user needs the appropriate IAP and instance access roles."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "GCP Landing Zone and Networking",
+    "category": "GCP / Cloud",
+    "topic": "GCP / Cloud",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "How would you design centralized networking in GCP when you have multiple projects, such as SAP Dev, UAT, and Production projects?",
+    "answer": "I would use a dedicated Shared VPC host project owned by the networking team and attach SAP Dev, UAT, and Production as service projects. Central subnets, routes, Cloud NAT, DNS, hybrid connectivity, firewall policies, flow logs, and load-balancing controls stay in the host project, while application resources and lifecycle remain in the service projects. I would normally isolate production from non-production with separate Shared VPC host projects or at least strongly separated subnets, firewall policies, IAM, and routing domains when the risk model permits one host. Access is delegated with least-privilege Shared VPC roles, and Terraform plus policy checks manages attachments and network changes. Centralized inspection, logging, IP planning, and controlled connectivity to on-premises SAP dependencies complete the design."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "GCP Landing Zone and Networking",
+    "category": "GCP / Cloud",
+    "topic": "GCP / Cloud",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "What is Shared VPC in GCP, and how do Host Projects and Service Projects work?",
+    "answer": "Shared VPC lets resources from multiple projects use a centrally managed VPC network. The host project owns the VPC, subnets, routes and central network controls; attached service projects contain resources such as VMs, GKE clusters, or managed services that consume those shared subnets. Network administrators manage the host, while service-project teams can receive roles such as Compute Network User only on the subnets they need. This separates application ownership and billing from network governance, avoids duplicating VPCs, and provides consistent connectivity and security across projects. A project can be attached to only one Shared VPC host at a time, so the host-project boundaries should reflect the required isolation and operating model."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "GCP Landing Zone and Networking",
+    "category": "GCP / Cloud",
+    "topic": "GCP / Cloud",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "What are Organization Policies in GCP? How do you use them for centralized governance?",
+    "answer": "Organization Policy Service provides centrally enforced constraints on Google Cloud resources. Policies can be applied at the organization, folder, or project level and inherited by descendants, with more specific policy behavior determined by the constraint and inheritance rules. I use managed constraints such as allowed resource locations, domain-restricted sharing, disabling service-account key creation, restricting public IPs, and requiring approved configurations; custom constraints can cover supported resource properties when built-in controls are insufficient. I roll policies out first in audit or a test folder where supported, assess existing violations, define exceptions explicitly, then enforce through Terraform and CI policy checks. Organization Policies are guardrails, not a replacement for IAM: IAM controls who can act, while org policy limits what configurations are allowed."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "Cloud Run",
+    "category": "GCP / Cloud Run",
+    "topic": "GCP / Cloud",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "What is Cloud Run in GCP?",
+    "answer": "Cloud Run is Google's fully managed platform for running containerized applications and jobs without managing servers or Kubernetes clusters. A service exposes a request-driven endpoint, creates immutable revisions for configuration or image changes, automatically scales instances up and down, and can scale to zero. It supports IAM-based invocation, custom domains and load balancing, VPC connectivity, secrets, logging, metrics, concurrency and CPU/memory controls. It is a strong fit for stateless HTTP or event-driven workloads; state should generally live in managed external services. Cloud Run jobs are used for finite batch work rather than serving requests."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "Terraform",
+    "category": "Terraform",
+    "topic": "Terraform",
+    "difficulty": "Beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "What happens when you run Terraform? Explain the Terraform workflow (init, validate, plan, apply).",
+    "answer": "terraform init initializes the working directory, downloads providers and modules, and configures or migrates the backend. terraform validate checks the configuration's syntax and internal consistency, but it does not prove the remote infrastructure will succeed. terraform plan refreshes or reads current state, compares configuration, state and provider data, and produces a proposed execution plan; in CI I save and review that plan. terraform apply executes an approved plan through provider APIs, records the resulting resource identities and attributes in state, and reports outputs. A production workflow also runs formatting, linting, security and policy checks, uses a remote protected backend, separates environment states, requires review or approval, and prevents multiple writers from modifying the same state concurrently."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "Terraform",
+    "category": "Terraform",
+    "topic": "Terraform",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "If you are creating a VPC in GCP using Terraform, what authentication do you provide to Terraform so that it can create the infrastructure?",
+    "answer": "Terraform's Google provider normally uses Application Default Credentials. Locally, I use my user ADC with service-account impersonation; in CI/CD, I use Workload Identity Federation or a workload running with an attached user-managed service account. The deployment identity receives only the roles needed to create the VPC and related resources in the target project, plus service-account usage permissions where necessary. I avoid long-lived JSON keys; if a key is unavoidable, it must be stored in a secret manager, rotated, tightly scoped, and never committed. Authentication proves the caller's identity, while IAM authorization determines whether that identity can enable APIs, create networks, subnets, firewall rules, and other resources."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "Terraform",
+    "category": "Terraform",
+    "topic": "Terraform",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you handle secrets in Terraform?",
+    "answer": "I avoid putting secret values in Terraform code, tfvars, command-line arguments, logs, or version control. I store secrets in Secret Manager or a CI/CD secret store and pass only references where the resource supports them; workloads fetch the secret at runtime using their identity. If Terraform must supply a secret, I inject it through protected environment variables or ephemeral pipeline credentials, mark variables and outputs sensitive, restrict and encrypt the remote state, enable state-version access controls and audit logs, and limit who can read plans because sensitive values may still exist in state or plan files. The sensitive flag only redacts display; it does not remove the value from state. Prefer generating and rotating secrets outside Terraform when lifecycle and provider support allow it."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "Cloud Run",
+    "category": "GCP / Cloud Run",
+    "topic": "GCP / Cloud",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Cloud Run production scenario: You deploy a new Docker image, which creates a new revision. The new revision starts serving users and the old revision is removed. If the new revision has an issue, the application goes down. How would you design the deployment so that only a stable/healthy revision serves end users?",
+    "answer": "I would not delete the last known-good revision or send the new one 100% traffic immediately. The pipeline deploys the image as a new immutable revision with --no-traffic and a revision tag, then runs startup, smoke, integration and dependency checks against the tag-specific URL. If those pass, it assigns a small traffic percentage and evaluates error rate, latency, saturation and business metrics against explicit thresholds. Traffic increases in stages only while the revision remains healthy. A readiness or startup probe helps prevent an unready instance from receiving traffic, but deployment promotion still needs end-to-end health gates. If a gate fails, automation sets the new revision to 0% and restores 100% to the known-good revision, retaining revision and artifact metadata for diagnosis."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "Cloud Run",
+    "category": "GCP / Cloud Run",
+    "topic": "GCP / Cloud",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "Which deployment strategy would you use for Cloud Run—Blue-Green or Canary—and how would you roll back if the new revision is unhealthy?",
+    "answer": "For most production Cloud Run services I would choose canary because native revision traffic splitting lets me expose 1-5% of real traffic, observe SLO and business metrics, then promote gradually. Blue-green is better when I need a binary switch, full pre-production validation, or traffic cannot be meaningfully sampled, but it gives less real-user risk detection before cutover. In either case I first deploy with no traffic and test through a revision tag. If unhealthy, I stop promotion and route 100% back to the known-good revision, for example with gcloud run services update-traffic SERVICE --to-revisions GOOD_REVISION=100. I also make database changes backward compatible so application rollback remains safe, then preserve evidence and investigate before retrying."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "Kubernetes Resource Governance",
+    "category": "Kubernetes",
+    "topic": "Kubernetes",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you restrict a Kubernetes namespace so that workloads in that namespace can use only 2 vCPUs and 4 GB of RAM?",
+    "answer": "I would create a ResourceQuota in that namespace with hard limits for requests.cpu: 2, requests.memory: 4Gi and, if the requirement also caps configured limits, limits.cpu: 2 and limits.memory: 4Gi. Because quota enforcement for CPU and memory expects containers to declare requests or limits, I would pair it with a LimitRange that supplies sensible defaults and default requests and optionally sets per-container minimums and maximums. The admission controller rejects a new or updated Pod when its declared resources would exceed the namespace quota. I would verify with kubectl describe resourcequota and kubectl describe limitrange, monitor actual usage separately, and remember that ResourceQuota controls aggregate declared resources, not live CPU or memory consumption."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "Kubernetes Resource Governance",
+    "category": "Kubernetes",
+    "topic": "Kubernetes",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "What is the difference between Kubernetes ResourceQuota and LimitRange?",
+    "answer": "ResourceQuota limits aggregate consumption or object counts across an entire namespace, such as the sum of CPU requests, memory limits, Pods, Services, or persistent-volume claims. LimitRange applies defaults and minimum/maximum constraints to individual Pods, containers, or PVCs in a namespace. They are complementary: a quota can cap the namespace at 2 CPU and 4 GiB, while a LimitRange ensures every container declares reasonable requests and limits so one workload cannot omit them or request an excessive amount. Neither replaces runtime monitoring, scheduling capacity, RBAC, or policy controls."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "DevOps and SRE Leadership",
+    "category": "Behavioral",
+    "topic": "Behavioral",
+    "difficulty": "Intermediate",
+    "questionType": "Experience",
+    "question": "How do you manage customers/stakeholders in your DevOps/SRE role?",
+    "answer": "I start by identifying stakeholders, business impact, decision owners, service expectations and communication preferences. I translate requests into measurable outcomes, priorities, risks, dependencies and acceptance criteria rather than promising a tool or date too early. For planned work I maintain a visible roadmap, provide concise status updates, document decisions and escalate blockers with options and trade-offs. During incidents I use a predictable communication cadence: impact, affected users, mitigation underway, next update time and recovery status, without speculation. Afterward I share the RCA and owned preventive actions. I use SLOs, incident trends, delivery metrics, cost and risk to make discussions objective, and I set clear boundaries when urgency conflicts with reliability or security."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "GCP Regions and High Availability",
+    "category": "GCP / Cloud",
+    "topic": "GCP / Cloud",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "What are the GCP regions available in India?",
+    "answer": "As of August 2026, Google Cloud lists two regions in India: Mumbai, asia-south1, and Delhi, asia-south2. I would still verify the current Google Cloud locations page before making a design decision because regions and service availability can change. A region being available does not mean every Google Cloud service, machine family, or feature is available there, so I also check the selected product's locations, quota, latency, pricing, compliance and data-residency requirements."
+  },
+  {
+    "source": "Actual Interview - GCP, Terraform, Kubernetes and Cloud Run - 2026-08-26",
+    "section": "GCP Regions and High Availability",
+    "category": "GCP / Cloud",
+    "topic": "GCP / Cloud",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "How would you design workloads across multiple GCP regions/zones for high availability?",
+    "answer": "I begin with business RTO, RPO, latency, data-residency and failure-domain requirements. Within a region, I spread stateless instances or GKE nodes across at least three zones behind a regional load balancer, use health checks and autoscaling, and choose regional managed services or replicated storage where supported. For regional-failure protection, I deploy the service stack in a second region and use a global external Application Load Balancer or DNS-based failover with health checks. Stateless tiers can be active-active; stateful tiers require a deliberate replication and failover design based on the database's consistency model, with backups kept outside the primary failure domain. Infrastructure is reproducible through Terraform, releases are compatible across regions, dependencies have no hidden single-region bottleneck, and failover plus restore procedures are tested regularly rather than assumed."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "source": "Actual Interview - GCP Monitoring and Drift Round - 2026-09-05",
+    "section": "Introduction",
+    "category": "Behavioral",
+    "topic": "Introduction",
+    "difficulty": "Beginner",
+    "questionType": "Experience",
+    "question": "Please go ahead and introduce yourself.",
+    "answer": "I am a Cloud, DevOps and MLOps engineer with experience designing, automating and operating production platforms, primarily on Google Cloud. My core skills include GKE, Terraform, CI/CD, Kubernetes, networking, IAM, security, observability and Python or Bash automation. In my current work I provision infrastructure through reusable Terraform modules, support containerized application releases, monitor reliability and capacity, troubleshoot production incidents and improve governance through policy and automation. I work closely with development, security, networking and data teams and focus on making delivery repeatable, least-privileged and auditable. I also support AI-enabled workloads where model serving, GPU capacity, evaluation and drift add MLOps requirements. I keep the introduction to about 60–90 seconds and follow it with one recent project and measurable outcome relevant to the role."
+  },
+  {
+    "source": "Actual Interview - GCP Monitoring and Drift Round - 2026-09-05",
+    "section": "Monitoring and Drift",
+    "category": "GCP / Operations",
+    "topic": "Observability and Infrastructure Drift",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you monitor resource and service usage, detect configuration drift, and which GCP services or tools do you use?",
+    "answer": "I separate operational usage, security or administrative change, and infrastructure-as-code drift. Cloud Monitoring provides dashboards, metrics and alerts for CPU, memory, disk, network, GKE Pods and nodes, load balancers, databases, quotas and service-specific saturation. I add application SLIs such as traffic, error rate and latency, and use bounded labels so monitoring remains useful and affordable. Cloud Logging centralizes application, platform and system logs, while log-based metrics and alerts identify recurring failures. Cloud Audit Logs answer who changed which resource, when and through which identity; I route required audit records to a protected central project and alert on high-risk operations. Security Command Center supplies asset posture, vulnerability, exposure and threat findings and routes them to owners with remediation SLAs.\n\nFor Terraform-managed infrastructure, I run scheduled and post-change `terraform plan` operations using the same pinned configuration, provider versions, remote state and least-privilege identity as the deployment pipeline. A non-empty reviewed plan indicates that live infrastructure, configuration or state differs; it does not automatically prove an unauthorized manual change, so I correlate it with Audit Logs and recent commits. Cloud Asset Inventory queries or feeds help detect resources outside Terraform and policy violations across projects. Drift alerts create a ticket or incident according to risk; we either revert the manual change through an approved apply, import and codify a legitimate resource, or update code after review. I do not auto-apply every detected difference, because destructive or externally caused drift needs human validation and a recovery plan."
+  }
+]

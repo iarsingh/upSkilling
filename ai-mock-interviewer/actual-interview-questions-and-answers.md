@@ -1,8 +1,8 @@
 # Actually Asked Interview Questions and Answers
 
-This collection contains 3891 unique interview questions shared through prior conversations. Questions are grouped by category and retain their original wording.
+This collection contains 4116 unique interview questions shared through prior conversations. Questions are grouped by category and retain their original wording.
 
-Categories: 172
+Categories: 200
 
 ---
 
@@ -254,7 +254,7 @@ First rotate or revoke the secret immediately; assume it is compromised. Then re
 
 ## Advanced Production Scenarios
 
-40 questions
+41 questions
 
 ### 1. An EKS pod cannot assume its IAM role. What would you check?
 
@@ -591,6 +591,14 @@ When a certificate expires unexpectedly, I'd first investigate the production me
 
 A production cluster has configuration drift across namespaces. To detect and correct it, I'd first identify the affected namespaces using `kubectl get namespace` and verify the expected configuration using `kubectl get configmap` or `kubectl get secret`. Next, I'd analyze logs from monitoring tools like Prometheus and Grafana to understand the impact of the drift on system performance. To correct the issue, I'd apply a patch with the corrected configuration using `kubectl apply -f <patch.yaml>`, followed by validation steps such as checking metrics for improvement and verifying access permissions using `kubectl get rolebinding`. In case of failure, I'd have a rollback plan in place to revert changes made during the correction process.
 
+### 41. A GKE application has a sudden traffic spike on a busy sales day. How would you determine whether it is genuine or malicious and protect the application without blocking genuine customers?
+
+**Type:** Scenario
+
+**Answer:**
+
+I start from user impact and preserve capacity while investigating: verify load-balancer, GKE and dependency saturation; allow HPA and Cluster Autoscaler to scale within tested limits; and protect databases with queues, caching, concurrency limits and graceful degradation. I compare the spike with campaign schedules and historical sales patterns, then analyze Cloud Armor and load-balancer logs by geography, ASN, IP or client fingerprint, path, method, response code, user agent, session and authenticated-account behavior. Genuine demand typically has plausible browsing-to-checkout journeys and conversion; attacks often show concentrated sources, impossible request rates, repeated expensive endpoints, invalid payloads, low session continuity or credential abuse. No single indicator is proof. I apply progressive controls at the edge: cache static content, rate-limit by the most reliable key, challenge suspicious clients, block known malicious signatures or geographies only when justified, and protect expensive endpoints more tightly than browsing. New Cloud Armor rules begin in preview or with a small scope, and I watch false positives, conversion, latency and error rate before expanding them. Security, SRE and business teams share one incident view. Afterward I retain evidence, tune autoscaling and capacity tests, refine WAF and bot rules, and quantify both attack mitigation and legitimate revenue protected.
+
 ---
 
 ## Advanced Reliability Architecture
@@ -853,6 +861,60 @@ Reduce cardinality and retention, sample upstream, and push only aggregated seri
 Here is a rewritten and polished answer:
 
 To demonstrate reliability improvement to management, I'd describe a situation where we implemented a change in our [SERVICE] to reduce latency by 30%. In Advanced Reliability Architecture, this would involve stating the changes made, who or what was affected, and how it's verified. Specifically, we modified the configuration of our load balancer to use a more efficient routing algorithm. To validate the change, I checked logs for any errors, monitored metrics such as request latency and error rates, and reviewed access permissions to ensure no unintended consequences. The key failure mode was a potential increase in resource utilization, but we mitigated this by implementing a rollback plan that would automatically revert to the previous configuration if issues arose.
+
+---
+
+## AI Agents
+
+6 questions
+
+### 1. Have you worked on building or deploying intelligent agents and their orchestration?
+
+**Type:** Experience
+
+**Answer:**
+
+Yes. My strongest ownership is on the engineering and production side of agent systems: packaging agent services, provisioning their runtime and data dependencies, implementing CI/CD, identity and secrets, and making the workflows observable and recoverable. An agent combines a model with instructions, tools, memory or retrieved context and a control loop that decides the next action. For orchestration, I have worked with explicit workflows where a coordinator routes a request to specialized agents or tools, preserves state and correlation IDs, applies timeouts and retry limits, and sends high-risk or low-confidence decisions to a human. I version prompts, models, tools and knowledge indexes together; evaluate representative tasks before promotion; and monitor latency, token usage, tool failures, answer quality and safety. I distinguish this production experience from foundational model training, which is normally owned by the data-science team.
+
+### 2. What kind of agent did you work with, and what was its purpose?
+
+**Type:** Experience
+
+**Answer:**
+
+One example was an internal Knowledge Assistant. Its purpose was to help engineers and support teams find reliable answers from approved runbooks, architecture documents, incident records and operational FAQs instead of searching across multiple repositories. The request passed through authentication and access checks, the service retrieved permission-filtered passages from a vector index, and the model produced an answer with source references. If confidence was low or the request required a production change, it did not act autonomously; it asked for clarification, opened the approved workflow or escalated to a human. My responsibility centered on the retrieval and serving platform, secure access to sources, deployment automation, observability, evaluation and operational controls.
+
+### 3. Can you explain simply what the agent was and give an example of what it used to do?
+
+**Type:** Conceptual / Experience
+
+**Answer:**
+
+In simple terms, the agent was an application that could understand a user's goal, look up authorized company knowledge, choose an approved tool when necessary and return a traceable answer. For example, an engineer could ask, 'Why is this deployment failing with an image-pull error?' The Knowledge Assistant identified the topic, retrieved the relevant GKE and registry runbooks, asked for the permitted error details, and returned likely checks with citations. It could fetch read-only deployment status through an approved API, but it could not change production directly. If the evidence was incomplete, it said so and handed the case to the support workflow. That bounded example demonstrates agency—reasoning plus retrieval and tool use—without claiming unsafe autonomous administration.
+
+### 4. What were the names of the agents?
+
+**Type:** Experience
+
+**Answer:**
+
+I describe them by stable functional names rather than inventing product names: the Knowledge Assistant handled enterprise knowledge and support questions; the Claim Assistance Agent guided insurance or automotive claim intake and evidence collection; and, where the workflow was split, a Coordinator Agent routed tasks to retrieval, validation and case-management tools. I clarify whether those were official project names or descriptive names used for the interview. More important than the label is each agent's boundary, allowed tools, data access, escalation path and production ownership.
+
+### 5. Have you worked with any other production AI agents?
+
+**Type:** Experience
+
+**Answer:**
+
+Another relevant use case was a Claim Assistance Agent for insurance or automotive workflows. It helped collect incident details, classify the request, check whether required evidence was present, summarize documents and images, and prepare a draft case for a human claims handler. It did not make an unreviewed payment or liability decision. Production controls included authenticated sessions, consent and data minimization, encryption, prompt-injection and file-validation defenses, deterministic business-rule checks, confidence thresholds, human approval, full audit history and retention rules. I supported the secure runtime, pipelines, model and prompt promotion, integrations, monitoring and rollback, while domain experts owned claims policy and final business decisions.
+
+### 6. Can you describe a development-side agent or application, such as the insurance or automotive claim-assistance use case?
+
+**Type:** Experience
+
+**Answer:**
+
+The claim-assistance application orchestrated a bounded workflow rather than giving a model unrestricted control. A coordinator validated the session and case, a document component extracted structured fields from submitted evidence, a policy-retrieval component found applicable guidance, and a validation step checked required fields and business rules. The system then generated a case summary and recommended next action for a human reviewer. Each tool used a narrow service identity and schema-validated input; uploaded content was scanned and isolated; sensitive values were redacted from logs; and every model, prompt, retrieved source and tool result was traceable. Offline test cases covered accuracy, groundedness, unsafe recommendations and edge cases, while canary releases monitored task completion, escalation, latency and cost. Human approval remained mandatory for consequential decisions.
 
 ---
 
@@ -2733,6 +2795,190 @@ In an artifact-management strategy, 'build once, promote many' refers to the pra
 
 ---
 
+## AWS
+
+2 questions
+
+### 1. Which AWS services have you worked with so far?
+
+**Type:** Experience
+
+**Answer:**
+
+My AWS experience includes EC2 for compute, S3 for object storage, IAM for access control, VPC networking and security groups, CloudFormation stacks for infrastructure as code, CloudFront for content delivery, Lambda for event-driven functions, EventBridge for schedules and event routing, CloudWatch for logs and metrics, and related load-balancing and container services where required. I connect each service to an actual workflow rather than reciting a list—for example, an EventBridge rule invoking Lambda to process an S3 event, with IAM least privilege, CloudWatch alarms, retries and a dead-letter path. GCP is my deeper current platform, so I state AWS depth honestly and explain how the architecture and operating principles transfer across clouds.
+
+### 2. When would you choose AWS Lambda over EC2 for a workload, and what constraints would push you back toward EC2?
+
+**Type:** Comparison
+
+**Answer:**
+
+I choose Lambda for event-driven, stateless and short-lived work with variable or bursty demand—for example processing an S3 event, handling an API request, responding to EventBridge or transforming queue messages. It removes server lifecycle work, scales by concurrency and can be cost-effective when idle time would otherwise dominate. I design for idempotency, bounded retries, downstream protection and external state. I choose EC2 when the workload needs full OS or kernel control, long-running processes, specialized agents or drivers, uncommon networking, local persistent state, GPUs or hardware not supported by the serverless runtime, or predictable sustained utilization where instances or commitments are more economical. Lambda also has runtime, package, memory, ephemeral-storage, concurrency and request limits, and cold starts may conflict with strict latency. The decision uses execution profile, security boundary, operational control, scaling behavior and total cost; I also consider containers or managed batch services rather than forcing every workload into either Lambda or EC2.
+
+---
+
+## AWS / Containers
+
+1 question
+
+### 1. When would you choose ECS Fargate over EKS, and what trade-offs does that carry for observability and operational control?
+
+**Type:** Comparison
+
+**Answer:**
+
+I choose ECS on Fargate for standard stateless or asynchronous containers when the team wants AWS-native task and service orchestration without operating Kubernetes or worker nodes. It fits services with supported CPU, memory, networking and runtime constraints and can reduce platform toil for smaller teams. I choose EKS when Kubernetes APIs and ecosystem portability, custom controllers, richer scheduling, specialized node or GPU control, service-mesh patterns or an existing Kubernetes platform justify the added complexity. With Fargate, CloudWatch logs, Container Insights, application metrics and OpenTelemetry provide strong service-level visibility, but there is less host-level access and fewer node, daemon or kernel controls; unsupported privileged or DaemonSet-style tooling may require another design. EKS offers deeper scheduling and infrastructure observability but the team must operate add-ons, node capacity, upgrades and policy consistently. I compare workload fit, isolation, startup and scaling behavior, telemetry requirements, team skill and total cost—serverless operations do not guarantee the lowest cost at sustained high utilization.
+
+---
+
+## AWS / Data Engineering
+
+2 questions
+
+### 1. Describe a scenario where you used AWS Glue Jobs, the data pipelines involved, and how you handled job failures and data-quality issues.
+
+**Type:** Experience / Architecture
+
+**Answer:**
+
+A representative pipeline ingested daily transaction and reference files into an encrypted S3 raw zone. EventBridge or an orchestrator started a Glue workflow after arrival checks; a crawler or explicitly managed schema updated the Data Catalog; and a versioned PySpark Glue Job validated, normalized, deduplicated and joined the data before writing partitioned Parquet into processed and curated zones. Every run carried a batch ID and source checksum so retries were idempotent and did not duplicate output. Quality rules checked schema, mandatory fields, ranges, referential integrity, duplicate transaction IDs and record-count or financial-control totals. Invalid records went to a restricted quarantine prefix with reason codes instead of silently disappearing. Operational failures emitted CloudWatch logs, metrics and alarms, retried only transient errors with limits, and sent terminal failures to the incident path. Bookmarks or a controlled watermark tracked progress, while atomic publish or manifest patterns kept consumers from reading partial output. Backfills used isolated run IDs and reconciled totals before promotion. IAM, KMS, private connectivity, lineage, retention and audit controls were part of the pipeline, not afterthoughts.
+
+### 2. How would you design an S3-based data lake for a banking application while ensuring compliance with data requirements?
+
+**Type:** Design / Architecture
+
+**Answer:**
+
+I begin with data classification, residency, retention, legal hold, RPO/RTO and separation-of-duties requirements. Separate accounts or strongly isolated buckets hold immutable raw, validated processed and consumer-ready curated zones; sensitive domains receive further boundaries. S3 Block Public Access is enforced, bucket policies require TLS and approved VPC endpoints, and least-privilege roles replace long-lived credentials. Data is encrypted with carefully governed KMS keys, with separate key administration and data access. Lake Formation provides database, table, column and row-level permissions where applicable, while Glue Catalog records schemas and ownership. Macie and quality jobs detect sensitive data or misplaced records; CloudTrail data events, S3 access evidence and centralized security findings support audit. Versioning, replication or backups and Object Lock in the correct compliance mode protect required records from alteration or deletion, with lifecycle rules moving data to appropriate archival tiers and expiring it only under approved policy. Ingestion validates schema, malware and control totals, quarantines bad data and preserves lineage from source to curated output. Analytics runs through private paths, query results are protected, and every exception has an owner, approval and expiry.
+
+---
+
+## AWS / Databases
+
+1 question
+
+### 1. How do you choose between Amazon RDS and Aurora for a transactional banking workload?
+
+**Type:** Comparison
+
+**Answer:**
+
+I start with the required database engine and compatibility, transaction behavior, peak and steady throughput, latency, availability, RPO/RTO, regional recovery, operational model and cost. Standard RDS is often suitable when the workload needs a supported commercial or open-source engine, conventional instance behavior and Multi-AZ availability at a predictable scale. Read replicas serve read scaling but are not a substitute for the writer's HA design. Aurora is a strong candidate for MySQL- or PostgreSQL-compatible workloads that benefit from its distributed storage, faster failover options, multiple replicas, reader scaling and capabilities such as Global Database for cross-region recovery. I still validate application compatibility, connection storms, failover behavior, replication lag and write limits with realistic load tests. For banking, I use private subnets, encryption and KMS, IAM or rotated secrets, TLS, auditing, protected backups and point-in-time recovery. I rehearse failover and restore against the business RTO/RPO. Aurora is not automatically better: engine features, migration risk and steady-state cost may favor RDS, while stricter scale and recovery requirements may justify Aurora's premium.
+
+---
+
+## AWS / EKS
+
+4 questions
+
+### 1. How would you design a multi-tenant EKS cluster for a banking platform using namespace isolation, RBAC and NetworkPolicies?
+
+**Type:** Design / Architecture
+
+**Answer:**
+
+I first decide whether tenants are trusted internal teams or require a hard security boundary. Namespaces are administrative boundaries, not complete isolation, so regulated or mutually untrusted workloads may require separate clusters and accounts. Within an approved shared cluster, each tenant receives dedicated namespaces, ResourceQuota, LimitRange, priority rules and ownership labels. IAM access is mapped to narrow Kubernetes RBAC roles; workloads use EKS Pod Identity or IRSA with a distinct least-privilege IAM role per service, never the node role. A compatible network-policy engine enforces default-deny ingress and egress, then permits only named application, DNS and dependency paths. Pod Security admission, policy-as-code, signed images, read-only filesystems and restricted privileges establish workload guardrails. Secrets come from AWS Secrets Manager or Parameter Store through workload identity. Sensitive or specialized tenants can use dedicated node groups with taints, tolerations and topology rules, although node separation alone is not a hard tenant boundary. Central audit logs, runtime findings, flow telemetry, cost allocation and admission-policy reports identify every action and resource owner. Cluster-wide resources and privileged controllers remain platform-team controlled.
+
+### 2. How do you manage EKS node scaling for unpredictable banking transaction spikes while controlling cost, and how do you choose between Cluster Autoscaler and Karpenter?
+
+**Type:** Comparison / Architecture
+
+**Answer:**
+
+I scale in layers. HPA increases Pod replicas from demand signals such as request rate, queue depth or latency, while accurate resource requests make unschedulable demand visible to the node scaler. Cluster Autoscaler changes capacity inside predefined Auto Scaling groups or managed node groups; it is mature and predictable when the organization wants a small, controlled set of instance types. Karpenter evaluates pending Pods and provisions suitable EC2 capacity directly from flexible constraints, which can react efficiently across instance families, zones and purchase options and later consolidate underused capacity. For critical banking paths I maintain minimum warm On-Demand capacity across zones, use topology spread and PodDisruptionBudgets, and protect databases and downstream services from unconstrained scaling. Spot is appropriate only for interruption-tolerant, redundant or batch capacity with disruption handling. Karpenter NodePools and NodeClasses restrict architecture, instance families, zones, capacity type and limits; consolidation is tested so it does not create churn. I monitor Pending Pods, scheduling and EC2 launch latency, HPA behavior, utilization, interruptions, errors and cost per transaction. Load tests and quota checks prove the entire scale-out path before a peak event.
+
+### 3. Describe an EKS production issue you resolved, including the failure mode, diagnostic process and architectural change that prevented recurrence.
+
+**Type:** Experience / Troubleshooting
+
+**Answer:**
+
+During a transaction spike, the load balancer began returning 502 and 503 responses and latency rose. HPA correctly created more application replicas, but many stayed Pending because the existing nodes lacked allocatable CPU and the node group was slow to add capacity near its configured maximum. I correlated ALB target health and response codes with application latency, HPA events, kubectl scheduling events and node-group metrics. Pod events showed insufficient CPU; the autoscaler logs and EC2 events then exposed the capacity and scaling constraint. We first protected customers by shedding noncritical work, raising safe capacity within quota and monitoring downstream saturation. The durable change combined realistic requests from load tests, higher minimum warm capacity for the critical path, wider multi-AZ instance flexibility, earlier scaling from demand signals, corrected node-scaler limits and topology spread plus disruption budgets. We isolated batch work from transaction services and added alerts for unschedulable Pods, node-provisioning latency and headroom. A peak-load exercise verified recovery time and confirmed that scaling one layer no longer waited for the next layer to fail.
+
+### 4. An EKS microservice receives AccessDenied while fetching configuration from S3. Identify problems with the IAM role trust policy OIDC sub condition and a missing eks.amazonaws.com/role-arn service-account annotation, then explain the corrections.
+
+**Type:** Code Review / Troubleshooting
+
+**Answer:**
+
+IRSA requires both halves to match: the IAM role must trust the cluster's OIDC provider for the exact Kubernetes service-account subject, and the Pod must use a service account annotated with that role ARN. The `sub` claim format is `system:serviceaccount:<namespace>:<service-account>`. A wrong namespace, name, condition-key issuer, `sts:AssumeRole` action or missing annotation means the Pod will not receive the intended web-identity role and S3 will deny the request.
+
+A corrected trust policy is:
+
+```hcl
+data "aws_iam_policy_document" "workload_trust" {
+  statement {
+    effect  = "Allow"
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+
+    principals {
+      type        = "Federated"
+      identifiers = [aws_iam_openid_connect_provider.eks.arn]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(aws_iam_openid_connect_provider.eks.url, "https://", "")}:sub"
+      values   = ["system:serviceaccount:payments:config-reader"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(aws_iam_openid_connect_provider.eks.url, "https://", "")}:aud"
+      values   = ["sts.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "config_reader" {
+  name               = "payments-config-reader"
+  assume_role_policy = data.aws_iam_policy_document.workload_trust.json
+}
+```
+
+The Kubernetes service account and Deployment must agree:
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: config-reader
+  namespace: payments
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/payments-config-reader
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-api
+  namespace: payments
+spec:
+  template:
+    spec:
+      serviceAccountName: config-reader
+      containers:
+        - name: api
+          image: example.invalid/payments@sha256:REPLACE_ME
+```
+
+The role's permissions policy separately grants only `s3:GetObject` for the required configuration prefix and, if required, `s3:ListBucket` for that prefix. I restart Pods after correcting the service account, inspect the projected token and caller identity without logging credentials, use CloudTrail to see the denied principal and verify bucket and KMS policies. On newer platforms EKS Pod Identity is an alternative, but it uses a different association and trust model; I do not mix its configuration with IRSA.
+
+---
+
+## AWS / Serverless
+
+1 question
+
+### 1. What is an AWS Lambda function?
+
+**Type:** Conceptual
+
+**Answer:**
+
+AWS Lambda is a managed event-driven compute service that runs a function without the team provisioning or managing servers. Code or a container image defines a handler, and events can come from services such as API Gateway, S3, EventBridge, SQS or streams. Lambda creates execution environments, scales concurrent invocations and charges according to the applicable request and execution-resource model. The function should normally be stateless and store durable state externally. In production I configure least-privilege IAM, memory and timeout, environment variables or secret references, reserved or provisioned concurrency where needed, retries, idempotency, dead-letter or failure destinations, structured logs, tracing and alarms. I also account for cold starts, payload and runtime limits, downstream connection pressure and the difference between synchronous and asynchronous failure handling.
+
+---
+
 ## AWS Fundamentals
 
 30 questions
@@ -3618,6 +3864,20 @@ DNS centralizes and controls name resolution in hub-and-spoke networking: the hu
 
 ---
 
+## Backup and Disaster Recovery
+
+1 question
+
+### 1. If a server does not start after patching, and you took a snapshot before patching, what would you do?
+
+**Type:** Scenario
+
+**Answer:**
+
+I stop repeated restart attempts, capture console or serial-port output and determine whether the failure is bootloader, filesystem, kernel, driver, service or configuration related. If the recovery objective requires fast restoration, I preserve the failed disk for evidence and create a new disk from the verified pre-patch snapshot rather than overwriting the only copy. I attach that disk to a replacement VM built from the same infrastructure definition, or use a rescue VM to repair the original disk if recovery is safer than rollback. Before restoring traffic I validate filesystem health, application startup, dependencies, secrets, monitoring and data consistency. I then shift traffic through the load balancer, monitor service health and retain the failed resources for RCA. A disk snapshot may be only crash-consistent, so databases require native, application-consistent recovery and transaction-log replay where applicable.
+
+---
+
 ## Bash and Shell Scripting
 
 30 questions
@@ -3886,6 +4146,50 @@ A pipe is an interprocess communication primitive that connects one process’s 
 **Answer:**
 
 Run static checks first: bash -n script.sh and shellcheck script.sh. Enable strict mode and safe pipeline handling: set -euo pipefail. For stepwise tracing use bash -x script.sh or inside script: export PS4='+${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}: ' && set -x to get file/line/function prefixes. Use set -v to see raw input. Add trap 'echo "ERROR at $BASH_SOURCE:$LINENO"; exit 1' ERR to catch failures, and use printf '%s\n' "var=$var" or declare -p var to inspect variables. For system-level issues attach strace -f -o strace.log bash script.sh and review strace.log. Redirect verbose debug to stderr with exec 3>&2; printf ... >&3 for non-interference.
+
+---
+
+## Behavioral
+
+3 questions
+
+### 1. Let's start from your side with a quick introduction.
+
+**Type:** Experience
+
+**Answer:**
+
+I am a Cloud, DevOps and MLOps engineer with experience building and operating production platforms across GCP and AWS. My core strengths are Kubernetes, Terraform, CI/CD, cloud security, observability and automation. Alongside traditional microservices, I have supported AI-enabled applications and agent workflows, including their containerization, deployment, orchestration, scaling, monitoring and release controls. I work closely with developers, data scientists, security and networking teams to turn requirements into secure, repeatable platforms and to keep them reliable in production. A recent focus has been MLOps and LLMOps: model and prompt versioning, RAG services, GPU workloads, evaluation, drift monitoring and safe rollback. I would then connect this summary to one project most relevant to the role and keep the introduction to about 60–90 seconds.
+
+### 2. Tell me about yourself, your current project, what you are working on, and the tech stack involved.
+
+**Type:** Experience
+
+**Answer:**
+
+I am a Cloud, DevOps and MLOps engineer focused on building secure platforms and keeping production services reliable. In my current project I support applications on GCP, primarily using GKE, Shared VPC, IAM, Secret Manager, Artifact Registry, Cloud Logging and Monitoring. Terraform provisions cloud infrastructure, while Jenkins and Git-based pipelines validate, build, scan and deploy containerized services using Docker, Kubernetes manifests or Helm. I also use Python and Bash for automation and Prometheus, Grafana or cloud-native telemetry for operations. My day-to-day work covers infrastructure changes, releases, incident troubleshooting, vulnerability remediation, capacity and cost optimization, documentation and coordination with application, security and networking teams. I keep this introduction brief, make my personal ownership clear and then explain one recent delivery with a measurable result.
+
+### 3. Please go ahead and introduce yourself.
+
+**Type:** Experience
+
+**Answer:**
+
+I am a Cloud, DevOps and MLOps engineer with experience designing, automating and operating production platforms, primarily on Google Cloud. My core skills include GKE, Terraform, CI/CD, Kubernetes, networking, IAM, security, observability and Python or Bash automation. In my current work I provision infrastructure through reusable Terraform modules, support containerized application releases, monitor reliability and capacity, troubleshoot production incidents and improve governance through policy and automation. I work closely with development, security, networking and data teams and focus on making delivery repeatable, least-privileged and auditable. I also support AI-enabled workloads where model serving, GPU capacity, evaluation and drift add MLOps requirements. I keep the introduction to about 60–90 seconds and follow it with one recent project and measurable outcome relevant to the role.
+
+---
+
+## Behavioral and Communication
+
+1 question
+
+### 1. Can you explain your project experience and how it fits with the job description?
+
+**Type:** Experience
+
+**Answer:**
+
+My experience aligns with a GCP/GKE platform-engineering role across infrastructure automation, Kubernetes operations, delivery, security and production support. In my current project I provision GCP projects, Shared VPC networking, IAM, private GKE clusters, node pools, Artifact Registry, Secret Manager, logging and monitoring through reusable Terraform modules and reviewed pipelines. I package and deploy applications with Docker, Helm and GitOps or CI/CD; configure Workload Identity, RBAC, network policies, probes, autoscaling and disruption controls; and troubleshoot scheduling, networking, memory and release incidents. I also work with security and networking teams on organization policies, vulnerability remediation, firewall governance and audit evidence. This maps directly to the role's need for secure self-service platforms and reliable GKE operations. I support the alignment with one specific delivery and one production incident, quantify the result and state any JD area where my experience is adjacent rather than claiming depth I do not have.
 
 ---
 
@@ -5340,7 +5644,7 @@ The script discovers configured endpoints or certificate files and reads the cer
 
 ## CI/CD
 
-4 questions
+6 questions
 
 ### 1. What is Continuous Integration (CI)?
 
@@ -5373,6 +5677,22 @@ A typical CI pipeline runs automated stages: checkout (git clone or actions/chec
 **Answer:**
 
 The pipeline promotes the immutable artifact (container image or package) to the production deployment target and executes the deployment strategy automatically. Typical steps: push image to registry (docker push registry.example.com/myapp:sha256:<digest>), update the deployment (helm upgrade --install myapp ./chart --set image.tag=sha256:<digest> or kubectl apply -f prod.yaml), then wait for readiness (kubectl rollout status deployment/myapp -n prod). In GitOps, the pipeline commits the image tag or manifest to the cluster repo and Argo CD/Flux performs argocd app sync / reconciles. Post-deploy verification uses HTTP checks (curl -f https://prod.example.com/health), Prometheus/Alertmanager metrics, and automated rollback (kubectl rollout undo or Flux/Argo rollback) if SLOs or alerts breach.
+
+### 5. Why would you choose Google Cloud Build over Jenkins, and what are its advantages and disadvantages?
+
+**Type:** Comparison
+
+**Answer:**
+
+I choose Cloud Build when workloads are centered on Google Cloud and the team values a managed build control plane, ephemeral workers, straightforward IAM and integrations with Artifact Registry, source repositories, Secret Manager and Cloud Deploy. It reduces controller, plugin, patching, backup and agent-fleet maintenance. Private pools can address isolation and network-access needs. Jenkins remains attractive when an organization has substantial existing shared libraries, plugins, heterogeneous environments, complex custom workflows or cross-cloud and on-premises integrations that would be expensive to migrate. Its flexibility also creates operational cost: controller availability, plugin compatibility, credentials, scaling and upgrades belong to the team. Cloud Build can introduce service limits, product coupling, migration work and different cost behavior, and private connectivity needs careful design. I compare security, workload location, required integrations, portability, developer experience, compliance evidence and total operating cost, then migrate incrementally rather than choosing solely because one service is managed.
+
+### 6. Explain the complete lifecycle of a microservice from source code commit until deployment to the target environment.
+
+**Type:** Interview question
+
+**Answer:**
+
+A commit or pull request triggers linting, unit tests, SAST, dependency and secret scans. After review, CI builds the container once, runs integration and image scans, creates an SBOM, signs the immutable digest and publishes it. Promotion updates the environment's GitOps configuration; Argo CD reconciles Helm manifests, progressive delivery validates health and business metrics, and rollback restores the last known-good digest and configuration.
 
 ---
 
@@ -5942,7 +6262,7 @@ To restrict Jenkins approval input to only valid values, use the `enum` validati
 
 ## Cloud and Platform Architecture
 
-19 questions
+22 questions
 
 ### 1. Explain one production application architecture you designed on GCP.
 
@@ -6111,6 +6431,34 @@ In our Cloud and Platform Architecture, we aim to minimize downtime and data los
 Here's a rewritten and polished answer:
 
 To test the DR architecture, I'd start by understanding the production mechanism, configuration involved, and operational risk it controls. In Cloud and Platform Architecture, this means identifying what changes are made, who or what is affected, and how it's verified. For validation, I'd check logs, metrics, configuration, access permissions, and post-change health signals before calling the issue closed. Specifically, for a DR test, I'd also identify key failure modes, such as network connectivity issues or data corruption, and ensure that security and reliability trade-offs are considered. In case of a failure, I'd have a rollback plan in place, including steps to recover from a failed DR test, such as reverting configuration changes or restoring backups.
+
+### 20. Design a critical, high-volume, real-time transactional microservice running across AWS EKS and GCP GKE, covering Kubernetes deployment, strong versus eventual-consistency databases, networking, API gateway or service mesh, observability, progressive CI/CD, Terraform and security compliance.
+
+**Type:** System Design
+
+**Answer:**
+
+I first clarify transactions per second, latency percentiles, availability, recovery objectives, data residency, consistency boundaries and whether active-active writes across clouds are truly required. Stateless service instances run in regional EKS and GKE clusters across zones with requests and limits, HPA, autoscaled nodes, topology spread, disruption budgets, readiness and startup probes. A global DNS or traffic-management layer routes clients to a healthy region, and each cloud has an API gateway or load balancer providing TLS, authentication, rate limits and WAF controls. Private interconnect or encrypted VPN carries approved cross-cloud traffic. A service mesh is justified only when consistent mTLS, identity, telemetry and traffic policy outweigh its operational cost.
+
+For money movement, one authoritative ledger uses ACID transactions, idempotency keys, immutable entries and explicit concurrency control. Synchronous multi-cloud database writes create latency and partition problems, so I normally assign a home region or cloud for each strongly consistent write domain and replicate for recovery. Events leave the transaction through an outbox and flow to a durable broker; reporting, search, notification and other derived views are eventually consistent, with deduplication, replay and reconciliation. Multi-region or global database selection follows tested failure semantics, RPO/RTO and regulatory approval—not a product label.
+
+CI builds once, runs tests, SAST, dependency and image scans, creates an SBOM, signs the digest and records provenance. Model-free service releases use canary or blue-green promotion independently in each cloud, with schema compatibility, synthetic transactions and automated rollback on error, latency or business-control breaches. Terraform modules provision networks, clusters, identity, KMS, databases and observability with separate state and provider-specific implementations behind common platform contracts; GitOps promotes Helm releases. OpenTelemetry correlates traces, logs and RED metrics across clouds, while dashboards add queue lag, database saturation, reconciliation difference and transaction success. Workload identity, least privilege, secrets managers, encryption, network policies, admission policy, audit logging, PCI-style segmentation and tested disaster recovery complete the design. I explicitly define degraded-mode behavior so a cloud or link failure cannot produce double charges or split-brain writes.
+
+### 21. Explain the architecture and communication between 100–200 microservices.
+
+**Type:** Interview question
+
+**Answer:**
+
+Services are grouped by business domain with clear APIs and ownership. Synchronous calls use internal DNS, authenticated HTTP or gRPC and bounded timeouts; asynchronous workflows use durable messaging with idempotency and dead-letter handling. Gateways control north-south traffic, while service identity, NetworkPolicies and optional mesh controls protect east-west paths. A catalog, distributed traces, SLOs and dependency maps make the estate operable.
+
+### 22. Explain an active-active architecture across multiple Kubernetes clusters and regions.
+
+**Type:** Interview question
+
+**Answer:**
+
+Each region runs healthy application capacity across zones, with identical signed artifacts and region-local dependencies where possible. Global traffic management sends clients to healthy nearby backends and removes failed regions. Stateless services are straightforward; sessions and asynchronous work require external durable state and idempotency. Data ownership, replication, split-brain prevention, regional capacity, failover and failback are tested against explicit RTO and RPO.
 
 ---
 
@@ -7038,6 +7386,100 @@ When one VPN tunnel fails in Cloud Router, the primary impact is on the connecti
 
 ---
 
+## Coding / Kubernetes Controller Round
+
+11 questions
+
+### 1. Design a custom Kubernetes controller that watches all Pods and dynamically applies labels based on resource usage and pending duration, removing labels when their conditions no longer apply.
+
+**Type:** Design / Architecture
+
+**Answer:**
+
+Use a cluster-scoped Pod informer and rate-limiting workqueue. Reconciliation reads the latest pod from the lister, sums CPU and memory requests across regular containers (and uses the maximum init-container request according to scheduling semantics), then derives labels. Set `high-resource=true` only when phase is Running and CPU exceeds 500m or memory exceeds 512Mi. Set `long-pending=true` only after the chosen Pending start timestamp exceeds five minutes; schedule `AddAfter` for the remainder. Create a merge/JSON patch only when managed labels differ, remove stale managed labels, handle conflicts by retrying, and never overwrite unrelated labels.
+
+### 2. How would you implement this using Kubernetes client-go concepts such as Informers, Listers, and WorkQueues?
+
+**Type:** Design / Architecture
+
+**Answer:**
+
+Create a shared informer factory for Pods across all namespaces, register lightweight add/update/delete handlers, and enqueue `namespace/name`. Start the factory, wait for cache sync, then run multiple workers with `wait.UntilWithContext`. Each worker calls `Get`, splits the key, and reads the latest Pod from the lister cache. Reconcile computes desired managed labels, schedules delayed work when necessary, and patches through the typed client. On success call `Forget`; on transient failure use `AddRateLimited`; after a retry limit, report and `Forget`. Informers reduce API reads, listers provide current cached state, and the queue decouples events from writes.
+
+### 3. Write pseudocode showing how your controller watches Pod changes, processes events, and applies the appropriate labels.
+
+**Type:** Coding
+
+**Answer:**
+
+`onAdd(p) => queue.Add(key(p)); onUpdate(old,p) => { if old.resourceVersion != p.resourceVersion { queue.Add(key(p)) } }; onDelete(p) => queue.Add(keyFromObjectOrTombstone(p))`. A worker executes `key,quit := queue.Get(); defer queue.Done(key); err := reconcile(key)`. Reconcile gets the latest pod from the lister; NotFound succeeds. It computes `(desired,nextCheck)`, calls `queue.AddAfter(key,nextCheck)` when needed, and returns if managed labels already match. Otherwise it patches only `/metadata/labels/high-resource` and `/metadata/labels/long-pending`. Success calls `Forget`; retryable errors call `AddRateLimited`; terminal or exhausted errors are recorded and forgotten.
+
+### 4. How would your controller handle Pod ADD, UPDATE, and DELETE events?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+ADD enqueues the pod key. UPDATE enqueues the new key when its resource version changes; optional predicates can suppress updates that cannot affect the derived labels, but correctness should not depend on them. DELETE normally requires no pod-label cleanup because the object is gone, yet its key can be enqueued to clear controller-owned external state; handle `DeletedFinalStateUnknown` tombstones safely. Handlers must not patch or perform slow work. They only extract keys and enqueue, leaving reconciliation to read current cached state and making rapid, duplicate, or out-of-order notifications harmless.
+
+### 5. Why would you use a WorkQueue instead of directly modifying the Pod inside the Informer event handler?
+
+**Type:** Conceptual
+
+**Answer:**
+
+A workqueue keeps informer handlers fast and prevents API latency from blocking event delivery. It deduplicates keys that are already queued, coalesces bursts, bounds concurrency through workers, supports delayed items, and provides rate-limited retries with backoff. The event becomes only a hint; reconciliation reads current state rather than acting on a stale event object. This cleanly separates observation from business logic and makes shutdown, metrics and error handling manageable. Direct writes in a handler can create feedback loops, miss events while blocked, overload the API server and provide no consistent retry or backpressure strategy.
+
+### 6. How would you make the controller reconciliation idempotent?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+Treat reconciliation as a pure desired-state calculation followed by a minimal write. Read the latest Pod, compute only the two labels owned by this controller, and compare them with current values. If they match, return successfully without patching. If not, patch only changed managed keys, including removal when a condition becomes false, while preserving every unrelated label. Never base correctness on how many events occurred or on in-memory transition history. Repeated calls with the same Pod state therefore converge to the same metadata. Use optimistic concurrency or retry conflicts and ensure any external side effects have stable idempotency keys.
+
+### 7. How would the controller remain resilient and eventually consistent if Kubernetes API operations fail temporarily?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+Return transient API errors to the worker and call `AddRateLimited(key)` using an exponential failure rate limiter; call `Forget(key)` only after success or a deliberate terminal decision. Cap retries, emit an event and metric when exhausted, and rely on later informer updates or periodic resync to enqueue the key again. Honor context cancellation and API timeouts, limit worker concurrency, and distinguish conflicts, throttling and server errors from validation or authorization failures. Because reconciliation is idempotent and always reads the latest cached state, retries safely converge after the API recovers without replaying stale desired state.
+
+### 8. If a Pod becomes Pending, how will your controller know when it has remained Pending for five minutes if Kubernetes does not generate another event exactly five minutes later?
+
+**Type:** Scenario
+
+**Answer:**
+
+When reconciling a Pending pod, calculate `remaining = fiveMinutes - (now - pendingSince)`. If remaining is positive, call `queue.AddAfter(key, remaining)`; if it is zero or negative, set `long-pending=true`. The important design choice is a reliable `pendingSince`: `creationTimestamp` works only if the requirement means five minutes since creation while still Pending. For repeated phase transitions, persist a controller-owned timestamp annotation or track a relevant status-condition transition timestamp when available, because in-memory state is lost on restart. The delayed event is only a wake-up; reconciliation must reread current state.
+
+### 9. If you also need to check the Pod's readiness condition, how would this change your labeling logic?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+Add an `isReady` helper that finds the `PodReady` condition and returns true only when its status is `ConditionTrue`; missing or Unknown means not ready. Keep readiness separate from phase because Running only means containers have started, while Ready controls Service endpoint eligibility. Define the exact policy, for example `high-resource=true` only when `phase == Running && ready && (cpu > 500m || memory > 512Mi)`, then include readiness-condition changes in update handling. Reconciliation still calculates desired labels from the latest cached Pod and removes the label immediately if readiness becomes false.
+
+### 10. How would your controller behave if a Pod transitions rapidly between Running and Pending phases within a few seconds?
+
+**Type:** Scenario
+
+**Answer:**
+
+Each meaningful update enqueues the same key, and the workqueue may coalesce duplicates. Reconciliation reads the newest cache state, so it converges labels to the current phase rather than replaying each transition. Delayed Pending checks may remain queued, but later reconciliation verifies current phase and UID before acting.
+
+### 11. What happens if you schedule a five-minute delayed reconciliation while a Pod is Pending, but it becomes Running before those five minutes expire?
+
+**Type:** Scenario
+
+**Answer:**
+
+The Pending-to-Running update immediately enqueues the same key, so reconciliation removes or avoids `long-pending` and evaluates the Running resource rule. The old delayed queue item may still become ready later; it is harmless because the worker rereads the latest Pod, sees Running, and keeps `long-pending` absent. Correctness must never rely on cancelling delayed entries or preserving the old event object. If a new Pod reuses the same namespace/name, compare UID or include it in persisted timing state so a delayed item from the deleted object cannot apply an old Pending timestamp to the replacement.
+
+---
+
 ## Company and Role Fit
 
 20 questions
@@ -7537,9 +7979,23 @@ Build, test, and promote artifacts through CI/CD, then apply infra and applicati
 
 ---
 
+## Databases
+
+1 question
+
+### 1. Is the database also active-active in a multi-region application architecture?
+
+**Type:** Interview question
+
+**Answer:**
+
+Not necessarily. Application active-active does not imply multi-writer data. For strongly consistent transactions, a single writer or home-region model often avoids conflicts and split brain, while replicas support reads and recovery. Multi-writer databases require explicit conflict, consistency and failure semantics and higher cost. I choose from business consistency, latency, RPO/RTO and tested partition behavior.
+
+---
+
 ## Deployment and Release Incidents
 
-20 questions
+23 questions
 
 ### 1. A deployment introduces high latency. What is your immediate response?
 
@@ -7700,6 +8156,30 @@ Make builds immutable, deploy by digest, and remove or block the bad image tag i
 **Answer:**
 
 Immediately snapshot and archive everything before further changes: capture node disks (aws ec2 create-snapshot --volume-id vol-...), export VM images (gcloud compute images create from-disk), and take filesystem dd if=/dev/sda | gzip > /mnt/backup/image.gz. Collect container/image IDs and checksums (docker images --no-trunc; docker inspect --format='{{index .RepoDigests 0}}' IMAGE; sha256sum image.tar). Save Git commit/tags (git rev-parse HEAD; git tag -a rollback-YYYYMMDD -m "rollback"), store logs (kubectl logs --previous POD > pod.previous.log; journalctl -u mysvc --since "2026-08-16" > svc.log), capture network (tcpdump -w net.pcap). Upload artifacts to immutable storage (aws s3 cp --acl bucket-owner-full-control; enable S3 Object Lock) and verify retention with sha256sum and aws s3api head-object.
+
+### 21. Describe a rollout strategy you implemented, how you implemented Canary deployment and why you used it instead of a normal Kubernetes RollingUpdate.
+
+**Type:** Experience / Implementation
+
+**Answer:**
+
+For a high-risk API change, I used canary delivery with two versions behind controlled traffic routing. The pipeline built and signed one image, deployed the new version at zero or a small traffic share and ran smoke tests. Traffic then advanced through stages such as 1%, 5%, 25%, 50% and 100%, with an observation window at each stage. Promotion required readiness plus error rate, latency, saturation and business-success metrics within thresholds compared with the stable version; a failure automatically returned traffic to stable and stopped the rollout. Database changes were backward compatible and both versions could run concurrently. A standard RollingUpdate replaces Pods gradually but usually lacks explicit user-traffic percentages, baseline comparison and analysis gates. Canary costs more capacity and operational complexity, so I use it for changes whose failure risk justifies exposure control, while routine low-risk releases can use a well-configured RollingUpdate.
+
+### 22. If a release contains a new image, new ConfigMap keys and a changed service or API path, how do you release them together?
+
+**Type:** Interview question
+
+**Answer:**
+
+I commit the compatible image digest, configuration and route changes as one reviewed desired-state change, but design ordering and backward compatibility explicitly. The application accepts old and new configuration during transition; the old route remains while the new route is verified. Argo sync waves or hooks establish dependencies, then canary health gates promote traffic. Cleanup occurs only after consumers migrate.
+
+### 23. How do you avoid downtime when changing an API or context path?
+
+**Type:** Interview question
+
+**Answer:**
+
+I add the new path while retaining the old path, deploy code that supports both and test the new route before shifting clients. Telemetry identifies remaining old-path traffic, and clients receive a deprecation window. Redirects are used only when method and client behavior are safe. The old path is removed in a later release after usage reaches the approved threshold.
 
 ---
 
@@ -8683,7 +9163,7 @@ Use a DNS provider Terraform provider (aws_route53_record, google_dns_record_set
 
 ## Docker
 
-20 questions
+23 questions
 
 ### 1. Explain Docker architecture.
 
@@ -9373,6 +9853,30 @@ Docker Compose is a tool for defining and managing multi-container applications 
 **Answer:**
 
 Compose is a tool for defining and running multi-container Docker applications, while Kubernetes is a container orchestration platform that automates deployment, scaling, and management of containers. Compose provides a simpler way to manage small-scale applications, whereas Kubernetes is designed for large-scale, distributed systems.
+
+### 21. What are common instructions used in a Dockerfile?
+
+**Type:** Interview question
+
+**Answer:**
+
+Common instructions are `FROM`, `ARG`, `ENV`, `WORKDIR`, `COPY`, `RUN`, `USER`, `EXPOSE`, `ENTRYPOINT`, `CMD`, `LABEL`, `HEALTHCHECK` and multi-stage `FROM`. I use exec form for process handling, pin trusted base images, combine layers thoughtfully, run as non-root and keep secrets out of build arguments and layers. `EXPOSE` documents a port; it does not publish it.
+
+### 22. How do you containerize a Java 21 microservice?
+
+**Type:** Interview question
+
+**Answer:**
+
+I use a multi-stage build: a pinned Maven or Gradle JDK 21 image compiles and tests the service, then a minimal approved Java 21 runtime image receives only the artifact and required runtime files. The image runs as non-root with an exec-form entrypoint, container-aware JVM memory settings, predictable signals and no embedded secrets. CI scans and signs the digest and validates startup and resource behavior.
+
+### 23. How are Maven or Gradle dependencies packaged into a Docker image?
+
+**Type:** Interview question
+
+**Answer:**
+
+The build stage resolves dependencies from an authenticated repository, uses lock or checksum controls where available and produces a JAR, layered JAR or distribution. A fat JAR includes runtime dependencies; a thin distribution copies dependency libraries separately. The final image contains only runtime artifacts, not Maven caches or credentials. Layering dependencies separately improves cache reuse without weakening reproducibility.
 
 ---
 
@@ -10980,7 +11484,7 @@ A producer emits an event rather than calling the consumer synchronously. For ex
 
 ## FinOps and Cost Optimization
 
-30 questions
+31 questions
 
 ### 1. What is FinOps?
 
@@ -11250,6 +11754,14 @@ Choose the right metric (CPU, memory, request latency, queue depth, or custom SL
 **Answer:**
 
 I package recommendations as a prioritized, data-driven plan: 1) provide quantified savings, baseline, and ROI (e.g., “$120k/yr via 40% EC2 rightsizing”), using Cost Explorer or AWS CLI (aws ce get-cost-and-usage --time-period Start=2026-07-01,End=2026-07-31 --granularity MONTHLY --metrics UnblendedCost) and the CUR loaded into BigQuery for SQL verification. 2) show implementation steps, owners, and risk mitigations (pilot, rollback runbook, Terraform changes). 3) propose timing and required commitment (capex/opex). 4) include KPIs and verification: enable budget alerts, track weekly delta in Cost Explorer or query CUR post-change to validate savings. 5) request approval with an execution timeline.
+
+### 31. The client wants a specific percentage reduction in the GCP bill. How would you reduce cost without affecting production performance or reliability?
+
+**Type:** Scenario
+
+**Answer:**
+
+I convert the requested percentage into a measured baseline, scope and deadline before promising it. Billing export to BigQuery, labels and project ownership show cost by service, environment and unit such as cost per request; I separate contractual spend, growth and anomalies from addressable waste. Quick, low-risk actions include deleting unattached disks and stale snapshots or IPs, applying storage lifecycle policies, scheduling non-production resources, controlling log volume and retention, and stopping idle development clusters. Next I rightsize GKE requests and node pools from percentile usage while preserving SLO-based headroom, use autoscaling and Spot VMs only for disruption-tolerant workloads, tune Cloud SQL and data-processing capacity, reduce avoidable cross-region egress and choose suitable storage classes. Stable baseline usage may justify committed-use discounts after forecasting; commitments do not fix waste. Every proposal includes expected monthly savings, engineering effort, risk, owner and validation metric. I test changes through canaries or lower environments, protect redundancy, latency and error-budget thresholds, and automatically revert if SLOs regress. Budgets, anomaly alerts, quotas, showback and monthly unit-economics reviews make savings persistent. I report realized rather than forecast savings and openly identify if the target cannot be safely achieved within the deadline.
 
 ---
 
@@ -11688,6 +12200,346 @@ Auto (a.k.a. "default" network) automatically creates one subnet per region with
 **Answer:**
 
 GCP VPC firewall rules are stateful, network-level allow/deny policies that apply to VM instances by target (instance tags or service accounts). Key fields: direction (INGRESS/EGRESS), priority (0–65535; lower evaluated first), action (allow or deny), source/destination ranges, and protocol:port selectors (e.g., --rules tcp:22,tcp:80). Create with gcloud compute firewall-rules create NAME --network NETWORK --direction INGRESS --priority 1000 --rules tcp:22 --source-ranges 0.0.0.0/0 --target-tags web. Verify with gcloud compute firewall-rules list/describe or the REST API compute.firewalls.list/compute.firewalls.get, test connectivity from a VM (curl/telnet) and enable logging with gcloud compute firewall-rules update NAME --enable-logging to inspect hits in Cloud Logging.
+
+---
+
+## GCP / Cloud
+
+3 questions
+
+### 1. Walk me through a specific case where you implemented an enterprise-scale GCP landing zone. What policies and controls did you implement, and how did you restrict resources to approved regions such as us-east1 and us-west4 while handling regional resources and secrets?
+
+**Type:** Experience / Architecture
+
+**Answer:**
+
+In one enterprise landing-zone implementation, my scope covered the organization and folder hierarchy for platform, production, non-production and sandbox workloads, plus separate billing, logging, security and Shared VPC host projects. Identity was group-based and federated; predefined roles, privileged access approvals, Workload Identity Federation and a restriction on service-account key creation reduced standing privilege. At the organization or folder level, I applied Organization Policy constraints for allowed resource locations, external IP use, domain-restricted sharing, public access, uniform bucket-level access and approved networking patterns. Central projects collected audit logs, Security Command Center findings and billing exports. Terraform modules created projects, APIs, budgets, IAM, networking, logging and baseline controls through reviewed pipelines with protected remote state. For residency, I tested and enforced the Resource Location Restriction constraint using the appropriate location value group or an explicit allow list containing us-east1 and us-west4, first in dry-run where supported and then in enforcement. I verified service-specific behavior because the constraint applies only to supported resource types and resource location is not always the same as where data is stored or processed. Global resources needed a documented exception or a design change. Secrets were created in Secret Manager with user-managed replication pinned to approved regions when residency required it, and regional services such as GKE, Cloud SQL and storage were parameterized so the pipeline rejected any unapproved location. Policy tests, Cloud Asset Inventory queries and drift alerts continuously detected exceptions. I measured the result through onboarding lead time, policy compliance and audit findings and operated the landing zone as an evolving platform product.
+
+### 2. Which cloud platform are you using?
+
+**Type:** Experience
+
+**Answer:**
+
+My primary current platform is Google Cloud, especially GKE, Compute Engine, Shared VPC, IAM, Secret Manager, Artifact Registry, Cloud Logging and Monitoring, load balancing and Cloud Storage, provisioned through Terraform. I also have AWS exposure, but I state the relative depth honestly and anchor the answer in the platform and workload I operate today.
+
+### 3. Can you explain the enterprise-scale GCP architecture you designed, including the organization, projects, networking, security and shared services?
+
+**Type:** Experience / Architecture
+
+**Answer:**
+
+I structured the platform from the organization root into folders aligned to governance boundaries such as platform, production, non-production and sandbox, with business-unit folders where delegation required them. Separate projects created IAM, quota, billing and blast-radius boundaries for applications, Shared VPC hosts, security, centralized logging, CI/CD and common services. A project factory used versioned Terraform modules to create projects, enable APIs, attach billing, apply labels and budgets, configure logging sinks and inherit Organization Policies. Central host projects provided Shared VPC subnets, IP planning, DNS, Cloud NAT, hybrid connectivity and hierarchical firewall controls, with production separated from lower environments. Identity was federated and group-based; workloads used Workload Identity instead of keys; privileged access was time-bound; secrets and encryption keys had dedicated ownership. Security Command Center, audit logs, asset inventory and monitoring flowed into protected central projects and the SIEM. GKE golden paths included private clusters, policy enforcement, signed images, network policies, autoscaling, backups and GitOps. Exceptions were reviewed, expiring and visible. I measured onboarding time, policy compliance, reliability and cost, treating the landing zone as an operated platform product.
+
+---
+
+## GCP / GKE
+
+8 questions
+
+### 1. How would you upgrade GKE node pools in production without affecting workload availability?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I first review GKE release notes, version skew, API deprecations, add-on and workload compatibility, maintenance windows and rollback constraints, then reproduce the upgrade in a representative lower environment. Production workloads must already have multiple replicas across zones, PodDisruptionBudgets that reflect real availability, topology spread or anti-affinity, readiness and startup probes, realistic requests and limits, and enough quota and spare capacity. I upgrade the control plane before nodes when required by GKE's supported sequence. For nodes, I prefer a blue-green node-pool upgrade for strict control: create a new pool at the target version with equivalent labels, taints, service account, disk, networking and security settings; validate DaemonSets, GPUs or drivers and a canary workload; then cordon and drain old nodes gradually while watching SLOs, Pending pods, disruption budgets and capacity. GKE surge upgrades are suitable when configured with safe max-surge and max-unavailable values. I pause or roll back traffic if error rate, latency, saturation or scheduling breaches thresholds. After all workloads stabilize, I observe for a defined soak period and only then remove the old pool. Stateful workloads receive application-specific failover and data-safety checks. Zero impact is an objective backed by redundancy and validation, not a promise that the infrastructure change can never fail.
+
+### 2. If you only have a one-week-old backup and an issue occurs during patching, how would you bring the GKE cluster back to the latest possible state?
+
+**Type:** Scenario
+
+**Answer:**
+
+I separate cluster infrastructure, Kubernetes desired state and application data. I rebuild or repair the GKE cluster and node pools from Terraform at the last approved version, then let GitOps or the deployment repository reconcile current manifests, policies and application versions; I do not restore a week-old cluster image as if it contained all current state. For persistent data, I restore the most recent valid full backup and then apply incremental backups, snapshots, database logs or replication data up to the latest consistent recovery point. Backup for GKE or an equivalent tool can restore supported Kubernetes resources and volumes, but databases still need engine-aware recovery. Secrets come from the authoritative secret manager, not an old backup. I validate API compatibility, networking, identity, storage, data integrity and critical transactions before shifting traffic. If no changes or logs exist after the week-old backup, the honest RPO is one week and I communicate that data loss; recovery cannot manufacture missing state.
+
+### 3. What services and components are you managing in the GKE cluster?
+
+**Type:** Experience
+
+**Answer:**
+
+I manage workload resources such as Deployments, StatefulSets, Jobs, CronJobs, Services, ConfigMaps, service accounts, autoscalers and disruption budgets; traffic resources such as Gateway or Ingress and network policies; and platform controls such as namespaces, RBAC, quotas, admission policies and secret integrations. On the GKE side I operate node pools, release channels and upgrades, Workload Identity, VPC-native networking, storage classes, persistent volumes, Backup for GKE where used, logging, monitoring and policy enforcement. Shared platform add-ons may include DNS, certificate management, ingress controllers, metrics collectors and GitOps agents. I clarify which components Google manages, which the platform team owns and which application teams own.
+
+### 4. If a customer temporarily needs a large number of nodes to process a GKE job, how would you design it?
+
+**Type:** Design / Architecture
+
+**Answer:**
+
+I characterize CPU, memory, GPU, storage, network, duration, parallelism, deadline, retry safety and data locality, then verify project quota and regional capacity before accepting the schedule. I create or use a dedicated autoscaled batch node pool with appropriate machine type, labels and taints, minimum zero where supported and a bounded maximum. Kubernetes Jobs request resources accurately, tolerate and select that pool, set parallelism and completion behavior, and use idempotent work units with checkpoints. A queue and Kueue or an equivalent admission layer can control concurrency and protect service workloads. Cluster Autoscaler adds nodes for unschedulable Job Pods and removes empty nodes after completion. Spot VMs reduce cost only if tasks tolerate interruption. Quotas, priority, network policy, service identity and cost labels isolate the customer, while dashboards track queue age, failures, node provisioning, utilization and spend.
+
+### 5. Do we need to create a separate GKE cluster for every customer or job, or can we use an existing cluster?
+
+**Type:** Design / Architecture
+
+**Answer:**
+
+A separate cluster per job is usually unnecessary. I use an existing cluster when workloads have compatible trust, compliance, network and lifecycle requirements, then isolate customers with namespaces, RBAC, service accounts and Workload Identity, network policies, quotas, limit ranges, priority, dedicated queues and customer labels. Dedicated node pools with taints provide capacity or hardware separation but are not a hard security boundary by themselves. I choose a separate cluster or project when regulation, untrusted tenants, conflicting cluster-wide components, distinct maintenance schedules, strong blast-radius requirements or dedicated network and billing boundaries justify it. The decision follows a documented tenancy model and threat assessment. For short batch jobs, shared control-plane capacity with autoscaled dedicated pools is often the best balance of speed, utilization and governance.
+
+### 6. How do you manage Kubernetes workloads on GKE and Anthos in your current role?
+
+**Type:** Experience
+
+**Answer:**
+
+I manage GKE workloads through a standardized platform rather than giving every team unrestricted cluster access. Terraform provisions projects, networks, private clusters, node pools, Workload Identity, logging, monitoring and security controls. Application teams use versioned Helm charts or Kustomize overlays, and GitOps reconciles reviewed environment repositories into clusters. Each workload receives namespaces, group-based RBAC, dedicated service accounts, resource requests and limits, quotas, probes, PodDisruptionBudgets, topology spread, autoscaling, NetworkPolicies and secret-manager integration. CI builds and scans the image once, signs the immutable digest, validates manifests and policy, and promotes the same artifact through canary or rolling deployment with SLO-based rollback.
+
+For Anthos—now represented through GKE Enterprise capabilities in current Google Cloud terminology—I manage registered clusters as fleets so common configuration, policy and observability can be applied consistently across GKE and approved hybrid or multi-cloud clusters. Config Sync or the fleet configuration mechanism distributes namespace and platform configuration from Git; Policy Controller audits and enforces admission guardrails; fleet-level identity and team scopes support controlled tenancy; and service-mesh capabilities are used only where uniform mTLS, traffic policy and cross-cluster telemetry justify the complexity. I use staged rollout rings for policies, platform add-ons and upgrades, with development clusters first and production only after validation. Day-to-day operations include release support, Pending or CrashLoopBackOff diagnosis, capacity and cost reviews, vulnerability remediation, certificate and secret rotation, drift checks, backup and recovery tests, and incident follow-up. I make my actual scope clear: Google manages the GKE control plane, the platform team manages fleet and cluster guardrails, and application teams own service code and business behavior.
+
+### 7. How do applications or pods running on GKE securely access GCP services such as Cloud Storage, BigQuery, Secret Manager and Cloud SQL?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I use Workload Identity Federation for GKE so each Kubernetes service account receives only the IAM permissions required by its workload, without a downloaded key. Depending on the supported pattern, I grant the Kubernetes principal direct resource permissions or bind it to a Google service account; the Pod uses Application Default Credentials and the metadata service obtains short-lived tokens. Cloud Storage and BigQuery permissions are scoped to the required bucket, dataset or table; Secret Manager access is scoped to named secrets; and Cloud SQL uses private IP or an approved connector plus database authentication and authorization. Network paths use private Google access, Private Service Connect or private service access where appropriate, and egress policy permits only required destinations. I keep Kubernetes RBAC separate from Google Cloud IAM, audit both, test denied access and avoid granting broad project roles to the cluster node service account.
+
+### 8. At a high level, how do you create a private GKE cluster and securely access it?
+
+**Type:** Design / Architecture
+
+**Answer:**
+
+I first create or select a VPC-native network and subnet with non-overlapping secondary ranges for Pods and Services, required routes, DNS, firewall rules and Private Google Access; Cloud NAT provides controlled outbound internet access only if workloads need it. Terraform then creates a regional private GKE cluster with private nodes, Workload Identity, release channel, logging, monitoring, policy controls and an appropriately restricted control-plane endpoint. Access depends on the endpoint design: administrators connect from an approved corporate network through VPN or Interconnect, from a tightly controlled bastion or management environment, or through supported DNS-based or authorized control-plane access. IAM controls who can authenticate and Kubernetes RBAC controls what they can do. I avoid public node IPs, broad authorized networks and standing cluster-admin. After creation I validate control-plane reachability, DNS, image pulls, private Google API access, NAT egress, Pod and Service routing, logging and a least-privilege kubectl operation.
+
+---
+
+## GCP / Networking
+
+27 questions
+
+### 1. With multiple service projects attached to a Shared VPC, how do you prevent firewall misconfigurations or rules from different teams overlapping?
+
+**Type:** Design / Architecture
+
+**Answer:**
+
+I separate network administration from workload administration. The central network team owns the Shared VPC host project, subnets, routes, Cloud NAT, DNS and baseline firewall policy; application teams receive only the subnet-level and workload permissions they need in their service projects, not broad firewall administration in the host project. Organization- and folder-level hierarchical firewall policies establish non-negotiable deny and allow guardrails, while centrally reviewed network firewall policies or host-project VPC rules implement shared controls. Rules use service accounts or secure tags instead of fragile IP ranges wherever possible, with reserved priority bands, naming conventions, explicit owners and expiry dates. Terraform modules validate duplicate priorities, broad CIDRs, unrestricted ports and conflicting intent before merge; plans require network or security approval and run policy-as-code tests. Firewall Rules Logging, Connectivity Tests, flow logs and periodic reachability reviews verify actual behavior. Emergency exceptions are time-bound and automatically removed. Because GCP evaluates applicable policies and rules by defined hierarchy and priority, I document that evaluation model and test changes in a non-production network so an apparently harmless team rule cannot silently override the intended control.
+
+### 2. Can firewall rules be managed centrally, and how would you implement centralized firewall governance in GCP?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+Yes. I use hierarchical firewall policies attached at the organization or folder level for enterprise-wide guardrails and network firewall policies or centrally managed VPC rules for environment-specific controls. The organization policy defines mandatory controls such as blocking prohibited ingress, while folder policies distinguish production from non-production and host-project policies handle shared application paths. A dedicated network-security repository stores rules as code with reusable Terraform modules, reserved priority ranges, secure tags or service-account targets, ownership metadata and expiry for temporary access. Pull requests run formatting, validation, policy tests and a Terraform plan, then require the correct network and security approvers before a controlled apply. Teams request connectivity through a small contract—source identity or tag, destination, protocol, business reason and duration—instead of editing rules directly. Firewall logging, flow logs, Connectivity Tests, Cloud Asset Inventory and drift detection provide evidence and identify shadow rules. I include a tested emergency process, but every bypass is short-lived, independently approved and audited. This gives central governance without turning the network team into a manual ticket bottleneck.
+
+### 3. An external customer cannot access an application running on a private GKE cluster without internet access. How would you provide access?
+
+**Type:** Design / Architecture
+
+**Answer:**
+
+A private cluster can keep nodes and the control plane private while exposing only the application through an approved frontend. If public customer access is required, I place an external Application Load Balancer in front of a GKE Gateway or Ingress backend, terminate managed TLS, use Cloud Armor and expose only the required hostname and paths; the Pods and nodes remain private. If the customer has a private enterprise network, HA VPN, Interconnect or another approved private connectivity service can reach an internal load balancer and private DNS instead. Identity-aware access or an API gateway may be appropriate for authenticated HTTP applications. I validate DNS, certificate, frontend policy, backend health, firewall path and application authorization end to end. The choice is driven by customer network capability and exposure requirements, not by making cluster nodes public.
+
+### 4. How would you design VPC networking for Development, Staging and Production environments?
+
+**Type:** Design / Architecture
+
+**Answer:**
+
+I place environments in separate projects and use separate VPC or Shared VPC network domains where blast radius and policy require it; production is never simply another subnet that every developer can administer. A common enterprise design has dedicated production and non-production Shared VPC host projects, with Dev and Staging separated by projects and subnets and stricter isolation added when their trust differs. IP planning reserves non-overlapping regional subnet, Pod and Service ranges so VPN, Interconnect, peering or Private Service Connect remain possible. Central network teams own subnets, DNS, NAT, routes and hierarchical firewall guardrails, while application teams receive limited subnet use. Workloads use private IPs, Private Google Access and controlled egress; public exposure occurs only through approved load balancers, WAF and identity controls. Shared services such as CI/CD, artifact storage, DNS forwarding and observability sit in dedicated projects and expose narrow interfaces rather than broad transitive access. Terraform modules, connectivity tests, flow logs, firewall logging and policy checks keep environments consistent, while production requires stronger approvals, restricted access, redundancy and audit retention.
+
+### 5. How do you expose microservices externally through a Gateway or Ingress?
+
+**Type:** Interview question
+
+**Answer:**
+
+I define a managed Gateway or Ingress with TLS certificates and attach host/path routes to Kubernetes Services. The GKE controller creates the Google Cloud load-balancing resources and NEGs, and health checks determine eligible Pod endpoints. DNS points the approved hostname to the frontend. The platform owns Gateway policy; application teams own permitted routes through GitOps and cannot expose arbitrary services.
+
+### 6. Explain the request flow from the Internet through the load balancer or Gateway and Kubernetes to the application.
+
+**Type:** Interview question
+
+**Answer:**
+
+DNS resolves the hostname to the load-balancer frontend. TLS terminates at the proxy, security policy is evaluated and the URL map selects a backend from the matching Gateway and HTTPRoute host/path rules. The backend service chooses a healthy NEG endpoint, and traffic reaches the ready Pod IP and target port. The response returns through the proxy; logs and traces correlate every layer.
+
+### 7. How many Gateways would you use for more than 100 microservices?
+
+**Type:** Interview question
+
+**Answer:**
+
+The count follows trust, exposure, ownership, certificate, policy and failure-domain requirements, not service count. Many services can share a Gateway with delegated HTTPRoutes, while public, private, regulated or independently operated domains may use separate Gateways. I avoid both one Gateway for every service and one uncontrolled enterprise-wide Gateway; capacity, quotas and blast radius are tested.
+
+### 8. Can multiple DNS names point to the same Gateway?
+
+**Type:** Interview question
+
+**Answer:**
+
+Yes. Multiple DNS records can resolve to the same load-balancer address, and Gateway listeners and HTTPRoutes match their hostnames. TLS certificates must cover every name, and route attachment must be authorized. Sharing reduces frontends but increases policy and blast-radius coupling, so ownership and limits remain explicit.
+
+### 9. How does host-based and path-based routing work at the Gateway?
+
+**Type:** Interview question
+
+**Answer:**
+
+A Gateway listener accepts specified hostnames, ports and protocols. Attached HTTPRoutes define `hostnames` and ordered path, header or method matches, then `backendRefs` select Services. `abc.company.com/payments` and `xyz.company.com/payments` can therefore reach different backends on one frontend. The controller translates desired state into load-balancer URL maps and backend services.
+
+### 10. Explain the complete request path from https://api.company.com/payment to a Kubernetes pod.
+
+**Type:** Interview question
+
+**Answer:**
+
+DNS resolves `api.company.com` to the global load-balancer frontend. The proxy completes TLS, applies Cloud Armor and selects the `/payment` rule. Its backend service chooses a healthy NEG endpoint created from a ready Pod. Traffic crosses the VPC to the Pod IP and container target port; application calls use internal services and dependencies. The response returns through the proxy, with trace context spanning the path.
+
+### 11. Does DNS directly know about Kubernetes pods?
+
+**Type:** Interview question
+
+**Answer:**
+
+Public DNS normally knows only the stable load-balancer or Gateway address, not ephemeral Pod IPs. Inside the cluster, Kubernetes DNS resolves Service names to a ClusterIP or headless-service records. Controllers update endpoint and NEG membership as Pods change. This separation lets Pods be replaced without changing the customer hostname.
+
+### 12. How does a Gateway know which Kubernetes Service should receive a request?
+
+**Type:** Interview question
+
+**Answer:**
+
+An attached HTTPRoute declares host and path matches and names the destination Service in `backendRefs`. `parentRefs` attaches that route to an allowed Gateway listener. The controller validates references and permissions, then programs the load balancer's URL map and backend resources. Gateway status conditions show whether the route was accepted and references resolved.
+
+### 13. How do you configure a backend in Kubernetes Gateway API?
+
+**Type:** Interview question
+
+**Answer:**
+
+I create a Service exposing the workload port, then an HTTPRoute rule with `backendRefs` containing the Service name, port and optional weight. The route attaches to a Gateway through `parentRefs` and includes host or path matches. Cross-namespace references require explicit authorization such as ReferenceGrant where supported. I verify Accepted and ResolvedRefs conditions plus backend health.
+
+### 14. What are parentRefs and backendRefs in an HTTPRoute?
+
+**Type:** Interview question
+
+**Answer:**
+
+`parentRefs` identify the Gateway or listener to which the route wants to attach; listener policy controls whether attachment is allowed. `backendRefs` identify Services or other supported backend objects receiving matching traffic, including port and optional weight. They describe desired relationships, while status conditions report whether the controller accepted and resolved them.
+
+### 15. If a request comes for abc.company.com, how do you configure the Gateway to route it to service-one?
+
+**Type:** Interview question
+
+**Answer:**
+
+I configure a TLS listener that permits `abc.company.com`, create an HTTPRoute with `hostnames: [abc.company.com]`, attach it to that Gateway and set a rule whose backendRef names `service-one` and its Service port. DNS points the hostname to the Gateway frontend and the certificate covers it. GitOps applies both route and service, and status plus a synthetic request validates routing.
+
+### 16. How does the GKE Gateway Controller use Gateway, HTTPRoute, Service and endpoint information?
+
+**Type:** Interview question
+
+**Answer:**
+
+The controller watches these Kubernetes resources, validates attachment and references, and translates them into Google Cloud forwarding, proxy, URL-map, health-check, backend-service and NEG configuration. Services define the backend contract and ready EndpointSlices drive endpoint membership. It continually reconciles changes and writes status back to Kubernetes. The controller is the control plane, not the per-request proxy.
+
+### 17. Is the Gateway Controller part of the actual runtime request path?
+
+**Type:** Interview question
+
+**Answer:**
+
+No. It watches desired state and programs the managed load-balancer data plane. Client requests flow through Google Cloud load-balancing infrastructure to healthy backends without traversing the controller process. If the controller is temporarily unavailable, existing programmed traffic can continue, but route and backend changes will not reconcile until it recovers.
+
+### 18. What is the difference between the Gateway control plane and actual data-plane traffic?
+
+**Type:** Interview question
+
+**Answer:**
+
+The control plane consists of Kubernetes APIs, the Gateway controller and cloud APIs that validate and program listeners, routes, policies, health checks and backends. The data plane is the managed proxy and network path handling live packets and requests. Control-plane convergence affects configuration changes; data-plane health affects customer traffic. Monitoring and failure response distinguish the two.
+
+### 19. How does traffic physically travel from a Google Cloud Gateway or load balancer to GKE pods?
+
+**Type:** Interview question
+
+**Answer:**
+
+The Google frontend receives the connection and the proxy selects a backend service. With container-native load balancing, the backend contains zonal NEGs whose endpoints are Pod IP and port pairs. After health and policy evaluation, Google Cloud sends traffic through the VPC to the selected Pod endpoint. Firewall and network policy must allow the required paths, and return traffic follows the managed connection.
+
+### 20. What are Network Endpoint Groups, and how are they used by GKE?
+
+**Type:** Interview question
+
+**Answer:**
+
+A NEG is a Google Cloud backend-membership object containing endpoints rather than managing a VM fleet. GKE container-native load balancing creates zonal `GCE_VM_IP_PORT` NEGs representing Pod IPs and serving ports and keeps membership synchronized with workload readiness. Backend services attach those NEGs, perform health checks and distribute traffic directly to healthy Pod endpoints.
+
+### 21. Does traffic always pass through the Kubernetes ClusterIP Service, or can the Google load balancer route directly to pod IPs through NEGs?
+
+**Type:** Interview question
+
+**Answer:**
+
+It does not always pass through the ClusterIP. With GKE container-native load balancing, the Google load balancer can select NEG endpoints containing Pod IPs and ports and route directly to them. The Service and controller still define and discover the backend relationship, but the runtime data path avoids an extra node or ClusterIP hop. Internal service-to-service traffic may still use ClusterIP.
+
+### 22. In a multi-cluster environment with a single Gateway, how do you route traffic to a particular service?
+
+**Type:** Interview question
+
+**Answer:**
+
+The service is exported from member clusters and represented through a multi-cluster service abstraction such as ServiceImport. A multi-cluster HTTPRoute matches the hostname or path and references that imported service and port. The controller builds backends from healthy endpoints across selected clusters, and locality and health influence traffic. Fleet membership, namespaces and service names must be consistent with the design.
+
+### 23. What are ServiceExport and ServiceImport in GKE Multi-Cluster Services?
+
+**Type:** Interview question
+
+**Answer:**
+
+ServiceExport declares that a Kubernetes Service in a fleet member cluster should be discoverable across the fleet. The multi-cluster services controller creates or represents a corresponding ServiceImport in member clusters, providing a common identity and aggregated endpoints. They support cross-cluster discovery and multi-cluster routing; status conditions reveal conflicts or export failures.
+
+### 24. How does an HTTPRoute reference a ServiceImport as its backend?
+
+**Type:** Interview question
+
+**Answer:**
+
+For the GKE multi-cluster routing API, the route uses the supported multi-cluster route kind and a backend reference whose group and kind identify `ServiceImport`, plus its name and port. Exact API group and feature support must match the installed GKE controller version. I validate CRDs and use status `Accepted` and `ResolvedRefs` rather than copying a single-cluster Service reference blindly.
+
+### 25. If abc.company.com should reach Service 1 across multiple clusters, how is that mapping configured?
+
+**Type:** Interview question
+
+**Answer:**
+
+DNS points `abc.company.com` to the multi-cluster Gateway frontend. A listener accepts that hostname, and a multi-cluster HTTPRoute with the same hostname references Service 1's ServiceImport. Each participating cluster exports the consistently named Service. The controller aggregates healthy backends across clusters and programs the global load balancer; health and traffic policy govern regional distribution.
+
+### 26. Does the Gateway need to be restarted when a new service or backend is added?
+
+**Type:** Interview question
+
+**Answer:**
+
+No. Gateway API is declarative. Creating an accepted HTTPRoute, Service and endpoints causes the controller to reconcile new load-balancer configuration dynamically. Existing data-plane infrastructure continues serving traffic while the change propagates. I wait for route and backend status, health checks and a synthetic request rather than restarting the Gateway or controller.
+
+### 27. How does the Gateway controller dynamically reconcile a newly created route or backend into the load balancer?
+
+**Type:** Interview question
+
+**Answer:**
+
+The controller's watches detect the new or changed object, resolve parent and backend references, validate policy and compute desired cloud resources. It calls Google Cloud APIs to create or update URL maps, backend services, health checks and NEG associations, then records status and observed generation. Reconciliation is idempotent and continuous: later drift or endpoint changes trigger another comparison and update without a runtime restart.
+
+---
+
+## GCP / Operations
+
+1 question
+
+### 1. How do you monitor resource and service usage, detect configuration drift, and which GCP services or tools do you use?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I separate operational usage, security or administrative change, and infrastructure-as-code drift. Cloud Monitoring provides dashboards, metrics and alerts for CPU, memory, disk, network, GKE Pods and nodes, load balancers, databases, quotas and service-specific saturation. I add application SLIs such as traffic, error rate and latency, and use bounded labels so monitoring remains useful and affordable. Cloud Logging centralizes application, platform and system logs, while log-based metrics and alerts identify recurring failures. Cloud Audit Logs answer who changed which resource, when and through which identity; I route required audit records to a protected central project and alert on high-risk operations. Security Command Center supplies asset posture, vulnerability, exposure and threat findings and routes them to owners with remediation SLAs.
+
+For Terraform-managed infrastructure, I run scheduled and post-change `terraform plan` operations using the same pinned configuration, provider versions, remote state and least-privilege identity as the deployment pipeline. A non-empty reviewed plan indicates that live infrastructure, configuration or state differs; it does not automatically prove an unauthorized manual change, so I correlate it with Audit Logs and recent commits. Cloud Asset Inventory queries or feeds help detect resources outside Terraform and policy violations across projects. Drift alerts create a ticket or incident according to risk; we either revert the manual change through an approved apply, import and codify a legitimate resource, or update code after review. I do not auto-apply every detected difference, because destructive or externally caused drift needs human validation and a recovery plan.
 
 ---
 
@@ -14928,6 +15780,68 @@ Use DAGs, caching, and lightweight checkouts: convert sequential stages to needs
 
 ---
 
+## GitOps
+
+7 questions
+
+### 1. What is the difference between traditional CI/CD deployment and Argo CD deployment, including push-based deployment versus pull-based GitOps?
+
+**Type:** Comparison
+
+**Answer:**
+
+In a traditional push model, the CI runner holds cluster credentials and executes Helm or kubectl against the target environment after building the artifact. Its completion proves that a command ran, but not necessarily that the cluster remains aligned later. With Argo CD, CI builds, tests, scans and publishes an immutable artifact, then updates the desired version in a Git environment repository. Argo CD runs inside or near the cluster, pulls the approved desired state, compares it with live resources and continuously reconciles differences. Git becomes the auditable deployment intent and rollback is normally a reviewed revert. The pull model reduces inbound CI access to clusters and detects drift, but it introduces controller availability, repository and promotion design, credential scope, multi-tenant controls and reconciliation risks. CI and GitOps are complementary: CI produces trusted artifacts, while Argo CD performs continuous delivery and convergence.
+
+### 2. If someone manually changes a Kubernetes resource managed by Argo CD, what will Argo CD do, and what happens when self-healing is enabled?
+
+**Type:** Scenario
+
+**Answer:**
+
+Argo CD compares live state with the manifests rendered from Git. A manual change normally makes the Application `OutOfSync` and the UI and metrics show the diff. If automated sync with self-heal is enabled and the field is managed rather than deliberately ignored, Argo CD reconciles the live resource back to the Git-defined value. Without self-heal, it reports drift until an authorized sync or another change corrects it. Prune is a separate option governing resources removed from desired state. For incidents, manual changes may be overwritten quickly, so break-glass procedures either update Git first or temporarily suspend the relevant reconciliation with approval, audit and a deadline. Afterward I commit the correct desired state and re-enable convergence; the cluster is not the permanent source of truth.
+
+### 3. How does Argo CD handle ConfigMap and configuration changes?
+
+**Type:** Interview question
+
+**Answer:**
+
+Argo CD renders the Git revision, compares it with live resources and applies the changed ConfigMap during sync. It does not inherently restart Pods that consume the ConfigMap. A checksum annotation changes the Deployment template in the same commit and produces a rollout; a reload controller or application reload is another explicit design. Sync waves can order configuration before workloads when dependencies require it.
+
+### 4. How do you manage environment-specific Helm values for dev, UAT and production?
+
+**Type:** Interview question
+
+**Answer:**
+
+The base chart contains common defaults and a JSON schema; environment repositories contain small reviewed values files or Application parameters for dev, UAT and prod. Image digests and chart versions are promoted rather than rebuilt. Secrets are referenced from a manager, not stored in values. Production changes require stronger approval, and excessive value divergence triggers a chart or platform-contract review.
+
+### 5. How does Argo CD deploy a Helm-based application?
+
+**Type:** Interview question
+
+**Answer:**
+
+An Argo CD Application points to a Git repository and chart path or a Helm repository plus version, target cluster and namespace, and approved values. Argo renders Helm templates itself, compares them with live state and applies changes according to sync policy. Automated sync, prune and self-heal are separate choices. Health checks, sync waves, projects and RBAC constrain ordering and tenancy.
+
+### 6. How do you roll back a failed GitOps or Helm deployment?
+
+**Type:** Interview question
+
+**Answer:**
+
+I stop promotion and revert the environment Git commit to the last known-good chart, image digest and values, allowing Argo CD to reconcile. I verify rollout, readiness, error rate, latency and business checks. Database and CRD changes must be backward compatible or have their own tested recovery. An imperative rollback is reserved for incident mitigation and is immediately reconciled back into Git.
+
+### 7. How do you automate new-service registration and routing with Helm, Argo CD and GitOps?
+
+**Type:** Interview question
+
+**Answer:**
+
+A catalog template creates the service repository, Helm values and environment declaration. The chart renders Deployment, Service and authorized HTTPRoute, plus ServiceExport for multi-cluster exposure. CI validates host ownership, schema, policy and rendered manifests. After approval, Argo CD syncs the commit; the Gateway controller observes the resources and programs the load balancer. Status and synthetic tests complete onboarding.
+
+---
+
 ## GKE
 
 22 questions
@@ -15348,7 +16262,7 @@ GKE Standard is Google Cloud’s managed Kubernetes offering where Google manage
 
 **Answer:**
 
-GKE Autopilot is a managed cluster mode where Google manages node provisioning, autoscaling, OS image & kernel patching, node upgrades and repairs, and control plane operations. You create an Autopilot cluster with gcloud container clusters create CLUSTER --enable-autopilot; you do not create node pools or SSH into nodes. Workloads are scheduled by Kubernetes but must conform to Autopilot constraints (no privileged host-level access, restricted hostPath/hostNetwork use). Billing is based on pod resource requests (vCPU, memory, ephemeral storage) rather than per-node VM hours. Verify with gcloud container clusters describe CLUSTER and kubectl get nodes/pods to observe Google-managed nodes and running pods.
+GKE Autopilot is a managed GKE mode in which Google manages the cluster's nodes, scaling and many security and operational defaults based on workload specifications. Teams deploy Kubernetes workloads and pay according to the applicable Autopilot resource model instead of planning conventional node pools. It suits most standard production workloads, while its guardrails can restrict privileged or highly specialized configurations.
 
 ### 11. What is the difference between Standard and Autopilot?
 
@@ -15537,6 +16451,107 @@ gcloud container node-pools create POOL --cluster CLUSTER --enable-autoscaling -
 Or resize manually:
 gcloud container clusters resize CLUSTER --node-pool POOL --num-nodes N
 For automatic provisioning enable node auto-provisioning on the cluster (gcloud container clusters update CLUSTER --enable-autoprovisioning). Drain and cordon nodes for maintenance with kubectl cordon NODE and kubectl drain NODE --ignore-daemonsets --delete-local-data. Verify with kubectl get nodes, kubectl describe node, inspect PodDisruptionBudgets, and view autoscaler activity via kubectl -n kube-system logs deployment/cluster-autoscaler.
+
+---
+
+## Golang
+
+1 question
+
+### 1. Write a Go HTTP handler that accepts a JSON POST request containing a transaction amount and account ID, validates the inputs, returns structured JSON errors and implements proper error handling.
+
+**Type:** Coding
+
+**Answer:**
+
+I would represent money as an integer number of minor units, such as cents, rather than float64, to avoid binary floating-point rounding. The handler restricts the method and content type, limits the body, rejects unknown or trailing JSON, validates both fields and returns one consistent JSON envelope.
+
+```go
+package api
+
+import (
+    "encoding/json"
+    "errors"
+    "io"
+    "net/http"
+    "strings"
+)
+
+type transactionRequest struct {
+    AccountID  string `json:"account_id"`
+    AmountCents int64 `json:"amount_cents"`
+}
+
+type errorResponse struct {
+    Error struct {
+        Code    string `json:"code"`
+        Message string `json:"message"`
+    } `json:"error"`
+}
+
+func writeJSON(w http.ResponseWriter, status int, value any) {
+    w.Header().Set("Content-Type", "application/json")
+    w.WriteHeader(status)
+    _ = json.NewEncoder(w).Encode(value)
+}
+
+func writeError(w http.ResponseWriter, status int, code, message string) {
+    var response errorResponse
+    response.Error.Code = code
+    response.Error.Message = message
+    writeJSON(w, status, response)
+}
+
+func TransactionHandler(w http.ResponseWriter, r *http.Request) {
+    if r.Method != http.MethodPost {
+        w.Header().Set("Allow", http.MethodPost)
+        writeError(w, http.StatusMethodNotAllowed, "method_not_allowed", "use POST")
+        return
+    }
+    mediaType := strings.ToLower(strings.TrimSpace(strings.Split(r.Header.Get("Content-Type"), ";")[0]))
+    if mediaType != "application/json" {
+        writeError(w, http.StatusUnsupportedMediaType, "unsupported_media_type", "Content-Type must be application/json")
+        return
+    }
+
+    r.Body = http.MaxBytesReader(w, r.Body, 1<<20)
+    decoder := json.NewDecoder(r.Body)
+    decoder.DisallowUnknownFields()
+
+    var request transactionRequest
+    if err := decoder.Decode(&request); err != nil {
+        var maxBytesError *http.MaxBytesError
+        if errors.As(err, &maxBytesError) {
+            writeError(w, http.StatusRequestEntityTooLarge, "body_too_large", "request body is too large")
+            return
+        }
+        writeError(w, http.StatusBadRequest, "invalid_json", "request body must be valid JSON")
+        return
+    }
+    if err := decoder.Decode(&struct{}{}); err != io.EOF {
+        writeError(w, http.StatusBadRequest, "invalid_json", "request body must contain one JSON object")
+        return
+    }
+
+    request.AccountID = strings.TrimSpace(request.AccountID)
+    if request.AccountID == "" {
+        writeError(w, http.StatusUnprocessableEntity, "invalid_account_id", "account_id is required")
+        return
+    }
+    if request.AmountCents <= 0 {
+        writeError(w, http.StatusUnprocessableEntity, "invalid_amount", "amount_cents must be greater than zero")
+        return
+    }
+
+    writeJSON(w, http.StatusAccepted, map[string]any{
+        "status":       "accepted",
+        "account_id":   request.AccountID,
+        "amount_cents": request.AmountCents,
+    })
+}
+```
+
+In production I would inject a transaction service into a handler type, pass r.Context() to it, map typed domain errors to safe status codes, log only non-sensitive correlation data and test malformed bodies, unknown fields, oversized requests, cancellation and service failures.
 
 ---
 
@@ -18698,6 +19713,44 @@ Corrective actions are steps taken to eliminate the cause of an observed inciden
 
 ---
 
+## Infrastructure as Code - Terraform & Ansible
+
+4 questions
+
+### 1. How have you implemented Infrastructure as Code using tools like Terraform or Ansible to automate infrastructure provisioning and improve deployment consistency?
+
+**Type:** Experience
+
+**Answer:**
+
+I use Terraform for declarative cloud resources and Ansible for operating-system or software configuration where image-based delivery is not suitable. Reusable versioned modules and roles have validated inputs, tests and documentation; environment roots contain only composition and values. Pull requests run lint, security, policy and plan checks, then approved pipelines apply with short-lived identity and protected state. Immutable images and idempotent configuration reduce drift.
+
+### 2. How do you handle secrets and sensitive data management within your IaC workflows to ensure security?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+Secrets live in Secret Manager or the CI secret store, never source control, images, ordinary variables or logs. Pipelines use short-lived workload identity and workloads fetch secrets at runtime. If Terraform must handle a value, I mark it sensitive, restrict and encrypt state and plan artifacts, and minimize readers because redaction does not remove it from state. Rotation, audit logging and secret scanning complete the control.
+
+### 3. How do you automate and test your infrastructure deployments to ensure consistent and error-free provisioning across environments?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+CI runs formatting, validation, linting, security and policy tests, then integration-tests modules in an isolated project. Each environment receives a saved, reviewed plan using pinned module and provider versions; development and staging apply before production. Post-apply tests verify APIs, network paths, IAM and health. Protected remote state, serialized applies, drift detection and a documented recovery plan reduce inconsistency and partial-change risk.
+
+### 4. Can you explain a challenging scenario where you had to troubleshoot and fix an infrastructure provisioning failure using your IaC and automation tools?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+I preserve logs and state first, locate the exact failing resource and determine whether the failure is configuration, identity, quota, API, dependency, concurrency or transient provider behavior. In one representative case, parallel pipelines targeted the same state and produced inconsistent plans; we stopped writers, verified real resources against state, recovered safely, then serialized applies and added concurrency controls. I validate the fix in a non-production stack and add a regression test or policy.
+
+---
+
 ## Internal Load Balancers and Private Connectivity
 
 15 questions
@@ -18838,7 +19891,7 @@ Place the appliance in-path or force return traffic through it using connection�
 
 ## Jenkins
 
-50 questions
+63 questions
 
 ### 1. What is Jenkins?
 
@@ -19459,6 +20512,110 @@ Verify with helm list -n my-ns and kubectl get pods -n my-ns to confirm rollout.
 **Answer:**
 
 Use a gated change + manual sync pattern: require code promotion via a protected-branch PR (GitHub branch protection: required reviews and required status checks) and a paused CI job that needs human approval. In Jenkins Pipeline use the input step: input message: "Approve deploy to prod?"; when paused the console shows "Waiting for input". You can approve via the Jenkins UI or programmatically with the input submit endpoint (POST /job/<jobName>/<buildNumber>/input/<inputId>/submit with Jenkins-Crumb). For GitOps (Argo CD) keep spec.syncPolicy.automated unset (manual sync) and run argocd app sync myapp to deploy. Verify by checking Jenkins console for approval state and argocd app get myapp shows STATUS sync: Synced and HEALTH: Healthy after approval.
+
+### 51. Do you work on Jenkins?
+
+**Type:** Experience
+
+**Answer:**
+
+Yes. I use Jenkins for application and infrastructure pipelines, including source checkout, tests, container builds, security scans, Terraform validation and plans, artifact publication, approvals, deployments and post-deployment verification. I have worked with controllers, agents, shared libraries, credentials, plugins, webhooks, job permissions and pipeline troubleshooting. For production I prefer ephemeral agents, pinned tool images, least-privilege short-lived cloud identity, pipeline-as-code, protected artifacts and centralized logs and metrics. I support Jenkins as a delivery platform while keeping application ownership with the relevant team.
+
+### 52. Where do you store passwords or credentials used by Jenkins pipelines?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+For legacy credentials I use the Jenkins Credentials store with folder or job scope, role-based access and credential-binding mechanisms that mask values. For cloud access I prefer short-lived identity through workload federation or an attached workload role rather than a stored service-account key. Application and deployment secrets belong in a dedicated manager such as Google Secret Manager, HashiCorp Vault or AWS Secrets Manager and are fetched at runtime over an authenticated path. Secrets never go into Jenkinsfiles, source control, build parameters, container images or ordinary logs. I rotate them, audit access and ensure untrusted pull-request jobs cannot access production credentials.
+
+### 53. If suddenly all Jenkins pipelines start failing, what could be the likely causes?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+When all jobs fail at once, I suspect a shared dependency before individual application code: controller health or disk pressure, unavailable or incompatible agents, an expired certificate or credential, DNS or proxy failure, source-control or artifact-registry outage, cloud IAM change, exhausted quota, a broken shared library, plugin upgrade, tool-image change or secrets-manager outage. I compare the first failure time with audit logs and platform changes and identify whether jobs fail while queuing, checking out, building, publishing or deploying. A common error signature across unrelated jobs is the fastest clue to the shared layer.
+
+### 54. What would be your troubleshooting approach if all Jenkins pipelines are failing?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+I pause nonessential retries, establish when failures began and group jobs by the first failing stage and error. I verify controller health, CPU, memory, disk, queue, executor and agent state, then test shared dependencies from the same agent environment: DNS, TLS, proxy, source control, artifact registry, cloud APIs and secrets provider. I inspect recent configuration, plugin, shared-library, credential, certificate, firewall and IAM changes and compare a previously successful build. If a common change is responsible, I roll it back or fail over the dependency and run one small representative pipeline before releasing the queue. I communicate impact throughout, preserve logs and then add monitoring, expiry alerts, capacity or change controls that prevent recurrence.
+
+### 55. What kind of fix would you apply if the pipeline is getting a 403 Forbidden error?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+A 403 means the server understood the authenticated request but refused it, so I identify which hop returned it and inspect response headers and server-side audit logs. For Jenkins API requests I check user or token permissions, folder authorization and CSRF crumb requirements; for source control, registries or cloud APIs I verify token scope, expiry, service-account IAM, repository policy and whether the request originates from an allowed network. I reproduce a safe read-only request from the same agent and compare it with a known-good identity. The fix is the smallest missing permission, corrected token or approved network path—not disabling CSRF, granting administrator or making the endpoint public. I rotate exposed credentials, retest the exact operation and record the authorization change in code where possible.
+
+### 56. If the Jenkins build agent is online but the build is still stuck in the queue, what would you check?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+Online only means the agent is connected. I inspect the queue reason and verify that the job's label expression matches the agent labels, an executor is free, the node is accepting tasks and is not temporarily offline. I check throttling and concurrency plugins, locks, quiet-down mode, upstream dependencies, flyweight tasks, folder restrictions and cloud-agent provisioning caps. I also verify disk-space and node-monitor thresholds because Jenkins can keep a connected agent from scheduling work. If the job requests a container, workspace or custom resource, I confirm that provisioning succeeded. I correct the label or constraint, release only a stale lock after verifying ownership, or add safe executor capacity, then watch one queued build start.
+
+### 57. What would you troubleshoot if a Jenkins build or job fails?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+I locate the first real error rather than the final generic failure and identify the stage: checkout, dependency resolution, compile, test, scan, artifact publication, infrastructure plan or deployment. I compare the commit, parameters, agent image, credentials and dependencies with the last successful run and check whether the failure is reproducible on a clean agent. Exit code, test report, resource usage and external-service logs distinguish code failure from platform failure. I avoid blindly retrying non-idempotent deployment steps. After correcting the cause, I rerun from a clean state, verify resulting artifacts and environment health, and improve the pipeline message or gate if diagnosis was unnecessarily difficult.
+
+### 58. How is Jenkins integrated with Jira technically, including the handshake and authentication?
+
+**Type:** Interview question
+
+**Answer:**
+
+A Jenkins shared library calls the Jira REST API over TLS using a dedicated least-privilege service identity, normally an API token or OAuth integration stored in Jenkins Credentials or Vault. The pipeline sends authenticated JSON containing job, build, commit, environment and incident context. Jira returns the issue key and status, which Jenkins records. Timeouts, retries, certificate validation, audit logs and secret masking are mandatory.
+
+### 59. If a Jenkins pipeline fails 100 times, will it create 100 Jira tickets, and how do you prevent duplicate tickets?
+
+**Type:** Interview question
+
+**Answer:**
+
+A naive integration could create 100 tickets. I generate a deterministic incident key from job, stage, environment and normalized error signature, then search Jira or an external deduplication store before creation. If an open issue exists, the pipeline adds a comment or increments occurrence metadata. Cooldowns, idempotency keys and close/reopen rules prevent both ticket storms and accidental suppression of a genuinely new failure.
+
+### 60. How is a Jenkins pipeline triggered automatically from GitHub?
+
+**Type:** Interview question
+
+**Answer:**
+
+A GitHub App or repository webhook sends a signed push or pull-request event to a TLS Jenkins webhook endpoint. Jenkins validates the event, maps the repository and branch to a multibranch Pipeline, fetches the Jenkinsfile and schedules a build. Webhook delivery logs, branch protections and periodic repository scanning provide recovery if an event is missed.
+
+### 61. Explain the technical handshake between GitHub and Jenkins.
+
+**Type:** Interview question
+
+**Answer:**
+
+GitHub sends an HTTPS webhook containing event headers and payload; the receiver validates the shared-secret signature or GitHub App identity and rejects replays or unsupported events. Jenkins then authenticates back to GitHub with a short-lived App installation token or narrowly scoped credential to read code and report commit status. Firewall, proxy, TLS, webhook-delivery and audit logs prove each half of the exchange.
+
+### 62. How do you restrict production deployment permissions in Jenkins?
+
+**Type:** Interview question
+
+**Answer:**
+
+Folder and job roles limit who can run or approve production stages; branch protection and environment approval require authorized reviewers. Production credentials are scoped to the deployment job, unavailable to untrusted pull requests and preferably short-lived. The deploy service account has permission only for approved resources. Audit logs record initiator, approver, artifact digest and result, and emergency access expires automatically.
+
+### 63. How do Jenkins RBAC, approval gates and service accounts work together?
+
+**Type:** Interview question
+
+**Answer:**
+
+Jenkins RBAC controls which humans can view, trigger, configure or approve a job. The approval gate proves an authorized person accepted a specific artifact and plan. The service account is the machine identity that performs the deployment with least privilege. These are separate controls: human authorization must not expose the credential, and possessing a service account must not bypass review and pipeline policy.
 
 ---
 
@@ -20705,7 +21862,7 @@ Deploy an MLflow Tracking server inside your Kubernetes cluster (Deployment + Se
 
 ## Kubernetes
 
-62 questions
+74 questions
 
 ### 1. A pod is stuck in the Pending state. How would you troubleshoot it?
 
@@ -22415,6 +23572,102 @@ Store etcd, cluster objects, and persistent data separately and verify restores.
 
 Disaster Recovery in Kubernetes is the set of processes to restore cluster control plane, cluster state, and application data after catastrophic failure. Key elements: regularly back up etcd (control plane) using etcdctl snapshot save /path/snap.db and verify with etcdctl snapshot status; back up Kubernetes resources and CRDs (kubectl get all,crd --all-namespaces -o yaml) and persistent volumes using tools like Velero (velero install; velero backup create mybackup; velero restore create --from-backup mybackup) or storage provider snapshots. Test restores to a separate cluster: restore etcd to new control plane (etcdctl snapshot restore), apply manifests, verify with kubectl get nodes,pods,svc --all-namespaces and application-level checks. Include documented runbooks and automate backups and recovery verification.
 
+### 63. The requirement is to submit a job to GKE, process it using the required compute resources, and terminate or scale down the resources afterward. How would you implement this?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+A submission API or pipeline writes work to a queue or creates a Kubernetes Job with an immutable image, resource requests, service account, deadline, retry and completion policy. The Job is scheduled onto a dedicated node pool through labels, affinity and taints. If capacity is absent, Cluster Autoscaler grows the pool; for variable queued work, KEDA can scale worker Pods and a batch scheduler can enforce quotas and fair sharing. Workers claim idempotent units, checkpoint progress externally and write results to durable storage. On success or terminal failure, the Job records status, emits metrics and logs and cleans temporary resources through TTL controls. When Pods terminate and no protected workload needs the nodes, Cluster Autoscaler scales the pool back toward zero after its safety checks and delay. I test failure, duplicate delivery, interruption, quota exhaustion and cleanup so scale-down never deletes the only copy of state.
+
+### 64. Why do we need GKE for this kind of workload?
+
+**Type:** Conceptual
+
+**Answer:**
+
+GKE is useful when the organization already has a Kubernetes platform and the workload benefits from container scheduling, declarative Jobs, bin packing, node autoscaling, retries, quotas, isolation, standardized identity, observability and one operating model shared with other services. It can run many independent tasks across an elastic pool and cleanly separate application packaging from node lifecycle. It is not automatically required. A managed batch service, Cloud Run Jobs, Vertex AI custom jobs or a VM managed instance group may be simpler depending on duration, accelerator needs, scale, startup time and operational ownership. I choose GKE only when its scheduling and platform capabilities justify its complexity.
+
+### 65. Why use GKE instead of simply using VMs for these jobs?
+
+**Type:** Comparison
+
+**Answer:**
+
+With raw VMs the team must build job placement, machine provisioning, health, retries, concurrency, cleanup, image or dependency consistency, tenant isolation and scaling orchestration. GKE provides those through container images, Jobs, the scheduler, controllers, quotas and node autoscaling, and it can improve utilization by packing tasks onto shared nodes. VMs may still be better for a small number of long-running jobs, software that cannot be containerized, specialized host control or a team without Kubernetes operating maturity. I compare total operational effort, startup latency, cost, workload isolation, scheduling requirements and existing platform skills rather than treating Kubernetes as the default answer.
+
+### 66. What is HPA, how does it work, and what is the difference between HPA and Cluster Autoscaler?
+
+**Type:** Comparison
+
+**Answer:**
+
+Horizontal Pod Autoscaler changes the replica count of a scalable workload such as a Deployment from observed CPU, memory, custom or external metrics relative to a target. It periodically calculates desired replicas, applies tolerance and stabilization behavior and updates the workload's scale subresource. Correct resource requests are essential for utilization-based targets. Cluster Autoscaler operates at a different layer: it adds nodes when Pods remain unschedulable and removes underused nodes only when their Pods can move safely. HPA creates demand for more Pods; the scheduler places them; Cluster Autoscaler supplies node capacity if no existing node can fit them. HPA does not resize nodes, and Cluster Autoscaler does not normally create application replicas. Limits, quotas, disruption budgets, topology, scale-down safety and realistic load tests must be designed across both layers.
+
+### 67. Do you have experience with Helm charts, including deploying common components across clusters and managing similar deployments for multiple microservices?
+
+**Type:** Experience
+
+**Answer:**
+
+Yes. I use Helm to package reusable Kubernetes resources such as Deployments, Services, service accounts, autoscaling, disruption budgets, ConfigMaps, Ingress or Gateway resources and policy-compatible security settings. A common library chart holds approved labels, probes, resource configuration and security defaults, while each microservice supplies a small values file for image digest, ports, capacity and environment-specific integration. For shared components such as monitoring agents, policy controllers or security defenders, I maintain a separately versioned chart and deploy it through GitOps to selected clusters using cluster-specific values and staged rollout rings. CI runs `helm lint`, renders templates, validates schemas and Kubernetes policy, scans images and tests upgrades before publishing an immutable chart version. I avoid one chart with excessive conditionals, never place secret values in ordinary values files and document ownership, supported versions, rollback and CRD handling.
+
+### 68. When a ConfigMap changes, how do running pods receive the new configuration?
+
+**Type:** Interview question
+
+**Answer:**
+
+Environment-variable values from a ConfigMap are fixed when the container starts and require a new Pod. Mounted ConfigMap volumes are updated eventually by the kubelet, but applications must watch and safely reload the file; `subPath` mounts do not receive normal updates. I choose explicit reload or controlled rollout based on application behavior and never assume a ConfigMap change automatically restarts Pods.
+
+### 69. How can you automatically restart or roll out pods after a ConfigMap change without manually running kubectl rollout restart?
+
+**Type:** Interview question
+
+**Answer:**
+
+For Helm-managed workloads I add a checksum of the rendered ConfigMap to the Pod-template annotation. A configuration change alters the Deployment template hash and triggers its normal rollout. Alternatives include a well-governed reloader controller or an application that supports safe dynamic reload. GitOps commits remain the source of truth, and rollout health gates prevent a bad configuration reaching every replica.
+
+### 70. How does a Helm checksum annotation trigger a new Kubernetes rollout?
+
+**Type:** Interview question
+
+**Answer:**
+
+The chart renders something like `checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}` under `spec.template.metadata.annotations`. When ConfigMap content changes, the checksum changes the Pod template. The Deployment controller sees a new template hash, creates a new ReplicaSet and performs the configured rolling update. The annotation must hash the actual rendered configuration.
+
+### 71. How do you package all Kubernetes resources for a microservice?
+
+**Type:** Interview question
+
+**Answer:**
+
+I use a versioned Helm chart or Kustomize package containing the workload, Service, service account, configuration references, autoscaling, disruption budget, network policy and optional route and observability resources. Values expose a small validated contract. Secrets remain external. CI renders and validates the package, and GitOps promotes an immutable chart and image digest through environments.
+
+### 72. What resources are normally included in a Helm chart?
+
+**Type:** Interview question
+
+**Answer:**
+
+Typical resources are Deployment or StatefulSet, Service, service account, ConfigMap, HPA, PodDisruptionBudget, NetworkPolicy and Ingress, Gateway route or ServiceMonitor when needed. RBAC, Jobs and PVCs are included only when the service owns them. Cluster-scoped CRDs and shared controllers usually have separate lifecycle charts to avoid unsafe coupling.
+
+### 73. What is the difference between a pod being Running, Ready and actually capable of serving business requests?
+
+**Type:** Interview question
+
+**Answer:**
+
+Running is the Pod phase and means containers have started or are running. Ready means configured readiness conditions currently allow the endpoint to receive Service traffic. Business-capable means a real critical operation succeeds within its SLO, including required dependencies and valid configuration. A weak readiness probe can mark a process Ready even when it cannot serve customers, so synthetic business checks complement local probes.
+
+### 74. How can a common Helm or platform template automatically generate Service, ServiceExport and HTTPRoute resources?
+
+**Type:** Interview question
+
+**Answer:**
+
+A validated values schema captures service name, ports, route, exposure and multi-cluster flag. Named templates produce consistent labels and resource names; conditional templates render ServiceExport and the correct route kind only when approved. `backendRefs` use the generated Service or ServiceImport contract. CI renders every supported values combination, runs schema and policy tests and prevents duplicate hosts before GitOps promotion.
+
 ---
 
 ## Kubernetes — Architecture Decisions
@@ -22697,9 +23950,41 @@ No. A Deployment (apps/v1) is a declarative controller that creates or updates R
 
 ## Kubernetes / GKE
 
-2 questions
+6 questions
 
-### 1. If a Kubernetes pod is stuck in Pending state or CrashLoopBackOff, how would you troubleshoot it?
+### 1. How have you managed and optimized Kubernetes clusters in production to ensure scalability and performance?
+
+**Type:** Experience
+
+**Answer:**
+
+I right-size requests and limits from observed usage, use HPA on meaningful metrics and Cluster Autoscaler for node capacity, and spread replicas across zones and nodes. I monitor throttling, OOMs, pending Pods, node pressure, control-plane health, latency and cost. Release channels, maintenance windows, PodDisruptionBudgets, autoscaling safeguards, load tests and capacity forecasts keep performance predictable while avoiding permanent overprovisioning.
+
+### 2. How do you handle Kubernetes cluster upgrades and ensure zero downtime during maintenance windows?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I check deprecations and release notes, test the target version in staging, verify add-on and API compatibility, backups and rollback limits, then upgrade the control plane and node pools progressively. Surge upgrades or a new node pool drain workloads gradually. Multiple replicas, readiness probes, topology spread and PodDisruptionBudgets preserve capacity, while canary workloads and SLO monitoring gate continuation. Stateful workloads and strict budgets are rehearsed separately.
+
+### 3. How do you approach troubleshooting and resolving networking issues within Kubernetes clusters, especially related to service discovery and pod communication?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+I scope source, destination, protocol and failure type, then test DNS resolution and direct Pod IP, Service ClusterIP and endpoint connectivity from an affected Pod. I inspect Services, EndpointSlices, selectors, readiness, ports, NetworkPolicies, routes, CNI or dataplane health, kube-proxy behavior where applicable, firewall rules and VPC flow logs. Packet capture, DNS logs and traces isolate the hop. I change one hypothesis at a time and document the proven cause.
+
+### 4. Can you share an example where you resolved a complex Kubernetes networking problem that impacted production services? What steps did you take to prevent it from recurring?
+
+**Type:** Experience
+
+**Answer:**
+
+Use a verified incident: [SERVICE] returned [ERROR/IMPACT] after [CHANGE]. I traced traffic from client to load balancer, Ingress, Service EndpointSlices and pods, comparing healthy and unhealthy paths. Evidence from [FLOW LOGS/COREDNS/CNI/POLICY] showed [ACTUAL CAUSE], so I mitigated with [SAFE REVERSIBLE ACTION] and verified recovery through error rate, latency and synthetic requests. We then added [POLICY TEST/CANARY/MONITOR], documented the traffic path, and changed the rollout process. Include real duration and metrics; do not claim a NetworkPolicy, MTU or DNS cause unless your evidence established it.
+
+### 5. If a Kubernetes pod is stuck in Pending state or CrashLoopBackOff, how would you troubleshoot it?
 
 **Type:** Implementation / Workflow
 
@@ -22707,7 +23992,7 @@ No. A Deployment (apps/v1) is a declarative controller that creates or updates R
 
 To troubleshoot a stuck Kubernetes pod in Pending or CrashLoopBackOff state, first check the pod's logs for any errors or exceptions. Then, verify the pod's configuration and ensure it meets the required specifications. Use the `kubectl describe pod <pod-name>` command to inspect the pod's status and logs. Next, check the pod's network connectivity and DNS resolution using `kubectl exec -it <pod-name> -- /bin/sh` and `dig <domain-name>`. If the issue persists, use `kubectl get pod <pod-name> --raw` to inspect the pod's container status and `kubectl describe deployment <deployment-name>` to check the deployment's configuration. Additionally, check the cluster's node and pod resource utilization using `kubectl top node` and `kubectl top pod`. Finally, consider running a pod with a similar configuration to reproduce the issue and use `kubectl debug` to debug the pod.
 
-### 2. What is the difference between GKE Standard and GKE Autopilot?
+### 6. What is the difference between GKE Standard and GKE Autopilot?
 
 **Type:** Comparison
 
@@ -22872,7 +24157,7 @@ Istio enforces mTLS with PeerAuthentication and DestinationRule (e.g., PeerAuthe
 
 ## Kubernetes Production Troubleshooting
 
-40 questions
+56 questions
 
 ### 1. A pod is in CrashLoopBackOff. How do you troubleshoot it?
 
@@ -23198,6 +24483,134 @@ Use kubectl rollout undo on the Deployment. To see available revisions: kubectl 
 **Answer:**
 
 Check rollout and revision first: kubectl rollout status deployment/myapp; kubectl rollout history deployment/myapp --revision=N to list changes and rollout annotations. Correlate the deployment’s pod template (kubectl get deploy myapp -o yaml) and ReplicaSet events (kubectl describe rs -l app=myapp) with pod start timestamps (kubectl get pods -l app=myapp -o wide --sort-by=.metadata.creationTimestamp). Correlate those timestamps with CI/CD pipeline/job logs and the Git commit SHA in the image tag (git log -1 --pretty=%H or image digest). Verify runtime impact with logs and metrics: kubectl logs -l app=myapp --since=1h and Prometheus queries (e.g., rate(http_requests_total{job="myapp",status=~"5.."}[5m])) to see if errors spike at rollout time.
+
+### 41. If Kubernetes or GKE pods are stuck in Pending state, how would you troubleshoot?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+I run kubectl describe pod and inspect scheduling events first. FailedScheduling normally identifies insufficient CPU, memory or GPU; unmatched node selectors or affinity; missing tolerations; topology constraints; maximum Pod or IP capacity; an unbound PVC; quota; or no suitable node pool. I compare requests with node allocatable resources, inspect node conditions and taints, verify storage class and zone binding, and check Cluster Autoscaler status and logs. If autoscaling did not help, I look for pool maximums, project quota, subnet secondary-range exhaustion, unavailable machine types or a Pod request too large for any configured node. I fix the constraint rather than deleting the Pod repeatedly, then verify it schedules and becomes ready.
+
+### 42. What can be done to prevent pods from frequently going into Pending state?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I set realistic resource requests from measured usage, keep appropriate node-pool shapes and autoscaling limits, reserve headroom for production bursts and validate cloud quotas and Pod IP capacity. Workload templates use tested labels, tolerations, affinity and topology rules, while admission policies catch impossible requests and missing configuration before deployment. Capacity dashboards alert on unschedulable Pods, node saturation, pool maximums, quota and subnet utilization. Priority classes and preemption are used only for clearly defined critical workloads, not as a substitute for capacity. GPU and other specialized workloads have matching pools and quotas, and batch jobs use controlled queues so they cannot starve services. Load and failure tests prove that HPA and node scaling respond early enough.
+
+### 43. If a pod is showing CrashLoopBackOff, how would you troubleshoot it?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+CrashLoopBackOff means a container repeatedly exits and Kubernetes is delaying restarts. I inspect kubectl describe pod for events, restart count, exit code, reason and probe failures, then use kubectl logs POD -c CONTAINER --previous to capture the terminated instance. I verify command and arguments, configuration, secrets, file permissions, dependency connectivity, migrations, mounted volumes and resource limits. Exit code 137 or OOMKilled points to memory; immediate probe failure may indicate incorrect paths or startup timing. I compare the image and configuration with the last healthy revision and use an ephemeral debug container when the application image lacks tools. I fix or roll back the cause, watch rollout and readiness, and avoid deleting Pods until evidence is captured.
+
+### 44. If an application repeatedly throws OOM or OOMKilled errors, how would you troubleshoot and fix it?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+I first distinguish a container cgroup OOM from node-level memory pressure using Pod status, exit code 137, kubectl describe, node events and kernel or runtime logs. I graph working set, RSS, heap, allocation rate, request, limit, throttling and traffic around each restart and compare the current build with the last healthy one. A limit that is below legitimate peak usage needs evidence-based resizing; a steadily growing heap suggests a leak that requires profiling, heap dumps or runtime diagnostics. I also check unbounded caches, queues, concurrency, large requests and sidecars. Immediate mitigation may be rollback, reduced concurrency, traffic shedding or a safe limit increase with node capacity confirmed. The durable fix is code or configuration correction, realistic requests and limits, load testing, autoscaling on meaningful demand and alerts on memory trend and restart rate. Removing the limit blindly can move the failure from one Pod to the whole node.
+
+### 45. If HPA creates more pods but Cluster Autoscaler is not adding nodes, how would you investigate?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+I first confirm that the new Pods are actually Pending and inspect `kubectl describe pod` scheduling events. Cluster Autoscaler scales for unschedulable resource demand, not simply high CPU on running Pods. I verify autoscaling is enabled on a suitable node pool and check its minimum and maximum, Pod requests, selectors, affinity, topology constraints, taints and tolerations. A Pod too large for every configured machine type, an unbound zonal volume or an incompatible label will remain unschedulable without useful scale-out. I then inspect autoscaler status, events and logs for `NotTriggerScaleUp`, backoff or scale-up errors and check Compute Engine quota, regional capacity, subnet or secondary-range exhaustion, maximum cluster resources and service-agent IAM. I compare the pool's instance template with the Pod requirements. After correcting the exact constraint, I create controlled demand and measure node provisioning, scheduling and readiness time rather than repeatedly deleting Pods.
+
+### 46. A GKE deployment succeeded and application logs are visible, but users receive 502 or 503 errors. How would you troubleshoot pods, probes, Services, endpoints, Ingress, NEGs, backends, firewalls and NetworkPolicies?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+I trace one request from DNS and frontend to the Pod and identify which component emitted the status. I verify the expected Deployment revision, available replicas, readiness and recent events; a running Pod is not necessarily ready. I test the application on its container port and check whether the readiness path, protocol and timing reflect real serving health. I inspect the Service selector, port and targetPort, then EndpointSlices to confirm ready Pod IPs exist. From an approved debug Pod I test Service DNS and direct endpoint connectivity. At the GKE edge I inspect Ingress or Gateway events, URL map, backend service, NEG membership and backend health, including health-check port and path. A 503 often means no healthy backend or exhausted capacity; a 502 often indicates a bad upstream response, reset, protocol or timeout, but I confirm from logs rather than assuming. I verify health-check and data-plane firewall access plus NetworkPolicy ingress from the actual source. After correcting the smallest fault, I validate external traffic, latency and errors and add a deployment or monitoring gate for the missed condition.
+
+### 47. Suppose there is a sudden traffic spike and pods start crashing. What would you check first?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+I first confirm user impact and use `kubectl get pods` plus `kubectl describe pod` to identify whether containers are OOMKilled, failing probes, exiting with an application error or being evicted. I capture current and previous container logs and correlate restart time with request rate, latency, CPU, memory, throttling and downstream errors. OOMKilled suggests limits, a memory leak, unbounded concurrency or caches; CPU saturation may cause probe timeouts; dependency exhaustion can crash healthy application code during load. I check HPA metrics, desired versus available replicas, Pending Pods, node allocatable capacity and Cluster Autoscaler events to see whether Pod scaling outpaced node provisioning. Immediate mitigation may include rollback, safe capacity increase, rate limiting, caching, queueing or graceful degradation while protecting the database. I then fix the actual constraint, tune requests, limits, probes and autoscaling from load-test evidence, add headroom and verify the full Pod-to-node scale-out path under a repeatable spike.
+
+### 48. A customer cannot access the application. How do you troubleshoot it end to end?
+
+**Type:** Interview question
+
+**Answer:**
+
+I confirm scope, hostname, client network, timing and error, then follow the request: DNS resolution, TCP/TLS, load-balancer frontend and policy, route match, backend health, NEG membership, Service and EndpointSlices, Pod readiness and application dependencies. Logs and a correlation ID identify the rejecting layer. I compare an internal request with the customer path and mitigate only after preserving evidence.
+
+### 49. What do you check first: DNS, load balancer, Gateway, Service, endpoints or pods?
+
+**Type:** Interview question
+
+**Answer:**
+
+I start with the observed symptom and test the path from the customer's boundary inward. DNS and TLS are quick external checks; load-balancer logs show whether the request arrived and which backend was selected. In parallel I confirm ready Pods and endpoints. There is no universal single component to check first, but a structured outside-in flow prevents random changes.
+
+### 50. Pods are Running but customers receive 503. What could be wrong?
+
+**Type:** Interview question
+
+**Answer:**
+
+Running means containers started, not that they are ready or reachable. There may be no ready EndpointSlices, a Service selector or targetPort mismatch, failing readiness, unhealthy NEGs, wrong Gateway route, capacity exhaustion, firewall or NetworkPolicy denial, connection-pool exhaustion or an upstream dependency failure. I identify which proxy emitted the 503 and inspect its backend-health reason before changing Pods.
+
+### 51. Can a Kubernetes Service selector mismatch cause a 503?
+
+**Type:** Interview question
+
+**Answer:**
+
+Yes. If the selector matches no ready Pods, the Service has no usable EndpointSlices and a Gateway or Ingress backend can return 503. I compare Service selectors with Pod labels and inspect `kubectl get endpointslice`. The fix is a reviewed label or selector correction, followed by endpoint, NEG-health and external-request verification.
+
+### 52. You have 200 replicas, all Running, but around 30% of requests return 503. How do you troubleshoot?
+
+**Type:** Interview question
+
+**Answer:**
+
+I segment failures by Pod, node, zone, backend, request type and dependency using load-balancer logs, traces and response headers. I compare readiness and real business health, NEG endpoint health, latency, restarts, connection pools and node conditions. A roughly stable percentage suggests a bad subset or failure domain. I remove only proven unhealthy endpoints, preserve evidence and validate distribution after mitigation.
+
+### 53. Why should you not restart all 200 pods immediately?
+
+**Type:** Interview question
+
+**Answer:**
+
+A mass restart destroys evidence, removes healthy capacity, can overload nodes and dependencies, and may turn a partial incident into a full outage. It also fails if the cause is network, database or configuration outside the Pods. I first identify the failing subset and hypothesis, then drain, restart or roll back a small controlled group while monitoring availability.
+
+### 54. How do you identify which subset of pods is serving failed requests?
+
+**Type:** Interview question
+
+**Answer:**
+
+I propagate a correlation ID and record Pod name, revision, node and zone in structured logs or bounded response diagnostics. Distributed traces and load-balancer or mesh telemetry join failed requests to endpoints. I group error rate by these dimensions and compare health, resource and dependency metrics. I avoid high-cardinality metric labels for every request and use logs or traces for detailed identity.
+
+### 55. What do you check if all pods have the same image and configuration but the issue suddenly started?
+
+**Type:** Interview question
+
+**Answer:**
+
+I look for changed demand and external state: node or zone health, DNS, certificates, network policy, load balancer, database or cache saturation, connection limits, quotas, secret rotation, dependency deployment and provider incidents. Identical application artifacts can behave differently because runtime placement, traffic mix and dependencies differ. Audit timelines and segmentation by failure domain reveal the common trigger.
+
+### 56. How can nodes, zones, regions, databases, caches, DNS, networks, connection pools or downstream dependencies cause intermittent failures?
+
+**Type:** Interview question
+
+**Answer:**
+
+A failing node or zone affects only Pods placed there; regional routing can expose one unhealthy backend; DNS may return stale or partial answers; packet loss and NAT exhaustion break some connections; and saturated databases, caches or pools reject only concurrent bursts. I group errors by topology and dependency, inspect saturation and timeouts, and use controlled removal or synthetic probes to isolate the failing layer.
 
 ---
 
@@ -24446,6 +25859,36 @@ flock is an advisory file-locking facility on Unix/Linux: a libc/syscall interfa
 **Answer:**
 
 Never embed plaintext credentials in scripts or commit them to VCS. Use a secrets backend (Ansible Vault, HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager) and fetch at runtime. Examples: ansible-vault view secrets.yml; vault kv get -field=password secret/app; aws secretsmanager get-secret-value --secret-id my/secret --query SecretString --output text. Protect files with strict permissions (chmod 600), run processes with least privilege, and avoid logging secrets. Inject secrets via secure environment only at runtime, clear them after use, and prefer temporary tokens/short-lived credentials with automatic rotation. Verify by auditing access logs in the secret store and ensuring no secrets appear in git history or application logs.
+
+---
+
+## Linux Troubleshooting
+
+3 questions
+
+### 1. If you try to restart the application and get a port already in use error, what would you do?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+I confirm the configured address and port, then identify the listening process and its owner rather than immediately killing it. I check whether the original application instance is still running, a systemd socket or container published the port, or another approved service legitimately owns it. I review the service manager and application logs, stop or reconfigure the correct process through its manager, and start only one intended instance. If the conflict came from a failed deployment, I correct the shutdown, PID-file, socket or orchestration behavior so it cannot recur. Finally I verify the listener, health endpoint and client path.
+
+### 2. Which Linux command would you use to identify the process using or listening on a port?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I use sudo ss -lntp for listening TCP sockets, then filter the required port, for example sudo ss -lntp 'sport = :8080'. Another common option is sudo lsof -nP -iTCP:8080 -sTCP:LISTEN. The output provides the PID and process when permissions allow. I then confirm it with ps -fp PID and systemctl status SERVICE before taking action. For UDP I use ss -lnup or the corresponding lsof filter.
+
+### 3. If an unnecessary service or process is occupying the required port, what would you do?
+
+**Type:** Scenario
+
+**Answer:**
+
+I verify the PID, executable, owner, parent process, service unit and business ownership first. If it is genuinely unnecessary and stopping it is approved, I use its service manager—such as systemctl stop SERVICE—or the application's graceful shutdown so connections and data are handled correctly. I disable the service only if it must not return after reboot, and change its deployment or configuration source so automation does not recreate it. SIGKILL is a last resort after a normal termination fails and impact is understood. I then confirm the port is free, start the intended application, verify health and document why the conflicting process existed.
 
 ---
 
@@ -26265,7 +27708,7 @@ Run an MLflow Tracking server and artifact store (example: mlflow server --backe
 
 ## MLOps
 
-2 questions
+4 questions
 
 ### 1. What problem does MLflow solve?
 
@@ -26282,6 +27725,36 @@ MLflow addresses reproducibility, experiment tracking, model packaging, and life
 **Answer:**
 
 Containerize the model serving binary (e.g., Dockerfile), build and push: docker build -t myregistry/my-model:v1 . && docker push myregistry/my-model:v1. Create a Deployment spec (kubectl apply -f deployment.yaml) that sets container image, resources (e.g., resources: limits: { "nvidia.com/gpu": 1 } for GPUs), livenessProbe/readinessProbe, and imagePullSecrets if needed. Expose it with a Service (ClusterIP/LoadBalancer) and Ingress or use port-forward for testing: kubectl port-forward deploy/my-model 8080:8080. Verify: kubectl get pods, kubectl describe pod <pod>, kubectl logs <pod>, curl http://localhost:8080/health or inference endpoint. For managed inference use KServe InferenceService and confirm status with kubectl get inferenceservice.
+
+### 3. What is different when deploying AI or agent solutions compared with traditional microservices and APIs, and what additional things must be considered?
+
+**Type:** Comparison
+
+**Answer:**
+
+Both need secure code, immutable artifacts, CI/CD, infrastructure as code, SLOs, observability and rollback. AI systems add probabilistic behavior and more independently changing artifacts: model, prompt, tokenizer, features, retrieval index, evaluation set and sometimes agent tools. The pipeline therefore records lineage, evaluates quality and safety on representative datasets, scans model and data artifacts, and promotes a compatible bundle rather than only a container. Serving may require GPU memory, batching, model loading, warm capacity and different autoscaling signals. Production monitoring adds input and data drift, answer or prediction quality, hallucination and groundedness, tool-call success, token usage, bias and safety events. Security must address prompt injection, data poisoning, model supply chain, sensitive context leakage and excessive tool authority. Rollout uses shadow, canary or champion-challenger evaluation, and rollback restores the compatible code-model-prompt-index combination. Because ground truth may arrive late, human review and feedback pipelines are first-class operational components.
+
+### 4. What challenges have you faced with AI-based or agent-based solutions?
+
+**Type:** Experience / Troubleshooting
+
+**Answer:**
+
+The hardest challenges are rarely just container deployment. Output is probabilistic, so a release can improve average quality while failing an important slice; ground truth may arrive days later; prompts, models and knowledge indexes can drift independently; GPU startup and memory make scaling slower and more expensive; and agent tool calls introduce partial failure and security risk. In one knowledge workflow, stale or weak retrieval caused plausible but unsupported answers. We improved chunking and metadata, added document freshness and access filters, required citations, built a representative evaluation set, introduced an abstain threshold and routed uncertain cases to humans. Operationally, I added end-to-end traces for retrieval and tool calls, bounded retries and loop length, idempotency for side effects, cost and token budgets, version correlation and canary rollback. Other recurring controls address prompt injection, sensitive-data leakage, provider rate limits and dependency outages. I present the challenge, evidence, corrective action and measured result rather than claiming hallucinations can be eliminated completely.
+
+---
+
+## MLOps / Kubernetes
+
+1 question
+
+### 1. Have you implemented or worked with GPU autoscaling?
+
+**Type:** Experience / Implementation
+
+**Answer:**
+
+I have worked on the platform pattern for GPU autoscaling, and I describe the exact production depth honestly. On Kubernetes, GPU nodes live in a dedicated accelerator node pool with the correct drivers, labels and taints; inference Pods request the GPU resource and tolerate that pool. HPA or an event-driven scaler changes replicas using demand signals such as inference queue depth, request concurrency, latency or GPU-aware serving metrics—not GPU utilization alone. When new Pods become unschedulable, Cluster Autoscaler or node auto-provisioning adds matching GPU nodes within quota, regional availability and cost limits. Because GPUs can take minutes to provision and models take time to load, I keep minimum warm capacity for latency-sensitive services, use readiness and startup probes, cache model artifacts, and tune scale-down stabilization. Batching and concurrency often improve throughput before adding GPUs. I monitor accelerator utilization and memory, model-load time, queue age, throttling, Pending Pods, node-provisioning latency, error rate and cost per inference. Spot GPUs are limited to fault-tolerant batch or redundant capacity, and load tests validate the complete scaling path.
 
 ---
 
@@ -26974,7 +28447,7 @@ Use versioned artifacts and orchestrator-supported rolling or traffic-shift stra
 
 ## Model Monitoring
 
-30 questions
+32 questions
 
 ### 1. What do you monitor for an ML model in production?
 
@@ -27310,6 +28783,22 @@ alert: ModelAccuracyDrop
 expr: avg_over_time(model_accuracy[1h]) < 0.90
 for: 10m
 and complementary drift alerts like feature_psi > 0.2. Route alerts through Alertmanager to Slack/email/pager. Verify by querying Prometheus UI (query model_accuracy) and confirming alert state in Alertmanager UI or via the Alertmanager API (/api/v2/alerts). Operationalize remediation runbooks, automated rollback or canary traffic shift, and periodic backfills to validate alerts against ground-truth labels.
+
+### 31. How do you detect model drift or data drift in production?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I separate data drift, concept drift and model-quality degradation. Data drift means the production input distribution differs from the approved reference; I monitor schema, missing values, ranges, categorical frequencies and feature distributions using metrics such as PSI, Jensen-Shannon divergence, KS tests or domain-specific distances. Prediction drift tracks changes in score, class or embedding distributions. Concept drift means the relationship between input and outcome changed and requires labeled ground truth, so I compare recent performance with the validation baseline by time window and important customer slices. Tests need minimum sample sizes, seasonality-aware baselines and sustained thresholds because statistical significance alone can create noisy alerts at high volume. A drift alert first triggers data-quality and pipeline checks, then analysis by feature and slice; it does not automatically retrain blindly. Confirmed degradation starts a governed retraining or rollback workflow with lineage, offline validation, champion-challenger comparison and approval. Dashboards always identify model, data and feature versions so the team can distinguish environmental drift from a bad release.
+
+### 32. How do you monitor and measure model accuracy in production?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+Accuracy starts with the business task and trustworthy ground truth. For classification I may track precision, recall, F1, ROC-AUC or PR-AUC, calibration and a cost-weighted error metric; plain accuracy is misleading for imbalanced classes. Regression may use MAE, RMSE or business tolerance bands. Ranking, recommendation and generative systems need different measures such as NDCG, task success, groundedness, citation correctness, safety and human preference. I log prediction ID, model and feature versions, timestamp and privacy-safe context, then join predictions with delayed outcomes when labels arrive. Dashboards compare rolling windows with the offline baseline and previous champion by traffic segment, geography, device or other approved slices so aggregate performance does not hide a failing cohort. Golden labeled sets, shadow evaluation, online experiments and sampled human review cover cases without immediate ground truth. Alerts require adequate volume and sustained statistically and operationally meaningful degradation. I also monitor latency, errors and data quality because an accurate offline model can still be an unreliable product. Degradation leads to investigation, rollback or a validated retraining pipeline—not automatic promotion of an unproven model.
 
 ---
 
@@ -27805,9 +29294,41 @@ Underfitting is diagnosed when training performance is poor and similar to valid
 
 ## Monitoring & Observability
 
-2 questions
+6 questions
 
-### 1. How is Dynatrace different from Prometheus and Grafana?
+### 1. How have you designed and implemented monitoring dashboards and alerting systems to quickly detect and respond to production issues?
+
+**Type:** Experience
+
+**Answer:**
+
+I design from service objectives: overview dashboards show SLO, traffic, latency, errors and saturation, then dependency and infrastructure drill-downs. Release, region and version labels correlate symptoms with changes. Alerts are managed as code with sustained thresholds, routing, severity, owner and runbook; pages use user-impact or burn-rate signals. Synthetic checks and telemetry freshness alerts detect blind spots.
+
+### 2. How do you manage incident response workflows and coordinate with different teams to resolve production issues efficiently?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+Declare severity and appoint one incident commander, with separate operations and communications leads for major incidents. Open a shared channel and timeline, define user impact and current hypothesis, assign explicit owners, and use fixed update intervals. Stabilize service before deep root-cause work, keep stakeholders informed in plain language, and escalate dependencies early. Every change is logged with its result and rollback option. After recovery, verify customer health, conduct a blameless review, and track corrective actions to owners and dates. Regular drills and clear service ownership make cross-team coordination faster.
+
+### 3. How do you leverage automation or runbooks during incidents to speed up detection, mitigation, and recovery?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+Alerts link to short, tested runbooks containing impact checks, dashboards, safe diagnostic commands, mitigation choices, validation and escalation. Automation gathers context, correlates recent deployments, scales or rolls back only bounded and reversible operations, and records its actions. High-risk remediation remains approval-gated. Game days test permissions and steps, while incident feedback updates both runbook and automation.
+
+### 4. Can you share an example where automating incident response significantly reduced downtime or improved reliability?
+
+**Type:** Experience
+
+**Answer:**
+
+I automated certificate-expiry detection and routing: a scheduled service discovered endpoints, checked SNI-aware TLS expiry, emitted owner-tagged metrics and created deduplicated alerts at staged thresholds. This converted late manual discovery into proactive renewal work and reduced certificate-related outage risk. A stronger personal answer states the previous process, measured detection or remediation improvement, safety controls and how failures of the automation itself are monitored.
+
+### 5. How is Dynatrace different from Prometheus and Grafana?
 
 **Type:** Conceptual
 
@@ -27815,7 +29336,7 @@ Underfitting is diagnosed when training performance is poor and similar to valid
 
 Dynatrace is a comprehensive monitoring and analytics platform that provides real-time visibility into application performance, user experience, and infrastructure health. It differs from Prometheus and Grafana in its ability to provide end-to-end visibility across the entire application stack, including user behavior, transactional data, and infrastructure metrics. Prometheus is a monitoring system that focuses on collecting and storing metrics, while Grafana is a visualization tool for displaying those metrics. Dynatrace, on the other hand, provides a more holistic view of the application, including the ability to analyze user behavior and identify performance bottlenecks.
 
-### 2. How do you monitor an application using Dynatrace?
+### 6. How do you monitor an application using Dynatrace?
 
 **Type:** Implementation / Workflow
 
@@ -28287,6 +29808,44 @@ I report SLO/SLI-based availability, error budget remaining, MTTD (time-to-detec
 
 ---
 
+## Networking
+
+4 questions
+
+### 1. What is a Load Balancer?
+
+**Type:** Conceptual
+
+**Answer:**
+
+A load balancer exposes a stable frontend address and distributes incoming connections or requests across multiple healthy backends. It improves availability and scale by performing health checks, stopping traffic to unhealthy endpoints and applying a configured balancing policy. Depending on the type, it can operate at Layer 4 using IP and port or at Layer 7 using HTTP host, path, headers and TLS. It may also provide TLS termination, routing, connection draining, session affinity and integration with security controls. It does not remove the need for resilient applications, adequate backend capacity or correct health checks.
+
+### 2. Can an application work or connect without an internet-facing Load Balancer?
+
+**Type:** Conceptual
+
+**Answer:**
+
+Yes. An application can use an internal load balancer, a Kubernetes ClusterIP Service for in-cluster traffic, private DNS and private IP connectivity from the same VPC, Shared VPC, peered network, VPN or Interconnect. Administrators may also use identity-aware proxies or approved bastion patterns for specific management paths. An internet-facing load balancer is needed only when clients must reach the service from the public internet through that frontend. The design depends on who the clients are, their network path, protocol, authentication, availability requirements and whether any public exposure is acceptable.
+
+### 3. What is the internal logic of a Load Balancer, and how does it distribute traffic?
+
+**Type:** Conceptual
+
+**Answer:**
+
+The frontend accepts traffic on an IP, port and protocol, and a Layer-7 proxy may terminate TLS and evaluate host or path routing rules. The selected backend service considers only endpoints that pass health checks and then distributes new traffic using the product's balancing mode, capacity configuration, location, utilization or connection state. Algorithms vary by load-balancer type, so I do not assume every product uses simple round robin. Existing connections may remain pinned, session affinity may influence selection and connection draining protects in-flight requests during removal. In GKE, an Ingress or Gateway controller programs Google Cloud load-balancing resources and NEGs can send traffic directly to ready Pod endpoints. Metrics and logs show frontend requests, backend latency, health and distribution.
+
+### 4. What is the difference between a GCP VPC firewall and Kubernetes NetworkPolicy, and at what level does each control traffic?
+
+**Type:** Comparison
+
+**Answer:**
+
+GCP VPC firewall policy controls traffic at the VPC and network-interface layer for supported cloud resources, using direction, priority, protocol, ports, sources, destinations and targets such as service accounts or secure tags. It protects paths to nodes and other VPC resources and is administered through Google Cloud networking. Kubernetes NetworkPolicy controls allowed ingress and egress for selected Pods at the cluster workload layer, based on namespace and Pod selectors plus IP blocks and ports, and requires an enforcing network-policy implementation. It is useful for east-west microsegmentation but does not configure the VPC firewall, protect resources outside its scope or control every host-network path. In GKE I use both: hierarchical or VPC firewall controls establish network boundaries and required infrastructure paths, while default-deny NetworkPolicies permit only necessary workload-to-workload and egress flows. I test the combined packet path because either layer can block connectivity.
+
+---
+
 ## Networking & Security
 
 3 questions
@@ -28581,7 +30140,7 @@ Use multiple defenses: cache-aside with a singleflight/request-coalescing layer 
 
 ## Observability
 
-5 questions
+6 questions
 
 ### 1. Have you worked on observability?
 
@@ -28628,6 +30187,14 @@ Check four classes of metrics: host, app, saturation, and UX. Host: node_cpu_sec
 **Answer:**
 
 Logs are timestamped event records (structured JSON or free text) used for debugging, contain contextual fields and high cardinality; you inspect them with kubectl logs, grep, or a log store (Elasticsearch/Loki) and verify by tailing or querying fields (jq, Kibana/Loki LogQL). Metrics are numeric time-series (counters, gauges, histograms) scraped/exposed via Prometheus exposition format; you validate by curl http://host:9100/metrics and running PromQL queries in Prometheus/Grafana to aggregate and alert. Traces are distributed call-spans (span ID, trace ID, parent ID, timing) used to follow requests across services; you view them in Jaeger/Zipkin/OTel collector UIs or query by traceID to verify span timing and causal relationships.
+
+### 6. If GCP already provides Cloud Logging and Cloud Monitoring, what is the specific purpose of OpenTelemetry instrumentation?
+
+**Type:** Conceptual
+
+**Answer:**
+
+Cloud Logging, Cloud Monitoring and Cloud Trace are observability backends and managed analysis services; OpenTelemetry is the vendor-neutral instrumentation, context-propagation and collection layer. Infrastructure telemetry can show that a GKE service is slow or CPU is high, but application instrumentation creates spans and business-relevant metrics that explain which request, method, dependency or database call caused the latency. The SDK propagates trace context across services; automatic and manual instrumentation emit traces, metrics and logs; and an OpenTelemetry Collector receives, enriches, samples and exports that telemetry to Google Cloud or another backend. This produces end-to-end correlation across GKE, VMs, serverless components and third-party services while reducing application coupling to one vendor's API. I control cardinality, redact sensitive attributes, use tail or probabilistic sampling deliberately and monitor collector loss and backpressure. OpenTelemetry does not replace Cloud Operations—it makes application telemetry consistent, portable and rich enough for the backend to diagnose distributed systems.
 
 ---
 
@@ -30194,7 +31761,7 @@ Enforce branch-protection + CI-required checks: enable protected branches (GitHu
 
 ## Platform Engineering
 
-29 questions
+41 questions
 
 ### 1. What is platform engineering?
 
@@ -30434,6 +32001,144 @@ Standardize and enforce cost allocation tags and naming in IaC (Terraform module
 **Answer:**
 
 Start by mapping platform goals to business outcomes and company OKRs, then inventory capabilities, pain points, and dependencies. Define measurable outcomes (SLIs/SLOs, deployment frequency, MTTR) and prioritize work with a framework like RICE. Break the roadmap into milestones with owners, acceptance criteria, and capacity estimates; store initiatives in Jira and specs in Confluence. Specify delivery practices and controls: semantic versioning and git tags, CI pipelines (GitHub Actions/Jenkins), infra as code (terraform plan/apply), and deployment verification (kubectl rollout status, Argo Rollouts canary). Instrument with Prometheus/Grafana, define alerts and runbooks, and continuously validate progress using deployment metrics and quarterly roadmap reviews.
+
+### 30. A new business unit needs multiple GCP projects and team environments under a very short deadline. How would you provision it quickly without compromising governance or security?
+
+**Type:** Design / Architecture
+
+**Answer:**
+
+I use the existing landing zone as a product and treat the deadline as an onboarding configuration problem, not a reason to invent a parallel platform. A business-unit manifest captures owners, environments, billing, data classification, approved regions, connectivity, quotas and required services. Versioned Terraform modules create the folder and projects, attach Shared VPC subnets, enable APIs, budgets and logging, assign group-based IAM, apply inherited Organization Policies, configure service identities and, where needed, deploy a GKE golden template with Workload Identity, policy enforcement, observability, backups and approved CI/CD. The pipeline produces reviewed plans, policy-as-code results and automated smoke tests. I split work into parallel but coordinated streams for identity and billing, networking and IP allocation, project factory, GKE or data services, CI/CD and security validation, with one dependency board and explicit acceptance criteria. Standard paths are self-service; only genuine exceptions enter a time-bound risk process with compensating controls and an owner. I deliver a thin production-ready slice first, then add optional capabilities after the deadline. Readiness checks cover access, connectivity, logging, alerts, backup or recovery, cost controls and operational ownership. This shortens lead time through preapproved golden paths while retaining the same audit evidence and guardrails as every other business unit.
+
+### 31. Design a self-service platform that lets development teams quickly and securely deploy containerized microservices across AWS EKS and GCP GKE, covering control plane, data plane, shared services, workflow, Terraform, observability, security, compliance, Backstage, Helm, Argo CD and policy as code.
+
+**Type:** System Design
+
+**Answer:**
+
+I design the platform as a product with a cloud-neutral developer contract and cloud-specific implementations. Backstage provides the catalog, ownership and golden-path templates. A central platform control plane manages templates, policy, artifact metadata, GitOps registration, scorecards and audit evidence; it does not sit synchronously in every application request path. Data planes are environment-specific EKS and GKE clusters in separate accounts or projects, with production isolation based on risk. Shared services include identity federation, registry replication or approved per-cloud registries, secrets, DNS, certificates, ingress or gateways, observability, policy controllers and a Git service.
+
+A developer selects a service template and supplies owner, data class, target environments, cloud and capacity profile. The scaffold creates application code, tests, Dockerfile, Helm chart, service catalog entry, SLOs and Terraform or platform configuration. A pull request runs tests, security and license scans, SBOM and policy checks. The image is built once, signed by digest and promoted rather than rebuilt. Terraform pipelines create cloud resources through versioned AWS and GCP modules with isolated state, short-lived workload identity, plans and approvals. Argo CD watches environment repositories and reconciles Helm releases into clusters; progressive delivery shifts traffic only when health and business gates pass.
+
+The platform installs OpenTelemetry collection and standard dashboards for traffic, errors, latency, saturation, deployments and ownership, while cloud backends retain required audit logs. Default-deny network policy, Pod Security, resource policies, signed-image admission, workload identity through IRSA or EKS Pod Identity and GKE Workload Identity, secret-manager integration, encryption and policy-as-code are built into the golden path. Organization-level cloud controls remain outside Kubernetes. Exceptions are versioned, approved, time-bound and visible on scorecards. I measure lead time, deployment success, adoption, SLO coverage, policy compliance and developer satisfaction, use upgrade rings for cluster and add-on changes, and provide break-glass plus rollback paths. This gives teams self-service within guardrails rather than direct unrestricted cloud or cluster administration.
+
+### 32. How many microservices are running in your environment?
+
+**Type:** Interview question
+
+**Answer:**
+
+I give the verified current number or a defensible range and define whether it means repositories, deployable services or running workloads across environments. I also state how many clusters and teams own them. If the exact count is unavailable, I say so and explain that the service catalog and cluster inventory are the authoritative sources rather than inventing a number.
+
+### 33. How do you manage API endpoints and configuration for a large number of microservices?
+
+**Type:** Interview question
+
+**Answer:**
+
+Stable service discovery names and Gateway host or path contracts prevent consumers from hard-coding instance addresses. Non-secret configuration is versioned in Git and rendered through Helm or Kustomize; secrets stay in a secret manager. Schemas, ownership and compatibility rules are defined centrally, and GitOps promotes reviewed environment-specific values. A service catalog exposes endpoints and dependencies without becoming runtime configuration.
+
+### 34. If an API URL changes from abc.api.com to xyz.api.com, how do you propagate the change?
+
+**Type:** Interview question
+
+**Answer:**
+
+I first preserve compatibility by serving both names or routing the old name to the new backend. DNS, certificates, Gateway routes and consumer configuration change through reviewed code. Consumers migrate in controlled waves with telemetry showing use of the old endpoint. Only after the agreed deprecation window and zero or accepted traffic do I remove the old route and certificate.
+
+### 35. If five microservices consume the same configuration, do you update all five manually?
+
+**Type:** Interview question
+
+**Answer:**
+
+No. I keep the shared value in an approved configuration source or a versioned Helm library contract and update it through GitOps. Each consumer declares its dependency and receives a reviewed rollout. I avoid indiscriminate global configuration because services may need independent release timing; shared defaults are versioned and overrides remain explicit.
+
+### 36. If 50–55 microservices use Java 21, do you maintain separate Dockerfiles for every service?
+
+**Type:** Interview question
+
+**Answer:**
+
+Each repository may keep a small Dockerfile for ownership and explicit builds, but it should derive from a centrally maintained golden runtime and shared build pattern rather than 55 unrelated designs. Where services are genuinely uniform, a reusable build template or buildpack can remove most duplication. Exceptions are documented and versioned instead of hidden in a complex universal Dockerfile.
+
+### 37. How do you standardize Dockerfiles across many Java microservices?
+
+**Type:** Interview question
+
+**Answer:**
+
+I publish approved builder and runtime images, a reference multi-stage Dockerfile or buildpack, CI templates, JVM defaults, non-root UID, labels and scanning policy. Automated checks verify approved bases and required controls. Services pin a base digest or release tag, while a dependency-update bot opens reviewed upgrades. A conformance test validates signals, health, memory behavior and vulnerability policy.
+
+### 38. With more than 100 microservices, how do you organize Kubernetes namespaces and cloud projects?
+
+**Type:** Interview question
+
+**Answer:**
+
+I group by business domain, ownership, environment and trust boundary—not one namespace per arbitrary component by default. Projects separate billing, IAM, quotas and major blast radii; clusters separate hard tenancy or lifecycle needs; namespaces provide delegated administration with RBAC, quotas, policies and cost labels. Production is isolated from lower environments, and the service catalog records owner, namespace, project and dependencies.
+
+### 39. When a new microservice is added, does it have to be registered with the Gateway?
+
+**Type:** Interview question
+
+**Answer:**
+
+Any externally reachable service needs an explicit route and authorized attachment, but this should be declarative rather than a manual console registration. The service's onboarding configuration generates a Service and HTTPRoute, and ServiceExport for multi-cluster use. Git review, policy and controller reconciliation register it safely. Internal-only services do not need an external Gateway route.
+
+### 40. If you already have 100 services and add another 10–50, do you manually create Gateway mappings for every service?
+
+**Type:** Interview question
+
+**Answer:**
+
+No. Each service declares a small routing contract—hostname or path, port, exposure, authentication and limits—in its platform values. A versioned Helm or Backstage template renders the route resources, and Argo CD reconciles them. Humans review intent and exceptions, not hand-edit load-balancer mappings. Automated uniqueness, ownership, certificate, quota and policy checks prevent route conflicts at scale.
+
+### 41. What information should a development team provide when onboarding a new service?
+
+**Type:** Interview question
+
+**Answer:**
+
+The contract includes service and owner, namespace, environments, image, container and Service ports, protocol, health path, hostname or path, public or private exposure, authentication, expected traffic and rate limits, data classification, dependencies, resource profile, SLO and multi-cluster requirements. The platform derives standard security and observability resources. Exceptional privileges or routes require separate justification and expiry.
+
+---
+
+## PostgreSQL
+
+4 questions
+
+### 1. If PostgreSQL has a read-write primary and read-only secondary, how does replication work?
+
+**Type:** Interview question
+
+**Answer:**
+
+The primary records changes in write-ahead log. A standby receives WAL records, writes them locally and replays them to reproduce database changes, remaining read-only in physical streaming replication. Replication is normally asynchronous but can be configured synchronous for selected guarantees. Monitoring covers byte or time lag, replay state, WAL retention, slots and the ability to promote safely.
+
+### 2. What is PostgreSQL WAL streaming replication?
+
+**Type:** Interview question
+
+**Answer:**
+
+WAL streaming replication continuously sends write-ahead log records from a primary `walsender` process to a standby `walreceiver`. The standby stores and replays the records, producing a physical copy suitable for read replicas and failover. It complements a base backup that initializes the standby. Synchronous mode can reduce data-loss risk but adds commit latency and availability trade-offs.
+
+### 3. How is data transferred from the PostgreSQL primary to the secondary?
+
+**Type:** Interview question
+
+**Answer:**
+
+After a base backup establishes a consistent starting point, the primary streams WAL records over an authenticated, TLS-protected PostgreSQL replication connection. The standby writes them to its WAL and replays them into data files. Replication slots or archival can prevent required WAL from disappearing, but unmanaged retention can fill primary storage. Ordinary table rows are not copied one request at a time.
+
+### 4. What happens to PostgreSQL replication during a network failure?
+
+**Type:** Interview question
+
+**Answer:**
+
+The standby stops receiving new WAL and lag grows while the primary normally continues accepting writes in asynchronous mode. After connectivity returns, it requests missing WAL from the primary or archive and catches up. If required WAL was removed and no archive is available, the standby must be rebuilt. Synchronous replication may block commits depending on quorum settings, so failure behavior must be deliberately configured and tested.
 
 ---
 
@@ -32409,9 +34114,39 @@ Use XOR when the order of elements does not matter, and use a set when the order
 
 ---
 
+## Python / Scripting / Automation
+
+3 questions
+
+### 1. Can you describe a script or automation you developed that improved operational efficiency or integrated monitoring?
+
+**Type:** Experience
+
+**Answer:**
+
+I built a Python certificate monitor that reads an approved endpoint inventory, performs bounded TLS checks, calculates expiry in UTC and publishes metrics and structured results. It deduplicates alerts by certificate and owner, distinguishes network failures from actual expiry and exposes its own freshness metric. Tests cover parsing, time zones, retries and error paths, while deployment and schedule are managed as code.
+
+### 2. How do you ensure your scripts are maintainable, secure, and handle exceptions effectively in production environments?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I use small modules, typed interfaces, configuration rather than constants, unit and integration tests, formatting, linting and versioned dependencies. Inputs are validated; secrets come from workload identity and secret stores; logs are structured and redact sensitive data. External calls use timeouts, bounded retries with jitter and specific exceptions. Scripts support idempotency, dry-run where useful, meaningful exit codes, metrics and documentation.
+
+### 3. Can you share an example where you used scripting to automate integration between different tools or systems in your SRE workflow?
+
+**Type:** Experience
+
+**Answer:**
+
+A Python integration consumed monitoring webhooks, enriched alerts with service ownership and recent deployment data, then created or updated the incident record and collaboration channel. Stable correlation keys prevented duplicate tickets; retries and a dead-letter path handled transient API failures. Least-privilege tokens, audit logs, rate limits and metrics made the integration safe and observable.
+
+---
+
 ## Python Automation
 
-30 questions
+33 questions
 
 ### 1. Why is Python used in DevOps?
 
@@ -32715,6 +34450,305 @@ def test_api():
 
 Alternatives: requests-mock (with requests_mock.Mocker()), unittest.mock.patch('requests.Session.request') for unit tests, VCR.py for recording, or run WireMock standalone for integration tests; verify with pytest -q and explicit assertions above.
 
+### 31. Write a Python script to create and configure an AWS S3 bucket for application logs, accepting bucket name, region, tags and IAM role ARN; enable SSE-S3, configure a read-only bucket policy, transition objects to GLACIER_IR after 30 days, expire them after 365 days, handle errors, and print the bucket ARN and URL.
+
+**Type:** Coding
+
+**Answer:**
+
+This implementation handles the special us-east-1 create-bucket behavior, blocks public access, requires TLS, grants only the supplied role list and read access, enables AES256 SSE-S3 and installs the lifecycle policy. In production I would also validate the role through IAM, enforce organization naming and ownership rules, and decide whether compliance requires Object Lock or SSE-KMS instead.
+
+```python
+#!/usr/bin/env python3
+import argparse
+import json
+import sys
+from urllib.parse import quote
+
+import boto3
+from botocore.exceptions import BotoCoreError, ClientError
+
+
+def parse_tag(value: str) -> dict[str, str]:
+    if "=" not in value:
+        raise argparse.ArgumentTypeError("tags must use KEY=VALUE")
+    key, tag_value = value.split("=", 1)
+    if not key.strip():
+        raise argparse.ArgumentTypeError("tag key cannot be empty")
+    return {"Key": key.strip(), "Value": tag_value.strip()}
+
+
+def bucket_policy(bucket: str, role_arn: str) -> dict:
+    return {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "DenyInsecureTransport",
+                "Effect": "Deny",
+                "Principal": "*",
+                "Action": "s3:*",
+                "Resource": [f"arn:aws:s3:::{bucket}", f"arn:aws:s3:::{bucket}/*"],
+                "Condition": {"Bool": {"aws:SecureTransport": "false"}},
+            },
+            {
+                "Sid": "AllowRoleToListBucket",
+                "Effect": "Allow",
+                "Principal": {"AWS": role_arn},
+                "Action": ["s3:ListBucket", "s3:GetBucketLocation"],
+                "Resource": f"arn:aws:s3:::{bucket}",
+            },
+            {
+                "Sid": "AllowRoleToReadLogs",
+                "Effect": "Allow",
+                "Principal": {"AWS": role_arn},
+                "Action": ["s3:GetObject", "s3:GetObjectVersion"],
+                "Resource": f"arn:aws:s3:::{bucket}/*",
+            },
+        ],
+    }
+
+
+def create_log_bucket(bucket: str, region: str, tags: list[dict[str, str]], role_arn: str) -> None:
+    s3 = boto3.client("s3", region_name=region)
+    create_args = {"Bucket": bucket}
+    if region != "us-east-1":
+        create_args["CreateBucketConfiguration"] = {"LocationConstraint": region}
+
+    s3.create_bucket(**create_args)
+    s3.get_waiter("bucket_exists").wait(Bucket=bucket)
+    s3.put_public_access_block(
+        Bucket=bucket,
+        PublicAccessBlockConfiguration={
+            "BlockPublicAcls": True,
+            "IgnorePublicAcls": True,
+            "BlockPublicPolicy": True,
+            "RestrictPublicBuckets": True,
+        },
+    )
+    s3.put_bucket_encryption(
+        Bucket=bucket,
+        ServerSideEncryptionConfiguration={
+            "Rules": [{"ApplyServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}]
+        },
+    )
+    if tags:
+        s3.put_bucket_tagging(Bucket=bucket, Tagging={"TagSet": tags})
+    s3.put_bucket_lifecycle_configuration(
+        Bucket=bucket,
+        LifecycleConfiguration={
+            "Rules": [
+                {
+                    "ID": "archive-and-expire-logs",
+                    "Status": "Enabled",
+                    "Filter": {"Prefix": ""},
+                    "Transitions": [{"Days": 30, "StorageClass": "GLACIER_IR"}],
+                    "Expiration": {"Days": 365},
+                    "AbortIncompleteMultipartUpload": {"DaysAfterInitiation": 7},
+                }
+            ]
+        },
+    )
+    s3.put_bucket_policy(Bucket=bucket, Policy=json.dumps(bucket_policy(bucket, role_arn)))
+
+    print(f"Bucket ARN: arn:aws:s3:::{bucket}")
+    print(f"Bucket URL: https://{bucket}.s3.{region}.amazonaws.com/")
+    print(f"S3 URI: s3://{quote(bucket)}/")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Create a secured S3 application-log bucket")
+    parser.add_argument("--bucket", required=True)
+    parser.add_argument("--region", required=True)
+    parser.add_argument("--role-arn", required=True)
+    parser.add_argument("--tag", action="append", default=[], type=parse_tag)
+    args = parser.parse_args()
+
+    try:
+        create_log_bucket(args.bucket, args.region, args.tag, args.role_arn)
+        return 0
+    except (ClientError, BotoCoreError) as exc:
+        print(f"AWS operation failed: {exc}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+```
+
+Example: `python create_log_bucket.py --bucket my-app-logs-123 --region us-east-1 --role-arn arn:aws:iam::123456789012:role/LogReader --tag Environment=prod --tag Owner=platform`. The role is intentionally read-only; the log-delivery principal or writer role needs a separate, narrowly scoped write statement.
+
+### 32. Write a Python script to analyze one or more Kubernetes Deployment YAML files and validate CPU and memory requests, liveness and readiness probes, imagePullPolicy, Pod-level securityContext and runAsNonRoot: true, reporting all violations.
+
+**Type:** Coding
+
+**Answer:**
+
+The validator below processes multiple files and YAML documents, reports every violation instead of stopping at the first one, validates init containers as well as application containers for resources and image policy, and applies probes only to regular containers. This interview version requires `imagePullPolicy: Always`; a real organization should make that rule configurable and normally deploy immutable image digests.
+
+```python
+#!/usr/bin/env python3
+import argparse
+import sys
+from pathlib import Path
+from typing import Any
+
+import yaml
+
+
+def validate_container(path: Path, deployment: str, container: dict[str, Any], require_probes: bool) -> list[str]:
+    name = container.get("name", "<unnamed>")
+    prefix = f"{path}:{deployment}:container/{name}"
+    errors: list[str] = []
+    requests = container.get("resources", {}).get("requests", {})
+    for resource in ("cpu", "memory"):
+        if not requests.get(resource):
+            errors.append(f"{prefix}: missing resources.requests.{resource}")
+    if require_probes:
+        for probe in ("livenessProbe", "readinessProbe"):
+            if not isinstance(container.get(probe), dict):
+                errors.append(f"{prefix}: missing {probe}")
+    if container.get("imagePullPolicy") != "Always":
+        errors.append(f"{prefix}: imagePullPolicy must be Always")
+    return errors
+
+
+def validate_document(path: Path, document: Any) -> list[str]:
+    if not isinstance(document, dict) or document.get("kind") != "Deployment":
+        return []
+    metadata = document.get("metadata") or {}
+    name = metadata.get("name", "<unnamed-deployment>")
+    pod_spec = (((document.get("spec") or {}).get("template") or {}).get("spec") or {})
+    errors: list[str] = []
+
+    security_context = pod_spec.get("securityContext")
+    if not isinstance(security_context, dict):
+        errors.append(f"{path}:{name}: missing Pod-level spec.template.spec.securityContext")
+    elif security_context.get("runAsNonRoot") is not True:
+        errors.append(f"{path}:{name}: Pod securityContext.runAsNonRoot must be true")
+
+    containers = pod_spec.get("containers") or []
+    if not containers:
+        errors.append(f"{path}:{name}: Deployment must define at least one container")
+    for container in containers:
+        errors.extend(validate_container(path, name, container or {}, require_probes=True))
+    for container in pod_spec.get("initContainers") or []:
+        errors.extend(validate_container(path, name, container or {}, require_probes=False))
+    return errors
+
+
+def validate_file(path: Path) -> tuple[int, list[str]]:
+    try:
+        with path.open(encoding="utf-8") as stream:
+            documents = list(yaml.safe_load_all(stream))
+    except (OSError, yaml.YAMLError) as exc:
+        return 0, [f"{path}: cannot parse file: {exc}"]
+
+    deployments = 0
+    errors: list[str] = []
+    for document in documents:
+        if isinstance(document, dict) and document.get("kind") == "Deployment":
+            deployments += 1
+        errors.extend(validate_document(path, document))
+    return deployments, errors
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Validate Kubernetes Deployment YAML")
+    parser.add_argument("files", nargs="+", type=Path)
+    args = parser.parse_args()
+
+    deployment_count = 0
+    violations: list[str] = []
+    for path in args.files:
+        count, errors = validate_file(path)
+        deployment_count += count
+        violations.extend(errors)
+
+    if deployment_count == 0:
+        violations.append("no Kubernetes Deployment documents found")
+    if violations:
+        print("Validation failed:")
+        for violation in violations:
+            print(f"- {violation}")
+        return 1
+    print(f"Validation passed for {deployment_count} Deployment(s)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+```
+
+Install the dependency with `pip install PyYAML` and run `python validate_deployments.py deployment.yaml manifests/*.yaml`. Exit code 1 makes it suitable for a CI quality gate.
+
+### 33. Write a Python script using kubeconfig or in-cluster configuration to connect to Kubernetes, accept a namespace argument, and display each pod's name, status and container names while handling missing and empty namespaces.
+
+**Type:** Coding
+
+**Answer:**
+
+This implementation prefers in-cluster credentials and falls back to kubeconfig. It checks the namespace explicitly so a missing namespace and an empty namespace produce different results.
+
+```python
+#!/usr/bin/env python3
+import argparse
+import sys
+
+from kubernetes import client, config
+from kubernetes.client.exceptions import ApiException
+from kubernetes.config.config_exception import ConfigException
+
+
+def load_cluster_config() -> str:
+    try:
+        config.load_incluster_config()
+        return "in-cluster configuration"
+    except ConfigException:
+        config.load_kube_config()
+        return "kubeconfig"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="List Kubernetes Pods in a namespace")
+    parser.add_argument("namespace")
+    args = parser.parse_args()
+
+    try:
+        source = load_cluster_config()
+        api = client.CoreV1Api()
+        api.read_namespace(args.namespace)
+        pods = api.list_namespaced_pod(namespace=args.namespace).items
+    except ConfigException as exc:
+        print(f"Unable to load Kubernetes configuration: {exc}", file=sys.stderr)
+        return 2
+    except ApiException as exc:
+        if exc.status == 404:
+            print(f"Namespace not found: {args.namespace}", file=sys.stderr)
+            return 3
+        if exc.status == 403:
+            print(f"Access denied for namespace: {args.namespace}", file=sys.stderr)
+            return 4
+        print(f"Kubernetes API error ({exc.status}): {exc.reason}", file=sys.stderr)
+        return 5
+
+    if not pods:
+        print(f"Namespace '{args.namespace}' exists but contains no Pods ({source}).")
+        return 0
+
+    print(f"Connected using {source}")
+    print(f"{'POD':<48} {'STATUS':<16} CONTAINERS")
+    for pod in pods:
+        names = [container.name for container in (pod.spec.containers or [])]
+        print(f"{pod.metadata.name:<48} {(pod.status.phase or 'Unknown'):<16} {','.join(names)}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+```
+
+Install with `pip install kubernetes` and run `python list_pods.py payments`. The in-cluster service account needs only `get` on namespaces and `list` on Pods for the required scope. For large namespaces I would add pagination and request timeouts.
+
 ---
 
 ## Python Coding - Email Validation
@@ -32947,6 +34981,20 @@ Expect one of three emphases: operations (on‑call, incident response, runbooks
 **Answer:**
 
 Yes — the company does have MLOps/AI-infrastructure opportunities: a platform team owning model CI/CD, feature stores, and serving infra. Typical tech includes Kubernetes (Helm charts, kubectl for verification), Argo Workflows/Argo CD or GitHub Actions for pipelines, Terraform for infra-as-code, MLflow/KServe or SageMaker for model registry/serving, and Prometheus/Grafana for metrics and Alertmanager/PagerDuty for on-call. To verify: ask to see recent pipeline YAMLs or GitHub Actions workflows, run kubectl get pods -n ml-platform and kubectl logs against a model-serving pod, view terraform plan/state, or list SageMaker endpoints with aws sagemaker list-endpoints. Expect ownership of runbooks, SLOs, and pager rotation.
+
+---
+
+## RAG and LLMOps
+
+1 question
+
+### 1. What did the Knowledge Assistant agent do, and was it similar to an FAQ or basic-query assistant?
+
+**Type:** Experience
+
+**Answer:**
+
+It covered FAQ-style questions, but it was more than a static FAQ bot. A basic FAQ system usually maps a known question to a fixed response. The Knowledge Assistant used retrieval-augmented generation: documents were ingested, parsed, chunked, embedded and stored with source and access metadata; at query time it retrieved authorized evidence and generated a contextual answer with citations. It could handle different wording, combine information from several approved sources and invoke narrow read-only tools. Guardrails prevented answers from unauthorized documents, protected sensitive data and required abstention or human escalation when evidence was weak. We evaluated retrieval recall, groundedness, citation correctness, answer relevance, latency and cost, and maintained document freshness and deletion workflows.
 
 ---
 
@@ -34947,6 +36995,309 @@ Check Cloud Audit Logs for the exact VPC Service Controls denial entry (look for
 
 ---
 
+## Security
+
+17 questions
+
+### 1. Apart from Jenkins Credentials or Vault, what other ways do you use to store secrets?
+
+**Type:** Comparison
+
+**Answer:**
+
+On GCP I use Secret Manager with IAM, versioning, audit logs and optional CMEK; on AWS the comparable service is AWS Secrets Manager or Systems Manager Parameter Store for suitable configuration. Kubernetes workloads authenticate through Workload Identity and fetch secrets directly or use a supported CSI integration, avoiding long-lived cloud keys and plain Kubernetes Secrets where stronger controls are needed. A CI platform may also integrate with an enterprise secrets broker. The choice considers rotation, dynamic credentials, access granularity, availability, auditability and application integration. Environment variables are only a delivery mechanism, not a secure system of record, and encrypted Git files require careful key and access governance.
+
+### 2. How would you restrict or close that external customer access securely?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I enforce access in layers: strong application identity and authorization, TLS, the narrowest frontend and route, and Cloud Armor allow, deny, WAF or rate-limit rules where public exposure exists. For a customer with stable egress addresses, an IP allow list can supplement identity but should not replace it; mTLS, signed tokens or an API gateway provide stronger client authentication. Private access can be restricted through VPN routes, firewall policy and internal load-balancer reachability. Access has an owner, purpose and expiry, is managed through reviewed code and is logged and alerted. To close it, I revoke application credentials and client certificates, remove the route or allow rule, invalidate sessions if required and verify from both authorized and unauthorized networks. I retain audit evidence and ensure no alternate endpoint still exposes the service.
+
+### 3. Why is Workload Identity better than putting a service-account JSON key in a Kubernetes Secret, and why should static keys be avoided?
+
+**Type:** Comparison
+
+**Answer:**
+
+Workload Identity issues short-lived credentials tied to the Pod's Kubernetes identity and the authorized workload context. There is no private key to distribute, mount, rotate or accidentally commit, and access can be revoked by changing IAM or the workload binding. A JSON key in a Kubernetes Secret is still a long-lived bearer credential: anyone who reads the Secret, Pod filesystem, backup or diagnostic output may reuse it outside the cluster until it is revoked. Rotation is operationally difficult, attribution is weaker and leaked keys often outlive the workload. With Workload Identity I give each service its own least-privilege principal, keep the node identity narrow and use Cloud Audit Logs for attribution. Kubernetes Secrets remain useful for some application secrets, but base64 encoding does not make a static cloud key safe.
+
+### 4. How would you give a developer read-only access to application pod logs without allowing deployment changes, including temporary access?
+
+**Type:** Scenario
+
+**Answer:**
+
+I create a namespace-scoped Role granting only `get`, `list` and `watch` on Pods and `get` on the `pods/log` subresource, then bind it to an identity group with a RoleBinding. I do not grant verbs on Deployments, Secrets, `pods/exec`, port-forward or cluster-wide resources. GKE authentication and Google Cloud IAM must allow the user to reach and authenticate to the cluster, while Kubernetes RBAC controls the log operation. I test with `kubectl auth can-i get pods/log -n NAME` and confirm that patching a Deployment and reading Secrets are denied. Temporary access is delivered through the organization's just-in-time privileged-access workflow with approval, incident or ticket context, automatic expiry and protected audit logs. If no native expiry exists for the binding, automation creates and removes it at the approved times and verifies revocation. Application logs themselves must avoid secrets and sensitive customer data because read-only access can still disclose information.
+
+### 5. If pods running in GKE need to access GCP services such as Cloud Storage or BigQuery, how would you provide that access securely?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I enable Workload Identity Federation for GKE and give each workload its own Kubernetes service account. I grant that principal the smallest required IAM permissions directly or, where the selected integration requires it, bind it to a dedicated Google service account. The application uses Google client libraries and Application Default Credentials; the GKE metadata service exchanges workload identity for short-lived tokens, so no JSON key is mounted. Cloud Storage permissions are scoped to the required bucket and operations, while BigQuery access is scoped to the necessary project, dataset or tables and job-creation needs. The Deployment explicitly selects the Kubernetes service account, and network policy and private Google API paths restrict connectivity. I verify access from the Pod, inspect IAM and Audit Logs and confirm unrelated buckets or datasets are denied. Static service-account keys are avoided because they are reusable outside the cluster, difficult to rotate and easily leaked through Secrets, images, backups or logs.
+
+### 6. How do you manage database passwords and secrets securely in GKE?
+
+**Type:** Interview question
+
+**Answer:**
+
+Secrets are stored in Google Secret Manager with versioning, least-privilege IAM, audit logs and rotation. GKE workloads authenticate through Workload Identity Federation and fetch values at runtime or mount them with the Secrets Store CSI Driver. Secrets never enter Git, images, Helm values or ordinary logs. I restrict network paths, separate access per service and test rotation, revocation and application reconnection.
+
+### 7. How do GKE workloads authenticate to Google Secret Manager?
+
+**Type:** Interview question
+
+**Answer:**
+
+Each workload uses a dedicated Kubernetes service account mapped or authorized through Workload Identity Federation for GKE. The metadata service exchanges its projected Kubernetes identity for short-lived Google credentials, and IAM grants only access to named secrets. Google client libraries use Application Default Credentials, or the CSI provider uses that workload identity. No downloadable service-account key is required.
+
+### 8. Explain Workload Identity, Secrets Store CSI Driver and SecretProviderClass together.
+
+**Type:** Interview question
+
+**Answer:**
+
+Workload Identity supplies the Pod's short-lived Google identity. The Secrets Store CSI Driver invokes the Google provider during volume setup, and a SecretProviderClass declares which Secret Manager objects and versions to mount. The Pod references that CSI volume. IAM authorizes the workload principal, and rotation behavior depends on driver configuration and application reload; syncing into a Kubernetes Secret expands exposure and is used only when necessary.
+
+### 9. What happens when a database password is rotated in Secret Manager?
+
+**Type:** Interview question
+
+**Answer:**
+
+A new secret version does not automatically guarantee that every application connection uses it. The mount or client must fetch the new version, the application must reload it and its connection pool must establish new sessions, while the database must accept the new credential. I coordinate secret and database changes using overlapping validity or a dual-user pattern and monitor authentication failures before disabling the old version.
+
+### 10. How does an updated database password reach the application?
+
+**Type:** Interview question
+
+**Answer:**
+
+The application either reads the latest version through the Secret Manager API using Workload Identity or receives a refreshed CSI-mounted file. It must detect the change, reload credentials and recycle connections safely; environment variables normally require a Pod rollout. I verify the provider's rotation interval, application reload behavior and version pinning rather than assuming secret rotation is instantaneous.
+
+### 11. How do you rotate database credentials without causing application downtime?
+
+**Type:** Interview question
+
+**Answer:**
+
+I use overlapping credentials: create or rotate a secondary database user, publish it as a new secret version, roll or reload applications gradually and verify new connections. After all instances and pools use the new credential, I revoke the old one. Short connection lifetimes, readiness gates, multi-replica rollout, authentication metrics and rollback preserve availability. In-place single-password replacement is riskier unless the database supports a grace period.
+
+### 12. What security controls do you apply at an internet-facing Gateway or load balancer?
+
+**Type:** Interview question
+
+**Answer:**
+
+I use managed TLS, strong application authentication and authorization, Cloud Armor WAF and DDoS controls, per-route rate limits, request-size and timeout limits, and only required hosts, paths and methods. Backends remain private, headers are normalized carefully, and secrets are never trusted from the client. Access logs, audit logs, threat alerts and certificate monitoring feed incident response; policy changes begin in preview where possible.
+
+### 13. How do you implement rate limiting?
+
+**Type:** Interview question
+
+**Answer:**
+
+I define the protected resource, client identity, rate, burst, scope and failure behavior. At the Google Cloud edge, Cloud Armor rate-based rules can throttle or ban by an appropriate key; an API gateway or service mesh can enforce API-specific quotas; the application handles authenticated account and business-operation limits. I test in preview, monitor false positives and protect downstream capacity with concurrency and queue limits.
+
+### 14. If you have two clusters and five services, each requiring 100 TPS, where do you configure rate limiting?
+
+**Type:** Interview question
+
+**Answer:**
+
+For an internet-wide limit I enforce it before traffic splits across clusters, at the global edge or API-management layer. I create a distinct rule per service route, keyed by authenticated client or another reliable identity. Cluster-local limits alone could permit 100 TPS in each cluster and exceed the intended global total. Applications also enforce critical business quotas and idempotency.
+
+### 15. If all five services use the same DNS name and load balancer, how do you provide a separate 100 TPS limit for each service?
+
+**Type:** Interview question
+
+**Answer:**
+
+I match each service's host/path or route at the Layer-7 policy and attach separate rate-limit rules with independent counters and priorities. For example, `/payments/*` and `/accounts/*` receive different policies even behind one frontend. The key should represent the consumer—preferably an authenticated API identity rather than only IP—and rules must account for trusted proxies and shared NAT addresses.
+
+### 16. Is rate limiting configured at DNS, Gateway, load balancer or application level?
+
+**Type:** Interview question
+
+**Answer:**
+
+DNS does not perform request rate limiting. Edge load balancers, WAFs, API gateways and service meshes can enforce network or API limits before the workload; the application is best placed for account, tenant and transaction-specific rules. I usually layer edge abuse protection with application business limits. The required scope determines the enforcement point.
+
+### 17. How do you handle global versus per-region rate limits in a multi-region setup?
+
+**Type:** Interview question
+
+**Answer:**
+
+A global edge or centralized API-management counter is needed for a strict worldwide quota before regional routing. Per-region gateways can enforce local capacity and safety limits but their independent counters do not equal one global limit. When globally consistent counters would add unacceptable latency, I allocate regional budgets with headroom and reconcile usage, documenting the bounded overrun and failure behavior.
+
+---
+
+## Security and DevSecOps
+
+10 questions
+
+### 1. Have you worked with VPC Service Controls, Binary Authorization, and Security Command Center? What is VPC Service Controls, and how did you implement or use these controls in your project?
+
+**Type:** Experience / Conceptual
+
+**Answer:**
+
+VPC Service Controls creates service perimeters around supported Google-managed services and projects to reduce data exfiltration risk, even when IAM credentials are compromised; it complements IAM and does not replace firewall rules. In a project example, I place sensitive services such as Cloud Storage, BigQuery, Secret Manager and Artifact Registry inside carefully designed perimeters, use access levels for trusted identities and devices, and define narrow ingress and egress rules for approved cross-perimeter flows. I start in dry-run, analyze violation logs, account for CI/CD, Google-managed service agents and developer workflows, then enforce in stages with an exception owner and expiry. Security Command Center is the central finding and asset layer: I enable the appropriate tier and detectors, export findings to the security project or SIEM, assign severity-based SLAs, suppress only documented false positives and track remediation. Binary Authorization is the deployment gate: CI builds in a trusted service, scans the image, signs or attests the immutable digest after tests pass, and GKE admission policy permits only approved registries and required attestations. Break-glass use is tightly authorized, alerted and audited. The important design is the combination: SCC detects posture and threats, VPC Service Controls limits data movement, and Binary Authorization controls what software can run. I would state exactly which parts I operated hands-on and which were owned jointly with security.
+
+### 2. For a GPU workload with a CI/CD pipeline, how would you prevent container images containing vulnerabilities from being deployed?
+
+**Type:** Design / Architecture
+
+**Answer:**
+
+I secure the path from source to admission. The build uses pinned base-image digests from approved NVIDIA or internal repositories, an isolated ephemeral builder and short-lived workload identity. CI runs secret, dependency, OS-package, malware and container scans, creates an SBOM, executes tests, and fails on an agreed policy such as exploitable critical or high findings with a fix available; exceptions require a named risk owner and expiry. The pipeline pushes only to a protected Artifact Registry, signs the immutable image digest and records provenance or an attestation after every gate passes. GKE Binary Authorization or another admission policy accepts only approved registries, signatures and attestations, so changing an image tag cannot bypass the result. I also validate GPU driver and CUDA compatibility, because a secure image that cannot run is still a failed release. Runtime controls include least privilege, a read-only filesystem where possible, Workload Identity, network policy and continuous scanning. Scanning alone is insufficient: enforcement must occur against the exact digest at deployment time.
+
+### 3. How would you prevent vulnerable images from reaching production, and what would you do if a vulnerable image were already deployed?
+
+**Type:** Scenario
+
+**Answer:**
+
+Prevention combines trusted dependencies, continuous scanning, SBOM and provenance generation, severity and exploitability gates, immutable digests, signing, protected registries and admission enforcement. I define remediation SLAs and a narrow, expiring exception process so teams cannot normalize bypasses. If an image is already running, I treat it as an incident based on exposure and exploitability rather than CVSS alone. I identify every workload using the digest, determine whether the vulnerable component is reachable, inspect runtime and audit signals for exploitation, and apply compensating controls such as disabling the affected feature, restricting ingress or egress, or isolating the workload. If active compromise is suspected, I preserve evidence, rotate exposed credentials and follow incident-response procedures. In parallel I rebuild from a patched base or dependency, rerun all gates, sign a new digest, deploy it through canary or rolling replacement and verify health and security signals. If no patch exists and risk is unacceptable, I roll back to a known-safe digest or remove the service. I never patch a running container as the final fix; I replace it immutably, confirm the old digest is no longer running, and add a control that would have caught the gap earlier.
+
+### 4. A team member needs kubectl access to production for urgent debugging and RCA. Would you provide admin permissions, and how would you manage secure temporary access?
+
+**Type:** Scenario
+
+**Answer:**
+
+I would not grant standing cluster-admin merely because the issue is urgent. I first ask what diagnostic actions are required and provide the smallest namespace, resource and verb set—for example get, list, watch and logs, with exec or port-forward granted only when justified. Access goes to an identity group rather than a personal static credential, is approved through a just-in-time or privileged-access workflow, has a short expiry and requires strong authentication. GKE IAM determines who can authenticate and Kubernetes RBAC determines what that identity can do; both layers must be correct. If normal least privilege cannot recover a severe incident, a separate break-glass role can provide broader access with dual approval, a declared incident, immediate alerting and automatic revocation. Audit logs, Kubernetes audit events and shell or command evidence where available are sent to a protected logging project. Secrets shown during debugging are treated as exposed and rotated when necessary. After recovery, I revoke and verify access, review all actions during the RCA, and convert repeated emergency steps into safe runbooks or automation. The goal is fast restoration with attributable, temporary privilege—not a choice between security and incident response.
+
+### 5. Review an aws_s3_bucket_policy where Principal = "*" allows s3:GetObject and s3:PutObject. Identify the security bug, explain its implications, and provide a secure least-privilege fix.
+
+**Type:** Code Review
+
+**Answer:**
+
+The bug is an Allow statement granting every principal read and write access to the bucket's objects. If no effective higher-level public-access control blocks it, anyone could exfiltrate data, upload malicious content, overwrite keys and create storage or incident cost. `s3:GetObject` and `s3:PutObject` belong on the object ARN ending in `/*`; `s3:ListBucket` belongs on the bucket ARN. Public Access Block is essential defense in depth but is not a reason to retain a dangerously broad policy.
+
+A least-privilege Terraform fix grants one application role only the operations and prefix it needs, while explicitly requiring TLS:
+
+```hcl
+data "aws_iam_policy_document" "bucket" {
+  statement {
+    sid    = "DenyInsecureTransport"
+    effect = "Deny"
+
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+
+    actions = ["s3:*"]
+    resources = [
+      aws_s3_bucket.app.arn,
+      "${aws_s3_bucket.app.arn}/*"
+    ]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:SecureTransport"
+      values   = ["false"]
+    }
+  }
+
+  statement {
+    sid    = "AllowApplicationObjects"
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = [aws_iam_role.application.arn]
+    }
+
+    actions   = ["s3:GetObject", "s3:PutObject"]
+    resources = ["${aws_s3_bucket.app.arn}/application/*"]
+  }
+
+  statement {
+    sid    = "AllowApplicationPrefixList"
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = [aws_iam_role.application.arn]
+    }
+
+    actions   = ["s3:ListBucket"]
+    resources = [aws_s3_bucket.app.arn]
+
+    condition {
+      test     = "StringLike"
+      variable = "s3:prefix"
+      values   = ["application/*"]
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "app" {
+  bucket = aws_s3_bucket.app.id
+  policy = data.aws_iam_policy_document.bucket.json
+}
+
+resource "aws_s3_bucket_public_access_block" "app" {
+  bucket                  = aws_s3_bucket.app.id
+  block_public_acls       = true
+  ignore_public_acls      = true
+  block_public_policy     = true
+  restrict_public_buckets = true
+}
+```
+
+If the role needs only reads, I remove `s3:PutObject`. If SSE-KMS is used, the role also needs narrowly scoped KMS permissions and the key policy must agree.
+
+### 6. What areas would you check during a security review of a production GKE platform, including IAM, networking, workloads, secrets, images and auditing?
+
+**Type:** Security Review
+
+**Answer:**
+
+I begin with scope, data classification, threat model and cluster inventory. For identity I review Google Cloud IAM, groups, privileged access, Workload Identity, node service accounts, Kubernetes RBAC, anonymous access and stale bindings. Networking covers private nodes and control-plane exposure, authorized access, Shared VPC firewalls, load balancers, Cloud Armor, DNS, egress, default-deny NetworkPolicies and metadata protection. Workload checks include Pod Security, privileged containers, host namespaces and mounts, capabilities, seccomp, non-root execution, read-only filesystems, requests and limits, quotas and tenant boundaries. I verify secrets-manager integration, rotation, CMEK requirements and absence of credentials in Git, images or logs. Supply-chain controls include trusted registries, vulnerability and malware scanning, SBOM, signatures, provenance, Binary Authorization and patch SLAs. I review supported versions, release channels, node hardening, upgrades, backups and recovery tests. Audit logs, policy violations, Security Command Center findings, runtime alerts and log retention must reach protected central storage with clear owners and response SLAs. Findings are risk-ranked, evidence-backed and tracked through remediation or expiring exception.
+
+### 7. What security and code scanning do you perform in your CI/CD pipeline?
+
+**Type:** Interview question
+
+**Answer:**
+
+I layer secret scanning, SAST, dependency and license analysis, IaC and Kubernetes policy checks, container and malware scanning, SBOM generation, signature and provenance verification, and DAST where an environment is available. Risk gates use exploitability, exposure and approved exceptions rather than severity alone. CI uses short-lived identity, protected runners and immutable artifacts, and production admission verifies the exact signed digest.
+
+### 8. What is a golden or base Docker image?
+
+**Type:** Interview question
+
+**Answer:**
+
+A golden image is an organization-approved base containing the supported runtime, CA certificates, required system libraries, non-root defaults, metadata and hardening, built and patched through a controlled pipeline. It reduces variation and accelerates remediation, but does not make child images automatically secure. It is minimal, signed, scanned, versioned and accompanied by ownership and support dates.
+
+### 9. If the golden base image changes from version 1.0 to 1.1, how do all microservices get updated?
+
+**Type:** Interview question
+
+**Answer:**
+
+The base-image pipeline publishes and signs 1.1, then automation identifies consumers and opens pull requests updating their pinned reference. Each service rebuilds, tests and scans its own final image and promotes it through normal rollout gates. Dashboards track adoption and deadlines by severity. I do not silently mutate 1.0, because immutable versions preserve reproducibility and rollback.
+
+### 10. What is the first authorization or security check before allowing a production deployment?
+
+**Type:** Interview question
+
+**Answer:**
+
+I first verify that the initiating identity is authenticated and authorized for that exact application and production environment, and that the change comes from a protected, approved commit. The pipeline then verifies required reviews, separation of duties, signed artifact provenance and policy gates. No person or CI job receives broad production access merely because tests passed.
+
+---
+
 ## Security and DevSecOps Scenarios
 
 29 questions
@@ -36273,7 +38624,7 @@ The inner query references the current row from the outer query, usually by cust
 
 ## SRE Fundamentals
 
-30 questions
+33 questions
 
 ### 1. What is Site Reliability Engineering?
 
@@ -36530,6 +38881,76 @@ Developers and SREs collaborate by sharing ownership: code changes via Git (feat
 **Answer:**
 
 A reliability review is a structured pre-launch and periodic assessment that evaluates a service’s readiness to meet defined SLOs and minimize production risk. It verifies ownership, runbooks, rollback/upgrade procedures, monitoring (SLIs such as error rate, p50/p99 latency, saturation), alerting thresholds, and on-call playbooks. Operational checks include automated test pass rates in CI, successful canary deployments with promoted metrics, disaster recovery runbook drills, load-test results, and SLO burn-rate projections. It also assesses change control (feature flags, CI/CD rollback), blast-radius limitations, and dependency health. A completed review produces an action list with owners, acceptance criteria, and measurable verification steps (e.g., canary metrics within SLOs for 24 hours).
+
+### 31. For a production GKE application requiring minimal or near-zero downtime, what availability target would you recommend and what is a good production availability percentage?
+
+**Type:** Design / Architecture
+
+**Answer:**
+
+There is no universally correct production percentage. I derive the target from customer impact, transaction criticality, dependency capability, support model and the cost of redundancy. A common starting point for an important service is 99.9%, while a critical customer-facing path may justify 99.95% or 99.99% only if every dependency and the operating model can support it. At 99.9%, the monthly error budget is roughly 43 minutes; at 99.99%, it is roughly 4.3 minutes. The SLO applies to a precise user journey and measurement window, not simply Pod uptime. Multi-zone GKE, redundant replicas, disruption budgets, controlled upgrades, progressive delivery, resilient dependencies, tested failover and actionable observability support the target. I avoid saying zero downtime or 100% because it is generally unachievable and leaves no error budget for safe change. The business approves the reliability-versus-cost trade-off, and we review the target using actual incidents and user expectations.
+
+### 32. What are SLI, SLO and SLA, and what is the difference between them?
+
+**Type:** Comparison
+
+**Answer:**
+
+An SLI is the measured indicator of service behavior, such as the proportion of valid requests completed successfully within 300 milliseconds. An SLO is the internal reliability target for that SLI over a stated window—for example, 99.9% of eligible requests in 30 days. The difference between perfect performance and the SLO creates an error budget that guides release and reliability decisions. An SLA is the external or contractual commitment to a customer and defines measurement, exclusions, responsibilities and consequences such as service credits. The SLA is often no stricter than the engineering SLO, allowing operating margin. All three require precise event definitions and data sources; vague statements such as 'the server should be up' are not enough.
+
+### 33. If the SLA is 99.9% availability, approximately how much downtime is allowed per month and per year?
+
+**Type:** Calculation
+
+**Answer:**
+
+99.9% availability permits 0.1% unavailability. For a 30-day month, 30 × 24 × 60 = 43,200 minutes, and 0.001 × 43,200 = 43.2 minutes. For a 365-day year, 365 × 24 × 60 = 525,600 minutes, and 0.001 × 525,600 = 525.6 minutes, which is 8 hours 45 minutes 36 seconds—approximately 8 hours 46 minutes. The exact monthly allowance varies with the month's length and, in practice, the SLA must specify the measurement window, eligible requests, maintenance exclusions and rounding rules.
+
+---
+
+## SRE Fundamentals & Reliability
+
+5 questions
+
+### 1. Tell me about yourself and your experience relevant to the Site Reliability Engineer role.
+
+**Type:** Experience
+
+**Answer:**
+
+I am a [CURRENT ROLE] with [YEARS] years of experience across [CLOUD/PLATFORM], Kubernetes, infrastructure as code, CI/CD, and production operations. In my current role I own [SYSTEM OR SERVICE], where I improved [RELIABILITY METRIC] from [BEFORE] to [AFTER] by implementing [SLOs/AUTOMATION/OBSERVABILITY]. I have handled incidents involving [REAL EXAMPLE], coordinated recovery, and converted lessons into runbooks and engineering actions. My strongest SRE contribution is reducing toil while making reliability measurable, and I am interested in this role because [TRUTHFUL ROLE-SPECIFIC REASON].
+
+### 2. How do you define and track Service Level Objectives (SLOs) and Service Level Indicators (SLIs) to ensure system reliability?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+Start with a user journey and choose an SLI that measures its success, such as successful requests divided by valid requests or the proportion completing below a latency threshold. Set an SLO such as 99.9% success over a rolling 30-day window, document exclusions and data sources, and derive the error budget: 0.1% of eligible events. Track compliance and fast/slow burn rates on dashboards, alert on multi-window budget consumption, and review SLOs with product owners. Avoid infrastructure-only indicators that do not represent user experience.
+
+### 3. Can you explain a specific incident where you used root cause analysis (RCA) to prevent recurring system downtime? What steps did you take post-incident to improve system resiliency?
+
+**Type:** Experience
+
+**Answer:**
+
+A representative incident involved a release exhausting database connections, increasing latency and 5xx errors. We restored service by rolling back, then built a factual timeline from deployment data, traces, metrics and logs. The RCA found the code defect plus systemic gaps in load testing and release gates. We fixed pooling and timeouts, added production-like load tests, canary saturation checks, dashboards and a runbook, and tracked every action to an owner and due date. I would replace this example with my actual incident details in an interview.
+
+### 4. How do you incorporate error budget policies to balance feature releases with system reliability?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+The error budget is the allowed unreliability implied by the SLO. I define policy thresholds in advance: healthy budget permits normal delivery, rapid burn triggers investigation and safer rollouts, and exhausted budget pauses discretionary high-risk releases while teams prioritize reliability work. Exceptions require explicit business ownership. The policy uses burn rate and user impact rather than treating every minor incident as a release freeze.
+
+### 5. How do you ensure your monitoring and alerting mechanisms reduce alert fatigue while still catching critical issues early?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I page only for urgent, actionable user impact or imminent exhaustion, using SLO burn rates, sustained windows, minimum traffic, grouping and deduplication. Lower-severity symptoms become tickets or dashboards. Every alert has an owner and runbook, and I review precision, duplicates, acknowledgement, missed incidents and stale rules. Historical replay and game days validate thresholds before and after tuning.
 
 ---
 
@@ -36803,7 +39224,7 @@ Run Kubernetes as the control plane and expose VMs via KubeVirt for in-cluster V
 
 ## Terraform
 
-82 questions
+88 questions
 
 ### 1. Are you comfortable writing Terraform scripts?
 
@@ -37577,6 +39998,168 @@ Yes. Combine static checks, plan-time and integration tests and run them in CI. 
 
 Use a two-layer approach: fast unit-ish checks with Terraform CLI and end-to-end tests with Terratest. Run CI steps: terraform fmt -check, terraform validate, terraform init, terraform plan -out=plan.tfplan and terraform apply "plan.tfplan" (or use terraform apply -auto-approve for ephemeral runs). Use terraform output -json to assert outputs. For Terratest, write Go tests that use test_structure and terraform.Options, call terraform.InitAndApply(t, &options) and defer terraform.Destroy(t, &options). Verify cloud state with provider SDK helpers (e.g., aws.GetS3BucketVersioning(t, region, bucketName)) and assertions from testify; run tests with go test ./test -v. Ensure cleanup by deferring Destroy to prevent resource leaks.
 
+### 83. What is the difference between Terraform Community or open-source and Terraform Enterprise, and why would an organization use Terraform Enterprise?
+
+**Type:** Comparison
+
+**Answer:**
+
+Terraform Community Edition gives the core CLI workflow: providers, modules, plan, apply and state. The organization must design and operate its own remote execution, state backend and locking, access control, secrets, policy checks, approvals, audit trail and high availability around it. Terraform Enterprise is the self-hosted commercial platform for centralized Terraform workflows; it adds managed workspaces and remote runs, team-based access, policy enforcement, private module and provider distribution, governance and audit capabilities, with vendor support and enterprise deployment features. HCP Terraform provides a related SaaS operating model, so I would not use its name interchangeably with Terraform Enterprise. An organization chooses Enterprise when regulatory, data-residency or network-isolation requirements demand a self-hosted control plane and when the cost of consistently building those governance capabilities across many teams exceeds the license and platform-operating cost. Open source may remain the better choice for a small team with a mature CI/CD platform and modest governance needs. I decide from tenancy, compliance, scale, integration, availability, support and total cost—not from the assumption that Enterprise makes Terraform code itself better.
+
+### 84. Design a reusable Terraform module in one file for an S3 bucket with configurable bucket name, environment tag, versioning, SSE-S3 encryption, complete Public Access Block, lifecycle transition of non-current versions to GLACIER_IR after 30 days and deletion after 365 days, with bucket_arn and bucket_id outputs.
+
+**Type:** Coding
+
+**Answer:**
+
+A module normally leaves provider authentication and region configuration to its caller. The following complete `main.tf` declares the provider constraint, validated inputs, resources and outputs in one file. The non-current lifecycle rule is enabled only when versioning is enabled because otherwise non-current versions do not exist.
+
+```hcl
+terraform {
+  required_version = ">= 1.6.0"
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+variable "bucket_name" {
+  description = "Globally unique S3 bucket name."
+  type        = string
+
+  validation {
+    condition     = length(var.bucket_name) >= 3 && length(var.bucket_name) <= 63
+    error_message = "bucket_name must contain between 3 and 63 characters."
+  }
+}
+
+variable "environment" {
+  description = "Environment tag, for example dev, test or prod."
+  type        = string
+
+  validation {
+    condition     = contains(["dev", "test", "stage", "prod"], lower(var.environment))
+    error_message = "environment must be dev, test, stage or prod."
+  }
+}
+
+variable "versioning_enabled" {
+  description = "Whether S3 object versioning is enabled."
+  type        = bool
+  default     = true
+}
+
+resource "aws_s3_bucket" "this" {
+  bucket = var.bucket_name
+
+  tags = {
+    Environment = var.environment
+    ManagedBy   = "Terraform"
+  }
+}
+
+resource "aws_s3_bucket_versioning" "this" {
+  bucket = aws_s3_bucket.this.id
+
+  versioning_configuration {
+    status = var.versioning_enabled ? "Enabled" : "Suspended"
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
+  bucket = aws_s3_bucket.this.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "this" {
+  bucket = aws_s3_bucket.this.id
+
+  block_public_acls       = true
+  ignore_public_acls      = true
+  block_public_policy     = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "this" {
+  count  = var.versioning_enabled ? 1 : 0
+  bucket = aws_s3_bucket.this.id
+
+  depends_on = [aws_s3_bucket_versioning.this]
+
+  rule {
+    id     = "archive-and-expire-noncurrent-versions"
+    status = "Enabled"
+
+    filter {}
+
+    noncurrent_version_transition {
+      noncurrent_days = 30
+      storage_class   = "GLACIER_IR"
+    }
+
+    noncurrent_version_expiration {
+      noncurrent_days = 365
+    }
+  }
+}
+
+output "bucket_arn" {
+  description = "ARN of the S3 bucket."
+  value       = aws_s3_bucket.this.arn
+}
+
+output "bucket_id" {
+  description = "Name/ID of the S3 bucket."
+  value       = aws_s3_bucket.this.id
+}
+```
+
+A production module would usually add ownership controls, TLS-only bucket policy, logging, optional SSE-KMS, retention or Object Lock controls and automated `terraform test` coverage according to the organization's baseline.
+
+### 85. Explain the structure of a Terraform module you personally developed, including its files and what you implemented inside it.
+
+**Type:** Experience
+
+**Answer:**
+
+One example is a reusable GKE node-pool module. `main.tf` defines the node pool, autoscaling, management and upgrade settings; `variables.tf` exposes validated inputs such as project, cluster, location, machine type, disk, labels, taints, service account and min/max nodes; `outputs.tf` returns the pool name and identifiers; `versions.tf` pins Terraform and provider constraints; and `README.md` documents behavior, examples and upgrade notes. Examples and tests live in dedicated directories, while changelog and CI checks support releases. I included secure defaults such as no broad OAuth scopes, an explicit least-privilege node service account, auto-repair, controlled upgrades and consistent labels. I used validation and preconditions for incompatible inputs, avoided embedding environment-specific values and released immutable module versions. Consumer root modules supplied environment values and owned remote state. I explain both the resources I wrote and why I chose that module boundary.
+
+### 86. What happens if someone manually deletes a GCP resource managed by Terraform, and what happens during the next terraform plan and apply?
+
+**Type:** Scenario
+
+**Answer:**
+
+Terraform state still records the resource until the next refresh or plan reads the provider. The plan detects that the remote object is missing and, if it remains in configuration, normally proposes creating it again. The next approved apply recreates it, but the new resource may receive a different identifier, IP or generated property and dependent services may have been disrupted. If configuration also removed the resource, Terraform updates state without recreation. Importantly, recreation can fail because of retained names, dependencies, quotas or data loss; Terraform cannot restore deleted business data merely because it knows the resource definition. I investigate the audit log, recover data where required, review the plan and then apply through the controlled pipeline. Preventive controls include least-privilege IAM, deletion protection where supported, backups, policy and drift alerts—not automatic unreviewed applies for every drift event.
+
+### 87. How does Terraform state locking work, what happens when another pipeline targets the same state, and how do you prevent simultaneous applies?
+
+**Type:** Conceptual
+
+**Answer:**
+
+For operations that can write state, Terraform asks the configured backend for an exclusive lock when that backend supports locking. A second pipeline targeting the same state waits up to its lock timeout or fails with lock metadata instead of applying concurrently. This prevents two writers from reading the same old state and overwriting each other's results. I use a backend with supported locking semantics, one remote state per clear environment or component boundary, serialized deployment concurrency in CI and protected apply stages. Plans are generated from the same reviewed commit and applies run with least-privilege identity. I never use `-lock=false` for normal changes. If a pipeline crashes, I verify that no operation is active and that the recorded lock belongs to the failed run before using `terraform force-unlock`; blindly removing a valid lock can corrupt state. State versioning and backups provide recovery but do not replace locking.
+
+### 88. How did you use Terraform in your recent GCP project, and can you give a specific automation example?
+
+**Type:** Experience
+
+**Answer:**
+
+In my recent project, I used Terraform extensively to automate and standardize GCP infrastructure provisioning. We maintained a centralized repository of versioned, reusable modules for VPC networking, service accounts and IAM, GKE, load balancers, Cloud Armor, Cloud Run, storage buckets and Secret Manager. Application or live-environment repositories consumed pinned module versions and supplied environment-specific values through reviewed variable files rather than duplicating resource definitions.
+
+Terraform ran through Bitbucket Pipelines. A pull request triggered formatting, validation, security or policy checks and a `terraform plan`; reviewers examined the exact proposed change. After approval, the controlled deployment stage applied the reviewed configuration using a dedicated least-privilege service account, so normal infrastructure changes did not require engineers to create resources manually in the GCP console. Dev, QA, UAT and Production had separate state boundaries to reduce blast radius. Remote state was stored in a restricted, versioned GCS bucket using the backend's locking behavior, with audit logging and recovery controls. IAM bindings and Organization Policies were also managed as code to keep environments consistent.
+
+A strong example was external-application onboarding. Instead of manually configuring every network and security component, reusable modules created the external load balancer, backend service or NEG configuration, approved custom headers, TLS and domain integration, Cloud Armor policy and rate limits, service accounts, IAM and supporting monitoring resources. The application team supplied a small contract containing the project, environment, backend, domain, capacity and security parameters. The pipeline validated those inputs and produced an auditable plan. This reduced onboarding lead time, eliminated repeated console work and made the resulting infrastructure repeatable, reviewable and easier to detect for drift. I would quantify the actual time or error reduction where project measurements are available.
+
 ---
 
 ## Terraform Architecture and Multi-Environment Design
@@ -38093,7 +40676,7 @@ State locking prevents concurrent write/conflicting operations by acquiring a lo
 
 ## Troubleshooting Scenarios
 
-20 questions
+21 questions
 
 ### 1. A model endpoint is healthy but predictions are incorrect. What would you investigate?
 
@@ -38261,6 +40844,14 @@ Check environment and runner differences: print env (env | sort), PATH, shell (e
 **Answer:**
 
 1) Immediately revoke the compromised workload’s credentials and network access: e.g. disable AWS keys (aws iam update-access-key --user-name USER --access-key-id AKIA... --status Inactive) and/or remove its Kubernetes ServiceAccount binding (kubectl delete rolebinding ROLEBINDING -n NAMESPACE). 2) Remove or tighten storage permissions: enforce least privilege on the bucket/object (aws s3api put-bucket-policy --bucket BUCKET --policy file://deny-unexpected.json) and enable S3 Block Public Access (aws s3api put-public-access-block --bucket BUCKET --public-access-block-configuration file://config.json). 3) Rotate any rotated secrets/keys, update consuming workloads, and enable encryption+object ACLs. 4) Audit and verify: check CloudTrail/S3 access logs for unauthorized GetObject, then confirm access fails (aws s3api head-object --bucket BUCKET --key KEY returns AccessDenied) and kubectl auth can-i get pods --as=sa-name to verify denial.
+
+### 21. If there is a production or server problem, what troubleshooting approach do you follow?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+I first confirm customer impact, severity, scope and start time, open the incident process and assign clear ownership. I check health dashboards, alerts, logs, events and recent deployments or infrastructure changes before changing anything. I follow the request path from DNS and load balancer through network, compute or Kubernetes, application and downstream data services, comparing failing and healthy instances to narrow the fault domain. The immediate priority is safe mitigation—rollback, fail over, remove a bad instance, scale capacity or disable a feature—while preserving evidence. I make one controlled change at a time, state the hypothesis and verify recovery through technical and business signals. After stabilization, I identify root and contributing causes, reconcile emergency changes into code, improve alerts or runbooks and track corrective actions to completion.
 
 ---
 

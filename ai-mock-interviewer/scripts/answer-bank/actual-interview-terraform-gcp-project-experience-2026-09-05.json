@@ -1,0 +1,12 @@
+[
+  {
+    "source": "Actual Interview - Terraform GCP Project Experience - 2026-09-05",
+    "section": "Terraform Project Experience",
+    "category": "Terraform",
+    "topic": "GCP Infrastructure as Code",
+    "difficulty": "Advanced",
+    "questionType": "Experience",
+    "question": "How did you use Terraform in your recent GCP project, and can you give a specific automation example?",
+    "answer": "In my recent project, I used Terraform extensively to automate and standardize GCP infrastructure provisioning. We maintained a centralized repository of versioned, reusable modules for VPC networking, service accounts and IAM, GKE, load balancers, Cloud Armor, Cloud Run, storage buckets and Secret Manager. Application or live-environment repositories consumed pinned module versions and supplied environment-specific values through reviewed variable files rather than duplicating resource definitions.\n\nTerraform ran through Bitbucket Pipelines. A pull request triggered formatting, validation, security or policy checks and a `terraform plan`; reviewers examined the exact proposed change. After approval, the controlled deployment stage applied the reviewed configuration using a dedicated least-privilege service account, so normal infrastructure changes did not require engineers to create resources manually in the GCP console. Dev, QA, UAT and Production had separate state boundaries to reduce blast radius. Remote state was stored in a restricted, versioned GCS bucket using the backend's locking behavior, with audit logging and recovery controls. IAM bindings and Organization Policies were also managed as code to keep environments consistent.\n\nA strong example was external-application onboarding. Instead of manually configuring every network and security component, reusable modules created the external load balancer, backend service or NEG configuration, approved custom headers, TLS and domain integration, Cloud Armor policy and rate limits, service accounts, IAM and supporting monitoring resources. The application team supplied a small contract containing the project, environment, backend, domain, capacity and security parameters. The pipeline validated those inputs and produced an auditable plan. This reduced onboarding lead time, eliminated repeated console work and made the resulting infrastructure repeatable, reviewable and easier to detect for drift. I would quantify the actual time or error reduction where project measurements are available."
+  }
+]
