@@ -1,5 +1,9 @@
 # AI Mock Interviewer
 
+<!-- repository-summary -->
+Voice-led AI mock interview practice for DevOps, SRE, Cloud, Platform Engineering, MLOps, and software engineering roles.
+<!-- /repository-summary -->
+
 A local-first, voice-led mock interview simulator for DevOps, SRE, Cloud, Platform Engineering, and MLOps
 preparation. It runs against a local Node server and requires no cloud service in offline mode.
 

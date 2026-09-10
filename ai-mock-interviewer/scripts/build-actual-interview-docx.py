@@ -1,6 +1,7 @@
 import os
 import re
 from datetime import date
+from docx_answer_format import append_answer_runs
 
 from docx import Document
 from docx.enum.section import WD_SECTION
@@ -135,10 +136,17 @@ def parse_source(text):
             question = match.group(1).strip() if match else line[4:].strip()
             question_type = "Interview question"
             answer_parts = []
+            in_code = False
             index += 1
-            while index < len(lines) and not lines[index].startswith("### ") and not lines[index].startswith("## "):
-                value = lines[index].strip()
-                if value.startswith("**Type:**"):
+            while index < len(lines) and (in_code or not (lines[index].startswith("### ") or lines[index].startswith("## "))):
+                raw_value = lines[index]
+                value = raw_value.strip()
+                if value.startswith("```"):
+                    in_code = not in_code
+                    answer_parts.append(raw_value)
+                elif in_code:
+                    answer_parts.append(raw_value)
+                elif value.startswith("**Type:**"):
                     question_type = value.replace("**Type:**", "", 1).strip()
                 elif value == "**Answer:**":
                     pass
@@ -268,8 +276,7 @@ for category_index, category in enumerate(categories, 1):
         answer = doc.add_paragraph(style="Interview Answer")
         label = answer.add_run("Answer: ")
         set_font(label, 11, DARK_BLUE, bold=True)
-        body = answer.add_run(item["answer"] or "Answer pending.")
-        set_font(body, 11, INK)
+        append_answer_runs(answer, item["answer"] or "Answer pending.")
         global_number += 1
 
 doc.core_properties.title = "Actual Interview Questions and Answers"

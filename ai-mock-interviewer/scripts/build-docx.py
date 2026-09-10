@@ -1,6 +1,7 @@
 import json
 import re
 import os
+from docx_answer_format import append_answer_runs
 from datetime import date
 
 from docx import Document
@@ -212,8 +213,8 @@ def add_qa(number, entry):
     a_para = doc.add_paragraph()
     a_para.paragraph_format.space_after = Pt(8)
     a_para.paragraph_format.left_indent = Inches(0.15)
-    a_run = a_para.add_run("A: " + entry["answer"])
-    a_run.font.size = Pt(10.5)
+    a_para.add_run("A: ").font.size = Pt(10.5)
+    append_answer_runs(a_para, entry["answer"], prose_size=10.5)
     example_para = doc.add_paragraph()
     example_para.paragraph_format.space_after = Pt(10)
     example_para.paragraph_format.left_indent = Inches(0.15)

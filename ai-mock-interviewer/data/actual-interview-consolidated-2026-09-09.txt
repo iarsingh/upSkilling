@@ -1,0 +1,2657 @@
+Here are all the questions asked in this interview, in order. I’ve grouped the follow-up probes with their main questions so you can use this as an interview revision sheet.
+
+1. Introduction & experience
+
+1. Can you introduce yourself and tell us about your background?
+2. What kind of DevOps/SRE work are you currently doing?
+
+2. Production incident / troubleshooting
+
+3. Tell me about a time when you helped investigate a system or service incident.
+4. What tools or information did you use—logs, alerts, dashboards?
+5. What was actually wrong, and how did you contribute to fixing it?
+6. Can you give me a specific real incident, rather than a general troubleshooting approach?
+7. What was the actual result of that incident?
+8. You mentioned Dynatrace—can you explain your Dynatrace setup?
+9. How is OneAgent integrated into your environment/GKE?
+10. How do you set up SLIs/SLOs? (Interviewer wording sounded like “SLOs and SLRs.”)
+11. What is a Key Request in Dynatrace?
+12. How does your on-call process work?
+13. What happens when an incident occurs outside business hours?
+14. What language was the affected application written in? (Node.js)
+15. How did you identify that the problem was database-related?
+16. If the application cannot connect to the database, shouldn’t the calls simply fail rather than become slow?
+17. Why was this considered service degradation rather than a complete outage?
+
+3. CI/CD & application delivery
+
+18. Describe the CI/CD process you use for deploying applications.
+19. Tell me about a time when you improved the CI/CD process.
+20. What did you change, and what improvement did it provide?
+21. What happens when a developer raises a PR/merges into the develop branch?
+22. Do you run a Terraform plan before actually deploying changes?
+23. What stages do you have in the pipeline?
+24. How are SonarQube quality gates used?
+25. How do you prevent things such as database credentials from being hardcoded?
+26. What CI/CD tool are you using? (Jenkins)
+27. Do security scans, unit tests, and integration tests run sequentially or in parallel?
+28. Where do your application dependencies come from?
+29. Are you using an internal or external dependency repository?
+30. Are you using Nexus, JFrog, or something else? (Artifact Registry)
+31. How do developers access Artifact Registry?
+32. How are elevated write permissions handled/service-account impersonation used?
+33. Once the application is built, what kind of container images do you build?
+34. Do you directly use public Docker images?
+35. Do you have an image bakery / approved base-image process?
+36. What makes a container image clean/minimal instead of bloated?
+37. Once the image has been built and pushed, what happens next?
+38. What happens if the vulnerability scan fails?
+39. Do you automatically create a Jira defect for the responsible development team?
+40. How are applications deployed using Argo CD?
+41. How are Helm charts used?
+42. Do you deploy multiple microservices simultaneously?
+43. Why would you avoid deploying all production microservices together?
+44. What Kubernetes deployment settings do you check before production rollout?
+45. What are reasonable CPU and memory resource values?
+46. How do resource configurations differ between Dev, QA, UAT and Production?
+47. How do Kubernetes resource requests and limits work?
+48. What would be reasonable starting values for requests and limits?
+49. Once the application is deployed into Dev, what happens next?
+50. What types of testing happen after Dev deployment?
+51. Are you personally responsible for writing those tests?
+52. How does the tested image eventually get promoted to Production?
+53. Who signs off the release?
+54. What security/QA/UAT approvals are required?
+55. How do you handle the production change/CAB process?
+56. What software do you use for change management? (ServiceNow)
+57. Are you familiar with ServiceNow?
+
+4. Infrastructure as Code / Terraform
+
+58. What is Infrastructure as Code (IaC)?
+59. Why do we use Infrastructure as Code?
+60. What tools and languages have you used to implement IaC?
+61. Where do you store your Terraform state file? (GCS bucket)
+62. Have you written Terraform modules?
+63. Give me an example of a Terraform module you have created/worked on.
+64. Are you using Google Cloud Secret Manager?
+
+5. Complex issue / stakeholder management
+
+65. Describe a time when you managed a complex technical issue involving many moving parts.
+66. How did you coordinate multiple technical teams?
+67. How did you manage the different stakeholders?
+68. How did you communicate progress and business impact during the incident?
+
+6. Kubernetes quick-fire
+
+69. What is a DaemonSet?
+70. What is a StatefulSet?
+71. What is Cloud Controller Manager?
+72. What is HPA (Horizontal Pod Autoscaler)?
+73. What is a ConfigMap?
+74. If you change a ConfigMap, do you need to restart the pod?
+75. What is Node Affinity?
+76. What is Pod Affinity?
+77. What is Pod Anti-Affinity?
+78. What are Taints and Tolerations?
+79. Have you worked with a service mesh?
+80. What is Istio?
+81. What does a service mesh do?
+82. What is the difference between ClusterIP, NodePort and LoadBalancer?
+83. What is the kube-apiserver?
+84. What happens when you execute a kubectl command?
+
+7. DevOps concepts
+
+85. What is Continuous Integration (CI)?
+86. What is Continuous Deployment?
+87. What is the difference between Continuous Delivery and Continuous Deployment?
+88. What is a Blue-Green deployment?
+89. What is a Canary release/deployment?
+
+8. Azure / GCP quick-fire
+
+90. Most of your experience is GCP—are you also familiar with Azure?
+91. What is an Azure Subscription?
+92. What is the equivalent of an Azure Subscription in GCP?
+    Expected: GCP Project.
+93. What is an Azure Network Security Group (NSG)?
+94. Where can an NSG be associated?
+    Subnet / NIC.
+95. What is Azure Application Gateway?
+96. What is the equivalent/load-balancing approach in GCP?
+97. Explain the GCP Application Load Balancer.
+98. How do you use Cloud Armor/WAF with an internet-facing application?
+99. What is the difference between an Azure VM and VMSS?
+100. What are their GCP equivalents?
+    Compute Engine VM / Managed Instance Group.
+101. What databases have you worked with across the different clouds?
+102. What is the difference between IaaS, PaaS and SaaS?
+
+9. Security
+
+103. What is TLS?
+104. What is mTLS?
+105. What is the difference between TLS and mTLS?
+
+So there were roughly 105 questions/probes, although many were follow-ups to the same main topic rather than independent questions.
+
+The heaviest areas in this round were clearly production incident handling, CI/CD, Kubernetes, Terraform/IaC, GCP/Azure fundamentals, and deployment practices. The interviewer also repeatedly pushed for specific real-world implementation details rather than textbook definitions, which is useful preparation if there is another round.
+
+Based on the interview transcript you shared in this conversation, these are all the questions asked so far, in order:
+
+1. Introduction
+
+“Can we start with your introduction?”
+
+2. Current company
+
+“Which company are you from?”
+
+3. Current project
+
+“Which project are you in?”
+
+4. Kubernetes experience
+
+“Do you have experience with AKS or GKE?”
+
+5. GKE 503 troubleshooting
+
+“Your application is running on GKE, but users are getting 503 errors. How will you troubleshoot this?”
+
+6. Egress security / monitoring
+
+“Your team runs Kubernetes, managing internal services and public-facing APIs. Due to a recent security incident, how would you design the system to enforce and monitor egress traffic policies?”
+
+7. Global DNS-based API failure
+
+“A global customer-facing API is deployed across multiple regions and uses DNS-based global traffic management to route users to the nearest healthy region. How would you detect a regional failure and fail over traffic?”
+
+8. Multi-region IaC issues
+
+“You have a critical customer-facing application deployed across multiple regions using Infrastructure as Code. What are the potential issues with the current setup?”
+
+9. VM deployment / configuration drift
+
+“A customer-facing API is running on VM instances behind a load balancer. When a new version is released, a configuration-management tool updates the application in place, leading to configuration differences and difficult rollbacks. How would you redesign this deployment?”
+
+10. High-risk microservice deployment
+
+“You are deploying a new microservice alongside an existing billing system. If a mistake in the new service causes customer overcharges or lost transactions, what deployment strategy would you use to minimize risk and failure?”
+
+11. Istio latency troubleshooting
+
+“You have users reporting increased latency for certain API calls. The system consists of multiple microservices running on Kubernetes with Istio service mesh, and you have access to logs, metrics, and distributed traces. How would you identify the root cause of the latency?”
+
+12. Load-balancer operational actions
+
+“What specific operational actions or configuration changes would you make on the load balancer when the target group is affected, particularly within the first five minutes of an incident?”
+
+13. Health checks / failure domains
+
+“What is your experience with model/application health checks for microservices and failure domains?”
+
+⸻
+
+Main technical areas the interviewer is testing
+
+Area	Topics
+GKE/Kubernetes	Pods, Services, health checks, readiness, troubleshooting
+Load Balancing	Target groups/backends, health checks, draining, failover
+Networking	Pod-to-pod connectivity, ports, DNS, egress
+Security	Egress policies, NetworkPolicy, monitoring/auditing
+Multi-region	DNS routing, health-based failover, failure domains
+IaC	Terraform, configuration drift, immutable infrastructure
+Deployment	Canary, blue-green, rollback, progressive delivery
+Microservices	Dependencies, DB connectivity, connection pools
+Istio	Service mesh, Envoy, retries, latency, tracing
+Observability	Logs, metrics, distributed tracing, P95/P99
+Incident Response	First-five-minute stabilization and RCA
+
+Overall pattern: this interviewer is heavily focused on real-world production troubleshooting, high availability, deployment safety, Kubernetes/GKE, load balancing, networking, and incident response, rather than asking only definition-based questions.
+
+
+Yes. Here is the complete list of interview questions covered in this round, in the order you shared them:
+
+1. Terraform / Cloud Standardization
+
+1. You mentioned that you developed and standardized the telecom enterprise and reduced effort by 70%. What exactly was the problem, and what did you solve?
+2. Was the 70% reduction simply reduction of manual effort through automation?
+3. Why wasn’t it 100% automated? What manual activities remained in production?
+
+2. AWS ↔ GCP / Datastream
+
+4. How would you set up replication between AWS Mumbai and GCP?
+5. If AWS is the source and GCP is the destination, how does replication work from source to destination?
+6. What is Datastream, and how does CDC work?
+
+3. AWS Route 53
+
+7. Are you aware of AWS?
+8. How does Route 53 internally work?
+9. How does Route 53 Private Hosted Zone / private DNS work?
+10. How does a private DNS request get resolved inside a VPC?
+11. How would hybrid/on-premises DNS work with Route 53 Resolver?
+
+4. WAF / Rate Limiting / DDoS
+
+12. If you don’t want to use an expensive managed service for rate limiting and DDoS protection, what alternatives do you have?
+13. Can you block requests such as /admin.php or suspicious paths without a managed WAF?
+14. Can NGINX/Apache provide rate limiting?
+15. What is the limitation of server-level protection against a large DDoS attack?
+
+5. EKS Troubleshooting
+
+16. In EKS, if an application was working one minute ago and suddenly shows a configuration error without any deployment, what would you check first?
+17. How would you determine whether the problem is with the pod, ConfigMap, Secret, Service, node, or external dependency?
+18. What Kubernetes commands would you use for the initial investigation?
+
+6. Three-Tier Architecture
+
+19. You have to design a three-tier application from scratch—frontend, backend, and database. How would you design it?
+20. How would you design it for high availability and security?
+21. Where would you place the frontend, backend, and database?
+22. How would you handle CI/CD, monitoring, backup, and DR?
+
+7. GCP Networking
+
+23. You have two GCP subnets—one with Cloud NAT and one without NAT. Your database is in the subnet without NAT. Can it communicate with the application subnet?
+24. Does a GCP database subnet require Cloud NAT for private communication?
+25. What is the difference between private connectivity and internet egress in GCP?
+
+8. Terraform IAM
+
+26. One team uses google_project_iam_policy and another uses google_project_iam_member. What problems can occur?
+27. What is the difference between:
+
+* google_project_iam_policy
+* google_project_iam_binding
+* google_project_iam_member
+
+28. How would you prevent Terraform teams from overwriting each other’s IAM configuration?
+
+9. GCP Centralized Networking
+
+29. You have 50 GCP projects, but applications need to remain in their individual projects. How would you centralize networking?
+30. How would you separate production and non-production?
+31. What is Shared VPC?
+32. Which project owns the network and which project owns the application?
+33. How would you control application-team access to centrally managed subnets?
+
+10. Cloud SQL Performance Incident
+
+34. A production Cloud SQL instance suddenly reaches 100% CPU, and application latency increases from 100 ms to 5 seconds. What would you investigate?
+35. How would you identify whether a particular query is causing the CPU spike?
+36. What would you check in Query Insights, Cloud Monitoring, connections, locks, memory, and disk I/O?
+37. What immediate mitigation would you take?
+38. What would you do for permanent RCA?
+
+11. GCP Disaster Recovery
+
+39. Your primary application is in US Central 1, and the entire region becomes unavailable. Your DR requirement is RTO 30 minutes and RPO 5 minutes. How would you design it?
+40. Would you use another zone or another region?
+41. What is the difference between multi-AZ/multi-zone HA and multi-region DR?
+42. Would you choose the same region or a different region for DR?
+43. How would you achieve the 5-minute RPO?
+44. How would Terraform help you achieve the 30-minute RTO?
+45. Have you personally implemented this kind of multi-region DR setup for a client?
+46. What DR experience do you have with Veeam and Kasten K10?
+
+12. ECS Production Incident
+
+47. An ECS application is failing because of an incorrect environment variable. The developer has the correct value, but changing it normally requires a PR and approval. It’s causing production downtime. What would you do as a DevOps engineer?
+48. Would you bypass the normal PR process?
+49. What is the emergency-change/break-glass process?
+50. If the image itself is already created, do you need to rebuild it?
+51. How would you fix an environment-variable issue without creating a new Docker image?
+52. How would you roll back the ECS deployment?
+
+13. Docker Image Retention / Rollback
+
+53. What is the best practice for keeping Docker images for rollback?
+54. How many previous production images would you retain?
+55. Why shouldn’t you use the latest tag?
+56. How would you make rollback reliable?
+57. Would you use image tags or immutable image digests?
+
+14. Observability
+
+58. How is your observability setup?
+59. Why do we use Prometheus?
+60. Why do we use Loki?
+61. What is the difference between Prometheus and Loki?
+62. How does Logstash fit into the architecture?
+63. What is the difference between Prometheus, Loki, Logstash, Grafana, and Alertmanager?
+
+15. Cloud Cost Optimization
+
+64. You mentioned 20% cloud cost optimization. What exactly was reduced?
+65. Why did you achieve 20% savings?
+66. How did you identify the cost-saving opportunities?
+67. What did you optimize in GCP/GKE?
+68. How did you measure the 20% reduction?
+69. Was the 20% saving from one resource or cumulative optimization?
+
+16. GitHub → Bitbucket Migration
+
+70. You mentioned leading a Bitbucket migration. How would you migrate a monolithic repository?
+71. Would you split the monolith during migration?
+72. How would you migrate GitHub to Bitbucket while preserving history?
+73. What happens if the two platforms have different handling of binaries?
+74. How would you migrate Git LFS, tags, branches, and other Git objects?
+75. How would you make sure the source and destination repositories match?
+76. How would you validate the migration?
+77. How would you migrate CI/CD pipelines, secrets, webhooks, permissions, and branch protections?
+78. What would your final cutover strategy be?
+
+17. EKS Upgrade
+
+79. Have you performed an EKS cluster upgrade?
+80. How would you upgrade EKS 1.32 → 1.36?
+81. Can you directly jump from 1.32 to 1.36?
+82. What compatibility checks would you perform?
+83. What do you check for deprecated Kubernetes APIs?
+84. What about EKS add-ons such as VPC CNI, CoreDNS, kube-proxy, CSI drivers, Load Balancer Controller, etc.?
+85. How would you upgrade worker nodes?
+86. How would you protect workloads during node draining?
+87. What role do PDBs play during the upgrade?
+88. How would you test the upgrade before production?
+
+18. EKS Upgrade Runbook
+
+89. How would you prepare a step-by-step EKS upgrade runbook?
+90. What are your pre-checks?
+91. What backups would you take?
+92. What is your rollback strategy?
+93. How would you perform:
+93. 32 → 1.33 → 1.34 → 1.35 → 1.36?
+94. What would you validate after every version?
+95. When would you stop/rollback the upgrade?
+96. Would you consider a blue/green cluster migration instead of multiple in-place upgrades?
+
+19. EKS / AMI / Kernel Issue
+
+97. Your POC worked with one AMI, but in production you used the latest AMI and suddenly got a kernel issue. Why could that happen?
+98. What differences would you compare between the POC and production AMIs?
+99. What would you check in the Linux kernel, container runtime, CNI/CSI, security agents, and node configuration?
+100. Which logs/commands would you use to investigate a kernel issue?
+101. Would you immediately use the latest AMI in production?
+102. How would you safely roll back to the previous AMI?
+
+20. Docker VM-to-VM Communication
+
+103. How would a frontend container communicate with a backend container when both are running on EC2/Compute Engine VMs, not Kubernetes?
+104. First, how would you establish VM-to-VM communication?
+105. What private IP, routing, firewall/security-group configuration would you use?
+106. How would Docker port mapping work?
+107. What is the difference between VM networking and Docker networking?
+108. Can two Docker bridge networks on different VMs communicate simply because they have the same network name?
+109. How would the frontend application actually call the backend?
+
+21. Stable Backend Endpoint
+
+110. What happens if someone deletes/releases the backend VM’s IP?
+111. How do you avoid production downtime caused by changing VM IPs?
+112. Would you use a static private IP?
+113. Why would you prefer an internal load balancer + private DNS?
+114. What does “stable service endpoint” mean?
+
+22. E-Commerce API Request Flow
+
+115. How does a frontend application communicate with a backend?
+116. Does it use an IP, URL, or Docker network?
+117. When would you use a reverse proxy or API Gateway?
+118. Explain the complete request flow for an e-commerce Place Order operation.
+119. What URL would the browser call?
+120. How does DNS resolve the API?
+121. How does the request travel through the gateway/load balancer to the backend?
+122. How does the backend communicate with the database?
+123. Where would authentication, TLS, WAF, logging, and monitoring happen?
+
+⸻
+
+The biggest areas the interviewer was testing
+
+From the questions, this was not just a “define AWS/GCP services” interview. The interviewer was repeatedly testing whether you can think through:
+
+Architecture → troubleshooting → production operations → networking → HA/DR → Terraform governance → Kubernetes → CI/CD → incident handling.
+
+And the places where you should be especially careful next time are:
+
+1. Don’t overclaim hands-on experience.
+2. For percentage achievements like 70% / 20%, be ready to explain exactly how they were calculated.
+3. Distinguish HA vs DR very clearly.
+4. Distinguish VM networking vs Docker networking vs application/API networking.
+5. For production incidents, always give:
+    Detect → Investigate → Mitigate → Validate → RCA → Prevent recurrence.
+6. When you don’t know something, say “I haven’t implemented that directly, but this is how I would approach it.” That is much better than guessing.
+
+Based on this interview conversation, here are all the questions asked so far, in order, with the key answer area you should prepare:
+
+Interview Questions
+
+1. Please give me a brief introduction about yourself.
+    * 7 years experience
+    * GCP/DevOps
+    * Terraform, GKE, Kubernetes, CI/CD, Docker
+    * Monitoring and automation
+2. Can you tell me your day-to-day activities?
+    * GCP infrastructure
+    * GKE operations
+    * Terraform
+    * CI/CD
+    * Monitoring
+    * Production support
+    * Automation
+3. What application deployments do you handle?
+    * Containerized microservices
+    * Docker
+    * GKE
+    * Artifact Registry
+    * Jenkins/Bitbucket/GitHub Actions
+    * Cloud Run where applicable
+4. You mentioned Dynatrace. What was it used for in your application?
+    * APM
+    * Infrastructure monitoring
+    * Distributed tracing
+    * Application latency/errors
+    * Production troubleshooting
+5. What was your role in Dynatrace configuration/integration?
+    * GCP infrastructure integration
+    * GKE/Dynatrace integration
+    * Monitoring pods, nodes and containers
+    * Application onboarding
+    * Dashboards/alerts
+    * Supporting APM/tracing
+6. Have you worked with Docker images?
+7. If a Docker image version changes from v1 to v2, how will the deployment work?
+    * Build image
+    * Scan/test
+    * Push to Artifact Registry
+    * Update deployment
+    * Kubernetes rolling update
+    * Readiness checks
+    * Monitor
+    * Rollback if necessary
+8. Can you give me the architecture of the application you are talking about?
+    * DNS
+    * Global Load Balancer
+    * Cloud Armor
+    * GKE Gateway
+    * Microservices
+    * Services
+    * AlloyDB/Cloud SQL
+    * Pub/Sub/Redis where required
+    * Monitoring
+    * CI/CD
+9. Have you written Terraform code?
+10. Can you write Terraform code to provision multiple EC2 instances?
+
+* count
+* for_each
+* Variables
+* Outputs
+
+11. How do you specify the count of servers?
+
+* variable "server_count"
+* count = var.server_count
+
+12. How do you count the instances created?
+
+* length(aws_instance.server)
+* Output instance IDs using aws_instance.server[*].id
+
+13. What were your day-to-day activities as an SRE?
+
+* Monitoring
+* On-call
+* Incident management
+* RCA
+* Production deployments
+* Capacity planning
+* Automation
+* Reliability improvements
+
+14. Give me an example of a P1 incident you resolved as an SRE.
+
+* Detect alert
+* Assess impact
+* Incident bridge
+* Logs/metrics
+* Identify root cause
+* Mitigate/restore
+* RCA
+* Prevent recurrence
+
+15. Were you part of a particular on-call rotation?
+
+* L2 on-call
+* Alert acknowledgement
+* Troubleshooting
+* Escalation
+* Production restoration
+
+16. Have you worked on AlloyDB PostgreSQL performance spikes during business hours?
+
+* Historical metrics
+* CPU/load
+* Connections
+* Query latency
+* Long-running queries
+* Capacity planning
+* Connection-pool tuning
+* Query optimization
+* Scaling
+
+17. How do you deal with CrashLoopBackOff errors?
+
+* kubectl describe pod
+* kubectl logs --previous
+* Exit code
+* OOMKilled
+* Probes
+* Configuration
+* Secrets/ConfigMaps
+* Database connectivity
+* DNS/networking
+* Recent deployment
+* Rollback if necessary
+
+18. What level are you at in SRE—L1 or L2?
+
+* L2 SRE
+* Deeper production troubleshooting
+* RCA
+* Automation
+* Reliability improvements
+
+19. How do you secure the CI/CD software supply chain?
+
+* Branch protection
+* PR reviews
+* Least privilege
+* Secure runners
+* Secret Manager
+* Dependency scanning
+* Container scanning
+* Immutable artifacts
+* Image signing
+* Policy enforcement
+* Audit logging
+
+20. How would you achieve zero-downtime progressive delivery using Istio/service mesh?
+
+* Canary deployment
+* v1 + v2 simultaneously
+* Istio VirtualService
+* DestinationRule
+* Traffic splitting
+* 95/5 → 90/10 → 50/50 → 0/100
+* Monitor metrics
+* Rollback
+
+21. How does autoscaling help with progressive delivery?
+
+* Istio = traffic control
+* HPA = pod scaling
+* Cluster Autoscaler = node scaling
+
+22. Have you performed any migration from GCP to GKE or GCP to AWS?
+
+* Clarified: currently involved in AWS → GCP database migration
+* No GKE workload migration yet
+
+23. Why are you migrating the database from AWS to GCP?
+
+* Application platform already on GCP
+* Reduce cross-cloud dependency
+* Lower latency
+* Reduce data-transfer cost
+* Simplify operations
+* AlloyDB PostgreSQL
+
+24. Why GCP instead of AWS? What pros/cons did you present to the client?
+
+* GCP was already the primary application platform
+* GKE already established
+* Avoid full application-platform migration
+* Reduce cross-cloud traffic
+* Operational simplicity
+* AlloyDB PostgreSQL compatibility
+* Migration risk acknowledged
+
+25. Have you worked with Kubernetes?
+26. What are the types in Kubernetes?
+
+* Deployment
+* StatefulSet
+* DaemonSet
+* Job
+* CronJob
+* Services: ClusterIP, NodePort, LoadBalancer, ExternalName
+
+27. What about routing and NetworkPolicies?
+
+* Pod-level communication
+* Namespace selectors
+* Ingress rules
+* Egress rules
+* Pod selectors
+* Ports/IP blocks
+* Default deny
+* Least-privilege networking
+
+28. How is the application exposed through Kubernetes?
+
+* DNS
+* Load Balancer
+* Gateway/Ingress
+* Service
+* Pods
+* Path/host-based routing
+
+29. What kind of load balancer did you use?
+
+* Google Cloud external global Application Load Balancer
+* Cloud Armor
+* GKE Gateway API
+* Kubernetes Service
+* Internal ClusterIP for service-to-service communication
+
+30. Can a Kubernetes Service be exposed through a Load Balancer?
+
+* Yes
+* type: LoadBalancer
+* GKE provisions the relevant load-balancing resources
+* But production microservice architectures often prefer Gateway/Ingress for centralized routing
+
+⭐ Most likely follow-up questions
+
+Based on the progression of this interviewer, I would especially prepare these next:
+
+* Difference between Ingress and Gateway API?
+* Difference between Ingress and LoadBalancer Service?
+* How does GKE Gateway actually provision the Google Load Balancer?
+* How does traffic flow from Load Balancer to Pod?
+* How does Kubernetes Service select Pods?
+* ClusterIP vs NodePort vs LoadBalancer?
+* How do you troubleshoot a 502/503 from the Load Balancer?
+* How do you troubleshoot a GKE pod that cannot connect to AlloyDB?
+* How do you implement HPA?
+* How does HPA calculate replica count?
+* How would you implement canary deployment without Istio?
+* What happens during a Kubernetes rolling update?
+* How do you rollback a failed deployment?
+* How do you secure GKE?
+* How do you secure Terraform state?
+* How do you manage secrets in CI/CD?
+* What happens if Terraform state is locked?
+* How do you troubleshoot a production P1?
+* What is SLI, SLO and SLA?
+* How do you reduce MTTR?
+What is the difference between monitoring and observability?
+Based on this interview conversation, here are all the questions asked so far, in order, with the key answer area you should prepare:
+
+Interview Questions
+
+1. Please give me a brief introduction about yourself.
+    * 7 years experience
+    * GCP/DevOps
+    * Terraform, GKE, Kubernetes, CI/CD, Docker
+    * Monitoring and automation
+2. Can you tell me your day-to-day activities?
+    * GCP infrastructure
+    * GKE operations
+    * Terraform
+    * CI/CD
+    * Monitoring
+    * Production support
+    * Automation
+3. What application deployments do you handle?
+    * Containerized microservices
+    * Docker
+    * GKE
+    * Artifact Registry
+    * Jenkins/Bitbucket/GitHub Actions
+    * Cloud Run where applicable
+4. You mentioned Dynatrace. What was it used for in your application?
+    * APM
+    * Infrastructure monitoring
+    * Distributed tracing
+    * Application latency/errors
+    * Production troubleshooting
+5. What was your role in Dynatrace configuration/integration?
+    * GCP infrastructure integration
+    * GKE/Dynatrace integration
+    * Monitoring pods, nodes and containers
+    * Application onboarding
+    * Dashboards/alerts
+    * Supporting APM/tracing
+6. Have you worked with Docker images?
+7. If a Docker image version changes from v1 to v2, how will the deployment work?
+    * Build image
+    * Scan/test
+    * Push to Artifact Registry
+    * Update deployment
+    * Kubernetes rolling update
+    * Readiness checks
+    * Monitor
+    * Rollback if necessary
+8. Can you give me the architecture of the application you are talking about?
+    * DNS
+    * Global Load Balancer
+    * Cloud Armor
+    * GKE Gateway
+    * Microservices
+    * Services
+    * AlloyDB/Cloud SQL
+    * Pub/Sub/Redis where required
+    * Monitoring
+    * CI/CD
+9. Have you written Terraform code?
+10. Can you write Terraform code to provision multiple EC2 instances?
+
+* count
+* for_each
+* Variables
+* Outputs
+
+11. How do you specify the count of servers?
+
+* variable "server_count"
+* count = var.server_count
+
+12. How do you count the instances created?
+
+* length(aws_instance.server)
+* Output instance IDs using aws_instance.server[*].id
+
+13. What were your day-to-day activities as an SRE?
+
+* Monitoring
+* On-call
+* Incident management
+* RCA
+* Production deployments
+* Capacity planning
+* Automation
+* Reliability improvements
+
+14. Give me an example of a P1 incident you resolved as an SRE.
+
+* Detect alert
+* Assess impact
+* Incident bridge
+* Logs/metrics
+* Identify root cause
+* Mitigate/restore
+* RCA
+* Prevent recurrence
+
+15. Were you part of a particular on-call rotation?
+
+* L2 on-call
+* Alert acknowledgement
+* Troubleshooting
+* Escalation
+* Production restoration
+
+16. Have you worked on AlloyDB PostgreSQL performance spikes during business hours?
+
+* Historical metrics
+* CPU/load
+* Connections
+* Query latency
+* Long-running queries
+* Capacity planning
+* Connection-pool tuning
+* Query optimization
+* Scaling
+
+17. How do you deal with CrashLoopBackOff errors?
+
+* kubectl describe pod
+* kubectl logs --previous
+* Exit code
+* OOMKilled
+* Probes
+* Configuration
+* Secrets/ConfigMaps
+* Database connectivity
+* DNS/networking
+* Recent deployment
+* Rollback if necessary
+
+18. What level are you at in SRE—L1 or L2?
+
+* L2 SRE
+* Deeper production troubleshooting
+* RCA
+* Automation
+* Reliability improvements
+
+19. How do you secure the CI/CD software supply chain?
+
+* Branch protection
+* PR reviews
+* Least privilege
+* Secure runners
+* Secret Manager
+* Dependency scanning
+* Container scanning
+* Immutable artifacts
+* Image signing
+* Policy enforcement
+* Audit logging
+
+20. How would you achieve zero-downtime progressive delivery using Istio/service mesh?
+
+* Canary deployment
+* v1 + v2 simultaneously
+* Istio VirtualService
+* DestinationRule
+* Traffic splitting
+* 95/5 → 90/10 → 50/50 → 0/100
+* Monitor metrics
+* Rollback
+
+21. How does autoscaling help with progressive delivery?
+
+* Istio = traffic control
+* HPA = pod scaling
+* Cluster Autoscaler = node scaling
+
+22. Have you performed any migration from GCP to GKE or GCP to AWS?
+
+* Clarified: currently involved in AWS → GCP database migration
+* No GKE workload migration yet
+
+23. Why are you migrating the database from AWS to GCP?
+
+* Application platform already on GCP
+* Reduce cross-cloud dependency
+* Lower latency
+* Reduce data-transfer cost
+* Simplify operations
+* AlloyDB PostgreSQL
+
+24. Why GCP instead of AWS? What pros/cons did you present to the client?
+
+* GCP was already the primary application platform
+* GKE already established
+* Avoid full application-platform migration
+* Reduce cross-cloud traffic
+* Operational simplicity
+* AlloyDB PostgreSQL compatibility
+* Migration risk acknowledged
+
+25. Have you worked with Kubernetes?
+26. What are the types in Kubernetes?
+
+* Deployment
+* StatefulSet
+* DaemonSet
+* Job
+* CronJob
+* Services: ClusterIP, NodePort, LoadBalancer, ExternalName
+
+27. What about routing and NetworkPolicies?
+
+* Pod-level communication
+* Namespace selectors
+* Ingress rules
+* Egress rules
+* Pod selectors
+* Ports/IP blocks
+* Default deny
+* Least-privilege networking
+
+28. How is the application exposed through Kubernetes?
+
+* DNS
+* Load Balancer
+* Gateway/Ingress
+* Service
+* Pods
+* Path/host-based routing
+
+29. What kind of load balancer did you use?
+
+* Google Cloud external global Application Load Balancer
+* Cloud Armor
+* GKE Gateway API
+* Kubernetes Service
+* Internal ClusterIP for service-to-service communication
+
+30. Can a Kubernetes Service be exposed through a Load Balancer?
+
+* Yes
+* type: LoadBalancer
+* GKE provisions the relevant load-balancing resources
+* But production microservice architectures often prefer Gateway/Ingress for centralized routing
+
+⭐ Most likely follow-up questions
+
+Based on the progression of this interviewer, I would especially prepare these next:
+
+* Difference between Ingress and Gateway API?
+* Difference between Ingress and LoadBalancer Service?
+* How does GKE Gateway actually provision the Google Load Balancer?
+* How does traffic flow from Load Balancer to Pod?
+* How does Kubernetes Service select Pods?
+* ClusterIP vs NodePort vs LoadBalancer?
+* How do you troubleshoot a 502/503 from the Load Balancer?
+* How do you troubleshoot a GKE pod that cannot connect to AlloyDB?
+* How do you implement HPA?
+* How does HPA calculate replica count?
+* How would you implement canary deployment without Istio?
+* What happens during a Kubernetes rolling update?
+* How do you rollback a failed deployment?
+* How do you secure GKE?
+* How do you secure Terraform state?
+* How do you manage secrets in CI/CD?
+* What happens if Terraform state is locked?
+* How do you troubleshoot a production P1?
+* What is SLI, SLO and SLA?
+* How do you reduce MTTR?
+What is the difference between monitoring and observability?
+
+Based on the interview conversation you shared, here are all the questions/topics asked so far, reconstructed in interview order.
+
+Questions asked
+
+1. Tell me about your current role / what you are working on.
+    * Your GCP DevOps experience
+    * Current infrastructure/deployment responsibilities
+    * Kubernetes, Terraform, CI/CD, automation, monitoring
+2. What kind of GCP architecture have you worked with?
+    * GCP infrastructure
+    * GKE
+    * Networking
+    * Load balancers
+    * Cloud services
+3. How do you deploy applications on GCP?
+    * Terraform for infrastructure
+    * CI/CD pipelines
+    * Kubernetes/GKE
+    * Docker and Helm
+4. How do you expose a Kubernetes service through a load balancer?
+    * Pod → Service → Gateway/Ingress → External Load Balancer → DNS
+    * Why directly exposing the cluster publicly is generally not preferred
+5. Can you explain how a request flows through an e-commerce application?
+    * User/browser
+    * DNS
+    * Load balancer
+    * Gateway/Ingress
+    * Kubernetes Service
+    * Pod/microservice
+    * Database/backend services
+    * Response path
+6. What happens if a microservice’s health check fails?
+    * Health checks
+    * Removing unhealthy instances/pods from traffic
+    * Connection draining
+    * Load-balancer behavior
+    * Recovery/replacement
+7. What specific operational actions would you take in the first five minutes if a target/target group is failing?
+    * Check health status
+    * Backend/service health
+    * Logs and metrics
+    * Recent deployment/configuration changes
+    * Traffic distribution
+    * Rollback if required
+    * Connection draining
+8. Have you worked with model health checks / microservice failure domains?
+    * Health checks
+    * Failure isolation
+    * Connection draining
+    * Removing unhealthy workloads from traffic
+9. What databases have you used in cloud environments?
+    * GCP Cloud SQL
+    * AlloyDB for PostgreSQL
+    * Azure SQL Server
+    * PostgreSQL/SQL Server experience
+10. What is the difference between IaaS, PaaS and SaaS?
+11. What is TLS?
+12. What is mTLS, and what is the difference between TLS and mTLS?
+
+* TLS → server authentication
+* mTLS → mutual authentication between client and server
+
+13. How many VPCs / projects / subscriptions are you managing?
+
+* They specifically wanted actual operational scale, rather than only conceptual/descriptive knowledge.
+
+14. How do you manage GCP infrastructure using Terraform?
+
+* Modules
+* Remote state
+* Networking
+* IAM
+* GKE
+* Load balancing
+* Environment management
+
+15. What happens with Terraform state?
+
+* Remote backend
+* State locking
+* State consistency
+* Collaboration
+
+16. How do you manage secrets/configuration in cloud infrastructure?
+
+* Secret management
+* IAM
+* Secure pipeline integration
+
+17. How would you deploy workloads using GKE?
+
+* Standard vs Autopilot
+* Deployments
+* Services
+* Ingress/Gateway
+* Helm
+* Docker images
+
+18. How do you deploy applications through CI/CD?
+
+* Jenkins
+* GitLab CI
+* Bitbucket Pipelines
+* GitHub Actions
+* Cloud Build
+* Cloud Deploy
+
+19. Where do you store container images/artifacts?
+
+* Artifact Registry
+* Customer-owned Artifact Registry
+* Integration with GitHub/Bitbucket source repositories
+
+20. How do you handle application deployment when the customer has GitHub or Bitbucket?
+
+* Source repository integration
+* Pipeline trigger
+* Build
+* Security/quality checks
+* Image creation
+* Artifact Registry
+* Deployment to GKE/Cloud Run
+
+21. What is your experience with Cloud Run?
+
+* When to choose Cloud Run
+* Serverless deployment
+* Scaling
+* Cost considerations
+* Comparison with GKE
+
+22. What is your experience with GKE Standard vs Autopilot?
+
+* Operational responsibility
+* Node management
+* Scaling
+* Cost
+* Workload requirements
+
+23. What is your experience with Agent Engine / agentic workloads?
+
+* Agent deployment
+* Lifecycle
+* Security
+* Infrastructure/platform requirements
+
+24. How would you design infrastructure for an agentic application?
+
+* Agent Engine/Cloud Run
+* Supporting GCP services
+* IAM
+* Networking
+* Artifact Registry
+* CI/CD
+* Monitoring
+* Security
+
+25. Can you design HLD/LLD for a customer requirement?
+
+* High-Level Design
+* Low-Level Design
+* Infrastructure architecture
+* Deployment architecture
+* Security
+* Networking
+* Observability
+
+What the interviewer appears to be testing
+
+The important point is that this interviewer is not looking only for Kubernetes definitions. They are testing whether you can operate as a senior GCP DevOps engineer in a customer-facing CoE.
+
+The strongest areas to prepare are:
+
+GCP architecture → GKE → CI/CD → Terraform → networking/load balancing → security → observability → production troubleshooting → Cloud Run → Agentic AI infrastructure.
+
+And based on the latest part of the conversation, the next questions are very likely to go deeper into GKE application deployment, pipeline design, Cloud Build/Cloud Deploy, Artifact Registry, and possibly Agent Engine/Cloud Run architecture.
+
+
+Here are all the interview questions asked in this conversation, in order:
+
+GCP / Network Troubleshooting
+
+1. You got a Severity-1 issue where traffic from an on-premises network to a GCP-hosted application is failing intermittently, with 30–50% requests randomly failing. There were no deployments or changes in the last 2–3 days. What will be your troubleshooting steps?
+
+CI/CD & Security
+
+2. Which CI/CD tools are you currently using?
+3. How do you securely manage secrets in your CI/CD pipelines?
+
+Production Deployment / Rollback
+
+4. Suppose you have a production release plan. The CI/CD pipeline deploys a new application version, and within 10 minutes the customer error rate spikes significantly. Which deployment strategy are you currently using?
+5. What would you do if the new production deployment starts causing a high error rate?
+
+Kubernetes
+
+6. What happens in the backend when you run kubectl apply -f deployment.yaml?
+7. What kind of applications can you deploy as a DaemonSet in Kubernetes?
+8. Suppose a Pod/container reaches the configured memory limit. What happens?
+9. What happens if a container reaches its CPU limit?
+10. What is the difference between reaching a memory limit and reaching a CPU limit?
+
+GKE Access & Security
+
+11. How are you currently managing access to your GKE clusters?
+12. If your GKE clusters are private, how are engineers accessing them?
+13. How is an application running inside GKE accessed by other individuals/users?
+14. How do you control engineer access to GKE clusters?
+15. How do you handle authentication and authorization for workloads accessing GCP services from GKE?
+
+Terraform / Disaster Recovery
+
+16. Suppose multiple engineers are working on the same Terraform repository and someone accidentally runs Terraform apply that deletes a Cloud SQL instance. How will you recover from it?
+17. How will you get all the Cloud SQL data back after accidental deletion?
+18. What recovery strategies would you use for Cloud SQL?
+19. What strategies would you implement to prevent accidental deletion of critical resources in the future?
+20. How would you use Terraform prevent_destroy for a critical Cloud SQL instance?
+21. How would you ensure production Terraform changes are reviewed and approved before they are applied?
+
+Incident / Ticket Prioritization
+
+22. Suppose you receive three simultaneous requests:
+
+* P1: Production outage
+* P2: Application performance degradation
+* P3: Cost query from a senior customer stakeholder
+
+How will you prioritize them?
+
+Your overall answer pattern
+
+For this interview, your strongest recurring themes should be:
+
+P1 incident management → systematic troubleshooting → least privilege → private GKE → Terraform governance → monitoring → rollback/recovery → automation.
+
+And for the prioritization question:
+
+P1 outage → P2 performance → P3 cost query, while acknowledging and communicating with all stakeholders and delegating where possible.
+
+
+Absolutely. Here are all the interview questions asked in this round, in the order they came up, with the key answer you should give.
+
+Python — Questions Asked
+
+1. What are the different data types in Python?
+
+Answer:
+Python has built-in types such as:
+
+* int, float, complex
+* str
+* list, tuple, range
+* dict
+* set, frozenset
+* bool
+* bytes, bytearray
+* NoneType
+
+⸻
+
+2. What are mutable and immutable data types?
+
+Mutable:
+
+* list
+* dict
+* set
+* bytearray
+
+Immutable:
+
+* int
+* float
+* bool
+* str
+* tuple
+* frozenset
+* bytes
+
+Key point: Mutable objects can be changed in place; immutable objects cannot.
+
+⸻
+
+3. Can we use a list as a dictionary key? Why not?
+
+Answer:
+No. A list is mutable and therefore unhashable. Dictionary keys must be hashable.
+
+# Wrong
+data = {[1, 2]: "value"}
+
+A tuple can be used if its elements are also hashable:
+
+data = {(1, 2): "value"}
+
+⸻
+
+4. What is shallow copy and deep copy?
+
+Shallow copy: Creates a new outer object but nested objects are still shared.
+
+Deep copy: Recursively creates independent copies of nested objects.
+
+import copy
+shallow = copy.copy(original)
+deep = copy.deepcopy(original)
+
+⸻
+
+5. What are decorators?
+
+A decorator modifies or extends the behavior of a function/class without changing its original code.
+
+def logger(func):
+    def wrapper():
+        print("Before")
+        func()
+    return wrapper
+@logger
+def deploy():
+    print("Deploying")
+
+Common uses: logging, authentication, authorization, retries, timing, caching.
+
+⸻
+
+6. What are generators?
+
+Generators produce values one at a time using yield, rather than storing all values in memory.
+
+def numbers():
+    for i in range(5):
+        yield i
+
+They are particularly useful for large files, datasets, and streams.
+
+⸻
+
+7. What is a context manager?
+
+A context manager manages resource acquisition and cleanup, commonly using the with statement.
+
+with open("file.txt") as f:
+    data = f.read()
+
+It ensures the resource is properly released even if an exception occurs.
+
+Internally, context managers commonly use:
+
+__enter__()
+__exit__()
+
+⸻
+
+8. What is exception handling?
+
+Python uses:
+
+* try
+* except
+* else
+* finally
+* raise
+
+Example:
+
+try:
+    result = 10 / 0
+except ZeroDivisionError as e:
+    print(e)
+finally:
+    print("Cleanup")
+
+⸻
+
+9. Difference between instance method, class method and static method?
+
+Method	First argument	Purpose
+Instance	self	Works with object/instance
+Class	cls	Works with class
+Static	None	Utility logic
+
+class Employee:
+    def display(self):       # instance
+        pass
+    @classmethod
+    def company(cls):        # class
+        pass
+    @staticmethod
+    def add(a, b):           # static
+        return a + b
+
+⸻
+
+10. What is GIL?
+
+GIL = Global Interpreter Lock.
+
+In traditional CPython, it allows only one thread at a time to execute Python bytecode within an interpreter.
+
+* I/O-bound: multithreading can be useful.
+* CPU-bound: multiprocessing is generally preferred for parallel execution.
+
+⸻
+
+11. When would you use multiprocessing vs multithreading?
+
+Multithreading: I/O-bound operations:
+
+* API calls
+* Network requests
+* File operations
+* Database calls
+
+Multiprocessing: CPU-bound operations:
+
+* Heavy calculations
+* Image processing
+* Data processing
+
+⸻
+
+12. Have you worked with multiprocessing/multithreading?
+
+Your best answer:
+
+“I have practical experience mainly with multithreading for I/O-bound Python automation. For example, when querying multiple GCP resources or APIs, I have used concurrent execution to reduce overall execution time. I have less hands-on experience with multiprocessing because my DevOps automation workloads are primarily I/O-bound.”
+
+⸻
+
+13. Have you worked with AsyncIO?
+
+You said you recently started with FastAPI/async concepts.
+
+Answer:
+
+“Yes, I have exposure to AsyncIO. I understand async and await and have recently started working with asynchronous programming, particularly for I/O-bound operations.”
+
+⸻
+
+14. Explain async and await.
+
+* async defines a coroutine.
+* await pauses the coroutine while waiting for an asynchronous operation.
+* During that waiting time, the event loop can execute other coroutines.
+
+Useful for high-concurrency I/O operations such as APIs and network calls.
+
+⸻
+
+15. How do you implement logging in Python?
+
+Use Python’s built-in logging module rather than print().
+
+import logging
+logger = logging.getLogger(__name__)
+logger.info("Deployment started")
+logger.warning("High CPU usage")
+logger.error("Deployment failed")
+
+Common levels:
+
+DEBUG → INFO → WARNING → ERROR → CRITICAL
+
+For exceptions:
+
+logger.exception("Deployment failed")
+
+⸻
+
+16. How do you manage passwords, API keys and secrets?
+
+Don’t hardcode them in Python code, Git, or pipeline YAML.
+
+Use:
+
+* GCP Secret Manager
+* AWS Secrets Manager
+* Azure Key Vault
+* CI/CD secret stores
+
+Follow:
+
+* Least privilege
+* Rotation
+* IAM
+* Secret masking
+* No secrets in logs
+
+⸻
+
+Python Automation
+
+17. Describe an automation script you developed using Python.
+
+Your strongest answer:
+
+“I developed Python automation for monitoring GCP resource quotas across multiple projects. The script queried quota utilization, compared it against defined thresholds, generated alerts when utilization crossed the threshold, and helped the team take proactive action. I also implemented logging, exception handling and retry mechanisms. For independent API calls, controlled concurrency could be used to improve execution time.”
+
+⸻
+
+18. How do you make a Python automation script idempotent?
+
+Use read-before-write and compare current state with desired state.
+
+if current_value != desired_value:
+    update_resource(desired_value)
+
+Also use:
+
+* Deterministic resource names
+* Safe retries
+* Checkpoints
+* Idempotent API operations
+
+Key phrase:
+
+“Multiple executions should result in the same desired state without unnecessary or duplicate changes.”
+
+⸻
+
+19. Python script connects to 500 servers; 20 fail due to network issues. How do you avoid reprocessing successful servers?
+
+Maintain persistent status/checkpoint information.
+
+Server 1  → SUCCESS
+Server 2  → SUCCESS
+...
+Server 480 → SUCCESS
+Server 481 → FAILED
+...
+Server 500 → FAILED
+
+On retry, process only the failed/incomplete servers.
+
+Also use:
+
+* ThreadPoolExecutor
+* Retry with exponential backoff
+* Exception handling
+* Persistent checkpoint
+* Idempotent operations
+
+⸻
+
+REST API Questions
+
+20. What are the common HTTP methods?
+
+* GET — retrieve
+* POST — create
+* PUT — full replacement/update
+* PATCH — partial update
+* DELETE — delete
+* HEAD — headers only
+* OPTIONS — supported operations/options
+
+⸻
+
+21. What is PATCH?
+
+PATCH is used for partial updates.
+
+PATCH /users/101
+{
+  "location": "Bangalore"
+}
+
+Only the specified field is changed.
+
+PUT generally replaces the complete resource representation.
+
+⸻
+
+22. What HTTP status codes do you commonly use?
+
+Important ones:
+
+200 - OK
+201 - Created
+204 - No Content
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+404 - Not Found
+409 - Conflict
+429 - Too Many Requests
+500 - Internal Server Error
+502 - Bad Gateway
+503 - Service Unavailable
+504 - Gateway Timeout
+
+Important interview distinction:
+
+401 = authentication issue
+403 = authorization/permission issue
+
+⸻
+
+23. How do you validate API input?
+
+Validate:
+
+* Required fields
+* Data types
+* Formats
+* Length
+* Range
+* Allowed values
+* Unexpected fields
+
+With FastAPI, use Pydantic models.
+
+class UserRequest(BaseModel):
+    name: str
+    email: EmailStr
+    age: int
+
+Reject invalid input before it reaches business logic/database operations.
+
+⸻
+
+24. Explain JWT authentication.
+
+JWT = JSON Web Token.
+
+Typical flow:
+
+Login
+  ↓
+Authentication service
+  ↓
+JWT issued
+  ↓
+Client sends Bearer token
+  ↓
+API validates token
+  ↓
+Authorization
+  ↓
+Access granted/denied
+
+Validate:
+
+* Signature
+* Expiration
+* Issuer
+* Audience
+
+⸻
+
+25. What are the parts of a JWT token?
+
+Three parts:
+
+Header.Payload.Signature
+
+Header: Algorithm and token type.
+
+Payload: Claims such as sub, role, exp, issuer, audience.
+
+Signature: Verifies integrity/authenticity.
+
+Important: JWT payload is encoded, not encrypted, so don’t put passwords/secrets inside it.
+
+⸻
+
+26. What is API versioning?
+
+API versioning allows us to introduce changes without breaking existing clients.
+
+Example:
+
+/api/v1/users
+/api/v2/users
+
+Common approaches:
+
+* URL/path versioning
+* Header versioning
+* Query parameter versioning
+
+⸻
+
+27. How do you handle pagination in an API?
+
+Two common approaches:
+
+Offset/page-based:
+
+GET /users?page=2&limit=20
+
+Cursor-based:
+
+GET /users?limit=20&cursor=abc123
+
+For large/frequently changing datasets, cursor-based pagination is often preferable.
+
+⸻
+
+28. How do you implement filtering and sorting in an e-commerce search API?
+
+Example:
+
+GET /products/search?
+q=laptop
+&brand=Lenovo
+&min_price=40000
+&max_price=80000
+&rating=4
+&sort_by=price
+&order=asc
+&page=1
+&limit=20
+
+Backend flow:
+
+Search keyword
+      ↓
+Apply filters
+      ↓
+Apply sorting
+      ↓
+Apply pagination
+      ↓
+Return results
+
+For a large product catalog, use a search engine such as Elasticsearch/OpenSearch rather than fetching everything into Python.
+
+⸻
+
+29. Which Python library would you use to call an Ethereum API?
+
+For Ethereum specifically:
+
+web3.py
+
+For a general REST API:
+
+requests
+
+For asynchronous HTTP:
+
+httpx / aiohttp
+
+⸻
+
+30. How do you call a third-party API from Python?
+
+Using requests:
+
+import requests
+url = "https://example.com/api"
+response = requests.get(url, timeout=10)
+response.raise_for_status()
+data = response.json()
+print(data)
+
+Handle:
+
+* HTTP errors
+* Network errors
+* Timeout
+* Authentication
+* JSON parsing
+* Rate limiting
+
+⸻
+
+31. Fetch users from an API and print their first names.
+
+For the API you were using, the structure was:
+
+{
+    "users": [
+        {
+            "id": 1,
+            "firstName": "Emily"
+        }
+    ]
+}
+
+Correct code:
+
+import requests
+url = "https://dummyjson.com/users"
+response = requests.get(url)
+response.raise_for_status()
+data = response.json()
+for user in data["users"]:
+    print(user["firstName"])
+
+The important debugging point from your screen was:
+
+response.json()
+
+not:
+
+response.json
+
+json is a method, while json() calls that method and returns the parsed JSON.
+
+⸻
+
+Ansible Questions
+
+32. Explain Ansible architecture.
+
+Ansible is primarily agentless and push-based.
+
+Control Node
+     ↓
+Inventory
+     ↓
+Playbook
+     ↓
+Modules
+     ↓
+Managed Nodes
+
+Components:
+
+* Control node
+* Managed nodes
+* Inventory
+* Playbooks
+* Modules
+* Roles
+* Variables
+* Templates
+* Plugins
+
+Linux commonly uses SSH; Windows commonly uses WinRM.
+
+⸻
+
+33. Difference between control node and managed node?
+
+Control node: Where Ansible is installed and playbooks are executed.
+
+Managed node: Target server where Ansible performs configuration/automation.
+
+⸻
+
+34. What is Ansible inventory?
+
+Inventory defines the hosts and groups managed by Ansible.
+
+[webservers]
+web01
+web02
+[dbservers]
+db01
+db02
+
+It allows us to target specific groups.
+
+⸻
+
+35. What is static vs dynamic inventory?
+
+Static inventory: Manually maintained host list.
+
+Dynamic inventory: Hosts are automatically discovered from external sources such as GCP/AWS/Azure.
+
+For cloud environments, dynamic inventory is particularly useful because VMs can be created/deleted frequently.
+
+⸻
+
+36. What are Ansible modules?
+
+Modules are units of functionality used to perform tasks.
+
+Common examples:
+
+package
+service
+copy
+template
+file
+user
+command
+shell
+
+Example:
+
+- name: Install nginx
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+⸻
+
+37. What are Ansible handlers?
+
+Handlers are special tasks triggered through notify when another task reports a change.
+
+tasks:
+  - name: Update nginx config
+    ansible.builtin.template:
+      src: nginx.conf.j2
+      dest: /etc/nginx/nginx.conf
+    notify: Restart nginx
+handlers:
+  - name: Restart nginx
+    ansible.builtin.service:
+      name: nginx
+      state: restarted
+
+Commonly used for restarting/reloading services only when configuration changes.
+
+⸻
+
+38. Difference between include_tasks and import_tasks?
+
+import_tasks
+
+* Static
+* Processed during playbook parsing
+
+include_tasks
+
+* Dynamic
+* Processed during runtime
+* Useful with conditions, loops and dynamic variables
+
+Example:
+
+- ansible.builtin.include_tasks: "{{ ansible_os_family }}.yml"
+
+⸻
+
+39. Write an Ansible playbook to install and start Nginx.
+
+---
+- name: Install and start Nginx
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Install Nginx
+      ansible.builtin.package:
+        name: nginx
+        state: present
+    - name: Start and enable Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+
+Key explanation:
+
+* hosts → target servers
+* become → privilege escalation
+* package → installs Nginx
+* service → starts/enables Nginx
+* state: present/started → idempotent desired state
+
+⸻
+
+Coding Questions
+
+40. Write a decorator to log timestamp.
+
+from datetime import datetime
+def log_timestamp(func):
+    def wrapper(*args, **kwargs):
+        print("Execution time:", datetime.now())
+        return func(*args, **kwargs)
+    return wrapper
+@log_timestamp
+def deploy():
+    print("Application deployed")
+deploy()
+
+⸻
+
+41. If you add another decorator, what will be the sequence?
+
+Example:
+
+@decorator1
+@decorator2
+def deploy():
+    pass
+
+Equivalent to:
+
+deploy = decorator1(decorator2(deploy))
+
+Execution order:
+
+Decorator 1 Before
+Decorator 2 Before
+Original function
+Decorator 2 After
+Decorator 1 After
+
+Remember: decorators are applied bottom-to-top, while the outermost decorator executes first when the function is called.
+
+⸻
+
+Ansible Experience Question
+
+42. Are you currently using Ansible?
+
+Your answer should be:
+
+“In my current environment, we have two landing zones. One landing zone has VMs, where Ansible is being used for server-level automation. Another landing zone doesn’t currently have servers, so Ansible isn’t required there. In the VM environment, I have worked on patching, rolling out security agents such as Defender and Prisma Defender, and upgrading SentinelOne agents.”
+
+⸻
+
+Production Scenario
+
+43. Explain a recent production issue with automation.
+
+Your strongest version:
+
+“One production issue I faced was intermittent API timeouts and rate limiting in Python automation that monitored GCP resources across multiple projects. I improved the automation by adding structured logging, exception handling, retry with exponential backoff, controlled concurrency for I/O operations, and checkpointing so successfully processed resources were not unnecessarily processed again. This improved reliability and reduced execution time.”
+
+⸻
+
+Overall areas covered in this interview
+
+Python: ⭐⭐⭐⭐⭐
+REST APIs: ⭐⭐⭐⭐
+Ansible: ⭐⭐⭐⭐
+DevOps automation: ⭐⭐⭐⭐⭐
+Production troubleshooting: ⭐⭐⭐⭐
+Coding: ⭐⭐⭐⭐
+
+The interviewer focused heavily on Python fundamentals + practical automation + Ansible + REST API concepts, which aligns well with your DevOps profile.
+
+Here are all the technical/interview questions asked in this round, in order:
+
+1. Can you talk more about your recent project and the technical activities you have done there?
+2. Have you worked on AWS CloudFormation?
+3. Do you have experience with both AWS and GCP?
+4. Have you created AWS resources using CloudFormation?
+5. What is Pub/Sub in GCP?
+6. What is a firewall rule in GCP?
+7. What are the different storage classes in GCP Cloud Storage?
+8. What is Google Cloud Run, and how does it relate to Cloud Functions?
+9. How do you configure autoscaling in GCP?
+    * Specifically, how do you configure autoscaling for Compute Engine VMs/MIGs?
+10. How do you set up a Cloud SQL instance?
+11. What is Cloud Spanner, and how is it different from Cloud SQL?
+12. What is the difference between Persistent Disk and Local SSD in GCP?
+13. Explain Kubernetes architecture.
+14. Where/how can you check the Kubernetes cluster state?
+15. Explain HPA and VPA in Kubernetes.
+16. Explain Kubernetes Affinity and Anti-Affinity.
+17. How do you check the Kubernetes cluster/version?
+18. How do you handle sensitive data in AWS CloudFormation templates?
+19. How do you deploy/manage multiple AWS resources together using a CloudFormation template?
+
+* Stack
+* Change Set
+* Rollback
+* StackSets
+
+20. Are you comfortable/competent in writing Python, Shell, or Bash scripts?
+21. Python coding question: Write a program to identify the common factors of any two numbers.
+22. How do you avoid hardcoding values in CloudFormation templates?
+
+* Parameters
+* Mappings
+* Conditions
+* SSM Parameter Store
+* Secrets Manager / dynamic references
+
+Main areas covered
+
+This interview was primarily focused on GCP + AWS CloudFormation + Kubernetes + Python.
+
+GCP: Pub/Sub, firewall rules, Cloud Storage classes, Cloud Run/Functions, Compute Engine autoscaling, Cloud SQL, Cloud Spanner, Persistent Disk/Local SSD.
+
+Kubernetes: Architecture, cluster state, HPA/VPA, affinity/anti-affinity, cluster versions.
+
+AWS: CloudFormation, sensitive-data handling, reusable templates/no hardcoding, stacks/change sets/StackSets.
+
+Coding: Python program for common factors of two numbers.
+
+Here are all the technical/interview questions asked in this conversation, in order:
+
+1. What is Terraform? What do you know about Terraform?
+2. How can Terraform be used to deploy infrastructure in a multi-cloud environment?
+3. If the Terraform state file gets deleted, how can you recover/revert the state file?
+4. What are ingress and egress controls in networking?
+5. How would you deploy Redis in Kubernetes? Which controller would you use?
+6. How do you configure network connectivity between two different Kubernetes namespaces?
+7. How do you expose an application/service from one namespace to another namespace?
+8. What is a ConfigMap in Kubernetes?
+9. What is the difference between a ConfigMap and a Secret?
+10. Can you explain ConfigMaps and Secrets in more detail?
+11. How would you use a cloud provider’s Secret Manager instead of Kubernetes Secrets?
+12. How would you deploy 1,000 microservices at the same time using Terraform?
+13. How would you create 1,000 EC2/VM instances using Terraform?
+14. How would you create 1,000 GCP Compute Engine VMs using Terraform?
+15. How would you create multiple GCP VMs using Terraform for_each?
+16. What is the difference between count and for_each in Terraform? (follow-up/context)
+17. How do you merge/promote your code across Dev, Pre-Prod, and Production branches?
+18. How can you provide/configure different ports for different applications/services?
+19. How can you integrate Ansible with Terraform?
+20. After Terraform creates the infrastructure, how can you use Ansible for configuration or software upgrades such as upgrading Defender?
+21. Which Jenkins plugin can be used to integrate Ansible with Jenkins?
+
+Main areas covered
+
+Terraform: Basics, multi-cloud providers, state recovery, count, for_each, large-scale VM/microservice provisioning.
+
+Kubernetes/GKE: Redis StatefulSet, cross-namespace communication, Services, NetworkPolicy, ConfigMaps, Secrets, Secret Manager.
+
+CI/CD: Dev → Pre-Prod → Prod promotion and branch strategy.
+
+Ansible/Jenkins: Terraform + Ansible integration, configuration management after provisioning, and Jenkins Ansible plugin.
+
+Networking: Ingress, egress, ports, and namespace-to-namespace connectivity.
+
+Here are all the questions asked in this interview, in order:
+
+1. Can you present yourself / introduce yourself?
+2. What is the project you worked on that you’re most proud of, why are you proud of it, and what did you contribute to that project?
+3. How are you managing the configuration of your project’s infrastructure? What tools are you using?
+4. Terraform: What are the core or most important differences between using Terraform for Platform as a Service (PaaS) vs Infrastructure as a Service (IaaS)?
+5. Do you have experience with GitHub and GitHub Workflows / GitHub Actions?
+6. Given a large number of services, which GitHub Actions feature allows you to centralize deployments?
+    * Expected topic: Reusable Workflows / workflow_call
+7. At the Kubernetes layer, have you worked with ecosystem frameworks/tools such as service meshes, stateful managers, or operators?
+8. Which Kubernetes operators have you worked with?
+9. Do you have experience with MCP (Model Context Protocol) servers?
+10. What was the most complex part of deploying or managing MCP servers?
+11. Do you have experience working with agentic development and/or loop engineering?
+12. Do you know what an Agent Skill is?
+13. Have you had experience managing, mentoring, supervising, or technically guiding other engineers/specialists?
+14. Have you experienced a disagreement with a team member about an implementation or technical solution?
+15. How did you handle that disagreement?
+16. Can you describe what happens when you submit a new commit to a repository?
+
+* Git → CI → testing/security → build → artifact → deployment → validation
+
+17. During a Kubernetes deployment, what happens to the replicas?
+18. How does Kubernetes reconcile replicas during a rollout?
+
+* Deployment → ReplicaSets → RollingUpdate → maxSurge / maxUnavailable → readiness → reconciliation
+
+19. Are you familiar with canary deployments?
+20. Have you ever managed a canary deployment?
+21. What is one of the most important risks you need to consider during a canary deployment?
+22. How does canary deployment change when dealing with a stateful application?
+23. How would you handle a canary deployment when the application also performs database migrations?
+
+* Backward compatibility → expand-and-contract → data migration → rollback strategy
+
+24. What excites you the most about this job?
+25. Why are you aiming to leave your current company?
+
+Main areas this interview tested
+
+This was strongly focused on Platform Engineering for GenAI/Agentic AI, particularly:
+
+Terraform → GitHub Actions → Kubernetes → Operators/Service Mesh → MCP → Agent Skills → Agentic Development → Leadership → CI/CD → Kubernetes Rollouts → Canary → Stateful/DB Migration → Motivation.
+
+The interviewer also repeatedly emphasized POC-to-production speed, security guardrails, scalability for thousands of users, reliability, client-data security, and rapidly evolving GenAI technologies.
+
+Questions asked in this conversation:
+
+1. I am getting this gcloud error while running/updating the command. How do I fix it?
+    * PERMISSION_DENIED
+    * Missing permission: iam.serviceAccounts.getIamPolicy
+    * The command is running using a GCP service account.
+2. Why is gcloud iam service-accounts get-iam-policy failing with IAM_PERMISSION_DENIED?
+3. Which IAM role/permission should be given to the Jenkins/service account to resolve the issue?
+4. How can I verify which GCP account/service account Jenkins or gcloud is currently authenticated with?
+5. If Jenkins needs to modify a service account’s IAM policy, which additional permission is required?
+    * iam.serviceAccounts.setIamPolicy
+6. Will running gcloud components update fix this permission error?
+
+
+Only one question has been asked in this interview so far:
+
+Describe a complex DevOps or Platform Engineering project you led or significantly contributed to, where you had to design and implement the solution.
+Here are all the interview questions asked in this conversation, in order:
+
+1. CI/CD Pipeline: Explain the complete pipeline structure you have implemented end-to-end.
+2. Blue-Green Deployment: What is Blue-Green deployment, and how does it work?
+3. Zero-Downtime Restart: How would you restart a production deployment without downtime?
+4. GitOps & Argo CD: What is GitOps, and how have you implemented Argo CD?
+5. Kubernetes 503: A new version is successfully deployed, but users are getting 503 Service Unavailable. How would you troubleshoot it?
+6. Terraform Script: Explain the Terraform scripts/code structure you use in your project.
+7. Terraform Drift: If a Terraform-managed resource is manually modified from the cloud console/CLI, what happens?
+8. Terraform Internals: What happens internally when you run Terraform / terraform apply?
+9. Terraform Reusability: If 30 applications require the same infrastructure, how would you avoid duplicating Terraform code?
+10. Multiple Environments: How would you structure Terraform for multiple environments such as Dev, QA, UAT, and Prod?
+11. Terraform State Isolation: Should Dev and Prod share the same Terraform state? How would you manage state across environments?
+12. Terraform Secrets: How do you securely handle secrets in Terraform?
+13. Partial Terraform Failure: If Terraform successfully creates 10 resources but fails while creating the 11th, what happens?
+14. Production DB Destruction: If terraform plan/apply shows that it is going to destroy a production database, what would you do?
+15. ignore_changes: What is Terraform ignore_changes, and when would you use it?
+
+Main areas covered
+
+This interview was heavily focused on Terraform + Kubernetes/GKE + CI/CD/GitOps.
+
+For Terraform specifically, they tested you on modules, environment structure, state isolation, drift, secrets, partial failures, lifecycle rules (prevent_destroy, ignore_changes), production safety, and Terraform internals.
+
+For Kubernetes/CI-CD, they focused on end-to-end deployment, Blue-Green deployment, zero-downtime restart, Argo CD/GitOps, and production 503 troubleshooting.
+
+Here are all the questions asked in this interview conversation, in order:
+
+1. What is an interface in Java?
+2. What is abstraction in Java?
+3. What is inheritance in Java?
+4. Which Java versions have you used?
+5. Are you familiar with Spring Boot?
+6. How does deployment generally happen in your project?
+7. How do you perform RCA (Root Cause Analysis)?
+8. Can you explain observability?
+9. Do you know what a cascading failure is?
+10. What is an error budget? (It sounded like “annual budget,” but likely error budget in the SRE context.)
+11. Your Kubernetes cluster has 90% CPU utilization. How would you troubleshoot it?
+12. Can you tell me some Linux commands you use?
+13. What problems can occur when multiple teams use the same Terraform state, and how would you handle them?
+14. Suppose the pod is healthy/running, but the application is not accessible. What could be the possible causes, and how would you troubleshoot it?
+15. Have you used AI agents?
+16. Which AI agent have you used, how have you used it, and how does it help you?
+
+Main areas covered
+
+Java: Interface, abstraction, inheritance, Java 8, Spring Boot.
+
+DevOps/SRE: Deployment lifecycle, RCA, observability, cascading failures, error budgets.
+
+Kubernetes: High CPU troubleshooting and application inaccessible despite healthy pods.
+
+Terraform: Shared-state problems, state separation, locking and team ownership.
+
+Linux: System, process, networking, logs and troubleshooting commands.
+
+AI/Agentic AI: AI-agent experience, use cases in DevOps, troubleshooting/automation, and production guardrails.
+
+Questions asked:
+
+1. What is causing this Terraform/GCP IAM error?
+2. Why does the gcp-sa-notebooks service account not exist?
+3. How do you verify whether the Notebooks API is enabled?
+4. How do you create the Google-managed Notebooks service identity/service agent?
+5. How do you verify the service account exists after creation?
+6. How should Terraform handle the Notebooks service agent correctly?
+7. How do you assign roles/compute.networkUser to the Notebooks service agent?
+8. In a Shared VPC setup, should the service-agent project number belong to the host project or the service project?
+9. How do you prevent Terraform dependency/race-condition issues when enabling an API and assigning IAM immediately afterward?
+
+Here are all the interview questions asked in this conversation, in order:
+
+1. Current role / day-to-day:
+    “Could you go through what a typical day looks like in your current role?”
+2. MLOps / GenAI / LLM:
+    “Could you tell me more about the advanced LLM and GenAI platform capabilities you’ve been working on through MLOps?”
+3. Motivation for the role:
+    “What excites you about this role that you’ve applied for?”
+4. Leadership / management:
+    “Did they explain that this role has a leadership component?”
+5. Management experience:
+    “Do you have any prior management experience?”
+6. Conflict resolution:
+    “How have you resolved conflicts or challenges within your team in the past?”
+7. Azure / AKS:
+    “You said you’ve worked with GCP. How comfortable are you configuring and maintaining Kubernetes clusters in Azure/AKS?”
+8. Git:
+    “What is the difference between git pull and git merge?”
+9. DNS:
+    “How would you explain DNS to your grandmother or an elderly/non-technical person?”
+10. Security automation scenario:
+    “We currently have a manual process for containing machines during security incidents. We have to identify the machine, investigate logs, contact multiple teams and ask the network team to isolate it. How would you automate this process?”
+11. Automation platform:
+    “What platform would you use to build that automation?”
+12. Agentic AI:
+    “Would this be an agent that you’re building?”
+13. Automation configuration:
+    “How would you configure the automation, and what platforms or technologies would you use?”
+14. Multi-agent architecture:
+    “If I had multiple agents doing separate activities—for example:
+
+* Agent 1: threat intelligence
+* Agent 2: threat investigation/SIEM logs
+* Agent 3: correlation
+* Agent 4: containment
+
+How would you connect all of these agents together?”
+
+15. Python implementation:
+    “If I wanted you to use Python to build this setup, would that change anything?”
+16. Python + Logic Apps:
+    “If we’re using Python, can you still use Azure Logic Apps?”
+17. Kubernetes production experience:
+    “You mentioned managing production Kubernetes/GKE environments. Can you tell me about the managed production Kubernetes environment?”
+18. Managed Kubernetes decision:
+    “Why did you decide to use managed Kubernetes?”
+19. People leadership / direct reports:
+    “This role will initially include a small number of direct reports and potentially expand later. How would you communicate with and manage the engineers?”
+20. Australia–India collaboration:
+    “If you and the team in Australia are working closely with the engineers, how would you work with those engineers?”
+21. Prioritisation:
+    “How would you prioritise the engineers’ work and make sure they’re properly set up to deliver?”
+22. Closing / questions for interviewer:
+    “Do you have any questions for us / Is there anything else you’d like to understand about the role?”
+
+Main areas they tested
+
+Overall, this interview was heavily focused on five areas: GenAI/LLMOps and multi-agent architecture, security automation, Kubernetes/GKE/AKS, Python and Azure integration, and leadership/team management.
+
+The most important scenario to prepare deeper is the multi-agent security automation architecture, because several follow-up questions came from that one scenario: Threat Intel → SIEM Investigation → Correlation → Decision/Policy → Containment, including how you would implement it using Python, agents, Logic Apps, APIs, orchestration, approvals, and guardrails.
+
+Here are all the questions asked in this interview/session, in order:
+
+1. Can you explain your current role and the type of platform you are working on?
+2. How do you implement Blue-Green or Canary deployment in Cloud Run?
+3. How do you prevent an unapproved build from reaching production?
+4. Walk me through your Jenkins pipeline from code commit to production deployment.
+5. What are minimum instances and maximum instances in Cloud Run, and why do you configure them?
+6. Explain your Git branching strategy—feature, development, master/main—and who approves merges to master?
+7. Explain the GCP resource hierarchy: Organization, Folder, and Project.
+8. What is the difference between a Terraform module and Terraform workspace?
+9. How do you create reusable Terraform modules?
+10. Explain Kubernetes architecture.
+11. A Kubernetes Pod is stuck in Pending. How would you troubleshoot it?
+12. What is the difference between desired state and actual state in Kubernetes?
+13. A Pod is healthy, but the Kubernetes Service has no endpoints. What could be wrong?
+14. How do you optimize a Docker image?
+15. How do you scan the final Docker image for vulnerabilities?
+16. How do you secure a CI/CD pipeline?
+17. A developer accidentally commits a database password to Bitbucket, and the pipeline detects it. Walk through detection, containment, remediation, secret rotation, and how you would prevent it from happening again.
+18. Explain an end-to-end MLOps architecture.
+19. An application is returning incorrect answers even though the LLM itself is working correctly. How would you troubleshoot it?
+20. Are you comfortable with Python coding?
+21. Python coding: Given "Python is easy and Python is powerful", count the frequency of each word while ignoring case.
+22. Explain the logic of the Python word-frequency solution.
+23. If the input contains thousands or millions of words, how would you optimize the solution?
+24. Why would you choose hybrid search instead of pure vector search for an enterprise application?
+25. How do you combine vector-search and keyword-search results?
+26. You’re building an insurance RAG system with thousands of policy documents. A user asks: “What is the hospitalization coverage limit under policy XYZ?” Design the complete retrieval flow.
+27. An agent is repeatedly calling the same tool and never finishing its task. How would you prevent this behavior?
+28. How would you design a secure tool-calling framework where an agent can interact with databases, APIs, documents, and business applications?
+29. An agent remembers information from previous conversations that is no longer valid. How would you handle incorrect/stale memory?
+30. How would you protect an agent against indirect prompt injection from documents or emails?
+31. How would you design a kill-switch mechanism for a production agent system?
+32. An agent completes 90% of a workflow but gets stuck on an exception. How would you design the human-escalation / human-in-the-loop flow?
+33. You need to expose an agent as an enterprise API. What would the API structure look like?
+34. Your agent has access to 30+ tools, and after deployment its tool selection becomes unreliable. What would you change?
+35. Would you consider fine-tuning in this scenario?
+36. An agent works correctly in development but starts hallucinating after production deployment. What would you investigate?
+37. An agent occasionally calls an API twice, resulting in duplicate customer transactions. How would you prevent duplicate transactions?
+
+Main areas covered
+
+This interview was heavily focused on five areas: DevOps/GCP (Cloud Run, Jenkins, branching, GCP hierarchy, Terraform), Kubernetes & containers (architecture, Pending pods, Services/endpoints, Docker optimization/security), MLOps/RAG (MLOps lifecycle, hybrid retrieval, insurance RAG), Agentic AI engineering (tool calling, memory, prompt injection, kill switches, human escalation, enterprise APIs, tool routing, hallucination), and Python coding (word-frequency counting and large-file optimization).
+
+The later half was particularly focused on production-grade Agentic AI architecture and safety/reliability, rather than traditional DevOps alone.
+
+
+Here are all the questions asked in this interview segment:
+
+1. API & Role
+    * What did you build?
+    * What was the API?
+    * How was the API handled?
+    * What exactly was your role in building/managing it?
+2. Authentication
+    * Could you be more specific about your authentication?
+    * How did you handle token-based authentication for user-facing APIs?
+    * How did you handle service-to-service authentication using service accounts?
+    * Did you personally write the code/configuration to validate the tokens, or was token validation handled by a library or API gateway?
+3. Webhooks / Event-Driven Integration
+    * Have you worked with webhooks, either consuming them or setting them up for event-driven integrations?
+    * What event triggered the webhook?
+    * What did you do with the webhook payload after receiving the event?
+
+Here are all the interview questions asked in this conversation, in order:
+
+1. Project & Responsibilities: Can you explain one project you worked on, your roles and responsibilities, what the team achieved, and the most challenging/problematic situations you faced?
+2. DevSecOps Pipeline: You mentioned cybersecurity stages in your pipeline. Which security tools have you used, for what purpose, and at which stage of the pipeline?
+3. Branching & Environments: On which branches/environments does a developer commit code, and at what point do the CI/CD and security processes start?
+4. Feature Branch Pipeline: If a developer commits a change to a feature branch, does the pipeline run at that point?
+5. PR Pipeline: When a PR is raised from a feature branch to a protected branch such as develop or main, does the pipeline run before the merge or only after the merge? How is that configured?
+6. Roles & Responsibilities / Cluster Setup: What are your roles and responsibilities around cluster creation, namespaces, DNS configuration, initial deployment, and pipeline setup?
+7. Managed vs On-Prem Kubernetes: Is your Kubernetes cluster a legacy/on-premises cluster or a managed cloud-native cluster?
+8. Cluster Management: Are you responsible for managing the Kubernetes cluster along with supporting the development teams?
+9. Zero-Downtime Kubernetes Upgrade: How would you upgrade a production Kubernetes/GKE cluster without impacting running production applications?
+10. Production Latency Incident: An application had approximately 1-second latency before deployment. The release passed QA and pre-production testing, but after production deployment latency increased to 3–4 seconds. CPU throttling and memory spikes have already been ruled out. How would you investigate the issue?
+11. Highly Available Kubernetes: What do you consider a highly available cloud Kubernetes cluster, and how would you design one?
+12. Multi-Region HA: The application needs to operate across North America, Asia-Pacific, and Europe. How would you design highly available Kubernetes clusters across these three regions?
+13. Multi-Region Infrastructure Automation: Would you create the three regional environments manually using manifests, or would you create reusable modules? How would you automate the entire setup?
+14. Multi-Region + Multi-Cloud DR: If the client additionally requires disaster recovery across multiple regions and multiple clouds, how would you design it?
+15. GCP-to-AWS Disaster Recovery: Suppose all the current services are running on GCP and AWS needs to become the DR environment. How would you set that up?
+16. Terraform for Active-Passive Multi-Cloud: For a new client where GCP is active and AWS is passive DR, how would you structure Terraform so resources can be provisioned in either cloud as required?
+17. Terraform Multi-Region Provisioning: How does Terraform know which GCP region a resource needs to be created in? How would you automate resource creation across three regions without manually provisioning anything?
+18. Terraform Provider & Region: When creating resources in a particular region, do you need a separate Terraform provider for every region? How does the default provider/region work?
+19. Deployment Tools: Which tools are you currently using for application and infrastructure deployments?
+20. Application Deployment Lifecycle: Walk me through the complete lifecycle after clicking the Deploy button—from source code through CI/CD until the application is running.
+21. Kubernetes Internal Deployment Lifecycle: Once all checks have passed, the Docker image has been built and pushed to the artifact repository, and deployment starts on the Kubernetes cluster, what exactly happens inside the cluster?
+22. Argo CD / Flux: Are you using Argo CD or Flux on your Kubernetes clusters? How are you using Argo CD?
+23. Jenkins + Argo CD: If Jenkins handles CI and Argo CD handles GitOps/CD, explain how an application goes from source-code commit to deployment on Kubernetes.
+24. Kubernetes Troubleshooting: What Kubernetes/cluster issues have you faced in your projects? How did you troubleshoot and resolve them? What were the major challenges?
+25. API Exposure from Kubernetes: Do you have APIs exposed from your Kubernetes clusters that are consumed by other applications? Walk me through the complete request flow.
+26. API Request Flow: Explain the request flow from client/DNS through load balancer, Cloud Armor, GKE/NEG/Service, and finally to the application pod.
+27. Kubernetes Service Accounts: What are ServiceAccounts in Kubernetes? How are they used, and how do you securely allow Kubernetes workloads to access GCP services?
+
+Main areas this interviewer focused on
+
+The interview was heavily centered around real production architecture and troubleshooting, particularly:
+
+GKE/Kubernetes → Terraform → Multi-region HA → Multi-cloud DR → CI/CD → Jenkins → Argo CD/GitOps → DevSecOps → Kubernetes internals → Networking/API flow → IAM/Service Accounts → Production troubleshooting.
+
+A key pattern is that the interviewer repeatedly moved from “What do you use?” → “How does it work internally?” → “How would you design it at scale?” → “What happens when it fails?”. That’s the level to prepare for follow-up rounds.
+
+
+
+Here are all the interview questions asked in this conversation, in order:
+
+1. After building a staging environment and deploying an application, what are the different stages you follow, including testing and monitoring?
+2. Apart from ArgoCD, what other DevOps tools/platforms have you worked with?
+3. What do you mean by Docker Compose?
+4. Have you used Jenkins with Docker? How do you build Docker images through Jenkins?
+5. What capabilities does Terraform provide?
+6. How are Terraform and Ansible different? Can Ansible be used for configuration changes and deploying software such as Defender or antivirus?
+7. What do you understand by Blue-Green deployment and Canary deployment? How are they different?
+8. Have you worked with load balancers? Which types of load balancers have you worked with?
+9. What is the difference between DDoS protection and a Web Application Firewall (WAF)?
+10. What is the difference between Layer 4 and Layer 7 firewalls?
+11. What different authentication schemes/mechanisms do you know or have you worked with?
+12. When working with tokens, what is the difference between scopes and claims?
+13. Have you worked with SOAP-based APIs, particularly using Apigee/API proxies?
+14. Which AWS services/resources have you worked with?
+15. How do you scale up an EC2 instance?
+16. What different types/families of EC2 instances have you worked with?
+17. Have you worked with Amazon EKS? What exactly have you done with EKS?
+18. If you need to troubleshoot an EKS cluster, where do you start and what approach do you follow?
+19. What do you understand about AWS IAM?
+20. What is the difference between authentication and authorization?
+21. What is your hands-on experience with Linux operating systems and scripting using Python/Bash?
+22. Have you worked with disk management and storage management? What kind of activities have you performed?
+23. Suppose an enterprise has 50 applications and wants to migrate to the cloud. How would you develop the cloud migration strategy?
+24. What analysis would you perform before migrating those 50 applications?
+25. How would you determine which applications can migrate to cloud and which should remain on-premises?
+26. What is the difference between DevOps and Site Reliability Engineering (SRE)?
+27. Have you heard about ITIL? What is ITIL?
+28. Have you worked with or come across Snowflake?
+29. What do you understand by Data Warehousing?
+30. Have you worked on the Windows side as well as Linux?
+31. Give an example of your experience managing infrastructure containing a combination of Linux and Windows systems.
+
+Main areas covered
+
+This interview was particularly focused on DevOps fundamentals + AWS + infrastructure operations:
+
+DevOps: ArgoCD, Jenkins, Docker, Docker Compose, Terraform, Ansible, CI/CD, release management, Blue-Green, Canary.
+
+AWS: EC2, instance families, scaling, EKS, EKS troubleshooting, IAM, networking/load balancing.
+
+Security: DDoS, WAF, L4/L7, authentication, authorization, tokens, scopes, claims.
+
+Infrastructure/OS: Linux, Windows, Bash, Python, disk/storage management.
+
+Architecture: Cloud migration strategy, application assessment, migration readiness.
+
+Operations/SRE: DevOps vs SRE, ITIL, monitoring, hypercare.
+
+Data/API: SOAP, Apigee, Snowflake, data warehousing.
+
+This looks like an interview testing whether you are a well-rounded Cloud/DevOps engineer, rather than focusing only on Kubernetes or Terraform.
+
+Here are all the technical questions asked in this interview/conversation, consolidated and cleaned up:
+
+1. Explain the complete lifecycle of a microservice from source code commit until deployment to the target environment.
+2. What security/code scanning do you perform in your CI/CD pipeline?
+3. How is Jenkins integrated with Jira technically? Explain the handshake/authentication.
+4. If a Jenkins pipeline fails 100 times, will it create 100 Jira tickets? How do you prevent duplicate tickets?
+5. How is a Jenkins pipeline triggered automatically from GitHub?
+6. Explain the technical handshake between GitHub and Jenkins.
+7. How many microservices are running in your environment?
+8. Explain the architecture and communication between 100–200 microservices.
+9. How do you manage API endpoints/configuration for such a large number of microservices?
+10. If an API URL changes from abc.api.com to xyz.api.com, how do you propagate the change?
+11. If five microservices consume the same configuration, do you update all five manually?
+12. When a ConfigMap changes, how do running pods receive the new configuration?
+13. How can you automatically restart/roll out pods after a ConfigMap change without manually running kubectl rollout restart?
+14. How does a Helm checksum annotation trigger a new Kubernetes rollout?
+15. How does Argo CD handle ConfigMap/configuration changes?
+16. How do you manage database passwords/secrets securely in GKE?
+17. How do GKE workloads authenticate to Google Secret Manager?
+18. Explain Workload Identity + Secrets Store CSI Driver + SecretProviderClass.
+19. What happens when a database password is rotated in Secret Manager?
+20. How does the updated database password reach the application?
+21. How do you rotate DB credentials without causing application downtime?
+22. How do you expose microservices externally through a Gateway/Ingress?
+23. What security controls do you apply at an internet-facing Gateway/load balancer?
+24. Explain the request flow from Internet → Load Balancer/Gateway → Kubernetes → application.
+25. How do you implement rate limiting?
+26. If you have two clusters and five services, each requiring 100 TPS, where do you configure rate limiting?
+27. If all five services use the same DNS/load balancer, how do you provide a separate 100 TPS limit for each service?
+28. Is rate limiting configured at DNS, Gateway, load balancer, or application level?
+29. How do you handle global versus per-region rate limits in a multi-region setup?
+30. What are the common instructions used in a Dockerfile?
+31. How do you containerize a Java 21 microservice?
+32. How are Maven/Gradle dependencies packaged into the Docker image?
+33. If 50–55 microservices use Java 21, do you maintain separate Dockerfiles for every service?
+34. How do you standardize Dockerfiles across many Java microservices?
+35. What is a golden/base Docker image?
+36. If the golden base image changes from version 1.0 to 1.1, how do all microservices get updated?
+37. With 100+ microservices, how do you organize Kubernetes namespaces/projects?
+38. How many Gateways would you use for 100+ microservices?
+39. Can multiple DNS names point to the same Gateway?
+40. How does host-based/path-based routing work at the Gateway?
+41. Explain an active-active architecture across multiple Kubernetes clusters/regions.
+42. Is the database also active-active?
+43. If PostgreSQL has a read-write primary and read-only secondary, how does replication work?
+44. What is PostgreSQL WAL streaming replication?
+45. How is data transferred from the PostgreSQL primary to the secondary?
+46. What happens to replication during a network failure?
+47. What is the first authorization/security check before allowing a production deployment?
+48. How do you restrict production deployment permissions in Jenkins?
+49. How do Jenkins RBAC, approval gates, and service accounts work together?
+50. How do you package all Kubernetes resources for a microservice?
+51. What resources are normally included in a Helm chart?
+52. How do you manage environment-specific Helm values for dev/UAT/prod?
+53. How does Argo CD deploy a Helm-based application?
+54. If a release contains a new image, new ConfigMap keys, and a changed service/API path, how do you release them together?
+55. How do you avoid downtime when changing an API/context path?
+56. How do you roll back a failed GitOps/Helm deployment?
+57. A customer cannot access the application. How do you troubleshoot it end-to-end?
+58. What do you check first: DNS, load balancer, Gateway, Service, endpoints, or pods?
+59. Pods are Running but customers receive 503. What could be wrong?
+60. Can a Kubernetes Service selector mismatch cause a 503?
+61. You have 200 replicas, all are Running, but around 30% of requests return 503. How do you troubleshoot?
+62. Why shouldn’t you restart all 200 pods immediately?
+63. How do you identify which subset of pods is serving failed requests?
+64. What do you check if all pods have the same image/configuration but the issue suddenly started?
+65. How do node, zone, region, DB, cache, DNS/network, connection pools, or downstream dependencies cause intermittent failures?
+66. What is the difference between a pod being Running, Ready, and actually capable of serving business requests?
+67. Explain the complete request path from https://api.company.com/payment to a Kubernetes pod.
+68. Does DNS directly know about Kubernetes pods?
+69. How does a Gateway know which Kubernetes Service should receive a request?
+70. How do you configure a backend in Kubernetes Gateway API?
+71. What are parentRefs and backendRefs in an HTTPRoute?
+72. If a request comes for abc.company.com, how do you configure the Gateway to route it to service-one?
+73. How does the GKE Gateway Controller use Gateway, HTTPRoute, Service, and endpoint information?
+74. Is the Gateway Controller part of the actual runtime request path?
+75. What is the difference between the Gateway control plane and actual data-plane traffic?
+76. How does traffic physically travel from a Google Cloud Gateway/load balancer to GKE pods?
+77. What are Network Endpoint Groups (NEGs), and how are they used by GKE?
+78. Does traffic always pass through the Kubernetes ClusterIP Service, or can the Google load balancer route directly to pod IPs through NEGs?
+79. In a multi-cluster environment with a single Gateway, how do you route traffic to a particular service?
+80. What are ServiceExport and ServiceImport in GKE Multi-Cluster Services?
+81. How does an HTTPRoute reference a ServiceImport as its backend?
+82. If abc.company.com should reach Service 1 across multiple clusters, how is that mapping configured?
+83. When a new microservice is added, does it have to be registered with the Gateway?
+84. If you already have 100 services and another 10–50 services are added, do you manually create Gateway mappings for every service?
+85. How do you automate new-service registration/routing with Helm, Argo CD, and GitOps?
+86. What information should a development team provide when onboarding a new service—service name, hostname/path, port, namespace, exposure type, etc.?
+87. How can a common Helm/platform template automatically generate Service, ServiceExport, and HTTPRoute resources?
+88. Does the Gateway need to be restarted when a new service/backend is added?
+89. How does the Gateway controller dynamically reconcile a newly created route/backend into the load balancer?
+
+Main areas the interviewer focused on
+
+The interview went particularly deep into GKE networking and Gateway architecture, multi-cluster routing, GitOps/Argo CD, Helm standardization, Jenkins integration, Secret Manager, ConfigMap automation, production troubleshooting, Docker/Java standardization, and PostgreSQL replication.
+
+The deepest chain was essentially:
+
+DNS → Global Gateway/LB → HTTPRoute → ServiceImport → multi-cluster backend → NEG → healthy Pod endpoints, including how this entire mapping is automated for 100+ microservices rather than manually maintained.
+
+Here are all the technical questions asked in this interview conversation, in order:
+
+1. What is git pull? How do you pull changes from a remote branch?
+2. What is the difference between git fetch and git pull?
+3. What is the difference between a hard link and a soft/symbolic link in Linux?
+4. What is AWS Route 53?
+5. What are the major DNS record types in Route 53, such as A and CNAME records?
+6. What is the difference between Git Merge and Git Rebase?
+7. How do you resolve Git merge conflicts?
+8. Explain SonarQube Quality Gates.
+9. Docker/Dockerfile: How do you work with certificates, ADD/COPY, and create directories inside a Docker image?
+10. What are the main components of Docker?
+11. How do you get/add a particular file from a remote Git repository/branch?
+12. How do you troubleshoot a Kubernetes Pod that is continuously restarting / CrashLoopBackOff?
+13. What is an AWS S3 Lifecycle Policy?
+14. What is the difference between a monolithic application and a microservices architecture?
+15. How do you optimize cloud costs?
+16. Explain Kubernetes architecture and its major components.
+17. HPA scenario: A Deployment has two replicas and HPA configured. If the Deployment is manually scaled down to zero Pods, will HPA trigger and scale the Pods back up?
+
+Main areas covered
+
+Git: Pull, Fetch, Merge, Rebase, conflicts, remote files
+Linux: Hard link vs soft link
+AWS: Route 53, DNS records, S3 lifecycle
+SonarQube: Quality Gates
+Docker: Dockerfile operations and Docker architecture/components
+Kubernetes: Architecture, CrashLoopBackOff troubleshooting, HPA/scaling
+Architecture: Monolith vs microservices
+FinOps: Cloud cost optimization
+
+Total: 17 technical questions/topics.
+
+Here are all the technical/interview questions asked in this conversation, in order:
+
+1. Enterprise-scale GCP architecture
+    * Can you explain the enterprise-scale architecture you designed?
+    * How did you structure the GCP organization, projects, networking, security, and shared services?
+2. Production availability / minimal downtime
+    * For a production GKE/application environment with minimal or near-zero downtime, what availability target would you recommend?
+    * What is a good production availability percentage?
+3. HPA vs Cluster Autoscaler
+    * What is HPA?
+    * How does HPA work?
+    * What is the difference between HPA and Cluster Autoscaler?
+4. HPA works but Cluster Autoscaler does not
+    * If HPA creates/scales pods but Cluster Autoscaler is not adding nodes, how would you investigate the issue?
+5. GKE integration with GCP services
+    * How do applications/pods running on GKE securely access GCP services such as Cloud Storage, BigQuery, Secret Manager, Cloud SQL, etc.?
+6. Workload Identity
+    * Why is Workload Identity better than putting a service-account key/credential inside a Kubernetes Secret?
+    * Why should we avoid static service-account JSON keys?
+7. Terraform module structure
+    * Explain the structure of a Terraform module that you personally developed.
+    * What files do you have in a Terraform module?
+    * What exactly did you develop inside the module?
+8. Terraform drift / manually deleted resource
+    * What happens if somebody manually deletes a GCP resource that is managed by Terraform?
+    * What will happen during the next terraform plan / terraform apply?
+9. Terraform state locking
+    * How does Terraform state locking work?
+    * What happens if another pipeline tries to modify the same Terraform state?
+    * How do you prevent multiple pipelines from simultaneously applying changes?
+10. Cloud Build vs Jenkins
+
+* Why would you choose Google Cloud Build over Jenkins?
+* What are the advantages and disadvantages of Cloud Build compared with Jenkins?
+
+11. Traditional CI/CD vs Argo CD GitOps
+
+* What is the difference between traditional CI/CD deployment and deployment using Argo CD?
+* What is push-based deployment vs pull-based GitOps?
+
+12. Manual Kubernetes changes with Argo CD
+
+* If someone manually changes a Kubernetes resource that is managed by Argo CD, what will Argo CD do?
+* What happens when self-healing is enabled?
+
+13. Deployment / rollout strategy
+
+* Tell me about one rollout/deployment strategy that you implemented.
+* How did you implement Canary deployment?
+* Why would you use Canary instead of a normal Kubernetes RollingUpdate?
+
+14. GCP Firewall vs Kubernetes NetworkPolicy
+
+* What is the difference between a GCP VPC firewall and Kubernetes NetworkPolicy?
+* At what level does each one control traffic?
+
+15. Read-only Kubernetes log access
+
+* A developer needs access to read application/pod logs but must not be able to modify deployments. How would you provide access?
+* How would you implement least-privilege Kubernetes RBAC?
+* What if the access is required only temporarily?
+
+16. Production GKE security review
+
+* You are asked to perform a security review of a production/operational GKE platform. What areas would you check?
+* What would you review around IAM, networking, workloads, secrets, images, and auditing?
+
+17. 502/503 after successful GKE deployment
+
+* The deployment completed successfully and application logs are visible, but users are getting 502/503 errors. How would you troubleshoot?
+* What would you check in pods, readiness probes, Services, endpoints, Ingress/load balancer, NEG/backend health, firewall rules, and NetworkPolicies?
+
+18. SLI vs SLO vs SLA
+
+* What is an SLI?
+* What is an SLO?
+* What is an SLA?
+* What is the difference between SLI, SLO, and SLA?
+
+19. 99.9% SLA downtime
+
+* If the SLA is 99.9% availability, approximately how much downtime is allowed?
+* Answer: approximately 43 minutes/month or 8 hours 46 minutes/year.
+
+Main areas covered
+
+This interview was heavily focused on GCP + GKE + Terraform + CI/CD + GitOps + SRE + Security:
+
+GCP Architecture → GKE → Autoscaling → Workload Identity → Terraform → Jenkins/Cloud Build → Argo CD → Canary → Networking → RBAC → Security → Troubleshooting → SRE/SLA
+
+These are 19 main question areas, with several follow-up questions under them.
+

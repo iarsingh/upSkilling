@@ -238,10 +238,10 @@ const imported = [...uniqueQuestions.values()];
 
 for (const entry of imported) {
   const category = entry.category || entry.section || "General";
-  const answer = curatedAnswersByQuestion.get(normalize(entry.question))
+  const answer = answersByQuestion.get(normalize(entry.question))
+    || curatedAnswersByQuestion.get(normalize(entry.question))
     || supplementalAnswers.get(normalize(entry.question))
     || generatedAnswers[normalize(entry.question)]
-    || answersByQuestion.get(normalize(entry.question))
     || answerGuidance(entry);
   if (!categories.has(category)) categories.set(category, []);
   categories.get(category).push({ ...entry, answer });
