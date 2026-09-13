@@ -1,0 +1,17 @@
+name: Question or answer correction
+description: Improve accuracy, remove duplication, or flag content provenance.
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question and location
+      description: Paste the question and name its file or mock set.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Proposed correction and supporting source
+      description: Prefer official documentation. Do not include confidential interview material.
+    validations:
+      required: true

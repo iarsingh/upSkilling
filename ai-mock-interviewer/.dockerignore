@@ -12,3 +12,15 @@ data/users.json
 data/contacts.json
 data/session-secret.txt
 youtube-podcast-videos
+
+.env.*
+!.env.example
+.venv
+venv
+**/__pycache__
+**/*.pyc
+coverage
+audio
+data/applicant-profile.json
+.youtube-token.json
+youtube-client-secret.json

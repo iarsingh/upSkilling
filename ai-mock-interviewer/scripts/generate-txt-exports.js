@@ -26,7 +26,7 @@ const qaLines = [
   "Sources: fixed mock interview sets, the full app question bank (GCP/DevOps/SRE, Kubernetes, Docker, Terraform, " +
     "Python, Go, FastAPI, Ansible, Scripting, Coding Exercises, Debug-This-Script, LLMOps, MLOps, Technology Risk, " +
     "HR/Behavioral), Technology Risk Q&A, and the 1000+ DevOps/MLOps/Kubernetes/GCP bank.",
-  "Every question below has a real, specific answer - no generic placeholders.",
+  "Answers include technical explanations and personal-response templates; confirm personal details before use.",
   ""
 ];
 
@@ -44,8 +44,8 @@ entries.forEach((entry, index) => {
   qaLines.push("");
 });
 
-fs.writeFileSync(QUESTIONS_OUT, questionsLines.join("\n").replace(/\n{4,}/g, "\n\n\n") + "\n");
-fs.writeFileSync(QA_OUT, qaLines.join("\n").replace(/\n{4,}/g, "\n\n\n") + "\n");
+fs.writeFileSync(QUESTIONS_OUT, questionsLines.join("\n").replace(/[ \t]+$/gm, "").replace(/\n{4,}/g, "\n\n\n") + "\n");
+fs.writeFileSync(QA_OUT, qaLines.join("\n").replace(/[ \t]+$/gm, "").replace(/\n{4,}/g, "\n\n\n") + "\n");
 
 console.log(`Wrote ${entries.length} questions to:`);
 console.log(" ", path.relative(ROOT, QUESTIONS_OUT));

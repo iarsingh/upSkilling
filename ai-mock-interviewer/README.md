@@ -1,5 +1,7 @@
 # AI Mock Interviewer
 
+[![CI](https://github.com/iarsingh/ai-mock-interviewer/actions/workflows/ci.yml/badge.svg)](https://github.com/iarsingh/ai-mock-interviewer/actions/workflows/ci.yml) · [MIT licensed](LICENSE) · [Contribute](CONTRIBUTING.md)
+
 <!-- repository-summary -->
 Voice-led AI mock interview practice for DevOps, SRE, Cloud, Platform Engineering, MLOps, and software engineering roles.
 <!-- /repository-summary -->
@@ -8,7 +10,7 @@ A local-first, voice-led mock interview simulator for DevOps, SRE, Cloud, Platfo
 preparation. It runs against a local Node server and requires no cloud service in offline mode.
 
 The app asks interview questions, reads them aloud, records or accepts typed answers, saves progress
-locally, and works fully offline using a deduplicated built-in bank of more than 8,000 questions with answers and question-type metadata.
+locally, and works fully offline using a deduplicated built-in bank of more than 9,500 questions with answers and question-type metadata.
 
 ## Contents
 
@@ -58,7 +60,7 @@ locally, and works fully offline using a deduplicated built-in bank of more than
 
 ## Requirements
 
-- Node.js 20 or newer
+- Node.js 22.x (see `.nvmrc`)
 - npm
 - Git
 - Chrome or Edge recommended for microphone features
@@ -133,17 +135,24 @@ node scripts/generate-full-qa-document.js
 node scripts/generate-txt-exports.js
 ```
 
-The legacy `npm run sync:question-bank` command also builds the Word document and
-requires `../.venv/bin/python` with `python-docx` installed. For a standalone clone,
-you can generate that document separately using your own Python environment:
+To regenerate all app data and Word/Markdown/text exports from a standalone clone:
 
 ```bash
 python3 -m venv .venv
-.venv/bin/python -m pip install python-docx
-.venv/bin/python scripts/build-docx.py
+.venv/bin/python -m pip install -r requirements-docs.txt
+npm run sync:actual-interviews
+npm run test:documents
 ```
 
-On Windows, use `.venv\Scripts\python.exe` for the last two commands.
+On Windows use `python -m venv .venv` and `.venv\Scripts\python.exe -m pip install -r requirements-docs.txt`.
+The npm commands find the repository's `.venv` automatically. You can also set
+`PYTHON` to an absolute Python executable path; no sibling repository is required.
+Python is optional for running the app.
+
+Run `npm run check:release` before submitting a change. This checks tests, answer
+quality patterns, repository hygiene and dataset consistency without cloud credentials.
+`npm run check:production` separately validates deployment configuration; it does not
+connect to the configured database or prove that a hosted service is healthy.
 
 ### Server-persisted interviews
 
@@ -529,7 +538,7 @@ Examples:
 - Behavioral ownership
 - Today's audio interview recap
 
-Eleven additional question-only sets preserve the order of user-shared interview summaries:
+Eleven additional sets with technical answers and personal-response templates preserve the order of user-shared interview summaries:
 
 - **Actual Interview - GKE Architecture, Policy as Code and GitOps**: 10 topic groups with follow-ups.
 - **Actual Interview - GCP Troubleshooting, CI/CD, Migration and Docker**: 28 questions.
@@ -666,7 +675,26 @@ Or use offline mode:
 npm run start:offline
 ```
 
+## Content and privacy
+
+The question bank is community-maintained educational material, not verified company
+interview content or a guarantee of technical accuracy. Organization and product names
+provide context and do not imply affiliation or endorsement. Personal-response templates
+must be filled with your own confirmed facts. Report errors through the content-correction
+issue form; see [content contribution rules](docs/CONTENT_POLICY.md).
+
+Offline mode avoids configured cloud AI calls, but browser speech recognition can send
+audio to the browser vendor. Enabling a cloud AI provider sends the relevant prompts and
+answers to that provider. Local profiles, accounts and interview history are private data;
+use synthetic data for demos and clear shared-browser storage after use.
+
+Publishing this source on GitHub does not deploy the Node backend. GitHub Pages alone
+cannot run it. Public hosting also requires HTTPS, persistent storage, identity controls
+and deployment-specific verification; see [SECURITY.md](SECURITY.md).
+
 ## GitHub Publishing Notes
+
+Follow [the release workflow](docs/RELEASING.md) for clean-checkout validation and GitHub publication.
 
 Before publishing a fork, review the entire working tree and Git history for secrets and personal data. Never commit
 `.env`, `data/applicant-profile.json`, local account/contact files, SQLite databases, logs, API credentials, session

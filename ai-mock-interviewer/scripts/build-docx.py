@@ -86,7 +86,7 @@ def build_example(entry):
         (r"\b(terraform|infrastructure as code|remote state|state lock|drift)\b",
          "For example, store Terraform state in a versioned GCS backend, run `terraform plan` in the pull request pipeline, require approval, and apply only the reviewed plan from the protected main branch."),
         (r"\b(jenkins|ci/cd|pipeline|gitops|argo cd|github actions|gitlab ci|canary|blue-green)\b",
-         "For example, a Jenkins pipeline can run tests and security scans, publish an immutable image to Artifact Registry, update the GitOps repository, and let Argo CD promote it with an automatic rollback on failed health checks."),
+         "For example, a Jenkins pipeline can run tests and security scans, publish an immutable image to Artifact Registry, update the GitOps repository, and let Argo CD reconcile the approved deployment. If health checks fail, explicitly revert to the known-good Git revision or use separately configured progressive-delivery rollback automation."),
         (r"\b(prometheus|grafana|opentelemetry|observability|monitoring|logging|sli|slo|error budget)\b",
          "For example, define availability as successful requests divided by total requests, set a 99.9% SLO, page on fast error-budget burn, and use traces plus correlated logs to identify the failing dependency."),
         (r"\b(iam|workload identity|secret|zero trust|waf|owasp|sast|dast|devsecops|security)\b",

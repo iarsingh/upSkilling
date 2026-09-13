@@ -1,8 +1,8 @@
 # Actually Asked Interview Questions and Answers
 
-This collection contains 4359 unique interview questions shared through prior conversations. Questions are grouped by category and retain their original wording.
+This collection contains 4695 unique interview questions shared through prior conversations. Questions are grouped by category and retain their original wording.
 
-Categories: 307
+Categories: 425
 
 ---
 
@@ -1000,6 +1000,36 @@ Use traces and a labeled evaluation set to identify confused tool pairs, missing
 
 ---
 
+## AI / SRE Agents
+
+3 questions
+
+### 1. You mentioned an agent that can auto-heal systems. What kind of agent are you building?
+
+**Type:** Interview question
+
+**Answer:**
+
+Example design: an agent receives an EC2 alarm, gathers instance status, recent changes and service logs through read-only tools, then proposes a bounded runbook. If a stateless service has crashed, an approved SSM document can restart that service and verify a health endpoint. Unhealthy hosts can be replaced through an Auto Scaling workflow when data safety is established. Limit permissions, attempts and blast radius; audit every action and escalate when validation fails. Model output alone must not authorize arbitrary shell commands.
+
+### 2. Can you take one example and explain how an AI/SRE agent could auto-heal an AWS virtual machine?
+
+**Type:** Interview question
+
+**Answer:**
+
+Example design: an agent receives an EC2 alarm, gathers instance status, recent changes and service logs through read-only tools, then proposes a bounded runbook. If a stateless service has crashed, an approved SSM document can restart that service and verify a health endpoint. Unhealthy hosts can be replaced through an Auto Scaling workflow when data safety is established. Limit permissions, attempts and blast radius; audit every action and escalate when validation fails. Model output alone must not authorize arbitrary shell commands.
+
+### 3. What exactly would the agent heal, and how would it perform the healing?
+
+**Type:** Interview question
+
+**Answer:**
+
+Example design: an agent receives an EC2 alarm, gathers instance status, recent changes and service logs through read-only tools, then proposes a bounded runbook. If a stateless service has crashed, an approved SSM document can restart that service and verify a health endpoint. Unhealthy hosts can be replaced through an Auto Scaling workflow when data safety is established. Limit permissions, attempts and blast radius; audit every action and escalate when validation fails. Model output alone must not authorize arbitrary shell commands.
+
+---
+
 ## AI Agent Engineer · Beginner
 
 1 question
@@ -1065,6 +1095,28 @@ Another relevant use case was a Claim Assistance Agent for insurance or automoti
 **Answer:**
 
 The claim-assistance application orchestrated a bounded workflow rather than giving a model unrestricted control. A coordinator validated the session and case, a document component extracted structured fields from submitted evidence, a policy-retrieval component found applicable guidance, and a validation step checked required fields and business rules. The system then generated a case summary and recommended next action for a human reviewer. Each tool used a narrow service identity and schema-validated input; uploaded content was scanned and isolated; sensitive values were redacted from logs; and every model, prompt, retrieved source and tool result was traceable. Offline test cases covered accuracy, groundedness, unsafe recommendations and edge cases, while canary releases monitored task completion, escalation, latency and cost. Human approval remained mandatory for consequential decisions.
+
+---
+
+## AI Operations
+
+2 questions
+
+### 1. How are you planning to use AI agents for monitoring and troubleshooting infrastructure/applications?
+
+**Type:** Interview question
+
+**Answer:**
+
+Example design: an agent receives an EC2 alarm, gathers instance status, recent changes and service logs through read-only tools, then proposes a bounded runbook. If a stateless service has crashed, an approved SSM document can restart that service and verify a health endpoint. Unhealthy hosts can be replaced through an Auto Scaling workflow when data safety is established. Limit permissions, attempts and blast radius; audit every action and escalate when validation fails. Model output alone must not authorize arbitrary shell commands.
+
+### 2. How would you use AI-based automation differently in non-production versus production environments?
+
+**Type:** Interview question
+
+**Answer:**
+
+In nonproduction, allow bounded experiments against disposable environments with budgets and reset paths. In production, start with read-only diagnosis and require explicit authorization for writes; restrict actions to reviewed runbooks with scoped identities, rate/attempt limits, audit logs and post-action health checks. Promote an automation only after replay tests and failure drills demonstrate predictable behavior. Environment labels alone are not a security boundary.
 
 ---
 
@@ -1171,6 +1223,20 @@ No — Base64 is only an encoding, not encryption. By default Kubernetes stores 
 **Answer:**
 
 Use least-privilege RBAC + namespaces + service accounts: create a Role (verbs: get,list,watch) scoped to a namespace and bind only the specific ServiceAccount with RoleBinding, e.g. kubectl apply -f role.yaml and kubectl apply -f rolebinding.yaml; verify with kubectl auth can-i get secrets -n myns --as system:serviceaccount:myns:my-sa. Enable kube-apiserver secret encryption (EncryptionConfiguration with providers aescbc or KMS v1 plugin) so secrets are encrypted at rest; verify operator logs and KMS plugin health and that etcd-stored values are not plain plaintext. For cloud use the Secrets Store CSI driver (Azure Key Vault provider on AKS) to mount secrets into pods without creating Kubernetes Secrets and verify mounts inside the pod.
+
+---
+
+## AKS Architecture
+
+1 question
+
+### 1. What kind of AKS cluster did you work with in your last Azure experience?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: identify managed or self-hosted Kubernetes, cluster mode, environment and your exact ownership. Cluster creation can include network/subnet design, identities, control-plane access, node pools, logging, policy and add-ons; operating workloads is a separate responsibility. State whether you provisioned clusters through Terraform, used a console/CLI, or worked only on existing clusters. Do not infer full cluster ownership from application deployment experience.
 
 ---
 
@@ -1404,7 +1470,7 @@ In this setup, the key failure mode is misconfigured label selectors leading to 
 
 ## Ansible
 
-53 questions
+58 questions
 
 ### 1. What is Ansible?
 
@@ -2006,6 +2072,46 @@ Static inventory is a maintained YAML or INI list of hosts and groups. Dynamic i
 
 import_tasks statically expands a task file while the playbook is parsed. include_tasks dynamically loads tasks during execution, so runtime variables and a loop on the include can select files or repeat a task group. Conditions on an import are effectively applied to the imported tasks, whereas a condition on an include decides whether to include the group at that point. Tag inheritance and visibility in list-tasks also differ; an include can use apply to set attributes on included tasks. Prefer imports for predictable static structure and includes when the task selection depends on runtime results. Neither should hide unclear role boundaries or make execution order difficult to reason about.
 
+### 54. Have you worked with Ansible?
+
+**Type:** Interview question
+
+**Answer:**
+
+Ansible playbooks express tasks applied to inventory hosts; roles package related tasks, handlers, defaults and templates. Prefer idempotent modules for packages, files and services, keep secrets in an approved vault and use staged inventories. Check mode and diffs help preview supported operations but do not guarantee every task's behavior. Personalize with an automation you actually implemented and show the before/after state and verification.
+
+### 55. What kind of automation have you implemented using Ansible?
+
+**Type:** Interview question
+
+**Answer:**
+
+Ansible playbooks express tasks applied to inventory hosts; roles package related tasks, handlers, defaults and templates. Prefer idempotent modules for packages, files and services, keep secrets in an approved vault and use staged inventories. Check mode and diffs help preview supported operations but do not guarantee every task's behavior. Personalize with an automation you actually implemented and show the before/after state and verification.
+
+### 56. How do you use Ansible to maintain infrastructure/configuration in the desired state?
+
+**Type:** Interview question
+
+**Answer:**
+
+Ansible playbooks express tasks applied to inventory hosts; roles package related tasks, handlers, defaults and templates. Prefer idempotent modules for packages, files and services, keep secrets in an approved vault and use staged inventories. Check mode and diffs help preview supported operations but do not guarantee every task's behavior. Personalize with an automation you actually implemented and show the before/after state and verification.
+
+### 57. How would you use Ansible to identify and remediate a missing security/Defender agent?
+
+**Type:** Interview question
+
+**Answer:**
+
+Collect package/service facts for the approved agent, install the supported package from a trusted source if absent, render its configuration without exposing credentials and ensure the service is enabled/running. Use handlers for necessary restarts and run health or enrollment checks afterward. Pilot on a small host group, respect vendor/OS compatibility and report failures rather than repeatedly reinstalling a broken agent.
+
+### 58. Have you written Ansible modules, roles, tasks, playbooks, or templates?
+
+**Type:** Interview question
+
+**Answer:**
+
+Ansible playbooks express tasks applied to inventory hosts; roles package related tasks, handlers, defaults and templates. Prefer idempotent modules for packages, files and services, keep secrets in an approved vault and use staged inventories. Check mode and diffs help preview supported operations but do not guarantee every task's behavior. Personalize with an automation you actually implemented and show the before/after state and verification.
+
 ---
 
 ## Ansible Coding
@@ -2403,6 +2509,68 @@ Register the intended event and receiver URL, verify the sender signature over t
 
 ---
 
+## Application Deployment / CI-CD
+
+7 questions
+
+### 1. Can you explain the latest application deployment approach you have used?
+
+**Type:** Interview question
+
+**Answer:**
+
+A commit triggers an authenticated webhook and a pipeline checks out the exact revision. Run unit tests, linting, secret/SAST/dependency checks and the quality gate, then build and scan the container. Publish a signed immutable artifact and record its digest. Deploy that artifact to a lower environment, run integration and smoke tests, approve promotion and update production manifests or the GitOps repository. Monitor health and SLOs; rollback means an explicit known-good artifact/configuration change or separately configured progressive-delivery automation.
+
+### 2. What happens after a developer commits code to a feature branch?
+
+**Type:** Interview question
+
+**Answer:**
+
+The source host sends a signed/authenticated webhook for a configured event such as a push or pull request. The CI service validates it, applies branch/path filters, queues a job on an authorized runner and checks out the event's exact commit. Record that commit in test and artifact metadata. Deduplicate retries where needed and prevent untrusted fork code from accessing production credentials.
+
+### 3. What is your pull-request and branch-merging approach?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use short-lived feature branches and reviewed pull requests into a protected main branch. Require relevant CODEOWNERS/reviewers, passing tests and linting, secret/dependency/SAST checks and artifact or IaC scans. Prevent direct pushes and uncontrolled force pushes; restrict bypass permissions and protect workflow definitions. Keep merge strategy consistent and make emergency exceptions auditable. Adapt reviewer count and gates to risk rather than claiming a particular company policy.
+
+### 4. Where are you writing your deployment pipelines—Jenkins or GitHub Actions?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “Our pipelines are defined in [Jenkinsfile / bitbucket-pipelines.yml / workflow YAML], and execute on [verified runner platform]. I own [build, tests, credentials, artifact publishing or deployment stages]. We use [other CI platform] for [actual reason].” Distinguish tools used in production from tools explored in a lab; a list of product names alone does not establish hands-on experience.
+
+### 5. Are your current application deployment pipelines written in Jenkins?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “Our pipelines are defined in [Jenkinsfile / bitbucket-pipelines.yml / workflow YAML], and execute on [verified runner platform]. I own [build, tests, credentials, artifact publishing or deployment stages]. We use [other CI platform] for [actual reason].” Distinguish tools used in production from tools explored in a lab; a list of product names alone does not establish hands-on experience.
+
+### 6. How do you handle deployments for different environments?
+
+**Type:** Interview question
+
+**Answer:**
+
+Build once, publish a tested immutable artifact and promote the same digest through Dev, Test/UAT and Production. Keep environment configuration versioned separately and retrieve secrets through scoped runtime or pipeline identities. A validated environment parameter may select the target, but authorization and approvals must be enforced independently. Record test evidence and artifact identity at each gate. Do not rebuild main for every environment: new dependencies or commits could produce a different artifact.
+
+### 7. Do you use Jenkins “Build with Parameters” to select environments such as Dev, Test, and Prod?
+
+**Type:** Interview question
+
+**Answer:**
+
+Build once, publish a tested immutable artifact and promote the same digest through Dev, Test/UAT and Production. Keep environment configuration versioned separately and retrieve secrets through scoped runtime or pipeline identities. A validated environment parameter may select the target, but authorization and approvals must be enforced independently. Record test evidence and artifact identity at each gate. Do not rebuild main for every environment: new dependencies or commits could produce a different artifact.
+
+---
+
 ## Application Exposure & Security
 
 14 questions
@@ -2553,6 +2721,20 @@ Answer with the actual stack and be specific about the mix if it's polyglot (e.g
 
 ---
 
+## Architectural Leadership
+
+1 question
+
+### 1. Describe how you established and enforced architectural standards across multiple development teams. What governance mechanism did you create, and how did you handle teams that deviated from the standard?
+
+**Type:** Interview question
+
+**Answer:**
+
+Example governance approach: publish versioned reference architectures and reusable modules with owners, require automated policy checks and design review for high-risk deviations, and offer a documented exception process with justification and expiry. Pilot standards with teams, collect adoption/incident evidence and update the standard when a legitimate requirement exposes a gap. Personalize the mechanism and outcome to governance you actually implemented.
+
+---
+
 ## Architecture
 
 1 question
@@ -2621,7 +2803,7 @@ Formal RCA follows: 1) Contain incident and capture immutable timeline (timestam
 
 ## Argo CD and GitOps
 
-49 questions
+59 questions
 
 ### 1. What are the core principles of GitOps?
 
@@ -3103,6 +3285,124 @@ Verify Velero backup exists with velero backup describe argocd-backup --details 
 **Answer:**
 
 Argo CD limitations I’ve seen: repo-server and app-controller resource scaling — large mono-repos or many Helm chart renders cause argocd-repo-server and argocd-application-controller CPU/memory spikes (verify with kubectl top deploy/argocd-repo-server -n argocd and kubectl top deploy/argocd-application-controller -n argocd, and inspect logs via kubectl logs). Diffing very large manifsets is slow and can time out; use resource exclusions or smart pruning. Multi-tenancy is coarse-grained: Projects and RBAC work but per-namespace isolation and secrets handling require external tooling (SOPS/SealedSecrets) because Argo CD does not encrypt Git secrets. Finally, ordering for CRDs and complex bootstraps requires explicit orchestration or app-of-apps patterns to avoid apply failures.
+
+### 50. What kind of exposure do you have to Argo CD?
+
+**Type:** Interview question
+
+**Answer:**
+
+Argo CD and Flux are Kubernetes GitOps reconcilers that compare desired Git/OCI-sourced configuration with cluster state, with different controller and operational models. Personalize which one you installed, configured or operated and which features you actually used. Do not equate Argo CD experience with production Flux experience; a lab evaluation should be labeled as such.
+
+### 51. Have you worked with any GitOps tools other than Argo CD, such as Flux?
+
+**Type:** Interview question
+
+**Answer:**
+
+Argo CD and Flux are Kubernetes GitOps reconcilers that compare desired Git/OCI-sourced configuration with cluster state, with different controller and operational models. Personalize which one you installed, configured or operated and which features you actually used. Do not equate Argo CD experience with production Flux experience; a lab evaluation should be labeled as such.
+
+### 52. How do you set up Argo CD from scratch?
+
+**Type:** Interview question
+
+**Answer:**
+
+Choose and pin a compatible argo-helm chart version, review its values and render the manifests before installation. Add the official chart repository and run `helm upgrade --install argocd argo/argo-cd --namespace argocd --create-namespace --version APPROVED_VERSION -f values.yaml` after adding `https://argoproj.github.io/argo-helm`. Configure SSO, RBAC, repository credentials and cluster permissions. Use a private, authenticated TLS endpoint or local port-forward for initial access; rotate bootstrap credentials. Create scoped Projects/Applications and verify a nonproduction sync before expanding access.
+
+### 53. How do you expose/access the Argo CD API/server?
+
+**Type:** Interview question
+
+**Answer:**
+
+Choose and pin a compatible argo-helm chart version, review its values and render the manifests before installation. Add the official chart repository and run `helm upgrade --install argocd argo/argo-cd --namespace argocd --create-namespace --version APPROVED_VERSION -f values.yaml` after adding `https://argoproj.github.io/argo-helm`. Configure SSO, RBAC, repository credentials and cluster permissions. Use a private, authenticated TLS endpoint or local port-forward for initial access; rotate bootstrap credentials. Create scoped Projects/Applications and verify a nonproduction sync before expanding access.
+
+### 54. What do you mean when you say you install Argo CD using Helm?
+
+**Type:** Interview question
+
+**Answer:**
+
+Choose and pin a compatible argo-helm chart version, review its values and render the manifests before installation. Add the official chart repository and run `helm upgrade --install argocd argo/argo-cd --namespace argocd --create-namespace --version APPROVED_VERSION -f values.yaml` after adding `https://argoproj.github.io/argo-helm`. Configure SSO, RBAC, repository credentials and cluster permissions. Use a private, authenticated TLS endpoint or local port-forward for initial access; rotate bootstrap credentials. Create scoped Projects/Applications and verify a nonproduction sync before expanding access.
+
+### 55. How do you install Argo CD through a Helm chart?
+
+**Type:** Interview question
+
+**Answer:**
+
+Choose and pin a compatible argo-helm chart version, review its values and render the manifests before installation. Add the official chart repository and run `helm upgrade --install argocd argo/argo-cd --namespace argocd --create-namespace --version APPROVED_VERSION -f values.yaml` after adding `https://argoproj.github.io/argo-helm`. Configure SSO, RBAC, repository credentials and cluster permissions. Use a private, authenticated TLS endpoint or local port-forward for initial access; rotate bootstrap credentials. Create scoped Projects/Applications and verify a nonproduction sync before expanding access.
+
+### 56. What Kubernetes resources/objects does the Argo CD Helm installation create?
+
+**Type:** Interview question
+
+**Answer:**
+
+The exact objects depend on chart version and values. Typical installations include application-controller, API/server and repository-server workloads, Redis, optional ApplicationSet/notifications components, Services, ServiceAccounts, RBAC, ConfigMaps, Secrets and Argo CD CRDs. Some components can be StatefulSets and optional HA/ingress resources differ. Inspect `helm template` and `helm get manifest` for the installed release rather than claiming a fixed Deployment/object count.
+
+### 57. What Deployments, Services, ConfigMaps, Secrets, ServiceAccounts, and RBAC objects are created by Argo CD?
+
+**Type:** Interview question
+
+**Answer:**
+
+The exact objects depend on chart version and values. Typical installations include application-controller, API/server and repository-server workloads, Redis, optional ApplicationSet/notifications components, Services, ServiceAccounts, RBAC, ConfigMaps, Secrets and Argo CD CRDs. Some components can be StatefulSets and optional HA/ingress resources differ. Inspect `helm template` and `helm get manifest` for the installed release rather than claiming a fixed Deployment/object count.
+
+### 58. Are there any other Kubernetes resources created as part of the Argo CD installation?
+
+**Type:** Interview question
+
+**Answer:**
+
+The exact objects depend on chart version and values. Typical installations include application-controller, API/server and repository-server workloads, Redis, optional ApplicationSet/notifications components, Services, ServiceAccounts, RBAC, ConfigMaps, Secrets and Argo CD CRDs. Some components can be StatefulSets and optional HA/ingress resources differ. Inspect `helm template` and `helm get manifest` for the installed release rather than claiming a fixed Deployment/object count.
+
+### 59. Have you ever used managed Argo CD for Azure/AKS?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: identify the specific managed offering and who operated its control plane. Installing the upstream Argo CD Helm chart on AKS is self-managed Argo CD running on managed Kubernetes; it is not automatically a managed Argo CD service. If your exposure was only that installation, describe it accurately and verify the vendor's responsibility boundary before claiming managed-service experience.
+
+---
+
+## Artifact Promotion
+
+4 questions
+
+### 1. Suppose the code is available in the main branch and you deploy it to Dev. How do you subsequently deploy it to Test and Production?
+
+**Type:** Interview question
+
+**Answer:**
+
+Build once, publish a tested immutable artifact and promote the same digest through Dev, Test/UAT and Production. Keep environment configuration versioned separately and retrieve secrets through scoped runtime or pipeline identities. A validated environment parameter may select the target, but authorization and approvals must be enforced independently. Record test evidence and artifact identity at each gate. Do not rebuild main for every environment: new dependencies or commits could produce a different artifact.
+
+### 2. For Test, do you pull the code from the main branch again and rebuild it?
+
+**Type:** Interview question
+
+**Answer:**
+
+Build once, publish a tested immutable artifact and promote the same digest through Dev, Test/UAT and Production. Keep environment configuration versioned separately and retrieve secrets through scoped runtime or pipeline identities. A validated environment parameter may select the target, but authorization and approvals must be enforced independently. Record test evidence and artifact identity at each gate. Do not rebuild main for every environment: new dependencies or commits could produce a different artifact.
+
+### 3. For Production, do you again pull the same source code from main and rebuild it?
+
+**Type:** Interview question
+
+**Answer:**
+
+Build once, publish a tested immutable artifact and promote the same digest through Dev, Test/UAT and Production. Keep environment configuration versioned separately and retrieve secrets through scoped runtime or pipeline identities. A validated environment parameter may select the target, but authorization and approvals must be enforced independently. Record test evidence and artifact identity at each gate. Do not rebuild main for every environment: new dependencies or commits could produce a different artifact.
+
+### 4. Or do you follow another approach for promoting an application across Dev → Test → Prod?
+
+**Type:** Interview question
+
+**Answer:**
+
+Build once, publish a tested immutable artifact and promote the same digest through Dev, Test/UAT and Production. Keep environment configuration versioned separately and retrieve secrets through scoped runtime or pipeline identities. A validated environment parameter may select the target, but authorization and approvals must be enforced independently. Record test evidence and artifact identity at each gate. Do not rebuild main for every environment: new dependencies or commits could produce a different artifact.
 
 ---
 
@@ -3698,6 +3998,20 @@ Note: I've kept the answer concise (around 120 words) and focused on providing c
 
 ---
 
+## AWS Landing Zone
+
+1 question
+
+### 1. Describe how you would use Terraform to provision a new AWS account in a banking organization, including VPC baseline, SCPs, CloudTrail, Config Rules, and IAM baseline. What does your module hierarchy look like?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use the organization's approved account-vending workflow, such as Control Tower/AFT where adopted. Separate modules/stacks for account enrollment and OU placement, organization guardrails, audit/logging, identity baseline and workload networking. Provision non-overlapping VPCs, centralized CloudTrail, appropriate Config rules, security integrations and scoped roles with delegated administration. SCPs constrain maximum permissions and do not grant access. Account creation is asynchronous; validate enrollment and controls before handing the account to a workload team.
+
+---
+
 ## AWS Networking
 
 32 questions
@@ -4135,6 +4449,28 @@ An NSG is a stateful Layer 3/4 traffic-filtering resource with prioritized inbou
 
 ---
 
+## Azure Experience
+
+2 questions
+
+### 1. How many years of experience do you have with Azure?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “My primary cloud is [verified platform], with [verified duration] of hands-on work. I have used [specific services] for [specific responsibilities]. My exposure to the other clouds is [production / project / POC / training], with [concrete examples].” Separate overlapping calendar years from platform-specific experience and do not claim deployments in a cloud used only for study.
+
+### 2. What Azure services have you worked on?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “My primary cloud is [verified platform], with [verified duration] of hands-on work. I have used [specific services] for [specific responsibilities]. My exposure to the other clouds is [production / project / POC / training], with [concrete examples].” Separate overlapping calendar years from platform-specific experience and do not claim deployments in a cloud used only for study.
+
+---
+
 ## Azure Governance & Cost
 
 8 questions
@@ -4204,6 +4540,52 @@ Apply and enforce tags/labels at resource-creation and at scale, then export bil
 **Answer:**
 
 Use Azure Reservations or Savings Plans when you have predictable, steady-state compute or service consumption and can commit to 1‑ or 3‑year terms to get lower unit prices. Choose Reservations when you need resource-level capacity and SKU-specific discounts (for VMs, SQL Database compute, Cosmos DB, Dedicated Hosts, etc.) and want role-specific reservation exchange/cancellation. Choose Azure Savings Plan for Compute when you need cross‑VM-family and regional flexibility for VMs and VM-based compute and still want broad hourly discounts. Validate with Azure Advisor reservation/Savings Plan recommendations and confirm realized discounts and utilization in Cost Management > Reservations / Cost analysis to ensure expected savings are applied.
+
+---
+
+## Azure Networking
+
+5 questions
+
+### 1. How do you connect one Azure subscription to another subscription or one landing zone to another landing zone?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use non-overlapping VNets with explicitly authorized cross-subscription peering, appropriate permissions at both ends and planned DNS. Hub-and-spoke centralizes shared services and connectivity, but ordinary peering is not transitive. Gateway transit can let a spoke use a permitted hub gateway; ExpressRoute supplies private connectivity to on-premises and requires deliberate gateway/route design. Validate effective routes and return paths; peering two VNets alone does not establish every landing-zone transit path. Reference: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview
+
+### 2. How do you use VNet peering for cross-subscription connectivity?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use non-overlapping VNets with explicitly authorized cross-subscription peering, appropriate permissions at both ends and planned DNS. Hub-and-spoke centralizes shared services and connectivity, but ordinary peering is not transitive. Gateway transit can let a spoke use a permitted hub gateway; ExpressRoute supplies private connectivity to on-premises and requires deliberate gateway/route design. Validate effective routes and return paths; peering two VNets alone does not establish every landing-zone transit path. Reference: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview
+
+### 3. Have you worked with a hub-and-spoke architecture in Azure?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use non-overlapping VNets with explicitly authorized cross-subscription peering, appropriate permissions at both ends and planned DNS. Hub-and-spoke centralizes shared services and connectivity, but ordinary peering is not transitive. Gateway transit can let a spoke use a permitted hub gateway; ExpressRoute supplies private connectivity to on-premises and requires deliberate gateway/route design. Validate effective routes and return paths; peering two VNets alone does not establish every landing-zone transit path. Reference: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview
+
+### 4. How do you use ExpressRoute in a cross-subscription/landing-zone architecture?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use non-overlapping VNets with explicitly authorized cross-subscription peering, appropriate permissions at both ends and planned DNS. Hub-and-spoke centralizes shared services and connectivity, but ordinary peering is not transitive. Gateway transit can let a spoke use a permitted hub gateway; ExpressRoute supplies private connectivity to on-premises and requires deliberate gateway/route design. Validate effective routes and return paths; peering two VNets alone does not establish every landing-zone transit path. Reference: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview
+
+### 5. How do you control inbound and outbound traffic between VNets/subscriptions?
+
+**Type:** Interview question
+
+**Answer:**
+
+Treat reachability and isolation separately. Apply least-privilege NSG rules where present, user-defined routing through an approved firewall when needed, and enforced Kubernetes NetworkPolicies for Pod traffic. If NSGs are absent, deny-by-default workload policies, a functioning policy-capable CNI and controlled firewall routes can restrict traffic; test actual source addressing and both directions. Protect identities, secrets and cluster administration independently. VNet peering connects networks, not authorization domains, and namespace names alone do not isolate two clusters.
 
 ---
 
@@ -4381,6 +4763,58 @@ DNS centralizes and controls name resolution in hub-and-spoke networking: the hu
 
 ---
 
+## Background and Project
+
+1 question
+
+### 1. Can you explain your current project in detail?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “I have [verified years] of experience in [areas]. In my current [domain] project, the platform supports [business function]. I own [specific infrastructure, delivery or reliability responsibilities], using [tools actually operated]. A recent contribution was [change], which improved [measured outcome].” Replace every bracket with confirmed information and distinguish individual ownership from the team's work.
+
+---
+
+## Background Verification
+
+4 questions
+
+### 1. Do you have all your educational documents available?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: compare the employer's document checklist with records you actually possess. State which documents are ready, which will arrive after an employer's final settlement or exit process, and the confirmed expected dates. Share sensitive records only through the approved verification channel. Do not claim all documents are available without checking them.
+
+### 2. Do you have all the relevant employment/supporting documents required for background verification?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: compare the employer's document checklist with records you actually possess. State which documents are ready, which will arrive after an employer's final settlement or exit process, and the confirmed expected dates. Share sensitive records only through the approved verification channel. Do not claim all documents are available without checking them.
+
+### 3. Are there any documents that you can provide only after your current company’s final settlement?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: compare the employer's document checklist with records you actually possess. State which documents are ready, which will arrive after an employer's final settlement or exit process, and the confirmed expected dates. Share sensitive records only through the approved verification channel. Do not claim all documents are available without checking them.
+
+### 4. Are the rest of your documents in place?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: compare the employer's document checklist with records you actually possess. State which documents are ready, which will arrive after an employer's final settlement or exit process, and the confirmed expected dates. Share sensitive records only through the approved verification channel. Do not claim all documents are available without checking them.
+
+---
+
 ## Backup and Disaster Recovery
 
 1 question
@@ -4392,6 +4826,20 @@ DNS centralizes and controls name resolution in hub-and-spoke networking: the hu
 **Answer:**
 
 I stop repeated restart attempts, capture console or serial-port output and determine whether the failure is bootloader, filesystem, kernel, driver, service or configuration related. If the recovery objective requires fast restoration, I preserve the failed disk for evidence and create a new disk from the verified pre-patch snapshot rather than overwriting the only copy. I attach that disk to a replacement VM built from the same infrastructure definition, or use a rescue VM to repair the original disk if recovery is safer than rollback. Before restoring traffic I validate filesystem health, application startup, dependencies, secrets, monitoring and data consistency. I then shift traffic through the load balancer, monitor service health and retain the failed resources for RCA. A disk snapshot may be only crash-consistent, so databases require native, application-consistent recovery and transaction-log replay where applicable.
+
+---
+
+## Backup and Restore
+
+1 question
+
+### 1. How do you validate that your database backup and restore process actually meets the stated RPO? What are you testing before and during DR exercises?
+
+**Type:** Interview question
+
+**Answer:**
+
+Write timestamped or sequenced synthetic transactions before and during the exercise, then compare the latest committed source marker with the latest recovered marker. That gap measures achieved data loss/RPO; separately time service restoration for RTO. Test backup completeness, decryption permissions, restore automation, schema consistency, application connectivity and reconciliation of transactions after the selected recovery point. Backup job success alone does not prove recoverability.
 
 ---
 
@@ -5833,6 +6281,20 @@ Create a Bitbucket repo, add it as a remote, and push code and tags: git remote 
 
 ---
 
+## Blue-Green Deployment
+
+1 question
+
+### 1. What is a blue-green deployment? How can you implement blue-green deployment through code? What changes are required in the Kubernetes YAML/Helm code to implement blue-green? Have you actually implemented blue-green deployment in your project? How would you switch traffic from Blue to Green? How would you roll back from Green to Blue?
+
+**Type:** Interview question
+
+**Answer:**
+
+Blue-green keeps two complete application versions available. Define separate Deployments labeled `track: blue` and `track: green`, with a stable Service selecting the active track. Deploy and test green through a preview Service, then change the stable Service selector to green in Git and reconcile it. Revert that selector to blue for rollback while retaining blue capacity. Account for connection draining, cache/session compatibility and backward-compatible database changes. Personal implementation experience must be supplied separately.
+
+---
+
 ## Capacity Planning and Performance
 
 28 questions
@@ -6063,6 +6525,20 @@ Caching creates reliability problems when stale or inconsistent data is served a
 
 ---
 
+## Centralized Observability
+
+1 question
+
+### 1. Suppose I want centralized monitoring for all GCP resources—GKE clusters/pods, Cloud Run, IAM, CI/CD pipelines, etc. How would you create the monitoring system using Prometheus, Grafana, or another observability platform?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use a central metrics scope or observability account with controlled access to project telemetry. Collect GKE application metrics through managed Prometheus or an operated Prometheus stack, Google service metrics through Cloud Monitoring, and audit/activity events through Cloud Logging. Export pipeline outcomes and instrument Cloud Run/application traces with OpenTelemetry. Grafana can query the chosen backends. Standardize service/environment labels, retention, dashboards, SLOs and alert routing; IAM changes are audit events, not ordinary Pod metrics.
+
+---
+
 ## Certificate monitoring
 
 16 questions
@@ -6197,9 +6673,125 @@ The script discovers configured endpoints or certificate files and reads the cer
 
 ---
 
+## Certifications
+
+6 questions
+
+### 1. You are Google Cloud certified, correct?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: list exact certification names, issuing organizations, earned dates and current expiration/renewal status from the official credential record. Distinguish a completed course or passed exam from an active certification. If AZ-400 or another credential is expired, omitted or never earned, state that accurately and update the CV; do not infer certification status from the interviewer's question.
+
+### 2. Do you have a DevOps certification as well?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: list exact certification names, issuing organizations, earned dates and current expiration/renewal status from the official credential record. Distinguish a completed course or passed exam from an active certification. If AZ-400 or another credential is expired, omitted or never earned, state that accurately and update the CV; do not infer certification status from the interviewer's question.
+
+### 3. What certifications have you completed?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: list exact certification names, issuing organizations, earned dates and current expiration/renewal status from the official credential record. Distinguish a completed course or passed exam from an active certification. If AZ-400 or another credential is expired, omitted or never earned, state that accurately and update the CV; do not infer certification status from the interviewer's question.
+
+### 4. Have you completed Google Cloud certifications, including DevOps/Associate/Networking-related certifications?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: list exact certification names, issuing organizations, earned dates and current expiration/renewal status from the official credential record. Distinguish a completed course or passed exam from an active certification. If AZ-400 or another credential is expired, omitted or never earned, state that accurately and update the CV; do not infer certification status from the interviewer's question.
+
+### 5. Have you completed the Microsoft AZ-400 DevOps Engineer certification?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: list exact certification names, issuing organizations, earned dates and current expiration/renewal status from the official credential record. Distinguish a completed course or passed exam from an active certification. If AZ-400 or another credential is expired, omitted or never earned, state that accurately and update the CV; do not infer certification status from the interviewer's question.
+
+### 6. Why haven’t you mentioned AZ-400 on your current CV? / What is its current renewal status?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: list exact certification names, issuing organizations, earned dates and current expiration/renewal status from the official credential record. Distinguish a completed course or passed exam from an active certification. If AZ-400 or another credential is expired, omitted or never earned, state that accurately and update the CV; do not infer certification status from the interviewer's question.
+
+---
+
+## Change Management
+
+7 questions
+
+### 1. How frequently do you perform changes in your environment?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize with verified duties and frequency: resource provisioning, release support, incident response, certificate rotation, IAM/network changes, capacity management, patching and cluster upgrades are possible examples. For each selected duty, identify the affected service, your access/ownership, the approval route and validation. Production work frequency depends on the release/change calendar; do not invent a daily schedule or responsibilities from the prompt.
+
+### 2. Do you perform production changes on a day-to-day basis?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize with verified duties and frequency: resource provisioning, release support, incident response, certificate rotation, IAM/network changes, capacity management, patching and cluster upgrades are possible examples. For each selected duty, identify the affected service, your access/ownership, the approval route and validation. Production work frequency depends on the release/change calendar; do not invent a daily schedule or responsibilities from the prompt.
+
+### 3. What is your sprint cycle?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: state the team's actual sprint length, planning/review cadence and CAB schedule. Distinguish scheduled meetings from emergency approval arrangements and product sprints from production release frequency. These are organization-specific practices, so there is no universally correct number of days or meetings.
+
+### 4. How long is your sprint?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: state the team's actual sprint length, planning/review cadence and CAB schedule. Distinguish scheduled meetings from emergency approval arrangements and product sprints from production release frequency. These are organization-specific practices, so there is no universally correct number of days or meetings.
+
+### 5. How do changes move through Dev/QA/UAT before reaching production?
+
+**Type:** Interview question
+
+**Answer:**
+
+Build once, publish a tested immutable artifact and promote the same digest through Dev, Test/UAT and Production. Keep environment configuration versioned separately and retrieve secrets through scoped runtime or pipeline identities. A validated environment parameter may select the target, but authorization and approvals must be enforced independently. Record test evidence and artifact identity at each gate. Do not rebuild main for every environment: new dependencies or commits could produce a different artifact.
+
+### 6. How frequently do you have CAB calls?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: state the team's actual sprint length, planning/review cadence and CAB schedule. Distinguish scheduled meetings from emergency approval arrangements and product sprints from production release frequency. These are organization-specific practices, so there is no universally correct number of days or meetings.
+
+### 7. How do you handle production change approvals?
+
+**Type:** Interview question
+
+**Answer:**
+
+Build once, publish a tested immutable artifact and promote the same digest through Dev, Test/UAT and Production. Keep environment configuration versioned separately and retrieve secrets through scoped runtime or pipeline identities. A validated environment parameter may select the target, but authorization and approvals must be enforced independently. Record test evidence and artifact identity at each gate. Do not rebuild main for every environment: new dependencies or commits could produce a different artifact.
+
+---
+
 ## CI/CD
 
-12 questions
+29 questions
 
 ### 1. What is Continuous Integration (CI)?
 
@@ -6296,6 +6888,142 @@ The commit (or PR) triggers the CI pipeline automatically: checkout, build, unit
 **Answer:**
 
 I choose Cloud Build when workloads are centered on Google Cloud and the team values a managed build control plane, ephemeral workers, straightforward IAM and integrations with Artifact Registry, source repositories, Secret Manager and Cloud Deploy. It reduces controller, plugin, patching, backup and agent-fleet maintenance. Private pools can address isolation and network-access needs. Jenkins remains attractive when an organization has substantial existing shared libraries, plugins, heterogeneous environments, complex custom workflows or cross-cloud and on-premises integrations that would be expensive to migrate. Its flexibility also creates operational cost: controller availability, plugin compatibility, credentials, scaling and upgrades belong to the team. Cloud Build can introduce service limits, product coupling, migration work and different cost behavior, and private connectivity needs careful design. I compare security, workload location, required integrations, portability, developer experience, compliance evidence and total operating cost, then migrate incrementally rather than choosing solely because one service is managed.
+
+### 13. Can you explain your CI/CD pipeline in detail?
+
+**Type:** Interview question
+
+**Answer:**
+
+A commit triggers an authenticated webhook and a pipeline checks out the exact revision. Run unit tests, linting, secret/SAST/dependency checks and the quality gate, then build and scan the container. Publish a signed immutable artifact and record its digest. Deploy that artifact to a lower environment, run integration and smoke tests, approve promotion and update production manifests or the GitOps repository. Monitor health and SLOs; rollback means an explicit known-good artifact/configuration change or separately configured progressive-delivery automation.
+
+### 14. How does a code commit trigger your CI/CD pipeline?
+
+**Type:** Interview question
+
+**Answer:**
+
+The source host sends a signed/authenticated webhook for a configured event such as a push or pull request. The CI service validates it, applies branch/path filters, queues a job on an authorized runner and checks out the event's exact commit. Record that commit in test and artifact metadata. Deduplicate retries where needed and prevent untrusted fork code from accessing production credentials.
+
+### 15. What is an event-driven CI/CD pipeline? How do webhooks trigger pipelines when changes occur?
+
+**Type:** Interview question
+
+**Answer:**
+
+The source host sends a signed/authenticated webhook for a configured event such as a push or pull request. The CI service validates it, applies branch/path filters, queues a job on an authorized runner and checks out the event's exact commit. Record that commit in test and artifact metadata. Deduplicate retries where needed and prevent untrusted fork code from accessing production credentials.
+
+### 16. All pods are running successfully, but users are receiving HTTP 500 or 501 errors. How would you troubleshoot?
+
+**Type:** Interview question
+
+**Answer:**
+
+Running Pods can still serve failing requests. Identify which component produced the status using request IDs and load-balancer, proxy and application logs. A 500 indicates a server error; 501 means the server does not implement the requested functionality, often a method or handler issue. Check routing, request method, backend responses, recent releases and database/upstream health. Verify readiness tests cover useful dependencies and reproduce the failing request safely.
+
+### 17. What branching strategy have you used? Explain your feature-branch strategy.
+
+**Type:** Interview question
+
+**Answer:**
+
+Use short-lived feature branches and reviewed pull requests into a protected main branch. Require relevant CODEOWNERS/reviewers, passing tests and linting, secret/dependency/SAST checks and artifact or IaC scans. Prevent direct pushes and uncontrolled force pushes; restrict bypass permissions and protect workflow definitions. Keep merge strategy consistent and make emergency exceptions auditable. Adapt reviewer count and gates to risk rather than claiming a particular company policy.
+
+### 18. Do you have experience migrating repositories from GitHub to Bitbucket? How did you perform the migration?
+
+**Type:** Interview question
+
+**Answer:**
+
+Inventory repositories, refs, LFS, submodules, permissions, webhooks and CI dependencies. Test a mirror migration into an empty destination, including LFS separately where used; compare refs and representative clones. Migrate issues/PR history with a supported export tool if required, because Git transfer alone does not move them. Recreate branch protections and credentials, freeze writes for final synchronization, validate pipelines and update remotes while retaining the old host read-only for a defined rollback window.
+
+### 19. Have you worked with Jenkins pipeline agents?
+
+**Type:** Interview question
+
+**Answer:**
+
+A Jenkins agent executes assigned build steps and may be a VM or ephemeral Pod. If it goes offline, inspect controller connection logs, agent process/Pod events, node pressure, network reachability, credentials and disk space. Determine whether the running stage is safely resumable; preserve artifacts and verify external side effects before retrying. Restore or replace the agent and rerun from an idempotent checkpoint rather than blindly repeating a deployment.
+
+### 20. If a Jenkins agent goes offline while a job is running, how would you troubleshoot and recover it?
+
+**Type:** Interview question
+
+**Answer:**
+
+A Jenkins agent executes assigned build steps and may be a VM or ephemeral Pod. If it goes offline, inspect controller connection logs, agent process/Pod events, node pressure, network reachability, credentials and disk space. Determine whether the running stage is safely resumable; preserve artifacts and verify external side effects before retrying. Restore or replace the agent and rerun from an idempotent checkpoint rather than blindly repeating a deployment.
+
+### 21. What is SonarQube, and how do you use it in your CI/CD pipeline?
+
+**Type:** Interview question
+
+**Answer:**
+
+SonarQube analyzes code for maintainability and reliability/security findings and can incorporate coverage data from the test runner. Run the scanner against the exact commit, submit results and wait for the configured quality gate before merge or release. Tune rules and review false positives with an audit trail. It complements, rather than replaces, dependency, container and runtime security checks.
+
+### 22. What is a code smell in SonarQube?
+
+**Type:** Interview question
+
+**Answer:**
+
+A code smell is a maintainability concern such as excessive complexity, duplication or confusing structure. It is not necessarily a current functional defect or an exploitable vulnerability. Review the rule and context, refactor with tests and prioritize high-impact findings in changed code.
+
+### 23. Have you worked with Jenkins, Bitbucket, and GitHub Actions?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “Our pipelines are defined in [Jenkinsfile / bitbucket-pipelines.yml / workflow YAML], and execute on [verified runner platform]. I own [build, tests, credentials, artifact publishing or deployment stages]. We use [other CI platform] for [actual reason].” Distinguish tools used in production from tools explored in a lab; a list of product names alone does not establish hands-on experience.
+
+### 24. Have you worked with GitLab Runner as well?
+
+**Type:** Interview question
+
+**Answer:**
+
+GitLab Runner is the agent that executes GitLab CI jobs using a configured executor such as Docker or Kubernetes. Runners need appropriate registration/authentication, tags, isolation and network access. Personalize whether you installed or maintained runners, wrote jobs that used them, or only studied them; these are different levels of hands-on ownership.
+
+### 25. Have you worked with Harness?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “My Harness experience is [production / POC / training / none]. My strongest comparable experience is [verified CI/CD platform], covering pipeline stages, runners, secrets, approval gates and deployments. I would validate Harness connectors, delegates, environment permissions and rollback behavior in a sandbox before owning production releases.” Do not claim hands-on Harness or Azure DevOps experience without evidence.
+
+### 26. How much hands-on experience do you have with Harness?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “My Harness experience is [production / POC / training / none]. My strongest comparable experience is [verified CI/CD platform], covering pipeline stages, runners, secrets, approval gates and deployments. I would validate Harness connectors, delegates, environment permissions and rollback behavior in a sandbox before owning production releases.” Do not claim hands-on Harness or Azure DevOps experience without evidence.
+
+### 27. Since we use Harness and Azure DevOps here, how comfortable are you working with these tools?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “My Harness experience is [production / POC / training / none]. My strongest comparable experience is [verified CI/CD platform], covering pipeline stages, runners, secrets, approval gates and deployments. I would validate Harness connectors, delegates, environment permissions and rollback behavior in a sandbox before owning production releases.” Do not claim hands-on Harness or Azure DevOps experience without evidence.
+
+### 28. Compare Jenkins and GitLab CI for managing pipelines in a large banking organization. What are the operational trade-offs regarding scalability, maintenance, and developer experience?
+
+**Type:** Interview question
+
+**Answer:**
+
+Jenkins offers broad plugin and integration flexibility but requires careful controller, plugin and agent maintenance. GitLab CI integrates pipeline configuration, source review and runner workflows, with constraints depending on the hosted/self-managed edition. Compare isolation, runner scaling, upgrades, secrets, auditability, approval controls and total operating effort using representative banking workflows. Neither tool by itself guarantees compliance or a safe production release.
+
+### 29. What stages do you include in a CI/CD pipeline for a containerized microservice deploying to EKS, and what quality gates exist between the stages?
+
+**Type:** Interview question
+
+**Answer:**
+
+A commit triggers an authenticated webhook and a pipeline checks out the exact revision. Run unit tests, linting, secret/SAST/dependency checks and the quality gate, then build and scan the container. Publish a signed immutable artifact and record its digest. Deploy that artifact to a lower environment, run integration and smoke tests, approve promotion and update production manifests or the GitOps repository. Monitor health and SLOs; rollback means an explicit known-good artifact/configuration change or separately configured progressive-delivery automation.
 
 ---
 
@@ -6476,6 +7204,20 @@ ________________
 
 Interview Answer (1 Minute)
 Continuous Deployment is a DevOps practice where every code change that successfully passes build, testing, quality, and security checks is automatically deployed to production without manual approval. It enables rapid and frequent software releases while reducing human intervention. To implement Continuous Deployment effectively, organizations need comprehensive automated testing, monitoring, and rollback mechanisms. In Kubernetes environments, tools such as Jenkins, GitHub Actions, Docker, and ArgoCD are commonly used to automate the entire deployment lifecycle.
+
+---
+
+## CI/CD Flow
+
+1 question
+
+### 1. Give me the overall flow/flowchart of your CI/CD pipeline. Discussion context: source → webhook → Jenkins → tests/SonarQube → Docker build → vulnerability scan → Artifact Registry → deployment/ArgoCD → GKE → validation → production → monitoring/rollback.
+
+**Type:** Interview question
+
+**Answer:**
+
+A commit triggers an authenticated webhook and a pipeline checks out the exact revision. Run unit tests, linting, secret/SAST/dependency checks and the quality gate, then build and scan the container. Publish a signed immutable artifact and record its digest. Deploy that artifact to a lower environment, run integration and smoke tests, approve promotion and update production manifests or the GitOps repository. Monitor health and SLOs; rollback means an explicit known-good artifact/configuration change or separately configured progressive-delivery automation.
 
 ---
 
@@ -6906,6 +7648,20 @@ A typical application flow is checkout, dependency and secret scanning, unit tes
 **Answer:**
 
 Use repositories for the required package formats, such as Maven, Python, npm or container images, with approved upstream/remote or virtual repositories where supported. Configure package managers and container clients to use the intended repository endpoint and authenticate using short-lived credentials. Developers normally receive read-only repository access through groups; CI uses a dedicated writer identity scoped to the build repository. If a human temporarily needs write access, use an approved time-bound grant or constrained service-account impersonation, with audit logging and separate production permissions. Impersonation requires permission to mint credentials for the target identity and that identity still needs repository access. Pin/lock dependency versions and scan provenance/licensing/vulnerabilities. Artifact Registry replaces only the repository functions actually configured; do not claim every Nexus/JFrog feature is identical.
+
+---
+
+## CI/CD Tools
+
+1 question
+
+### 1. What CI/CD tools are you currently using? Discussion context: Jenkins, Bitbucket Pipelines, GitLab Runner, GitHub Actions, and Cloud Build.
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “Our pipelines are defined in [Jenkinsfile / bitbucket-pipelines.yml / workflow YAML], and execute on [verified runner platform]. I own [build, tests, credentials, artifact publishing or deployment stages]. We use [other CI platform] for [actual reason].” Distinguish tools used in production from tools explored in a lab; a list of product names alone does not establish hands-on experience.
 
 ---
 
@@ -8323,6 +9079,98 @@ Minimum instances keep some capacity warm to reduce cold starts but increase bas
 
 ---
 
+## Cluster Provisioning
+
+2 questions
+
+### 1. Have you created a Kubernetes cluster yourself end-to-end?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: identify managed or self-hosted Kubernetes, cluster mode, environment and your exact ownership. Cluster creation can include network/subnet design, identities, control-plane access, node pools, logging, policy and add-ons; operating workloads is a separate responsibility. State whether you provisioned clusters through Terraform, used a console/CLI, or worked only on existing clusters. Do not infer full cluster ownership from application deployment experience.
+
+### 2. Have you created Kubernetes clusters manually as well as through Terraform?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: identify managed or self-hosted Kubernetes, cluster mode, environment and your exact ownership. Cluster creation can include network/subnet design, identities, control-plane access, node pools, logging, policy and add-ons; operating workloads is a separate responsibility. State whether you provisioned clusters through Terraform, used a console/CLI, or worked only on existing clusters. Do not infer full cluster ownership from application deployment experience.
+
+---
+
+## Cluster Scale and Capacity
+
+8 questions
+
+### 1. How many nodes did your Kubernetes/AKS cluster have?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use cluster inventory and historical metrics for actual counts rather than inferring them from interview prompts. Count Deployments, StatefulSets, DaemonSets, Jobs and replicas separately; 100–125 services do not necessarily imply the same number of Deployments. Total Pods include workload replicas, system components, rollout surge and completed/job state as relevant. Node count depends on requests, bin packing, zones, taints, headroom and failure tolerance, not a fixed services-per-node ratio.
+
+### 2. Why did your cluster require around 25 nodes?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use cluster inventory and historical metrics for actual counts rather than inferring them from interview prompts. Count Deployments, StatefulSets, DaemonSets, Jobs and replicas separately; 100–125 services do not necessarily imply the same number of Deployments. Total Pods include workload replicas, system components, rollout surge and completed/job state as relevant. Node count depends on requests, bin packing, zones, taints, headroom and failure tolerance, not a fixed services-per-node ratio.
+
+### 3. How many microservices were running on that cluster?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use cluster inventory and historical metrics for actual counts rather than inferring them from interview prompts. Count Deployments, StatefulSets, DaemonSets, Jobs and replicas separately; 100–125 services do not necessarily imply the same number of Deployments. Total Pods include workload replicas, system components, rollout surge and completed/job state as relevant. Node count depends on requests, bin packing, zones, taints, headroom and failure tolerance, not a fixed services-per-node ratio.
+
+### 4. Are you saying you were running around 100–125 different microservices?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use cluster inventory and historical metrics for actual counts rather than inferring them from interview prompts. Count Deployments, StatefulSets, DaemonSets, Jobs and replicas separately; 100–125 services do not necessarily imply the same number of Deployments. Total Pods include workload replicas, system components, rollout surge and completed/job state as relevant. Node count depends on requests, bin packing, zones, taints, headroom and failure tolerance, not a fixed services-per-node ratio.
+
+### 5. How many Kubernetes Deployments did you have for those 100–125 microservices?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use cluster inventory and historical metrics for actual counts rather than inferring them from interview prompts. Count Deployments, StatefulSets, DaemonSets, Jobs and replicas separately; 100–125 services do not necessarily imply the same number of Deployments. Total Pods include workload replicas, system components, rollout surge and completed/job state as relevant. Node count depends on requests, bin packing, zones, taints, headroom and failure tolerance, not a fixed services-per-node ratio.
+
+### 6. How many replicas/pods were typically running for each Deployment?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use cluster inventory and historical metrics for actual counts rather than inferring them from interview prompts. Count Deployments, StatefulSets, DaemonSets, Jobs and replicas separately; 100–125 services do not necessarily imply the same number of Deployments. Total Pods include workload replicas, system components, rollout surge and completed/job state as relevant. Node count depends on requests, bin packing, zones, taints, headroom and failure tolerance, not a fixed services-per-node ratio.
+
+### 7. If you had around 100–125 microservices, approximately how many total pods were running?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use cluster inventory and historical metrics for actual counts rather than inferring them from interview prompts. Count Deployments, StatefulSets, DaemonSets, Jobs and replicas separately; 100–125 services do not necessarily imply the same number of Deployments. Total Pods include workload replicas, system components, rollout surge and completed/job state as relevant. Node count depends on requests, bin packing, zones, taints, headroom and failure tolerance, not a fixed services-per-node ratio.
+
+### 8. How did you decide the required number of Kubernetes nodes for those workloads?
+
+**Type:** Interview question
+
+**Answer:**
+
+Sum representative Pod CPU/memory requests and other constraints, then calculate usable per-node allocatable capacity after system and DaemonSet overhead. Model bin packing, topology spreading, taints, disruption/zone-failure tolerance and rollout surge. Load-test requests against real usage, define autoscaler bounds and reserve capacity for failure. A simple total-CPU division is only a lower bound and can miss memory, Pod/IP or scheduling limits.
+
+---
+
 ## Coding / Kubernetes Controller Round
 
 11 questions
@@ -8583,6 +9431,74 @@ Yes — I’m comfortable with rotational shifts, including nights and weekends,
 
 ---
 
+## Configuration and Secrets
+
+1 question
+
+### 1. How do you manage environment-specific configurations and secrets across development, staging/UAT, and production pipelines without hardcoding values?
+
+**Type:** Interview question
+
+**Answer:**
+
+Build once, publish a tested immutable artifact and promote the same digest through Dev, Test/UAT and Production. Keep environment configuration versioned separately and retrieve secrets through scoped runtime or pipeline identities. A validated environment parameter may select the target, but authorization and approvals must be enforced independently. Record test evidence and artifact identity at each gate. Do not rebuild main for every environment: new dependencies or commits could produce a different artifact.
+
+---
+
+## Container Security
+
+6 questions
+
+### 1. Have you faced security vulnerabilities identified in a particular application/base-image version?
+
+**Type:** Interview question
+
+**Answer:**
+
+Trace the finding to the deployed image digest, affected package and fixed version; assess exploitability and exposure with the security owner. Rebuild from a maintained patched base image, update dependencies and rescan rather than patching running containers. Test functional behavior, performance and configuration compatibility in nonproduction, then release progressively with a rollback image and monitored exception process. Maintain versioned golden images with owners, provenance, patch SLAs and automated rebuilds; verify scanner findings against the actual artifact.
+
+### 2. How did you handle upgrades when vulnerabilities or CVEs were identified?
+
+**Type:** Interview question
+
+**Answer:**
+
+Trace the finding to the deployed image digest, affected package and fixed version; assess exploitability and exposure with the security owner. Rebuild from a maintained patched base image, update dependencies and rescan rather than patching running containers. Test functional behavior, performance and configuration compatibility in nonproduction, then release progressively with a rollback image and monitored exception process. Maintain versioned golden images with owners, provenance, patch SLAs and automated rebuilds; verify scanner findings against the actual artifact.
+
+### 3. How do you remediate vulnerabilities found in container base images?
+
+**Type:** Interview question
+
+**Answer:**
+
+Trace the finding to the deployed image digest, affected package and fixed version; assess exploitability and exposure with the security owner. Rebuild from a maintained patched base image, update dependencies and rescan rather than patching running containers. Test functional behavior, performance and configuration compatibility in nonproduction, then release progressively with a rollback image and monitored exception process. Maintain versioned golden images with owners, provenance, patch SLAs and automated rebuilds; verify scanner findings against the actual artifact.
+
+### 4. How do you use Prisma Cloud/Security Command Center findings to identify and remediate CVEs?
+
+**Type:** Interview question
+
+**Answer:**
+
+Trace the finding to the deployed image digest, affected package and fixed version; assess exploitability and exposure with the security owner. Rebuild from a maintained patched base image, update dependencies and rescan rather than patching running containers. Test functional behavior, performance and configuration compatibility in nonproduction, then release progressively with a rollback image and monitored exception process. Maintain versioned golden images with owners, provenance, patch SLAs and automated rebuilds; verify scanner findings against the actual artifact.
+
+### 5. How do you test vulnerability fixes in non-production before rolling them out to production?
+
+**Type:** Interview question
+
+**Answer:**
+
+Trace the finding to the deployed image digest, affected package and fixed version; assess exploitability and exposure with the security owner. Rebuild from a maintained patched base image, update dependencies and rescan rather than patching running containers. Test functional behavior, performance and configuration compatibility in nonproduction, then release progressively with a rollback image and monitored exception process. Maintain versioned golden images with owners, provenance, patch SLAs and automated rebuilds; verify scanner findings against the actual artifact.
+
+### 6. What are golden/base images, and how do you maintain them for multiple microservices?
+
+**Type:** Interview question
+
+**Answer:**
+
+Trace the finding to the deployed image digest, affected package and fixed version; assess exploitability and exposure with the security owner. Rebuild from a maintained patched base image, update dependencies and rescan rather than patching running containers. Test functional behavior, performance and configuration compatibility in nonproduction, then release progressively with a rollback image and monitored exception process. Maintain versioned golden images with owners, provenance, patch SLAs and automated rebuilds; verify scanner findings against the actual artifact.
+
+---
+
 ## Containers
 
 2 questions
@@ -8602,6 +9518,94 @@ Use a minimal base image (Alpine or distroless), multi-stage builds so build too
 **Answer:**
 
 Production Docker workflows typically involve writing multi-stage Dockerfiles for small, secure images, integrating vulnerability scanning and image signing into the CI pipeline, and pushing versioned images to a registry consumed by Kubernetes deployments. Production concerns include ensuring images run as non-root, resource limits are set correctly at the orchestration layer, base images are kept patched and current, and build reproducibility is maintained through pinned dependencies and digests rather than floating tags.
+
+---
+
+## CronJob Internals
+
+1 question
+
+### 1. How does a CronJob execute internally in Kubernetes?
+
+**Type:** Interview question
+
+**Answer:**
+
+The CronJob controller evaluates the schedule and creates Job objects. The Job controller creates Pods, the scheduler assigns nodes and kubelet executes the containers. Configure time zone, concurrencyPolicy, startingDeadlineSeconds, retry limits and history retention. Schedules can be missed or duplicated under some conditions, so jobs should be idempotent and durable work should be tracked independently of a Pod.
+
+---
+
+## Cross-Project GCS Access
+
+1 question
+
+### 1. Suppose a service account in Project A needs read access to a GCS bucket in Project B. How would you configure it?
+
+**Type:** Interview question
+
+**Answer:**
+
+Grant the Project A service account the narrowest required role on the resource in Project B; it does not need to be recreated there. For read-only GCS access, bind `roles/storage.objectViewer` on the specific bucket to `serviceAccount:NAME@PROJECT_A.iam.gserviceaccount.com`. Authenticate the workload as that identity without distributing keys. Verify organization policies and VPC Service Controls as well as IAM, and test that reads succeed while writes remain denied.
+
+---
+
+## Current Project
+
+4 questions
+
+### 1. What is your current Capgemini project basically about?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “I have [verified years] of experience in [areas]. In my current [domain] project, the platform supports [business function]. I own [specific infrastructure, delivery or reliability responsibilities], using [tools actually operated]. A recent contribution was [change], which improved [measured outcome].” Replace every bracket with confirmed information and distinguish individual ownership from the team's work.
+
+### 2. What is the domain of your current project?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: name the project's actual business domain and summarize the supported business process without revealing confidential customer details. For example, distinguish an insurance claims service from banking payments or telecom provisioning only if that is your real project. The alternatives suggested in the question do not establish which one applies.
+
+### 3. Is it telecom, insurance, or banking?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: name the project's actual business domain and summarize the supported business process without revealing confidential customer details. For example, distinguish an insurance claims service from banking payments or telecom provisioning only if that is your real project. The alternatives suggested in the question do not establish which one applies.
+
+### 4. Apart from your primary responsibilities, what miscellaneous/additional activities have you performed?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize with verified duties and frequency: resource provisioning, release support, incident response, certificate rotation, IAM/network changes, capacity management, patching and cluster upgrades are possible examples. For each selected duty, identify the affected service, your access/ownership, the approval route and validation. Production work frequency depends on the release/change calendar; do not invent a daily schedule or responsibilities from the prompt.
+
+---
+
+## Current Project and Experience
+
+2 questions
+
+### 1. Tell me your years of experience, what you are currently working on, and what your key skill set is.
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “I have [verified years] of experience in [areas]. In my current [domain] project, the platform supports [business function]. I own [specific infrastructure, delivery or reliability responsibilities], using [tools actually operated]. A recent contribution was [change], which improved [measured outcome].” Replace every bracket with confirmed information and distinguish individual ownership from the team's work.
+
+### 2. Give me an overview of your current project and what you are doing.
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “I have [verified years] of experience in [areas]. In my current [domain] project, the platform supports [business function]. I own [specific infrastructure, delivery or reliability responsibilities], using [tools actually operated]. A recent contribution was [change], which improved [measured outcome].” Replace every bracket with confirmed information and distinguish individual ownership from the team's work.
 
 ---
 
@@ -8952,6 +9956,20 @@ A data warehouse integrates data from operational sources for reporting and anal
 
 ---
 
+## Database Architecture
+
+1 question
+
+### 1. What are the key differences between Aurora and RDS PostgreSQL in terms of storage architecture, replication, and failover behavior? When does Aurora’s cost premium justify itself?
+
+**Type:** Interview question
+
+**Answer:**
+
+Aurora PostgreSQL uses a distributed cluster storage system shared by its writer and readers, while RDS PostgreSQL follows the storage and replication model of its chosen instance or Multi-AZ deployment type. Compare read scaling, failover behavior, extensions and operational compatibility for the exact configurations. Aurora's premium can be justified by measured availability, scaling or managed global-replication needs; benchmark workload cost and latency instead of assuming it is always faster or cheaper.
+
+---
+
 ## Database Migration
 
 3 questions
@@ -8981,6 +9999,20 @@ If you have direct experience, describe the source/target, the tool used (Databa
 **Answer:**
 
 Co-locating the database with the established application platform may reduce cross-cloud latency, egress charges and operational dependencies, while simplifying private networking, IAM and incident ownership. Compare this against migration complexity, engine/extension compatibility, replication lag, target performance, licensing, recovery design and lock-in. Benchmark representative queries and transaction latency, model total cost and test a rollback-capable cutover before choosing Cloud SQL or AlloyDB. Moving the database is not automatically better than keeping it in AWS; the decision depends on measured application needs and migration risk. Describe a migration as planned, in progress or completed according to actual involvement, and do not relabel a database migration as a GKE workload migration.
+
+---
+
+## Database Migrations
+
+1 question
+
+### 1. How do you handle schema migrations in a PostgreSQL database that is actively serving 24/7 banking traffic without downtime?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use expand/contract migrations: add backward-compatible structures, deploy code that works with both versions, backfill in throttled resumable batches, then remove old structures after all consumers migrate. Inspect PostgreSQL lock behavior and test on production-like data; use concurrent index creation where appropriate and compatible. Set lock/statement timeouts, monitor replication lag and keep a tested recovery plan. “Online” migrations can still acquire locks, so validate each DDL statement.
 
 ---
 
@@ -9232,6 +10264,28 @@ I add the new path while retaining the old path, deploy code that supports both 
 
 ---
 
+## Deployment Prioritization
+
+2 questions
+
+### 1. How do you handle situations where the development team asks for an urgent deployment during an ongoing sprint?
+
+**Type:** Interview question
+
+**Answer:**
+
+Clarify business impact, deadline, risk and dependencies with the requester, product owner/BA and engineering owner. Compare the urgent change with committed work, agree who can reprioritize and record the decision. Confirm acceptance criteria, test evidence, operational readiness and rollback before release. Sprint urgency does not automatically waive production controls; use the emergency path only when its criteria are met.
+
+### 2. How do you decide which requirement has higher priority when the development team and business/client have different priorities?
+
+**Type:** Interview question
+
+**Answer:**
+
+Clarify business impact, deadline, risk and dependencies with the requester, product owner/BA and engineering owner. Compare the urgent change with committed work, agree who can reprioritize and record the decision. Confirm acceptance criteria, test evidence, operational readiness and rollback before release. Sprint urgency does not automatically waive production controls; use the emergency path only when its criteria are met.
+
+---
+
 ## Deployment Safety
 
 1 question
@@ -9243,6 +10297,36 @@ I add the new path while retaining the old path, deploy code that supports both 
 **Answer:**
 
 First protect correctness with idempotency keys, unique transaction constraints, auditable ledger entries, reconciliation and explicit retry semantics. A canary limits exposure but cannot undo a customer charge, so validate contracts and migrations, use test accounts and shadow traffic only when it cannot create side effects, and put billing actions behind a kill switch. Start with a tightly controlled cohort and monitor payment correctness, duplicate rate and reconciliation, not just HTTP success. Expand only after business validation; stop traffic and disable the feature on a financial mismatch. Keep old/new service and schema versions compatible and prepare compensating actions for committed transactions because a software rollback does not roll back external payments.
+
+---
+
+## Deployment Strategies
+
+3 questions
+
+### 1. What is the difference between Canary and Blue-Green deployment?
+
+**Type:** Interview question
+
+**Answer:**
+
+Canary sends a controlled portion of traffic to a new version and expands exposure as measurements pass. Blue-green keeps complete old/new environments and switches the active traffic target after testing. Canary limits initial user exposure but needs reliable traffic splitting and metrics; blue-green gives a clear switchback but requires spare capacity. Both require compatible state and database changes.
+
+### 2. How does traffic shifting work in a Canary deployment—for example, 5%, 10%, 25%, 50%, and finally 100%?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use a supported weighted Gateway, service mesh, load balancer or progressive-delivery controller to route traffic to stable and canary backends. Increase configured weight through stages such as 5, 10, 25, 50 and 100 percent only after minimum observation windows and error/latency gates. Pod replica ratios alone are not precise request weighting. Account for session affinity, low traffic and shared dependencies.
+
+### 3. How does rollback differ between Canary and Blue-Green deployments?
+
+**Type:** Interview question
+
+**Answer:**
+
+Canary rollback reduces the new backend's weight to zero and sends traffic to stable capacity; blue-green rollback switches the active target back to the retained old environment. Both need healthy old capacity, connection handling and backward-compatible data. Define who or which configured controller triggers rollback; it is not automatic merely because manifests are managed by GitOps.
 
 ---
 
@@ -9495,7 +10579,7 @@ If readiness probes are misconfigured to fail, the kubelet marks Pods NotReady a
 
 ## Disaster Recovery
 
-5 questions
+6 questions
 
 ### 1. How would you detect a regional API failure and fail over DNS-routed traffic?
 
@@ -9536,6 +10620,14 @@ State whether you operated the product, assisted a backup team or only know the 
 **Answer:**
 
 Start with business RTO/RPO, data portability and dependencies rather than duplicating resource names across clouds. Pre-provision AWS networking, identities, image/artifact replication, secrets and compatible application runtime, and choose a supported cross-cloud data replication/backup strategy with measured lag and restore time. Replace or adapt GCP-specific services deliberately; IAM, managed databases and event systems are not automatically interchangeable. During failover, fence old writers, promote consistent data, scale standby capacity, switch the public routing layer and validate transactions. Test quotas, certificates, key access, external integrations and failback/reconciliation. Multi-cloud can reduce provider concentration risk but adds substantial operational complexity, so demonstrate the required recovery objective through drills.
+
+### 6. Design a disaster-recovery strategy for an Aurora PostgreSQL cluster serving a core banking application with an RTO of 15 minutes and RPO of 1 minute. Walk through every architectural component involved.
+
+**Type:** Interview question
+
+**Answer:**
+
+Use Aurora Global Database with pre-provisioned recovery-region compute, networking, identity, secrets and application capacity. Monitor replication lag against the one-minute RPO and rehearse database promotion, application reconnection and traffic changes within fifteen minutes. Separate regional failover from backup/PITR recovery and test both. Cross-region replication is asynchronous, so unplanned failover can lose recent transactions; fence the old writer and reconcile data. Supported PostgreSQL RPO controls can trade write availability for an RPO bound. Reference: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html
 
 ---
 
@@ -10280,7 +11372,7 @@ A maps a name to IPv4 addresses and AAAA to IPv6 addresses. CNAME maps a non-ape
 
 ## Docker
 
-25 questions
+26 questions
 
 ### 1. Explain Docker architecture.
 
@@ -11011,6 +12103,14 @@ Prefer COPY for predictable copying of files from the build context or another b
 
 The Docker CLI/client sends requests through the Docker API to the Docker daemon, which manages images, containers, networks and volumes. Images are layered read-only templates; a container is a running or stopped instance with its own writable layer and configured process isolation. Registries store and distribute images. On typical Linux Docker Engine installations, containerd manages container lifecycle functions and an OCI runtime such as runc creates the isolated process using kernel namespaces and cgroups. BuildKit provides modern build functionality. Docker Compose describes and orchestrates a multi-container application through Docker; it is not a Kubernetes control plane. On desktop platforms a VM may provide the Linux kernel used by Linux containers.
 
+### 26. You have mentioned Docker in your experience. Have you worked with Docker?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “I have used Docker for [verified packaging/build/runtime work] and Compose for [verified local or integration-test setup]. Images package application dependencies; containers are running instances. Compose describes related services, networks and volumes in YAML. I can explain my Dockerfile, image scanning, persistent data and configuration handling.” Do not present local Compose experience as production orchestration experience.
+
 ---
 
 ## Docker & Artifact Registry
@@ -11191,6 +12291,79 @@ Retain every image digest currently deployed and the validated rollback digests,
 
 ---
 
+## Docker Compose
+
+1 question
+
+### 1. Have you worked with Docker Compose?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “I have used Docker for [verified packaging/build/runtime work] and Compose for [verified local or integration-test setup]. Images package application dependencies; containers are running instances. Compose describes related services, networks and volumes in YAML. I can explain my Dockerfile, image scanning, persistent data and configuration handling.” Do not present local Compose experience as production orchestration experience.
+
+---
+
+## Docker Compose Coding
+
+1 question
+
+### 1. Can you write a basic Docker Compose file? The example involved an application container and PostgreSQL with ports, environment variables, depends_on, and a persistent volume.
+
+**Type:** Interview question
+
+**Answer:**
+
+A minimal example uses an app image supplied by your build and a database password supplied at runtime. For production, use a secrets mechanism rather than committing credentials:
+```yaml
+services:
+  app:
+    image: my-app:1.0
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: db
+      DB_NAME: app
+      DB_USER: app
+      DB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d app"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata: {}
+```
+The application must still retry transient database connection failures.
+
+---
+
+## Docker Compose Startup
+
+1 question
+
+### 1. What does depends_on do, and does it guarantee that the dependent application/database is actually ready?
+
+**Type:** Interview question
+
+**Answer:**
+
+Short-form depends_on orders service startup but does not establish application readiness. Use long-form `condition: service_healthy` together with a dependency healthcheck when readiness is required. A started or initially healthy database can fail later, so the application still needs bounded retries, timeouts and reconnection handling.
+
+---
+
 ## Docker Networking
 
 1 question
@@ -11216,6 +12389,20 @@ First ensure VM private addressing, routes and firewall/security-group rules all
 **Answer:**
 
 Integrate a scanner (Trivy, Grype, Prisma Cloud, or Artifact Registry's built-in vulnerability scanning) as a CI/CD stage that runs on every image build and fails the pipeline if critical/high-severity vulnerabilities are found, rather than scanning ad hoc or only in production. Also scan base images periodically even without a code change, since new CVEs are discovered in existing base image layers over time.
+
+---
+
+## Dynatrace
+
+1 question
+
+### 1. Explain your Dynatrace experience. What work have you done and what was your contribution? Cover APM, microservices health monitoring, centralized application monitoring, distributed tracing, alerting, dashboards, and production troubleshooting/RCA.
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: identify actual ownership in SLO definition, dashboards, alert tuning, incident response, tracing, capacity planning and toil reduction. For Dynatrace, distinguish installing/configuring collection from consuming existing dashboards. Describe one service's telemetry, an alert condition, a trace-based diagnosis and a measured result. State which tasks you performed yourself; the question does not establish that any particular tool or achievement was part of your Capgemini project.
 
 ---
 
@@ -11441,6 +12628,20 @@ Use end-to-end tracing and DB-native tools together: in Dynatrace open the servi
 **Answer:**
 
 Dynatrace is a commercial, full‑stack APM SaaS with OneAgent for automatic instrumentation, distributed tracing, real‑user monitoring, synthetic checks, built‑in log analytics, Davis AI root‑cause, and centralized data retention and alerting. Prometheus is an open‑source, pull‑based time‑series DB focused on metrics (scrape configs, exporters, PromQL) and relies on Alertmanager for alerts; it requires separate tracing (Jaeger/OpenTelemetry) and logging (Loki/ELK). Grafana is a visualization/alerting layer that queries Prometheus, Loki, and many datasources. Operationally, Dynatrace reduces instrumentation and maintenance overhead but is license/usage priced; Prometheus+Grafana gives full control, lower software cost, and more operational toil (scaling, long‑term storage via remote_write/federation). Both can coexist via metric export/integration.
+
+---
+
+## EC2 Migration
+
+1 question
+
+### 1. Suppose you performed an EC2-to-EC2 migration with zero downtime. How did you perform it?
+
+**Type:** Interview question
+
+**Answer:**
+
+Example migration design: provision the replacement EC2 instance from a reproducible image, install compatible configuration and validate dependencies. Keep durable data external or replicate it consistently before cutover. Register the new instance in the load-balancer target group, confirm health and gradually shift traffic, then drain the old instance's connections. Monitor errors and latency and retain the old instance until the rollback window closes. Zero downtime requires compatible sessions and data, not just a target-group change.
 
 ---
 
@@ -12627,6 +13828,36 @@ Not as a simple way to enlarge Elasticsearch's existing data path. Kubernetes ca
 
 ---
 
+## Emergency Changes
+
+3 questions
+
+### 1. Have you handled emergency production changes, hotfixes, or break-glass scenarios?
+
+**Type:** Interview question
+
+**Answer:**
+
+For a real emergency, open the incident/change record, obtain the designated emergency authorization and identify an accountable release owner. Run the smallest safe test set, confirm artifact/configuration identity and rollback, then deploy with active monitoring. Communicate impact, timing, owner and next update to affected teams. Validate recovery and complete retrospective approval/evidence and follow-up work. Personalize whether you have actually led such a change.
+
+### 2. How do you handle a critical bug fix that has to be deployed immediately, for example during the night rather than waiting for the normal deployment window?
+
+**Type:** Interview question
+
+**Answer:**
+
+For a real emergency, open the incident/change record, obtain the designated emergency authorization and identify an accountable release owner. Run the smallest safe test set, confirm artifact/configuration identity and rollback, then deploy with active monitoring. Communicate impact, timing, owner and next update to affected teams. Validate recovery and complete retrospective approval/evidence and follow-up work. Personalize whether you have actually led such a change.
+
+### 3. How do you communicate an emergency production change to impacted stakeholders?
+
+**Type:** Interview question
+
+**Answer:**
+
+For a real emergency, open the incident/change record, obtain the designated emergency authorization and identify an accountable release owner. Run the smallest safe test set, confirm artifact/configuration identity and rollback, then deploy with active monitoring. Communicate impact, timing, owner and next update to affected teams. Validate recovery and complete retrospective approval/evidence and follow-up work. Personalize whether you have actually led such a change.
+
+---
+
 ## Event-driven architecture
 
 3 questions
@@ -12701,9 +13932,23 @@ Name the project, its business purpose in one sentence, your specific role on it
 
 ---
 
-## FinOps
+## Experience Clarification
 
 1 question
+
+### 1. Did you work for Google? Were you working directly for Google/a Google customer, or were you primarily using Google Cloud extensively?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: provide the confirmed employer, client relationship and employment dates from your records. Distinguish employment by a consulting company, work for its customer and use of Google Cloud technology. Using GCP does not mean being employed by Google. The question's wording is not evidence that any suggested employer or client relationship is true.
+
+---
+
+## FinOps
+
+2 questions
 
 ### 1. How do you justify a claimed 20% cloud cost reduction?
 
@@ -12712,6 +13957,14 @@ Name the project, its business purpose in one sentence, your specific role on it
 **Answer:**
 
 Choose a comparable baseline and period and separate usage changes, price/discount changes and architectural savings. If normalized monthly cost falls from 100,000 to 80,000 in the same currency, the reduction is 20%; use actual billing exports and allocation labels rather than this illustrative number in a personal answer. Investigate idle resources, oversized requests/VMs, unused disks/IPs, log retention, cross-region egress, non-production schedules and stable demand eligible for commitments. Explain which changes contributed and avoid double-counting overlapping savings. Compare cost per transaction or other business unit alongside total spend and verify SLOs, latency and capacity remained acceptable. State whether the 20% is realized recurring savings or a forecast and whether it includes implementation costs.
+
+### 2. Describe the most impactful cost-optimization change you implemented in a large AWS environment. What was the baseline spend, what was your approach, and what measurable outcome did you achieve?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize one measured example: provide the verified billing baseline and period, the workload's constraints, the change you implemented and the post-change cost normalized for traffic. Possible approaches include rightsizing, scheduling idle environments, storage lifecycle changes or commitment coverage after usage stabilizes. Report availability/performance effects and savings net of implementation costs; do not invent currency amounts or percentages.
 
 ---
 
@@ -13000,7 +14253,7 @@ I convert the requested percentage into a measured baseline, scope and deadline 
 
 ## GCP
 
-41 questions
+46 questions
 
 ### 1. What is a Shared VPC?
 
@@ -13048,13 +14301,7 @@ Compute Engine provides raw VMs you manage (boot images, startup scripts, SSH, i
 
 **Answer:**
 
-Cloud Run is a serverless container platform that runs stateless HTTP containers (Knative-based) with automatic scaling to zero and per-request concurrency. You deploy OCI images from Artifact Registry or Container Registry, e.g.:
-gcloud run deploy SERVICE --image gcr.io/PROJECT/IMAGE --region REGION --platform managed --concurrency 80 --memory 512Mi --cpu 1 --min-instances 0 --max-instances 100
-Revisions are immutable and support traffic splitting. Services are HTTPS-accessible and integrate with IAM, Cloud Build, Cloud Pub/Sub (push), Cloud Logging and Monitoring. Verify and operate with:
-gcloud run services list
-gcloud run services describe SERVICE --platform managed --region REGION
-curl $(gcloud run services describe SERVICE --format='value(status.url)' --platform managed --region REGION)
-and check logs via gcloud logging read.
+Cloud Run. is handled by understanding the production mechanism, the configuration involved, and the operational risk it controls. In GCP, the practical answer is to state what changes, who or what is affected, and how it is verified. In GCP I would validate IAM, project and region scope, VPC routing, firewall rules, health checks, Cloud Logging, audit logs, quotas, and the exact resource policy. In an interview, I would also mention the key failure mode, the security or reliability trade-off, and the rollback or recovery step so the answer sounds production-ready instead of theoretical.
 
 ### 7. Explain Cloud Storage.
 
@@ -13434,6 +14681,46 @@ Auto (a.k.a. "default" network) automatically creates one subnet per region with
 
 GCP VPC firewall rules are stateful, network-level allow/deny policies that apply to VM instances by target (instance tags or service accounts). Key fields: direction (INGRESS/EGRESS), priority (0–65535; lower evaluated first), action (allow or deny), source/destination ranges, and protocol:port selectors (e.g., --rules tcp:22,tcp:80). Create with gcloud compute firewall-rules create NAME --network NETWORK --direction INGRESS --priority 1000 --rules tcp:22 --source-ranges 0.0.0.0/0 --target-tags web. Verify with gcloud compute firewall-rules list/describe or the REST API compute.firewalls.list/compute.firewalls.get, test connectivity from a VM (curl/telnet) and enable logging with gcloud compute firewall-rules update NAME --enable-logging to inspect hits in Cloud Logging.
 
+### 42. Which major cloud platform have you used throughout your career?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “My primary cloud is [verified platform], with [verified duration] of hands-on work. I have used [specific services] for [specific responsibilities]. My exposure to the other clouds is [production / project / POC / training], with [concrete examples].” Separate overlapping calendar years from platform-specific experience and do not claim deployments in a cloud used only for study.
+
+### 43. How many years of experience do you have in GCP?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “My primary cloud is [verified platform], with [verified duration] of hands-on work. I have used [specific services] for [specific responsibilities]. My exposure to the other clouds is [production / project / POC / training], with [concrete examples].” Separate overlapping calendar years from platform-specific experience and do not claim deployments in a cloud used only for study.
+
+### 44. What are the major GCP services you have worked with?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “My primary cloud is [verified platform], with [verified duration] of hands-on work. I have used [specific services] for [specific responsibilities]. My exposure to the other clouds is [production / project / POC / training], with [concrete examples].” Separate overlapping calendar years from platform-specific experience and do not claim deployments in a cloud used only for study.
+
+### 45. How are you provisioning infrastructure in GCP?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “Our infrastructure code is stored in [verified Git host] and run through [local CLI / approved CI / Terraform Enterprise or HCP Terraform]. Provider authentication uses [actual identity method], state is in [actual backend], and changes follow plan, review and apply. Manual console work is [actual permitted scope] and approved changes are reconciled into code.” State which tooling is actually deployed rather than assuming an enterprise platform.
+
+### 46. Have you provisioned GCP infrastructure manually as well as through Terraform?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “Our infrastructure code is stored in [verified Git host] and run through [local CLI / approved CI / Terraform Enterprise or HCP Terraform]. Provider authentication uses [actual identity method], state is in [actual backend], and changes follow plan, review and apply. Manual console work is [actual permitted scope] and approved changes are reconciled into code.” State which tooling is actually deployed rather than assuming an enterprise platform.
+
 ---
 
 ## GCP / Cloud
@@ -13571,6 +14858,92 @@ A separate cluster per job is usually unnecessary. I use an existing cluster whe
 I manage GKE workloads through a standardized platform rather than giving every team unrestricted cluster access. Terraform provisions projects, networks, private clusters, node pools, Workload Identity, logging, monitoring and security controls. Application teams use versioned Helm charts or Kustomize overlays, and GitOps reconciles reviewed environment repositories into clusters. Each workload receives namespaces, group-based RBAC, dedicated service accounts, resource requests and limits, quotas, probes, PodDisruptionBudgets, topology spread, autoscaling, NetworkPolicies and secret-manager integration. CI builds and scans the image once, signs the immutable digest, validates manifests and policy, and promotes the same artifact through canary or rolling deployment with SLO-based rollback.
 
 For Anthos—now represented through GKE Enterprise capabilities in current Google Cloud terminology—I manage registered clusters as fleets so common configuration, policy and observability can be applied consistently across GKE and approved hybrid or multi-cloud clusters. Config Sync or the fleet configuration mechanism distributes namespace and platform configuration from Git; Policy Controller audits and enforces admission guardrails; fleet-level identity and team scopes support controlled tenancy; and service-mesh capabilities are used only where uniform mTLS, traffic policy and cross-cluster telemetry justify the complexity. I use staged rollout rings for policies, platform add-ons and upgrades, with development clusters first and production only after validation. Day-to-day operations include release support, Pending or CrashLoopBackOff diagnosis, capacity and cost reviews, vulnerability remediation, certificate and secret rotation, drift checks, backup and recovery tests, and incident follow-up. I make my actual scope clear: Google manages the GKE control plane, the platform team manages fleet and cluster guardrails, and application teams own service code and business behavior.
+
+---
+
+## GCP / Kubernetes Networking and Scaling
+
+10 questions
+
+### 1. Why would you choose Kubernetes/GKE for a microservices application?
+
+**Type:** Interview question
+
+**Answer:**
+
+GKE suits microservices that benefit from common deployment, Service discovery, workload scheduling, autoscaling, policy and controller extensions. Its cost is ongoing responsibility for workload configuration, capacity, networking and operations. Compare that requirement with managed request/job platforms such as Cloud Run; microservices alone are not sufficient justification for Kubernetes.
+
+### 2. What autoscaling mechanisms are available in Kubernetes/GKE—HPA, VPA, and Cluster Autoscaler?
+
+**Type:** Interview question
+
+**Answer:**
+
+HPA adjusts workload replicas using resource or other metrics. VPA recommends or changes container resource requests according to its update mode; some changes can require Pod recreation. Cluster Autoscaler changes node-pool capacity when scheduling and consolidation conditions warrant it. Avoid having HPA and VPA fight over the same utilization signal, and test min/max limits, requests and disruption behavior.
+
+### 3. Suppose your application needs to be deployed across multiple zones. How would you design the GCP VPC/networking?
+
+**Type:** Interview question
+
+**Answer:**
+
+A GCP VPC is global and its subnets are regional, so workloads in different zones of one region can use the same subnet. Internal communication is possible when routes, firewall policies and workload-level policies allow it. Spread application replicas across zones and use an appropriate regional/global load balancer and replicated data design. Multi-zone placement protects against zonal failure but does not automatically provide cross-region recovery.
+
+### 4. Can resources deployed in different zones communicate internally within the same GCP VPC?
+
+**Type:** Interview question
+
+**Answer:**
+
+A GCP VPC is global and its subnets are regional, so workloads in different zones of one region can use the same subnet. Internal communication is possible when routes, firewall policies and workload-level policies allow it. Spread application replicas across zones and use an appropriate regional/global load balancer and replicated data design. Multi-zone placement protects against zonal failure but does not automatically provide cross-region recovery.
+
+### 5. If you have VPC-A, VPC-B, and VPC-C, how would those separate VPC networks communicate internally?
+
+**Type:** Interview question
+
+**Answer:**
+
+Choose direct VPC Network Peering, Network Connectivity Center or a designed VPN/router topology according to scale and transit requirements. Ensure non-overlapping CIDRs, explicit route exchange, DNS and firewall policies. VPC peering is not transitive: A-B and B-C peerings do not by themselves connect A to C. Private Service Connect can expose a specific service without broad network connectivity.
+
+### 6. How do you manage load balancing in GCP?
+
+**Type:** Interview question
+
+**Answer:**
+
+Select an internal or external and regional or global load balancer based on clients, protocol and availability needs. Configure backend services, health checks, capacity and TLS, then use supported URL/host routing, locality or weighted traffic controls. Validate behavior with connection reuse and backend failure, since traffic percentages are approximate over requests. Match Cloud Armor, session affinity and failover features to the chosen load-balancer type.
+
+### 7. What load-balancing/traffic-distribution strategies have you used?
+
+**Type:** Interview question
+
+**Answer:**
+
+Select an internal or external and regional or global load balancer based on clients, protocol and availability needs. Configure backend services, health checks, capacity and TLS, then use supported URL/host routing, locality or weighted traffic controls. Validate behavior with connection reuse and backend failure, since traffic percentages are approximate over requests. Match Cloud Armor, session affinity and failover features to the chosen load-balancer type.
+
+### 8. What is outlier detection, and how can it help when backend instances continuously return 5xx/503 errors?
+
+**Type:** Interview question
+
+**Answer:**
+
+Outlier detection temporarily ejects an unhealthy backend from eligible traffic based on observed request failures rather than only an active health probe. Where the selected proxy/load-balancer product supports it, configure error thresholds, ejection duration and maximum ejected percentage. Keep sufficient healthy capacity and investigate the cause; shared dependency failure can affect every backend and should not trigger uncontrolled ejection of all capacity.
+
+### 9. Suppose you have VPC-A, VPC-B, and VPC-C and the application backend in VPC-C crashes due to high incoming traffic. How would you maintain availability and troubleshoot it?
+
+**Type:** Interview question
+
+**Answer:**
+
+Identify the traffic path and separate network reachability from application saturation. Maintain healthy backend capacity across failure domains and configure the selected load balancer's health and supported failover behavior. Check 5xx, queue depth, connection pools, CPU/memory and dependency capacity; shed excess load, scale safely and use bounded retries. Validate routes and firewalls between VPCs, including the return path. No architecture guarantees traffic never fails; define and test a measurable availability and recovery target.
+
+### 10. If internal traffic initially enters through VPC-A, how would you design failover so incoming traffic never goes down?
+
+**Type:** Interview question
+
+**Answer:**
+
+Identify the traffic path and separate network reachability from application saturation. Maintain healthy backend capacity across failure domains and configure the selected load balancer's health and supported failover behavior. Check 5xx, queue depth, connection pools, CPU/memory and dependency capacity; shed excess load, scale safely and use bounded retries. Validate routes and firewalls between VPCs, including the return path. No architecture guarantees traffic never fails; define and test a measurable availability and recovery target.
 
 ---
 
@@ -13915,6 +15288,34 @@ Enable GKE Cluster Autoscaler on the relevant node pool and set appropriate mini
 **Answer:**
 
 Create an instance template and a zonal or regional MIG, then configure autoscaling with minimum/maximum replicas, an appropriate signal such as CPU utilization, supported load-balancing utilization or a Cloud Monitoring metric, plus initialization and scale-in controls. Define health-check-based autohealing separately: scaling changes group size, while autohealing replaces unhealthy instances. Choose minimum capacity for availability and startup delay, maximum capacity within quota and dependency limits, and validate regional distribution. Test scale-out, scale-in and connection draining under representative load. Instance templates and application state must support disposable instances; autoscaling does not preserve state stored only on an individual VM.
+
+---
+
+## GCP Cost Investigation
+
+1 question
+
+### 1. What will you do when you see a sudden cost spike in GCP? How would you identify the project, service, SKU, or resource responsible and control the cost?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use Billing reports or the billing export to compare the spike by project, service, SKU, region and labels against the prior baseline. Correlate with new resources, autoscaling, egress, log ingestion and audit events; billing data can lag. Identify an owner before changing capacity. Stop confirmed unused resources, cap noncritical scaling or address excess traffic with approvals, while checking availability. Budgets notify; they do not automatically cap spending. Add anomaly alerts and ownership labels.
+
+---
+
+## GCP Cross-Project IAM
+
+1 question
+
+### 1. How would you provide a service account in one GCP project access to resources in another project?
+
+**Type:** Interview question
+
+**Answer:**
+
+Grant the Project A service account the narrowest required role on the resource in Project B; it does not need to be recreated there. For read-only GCS access, bind `roles/storage.objectViewer` on the specific bucket to `serviceAccount:NAME@PROJECT_A.iam.gserviceaccount.com`. Authenticate the workload as that identity without distributing keys. Verify organization policies and VPC Service Controls as well as IAM, and test that reads succeed while writes remain denied.
 
 ---
 
@@ -15473,6 +16874,72 @@ gcloud iam roles create temp-production-access --role-type=CustomRole \
 You can then add the service account to the role using `gcloud iam roles add member`. Additionally, you can use the `gcloud auth activate-service-account` command to authenticate with the service account and grant temporary access.
 
 Temporary production access is typically granted for a short period of time, such as 30 minutes or an hour.
+
+---
+
+## GCP Routing
+
+1 question
+
+### 1. How does longest prefix match influence route selection? How does route priority influence routing? How do policy-based routes (PBR) influence route selection? What is the order/precedence between policy-based routing and normal VPC routes?
+
+**Type:** Interview question
+
+**Answer:**
+
+GCP evaluates applicable policy-based routes before ordinary subnet and custom route processing; a policy can direct matching source/destination/protocol traffic or skip policy-based routing. Within eligible ordinary routes, a more specific destination prefix normally wins before route priority is compared; lower numeric priority is preferred among comparable routes. Route classes and eligibility matter, so priority alone does not override the documented routing order. Inspect effective routes and both directions of the flow. Reference: https://docs.cloud.google.com/vpc/docs/routes
+
+---
+
+## GCP Security / Cloud Armor
+
+1 question
+
+### 1. How do you secure an internet-facing application using Global Load Balancer and Cloud Armor? How do you restrict traffic based on ASN, country/geo, IP ranges, or specific regions?
+
+**Type:** Interview question
+
+**Answer:**
+
+Place the application behind a supported external Application Load Balancer with HTTPS and attach a Cloud Armor backend security policy. Define ordered allow/deny rules using source IP ranges, `origin.region_code` for country codes, and `origin.asn` where supported. Test rules in preview before enforcement and retain health-check paths. Geography indicates request origin, not the GCP deployment region, and is not strong user authentication. Prevent direct backend access and add identity controls, rate limiting and WAF rules appropriate to the application.
+
+---
+
+## GCP Serverless
+
+4 questions
+
+### 1. Suppose you need to deploy a small application using Google Cloud Functions. How would you deploy the code?
+
+**Type:** Interview question
+
+**Answer:**
+
+Choose the supported function runtime, entry point and HTTP or event trigger. Package tested source and dependencies, set a dedicated runtime identity and deploy through the supported Cloud Run functions/Cloud Functions workflow or a Terraform resource with a versioned source artifact. Configure invoker permissions, environment/secrets, timeout, memory and networking, then test the trigger and logs. Pin the deployment generation and tool versions because first- and second-generation interfaces differ.
+
+### 2. What is the difference between Cloud Run Services and Cloud Run Jobs?
+
+**Type:** Interview question
+
+**Answer:**
+
+A Cloud Run Service handles incoming requests or events through a service endpoint and scales instances to serve traffic. A Cloud Run Job executes one or more finite tasks to completion without providing a request-serving endpoint. Use Services for APIs and web handlers, Jobs for batch processing or scheduled work; configure retries and idempotency according to the execution model.
+
+### 3. How do you secure a Cloud Run application?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use a dedicated least-privilege runtime identity, authenticated invocation where appropriate, Secret Manager and controlled ingress/egress. For a public application behind an external Application Load Balancer, configure a supported serverless backend, TLS and Cloud Armor, and restrict direct service ingress to prevent bypass. Add browser security headers at the application or supported proxy layer. Validate both intended access and denied direct paths; load-balancer exposure does not replace application authentication.
+
+### 4. How would you use Global Load Balancer, Cloud Armor, security headers, IAM, and Secret Manager with Cloud Run?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use a dedicated least-privilege runtime identity, authenticated invocation where appropriate, Secret Manager and controlled ingress/egress. For a public application behind an external Application Load Balancer, configure a supported serverless backend, TLS and Cloud Armor, and restrict direct service ingress to prevent bypass. Add browser security headers at the application or supported proxy layer. Validate both intended access and denied direct paths; load-balancer exposure does not replace application authentication.
 
 ---
 
@@ -17351,6 +18818,74 @@ Argo CD compares live state with the manifests rendered from Git. A manual chang
 
 ---
 
+## GitOps and Kubernetes Upgrades
+
+6 questions
+
+### 1. Kubernetes manifests change continuously. How do you maintain and manage those manifests?
+
+**Type:** Interview question
+
+**Answer:**
+
+Store manifests in Git, use versioned Helm charts or Kustomize overlays for environment differences and pin immutable image references. CI renders and validates changes and runs policy checks; Argo CD compares the approved desired state with the cluster and reconciles it. Restrict direct writes and document emergency reconciliation. Keep one owner per resource. Reverting Git is a deliberate rollback; standard Argo CD auto-sync does not itself promise rollback when an application becomes unhealthy.
+
+### 2. How do you manage Kubernetes manifests using Git, Helm, and ArgoCD/GitOps?
+
+**Type:** Interview question
+
+**Answer:**
+
+Store manifests in Git, use versioned Helm charts or Kustomize overlays for environment differences and pin immutable image references. CI renders and validates changes and runs policy checks; Argo CD compares the approved desired state with the cluster and reconciles it. Restrict direct writes and document emergency reconciliation. Keep one owner per resource. Reverting Git is a deliberate rollback; standard Argo CD auto-sync does not itself promise rollback when an application becomes unhealthy.
+
+### 3. How would you upgrade a Kubernetes/GKE cluster from version 1.32 toward newer versions such as 1.33, 1.34, 1.35, and 1.36?
+
+**Type:** Interview question
+
+**Answer:**
+
+Check currently supported GKE releases, release-channel availability and the allowed upgrade path rather than assuming every named version is available. Review API removals, CRDs/operators, admission webhooks, CNI/CSI, manifests and client compatibility. Rehearse in a representative nonproduction cluster, verify backups, capacity, disruption budgets and maintenance windows, then upgrade control plane and node pools through supported steps. Use surge or blue-green node upgrades where appropriate and validate user journeys between stages; control-plane downgrade is not a general rollback plan.
+
+### 4. What checks would you perform before a Kubernetes/GKE version upgrade?
+
+**Type:** Interview question
+
+**Answer:**
+
+Check currently supported GKE releases, release-channel availability and the allowed upgrade path rather than assuming every named version is available. Review API removals, CRDs/operators, admission webhooks, CNI/CSI, manifests and client compatibility. Rehearse in a representative nonproduction cluster, verify backups, capacity, disruption budgets and maintenance windows, then upgrade control plane and node pools through supported steps. Use surge or blue-green node upgrades where appropriate and validate user journeys between stages; control-plane downgrade is not a general rollback plan.
+
+### 5. How would you handle application compatibility during a GKE upgrade?
+
+**Type:** Interview question
+
+**Answer:**
+
+Check currently supported GKE releases, release-channel availability and the allowed upgrade path rather than assuming every named version is available. Review API removals, CRDs/operators, admission webhooks, CNI/CSI, manifests and client compatibility. Rehearse in a representative nonproduction cluster, verify backups, capacity, disruption budgets and maintenance windows, then upgrade control plane and node pools through supported steps. Use surge or blue-green node upgrades where appropriate and validate user journeys between stages; control-plane downgrade is not a general rollback plan.
+
+### 6. How would you handle rollback when stateful applications or databases are hosted inside Kubernetes?
+
+**Type:** Interview question
+
+**Answer:**
+
+Treat application rollback, cluster recovery and data recovery as separate procedures. Take verified application-consistent backups and test restores; use backward-compatible expand/contract schema migrations so old and new application versions can coexist. Reverting a Deployment does not undo database writes or a destructive schema change. If data must be restored, approve the recovery point and reconcile later transactions. Keep a tested recovery environment and measure RPO/RTO.
+
+---
+
+## GitOps vs Traditional Deployment
+
+1 question
+
+### 1. Do you use only GitOps, or do you also have traditional deployments? Do you still have legacy applications that haven’t migrated to GitOps? Are you planning to migrate pipelines from Jenkins to Bitbucket? Which approach is better: GitOps or traditional DevOps/CI-CD deployment? What are the advantages of GitOps? When would traditional deployment still make sense? How does Argo CD change the deployment model? Is migrating from Jenkins to Bitbucket Pipelines the same as migrating to GitOps?
+
+**Type:** Interview question
+
+**Answer:**
+
+GitOps makes versioned Git configuration the desired state and uses a controller such as Argo CD to reconcile it continuously. CI still builds, tests and publishes artifacts. Traditional deployment jobs push changes directly and can suit legacy platforms without a suitable reconciler. Migrating Jenkins jobs to Bitbucket changes the CI platform; it becomes GitOps only when deployment ownership moves to reconciliation. Migrate incrementally, keep one deployment owner per resource and describe actual legacy usage without inventing experience.
+
+---
+
 ## GKE
 
 22 questions
@@ -17960,6 +19495,126 @@ gcloud container node-pools create POOL --cluster CLUSTER --enable-autoscaling -
 Or resize manually:
 gcloud container clusters resize CLUSTER --node-pool POOL --num-nodes N
 For automatic provisioning enable node auto-provisioning on the cluster (gcloud container clusters update CLUSTER --enable-autoprovisioning). Drain and cordon nodes for maintenance with kubectl cordon NODE and kubectl drain NODE --ignore-daemonsets --delete-local-data. Verify with kubectl get nodes, kubectl describe node, inspect PodDisruptionBudgets, and view autoscaler activity via kubectl -n kube-system logs deployment/cluster-autoscaler.
+
+---
+
+## GKE Architecture
+
+1 question
+
+### 1. Can you explain GKE architecture? Cover control plane, API Server, etcd, Controller Manager, Scheduler, worker nodes, Kubelet, pods, and Services/networking.
+
+**Type:** Interview question
+
+**Answer:**
+
+The API server authenticates, authorizes and validates Kubernetes requests; persistent cluster state is stored in etcd. Controllers reconcile declared state, and the scheduler selects a node for unscheduled Pods. Each worker's kubelet asks the container runtime to run containers and reports status; CNI networking connects Pods and the Service data plane routes traffic to eligible endpoints. Google operates GKE's managed control plane. Applications still own correct manifests, identity, policy and reliability configuration.
+
+---
+
+## GKE Monitoring and Recovery
+
+1 question
+
+### 1. How would you implement monitoring and alerting for GKE pods? If a pod becomes corrupted/down or the replica count mismatches, how would you restart/recreate it or scale the pods?
+
+**Type:** Interview question
+
+**Answer:**
+
+Collect desired/available replicas, restart rates, container termination reasons, pending Pods, resource saturation and request latency/errors. Alert on sustained availability gaps with a runbook, rather than every Pod replacement. A Deployment/ReplicaSet replaces missing Pods; kubelet restarts failed containers according to policy, while liveness probes can restart a hung container. Readiness removes unready endpoints without restarting them. Fix resource or dependency issues before scaling, and keep disruption budgets and capacity limits in view.
+
+---
+
+## GKE Outage Troubleshooting
+
+1 question
+
+### 1. Suppose suddenly a GKE cluster goes down. How would you investigate it? What would be your troubleshooting strategy across compute and networking? How would you determine the blast radius? How would you check whether the GKE control plane/API is accessible? How would you troubleshoot NotReady nodes? What compute/node-pool issues would you investigate? What networking components would you check? How would you troubleshoot the path: DNS → Load Balancer → Cloud Armor → Gateway/Ingress → Service → Pod? What would you check if kubectl itself cannot connect to the cluster? How would you use logs, metrics, and events to identify the root cause? How would you restore service and then perform RCA?
+
+**Type:** Interview question
+
+**Answer:**
+
+Establish affected regions, clusters and user journeys first. If kubectl cannot connect, check credentials, context, endpoint access, DNS, VPN/private routing and GKE service health before assuming a cluster failure. Inspect node conditions, resource pressure, quotas, upgrade operations and node-pool events. Trace DNS resolution, load-balancer backend health, Cloud Armor decisions, Gateway/Ingress configuration, Service selectors/EndpointSlices, Pod readiness and application dependencies. Correlate logs, metrics and audit events with changes. Restore through a validated rollback or healthy capacity, preserve evidence and document the root cause afterward.
+
+---
+
+## GKE Pod Observability
+
+1 question
+
+### 1. For GKE cluster pods specifically, what monitoring and alerting setup would you implement?
+
+**Type:** Interview question
+
+**Answer:**
+
+Collect desired/available replicas, restart rates, container termination reasons, pending Pods, resource saturation and request latency/errors. Alert on sustained availability gaps with a runbook, rather than every Pod replacement. A Deployment/ReplicaSet replaces missing Pods; kubelet restarts failed containers according to policy, while liveness probes can restart a hung container. Readiness removes unready endpoints without restarting them. Fix resource or dependency issues before scaling, and keep disruption budgets and capacity limits in view.
+
+---
+
+## GKE Pod Troubleshooting
+
+1 question
+
+### 1. If a pod is stuck or not responding in a GKE cluster, how would you diagnose it?
+
+**Type:** Interview question
+
+**Answer:**
+
+Check `kubectl get pods -n NS -o wide`, `describe pod`, `logs -c CONTAINER`, `logs --previous`, `get events --sort-by=.metadata.creationTimestamp` and `top pod` where metrics are available. Inspect readiness, restart reasons, resource limits, dependencies, mounted configuration, storage and node conditions. Use `exec` only if the container is running and permitted, or a controlled debug container when needed. Capture evidence before deleting or restarting anything.
+
+---
+
+## GKE Standard vs Autopilot
+
+2 questions
+
+### 1. Before designing the solution, wouldn’t you first ask which type of GKE solution the client wants? What is the difference between GKE Standard and GKE Autopilot? What are the use cases for Standard? What are the use cases for Autopilot? What are the pros and cons of each? Who handles upgrades, patching, maintenance, and node scaling? How would cost and operational maintenance influence your recommendation? When would you use Fleet Management for multiple clusters?
+
+**Type:** Interview question
+
+**Answer:**
+
+GKE Standard exposes node-pool configuration and greater host-level control; the team chooses capacity, pool settings and maintenance configuration while Google manages the control plane. Autopilot manages node provisioning and scaling and applies stronger workload constraints; workload manifests, requests, policies and application reliability remain the team's responsibility. Compare required privileges, supported hardware, workload utilization and billing model using a representative workload. Release channels and maintenance policies govern upgrades. Fleet management helps apply common governance across multiple clusters. Confirm current capabilities before selecting a mode.
+
+### 2. What is the difference between GKE Standard and Autopilot? Who manages nodes, scaling, upgrades, and underlying infrastructure?
+
+**Type:** Interview question
+
+**Answer:**
+
+GKE Standard exposes node-pool configuration and greater host-level control; the team chooses capacity, pool settings and maintenance configuration while Google manages the control plane. Autopilot manages node provisioning and scaling and applies stronger workload constraints; workload manifests, requests, policies and application reliability remain the team's responsibility. Compare required privileges, supported hardware, workload utilization and billing model using a representative workload. Release channels and maintenance policies govern upgrades. Fleet management helps apply common governance across multiple clusters. Confirm current capabilities before selecting a mode.
+
+---
+
+## GKE Workload Architecture
+
+1 question
+
+### 1. How would you design the Kubernetes architecture for the client’s workloads/workers? How would you separate different types of workloads? How would you design namespaces, node pools, autoscaling, security, and deployment? How would you handle general-purpose, batch, high-memory, or GPU workloads?
+
+**Type:** Interview question
+
+**Answer:**
+
+Separate environments and trust boundaries first; use distinct clusters when namespace isolation is insufficient. Organize namespaces with RBAC, quotas and default-deny NetworkPolicies. In Standard, use labeled and tainted node pools for general-purpose, batch, memory-heavy and GPU workloads, with matching requests, affinity and tolerations. Use Deployments for services, Jobs for finite work, HPA for replicas and node autoscaling for capacity. Spread replicas across zones, configure disruption budgets and manage releases through versioned manifests.
+
+---
+
+## GKE Workload Identity / GCS
+
+1 question
+
+### 1. How do you give a GKE pod access to Cloud Storage? Discussion context: Kubernetes ServiceAccount → Workload Identity → Google Service Account → IAM → GCS.
+
+**Type:** Interview question
+
+**Answer:**
+
+Use Workload Identity Federation for GKE. Give the workload a dedicated Kubernetes ServiceAccount and grant its federated principal the required bucket role, or configure supported impersonation of a Google service account using the necessary IAM binding and KSA annotation. Set `serviceAccountName` on the Pod. The client library obtains short-lived credentials through the GKE metadata server; do not mount a service-account key. Verify bucket IAM and perimeter access from that exact workload.
 
 ---
 
@@ -18822,6 +20477,20 @@ Operationally useful dashboards are focused, actionable, and verifiable: show a 
 
 ---
 
+## Harness
+
+1 question
+
+### 1. Do you have any experience with Harness?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “My Harness experience is [production / POC / training / none]. My strongest comparable experience is [verified CI/CD platform], covering pipeline stages, runners, secrets, approval gates and deployments. I would validate Harness connectors, delegates, environment permissions and rollback behavior in a sandbox before owning production releases.” Do not claim hands-on Harness or Azure DevOps experience without evidence.
+
+---
+
 ## HashiCorp Vault
 
 30 questions
@@ -19590,6 +21259,20 @@ For example, you can use `helm install --wait 300s my-release` to wait 5 minutes
 
 ---
 
+## Helm Charts
+
+1 question
+
+### 1. Have you worked with Helm charts? How have you used Helm charts for cluster-level deployments, such as deploying Defender/security agents across clusters? How did you handle initial project/cluster setup and Hello World deployment templates?
+
+**Type:** Interview question
+
+**Answer:**
+
+Example implementation, to adapt to actual experience: maintain a versioned Helm chart with per-cluster values, namespace, RBAC, ServiceAccount, and an agent DaemonSet when the vendor requires one instance per node. Validate privileged access against the vendor's requirements and cluster policies. Bootstrap the cluster's networking, identities and secrets before installing the chart; deploy a minimal Hello World chart to verify image pulls, Services, ingress and readiness. Pin chart and image versions and test upgrades on a pilot cluster.
+
+---
+
 ## High Availability and Resilience
 
 29 questions
@@ -19873,6 +21556,149 @@ Fault injection is the deliberate introduction of errors or adverse conditions i
 **Answer:**
 
 [CONTEXT] I organized a game day for a microservices platform running on EKS with ASGs, Prometheus/Grafana, and PagerDuty. [ACTION] I executed controlled failures: aws autoscaling terminate-instance-in-auto-scaling-group --instance-id i-0123456789abcdef0 --no-decrement-desired-capacity, kubectl cordon <node> && kubectl drain <node> --ignore-daemonsets --delete-local-data, and killed a deployment with kubectl rollout restart deployment/myservice to test rolling restart behavior. I validated recovery with kubectl get pods -o wide, curl -f http://myservice.internal/health for smoke tests, and Prometheus API queries: curl -g 'http://prometheus:9090/api/v1/query?query=up{job="myservice"}'. [RESULT] The runbook and monitoring triggered PagerDuty incidents and autoscaling replaced capacity within expected SLO windows.
+
+---
+
+## HPA Calculation
+
+1 question
+
+### 1. How does HPA calculate the required number of pods?
+
+**Type:** Interview question
+
+**Answer:**
+
+The basic calculation is `ceil(currentReplicas * currentMetricValue / desiredMetricValue)`. For CPU utilization, usage is compared with container CPU requests, not node CPU capacity. The controller then accounts for tolerance, unavailable metrics, readiness, stabilization and min/max replica limits; with multiple metrics it generally chooses the largest recommendation. Missing requests or unavailable metrics can prevent the intended scaling.
+
+---
+
+## HPA Manifest
+
+1 question
+
+### 1. Can you write a Kubernetes manifest for HPA autoscaling?
+
+**Type:** Interview question
+
+**Answer:**
+
+This HPA targets a Deployment named web. Install the required metrics pipeline and set CPU requests on its containers:
+```yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: web
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+```
+Validate scaling and downstream capacity in a load test.
+
+---
+
+## HR / Background
+
+11 questions
+
+### 1. Can you introduce yourself?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “I have [verified years] of experience in [areas]. In my current [domain] project, the platform supports [business function]. I own [specific infrastructure, delivery or reliability responsibilities], using [tools actually operated]. A recent contribution was [change], which improved [measured outcome].” Replace every bracket with confirmed information and distinguish individual ownership from the team's work.
+
+### 2. Why are you looking for a change from your current organization?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “I am looking for [truthful growth goal, role scope or location reason]. This opportunity aligns with [specific responsibility], and I can contribute [verified skill].” Keep the explanation professional, consistent with your actual circumstances and focused on the new role rather than unsupported criticism of the current employer.
+
+### 3. Which company are you currently working with?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: provide the confirmed employer, client relationship and employment dates from your records. Distinguish employment by a consulting company, work for its customer and use of Google Cloud technology. Using GCP does not mean being employed by Google. The question's wording is not evidence that any suggested employer or client relationship is true.
+
+### 4. Are you currently serving your notice period?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: answer with your current notice/offer status, confirmed dates, location or actual work-arrangement preference, as applicable. For an offer, distinguish written acceptance from an ongoing discussion; for relocation or office attendance, state any real constraints. Do not commit to an arrangement or joining date solely because the interviewer suggested it.
+
+### 5. Do you currently have any other offers?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: answer with your current notice/offer status, confirmed dates, location or actual work-arrangement preference, as applicable. For an offer, distinguish written acceptance from an ongoing discussion; for relocation or office attendance, state any real constraints. Do not commit to an arrangement or joining date solely because the interviewer suggested it.
+
+### 6. Where are you currently staying / what is your current location?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: answer with your current notice/offer status, confirmed dates, location or actual work-arrangement preference, as applicable. For an offer, distinguish written acceptance from an ongoing discussion; for relocation or office attendance, state any real constraints. Do not commit to an arrangement or joining date solely because the interviewer suggested it.
+
+### 7. Where is your existing offer located?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: answer with your current notice/offer status, confirmed dates, location or actual work-arrangement preference, as applicable. For an offer, distinguish written acceptance from an ongoing discussion; for relocation or office attendance, state any real constraints. Do not commit to an arrangement or joining date solely because the interviewer suggested it.
+
+### 8. Are you ready to relocate to Bangalore?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: answer with your current notice/offer status, confirmed dates, location or actual work-arrangement preference, as applicable. For an offer, distinguish written acceptance from an ongoing discussion; for relocation or office attendance, state any real constraints. Do not commit to an arrangement or joining date solely because the interviewer suggested it.
+
+### 9. Are you comfortable working from the office four days a week?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: answer with your current notice/offer status, confirmed dates, location or actual work-arrangement preference, as applicable. For an offer, distinguish written acceptance from an ongoing discussion; for relocation or office attendance, state any real constraints. Do not commit to an arrangement or joining date solely because the interviewer suggested it.
+
+### 10. When is your joining date with the other company?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: answer with your current notice/offer status, confirmed dates, location or actual work-arrangement preference, as applicable. For an offer, distinguish written acceptance from an ongoing discussion; for relocation or office attendance, state any real constraints. Do not commit to an arrangement or joining date solely because the interviewer suggested it.
+
+### 11. If your last working day is 16 September and your other joining date is 21 September, how can we schedule the interview?
+
+**Type:** Interview question
+
+**Answer:**
+
+Confirm the year, actual last working day, other joining commitment and available interview slots. Offer specific times before the confirmed deadline or discuss a mutually agreed alternative. Do not assume the example dates are current or promise an overlapping employment arrangement; scheduling depends on your verified availability and obligations.
 
 ---
 
@@ -20827,6 +22653,20 @@ Segment failures by client subnet, destination IP, backend, zone and connection 
 
 ---
 
+## IAM and Security
+
+1 question
+
+### 1. How do you enforce least-privilege IAM in a large AWS organization where hundreds of developers need access? Describe your role design and guardrail mechanisms.
+
+**Type:** Interview question
+
+**Answer:**
+
+Federate workforce access through the organization's identity system and use temporary roles, MFA and reviewed group/permission-set assignments. Scope roles by job and account/environment, use permission boundaries and SCPs as guardrails, and constrain high-risk actions with conditions. Analyze actual access, remove unused grants and audit privileged sessions. Maintain time-limited, logged break-glass access with independent review; avoid distributing long-lived user keys.
+
+---
+
 ## Identity, SSO and External Users
 
 25 questions
@@ -21386,6 +23226,28 @@ Pause the rollout and compare version-specific traffic, business failures and de
 
 ---
 
+## Induction
+
+2 questions
+
+### 1. Are you comfortable attending an in-person induction if required?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: answer with your current notice/offer status, confirmed dates, location or actual work-arrangement preference, as applicable. For an offer, distinguish written acceptance from an ongoing discussion; for relocation or office attendance, state any real constraints. Do not commit to an arrangement or joining date solely because the interviewer suggested it.
+
+### 2. Are you flexible regarding virtual or in-person induction depending on the joining arrangements?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: answer with your current notice/offer status, confirmed dates, location or actual work-arrangement preference, as applicable. For an offer, distinguish written acceptance from an ongoing discussion; for relocation or office attendance, state any real constraints. Do not commit to an arrangement or joining date solely because the interviewer suggested it.
+
+---
+
 ## Infrastructure as Code - Terraform & Ansible
 
 4 questions
@@ -21435,6 +23297,34 @@ I preserve logs and state first, locate the exact failing resource and determine
 **Answer:**
 
 Use a common asset inventory, ownership, patch policy, backup/recovery objectives, monitoring and identity controls, while respecting OS-specific tooling. Linux may use SSH, systemd, package managers and Bash/Python; Windows commonly uses PowerShell, Windows services, Event Logs and approved remote-management mechanisms. Automate with appropriate OS-specific modules and scoped credentials rather than applying Linux commands to Windows. Test patches on a representative canary, plan reboots and validate application health and rollback. Compare actual responsibilities in each OS honestly and give a real example if available; conceptual familiarity does not establish hands-on administration.
+
+---
+
+## Ingress / Gateway Enforcement
+
+1 question
+
+### 1. In a GKE cluster, how would you make sure pods cannot bypass the intended Ingress/Gateway path? How would ClusterIP Services help? How would Kubernetes NetworkPolicy help? How would you implement default-deny and explicit allow rules? How would you prevent developers from creating unauthorized NodePort or LoadBalancer Services? How can OPA Gatekeeper/admission policies be used for this? What role does RBAC play?
+
+**Type:** Interview question
+
+**Answer:**
+
+Keep application Services as ClusterIP and expose only approved Gateway/Ingress endpoints. Apply default-deny ingress and explicit allows from the actual gateway/proxy or load-balancer data path; some GKE load balancers connect directly to Pod endpoints, so verify source ranges and health checks. Restrict external Service creation with RBAC and admission policies that validate NodePort, LoadBalancer and externalIPs. Protect policy changes and privileged/hostNetwork workloads. ClusterIP alone is not an authorization boundary.
+
+---
+
+## Insurance Claims AI
+
+1 question
+
+### 1. You mentioned that you deployed models for users to check their insurance claims. Can you explain that use case in more detail?
+
+**Type:** Interview question
+
+**Answer:**
+
+Illustrative claims use case, not a claim about personal delivery: accept an authenticated claim/document request, extract relevant fields, retrieve the applicable policy and use a validated model to summarize evidence or flag missing information. Protect personal data, track model and policy versions, measure error rates and route uncertain or high-impact decisions to a human. Separate model assistance from the authoritative claims system and retain an audit trail.
 
 ---
 
@@ -21573,6 +23463,60 @@ Make the appliance redundant with either control-plane failover (VRRP/HSRP via k
 **Answer:**
 
 Place the appliance in-path or force return traffic through it using connection‑aware policy routing and connection tracking. On Linux routers, mark new connections and route by mark: iptables -t mangle -A PREROUTING -m conntrack --ctstate NEW -j CONNMARK --set-mark 1; ip rule add fwmark 1 table 100; ip route add default via <APPLIANCE_IP> table 100. Ensure conntrack/nat is enabled so established flows use the same state (conntrack -L). Disable ECMP or configure hashing so both directions pick the same next‑hop if using equal‑cost paths. Verify symmetry with tcpdump -i <if> host <client> and confirm single conntrack entry and identical forward/reverse packets.
+
+---
+
+## Introduction and Experience
+
+6 questions
+
+### 1. Can you introduce yourself and explain your overall experience?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “I have [verified years] of experience in [areas]. In my current [domain] project, the platform supports [business function]. I own [specific infrastructure, delivery or reliability responsibilities], using [tools actually operated]. A recent contribution was [change], which improved [measured outcome].” Replace every bracket with confirmed information and distinguish individual ownership from the team's work.
+
+### 2. How much experience do you have with GCP, AWS, and Azure?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “My primary cloud is [verified platform], with [verified duration] of hands-on work. I have used [specific services] for [specific responsibilities]. My exposure to the other clouds is [production / project / POC / training], with [concrete examples].” Separate overlapping calendar years from platform-specific experience and do not claim deployments in a cloud used only for study.
+
+### 3. How long have you been working at Capgemini?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: provide the confirmed employer, client relationship and employment dates from your records. Distinguish employment by a consulting company, work for its customer and use of Google Cloud technology. Using GCP does not mean being employed by Google. The question's wording is not evidence that any suggested employer or client relationship is true.
+
+### 4. Before Capgemini, did you work at Tech Mahindra and TCS?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: provide the confirmed employer, client relationship and employment dates from your records. Distinguish employment by a consulting company, work for its customer and use of Google Cloud technology. Using GCP does not mean being employed by Google. The question's wording is not evidence that any suggested employer or client relationship is true.
+
+### 5. Are you working full-time on GCP at Capgemini, or are you working with other clouds as well?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “My primary cloud is [verified platform], with [verified duration] of hands-on work. I have used [specific services] for [specific responsibilities]. My exposure to the other clouds is [production / project / POC / training], with [concrete examples].” Separate overlapping calendar years from platform-specific experience and do not claim deployments in a cloud used only for study.
+
+### 6. Are you deploying workloads on both GCP and Azure?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “My primary cloud is [verified platform], with [verified duration] of hands-on work. I have used [specific services] for [specific responsibilities]. My exposure to the other clouds is [production / project / POC / training], with [concrete examples].” Separate overlapping calendar years from platform-specific experience and do not claim deployments in a cloud used only for study.
 
 ---
 
@@ -22880,6 +24824,48 @@ Using two tools is defensible only when existing capabilities, ownership, networ
 
 ---
 
+## Kafka Consumer Lag
+
+1 question
+
+### 1. A Kafka consumer group in your payment-event pipeline develops significant consumer lag during peak hours. Walk through your diagnostic process and the architectural options you would evaluate to resolve it.
+
+**Type:** Interview question
+
+**Answer:**
+
+Inspect lag per partition, arrival rate, processing latency, rebalances and consumer errors. Check hot keys, slow downstream writes, throttling, GC, batch/fetch settings and broker resource pressure. Scale consumers up to useful partition parallelism, optimize downstream work or increase partitions only with an ordering/repartitioning plan. Bound retries and handle poison events without silently discarding payments. Load-test recovery throughput and verify idempotency before replaying backlog.
+
+---
+
+## Kafka Delivery Semantics
+
+1 question
+
+### 1. Explain the difference between at-least-once and exactly-once delivery in Kafka. When is exactly-once semantics critical in a financial system, and what are the implementation trade-offs?
+
+**Type:** Interview question
+
+**Answer:**
+
+At-least-once processing can repeat a record after retries or offset recovery, so consumers need idempotent effects. Kafka transactions can atomically commit produced records and consumed offsets for supported Kafka-to-Kafka workflows, with read_committed consumers. External payment/database effects still need idempotency keys, transactional integration or reconciliation; Kafka alone cannot make arbitrary external effects exactly once. Transactions add coordination and operational cost, so select guarantees around the business invariant.
+
+---
+
+## Kafka Partitioning
+
+1 question
+
+### 1. How do you design Kafka topic partitioning for a banking transaction stream that needs to guarantee ordering per account while maximizing throughput?
+
+**Type:** Interview question
+
+**Answer:**
+
+Key records by account ID so events for an account land in the same partition, where Kafka preserves order. Choose partition count using throughput and consumer-parallelism tests, and watch hot accounts that create skew. Increasing partitions can change key placement, so plan ordering across transitions. A transaction involving multiple accounts needs an explicit consistency design; per-account partition ordering is not a cross-account atomicity guarantee.
+
+---
+
 ## Kafka, Pub/Sub and Messaging
 
 40 questions
@@ -23232,6 +25218,20 @@ Expect questions about CAP theorem, cache invalidation, database sharding, queue
 **Answer:**
 
 Use RabbitMQ when you need AMQP-style messaging, flexible routing and broker-side features rather than a distributed log. RabbitMQ excels for RPC/request–reply, complex routing (direct/topic/fanout/headers exchanges), per-queue or per-message TTL, dead-letter exchanges, consumer prefetch and ordered single-consumer work queues, or when latency and heterogeneous client protocols matter. It’s operationally validated with rabbitmqctl (e.g., rabbitmqctl list_queues name messages_ready messages_unacknowledged) and the management UI on :15672 for queue/exchange inspection. Prefer RabbitMQ for modest-to-moderate throughput systems requiring transactional-style acknowledgements, priority queues, or JMS/AMQP compatibility; for very high-throughput, partitioned retention-based streaming, Kafka is usually preferable.
+
+---
+
+## Kube-Scheduler
+
+1 question
+
+### 1. What is the responsibility of the kube-scheduler?
+
+**Type:** Interview question
+
+**Answer:**
+
+The scheduler watches for Pods without a node assignment, filters nodes using requests and constraints such as taints, affinity and topology, scores eligible nodes, and binds the Pod to one. It does not create Deployment replicas or start containers. If no node satisfies the constraints, the Pod remains unscheduled and events explain the failure.
 
 ---
 
@@ -23591,7 +25591,7 @@ Deploy an MLflow Tracking server inside your Kubernetes cluster (Deployment + Se
 
 ## Kubernetes
 
-86 questions
+89 questions
 
 ### 1. A pod is stuck in the Pending state. How would you troubleshoot it?
 
@@ -25471,7 +27471,31 @@ For the usual HPA configuration with minReplicas greater than zero, manually set
 
 References: https://kubernetes.io/docs/concepts/workloads/autoscaling/horizontal-pod-autoscale/
 
-### 84. The requirement is to submit a job to GKE, process it using the required compute resources, and terminate or scale down the resources afterward. How would you implement this?
+### 84. Can you explain the structure of a Kubernetes YAML file?
+
+**Type:** Interview question
+
+**Answer:**
+
+A Kubernetes object usually has apiVersion, kind, metadata and spec. For a Deployment, spec contains replicas, a selector matching template metadata labels, and a Pod template with containers, images, ports, requests/limits and probes. A Service is a separate object with selectors and port mappings. Validate against the target API version with server-side dry-run and inspect the rendered Helm/Kustomize output.
+
+### 85. Tell me about your Kubernetes experience.
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: identify managed or self-hosted Kubernetes, cluster mode, environment and your exact ownership. Cluster creation can include network/subnet design, identities, control-plane access, node pools, logging, policy and add-ons; operating workloads is a separate responsibility. State whether you provisioned clusters through Terraform, used a console/CLI, or worked only on existing clusters. Do not infer full cluster ownership from application deployment experience.
+
+### 86. How do you check the number/status of pods running in Kubernetes?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use `kubectl get pods -n NS -o wide` or `kubectl get pods -A` with appropriate permissions, then inspect READY, STATUS and RESTARTS. `kubectl get deployment -n NS` compares desired and available replicas. A Pod's Running phase does not guarantee readiness; inspect conditions and container states before counting it as serving traffic.
+
+### 87. The requirement is to submit a job to GKE, process it using the required compute resources, and terminate or scale down the resources afterward. How would you implement this?
 
 **Type:** Implementation / Workflow
 
@@ -25479,7 +27503,7 @@ References: https://kubernetes.io/docs/concepts/workloads/autoscaling/horizontal
 
 A submission API or pipeline writes work to a queue or creates a Kubernetes Job with an immutable image, resource requests, service account, deadline, retry and completion policy. The Job is scheduled onto a dedicated node pool through labels, affinity and taints. If capacity is absent, Cluster Autoscaler grows the pool; for variable queued work, KEDA can scale worker Pods and a batch scheduler can enforce quotas and fair sharing. Workers claim idempotent units, checkpoint progress externally and write results to durable storage. On success or terminal failure, the Job records status, emits metrics and logs and cleans temporary resources through TTL controls. When Pods terminate and no protected workload needs the nodes, Cluster Autoscaler scales the pool back toward zero after its safety checks and delay. I test failure, duplicate delivery, interruption, quota exhaustion and cleanup so scale-down never deletes the only copy of state.
 
-### 85. Why do we need GKE for this kind of workload?
+### 88. Why do we need GKE for this kind of workload?
 
 **Type:** Conceptual
 
@@ -25487,7 +27511,7 @@ A submission API or pipeline writes work to a queue or creates a Kubernetes Job 
 
 GKE is useful when the organization already has a Kubernetes platform and the workload benefits from container scheduling, declarative Jobs, bin packing, node autoscaling, retries, quotas, isolation, standardized identity, observability and one operating model shared with other services. It can run many independent tasks across an elastic pool and cleanly separate application packaging from node lifecycle. It is not automatically required. A managed batch service, Cloud Run Jobs, Vertex AI custom jobs or a VM managed instance group may be simpler depending on duration, accelerator needs, scale, startup time and operational ownership. I choose GKE only when its scheduling and platform capabilities justify its complexity.
 
-### 86. Why use GKE instead of simply using VMs for these jobs?
+### 89. Why use GKE instead of simply using VMs for these jobs?
 
 **Type:** Comparison
 
@@ -25829,6 +27853,56 @@ Autopilot manages nodes, placement, scaling and many secure defaults, reducing o
 
 ---
 
+## Kubernetes Adoption
+
+1 question
+
+### 1. Suppose a client comes to you and says they want to adopt Kubernetes for deploying their workloads. How would you guide them? What questions would you ask before recommending Kubernetes? How would you determine whether Kubernetes/GKE is actually the right solution? When would you recommend something simpler, such as Cloud Run?
+
+**Type:** Interview question
+
+**Answer:**
+
+Start with traffic patterns, protocols, state, availability targets, regulatory constraints, deployment frequency, team skills and operating budget. Kubernetes is useful when workloads need its scheduling, custom controllers, networking or platform ecosystem. A stateless HTTP service or finite job can often use Cloud Run with less cluster administration. Prototype a representative workload and compare latency, scaling, security, cost and operational ownership before committing to GKE.
+
+---
+
+## Kubernetes API Flow
+
+1 question
+
+### 1. When you execute a kubectl command, what happens internally in Kubernetes?
+
+**Type:** Interview question
+
+**Answer:**
+
+kubectl reads the selected kubeconfig context and sends an authenticated API request. The API server performs authorization and, for relevant writes, admission checks before persisting accepted state. Controllers observe resource changes; for a newly created Pod the scheduler binds a suitable node and kubelet starts its containers. A read such as `kubectl get pods` returns API data and does not itself cause scheduling.
+
+---
+
+## Kubernetes Commands
+
+2 questions
+
+### 1. What commands would you use to identify and troubleshoot a Pending pod?
+
+**Type:** Interview question
+
+**Answer:**
+
+Run `kubectl get pod NAME -n NS -o wide`, `kubectl describe pod NAME -n NS` and `kubectl get events -n NS --sort-by=.metadata.creationTimestamp`. Read FailedScheduling events for insufficient requested CPU/memory, taints, node affinity, topology constraints or unbound PVCs. Check node conditions, resource requests, quotas, PVC/storage events and autoscaler limits. Pending can also include image or volume preparation after scheduling, so inspect container waiting reasons. Correct the specific constraint rather than repeatedly deleting the Pod.
+
+### 2. What kubectl commands would you use to troubleshoot a problematic GKE pod? Commands listed in the supplied round: kubectl get pods; kubectl describe pod; kubectl logs; kubectl logs --previous; kubectl exec; kubectl top; kubectl get events.
+
+**Type:** Interview question
+
+**Answer:**
+
+Check `kubectl get pods -n NS -o wide`, `describe pod`, `logs -c CONTAINER`, `logs --previous`, `get events --sort-by=.metadata.creationTimestamp` and `top pod` where metrics are available. Inspect readiness, restart reasons, resource limits, dependencies, mounted configuration, storage and node conditions. Use `exec` only if the container is running and permitted, or a controlled debug container when needed. Capture evidence before deleting or restarting anything.
+
+---
+
 ## Kubernetes Databases
 
 1 question
@@ -25993,6 +28067,56 @@ Istio remains useful with a single application version for service mesh features
 **Answer:**
 
 Istio enforces mTLS with PeerAuthentication and DestinationRule (e.g., PeerAuthentication STRICT and DestinationRule tls.mode: ISTIO_MUTUAL); verify with istioctl authn tls-check and by inspecting pod-sidecar certs. Authorization is handled with AuthorizationPolicy (ALLOW/DENY rules scoped by namespace/workload); kubectl get authorizationpolicy -o yaml shows applied rules. Retries and timeouts are configured on VirtualService (route->retries.timeout, retries.attempts, route->timeout). Circuit breaking uses DestinationRule trafficPolicy (connectionPool for maxConnections and outlierDetection for consecutiveErrors/ejection). Observability is provided by Envoy stats (exposed to Prometheus at each istio-proxy), distributed tracing (Envoy emits trace headers to Jaeger/Zipkin), and access logs via mesh config; validate with Prometheus targets and the Jaeger UI.
+
+---
+
+## Kubernetes Deployment Troubleshooting
+
+1 question
+
+### 1. What would you check if the pod/application does not start because of an incorrect image/image tag, port configuration, labels, selectors, or matchLabels?
+
+**Type:** Interview question
+
+**Answer:**
+
+Inspect Pod events and container status for image-not-found, authentication, architecture or startup errors. Confirm the image digest/tag exists and credentials reach the registry. Compare the process listening port with Service targetPort and probe configuration; containerPort does not make the process listen. Verify Service selectors match Pod labels and EndpointSlices contain ready endpoints. A Deployment selector must match its template labels and generally cannot be changed in place.
+
+---
+
+## Kubernetes Desired State
+
+1 question
+
+### 1. How does Kubernetes maintain desired state versus actual state?
+
+**Type:** Interview question
+
+**Answer:**
+
+Kubernetes controllers repeatedly compare observed resources with the desired spec and take corrective API actions. A Deployment manages ReplicaSets, a ReplicaSet maintains Pod count, and kubelet reconciles assigned Pod containers on its node. The loops are asynchronous and depend on available capacity and healthy dependencies; a desired replica count is not a guarantee that all replicas are ready.
+
+---
+
+## Kubernetes Experience
+
+2 questions
+
+### 1. What experience do you have with Kubernetes?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: identify managed or self-hosted Kubernetes, cluster mode, environment and your exact ownership. Cluster creation can include network/subnet design, identities, control-plane access, node pools, logging, policy and add-ons; operating workloads is a separate responsibility. State whether you provisioned clusters through Terraform, used a console/CLI, or worked only on existing clusters. Do not infer full cluster ownership from application deployment experience.
+
+### 2. What Kubernetes activities have you performed in your projects?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize with verified duties and frequency: resource provisioning, release support, incident response, certificate rotation, IAM/network changes, capacity management, patching and cluster upgrades are possible examples. For each selected duty, identify the affected service, your access/ownership, the approval route and validation. Production work frequency depends on the release/change calendar; do not invent a daily schedule or responsibilities from the prompt.
 
 ---
 
@@ -26195,6 +28319,20 @@ A Kubernetes Operator is a custom controller that extends the Kubernetes API usi
 
 ---
 
+## Kubernetes Logs
+
+1 question
+
+### 1. Have you worked with Kubernetes logs? How do you check pod logs?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use `kubectl logs POD -n NS -c CONTAINER`, add `--previous` for the previous terminated container and `-f` to follow output. Include `--since` or `--tail` to bound retrieval. Inspect init-container logs separately and use centralized logging for deleted Pods or longer retention. Application file logs require an explicit collection design; kubectl logs normally reads container stdout/stderr.
+
+---
+
 ## Kubernetes Networking
 
 1 question
@@ -26206,6 +28344,20 @@ A Kubernetes Operator is a custom controller that extends the Kubernetes API usi
 **Answer:**
 
 Namespaces provide naming and policy boundaries but do not inherently block network traffic. A client can use service-name.target-namespace.svc.cluster.local, or service-name.target-namespace, to resolve a Service in another namespace. Ensure the Service selects the correct Pods in its own namespace, its port/targetPort matches and ready endpoints exist. If NetworkPolicy isolates either side, allow source egress and destination ingress using namespace/pod selectors and allow DNS resolution. Verify any service-mesh authorization, TLS identity and application authentication too. Do not create a public LoadBalancer merely for cross-namespace calls, and do not assume Kubernetes RBAC controls Pod-to-Pod packets.
+
+---
+
+## Kubernetes Pending Pods
+
+1 question
+
+### 1. A pod is stuck in Pending. Walk me through how you would troubleshoot it.
+
+**Type:** Interview question
+
+**Answer:**
+
+Run `kubectl get pod NAME -n NS -o wide`, `kubectl describe pod NAME -n NS` and `kubectl get events -n NS --sort-by=.metadata.creationTimestamp`. Read FailedScheduling events for insufficient requested CPU/memory, taints, node affinity, topology constraints or unbound PVCs. Check node conditions, resource requests, quotas, PVC/storage events and autoscaler limits. Pending can also include image or volume preparation after scheduling, so inspect container waiting reasons. Correct the specific constraint rather than repeatedly deleting the Pod.
 
 ---
 
@@ -26684,7 +28836,7 @@ Inventory required destinations and inspect current DNS, flow and proxy logs bef
 
 ## Kubernetes Troubleshooting
 
-17 questions
+20 questions
 
 ### 1. You scale a ReplicaSet from 3 to 5. The 4th pod comes up, but the 5th pod remains Pending. How would you troubleshoot it?
 
@@ -26829,6 +28981,30 @@ Preserve the error and time range, identify affected Pods/nodes and compare heal
 **Answer:**
 
 Clarify whether 90% refers to one node, all nodes, container requests or limits, and whether users are affected. Use kubectl top nodes/pods and monitoring to locate hot workloads, then inspect CPU throttling, requests/limits, replica counts, HPA status, Pending Pods and node capacity. Compare traffic, scheduled batch jobs, code changes and per-request work; profile the application if the evidence points to a hot loop or expensive operation. Cluster Autoscaler generally reacts to unschedulable Pods, not simply high node CPU, so increasing replica demand may still require proper requests and eligible node pools. Mitigate a noisy workload, scale within quota or revert a proven regression while checking downstream capacity. Validate latency and saturation after the change.
+
+### 18. If a Kubernetes pod is hanging or having an issue, how would you troubleshoot it? What things do you typically check when investigating Kubernetes problems?
+
+**Type:** Interview question
+
+**Answer:**
+
+Check `kubectl get pods -n NS -o wide`, `describe pod`, `logs -c CONTAINER`, `logs --previous`, `get events --sort-by=.metadata.creationTimestamp` and `top pod` where metrics are available. Inspect readiness, restart reasons, resource limits, dependencies, mounted configuration, storage and node conditions. Use `exec` only if the container is running and permitted, or a controlled debug container when needed. Capture evidence before deleting or restarting anything.
+
+### 19. If a pod suddenly goes into CrashLoopBackOff, what could be the possible reasons?
+
+**Type:** Interview question
+
+**Answer:**
+
+CrashLoopBackOff is a backoff while a container repeatedly terminates. Inspect `kubectl describe pod` and `kubectl logs --previous`, termination reason and exit code, then check OOMKilled, startup command, missing configuration, dependency failure and overly aggressive probes. Fix the underlying cause and watch readiness/restart counts. The ReplicaSet maintains Pod objects; kubelet restarts containers, so deleting the Pod usually only recreates the same failure.
+
+### 20. How would you troubleshoot a pod in CrashLoopBackOff?
+
+**Type:** Interview question
+
+**Answer:**
+
+CrashLoopBackOff is a backoff while a container repeatedly terminates. Inspect `kubectl describe pod` and `kubectl logs --previous`, termination reason and exit code, then check OOMKilled, startup command, missing configuration, dependency failure and overly aggressive probes. Fix the underlying cause and watch readiness/restart counts. The ReplicaSet maintains Pod objects; kubelet restarts containers, so deleting the Pod usually only recreates the same failure.
 
 ---
 
@@ -28354,6 +30530,28 @@ Use a token-bucket or sliding-window limiter per API key/user, enforce at the ed
 
 ---
 
+## LLMOps / DevOps
+
+2 questions
+
+### 1. Can you tell me the difference between LLMOps and typical DevOps?
+
+**Type:** Interview question
+
+**Answer:**
+
+One key difference is evaluation: LLMOps must measure probabilistic model behavior, such as groundedness, task success and unsafe output, across versioned prompts, models and retrieval data. DevOps primarily manages software delivery and service operation. LLMOps retains CI/CD and monitoring while adding model-quality, token-cost and data-governance controls.
+
+### 2. Tell me just one difference between LLMOps and DevOps.
+
+**Type:** Interview question
+
+**Answer:**
+
+One key difference is evaluation: LLMOps must measure probabilistic model behavior, such as groundedness, task success and unsafe output, across versioned prompts, models and retrieval data. DevOps primarily manages software delivery and service operation. LLMOps retains CI/CD and monitoring while adding model-quality, token-cost and data-governance controls.
+
+---
+
 ## Load Balancing Fundamentals
 
 30 questions
@@ -29553,6 +31751,34 @@ Retain historical metrics by streaming short-term Prometheus data to long-term s
 
 ---
 
+## Migration Cutover
+
+1 question
+
+### 1. What was the actual cutover? Discussion context: adding the new EC2 to the target group, validating health checks, shifting traffic, draining the old instance, monitoring, and then decommissioning it.
+
+**Type:** Interview question
+
+**Answer:**
+
+Example migration design: provision the replacement EC2 instance from a reproducible image, install compatible configuration and validate dependencies. Keep durable data external or replicate it consistently before cutover. Register the new instance in the load-balancer target group, confirm health and gradually shift traffic, then drain the old instance's connections. Monitor errors and latency and retain the old instance until the rollback window closes. Zero downtime requires compatible sessions and data, not just a target-group change.
+
+---
+
+## Migration Rollback
+
+1 question
+
+### 1. What would you do if the new EC2 instance started failing after production traffic had been shifted?
+
+**Type:** Interview question
+
+**Answer:**
+
+Stop the rollout and route traffic back to the retained healthy target, allowing connections to drain safely. Verify the old application remains compatible with any database/schema changes before reverting. Preserve failing-instance logs and deployment evidence, check health probes and dependencies, and compare the new image/configuration with the old. Confirm recovery using user requests and metrics before retrying a corrected release.
+
+---
+
 ## MLflow
 
 30 questions
@@ -29924,7 +32150,7 @@ Run an MLflow Tracking server and artifact store (example: mlflow server --backe
 
 ## MLOps
 
-4 questions
+6 questions
 
 ### 1. What problem does MLflow solve?
 
@@ -29950,7 +32176,23 @@ Containerize the model serving binary (e.g., Dockerfile), build and push: docker
 
 Both need secure code, immutable artifacts, CI/CD, infrastructure as code, SLOs, observability and rollback. AI systems add probabilistic behavior and more independently changing artifacts: model, prompt, tokenizer, features, retrieval index, evaluation set and sometimes agent tools. The pipeline therefore records lineage, evaluates quality and safety on representative datasets, scans model and data artifacts, and promotes a compatible bundle rather than only a container. Serving may require GPU memory, batching, model loading, warm capacity and different autoscaling signals. Production monitoring adds input and data drift, answer or prediction quality, hallucination and groundedness, tool-call success, token usage, bias and safety events. Security must address prompt injection, data poisoning, model supply chain, sensitive context leakage and excessive tool authority. Rollout uses shadow, canary or champion-challenger evaluation, and rollback restores the compatible code-model-prompt-index combination. Because ground truth may arrive late, human review and feedback pipelines are first-class operational components.
 
-### 4. What challenges have you faced with AI-based or agent-based solutions?
+### 4. What advantage do I get from MLOps?
+
+**Type:** Interview question
+
+**Answer:**
+
+MLOps makes model training and deployment reproducible through versioned data, code, parameters and artifacts. Automated evaluation gates prevent unvalidated models from reaching production, while monitoring catches data or performance drift. The benefit is reliable, traceable delivery and faster controlled iteration; it does not guarantee a better predictive model.
+
+### 5. What exactly am I getting out of the models?
+
+**Type:** Interview question
+
+**Answer:**
+
+A model turns input data into a prediction, score, classification or generated response for a defined business decision. Its value must be measured against a baseline using task quality, error costs, latency and operating expense. For example, a claims model might prioritize documents for review; a prediction is not automatically an authorized payment or a correct decision.
+
+### 6. What challenges have you faced with AI-based or agent-based solutions?
 
 **Type:** Experience / Troubleshooting
 
@@ -29971,6 +32213,66 @@ The hardest challenges are rarely just container deployment. Output is probabili
 **Answer:**
 
 I have worked on the platform pattern for GPU autoscaling, and I describe the exact production depth honestly. On Kubernetes, GPU nodes live in a dedicated accelerator node pool with the correct drivers, labels and taints; inference Pods request the GPU resource and tolerate that pool. HPA or an event-driven scaler changes replicas using demand signals such as inference queue depth, request concurrency, latency or GPU-aware serving metrics—not GPU utilization alone. When new Pods become unschedulable, Cluster Autoscaler or node auto-provisioning adds matching GPU nodes within quota, regional availability and cost limits. Because GPUs can take minutes to provision and models take time to load, I keep minimum warm capacity for latency-sensitive services, use readiness and startup probes, cache model artifacts, and tune scale-down stabilization. Batching and concurrency often improve throughput before adding GPUs. I monitor accelerator utilization and memory, model-load time, queue age, throttling, Pending Pods, node-provisioning latency, error rate and cost per inference. Spot GPUs are limited to fault-tolerant batch or redundant capacity, and load tests validate the complete scaling path.
+
+---
+
+## MLOps / LLMOps
+
+1 question
+
+### 1. You mentioned MLOps and LLMOps. How have you used them, and what use cases have you worked on?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: identify the actual use case, dataset, model type, environment and your ownership. A typical lifecycle is data validation, training with tracked experiments, held-out evaluation, artifact registration, gated deployment and monitoring with rollback. MLflow can track experiments and registry artifacts; Vertex AI can host training, managed model workflows and endpoints. State the verified number of production models separately from sandbox/POC models; tool familiarity does not establish production deployment.
+
+---
+
+## MLOps / Vertex AI
+
+5 questions
+
+### 1. Are your AI/ML models currently deployed in production, or are they mainly in sandbox/POC environments?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: identify the actual use case, dataset, model type, environment and your ownership. A typical lifecycle is data validation, training with tracked experiments, held-out evaluation, artifact registration, gated deployment and monitoring with rollback. MLflow can track experiments and registry artifacts; Vertex AI can host training, managed model workflows and endpoints. State the verified number of production models separately from sandbox/POC models; tool familiarity does not establish production deployment.
+
+### 2. How many ML models have actually been deployed to production?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: identify the actual use case, dataset, model type, environment and your ownership. A typical lifecycle is data validation, training with tracked experiments, held-out evaluation, artifact registration, gated deployment and monitoring with rollback. MLflow can track experiments and registry artifacts; Vertex AI can host training, managed model workflows and endpoints. State the verified number of production models separately from sandbox/POC models; tool familiarity does not establish production deployment.
+
+### 3. Are you using MLflow for building and testing AI/ML models?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: identify the actual use case, dataset, model type, environment and your ownership. A typical lifecycle is data validation, training with tracked experiments, held-out evaluation, artifact registration, gated deployment and monitoring with rollback. MLflow can track experiments and registry artifacts; Vertex AI can host training, managed model workflows and endpoints. State the verified number of production models separately from sandbox/POC models; tool familiarity does not establish production deployment.
+
+### 4. How are you using Vertex AI / AutoML for your ML workloads?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: identify the actual use case, dataset, model type, environment and your ownership. A typical lifecycle is data validation, training with tracked experiments, held-out evaluation, artifact registration, gated deployment and monitoring with rollback. MLflow can track experiments and registry artifacts; Vertex AI can host training, managed model workflows and endpoints. State the verified number of production models separately from sandbox/POC models; tool familiarity does not establish production deployment.
+
+### 5. What does your model development/deployment lifecycle look like?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: identify the actual use case, dataset, model type, environment and your ownership. A typical lifecycle is data validation, training with tracked experiments, held-out evaluation, artifact registration, gated deployment and monitoring with rollback. MLflow can track experiments and registry artifacts; Vertex AI can host training, managed model workflows and endpoints. State the verified number of production models separately from sandbox/POC models; tool familiarity does not establish production deployment.
 
 ---
 
@@ -32213,6 +34515,36 @@ I report SLO/SLI-based availability, error budget remaining, MTTD (time-to-detec
 
 ---
 
+## Network Isolation
+
+3 questions
+
+### 1. How do you prevent cross-contamination between Azure subscriptions/landing zones?
+
+**Type:** Interview question
+
+**Answer:**
+
+Treat reachability and isolation separately. Apply least-privilege NSG rules where present, user-defined routing through an approved firewall when needed, and enforced Kubernetes NetworkPolicies for Pod traffic. If NSGs are absent, deny-by-default workload policies, a functioning policy-capable CNI and controlled firewall routes can restrict traffic; test actual source addressing and both directions. Protect identities, secrets and cluster administration independently. VNet peering connects networks, not authorization domains, and namespace names alone do not isolate two clusters.
+
+### 2. If VNet peering is already enabled between two AKS clusters, how do you prevent cross-contamination between them?
+
+**Type:** Interview question
+
+**Answer:**
+
+Treat reachability and isolation separately. Apply least-privilege NSG rules where present, user-defined routing through an approved firewall when needed, and enforced Kubernetes NetworkPolicies for Pod traffic. If NSGs are absent, deny-by-default workload policies, a functioning policy-capable CNI and controlled firewall routes can restrict traffic; test actual source addressing and both directions. Protect identities, secrets and cluster administration independently. VNet peering connects networks, not authorization domains, and namespace names alone do not isolate two clusters.
+
+### 3. If there is no NSG between the two AKS workloads, how would you control the traffic/isolation?
+
+**Type:** Interview question
+
+**Answer:**
+
+Treat reachability and isolation separately. Apply least-privilege NSG rules where present, user-defined routing through an approved firewall when needed, and enforced Kubernetes NetworkPolicies for Pod traffic. If NSGs are absent, deny-by-default workload policies, a functioning policy-capable CNI and controlled firewall routes can restrict traffic; test actual source addressing and both directions. Protect identities, secrets and cluster administration independently. VNet peering connects networks, not authorization domains, and namespace names alone do not isolate two clusters.
+
+---
+
 ## Networking
 
 7 questions
@@ -32569,7 +34901,7 @@ Use multiple defenses: cache-aside with a singleflight/request-coalescing layer 
 
 ## Observability
 
-10 questions
+15 questions
 
 ### 1. Have you worked on observability?
 
@@ -32651,7 +34983,47 @@ Start from the affected endpoint, time range and p95/p99 latency, then compare s
 
 Prometheus collects numerical time-series metrics, typically by scraping instrumented endpoints, and evaluates recording/alerting rules. Loki stores and queries logs with labels and log content; logs provide individual event detail while metrics summarize rates, latency and saturation. Logstash is a processing pipeline that receives, parses, enriches and forwards events to destinations such as Elasticsearch; it is not the same kind of metrics store as Prometheus. Grafana visualizes and correlates data from these systems and can run its own alerting. Alertmanager receives alerts, groups/deduplicates them and handles routing, inhibition and silences. Define shared service/environment labels and correlation IDs, control cardinality and sensitive data, and page on actionable user impact.
 
-### 10. If GCP already provides Cloud Logging and Cloud Monitoring, what is the specific purpose of OpenTelemetry instrumentation?
+### 10. Have you worked with the ELK Stack?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: name the monitoring platform actually used, where the dashboards are hosted and whether you configured collection or only consumed dashboards. ELK commonly covers log ingestion/search, OpenTelemetry provides instrumentation and collection, Grafana visualizes data sources, and Dynatrace provides an observability platform. Describe one dashboard or alert you owned, its data source, access controls and a troubleshooting outcome; do not equate familiarity with deployment experience.
+
+### 11. Have you worked with OpenTelemetry?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: name the monitoring platform actually used, where the dashboards are hosted and whether you configured collection or only consumed dashboards. ELK commonly covers log ingestion/search, OpenTelemetry provides instrumentation and collection, Grafana visualizes data sources, and Dynatrace provides an observability platform. Describe one dashboard or alert you owned, its data source, access controls and a troubleshooting outcome; do not equate familiarity with deployment experience.
+
+### 12. Have you worked with Grafana?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: name the monitoring platform actually used, where the dashboards are hosted and whether you configured collection or only consumed dashboards. ELK commonly covers log ingestion/search, OpenTelemetry provides instrumentation and collection, Grafana visualizes data sources, and Dynatrace provides an observability platform. Describe one dashboard or alert you owned, its data source, access controls and a troubleshooting outcome; do not equate familiarity with deployment experience.
+
+### 13. What monitoring tools are you currently using?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: name the monitoring platform actually used, where the dashboards are hosted and whether you configured collection or only consumed dashboards. ELK commonly covers log ingestion/search, OpenTelemetry provides instrumentation and collection, Grafana visualizes data sources, and Dynatrace provides an observability platform. Describe one dashboard or alert you owned, its data source, access controls and a troubleshooting outcome; do not equate familiarity with deployment experience.
+
+### 14. Have you integrated Dynatrace yourself?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: name the monitoring platform actually used, where the dashboards are hosted and whether you configured collection or only consumed dashboards. ELK commonly covers log ingestion/search, OpenTelemetry provides instrumentation and collection, Grafana visualizes data sources, and Dynatrace provides an observability platform. Describe one dashboard or alert you owned, its data source, access controls and a troubleshooting outcome; do not equate familiarity with deployment experience.
+
+### 15. If GCP already provides Cloud Logging and Cloud Monitoring, what is the specific purpose of OpenTelemetry instrumentation?
 
 **Type:** Conceptual
 
@@ -33498,6 +35870,34 @@ To manage organization policies using Terraform, you can utilize the `terraform 
 **Answer:**
 
 If Terraform tries to create a resource blocked by an organization policy, it will output an error message indicating that the operation was rejected due to policy constraints. The exact error message may vary depending on the specific policy and the type of resource being created. For example, if a user attempts to create a new AWS IAM role using Terraform, but the organization policy prohibits the creation of roles in certain regions, Terraform will output an error similar to "Error creating Resource: ... (error code 400): Policy denied". The user can then review and modify their configuration or policy to resolve the issue.
+
+---
+
+## Organization Policy vs IAM
+
+1 question
+
+### 1. What is the difference between GCP Organization Policy and IAM?
+
+**Type:** Interview question
+
+**Answer:**
+
+IAM decides which principal may perform an action on a resource. Organization Policy constrains permitted resource configurations or behavior across an organization, folder or project, such as allowed locations or restrictions on service-account keys. A principal can have an IAM permission and still be blocked by an organization-policy constraint. Apply both least-privilege access and configuration guardrails.
+
+---
+
+## P2 Incident Troubleshooting
+
+1 question
+
+### 1. You own a P2 issue end-to-end. Something has changed and caused the problem. How will you debug it?
+
+**Type:** Interview question
+
+**Answer:**
+
+Own the incident timeline, scope and communications. Compare the first failure time with application releases, ConfigMap/Secret updates, Kubernetes events, Terraform runs and cloud audit logs. Compare a failing instance with a healthy one and inspect dependency changes; correlation alone does not prove causation. Test a narrow hypothesis or revert a compatible recent change with the incident lead's approval. Verify user-facing recovery and record evidence and follow-up prevention work.
 
 ---
 
@@ -34597,6 +36997,34 @@ The platform installs OpenTelemetry collection and standard dashboards for traff
 
 ---
 
+## Pod Logs vs Events
+
+1 question
+
+### 1. Does kubectl describe provide error/application logs? When would you use kubectl logs instead?
+
+**Type:** Interview question
+
+**Answer:**
+
+`kubectl describe pod NAME -n NS` shows configuration, conditions, container states and related events; it does not provide application stdout/stderr. Use `kubectl logs NAME -n NS -c CONTAINER` for container output and `--previous` for the previous terminated instance. Logs may be unavailable before a container starts or after its history is removed; use centralized logging for retained history.
+
+---
+
+## Policy as Code / OPA
+
+1 question
+
+### 1. What tool do you use for Policy as Code? How are you maintaining the policies? Once Terraform generates a plan, how does OPA check or validate that Terraform plan?
+
+**Type:** Interview question
+
+**Answer:**
+
+OPA evaluates policy written in Rego against structured input. Keep policies and tests in Git; run `terraform plan -out=tfplan` and `terraform show -json tfplan > plan.json`, then evaluate that JSON with OPA or Conftest. Explicitly fail CI when deny results exist; successful evaluation alone does not mean approval. Test allowed and denied examples and protect plan files because they can contain secrets.
+
+---
+
 ## PostgreSQL
 
 4 questions
@@ -35234,6 +37662,20 @@ Install PowerShell Core on runners and invoke scripts in pipeline steps (GitHub 
 
 ---
 
+## Previous Project Experience
+
+1 question
+
+### 1. What have you done in your previous company? What project did you work on, and what was your role?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “I have [verified years] of experience in [areas]. In my current [domain] project, the platform supports [business function]. I own [specific infrastructure, delivery or reliability responsibilities], using [tools actually operated]. A recent contribution was [change], which improved [measured outcome].” Replace every bracket with confirmed information and distinguish individual ownership from the team's work.
+
+---
+
 ## Private Terraform module authentication
 
 13 questions
@@ -35341,6 +37783,190 @@ Bitbucket Pipelines is defined in `bitbucket-pipelines.yml`. Within a repository
 **Answer:**
 
 `terraform init` asks Git to download the private module, so repository authentication must be configured before init. Prefer a read-only deploy key over SSH or a scoped app password/access token over HTTPS; store it as a masked secured CI variable or credential, materialize it only for the job, configure `known_hosts` or a credential helper, and never place the secret directly in YAML or a module URL. Git credentials authorize Bitbucket, while workload identity or a GCP service account authorizes Google APIs. Shell, PowerShell, or Python can perform setup. Missing access makes init fail before planning.
+
+---
+
+## Production Incident / RCA
+
+1 question
+
+### 1. In your career, what is the most complex problem you have solved? What was the problem, how did you approach it, how did you identify the root cause, what solution did you implement, and what was the final result?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize one real example: describe the business impact and constraints, the teams involved, the hypotheses tested and the evidence identifying the cause or disagreement. Explain your specific technical and coordination actions, the decision process and the verified result, including any remaining tradeoff. Use a measured outcome only when records support it, and distinguish your contribution from collective work.
+
+---
+
+## Production Operations / SRE
+
+5 questions
+
+### 1. What other operational activities do you perform apart from infrastructure provisioning and deployments?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize with verified duties and frequency: resource provisioning, release support, incident response, certificate rotation, IAM/network changes, capacity management, patching and cluster upgrades are possible examples. For each selected duty, identify the affected service, your access/ownership, the approval route and validation. Production work frequency depends on the release/change calendar; do not invent a daily schedule or responsibilities from the prompt.
+
+### 2. Do you handle production incidents and troubleshooting?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize with verified duties and frequency: resource provisioning, release support, incident response, certificate rotation, IAM/network changes, capacity management, patching and cluster upgrades are possible examples. For each selected duty, identify the affected service, your access/ownership, the approval route and validation. Production work frequency depends on the release/change calendar; do not invent a daily schedule or responsibilities from the prompt.
+
+### 3. What types of Kubernetes/GKE issues do you troubleshoot?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize with verified duties and frequency: resource provisioning, release support, incident response, certificate rotation, IAM/network changes, capacity management, patching and cluster upgrades are possible examples. For each selected duty, identify the affected service, your access/ownership, the approval route and validation. Production work frequency depends on the release/change calendar; do not invent a daily schedule or responsibilities from the prompt.
+
+### 4. Are you involved in vulnerability remediation and security-related changes?
+
+**Type:** Interview question
+
+**Answer:**
+
+Trace the finding to the deployed image digest, affected package and fixed version; assess exploitability and exposure with the security owner. Rebuild from a maintained patched base image, update dependencies and rescan rather than patching running containers. Test functional behavior, performance and configuration compatibility in nonproduction, then release progressively with a rollback image and monitored exception process. Maintain versioned golden images with owners, provenance, patch SLAs and automated rebuilds; verify scanner findings against the actual artifact.
+
+### 5. Do you perform certificate, IAM, firewall, Cloud Armor, scaling, and upgrade-related activities?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize with verified duties and frequency: resource provisioning, release support, incident response, certificate rotation, IAM/network changes, capacity management, patching and cluster upgrades are possible examples. For each selected duty, identify the affected service, your access/ownership, the approval route and validation. Production work frequency depends on the release/change calendar; do not invent a daily schedule or responsibilities from the prompt.
+
+---
+
+## Production Troubleshooting
+
+9 questions
+
+### 1. You have worked with ArgoCD. If a GKE workload cannot pull an image from JFrog, how would you troubleshoot it?
+
+**Type:** Interview question
+
+**Answer:**
+
+Inspect Pod events for ImagePullBackOff and the precise registry error. Confirm the JFrog repository path, immutable tag/digest, platform architecture and artifact existence. Verify imagePullSecrets are in the Pod namespace and attached through the Pod or ServiceAccount; test expiry and pull permissions without exposing tokens. Check node/runtime DNS, egress, proxy and CA trust. Argo CD applies manifests but normally does not pull the workload image itself; fix the runtime path and reconcile the corrected configuration.
+
+### 2. How do you manage secrets securely in CI/CD pipelines?
+
+**Type:** Interview question
+
+**Answer:**
+
+Prefer short-lived federated identities for cloud access. Store unavoidable credentials in a managed secret store or CI credential system with scoped access, masking and rotation. Inject them only into authorized jobs, never into Git, image layers, command tracing or published artifacts. Restrict production environments and runner access; protect logs, Terraform plans and state, which may contain sensitive values despite masking in normal output.
+
+### 3. A Python application was working successfully today, but tomorrow it suddenly starts generating many errors. How would you troubleshoot and improve it?
+
+**Type:** Interview question
+
+**Answer:**
+
+Compare the first errors with code releases, dependency versions, configuration/secrets, certificates, traffic and upstream changes. Group exceptions by type and request path, reproduce with sanitized input and inspect traces and resource saturation. Stabilize with a compatible rollback or capacity mitigation, then fix the cause. Pin dependencies, add regression tests, bounded timeouts/retries and error-rate alerts; broad exception suppression only hides the problem.
+
+### 4. Your application was deployed successfully on GKE, but due to high traffic CPU utilization crossed 90%. How would you troubleshoot and manage the incoming traffic?
+
+**Type:** Interview question
+
+**Answer:**
+
+Check whether CPU saturation coincides with latency, errors or throttling and distinguish expensive requests from legitimate load. Inspect container requests/limits and HPA metrics; scale replicas only if the app and dependencies can handle parallelism and node capacity exists. Use node autoscaling, caching, queueing or request limits as appropriate. Profile hot paths and load-test the fix. A 90% CPU metric alone does not identify the bottleneck.
+
+### 5. What is a ReplicaSet in Kubernetes?
+
+**Type:** Interview question
+
+**Answer:**
+
+A ReplicaSet maintains a desired number of Pods matching its selector. It creates missing Pods and deletes excess matching Pods, while a Deployment manages ReplicaSet revisions for rollout. A ReplicaSet does not itself restart a failed container or fix an application bug; kubelet handles container restart policy.
+
+### 6. If a pod goes into CrashLoopBackOff, how would you troubleshoot it? What role does ReplicaSet play?
+
+**Type:** Interview question
+
+**Answer:**
+
+CrashLoopBackOff is a backoff while a container repeatedly terminates. Inspect `kubectl describe pod` and `kubectl logs --previous`, termination reason and exit code, then check OOMKilled, startup command, missing configuration, dependency failure and overly aggressive probes. Fix the underlying cause and watch readiness/restart counts. The ReplicaSet maintains Pod objects; kubelet restarts containers, so deleting the Pod usually only recreates the same failure.
+
+### 7. What kinds of production troubleshooting scenarios have you faced most frequently?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize with real incidents: choose two or three cases such as CrashLoopBackOff, failed image pulls, missing Service endpoints, resource pressure or dependency timeouts. For each, state the observed user impact, diagnostic evidence, exact cause, mitigation and follow-up prevention. Do not invent incident frequency or claim that a generic troubleshooting checklist describes incidents you personally resolved.
+
+### 8. How would you troubleshoot an internet-facing GKE application end-to-end?
+
+**Type:** Interview question
+
+**Answer:**
+
+Establish affected regions, clusters and user journeys first. If kubectl cannot connect, check credentials, context, endpoint access, DNS, VPN/private routing and GKE service health before assuming a cluster failure. Inspect node conditions, resource pressure, quotas, upgrade operations and node-pool events. Trace DNS resolution, load-balancer backend health, Cloud Armor decisions, Gateway/Ingress configuration, Service selectors/EndpointSlices, Pod readiness and application dependencies. Correlate logs, metrics and audit events with changes. Restore through a validated rollback or healthy capacity, preserve evidence and document the root cause afterward.
+
+### 9. How would you troubleshoot across DNS → Global Load Balancer → Cloud Armor → Gateway → Service → Pod → Application?
+
+**Type:** Interview question
+
+**Answer:**
+
+Establish affected regions, clusters and user journeys first. If kubectl cannot connect, check credentials, context, endpoint access, DNS, VPN/private routing and GKE service health before assuming a cluster failure. Inspect node conditions, resource pressure, quotas, upgrade operations and node-pool events. Trace DNS resolution, load-balancer backend health, Cloud Armor decisions, Gateway/Ingress configuration, Service selectors/EndpointSlices, Pod readiness and application dependencies. Correlate logs, metrics and audit events with changes. Restore through a validated rollback or healthy capacity, preserve evidence and document the root cause afterward.
+
+---
+
+## Programming and Scripting
+
+5 questions
+
+### 1. Your resume mentions Python, Bash, Go, and Java. Have you actually worked with all four languages?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: list each language separately with your actual level and an example. Bash may automate command-line operations, Python may implement API/data workflows, Go may build services/tools, and Java may support application work. If one appears on the resume from coursework or limited exposure, say so explicitly. Provide only code and responsibilities you can explain and defend.
+
+### 2. What kind of work have you done using Python?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “I have [verified duration] of Python experience and have implemented [specific scripts or services]. One example reads [API/log/input], validates and transforms it, then writes [output] with timeouts, exception handling and tests. I used [libraries actually used] and can demonstrate the code and its operational result.” Separate production ownership from practice exercises.
+
+### 3. What is your experience with Bash scripting?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: list each language separately with your actual level and an example. Bash may automate command-line operations, Python may implement API/data workflows, Go may build services/tools, and Java may support application work. If one appears on the resume from coursework or limited exposure, say so explicitly. Provide only code and responsibilities you can explain and defend.
+
+### 4. How much experience do you have with Go?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: list each language separately with your actual level and an example. Bash may automate command-line operations, Python may implement API/data workflows, Go may build services/tools, and Java may support application work. If one appears on the resume from coursework or limited exposure, say so explicitly. Provide only code and responsibilities you can explain and defend.
+
+### 5. How much hands-on experience do you have with Java?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: list each language separately with your actual level and an example. Bash may automate command-line operations, Python may implement API/data workflows, Go may build services/tools, and Java may support application work. If one appears on the resume from coursework or limited exposure, say so explicitly. Provide only code and responsibilities you can explain and defend.
 
 ---
 
@@ -36442,9 +39068,39 @@ Thanos, Cortex and Mimir are horizontally‑scalable Prometheus ecosystems that 
 
 ---
 
+## Pull Request Governance
+
+3 questions
+
+### 1. What policies should you maintain for Pull Request approval?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use short-lived feature branches and reviewed pull requests into a protected main branch. Require relevant CODEOWNERS/reviewers, passing tests and linting, secret/dependency/SAST checks and artifact or IaC scans. Prevent direct pushes and uncontrolled force pushes; restrict bypass permissions and protect workflow definitions. Keep merge strategy consistent and make emergency exceptions auditable. Adapt reviewer count and gates to risk rather than claiming a particular company policy.
+
+### 2. How do you protect production branches and prevent direct pushes?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use short-lived feature branches and reviewed pull requests into a protected main branch. Require relevant CODEOWNERS/reviewers, passing tests and linting, secret/dependency/SAST checks and artifact or IaC scans. Prevent direct pushes and uncontrolled force pushes; restrict bypass permissions and protect workflow definitions. Keep merge strategy consistent and make emergency exceptions auditable. Adapt reviewer count and gates to risk rather than claiming a particular company policy.
+
+### 3. What CI/security checks should pass before allowing a PR to merge?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use short-lived feature branches and reviewed pull requests into a protected main branch. Require relevant CODEOWNERS/reviewers, passing tests and linting, secret/dependency/SAST checks and artifact or IaC scans. Prevent direct pushes and uncontrolled force pushes; restrict bypass permissions and protect workflow definitions. Keep merge strategy consistent and make emergency exceptions auditable. Adapt reviewer count and gates to risk rather than claiming a particular company policy.
+
+---
+
 ## Python
 
-32 questions
+35 questions
 
 ### 1. What is the largest Python script you have written?
 
@@ -36574,7 +39230,72 @@ Use the standard logging module with a named logger, set levels explicitly and c
 
 A strong answer names the specific languages used regularly (e.g. Python for automation and tooling, Bash for quick operational glue scripts, Go for CLIs or controllers) with a concrete example of what each was used for, rather than just listing languages. Explaining the reasoning - Python for its ecosystem and readability in larger automation, Bash for simple sequential operations - shows genuine hands-on judgment rather than a resume keyword list.
 
-### 17. How does garbage collection in Python work?
+### 17. Write a simple Python program to check disk-space utilization. Assume a system/drive, calculate disk usage, and generate an alert saying the disk is nearing full if utilization is 80% or higher. Below 80%, nothing needs to happen.
+
+**Type:** Interview question
+
+**Answer:**
+
+Python's standard library works on both platforms; supply the drive or mount point to inspect:
+```python
+import os
+import shutil
+import sys
+
+path = sys.argv[1] if len(sys.argv) > 1 else os.path.abspath(os.sep)
+try:
+    usage = shutil.disk_usage(path)
+    percent = 100 * usage.used / usage.total
+except (OSError, ZeroDivisionError) as exc:
+    print(f"Disk check failed: {exc}", file=sys.stderr)
+    raise SystemExit(2)
+if percent >= 80:
+    print(f"ALERT: disk {path} is nearing full ({percent:.1f}%)")
+```
+Pass `/` for the Linux root filesystem or `C:\` for the Windows system drive. Successful checks below 80% produce no output; production scheduling and notification delivery are separate concerns.
+
+### 18. How would you write the disk-space monitoring program for Windows and Linux? Windows example: C:\; Linux example: /.
+
+**Type:** Interview question
+
+**Answer:**
+
+Python's standard library works on both platforms; supply the drive or mount point to inspect:
+```python
+import os
+import shutil
+import sys
+
+path = sys.argv[1] if len(sys.argv) > 1 else os.path.abspath(os.sep)
+try:
+    usage = shutil.disk_usage(path)
+    percent = 100 * usage.used / usage.total
+except (OSError, ZeroDivisionError) as exc:
+    print(f"Disk check failed: {exc}", file=sys.stderr)
+    raise SystemExit(2)
+if percent >= 80:
+    print(f"ALERT: disk {path} is nearing full ({percent:.1f}%)")
+```
+Pass `/` for the Linux root filesystem or `C:\` for the Windows system drive. Successful checks below 80% produce no output; production scheduling and notification delivery are separate concerns.
+
+### 19. Using Python, open a file called Abhilesh.log and find how many lines are present in the log file.
+
+**Type:** Interview question
+
+**Answer:**
+
+Stream the file so memory use does not grow with its size; an unterminated final line still counts:
+```python
+try:
+    with open("Abhilesh.log", "rb") as log:
+        count = sum(1 for _ in log)
+except OSError as exc:
+    raise SystemExit(f"Cannot read Abhilesh.log: {exc}")
+print(count)
+```
+Binary mode avoids text-decoding errors while counting newline-delimited log records.
+
+### 20. How does garbage collection in Python work?
 
 **Type:** Implementation / Workflow
 
@@ -36582,7 +39303,7 @@ A strong answer names the specific languages used regularly (e.g. Python for aut
 
 Python's garbage collection is a cycle collector that periodically frees up memory occupied by objects that are no longer referenced. It works by identifying unreachable objects and deleting them, and it is enabled by default in Python 2.x and 3.x.
 
-### 18. What is reference counting?
+### 21. What is reference counting?
 
 **Type:** Conceptual
 
@@ -36590,7 +39311,7 @@ Python's garbage collection is a cycle collector that periodically frees up memo
 
 Reference counting is an algorithm used to manage memory by tracking the number of references to each object in memory. When the reference count reaches zero, the object is deallocated.
 
-### 19. How does Python handle circular references?
+### 22. How does Python handle circular references?
 
 **Type:** Implementation / Workflow
 
@@ -36598,7 +39319,7 @@ Reference counting is an algorithm used to manage memory by tracking the number 
 
 Python uses a cycle detection algorithm to handle circular references. When the garbage collector detects a circular reference, it breaks the cycle by changing the references to point to a special object called a 'weakref'.
 
-### 20. What is generational garbage collection?
+### 23. What is generational garbage collection?
 
 **Type:** Conceptual
 
@@ -36606,7 +39327,7 @@ Python uses a cycle detection algorithm to handle circular references. When the 
 
 Generational garbage collection is a technique used to reduce the overhead of garbage collection by dividing objects into generations based on their lifetimes. Younger generations are collected more frequently than older generations.
 
-### 21. What is a variable in Python?
+### 24. What is a variable in Python?
 
 **Type:** Conceptual
 
@@ -36614,7 +39335,7 @@ Generational garbage collection is a technique used to reduce the overhead of ga
 
 In Python, a variable is an object that stores a value. Variables are created when they are assigned a value, and they can be reassigned to hold different values.
 
-### 22. What are the constraints/rules for naming Python variables?
+### 25. What are the constraints/rules for naming Python variables?
 
 **Type:** Conceptual
 
@@ -36622,7 +39343,7 @@ In Python, a variable is an object that stores a value. Variables are created wh
 
 In Python, variable names must start with a letter (a-z or A-Z), underscore (_), or dollar sign (#). They can contain letters, digits, underscores, and dollar signs, but cannot contain whitespace or special characters.
 
-### 23. Can Python reserved keywords be used as variable names?
+### 26. Can Python reserved keywords be used as variable names?
 
 **Type:** Conceptual
 
@@ -36630,7 +39351,7 @@ In Python, variable names must start with a letter (a-z or A-Z), underscore (_),
 
 No, Python reserved keywords cannot be used as variable names. They must be unique and not used as identifiers.
 
-### 24. Give examples of mutable and immutable Python objects.
+### 27. Give examples of mutable and immutable Python objects.
 
 **Type:** Conceptual
 
@@ -36638,7 +39359,7 @@ No, Python reserved keywords cannot be used as variable names. They must be uniq
 
 Mutable Python objects can change in place: lists (`[1, 2]`), dictionaries (`{'a': 1}`), sets, bytearrays, and most user-defined class instances. Immutable objects cannot change after creation: integers, floats, booleans, strings, bytes, frozensets, and tuples whose element references are fixed. For example, `items.append(3)` mutates a list, while `name += 'x'` creates a new string object. Immutability does not automatically imply hashability: a tuple containing a list is immutable as a tuple but unhashable because the nested list is mutable.
 
-### 25. Is a tuple completely immutable if it contains a mutable object?
+### 28. Is a tuple completely immutable if it contains a mutable object?
 
 **Type:** Conceptual
 
@@ -36646,7 +39367,7 @@ Mutable Python objects can change in place: lists (`[1, 2]`), dictionaries (`{'a
 
 The tuple itself is immutable: its length and references cannot be changed after creation. However, an object referenced by the tuple can still be mutable. For example, `t = (1, [2, 3])`; `t[1].append(4)` is valid and produces `(1, [2, 3, 4])`, but `t[1] = []` raises `TypeError` because that would replace a tuple element. This distinction also affects hashability: a tuple is hashable only when every contained value is hashable, so a tuple containing a list cannot be used as a dictionary key or set member.
 
-### 26. Given "Akhilesh Kumar Singh", create a dictionary containing the frequency of each character.
+### 29. Given "Akhilesh Kumar Singh", create a dictionary containing the frequency of each character.
 
 **Type:** Implementation / Workflow
 
@@ -36654,7 +39375,7 @@ The tuple itself is immutable: its length and references cannot be changed after
 
 Use `collections.Counter`, which returns a dictionary-like mapping: `from collections import Counter; frequencies = dict(Counter('Akhilesh Kumar Singh'))`. This counts characters exactly as written, so uppercase and lowercase letters are different and spaces are included. For a case-insensitive count without spaces, normalize first: `text = 'Akhilesh Kumar Singh'; frequencies = dict(Counter(ch.lower() for ch in text if not ch.isspace()))`. A manual loop using `freq[ch] = freq.get(ch, 0) + 1` produces the same result. Both approaches run in O(n) time and require O(k) space for k distinct characters.
 
-### 27. Given a list containing duplicate elements, remove the duplicates.
+### 30. Given a list containing duplicate elements, remove the duplicates.
 
 **Type:** Implementation / Workflow
 
@@ -36662,7 +39383,7 @@ Use `collections.Counter`, which returns a dictionary-like mapping: `from collec
 
 If order does not matter and elements are hashable, use `unique = list(set(values))`; this is concise but does not guarantee the original order. To preserve order, use `unique = list(dict.fromkeys(values))` on modern Python. An explicit version maintains a `seen` set and appends a value only when it has not been seen. The set-based ordered approach is O(n) average time and O(n) additional space. If elements are unhashable, such as lists or dictionaries, use a hashable key conversion or an equality-based scan with a possible O(n²) cost.
 
-### 28. How can you improve duplicate removal using a set?
+### 31. How can you improve duplicate removal using a set?
 
 **Type:** Implementation / Workflow
 
@@ -36677,7 +39398,7 @@ input_list = [1, 2, 2, 3, 4, 4, 5]
 print(remove_duplicates_ordered(input_list))
 # Output: [1, 2, 3, 4, 5]
 
-### 29. What is the time complexity of removing duplicates using a seen set?
+### 32. What is the time complexity of removing duplicates using a seen set?
 
 **Type:** Conceptual
 
@@ -36685,7 +39406,7 @@ print(remove_duplicates_ordered(input_list))
 
 The time complexity of removing duplicates using a seen set is O(n), where n is the number of elements in the set.
 
-### 30. Can XOR be used for duplicate-related problems?
+### 33. Can XOR be used for duplicate-related problems?
 
 **Type:** Conceptual
 
@@ -36693,7 +39414,7 @@ The time complexity of removing duplicates using a seen set is O(n), where n is 
 
 No, XOR cannot be used for duplicate-related problems. XOR has a time complexity of O(n) for duplicate-related problems, which is the same as using a seen set.
 
-### 31. Given an array where every number appears twice except one, find the unique number using XOR.
+### 34. Given an array where every number appears twice except one, find the unique number using XOR.
 
 **Type:** Implementation / Workflow
 
@@ -36701,7 +39422,7 @@ No, XOR cannot be used for duplicate-related problems. XOR has a time complexity
 
 The unique number can be found by performing XOR on all numbers in the array. The result will be the unique number. The time complexity is O(n).
 
-### 32. When should you use XOR vs Set for duplicate/unique-element problems?
+### 35. When should you use XOR vs Set for duplicate/unique-element problems?
 
 **Type:** Comparison
 
@@ -37552,6 +40273,34 @@ Verification: run assert is_valid_email("user@example.com") and assert not is_va
 
 ---
 
+## Python Experience
+
+1 question
+
+### 1. How much experience do you have in Python?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “I have [verified duration] of Python experience and have implemented [specific scripts or services]. One example reads [API/log/input], validates and transforms it, then writes [output] with timeouts, exception handling and tests. I used [libraries actually used] and can demonstrate the code and its operational result.” Separate production ownership from practice exercises.
+
+---
+
+## Python GCP Monitoring
+
+1 question
+
+### 1. If you need to write a Python script to monitor application errors on GCP, how would you implement it?
+
+**Type:** Interview question
+
+**Answer:**
+
+Prefer a Cloud Logging log-based alert or metric for standard error detection. When custom correlation is required, run a scheduled Python job using Application Default Credentials and the Logging client to query a bounded time window with project/service/severity filters. Page through results, aggregate by service and error type, deduplicate notifications and record a checkpoint. Use retries and request timeouts, avoid logging sensitive payloads and test missing data and overlapping windows.
+
+---
+
 ## Python/Automation
 
 1 question
@@ -38143,6 +40892,20 @@ Use a blameless, evidence-first format: build a timeline from immutable data (ti
 
 ---
 
+## Recent-Change Investigation
+
+1 question
+
+### 1. During an incident, how would you determine whether a recent application, Kubernetes, Terraform, configuration, or infrastructure change caused the issue?
+
+**Type:** Interview question
+
+**Answer:**
+
+Own the incident timeline, scope and communications. Compare the first failure time with application releases, ConfigMap/Secret updates, Kubernetes events, Terraform runs and cloud audit logs. Compare a failing instance with a healthy one and inspect dependency changes; correlation alone does not prove causation. Test a narrow hypothesis or revert a compatible recent change with the incident lead's approval. Verify user-facing recovery and record evidence and follow-up prevention work.
+
+---
+
 ## Relational Database Fundamentals
 
 30 questions
@@ -38408,6 +41171,20 @@ Database failover is the process of switching client traffic from a failed prima
 **Answer:**
 
 Separate startup checks from liveness and readiness. Startup allows initialization or model loading; liveness detects an unrecoverable local process problem; readiness indicates whether the instance can accept traffic. Do not make liveness depend on a shared database or model API because a downstream outage could restart the entire fleet. Readiness should exercise necessary local capability without expensive work on every probe, while independent synthetics test end-to-end business correctness and model quality. Spread replicas across nodes/zones, set deadlines and retry budgets, and isolate pools/queues so one tenant or dependency cannot exhaust all capacity. Test node, zone and dependency failures and measure which user journeys remain available.
+
+---
+
+## ReplicaSet Reconciliation
+
+1 question
+
+### 1. If a ReplicaSet is configured for three replicas but only two pods are running, which Kubernetes component detects and fixes it?
+
+**Type:** Interview question
+
+**Answer:**
+
+The ReplicaSet controller compares desired replicas with matching active Pods and creates a missing Pod when the count is short. The scheduler assigns a node and kubelet runs it. If three Pod objects exist but only two are ready, the controller may not create a fourth merely because one is unready; investigate readiness and Deployment rollout behavior.
 
 ---
 
@@ -41190,6 +43967,104 @@ Avoid a service mesh when your environment is small/simple (single service or a 
 
 ---
 
+## SLA / SLO / SLI
+
+8 questions
+
+### 1. What is your experience with SLAs and SLOs from an SRE perspective?
+
+**Type:** Interview question
+
+**Answer:**
+
+Measure user-facing availability with successful valid requests divided by total valid requests, latency with threshold-based good-event ratios or relevant percentiles, errors by status/cause and throughput as requests per time. Define windows, exclusions and measurement locations. Set SLOs with service owners, compare performance with contractual SLA rules and alert on actionable error-budget burn. Infrastructure health supports diagnosis but is not by itself a user-facing availability SLI.
+
+### 2. Where are your SLA/SLO dashboards hosted?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: name the monitoring platform actually used, where the dashboards are hosted and whether you configured collection or only consumed dashboards. ELK commonly covers log ingestion/search, OpenTelemetry provides instrumentation and collection, Grafana visualizes data sources, and Dynatrace provides an observability platform. Describe one dashboard or alert you owned, its data source, access controls and a troubleshooting outcome; do not equate familiarity with deployment experience.
+
+### 3. Which monitoring platform do you use for your SLO dashboards?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: name the monitoring platform actually used, where the dashboards are hosted and whether you configured collection or only consumed dashboards. ELK commonly covers log ingestion/search, OpenTelemetry provides instrumentation and collection, Grafana visualizes data sources, and Dynatrace provides an observability platform. Describe one dashboard or alert you owned, its data source, access controls and a troubleshooting outcome; do not equate familiarity with deployment experience.
+
+### 4. What SLIs do you monitor?
+
+**Type:** Interview question
+
+**Answer:**
+
+Measure user-facing availability with successful valid requests divided by total valid requests, latency with threshold-based good-event ratios or relevant percentiles, errors by status/cause and throughput as requests per time. Define windows, exclusions and measurement locations. Set SLOs with service owners, compare performance with contractual SLA rules and alert on actionable error-budget burn. Infrastructure health supports diagnosis but is not by itself a user-facing availability SLI.
+
+### 5. How do you monitor application availability, latency, error rate, and throughput?
+
+**Type:** Interview question
+
+**Answer:**
+
+Measure user-facing availability with successful valid requests divided by total valid requests, latency with threshold-based good-event ratios or relevant percentiles, errors by status/cause and throughput as requests per time. Define windows, exclusions and measurement locations. Set SLOs with service owners, compare performance with contractual SLA rules and alert on actionable error-budget burn. Infrastructure health supports diagnosis but is not by itself a user-facing availability SLI.
+
+### 6. How are SLOs configured/monitored in Dynatrace?
+
+**Type:** Interview question
+
+**Answer:**
+
+In Dynatrace, select the relevant service/metric expression, define the good-event ratio, target and evaluation window, then validate the SLO against independent request data. Place the SLO and remaining error budget on an access-controlled dashboard and configure supported alerting for sustained risk. Handle missing data and maintenance exclusions explicitly; entity selectors and feature availability depend on the deployed Dynatrace version.
+
+### 7. Who defines the SLA versus the SLO?
+
+**Type:** Interview question
+
+**Answer:**
+
+Business/service owners and customer or legal stakeholders agree the SLA. Product, engineering and SRE teams set achievable SLOs that reflect user needs and contractual commitments. Engineers implement trustworthy SLIs and telemetry with service-owner agreement. Operations maintains dashboards and alerts, but changing a business commitment is not solely a monitoring configuration decision.
+
+### 8. Do you monitor error-budget consumption?
+
+**Type:** Interview question
+
+**Answer:**
+
+Track error budget as the allowed bad-event proportion, `1 - SLO`, over the agreed window; remaining budget accounts for observed bad events under that window's rules. Burn rate compares observed bad-event rate with the allowed rate. Use short and long windows together to detect fast outages and slow degradation, and agree release/incident actions when budget is exhausted.
+
+---
+
+## SLI / SLO / SLA
+
+1 question
+
+### 1. What is SLI, SLO, and SLA?
+
+**Type:** Interview question
+
+**Answer:**
+
+An SLI measures service behavior, such as the proportion of valid requests completed successfully within a latency threshold. An SLO defines the target for that indicator over a window, such as 99.9% successful requests over 30 days. An SLA is an agreement describing commitments, measurement rules and consequences. Define exclusions and measurement points explicitly; an internal SLO often provides margin before the external SLA is breached.
+
+---
+
+## SLI / SLO / SLA Ownership
+
+1 question
+
+### 1. Who defines or sets up the SLA, SLO, and SLI?
+
+**Type:** Interview question
+
+**Answer:**
+
+Business/service owners and customer or legal stakeholders agree the SLA. Product, engineering and SRE teams set achievable SLOs that reflect user needs and contractual commitments. Engineers implement trustworthy SLIs and telemetry with service-owner agreement. Operations maintains dashboards and alerts, but changing a business commitment is not solely a monitoring configuration decision.
+
+---
+
 ## SLI, SLO and SLA
 
 30 questions
@@ -41576,6 +44451,20 @@ DevOps is a broad set of cultural and engineering practices for shared ownership
 
 ---
 
+## SRE / Monitoring / Python
+
+1 question
+
+### 1. Tell me about your high-level experience, especially in SRE, monitoring, alerting, and Python. Context: the interviewer described a Google project migrating/converting existing alerts into an internal system called Portman, focusing on Python, parsing alert definitions, semantic conversion, testing, validation, and maintaining existing production behavior.
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize actual SRE and Python experience, then describe a safe alert-conversion approach: parse source definitions into a typed intermediate representation, map thresholds, windows, aggregation, labels, missing-data behavior and routing into the documented target schema, and reject unsupported constructs. Golden fixtures and replayed telemetry should compare old/new firing behavior before shadow rollout. Portman is an internal system in this interview context; its API and semantics must come from the owning team, not assumptions.
+
+---
+
 ## SRE & Incident Response
 
 2 questions
@@ -41595,6 +44484,20 @@ Illustrative incident, not a claim about personal history: checkout latency rise
 **Answer:**
 
 A request can wait for a connection-pool slot, DNS resolution, TCP connection establishment, TLS negotiation, a database lock or a retry timeout before returning an error. Repeated retries or long connection timeouts turn an unavailable dependency into high latency and queue growth. Existing connections may still work, some replicas or shards may remain healthy, and cached or database-independent endpoints can succeed, so the service is degraded rather than completely unavailable. Separate connection-wait time from query execution time in traces; compare pool active/idle/waiting counts, database sessions, network errors and endpoint success rates. Mitigate with bounded deadlines, limited retries with jitter, concurrency limits and circuit breaking; fix the underlying database or network fault. A readiness policy should prevent a bad instance receiving traffic without taking every healthy endpoint offline because of one shared dependency.
+
+---
+
+## SRE Experience
+
+1 question
+
+### 1. What SRE work have you done in your Capgemini project? List it point by point.
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: identify actual ownership in SLO definition, dashboards, alert tuning, incident response, tracing, capacity planning and toil reduction. For Dynatrace, distinguish installing/configuring collection from consuming existing dashboards. Describe one service's telemetry, an alert condition, a trace-based diagnosis and a measured result. State which tasks you performed yourself; the question does not establish that any particular tool or achievement was part of your Capgemini project.
 
 ---
 
@@ -41930,6 +44833,20 @@ I page only for urgent, actionable user impact or imminent exhaustion, using SLO
 
 ---
 
+## SRE Tools
+
+1 question
+
+### 1. What SRE tools have you used in your project, and what work have you done with each tool?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: identify actual ownership in SLO definition, dashboards, alert tuning, incident response, tracing, capacity planning and toil reduction. For Dynatrace, distinguish installing/configuring collection from consuming existing dashboards. Describe one service's telemetry, an alert condition, a trace-based diagnosis and a measured result. State which tasks you performed yourself; the question does not establish that any particular tool or achievement was part of your Capgemini project.
+
+---
+
 ## SRE/Reliability
 
 2 questions
@@ -41949,6 +44866,28 @@ Choose SLIs that reflect real user experience: request success rate (non-5xx res
 **Answer:**
 
 Diagnose by correlating request-rate graphs across the call chain - if load on the failing dependency step-changes upward right as its own error rate rises, that is the retry-storm signature (a 'thundering herd' pattern), confirmed by checking retry counters/client logs for exponential growth in attempts per original request. Fix with three layers: exponential backoff with jitter on every retrying client (never fixed-interval retries), a circuit breaker that stops calling a dependency once its error rate crosses a threshold and fails fast instead, and request-level timeouts short enough that failed calls free up resources quickly rather than piling up. Longer-term, add a load-shedding/bulkhead pattern so one degraded dependency cannot exhaust the shared thread/connection pool used by unrelated requests.
+
+---
+
+## Stakeholder Alignment
+
+2 questions
+
+### 1. Tell me about a challenging situation where you had to align multiple teams or stakeholders. How did you overcome it?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize one real example: describe the business impact and constraints, the teams involved, the hypotheses tested and the evidence identifying the cause or disagreement. Explain your specific technical and coordination actions, the decision process and the verified result, including any remaining tradeoff. Use a measured outcome only when records support it, and distinguish your contribution from collective work.
+
+### 2. How do you coordinate with the Business Analyst, development team, and other stakeholders before productionizing a change?
+
+**Type:** Interview question
+
+**Answer:**
+
+Clarify business impact, deadline, risk and dependencies with the requester, product owner/BA and engineering owner. Compare the urgent change with committed work, agree who can reprioritize and record the decision. Confirm acceptance criteria, test evidence, operational readiness and rollback before release. Sprint urgency does not automatically waive production controls; use the emergency path only when its criteria are met.
 
 ---
 
@@ -42244,7 +45183,7 @@ Run Kubernetes as the control plane and expose VMs via KubeVirt for in-cluster V
 
 ## Terraform
 
-96 questions
+113 questions
 
 ### 1. Are you comfortable writing Terraform scripts?
 
@@ -42664,23 +45603,7 @@ terraform init initializes a working directory for Terraform: it configures and 
 
 **Answer:**
 
-terraform plan shows the changes Terraform will make to reach the desired state. It is used for review, approval, and policy checks before applying changes.
-
-Detailed interview explanation:
-Terraform Plan should be explained as part of Infrastructure as Code. Terraform lets teams define infrastructure declaratively, review changes before applying them, and keep cloud resources aligned with version-controlled configuration. The important production concerns are state management, dependency ordering, module reuse, drift detection, policy enforcement, and secure automation.
-
-Production example:
-In an enterprise Terraform workflow, an engineer raises a pull request for infrastructure changes. CI runs terraform fmt, validate, security scanning, cost checks, and terraform plan. Reviewers inspect the plan before apply. Production applies are executed by a controlled pipeline identity, while state is stored in a remote encrypted backend with locking and restricted access.
-
-Best practices to mention:
-- Use remote encrypted state with locking and backups.
-- Split large infrastructure into modules and separate state boundaries.
-- Pin provider and module versions.
-- Avoid storing secrets in code, outputs, or broadly accessible state.
-- Use policy-as-code and drift detection before production changes.
-
-Common interview follow-ups:
-Be ready to explain state corruption, partial applies, imports, state migration, workspaces, module design, provider authentication, and how to recover when Terraform state and real infrastructure do not match.
+terraform plan. is handled by understanding the production mechanism, the configuration involved, and the operational risk it controls. In Terraform, the practical answer is to state what changes, who or what is affected, and how it is verified. Example commands: `terraform fmt`, `terraform validate`, `terraform plan`, then apply only after reviewing drift, state, provider versions, variables, and backend locking. In an interview, I would also mention the key failure mode, the security or reliability trade-off, and the rollback or recovery step so the answer sounds production-ready instead of theoretical.
 
 ### 46. Explain terraform apply.
 
@@ -42688,7 +45611,7 @@ Be ready to explain state corruption, partial applies, imports, state migration,
 
 **Answer:**
 
-terraform apply builds an execution plan from current configuration and state, shows the planned create/update/delete actions, and then executes them to reconcile infrastructure and write the updated state to the configured backend. By default apply refreshes remote resources before planning, prompts for interactive approval, and can be run noninteractively with -auto-approve. You can create and reuse a plan file with terraform plan -out=plan.tfplan and then run terraform apply plan.tfplan (apply will not refresh when given a saved plan). Useful flags include -var, -var-file, -parallelism, -lock/ -lock-timeout, and -input=false. Verify results with terraform show plan.tfplan, terraform state list, and terraform output.
+terraform apply. is handled by understanding the production mechanism, the configuration involved, and the operational risk it controls. In Terraform, the practical answer is to state what changes, who or what is affected, and how it is verified. Example commands: `terraform fmt`, `terraform validate`, `terraform plan`, then apply only after reviewing drift, state, provider versions, variables, and backend locking. In an interview, I would also mention the key failure mode, the security or reliability trade-off, and the rollback or recovery step so the answer sounds production-ready instead of theoretical.
 
 ### 47. Explain terraform destroy.
 
@@ -43163,7 +46086,202 @@ A module is a reusable collection of Terraform configuration that accepts inputs
 
 Terraform state still records the resource until the next refresh or plan reads the provider. The plan detects that the remote object is missing and, if it remains in configuration, normally proposes creating it again. The next approved apply recreates it, but the new resource may receive a different identifier, IP or generated property and dependent services may have been disrupted. If configuration also removed the resource, Terraform updates state without recreation. Importantly, recreation can fail because of retained names, dependencies, quotas or data loss; Terraform cannot restore deleted business data merely because it knows the resource definition. I investigate the audit log, recover data where required, review the plan and then apply through the controlled pipeline. Preventive controls include least-privilege IAM, deletion protection where supported, backups, policy and drift alerts—not automatic unreviewed applies for every drift event.
 
-### 95. What is the difference between Terraform Community or open-source and Terraform Enterprise, and why would an organization use Terraform Enterprise?
+### 95. How do you create resources such as VPCs, VMs, GKE, etc. using Terraform modules?
+
+**Type:** Interview question
+
+**Answer:**
+
+Keep reusable modules focused on a resource boundary, with typed variables, validation, outputs and tests. Environment roots configure providers/backends and call pinned module versions. For example:
+```hcl
+module "network" {
+  source     = "../../modules/gcp-network"
+  project_id = var.project_id
+  name       = "${var.environment}-network"
+}
+```
+The module directory must implement its declared inputs and resources. Use separate provider-specific modules for GCP and Azure and explicitly pass aliased providers when needed; do not hide incompatible cloud semantics behind a single generic interface.
+
+### 96. Can you write/show Terraform modular code?
+
+**Type:** Interview question
+
+**Answer:**
+
+Keep reusable modules focused on a resource boundary, with typed variables, validation, outputs and tests. Environment roots configure providers/backends and call pinned module versions. For example:
+```hcl
+module "network" {
+  source     = "../../modules/gcp-network"
+  project_id = var.project_id
+  name       = "${var.environment}-network"
+}
+```
+The module directory must implement its declared inputs and resources. Use separate provider-specific modules for GCP and Azure and explicitly pass aliased providers when needed; do not hide incompatible cloud semantics behind a single generic interface.
+
+### 97. What information is stored in a Terraform state file? How does it map Terraform resources to actual cloud resource IDs?
+
+**Type:** Interview question
+
+**Answer:**
+
+State maps Terraform resource addresses, including module paths and instance keys, to provider-managed resource identities and recorded attributes. It also contains metadata such as lineage, serial, outputs and dependency information. Terraform uses configuration, refreshed remote data and state to plan changes. State can contain plaintext sensitive values, so restrict and encrypt backend access and avoid committing it to Git.
+
+### 98. If someone manually changes a Terraform-managed resource from the GCP Console, how does Terraform identify the change?
+
+**Type:** Interview question
+
+**Answer:**
+
+During planning, Terraform normally refreshes managed resource attributes through provider APIs and compares observed state with configuration. An out-of-band console change can therefore appear as drift. Review whether the change was intentional and whether the attribute is provider-tracked or ignored. Adopt approved changes into code or plan a controlled correction; `plan -refresh-only` helps inspect state reconciliation without changing infrastructure. Do not blindly apply a large drift plan.
+
+### 99. If the Terraform state file is accidentally deleted, how would you recover it?
+
+**Type:** Interview question
+
+**Answer:**
+
+Stop concurrent Terraform runs and restore the correct backend object version or a verified state backup. Validate workspace, lineage and resource mappings, then inspect a fresh plan before applying. If no usable backup exists, inventory live resources and reconstruct configuration with import blocks or terraform import. Never run apply against an empty state assuming it will discover everything automatically.
+
+### 100. What is configuration drift in Terraform?
+
+**Type:** Interview question
+
+**Answer:**
+
+During planning, Terraform normally refreshes managed resource attributes through provider APIs and compares observed state with configuration. An out-of-band console change can therefore appear as drift. Review whether the change was intentional and whether the attribute is provider-tracked or ignored. Adopt approved changes into code or plan a controlled correction; `plan -refresh-only` helps inspect state reconciliation without changing infrastructure. Do not blindly apply a large drift plan.
+
+### 101. How does Terraform know whether it needs to manage GCP, AWS, or Azure resources? Explain Terraform providers.
+
+**Type:** Interview question
+
+**Answer:**
+
+Providers are plugins that implement resource/data-source types and communicate with service APIs. Required-provider declarations select provider source and version constraints, while provider configuration selects identity, account/project and region. Resource prefixes such as google_, aws_ and azurerm_ identify their default provider; aliases support multiple configurations. Terraform follows declared resources, not a guess from cloud credentials.
+
+### 102. How are you using Terraform in your current environment?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “Our infrastructure code is stored in [verified Git host] and run through [local CLI / approved CI / Terraform Enterprise or HCP Terraform]. Provider authentication uses [actual identity method], state is in [actual backend], and changes follow plan, review and apply. Manual console work is [actual permitted scope] and approved changes are reconciled into code.” State which tooling is actually deployed rather than assuming an enterprise platform.
+
+### 103. Do you have a local Terraform setup, or are you using Terraform Enterprise / another enterprise platform?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “Our infrastructure code is stored in [verified Git host] and run through [local CLI / approved CI / Terraform Enterprise or HCP Terraform]. Provider authentication uses [actual identity method], state is in [actual backend], and changes follow plan, review and apply. Manual console work is [actual permitted scope] and approved changes are reconciled into code.” State which tooling is actually deployed rather than assuming an enterprise platform.
+
+### 104. How have you structured your Terraform modules?
+
+**Type:** Interview question
+
+**Answer:**
+
+Keep reusable modules focused on a resource boundary, with typed variables, validation, outputs and tests. Environment roots configure providers/backends and call pinned module versions. For example:
+```hcl
+module "network" {
+  source     = "../../modules/gcp-network"
+  project_id = var.project_id
+  name       = "${var.environment}-network"
+}
+```
+The module directory must implement its declared inputs and resources. Use separate provider-specific modules for GCP and Azure and explicitly pass aliased providers when needed; do not hide incompatible cloud semantics behind a single generic interface.
+
+### 105. Are you maintaining shared Terraform modules and calling them from individual projects?
+
+**Type:** Interview question
+
+**Answer:**
+
+Keep reusable modules focused on a resource boundary, with typed variables, validation, outputs and tests. Environment roots configure providers/backends and call pinned module versions. For example:
+```hcl
+module "network" {
+  source     = "../../modules/gcp-network"
+  project_id = var.project_id
+  name       = "${var.environment}-network"
+}
+```
+The module directory must implement its declared inputs and resources. Use separate provider-specific modules for GCP and Azure and explicitly pass aliased providers when needed; do not hide incompatible cloud semantics behind a single generic interface.
+
+### 106. Where are you storing your Terraform scripts/code?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “Our infrastructure code is stored in [verified Git host] and run through [local CLI / approved CI / Terraform Enterprise or HCP Terraform]. Provider authentication uses [actual identity method], state is in [actual backend], and changes follow plan, review and apply. Manual console work is [actual permitted scope] and approved changes are reconciled into code.” State which tooling is actually deployed rather than assuming an enterprise platform.
+
+### 107. Where are you storing your Terraform state files?
+
+**Type:** Interview question
+
+**Answer:**
+
+Pre-create a secured, versioned GCS state bucket and separate state prefixes by environment and stack; use separate buckets/projects when access boundaries require it. A root backend can be:
+```hcl
+terraform {
+  backend "gcs" {
+    bucket = "company-prod-terraform-state"
+    prefix = "platform/network"
+  }
+}
+```
+Authenticate externally with a scoped identity. Backend blocks cannot refer to ordinary Terraform variables; use reviewed partial backend configuration during init. GCS provides locking. State and saved plans can contain secrets. Reference: https://developer.hashicorp.com/terraform/language/backend/gcs
+
+### 108. Are you using a GCS bucket as the Terraform remote backend?
+
+**Type:** Interview question
+
+**Answer:**
+
+Pre-create a secured, versioned GCS state bucket and separate state prefixes by environment and stack; use separate buckets/projects when access boundaries require it. A root backend can be:
+```hcl
+terraform {
+  backend "gcs" {
+    bucket = "company-prod-terraform-state"
+    prefix = "platform/network"
+  }
+}
+```
+Authenticate externally with a scoped identity. Backend blocks cannot refer to ordinary Terraform variables; use reviewed partial backend configuration during init. GCS provides locking. State and saved plans can contain secrets. Reference: https://developer.hashicorp.com/terraform/language/backend/gcs
+
+### 109. How are you locking the Terraform state file?
+
+**Type:** Interview question
+
+**Answer:**
+
+A locking-capable shared backend serializes state-changing operations for the same state. A second apply waits or fails to acquire the lock; separate states are not protected from conflicting management of the same cloud object. Inspect the lock holder and active CI runs, then wait or use a lock timeout. Force-unlock only after confirming the owner is dead and no operation is writing. GCS supports locking natively. Reference: https://developer.hashicorp.com/terraform/language/backend/gcs
+
+### 110. What do you define in the Terraform backend configuration for GCS?
+
+**Type:** Interview question
+
+**Answer:**
+
+Pre-create a secured, versioned GCS state bucket and separate state prefixes by environment and stack; use separate buckets/projects when access boundaries require it. A root backend can be:
+```hcl
+terraform {
+  backend "gcs" {
+    bucket = "company-prod-terraform-state"
+    prefix = "platform/network"
+  }
+}
+```
+Authenticate externally with a scoped identity. Backend blocks cannot refer to ordinary Terraform variables; use reviewed partial backend configuration during init. GCS provides locking. State and saved plans can contain secrets. Reference: https://developer.hashicorp.com/terraform/language/backend/gcs
+
+### 111. How does Terraform state locking work with a GCS backend?
+
+**Type:** Interview question
+
+**Answer:**
+
+The GCS backend acquires a lock for a particular state before an operation that requires it, preventing cooperating Terraform processes from writing that state concurrently. Use the same secured bucket/prefix for that stack and allow sufficient lock timeout. If a lock remains, inspect its owner and active runs before considering force-unlock; never disable locking to bypass a live operation. GCS object versioning supports recovery but is separate from locking.
+
+### 112. What is the difference between Terraform Community or open-source and Terraform Enterprise, and why would an organization use Terraform Enterprise?
 
 **Type:** Comparison
 
@@ -43171,7 +46289,7 @@ Terraform state still records the resource until the next refresh or plan reads 
 
 Terraform Community Edition gives the core CLI workflow: providers, modules, plan, apply and state. The organization must design and operate its own remote execution, state backend and locking, access control, secrets, policy checks, approvals, audit trail and high availability around it. Terraform Enterprise is the self-hosted commercial platform for centralized Terraform workflows; it adds managed workspaces and remote runs, team-based access, policy enforcement, private module and provider distribution, governance and audit capabilities, with vendor support and enterprise deployment features. HCP Terraform provides a related SaaS operating model, so I would not use its name interchangeably with Terraform Enterprise. An organization chooses Enterprise when regulatory, data-residency or network-isolation requirements demand a self-hosted control plane and when the cost of consistently building those governance capabilities across many teams exceeds the license and platform-operating cost. Open source may remain the better choice for a small team with a mature CI/CD platform and modest governance needs. I decide from tenancy, compliance, scale, integration, availability, support and total cost—not from the assumption that Enterprise makes Terraform code itself better.
 
-### 96. Design a reusable Terraform module in one file for an S3 bucket with configurable bucket name, environment tag, versioning, SSE-S3 encryption, complete Public Access Block, lifecycle transition of non-current versions to GLACIER_IR after 30 days and deletion after 365 days, with bucket_arn and bucket_id outputs.
+### 113. Design a reusable Terraform module in one file for an S3 bucket with configurable bucket name, environment tag, versioning, SSE-S3 encryption, complete Public Access Block, lifecycle transition of non-current versions to GLACIER_IR after 30 days and deletion after 365 days, with bucket_arn and bucket_id outputs.
 
 **Type:** Coding
 
@@ -43305,6 +46423,52 @@ google_project_iam_policy authoritatively manages the project allow policy and c
 
 ---
 
+## Terraform / Multi-Cloud
+
+4 questions
+
+### 1. How are you deploying/provisioning resources across GCP and Azure?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “My primary cloud is [verified platform], with [verified duration] of hands-on work. I have used [specific services] for [specific responsibilities]. My exposure to the other clouds is [production / project / POC / training], with [concrete examples].” Separate overlapping calendar years from platform-specific experience and do not claim deployments in a cloud used only for study.
+
+### 2. Which Infrastructure-as-Code tool are you using?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize before use: “Our infrastructure code is stored in [verified Git host] and run through [local CLI / approved CI / Terraform Enterprise or HCP Terraform]. Provider authentication uses [actual identity method], state is in [actual backend], and changes follow plan, review and apply. Manual console work is [actual permitted scope] and approved changes are reconciled into code.” State which tooling is actually deployed rather than assuming an enterprise platform.
+
+### 3. Have you written Terraform modules for both GCP and Azure?
+
+**Type:** Interview question
+
+**Answer:**
+
+Keep reusable modules focused on a resource boundary, with typed variables, validation, outputs and tests. Environment roots configure providers/backends and call pinned module versions. For example:
+```hcl
+module "network" {
+  source     = "../../modules/gcp-network"
+  project_id = var.project_id
+  name       = "${var.environment}-network"
+}
+```
+The module directory must implement its declared inputs and resources. Use separate provider-specific modules for GCP and Azure and explicitly pass aliased providers when needed; do not hide incompatible cloud semantics behind a single generic interface.
+
+### 4. What types of resources are you deploying on a day-to-day basis?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize with verified duties and frequency: resource provisioning, release support, incident response, certificate rotation, IAM/network changes, capacity management, patching and cluster upgrades are possible examples. For each selected duty, identify the affected service, your access/ownership, the approval route and validation. Production work frequency depends on the release/change calendar; do not invent a daily schedule or responsibilities from the prompt.
+
+---
+
 ## Terraform & IaC (361–450)
 
 1 question
@@ -43401,6 +46565,29 @@ For six environments I use a live-infrastructure repository with a thin root per
 
 ---
 
+## Terraform Backend Isolation
+
+1 question
+
+### 1. How would you manage separate Terraform backend/state buckets for different environments/projects?
+
+**Type:** Interview question
+
+**Answer:**
+
+Pre-create a secured, versioned GCS state bucket and separate state prefixes by environment and stack; use separate buckets/projects when access boundaries require it. A root backend can be:
+```hcl
+terraform {
+  backend "gcs" {
+    bucket = "company-prod-terraform-state"
+    prefix = "platform/network"
+  }
+}
+```
+Authenticate externally with a scoped identity. Backend blocks cannot refer to ordinary Terraform variables; use reviewed partial backend configuration during init. GCS provides locking. State and saved plans can contain secrets. Reference: https://developer.hashicorp.com/terraform/language/backend/gcs
+
+---
+
 ## Terraform CI/CD
 
 6 questions
@@ -43492,6 +46679,88 @@ The subnet must match each VM zone’s region; for multiple regions include the 
 
 ---
 
+## Terraform Concurrent Apply
+
+1 question
+
+### 1. What happens if two people execute terraform apply at the same time? What prevents state corruption?
+
+**Type:** Interview question
+
+**Answer:**
+
+A locking-capable shared backend serializes state-changing operations for the same state. A second apply waits or fails to acquire the lock; separate states are not protected from conflicting management of the same cloud object. Inspect the lock holder and active CI runs, then wait or use a lock timeout. Force-unlock only after confirming the owner is dead and no operation is writing. GCS supports locking natively. Reference: https://developer.hashicorp.com/terraform/language/backend/gcs
+
+---
+
+## Terraform Deployment
+
+1 question
+
+### 1. Write the core Terraform logic for a multi-stage application deployment.
+
+**Type:** Interview question
+
+**Answer:**
+
+Use separate environment roots with isolated state and identities; reuse a pinned module and promote the same application artifact. A root can contain:
+```hcl
+variable "project_id" { type = string }
+variable "environment" { type = string }
+variable "image_digest" { type = string }
+
+module "application" {
+  source       = "../../modules/application"
+  project_id   = var.project_id
+  environment  = var.environment
+  image_digest = var.image_digest
+}
+```
+This is orchestration logic, not a complete module implementation. Each environment runs init, validate and a saved plan against its own backend; production applies only after approval. Keep routine app release ownership separate from Terraform when using GitOps.
+
+---
+
+## Terraform Drift
+
+1 question
+
+### 1. What happens during Terraform state/infrastructure drift? How do you detect it, and what is your remediation workflow without causing production disruption?
+
+**Type:** Interview question
+
+**Answer:**
+
+During planning, Terraform normally refreshes managed resource attributes through provider APIs and compares observed state with configuration. An out-of-band console change can therefore appear as drift. Review whether the change was intentional and whether the attribute is provider-tracked or ignored. Adopt approved changes into code or plan a controlled correction; `plan -refresh-only` helps inspect state reconciliation without changing infrastructure. Do not blindly apply a large drift plan.
+
+---
+
+## Terraform Environments
+
+1 question
+
+### 1. How would you use Terraform to deploy an application across Dev, QA, UAT, and Prod environments?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use separate environment roots with isolated state and identities; reuse a pinned module and promote the same application artifact. A root can contain:
+```hcl
+variable "project_id" { type = string }
+variable "environment" { type = string }
+variable "image_digest" { type = string }
+
+module "application" {
+  source       = "../../modules/application"
+  project_id   = var.project_id
+  environment  = var.environment
+  image_digest = var.image_digest
+}
+```
+This is orchestration logic, not a complete module implementation. Each environment runs init, validate and a saved plan against its own backend; production applies only after approval. Keep routine app release ownership separate from Terraform when using GitOps.
+
+---
+
 ## Terraform Execution and State
 
 5 questions
@@ -43535,6 +46804,94 @@ A GCS backend gives the team a durable, centralized state instead of tying it to
 **Answer:**
 
 A GCS backend gives the team a durable, centralized state instead of tying it to one laptop or CI workspace. It supports IAM-controlled access, encryption, object versioning and recovery, audit logs, and collaboration. State contains resource identifiers and can contain sensitive values, so the bucket has least-privilege access, retention/versioning, and no public access. Locking serializes state-changing operations: without it, concurrent plans or applies can read stale state and overwrite one another, causing lost updates, duplicate resources, drift, or corruption. Locking complements—but does not replace—one controlled apply pipeline per state.
+
+---
+
+## Terraform Failure Recovery
+
+5 questions
+
+### 1. Suppose terraform plan passes, but terraform apply fails. What will you do?
+
+**Type:** Interview question
+
+**Answer:**
+
+A successful plan is a proposed change, not proof that every API operation will succeed. Apply can fail from quota/capacity, permissions, API errors, concurrent changes or invalid runtime constraints. Preserve logs and inspect both state and actual resources because apply is not transactional and may partly succeed. Correct the underlying issue or submit a corrective PR, then generate and review a fresh plan. Reverting Git alone does not undo resources already changed; review its resulting plan before applying.
+
+### 2. What kinds of errors can cause an apply to fail even though the plan passed?
+
+**Type:** Interview question
+
+**Answer:**
+
+A successful plan is a proposed change, not proof that every API operation will succeed. Apply can fail from quota/capacity, permissions, API errors, concurrent changes or invalid runtime constraints. Preserve logs and inspect both state and actual resources because apply is not transactional and may partly succeed. Correct the underlying issue or submit a corrective PR, then generate and review a fresh plan. Reverting Git alone does not undo resources already changed; review its resulting plan before applying.
+
+### 3. Your Terraform code has already been merged into the main/master branch, but the apply has failed. What will you do?
+
+**Type:** Interview question
+
+**Answer:**
+
+A successful plan is a proposed change, not proof that every API operation will succeed. Apply can fail from quota/capacity, permissions, API errors, concurrent changes or invalid runtime constraints. Preserve logs and inspect both state and actual resources because apply is not transactional and may partly succeed. Correct the underlying issue or submit a corrective PR, then generate and review a fresh plan. Reverting Git alone does not undo resources already changed; review its resulting plan before applying.
+
+### 4. Will you back out/revert the code? If not, how exactly will you resolve the issue?
+
+**Type:** Interview question
+
+**Answer:**
+
+A successful plan is a proposed change, not proof that every API operation will succeed. Apply can fail from quota/capacity, permissions, API errors, concurrent changes or invalid runtime constraints. Preserve logs and inspect both state and actual resources because apply is not transactional and may partly succeed. Correct the underlying issue or submit a corrective PR, then generate and review a fresh plan. Reverting Git alone does not undo resources already changed; review its resulting plan before applying.
+
+### 5. Suppose the apply failed because the GCP quota limit was exhausted. How would you resolve it and redeploy safely?
+
+**Type:** Interview question
+
+**Answer:**
+
+Identify the exact quota, project and region from the API error and distinguish quota from physical capacity exhaustion. Request an increase or revise the approved design; remove unused resources only after ownership checks. Inspect partial apply results, rerun a fresh plan once capacity is available and apply the reviewed remainder. Do not delete state or repeatedly retry a known quota failure.
+
+---
+
+## Terraform GCS Bucket
+
+1 question
+
+### 1. Can you write Terraform code to create a GCS bucket in GCP?
+
+**Type:** Interview question
+
+**Answer:**
+
+Minimal bucket resource; configure the Google provider and authenticate using an approved workload identity. Supply a globally unique name and an allowed location:
+```hcl
+variable "project_id" { type = string }
+variable "bucket_name" { type = string }
+
+resource "google_storage_bucket" "data" {
+  project                     = var.project_id
+  name                        = var.bucket_name
+  location                    = "US"
+  uniform_bucket_level_access = true
+  public_access_prevention    = "enforced"
+  force_destroy               = false
+}
+```
+Run fmt, init, validate and a reviewed plan before apply.
+
+---
+
+## Terraform Governance
+
+1 question
+
+### 1. How do you prevent infrastructure drift at scale across 50+ AWS accounts managed by Terraform, and what tooling do you layer on top to enforce compliance continuously?
+
+**Type:** Interview question
+
+**Answer:**
+
+Limit out-of-band writes, require reviewed IaC and run scheduled read-only plans per state with findings routed to owners. Layer organization guardrails, AWS Config/security evaluations and CloudTrail-based detection over Terraform because not every control is an IaC attribute. Track approved exceptions with expiry and test remediation in a narrow scope. Do not auto-apply every drift result across fifty accounts without assessing impact and ownership.
 
 ---
 
@@ -43632,6 +46989,70 @@ Terraform 1.5 introduced HCL "import" blocks: you can declare import { to = <res
 
 ---
 
+## Terraform Lifecycle Rule
+
+1 question
+
+### 1. How would you configure a bucket lifecycle condition such as moving objects to another storage class after 30 days?
+
+**Type:** Interview question
+
+**Answer:**
+
+Add this block inside `google_storage_bucket`; age is measured in days since object creation and execution is asynchronous:
+```hcl
+lifecycle_rule {
+  condition {
+    age = 30
+  }
+  action {
+    type          = "SetStorageClass"
+    storage_class = "NEARLINE"
+  }
+}
+```
+Check retrieval patterns, minimum storage duration charges and compatibility with other lifecycle or Autoclass settings before enabling it.
+
+---
+
+## Terraform Production Governance
+
+4 questions
+
+### 1. How would you prevent terraform apply from ruining production infrastructure?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use isolated production state and a dedicated least-privilege deployment identity available only to a protected CI environment. Run validation, policy checks and a saved plan; require the approved change/CAB record and authorized reviewer before applying that exact plan. Serialize runs, flag replacements/deletions and verify backups and rollback readiness. Regenerate approval when the plan changes. IAM controls API access; a manual approval button alone cannot stop an otherwise authorized user from bypassing CI.
+
+### 2. How do you implement manual approval between terraform plan and terraform apply?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use isolated production state and a dedicated least-privilege deployment identity available only to a protected CI environment. Run validation, policy checks and a saved plan; require the approved change/CAB record and authorized reviewer before applying that exact plan. Serialize runs, flag replacements/deletions and verify backups and rollback readiness. Regenerate approval when the plan changes. IAM controls API access; a manual approval button alone cannot stop an otherwise authorized user from bypassing CI.
+
+### 3. How do you restrict who can execute Terraform changes against production?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use isolated production state and a dedicated least-privilege deployment identity available only to a protected CI environment. Run validation, policy checks and a saved plan; require the approved change/CAB record and authorized reviewer before applying that exact plan. Serialize runs, flag replacements/deletions and verify backups and rollback readiness. Regenerate approval when the plan changes. IAM controls API access; a manual approval button alone cannot stop an otherwise authorized user from bypassing CI.
+
+### 4. How do you integrate change-management/CAB approval with production Terraform deployments?
+
+**Type:** Interview question
+
+**Answer:**
+
+Use isolated production state and a dedicated least-privilege deployment identity available only to a protected CI environment. Run validation, policy checks and a saved plan; require the approved change/CAB record and authorized reviewer before applying that exact plan. Serialize runs, flag replacements/deletions and verify backups and rollback readiness. Regenerate approval when the plan changes. IAM controls API access; a manual approval button alone cannot stop an otherwise authorized user from bypassing CI.
+
+---
+
 ## Terraform repository structure
 
 9 questions
@@ -43712,7 +47133,7 @@ Each environment has its own root module or configuration folder, variable file,
 
 ## Terraform State
 
-20 questions
+21 questions
 
 ### 1. Where do you store your Terraform state?
 
@@ -43909,6 +47330,58 @@ After recovering state you must run terraform plan to validate that the recovere
 **Answer:**
 
 State locking prevents concurrent write/conflicting operations by acquiring a lock on the remote state during plan/apply. Example: S3 backend uses a DynamoDB lock table; Terraform Cloud/Enterprise enforces locks automatically. Verify with terraform plan/apply errors or use terraform force-unlock <LOCK_ID> to clear a stale lock. State backup/versioning preserves historical copies of the state so you can recover or inspect prior states. Example: enable S3 object versioning (aws s3api put-bucket-versioning --bucket <name> --versioning-configuration Status=Enabled) or use Terraform Cloud state versions UI/API. Verify recovery with terraform state pull to fetch current state or aws s3api list-object-versions to view previous state files.
+
+### 21. How do you structure Terraform state for a large banking organization managing dozens of AWS accounts and environments? What backend configuration and state-isolation strategy do you use?
+
+**Type:** Interview question
+
+**Answer:**
+
+Separate states by account, environment and independently owned stack; avoid a single state spanning the organization. Use encrypted, versioned S3 with narrowly scoped backend roles and supported locking, such as `use_lockfile = true` on compatible Terraform versions. Keep production roles and keys isolated and share only approved outputs. Version and test backend migration changes. Reference: https://developer.hashicorp.com/terraform/language/backend/s3
+
+---
+
+## Terraform State Locking
+
+1 question
+
+### 1. How does state locking work, and what would you do if Terraform reports that the state is already locked?
+
+**Type:** Interview question
+
+**Answer:**
+
+A locking-capable shared backend serializes state-changing operations for the same state. A second apply waits or fails to acquire the lock; separate states are not protected from conflicting management of the same cloud object. Inspect the lock holder and active CI runs, then wait or use a lock timeout. Force-unlock only after confirming the owner is dead and no operation is writing. GCS supports locking natively. Reference: https://developer.hashicorp.com/terraform/language/backend/gcs
+
+---
+
+## Terraform VM Provisioning
+
+3 questions
+
+### 1. Suppose I want to provision a virtual machine using Terraform. Can you explain the end-to-end steps and everything you would do?
+
+**Type:** Interview question
+
+**Answer:**
+
+Choose the VM's project, region/zone, image, machine type, network, disk, identity and firewall requirements. Use versions/provider configuration, variables, resource definitions, optional data sources and outputs; filenames are organizational conventions, since Terraform reads the root's .tf files together. Configure the remote backend and authenticate. Run fmt, init, validate and `terraform plan -out=tfplan`; review the plan, then `terraform apply tfplan`. Verify network access, startup logs, identity permissions and outputs.
+
+### 2. What Terraform files would you create—for example, provider, variables, main, data sources, outputs, etc.?
+
+**Type:** Interview question
+
+**Answer:**
+
+Choose the VM's project, region/zone, image, machine type, network, disk, identity and firewall requirements. Use versions/provider configuration, variables, resource definitions, optional data sources and outputs; filenames are organizational conventions, since Terraform reads the root's .tf files together. Configure the remote backend and authenticate. Run fmt, init, validate and `terraform plan -out=tfplan`; review the plan, then `terraform apply tfplan`. Verify network access, startup logs, identity permissions and outputs.
+
+### 3. After writing the Terraform files, what commands and sequence would you follow to provision the VM?
+
+**Type:** Interview question
+
+**Answer:**
+
+Choose the VM's project, region/zone, image, machine type, network, disk, identity and firewall requirements. Use versions/provider configuration, variables, resource definitions, optional data sources and outputs; filenames are organizational conventions, since Terraform reads the root's .tf files together. Configure the remote backend and authenticate. Run fmt, init, validate and `terraform plan -out=tfplan`; review the plan, then `terraform apply tfplan`. Verify network access, startup logs, identity permissions and outputs.
 
 ---
 
@@ -44150,6 +47623,90 @@ Check environment and runner differences: print env (env | sort), PATH, shell (e
 **Answer:**
 
 I first confirm customer impact, severity, scope and start time, open the incident process and assign clear ownership. I check health dashboards, alerts, logs, events and recent deployments or infrastructure changes before changing anything. I follow the request path from DNS and load balancer through network, compute or Kubernetes, application and downstream data services, comparing failing and healthy instances to narrow the fault domain. The immediate priority is safe mitigation—rollback, fail over, remove a bad instance, scale capacity or disable a feature—while preserving evidence. I make one controlled change at a time, state the hypothesis and verify recovery through technical and business signals. After stabilization, I identify root and contributing causes, reconcile emergency changes into code, improve alerts or runbooks and track corrective actions to completion.
+
+---
+
+## Upskilling
+
+2 questions
+
+### 1. What is one area where you think you need to upskill yourself? It can be technical or personal.
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize a specific skill gap and evidence-based learning plan: “I am improving [skill] because [work need]. I am building [small practical project], testing it against [clear criteria] and seeking [review or feedback]. My next milestone is [realistic deliverable].” Distinguish completed work from plans and connect AI/MLOps/SRE study to a practical operational problem.
+
+### 2. How are you currently upskilling yourself in AI, MLOps, SRE, or Agentic AI?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize a specific skill gap and evidence-based learning plan: “I am improving [skill] because [work need]. I am building [small practical project], testing it against [clear criteria] and seeking [review or feedback]. My next milestone is [realistic deliverable].” Distinguish completed work from plans and connect AI/MLOps/SRE study to a practical operational problem.
+
+---
+
+## Vendor POC / GCP Integration
+
+7 questions
+
+### 1. Can you take an example of one POC you did with a vendor and explain it end-to-end?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize a real POC: “We evaluated [product and version] for [security/monitoring requirement]. I coordinated with [vendor engineer], [security owner] and [platform/application owner]. My work was [specific integration or automation], validated against [acceptance criteria] in [sandbox scope]. The outcome was [measured finding and adoption decision].” State whether it was a new product or an integration of an existing one, and name your own technical deliverables rather than implying ownership of the vendor's product.
+
+### 2. I’m looking at it from a technical lens. Where did you coordinate, whom did you talk to, and what exactly did you do?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize a real POC: “We evaluated [product and version] for [security/monitoring requirement]. I coordinated with [vendor engineer], [security owner] and [platform/application owner]. My work was [specific integration or automation], validated against [acceptance criteria] in [sandbox scope]. The outcome was [measured finding and adoption decision].” State whether it was a new product or an integration of an existing one, and name your own technical deliverables rather than implying ownership of the vendor's product.
+
+### 3. You mentioned security and monitoring POCs. Which one would you like to explain?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize a real POC: “We evaluated [product and version] for [security/monitoring requirement]. I coordinated with [vendor engineer], [security owner] and [platform/application owner]. My work was [specific integration or automation], validated against [acceptance criteria] in [sandbox scope]. The outcome was [measured finding and adoption decision].” State whether it was a new product or an integration of an existing one, and name your own technical deliverables rather than implying ownership of the vendor's product.
+
+### 4. To whom did you coordinate for this POC?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize a real POC: “We evaluated [product and version] for [security/monitoring requirement]. I coordinated with [vendor engineer], [security owner] and [platform/application owner]. My work was [specific integration or automation], validated against [acceptance criteria] in [sandbox scope]. The outcome was [measured finding and adoption decision].” State whether it was a new product or an integration of an existing one, and name your own technical deliverables rather than implying ownership of the vendor's product.
+
+### 5. Was this a new product, or was it an existing product that you integrated? What exactly was it?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personalize a real POC: “We evaluated [product and version] for [security/monitoring requirement]. I coordinated with [vendor engineer], [security owner] and [platform/application owner]. My work was [specific integration or automation], validated against [acceptance criteria] in [sandbox scope]. The outcome was [measured finding and adoption decision].” State whether it was a new product or an integration of an existing one, and name your own technical deliverables rather than implying ownership of the vendor's product.
+
+### 6. How did you convert the vendor’s manual/script-based integration into a Terraform-based implementation?
+
+**Type:** Interview question
+
+**Answer:**
+
+Inventory each manual action, resource, identity and dependency; map supported operations to Terraform resources and data sources. Parameterize projects, destinations and environments, use explicit outputs and narrowly scoped identities, and import existing resources before managing them. Store scripts only for genuine provider gaps and ensure they are idempotent. Test a plan/apply and a second no-change plan in a sandbox, then version the module and promote with approval.
+
+### 7. What GCP components/APIs were involved in the integration—Cloud Logging, Audit Logs, Pub/Sub, Cloud Run, log sinks, etc.?
+
+**Type:** Interview question
+
+**Answer:**
+
+A possible logging integration enables the relevant APIs, routes selected Cloud Logging/Audit Log entries through a sink into Pub/Sub, grants the sink writer publish permission and runs a subscriber or authenticated Cloud Run consumer. Configure subscription delivery, dead-letter handling, deduplication, retention and monitoring. Secret Manager stores vendor credentials when federation is unavailable. The exact components depend on the vendor architecture; do not assert every integration needs all these services.
 
 ---
 
@@ -44929,5 +48486,43 @@ SCA (Software Composition Analysis) identifies and inventories third‑party/ope
 **Answer:**
 
 Penetration testing converts scanner findings into validated, exploitable risks by chaining vulnerabilities, business logic flaws, and misconfigurations into real attack paths that automated scans miss. Scanners (Nessus, OpenVAS) enumerate and flag issues (e.g., nmap -sV -p-), but a pentest uses tools like Metasploit (msfconsole) or manual techniques to exploit, obtain a shell, and demonstrate impact (e.g., run id, sudo -l, or escalate to Administrator/root). Pentests also validate detection and response by exercising attacks against EDR/SIEM and confirming alerts (e.g., confirm Splunk searches return expected events). The result is prioritized, actionable remediation with proof-of-concept and operational verification that fixes actually mitigate the exploit chain.
+
+---
+
+## Working Arrangements
+
+4 questions
+
+### 1. Are you comfortable working in a hybrid model according to the organization’s current policy?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: answer with your current notice/offer status, confirmed dates, location or actual work-arrangement preference, as applicable. For an offer, distinguish written acceptance from an ongoing discussion; for relocation or office attendance, state any real constraints. Do not commit to an arrangement or joining date solely because the interviewer suggested it.
+
+### 2. Are you comfortable with the organization’s working framework/policy?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: answer with your current notice/offer status, confirmed dates, location or actual work-arrangement preference, as applicable. For an offer, distinguish written acceptance from an ongoing discussion; for relocation or office attendance, state any real constraints. Do not commit to an arrangement or joining date solely because the interviewer suggested it.
+
+### 3. What is your preferred work location? / Is Noida your preferred location?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: answer with your current notice/offer status, confirmed dates, location or actual work-arrangement preference, as applicable. For an offer, distinguish written acceptance from an ongoing discussion; for relocation or office attendance, state any real constraints. Do not commit to an arrangement or joining date solely because the interviewer suggested it.
+
+### 4. Are you comfortable with the 3-days-office and 2-days-WFH hybrid policy?
+
+**Type:** Interview question
+
+**Answer:**
+
+Personal fact required: answer with your current notice/offer status, confirmed dates, location or actual work-arrangement preference, as applicable. For an offer, distinguish written acceptance from an ongoing discussion; for relocation or office attendance, state any real constraints. Do not commit to an arrangement or joining date solely because the interviewer suggested it.
 
 ---

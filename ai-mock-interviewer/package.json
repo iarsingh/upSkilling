@@ -17,23 +17,32 @@
     "url": "https://github.com/iarsingh/ai-mock-interviewer/issues"
   },
   "homepage": "https://github.com/iarsingh/ai-mock-interviewer#readme",
-  "keywords": ["mock-interview", "devops", "sre", "kubernetes", "gcp", "ollama"],
+  "keywords": [
+    "mock-interview",
+    "devops",
+    "sre",
+    "kubernetes",
+    "gcp",
+    "ollama"
+  ],
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "start:offline": "node scripts/start-offline.js",
     "start:production": "node server.js",
-    "sync:question-bank": "node scripts/generate-full-qa-document.js && node scripts/generate-txt-exports.js && ../.venv/bin/python scripts/build-docx.py",
-    "sync:actual-interviews": "node scripts/sync-actual-interview-mock-set.js && node scripts/generate-full-qa-document.js && node scripts/audit-answer-quality.js && node scripts/generate-txt-exports.js && ../.venv/bin/python scripts/build-docx.py && node scripts/build-actual-interview-qa.js && ../.venv/bin/python scripts/build-actual-interview-docx.py",
-    "sync:interview-prep": "../.venv/bin/python scripts/build-interview-prep-document.py",
+    "sync:question-bank": "node scripts/generate-full-qa-document.js && node scripts/generate-txt-exports.js && node scripts/run-python.js scripts/build-docx.py",
+    "sync:actual-interviews": "node scripts/sync-actual-interview-mock-set.js && node scripts/generate-full-qa-document.js && node scripts/audit-answer-quality.js && node scripts/generate-txt-exports.js && node scripts/run-python.js scripts/build-docx.py && node scripts/build-actual-interview-qa.js && node scripts/run-python.js scripts/build-actual-interview-docx.py",
+    "sync:interview-prep": "node scripts/run-python.js scripts/build-interview-prep-document.py",
     "audit:answer-quality": "node scripts/audit-answer-quality.js",
     "check:production": "node scripts/check-production-readiness.js",
-    "check:release": "npm test && npm run audit:answer-quality && npm run check:production",
+    "check:release": "npm test && npm run audit:answer-quality && npm run check:repository",
     "test": "node --test tests/*.test.js",
-    "stop": "lsof -ti:${PORT:-3030} | xargs kill 2>/dev/null || echo 'No process running on port '${PORT:-3030}"
+    "stop": "lsof -ti:${PORT:-3030} | xargs kill 2>/dev/null || echo 'No process running on port '${PORT:-3030}",
+    "test:documents": "node scripts/run-python.js tests/test_docx_answer_format.py",
+    "check:repository": "node scripts/check-repository.js"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22 <23"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.109.1",
