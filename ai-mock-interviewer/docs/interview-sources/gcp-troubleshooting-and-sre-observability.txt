@@ -1,0 +1,80 @@
+Here are all the interview questions asked in this round, in order:
+1. Previous company/project experience: “What have you done in your previous company? What project did you work on, and what was your role?”
+2. GCP application security / Cloud Armor: How do you secure an internet-facing application using Global Load Balancer and Cloud Armor? How do you restrict traffic based on ASN, country/geo, IP ranges, or specific regions?
+3. Kubernetes Pending pod troubleshooting: “A pod is stuck in Pending. Walk me through how you would troubleshoot it.”
+4. Kubernetes commands: What commands would you use to identify and troubleshoot a Pending pod?
+5. Pod logs vs events: Does kubectl describe provide error/application logs? When would you use kubectl logs instead?
+6. Kubernetes deployment troubleshooting: What would you check if the pod/application does not start because of an incorrect image/image tag, port configuration, labels, selectors, or matchLabels?
+7. GCP cross-project access: How would you provide a service account in one GCP project access to resources in another project?
+8. Cross-project GCS access: Suppose a service account in Project A needs read access to a GCS bucket in Project B. How would you configure it?
+9. GCP cost spike: “What will you do when you see a sudden cost spike in GCP?” How would you identify the project, service, SKU, or resource responsible and control the cost?
+10. Organization Policy vs IAM: “What is the difference between GCP Organization Policy and IAM?”
+11. CI/CD tools: “What CI/CD tools are you currently using?” You discussed Jenkins, Bitbucket Pipelines, GitLab Runner, GitHub Actions, and Cloud Build.
+12. Harness: “Do you have any experience with Harness?”
+13. Overall CI/CD flow: “Give me the overall flow/flowchart of your CI/CD pipeline.” This covered source → webhook → Jenkins → tests/SonarQube → Docker build → vulnerability scan → Artifact Registry → deployment/ArgoCD → GKE → validation → production → monitoring/rollback.
+14. Terraform GCS bucket: “Can you write Terraform code to create a GCS bucket in GCP?”
+15. Terraform lifecycle rule: How would you configure a bucket lifecycle condition such as moving objects to another storage class after 30 days?
+16. GKE pod access to GCS: “How do you give a GKE pod access to Cloud Storage?” This covered Kubernetes ServiceAccount → Workload Identity → Google Service Account → IAM → GCS.
+17. GKE Standard vs Autopilot: “What is the difference between GKE Standard and Autopilot?” Who manages nodes, scaling, upgrades, and underlying infrastructure?
+18. P2 incident troubleshooting: “You own a P2 issue end-to-end. Something has changed and caused the problem. How will you debug it?”
+19. Recent-change investigation: During an incident, how would you determine whether a recent application, Kubernetes, Terraform, configuration, or infrastructure change caused the issue?
+20. Terraform concurrent apply: “What happens if two people execute terraform apply at the same time? What prevents state corruption?”
+21. Terraform state locking: How does state locking work, and what would you do if Terraform reports that the state is already locked?
+22. EC2-to-EC2 migration: “Suppose you performed an EC2-to-EC2 migration with zero downtime. How did you perform it?”
+23. Actual migration cutover: “What was the actual cutover?” You discussed adding the new EC2 to the target group, validating health checks, shifting traffic, draining the old instance, monitoring, and then decommissioning it.
+24. Migration rollback: What would you do if the new EC2 instance started failing after production traffic had been shifted?
+25. Docker: “You have mentioned Docker in your experience. Have you worked with Docker?”
+26. Docker Compose: “Have you worked with Docker Compose?”
+27. Docker Compose coding: “Can you write a basic Docker Compose file?” The example involved an application container and PostgreSQL with ports, environment variables, depends_on, and a persistent volume.
+28. Docker Compose startup behavior: What does depends_on do, and does it guarantee that the dependent application/database is actually ready?
+This round was strongly focused on GCP + GKE + troubleshooting + Terraform + CI/CD, with additional AWS and Docker questions.
+The highest-priority topics to revise from this round are Pending pod troubleshooting, Workload Identity, cross-project IAM, Cloud Armor, GCP cost investigation, Org Policy vs IAM, CI/CD architecture, Terraform state locking, incident/change troubleshooting, zero-downtime cutover, and Docker Compose.Here are all the interview questions asked in this conversation, in order:
+1. What SRE work have you done in your Capgemini project? List it point by point.
+2. What SRE tools have you used in your project, and what work have you done with each tool?
+3. Explain your Dynatrace experience. What work have you done and what was your contribution?
+   - APM
+   - Microservices health monitoring
+   - Centralized application monitoring
+   - Distributed tracing
+   - Alerting
+   - Dashboards
+   - Production troubleshooting/RCA
+4. How would you implement monitoring and alerting for GKE pods? If a pod becomes corrupted/down or the replica count mismatches, how would you restart/recreate it or scale the pods?
+5. Can you write a Kubernetes manifest for HPA autoscaling?
+6. How does HPA calculate the required number of pods?
+7. Write the core Terraform logic for a multi-stage application deployment.
+8. How would you use Terraform to deploy an application across Dev, QA, UAT, and Prod environments?
+9. How would you manage separate Terraform backend/state buckets for different environments/projects?
+10. If a pod is stuck or not responding in a GKE cluster, how would you diagnose it?
+11. What kubectl commands would you use to troubleshoot a problematic GKE pod?
+- kubectl get pods
+- kubectl describe pod
+- kubectl logs
+- kubectl logs --previous
+- kubectl exec
+- kubectl top
+- kubectl get events
+12. Suppose I want centralized monitoring for all GCP resources—GKE clusters/pods, Cloud Run, IAM, CI/CD pipelines, etc. How would you create the monitoring system using Prometheus, Grafana, or another observability platform?
+13. For GKE cluster pods specifically, what monitoring and alerting setup would you implement?
+14. What is SLI, SLO, and SLA?
+15. Who defines or sets up the SLA, SLO, and SLI?
+16. Can you explain GKE architecture?
+- Control plane
+- API Server
+- etcd
+- Controller Manager
+- Scheduler
+- Worker nodes
+- Kubelet
+- Pods
+- Services/networking
+17. When you execute a kubectl command, what happens internally in Kubernetes?
+18. What is the responsibility of the kube-scheduler?
+19. If a ReplicaSet is configured for three replicas but only two pods are running, which Kubernetes component detects and fixes it?
+20. How does Kubernetes maintain desired state versus actual state?
+21. How does a CronJob execute internally in Kubernetes?
+22. How much experience do you have in Python?
+23. If you need to write a Python script to monitor application errors on GCP, how would you implement it?
+The major areas this interviewer is testing are SRE + observability, GKE/Kubernetes troubleshooting and internals, Terraform/multi-environment deployment, monitoring/alerting, SLI/SLO/SLA, and Python automation.""
+
+save it

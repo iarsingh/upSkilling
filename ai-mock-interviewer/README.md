@@ -18,7 +18,10 @@ locally, and works fully offline using a deduplicated built-in bank of more than
 - [Quick Start](#quick-start)
 - [Sign In And Accounts](#sign-in-and-accounts)
 - [Contact Messages](#contact-messages)
+- [Choose a Run Mode](#choose-a-run-mode)
 - [Run With Local Ollama](#run-with-local-ollama)
+- [Run Online With an API Key](#run-online-with-an-api-key)
+- [Use ChatGPT or Another Chat UI](#use-chatgpt-or-another-chat-ui)
 - [Deploy On Vercel](#deploy-on-vercel)
 - [How To Use](#how-to-use)
 - [Audio Notes](#audio-notes)
@@ -73,44 +76,74 @@ git clone https://github.com/iarsingh/ai-mock-interviewer.git
 cd ai-mock-interviewer
 ```
 
-Install dependencies:
+From an existing checkout, run these commands in the `ai-mock-interviewer` folder.
+Use Node.js 22 (the version in `.nvmrc`); if you use nvm, run `nvm install` and `nvm use` first.
 
 ```bash
-npm install
+npm ci
+cp .env.example .env
+npm run start:offline
 ```
 
-Optional: create a private local profile for job autofill and cover-letter features. This file is git-ignored:
+On Windows PowerShell, use `Copy-Item .env.example .env` in place of `cp`.
+If you already have `.env`, keep it and update its local settings instead of overwriting it:
+
+```dotenv
+NODE_ENV=development
+HOST=127.0.0.1
+PORT=3030
+OFFLINE_ONLY=1
+DATABASE_URL=
+SESSION_SECRET=
+```
+
+Open **http://127.0.0.1:3030**, create an account at `/signup.html` (password: 8–128
+characters), then sign in and choose a practice topic. No API key, PostgreSQL,
+Python environment, or frontend build is required. Dependencies must be installed
+before working offline. Typed answers work without browser speech recognition;
+voice recognition may require an internet connection supplied by the browser.
+
+Leave the terminal running. Press **Ctrl+C** to stop the server. For automatic
+restart while editing server code, run `node --watch server.js` with `OFFLINE_ONLY=1`
+in `.env`.
+
+To verify startup, open http://127.0.0.1:3030/health/ready; it should return
+`"status":"READY"`. You can also run:
+
+```bash
+curl http://127.0.0.1:3030/health/ready
+npm test
+```
+
+Optional: create a private local profile for job autofill and cover-letter features:
 
 ```bash
 cp data/applicant-profile.example.json data/applicant-profile.json
 ```
 
-Run offline:
+### Question-bank maintenance (optional)
+
+Startup uses the checked-in question bank directly. It does not regenerate large
+exports or require another repository's Python environment.
+
+After changing question-bank sources, regenerate the JSON and text exports with:
 
 ```bash
-npm run start:offline
+node scripts/generate-full-qa-document.js
+node scripts/generate-txt-exports.js
 ```
 
-Open:
-
-```text
-http://127.0.0.1:3030
-```
-
-This is the easiest way for another person to run the project. It works with the built-in local question bank and does not require an AI API key.
-
-### Automatic question-bank synchronization
-
-Both `npm start` and `npm run start:offline` synchronize every question-bank
-output before the server starts. The sync rebuilds the canonical and browser
-datasets, UI topic index counts, text exports, Word document, and the companion
-`interview-quiz-app` flashcard dataset.
-
-To synchronize everything without starting the server:
+The legacy `npm run sync:question-bank` command also builds the Word document and
+requires `../.venv/bin/python` with `python-docx` installed. For a standalone clone,
+you can generate that document separately using your own Python environment:
 
 ```bash
-npm run sync:question-bank
+python3 -m venv .venv
+.venv/bin/python -m pip install python-docx
+.venv/bin/python scripts/build-docx.py
 ```
+
+On Windows, use `.venv\Scripts\python.exe` for the last two commands.
 
 ### Server-persisted interviews
 
@@ -159,50 +192,181 @@ No default accounts or shared passwords are included. Create a user from `/signu
 `BOOTSTRAP_ADMIN_PASSWORD` of at least 12 characters before the first start, then remove those values after the
 account is created. Existing local JSON users can be imported into PostgreSQL when the database table is empty.
 
-Interview progress itself still lives in the browser's `localStorage`, exactly as before - signing in controls who can
-reach the app and the admin report, but it does not (yet) sync interview history to a per-account server-side store.
+Legacy practice history and custom skills live in browser `localStorage`. Skills Dashboard interviews
+are stored separately in SQLite and associated with the signed-in account. Back up `data/` to retain
+local accounts and server-persisted interviews; browser-only progress stays in that browser and origin.
 
 If you change hosts or want existing sessions to survive a server restart on a read-only deployment, set a
 `SESSION_SECRET` environment variable to a long random string; otherwise a secret is generated once and saved to
 `data/session-secret.txt` (also git-ignored).
 
+## Choose a Run Mode
+
+Complete [Quick Start](#quick-start) once, then choose one of these modes. The app
+always opens at **http://127.0.0.1:3030** unless you change `PORT`.
+Here, “online” means using a cloud AI API while the app runs on your computer;
+public hosting is covered separately under deployment.
+
+| Mode | Configuration in `.env` | Start command | API key / internet |
+| --- | --- | --- | --- |
+| Offline question bank and template feedback | `OFFLINE_ONLY=1` | `npm run start:offline` | No key; no internet for typed practice after installation |
+| Local Ollama AI | `OFFLINE_ONLY=0`, `LLM_PROVIDER=ollama` | `npm start` | No key; internet needed to download the local model initially |
+| OpenAI API | `OFFLINE_ONLY=0`, `LLM_PROVIDER=openai` | `npm start` | OpenAI API key and internet |
+| Anthropic Claude API | `OFFLINE_ONLY=0`, `LLM_PROVIDER=claude` | `npm start` | Anthropic API key and internet |
+| ChatGPT or another chat UI alongside the app | Keep the app in offline mode | `npm run start:offline` | Manual copy/paste; the chat tool has its own requirements |
+
+Keep `NODE_ENV=development` and `DATABASE_URL=` for local use in every mode.
+Edit the existing variables in `.env`, then stop the server with **Ctrl+C** and
+restart it. Terminal environment variables override `.env`.
+**`npm run start:offline` always forces offline mode**, even when `.env` says `OFFLINE_ONLY=0`.
+
 ## Run With Local Ollama
 
-Install Ollama from:
+1. Install Ollama using the [official quickstart](https://docs.ollama.com/quickstart).
+2. Start the Ollama desktop app or run this in a separate terminal:
 
-```text
-https://ollama.com
+   ```bash
+   ollama serve
+   ```
+
+   If Ollama is already running on port `11434`, keep that instance running;
+   you do not need a second server.
+
+3. Download the app's default local model and check that it is installed:
+
+   ```bash
+   ollama pull llama3.1:8b
+   ollama list
+   ```
+
+4. Set these values in the project's `.env`:
+
+   ```dotenv
+   OFFLINE_ONLY=0
+   LLM_PROVIDER=ollama
+   OLLAMA_URL=http://127.0.0.1:11434
+   OLLAMA_MODEL=llama3.1:8b
+   OLLAMA_TIMEOUT_MS=90000
+   ```
+
+5. Start the interview app from the project folder:
+
+   ```bash
+   npm start
+   ```
+
+Open **http://127.0.0.1:3030**, sign in, and begin a practice interview.
+To use another model, download it with `ollama pull <model-name>` and set
+`OLLAMA_MODEL` to the exact installed name shown by `ollama list`.
+
+With a downloaded local model, inference runs on your machine without a cloud API
+key. `OFFLINE_ONLY=0` enables AI calls, including calls to local Ollama; it does not
+mean Ollama requires cloud inference. Public JD URL import and browser speech
+recognition may still use the internet. Use pasted JD text and typed answers when
+you want to practice without internet access.
+
+## Run Online With an API Key
+
+The server supports OpenAI and Anthropic directly. Put the selected provider's key
+in the project's git-ignored `.env` file, never in browser JavaScript or a chat
+prompt. Cloud mode sends the relevant interview prompt and included context to
+that provider. API usage is subject to the provider's billing and access limits.
+
+### OpenAI API
+
+Create an API key in the OpenAI developer platform and configure API billing/access
+for your project; follow the [official API quickstart](https://developers.openai.com/api/docs/quickstart).
+Then edit `.env`:
+
+```dotenv
+OFFLINE_ONLY=0
+LLM_PROVIDER=openai
+OPENAI_API_KEY=replace-with-your-openai-api-key
+OPENAI_MODEL=gpt-5-mini
 ```
 
-Start Ollama:
-
-```bash
-ollama serve
-```
-
-In another terminal, start the app:
+`gpt-5-mini` is this repository's configured default. If it is unavailable to your
+API project, set `OPENAI_MODEL` to a model your project can use with the Responses
+API. The server calls `https://api.openai.com/v1/responses`.
 
 ```bash
 npm start
 ```
 
-Open:
+Open **http://127.0.0.1:3030**, sign in, and request an interview question or feedback.
+The app authenticates with `OPENAI_API_KEY`; signing in to ChatGPT in another tab
+does not configure this integration.
 
-```text
-http://127.0.0.1:3030
+### Anthropic Claude API
+
+Create a key through the Claude Console following the
+[official authentication guide](https://platform.claude.com/docs/en/manage-claude/authentication).
+Add or update these variables in `.env`:
+
+```dotenv
+OFFLINE_ONLY=0
+LLM_PROVIDER=claude
+ANTHROPIC_API_KEY=replace-with-your-anthropic-api-key
+CLAUDE_MODEL=replace-with-an-accessible-claude-model-id
 ```
 
-Default model:
-
-```text
-llama3.1:8b
-```
-
-Use another local model:
+Replace `CLAUDE_MODEL` with an actual model ID available to your API account before
+starting. Set it explicitly rather than relying on the repository's baked-in default.
+The server uses Anthropic's Messages API through its SDK.
 
 ```bash
-OLLAMA_MODEL=mistral npm start
+npm start
 ```
+
+Open **http://127.0.0.1:3030**, sign in, and begin an interview.
+
+### Verify the selected provider
+
+Open **http://127.0.0.1:3030/api/health**. Its `provider` field should be `offline`,
+`ollama`, `openai`, or `claude`, matching your selection. You can also run:
+
+```bash
+curl http://127.0.0.1:3030/api/health
+```
+
+For cloud providers, `ok: true` checks that a key is configured; it does **not**
+validate the key, model access, billing, or a successful AI response. For Ollama,
+it checks the server's model-list endpoint. Request a question or feedback in the
+app and inspect the server terminal for provider errors; some interview flows
+fall back to built-in questions when generation fails.
+
+## Use ChatGPT or Another Chat UI
+
+You can use ChatGPT, Claude's chat interface, or another chat tool alongside this
+app without adding an API key to the app:
+
+1. Run `npm run start:offline` and open **http://127.0.0.1:3030**.
+2. Pick a question and write or speak your own answer.
+3. Copy the question and your answer into your preferred chat UI with this prompt:
+
+   ```text
+   Act as a technical interview coach.
+   Role: [target role]
+   Question: [paste the interview question]
+   My answer: [paste my answer]
+
+   Assess technical accuracy, clarity, and practical depth. Point out mistakes,
+   suggest a stronger answer, and ask one follow-up question. Do not invent
+   experience or achievements on my behalf.
+   ```
+
+4. Review the feedback in that chat tool and continue practicing in the app.
+
+This is a manual workflow: chat feedback and conversation history are not
+imported or synchronized into the interview app. The app has no built-in ChatGPT
+login connector or browser-chat integration. For automatic AI feedback inside the
+app, use the Ollama or API configurations above.
+
+A separate local chat UI can be used for manual practice too, but the app's Ollama
+connection must point to the **Ollama API** at port `11434`, not that UI's web page.
+Other tools exposing only an OpenAI-compatible Chat Completions endpoint are not
+currently configurable through `.env`: this app's OpenAI endpoint is fixed to the
+OpenAI Responses API. Supporting a different endpoint/provider requires code changes.
 
 ## Deploy On Vercel
 
@@ -282,7 +446,7 @@ escape hatch.
 ## How To Use
 
 1. Open `http://127.0.0.1:3030`.
-2. Choose a `Technology practice` topic or select a `Mock interview set`.
+2. Create an account or sign in, then choose a `Technology practice` topic or select a `Mock interview set`.
 3. Keep `Live mock interview` and `Real-time simulation` enabled for the voice interview flow.
 4. Click `New question`.
 5. Listen to the question.
@@ -319,7 +483,7 @@ Offline mode:
 - Disables internet-only features such as Claude API calls and public JD URL import.
 - Still allows manual JD paste.
 - Still allows local JD file upload and text extraction.
-- Uses local template feedback if Ollama is not available.
+- Uses local template feedback without calling an AI provider.
 
 ## Job Description Practice
 
@@ -364,6 +528,27 @@ Examples:
 - MLOps and LLMOps
 - Behavioral ownership
 - Today's audio interview recap
+
+Eleven additional question-only sets preserve the order of user-shared interview summaries:
+
+- **Actual Interview - GKE Architecture, Policy as Code and GitOps**: 10 topic groups with follow-ups.
+- **Actual Interview - GCP Troubleshooting, CI/CD, Migration and Docker**: 28 questions.
+- **Actual Interview - SRE Observability, GKE Internals and Python**: 23 questions.
+
+- **Actual Interview - Vendor POC, Terraform Troubleshooting and AI/SRE Agents**: 25 questions.
+
+- **Actual Interview - GCP DevOps and SRE Scenarios**: 70 questions.
+- **Actual Interview - Production Experience, Multi-Cloud and SRE**: 62 questions.
+- **Actual Interview - Wipro Director of Engineering: SRE, Python and Kubernetes**: 10 questions.
+- **Actual Interview - Senior AWS Banking and Platform Architecture**: 17 questions.
+- **Actual Interview - Managerial and HR Fitment**: 25 questions.
+- **Actual Interview - Azure, AKS and Argo CD**: 35 questions.
+- **Actual Interview - HR, GCP, Terraform and Artifact Promotion**: 38 questions.
+
+Select **All technologies** under `Technology practice`, then choose the named
+`Mock interview set` to include the full round. See
+[the captured rounds and separate HR discussion notes](docs/user-shared-interview-rounds.md).
+Personal answers and employer policies are not inferred from these questions.
 
 The 50-day plan is available in the app and in:
 
@@ -436,28 +621,31 @@ The extension uses the same local server and profile data.
 
 ## Troubleshooting
 
-Port `3030` already in use:
+Port `3030` already in use: set `PORT=3031` in `.env`, restart the app, and open
+http://127.0.0.1:3031. Browser-local progress is specific to each origin, including its port.
 
-```bash
-lsof -nP -iTCP:3030 -sTCP:LISTEN
-kill <PID>
-```
+Startup reports `SESSION_SECRET` or `DATABASE_URL` is required: your environment is
+set to production. For local use, set `NODE_ENV=development` and leave `DATABASE_URL`
+blank. Check exported terminal variables too: they take precedence over `.env`.
 
-Then restart:
+Dependencies fail to install, or `better-sqlite3` reports a native module mismatch:
+use the Node version in `.nvmrc`, then rerun `npm ci` from the project folder.
+If npm needs to compile native modules, install your platform's C/C++ build tools
+and Python. `npm ci` replaces installed dependencies without changing the lockfile.
 
-```bash
-npm run start:offline
-```
+Sign-in does not persist: use the same host consistently (`127.0.0.1` or `localhost`),
+allow cookies, and use `NODE_ENV=development` for local HTTP. Production cookies require HTTPS.
 
-Dependencies fail to install:
+AI mode still shows `offline`: start with `npm start` after setting `OFFLINE_ONLY=0`.
+The `start:offline` command deliberately overrides that setting.
 
-```bash
-node -v
-npm -v
-npm install
-```
+Cloud AI returns an authentication, quota, or model error: check the selected
+provider, its API key, API billing/access, and the exact model ID. Restart after
+editing `.env`. A successful health response alone does not validate cloud credentials.
 
-Make sure Node.js is version 20 or newer.
+Ollama reports a missing model or times out: check `ollama list`, download the model
+named in `OLLAMA_MODEL`, and confirm `OLLAMA_URL`. A smaller installed model or a
+larger `OLLAMA_TIMEOUT_MS` can help on slower machines.
 
 Microphone does not work:
 

@@ -20,10 +20,8 @@
   "keywords": ["mock-interview", "devops", "sre", "kubernetes", "gcp", "ollama"],
   "main": "server.js",
   "scripts": {
-    "prestart": "npm run sync:question-bank",
     "start": "node server.js",
-    "prestart:offline": "npm run sync:question-bank",
-    "start:offline": "OFFLINE_ONLY=1 node server.js",
+    "start:offline": "node scripts/start-offline.js",
     "start:production": "node server.js",
     "sync:question-bank": "node scripts/generate-full-qa-document.js && node scripts/generate-txt-exports.js && ../.venv/bin/python scripts/build-docx.py",
     "sync:actual-interviews": "node scripts/sync-actual-interview-mock-set.js && node scripts/generate-full-qa-document.js && node scripts/audit-answer-quality.js && node scripts/generate-txt-exports.js && ../.venv/bin/python scripts/build-docx.py && node scripts/build-actual-interview-qa.js && ../.venv/bin/python scripts/build-actual-interview-docx.py",
