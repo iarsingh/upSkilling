@@ -16,7 +16,9 @@ function wrapText(text, max = 28, limit = 3) {
 }
 
 function diagramFor(post) {
+  if (post.diagram) return post.diagram;
   const source = `${post.pillar || ""} ${post.topic || ""} ${post.imageTitle || ""}`.toLowerCase();
+  if (/\bfde\b|forward deployed|customer engagement/.test(source)) return { label: "FDE ENGAGEMENT", nodes: ["Discover", "Constraint", "Policy", "Eval gate", "Shadow", "Handoff"], detail: "Name the user · obey the constraint · measure a number you can defend", accent: "#0f766e", pale: "#ccfbf1", icon: "bulb" };
   if (/log analyzer|log analys/.test(source)) return { label: "PYTHON LOG ANALYZER", nodes: ["Read stream", "Parse lines", "Normalize", "Detect patterns", "Aggregate", "JSON report"], detail: "Handle malformed lines · bound memory · emit metrics · preserve raw evidence", accent: "#d97706", pale: "#fef3c7", icon: "log" };
   if (/model|mlops|training|drift|inference|feature/.test(source)) return { label: "MLOPS, SIMPLIFIED", nodes: ["Validate data", "Feature set", "Train run", "Eval gate", "Registry", "Drift alert"], detail: "Version data + code + model · enforce acceptance gates · monitor skew", accent: "#16a34a", pale: "#dcfce7", icon: "brain" };
   if (/kubernetes|k8s|gke|pod|cluster|helm|gitops|container/.test(source)) return { label: "PLATFORM, UNPACKED", nodes: ["Commit SHA", "CI tests", "OCI image", "GitOps sync", "K8s rollout", "SLO signals"], detail: "Immutable artifact · readiness probes · policy gates · safe rollback", accent: "#0284c7", pale: "#e0f2fe", icon: "cloud" };
@@ -65,8 +67,8 @@ function createSvg(post, slug) {
 <rect width="1200" height="675" fill="#fffdf6"/><g opacity=".03" filter="url(#paper)"><rect width="1200" height="675" fill="#64748b"/></g><circle cx="1100" cy="72" r="86" fill="${d.pale}"/>
 <path d="M53 75q30-30 64 0m-42-25 24 39" fill="none" stroke="${d.accent}" stroke-width="6" stroke-linecap="round"/><text x="72" y="104" class="eyebrow">${esc(d.label)}</text>${titleSvg}
 <path d="M72 ${177 + title.length * 58}q190 16 398 0" fill="none" stroke="${d.accent}" stroke-width="9" stroke-linecap="round" opacity=".65"/><g filter="url(#wobble)">${icon(d.icon, d.accent)}</g>
-<path d="M1054 137q24-17 43-1m-18 22q31-4 43 17M820 314q-28 18-43 48" class="scribble"/><text x="72" y="402" class="note">The production path, without the buzzwords ↓</text>
-${cards}<rect x="70" y="566" width="1020" height="39" rx="19" fill="${d.pale}"/><text x="580" y="592" class="detail" text-anchor="middle">${esc(d.detail)}</text><path d="M55 626q215-13 430 0t430-2" fill="none" stroke="${d.accent}" stroke-width="3" opacity=".55"/><text x="72" y="654" class="footer">Akhilesh Ranjan Singh  ·  ML Platform + DevOps</text><text x="1110" y="647" class="note" text-anchor="end">save this ↗</text>
+<path d="M1054 137q24-17 43-1m-18 22q31-4 43 17M820 314q-28 18-43 48" class="scribble"/><text x="72" y="402" class="note">${esc(post.caption || "The production path, without the buzzwords ↓")}</text>
+${cards}<rect x="70" y="566" width="1020" height="39" rx="19" fill="${d.pale}"/><text x="580" y="592" class="detail" text-anchor="middle">${esc(d.detail)}</text><path d="M55 626q215-13 430 0t430-2" fill="none" stroke="${d.accent}" stroke-width="3" opacity=".55"/><text x="72" y="654" class="footer">${esc(post.footer || "Akhilesh Ranjan Singh  ·  ML Platform + DevOps")}</text><text x="1110" y="647" class="note" text-anchor="end">save this ↗</text>
 </svg>`;
   fs.writeFileSync(svgPath, svg, "utf8");
   return svgPath;

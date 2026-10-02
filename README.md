@@ -61,6 +61,11 @@ This keeps the GitHub view clean and recruiter-readable.
 | GenAI Projects | [`genai-hands-on-projects`](genai-hands-on-projects/) | RAG, safety gateway, prompt evaluation, Gemini/Vertex AI |
 | FDE Playbook | [`fde-engagement-playbook`](fde-engagement-playbook/) | How a forward deployed engagement is scoped, secured, rolled out, and measured |
 | FDE Harborline | [`fde-harborline-engagement`](fde-harborline-engagement/) | Customer deployment of a dispatch copilot that never calls an external model |
+| FDE Clinic Intake | [`fde-clinic-intake`](fde-clinic-intake/) | After-hours intake that blocks on missing consent and does not store the raw note |
+| FDE Ledger Reconcile | [`fde-ledger-reconcile`](fde-ledger-reconcile/) | Idempotent payment matching that refuses to auto-resolve a mismatch |
+| FDE Field Parts | [`fde-field-parts`](fde-field-parts/) | Offline spare-part lookup that will not invent a purchase order |
+| FDE Outage Desk | [`fde-outage-desk`](fde-outage-desk/) | Life-safety feeders ranked ahead of larger commercial outages |
+| FDE Vendor Review | [`fde-vendor-review`](fde-vendor-review/) | Vendor packets that never auto-approve a bank-detail change |
 | RAG + Kubeflow + MLflow Platform | [`rag-kubeflow-mlflow-platform`](rag-kubeflow-mlflow-platform/) | Kubeflow Pipelines SDK build/eval pipeline, MLflow registry promotion gate, Ollama-served RAG API |
 | AIOps Projects | [`aiops-hands-on-projects`](aiops-hands-on-projects/) | Log anomaly detection, alert correlation, SLO burn rate |
 | CI/CD Projects | [`github-actions-hands-on-projects`](github-actions-hands-on-projects/) | GitHub Actions, Docker, Cloud Run, Terraform, Kubernetes validation |
