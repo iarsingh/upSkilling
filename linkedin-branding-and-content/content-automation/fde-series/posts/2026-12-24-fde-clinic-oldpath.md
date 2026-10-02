@@ -1,5 +1,5 @@
 ---
-date: 2026-12-24
+date: 2027-03-14
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: they still use the old path

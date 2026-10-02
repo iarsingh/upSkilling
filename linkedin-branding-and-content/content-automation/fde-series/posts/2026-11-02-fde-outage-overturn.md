@@ -1,5 +1,5 @@
 ---
-date: 2026-11-02
+date: 2026-11-30
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: when the expert disagrees

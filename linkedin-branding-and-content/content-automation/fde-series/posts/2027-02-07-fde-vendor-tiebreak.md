@@ -1,5 +1,5 @@
 ---
-date: 2027-02-07
+date: 2027-06-12
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: who breaks the tie

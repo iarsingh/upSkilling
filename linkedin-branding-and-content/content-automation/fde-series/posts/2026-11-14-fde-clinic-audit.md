@@ -1,5 +1,5 @@
 ---
-date: 2026-11-14
+date: 2026-12-24
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: what the log refuses

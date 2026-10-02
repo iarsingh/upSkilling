@@ -1,5 +1,5 @@
 ---
-date: 2027-02-09
+date: 2027-06-16
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: agree the metric before the build

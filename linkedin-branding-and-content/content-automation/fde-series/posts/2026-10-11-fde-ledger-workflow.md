@@ -1,5 +1,5 @@
 ---
-date: 2026-10-11
+date: 2026-10-17
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: start from the workflow

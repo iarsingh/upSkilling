@@ -1,5 +1,5 @@
 ---
-date: 2026-11-28
+date: 2027-01-21
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: shadow before the desk

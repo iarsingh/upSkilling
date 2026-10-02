@@ -1,5 +1,5 @@
 ---
-date: 2027-02-06
+date: 2027-06-10
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: who breaks the tie

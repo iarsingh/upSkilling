@@ -1,5 +1,5 @@
 ---
-date: 2026-12-09
+date: 2027-02-12
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: rollback that needs no migration

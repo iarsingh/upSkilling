@@ -1,5 +1,5 @@
 ---
-date: 2027-02-12
+date: 2027-06-22
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: agree the metric before the build

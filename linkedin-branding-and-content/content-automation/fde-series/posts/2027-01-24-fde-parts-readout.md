@@ -1,5 +1,5 @@
 ---
-date: 2027-01-24
+date: 2027-05-15
 slot: 08:00
 series: FDE Interview Series
 topic: Helios: the note a sponsor can forward

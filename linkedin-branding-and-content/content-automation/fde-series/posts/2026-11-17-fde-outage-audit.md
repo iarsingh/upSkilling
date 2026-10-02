@@ -1,5 +1,5 @@
 ---
-date: 2026-11-17
+date: 2026-12-30
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: what the log refuses

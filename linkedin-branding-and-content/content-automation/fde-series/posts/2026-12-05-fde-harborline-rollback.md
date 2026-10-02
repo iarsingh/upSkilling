@@ -1,5 +1,5 @@
 ---
-date: 2026-12-05
+date: 2027-02-04
 slot: 08:00
 series: FDE Interview Series
 topic: Harborline: rollback that needs no migration

@@ -1,5 +1,5 @@
 ---
-date: 2027-02-19
+date: 2027-07-06
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: they can recompute the answer

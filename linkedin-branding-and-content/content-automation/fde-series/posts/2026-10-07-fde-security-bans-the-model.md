@@ -1,5 +1,5 @@
 ---
-date: 2026-10-07
+date: 2026-10-09
 slot: 08:00
 series: FDE Interview Series
 topic: Security bans the model API

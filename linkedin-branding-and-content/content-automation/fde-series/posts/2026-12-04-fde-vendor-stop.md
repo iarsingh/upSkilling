@@ -1,5 +1,5 @@
 ---
-date: 2026-12-04
+date: 2027-02-02
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: write the stop before the demo

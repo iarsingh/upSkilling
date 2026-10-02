@@ -1,5 +1,5 @@
 ---
-date: 2026-12-17
+date: 2027-02-28
 slot: 08:00
 series: FDE Interview Series
 topic: Harborline: cut scope in the room

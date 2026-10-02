@@ -1,5 +1,5 @@
 ---
-date: 2026-10-31
+date: 2026-11-26
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: when the expert disagrees

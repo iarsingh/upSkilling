@@ -1,5 +1,5 @@
 ---
-date: 2026-11-03
+date: 2026-12-02
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: when the expert disagrees

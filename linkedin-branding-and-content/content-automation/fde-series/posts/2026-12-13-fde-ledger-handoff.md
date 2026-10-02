@@ -1,5 +1,5 @@
 ---
-date: 2026-12-13
+date: 2027-02-20
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: they can extend the eval file

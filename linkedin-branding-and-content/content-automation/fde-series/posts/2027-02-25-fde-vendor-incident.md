@@ -1,5 +1,5 @@
 ---
-date: 2027-02-25
+date: 2027-07-18
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: a wrong answer during the pilot

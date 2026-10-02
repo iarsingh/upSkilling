@@ -1,5 +1,5 @@
 ---
-date: 2027-03-02
+date: 2027-07-28
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: what they still open after you leave

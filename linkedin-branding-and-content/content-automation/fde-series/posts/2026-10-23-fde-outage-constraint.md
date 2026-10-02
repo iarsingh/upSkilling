@@ -1,5 +1,5 @@
 ---
-date: 2026-10-23
+date: 2026-11-10
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: the sentence that kills a design

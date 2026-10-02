@@ -1,5 +1,5 @@
 ---
-date: 2026-12-07
+date: 2027-02-08
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: rollback that needs no migration

@@ -1,5 +1,5 @@
 ---
-date: 2027-02-23
+date: 2027-07-14
 slot: 08:00
 series: FDE Interview Series
 topic: Helios: a wrong answer during the pilot

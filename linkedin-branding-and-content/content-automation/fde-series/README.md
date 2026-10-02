@@ -2,7 +2,7 @@
 
 LinkedIn drafts and spoken interview drills for a Forward Deployed Engineer profile.
 
-These 150 posts are on the live calendar in `content-calendar.json` from 5 October 2026 through 3 March 2027. The daily publisher sends one of them at 08:00 Asia/Kolkata, with its image. The first ten were written by hand. The rest are scenario posts across Harborline, Northshore, Brightpath, Helios, Cedar Grid, and Northline.
+These 150 posts are on the live calendar on alternate days from 5 October 2026 through 30 July 2027. The daily publisher sends one post at 08:00 Asia/Kolkata. On 5 October the post is FDE, on 6 October it is the existing series, and that pattern continues. The other days stay on Kubernetes, MLOps, Python, and cloud fundamentals.
 
 The story underneath the posts is the Harborline Freight engagement in `fde-harborline-engagement`: a night desk, a banned external model, a written score, and a metric you refuse to claim.
 

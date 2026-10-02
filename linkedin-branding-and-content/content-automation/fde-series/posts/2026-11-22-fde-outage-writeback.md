@@ -1,5 +1,5 @@
 ---
-date: 2026-11-22
+date: 2027-01-09
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: do not write back yet

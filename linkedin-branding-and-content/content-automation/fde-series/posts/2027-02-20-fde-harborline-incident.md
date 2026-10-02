@@ -1,5 +1,5 @@
 ---
-date: 2027-02-20
+date: 2027-07-08
 slot: 08:00
 series: FDE Interview Series
 topic: Harborline: a wrong answer during the pilot

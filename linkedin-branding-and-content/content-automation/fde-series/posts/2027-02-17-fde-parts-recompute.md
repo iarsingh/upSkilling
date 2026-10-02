@@ -1,5 +1,5 @@
 ---
-date: 2027-02-17
+date: 2027-07-02
 slot: 08:00
 series: FDE Interview Series
 topic: Helios: they can recompute the answer

@@ -1,5 +1,5 @@
 ---
-date: 2027-01-16
+date: 2027-04-29
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: prove nothing leaves

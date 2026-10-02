@@ -1,5 +1,5 @@
 ---
-date: 2027-01-02
+date: 2027-04-01
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: unknown means unscored

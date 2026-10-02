@@ -1,5 +1,5 @@
 ---
-date: 2026-10-29
+date: 2026-11-22
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: do not invent the ROI

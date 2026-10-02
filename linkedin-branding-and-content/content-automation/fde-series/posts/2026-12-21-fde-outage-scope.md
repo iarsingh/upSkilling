@@ -1,5 +1,5 @@
 ---
-date: 2026-12-21
+date: 2027-03-08
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: cut scope in the room

@@ -1,5 +1,5 @@
 ---
-date: 2026-11-13
+date: 2026-12-22
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: their file is not the sample

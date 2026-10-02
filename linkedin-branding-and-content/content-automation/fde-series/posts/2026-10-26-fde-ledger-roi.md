@@ -1,5 +1,5 @@
 ---
-date: 2026-10-26
+date: 2026-11-16
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: do not invent the ROI

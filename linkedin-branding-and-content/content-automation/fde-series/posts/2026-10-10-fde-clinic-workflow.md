@@ -1,5 +1,5 @@
 ---
-date: 2026-10-10
+date: 2026-10-15
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: start from the workflow

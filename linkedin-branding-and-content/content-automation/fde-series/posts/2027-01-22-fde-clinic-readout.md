@@ -1,5 +1,5 @@
 ---
-date: 2027-01-22
+date: 2027-05-11
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: the note a sponsor can forward

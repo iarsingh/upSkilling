@@ -1,5 +1,5 @@
 ---
-date: 2027-01-28
+date: 2027-05-23
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: do not hide the gap in the demo

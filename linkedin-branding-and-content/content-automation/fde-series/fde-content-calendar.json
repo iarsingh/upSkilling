@@ -2,10 +2,11 @@
   "series": "FDE Interview Series",
   "status": "scheduled",
   "wiredToDailyPublisher": true,
+  "cadence": "alternate-days",
   "count": 150,
   "startDate": "2026-10-05",
-  "endDate": "2027-03-03",
-  "note": "All 150 posts are in content-calendar.json. The daily publisher sends one per day at 08:00 Asia/Kolkata.",
+  "endDate": "2027-07-30",
+  "note": "150 posts on alternate days starting 2026-10-05. The other days stay on the existing Kubernetes, MLOps, Python, and fundamentals series.",
   "items": [
     {
       "date": "2026-10-05",
@@ -15,1043 +16,1043 @@
       "imagePath": "assets/2026-10-05-fde-start-from-the-workflow-doodle.png"
     },
     {
-      "date": "2026-10-06",
+      "date": "2026-10-07",
       "day": 2,
       "topic": "A constraint has to delete a design",
       "draftPath": "fde-series/posts/2026-10-06-fde-constraint-deletes-the-design.md",
       "imagePath": "assets/2026-10-06-fde-constraint-deletes-the-design-doodle.png"
     },
     {
-      "date": "2026-10-07",
+      "date": "2026-10-09",
       "day": 3,
       "topic": "Security bans the model API",
       "draftPath": "fde-series/posts/2026-10-07-fde-security-bans-the-model.md",
       "imagePath": "assets/2026-10-07-fde-security-bans-the-model-doodle.png"
     },
     {
-      "date": "2026-10-08",
+      "date": "2026-10-11",
       "day": 4,
       "topic": "Do not invent the ROI",
       "draftPath": "fde-series/posts/2026-10-08-fde-do-not-invent-the-roi.md",
       "imagePath": "assets/2026-10-08-fde-do-not-invent-the-roi-doodle.png"
     },
     {
-      "date": "2026-10-09",
+      "date": "2026-10-13",
       "day": 5,
       "topic": "The operator overturns the score",
       "draftPath": "fde-series/posts/2026-10-09-fde-operator-overturns-the-score.md",
       "imagePath": "assets/2026-10-09-fde-operator-overturns-the-score-doodle.png"
     },
     {
-      "date": "2026-10-10",
+      "date": "2026-10-15",
       "day": 6,
       "topic": "Northshore: start from the workflow",
       "draftPath": "fde-series/posts/2026-10-10-fde-clinic-workflow.md",
       "imagePath": "assets/2026-10-10-fde-clinic-workflow-doodle.png"
     },
     {
-      "date": "2026-10-11",
+      "date": "2026-10-17",
       "day": 7,
       "topic": "Brightpath: start from the workflow",
       "draftPath": "fde-series/posts/2026-10-11-fde-ledger-workflow.md",
       "imagePath": "assets/2026-10-11-fde-ledger-workflow-doodle.png"
     },
     {
-      "date": "2026-10-12",
+      "date": "2026-10-19",
       "day": 8,
       "topic": "Two stakeholders, one week",
       "draftPath": "fde-series/posts/2026-10-12-fde-two-stakeholders-one-week.md",
       "imagePath": "assets/2026-10-12-fde-two-stakeholders-one-week-doodle.png"
     },
     {
-      "date": "2026-10-13",
+      "date": "2026-10-21",
       "day": 9,
       "topic": "The export is missing a column",
       "draftPath": "fde-series/posts/2026-10-13-fde-export-missing-a-column.md",
       "imagePath": "assets/2026-10-13-fde-export-missing-a-column-doodle.png"
     },
     {
-      "date": "2026-10-14",
+      "date": "2026-10-23",
       "day": 10,
       "topic": "What the audit log refuses to store",
       "draftPath": "fde-series/posts/2026-10-14-fde-audit-log-refuses-to-store.md",
       "imagePath": "assets/2026-10-14-fde-audit-log-refuses-to-store-doodle.png"
     },
     {
-      "date": "2026-10-15",
+      "date": "2026-10-25",
       "day": 11,
       "topic": "Do not write back to the system of record",
       "draftPath": "fde-series/posts/2026-10-15-fde-do-not-write-back.md",
       "imagePath": "assets/2026-10-15-fde-do-not-write-back-doodle.png"
     },
     {
-      "date": "2026-10-16",
+      "date": "2026-10-27",
       "day": 12,
       "topic": "Rollout, rollback, and the stop condition",
       "draftPath": "fde-series/posts/2026-10-16-fde-rollout-and-rollback.md",
       "imagePath": "assets/2026-10-16-fde-rollout-and-rollback-doodle.png"
     },
     {
-      "date": "2026-10-17",
+      "date": "2026-10-29",
       "day": 13,
       "topic": "Helios: start from the workflow",
       "draftPath": "fde-series/posts/2026-10-17-fde-parts-workflow.md",
       "imagePath": "assets/2026-10-17-fde-parts-workflow-doodle.png"
     },
     {
-      "date": "2026-10-18",
+      "date": "2026-10-31",
       "day": 14,
       "topic": "Cedar Grid: start from the workflow",
       "draftPath": "fde-series/posts/2026-10-18-fde-outage-workflow.md",
       "imagePath": "assets/2026-10-18-fde-outage-workflow-doodle.png"
     },
     {
-      "date": "2026-10-19",
+      "date": "2026-11-02",
       "day": 15,
       "topic": "Northline: start from the workflow",
       "draftPath": "fde-series/posts/2026-10-19-fde-vendor-workflow.md",
       "imagePath": "assets/2026-10-19-fde-vendor-workflow-doodle.png"
     },
     {
-      "date": "2026-10-20",
+      "date": "2026-11-04",
       "day": 16,
       "topic": "Northshore: the sentence that kills a design",
       "draftPath": "fde-series/posts/2026-10-20-fde-clinic-constraint.md",
       "imagePath": "assets/2026-10-20-fde-clinic-constraint-doodle.png"
     },
     {
-      "date": "2026-10-21",
+      "date": "2026-11-06",
       "day": 17,
       "topic": "Brightpath: the sentence that kills a design",
       "draftPath": "fde-series/posts/2026-10-21-fde-ledger-constraint.md",
       "imagePath": "assets/2026-10-21-fde-ledger-constraint-doodle.png"
     },
     {
-      "date": "2026-10-22",
+      "date": "2026-11-08",
       "day": 18,
       "topic": "Helios: the sentence that kills a design",
       "draftPath": "fde-series/posts/2026-10-22-fde-parts-constraint.md",
       "imagePath": "assets/2026-10-22-fde-parts-constraint-doodle.png"
     },
     {
-      "date": "2026-10-23",
+      "date": "2026-11-10",
       "day": 19,
       "topic": "Cedar Grid: the sentence that kills a design",
       "draftPath": "fde-series/posts/2026-10-23-fde-outage-constraint.md",
       "imagePath": "assets/2026-10-23-fde-outage-constraint-doodle.png"
     },
     {
-      "date": "2026-10-24",
+      "date": "2026-11-12",
       "day": 20,
       "topic": "Northline: the sentence that kills a design",
       "draftPath": "fde-series/posts/2026-10-24-fde-vendor-constraint.md",
       "imagePath": "assets/2026-10-24-fde-vendor-constraint-doodle.png"
     },
     {
-      "date": "2026-10-25",
+      "date": "2026-11-14",
       "day": 21,
       "topic": "Northshore: do not invent the ROI",
       "draftPath": "fde-series/posts/2026-10-25-fde-clinic-roi.md",
       "imagePath": "assets/2026-10-25-fde-clinic-roi-doodle.png"
     },
     {
-      "date": "2026-10-26",
+      "date": "2026-11-16",
       "day": 22,
       "topic": "Brightpath: do not invent the ROI",
       "draftPath": "fde-series/posts/2026-10-26-fde-ledger-roi.md",
       "imagePath": "assets/2026-10-26-fde-ledger-roi-doodle.png"
     },
     {
-      "date": "2026-10-27",
+      "date": "2026-11-18",
       "day": 23,
       "topic": "Helios: do not invent the ROI",
       "draftPath": "fde-series/posts/2026-10-27-fde-parts-roi.md",
       "imagePath": "assets/2026-10-27-fde-parts-roi-doodle.png"
     },
     {
-      "date": "2026-10-28",
+      "date": "2026-11-20",
       "day": 24,
       "topic": "Cedar Grid: do not invent the ROI",
       "draftPath": "fde-series/posts/2026-10-28-fde-outage-roi.md",
       "imagePath": "assets/2026-10-28-fde-outage-roi-doodle.png"
     },
     {
-      "date": "2026-10-29",
+      "date": "2026-11-22",
       "day": 25,
       "topic": "Northline: do not invent the ROI",
       "draftPath": "fde-series/posts/2026-10-29-fde-vendor-roi.md",
       "imagePath": "assets/2026-10-29-fde-vendor-roi-doodle.png"
     },
     {
-      "date": "2026-10-30",
+      "date": "2026-11-24",
       "day": 26,
       "topic": "Northshore: when the expert disagrees",
       "draftPath": "fde-series/posts/2026-10-30-fde-clinic-overturn.md",
       "imagePath": "assets/2026-10-30-fde-clinic-overturn-doodle.png"
     },
     {
-      "date": "2026-10-31",
+      "date": "2026-11-26",
       "day": 27,
       "topic": "Brightpath: when the expert disagrees",
       "draftPath": "fde-series/posts/2026-10-31-fde-ledger-overturn.md",
       "imagePath": "assets/2026-10-31-fde-ledger-overturn-doodle.png"
     },
     {
-      "date": "2026-11-01",
+      "date": "2026-11-28",
       "day": 28,
       "topic": "Helios: when the expert disagrees",
       "draftPath": "fde-series/posts/2026-11-01-fde-parts-overturn.md",
       "imagePath": "assets/2026-11-01-fde-parts-overturn-doodle.png"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-30",
       "day": 29,
       "topic": "Cedar Grid: when the expert disagrees",
       "draftPath": "fde-series/posts/2026-11-02-fde-outage-overturn.md",
       "imagePath": "assets/2026-11-02-fde-outage-overturn-doodle.png"
     },
     {
-      "date": "2026-11-03",
+      "date": "2026-12-02",
       "day": 30,
       "topic": "Northline: when the expert disagrees",
       "draftPath": "fde-series/posts/2026-11-03-fde-vendor-overturn.md",
       "imagePath": "assets/2026-11-03-fde-vendor-overturn-doodle.png"
     },
     {
-      "date": "2026-11-04",
+      "date": "2026-12-04",
       "day": 31,
       "topic": "Northshore: two owners, one week",
       "draftPath": "fde-series/posts/2026-11-04-fde-clinic-stakeholders.md",
       "imagePath": "assets/2026-11-04-fde-clinic-stakeholders-doodle.png"
     },
     {
-      "date": "2026-11-05",
+      "date": "2026-12-06",
       "day": 32,
       "topic": "Brightpath: two owners, one week",
       "draftPath": "fde-series/posts/2026-11-05-fde-ledger-stakeholders.md",
       "imagePath": "assets/2026-11-05-fde-ledger-stakeholders-doodle.png"
     },
     {
-      "date": "2026-11-06",
+      "date": "2026-12-08",
       "day": 33,
       "topic": "Helios: two owners, one week",
       "draftPath": "fde-series/posts/2026-11-06-fde-parts-stakeholders.md",
       "imagePath": "assets/2026-11-06-fde-parts-stakeholders-doodle.png"
     },
     {
-      "date": "2026-11-07",
+      "date": "2026-12-10",
       "day": 34,
       "topic": "Cedar Grid: two owners, one week",
       "draftPath": "fde-series/posts/2026-11-07-fde-outage-stakeholders.md",
       "imagePath": "assets/2026-11-07-fde-outage-stakeholders-doodle.png"
     },
     {
-      "date": "2026-11-08",
+      "date": "2026-12-12",
       "day": 35,
       "topic": "Northline: two owners, one week",
       "draftPath": "fde-series/posts/2026-11-08-fde-vendor-stakeholders.md",
       "imagePath": "assets/2026-11-08-fde-vendor-stakeholders-doodle.png"
     },
     {
-      "date": "2026-11-09",
+      "date": "2026-12-14",
       "day": 36,
       "topic": "Northshore: their file is not the sample",
       "draftPath": "fde-series/posts/2026-11-09-fde-clinic-export.md",
       "imagePath": "assets/2026-11-09-fde-clinic-export-doodle.png"
     },
     {
-      "date": "2026-11-10",
+      "date": "2026-12-16",
       "day": 37,
       "topic": "Brightpath: their file is not the sample",
       "draftPath": "fde-series/posts/2026-11-10-fde-ledger-export.md",
       "imagePath": "assets/2026-11-10-fde-ledger-export-doodle.png"
     },
     {
-      "date": "2026-11-11",
+      "date": "2026-12-18",
       "day": 38,
       "topic": "Helios: their file is not the sample",
       "draftPath": "fde-series/posts/2026-11-11-fde-parts-export.md",
       "imagePath": "assets/2026-11-11-fde-parts-export-doodle.png"
     },
     {
-      "date": "2026-11-12",
+      "date": "2026-12-20",
       "day": 39,
       "topic": "Cedar Grid: their file is not the sample",
       "draftPath": "fde-series/posts/2026-11-12-fde-outage-export.md",
       "imagePath": "assets/2026-11-12-fde-outage-export-doodle.png"
     },
     {
-      "date": "2026-11-13",
+      "date": "2026-12-22",
       "day": 40,
       "topic": "Northline: their file is not the sample",
       "draftPath": "fde-series/posts/2026-11-13-fde-vendor-export.md",
       "imagePath": "assets/2026-11-13-fde-vendor-export-doodle.png"
     },
     {
-      "date": "2026-11-14",
+      "date": "2026-12-24",
       "day": 41,
       "topic": "Northshore: what the log refuses",
       "draftPath": "fde-series/posts/2026-11-14-fde-clinic-audit.md",
       "imagePath": "assets/2026-11-14-fde-clinic-audit-doodle.png"
     },
     {
-      "date": "2026-11-15",
+      "date": "2026-12-26",
       "day": 42,
       "topic": "Brightpath: what the log refuses",
       "draftPath": "fde-series/posts/2026-11-15-fde-ledger-audit.md",
       "imagePath": "assets/2026-11-15-fde-ledger-audit-doodle.png"
     },
     {
-      "date": "2026-11-16",
+      "date": "2026-12-28",
       "day": 43,
       "topic": "Helios: what the log refuses",
       "draftPath": "fde-series/posts/2026-11-16-fde-parts-audit.md",
       "imagePath": "assets/2026-11-16-fde-parts-audit-doodle.png"
     },
     {
-      "date": "2026-11-17",
+      "date": "2026-12-30",
       "day": 44,
       "topic": "Cedar Grid: what the log refuses",
       "draftPath": "fde-series/posts/2026-11-17-fde-outage-audit.md",
       "imagePath": "assets/2026-11-17-fde-outage-audit-doodle.png"
     },
     {
-      "date": "2026-11-18",
+      "date": "2027-01-01",
       "day": 45,
       "topic": "Northline: what the log refuses",
       "draftPath": "fde-series/posts/2026-11-18-fde-vendor-audit.md",
       "imagePath": "assets/2026-11-18-fde-vendor-audit-doodle.png"
     },
     {
-      "date": "2026-11-19",
+      "date": "2027-01-03",
       "day": 46,
       "topic": "Northshore: do not write back yet",
       "draftPath": "fde-series/posts/2026-11-19-fde-clinic-writeback.md",
       "imagePath": "assets/2026-11-19-fde-clinic-writeback-doodle.png"
     },
     {
-      "date": "2026-11-20",
+      "date": "2027-01-05",
       "day": 47,
       "topic": "Brightpath: do not write back yet",
       "draftPath": "fde-series/posts/2026-11-20-fde-ledger-writeback.md",
       "imagePath": "assets/2026-11-20-fde-ledger-writeback-doodle.png"
     },
     {
-      "date": "2026-11-21",
+      "date": "2027-01-07",
       "day": 48,
       "topic": "Helios: do not write back yet",
       "draftPath": "fde-series/posts/2026-11-21-fde-parts-writeback.md",
       "imagePath": "assets/2026-11-21-fde-parts-writeback-doodle.png"
     },
     {
-      "date": "2026-11-22",
+      "date": "2027-01-09",
       "day": 49,
       "topic": "Cedar Grid: do not write back yet",
       "draftPath": "fde-series/posts/2026-11-22-fde-outage-writeback.md",
       "imagePath": "assets/2026-11-22-fde-outage-writeback-doodle.png"
     },
     {
-      "date": "2026-11-23",
+      "date": "2027-01-11",
       "day": 50,
       "topic": "Northline: do not write back yet",
       "draftPath": "fde-series/posts/2026-11-23-fde-vendor-writeback.md",
       "imagePath": "assets/2026-11-23-fde-vendor-writeback-doodle.png"
     },
     {
-      "date": "2026-11-24",
+      "date": "2027-01-13",
       "day": 51,
       "topic": "Harborline: shadow before the desk",
       "draftPath": "fde-series/posts/2026-11-24-fde-harborline-shadow.md",
       "imagePath": "assets/2026-11-24-fde-harborline-shadow-doodle.png"
     },
     {
-      "date": "2026-11-25",
+      "date": "2027-01-15",
       "day": 52,
       "topic": "Northshore: shadow before the desk",
       "draftPath": "fde-series/posts/2026-11-25-fde-clinic-shadow.md",
       "imagePath": "assets/2026-11-25-fde-clinic-shadow-doodle.png"
     },
     {
-      "date": "2026-11-26",
+      "date": "2027-01-17",
       "day": 53,
       "topic": "Brightpath: shadow before the desk",
       "draftPath": "fde-series/posts/2026-11-26-fde-ledger-shadow.md",
       "imagePath": "assets/2026-11-26-fde-ledger-shadow-doodle.png"
     },
     {
-      "date": "2026-11-27",
+      "date": "2027-01-19",
       "day": 54,
       "topic": "Helios: shadow before the desk",
       "draftPath": "fde-series/posts/2026-11-27-fde-parts-shadow.md",
       "imagePath": "assets/2026-11-27-fde-parts-shadow-doodle.png"
     },
     {
-      "date": "2026-11-28",
+      "date": "2027-01-21",
       "day": 55,
       "topic": "Cedar Grid: shadow before the desk",
       "draftPath": "fde-series/posts/2026-11-28-fde-outage-shadow.md",
       "imagePath": "assets/2026-11-28-fde-outage-shadow-doodle.png"
     },
     {
-      "date": "2026-11-29",
+      "date": "2027-01-23",
       "day": 56,
       "topic": "Northline: shadow before the desk",
       "draftPath": "fde-series/posts/2026-11-29-fde-vendor-shadow.md",
       "imagePath": "assets/2026-11-29-fde-vendor-shadow-doodle.png"
     },
     {
-      "date": "2026-11-30",
+      "date": "2027-01-25",
       "day": 57,
       "topic": "Northshore: write the stop before the demo",
       "draftPath": "fde-series/posts/2026-11-30-fde-clinic-stop.md",
       "imagePath": "assets/2026-11-30-fde-clinic-stop-doodle.png"
     },
     {
-      "date": "2026-12-01",
+      "date": "2027-01-27",
       "day": 58,
       "topic": "Brightpath: write the stop before the demo",
       "draftPath": "fde-series/posts/2026-12-01-fde-ledger-stop.md",
       "imagePath": "assets/2026-12-01-fde-ledger-stop-doodle.png"
     },
     {
-      "date": "2026-12-02",
+      "date": "2027-01-29",
       "day": 59,
       "topic": "Helios: write the stop before the demo",
       "draftPath": "fde-series/posts/2026-12-02-fde-parts-stop.md",
       "imagePath": "assets/2026-12-02-fde-parts-stop-doodle.png"
     },
     {
-      "date": "2026-12-03",
+      "date": "2027-01-31",
       "day": 60,
       "topic": "Cedar Grid: write the stop before the demo",
       "draftPath": "fde-series/posts/2026-12-03-fde-outage-stop.md",
       "imagePath": "assets/2026-12-03-fde-outage-stop-doodle.png"
     },
     {
-      "date": "2026-12-04",
+      "date": "2027-02-02",
       "day": 61,
       "topic": "Northline: write the stop before the demo",
       "draftPath": "fde-series/posts/2026-12-04-fde-vendor-stop.md",
       "imagePath": "assets/2026-12-04-fde-vendor-stop-doodle.png"
     },
     {
-      "date": "2026-12-05",
+      "date": "2027-02-04",
       "day": 62,
       "topic": "Harborline: rollback that needs no migration",
       "draftPath": "fde-series/posts/2026-12-05-fde-harborline-rollback.md",
       "imagePath": "assets/2026-12-05-fde-harborline-rollback-doodle.png"
     },
     {
-      "date": "2026-12-06",
+      "date": "2027-02-06",
       "day": 63,
       "topic": "Northshore: rollback that needs no migration",
       "draftPath": "fde-series/posts/2026-12-06-fde-clinic-rollback.md",
       "imagePath": "assets/2026-12-06-fde-clinic-rollback-doodle.png"
     },
     {
-      "date": "2026-12-07",
+      "date": "2027-02-08",
       "day": 64,
       "topic": "Brightpath: rollback that needs no migration",
       "draftPath": "fde-series/posts/2026-12-07-fde-ledger-rollback.md",
       "imagePath": "assets/2026-12-07-fde-ledger-rollback-doodle.png"
     },
     {
-      "date": "2026-12-08",
+      "date": "2027-02-10",
       "day": 65,
       "topic": "Helios: rollback that needs no migration",
       "draftPath": "fde-series/posts/2026-12-08-fde-parts-rollback.md",
       "imagePath": "assets/2026-12-08-fde-parts-rollback-doodle.png"
     },
     {
-      "date": "2026-12-09",
+      "date": "2027-02-12",
       "day": 66,
       "topic": "Cedar Grid: rollback that needs no migration",
       "draftPath": "fde-series/posts/2026-12-09-fde-outage-rollback.md",
       "imagePath": "assets/2026-12-09-fde-outage-rollback-doodle.png"
     },
     {
-      "date": "2026-12-10",
+      "date": "2027-02-14",
       "day": 67,
       "topic": "Northline: rollback that needs no migration",
       "draftPath": "fde-series/posts/2026-12-10-fde-vendor-rollback.md",
       "imagePath": "assets/2026-12-10-fde-vendor-rollback-doodle.png"
     },
     {
-      "date": "2026-12-11",
+      "date": "2027-02-16",
       "day": 68,
       "topic": "Harborline: they can extend the eval file",
       "draftPath": "fde-series/posts/2026-12-11-fde-harborline-handoff.md",
       "imagePath": "assets/2026-12-11-fde-harborline-handoff-doodle.png"
     },
     {
-      "date": "2026-12-12",
+      "date": "2027-02-18",
       "day": 69,
       "topic": "Northshore: they can extend the eval file",
       "draftPath": "fde-series/posts/2026-12-12-fde-clinic-handoff.md",
       "imagePath": "assets/2026-12-12-fde-clinic-handoff-doodle.png"
     },
     {
-      "date": "2026-12-13",
+      "date": "2027-02-20",
       "day": 70,
       "topic": "Brightpath: they can extend the eval file",
       "draftPath": "fde-series/posts/2026-12-13-fde-ledger-handoff.md",
       "imagePath": "assets/2026-12-13-fde-ledger-handoff-doodle.png"
     },
     {
-      "date": "2026-12-14",
+      "date": "2027-02-22",
       "day": 71,
       "topic": "Helios: they can extend the eval file",
       "draftPath": "fde-series/posts/2026-12-14-fde-parts-handoff.md",
       "imagePath": "assets/2026-12-14-fde-parts-handoff-doodle.png"
     },
     {
-      "date": "2026-12-15",
+      "date": "2027-02-24",
       "day": 72,
       "topic": "Cedar Grid: they can extend the eval file",
       "draftPath": "fde-series/posts/2026-12-15-fde-outage-handoff.md",
       "imagePath": "assets/2026-12-15-fde-outage-handoff-doodle.png"
     },
     {
-      "date": "2026-12-16",
+      "date": "2027-02-26",
       "day": 73,
       "topic": "Northline: they can extend the eval file",
       "draftPath": "fde-series/posts/2026-12-16-fde-vendor-handoff.md",
       "imagePath": "assets/2026-12-16-fde-vendor-handoff-doodle.png"
     },
     {
-      "date": "2026-12-17",
+      "date": "2027-02-28",
       "day": 74,
       "topic": "Harborline: cut scope in the room",
       "draftPath": "fde-series/posts/2026-12-17-fde-harborline-scope.md",
       "imagePath": "assets/2026-12-17-fde-harborline-scope-doodle.png"
     },
     {
-      "date": "2026-12-18",
+      "date": "2027-03-02",
       "day": 75,
       "topic": "Northshore: cut scope in the room",
       "draftPath": "fde-series/posts/2026-12-18-fde-clinic-scope.md",
       "imagePath": "assets/2026-12-18-fde-clinic-scope-doodle.png"
     },
     {
-      "date": "2026-12-19",
+      "date": "2027-03-04",
       "day": 76,
       "topic": "Brightpath: cut scope in the room",
       "draftPath": "fde-series/posts/2026-12-19-fde-ledger-scope.md",
       "imagePath": "assets/2026-12-19-fde-ledger-scope-doodle.png"
     },
     {
-      "date": "2026-12-20",
+      "date": "2027-03-06",
       "day": 77,
       "topic": "Helios: cut scope in the room",
       "draftPath": "fde-series/posts/2026-12-20-fde-parts-scope.md",
       "imagePath": "assets/2026-12-20-fde-parts-scope-doodle.png"
     },
     {
-      "date": "2026-12-21",
+      "date": "2027-03-08",
       "day": 78,
       "topic": "Cedar Grid: cut scope in the room",
       "draftPath": "fde-series/posts/2026-12-21-fde-outage-scope.md",
       "imagePath": "assets/2026-12-21-fde-outage-scope-doodle.png"
     },
     {
-      "date": "2026-12-22",
+      "date": "2027-03-10",
       "day": 79,
       "topic": "Northline: cut scope in the room",
       "draftPath": "fde-series/posts/2026-12-22-fde-vendor-scope.md",
       "imagePath": "assets/2026-12-22-fde-vendor-scope-doodle.png"
     },
     {
-      "date": "2026-12-23",
+      "date": "2027-03-12",
       "day": 80,
       "topic": "Harborline: they still use the old path",
       "draftPath": "fde-series/posts/2026-12-23-fde-harborline-oldpath.md",
       "imagePath": "assets/2026-12-23-fde-harborline-oldpath-doodle.png"
     },
     {
-      "date": "2026-12-24",
+      "date": "2027-03-14",
       "day": 81,
       "topic": "Northshore: they still use the old path",
       "draftPath": "fde-series/posts/2026-12-24-fde-clinic-oldpath.md",
       "imagePath": "assets/2026-12-24-fde-clinic-oldpath-doodle.png"
     },
     {
-      "date": "2026-12-25",
+      "date": "2027-03-16",
       "day": 82,
       "topic": "Brightpath: they still use the old path",
       "draftPath": "fde-series/posts/2026-12-25-fde-ledger-oldpath.md",
       "imagePath": "assets/2026-12-25-fde-ledger-oldpath-doodle.png"
     },
     {
-      "date": "2026-12-26",
+      "date": "2027-03-18",
       "day": 83,
       "topic": "Helios: they still use the old path",
       "draftPath": "fde-series/posts/2026-12-26-fde-parts-oldpath.md",
       "imagePath": "assets/2026-12-26-fde-parts-oldpath-doodle.png"
     },
     {
-      "date": "2026-12-27",
+      "date": "2027-03-20",
       "day": 84,
       "topic": "Cedar Grid: they still use the old path",
       "draftPath": "fde-series/posts/2026-12-27-fde-outage-oldpath.md",
       "imagePath": "assets/2026-12-27-fde-outage-oldpath-doodle.png"
     },
     {
-      "date": "2026-12-28",
+      "date": "2027-03-22",
       "day": 85,
       "topic": "Northline: they still use the old path",
       "draftPath": "fde-series/posts/2026-12-28-fde-vendor-oldpath.md",
       "imagePath": "assets/2026-12-28-fde-vendor-oldpath-doodle.png"
     },
     {
-      "date": "2026-12-29",
+      "date": "2027-03-24",
       "day": 86,
       "topic": "Harborline: unknown means unscored",
       "draftPath": "fde-series/posts/2026-12-29-fde-harborline-unknown.md",
       "imagePath": "assets/2026-12-29-fde-harborline-unknown-doodle.png"
     },
     {
-      "date": "2026-12-30",
+      "date": "2027-03-26",
       "day": 87,
       "topic": "Northshore: unknown means unscored",
       "draftPath": "fde-series/posts/2026-12-30-fde-clinic-unknown.md",
       "imagePath": "assets/2026-12-30-fde-clinic-unknown-doodle.png"
     },
     {
-      "date": "2026-12-31",
+      "date": "2027-03-28",
       "day": 88,
       "topic": "Brightpath: unknown means unscored",
       "draftPath": "fde-series/posts/2026-12-31-fde-ledger-unknown.md",
       "imagePath": "assets/2026-12-31-fde-ledger-unknown-doodle.png"
     },
     {
-      "date": "2027-01-01",
+      "date": "2027-03-30",
       "day": 89,
       "topic": "Helios: unknown means unscored",
       "draftPath": "fde-series/posts/2027-01-01-fde-parts-unknown.md",
       "imagePath": "assets/2027-01-01-fde-parts-unknown-doodle.png"
     },
     {
-      "date": "2027-01-02",
+      "date": "2027-04-01",
       "day": 90,
       "topic": "Cedar Grid: unknown means unscored",
       "draftPath": "fde-series/posts/2027-01-02-fde-outage-unknown.md",
       "imagePath": "assets/2027-01-02-fde-outage-unknown-doodle.png"
     },
     {
-      "date": "2027-01-03",
+      "date": "2027-04-03",
       "day": 91,
       "topic": "Northline: unknown means unscored",
       "draftPath": "fde-series/posts/2027-01-03-fde-vendor-unknown.md",
       "imagePath": "assets/2027-01-03-fde-vendor-unknown-doodle.png"
     },
     {
-      "date": "2027-01-04",
+      "date": "2027-04-05",
       "day": 92,
       "topic": "Harborline: the same file run twice",
       "draftPath": "fde-series/posts/2027-01-04-fde-harborline-replay.md",
       "imagePath": "assets/2027-01-04-fde-harborline-replay-doodle.png"
     },
     {
-      "date": "2027-01-05",
+      "date": "2027-04-07",
       "day": 93,
       "topic": "Northshore: the same file run twice",
       "draftPath": "fde-series/posts/2027-01-05-fde-clinic-replay.md",
       "imagePath": "assets/2027-01-05-fde-clinic-replay-doodle.png"
     },
     {
-      "date": "2027-01-06",
+      "date": "2027-04-09",
       "day": 94,
       "topic": "Brightpath: the same file run twice",
       "draftPath": "fde-series/posts/2027-01-06-fde-ledger-replay.md",
       "imagePath": "assets/2027-01-06-fde-ledger-replay-doodle.png"
     },
     {
-      "date": "2027-01-07",
+      "date": "2027-04-11",
       "day": 95,
       "topic": "Helios: the same file run twice",
       "draftPath": "fde-series/posts/2027-01-07-fde-parts-replay.md",
       "imagePath": "assets/2027-01-07-fde-parts-replay-doodle.png"
     },
     {
-      "date": "2027-01-08",
+      "date": "2027-04-13",
       "day": 96,
       "topic": "Cedar Grid: the same file run twice",
       "draftPath": "fde-series/posts/2027-01-08-fde-outage-replay.md",
       "imagePath": "assets/2027-01-08-fde-outage-replay-doodle.png"
     },
     {
-      "date": "2027-01-09",
+      "date": "2027-04-15",
       "day": 97,
       "topic": "Northline: the same file run twice",
       "draftPath": "fde-series/posts/2027-01-09-fde-vendor-replay.md",
       "imagePath": "assets/2027-01-09-fde-vendor-replay-doodle.png"
     },
     {
-      "date": "2027-01-10",
+      "date": "2027-04-17",
       "day": 98,
       "topic": "Harborline: the second login waits",
       "draftPath": "fde-series/posts/2027-01-10-fde-harborline-access.md",
       "imagePath": "assets/2027-01-10-fde-harborline-access-doodle.png"
     },
     {
-      "date": "2027-01-11",
+      "date": "2027-04-19",
       "day": 99,
       "topic": "Northshore: the second login waits",
       "draftPath": "fde-series/posts/2027-01-11-fde-clinic-access.md",
       "imagePath": "assets/2027-01-11-fde-clinic-access-doodle.png"
     },
     {
-      "date": "2027-01-12",
+      "date": "2027-04-21",
       "day": 100,
       "topic": "Brightpath: the second login waits",
       "draftPath": "fde-series/posts/2027-01-12-fde-ledger-access.md",
       "imagePath": "assets/2027-01-12-fde-ledger-access-doodle.png"
     },
     {
-      "date": "2027-01-13",
+      "date": "2027-04-23",
       "day": 101,
       "topic": "Helios: the second login waits",
       "draftPath": "fde-series/posts/2027-01-13-fde-parts-access.md",
       "imagePath": "assets/2027-01-13-fde-parts-access-doodle.png"
     },
     {
-      "date": "2027-01-14",
+      "date": "2027-04-25",
       "day": 102,
       "topic": "Cedar Grid: the second login waits",
       "draftPath": "fde-series/posts/2027-01-14-fde-outage-access.md",
       "imagePath": "assets/2027-01-14-fde-outage-access-doodle.png"
     },
     {
-      "date": "2027-01-15",
+      "date": "2027-04-27",
       "day": 103,
       "topic": "Northline: the second login waits",
       "draftPath": "fde-series/posts/2027-01-15-fde-vendor-access.md",
       "imagePath": "assets/2027-01-15-fde-vendor-access-doodle.png"
     },
     {
-      "date": "2027-01-16",
+      "date": "2027-04-29",
       "day": 104,
       "topic": "Northshore: prove nothing leaves",
       "draftPath": "fde-series/posts/2027-01-16-fde-clinic-egress.md",
       "imagePath": "assets/2027-01-16-fde-clinic-egress-doodle.png"
     },
     {
-      "date": "2027-01-17",
+      "date": "2027-05-01",
       "day": 105,
       "topic": "Brightpath: prove nothing leaves",
       "draftPath": "fde-series/posts/2027-01-17-fde-ledger-egress.md",
       "imagePath": "assets/2027-01-17-fde-ledger-egress-doodle.png"
     },
     {
-      "date": "2027-01-18",
+      "date": "2027-05-03",
       "day": 106,
       "topic": "Helios: prove nothing leaves",
       "draftPath": "fde-series/posts/2027-01-18-fde-parts-egress.md",
       "imagePath": "assets/2027-01-18-fde-parts-egress-doodle.png"
     },
     {
-      "date": "2027-01-19",
+      "date": "2027-05-05",
       "day": 107,
       "topic": "Cedar Grid: prove nothing leaves",
       "draftPath": "fde-series/posts/2027-01-19-fde-outage-egress.md",
       "imagePath": "assets/2027-01-19-fde-outage-egress-doodle.png"
     },
     {
-      "date": "2027-01-20",
+      "date": "2027-05-07",
       "day": 108,
       "topic": "Northline: prove nothing leaves",
       "draftPath": "fde-series/posts/2027-01-20-fde-vendor-egress.md",
       "imagePath": "assets/2027-01-20-fde-vendor-egress-doodle.png"
     },
     {
-      "date": "2027-01-21",
+      "date": "2027-05-09",
       "day": 109,
       "topic": "Harborline: the note a sponsor can forward",
       "draftPath": "fde-series/posts/2027-01-21-fde-harborline-readout.md",
       "imagePath": "assets/2027-01-21-fde-harborline-readout-doodle.png"
     },
     {
-      "date": "2027-01-22",
+      "date": "2027-05-11",
       "day": 110,
       "topic": "Northshore: the note a sponsor can forward",
       "draftPath": "fde-series/posts/2027-01-22-fde-clinic-readout.md",
       "imagePath": "assets/2027-01-22-fde-clinic-readout-doodle.png"
     },
     {
-      "date": "2027-01-23",
+      "date": "2027-05-13",
       "day": 111,
       "topic": "Brightpath: the note a sponsor can forward",
       "draftPath": "fde-series/posts/2027-01-23-fde-ledger-readout.md",
       "imagePath": "assets/2027-01-23-fde-ledger-readout-doodle.png"
     },
     {
-      "date": "2027-01-24",
+      "date": "2027-05-15",
       "day": 112,
       "topic": "Helios: the note a sponsor can forward",
       "draftPath": "fde-series/posts/2027-01-24-fde-parts-readout.md",
       "imagePath": "assets/2027-01-24-fde-parts-readout-doodle.png"
     },
     {
-      "date": "2027-01-25",
+      "date": "2027-05-17",
       "day": 113,
       "topic": "Cedar Grid: the note a sponsor can forward",
       "draftPath": "fde-series/posts/2027-01-25-fde-outage-readout.md",
       "imagePath": "assets/2027-01-25-fde-outage-readout-doodle.png"
     },
     {
-      "date": "2027-01-26",
+      "date": "2027-05-19",
       "day": 114,
       "topic": "Northline: the note a sponsor can forward",
       "draftPath": "fde-series/posts/2027-01-26-fde-vendor-readout.md",
       "imagePath": "assets/2027-01-26-fde-vendor-readout-doodle.png"
     },
     {
-      "date": "2027-01-27",
+      "date": "2027-05-21",
       "day": 115,
       "topic": "Harborline: do not hide the gap in the demo",
       "draftPath": "fde-series/posts/2027-01-27-fde-harborline-demo.md",
       "imagePath": "assets/2027-01-27-fde-harborline-demo-doodle.png"
     },
     {
-      "date": "2027-01-28",
+      "date": "2027-05-23",
       "day": 116,
       "topic": "Northshore: do not hide the gap in the demo",
       "draftPath": "fde-series/posts/2027-01-28-fde-clinic-demo.md",
       "imagePath": "assets/2027-01-28-fde-clinic-demo-doodle.png"
     },
     {
-      "date": "2027-01-29",
+      "date": "2027-05-25",
       "day": 117,
       "topic": "Brightpath: do not hide the gap in the demo",
       "draftPath": "fde-series/posts/2027-01-29-fde-ledger-demo.md",
       "imagePath": "assets/2027-01-29-fde-ledger-demo-doodle.png"
     },
     {
-      "date": "2027-01-30",
+      "date": "2027-05-27",
       "day": 118,
       "topic": "Helios: do not hide the gap in the demo",
       "draftPath": "fde-series/posts/2027-01-30-fde-parts-demo.md",
       "imagePath": "assets/2027-01-30-fde-parts-demo-doodle.png"
     },
     {
-      "date": "2027-01-31",
+      "date": "2027-05-29",
       "day": 119,
       "topic": "Cedar Grid: do not hide the gap in the demo",
       "draftPath": "fde-series/posts/2027-01-31-fde-outage-demo.md",
       "imagePath": "assets/2027-01-31-fde-outage-demo-doodle.png"
     },
     {
-      "date": "2027-02-01",
+      "date": "2027-05-31",
       "day": 120,
       "topic": "Northline: do not hide the gap in the demo",
       "draftPath": "fde-series/posts/2027-02-01-fde-vendor-demo.md",
       "imagePath": "assets/2027-02-01-fde-vendor-demo-doodle.png"
     },
     {
-      "date": "2027-02-02",
+      "date": "2027-06-02",
       "day": 121,
       "topic": "Harborline: who breaks the tie",
       "draftPath": "fde-series/posts/2027-02-02-fde-harborline-tiebreak.md",
       "imagePath": "assets/2027-02-02-fde-harborline-tiebreak-doodle.png"
     },
     {
-      "date": "2027-02-03",
+      "date": "2027-06-04",
       "day": 122,
       "topic": "Northshore: who breaks the tie",
       "draftPath": "fde-series/posts/2027-02-03-fde-clinic-tiebreak.md",
       "imagePath": "assets/2027-02-03-fde-clinic-tiebreak-doodle.png"
     },
     {
-      "date": "2027-02-04",
+      "date": "2027-06-06",
       "day": 123,
       "topic": "Brightpath: who breaks the tie",
       "draftPath": "fde-series/posts/2027-02-04-fde-ledger-tiebreak.md",
       "imagePath": "assets/2027-02-04-fde-ledger-tiebreak-doodle.png"
     },
     {
-      "date": "2027-02-05",
+      "date": "2027-06-08",
       "day": 124,
       "topic": "Helios: who breaks the tie",
       "draftPath": "fde-series/posts/2027-02-05-fde-parts-tiebreak.md",
       "imagePath": "assets/2027-02-05-fde-parts-tiebreak-doodle.png"
     },
     {
-      "date": "2027-02-06",
+      "date": "2027-06-10",
       "day": 125,
       "topic": "Cedar Grid: who breaks the tie",
       "draftPath": "fde-series/posts/2027-02-06-fde-outage-tiebreak.md",
       "imagePath": "assets/2027-02-06-fde-outage-tiebreak-doodle.png"
     },
     {
-      "date": "2027-02-07",
+      "date": "2027-06-12",
       "day": 126,
       "topic": "Northline: who breaks the tie",
       "draftPath": "fde-series/posts/2027-02-07-fde-vendor-tiebreak.md",
       "imagePath": "assets/2027-02-07-fde-vendor-tiebreak-doodle.png"
     },
     {
-      "date": "2027-02-08",
+      "date": "2027-06-14",
       "day": 127,
       "topic": "Harborline: agree the metric before the build",
       "draftPath": "fde-series/posts/2027-02-08-fde-harborline-metric.md",
       "imagePath": "assets/2027-02-08-fde-harborline-metric-doodle.png"
     },
     {
-      "date": "2027-02-09",
+      "date": "2027-06-16",
       "day": 128,
       "topic": "Northshore: agree the metric before the build",
       "draftPath": "fde-series/posts/2027-02-09-fde-clinic-metric.md",
       "imagePath": "assets/2027-02-09-fde-clinic-metric-doodle.png"
     },
     {
-      "date": "2027-02-10",
+      "date": "2027-06-18",
       "day": 129,
       "topic": "Brightpath: agree the metric before the build",
       "draftPath": "fde-series/posts/2027-02-10-fde-ledger-metric.md",
       "imagePath": "assets/2027-02-10-fde-ledger-metric-doodle.png"
     },
     {
-      "date": "2027-02-11",
+      "date": "2027-06-20",
       "day": 130,
       "topic": "Helios: agree the metric before the build",
       "draftPath": "fde-series/posts/2027-02-11-fde-parts-metric.md",
       "imagePath": "assets/2027-02-11-fde-parts-metric-doodle.png"
     },
     {
-      "date": "2027-02-12",
+      "date": "2027-06-22",
       "day": 131,
       "topic": "Cedar Grid: agree the metric before the build",
       "draftPath": "fde-series/posts/2027-02-12-fde-outage-metric.md",
       "imagePath": "assets/2027-02-12-fde-outage-metric-doodle.png"
     },
     {
-      "date": "2027-02-13",
+      "date": "2027-06-24",
       "day": 132,
       "topic": "Northline: agree the metric before the build",
       "draftPath": "fde-series/posts/2027-02-13-fde-vendor-metric.md",
       "imagePath": "assets/2027-02-13-fde-vendor-metric-doodle.png"
     },
     {
-      "date": "2027-02-14",
+      "date": "2027-06-26",
       "day": 133,
       "topic": "Harborline: they can recompute the answer",
       "draftPath": "fde-series/posts/2027-02-14-fde-harborline-recompute.md",
       "imagePath": "assets/2027-02-14-fde-harborline-recompute-doodle.png"
     },
     {
-      "date": "2027-02-15",
+      "date": "2027-06-28",
       "day": 134,
       "topic": "Northshore: they can recompute the answer",
       "draftPath": "fde-series/posts/2027-02-15-fde-clinic-recompute.md",
       "imagePath": "assets/2027-02-15-fde-clinic-recompute-doodle.png"
     },
     {
-      "date": "2027-02-16",
+      "date": "2027-06-30",
       "day": 135,
       "topic": "Brightpath: they can recompute the answer",
       "draftPath": "fde-series/posts/2027-02-16-fde-ledger-recompute.md",
       "imagePath": "assets/2027-02-16-fde-ledger-recompute-doodle.png"
     },
     {
-      "date": "2027-02-17",
+      "date": "2027-07-02",
       "day": 136,
       "topic": "Helios: they can recompute the answer",
       "draftPath": "fde-series/posts/2027-02-17-fde-parts-recompute.md",
       "imagePath": "assets/2027-02-17-fde-parts-recompute-doodle.png"
     },
     {
-      "date": "2027-02-18",
+      "date": "2027-07-04",
       "day": 137,
       "topic": "Cedar Grid: they can recompute the answer",
       "draftPath": "fde-series/posts/2027-02-18-fde-outage-recompute.md",
       "imagePath": "assets/2027-02-18-fde-outage-recompute-doodle.png"
     },
     {
-      "date": "2027-02-19",
+      "date": "2027-07-06",
       "day": 138,
       "topic": "Northline: they can recompute the answer",
       "draftPath": "fde-series/posts/2027-02-19-fde-vendor-recompute.md",
       "imagePath": "assets/2027-02-19-fde-vendor-recompute-doodle.png"
     },
     {
-      "date": "2027-02-20",
+      "date": "2027-07-08",
       "day": 139,
       "topic": "Harborline: a wrong answer during the pilot",
       "draftPath": "fde-series/posts/2027-02-20-fde-harborline-incident.md",
       "imagePath": "assets/2027-02-20-fde-harborline-incident-doodle.png"
     },
     {
-      "date": "2027-02-21",
+      "date": "2027-07-10",
       "day": 140,
       "topic": "Northshore: a wrong answer during the pilot",
       "draftPath": "fde-series/posts/2027-02-21-fde-clinic-incident.md",
       "imagePath": "assets/2027-02-21-fde-clinic-incident-doodle.png"
     },
     {
-      "date": "2027-02-22",
+      "date": "2027-07-12",
       "day": 141,
       "topic": "Brightpath: a wrong answer during the pilot",
       "draftPath": "fde-series/posts/2027-02-22-fde-ledger-incident.md",
       "imagePath": "assets/2027-02-22-fde-ledger-incident-doodle.png"
     },
     {
-      "date": "2027-02-23",
+      "date": "2027-07-14",
       "day": 142,
       "topic": "Helios: a wrong answer during the pilot",
       "draftPath": "fde-series/posts/2027-02-23-fde-parts-incident.md",
       "imagePath": "assets/2027-02-23-fde-parts-incident-doodle.png"
     },
     {
-      "date": "2027-02-24",
+      "date": "2027-07-16",
       "day": 143,
       "topic": "Cedar Grid: a wrong answer during the pilot",
       "draftPath": "fde-series/posts/2027-02-24-fde-outage-incident.md",
       "imagePath": "assets/2027-02-24-fde-outage-incident-doodle.png"
     },
     {
-      "date": "2027-02-25",
+      "date": "2027-07-18",
       "day": 144,
       "topic": "Northline: a wrong answer during the pilot",
       "draftPath": "fde-series/posts/2027-02-25-fde-vendor-incident.md",
       "imagePath": "assets/2027-02-25-fde-vendor-incident-doodle.png"
     },
     {
-      "date": "2027-02-26",
+      "date": "2027-07-20",
       "day": 145,
       "topic": "Harborline: what they still open after you leave",
       "draftPath": "fde-series/posts/2027-02-26-fde-harborline-leftover.md",
       "imagePath": "assets/2027-02-26-fde-harborline-leftover-doodle.png"
     },
     {
-      "date": "2027-02-27",
+      "date": "2027-07-22",
       "day": 146,
       "topic": "Northshore: what they still open after you leave",
       "draftPath": "fde-series/posts/2027-02-27-fde-clinic-leftover.md",
       "imagePath": "assets/2027-02-27-fde-clinic-leftover-doodle.png"
     },
     {
-      "date": "2027-02-28",
+      "date": "2027-07-24",
       "day": 147,
       "topic": "Brightpath: what they still open after you leave",
       "draftPath": "fde-series/posts/2027-02-28-fde-ledger-leftover.md",
       "imagePath": "assets/2027-02-28-fde-ledger-leftover-doodle.png"
     },
     {
-      "date": "2027-03-01",
+      "date": "2027-07-26",
       "day": 148,
       "topic": "Helios: what they still open after you leave",
       "draftPath": "fde-series/posts/2027-03-01-fde-parts-leftover.md",
       "imagePath": "assets/2027-03-01-fde-parts-leftover-doodle.png"
     },
     {
-      "date": "2027-03-02",
+      "date": "2027-07-28",
       "day": 149,
       "topic": "Cedar Grid: what they still open after you leave",
       "draftPath": "fde-series/posts/2027-03-02-fde-outage-leftover.md",
       "imagePath": "assets/2027-03-02-fde-outage-leftover-doodle.png"
     },
     {
-      "date": "2027-03-03",
+      "date": "2027-07-30",
       "day": 150,
       "topic": "Northline: what they still open after you leave",
       "draftPath": "fde-series/posts/2027-03-03-fde-vendor-leftover.md",

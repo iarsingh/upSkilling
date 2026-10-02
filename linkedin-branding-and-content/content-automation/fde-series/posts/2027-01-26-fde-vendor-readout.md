@@ -1,5 +1,5 @@
 ---
-date: 2027-01-26
+date: 2027-05-19
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: the note a sponsor can forward

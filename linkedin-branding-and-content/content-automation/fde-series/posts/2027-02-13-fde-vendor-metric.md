@@ -1,5 +1,5 @@
 ---
-date: 2027-02-13
+date: 2027-06-24
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: agree the metric before the build

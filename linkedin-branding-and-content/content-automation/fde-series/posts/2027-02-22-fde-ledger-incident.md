@@ -1,5 +1,5 @@
 ---
-date: 2027-02-22
+date: 2027-07-12
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: a wrong answer during the pilot

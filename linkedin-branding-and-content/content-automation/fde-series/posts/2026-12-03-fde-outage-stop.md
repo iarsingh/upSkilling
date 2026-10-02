@@ -1,5 +1,5 @@
 ---
-date: 2026-12-03
+date: 2027-01-31
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: write the stop before the demo

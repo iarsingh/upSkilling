@@ -1,5 +1,5 @@
 ---
-date: 2026-12-20
+date: 2027-03-06
 slot: 08:00
 series: FDE Interview Series
 topic: Helios: cut scope in the room

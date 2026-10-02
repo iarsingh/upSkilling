@@ -1,5 +1,5 @@
 ---
-date: 2026-10-20
+date: 2026-11-04
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: the sentence that kills a design

@@ -1,5 +1,5 @@
 ---
-date: 2027-02-05
+date: 2027-06-08
 slot: 08:00
 series: FDE Interview Series
 topic: Helios: who breaks the tie

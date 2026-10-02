@@ -1,5 +1,5 @@
 ---
-date: 2026-11-25
+date: 2027-01-15
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: shadow before the desk

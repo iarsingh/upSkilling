@@ -1,5 +1,5 @@
 ---
-date: 2027-01-06
+date: 2027-04-09
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: the same file run twice

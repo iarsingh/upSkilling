@@ -1,5 +1,5 @@
 ---
-date: 2026-11-27
+date: 2027-01-19
 slot: 08:00
 series: FDE Interview Series
 topic: Helios: shadow before the desk

@@ -1,5 +1,5 @@
 ---
-date: 2027-01-14
+date: 2027-04-25
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: the second login waits

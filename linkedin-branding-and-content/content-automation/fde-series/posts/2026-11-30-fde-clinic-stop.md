@@ -1,5 +1,5 @@
 ---
-date: 2026-11-30
+date: 2027-01-25
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: write the stop before the demo

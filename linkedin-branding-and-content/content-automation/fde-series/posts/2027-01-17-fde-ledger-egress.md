@@ -1,5 +1,5 @@
 ---
-date: 2027-01-17
+date: 2027-05-01
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: prove nothing leaves

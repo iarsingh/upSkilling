@@ -1,5 +1,5 @@
 ---
-date: 2027-01-20
+date: 2027-05-07
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: prove nothing leaves

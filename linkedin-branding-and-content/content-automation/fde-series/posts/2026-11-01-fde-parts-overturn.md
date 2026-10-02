@@ -1,5 +1,5 @@
 ---
-date: 2026-11-01
+date: 2026-11-28
 slot: 08:00
 series: FDE Interview Series
 topic: Helios: when the expert disagrees

@@ -1,5 +1,5 @@
 ---
-date: 2027-02-24
+date: 2027-07-16
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: a wrong answer during the pilot

@@ -1,5 +1,5 @@
 ---
-date: 2026-10-22
+date: 2026-11-08
 slot: 08:00
 series: FDE Interview Series
 topic: Helios: the sentence that kills a design

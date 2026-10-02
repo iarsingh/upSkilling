@@ -1,5 +1,5 @@
 ---
-date: 2026-12-30
+date: 2027-03-26
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: unknown means unscored

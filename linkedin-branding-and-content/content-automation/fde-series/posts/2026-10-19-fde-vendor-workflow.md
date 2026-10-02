@@ -1,5 +1,5 @@
 ---
-date: 2026-10-19
+date: 2026-11-02
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: start from the workflow

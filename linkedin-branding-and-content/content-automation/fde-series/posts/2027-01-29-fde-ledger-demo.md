@@ -1,5 +1,5 @@
 ---
-date: 2027-01-29
+date: 2027-05-25
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: do not hide the gap in the demo

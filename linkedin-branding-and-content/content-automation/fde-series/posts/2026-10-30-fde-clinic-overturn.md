@@ -1,5 +1,5 @@
 ---
-date: 2026-10-30
+date: 2026-11-24
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: when the expert disagrees

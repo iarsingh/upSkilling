@@ -1,5 +1,5 @@
 ---
-date: 2027-01-19
+date: 2027-05-05
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: prove nothing leaves

@@ -1,5 +1,5 @@
 ---
-date: 2026-11-24
+date: 2027-01-13
 slot: 08:00
 series: FDE Interview Series
 topic: Harborline: shadow before the desk

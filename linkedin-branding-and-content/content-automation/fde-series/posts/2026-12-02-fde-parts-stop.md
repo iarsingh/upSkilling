@@ -1,5 +1,5 @@
 ---
-date: 2026-12-02
+date: 2027-01-29
 slot: 08:00
 series: FDE Interview Series
 topic: Helios: write the stop before the demo

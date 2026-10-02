@@ -1,5 +1,5 @@
 ---
-date: 2027-03-03
+date: 2027-07-30
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: what they still open after you leave

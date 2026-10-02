@@ -1,5 +1,5 @@
 ---
-date: 2026-12-27
+date: 2027-03-20
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: they still use the old path

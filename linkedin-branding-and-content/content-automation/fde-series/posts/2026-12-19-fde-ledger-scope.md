@@ -1,5 +1,5 @@
 ---
-date: 2026-12-19
+date: 2027-03-04
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: cut scope in the room

@@ -1,5 +1,5 @@
 ---
-date: 2026-10-21
+date: 2026-11-06
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: the sentence that kills a design

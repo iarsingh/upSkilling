@@ -1,5 +1,5 @@
 ---
-date: 2027-02-27
+date: 2027-07-22
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: what they still open after you leave

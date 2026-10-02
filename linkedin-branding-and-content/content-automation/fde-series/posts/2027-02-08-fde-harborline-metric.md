@@ -1,5 +1,5 @@
 ---
-date: 2027-02-08
+date: 2027-06-14
 slot: 08:00
 series: FDE Interview Series
 topic: Harborline: agree the metric before the build

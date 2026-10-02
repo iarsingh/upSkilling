@@ -1,5 +1,5 @@
 ---
-date: 2026-11-04
+date: 2026-12-04
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: two owners, one week

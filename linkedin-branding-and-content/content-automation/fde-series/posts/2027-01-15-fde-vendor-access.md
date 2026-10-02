@@ -1,5 +1,5 @@
 ---
-date: 2027-01-15
+date: 2027-04-27
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: the second login waits

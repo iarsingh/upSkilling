@@ -1,5 +1,5 @@
 ---
-date: 2027-02-03
+date: 2027-06-04
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: who breaks the tie

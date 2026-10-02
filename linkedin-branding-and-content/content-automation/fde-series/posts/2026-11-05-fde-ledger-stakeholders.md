@@ -1,5 +1,5 @@
 ---
-date: 2026-11-05
+date: 2026-12-06
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: two owners, one week

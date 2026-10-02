@@ -1,5 +1,5 @@
 ---
-date: 2026-11-18
+date: 2027-01-01
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: what the log refuses

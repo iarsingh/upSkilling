@@ -1,5 +1,5 @@
 ---
-date: 2026-12-25
+date: 2027-03-16
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: they still use the old path

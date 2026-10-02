@@ -1,5 +1,5 @@
 ---
-date: 2027-02-14
+date: 2027-06-26
 slot: 08:00
 series: FDE Interview Series
 topic: Harborline: they can recompute the answer

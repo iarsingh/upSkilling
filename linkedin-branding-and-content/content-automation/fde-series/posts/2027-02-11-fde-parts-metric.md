@@ -1,5 +1,5 @@
 ---
-date: 2027-02-11
+date: 2027-06-20
 slot: 08:00
 series: FDE Interview Series
 topic: Helios: agree the metric before the build

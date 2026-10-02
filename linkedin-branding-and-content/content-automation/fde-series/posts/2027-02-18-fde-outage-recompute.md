@@ -1,5 +1,5 @@
 ---
-date: 2027-02-18
+date: 2027-07-04
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: they can recompute the answer

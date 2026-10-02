@@ -1,5 +1,5 @@
 ---
-date: 2026-11-26
+date: 2027-01-17
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: shadow before the desk

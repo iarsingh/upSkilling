@@ -1,5 +1,5 @@
 ---
-date: 2026-12-18
+date: 2027-03-02
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: cut scope in the room

@@ -1,5 +1,5 @@
 ---
-date: 2027-02-10
+date: 2027-06-18
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: agree the metric before the build

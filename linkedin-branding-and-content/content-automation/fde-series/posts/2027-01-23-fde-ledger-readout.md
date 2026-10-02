@@ -1,5 +1,5 @@
 ---
-date: 2027-01-23
+date: 2027-05-13
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: the note a sponsor can forward

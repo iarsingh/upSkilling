@@ -1,5 +1,5 @@
 ---
-date: 2026-12-06
+date: 2027-02-06
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: rollback that needs no migration

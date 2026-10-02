@@ -1,5 +1,5 @@
 ---
-date: 2026-10-24
+date: 2026-11-12
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: the sentence that kills a design

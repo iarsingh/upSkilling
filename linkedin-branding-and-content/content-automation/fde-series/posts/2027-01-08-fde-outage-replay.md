@@ -1,5 +1,5 @@
 ---
-date: 2027-01-08
+date: 2027-04-13
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: the same file run twice

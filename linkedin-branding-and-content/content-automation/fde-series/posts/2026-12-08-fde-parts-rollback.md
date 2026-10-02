@@ -1,5 +1,5 @@
 ---
-date: 2026-12-08
+date: 2027-02-10
 slot: 08:00
 series: FDE Interview Series
 topic: Helios: rollback that needs no migration

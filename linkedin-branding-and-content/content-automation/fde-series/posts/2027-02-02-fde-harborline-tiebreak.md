@@ -1,5 +1,5 @@
 ---
-date: 2027-02-02
+date: 2027-06-02
 slot: 08:00
 series: FDE Interview Series
 topic: Harborline: who breaks the tie

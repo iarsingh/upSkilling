@@ -1,5 +1,5 @@
 ---
-date: 2027-02-16
+date: 2027-06-30
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: they can recompute the answer

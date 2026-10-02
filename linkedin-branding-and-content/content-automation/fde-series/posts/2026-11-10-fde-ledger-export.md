@@ -1,5 +1,5 @@
 ---
-date: 2026-11-10
+date: 2026-12-16
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: their file is not the sample

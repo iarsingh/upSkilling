@@ -1,5 +1,5 @@
 ---
-date: 2026-10-06
+date: 2026-10-07
 slot: 08:00
 series: FDE Interview Series
 topic: A constraint has to delete a design

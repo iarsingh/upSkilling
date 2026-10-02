@@ -1,5 +1,5 @@
 ---
-date: 2027-02-04
+date: 2027-06-06
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: who breaks the tie

@@ -1,5 +1,5 @@
 ---
-date: 2027-01-12
+date: 2027-04-21
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: the second login waits

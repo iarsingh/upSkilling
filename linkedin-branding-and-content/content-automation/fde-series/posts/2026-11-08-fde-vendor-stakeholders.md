@@ -1,5 +1,5 @@
 ---
-date: 2026-11-08
+date: 2026-12-12
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: two owners, one week

@@ -1,5 +1,5 @@
 ---
-date: 2027-02-15
+date: 2027-06-28
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: they can recompute the answer

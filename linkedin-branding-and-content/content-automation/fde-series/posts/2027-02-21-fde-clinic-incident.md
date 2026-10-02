@@ -1,5 +1,5 @@
 ---
-date: 2027-02-21
+date: 2027-07-10
 slot: 08:00
 series: FDE Interview Series
 topic: Northshore: a wrong answer during the pilot

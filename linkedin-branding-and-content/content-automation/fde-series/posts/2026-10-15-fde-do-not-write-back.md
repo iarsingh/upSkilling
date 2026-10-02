@@ -1,5 +1,5 @@
 ---
-date: 2026-10-15
+date: 2026-10-25
 slot: 08:00
 series: FDE Interview Series
 topic: Do not write back to the system of record

@@ -1,5 +1,5 @@
 ---
-date: 2026-11-23
+date: 2027-01-11
 slot: 08:00
 series: FDE Interview Series
 topic: Northline: do not write back yet

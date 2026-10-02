@@ -1,5 +1,5 @@
 ---
-date: 2027-02-26
+date: 2027-07-20
 slot: 08:00
 series: FDE Interview Series
 topic: Harborline: what they still open after you leave

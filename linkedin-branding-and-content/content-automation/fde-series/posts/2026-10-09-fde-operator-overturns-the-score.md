@@ -1,5 +1,5 @@
 ---
-date: 2026-10-09
+date: 2026-10-13
 slot: 08:00
 series: FDE Interview Series
 topic: The operator overturns the score

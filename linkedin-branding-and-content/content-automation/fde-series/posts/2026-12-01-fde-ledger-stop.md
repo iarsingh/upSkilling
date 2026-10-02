@@ -1,5 +1,5 @@
 ---
-date: 2026-12-01
+date: 2027-01-27
 slot: 08:00
 series: FDE Interview Series
 topic: Brightpath: write the stop before the demo

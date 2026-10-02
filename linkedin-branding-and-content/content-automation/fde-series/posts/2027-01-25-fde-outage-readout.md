@@ -1,5 +1,5 @@
 ---
-date: 2027-01-25
+date: 2027-05-17
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: the note a sponsor can forward

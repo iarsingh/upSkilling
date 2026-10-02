@@ -1,5 +1,5 @@
 ---
-date: 2026-11-07
+date: 2026-12-10
 slot: 08:00
 series: FDE Interview Series
 topic: Cedar Grid: two owners, one week

@@ -1,5 +1,5 @@
 ---
-date: 2027-03-01
+date: 2027-07-26
 slot: 08:00
 series: FDE Interview Series
 topic: Helios: what they still open after you leave
