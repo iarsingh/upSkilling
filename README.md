@@ -18,6 +18,7 @@ Target roles:
 - Platform Engineer
 - MLOps Engineer
 - AI Infrastructure Engineer
+- Forward Deployed Engineer
 
 Core strengths shown in this repository:
 
@@ -58,6 +59,8 @@ This keeps the GitHub view clean and recruiter-readable.
 | AutoMLOps Platform | [`automlops-platform`](automlops-platform/) | Model serving, FastAPI, Docker, logging, ML lifecycle |
 | MLOps Learning | [`mlops-zoomcamp`](mlops-zoomcamp/) | MLOps course implementation and best practices |
 | GenAI Projects | [`genai-hands-on-projects`](genai-hands-on-projects/) | RAG, safety gateway, prompt evaluation, Gemini/Vertex AI |
+| FDE Playbook | [`fde-engagement-playbook`](fde-engagement-playbook/) | How a forward deployed engagement is scoped, secured, rolled out, and measured |
+| FDE Harborline | [`fde-harborline-engagement`](fde-harborline-engagement/) | Customer deployment of a dispatch copilot that never calls an external model |
 | RAG + Kubeflow + MLflow Platform | [`rag-kubeflow-mlflow-platform`](rag-kubeflow-mlflow-platform/) | Kubeflow Pipelines SDK build/eval pipeline, MLflow registry promotion gate, Ollama-served RAG API |
 | AIOps Projects | [`aiops-hands-on-projects`](aiops-hands-on-projects/) | Log anomaly detection, alert correlation, SLO burn rate |
 | CI/CD Projects | [`github-actions-hands-on-projects`](github-actions-hands-on-projects/) | GitHub Actions, Docker, Cloud Run, Terraform, Kubernetes validation |
