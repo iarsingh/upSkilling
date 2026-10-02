@@ -5,8 +5,8 @@ series: FDE Interview Series
 topic: The export is missing a column
 drill: Q7
 image: ../../assets/2026-10-13-fde-export-missing-a-column-doodle.png
-status: draft
-publish: false
+status: scheduled
+publish: true
 ---
 
 The demo is tomorrow. Their nightly file has event timestamps, not the hours-since-checkpoint column the sample scorer expected. One status value has never shown up in the sample: held.

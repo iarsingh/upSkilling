@@ -5,8 +5,8 @@ series: FDE Interview Series
 topic: Do not write back to the system of record
 drill: Q9
 image: ../../assets/2026-10-15-fde-do-not-write-back-doodle.png
-status: draft
-publish: false
+status: scheduled
+publish: true
 ---
 
 The lead asks for the score and the recommended SOP to be written into the TMS so the next shift sees them.

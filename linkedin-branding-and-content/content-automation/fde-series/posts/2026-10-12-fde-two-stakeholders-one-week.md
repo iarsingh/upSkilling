@@ -5,8 +5,8 @@ series: FDE Interview Series
 topic: Two stakeholders, one week
 drill: Q6
 image: ../../assets/2026-10-12-fde-two-stakeholders-one-week-doodle.png
-status: draft
-publish: false
+status: scheduled
+publish: true
 ---
 
 IT wants SSO, and medical shipments restricted to the medical desk, before anyone logs in. The night lead wants the scorer tonight because a grocery load is already late.

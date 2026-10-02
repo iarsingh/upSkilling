@@ -2,7 +2,7 @@
 
 LinkedIn drafts and spoken interview drills for a Forward Deployed Engineer profile.
 
-This series is not in `content-calendar.json`. The daily publisher will not post it. Publish a draft only after you can answer the matching scenario without reading the notes.
+These ten posts are on the live calendar in `content-calendar.json` for 5–9 October and 12–16 October 2026. The daily publisher sends one of them at 08:00 Asia/Kolkata on each of those dates, with its PNG. 10 and 11 October stay on the previous series.
 
 The story underneath the posts is the Harborline Freight engagement in `fde-harborline-engagement`: a night desk, a banned external model, a written score, and a metric you refuse to claim.
 

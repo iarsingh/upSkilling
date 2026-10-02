@@ -5,8 +5,8 @@ series: FDE Interview Series
 topic: What the audit log refuses to store
 drill: Q8
 image: ../../assets/2026-10-14-fde-audit-log-refuses-to-store-doodle.png
-status: draft
-publish: false
+status: scheduled
+publish: true
 ---
 
 A dispatcher pastes a customer name and a medical detail into the question. The answer can still be useful. The log should not become a second copy of that sentence.

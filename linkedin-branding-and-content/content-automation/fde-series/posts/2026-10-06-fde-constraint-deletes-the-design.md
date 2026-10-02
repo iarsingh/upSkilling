@@ -5,8 +5,8 @@ series: FDE Interview Series
 topic: A constraint has to delete a design
 drill: Q2
 image: ../../assets/2026-10-06-fde-constraint-deletes-the-design-doodle.png
-status: draft
-publish: false
+status: scheduled
+publish: true
 ---
 
 A discovery brief that deletes nothing is a status meeting.

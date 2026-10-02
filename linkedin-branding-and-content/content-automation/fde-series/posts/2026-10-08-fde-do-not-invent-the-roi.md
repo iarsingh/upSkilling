@@ -5,8 +5,8 @@ series: FDE Interview Series
 topic: Do not invent the ROI
 drill: Q4
 image: ../../assets/2026-10-08-fde-do-not-invent-the-roi-doodle.png
-status: draft
-publish: false
+status: scheduled
+publish: true
 ---
 
 The VP asks how many missed deliveries the pilot will prevent next month.

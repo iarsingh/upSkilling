@@ -5,8 +5,8 @@ series: FDE Interview Series
 topic: The operator overturns the score
 drill: Q5
 image: ../../assets/2026-10-09-fde-operator-overturns-the-score-doodle.png
-status: draft
-publish: false
+status: scheduled
+publish: true
 ---
 
 Scenario: the eval file is green. The night lead reviews 10 shipments and overturns the band on 4.

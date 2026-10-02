@@ -5,8 +5,8 @@ series: FDE Interview Series
 topic: Start from the workflow, not the model
 drill: Q1
 image: ../../assets/2026-10-05-fde-start-from-the-workflow-doodle.png
-status: draft
-publish: false
+status: scheduled
+publish: true
 ---
 
 "We need an AI copilot" is not a requirement. It is a request for a familiar interface.

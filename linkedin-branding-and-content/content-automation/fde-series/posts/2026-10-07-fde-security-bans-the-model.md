@@ -5,8 +5,8 @@ series: FDE Interview Series
 topic: Security bans the model API
 drill: Q3
 image: ../../assets/2026-10-07-fde-security-bans-the-model-doodle.png
-status: draft
-publish: false
+status: scheduled
+publish: true
 ---
 
 Scenario: IT will not approve a third-party model, and the data cannot leave their environment. The VP still wants the night desk helped in two weeks.

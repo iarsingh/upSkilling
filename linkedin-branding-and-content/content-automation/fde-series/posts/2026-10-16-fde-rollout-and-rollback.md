@@ -5,8 +5,8 @@ series: FDE Interview Series
 topic: Rollout, rollback, and the stop condition
 drill: Q12
 image: ../../assets/2026-10-16-fde-rollout-and-rollback-doodle.png
-status: draft
-publish: false
+status: scheduled
+publish: true
 ---
 
 A healthy container is not a successful rollout.
