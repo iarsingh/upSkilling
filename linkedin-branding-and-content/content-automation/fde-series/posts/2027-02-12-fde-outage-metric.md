@@ -1,19 +1,19 @@
 ---
-date: 2027-06-22
+date: 2027-06-24
 slot: 08:00
 series: FDE Interview Series
-topic: Cedar Grid: agree the metric before the build
+topic: Count agreement and messages, not minutes saved
 status: scheduled
 publish: true
 image: ../../assets/2027-02-12-fde-outage-metric-doodle.png
 ---
 
-I do not start the scorer at Cedar Grid until the metric is written.
+Cedar Grid's tempting chart is outage minutes. The pilot cannot see that yet.
 
-Baseline: sorting open outages by customer count. Target: the lead agrees with the order on at least 9 of 10 open outages, and the tool sends no customer message. Judge: the storm-desk lead. Refusal: fewer outage minutes.
+We count whether the storm lead agrees with the order on 9 of 10 open outages, and whether customer messages sent by the tool stay at zero. OUT-1 ahead of OUT-2 is one case, not the metric. He is the judge. Shorter outages are refused on the page.
 
-A demo that "answers questions" is not the engagement.
+Minutes saved would have let me claim a win from a quiet week of weather. Agreement does not.
 
-What did you agree to measure at Cedar Grid before writing the rule?
+What metric is flattering in a quiet week and empty in a real one?
 
 #ForwardDeployedEngineer #Utilities #SRE #IncidentResponse #InterviewPrep

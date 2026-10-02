@@ -1,19 +1,19 @@
 ---
-date: 2027-03-22
+date: 2027-07-10
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: they still use the old path
+topic: She still printed the packet
 status: scheduled
 publish: true
 image: ../../assets/2026-12-28-fde-vendor-oldpath-doodle.png
 ---
 
-The timer at Northline Procurement can hit the target while the vendor-setup analyst still goes back to the vendor packet fields: W-9, insurance date, bank-change flag, sanctions flag.
+Northline's decisions were on screen. The analyst still printed every packet and wrote the decision in the margin.
 
-I watch one lookup. If they are checking the same step, the screen is a second copy and they have not accepted it. If a step is missing, I add it and extend the eval.
+The print had the insurance certificate. The tool had only the expiry date. She was checking that the PDF matched the date, which the tool cannot see. V-4 being blocked on a date was not enough when the PDF might say something else.
 
-Week two measures whether the old path stays closed. packets in a shared inbox, with one person able to accept a bank change is no longer the goal.
+I stopped calling the print a workaround. The decision now says "date only, certificate not reviewed." She still prints. The margin note is an honest second check, and the screen admits it is not that check.
 
-If the vendor-setup analyst still opens the old path, is the pilot a success?
+What document are you pretending a column can replace?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

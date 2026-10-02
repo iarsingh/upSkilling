@@ -1,19 +1,19 @@
 ---
-date: 2027-02-14
+date: 2027-07-04
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: rollback that needs no migration
+topic: No vendor master row to delete
 status: scheduled
 publish: true
 image: ../../assets/2026-12-10-fde-vendor-rollback-doodle.png
 ---
 
-Rollback at Northline Procurement is stop the process. The vendor master is unchanged.
+Northline's rollback is stopping the review process. The ERP vendor master is unchanged, so there is no vendor to inactivate and no bank account to revert.
 
-That sentence is a design constraint, not an afterthought. If undoing the pilot needs a migration, the pilot started too wide.
+V-2 never became payable. V-1 never became a master record. The inbox is still the queue. I want the analyst to stop the tool on a Thursday and finish Friday's packets the old way without calling me.
 
-the vendor-setup analyst should be able to hear the rollback in one breath at packet review.
+The moment a ready packet creates a master row, rollback is an ERP change, and this engagement is over its scope.
 
-How does the vendor-setup analyst undo this without you?
+What record, if you never create it, keeps rollback boring?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

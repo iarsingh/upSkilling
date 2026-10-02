@@ -1,19 +1,19 @@
 ---
-date: 2027-03-14
+date: 2027-01-09
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: they still use the old path
+topic: The nurse still opened the note after the route
 status: scheduled
 publish: true
 image: ../../assets/2026-12-24-fde-clinic-oldpath-doodle.png
 ---
 
-The timer at Northshore Clinic can hit the target while the morning nurse lead still goes back to the overnight portal CSV.
+Northshore's routes were fast. The nurse still opened every consented note, including the ones the tool had already cited.
 
-I watch one lookup. If they are checking the same step, the screen is a second copy and they have not accepted it. If a step is missing, I add it and extend the eval.
+On NT-11 she was checking that the chest-tightness sentence on the screen was the whole story, not a trimmed one. The citation was one sentence. Her judgment needed the paragraph. I had optimized for a card. She was still doing clinical reading, which we had said was out of scope, and the card could not replace it.
 
-Week two measures whether the old path stays closed. overnight notes read in arrival order, including notes with no consent is no longer the goal.
+The honest metric became how often a blocked note stayed unopened. Consented notes staying open was success, not failure.
 
-If the morning nurse lead still opens the old path, is the pilot a success?
+What behavior did you call resistance that was actually the job?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

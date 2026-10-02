@@ -1,19 +1,19 @@
 ---
-date: 2026-11-12
+date: 2027-05-15
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: the sentence that kills a design
+topic: Legal removed the approve action
 status: scheduled
 publish: true
 image: ../../assets/2026-10-24-fde-vendor-constraint-doodle.png
 ---
 
-I wanted a one-click approve for clean packets and for small bank edits. Northline Procurement deleted that design with one constraint: the software must not contain an approve action, and a sanctions flag has no override.
+Northline's legal team did not ask for a better approve button. They asked that the software not contain one.
 
-What shipped instead is smaller: blocked_sanctions, blocked_incomplete, manual_review, or ready_for_human.
+The decisions are blocked for sanctions, blocked for an incomplete packet, manual review when the bank details changed, or ready for a human. V-1 can be complete and still say ready_for_human. The renderer throws if the word approved appears.
 
-If the architecture survived every sentence in the room, the discovery was not finished.
+I had wanted one-click accept for clean packets. That click was the thing they would not own.
 
-Which sentence from Northline Procurement would force you to drop a one-click approve for clean packets and for small bank edits?
+If your product has a verb the customer's legal team banned, what did you rename it to, and what did you actually remove?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

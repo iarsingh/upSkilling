@@ -1,19 +1,19 @@
 ---
-date: 2026-10-15
+date: 2026-10-25
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: start from the workflow
+topic: The nurse asked which notes she may open
 status: scheduled
 publish: true
 image: ../../assets/2026-10-10-fde-clinic-workflow-doodle.png
 ---
 
-"We need AI" is not a requirement. At 7am the person in pain is the morning nurse lead.
+The morning nurse did not ask for a summary model. She asked which overnight notes she is allowed to open.
 
-I ask them to walk one case. At Northshore Clinic that walk is the overnight portal CSV. NT-12 is the example I keep: NT-12 stays blocked because consent is not yes, and the note body is not copied.
+NT-12 was at the top of the file and had no consent. The old habit was to read it anyway. The first version does the opposite: consent is not yes, so the body is not copied into the decision.
 
-I do not leave the room with a model name. I leave with the user, the file they actually have, and the one question they ask.
+No urgency guess. No chart write. A blocked row she can check before 7am.
 
-Who is the person at 7am, and what is the one question they actually ask?
+What would you hide until someone with authority has said yes?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

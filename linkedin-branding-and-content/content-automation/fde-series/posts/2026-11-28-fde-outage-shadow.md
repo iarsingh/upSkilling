@@ -1,19 +1,19 @@
 ---
-date: 2027-01-21
+date: 2027-05-29
 slot: 08:00
 series: FDE Interview Series
-topic: Cedar Grid: shadow before the desk
+topic: The radio stays the system of action
 status: scheduled
 publish: true
 image: ../../assets/2026-11-28-fde-outage-shadow-doodle.png
 ---
 
-Week one at Cedar Grid stays beside the old path. the storm-desk lead still uses the life-safety account flag and the outage list.
+Cedar Grid's shadow week runs during an ordinary night, not the first storm. The ranker is on a side monitor. Crews still move because someone speaks on the radio.
 
-We time real lookups against sorting open outages by customer count. The target is the lead agrees with the order on at least 9 of 10 open outages, and the tool sends no customer message.
+We compare the tool's order to the order the storm lead would have called. OUT-1 before OUT-2 is the case we already believe. The interesting rows are the ones he swaps. Those swaps become eval cases before a storm depends on the screen.
 
-The whole floor does not switch because a demo looked fast at a storm night.
+A calm night is when you can afford to be wrong. A storm is not.
 
-What still uses the old path during the first week at Cedar Grid?
+When would you refuse to turn a new ranking on, even if the weather is the reason they bought it?
 
 #ForwardDeployedEngineer #Utilities #SRE #IncidentResponse #InterviewPrep

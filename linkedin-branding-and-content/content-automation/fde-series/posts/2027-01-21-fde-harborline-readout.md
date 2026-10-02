@@ -1,19 +1,19 @@
 ---
-date: 2027-05-09
+date: 2026-11-30
 slot: 08:00
 series: FDE Interview Series
-topic: Harborline: the note a sponsor can forward
+topic: The Harborline note a VP can forward
 status: scheduled
 publish: true
 image: ../../assets/2027-01-21-fde-harborline-readout-doodle.png
 ---
 
-The readout for Harborline Freight is written to the sponsor, not to other engineers.
+Harborline's readout is one page to the VP of operations, not a model card.
 
-It includes their baseline, 25 to 40 minutes to explain a late reefer. It includes one row, SHP-1042: score 76 from an 8-hour SLA miss, an open P1, and a temperature event. It includes the refusal: we are not claiming fewer missed deliveries.
+Their night lead timed 25 to 40 minutes. SHP-1042 scores 76 because the checkpoint is 8 hours past a 6-hour SLA, a P1 is open, and the last event is a temperature alarm. The desk gets the cold-chain steps and the citations. We are not claiming fewer missed deliveries. Week two is one desk, reefer and medical only, if he agrees on 9 of 10.
 
-It ends with what we need from them, not with a feature list.
+The ask at the bottom is a named owner for the file drop. Not a platform roadmap.
 
-What sentence in the Harborline Freight readout should the sponsor be able to forward?
+What sentence in your readout can the sponsor forward without you in the room?
 
 #ForwardDeployedEngineer #Logistics #SRE #MLOps #InterviewPrep

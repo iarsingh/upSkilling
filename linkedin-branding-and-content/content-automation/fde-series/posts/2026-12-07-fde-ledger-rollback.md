@@ -1,19 +1,19 @@
 ---
-date: 2027-02-08
+date: 2027-02-22
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: rollback that needs no migration
+topic: Delete the output. The books do not change.
 status: scheduled
 publish: true
 image: ../../assets/2026-12-07-fde-ledger-rollback-doodle.png
 ---
 
-Rollback at Brightpath is delete the output file. The ledger was never written.
+Brightpath's undo is deleting the output file. The ledger does not change, because the matcher never posted. evt-1's match and pay-4's exception exist only in that file.
 
-That sentence is a design constraint, not an afterthought. If undoing the pilot needs a migration, the pilot started too wide.
+I want the analyst to delete it once during the parallel week and confirm her close still runs. A rollback you have not performed is a sentence in a doc.
 
-the payments ops analyst should be able to hear the rollback in one breath at the morning close.
+The day we post into the ledger, this sentence becomes false, and the pilot needs a new one before that day.
 
-How does the payments ops analyst undo this without you?
+What undo have you described and never watched someone do?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

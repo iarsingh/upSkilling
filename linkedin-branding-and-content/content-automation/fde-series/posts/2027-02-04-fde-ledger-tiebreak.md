@@ -1,19 +1,19 @@
 ---
-date: 2027-06-06
+date: 2027-03-14
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: who breaks the tie
+topic: The controller chooses which cent is unresolved
 status: scheduled
 publish: true
 image: ../../assets/2027-02-04-fde-ledger-tiebreak-doodle.png
 ---
 
-the payments ops analyst and the owner of the constraint can both be right. the tool must not post to the ledger, and a mismatch is never marked settled.
+Brightpath ops wanted pay-4 forced to the settlement amount so the file would clear. Finance wanted it forced to the webhook so the customer had paid what the processor saw. Those are different companies' losses.
 
-I do not negotiate that on the floor at the morning close. The sponsor who owns the outcome decides, and the sentence goes in writing the same day.
+The controller chose neither. The row stays an exception. evt-1 can match because the cents agree. A 100-cent gap is not a rounding policy I get to invent. She wrote "no force" in the readout.
 
-Until that sentence exists, I do not expand past evt-1.
+I was the wrong person to pick a winner, and so was the louder analyst.
 
-Who is allowed to decide when the payments ops analyst and the constraint owner disagree?
+When both corrections are plausible, who is allowed to refuse both?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

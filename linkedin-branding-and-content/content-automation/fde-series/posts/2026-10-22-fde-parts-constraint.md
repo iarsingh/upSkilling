@@ -1,19 +1,19 @@
 ---
-date: 2026-11-08
+date: 2027-02-04
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: the sentence that kills a design
+topic: An empty bin is not an order
 status: scheduled
 publish: true
 image: ../../assets/2026-10-22-fde-parts-constraint-doodle.png
 ---
 
-I wanted an automatic order when the bin was empty. Helios Equipment deleted that design with one constraint: the depot cannot call a vendor API, and the tool cannot create a purchase order.
+When Helios bin C-1 is empty, the obvious product is a purchase order. The depot lead said no. Ordering is a buyer workflow. The night network is also not allowed to call a vendor.
 
-What shipped instead is smaller: a bin with quantity, a stockout, or an escalate with no guessed part.
+E17 on AST-3 is a real fault and a real filter. Quantity is zero, so the answer is stockout, with the empty bin cited. The screen says not to cut a purchase order from it.
 
-If the architecture survived every sentence in the room, the discovery was not finished.
+The constraint deleted the feature I would have demoed first.
 
-Which sentence from Helios Equipment would force you to drop an automatic order when the bin was empty?
+What feature would you cut if the customer's network cannot call the vendor you had in mind?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

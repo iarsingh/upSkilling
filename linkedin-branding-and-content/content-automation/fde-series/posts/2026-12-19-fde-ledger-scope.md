@@ -1,19 +1,19 @@
 ---
-date: 2027-03-04
+date: 2027-02-26
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: cut scope in the room
+topic: Refunds are not part of the match
 status: scheduled
 publish: true
 image: ../../assets/2026-12-19-fde-ledger-scope-doodle.png
 ---
 
-Brightpath will ask for the lookup, a second product, and a rewrite of the ledger in the same two weeks.
+Brightpath asked the matcher to also issue refunds when the webhook was higher than the settlement. That is a money movement. The match is a list.
 
-I ship one thing for the payments ops analyst: one classification per event: matched, duplicate, pending, or amount exception. The rest goes in the readout as out of scope, with the condition that would reopen it.
+I will classify. evt-1 matches once. pay-4 stays an exception at a 100-cent gap. A person decides whether anyone is owed anything. The tool does not originate a credit.
 
-"Later" with no condition is how the promise rots.
+The refund work reopens only if the controller names an owner, a limit, and a ledger entry that is not this process. Until then it is out of scope in the readout, not a backlog item I nod at.
 
-What do you postpone at Brightpath, and what condition reopens it?
+What "also" in the kickoff would move money?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

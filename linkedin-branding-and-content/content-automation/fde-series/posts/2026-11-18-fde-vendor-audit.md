@@ -1,19 +1,19 @@
 ---
-date: 2027-01-01
+date: 2027-05-25
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: what the log refuses
+topic: The tool never sees the account number
 status: scheduled
 publish: true
 image: ../../assets/2026-11-18-fde-vendor-audit-doodle.png
 ---
 
-Someone will paste more than an id into the box. The answer can still be useful. The log should not become a second copy.
+Northline's vendor master has the bank account. This review tool receives only that it changed. V-2 is manual review because the flag is yes, not because someone pasted digits into a note.
 
-At Northline Procurement the audit event stores vendor id and decision. It does not store the bank account number. The tool only sees that it changed.
+The audit row is vendor id and decision. If an investigator needs the account, they go to the master, under the access they already have. I will not make a second copy so the packet review is "self-contained."
 
-If security wants the raw input for debugging, I replay V-2 inside their environment. I do not add the column for a week.
+Self-contained was the risk. The packet can be reviewed without becoming a new store of payment details.
 
-Which field stays out of the Northline Procurement log, and why?
+What fact can you replace with a yes/no so the tool stops being a second system of record?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

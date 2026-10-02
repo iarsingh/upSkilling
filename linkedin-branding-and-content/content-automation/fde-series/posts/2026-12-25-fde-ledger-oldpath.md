@@ -1,19 +1,19 @@
 ---
-date: 2027-03-16
+date: 2027-02-28
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: they still use the old path
+topic: She still rebuilt the spreadsheet
 status: scheduled
 publish: true
 image: ../../assets/2026-12-25-fde-ledger-oldpath-doodle.png
 ---
 
-The timer at Brightpath can hit the target while the payments ops analyst still goes back to the webhook export and the settlement file.
+Brightpath's matcher was faster than the paste. The analyst still rebuilt her spreadsheet for three mornings.
 
-I watch one lookup. If they are checking the same step, the screen is a second copy and they have not accepted it. If a step is missing, I add it and extend the eval.
+She did not distrust evt-1. She distrusted the absence of a row she always looks for, a fee line the webhook file does not carry. The tool was right and incomplete. Completeness was her spreadsheet's job, and I had called the spreadsheet waste.
 
-Week two measures whether the old path stays closed. a manual paste of webhooks next to the settlement CSV is no longer the goal.
+I added an explicit "not in this file" section so the gap is visible. She stopped rebuilding the rows we do cover. She still builds the fee sheet. That sheet is not a failure of the pilot.
 
-If the payments ops analyst still opens the old path, is the pilot a success?
+What sheet will survive because it knows something your file does not?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

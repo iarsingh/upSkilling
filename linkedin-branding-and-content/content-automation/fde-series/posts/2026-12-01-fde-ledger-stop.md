@@ -1,19 +1,19 @@
 ---
-date: 2027-01-27
+date: 2027-01-01
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: write the stop before the demo
+topic: Stop if the second run changes the total
 status: scheduled
 publish: true
 image: ../../assets/2026-12-01-fde-ledger-stop-doodle.png
 ---
 
-I write the stop condition before Brightpath sees a demo. Otherwise every miss becomes a debate.
+Brightpath's stop condition was written before the demo. If the matched total changes when the same file runs twice, the desk does not get the tool.
 
-We stop expanding if the matched total changes when the same file is run twice.
+evt-1 replayed is the test. 1500 cents, then 1500 cents again. A new event id for the same payment must not add another 1500. pay-4 must still be an amount exception, not a match that appeared because we retried.
 
-A green health check does not override that. evt-1 is the row I use when I explain it.
+I would rather cancel a demo than explain a total that moved while nobody posted a new payment.
 
-What is the stop condition you would write before the Brightpath demo?
+What number, if it changes on a retry, means you turn the tool off?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

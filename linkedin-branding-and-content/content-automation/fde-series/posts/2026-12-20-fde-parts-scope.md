@@ -1,19 +1,19 @@
 ---
-date: 2027-03-06
+date: 2027-04-17
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: cut scope in the room
+topic: Warranty claims are not the bin lookup
 status: scheduled
 publish: true
 image: ../../assets/2026-12-20-fde-parts-scope-doodle.png
 ---
 
-Helios Equipment will ask for the lookup, a second product, and a rewrite of the purchasing system in the same two weeks.
+Helios wanted the fault lookup, a warranty claim form, and a reorder point model in the same visit. The night shift needs the bin.
 
-I ship one thing for the depot lead: a bin with quantity, a stockout, or an escalate with no guessed part. The rest goes in the readout as out of scope, with the condition that would reopen it.
+AST-7 / E42 returns B-14 or it escalates. Warranty is a daytime process with photos and an OEM. Reorder points need a history this screen does not have. I wrote both down as out of scope, reopened only when the depot lead asks after the lookup has matched his pulls.
 
-"Later" with no condition is how the promise rots.
+I did not leave them as "we'll get to it" on a whiteboard. That phrase is where scope goes to become a promise.
 
-What do you postpone at Helios Equipment, and what condition reopens it?
+What adjacent form are you being asked to absorb because you are already in the building?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

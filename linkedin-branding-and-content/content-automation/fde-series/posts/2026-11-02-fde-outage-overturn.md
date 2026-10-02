@@ -1,19 +1,19 @@
 ---
-date: 2026-11-30
+date: 2027-03-30
 slot: 08:00
 series: FDE Interview Series
-topic: Cedar Grid: when the expert disagrees
+topic: The storm lead reversed two rankings
 status: scheduled
 publish: true
 image: ../../assets/2026-11-02-fde-outage-overturn-doodle.png
 ---
 
-The eval file can be green while the storm-desk lead overturns the result. At Cedar Grid that is a stop, not a prompt tweak.
+Cedar Grid's scorer put a feeder first because one account was flagged life-safety. The storm lead reversed it. That account had moved three months ago. The flag had not.
 
-I change the rule only when they can say why, and I add OUT-1 to the eval file. I do not lower a threshold until the chart looks calm.
+I took the feeder off the protected list for this drop, said so on the card, and added the outage id to the eval file as a case that must not get the 100 points. I did not "tune" the weight until he nodded.
 
-The second gate is the person who does the job. the lead agrees with the order on at least 9 of 10 open outages, and the tool sends no customer message.
+The data he trusts beat the flag I trusted.
 
-What do you change when the storm-desk lead disagrees, and what do you refuse to change?
+When the operator contradicts the source system, which one do you change first?
 
 #ForwardDeployedEngineer #Utilities #SRE #IncidentResponse #InterviewPrep

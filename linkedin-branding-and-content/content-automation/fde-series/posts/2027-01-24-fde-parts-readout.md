@@ -1,19 +1,19 @@
 ---
-date: 2027-05-15
+date: 2027-04-29
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: the note a sponsor can forward
+topic: Tell the depot director which bin and which blank
 status: scheduled
 publish: true
 image: ../../assets/2027-01-24-fde-parts-readout-doodle.png
 ---
 
-The readout for Helios Equipment is written to the sponsor, not to other engineers.
+Helios's readout is for the person who owns the night shift, not for a parts-marketplace pitch.
 
-It includes their baseline, three spreadsheets and a phone call for every fault code. It includes one row, AST-7: E42 on AST-7 points at bin B-14 because the quantity is 2, and E99 returns no SKU. It includes the refusal: we are not claiming less downtime.
+AST-7, fault E42, bin B-14, quantity 2. AST-3, fault E17, stockout, no purchase order. AST-8, fault E99, no part, because it is not on the signed list. We are not claiming less downtime. The ask is a name on the signed sheet and a time of day the bin file is fresh.
 
-It ends with what we need from them, not with a feature list.
+Three rows. One refusal. One ask. If I need a fourth section, I have started selling.
 
-What sentence in the Helios Equipment readout should the sponsor be able to forward?
+What three rows would you put in front of the operator's boss?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

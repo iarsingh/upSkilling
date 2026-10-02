@@ -1,19 +1,19 @@
 ---
-date: 2026-12-04
+date: 2026-11-02
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: two owners, one week
+topic: Privacy wanted a hold. The desk wanted 7am.
 status: scheduled
 publish: true
 image: ../../assets/2026-11-04-fde-clinic-stakeholders-doodle.png
 ---
 
-the morning nurse lead wants the answer tonight. The constraint owner wants note text does not leave the clinic, and missing consent means the body is not copied.
+Northshore's privacy officer wanted no second system until consent rules were reviewed. The nurse lead had 40 notes and a 7am start.
 
-Tonight can be one read-only lookup beside them on NT-12. A second person does not get a login until the constraint is in place.
+The sequence I wrote down: I sit with her for one file, read-only, and blocked notes do not show a body. Nobody else gets a login. Urgent callback for NT-11 still requires consent yes. NT-12 stays a blocked id.
 
-The sponsor breaks the tie in writing the same day. Helpful access at 7am is how the pilot ends.
+The sponsor signed that sentence the same afternoon. I did not expand it at 6:30am because the queue felt urgent.
 
-Who breaks the tie at Northshore Clinic when both sides are right?
+What can you give the person on shift tonight without creating an account?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

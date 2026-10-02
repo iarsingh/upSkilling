@@ -1,19 +1,19 @@
 ---
-date: 2026-11-28
+date: 2027-02-08
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: when the expert disagrees
+topic: The lead would not pull the part the sheet named
 status: scheduled
 publish: true
 image: ../../assets/2026-11-01-fde-parts-overturn-doodle.png
 ---
 
-The eval file can be green while the depot lead overturns the result. At Helios Equipment that is a stop, not a prompt tweak.
+Helios's fault sheet said E42 is BRG-19. The depot lead looked at AST-7 and said the last two trucks with that fault needed the housing kit, not the bearing alone.
 
-I change the rule only when they can say why, and I add AST-7 to the eval file. I do not lower a threshold until the chart looks calm.
+The eval file was green against the sheet he had signed last quarter. The sheet was stale. I did not override him in the tool. I marked the fault unscored until he updated the signed list, then I locked the new part in the eval file.
 
-The second gate is the person who does the job. the recommended bin matches what the lead would have pulled, and zero purchase orders are created.
+A signed source that the expert will not follow is not a source anymore.
 
-What do you change when the depot lead disagrees, and what do you refuse to change?
+Do you ship the document, or do you ship what the expert will actually do?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

@@ -1,19 +1,19 @@
 ---
-date: 2027-04-03
+date: 2027-07-12
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: unknown means unscored
+topic: A new document type does not count as a W-9
 status: scheduled
 publish: true
 image: ../../assets/2027-01-03-fde-vendor-unknown-doodle.png
 ---
 
-A value that was not in the sample will show up at Northline Procurement. I do not invent a result for it so the demo stays smooth.
+Northline added a row whose tax form was "W-8" and asked if we could treat it as the W-9 check. I cannot. The rule is a W-9 present, not "some tax form."
 
-The row stays visible and unscored until the vendor-setup analyst says what it means. Then it becomes an eval row next to V-2.
+The vendor stayed blocked_incomplete, with the form name visible. V-3, missing a W-9 entirely, stayed blocked for the same reason. I did not add W-8 as a synonym during the review meeting. Counsel can add it. The tool will not infer it.
 
-Unknown is an answer. Guessed is an incident.
+A synonym is a policy change. It does not belong in a parser.
 
-What do you show for a value the vendor-setup analyst has not defined?
+What near-match are you about to accept because the field is almost the one you coded?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

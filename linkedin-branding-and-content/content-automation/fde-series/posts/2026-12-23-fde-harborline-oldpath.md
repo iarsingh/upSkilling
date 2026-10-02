@@ -1,19 +1,19 @@
 ---
-date: 2027-03-12
+date: 2026-11-20
 slot: 08:00
 series: FDE Interview Series
-topic: Harborline: they still use the old path
+topic: They hit the timer and still opened the binder
 status: scheduled
 publish: true
 image: ../../assets/2026-12-23-fde-harborline-oldpath-doodle.png
 ---
 
-The timer at Harborline Freight can hit the target while the night dispatch lead still goes back to the TMS export, the ticket queue, and a printed SOP.
+Harborline's shadow week beat the clock. Cited answers came back in under two minutes. The night desk still opened the printed SOP afterward.
 
-I watch one lookup. If they are checking the same step, the screen is a second copy and they have not accepted it. If a step is missing, I add it and extend the eval.
+I watched one lookup on SHP-1042. They were checking that the three cold-chain steps on the screen matched the paper they are graded against. The tool was a second copy, not a source. Speed was the wrong victory.
 
-Week two measures whether the old path stays closed. 25 to 40 minutes to explain a late reefer is no longer the goal.
+Week two I measure how often the binder stays closed, and how often the lead still overturns the band. The timer stays as a guardrail. It is no longer the goal.
 
-If the night dispatch lead still opens the old path, is the pilot a success?
+If they still open the old document, what are they looking for that you did not give them?
 
 #ForwardDeployedEngineer #Logistics #SRE #MLOps #InterviewPrep

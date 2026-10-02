@@ -1,19 +1,19 @@
 ---
-date: 2027-06-08
+date: 2027-05-03
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: who breaks the tie
+topic: The maintenance director signs the part, not the tech
 status: scheduled
 publish: true
 image: ../../assets/2027-02-05-fde-parts-tiebreak-doodle.png
 ---
 
-the depot lead and the owner of the constraint can both be right. the depot cannot call a vendor API, and the tool cannot create a purchase order.
+A Helios tech and the depot lead disagreed on E42. The tech had been installing a kit. The signed sheet said a bearing. The night shift wanted a ruling before the driver left.
 
-I do not negotiate that on the floor at the night shift. The sponsor who owns the outcome decides, and the sentence goes in writing the same day.
+The maintenance director kept the sheet. Bin B-14 stands. The kit does not enter the tool because a driver is waiting. If the sheet is wrong, he changes the sheet in the morning and the eval file with it. I do not change it from the yard.
 
-Until that sentence exists, I do not expand past AST-7.
+Urgency is not signature authority.
 
-Who is allowed to decide when the depot lead and the constraint owner disagree?
+Who is allowed to overrule the signed source, and when are they not in the room?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

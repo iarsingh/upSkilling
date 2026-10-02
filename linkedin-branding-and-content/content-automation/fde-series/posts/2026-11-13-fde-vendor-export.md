@@ -1,19 +1,19 @@
 ---
-date: 2026-12-22
+date: 2027-05-23
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: their file is not the sample
+topic: Insurance dates arrived as Excel serials
 status: scheduled
 publish: true
 image: ../../assets/2026-11-13-fde-vendor-export-doodle.png
 ---
 
-The demo file for Northline Procurement is not their file. the vendor packet fields: W-9, insurance date, bank-change flag, sanctions flag will not match the sample column for column.
+Northline's packet dump stored insurance expiry as an Excel serial. Rendered badly, V-4's expired policy looked like it ended in 2027. The analyst would have called it complete.
 
-I show the mapping, including anything I had to derive. A value I have not agreed with the vendor-setup analyst stays unscored and visible. V-2 is only an example after they recognize it.
+I showed the raw value, the converted date, and the as-of date of 2 October 2026. V-4 stayed blocked. I did not ship a converter that "looked right" on the two rows I had checked by hand.
 
-Guessing a result so the demo looks finished is worse than showing the gap.
+A date parse is a control, not a convenience. The eval file now includes the serial that used to look valid.
 
-What do you put on screen when the vendor packet fields: W-9, insurance date, bank-change flag, sanctions flag does not match the sample?
+What conversion in your pipeline can make an expired fact look current?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

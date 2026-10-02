@@ -2,18 +2,18 @@
 date: 2026-12-26
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: what the log refuses
+topic: Keep the exception, not the provider payload
 status: scheduled
 publish: true
 image: ../../assets/2026-11-15-fde-ledger-audit-doodle.png
 ---
 
-Someone will paste more than an id into the box. The answer can still be useful. The log should not become a second copy.
+Brightpath's first log stored the whole webhook because debugging was easier. The payload had a customer name the settlement file did not need.
 
-At Brightpath the audit event stores event id, payment id, status, and the matched total. It does not store the raw provider payload.
+The log now stores event id, payment id, status, and the matched total. evt-1 is matched, 1500 cents. pay-4 is an amount exception. The raw body stays in the provider's system, which already has its own retention.
 
-If security wants the raw input for debugging, I replay evt-1 inside their environment. I do not add the column for a week.
+If an analyst needs to see why a row failed, they open that payment id in the tool and rerun the rule. They do not grep a copy of every payload.
 
-Which field stays out of the Brightpath log, and why?
+What did you log because it made the second bug easier, and the audit harder?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

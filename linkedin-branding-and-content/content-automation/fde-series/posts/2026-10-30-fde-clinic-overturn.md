@@ -1,19 +1,19 @@
 ---
-date: 2026-11-24
+date: 2026-10-31
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: when the expert disagrees
+topic: Four routes the nurse would not defend
 status: scheduled
 publish: true
 image: ../../assets/2026-10-30-fde-clinic-overturn-doodle.png
 ---
 
-The eval file can be green while the morning nurse lead overturns the result. At Northshore Clinic that is a stop, not a prompt tweak.
+Northshore's eval file was green. The nurse lead then rejected 4 routes out of 10. One of them had called a refill urgent because the word "blood" appeared in "blood pressure medication."
 
-I change the rule only when they can say why, and I add NT-12 to the eval file. I do not lower a threshold until the chart looks calm.
+That is a stop. I do not lower the word list until the chart looks calm. I sit on the four notes, delete the bad trigger, and add NT-13 to the eval file as a morning-queue case.
 
-The second gate is the person who does the job. every note without consent stays blocked, and the lead agrees on at least 9 of 10 routes.
+Green means the code matches yesterday's rule. It does not mean the nurse will stake her name on it.
 
-What do you change when the morning nurse lead disagrees, and what do you refuse to change?
+When the expert overturns you, do you edit the threshold or edit the rule they can explain?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

@@ -2,18 +2,18 @@
 date: 2027-07-30
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: what they still open after you leave
+topic: Northline keeps a decision that cannot say approved
 status: scheduled
 publish: true
 image: ../../assets/2027-03-03-fde-vendor-leftover-doodle.png
 ---
 
-After Northline Procurement, the thing they still open is not the architecture diagram. It is the eval file and the rule that explains V-2.
+Northline's analyst still walks new reviewers through V-2 and V-5. Bank change, second person. Sanctions, no override. V-1 is the trick question: complete, and still not accepted.
 
-They also keep the rollback: stop the process. The vendor master is unchanged. And a named owner for the vendor packet fields: W-9, insurance date, bank-change flag, sanctions flag.
+The vendor master does not contain rows this tool inserted. The account number never landed in the review log. Counsel still has the line that the word approved fails the build.
 
-The interview sentence is the customer, the constraint, what shipped, and the claim we refused: a fraud number.
+I am not in the packet meeting. The order of the checks is. That is the piece worth leaving.
 
-What artifact does Northline Procurement still open the week after you leave?
+What sentence should a new hire learn before they learn the tool?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

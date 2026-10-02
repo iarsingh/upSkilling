@@ -1,19 +1,19 @@
 ---
-date: 2027-03-30
+date: 2027-04-21
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: unknown means unscored
+topic: A fault from another model does not borrow a part
 status: scheduled
 publish: true
 image: ../../assets/2027-01-01-fde-parts-unknown-doodle.png
 ---
 
-A value that was not in the sample will show up at Helios Equipment. I do not invent a result for it so the demo stays smooth.
+A Helios tech reported E42 on an HX-90. The signed sheet maps E42 to a bearing only for the HX-200. The HX-90 has a different E42 in somebody's memory, not on the sheet.
 
-The row stays visible and unscored until the depot lead says what it means. Then it becomes an eval row next to AST-7.
+AST-3 stayed escalate. No SKU. AST-7, which is an HX-200, still got bin B-14. I did not reuse the part because the code matched. The model is part of the key. A code without the model is a different fault.
 
-Unknown is an answer. Guessed is an incident.
+The lead can add the HX-90 line when he is willing to sign it. The night shift cannot add it by pulling whatever was on the last truck.
 
-What do you show for a value the depot lead has not defined?
+When do you refuse to reuse a code that looks familiar?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

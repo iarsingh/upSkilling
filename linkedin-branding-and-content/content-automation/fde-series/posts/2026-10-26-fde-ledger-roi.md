@@ -1,19 +1,19 @@
 ---
-date: 2026-11-16
+date: 2026-12-18
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: do not invent the ROI
+topic: Do not claim recovered cash
 status: scheduled
 publish: true
 image: ../../assets/2026-10-26-fde-ledger-roi-doodle.png
 ---
 
-The sponsor will ask for recovered revenue for the month. The only honest baseline at Brightpath is a manual paste of webhooks next to the settlement CSV.
+Brightpath's controller will ask how much cash the matcher recovered. A sample where evt-1 matches 1500 cents does not answer that.
 
-The number I will own is a replayed file produces the same matched total, and every mismatch is still in the exception queue.
+The number I will sign is operational. Run the same file twice and the matched total stays 1500. pay-4's hundred-cent gap is still in the exception queue at the end of the day.
 
-recovered revenue for the month is why they care. It is not what this shadow week can prove.
+Recovered revenue is a later measurement, on their ledger, over a period they choose. It is not a property of this drop.
 
-What number would you refuse to put on the Brightpath slide?
+What metric sounds like success and is actually a different project?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

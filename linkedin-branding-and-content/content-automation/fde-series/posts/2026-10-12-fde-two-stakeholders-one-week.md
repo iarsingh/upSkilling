@@ -1,5 +1,5 @@
 ---
-date: 2026-10-19
+date: 2026-10-15
 slot: 08:00
 series: FDE Interview Series
 topic: Two stakeholders, one week

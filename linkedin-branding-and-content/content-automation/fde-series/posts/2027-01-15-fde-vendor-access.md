@@ -1,19 +1,19 @@
 ---
-date: 2027-04-27
+date: 2027-07-16
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: the second login waits
+topic: The requester cannot be the only reviewer
 status: scheduled
 publish: true
 image: ../../assets/2027-01-15-fde-vendor-access-doodle.png
 ---
 
-The first session at Northline Procurement is me beside the vendor-setup analyst, read-only, on rows they are already allowed to see.
+Northline's fastest path was to let the person who entered the bank change also mark V-2 reviewed, when nobody else was online. That is the path legal banned.
 
-A shared login for the rest of the desk waits until the software must not contain an approve action, and a sanctions flag has no override. V-2 is the row I use to explain what must not leak to the wrong person.
+The tool does not have a solo complete button. Manual review is a state that waits for a second id, and the second id cannot be the first. Sanctions rows never reach that wait. V-5 is blocked before anyone is asked to be flexible after hours.
 
-One extra login at packet review is the incident that ends the pilot.
+After hours is when the control gets waived. The control has to be boringly unavailable.
 
-What is the second person at Northline Procurement not allowed to see yet?
+Which after-hours exception would put the same person on both sides of the decision?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

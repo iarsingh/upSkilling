@@ -1,19 +1,19 @@
 ---
-date: 2027-07-18
+date: 2027-07-28
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: a wrong answer during the pilot
+topic: A hovered approve button is a Northline incident
 status: scheduled
 publish: true
 image: ../../assets/2027-02-25-fde-vendor-incident-doodle.png
 ---
 
-A wrong answer on V-2 during the Northline Procurement pilot is not a hotfix in production theater.
+A Northline build showed an approve control on V-1, grayed out, "for the demo." The analyst asked why she could not press it. Grayed out had already taught the wrong verb.
 
-The desk goes back to the vendor packet fields: W-9, insurance date, bank-change flag, sanctions flag. We pull the row, change the rule with the vendor-setup analyst, and add it to the eval file. We do not resume while the word approved appears, or a sanctions row can be waved through.
+I pulled the build. The control is gone, not hidden. The eval file fails if the rendered decision for any vendor contains approved. V-1 says ready for a human. V-2 says manual review. V-5 says blocked. She saw the three screens again before the next packet day.
 
-The old path still works because we did not write the ERP vendor master.
+A disabled button is still a promise. I do not ship promises legal has refused.
 
-A wrong answer lands on V-2. What do you stop first?
+What control have you only hidden?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

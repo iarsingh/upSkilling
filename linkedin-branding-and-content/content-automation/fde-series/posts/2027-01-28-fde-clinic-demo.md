@@ -1,19 +1,17 @@
 ---
-date: 2027-05-23
+date: 2027-01-21
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: do not hide the gap in the demo
+topic: Demo the note you refuse to show
 status: scheduled
 publish: true
 image: ../../assets/2027-01-28-fde-clinic-demo-doodle.png
 ---
 
-I would rather show the morning nurse lead one ugly row from their file than a perfect walkthrough of my sample.
+Northshore's impressive demo is NT-11, a consented urgent sentence, cited cleanly. The demo that matters is NT-12. Consent is not yes. The body is absent. I read the decision out loud so they can hear that the sore throat is not in it.
 
-At Northshore Clinic the honest demo is NT-12: NT-12 stays blocked because consent is not yes, and the note body is not copied. If a column was derived, I say the formula. If a value is unknown, I leave it unscored on screen.
+If the room asks me to "just show it this once," that is the test of the pilot, and the answer is no. The demo is the policy. A hidden override for the sake of the meeting is the override they will ask for at 7am.
 
-Theater at 7am costs the second meeting.
-
-Which gap would you rather show the morning nurse lead than hide?
+What will you refuse to click during the demo?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

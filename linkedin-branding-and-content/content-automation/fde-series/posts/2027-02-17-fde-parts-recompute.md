@@ -1,19 +1,19 @@
 ---
-date: 2027-07-02
+date: 2027-05-07
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: they can recompute the answer
+topic: The lead can point at the bin without the screen
 status: scheduled
 publish: true
 image: ../../assets/2027-02-17-fde-parts-recompute-doodle.png
 ---
 
-the depot lead has to defend the answer at the night shift. A hidden rank fails that test even when it is often right.
+Helios's depot lead should get the same bin I do, from the three sheets.
 
-At Helios Equipment, AST-7 is explainable: E42 on AST-7 points at bin B-14 because the quantity is 2, and E99 returns no SKU. The source is the asset list, the signed fault-to-part sheet, and the bin count.
+AST-7 is an HX-200. E42 on that model is BRG-19 on the signed sheet. B-14 has 2. B-02 has 0. The bin is B-14. E99 is not on the sheet, so there is no bin. E17's filter has no quantity, so there is no pull and no order.
 
-If they cannot recompute it, it is not ready for the desk.
+If he needs the screen to remember which sheet wins, the screen is hiding the rule. I want the rule boring enough to say at the parts window.
 
-Can the depot lead recompute AST-7 without you? What do they need?
+Can you narrate the choice from the source documents alone?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

@@ -1,19 +1,19 @@
 ---
-date: 2027-03-24
+date: 2026-11-22
 slot: 08:00
 series: FDE Interview Series
-topic: Harborline: unknown means unscored
+topic: A new TMS status stays unscored
 status: scheduled
 publish: true
 image: ../../assets/2026-12-29-fde-harborline-unknown-doodle.png
 ---
 
-A value that was not in the sample will show up at Harborline Freight. I do not invent a result for it so the demo stays smooth.
+Harborline's nightly file grew a status I had never seen: held. The demo was the next morning. Treating held as a normal dwell would have scored those trucks too low. Treating it as an exception would have paged the desk for a yard delay.
 
-The row stays visible and unscored until the night dispatch lead says what it means. Then it becomes an eval row next to SHP-1042.
+I left the rows on the screen with no band. SHP-1042 still scored 76, because its status was one the lead had already explained. Held waited until he said which SOP it belongs to, and then it became an eval row.
 
-Unknown is an answer. Guessed is an incident.
+A missing band is an answer I can defend. A guessed band is how you lose the second meeting.
 
-What do you show for a value the night dispatch lead has not defined?
+What new value will you refuse to score until the owner names it?
 
 #ForwardDeployedEngineer #Logistics #SRE #MLOps #InterviewPrep

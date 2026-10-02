@@ -1,19 +1,19 @@
 ---
-date: 2026-12-20
+date: 2027-04-03
 slot: 08:00
 series: FDE Interview Series
-topic: Cedar Grid: their file is not the sample
+topic: Life safety was a code, not a yes
 status: scheduled
 publish: true
 image: ../../assets/2026-11-12-fde-outage-export-doodle.png
 ---
 
-The demo file for Cedar Grid is not their file. the life-safety account flag and the outage list will not match the sample column for column.
+Cedar Grid's account file did not say yes/no. It said a priority code, and three codes meant life safety. One of those codes had been retired. My sample had already translated them.
 
-I show the mapping, including anything I had to derive. A value I have not agreed with the storm-desk lead stays unscored and visible. OUT-1 is only an example after they recognize it.
+I showed the storm lead the code list and asked which ones still count. Until he answered, those accounts did not add the 100 points. OUT-1 stayed high because its code was one he confirmed. A feeder with only the retired code stayed on customer count alone.
 
-Guessing a result so the demo looks finished is worse than showing the gap.
+The translation table is a decision. It does not belong inside a helper function with no name on it.
 
-What do you put on screen when the life-safety account flag and the outage list does not match the sample?
+Who has to initial the mapping before you score production rows?
 
 #ForwardDeployedEngineer #Utilities #SRE #IncidentResponse #InterviewPrep

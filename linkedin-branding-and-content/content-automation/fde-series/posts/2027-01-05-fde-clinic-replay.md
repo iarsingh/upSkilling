@@ -1,19 +1,19 @@
 ---
-date: 2027-04-07
+date: 2027-01-13
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: the same file run twice
+topic: Reading the note file twice does not double the queue
 status: scheduled
 publish: true
 image: ../../assets/2027-01-05-fde-clinic-replay-doodle.png
 ---
 
-Before Northshore Clinic trusts the output, I run the same drop twice. NT-12 stays blocked because consent is not yes, and the note body is not copied.
+Northshore's overnight job was restarted and processed the file again. NT-11 must still be one urgent callback, not two phone calls. NT-12 must still be one blocked row.
 
-The second run must not create a second decision, a second count, or a second write. The stop condition is a blocked note's body shows up in the decision.
+The route is a function of the note, not of how many times the job woke up. A second run replaces the decision. It does not append. I tested that before she used it at 7am, because a double callback is how a pilot becomes noise.
 
-A tool that only looks right on a fresh file is not ready for their operator.
+Idempotent here means one note, one route, however many retries the scheduler needs.
 
-What must stay identical when the Northshore Clinic file is run twice?
+What user-visible action would fire twice if your job retried?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

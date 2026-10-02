@@ -1,19 +1,19 @@
 ---
-date: 2026-12-06
+date: 2026-12-22
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: two owners, one week
+topic: Finance wanted a post. Ops wanted a list.
 status: scheduled
 publish: true
 image: ../../assets/2026-11-05-fde-ledger-stakeholders-doodle.png
 ---
 
-the payments ops analyst wants the answer tonight. The constraint owner wants the tool must not post to the ledger, and a mismatch is never marked settled.
+Brightpath finance wanted the matcher to post adjustments before the close. Ops wanted a list they could still argue with.
 
-Tonight can be one read-only lookup beside them on evt-1. A second person does not get a login until the constraint is in place.
+I kept the list. evt-1 can match. pay-4 cannot be settled by the tool. The close still happens in their ledger, by a person, after the exception queue is empty or explicitly waived. That waiver is not a button I own.
 
-The sponsor breaks the tie in writing the same day. Helpful access at the morning close is how the pilot ends.
+Both sides were protecting a real failure. Only the controller could decide, and the decision is in the readout: no posts in this engagement.
 
-Who breaks the tie at Brightpath when both sides are right?
+Who is allowed to choose when two teams are each preventing a different incident?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

@@ -1,19 +1,19 @@
 ---
-date: 2026-10-17
+date: 2026-12-14
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: start from the workflow
+topic: The analyst was hunting ghost payments
 status: scheduled
 publish: true
 image: ../../assets/2026-10-11-fde-ledger-workflow-doodle.png
 ---
 
-"We need AI" is not a requirement. At the morning close the person in pain is the payments ops analyst.
+Brightpath's analyst was not asking for AI. She was hunting payments that appeared twice, and payments that were ten dollars off.
 
-I ask them to walk one case. At Brightpath that walk is the webhook export and the settlement file. evt-1 is the example I keep: evt-1 matches 1500 cents once, the replay is ignored, and pay-4's 100-cent gap stays an exception.
+evt-1 is 1500 cents and matches once. The same event id comes back and is ignored. pay-4 is 8000 against a 7900 settlement, so it stays an exception. The matched total does not move.
 
-I do not leave the room with a model name. I leave with the user, the file they actually have, and the one question they ask.
+I left that meeting with a classification, not a model. Matched, duplicate, pending, or amount exception.
 
-Who is the person at the morning close, and what is the one question they actually ask?
+Which row in your customer's file is the one they would use to test you?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

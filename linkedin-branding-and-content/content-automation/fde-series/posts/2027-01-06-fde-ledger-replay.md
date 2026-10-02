@@ -1,19 +1,19 @@
 ---
-date: 2027-04-09
+date: 2027-03-04
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: the same file run twice
+topic: 1500 cents must not become 3000
 status: scheduled
 publish: true
 image: ../../assets/2027-01-06-fde-ledger-replay-doodle.png
 ---
 
-Before Brightpath trusts the output, I run the same drop twice. evt-1 matches 1500 cents once, the replay is ignored, and pay-4's 100-cent gap stays an exception.
+Brightpath replays webhooks. evt-1 arrived twice with the same event id, and evt-2 arrived later with a new id for the same payment. The matched total is 1500 cents, not 3000 and not 4500.
 
-The second run must not create a second decision, a second count, or a second write. The stop condition is the matched total changes when the same file is run twice.
+pay-4 is still an amount exception after the replay. Nothing new matched because we tried again. I run the file twice in front of the analyst and point at the total. If it moves, we do not talk about features.
 
-A tool that only looks right on a fresh file is not ready for their operator.
+The interesting test is the new event id, not the duplicate one. Duplicate ids are the easy case. Same payment, new id, is how you double-count.
 
-What must stay identical when the Brightpath file is run twice?
+Which retry in your system creates a second business event?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

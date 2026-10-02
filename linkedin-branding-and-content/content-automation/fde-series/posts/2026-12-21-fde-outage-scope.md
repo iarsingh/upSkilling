@@ -1,19 +1,19 @@
 ---
-date: 2027-03-08
+date: 2027-06-06
 slot: 08:00
 series: FDE Interview Series
-topic: Cedar Grid: cut scope in the room
+topic: Estimated restoration time is a different claim
 status: scheduled
 publish: true
 image: ../../assets/2026-12-21-fde-outage-scope-doodle.png
 ---
 
-Cedar Grid will ask for the lookup, a second product, and a rewrite of the outage management system in the same two weeks.
+Cedar Grid asked for a ranker and an ETA text to every customer. The ranker is the pilot. The ETA is a promise I cannot back.
 
-I ship one thing for the storm-desk lead: a ranked list and a crew suggestion the dispatcher still has to accept. The rest goes in the readout as out of scope, with the condition that would reopen it.
+OUT-1 can be first in the list. The card does not predict when the lights return, and it does not send that prediction. An ETA needs crew locations, travel, and a communications approval this engagement does not have.
 
-"Later" with no condition is how the promise rots.
+It reopens only with the communications owner in the room and a statement of what happens when the ETA is wrong. Not as a field I add because the mockup had a blank.
 
-What do you postpone at Cedar Grid, and what condition reopens it?
+What customer-facing sentence are you not ready to be wrong about?
 
 #ForwardDeployedEngineer #Utilities #SRE #IncidentResponse #InterviewPrep

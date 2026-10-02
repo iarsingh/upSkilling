@@ -1,19 +1,19 @@
 ---
-date: 2027-01-23
+date: 2027-07-02
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: shadow before the desk
+topic: The inbox stays the queue for a week
 status: scheduled
 publish: true
 image: ../../assets/2026-11-29-fde-vendor-shadow-doodle.png
 ---
 
-Week one at Northline Procurement stays beside the old path. the vendor-setup analyst still uses the vendor packet fields: W-9, insurance date, bank-change flag, sanctions flag.
+Northline does not close the shared inbox on day one. Packets still arrive there. The tool's decision is stapled beside the analyst's own note.
 
-We time real lookups against packets in a shared inbox, with one person able to accept a bank change. The target is every bank-change row is manual_review or blocked, and none are accepted by the tool.
+For a week I want every V-2 style bank change to show up as manual review in both places, and every sanctions row to show up blocked with no override. If she accepts one that the tool blocked, we stop and read the packet before anyone talks about automation.
 
-The whole floor does not switch because a demo looked fast at packet review.
+The inbox is ugly. It is also the path that already has a person on it.
 
-What still uses the old path during the first week at Northline Procurement?
+What existing queue will you refuse to turn off until the new decision matches it?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

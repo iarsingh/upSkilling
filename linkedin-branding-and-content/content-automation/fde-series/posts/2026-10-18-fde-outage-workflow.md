@@ -1,19 +1,19 @@
 ---
-date: 2026-10-31
+date: 2027-03-24
 slot: 08:00
 series: FDE Interview Series
-topic: Cedar Grid: start from the workflow
+topic: Customer count was the wrong sort
 status: scheduled
 publish: true
 image: ../../assets/2026-10-18-fde-outage-workflow-doodle.png
 ---
 
-"We need AI" is not a requirement. At a storm night the person in pain is the storm-desk lead.
+Cedar Grid's storm desk sorted outages by how many customers were dark. That sort buried a smaller feeder with a life-safety account.
 
-I ask them to walk one case. At Cedar Grid that walk is the life-safety account flag and the outage list. OUT-1 is the example I keep: OUT-1 scores 112 and ranks above OUT-2, even though OUT-2 affects 400 customers and OUT-1 affects 40.
+OUT-1 affects 40 customers and scores 112. OUT-2 affects 400 and scores 43. The 100 points for life safety are why. The screen suggests a crew count. It does not assign one, and it does not text anyone.
 
-I do not leave the room with a model name. I leave with the user, the file they actually have, and the one question they ask.
+The question I wrote down was not "where is the AI." It was "which feeder should the next crew hear about first."
 
-Who is the person at a storm night, and what is the one question they actually ask?
+What sort is your customer using that optimizes the wrong thing?
 
 #ForwardDeployedEngineer #Utilities #SRE #IncidentResponse #InterviewPrep

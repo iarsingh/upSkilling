@@ -1,19 +1,19 @@
 ---
-date: 2027-01-05
+date: 2026-12-28
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: do not write back yet
+topic: Posting the match ends the pilot's undo
 status: scheduled
 publish: true
 image: ../../assets/2026-11-20-fde-ledger-writeback-doodle.png
 ---
 
-the payments ops analyst will ask to write the result into the ledger so the next shift sees it.
+Brightpath asked the matcher to mark settlements as reconciled so the close would be faster. That request moves the tool from a list into the ledger.
 
-That is the moment rollback stops being easy. delete the output file. The ledger was never written is only true while the tool is read-only.
+Today, deleting the output file undoes the run. evt-1 matched, pay-4 did not, and the ledger does not know. After a post, a wrong match is an entry someone has to reverse, and a replay is no longer harmless.
 
-Writeback waits until a replayed file produces the same matched total, and every mismatch is still in the exception queue, and a named person is allowed to overwrite that field.
+I will post only after a week of identical totals on replay, an empty set of disputed exceptions, and a named poster who is not the tool. Speed of close is not worth a silent journal entry.
 
-What has to be true before you write into the ledger?
+What "save a step" request turns your output into their books?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

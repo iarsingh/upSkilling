@@ -1,19 +1,19 @@
 ---
-date: 2027-02-26
+date: 2027-07-06
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: they can extend the eval file
+topic: The analyst adds the next vendor id
 status: scheduled
 publish: true
 image: ../../assets/2026-12-16-fde-vendor-handoff-doodle.png
 ---
 
-The engagement at Northline Procurement is finished when the analyst can add a vendor id to the eval file.
+Northline is done when the analyst can add a vendor id and the decision she expects. V-2 is the taught bank change: manual review, not acceptance. V-5 is the taught sanctions block.
 
-The artifact they keep is the eval file, not a slide. V-2 is already in it: V-2 is otherwise complete and still manual_review, because the bank details changed.
+A new packet shape, a missing insurance date, is hers to append. Changing the order of the rules still needs legal. Adding an example does not. I watch her add one, then I stop joining the packet review.
 
-If the next change requires me on a call, the handoff is not done.
+The inbox can stay. The eval file has to be theirs.
 
-What can Northline Procurement change after you leave, without calling you?
+What decision are you still the only person who can encode?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

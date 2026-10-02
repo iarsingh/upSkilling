@@ -1,19 +1,19 @@
 ---
-date: 2027-06-10
+date: 2027-06-22
 slot: 08:00
 series: FDE Interview Series
-topic: Cedar Grid: who breaks the tie
+topic: The duty officer owns the life-safety list
 status: scheduled
 publish: true
 image: ../../assets/2027-02-06-fde-outage-tiebreak-doodle.png
 ---
 
-the storm-desk lead and the owner of the constraint can both be right. the screen does not text customers and does not assign a crew.
+Cedar Grid planning said a feeder was life safety. The storm lead said the account had moved. Dispatch wanted a crew either way. Three stories, one rank.
 
-I do not negotiate that on the floor at a storm night. The sponsor who owns the outcome decides, and the sentence goes in writing the same day.
+The duty officer is the name on the flag list for that night. She confirmed the account was stale, so OUT-1 did not get the 100 points until the list was fixed. I did not keep the points "to be safe." Safe, here, meant sending a crew on a lie.
 
-Until that sentence exists, I do not expand past OUT-1.
+Being safe and being conservative pointed at different feeders. Someone on shift had to pick.
 
-Who is allowed to decide when the storm-desk lead and the constraint owner disagree?
+Whose list wins when the storm lead and the database disagree?
 
 #ForwardDeployedEngineer #Utilities #SRE #IncidentResponse #InterviewPrep

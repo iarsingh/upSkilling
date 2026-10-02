@@ -1,19 +1,19 @@
 ---
-date: 2027-05-01
+date: 2027-01-17
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: prove nothing leaves
+topic: The matcher does not call the processor
 status: scheduled
 publish: true
 image: ../../assets/2027-01-17-fde-ledger-egress-doodle.png
 ---
 
-the tool must not post to the ledger, and a mismatch is never marked settled. A local model is not the clever workaround if the payments ops analyst still cannot recompute it.
+Brightpath's webhook file is already an export. I do not need to call the processor to "enrich" a payment, and the enrichment was going to include a customer name we had agreed not to copy.
 
-The service reads the webhook export and the settlement file from disk. There is no model client in the process. Their owner watches one lookup of evt-1 and confirms nothing leaves.
+evt-1 matches from the two files on disk. pay-4's exception is computed from those cents. The process has no HTTP client. Their security owner can see that in the image and on one run with the egress log open.
 
-A quiet log is not that proof. A quiet log can hide a request.
+Enrichment is how a local tool becomes a third copy of the processor's data.
 
-How do you prove the Brightpath lookup did not leave their network?
+What outbound call is only there to make the record feel complete?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

@@ -1,19 +1,19 @@
 ---
-date: 2027-02-28
+date: 2026-11-18
 slot: 08:00
 series: FDE Interview Series
-topic: Harborline: cut scope in the room
+topic: The driver app is a different engagement
 status: scheduled
 publish: true
 image: ../../assets/2026-12-17-fde-harborline-scope-doodle.png
 ---
 
-Harborline Freight will ask for the lookup, a second product, and a rewrite of the TMS in the same two weeks.
+Harborline's VP had three wishes: the night-desk answer, a driver phone app, and a rewrite of the TMS. Ten days cover one of them.
 
-I ship one thing for the night dispatch lead: a written score, the SOP they already use, and citations. The rest goes in the readout as out of scope, with the condition that would reopen it.
+The desk gets a cited score for one question, why this shipment is late and what to do next. SHP-1042 is the demo. The driver app has a second user and does not make 2am faster. The TMS rewrite writes into the system of record before we trust the band.
 
-"Later" with no condition is how the promise rots.
+Postponed work goes in the readout with a condition. The driver app reopens when the night lead has agreed on 9 of 10 and asks for a second user. "Later" with no condition is how I would have lied.
 
-What do you postpone at Harborline Freight, and what condition reopens it?
+What second product is hiding inside the sentence "while you're here"?
 
 #ForwardDeployedEngineer #Logistics #SRE #MLOps #InterviewPrep

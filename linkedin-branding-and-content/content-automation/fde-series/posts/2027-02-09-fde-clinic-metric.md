@@ -1,19 +1,19 @@
 ---
-date: 2027-06-16
+date: 2027-01-25
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: agree the metric before the build
+topic: Count blocked bodies, not summaries produced
 status: scheduled
 publish: true
 image: ../../assets/2027-02-09-fde-clinic-metric-doodle.png
 ---
 
-I do not start the scorer at Northshore Clinic until the metric is written.
+Northshore's first proposed metric was notes summarized per hour. That metric rewards copying text. Their constraint forbids copying text without consent.
 
-Baseline: overnight notes read in arrival order, including notes with no consent. Target: every note without consent stays blocked, and the lead agrees on at least 9 of 10 routes. Judge: the morning nurse lead. Refusal: fewer adverse events.
+The metric we wrote down: every note without consent, NT-12 included, stays blocked and body-free. The nurse lead agrees with the route on at least 9 of 10 consented notes. She is the judge. Fewer adverse events are refused.
 
-A demo that "answers questions" is not the engagement.
+I would rather report a small ugly fraction than a large flattering count of summaries.
 
-What did you agree to measure at Northshore Clinic before writing the rule?
+Which metric gets better when you violate the constraint?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

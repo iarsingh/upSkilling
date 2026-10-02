@@ -1,19 +1,19 @@
 ---
-date: 2027-07-12
+date: 2027-03-20
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: a wrong answer during the pilot
+topic: A 3000 total stops Brightpath's morning
 status: scheduled
 publish: true
 image: ../../assets/2027-02-22-fde-ledger-incident-doodle.png
 ---
 
-A wrong answer on evt-1 during the Brightpath pilot is not a hotfix in production theater.
+Brightpath's second run showed 3000 cents. evt-2, a new event id for the same payment as evt-1, had been counted. The tests had only covered the identical event id.
 
-The desk goes back to the webhook export and the settlement file. We pull the row, change the rule with the payments ops analyst, and add it to the eval file. We do not resume while the matched total changes when the same file is run twice.
+The analyst kept her own sheet for the close. I did not let the tool's total near the ledger. We treated same payment id as already matched, added evt-2 to the eval file, and reran until the total held at 1500. She signed the new total against her sheet before the next morning.
 
-The old path still works because we did not write the ledger.
+The incident was a test gap, not a bad day. The close did not need to absorb it.
 
-A wrong answer lands on evt-1. What do you stop first?
+What duplicate did your tests use the easy key for?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

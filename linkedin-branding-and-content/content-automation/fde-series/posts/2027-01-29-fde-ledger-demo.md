@@ -1,19 +1,19 @@
 ---
-date: 2027-05-25
+date: 2027-03-12
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: do not hide the gap in the demo
+topic: Demo the hundred cents you will not fix
 status: scheduled
 publish: true
 image: ../../assets/2027-01-29-fde-ledger-demo-doodle.png
 ---
 
-I would rather show the payments ops analyst one ugly row from their file than a perfect walkthrough of my sample.
+Brightpath's happy path is evt-1 matching 1500 cents. I still start the demo on pay-4. The webhook says 8000. The settlement says 7900. The status is amount exception. I do not press anything that picks a side.
 
-At Brightpath the honest demo is evt-1: evt-1 matches 1500 cents once, the replay is ignored, and pay-4's 100-cent gap stays an exception. If a column was derived, I say the formula. If a value is unknown, I leave it unscored on screen.
+Then I replay evt-1 and show the total staying 1500. The duplicate is the second scene, not the first. People remember the row you refused to clean up.
 
-Theater at the morning close costs the second meeting.
+If the only row in your demo is the one that matches, you have demoed a join, not a control.
 
-Which gap would you rather show the payments ops analyst than hide?
+Which mismatch deserves the first five minutes?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

@@ -1,19 +1,19 @@
 ---
-date: 2027-06-12
+date: 2027-07-22
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: who breaks the tie
+topic: Counsel wins on sanctions. Finance does not get a vote.
 status: scheduled
 publish: true
 image: ../../assets/2027-02-07-fde-vendor-tiebreak-doodle.png
 ---
 
-the vendor-setup analyst and the owner of the constraint can both be right. the software must not contain an approve action, and a sanctions flag has no override.
+Northline finance asked to onboard V-5 anyway because the contract was already signed. Counsel said the sanctions flag is not a negotiation. I had both of them in the note, and I did not build a path where finance can be right.
 
-I do not negotiate that on the floor at packet review. The sponsor who owns the outcome decides, and the sentence goes in writing the same day.
+V-5 stays blocked. There is no second approver for that state. V-2, the bank change, is where finance and counsel already agreed a second person is required. I do not let the harder case borrow the easier case's workflow.
 
-Until that sentence exists, I do not expand past V-2.
+Some ties are not ties. Naming that is the decision.
 
-Who is allowed to decide when the vendor-setup analyst and the constraint owner disagree?
+Where are you facilitating a debate the policy has already closed?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

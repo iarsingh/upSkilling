@@ -1,19 +1,19 @@
 ---
-date: 2027-05-17
+date: 2027-06-18
 slot: 08:00
 series: FDE Interview Series
-topic: Cedar Grid: the note a sponsor can forward
+topic: Explain why 40 customers beat 400
 status: scheduled
 publish: true
 image: ../../assets/2027-01-25-fde-outage-readout-doodle.png
 ---
 
-The readout for Cedar Grid is written to the sponsor, not to other engineers.
+Cedar Grid's readout leads with the sort the VP might challenge. OUT-2 affects 400 customers. OUT-1 affects 40 and ranks first, score 112 against 43, because a life-safety account is on that feeder. The customer-count term caps at 40, so it cannot outrank the flag.
 
-It includes their baseline, sorting open outages by customer count. It includes one row, OUT-1: OUT-1 scores 112 and ranks above OUT-2, even though OUT-2 affects 400 customers and OUT-1 affects 40. It includes the refusal: we are not claiming fewer outage minutes.
+The note says we did not text anyone and did not dispatch. OUT-3 was restored and was not on the list. We are not claiming shorter outages. The ask is which priority codes still mean life safety.
 
-It ends with what we need from them, not with a feature list.
+A VP who disagrees with the sort should disagree from the page, not from my voiceover.
 
-What sentence in the Cedar Grid readout should the sponsor be able to forward?
+Can your scoring rule survive a skeptical reader who only has the page?
 
 #ForwardDeployedEngineer #Utilities #SRE #IncidentResponse #InterviewPrep

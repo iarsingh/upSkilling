@@ -1,19 +1,19 @@
 ---
-date: 2026-12-16
+date: 2026-12-24
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: their file is not the sample
+topic: The settlement file used a different payment key
 status: scheduled
 publish: true
 image: ../../assets/2026-11-10-fde-ledger-export-doodle.png
 ---
 
-The demo file for Brightpath is not their file. the webhook export and the settlement file will not match the sample column for column.
+Brightpath's webhook had payment_id. The settlement file had processor_reference, which matched only after a prefix was stripped. My sample had hidden that.
 
-I show the mapping, including anything I had to derive. A value I have not agreed with the payments ops analyst stays unscored and visible. evt-1 is only an example after they recognize it.
+I put the prefix rule on the readout and showed one row where the strip was wrong. That row stayed unmatched. evt-1 still matched 1500 cents because its key was clean. I did not "fix" the ugly key so the demo hit rate would look better.
 
-Guessing a result so the demo looks finished is worse than showing the gap.
+If the join is a transformation, the transformation is part of the product.
 
-What do you put on screen when the webhook export and the settlement file does not match the sample?
+Where does your demo file spare you from the customer's actual key?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

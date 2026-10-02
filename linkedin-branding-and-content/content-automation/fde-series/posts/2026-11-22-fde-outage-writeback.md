@@ -1,19 +1,19 @@
 ---
-date: 2027-01-09
+date: 2027-04-07
 slot: 08:00
 series: FDE Interview Series
-topic: Cedar Grid: do not write back yet
+topic: A suggested crew is not an assignment
 status: scheduled
 publish: true
 image: ../../assets/2026-11-22-fde-outage-writeback-doodle.png
 ---
 
-the storm-desk lead will ask to write the result into the outage management system so the next shift sees it.
+Cedar Grid dispatch asked the ranker to create the crew assignment so the storm lead would stop retyping OUT-1. Retyping is the control.
 
-That is the moment rollback stops being easy. close the screen. Crews are still assigned by the dispatcher is only true while the tool is read-only.
+If the tool writes the assignment, a bad rank becomes a truck roll, and closing the screen does not call the truck back. The card can say "suggest 2 crews" only while a person still has to key it.
 
-Writeback waits until the lead agrees with the order on at least 9 of 10 open outages, and the tool sends no customer message, and a named person is allowed to overwrite that field.
+I will talk about writeback after a storm where the lead agrees with the order and still wants the keystrokes gone. Not during the storm where the flag data was just proven stale.
 
-What has to be true before you write into the outage management system?
+What retyping is actually your safety interlock?
 
 #ForwardDeployedEngineer #Utilities #SRE #IncidentResponse #InterviewPrep

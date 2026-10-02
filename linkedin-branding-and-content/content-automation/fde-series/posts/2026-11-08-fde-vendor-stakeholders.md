@@ -1,19 +1,19 @@
 ---
-date: 2026-12-12
+date: 2027-05-21
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: two owners, one week
+topic: Finance wanted speed. Legal wanted a second person.
 status: scheduled
 publish: true
 image: ../../assets/2026-11-08-fde-vendor-stakeholders-doodle.png
 ---
 
-the vendor-setup analyst wants the answer tonight. The constraint owner wants the software must not contain an approve action, and a sanctions flag has no override.
+Northline finance was measured on how fast a vendor could be paid. Legal was measured on whether a bank change had a second set of eyes.
 
-Tonight can be one read-only lookup beside them on V-2. A second person does not get a login until the constraint is in place.
+V-2 is the case that makes the trade visible. The packet is otherwise complete. The decision is still manual review. V-5 never reaches that argument, because a sanctions flag stops first.
 
-The sponsor breaks the tie in writing the same day. Helpful access at packet review is how the pilot ends.
+The CFO and the general counsel had to say which failure they would rather explain. They picked the slower vendor over the single-person bank change. I wrote that down before building the happy path.
 
-Who breaks the tie at Northline Procurement when both sides are right?
+When two scorecards conflict, which failure is the company willing to own?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

@@ -1,5 +1,5 @@
 ---
-date: 2026-10-27
+date: 2026-10-23
 slot: 08:00
 series: FDE Interview Series
 topic: Rollout, rollback, and the stop condition

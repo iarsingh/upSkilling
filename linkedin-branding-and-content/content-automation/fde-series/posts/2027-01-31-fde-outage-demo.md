@@ -1,19 +1,19 @@
 ---
-date: 2027-05-29
+date: 2027-06-20
 slot: 08:00
 series: FDE Interview Series
-topic: Cedar Grid: do not hide the gap in the demo
+topic: Demo the smaller outage that ranks first
 status: scheduled
 publish: true
 image: ../../assets/2027-01-31-fde-outage-demo-doodle.png
 ---
 
-I would rather show the storm-desk lead one ugly row from their file than a perfect walkthrough of my sample.
+Cedar Grid's audience expects the 400-customer feeder to be first. I show OUT-2, then OUT-1 above it, and I show the arithmetic. Forty customers cannot beat a life-safety flag because the customer term caps at 40. OUT-1 is 112. OUT-2 is 43.
 
-At Cedar Grid the honest demo is OUT-1: OUT-1 scores 112 and ranks above OUT-2, even though OUT-2 affects 400 customers and OUT-1 affects 40. If a column was derived, I say the formula. If a value is unknown, I leave it unscored on screen.
+I also show that the card has no send button. Someone in the room will ask for one. The demo answer is that communications already has a channel, and this screen will not grow a second one.
 
-Theater at a storm night costs the second meeting.
+The surprising sort is the product. The missing button is the constraint.
 
-Which gap would you rather show the storm-desk lead than hide?
+What result will look wrong to the room and be right for the policy?
 
 #ForwardDeployedEngineer #Utilities #SRE #IncidentResponse #InterviewPrep

@@ -1,19 +1,19 @@
 ---
-date: 2027-07-14
+date: 2027-05-09
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: a wrong answer during the pilot
+topic: A suggested part for E99 stops the Helios night
 status: scheduled
 publish: true
 image: ../../assets/2027-02-23-fde-parts-incident-doodle.png
 ---
 
-A wrong answer on AST-7 during the Helios Equipment pilot is not a hotfix in production theater.
+Helios's lookup filled E99 with BRG-19 after a fallback I had left in from a demo. The bin happened to exist. The fault was not on the signed sheet. A tech had already asked the lead if he should pull it.
 
-The desk goes back to the asset list, the signed fault-to-part sheet, and the bin count. We pull the row, change the rule with the depot lead, and add it to the eval file. We do not resume while any SKU appears for a fault that is not on the signed list.
+The lead said no. I took the screen off the desk, deleted the fallback, and added E99 as an eval row that must have an empty SKU. The next recommendation waited until that row failed the build if a part appeared. The bin quantity never changed, which is the only reason this was a conversation and not an inventory error.
 
-The old path still works because we did not write the purchasing system.
+A demo fallback is a production feature until you delete it.
 
-A wrong answer lands on AST-7. What do you stop first?
+What shortcut from the demo is still on the path?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

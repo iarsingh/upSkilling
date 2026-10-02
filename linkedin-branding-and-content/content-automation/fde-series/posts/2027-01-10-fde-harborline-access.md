@@ -1,19 +1,19 @@
 ---
-date: 2027-04-17
+date: 2026-11-26
 slot: 08:00
 series: FDE Interview Series
-topic: Harborline: the second login waits
+topic: The second dispatcher does not get a login tonight
 status: scheduled
 publish: true
 image: ../../assets/2027-01-10-fde-harborline-access-doodle.png
 ---
 
-The first session at Harborline Freight is me beside the night dispatch lead, read-only, on rows they are already allowed to see.
+Harborline's night lead wanted the whole desk on the scorer because a grocery load was late. IT wanted SSO, and medical shipments only on the medical desk, before any shared login.
 
-A shared login for the rest of the desk waits until shipment data stays in their environment, and IT banned an external model. SHP-1042 is the row I use to explain what must not leak to the wrong person.
+Tonight is one read-only lookup beside him, on loads he already handles. SHP-1042 is a reefer, not a medical row. Harbor Medical's shipment does not go on the grocery screen to be helpful. The VP wrote that down the same day.
 
-One extra login at 2am is the incident that ends the pilot.
+A second login is a feature. It is also how the wrong desk sees a medical load.
 
-What is the second person at Harborline Freight not allowed to see yet?
+Who is allowed to look before the access rule exists?
 
 #ForwardDeployedEngineer #Logistics #SRE #MLOps #InterviewPrep

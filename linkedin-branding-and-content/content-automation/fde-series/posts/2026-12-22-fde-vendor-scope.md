@@ -1,19 +1,19 @@
 ---
-date: 2027-03-10
+date: 2027-07-08
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: cut scope in the room
+topic: Payment release is not packet review
 status: scheduled
 publish: true
 image: ../../assets/2026-12-22-fde-vendor-scope-doodle.png
 ---
 
-Northline Procurement will ask for the lookup, a second product, and a rewrite of the ERP vendor master in the same two weeks.
+Northline asked the packet tool to also release the first payment once a vendor was ready. Review and payment are different authorities.
 
-I ship one thing for the vendor-setup analyst: blocked_sanctions, blocked_incomplete, manual_review, or ready_for_human. The rest goes in the readout as out of scope, with the condition that would reopen it.
+The tool can block V-5, send V-2 to manual review, and leave V-1 ready for a human. It cannot move cash. The first payment stays in the ERP, started by someone whose job is payments, after they accept the packet.
 
-"Later" with no condition is how the promise rots.
+I put payment release in the readout as out of scope, reopened only under the payables owner. I did not leave it as an integration task for "later in the sprint."
 
-What do you postpone at Northline Procurement, and what condition reopens it?
+Where does your project quietly pick up the authority to pay?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

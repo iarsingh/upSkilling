@@ -1,19 +1,19 @@
 ---
-date: 2026-11-26
+date: 2026-12-20
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: when the expert disagrees
+topic: The analyst rejected a match the file called clean
 status: scheduled
 publish: true
 image: ../../assets/2026-10-31-fde-ledger-overturn-doodle.png
 ---
 
-The eval file can be green while the payments ops analyst overturns the result. At Brightpath that is a stop, not a prompt tweak.
+Brightpath's tests passed. The analyst still pulled two "matched" rows out of the pile because the settlement status was posted and the payment had already been reversed in a column I had not mapped.
 
-I change the rule only when they can say why, and I add evt-1 to the eval file. I do not lower a threshold until the chart looks calm.
+I did not relax the matcher to agree with her. I stopped calling those rows matched, added the status she uses, and put both payment ids in the eval file. A second run has to keep them as exceptions.
 
-The second gate is the person who does the job. a replayed file produces the same matched total, and every mismatch is still in the exception queue.
+Agreement with the person who signs the close is the second gate. The unit test is the first.
 
-What do you change when the payments ops analyst disagrees, and what do you refuse to change?
+What column did your sample never contain that the operator uses every morning?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

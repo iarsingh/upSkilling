@@ -1,19 +1,19 @@
 ---
-date: 2027-02-18
+date: 2027-01-05
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: they can extend the eval file
+topic: The nurse adds the next note id herself
 status: scheduled
 publish: true
 image: ../../assets/2026-12-12-fde-clinic-handoff-doodle.png
 ---
 
-The engagement at Northshore Clinic is finished when the nurse lead can add a note id to the eval file.
+Northshore's handoff is the nurse lead adding a note id to the eval file when a route was wrong. NT-12 is already there as blocked, body not shown. The next fight, a refill that got marked urgent, should be her row.
 
-The artifact they keep is the eval file, not a slide. NT-12 is already in it: NT-12 stays blocked because consent is not yes, and the note body is not copied.
+She does not need the HTTP layer. She needs the file, the command, and a place to write the expected route. I sit with her once while she adds it. The second time I am not on the call.
 
-If the next change requires me on a call, the handoff is not done.
+If the only person who can teach the tool a new note is me, I have not left.
 
-What can Northshore Clinic change after you leave, without calling you?
+Who on the customer side will add the next failing example?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

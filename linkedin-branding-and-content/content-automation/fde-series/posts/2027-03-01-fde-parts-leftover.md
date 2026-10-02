@@ -1,19 +1,19 @@
 ---
-date: 2027-07-26
+date: 2027-05-11
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: what they still open after you leave
+topic: Helios keeps the signed sheet and the empty fault
 status: scheduled
 publish: true
 image: ../../assets/2027-03-01-fde-parts-leftover-doodle.png
 ---
 
-After Helios Equipment, the thing they still open is not the architecture diagram. It is the eval file and the rule that explains AST-7.
+Helios's depot lead still has two artifacts. The signed fault sheet, which he can edit, and the eval row for E99, which must stay empty of a SKU. AST-7 to bin B-14 is how he checks that a real fault still resolves.
 
-They also keep the rollback: stop the process. Bin quantities are unchanged. And a named owner for the asset list, the signed fault-to-part sheet, and the bin count.
+No purchase order was ever created by the lookup, so there is no order history to reconcile. The bin file is still his. I am not the person techs call when a code is new. He is.
 
-The interview sentence is the customer, the constraint, what shipped, and the claim we refused: less downtime.
+The leftover is a sheet and a prohibition. Both should be there after the project channel goes quiet.
 
-What artifact does Helios Equipment still open the week after you leave?
+What prohibition has to survive you?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

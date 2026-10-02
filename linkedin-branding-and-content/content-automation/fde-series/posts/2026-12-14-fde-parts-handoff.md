@@ -1,19 +1,19 @@
 ---
-date: 2027-02-22
+date: 2027-04-15
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: they can extend the eval file
+topic: The lead adds the next fault code
 status: scheduled
 publish: true
 image: ../../assets/2026-12-14-fde-parts-handoff-doodle.png
 ---
 
-The engagement at Helios Equipment is finished when the depot lead can add a fault code to the eval file.
+Helios is done when the depot lead can add a fault code to the signed list and to the eval file without me. E42 stays the example that resolves to bin B-14. E99 stays the example that must not grow a SKU.
 
-The artifact they keep is the eval file, not a slide. AST-7 is already in it: E42 on AST-7 points at bin B-14 because the quantity is 2, and E99 returns no SKU.
+A new code from a night call is his to append, with the part he is willing to sign. The tool does not learn parts from what techs pulled. That would launder an unsigned choice into the next recommendation.
 
-If the next change requires me on a call, the handoff is not done.
+I want him to add one code while I watch, and one code the next week while I do not.
 
-What can Helios Equipment change after you leave, without calling you?
+What source of truth is the customer allowed to edit without your review?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

@@ -1,19 +1,19 @@
 ---
-date: 2026-12-14
+date: 2026-11-04
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: their file is not the sample
+topic: Their note file had a column I had treated as text
 status: scheduled
 publish: true
 image: ../../assets/2026-11-09-fde-clinic-export-doodle.png
 ---
 
-The demo file for Northshore Clinic is not their file. the overnight portal CSV will not match the sample column for column.
+Northshore's real extract did not look like my sample. Consent was "Y", "yes", and blank. Blank was not the same as no, and the nurse lead had not agreed what Y meant.
 
-I show the mapping, including anything I had to derive. A value I have not agreed with the morning nurse lead stays unscored and visible. NT-12 is only an example after they recognize it.
+I stopped the demo, showed three rows, and left the blank and the Y unscored. Only an explicit yes copied a sentence into the route. NT-12 stayed blocked. I did not map Y to yes in the hallway to save the meeting.
 
-Guessing a result so the demo looks finished is worse than showing the gap.
+A derived mapping belongs on the slide. A silent mapping belongs in the incident review.
 
-What do you put on screen when the overnight portal CSV does not match the sample?
+What value in the real file have you never shown the person who owns the meaning?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

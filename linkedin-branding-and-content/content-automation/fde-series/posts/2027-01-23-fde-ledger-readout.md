@@ -1,19 +1,19 @@
 ---
-date: 2027-05-13
+date: 2027-03-10
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: the note a sponsor can forward
+topic: Show the controller one total and one exception
 status: scheduled
 publish: true
 image: ../../assets/2027-01-23-fde-ledger-readout-doodle.png
 ---
 
-The readout for Brightpath is written to the sponsor, not to other engineers.
+Brightpath's readout to the controller has two numbers she can check. Matched total 1500 cents, from evt-1, counted once. One amount exception, pay-4, 8000 against 7900, not resolved.
 
-It includes their baseline, a manual paste of webhooks next to the settlement CSV. It includes one row, evt-1: evt-1 matches 1500 cents once, the replay is ignored, and pay-4's 100-cent gap stays an exception. It includes the refusal: we are not claiming recovered revenue for the month.
+It says the tool does not post. It says a replay did not change the total. It does not say we recovered cash. The ask is whether processor_reference, after the prefix strip, is the key she will stand behind.
 
-It ends with what we need from them, not with a feature list.
+A readout that needs my narration is a demo. This one is a note.
 
-What sentence in the Brightpath readout should the sponsor be able to forward?
+What two numbers would your buyer recompute before they trust the rest of the page?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

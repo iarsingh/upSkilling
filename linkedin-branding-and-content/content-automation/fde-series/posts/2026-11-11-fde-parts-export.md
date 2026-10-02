@@ -1,19 +1,19 @@
 ---
-date: 2026-12-18
+date: 2027-02-12
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: their file is not the sample
+topic: The fault code came with a revision letter
 status: scheduled
 publish: true
 image: ../../assets/2026-11-11-fde-parts-export-doodle.png
 ---
 
-The demo file for Helios Equipment is not their file. the asset list, the signed fault-to-part sheet, and the bin count will not match the sample column for column.
+Helios sent E42 and E42A in the same night's calls. My signed sheet only had E42. Treating A as a typo would have issued BRG-19 for a fault the lead had not approved.
 
-I show the mapping, including anything I had to derive. A value I have not agreed with the depot lead stays unscored and visible. AST-7 is only an example after they recognize it.
+E42 on AST-7 still points at bin B-14. E42A stays escalate, with no SKU, until the lead adds it to the sheet. The tech hears "not on the signed list" instead of a confident wrong part.
 
-Guessing a result so the demo looks finished is worse than showing the gap.
+Unknown is a result I can defend at the parts window. A guessed suffix is not.
 
-What do you put on screen when the asset list, the signed fault-to-part sheet, and the bin count does not match the sample?
+What suffix or status have you been tempted to ignore so the match rate stays high?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

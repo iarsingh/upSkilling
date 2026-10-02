@@ -1,19 +1,19 @@
 ---
-date: 2027-01-31
+date: 2027-04-11
 slot: 08:00
 series: FDE Interview Series
-topic: Cedar Grid: write the stop before the demo
+topic: Stop if the tool can reach a customer
 status: scheduled
 publish: true
 image: ../../assets/2026-12-03-fde-outage-stop-doodle.png
 ---
 
-I write the stop condition before Cedar Grid sees a demo. Otherwise every miss becomes a debate.
+Cedar Grid's stop condition is not about rank quality. It is about a path that should not exist.
 
-We stop expanding if any path that can message a customer.
+If the process can message a customer, or write a crew assignment, the screen comes down. OUT-1 can rank first. The host should show no outbound message during that lookup. I want their network owner to watch one request before a storm, not after.
 
-A green health check does not override that. OUT-1 is the row I use when I explain it.
+A bad rank is a rollback of the desk. A text is a different incident, and it does not get a retry.
 
-What is the stop condition you would write before the Cedar Grid demo?
+What capability would you treat as fatal even when the feature is working as designed?
 
 #ForwardDeployedEngineer #Utilities #SRE #IncidentResponse #InterviewPrep

@@ -1,19 +1,19 @@
 ---
-date: 2027-04-15
+date: 2027-07-14
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: the same file run twice
+topic: Resubmitting a packet must not accept it
 status: scheduled
 publish: true
 image: ../../assets/2027-01-09-fde-vendor-replay-doodle.png
 ---
 
-Before Northline Procurement trusts the output, I run the same drop twice. V-2 is otherwise complete and still manual_review, because the bank details changed.
+Northline's analyst hit submit twice because the first click spun. V-2 was manual review both times. It did not become ready, and it did not create two review tasks that a tired approver could split.
 
-The second run must not create a second decision, a second count, or a second write. The stop condition is the word approved appears, or a sanctions row can be waved through.
+V-5 stayed blocked on both submits. There is no path where the second click is the override. I want that to be true even if the service times out and the browser retries.
 
-A tool that only looks right on a fresh file is not ready for their operator.
+The double click is the test. A state machine that treats the second submit as "they insisted" is an approval you did not design on purpose.
 
-What must stay identical when the Northline Procurement file is run twice?
+What does a retry mean in your workflow, if the user only meant to check?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

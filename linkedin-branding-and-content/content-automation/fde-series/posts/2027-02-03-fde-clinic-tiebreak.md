@@ -1,19 +1,19 @@
 ---
-date: 2027-06-04
+date: 2027-01-23
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: who breaks the tie
+topic: The medical director chooses the morning trade
 status: scheduled
 publish: true
 image: ../../assets/2027-02-03-fde-clinic-tiebreak-doodle.png
 ---
 
-the morning nurse lead and the owner of the constraint can both be right. note text does not leave the clinic, and missing consent means the body is not copied.
+Northshore's nurse wanted every chest-pain word to page her. Privacy wanted no sentence stored unless consent was explicit. A compromise that paged her and kept the sentence would have made both rules false.
 
-I do not negotiate that on the floor at 7am. The sponsor who owns the outcome decides, and the sentence goes in writing the same day.
+The medical director chose. Consented notes can cite the triggering sentence. Everything else stays an id. NT-11 cites. NT-12 does not. I did not average the two policies into a "store it briefly."
 
-Until that sentence exists, I do not expand past NT-12.
+Briefly is how a sentence becomes a record. Someone with clinical and organizational authority had to say no to briefly.
 
-Who is allowed to decide when the morning nurse lead and the constraint owner disagree?
+Who can choose when safety and privacy both sound like the careful option?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

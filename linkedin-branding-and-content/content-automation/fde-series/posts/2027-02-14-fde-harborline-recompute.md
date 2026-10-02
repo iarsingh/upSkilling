@@ -1,19 +1,19 @@
 ---
-date: 2027-06-26
+date: 2026-12-08
 slot: 08:00
 series: FDE Interview Series
-topic: Harborline: they can recompute the answer
+topic: The night lead can add Harborline's score by hand
 status: scheduled
 publish: true
 image: ../../assets/2027-02-14-fde-harborline-recompute-doodle.png
 ---
 
-the night dispatch lead has to defend the answer at 2am. A hidden rank fails that test even when it is often right.
+Harborline's night lead will be asked why SHP-1042 was high. He should not need me on the phone.
 
-At Harborline Freight, SHP-1042 is explainable: score 76 from an 8-hour SLA miss, an open P1, and a temperature event. The source is the TMS export, the ticket queue, and a printed SOP.
+Eight hours past a 6-hour SLA is 26 points. The open P1 is 30. The temperature event is 20. The total is 76, so the band is high, and the SOP is cold-chain because it is a reefer with a temp event. Medical would have beaten that, and this shipment is not medical.
 
-If they cannot recompute it, it is not ready for the desk.
+If he cannot do that arithmetic, the points are a costume. I do not ship a score he cannot rebuild on a pad.
 
-Can the night dispatch lead recompute SHP-1042 without you? What do they need?
+Which number in your system can the user rebuild without the system?
 
 #ForwardDeployedEngineer #Logistics #SRE #MLOps #InterviewPrep

@@ -1,19 +1,19 @@
 ---
-date: 2027-03-20
+date: 2027-06-08
 slot: 08:00
 series: FDE Interview Series
-topic: Cedar Grid: they still use the old path
+topic: They still built the storm list on paper
 status: scheduled
 publish: true
 image: ../../assets/2026-12-27-fde-outage-oldpath-doodle.png
 ---
 
-The timer at Cedar Grid can hit the target while the storm-desk lead still goes back to the life-safety account flag and the outage list.
+Cedar Grid's ranker was up. The storm lead still wrote the first three feeders on a pad.
 
-I watch one lookup. If they are checking the same step, the screen is a second copy and they have not accepted it. If a step is missing, I add it and extend the eval.
+He was not ignoring OUT-1. He was translating the screen into the order he speaks on the radio, which is three items, not a sorted table of twenty. I had given him a list. His job was a sentence.
 
-Week two measures whether the old path stays closed. sorting open outages by customer count is no longer the goal.
+The card now has a "say this" line for the top feeder only. The pad got shorter. It did not disappear, because the radio does not accept a CSV.
 
-If the storm-desk lead still opens the old path, is the pilot a success?
+What output format matches the way they speak, not the way you store?
 
 #ForwardDeployedEngineer #Utilities #SRE #IncidentResponse #InterviewPrep

@@ -1,19 +1,19 @@
 ---
-date: 2027-06-20
+date: 2027-05-05
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: agree the metric before the build
+topic: Count signed pulls, and count orders created
 status: scheduled
 publish: true
 image: ../../assets/2027-02-11-fde-parts-metric-doodle.png
 ---
 
-I do not start the scorer at Helios Equipment until the metric is written.
+Helios can look successful by recommending a part every time. E99 would then stop being an escalate and start being a guess.
 
-Baseline: three spreadsheets and a phone call for every fault code. Target: the recommended bin matches what the lead would have pulled, and zero purchase orders are created. Judge: the depot lead. Refusal: less downtime.
+Two numbers go in the weekly note. Recommended bins the depot lead would have pulled, with AST-7 / B-14 as the example. Purchase orders the tool created, which must stay zero. He is the judge. Less downtime is refused until a later window.
 
-A demo that "answers questions" is not the engagement.
+The zero matters as much as the hits. A tool that always names a part will win the first number and fail the second.
 
-What did you agree to measure at Helios Equipment before writing the rule?
+What second number keeps the first one honest?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

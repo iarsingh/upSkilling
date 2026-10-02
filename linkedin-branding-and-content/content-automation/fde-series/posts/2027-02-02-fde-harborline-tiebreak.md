@@ -1,19 +1,19 @@
 ---
-date: 2027-06-02
+date: 2026-12-04
 slot: 08:00
 series: FDE Interview Series
-topic: Harborline: who breaks the tie
+topic: The VP picks when IT and the desk both say no
 status: scheduled
 publish: true
 image: ../../assets/2027-02-02-fde-harborline-tiebreak-doodle.png
 ---
 
-the night dispatch lead and the owner of the constraint can both be right. shipment data stays in their environment, and IT banned an external model.
+Harborline's night lead wanted the scorer on every desk tonight. IT wanted no login until medical shipments were walled off. Both were preventing a real failure.
 
-I do not negotiate that on the floor at 2am. The sponsor who owns the outcome decides, and the sentence goes in writing the same day.
+I did not split the difference into a shared password. I wrote both constraints and asked the VP of operations to choose the sequence. He did, the same day: one lookup beside the lead, no second login, medical rows stay off the grocery desk. SHP-1042 can be shown. The medical shipment cannot.
 
-Until that sentence exists, I do not expand past SHP-1042.
+A tie left open at 2am gets resolved by whoever is loudest. That is not a decision.
 
-Who is allowed to decide when the night dispatch lead and the constraint owner disagree?
+Who has to put their name on the sequence before you build either side's version?
 
 #ForwardDeployedEngineer #Logistics #SRE #MLOps #InterviewPrep

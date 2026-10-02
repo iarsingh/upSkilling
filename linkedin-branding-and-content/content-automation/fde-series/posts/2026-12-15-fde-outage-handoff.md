@@ -1,19 +1,19 @@
 ---
-date: 2027-02-24
+date: 2027-06-04
 slot: 08:00
 series: FDE Interview Series
-topic: Cedar Grid: they can extend the eval file
+topic: The storm lead adds the next outage he reversed
 status: scheduled
 publish: true
 image: ../../assets/2026-12-15-fde-outage-handoff-doodle.png
 ---
 
-The engagement at Cedar Grid is finished when the storm lead can add an outage id to the eval file.
+Cedar Grid's handoff artifact is the eval file of rankings the lead reversed. OUT-1 before OUT-2 is the starting case. The next reversal, a stale life-safety flag, becomes his row.
 
-The artifact they keep is the eval file, not a slide. OUT-1 is already in it: OUT-1 scores 112 and ranks above OUT-2, even though OUT-2 affects 400 customers and OUT-1 affects 40.
+He can add an outage id and the order he believes. He should not need me to redeploy to do it. Their network owner already watched one lookup for egress. That person owns the host after I leave. I do not own the next storm.
 
-If the next change requires me on a call, the handoff is not done.
+If the eval file is only something I edit, it is my notebook, not their control.
 
-What can Cedar Grid change after you leave, without calling you?
+Which reversed decision will they be able to pin without you?
 
 #ForwardDeployedEngineer #Utilities #SRE #IncidentResponse #InterviewPrep

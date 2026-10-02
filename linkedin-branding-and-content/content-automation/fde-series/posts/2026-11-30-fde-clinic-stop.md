@@ -1,19 +1,19 @@
 ---
-date: 2027-01-25
+date: 2026-11-12
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: write the stop before the demo
+topic: Stop if a blocked note shows its body
 status: scheduled
 publish: true
 image: ../../assets/2026-11-30-fde-clinic-stop-doodle.png
 ---
 
-I write the stop condition before Northshore Clinic sees a demo. Otherwise every miss becomes a debate.
+Northshore's stop condition is one leak. If NT-12's sore-throat sentence appears anywhere in a blocked decision, the router comes off the nurse's desk.
 
-We stop expanding if a blocked note's body shows up in the decision.
+I do not "hotfix and continue" that morning. She goes back to the file. We find where the body was copied, add a test that fails if it happens again, and only then turn it back on. A wrong route on a consented note is a rule change. A body on a blocked note is a stop.
 
-A green health check does not override that. NT-12 is the row I use when I explain it.
+I wrote this before the demo so a useful sentence could not talk us out of it.
 
-What is the stop condition you would write before the Northshore Clinic demo?
+What single output would make you pull the tool the same day?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

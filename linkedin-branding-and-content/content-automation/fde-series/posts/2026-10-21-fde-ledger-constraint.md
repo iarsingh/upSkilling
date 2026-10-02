@@ -1,19 +1,19 @@
 ---
-date: 2026-11-06
+date: 2026-12-16
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: the sentence that kills a design
+topic: They had already been burned by a helpful script
 status: scheduled
 publish: true
 image: ../../assets/2026-10-21-fde-ledger-constraint-doodle.png
 ---
 
-I wanted a script that wrote the webhook amount over the settlement. Brightpath deleted that design with one constraint: the tool must not post to the ledger, and a mismatch is never marked settled.
+Brightpath had a script that wrote the webhook amount over the settlement when the cents disagreed. It was helpful once and wrong the next week.
 
-What shipped instead is smaller: one classification per event: matched, duplicate, pending, or amount exception.
+The controller's rule is now the design: this tool does not post to the ledger. pay-4 stays an amount exception at 8000 versus 7900. Nobody in the code path picks a winner.
 
-If the architecture survived every sentence in the room, the discovery was not finished.
+I had wanted the overwrite because it made the morning file look clean. Clean was the bug.
 
-Which sentence from Brightpath would force you to drop a script that wrote the webhook amount over the settlement?
+What helpful automation have you refused because the customer had already paid for it once?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

@@ -1,19 +1,19 @@
 ---
-date: 2027-03-18
+date: 2027-04-19
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: they still use the old path
+topic: The lead still walked to the bin to look
 status: scheduled
 publish: true
 image: ../../assets/2026-12-26-fde-parts-oldpath-doodle.png
 ---
 
-The timer at Helios Equipment can hit the target while the depot lead still goes back to the asset list, the signed fault-to-part sheet, and the bin count.
+Helios's lookup named B-14. The depot lead still walked over and looked before telling the tech to pull BRG-19.
 
-I watch one lookup. If they are checking the same step, the screen is a second copy and they have not accepted it. If a step is missing, I add it and extend the eval.
+The count on the screen was last night's file. He had issued one bearing at lunch and not booked it. The tool was not wrong about the file. The file was not the shelf. Watching him walk was the requirement I had missed: the screen has to show the file time, so he knows how stale the quantity is.
 
-Week two measures whether the old path stays closed. three spreadsheets and a phone call for every fault code is no longer the goal.
+After the timestamp was on the card, he walked when the file was old and trusted it when the file was from the last hour. Both were correct.
 
-If the depot lead still opens the old path, is the pilot a success?
+What physical check are you calling adoption failure?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

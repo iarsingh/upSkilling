@@ -1,19 +1,19 @@
 ---
-date: 2027-07-06
+date: 2027-07-26
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: they can recompute the answer
+topic: The analyst can apply Northline's order of rules
 status: scheduled
 publish: true
 image: ../../assets/2027-02-19-fde-vendor-recompute-doodle.png
 ---
 
-the vendor-setup analyst has to defend the answer at packet review. A hidden rank fails that test even when it is often right.
+Northline's analyst should reach the same decision I do, in the same order, on paper.
 
-At Northline Procurement, V-2 is explainable: V-2 is otherwise complete and still manual_review, because the bank details changed. The source is the vendor packet fields: W-9, insurance date, bank-change flag, sanctions flag.
+Sanctions yes, as on V-5, stops everything. Then a missing W-9 or an insurance date before 2 October 2026, as on V-3 and V-4, blocks the packet. Only then does a bank change, V-2, become manual review. V-1 survives all three and is still only ready for a human. V-6 fails the W-9 check before its bank change is discussed.
 
-If they cannot recompute it, it is not ready for the desk.
+The order is the product. A different order would review a bank change on a packet that should never have been opened.
 
-Can the vendor-setup analyst recompute V-2 without you? What do they need?
+Can your user say which check runs first, and why?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

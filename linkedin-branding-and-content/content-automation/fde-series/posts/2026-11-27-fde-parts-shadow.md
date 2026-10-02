@@ -1,19 +1,19 @@
 ---
-date: 2027-01-19
+date: 2027-04-09
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: shadow before the desk
+topic: The tech still calls before pulling a part
 status: scheduled
 publish: true
 image: ../../assets/2026-11-27-fde-parts-shadow-doodle.png
 ---
 
-Week one at Helios Equipment stays beside the old path. the depot lead still uses the asset list, the signed fault-to-part sheet, and the bin count.
+Helios does not send techs to a bin on the tool's word during the first week. The tech still calls the depot lead. The screen is on the lead's desk, and he says the bin out loud.
 
-We time real lookups against three spreadsheets and a phone call for every fault code. The target is the recommended bin matches what the lead would have pulled, and zero purchase orders are created.
+We score whether he would have said B-14 for AST-7 / E42, and whether any call ended with a purchase order the tool created. The second one has to stay zero. E99 has to stay "I don't have a part for that."
 
-The whole floor does not switch because a demo looked fast at the night shift.
+When the lead stops repeating the screen and starts correcting it, the shadow is doing its job.
 
-What still uses the old path during the first week at Helios Equipment?
+Who still has to say the answer out loud before you let the screen say it alone?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

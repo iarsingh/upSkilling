@@ -1,5 +1,5 @@
 ---
-date: 2026-10-21
+date: 2026-10-17
 slot: 08:00
 series: FDE Interview Series
 topic: The export is missing a column

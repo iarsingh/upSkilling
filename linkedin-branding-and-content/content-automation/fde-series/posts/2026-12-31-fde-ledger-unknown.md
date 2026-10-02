@@ -1,19 +1,19 @@
 ---
-date: 2027-03-28
+date: 2027-03-02
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: unknown means unscored
+topic: A new currency does not convert itself
 status: scheduled
 publish: true
 image: ../../assets/2026-12-31-fde-ledger-unknown-doodle.png
 ---
 
-A value that was not in the sample will show up at Brightpath. I do not invent a result for it so the demo stays smooth.
+Brightpath dropped a EUR webhook into a file that had only been USD. I can multiply by a rate. I do not know whose rate, or whose books would be wrong if I did.
 
-The row stays visible and unscored until the payments ops analyst says what it means. Then it becomes an eval row next to evt-1.
+The EUR event stayed pending, with the currency shown. evt-1 still matched 1500 USD cents once. I did not convert EUR so the matched total would include it. The analyst has a treasury rate. The tool does not.
 
-Unknown is an answer. Guessed is an incident.
+An unscored currency is a question for her. An invented rate is a journal entry I am not allowed to make.
 
-What do you show for a value the payments ops analyst has not defined?
+What unit conversion are you one multiply away from doing without an owner?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

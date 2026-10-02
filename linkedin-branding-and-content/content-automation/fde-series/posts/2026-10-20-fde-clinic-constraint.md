@@ -1,19 +1,19 @@
 ---
-date: 2026-11-04
+date: 2026-10-27
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: the sentence that kills a design
+topic: The summary model died in the first meeting
 status: scheduled
 publish: true
 image: ../../assets/2026-10-20-fde-clinic-constraint-doodle.png
 ---
 
-I wanted a summary model over every overnight note. Northshore Clinic deleted that design with one constraint: note text does not leave the clinic, and missing consent means the body is not copied.
+I wanted a model that summarized every overnight note for Northshore. Their privacy officer killed it in one sentence: note text does not leave the clinic, and a missing consent means the body is not copied.
 
-What shipped instead is smaller: a route: blocked, urgent callback, or the morning queue.
+What shipped is a route. Blocked, urgent callback, or the morning queue. NT-11 cites the chest-tightness sentence because consent was yes. NT-12 does not repeat the sore throat.
 
-If the architecture survived every sentence in the room, the discovery was not finished.
+The design I liked is in the discovery note as rejected, so the next person does not revive it.
 
-Which sentence from Northshore Clinic would force you to drop a summary model over every overnight note?
+Which customer sentence have you written down so it cannot be relitigated later?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

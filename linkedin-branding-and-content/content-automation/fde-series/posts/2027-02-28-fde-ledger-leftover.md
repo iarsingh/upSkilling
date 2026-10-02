@@ -1,19 +1,19 @@
 ---
-date: 2027-07-24
+date: 2027-03-22
 slot: 08:00
 series: FDE Interview Series
-topic: Brightpath: what they still open after you leave
+topic: Brightpath keeps the 1500-cent replay
 status: scheduled
 publish: true
 image: ../../assets/2027-02-28-fde-ledger-leftover-doodle.png
 ---
 
-After Brightpath, the thing they still open is not the architecture diagram. It is the eval file and the rule that explains evt-1.
+Brightpath's analyst still reruns last month's file when a new matcher change shows up. The total has to stay 1500 cents, and pay-4 has to stay an exception. That file outlived my involvement, which is what I wanted.
 
-They also keep the rollback: delete the output file. The ledger was never written. And a named owner for the webhook export and the settlement file.
+The ledger does not contain my matches. Her close notes do. The controller can still point at the readout and say we did not claim recovered cash.
 
-The interview sentence is the customer, the constraint, what shipped, and the claim we refused: recovered revenue for the month.
+I am not in the morning channel. The output format is. That is the handoff I can defend.
 
-What artifact does Brightpath still open the week after you leave?
+What fixture will they rerun after you are gone?
 
 #ForwardDeployedEngineer #FinOps #DataEngineering #SRE #InterviewPrep

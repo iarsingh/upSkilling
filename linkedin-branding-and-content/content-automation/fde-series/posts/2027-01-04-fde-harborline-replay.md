@@ -1,19 +1,19 @@
 ---
-date: 2027-04-05
+date: 2026-11-24
 slot: 08:00
 series: FDE Interview Series
-topic: Harborline: the same file run twice
+topic: The same shipment file must score 76 twice
 status: scheduled
 publish: true
 image: ../../assets/2027-01-04-fde-harborline-replay-doodle.png
 ---
 
-Before Harborline Freight trusts the output, I run the same drop twice. score 76 from an 8-hour SLA miss, an open P1, and a temperature event.
+Before Harborline's night lead trusts the scorer, I run the drop twice. SHP-1042 is 76 the first time and 76 the second time. The cold-chain SOP does not change. No second audit event appears for the same file.
 
-The second run must not create a second decision, a second count, or a second write. The stop condition is more than one overturned band in ten, or any call leaving the VPC.
+If the second run drifts, the desk does not get the tool. A score that depends on clock skew or on a hidden counter is not a score he can recompute at 2am.
 
-A tool that only looks right on a fresh file is not ready for their operator.
+I would rather show him two identical printouts than a live demo that only runs once.
 
-What must stay identical when the Harborline Freight file is run twice?
+What must be identical on a replay before you call the result stable?
 
 #ForwardDeployedEngineer #Logistics #SRE #MLOps #InterviewPrep

@@ -1,19 +1,19 @@
 ---
-date: 2027-02-06
+date: 2027-01-03
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: rollback that needs no migration
+topic: Stopping the router leaves the chart alone
 status: scheduled
 publish: true
 image: ../../assets/2026-12-06-fde-clinic-rollback-doodle.png
 ---
 
-Rollback at Northshore Clinic is stop the process. Nothing has been written to the chart.
+Northshore's rollback is stopping the process. The nurse still has the overnight file. The chart does not contain routes we have to amend, because we never wrote them.
 
-That sentence is a design constraint, not an afterthought. If undoing the pilot needs a migration, the pilot started too wide.
+NT-12's blocked decision dies with the process. It was never a clinical note. If I had written "urgent" onto a chart for NT-11, rollback would be a correction another nurse might miss.
 
-the morning nurse lead should be able to hear the rollback in one breath at 7am.
+I test the rollback by stopping it during shadow week, on purpose, while she is in the room.
 
-How does the morning nurse lead undo this without you?
+When did you last prove the undo, instead of describing it?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

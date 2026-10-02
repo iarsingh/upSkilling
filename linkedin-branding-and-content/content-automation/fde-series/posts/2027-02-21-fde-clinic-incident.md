@@ -1,19 +1,19 @@
 ---
-date: 2027-07-10
+date: 2027-01-29
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: a wrong answer during the pilot
+topic: One echoed sentence ends the Northshore morning
 status: scheduled
 publish: true
 image: ../../assets/2027-02-21-fde-clinic-incident-doodle.png
 ---
 
-A wrong answer on NT-12 during the Northshore Clinic pilot is not a hotfix in production theater.
+A log line at Northshore included NT-12's sore throat. The route on screen was still blocked. The leak was the log, and the leak was enough.
 
-The desk goes back to the overnight portal CSV. We pull the row, change the rule with the morning nurse lead, and add it to the eval file. We do not resume while a blocked note's body shows up in the decision.
+I turned the router off before the day shift. She used the file. We cut the body out of the logger, added a test that fails if a blocked note's text appears, and replayed the file. Then she looked at the log herself. It came back the next morning, not the same morning.
 
-The old path still works because we did not write the chart.
+A correct route with a dirty log is still an incident. I did not argue that the nurse had not seen it yet.
 
-A wrong answer lands on NT-12. What do you stop first?
+What side channel would you forget to turn off?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

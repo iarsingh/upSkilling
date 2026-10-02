@@ -1,19 +1,19 @@
 ---
-date: 2027-05-07
+date: 2027-06-16
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: prove nothing leaves
+topic: Do not send the vendor name to a sanctions API
 status: scheduled
 publish: true
 image: ../../assets/2027-01-20-fde-vendor-egress-doodle.png
 ---
 
-the software must not contain an approve action, and a sanctions flag has no override. A local model is not the clever workaround if the vendor-setup analyst still cannot recompute it.
+Northline's sanctions flag is already on the packet. I do not need to call an external screening API with the vendor's legal name to "be sure." That call is a new disclosure, and it is not this engagement.
 
-The service reads the vendor packet fields: W-9, insurance date, bank-change flag, sanctions flag from disk. There is no model client in the process. Their owner watches one lookup of V-2 and confirms nothing leaves.
+V-5 is blocked because their flag is yes. The tool does not re-screen, and it does not have an API key. If they want a fresh screen, that is a different owner and a different contract. I will not bury it in the packet check because the SDK was easy.
 
-A quiet log is not that proof. A quiet log can hide a request.
+A flag you already have is not a reason to export the identity behind it.
 
-How do you prove the Northline Procurement lookup did not leave their network?
+What check would you outsource that the customer has already performed?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

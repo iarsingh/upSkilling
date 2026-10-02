@@ -1,19 +1,19 @@
 ---
-date: 2027-01-03
+date: 2026-11-08
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: do not write back yet
+topic: A route in the chart is no longer a shadow
 status: scheduled
 publish: true
 image: ../../assets/2026-11-19-fde-clinic-writeback-doodle.png
 ---
 
-the morning nurse lead will ask to write the result into the chart so the next shift sees it.
+The Northshore lead asked to write the route onto the note in the chart so the day shift would see it. Reasonable, and it ends easy rollback.
 
-That is the moment rollback stops being easy. stop the process. Nothing has been written to the chart is only true while the tool is read-only.
+While the tool is read-only, stopping it leaves the chart untouched and the nurse still has the file. The moment NT-11's "urgent callback" is a chart field, a wrong route is something the next nurse will act on, and undoing it is an amendment.
 
-Writeback waits until every note without consent stays blocked, and the lead agrees on at least 9 of 10 routes, and a named person is allowed to overwrite that field.
+Writeback waits until she agrees on 9 of 10 routes, and a named person is allowed to change that field. Until then the decision lives beside the chart, not in it.
 
-What has to be true before you write into the chart?
+What write would turn your rollback into a data repair?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

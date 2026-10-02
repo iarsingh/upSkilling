@@ -1,19 +1,19 @@
 ---
-date: 2027-05-21
+date: 2026-12-02
 slot: 08:00
 series: FDE Interview Series
-topic: Harborline: do not hide the gap in the demo
+topic: Show Harborline the held status, not a perfect truck
 status: scheduled
 publish: true
 image: ../../assets/2027-01-27-fde-harborline-demo-doodle.png
 ---
 
-I would rather show the night dispatch lead one ugly row from their file than a perfect walkthrough of my sample.
+I can demo SHP-1042 cleanly. Score 76, cold-chain steps, citations. That demo teaches Harborline that my sample works.
 
-At Harborline Freight the honest demo is SHP-1042: score 76 from an 8-hour SLA miss, an open P1, and a temperature event. If a column was derived, I say the formula. If a value is unknown, I leave it unscored on screen.
+The demo I owe them uses a row whose status is held. No band. The column I had called hours-since-checkpoint is a formula, and the formula is on the slide. The lead decides what held means in the room. I do not fill it so the screen looks finished.
 
-Theater at 2am costs the second meeting.
+A perfect truck is theater. An unscored row is the start of the real engagement.
 
-Which gap would you rather show the night dispatch lead than hide?
+Which row in the demo makes you look less prepared and more trustworthy?
 
 #ForwardDeployedEngineer #Logistics #SRE #MLOps #InterviewPrep

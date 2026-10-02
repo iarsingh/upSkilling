@@ -1,19 +1,17 @@
 ---
-date: 2027-05-27
+date: 2027-05-01
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: do not hide the gap in the demo
+topic: Demo the fault with no part number
 status: scheduled
 publish: true
 image: ../../assets/2027-01-30-fde-parts-demo-doodle.png
 ---
 
-I would rather show the depot lead one ugly row from their file than a perfect walkthrough of my sample.
+Helios will enjoy seeing AST-7 resolve to bin B-14. I open E99 first. No SKU. Escalate. Then the stockout, E17, zero quantity, no purchase order. B-14 is the third screen, so they have already seen what the tool will not do.
 
-At Helios Equipment the honest demo is AST-7: E42 on AST-7 points at bin B-14 because the quantity is 2, and E99 returns no SKU. If a column was derived, I say the formula. If a value is unknown, I leave it unscored on screen.
+The lead tried to add a part for E99 during the demo. I wrote it on paper for the signed sheet. I did not type it into the tool while people watched. A demo that learns from the audience is a demo that skips the signature.
 
-Theater at the night shift costs the second meeting.
-
-Which gap would you rather show the depot lead than hide?
+What will you stop the room from configuring live?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

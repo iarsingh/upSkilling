@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+if (!process.argv.includes("--force")) {
+  console.error("This rebuilds the FDE posts from templates and would overwrite the edited copy. Pass --force only if you mean that.");
+  process.exit(1);
+}
 const fs = require("fs");
 const path = require("path");
 const { createImage } = require("../src/image");

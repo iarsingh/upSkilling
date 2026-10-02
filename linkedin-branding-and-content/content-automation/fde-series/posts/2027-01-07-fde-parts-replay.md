@@ -1,19 +1,19 @@
 ---
-date: 2027-04-11
+date: 2027-04-23
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: the same file run twice
+topic: Refreshing the lookup must not order twice
 status: scheduled
 publish: true
 image: ../../assets/2027-01-07-fde-parts-replay-doodle.png
 ---
 
-Before Helios Equipment trusts the output, I run the same drop twice. E42 on AST-7 points at bin B-14 because the quantity is 2, and E99 returns no SKU.
+A Helios tech hit refresh because the page looked stuck. If refresh cut a purchase order, he would have ordered the bearing twice. Refresh does not order. The first version cannot order at all.
 
-The second run must not create a second decision, a second count, or a second write. The stop condition is any SKU appears for a fault that is not on the signed list.
+AST-7 / E42 still says bin B-14, quantity 2, both times. The quantity does not drop on refresh, because we do not decrement. E99 still has no SKU. I made him refresh it while I watched, so the fear had a demo.
 
-A tool that only looks right on a fresh file is not ready for their operator.
+The dangerous click is the one a person hits when they are unsure. That click has to be safe.
 
-What must stay identical when the Helios Equipment file is run twice?
+What does your user do when the screen hesitates, and what would that do twice?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

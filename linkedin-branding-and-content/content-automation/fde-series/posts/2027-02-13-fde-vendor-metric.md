@@ -1,19 +1,19 @@
 ---
-date: 2027-06-24
+date: 2027-07-24
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: agree the metric before the build
+topic: Count bank changes that were not self-approved
 status: scheduled
 publish: true
 image: ../../assets/2027-02-13-fde-vendor-metric-doodle.png
 ---
 
-I do not start the scorer at Northline Procurement until the metric is written.
+Northline's fast metric would have been vendors onboarded. That number goes up if V-2 is accepted by the person who edited the bank details.
 
-Baseline: packets in a shared inbox, with one person able to accept a bank change. Target: every bank-change row is manual_review or blocked, and none are accepted by the tool. Judge: the vendor-setup analyst. Refusal: a fraud number.
+The metric we kept: every bank-change row is manual review or blocked, and none are accepted by the tool. V-5 never enters the numerator as a success. The analyst and counsel are the judges. Fraud found is refused.
 
-A demo that "answers questions" is not the engagement.
+Onboarded vendors is their ERP's metric, after a human accepts. It is not this tool's score.
 
-What did you agree to measure at Northline Procurement before writing the rule?
+What growth metric gets better if a control is skipped?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

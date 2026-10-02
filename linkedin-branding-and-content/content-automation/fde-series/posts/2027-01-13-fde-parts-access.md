@@ -1,19 +1,19 @@
 ---
-date: 2027-04-23
+date: 2027-04-25
 slot: 08:00
 series: FDE Interview Series
-topic: Helios: the second login waits
+topic: Techs see the bin. They do not edit the signed list.
 status: scheduled
 publish: true
 image: ../../assets/2027-01-13-fde-parts-access-doodle.png
 ---
 
-The first session at Helios Equipment is me beside the depot lead, read-only, on rows they are already allowed to see.
+A Helios tech asked for edit rights so he could add the part he actually pulled when the sheet was wrong. That edit is how an unsigned part becomes tomorrow's recommendation.
 
-A shared login for the rest of the desk waits until the depot cannot call a vendor API, and the tool cannot create a purchase order. AST-7 is the row I use to explain what must not leak to the wrong person.
+He can see B-14 for AST-7 / E42. He cannot change the fault sheet. The depot lead can. E99 stays empty until the lead signs a part. I would rather he call than silently teach the tool.
 
-One extra login at the night shift is the incident that ends the pilot.
+The person who feels the friction is not always the person who should remove it.
 
-What is the second person at Helios Equipment not allowed to see yet?
+Who wants write access because the approval feels slow?
 
 #ForwardDeployedEngineer #FieldService #SupplyChain #SRE #InterviewPrep

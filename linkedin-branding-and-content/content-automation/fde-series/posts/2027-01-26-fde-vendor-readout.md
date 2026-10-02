@@ -1,19 +1,19 @@
 ---
-date: 2027-05-19
+date: 2027-07-18
 slot: 08:00
 series: FDE Interview Series
-topic: Northline: the note a sponsor can forward
+topic: Show finance the packet you refused to accept
 status: scheduled
 publish: true
 image: ../../assets/2027-01-26-fde-vendor-readout-doodle.png
 ---
 
-The readout for Northline Procurement is written to the sponsor, not to other engineers.
+Northline's readout is for the CFO and for counsel, so it cannot say "approved" by accident.
 
-It includes their baseline, packets in a shared inbox, with one person able to accept a bank change. It includes one row, V-2: V-2 is otherwise complete and still manual_review, because the bank details changed. It includes the refusal: we are not claiming a fraud number.
+V-2 is complete except the bank details changed, so a second person still has to review it. V-5 is a sanctions flag and cannot be overridden. V-4's insurance expired on 1 January 2025, measured on 2 October 2026. V-1 is ready for a human and is still not accepted. We are not claiming fraud found.
 
-It ends with what we need from them, not with a feature list.
+The ask is the name of the second reviewer, and a confirmation that this tool will not see the account number.
 
-What sentence in the Northline Procurement readout should the sponsor be able to forward?
+What decision do you want both finance and legal to read the same way?
 
 #ForwardDeployedEngineer #Procurement #Security #SRE #InterviewPrep

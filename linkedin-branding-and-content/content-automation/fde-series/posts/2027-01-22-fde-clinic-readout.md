@@ -1,19 +1,19 @@
 ---
-date: 2027-05-11
+date: 2027-01-19
 slot: 08:00
 series: FDE Interview Series
-topic: Northshore: the note a sponsor can forward
+topic: Tell the clinic manager what you will not claim
 status: scheduled
 publish: true
 image: ../../assets/2027-01-22-fde-clinic-readout-doodle.png
 ---
 
-The readout for Northshore Clinic is written to the sponsor, not to other engineers.
+Northshore's readout goes to the clinic manager. It says the nurse lead still reads consented notes. It says NT-12 is blocked and the body is not in the tool. It says NT-11 cites one sentence and asks for a callback. It says we are not claiming fewer adverse events.
 
-It includes their baseline, overnight notes read in arrival order, including notes with no consent. It includes one row, NT-12: NT-12 stays blocked because consent is not yes, and the note body is not copied. It includes the refusal: we are not claiming fewer adverse events.
+The ask is a yes on what "verbal" consent means, and a name for who may see urgent routes. The ask is not a budget for a model.
 
-It ends with what we need from them, not with a feature list.
+If the manager forwards it, the privacy officer should not be surprised by a sentence. I write it as if she will.
 
-What sentence in the Northshore Clinic readout should the sponsor be able to forward?
+Who, besides your user, will read the note, and what must they not misunderstand?
 
 #ForwardDeployedEngineer #Privacy #Healthcare #SRE #InterviewPrep

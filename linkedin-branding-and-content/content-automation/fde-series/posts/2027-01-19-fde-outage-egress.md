@@ -1,19 +1,19 @@
 ---
-date: 2027-05-05
+date: 2027-04-27
 slot: 08:00
 series: FDE Interview Series
-topic: Cedar Grid: prove nothing leaves
+topic: Watch one outage lookup leave nothing
 status: scheduled
 publish: true
 image: ../../assets/2027-01-19-fde-outage-egress-doodle.png
 ---
 
-the screen does not text customers and does not assign a crew. A local model is not the clever workaround if the storm-desk lead still cannot recompute it.
+Cedar Grid's fear was not the ranking math. It was a library that phones home, or a map tile call that leaks feeder locations.
 
-The service reads the life-safety account flag and the outage list from disk. There is no model client in the process. Their owner watches one lookup of OUT-1 and confirms nothing leaves.
+The ranker reads the outage file and the life-safety flag from disk. OUT-1 can be first without a tile. I sat with their network owner and loaded that outage once. No unexpected destination. The check is part of the rollout, not a sentence in the security doc.
 
-A quiet log is not that proof. A quiet log can hide a request.
+If I cannot name the person who watched, I do not call egress "done."
 
-How do you prove the Cedar Grid lookup did not leave their network?
+Which single request will you perform while someone from their network team watches?
 
 #ForwardDeployedEngineer #Utilities #SRE #IncidentResponse #InterviewPrep
