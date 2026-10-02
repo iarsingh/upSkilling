@@ -22,6 +22,8 @@ inventing experience. Read [the content policy](docs/CONTENT_POLICY.md).
 
 ## Pull requests
 
+`main` is protected. Open a pull request for every change. The `verify` check must pass, and the branch must be current with `main` before merge. Direct pushes, force-pushes, and deletion of `main` are blocked.
+
 Keep changes focused, explain the resulting behavior, and include relevant verification.
 Add tests for behavior changes. Never commit credentials, résumés, private profiles,
 logs, databases or confidential interview material. Use synthetic test data.

@@ -1,0 +1,242 @@
+[
+  {
+    "text": "PostgreSQL connection pool exhausted database connections timing out",
+    "category": "database"
+  },
+  {
+    "text": "SQL queries are slow with database lock contention and long transactions",
+    "category": "database"
+  },
+  {
+    "text": "Database replication lag increasing on the PostgreSQL read replica",
+    "category": "database"
+  },
+  {
+    "text": "Postgres deadlock detected during concurrent database updates",
+    "category": "database"
+  },
+  {
+    "text": "Database disk full WAL storage usage reaching capacity",
+    "category": "database"
+  },
+  {
+    "text": "Too many connections to the database pool and connection refused",
+    "category": "database"
+  },
+  {
+    "text": "Query execution latency increased after missing database index",
+    "category": "database"
+  },
+  {
+    "text": "PostgreSQL database transactions waiting on exclusive table locks",
+    "category": "database"
+  },
+  {
+    "text": "Database primary unavailable and replica health check failed",
+    "category": "database"
+  },
+  {
+    "text": "Connection pool saturation causes SQL request timeout",
+    "category": "database"
+  },
+  {
+    "text": "Postgres database CPU high due to expensive sequential scans",
+    "category": "database"
+  },
+  {
+    "text": "Database vacuum backlog and bloated tables slow queries",
+    "category": "database"
+  },
+  {
+    "text": "Kubernetes pod CrashLoopBackOff after deployment restart",
+    "category": "kubernetes"
+  },
+  {
+    "text": "Container OOMKilled exceeding memory limits in Kubernetes pods",
+    "category": "kubernetes"
+  },
+  {
+    "text": "Kubernetes deployment pods pending due to insufficient node capacity",
+    "category": "kubernetes"
+  },
+  {
+    "text": "ImagePullBackOff container image cannot be pulled from registry",
+    "category": "kubernetes"
+  },
+  {
+    "text": "Kubernetes readiness probe failed and pod is not ready",
+    "category": "kubernetes"
+  },
+  {
+    "text": "Node NotReady Kubernetes kubelet stopped reporting status",
+    "category": "kubernetes"
+  },
+  {
+    "text": "Pod evicted due to node memory pressure and resource requests",
+    "category": "kubernetes"
+  },
+  {
+    "text": "Kubernetes rollout stalled because deployment replicas are unavailable",
+    "category": "kubernetes"
+  },
+  {
+    "text": "Container startup probe failing and pod keeps restarting",
+    "category": "kubernetes"
+  },
+  {
+    "text": "Kubernetes scheduler cannot place pending pods on nodes",
+    "category": "kubernetes"
+  },
+  {
+    "text": "Pod volume mount failure persistent volume claim pending",
+    "category": "kubernetes"
+  },
+  {
+    "text": "Kubernetes container exits with error after configuration change",
+    "category": "kubernetes"
+  },
+  {
+    "text": "DNS resolution failed for upstream service hostname",
+    "category": "network"
+  },
+  {
+    "text": "TLS certificate expired causing HTTPS handshake failures",
+    "category": "network"
+  },
+  {
+    "text": "Network packet loss between services and connection reset",
+    "category": "network"
+  },
+  {
+    "text": "Load balancer health checks failing backend unreachable",
+    "category": "network"
+  },
+  {
+    "text": "Firewall rule blocks network traffic to upstream service",
+    "category": "network"
+  },
+  {
+    "text": "DNS lookup timeout and service hostname cannot resolve",
+    "category": "network"
+  },
+  {
+    "text": "TLS handshake rejected because certificate chain invalid",
+    "category": "network"
+  },
+  {
+    "text": "Network routing issue causes intermittent connection timeout",
+    "category": "network"
+  },
+  {
+    "text": "Ingress load balancer returns gateway timeout on upstream connections",
+    "category": "network"
+  },
+  {
+    "text": "Network latency elevated and packets dropped across subnet",
+    "category": "network"
+  },
+  {
+    "text": "Connection refused after firewall network policy update",
+    "category": "network"
+  },
+  {
+    "text": "TLS certificate hostname mismatch and HTTPS clients fail",
+    "category": "network"
+  },
+  {
+    "text": "Application API returns HTTP 500 after new code release",
+    "category": "application"
+  },
+  {
+    "text": "Unhandled exception in checkout application request handler",
+    "category": "application"
+  },
+  {
+    "text": "Python traceback TypeError causes application server errors",
+    "category": "application"
+  },
+  {
+    "text": "Application null pointer exception during payment processing",
+    "category": "application"
+  },
+  {
+    "text": "New application release introduced a validation regression",
+    "category": "application"
+  },
+  {
+    "text": "Application worker raises an exception while processing requests",
+    "category": "application"
+  },
+  {
+    "text": "API error rate increased after application deployment code change",
+    "category": "application"
+  },
+  {
+    "text": "Checkout application fails with stack trace and internal server error",
+    "category": "application"
+  },
+  {
+    "text": "Application JSON serialization exception breaks API response",
+    "category": "application"
+  },
+  {
+    "text": "Application business logic returns incorrect order totals",
+    "category": "application"
+  },
+  {
+    "text": "Application request handler raises KeyError for missing field",
+    "category": "application"
+  },
+  {
+    "text": "Code regression causes application API HTTP 500 response",
+    "category": "application"
+  },
+  {
+    "text": "Unauthorized login attempts and brute force authentication alerts",
+    "category": "security"
+  },
+  {
+    "text": "Suspicious access token used from unknown IP address",
+    "category": "security"
+  },
+  {
+    "text": "IAM permission denied and unauthorized service account access",
+    "category": "security"
+  },
+  {
+    "text": "Leaked API credential detected in application logs",
+    "category": "security"
+  },
+  {
+    "text": "Security alert for unusual privilege escalation on account",
+    "category": "security"
+  },
+  {
+    "text": "Authentication failures spike with suspicious login attempts",
+    "category": "security"
+  },
+  {
+    "text": "Unexpected IAM role grant to an unknown principal",
+    "category": "security"
+  },
+  {
+    "text": "Secret token exposure reported by credential scanner",
+    "category": "security"
+  },
+  {
+    "text": "Unauthorized access to protected endpoint with stolen token",
+    "category": "security"
+  },
+  {
+    "text": "Security audit shows anomalous account activity and login locations",
+    "category": "security"
+  },
+  {
+    "text": "Permission denied after IAM service account role change",
+    "category": "security"
+  },
+  {
+    "text": "Credential compromise suspected after unusual authentication events",
+    "category": "security"
+  }
+]

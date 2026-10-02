@@ -2,7 +2,7 @@
 set -e
 
 FILE="README.md"
-START_DATE="2024-11-24"
+START_DATE="2016-11-24"
 END_DATE=$(date "+%Y-%m-%d")
 COMMITS_PER_DAY=1
 

@@ -4616,3 +4616,21 @@ button.is-busy::after {
   .prep-domain-heading > strong { display: none; }
   .prep-section-heading { flex-direction: column; }
 }
+
+/* Persistent accuracy guidance uses the existing light/dark theme tokens. */
+.accuracy-notice {
+  grid-column: 1 / -1;
+  margin: 16px 0;
+  padding: 14px 18px;
+  border: 1px solid var(--line-strong);
+  border-left: 4px solid var(--brand);
+  border-radius: 10px;
+  background: var(--panel-soft);
+  color: var(--text-dim);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.accuracy-notice strong { color: var(--ink); }
+.accuracy-notice p { margin: 6px 0; }
+.accuracy-notice a { color: var(--hint-ink); text-decoration: underline; }
+.accuracy-feedback-note { color: var(--text-subtle); font-size: 0.875rem; line-height: 1.6; }

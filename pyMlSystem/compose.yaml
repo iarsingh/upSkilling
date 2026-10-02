@@ -1,0 +1,84 @@
+name: incident-ops
+services:
+  postgres:
+    image: pgvector/pgvector:pg18
+    environment:
+      POSTGRES_USER: incident
+      POSTGRES_PASSWORD: local-development-only
+      POSTGRES_DB: incident_ops
+    ports: ["127.0.0.1:5432:5432"]
+    volumes:
+      - postgres:/var/lib/postgresql
+      - ./deploy/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U incident -d incident_ops"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+  migrate:
+    build: .
+    image: incident-ops:local
+    command: ["sh", "-c", "alembic upgrade head && incident-seed"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://incident:local-development-only@postgres:5432/incident_ops
+    depends_on:
+      postgres: {condition: service_healthy}
+  api:
+    build: .
+    image: incident-ops:local
+    ports: ["127.0.0.1:8000:8000"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://incident:local-development-only@postgres:5432/incident_ops
+      LLM_PROVIDER: ${LLM_PROVIDER:-disabled}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-}
+      API_KEY: ${API_KEY:-}
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4318
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+  mlflow:
+    image: incident-ops:local
+    command: ["mlflow", "server", "--host", "0.0.0.0", "--port", "5000", "--backend-store-uri", "postgresql+psycopg://incident:local-development-only@postgres:5432/mlflow", "--artifacts-destination", "/mlartifacts", "--serve-artifacts", "--allowed-hosts", "localhost:*,127.0.0.1:*,mlflow:5000"]
+    ports: ["127.0.0.1:5000:5000"]
+    volumes: ["mlartifacts:/mlartifacts"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      migrate: {condition: service_completed_successfully}
+    # The image's API-specific healthcheck does not apply to MLflow.
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+  prometheus:
+    image: prom/prometheus:v3.14.0
+    ports: ["127.0.0.1:9090:9090"]
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/alerts.yml:/etc/prometheus/alerts.yml:ro
+      - prometheus:/prometheus
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=7d"]
+  grafana:
+    image: grafana/grafana:13.2.2
+    ports: ["127.0.0.1:3000:3000"]
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: local-development-only
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - grafana:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboard.json:/var/lib/grafana/dashboards/incident-ops.json:ro
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.161.0
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes: ["./monitoring/otel-collector.yml:/etc/otelcol/config.yaml:ro"]
+volumes:
+  postgres:
+  mlartifacts:
+  prometheus:
+  grafana:

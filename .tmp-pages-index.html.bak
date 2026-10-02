@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script>document.documentElement.classList.add('js')</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Akhilesh Ranjan Singh — Senior DevOps / Platform Engineer</title>
+<link rel="canonical" href="https://iarsingh.github.io/">
+<meta name="description" content="Resume of Akhilesh Ranjan Singh, Senior DevOps / Platform Engineer — GCP, Kubernetes, Terraform, CI/CD, DevSecOps.">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://iarsingh.github.io/">
+<meta property="og:title" content="Akhilesh Ranjan Singh — Senior DevOps / Platform Engineer">
+<meta property="og:description" content="GCP · Kubernetes · Terraform · CI/CD · DevSecOps — with hands-on MLOps/AI infrastructure experience.">
+<meta property="og:image" content="https://iarsingh.github.io/og-card.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Akhilesh Ranjan Singh — Senior DevOps / Platform Engineer">
+<meta name="twitter:description" content="GCP · Kubernetes · Terraform · CI/CD · DevSecOps — with hands-on MLOps/AI infrastructure experience.">
+<meta name="twitter:image" content="https://iarsingh.github.io/og-card.svg">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div class="bg-orb bg-orb-a" aria-hidden="true"></div>
+<div class="bg-orb bg-orb-b" aria-hidden="true"></div>
+
+<nav class="nav">
+  <div class="nav-links">
+    <a href="#summary">summary</a>
+    <a href="#skills">skills</a>
+    <a href="#experience">experience</a>
+    <a href="#projects">projects</a>
+    <a href="#education">education</a>
+  </div>
+  <div class="nav-actions">
+    <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle color theme"></button>
+    <button class="icon-btn" id="downloadPdf" type="button">⬇ PDF</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero" id="top">
+    <p class="eyebrow">whoami<span class="cursor">&nbsp;</span></p>
+    <h1>Akhilesh Ranjan Singh</h1>
+    <p class="role">Senior DevOps / Platform Engineer — GCP · Kubernetes · Terraform · CI/CD · DevSecOps</p>
+    <div class="contact-row">
+      <span class="pill plain">Noida, India</span>
+      <button class="pill icon-btn" id="copyEmail" data-email="akhileshranjan.ks@gmail.com" type="button">akhileshranjan.ks@gmail.com</button>
+      <a class="pill" href="tel:+918002392976">+91-8002392976</a>
+      <a class="pill" href="https://github.com/iarsingh" target="_blank" rel="noopener">github.com/iarsingh</a>
+      <a class="pill" href="https://linkedin.com/in/iamarsingh" target="_blank" rel="noopener">linkedin.com/in/iamarsingh</a>
+    </div>
+    <div class="cta-row">
+      <a class="cta cta-topmate" href="https://topmate.io/iamarsingh/" target="_blank" rel="noopener">Book a session on Topmate →</a>
+      <a class="cta cta-coffee" href="https://buymeacoffee.com/iarsingh" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+    </div>
+  </section>
+
+  <section id="summary">
+    <h2>Summary</h2>
+    <div class="card reveal">
+      <p>
+        Senior DevOps &amp; Platform Engineer with nearly 7 years of experience architecting and scaling
+        cloud-native platforms across GCP, AWS, and Azure. Proven track record in Platform Engineering,
+        Kubernetes, Infrastructure as Code, and DevSecOps — delivering self-service cloud platforms,
+        standardized landing zones, and automated deployment frameworks that accelerate developer
+        productivity and operational efficiency.
+      </p>
+      <p class="muted">
+        Skilled in driving cloud transformation using Terraform, GitOps, CI/CD, and cloud governance
+        frameworks to improve deployment velocity, strengthen security posture, and increase
+        infrastructure reliability. Builds observability-driven platforms with advanced monitoring,
+        logging, and incident management to ensure high availability for mission-critical workloads.
+        Also brings hands-on MLOps and AI Infrastructure experience — model serving, model lifecycle
+        management, and Kubernetes-based ML platforms — as a secondary, supporting skill set.
+      </p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Core Skills</h2>
+    <div class="card reveal">
+      <div class="skill-group">
+        <h3>Cloud Platforms</h3>
+        <div class="chips"><span class="chip">GCP</span><span class="chip">AWS</span><span class="chip">Azure</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>Infrastructure as Code</h3>
+        <div class="chips"><span class="chip">Terraform Enterprise</span><span class="chip">Ansible</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>Containers &amp; Orchestration</h3>
+        <div class="chips"><span class="chip">Kubernetes</span><span class="chip">Docker</span><span class="chip">Helm</span><span class="chip">GKE</span><span class="chip">HPA</span><span class="chip">RBAC</span><span class="chip">Network Policies</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>CI/CD &amp; GitOps</h3>
+        <div class="chips"><span class="chip">Jenkins</span><span class="chip">GitHub Actions</span><span class="chip">GitLab CI/CD</span><span class="chip">Cloud Build</span><span class="chip">ArgoCD</span><span class="chip">GitOps</span><span class="chip">Bitbucket</span><span class="chip">Harness</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>Security &amp; Governance</h3>
+        <div class="chips"><span class="chip">IAM</span><span class="chip">Cloud Armor</span><span class="chip">WAF</span><span class="chip">DevSecOps</span><span class="chip">Prisma Cloud</span><span class="chip">IONIX</span><span class="chip">Stream Security</span><span class="chip">SAST/DAST</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>Observability</h3>
+        <div class="chips"><span class="chip">ELK Stack</span><span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">OpenTelemetry</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>Programming &amp; Scripting</h3>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Bash</span><span class="chip">Go</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>Databases</h3>
+        <div class="chips"><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">MongoDB</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>Other Tools</h3>
+        <div class="chips"><span class="chip">JFrog Artifactory</span><span class="chip">Veeam</span><span class="chip">Kasten K10</span><span class="chip">ServiceNow</span><span class="chip">Jira</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>MLOps &amp; AI Infrastructure</h3>
+        <div class="chips"><span class="chip">MLflow</span><span class="chip">Vertex AI</span><span class="chip">Model Serving</span><span class="chip">Model Monitoring</span><span class="chip">FastAPI</span><span class="chip">LLM Integrations</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+
+    <details class="role-card reveal" open>
+      <summary>
+        <span><span class="role-title">DevOps Engineer</span> <span class="role-company">— Capgemini, Noida</span></span>
+        <span class="role-dates">Sep 2024 – Present <span class="chevron">▸</span></span>
+      </summary>
+      <div class="role-body">
+        <ul>
+          <li>Designed and governed enterprise-scale GCP landing zones using Shared VPC architecture, project hierarchies, remote state management, IAM governance, and policy-as-code controls.</li>
+          <li>Built and standardized reusable Terraform Enterprise modules for networking, IAM, Kubernetes, monitoring, logging, load balancing, and security services — reducing infrastructure provisioning effort by 70%.</li>
+          <li>Enabled self-service infrastructure delivery by integrating Terraform Enterprise with Git-based CI/CD, Harness, Jira, and ServiceNow, streamlining change management.</li>
+          <li>Administered production-grade GKE environments — node pool lifecycle, cluster upgrades, autoscaling — strengthening reliability and service availability.</li>
+          <li>Drove cloud cost optimization across GCP, achieving a 20% reduction in cloud spend through governance, right-sizing, and capacity planning.</li>
+          <li>Enhanced security and observability with Cloud Armor WAF policies, rate limiting, Adaptive Protection, OpenTelemetry instrumentation, and continuous attack surface monitoring via IONIX and Stream Security.</li>
+          <li>Advanced MLOps frameworks using MLflow and FastAPI, and led GitHub-to-Bitbucket migration, improving engineering productivity by 30%.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="role-card reveal">
+      <summary>
+        <span><span class="role-title">Senior Software Engineer – DevOps</span> <span class="role-company">— Tech Mahindra, Mumbai</span></span>
+        <span class="role-dates">Jul 2022 – Sep 2024 <span class="chevron">▸</span></span>
+      </summary>
+      <div class="role-body">
+        <ul>
+          <li>Drove enterprise-scale CI/CD platform engineering using Jenkins, GitHub Actions, Terraform, Docker, Kubernetes, Helm, and Ansible, improving release efficiency and deployment reliability.</li>
+          <li>Delivered Infrastructure as Code across GCP, AWS, and Azure using Terraform and Ansible, streamlining provisioning, configuration management, backup automation, and disaster recovery.</li>
+          <li>Administered highly available Kubernetes platforms with Docker and Helm, maintaining 99.9% service availability through proactive monitoring.</li>
+          <li>Strengthened platform security via DevSecOps controls, enterprise backup/DR, observability frameworks, and secure artifact management.</li>
+          <li>Managed enterprise backup and disaster recovery using Veeam and Kasten K10, ensuring business continuity across cloud-native environments.</li>
+          <li>Administered artifact lifecycle management through JFrog Artifactory; executed OS patch management and secrets management practices.</li>
+          <li>Partnered with Google Cloud, Microsoft, and AWS engineering teams to optimize platform performance and accelerate cloud transformation.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="role-card reveal">
+      <summary>
+        <span><span class="role-title">System Engineer – Cloud &amp; DevOps</span> <span class="role-company">— TCS, Bengaluru</span></span>
+        <span class="role-dates">Sep 2019 – Jul 2022 <span class="chevron">▸</span></span>
+      </summary>
+      <div class="role-body">
+        <ul>
+          <li>Managed production Kubernetes and GKE environments supporting business-critical applications with high availability.</li>
+          <li>Automated CI/CD pipelines using Jenkins, Cloud Build, and Terraform, reducing deployment effort by 40% while improving consistency and delivery speed.</li>
+          <li>Facilitated GCP infrastructure provisioning, cloud migration, and reliability initiatives through Terraform automation, observability, and IAM governance.</li>
+          <li>Managed end-to-end monitoring and alerting, proactively identifying anomalies and maintaining high service availability.</li>
+          <li>Led incident response and resolution, coordinating cross-functional teams to minimize downtime and maintain SLA compliance.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <section id="projects">
+    <h2>Projects <span class="live-tag">· live from GitHub</span></h2>
+    <div class="project-grid">
+      <a class="project-card reveal" href="https://github.com/iarsingh/terraform-gcp-platform" target="_blank" rel="noopener">
+        <div class="project-head"><span class="project-name">terraform-gcp-platform</span><span class="lang-dot lang-hcl"></span><span class="lang">HCL</span></div>
+        <p>Reusable Terraform + Kubernetes patterns for GCP/GKE platform provisioning — namespaces, service accounts, guardrails, autoscaling.</p>
+      </a>
+      <a class="project-card reveal" href="https://github.com/iarsingh/kubernetes-mlops-platform" target="_blank" rel="noopener">
+        <div class="project-head"><span class="project-name">kubernetes-mlops-platform</span><span class="lang-dot lang-python"></span><span class="lang">Python</span></div>
+        <p>Kubernetes-native MLOps platform patterns — model serving, artifact storage, promotion workflows, inference autoscaling.</p>
+      </a>
+      <a class="project-card reveal" href="https://github.com/iarsingh/gitops-kubernetes-deployment" target="_blank" rel="noopener">
+        <div class="project-head"><span class="project-name">gitops-kubernetes-deployment</span><span class="lang-dot lang-shell"></span><span class="lang">Shell</span></div>
+        <p>GitOps-driven Kubernetes deployment workflows and ArgoCD-style promotion patterns.</p>
+      </a>
+      <a class="project-card reveal" href="https://github.com/iarsingh/github-actions-devops-templates" target="_blank" rel="noopener">
+        <div class="project-head"><span class="project-name">github-actions-devops-templates</span><span class="lang-dot lang-shell"></span><span class="lang">Shell</span></div>
+        <p>Reusable GitHub Actions CI/CD pipeline templates for DevOps and platform workflows.</p>
+      </a>
+      <a class="project-card reveal" href="https://github.com/iarsingh/ai-mock-interviewer" target="_blank" rel="noopener">
+        <div class="project-head"><span class="project-name">ai-mock-interviewer</span><span class="lang-dot lang-js"></span><span class="lang">JavaScript</span></div>
+        <p>Voice-led AI mock interview practice for DevOps, SRE, Cloud, Platform Engineering, and MLOps roles.</p>
+      </a>
+      <a class="project-card reveal" href="https://github.com/iarsingh/mlops-zoomcamp" target="_blank" rel="noopener">
+        <div class="project-head"><span class="project-name">mlops-zoomcamp</span><span class="lang-dot lang-jupyter"></span><span class="lang">Jupyter</span></div>
+        <p>MLOps coursework and hands-on labs — model tracking, pipelines, deployment, monitoring.</p>
+      </a>
+    </div>
+    <p class="muted small">Pulled from <a href="https://github.com/iarsingh" target="_blank" rel="noopener">github.com/iarsingh</a> — full repo list on GitHub.</p>
+  </section>
+
+  <section id="education">
+    <h2>Education &amp; Certifications</h2>
+    <div class="card reveal">
+      <p><strong>Bachelor of Engineering — Computer Science</strong><br>RGPV, Bhopal, 2019</p>
+    </div>
+
+    <div class="card badges-card reveal">
+      <div class="badges-head">
+        <h3>Verified Credentials <span class="live-tag">· Credly</span></h3>
+        <div class="badges-stats">
+          <span class="stat"><strong>9</strong> credentials</span>
+        </div>
+      </div>
+      <ul class="credential-list">
+        <li><span class="cred-name">Professional Cloud DevOps Engineer</span><span class="cred-meta">Google Cloud · Expires Jun 23, 2027</span></li>
+        <li><span class="cred-name">Professional Cloud Network Engineer</span><span class="cred-meta">Google Cloud · Expires Dec 10, 2027</span></li>
+        <li><span class="cred-name">Associate Cloud Engineer</span><span class="cred-meta">Google Cloud · Expires Oct 1, 2027</span></li>
+        <li><span class="cred-name">Engineer Data for Predictive Modeling with BigQuery ML</span><span class="cred-meta">Google Cloud · Issued Jun 20, 2026</span></li>
+        <li><span class="cred-name">Deploy Kubernetes Applications on Google Cloud</span><span class="cred-meta">Google Cloud · Issued Oct 16, 2024</span></li>
+        <li><span class="cred-name">Containers, K8s and Istio on IBM Cloud</span><span class="cred-meta">IBM · Issued Sep 5, 2023</span></li>
+        <li><span class="cred-name">LFS169: Introduction to GitOps</span><span class="cred-meta">The Linux Foundation · Issued Mar 25, 2023</span></li>
+        <li><span class="cred-name">Introduction to Cybersecurity</span><span class="cred-meta">Cisco · Issued Feb 21, 2024</span></li>
+        <li><span class="cred-name">Software Developer Career Guide and Interview Preparation</span><span class="cred-meta">Coursera · Issued Apr 8, 2025</span></li>
+      </ul>
+      <p class="muted small">Synced from <a href="https://www.credly.com/users/akhilesh-ranjan-singh.ca5f4b1e" target="_blank" rel="noopener">Credly profile</a>.</p>
+    </div>
+
+    <div class="card badges-card reveal">
+      <div class="badges-head">
+        <h3>Google Cloud Skills Boost <span class="live-tag">· live</span></h3>
+        <div class="badges-stats">
+          <span class="stat"><strong>Diamond</strong> League</span>
+          <span class="stat"><strong>89,118</strong> pts</span>
+          <span class="stat"><strong>65</strong> badges</span>
+        </div>
+      </div>
+      <div class="chips">
+        <span class="chip">Getting Started with Terraform for Google Cloud</span>
+        <span class="chip">Reliable Google Cloud Infrastructure: Design and Process</span>
+        <span class="chip">Developing a Google SRE Culture</span>
+        <span class="chip">Logging and Monitoring in Google Cloud</span>
+        <span class="chip">Getting Started with Google Kubernetes Engine</span>
+        <span class="chip">Architecting with GKE: Workloads</span>
+        <span class="chip">Deploy Kubernetes Applications on Google Cloud</span>
+        <span class="chip">Networking in Google Cloud: Routing and Addressing</span>
+        <span class="chip">Trust and Security with Google Cloud</span>
+        <span class="chip">Scaling with Google Cloud Operations</span>
+      </div>
+      <p class="muted small">10 of 65 badges shown, filtered for DevOps/Platform relevance · <a href="https://partner.skills.google/public_profiles/73b05fe2-54bc-4552-91e6-a41996c0d21d" target="_blank" rel="noopener">full profile</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <a href="https://topmate.io/iamarsingh/" target="_blank" rel="noopener">Topmate</a> ·
+    <a href="https://buymeacoffee.com/iarsingh" target="_blank" rel="noopener">Buy me a coffee</a>
+  </footer>
+</div>
+
+<script src="./script.js"></script>
+</body>
+</html>

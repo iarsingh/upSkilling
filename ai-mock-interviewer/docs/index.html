@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Mock Interviewer</title>
+    <meta name="description" content="Local-first voice and typed mock interview practice for DevOps, SRE, Cloud, Platform Engineering, and MLOps. Run it on your computer with Node.js 22.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0a0c14;
+        --panel: #12141f;
+        --ink: #eef0fa;
+        --muted: #a7afc6;
+        --line: #383e57;
+        --brand: #8a7bff;
+        --accent: #28b8c7;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: radial-gradient(1200px 500px at 10% -10%, rgba(138, 123, 255, 0.18), transparent 50%), var(--bg);
+        color: var(--ink);
+        line-height: 1.6;
+      }
+      main { max-width: 820px; margin: 0 auto; padding: 48px 20px 72px; }
+      a { color: var(--accent); }
+      .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+      .brand img { width: 40px; height: 40px; }
+      .eyebrow { letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.78rem; color: var(--accent); margin-bottom: 8px; }
+      h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; margin: 0 0 12px; }
+      h2 { margin: 36px 0 8px; font-size: 1.25rem; }
+      p { color: var(--muted); }
+      .lead { font-size: 1.125rem; }
+      .notice, .panel {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--panel);
+        padding: 16px 18px;
+      }
+      .notice { border-left: 4px solid var(--brand); }
+      .notice strong, .panel strong { color: var(--ink); }
+      pre {
+        overflow: auto;
+        padding: 16px;
+        border-radius: 12px;
+        background: #07080e;
+        border: 1px solid var(--line);
+        color: var(--ink);
+      }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      ul { color: var(--muted); padding-left: 1.2rem; }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+      .actions a {
+        text-decoration: none;
+        color: var(--ink);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 14px;
+      }
+      .actions a.primary { background: var(--brand); border-color: transparent; color: #fff; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="brand">
+        <img src="favicon.svg" alt="">
+        <strong>AI Mock Interviewer</strong>
+      </div>
+      <p class="eyebrow">Open-source interview practice · Runs on your computer</p>
+      <h1>Practice technical interviews before the real one.</h1>
+      <p class="lead">Voice and typed mock interviews for DevOps, SRE, Cloud, Platform Engineering, and MLOps. The built-in question bank and template feedback work offline. Local or cloud AI feedback is optional.</p>
+      <div class="actions">
+        <a class="primary" href="https://github.com/iarsingh/ai-mock-interviewer">View the repository</a>
+        <a href="https://github.com/iarsingh/ai-mock-interviewer/blob/main/docs/PUBLIC_CASE_STUDY.md">Read the case study</a>
+        <a href="https://github.com/iarsingh/ai-mock-interviewer/issues/new?template=content_correction.yml">Report an answer correction</a>
+      </div>
+
+      <h2>Use it</h2>
+      <p>This page is the public entry point. The interview app is a Node.js server, so install it locally and open it on your machine. You need <a href="https://nodejs.org/">Node.js 22</a> and npm.</p>
+      <pre><code>git clone https://github.com/iarsingh/ai-mock-interviewer.git
+cd ai-mock-interviewer
+npm ci
+cp .env.example .env
+npm run start:offline</code></pre>
+      <p>Then open <a href="http://127.0.0.1:3030">http://127.0.0.1:3030</a>, create an account, and start a practice topic. Typed answers work without a microphone. On Windows PowerShell, use <code>Copy-Item .env.example .env</code> instead of <code>cp</code>.</p>
+
+      <h2>What you can practice</h2>
+      <ul>
+        <li>Topic practice across Kubernetes, cloud, Terraform, CI/CD, Python, SRE, and related areas.</li>
+        <li>Fixed mock interview sets and a multi-day practice plan.</li>
+        <li>Job-description practice from pasted text or an uploaded file.</li>
+        <li>Optional feedback from local Ollama, OpenAI, or Anthropic when you configure it.</li>
+      </ul>
+
+      <h2>Before you rely on an answer</h2>
+      <aside class="notice" role="note">
+        <strong>Practice material. Verify it before you rely on it.</strong>
+        <p>Answers, explanations, code examples, and AI feedback may be incorrect, incomplete, or outdated. Check official documentation for your technology version, and try commands in a safe test environment. This project is not a verified assessment of interview readiness.</p>
+      </aside>
+
+      <h2>Privacy</h2>
+      <div class="panel">
+        <p>Offline mode does not call a configured cloud model. If you enable a cloud provider, the relevant prompt and answer are sent to that provider. Browser speech recognition can also send audio to the browser vendor. Do not put secrets, résumés, or confidential interview material into a public demo.</p>
+      </div>
+    </main>
+  </body>
+</html>

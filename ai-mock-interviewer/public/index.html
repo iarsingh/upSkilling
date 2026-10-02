@@ -63,9 +63,9 @@
         <p class="eyebrow">Open-source interview lab · Runs on your machine</p>
         <h1>Practice technical interviews out loud, before the real one.</h1>
         <p class="hero-subtitle">
-          Voice-led mock interviews for DevOps, SRE, Cloud, Platform, and MLOps roles. Speak your answer,
-          get a live transcript, and receive structured feedback scored against a real interview bar -
-          all powered by a local LLM, no data leaves your machine unless you choose cloud mode.
+          Voice-led mock interviews for DevOps, SRE, Cloud, Platform, and MLOps roles. Speak or type your answer,
+          then compare it with practice feedback. The built-in question bank and template feedback work offline.
+          Local Ollama or a cloud model is optional.
         </p>
         <div class="hero-actions">
           <a class="primary wide link-button" href="/dashboard.html">Choose interview track</a>
@@ -73,6 +73,13 @@
           <a class="ghost wide link-button topmate-button" href="https://topmate.io/iamarsingh" target="_blank" rel="noopener noreferrer">Book personal mentorship &#8599;</a>
         </div>
       </section>
+
+      <aside class="accuracy-notice" role="note" aria-label="Answer accuracy notice">
+        <strong>Practice material — verify before relying on it.</strong>
+        <p>Answers, explanations, code examples, and AI feedback may be incorrect, incomplete, or outdated. Check official documentation for your technology version and validate examples in a safe test environment.</p>
+        <a href="https://github.com/iarsingh/ai-mock-interviewer/issues/new?template=content_correction.yml" target="_blank" rel="noopener noreferrer">Report an answer correction</a>
+      </aside>
+
 
       <section class="feature-grid">
         <article class="feature-card">
@@ -93,7 +100,7 @@
         <article class="feature-card">
           <span class="feature-icon" aria-hidden="true">&#128274;</span>
           <h3>Private by default</h3>
-          <p>Runs fully offline against a local Ollama model. Your CV, answers, and transcripts stay on your machine unless you opt into cloud mode.</p>
+          <p>Offline mode keeps practice on this machine and does not call a cloud model. Optional cloud AI sends the relevant prompt and answer to that provider. Browser speech recognition may also send audio to the browser vendor.</p>
         </article>
       </section>
 

@@ -1,0 +1,57 @@
+[
+  {
+    "id": "rb-database",
+    "title": "Database connection saturation",
+    "category": "database",
+    "content": "PostgreSQL database connection pool exhausted, slow SQL queries, locks, long transactions, replication lag and storage pressure.",
+    "steps": [
+      "Inspect database connection counts and pool saturation against configured limits.",
+      "Review slow queries and active locks; identify long-running transactions.",
+      "Compare the incident timeline with recent deployments before proposing a reviewed mitigation."
+    ]
+  },
+  {
+    "id": "rb-kubernetes",
+    "title": "Kubernetes pod restart investigation",
+    "category": "kubernetes",
+    "content": "Kubernetes pods CrashLoopBackOff OOMKilled ImagePullBackOff pending deployment replicas, readiness probes, memory limits, node capacity.",
+    "steps": [
+      "Inspect pod events, restart counts, and the last termination reason.",
+      "Compare memory usage with container limits and check readiness probe failures.",
+      "Review previous container logs and the deployment diff with the platform on-call engineer."
+    ]
+  },
+  {
+    "id": "rb-network",
+    "title": "Network and TLS connectivity checks",
+    "category": "network",
+    "content": "DNS resolution timeout, TLS certificate expiry, HTTPS handshake, firewall, network packets dropped, load balancer upstream health.",
+    "steps": [
+      "Check DNS resolution and the affected hostname from the same network as the service.",
+      "Inspect certificate expiry and hostname coverage; compare firewall and routing changes.",
+      "Review upstream health checks and packet loss before proposing a network change."
+    ]
+  },
+  {
+    "id": "rb-application",
+    "title": "Application error regression investigation",
+    "category": "application",
+    "content": "Application API HTTP 500 internal server error, Python exception traceback TypeError KeyError, checkout code release regression.",
+    "steps": [
+      "Correlate request failures with sanitized application stack traces.",
+      "Compare the error timeline with the most recent code release and configuration changes.",
+      "Reproduce the failing request in staging and request review of a rollback if appropriate."
+    ]
+  },
+  {
+    "id": "rb-security",
+    "title": "Suspicious identity activity review",
+    "category": "security",
+    "content": "Security unauthorized authentication login attempts, IAM role permission escalation, suspicious account access, leaked secret API credential token.",
+    "steps": [
+      "Preserve relevant audit events without copying credentials into incident notes.",
+      "Review the principal, source, affected permissions, and authentication timeline.",
+      "Escalate to the security on-call engineer for approved containment and credential rotation."
+    ]
+  }
+]

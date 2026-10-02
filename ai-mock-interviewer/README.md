@@ -12,9 +12,27 @@ preparation. It runs against a local Node server and requires no cloud service i
 The app asks interview questions, reads them aloud, records or accepts typed answers, saves progress
 locally, and works fully offline using a deduplicated built-in bank of more than 9,500 questions with answers and question-type metadata.
 
+For a concise project walkthrough, see the [public case study](docs/PUBLIC_CASE_STUDY.md), including the user problem, architecture, demo flow, and limitations.
+
+The public project page is [https://iarsingh.github.io/ai-mock-interviewer/](https://iarsingh.github.io/ai-mock-interviewer/). It is the shareable entry point and the local run instructions. The interview app itself still runs on your computer; GitHub Pages does not host the Node server.
+
+## Answer accuracy
+
+Answers, explanations, code examples, and AI-generated feedback may be incorrect,
+incomplete, or outdated. Use them as practice material, not as verified technical
+advice or a validated assessment of interview readiness. Cross-check answers with
+official documentation for the relevant technology version, and validate commands
+and code in a safe test environment before using them.
+
+Automated checks cover dataset consistency and some answer-quality patterns; they
+do not establish that every answer is factually correct. If you find an error,
+[report a content correction](https://github.com/iarsingh/ai-mock-interviewer/issues/new?template=content_correction.yml)
+with the question and a reliable source. Do not include personal or confidential information.
+
 ## Contents
 
 - [Features](#features)
+- [Pages](#pages)
 - [Tech Stack](#tech-stack)
 - [Requirements](#requirements)
 - [Quick Start](#quick-start)
@@ -35,7 +53,8 @@ locally, and works fully offline using a deduplicated built-in bank of more than
 - [Developer Customization](#developer-customization)
 - [Chrome Extension](#chrome-extension)
 - [Troubleshooting](#troubleshooting)
-- [GitHub Publishing Notes](#github-publishing-notes)
+- [Content and privacy](#content-and-privacy)
+- [Publishing and contributions](#publishing-and-contributions)
 - [License](#license)
 
 ## Features
@@ -47,14 +66,28 @@ locally, and works fully offline using a deduplicated built-in bank of more than
 - Custom JD practice by pasting or uploading a job description.
 - Custom skills from the UI, so developers can add Java, React, AWS, Spring Boot, or any other topic locally.
 - Progress history saved in browser local storage.
-- Optional local Ollama support for stronger AI feedback.
+- Optional feedback from local Ollama, OpenAI, or Anthropic. Offline mode does not need an API key.
+- Sign-in for the skills dashboard and saved interview sessions. The admin report requires the `admin` role.
+- Interview Prep curriculum, a searchable question bank, and separate Data Science and AI Agent Engineer paths.
+
+## Pages
+
+These pages are served by the local Node app at `http://127.0.0.1:3030`. They are not available as a hosted interview app on GitHub Pages.
+
+| Page | Who can open it |
+| --- | --- |
+| `/`, `/signup.html`, `/signin.html`, `/contact.html` | Anyone |
+| `/interview-prep.html`, `/question-bank.html` | Anyone |
+| `/data-science-path.html`, `/ai-agent-engineer-path.html` | Anyone |
+| `/dashboard.html`, `/session.html` | Signed-in account |
+| `/admin.html` | Signed-in account with the `admin` role |
 
 ## Tech Stack
 
 - **Runtime**: Node.js (built-in `http` module, no framework)
 - **Frontend**: vanilla HTML/CSS/JS, browser Speech Synthesis + Speech Recognition APIs
 - **State**: browser `localStorage`; PostgreSQL for durable accounts (local JSON fallback)
-- **Optional AI**: local Ollama, or Anthropic Claude via `@anthropic-ai/sdk`
+- **Optional AI**: local Ollama, OpenAI, or Anthropic Claude via `@anthropic-ai/sdk`
 - **JD file parsing**: `pdf-parse`, `mammoth` (DOCX), `tesseract.js` (OCR)
 - **Browser extension**: Manifest V3 Chrome extension (`chrome-extension/`)
 
@@ -575,27 +608,24 @@ mock-interview-sets.md
 
 ```text
 ai-mock-interviewer/
-  public/
-    index.html
-    app.js
-    styles.css
-    mock-interview-sets.json
-    50-day-plan.json
-  server.js
-  package.json
-  package-lock.json
-  data/
-  scripts/
-  chrome-extension/
-  README.md
+  public/                 browser pages, styles, and question-bank JSON
+  src/                    interview services, SQLite access, and AI gateway
+  server.js               HTTP server and API routes
+  api/[...path].js        Vercel wrapper around the same server
+  scripts/                question-bank generation and release checks
+  data/                   examples and git-ignored local accounts
+  docs/                   case study, architecture notes, and the public page
+  chrome-extension/       local job-form autofill helper
+  tests/                  Node test suite
 ```
 
 Important files:
 
 - `server.js`: local Node.js server and API routes.
-- `public/index.html`: main app page.
+- `public/index.html`: public landing page.
+- `public/dashboard.html`: skills dashboard for launching interviews.
 - `public/app.js`: interview logic, audio, state, and question flow.
-- `public/styles.css`: UI styling.
+- `public/qa-dataset.json`: question bank served to the app.
 - `public/mock-interview-sets.json`: fixed mock interview rounds.
 - `public/50-day-plan.json`: daily practice plan.
 
@@ -617,7 +647,7 @@ Common files to edit:
 
 ## Chrome Extension
 
-The `chrome-extension/` folder contains a local job autofill helper.
+The `chrome-extension/` folder contains a local job autofill helper. It is not part of the hosted project page. Replace any built-in sample profile with your own data in the git-ignored `data/applicant-profile.json` file, and do not load the extension on a shared computer with a real résumé.
 
 Install it manually:
 
@@ -692,18 +722,13 @@ Publishing this source on GitHub does not deploy the Node backend. GitHub Pages 
 cannot run it. Public hosting also requires HTTPS, persistent storage, identity controls
 and deployment-specific verification; see [SECURITY.md](SECURITY.md).
 
-## GitHub Publishing Notes
+## Publishing and contributions
 
-Follow [the release workflow](docs/RELEASING.md) for clean-checkout validation and GitHub publication.
+The source repository is public. `main` is protected: open a pull request for every change, wait for the `verify` check, and keep the branch up to date with `main` before merging. Direct pushes, force-pushes, and deletion of `main` are blocked. See [CONTRIBUTING.md](CONTRIBUTING.md) and [the release workflow](docs/RELEASING.md).
 
-Before publishing a fork, review the entire working tree and Git history for secrets and personal data. Never commit
-`.env`, `data/applicant-profile.json`, local account/contact files, SQLite databases, logs, API credentials, session
-secrets, résumés, or OAuth tokens. The repository includes safe examples and ignore rules, but those do not remove
-data that was committed previously.
+The public page at [https://iarsingh.github.io/ai-mock-interviewer/](https://iarsingh.github.io/ai-mock-interviewer/) explains how to run the app. It does not host the Node server. A hosted instance still needs HTTPS, PostgreSQL, a unique `SESSION_SECRET`, and persistent storage for interview sessions.
 
-If sensitive data has ever been committed, removing it in a later commit is insufficient. Rotate exposed credentials
-and use a history-rewriting tool such as `git filter-repo` before making the repository public, then coordinate the
-forced update with every collaborator.
+Never commit `.env`, `data/applicant-profile.json`, local account or contact files, SQLite databases, logs, API credentials, session secrets, résumés, or OAuth tokens. The repository includes safe examples and ignore rules. Those rules do not remove data that was committed earlier. Before publishing a fork, review the working tree and Git history. If private data was committed, remove it from history before the fork is public and coordinate that update with collaborators.
 
 ## License
 

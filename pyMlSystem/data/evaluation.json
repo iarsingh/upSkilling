@@ -1,0 +1,82 @@
+[
+  {
+    "text": "Database connection pool timeout during checkout transactions",
+    "category": "database"
+  },
+  {
+    "text": "PostgreSQL replica lag and slow SQL queries",
+    "category": "database"
+  },
+  {
+    "text": "Database lock contention blocking writes",
+    "category": "database"
+  },
+  {
+    "text": "Database storage full with growing WAL files",
+    "category": "database"
+  },
+  {
+    "text": "Kubernetes pods repeatedly enter CrashLoopBackOff",
+    "category": "kubernetes"
+  },
+  {
+    "text": "Deployment replicas pending with insufficient node memory",
+    "category": "kubernetes"
+  },
+  {
+    "text": "Container OOMKilled after reaching memory limit",
+    "category": "kubernetes"
+  },
+  {
+    "text": "Kubernetes ImagePullBackOff for new container deployment",
+    "category": "kubernetes"
+  },
+  {
+    "text": "DNS hostname resolution timeout for upstream requests",
+    "category": "network"
+  },
+  {
+    "text": "TLS handshake fails with expired certificate",
+    "category": "network"
+  },
+  {
+    "text": "Firewall blocks connections between network subnets",
+    "category": "network"
+  },
+  {
+    "text": "Load balancer upstream unreachable and network packets dropped",
+    "category": "network"
+  },
+  {
+    "text": "Application API produces a Python TypeError traceback",
+    "category": "application"
+  },
+  {
+    "text": "Checkout handler returns HTTP 500 after code release",
+    "category": "application"
+  },
+  {
+    "text": "Application regression throws unhandled request exception",
+    "category": "application"
+  },
+  {
+    "text": "JSON serialization error in application response",
+    "category": "application"
+  },
+  {
+    "text": "Suspicious login attempts indicate authentication brute force",
+    "category": "security"
+  },
+  {
+    "text": "IAM unauthorized principal received elevated permission",
+    "category": "security"
+  },
+  {
+    "text": "API credential leaked and suspicious access detected",
+    "category": "security"
+  },
+  {
+    "text": "Unknown account token used for unauthorized login",
+    "category": "security"
+  }
+]

@@ -6,6 +6,206 @@ Categories: 425
 
 ---
 
+## Forward Deployed Engineer (FDE) — Supplemental Practice
+
+24 questions
+
+These are additional practice questions for Forward Deployed Engineer roles, including AI-focused deployments; they are not verified as questions actually asked in prior interviews. The original collection counts above exclude this supplement. Adapt experience answers to your own work.
+
+### 1. What does a Forward Deployed Engineer own?
+
+**Type:** Conceptual
+
+**Answer:**
+
+I would own turning a customer problem into a working, adopted solution: discover the workflow, define success, build integrations and application code, deploy safely, and measure results. I would stay close to users while feeding reusable requirements back to the product team. The exact boundaries vary by employer, so I would clarify who owns commercial decisions, long-term support, and core product changes.
+
+### 2. Why do you want to move from DevOps or platform engineering into an FDE role?
+
+**Type:** Experience
+
+**Answer:**
+
+Answer template — adapt to your actual experience: My infrastructure background gives me a foundation in reliable deployment, automation, and debugging across systems. I want to apply those skills closer to customer workflows and take responsibility for whether the solution solves their problem. I would support this with a real example of discovering a user need, writing or integrating software, and measuring the outcome. I would also explain which application-development skills I am strengthening; deployment experience alone does not demonstrate end-to-end product delivery.
+
+### 3. A customer says, “We need AI.” How would you run discovery?
+
+**Type:** Scenario
+
+**Answer:**
+
+I would ask users to walk through a recent task, including inputs, decisions, exceptions, and handoffs. I would identify where time or errors accumulate, establish a baseline, and clarify data access, security constraints, and the decision owner. Then I would compare a simple workflow or rules-based solution with an AI approach. The output would be one bounded use case, a measurable success criterion, explicit exclusions, and a plan to test the riskiest assumption.
+
+### 4. How would you turn an ambiguous request into an implementation plan?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I would write a short problem statement with the user, current workflow, desired outcome, constraints, and acceptance examples. Next I would map dependencies and unknowns, investigate the highest-risk integration, and split delivery into small end-to-end slices. Each slice would have an owner and demonstrable acceptance criteria. I would review assumptions with the customer and record scope changes with their effect on timing and outcomes.
+
+### 5. What would you deliver in a two-week customer pilot?
+
+**Type:** Scenario
+
+**Answer:**
+
+I would agree on one workflow, representative inputs, a baseline, and a go/no-go decision before building. Early work would validate access and the hardest dependency; the first implementation would connect real input to a usable output. The remaining time would cover user feedback, failure cases, instrumentation, and a controlled demonstration. I would report measured results, remaining limitations, production-readiness gaps, and the cost and ownership of the next phase. A successful demo alone would not establish production readiness.
+
+### 6. How do you choose between customer-specific code and a reusable product feature?
+
+**Type:** Comparison
+
+**Answer:**
+
+I would assess whether the underlying need repeats across customers, whether existing configuration can satisfy it, and how much long-term maintenance the change adds. A narrow adapter can isolate a unique customer system behind a stable interface. Repeated requirements may justify a shared capability, with product-team agreement and compatibility tests. I would avoid building a generic framework before validating the common need and document the owner and retirement plan for temporary customizations.
+
+### 7. Design a support-ticket triage solution for an enterprise customer.
+
+**Type:** System Design
+
+**Answer:**
+
+I would clarify ticket volume, categories, routing rules, response-time expectations, and the cost of a wrong assignment. An authenticated connector would ingest tickets into a queue; workers would normalize fields, apply deterministic rules or a classifier, and present a suggested route for review where needed. Writes back to the ticket system would be idempotent and audited. I would evaluate on representative labeled tickets, measure quality per category and time saved, and roll out first in shadow mode with a manual fallback.
+
+### 8. How would you integrate with an unreliable customer API?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I would establish the authentication, pagination, rate-limit, and error contracts first. The adapter would use explicit timeouts, bounded retries with backoff and jitter for transient failures, and durable checkpoints for incremental reads. Writes would use provider-supported idempotency keys or reconciliation before retrying an ambiguous outcome. I would track lag and failures, quarantine unrecoverable records for review, and test expired credentials, throttling, duplicate events, and partial outages.
+
+### 9. How would you implement a reliable CSV import for customer data?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I would define required fields, encoding, identifiers, and validation rules, then stream the file rather than load it all into memory. Records would enter a staging area with an import ID and row number; invalid rows would produce actionable errors without exposing sensitive values. I would make duplicate and update behavior explicit, validate references, and commit in bounded batches with restart checkpoints. Reconciliation would account for every input row as imported, rejected, or intentionally skipped, and a dry run would let the customer inspect the expected changes.
+
+### 10. Two customer systems disagree about the same business entity. What do you do?
+
+**Type:** Scenario
+
+**Answer:**
+
+I would work with the domain owner to define the canonical identifier and source of truth for each field. I would inspect freshness, deletion behavior, duplicate records, time zones, and whether updates arrive out of order. Transformations would preserve provenance, and uncertain matches would enter a review queue rather than silently merge. I would validate the mapping on representative records and reconcile counts and business totals after migration.
+
+### 11. A deployment works in your environment but fails inside the customer network. How do you debug it?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+I would capture the failing operation, timestamp, request ID, and environment differences, then trace the path through DNS, connectivity, proxy, TLS, authentication, authorization, and the application. I would use a minimal reproduction from the affected runtime and inspect sanitized logs with the customer infrastructure owner. I would change one variable at a time, verify the fix from the customer environment, and document the dependency. I would not disable certificate validation or broadly open network access to hide the failure.
+
+### 12. How would you move a successful prototype into production?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I would review authentication, authorization, data handling, failure recovery, load, and operational ownership against agreed requirements. I would add repeatable deployment, configuration and secret management, meaningful integration tests, monitoring, and a rollback path. A limited rollout would validate real traffic and user outcomes before expansion. Handover would include a runbook, known limitations, support contacts, and recovery exercises so the customer can operate the solution without depending on its original author.
+
+### 13. How would you deploy the same solution for customers with different isolation requirements?
+
+**Type:** System Design
+
+**Answer:**
+
+I would clarify data boundaries, connectivity, residency constraints, and who operates each deployment. Depending on those requirements, I would evaluate shared services with enforced tenant isolation, dedicated deployments, or customer-managed infrastructure. I would keep release artifacts consistent and express supported differences through versioned configuration. Authorization would be enforced on every data path, including background jobs and caches, with tests for cross-tenant access. I would make the operational cost and upgrade responsibilities explicit before selecting the model.
+
+### 14. How would you decide whether an AI workflow needs retrieval, fine-tuning, or an agent?
+
+**Type:** Comparison
+
+**Answer:**
+
+I would start with a simple baseline and classify observed failures. Retrieval can provide relevant, changing source information; fine-tuning may help with learned task behavior when suitable training examples exist; an agent may be useful when completing the task requires choosing among multiple actions. These techniques can be combined, but each adds complexity. I would choose based on measured failure cases, permissions, latency, cost, and maintainability, and use a deterministic workflow when its steps are already known.
+
+### 15. How would you evaluate a customer-facing AI assistant before release?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I would build a representative evaluation set with domain experts, including ordinary tasks, ambiguous requests, missing information, and adversarial inputs. I would measure task success, factual support, appropriate abstention, permission enforcement, latency, and cost, with results broken down by important user segments. The release threshold would reflect the consequence of errors rather than a single average score. I would compare against the existing workflow, review failures manually, and monitor a limited rollout before broader use.
+
+### 16. A retrieval assistant gives convincing but incorrect answers. What would you inspect?
+
+**Type:** Troubleshooting
+
+**Answer:**
+
+I would trace failing examples through ingestion, document freshness, parsing, retrieval, ranking, context assembly, and generation. First I would check whether an authorized supporting passage exists and whether retrieval returns it. Then I would check whether the model uses it correctly, cites evidence, and abstains when support is absent. I would test improvements on both the failed examples and a held-out set, because changing prompts cannot repair missing documents or incorrect access filters.
+
+### 17. How would you prevent an AI agent from taking unauthorized actions in customer systems?
+
+**Type:** System Design
+
+**Answer:**
+
+I would treat model output and retrieved content as untrusted inputs. A backend policy layer would validate the authenticated user, tenant, operation, arguments, and resource permissions independently of the model. Tools would have narrow capabilities, bounded execution, audit records, and idempotency controls. High-impact actions would require an explicit approval bound to the exact proposed operation. I would test malicious instructions inside documents and tool responses and provide cancellation and recovery paths for partial execution.
+
+### 18. A customer likes the demo but users are not adopting the solution. What next?
+
+**Type:** Scenario
+
+**Answer:**
+
+I would observe users completing real work and inspect the adoption funnel: access, first successful task, repeated use, and completion. I would look for workflow friction, poor output quality, slow responses, missing integrations, or unclear ownership. Then I would address the strongest evidence with a small change and measure whether repeated successful use improves. Training can help with discoverability, but I would not assume low adoption is a training problem before investigating product fit.
+
+### 19. How do you measure the business impact of an FDE engagement?
+
+**Type:** Conceptual
+
+**Answer:**
+
+I would agree on an outcome metric and baseline before delivery, such as handling time, processing errors, or completed cases per user. I would measure comparable workloads over a defined period and track quality and reliability as guardrails. Where practical, a phased rollout or comparison group would help separate the effect of the solution from other changes. I would include integration, operation, review, and support costs, and clearly distinguish observed results from projected savings.
+
+### 20. A customer asks for a feature that would jeopardize the agreed deadline. How do you respond?
+
+**Type:** Scenario
+
+**Answer:**
+
+I would clarify the business outcome behind the request and explain the dependency and delivery impact. I would offer concrete choices: exchange existing scope, deliver a smaller version, or schedule the feature later. I would align the customer decision owner and internal product owner on the tradeoff and update the acceptance criteria and timeline. I would avoid promising an unapproved roadmap commitment just to resolve the conversation.
+
+### 21. A production incident occurs during a customer rollout. How do you handle it?
+
+**Type:** Scenario
+
+**Answer:**
+
+I would first contain impact by pausing the rollout, disabling the affected feature, or rolling back where safe. I would establish incident ownership, communicate known impact and the next update time, and preserve evidence for diagnosis. After restoring service, I would reconcile incomplete or duplicate operations and verify the customer workflow end to end. The follow-up would document cause, contributing conditions, and assigned prevention work; I would not speculate about a recovery time before there is supporting evidence.
+
+### 22. Tell me about a time you delivered under ambiguity or disagreed with a customer.
+
+**Type:** Experience
+
+**Answer:**
+
+Use a real example with Situation, Task, Action, and Result. Explain the uncertain requirement or disagreement, what you learned from users or data, the options you proposed, and the code or integration you personally delivered. Describe how you aligned stakeholders and verified the result, then state what you would change next time. Use only metrics and responsibilities you can substantiate; if you lack external-customer experience, identify the example honestly as an internal-user project.
+
+### 23. How would you hand over a solution and feed lessons back into the product?
+
+**Type:** Implementation / Workflow
+
+**Answer:**
+
+I would deliver architecture and data-flow notes, deployment instructions, dashboards, runbooks, recovery procedures, and named support owners. The receiving team would perform a deployment and troubleshoot a sample failure to verify the handover. I would turn recurring friction into product issues with reproduction steps, customer impact, and evidence across deployments. Reusable adapters and tests would move into maintained shared components with clear ownership, while temporary exceptions would have an explicit review date.
+
+### 24. What would your first 30, 60, and 90 days as an FDE look like?
+
+**Type:** Interview question
+
+**Answer:**
+
+In the first 30 days, I would learn the product, shadow customer discovery and support, run the development environment, and deliver a small fix. By 60 days, I would own a bounded customer workflow from discovery through a measured pilot, with guidance on product and deployment decisions. By 90 days, I would aim to operate or hand over that solution, demonstrate user outcomes, and contribute a reusable improvement. I would adapt these milestones to the actual onboarding process, access dependencies, and customer delivery cycle.
+
+---
+
 ## Advanced Git
 
 30 questions

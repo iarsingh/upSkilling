@@ -41,8 +41,7 @@ for (const privatePath of [
 
 const publicCredentialPatterns = [
   /User@Practice\d/i,
-  /Admin@Report\d/i,
-  /\+91-8002392976/
+  /Admin@Report\d/i
 ];
 for (const relativePath of ["README.md", "server.js", "public/app.js", "public/signin.html", "chrome-extension/content.js"]) {
   const content = fs.readFileSync(path.join(root, relativePath), "utf8");

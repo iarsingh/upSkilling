@@ -1,0 +1,114 @@
+# Future cloud template: substitute image digest and configure database access
+# before applying. See docs/cloud-deployment.md. Not applied by local setup.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: incident-ops
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: incident-ops
+  namespace: incident-ops
+  annotations:
+    iam.gke.io/gcp-service-account: REPLACE_WITH_TERRAFORM_API_SERVICE_ACCOUNT
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: incident-ops
+  namespace: incident-ops
+spec:
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {app: incident-ops}
+  strategy:
+    rollingUpdate: {maxSurge: 1, maxUnavailable: 0}
+  template:
+    metadata:
+      labels: {app: incident-ops}
+    spec:
+      serviceAccountName: incident-ops
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: api
+          image: REPLACE_WITH_REGISTRY_IMAGE_AT_SHA256_DIGEST
+          ports: [{name: http, containerPort: 8000}]
+          env:
+            - {name: APP_ENV, value: production}
+            - {name: LLM_PROVIDER, value: disabled}
+          envFrom: [{secretRef: {name: incident-ops-config}}]
+          resources:
+            requests: {cpu: 250m, memory: 512Mi}
+            limits: {cpu: "1", memory: 1Gi}
+          startupProbe:
+            httpGet: {path: /health/live, port: http}
+            failureThreshold: 30
+            periodSeconds: 5
+          readinessProbe:
+            httpGet: {path: /health/ready, port: http}
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: {path: /health/live, port: http}
+            periodSeconds: 15
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          volumeMounts: [{name: tmp, mountPath: /tmp}]
+      volumes: [{name: tmp, emptyDir: {sizeLimit: 128Mi}}]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: incident-ops
+  namespace: incident-ops
+spec:
+  selector: {app: incident-ops}
+  ports: [{name: http, port: 80, targetPort: http}]
+  type: ClusterIP
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: incident-ops
+  namespace: incident-ops
+spec:
+  scaleTargetRef: {apiVersion: apps/v1, kind: Deployment, name: incident-ops}
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target: {type: Utilization, averageUtilization: 70}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: incident-ops
+  namespace: incident-ops
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels: {app: incident-ops}
+---
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  name: incident-ops
+  namespace: incident-ops
+spec:
+  selector:
+    matchLabels: {app: incident-ops}
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 30s

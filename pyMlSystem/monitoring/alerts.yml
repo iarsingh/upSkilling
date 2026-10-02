@@ -1,0 +1,18 @@
+groups:
+  - name: incident-ops
+    rules:
+      - alert: IncidentOpsDown
+        expr: up{job="incident-ops"} == 0
+        for: 2m
+        labels: {severity: critical}
+        annotations: {summary: "IncidentOps metrics endpoint is unavailable"}
+      - alert: IncidentOpsErrorRate
+        expr: sum(rate(http_requests_total{status=~"5.."}[5m])) / clamp_min(sum(rate(http_requests_total[5m])), 0.001) > 0.05
+        for: 5m
+        labels: {severity: warning}
+        annotations: {summary: "More than 5% of requests are failing"}
+      - alert: IncidentOpsLatency
+        expr: histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket[5m]))) > 5
+        for: 10m
+        labels: {severity: warning}
+        annotations: {summary: "P95 API latency exceeds five seconds"}

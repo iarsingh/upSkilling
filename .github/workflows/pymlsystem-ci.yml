@@ -1,0 +1,64 @@
+name: IncidentOps CI
+on:
+  push:
+    paths: ["pyMlSystem/**", ".github/workflows/pymlsystem-ci.yml"]
+  pull_request:
+    paths: ["pyMlSystem/**", ".github/workflows/pymlsystem-ci.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+defaults:
+  run:
+    working-directory: pyMlSystem
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.18"
+          enable-cache: true
+          cache-dependency-glob: pyMlSystem/uv.lock
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: pyMlSystem/frontend/package-lock.json
+      - run: uv sync --frozen --python 3.13
+      - run: uv run ruff check src tests migrations scripts && uv run ruff format --check src tests migrations scripts
+      - run: uv run pytest -q --cov=incident_ops --cov-report=term-missing
+      - run: uv run incident-train
+      - run: npm ci && npm run build
+        working-directory: pyMlSystem/frontend
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.15.4"
+      - run: terraform -chdir=infra/terraform fmt -check && terraform -chdir=infra/terraform init -backend=false && terraform -chdir=infra/terraform validate
+      - run: docker compose config --quiet
+      - run: docker compose up --build -d
+      - name: Verify PostgreSQL workflow and metrics
+        run: |
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent http://127.0.0.1:8000/health/ready; then break; fi
+            sleep 3
+          done
+          curl --fail http://127.0.0.1:8000/health/ready
+          uv run python scripts/smoke_test.py
+          docker compose exec -T prometheus promtool check config /etc/prometheus/prometheus.yml
+      - name: Browser workflow
+        working-directory: pyMlSystem/frontend
+        run: npx playwright install --with-deps chromium && npm run test:e2e
+      - name: Register demo model in MLflow
+        run: |
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:5000/health; then break; fi
+            sleep 2
+          done
+          uv run incident-train --track
+      - name: Compose logs
+        if: failure()
+        run: docker compose logs --tail=100
+      - name: Stop local stack
+        if: always()
+        run: docker compose down -v
