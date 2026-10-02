@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-12-17-fde-harborline-scope-doodle.png
 ---
 
+![The driver app is a different engagement](../../assets/2026-12-17-fde-harborline-scope-doodle.png)
+
 Harborline's VP had three wishes: the night-desk answer, a driver phone app, and a rewrite of the TMS. Ten days cover one of them.
 
 The desk gets a cited score for one question, why this shipment is late and what to do next. SHP-1042 is the demo. The driver app has a second user and does not make 2am faster. The TMS rewrite writes into the system of record before we trust the band.

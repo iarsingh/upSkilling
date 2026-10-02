@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-11-20-fde-ledger-writeback-doodle.png
 ---
 
+![Posting the match ends the pilot's undo](../../assets/2026-11-20-fde-ledger-writeback-doodle.png)
+
 Brightpath asked the matcher to mark settlements as reconciled so the close would be faster. That request moves the tool from a list into the ledger.
 
 Today, deleting the output file undoes the run. evt-1 matched, pay-4 did not, and the ledger does not know. After a post, a wrong match is an entry someone has to reverse, and a replay is no longer harmless.

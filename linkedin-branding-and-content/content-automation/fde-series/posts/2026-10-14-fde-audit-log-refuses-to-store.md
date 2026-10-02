@@ -9,6 +9,8 @@ status: scheduled
 publish: true
 ---
 
+![What the audit log refuses to store](../../assets/2026-10-14-fde-audit-log-refuses-to-store-doodle.png)
+
 A dispatcher pastes a customer name and a medical detail into the question. The answer can still be useful. The log should not become a second copy of that sentence.
 
 The event I would keep is small: time, shipment id, band, score, citation count. The shipment id already joins to their system of record. The question text does not need to.

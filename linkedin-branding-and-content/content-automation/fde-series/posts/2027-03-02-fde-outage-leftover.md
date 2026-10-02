@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-03-02-fde-outage-leftover-doodle.png
 ---
 
+![Cedar Grid keeps the sort and the missing button](../../assets/2027-03-02-fde-outage-leftover-doodle.png)
+
 Cedar Grid's storm lead still explains OUT-1 versus OUT-2 with the cap: 400 customers cannot outrank a life-safety flag. New dispatchers hear that before they hear about the software.
 
 The screen still has no send and no assign. Communications and dispatch kept their own tools. Closing the ranker is still the rollback, and they have done it. I am not on the storm roster.

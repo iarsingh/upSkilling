@@ -9,6 +9,8 @@ status: scheduled
 publish: true
 ---
 
+![Security bans the model API](../../assets/2026-10-07-fde-security-bans-the-model-doodle.png)
+
 Scenario: IT will not approve a third-party model, and the data cannot leave their environment. The VP still wants the night desk helped in two weeks.
 
 The build is a service that reads their export from disk and applies a policy they signed. Every point on the score is visible. Every answer cites the shipment row, the open ticket, and the SOP.

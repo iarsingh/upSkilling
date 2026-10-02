@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-02-13-fde-vendor-metric-doodle.png
 ---
 
+![Count bank changes that were not self-approved](../../assets/2027-02-13-fde-vendor-metric-doodle.png)
+
 Northline's fast metric would have been vendors onboarded. That number goes up if V-2 is accepted by the person who edited the bank details.
 
 The metric we kept: every bank-change row is manual review or blocked, and none are accepted by the tool. V-5 never enters the numerator as a success. The analyst and counsel are the judges. Fraud found is refused.

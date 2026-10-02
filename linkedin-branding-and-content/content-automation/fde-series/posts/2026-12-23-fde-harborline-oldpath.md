@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-12-23-fde-harborline-oldpath-doodle.png
 ---
 
+![They hit the timer and still opened the binder](../../assets/2026-12-23-fde-harborline-oldpath-doodle.png)
+
 Harborline's shadow week beat the clock. Cited answers came back in under two minutes. The night desk still opened the printed SOP afterward.
 
 I watched one lookup on SHP-1042. They were checking that the three cold-chain steps on the screen matched the paper they are graded against. The tool was a second copy, not a source. Speed was the wrong victory.

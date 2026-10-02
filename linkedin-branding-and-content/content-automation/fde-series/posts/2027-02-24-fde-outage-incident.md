@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-02-24-fde-outage-incident-doodle.png
 ---
 
+![A stale life-safety flag is a Cedar Grid incident](../../assets/2027-02-24-fde-outage-incident-doodle.png)
+
 Cedar Grid rolled a crew toward OUT-1 because the ranker said life safety. The account had moved. The storm lead caught it on the radio before the truck committed. The screen had been confident.
 
 I took the ranker off the shared display for the rest of the night. The radio list continued. In the morning the duty officer corrected the flag, and the outage id went into the eval file as a row that must not get the 100 points. We did not "lower the weight" to make stale data less embarrassing.

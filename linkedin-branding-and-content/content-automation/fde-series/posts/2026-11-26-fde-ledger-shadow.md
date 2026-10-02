@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-11-26-fde-ledger-shadow-doodle.png
 ---
 
+![The close still happens without the matcher](../../assets/2026-11-26-fde-ledger-shadow-doodle.png)
+
 Brightpath's morning close does not depend on the matcher in week one. The analyst still builds her list. The tool's list is a second copy she compares.
 
 Success is boring. Replay evt-1 and the matched total stays 1500 cents. pay-4 is on her exception list and on ours. If our list is missing a row she flagged, the tool does not get to post, and it does not get to replace her sheet.

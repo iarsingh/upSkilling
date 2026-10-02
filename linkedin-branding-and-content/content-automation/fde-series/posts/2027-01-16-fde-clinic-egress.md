@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-01-16-fde-clinic-egress-doodle.png
 ---
 
+![Prove the note did not leave the clinic](../../assets/2027-01-16-fde-clinic-egress-doodle.png)
+
 Northshore will not send note text to a model API. A small model on a laptop in the office was my workaround. The nurse still could not recompute it, and it spent the week on serving instead of on consent.
 
 The router reads the CSV from disk. There is no model client. Their IT owner watched one lookup of NT-12 and confirmed the host made no outbound call. A quiet application log would not have been enough. A quiet log can hide a request.

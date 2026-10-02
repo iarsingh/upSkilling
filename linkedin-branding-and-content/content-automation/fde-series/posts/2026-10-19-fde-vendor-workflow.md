@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-10-19-fde-vendor-workflow-doodle.png
 ---
 
+![One person could accept a bank change](../../assets/2026-10-19-fde-vendor-workflow-doodle.png)
+
 Northline's analyst was not blocked by missing software. She was blocked by a shared inbox where the person who typed a bank change could also accept it.
 
 V-2 has a W-9 and insurance that is still valid. The bank details changed, so the decision is manual review. There is no approve button. V-5 is a sanctions flag, and the tool will not wave it through.

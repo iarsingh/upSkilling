@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-10-29-fde-vendor-roi-doodle.png
 ---
 
+![Do not claim fraud found](../../assets/2026-10-29-fde-vendor-roi-doodle.png)
+
 Northline's CFO will ask how much fraud the packet check caught. A sanctions flag that was already on the row is not a discovery.
 
 The metric is behavioral. Every bank-change packet, including V-2, is manual review or blocked. None are accepted by the tool. V-6 is missing a W-9 and a bank change, so incomplete wins and the bank review does not even start.

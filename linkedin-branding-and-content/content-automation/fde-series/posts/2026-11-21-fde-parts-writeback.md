@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-11-21-fde-parts-writeback-doodle.png
 ---
 
+![Do not decrement the bin from the lookup](../../assets/2026-11-21-fde-parts-writeback-doodle.png)
+
 Helios asked the lookup to decrement bin B-14 when it recommended BRG-19, so the count would stay true. That makes a wrong recommendation a wrong inventory movement.
 
 The tech still pulls the part. The lead still adjusts stock in the system they already trust. The lookup staying wrong is annoying. The lookup writing stock is an outage at the parts window.

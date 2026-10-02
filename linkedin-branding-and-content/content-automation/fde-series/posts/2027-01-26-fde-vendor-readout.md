@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-01-26-fde-vendor-readout-doodle.png
 ---
 
+![Show finance the packet you refused to accept](../../assets/2027-01-26-fde-vendor-readout-doodle.png)
+
 Northline's readout is for the CFO and for counsel, so it cannot say "approved" by accident.
 
 V-2 is complete except the bank details changed, so a second person still has to review it. V-5 is a sanctions flag and cannot be overridden. V-4's insurance expired on 1 January 2025, measured on 2 October 2026. V-1 is ready for a human and is still not accepted. We are not claiming fraud found.

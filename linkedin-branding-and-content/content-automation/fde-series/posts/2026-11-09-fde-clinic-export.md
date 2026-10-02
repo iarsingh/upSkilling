@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-11-09-fde-clinic-export-doodle.png
 ---
 
+![Their note file had a column I had treated as text](../../assets/2026-11-09-fde-clinic-export-doodle.png)
+
 Northshore's real extract did not look like my sample. Consent was "Y", "yes", and blank. Blank was not the same as no, and the nurse lead had not agreed what Y meant.
 
 I stopped the demo, showed three rows, and left the blank and the Y unscored. Only an explicit yes copied a sentence into the route. NT-12 stayed blocked. I did not map Y to yes in the hallway to save the meeting.

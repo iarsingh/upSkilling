@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-12-18-fde-clinic-scope-doodle.png
 ---
 
+![Triage is not a diagnosis product](../../assets/2026-12-18-fde-clinic-scope-doodle.png)
+
 Northshore asked for overnight routing, a patient message, and a suggested medication note. I will do the routing.
 
 The nurse gets blocked, urgent callback, or morning queue. NT-11 can cite a consented sentence. Nobody gets a dose, a diagnosis, or a text to the patient. Those are other clinicians' jobs and other risk reviews.

@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-02-19-fde-vendor-recompute-doodle.png
 ---
 
+![The analyst can apply Northline's order of rules](../../assets/2027-02-19-fde-vendor-recompute-doodle.png)
+
 Northline's analyst should reach the same decision I do, in the same order, on paper.
 
 Sanctions yes, as on V-5, stops everything. Then a missing W-9 or an insurance date before 2 October 2026, as on V-3 and V-4, blocks the packet. Only then does a bank change, V-2, become manual review. V-1 survives all three and is still only ready for a human. V-6 fails the W-9 check before its bank change is discussed.

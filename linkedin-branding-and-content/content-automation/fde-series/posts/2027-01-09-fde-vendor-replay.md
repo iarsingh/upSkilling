@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-01-09-fde-vendor-replay-doodle.png
 ---
 
+![Resubmitting a packet must not accept it](../../assets/2027-01-09-fde-vendor-replay-doodle.png)
+
 Northline's analyst hit submit twice because the first click spun. V-2 was manual review both times. It did not become ready, and it did not create two review tasks that a tired approver could split.
 
 V-5 stayed blocked on both submits. There is no path where the second click is the override. I want that to be true even if the service times out and the browser retries.

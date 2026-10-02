@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-12-19-fde-ledger-scope-doodle.png
 ---
 
+![Refunds are not part of the match](../../assets/2026-12-19-fde-ledger-scope-doodle.png)
+
 Brightpath asked the matcher to also issue refunds when the webhook was higher than the settlement. That is a money movement. The match is a list.
 
 I will classify. evt-1 matches once. pay-4 stays an exception at a 100-cent gap. A person decides whether anyone is owed anything. The tool does not originate a credit.

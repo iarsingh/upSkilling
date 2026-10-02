@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-10-18-fde-outage-workflow-doodle.png
 ---
 
+![Customer count was the wrong sort](../../assets/2026-10-18-fde-outage-workflow-doodle.png)
+
 Cedar Grid's storm desk sorted outages by how many customers were dark. That sort buried a smaller feeder with a life-safety account.
 
 OUT-1 affects 40 customers and scores 112. OUT-2 affects 400 and scores 43. The 100 points for life safety are why. The screen suggests a crew count. It does not assign one, and it does not text anyone.

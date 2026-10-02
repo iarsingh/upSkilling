@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-11-19-fde-clinic-writeback-doodle.png
 ---
 
+![A route in the chart is no longer a shadow](../../assets/2026-11-19-fde-clinic-writeback-doodle.png)
+
 The Northshore lead asked to write the route onto the note in the chart so the day shift would see it. Reasonable, and it ends easy rollback.
 
 While the tool is read-only, stopping it leaves the chart untouched and the nurse still has the file. The moment NT-11's "urgent callback" is a chart field, a wrong route is something the next nurse will act on, and undoing it is an amendment.

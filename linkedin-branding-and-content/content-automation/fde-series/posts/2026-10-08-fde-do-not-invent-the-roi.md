@@ -9,6 +9,8 @@ status: scheduled
 publish: true
 ---
 
+![Do not invent the ROI](../../assets/2026-10-08-fde-do-not-invent-the-roi-doodle.png)
+
 The VP asks how many missed deliveries the pilot will prevent next month.
 
 The only number in the room is the night lead's own timing: 25 to 40 minutes to answer why a reefer or medical load is late. That does not convert into a delivery forecast. Pretending it does is how pilots die in the second meeting.

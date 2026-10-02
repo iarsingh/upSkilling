@@ -9,6 +9,8 @@ status: scheduled
 publish: true
 ---
 
+![A constraint has to delete a design](../../assets/2026-10-06-fde-constraint-deletes-the-design-doodle.png)
+
 A discovery brief that deletes nothing is a status meeting.
 
 I wanted a ranked search over the SOP binder. The night lead rejected it because he could not explain at 2am why one playbook won. That sentence removed the design. The replacement is a written order: medical cargo first, then a reefer temperature event, then a plain checkpoint delay.

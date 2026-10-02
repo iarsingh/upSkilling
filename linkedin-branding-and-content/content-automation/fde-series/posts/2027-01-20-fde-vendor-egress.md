@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-01-20-fde-vendor-egress-doodle.png
 ---
 
+![Do not send the vendor name to a sanctions API](../../assets/2027-01-20-fde-vendor-egress-doodle.png)
+
 Northline's sanctions flag is already on the packet. I do not need to call an external screening API with the vendor's legal name to "be sure." That call is a new disclosure, and it is not this engagement.
 
 V-5 is blocked because their flag is yes. The tool does not re-screen, and it does not have an API key. If they want a fresh screen, that is a different owner and a different contract. I will not bury it in the packet check because the SDK was easy.

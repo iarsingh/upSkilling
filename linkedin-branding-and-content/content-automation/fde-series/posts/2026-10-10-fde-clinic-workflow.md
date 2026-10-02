@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-10-10-fde-clinic-workflow-doodle.png
 ---
 
+![The nurse asked which notes she may open](../../assets/2026-10-10-fde-clinic-workflow-doodle.png)
+
 The morning nurse did not ask for a summary model. She asked which overnight notes she is allowed to open.
 
 NT-12 was at the top of the file and had no consent. The old habit was to read it anyway. The first version does the opposite: consent is not yes, so the body is not copied into the decision.

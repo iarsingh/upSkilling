@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-02-11-fde-parts-metric-doodle.png
 ---
 
+![Count signed pulls, and count orders created](../../assets/2027-02-11-fde-parts-metric-doodle.png)
+
 Helios can look successful by recommending a part every time. E99 would then stop being an escalate and start being a guess.
 
 Two numbers go in the weekly note. Recommended bins the depot lead would have pulled, with AST-7 / B-14 as the example. Purchase orders the tool created, which must stay zero. He is the judge. Less downtime is refused until a later window.

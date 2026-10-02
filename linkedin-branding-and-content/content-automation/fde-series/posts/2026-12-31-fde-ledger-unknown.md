@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-12-31-fde-ledger-unknown-doodle.png
 ---
 
+![A new currency does not convert itself](../../assets/2026-12-31-fde-ledger-unknown-doodle.png)
+
 Brightpath dropped a EUR webhook into a file that had only been USD. I can multiply by a rate. I do not know whose rate, or whose books would be wrong if I did.
 
 The EUR event stayed pending, with the currency shown. evt-1 still matched 1500 USD cents once. I did not convert EUR so the matched total would include it. The analyst has a treasury rate. The tool does not.

@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-10-27-fde-parts-roi-doodle.png
 ---
 
+![Do not claim less downtime](../../assets/2026-10-27-fde-parts-roi-doodle.png)
+
 Helios will ask if the parts lookup shortens truck downtime. Twenty correct bins do not prove that.
 
 The shadow-week claim is the one the depot lead can check. The recommended bin is the one they would have pulled, and the tool created zero purchase orders. AST-7 / E42 landing on B-14 is a hit. E99 returning no SKU is also a hit.

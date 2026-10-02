@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-11-18-fde-vendor-audit-doodle.png
 ---
 
+![The tool never sees the account number](../../assets/2026-11-18-fde-vendor-audit-doodle.png)
+
 Northline's vendor master has the bank account. This review tool receives only that it changed. V-2 is manual review because the flag is yes, not because someone pasted digits into a note.
 
 The audit row is vendor id and decision. If an investigator needs the account, they go to the master, under the access they already have. I will not make a second copy so the packet review is "self-contained."

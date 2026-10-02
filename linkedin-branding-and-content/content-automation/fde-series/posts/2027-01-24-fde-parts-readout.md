@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-01-24-fde-parts-readout-doodle.png
 ---
 
+![Tell the depot director which bin and which blank](../../assets/2027-01-24-fde-parts-readout-doodle.png)
+
 Helios's readout is for the person who owns the night shift, not for a parts-marketplace pitch.
 
 AST-7, fault E42, bin B-14, quantity 2. AST-3, fault E17, stockout, no purchase order. AST-8, fault E99, no part, because it is not on the signed list. We are not claiming less downtime. The ask is a name on the signed sheet and a time of day the bin file is fresh.

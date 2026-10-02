@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-12-08-fde-parts-rollback-doodle.png
 ---
 
+![The bin count survives a wrong lookup](../../assets/2026-12-08-fde-parts-rollback-doodle.png)
+
 Helios can turn the lookup off and lose nothing but the screen. Bin B-14 still shows quantity 2, because recommending BRG-19 did not decrement it. No purchase order exists to cancel.
 
 The tech who already walked to the bin is the residual risk. That is why shadow week still has the lead say the bin out loud before the walk. The rollback does not call a tech back from the yard.

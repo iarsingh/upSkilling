@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-12-10-fde-vendor-rollback-doodle.png
 ---
 
+![No vendor master row to delete](../../assets/2026-12-10-fde-vendor-rollback-doodle.png)
+
 Northline's rollback is stopping the review process. The ERP vendor master is unchanged, so there is no vendor to inactivate and no bank account to revert.
 
 V-2 never became payable. V-1 never became a master record. The inbox is still the queue. I want the analyst to stop the tool on a Thursday and finish Friday's packets the old way without calling me.

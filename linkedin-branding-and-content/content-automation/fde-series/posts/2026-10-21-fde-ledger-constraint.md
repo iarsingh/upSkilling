@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-10-21-fde-ledger-constraint-doodle.png
 ---
 
+![They had already been burned by a helpful script](../../assets/2026-10-21-fde-ledger-constraint-doodle.png)
+
 Brightpath had a script that wrote the webhook amount over the settlement when the cents disagreed. It was helpful once and wrong the next week.
 
 The controller's rule is now the design: this tool does not post to the ledger. pay-4 stays an amount exception at 8000 versus 7900. Nobody in the code path picks a winner.

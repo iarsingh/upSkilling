@@ -9,6 +9,8 @@ status: scheduled
 publish: true
 ---
 
+![Start from the workflow, not the model](../../assets/2026-10-05-fde-start-from-the-workflow-doodle.png)
+
 "We need an AI copilot" is not a requirement. It is a request for a familiar interface.
 
 On a discovery call I want one walkthrough from the person who feels the pain. For a night dispatch desk, that walk was three systems and 25 to 40 minutes: the TMS export, the ticket queue, then a printed SOP. The decision at the end was short. The searching was the job.

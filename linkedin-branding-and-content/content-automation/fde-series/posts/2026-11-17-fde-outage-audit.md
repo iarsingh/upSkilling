@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-11-17-fde-outage-audit-doodle.png
 ---
 
+![The rank log has no phone numbers](../../assets/2026-11-17-fde-outage-audit-doodle.png)
+
 Cedar Grid's outage card never had street addresses, on purpose. The first audit export still joined to the account table and picked up phone numbers, because the join was convenient.
 
 I cut the export back to outage id, feeder, score, and suggested crew count. OUT-1 can be reconstructed from the outage system they already run. The life-safety flag is a reason code, not a customer list.

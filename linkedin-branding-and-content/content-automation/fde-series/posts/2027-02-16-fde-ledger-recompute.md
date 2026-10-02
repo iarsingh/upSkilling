@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-02-16-fde-ledger-recompute-doodle.png
 ---
 
+![The analyst can recompute 1500 on a calculator](../../assets/2027-02-16-fde-ledger-recompute-doodle.png)
+
 Brightpath's analyst should not need the repo to explain the total.
 
 evt-1 matches 1500 cents and is counted. The same event id again is ignored. A later event id for the same payment is ignored. pay-4 is 8000 versus 7900, so it is not in the total. pay-7 has no settlement, so it is not in the total. The total is 1500.

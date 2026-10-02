@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-01-23-fde-ledger-readout-doodle.png
 ---
 
+![Show the controller one total and one exception](../../assets/2027-01-23-fde-ledger-readout-doodle.png)
+
 Brightpath's readout to the controller has two numbers she can check. Matched total 1500 cents, from evt-1, counted once. One amount exception, pay-4, 8000 against 7900, not resolved.
 
 It says the tool does not post. It says a replay did not change the total. It does not say we recovered cash. The ask is whether processor_reference, after the prefix strip, is the key she will stand behind.

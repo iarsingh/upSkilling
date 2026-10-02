@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-10-25-fde-clinic-roi-doodle.png
 ---
 
+![Do not promise fewer adverse events](../../assets/2026-10-25-fde-clinic-roi-doodle.png)
+
 A clinic sponsor will ask whether the overnight router prevents bad outcomes. I cannot get there from a file of notes.
 
 What Northshore can prove in a shadow week is narrower. Every note without consent stays blocked. The nurse lead agrees with the route on at least 9 of 10. NT-12 is the example: no consent, body not copied.

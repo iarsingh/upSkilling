@@ -9,6 +9,8 @@ status: scheduled
 publish: true
 ---
 
+![The export is missing a column](../../assets/2026-10-13-fde-export-missing-a-column-doodle.png)
+
 The demo is tomorrow. Their nightly file has event timestamps, not the hours-since-checkpoint column the sample scorer expected. One status value has never shown up in the sample: held.
 
 I do not compute the hours quietly and hope nobody asks. Derived is fine. Hidden is not. The formula goes into the readout.

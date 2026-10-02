@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-02-10-fde-ledger-metric-doodle.png
 ---
 
+![Count a stable total, not rows touched](../../assets/2027-02-10-fde-ledger-metric-doodle.png)
+
 Brightpath almost measured rows processed. A replay would have doubled the success.
 
 The metric is the matched total on a repeated file: 1500 cents, still 1500, with pay-4 still an exception. The analyst is the judge of whether an exception she knows is missing. Recovered cash is refused. The controller signed that before I tightened the matcher.

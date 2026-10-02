@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-12-01-fde-ledger-stop-doodle.png
 ---
 
+![Stop if the second run changes the total](../../assets/2026-12-01-fde-ledger-stop-doodle.png)
+
 Brightpath's stop condition was written before the demo. If the matched total changes when the same file runs twice, the desk does not get the tool.
 
 evt-1 replayed is the test. 1500 cents, then 1500 cents again. A new event id for the same payment must not add another 1500. pay-4 must still be an amount exception, not a match that appeared because we retried.

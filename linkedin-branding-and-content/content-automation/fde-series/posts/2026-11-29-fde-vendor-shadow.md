@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-11-29-fde-vendor-shadow-doodle.png
 ---
 
+![The inbox stays the queue for a week](../../assets/2026-11-29-fde-vendor-shadow-doodle.png)
+
 Northline does not close the shared inbox on day one. Packets still arrive there. The tool's decision is stapled beside the analyst's own note.
 
 For a week I want every V-2 style bank change to show up as manual review in both places, and every sanctions row to show up blocked with no override. If she accepts one that the tool blocked, we stop and read the packet before anyone talks about automation.

@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-12-06-fde-clinic-rollback-doodle.png
 ---
 
+![Stopping the router leaves the chart alone](../../assets/2026-12-06-fde-clinic-rollback-doodle.png)
+
 Northshore's rollback is stopping the process. The nurse still has the overnight file. The chart does not contain routes we have to amend, because we never wrote them.
 
 NT-12's blocked decision dies with the process. It was never a clinical note. If I had written "urgent" onto a chart for NT-11, rollback would be a correction another nurse might miss.

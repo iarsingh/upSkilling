@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-11-28-fde-outage-shadow-doodle.png
 ---
 
+![The radio stays the system of action](../../assets/2026-11-28-fde-outage-shadow-doodle.png)
+
 Cedar Grid's shadow week runs during an ordinary night, not the first storm. The ranker is on a side monitor. Crews still move because someone speaks on the radio.
 
 We compare the tool's order to the order the storm lead would have called. OUT-1 before OUT-2 is the case we already believe. The interesting rows are the ones he swaps. Those swaps become eval cases before a storm depends on the screen.

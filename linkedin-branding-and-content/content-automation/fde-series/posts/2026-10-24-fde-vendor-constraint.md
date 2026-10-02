@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-10-24-fde-vendor-constraint-doodle.png
 ---
 
+![Legal removed the approve action](../../assets/2026-10-24-fde-vendor-constraint-doodle.png)
+
 Northline's legal team did not ask for a better approve button. They asked that the software not contain one.
 
 The decisions are blocked for sanctions, blocked for an incomplete packet, manual review when the bank details changed, or ready for a human. V-1 can be complete and still say ready_for_human. The renderer throws if the word approved appears.

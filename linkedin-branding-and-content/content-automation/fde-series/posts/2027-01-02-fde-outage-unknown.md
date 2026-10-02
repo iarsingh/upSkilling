@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-01-02-fde-outage-unknown-doodle.png
 ---
 
+![An unknown cause code does not pick a crew size](../../assets/2027-01-02-fde-outage-unknown-doodle.png)
+
 Cedar Grid sent an open outage with a cause code the ranker had never seen. Customer count and life safety were still there. I could have scored it. The storm lead uses that code to decide whether the crew needs a special truck.
 
 I left the crew suggestion blank and kept the feeder on the list as unscored for crew size. OUT-1, with a known code, still said suggest 2. The unknown row showed the code and the words "lead has not classified this."

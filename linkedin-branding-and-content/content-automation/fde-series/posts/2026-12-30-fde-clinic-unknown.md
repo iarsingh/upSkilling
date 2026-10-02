@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-12-30-fde-clinic-unknown-doodle.png
 ---
 
+![A new consent value is not a yes](../../assets/2026-12-30-fde-clinic-unknown-doodle.png)
+
 Northshore sent a note with consent "verbal." My rule knew yes and everything else. Verbal is not everything else. A nurse might have obtained it. I had not.
 
 The note stayed unscored, id visible, body hidden. NT-12 with an explicit no stayed blocked. I asked the privacy officer what verbal requires before any sentence can be copied. Until that answer, verbal does not become yes inside a helper.

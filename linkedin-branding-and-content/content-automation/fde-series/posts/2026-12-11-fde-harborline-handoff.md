@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-12-11-fde-harborline-handoff-doodle.png
 ---
 
+![They add the next shipment without you](../../assets/2026-12-11-fde-harborline-handoff-doodle.png)
+
 Harborline is done when their IT owner can add a shipment to the eval file and run it. Not when I have explained the score for SHP-1042 one more time.
 
 SHP-1042 stays in the file as the taught example: 76 points, cold-chain SOP, citations. The next argument with the night lead becomes a new row, owned by them. If that row requires me to edit Python, the handoff failed.

@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-12-21-fde-outage-scope-doodle.png
 ---
 
+![Estimated restoration time is a different claim](../../assets/2026-12-21-fde-outage-scope-doodle.png)
+
 Cedar Grid asked for a ranker and an ETA text to every customer. The ranker is the pilot. The ETA is a promise I cannot back.
 
 OUT-1 can be first in the list. The card does not predict when the lights return, and it does not send that prediction. An ETA needs crew locations, travel, and a communications approval this engagement does not have.

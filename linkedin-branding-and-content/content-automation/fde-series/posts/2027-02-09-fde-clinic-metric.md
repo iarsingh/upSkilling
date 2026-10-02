@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-02-09-fde-clinic-metric-doodle.png
 ---
 
+![Count blocked bodies, not summaries produced](../../assets/2027-02-09-fde-clinic-metric-doodle.png)
+
 Northshore's first proposed metric was notes summarized per hour. That metric rewards copying text. Their constraint forbids copying text without consent.
 
 The metric we wrote down: every note without consent, NT-12 included, stays blocked and body-free. The nurse lead agrees with the route on at least 9 of 10 consented notes. She is the judge. Fewer adverse events are refused.

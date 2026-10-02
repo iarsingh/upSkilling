@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-10-23-fde-outage-constraint-doodle.png
 ---
 
+![No texts, no crew assignment](../../assets/2026-10-23-fde-outage-constraint-doodle.png)
+
 Cedar Grid's communications lead and the dispatcher said the same thing in different words. Do not text customers. Do not assign a crew.
 
 I had a design that paged the affected accounts and posted a crew. Both pieces are gone. OUT-1 still ranks first because of the life-safety flag. The card says "suggest 2 crews" and "this does not dispatch them."

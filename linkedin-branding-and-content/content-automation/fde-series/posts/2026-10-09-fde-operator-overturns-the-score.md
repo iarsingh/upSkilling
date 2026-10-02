@@ -9,6 +9,8 @@ status: scheduled
 publish: true
 ---
 
+![The operator overturns the score](../../assets/2026-10-09-fde-operator-overturns-the-score-doodle.png)
+
 Scenario: the eval file is green. The night lead reviews 10 shipments and overturns the band on 4.
 
 That is a stop, not a prompt tweak. The rule I would have written before the pilot is simple: more than one overturn in ten and the desk rollout does not expand.

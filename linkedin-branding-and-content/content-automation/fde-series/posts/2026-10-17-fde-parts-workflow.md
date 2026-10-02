@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-10-17-fde-parts-workflow-doodle.png
 ---
 
+![The depot lead still opens three sheets](../../assets/2026-10-17-fde-parts-workflow-doodle.png)
+
 A Helios tech calls with a fault code. The depot lead opens the asset list, the signed parts sheet, and the bin count. That phone call is the product.
 
 E42 on AST-7 is a bearing in bin B-14, because that bin has 2 and the other bin has 0. E99 is not on the signed list, so the answer has no part number.

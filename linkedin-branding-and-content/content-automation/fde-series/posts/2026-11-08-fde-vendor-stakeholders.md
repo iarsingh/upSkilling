@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-11-08-fde-vendor-stakeholders-doodle.png
 ---
 
+![Finance wanted speed. Legal wanted a second person.](../../assets/2026-11-08-fde-vendor-stakeholders-doodle.png)
+
 Northline finance was measured on how fast a vendor could be paid. Legal was measured on whether a bank change had a second set of eyes.
 
 V-2 is the case that makes the trade visible. The packet is otherwise complete. The decision is still manual review. V-5 never reaches that argument, because a sanctions flag stops first.

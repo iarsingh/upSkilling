@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-11-07-fde-outage-stakeholders-doodle.png
 ---
 
+![Comms and dispatch blocked different buttons](../../assets/2026-11-07-fde-outage-stakeholders-doodle.png)
+
 During a Cedar Grid storm, dispatch wanted a crew assignment on the card. Communications wanted an SMS to every account on the feeder. Each group thought the other was the delay.
 
 I removed both buttons. The card ranks OUT-1 first and says the suggestion is not a dispatch and not a message. The storm lead still uses the radio. Communications still uses their approved template, outside this tool.

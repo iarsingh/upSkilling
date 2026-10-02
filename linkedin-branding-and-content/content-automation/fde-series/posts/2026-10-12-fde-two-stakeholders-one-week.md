@@ -9,6 +9,8 @@ status: scheduled
 publish: true
 ---
 
+![Two stakeholders, one week](../../assets/2026-10-12-fde-two-stakeholders-one-week-doodle.png)
+
 IT wants SSO, and medical shipments restricted to the medical desk, before anyone logs in. The night lead wants the scorer tonight because a grocery load is already late.
 
 Both are right. The sequence is the job.

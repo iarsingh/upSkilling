@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-01-01-fde-parts-unknown-doodle.png
 ---
 
+![A fault from another model does not borrow a part](../../assets/2027-01-01-fde-parts-unknown-doodle.png)
+
 A Helios tech reported E42 on an HX-90. The signed sheet maps E42 to a bearing only for the HX-200. The HX-90 has a different E42 in somebody's memory, not on the sheet.
 
 AST-3 stayed escalate. No SKU. AST-7, which is an HX-200, still got bin B-14. I did not reuse the part because the code matched. The model is part of the key. A code without the model is a different fault.

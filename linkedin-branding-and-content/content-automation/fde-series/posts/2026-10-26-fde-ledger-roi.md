@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-10-26-fde-ledger-roi-doodle.png
 ---
 
+![Do not claim recovered cash](../../assets/2026-10-26-fde-ledger-roi-doodle.png)
+
 Brightpath's controller will ask how much cash the matcher recovered. A sample where evt-1 matches 1500 cents does not answer that.
 
 The number I will sign is operational. Run the same file twice and the matched total stays 1500. pay-4's hundred-cent gap is still in the exception queue at the end of the day.

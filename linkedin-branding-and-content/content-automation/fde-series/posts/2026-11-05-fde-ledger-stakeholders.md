@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-11-05-fde-ledger-stakeholders-doodle.png
 ---
 
+![Finance wanted a post. Ops wanted a list.](../../assets/2026-11-05-fde-ledger-stakeholders-doodle.png)
+
 Brightpath finance wanted the matcher to post adjustments before the close. Ops wanted a list they could still argue with.
 
 I kept the list. evt-1 can match. pay-4 cannot be settled by the tool. The close still happens in their ledger, by a person, after the exception queue is empty or explicitly waived. That waiver is not a button I own.

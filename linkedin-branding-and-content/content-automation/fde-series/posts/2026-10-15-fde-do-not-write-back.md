@@ -9,6 +9,8 @@ status: scheduled
 publish: true
 ---
 
+![Do not write back to the system of record](../../assets/2026-10-15-fde-do-not-write-back-doodle.png)
+
 The lead asks for the score and the recommended SOP to be written into the TMS so the next shift sees them.
 
 That request is reasonable. It is also the moment rollback stops being "turn the service off." A wrong band becomes a field someone will act on, and undoing it is a migration.

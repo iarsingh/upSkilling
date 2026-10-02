@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2027-01-08-fde-outage-replay-doodle.png
 ---
 
+![Reloading the storm list must not page anyone](../../assets/2027-01-08-fde-outage-replay-doodle.png)
+
 Cedar Grid's ranker reloads every few minutes as outages update. OUT-1 staying first is fine. A reload that sent a customer message would be a pager storm.
 
 There is no message path, so reload is safe. I still sat with their network owner and reloaded OUT-1 ten times, watching for an outbound call. The rank changed only when the input changed. The host stayed quiet.

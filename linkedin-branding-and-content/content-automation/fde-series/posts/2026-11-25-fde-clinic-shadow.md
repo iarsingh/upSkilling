@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-11-25-fde-clinic-shadow-doodle.png
 ---
 
+![She still reads every note in week one](../../assets/2026-11-25-fde-clinic-shadow-doodle.png)
+
 Northshore's shadow week is not "the tool routes, the nurse trusts." She still reads every overnight note. The tool sits beside the file.
 
 We count two things. Blocked notes, including NT-12, never show a body. Her route agrees with the tool on at least 9 of 10 consented notes. A disagreement becomes a rule change the next morning, not a silent miss.

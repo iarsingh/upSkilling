@@ -8,6 +8,8 @@ publish: true
 image: ../../assets/2026-11-23-fde-vendor-writeback-doodle.png
 ---
 
+![Ready for a human must not create the vendor](../../assets/2026-11-23-fde-vendor-writeback-doodle.png)
+
 Northline asked the review tool to create the ERP vendor when the packet was ready_for_human, to skip a screen. That screen is the acceptance.
 
 V-1 being complete is not V-1 being payable. Creating the master record is the write I will not automate in this engagement. Manual review for V-2 would be meaningless if a clean packet inserted itself.
