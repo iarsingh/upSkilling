@@ -66,6 +66,16 @@ function resolveImagePath(item) {
   const doodlePath = path.join(root, "assets", `${doodleSlug}.png`);
   if (fs.existsSync(doodlePath)) return doodlePath;
 
+  if (item.diagram) {
+    return createImage({
+      pillar: item.pillar,
+      topic: item.baseTopic || item.topic,
+      footer: item.footer,
+      caption: item.caption,
+      diagram: item.diagram
+    }, doodleSlug).pngPath;
+  }
+
   // Calendar entries created before the doodle renderer point at generic
   // fallback PNGs. Generate a topic-aware diagram on first publication.
   if (item.topic || item.baseTopic) {

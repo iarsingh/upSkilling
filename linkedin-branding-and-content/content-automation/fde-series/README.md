@@ -2,7 +2,7 @@
 
 LinkedIn drafts and spoken interview drills for a Forward Deployed Engineer profile.
 
-These ten posts are on the live calendar in `content-calendar.json` for 5–9 October and 12–16 October 2026. The daily publisher sends one of them at 08:00 Asia/Kolkata on each of those dates, with its PNG. 10 and 11 October stay on the previous series.
+These 150 posts are on the live calendar in `content-calendar.json` from 5 October 2026 through 3 March 2027. The daily publisher sends one of them at 08:00 Asia/Kolkata, with its image. The first ten were written by hand. The rest are scenario posts across Harborline, Northshore, Brightpath, Helios, Cedar Grid, and Northline.
 
 The story underneath the posts is the Harborline Freight engagement in `fde-harborline-engagement`: a night desk, a banned external model, a written score, and a metric you refuse to claim.
 
@@ -11,7 +11,7 @@ The story underneath the posts is the Harborline Freight engagement in `fde-harb
 1. Read one question in [drill-questions.md](interview/drill-questions.md). Close it.
 2. Answer out loud in 90 seconds using the six-beat structure in [how to practice](interview/how-to-practice.md).
 3. Check yourself against [scenario-answers.md](interview/scenario-answers.md).
-4. Post the matching draft only after the spoken answer is clean.
+4. The day's post goes out at 08:00. Practice the matching scenario before you talk about it in comments.
 
 ## Files
 
