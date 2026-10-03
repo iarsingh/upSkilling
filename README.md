@@ -66,6 +66,7 @@ This keeps the GitHub view clean and recruiter-readable.
 | FDE Field Parts | [`fde-field-parts`](fde-field-parts/) | Offline spare-part lookup that will not invent a purchase order |
 | FDE Outage Desk | [`fde-outage-desk`](fde-outage-desk/) | Life-safety feeders ranked ahead of larger commercial outages |
 | FDE Vendor Review | [`fde-vendor-review`](fde-vendor-review/) | Vendor packets that never auto-approve a bank-detail change |
+| FDE Deployment Platform | [`customer-deployment-platform`](https://github.com/iarsingh/customer-deployment-platform) | Self-service service requests that render files and refuse to apply production |
 | RAG + Kubeflow + MLflow Platform | [`rag-kubeflow-mlflow-platform`](rag-kubeflow-mlflow-platform/) | Kubeflow Pipelines SDK build/eval pipeline, MLflow registry promotion gate, Ollama-served RAG API |
 | AIOps Projects | [`aiops-hands-on-projects`](aiops-hands-on-projects/) | Log anomaly detection, alert correlation, SLO burn rate |
 | CI/CD Projects | [`github-actions-hands-on-projects`](github-actions-hands-on-projects/) | GitHub Actions, Docker, Cloud Run, Terraform, Kubernetes validation |
