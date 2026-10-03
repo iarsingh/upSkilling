@@ -67,6 +67,21 @@ This keeps the GitHub view clean and recruiter-readable.
 | FDE Outage Desk | [`fde-outage-desk`](fde-outage-desk/) | Life-safety feeders ranked ahead of larger commercial outages |
 | FDE Vendor Review | [`fde-vendor-review`](fde-vendor-review/) | Vendor packets that never auto-approve a bank-detail change |
 | FDE Deployment Platform | [`customer-deployment-platform`](https://github.com/iarsingh/customer-deployment-platform) | Self-service service requests that render files and refuse to apply production |
+| System Health Dashboard | [`system-health-dashboard`](https://github.com/iarsingh/system-health-dashboard) | Host CPU, memory, and disk over a small FastAPI |
+| Cloud Cost Analyzer | [`cloud-cost-analyzer`](https://github.com/iarsingh/cloud-cost-analyzer) | Group a GCP or AWS cost export and name the top service |
+| Log Analyzer | [`log-analyzer-alerting`](https://github.com/iarsingh/log-analyzer-alerting) | Regex rules that turn log lines into alerts |
+| Task API | [`task-management-api`](https://github.com/iarsingh/task-management-api) | JWT-protected task CRUD with tests |
+| Deployment Manager | [`fullstack-deployment-manager`](https://github.com/iarsingh/fullstack-deployment-manager) | React and FastAPI list of recorded deployments |
+| Provisioning API | [`infra-provisioning-api`](https://github.com/iarsingh/infra-provisioning-api) | Render Terraform locally and refuse production |
+| Kubernetes Portal | [`kubernetes-deployment-portal`](https://github.com/iarsingh/kubernetes-deployment-portal) | Helm render that rejects an image tag of latest |
+| Multi-Tenant SaaS | [`multi-tenant-saas-platform`](https://github.com/iarsingh/multi-tenant-saas-platform) | Tenant isolation, roles, and a local OAuth token |
+| Internal Developer Platform | [`self-service-developer-platform`](https://github.com/iarsingh/self-service-developer-platform) | A catalog request that returns checks, not a cluster apply |
+| Docs Assistant | [`ai-docs-assistant`](https://github.com/iarsingh/ai-docs-assistant) | Local embeddings and answers that quote the corpus |
+| Incident Investigation | [`ai-incident-investigation`](https://github.com/iarsingh/ai-incident-investigation) | Evidence-backed hypotheses that do not invent a root cause |
+| Customer Onboarding | [`customer-onboarding-platform`](https://github.com/iarsingh/customer-onboarding-platform) | A tenant stays blocked until the security gates pass |
+| Multi-Cloud Control Plane | [`multi-cloud-control-plane`](https://github.com/iarsingh/multi-cloud-control-plane) | One plan shape for GCP, AWS, and Azure, with no cloud login |
+| CloudOps Agent | [`ai-cloudops-agent`](https://github.com/iarsingh/ai-cloudops-agent) | A tool-calling loop over alerts, logs, and manifests |
+| FDE Solution Platform | [`fde-customer-solution-platform`](https://github.com/iarsingh/fde-customer-solution-platform) | An engagement stays a readout until the constraint and metric exist |
 | RAG + Kubeflow + MLflow Platform | [`rag-kubeflow-mlflow-platform`](rag-kubeflow-mlflow-platform/) | Kubeflow Pipelines SDK build/eval pipeline, MLflow registry promotion gate, Ollama-served RAG API |
 | AIOps Projects | [`aiops-hands-on-projects`](aiops-hands-on-projects/) | Log anomaly detection, alert correlation, SLO burn rate |
 | CI/CD Projects | [`github-actions-hands-on-projects`](github-actions-hands-on-projects/) | GitHub Actions, Docker, Cloud Run, Terraform, Kubernetes validation |
