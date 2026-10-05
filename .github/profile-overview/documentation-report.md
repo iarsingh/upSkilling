@@ -1,10 +1,10 @@
 # Repository documentation publication report
 
-Published and verified documentation in all 275 owned repositories from the latest authenticated owner scan: 233 public and 42 private.
+Published and verified documentation in all 281 owned repositories from the latest authenticated owner scan: 239 public and 42 private.
 
 This report replaces the earlier public-only inventory, which missed private repositories. Additional public repositories found during the final checks are also included.
 
-Updated 825 documents and added 3,426 interview questions with answers. Validated 18,826 local links and source-line references, balanced code fences, and architecture diagram presence.
+Updated 849 documents and added 3,510 interview questions with answers. Validated 19,012 local links and source-line references, balanced code fences, and architecture diagram presence.
 
 Every repository includes a README project guide, `PROJECT_ARCHITECTURE.md`, and `INTERVIEW_QA.md`. Existing notes and prior architecture documents were preserved. Documentation-only repositories are identified as such.
 
@@ -287,3 +287,20 @@ Repository visibility was preserved. Eight archived repositories were unarchived
 | [web-project](https://github.com/iarsingh/web-project) | Private | [Architecture](https://github.com/iarsingh/web-project/blob/main/PROJECT_ARCHITECTURE.md) | [Q&A](https://github.com/iarsingh/web-project/blob/main/INTERVIEW_QA.md) | 10 | [3e082ef](https://github.com/iarsingh/web-project/commit/3e082efa211cb3aef4060786f0dd16b7cf0cc02b) |
 | [web-resume](https://github.com/iarsingh/web-resume) | Private | [Architecture](https://github.com/iarsingh/web-resume/blob/main/PROJECT_ARCHITECTURE.md) | [Q&A](https://github.com/iarsingh/web-resume/blob/main/INTERVIEW_QA.md) | 11 | [2b5c428](https://github.com/iarsingh/web-resume/commit/2b5c428c98c86677fbd52e520b6eac3ca00d4d59) |
 | [x-content-automation](https://github.com/iarsingh/x-content-automation) | Private | [Architecture](https://github.com/iarsingh/x-content-automation/blob/main/PROJECT_ARCHITECTURE.md) | [Q&A](https://github.com/iarsingh/x-content-automation/blob/main/INTERVIEW_QA.md) | 12 | [ca674f7](https://github.com/iarsingh/x-content-automation/commit/ca674f74d89fc8813923d88341ab7deb28f6af4b) |
+| [software-development-agent](https://github.com/iarsingh/software-development-agent) | Public | [Architecture](https://github.com/iarsingh/software-development-agent/blob/master/PROJECT_ARCHITECTURE.md) | [Q&A](https://github.com/iarsingh/software-development-agent/blob/master/INTERVIEW_QA.md) | 14 | [68252ab](https://github.com/iarsingh/software-development-agent/commit/68252ab6f62f2b90cd96c9e8aed51bfc8506435a) |
+| [sql-analytics-dashboard](https://github.com/iarsingh/sql-analytics-dashboard) | Public | [Architecture](https://github.com/iarsingh/sql-analytics-dashboard/blob/master/PROJECT_ARCHITECTURE.md) | [Q&A](https://github.com/iarsingh/sql-analytics-dashboard/blob/master/INTERVIEW_QA.md) | 14 | [cad630e](https://github.com/iarsingh/sql-analytics-dashboard/commit/cad630e92b586e85b010cdc2a37e4c289e9ea487) |
+| [sql-data-analyst-agent](https://github.com/iarsingh/sql-data-analyst-agent) | Public | [Architecture](https://github.com/iarsingh/sql-data-analyst-agent/blob/master/PROJECT_ARCHITECTURE.md) | [Q&A](https://github.com/iarsingh/sql-data-analyst-agent/blob/master/INTERVIEW_QA.md) | 14 | [db5a665](https://github.com/iarsingh/sql-data-analyst-agent/commit/db5a66593554fe50a9f7c1febf56faf137ad6d04) |
+| [support-ticket-classification-system](https://github.com/iarsingh/support-ticket-classification-system) | Public | [Architecture](https://github.com/iarsingh/support-ticket-classification-system/blob/master/PROJECT_ARCHITECTURE.md) | [Q&A](https://github.com/iarsingh/support-ticket-classification-system/blob/master/INTERVIEW_QA.md) | 14 | [ebb4ebd](https://github.com/iarsingh/support-ticket-classification-system/commit/ebb4ebde4588c9ac495bc72b145831a42abacad3) |
+| [technical-documentation-rag-assistant](https://github.com/iarsingh/technical-documentation-rag-assistant) | Public | [Architecture](https://github.com/iarsingh/technical-documentation-rag-assistant/blob/master/PROJECT_ARCHITECTURE.md) | [Q&A](https://github.com/iarsingh/technical-documentation-rag-assistant/blob/master/INTERVIEW_QA.md) | 14 | [486419d](https://github.com/iarsingh/technical-documentation-rag-assistant/commit/486419dc0b871b8121cf6aef2ada1ca0f1573756) |
+| [weather-data-analyzer](https://github.com/iarsingh/weather-data-analyzer) | Public | [Architecture](https://github.com/iarsingh/weather-data-analyzer/blob/master/PROJECT_ARCHITECTURE.md) | [Q&A](https://github.com/iarsingh/weather-data-analyzer/blob/master/INTERVIEW_QA.md) | 14 | [3eed6bb](https://github.com/iarsingh/weather-data-analyzer/commit/3eed6bbef4ef3656d9d27fa8ab29d18f88ae3243) |
+
+## Newly documented repositories
+
+The latest scan found six additional repositories. Added 84 project-specific interview answers, six component diagrams, and twelve domain/approval flow diagrams. All 57 existing tests passed. Each repository has `docs/PROCESS_FLOW.md` linked from its README and architecture guide.
+
+- [software-development-agent process flows](https://github.com/iarsingh/software-development-agent/blob/master/docs/PROCESS_FLOW.md)
+- [sql-analytics-dashboard process flows](https://github.com/iarsingh/sql-analytics-dashboard/blob/master/docs/PROCESS_FLOW.md)
+- [sql-data-analyst-agent process flows](https://github.com/iarsingh/sql-data-analyst-agent/blob/master/docs/PROCESS_FLOW.md)
+- [support-ticket-classification-system process flows](https://github.com/iarsingh/support-ticket-classification-system/blob/master/docs/PROCESS_FLOW.md)
+- [technical-documentation-rag-assistant process flows](https://github.com/iarsingh/technical-documentation-rag-assistant/blob/master/docs/PROCESS_FLOW.md)
+- [weather-data-analyzer process flows](https://github.com/iarsingh/weather-data-analyzer/blob/master/docs/PROCESS_FLOW.md)
