@@ -1,24 +1,40 @@
 const fs = require("fs");
 const path = require("path");
 const { assetsDir } = require("./config");
+const { contentDiagram } = require("./content-diagrams");
 
 const esc = (v) => String(v || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-function wrapText(text, max = 28, limit = 3) {
+function wrapText(text, max = 30) {
+  const words = String(text || "Engineering made visual").trim().split(/\s+/);
   const lines = [];
   let line = "";
-  for (const word of String(text || "Engineering made visual").trim().split(/\s+/)) {
-    const next = line ? `${line} ${word}` : word;
-    if (line && next.length > max) { lines.push(line); line = word; } else line = next;
+  for (const word of words) {
+    if (line && `${line} ${word}`.length > max) { lines.push(line); line = word; }
+    else line = line ? `${line} ${word}` : word;
   }
   if (line) lines.push(line);
-  return lines.slice(0, limit);
+  return lines;
+}
+
+function fitText(text, width, maxSize, maxLines, minSize = 22) {
+  for (let size = maxSize; size >= minSize; size -= 2) {
+    const lines = wrapText(text, Math.floor(width / (size * 0.58)));
+    if (lines.length <= maxLines && lines.every(line => line.length * size * 0.58 <= width)) return { lines, size };
+  }
+  throw new Error(`Text is too long for this image layout: ${text}`);
 }
 
 function diagramFor(post) {
   if (post.diagram) return post.diagram;
+  const specific = contentDiagram(post);
+  if (specific) return specific;
   const source = `${post.pillar || ""} ${post.topic || ""} ${post.imageTitle || ""}`.toLowerCase();
   if (/\bfde\b|forward deployed|customer engagement/.test(source)) return { label: "FDE ENGAGEMENT", nodes: ["Discover", "Constraint", "Policy", "Eval gate", "Shadow", "Handoff"], detail: "Name the user · obey the constraint · measure a number you can defend", accent: "#0f766e", pale: "#ccfbf1", icon: "bulb" };
+  if (/model registry|model approval|model promotion|mlflow registry/.test(source)) return { label: "CONTROLLED MODEL RELEASES", nodes: ["Register candidate", "Run evaluation", "Review evidence", "Approve version", "Promote safely", "Monitor + rollback"], detail: "Promote an approved version with evaluation evidence and a tested rollback.", accent: "#15803d", pale: "#dcfce7", icon: "brain" };
+  if (/autoscal|\bhpa\b|\bvpa\b/.test(source)) return { label: "KUBERNETES AUTOSCALING", nodes: ["Workload metrics", "VPA requests", "HPA replicas", "Pending pods", "Node autoscaler", "SLO + cost"], detail: "HPA scales replicas · VPA sizes requests · Cluster Autoscaler adjusts nodes", accent: "#0369a1", pale: "#e0f2fe", icon: "cloud" };
+  if (/python.*(file|folder)|(file|folder).*automation/.test(source)) return { label: "SAFE FILE AUTOMATION", nodes: ["Select paths", "Dry-run plan", "Validate scope", "Apply safely", "Record changes", "Verify outcome"], detail: "Check paths and permissions. Review a dry run before changing files.", accent: "#b45309", pale: "#fef3c7", icon: "gear" };
+  if (/\brag\b|retrieval|embedding|vector search/.test(source)) return { label: "RETRIEVAL TO EVIDENCE", nodes: ["Prepare sources", "Chunk + embed", "Retrieve passages", "Rank evidence", "Answer + cite", "Evaluate quality"], detail: "Trace the answer back to its source. Evaluate retrieval and answers separately.", accent: "#6d28d9", pale: "#ede9fe", icon: "brain" };
   if (/log analyzer|log analys/.test(source)) return { label: "PYTHON LOG ANALYZER", nodes: ["Read stream", "Parse lines", "Normalize", "Detect patterns", "Aggregate", "JSON report"], detail: "Handle malformed lines · bound memory · emit metrics · preserve raw evidence", accent: "#d97706", pale: "#fef3c7", icon: "log" };
   if (/model|mlops|training|drift|inference|feature/.test(source)) return { label: "MLOPS, SIMPLIFIED", nodes: ["Validate data", "Feature set", "Train run", "Eval gate", "Registry", "Drift alert"], detail: "Version data + code + model · enforce acceptance gates · monitor skew", accent: "#16a34a", pale: "#dcfce7", icon: "brain" };
   if (/kubernetes|k8s|gke|pod|cluster|helm|gitops|container/.test(source)) return { label: "PLATFORM, UNPACKED", nodes: ["Commit SHA", "CI tests", "OCI image", "GitOps sync", "K8s rollout", "SLO signals"], detail: "Immutable artifact · readiness probes · policy gates · safe rollback", accent: "#0284c7", pale: "#e0f2fe", icon: "cloud" };
@@ -45,30 +61,69 @@ function icon(kind, color) {
   return `<path d="M938 128c-44 0-77 36-77 78 0 28 15 47 34 64 8 7 12 17 12 27h62c0-11 5-21 13-29 18-17 32-35 32-62 0-44-34-78-76-78z" fill="${color}" opacity=".14" stroke="${color}" stroke-width="7"/><path d="M907 316h62m-55 18h48M938 94V69m-102 42-18-18m222 18 18-18" class="ink thin"/>`;
 }
 
-function createSvg(post, slug) {
-  const title = wrapText(post.topic || post.imageSubtitle || post.imageTitle);
+function createSvg(post, slug, outputDir = assetsDir) {
   const d = diagramFor(post);
-  const svgPath = path.join(assetsDir, `${slug}.svg`);
-  const titleSvg = title.map((line, i) => `<text x="72" y="${151 + i * 58}" class="title" transform="rotate(${i % 2 ? .35 : -.3} 72 ${151 + i * 58})">${esc(line)}</text>`).join("\n");
+  if (!Array.isArray(d.nodes) || d.nodes.length < 1 || d.nodes.length > 6) throw new Error("Diagram needs one to six steps");
+  const title = fitText(post.topic || post.imageSubtitle || post.imageTitle, 1056, 64, 3, 30);
+  const architecture = d.layout === "architecture";
+  const takeaway = fitText(d.detail, 958, 26, 3, 20);
+  const caption = fitText(architecture ? "Architecture · components and relationships" : "Process flow · actions and checkpoints", 960, 28, 1);
+  const svgPath = path.join(outputDir, `${slug}.svg`);
+  const positions = architecture
+    ? [[64, 490], [432, 490], [800, 490], [64, 742], [432, 742], [800, 742]]
+    : [[64, 490], [432, 490], [800, 490], [800, 742], [432, 742], [64, 742]];
   const cards = d.nodes.map((node, i) => {
-    const x = 70 + i * 178, y = 450 + (i % 2 ? 9 : -7), rotate = [-1.2, .8, -.5, 1.1, -.8, .6][i];
-    const arrow = i < 5 ? `<path d="M${x + 132} ${y + 49}q19 ${i % 2 ? -12 : 12} 38 1" class="scribble" marker-end="url(#arrow)"/>` : "";
-    return `<g transform="rotate(${rotate} ${x + 63} ${y + 47})"><rect x="${x}" y="${y}" width="126" height="94" rx="10" fill="${i % 2 ? "#fff" : d.pale}" class="card"/><text x="${x + 17}" y="${y + 27}" class="step">0${i + 1}</text><text x="${x + 63}" y="${y + 64}" class="cardText" text-anchor="middle">${esc(node)}</text></g>${arrow}`;
-  }).join("\n");
-
+    const [x, y] = positions[i];
+    const label = fitText(node, 264, 28, 3, 20);
+    const textY = y + 92;
+    return `<g><rect x="${x}" y="${y + 6}" width="336" height="170" rx="22" fill="#132333" opacity=".055"/>
+      <rect x="${x}" y="${y}" width="336" height="170" rx="22" fill="${i === 0 || i === d.nodes.length - 1 ? d.pale : '#ffffff'}" stroke="${d.accent}" stroke-opacity=".20" stroke-width="2"/>
+      <rect x="${x + 24}" y="${y + 22}" width="${architecture ? 176 : 42}" height="32" rx="10" fill="${d.accent}"/>
+      <text x="${x + (architecture ? 112 : 45)}" y="${y + 45}" text-anchor="middle" class="number" style="font-size:${architecture ? 12 : 18}px">${architecture ? (i < 3 ? 'PRIMARY PATH' : 'SUPPORT / CONTROL') : String(i + 1).padStart(2, '0')}</text>
+      ${label.lines.map((line, n) => `<text x="${x + 24}" y="${textY + n * (label.size + 5)}" font-size="${label.size}" class="cardText">${esc(line)}</text>`).join('')}
+    </g>`;
+  }).join('');
+  const connectors = architecture ? (d.edges || [[0,1],[1,2],[3,0],[4,1],[5,2]]).map(([from,to,label]) => {
+    const [x,y]=positions[from], [nx,ny]=positions[to];
+    let line;
+    let lx,ly;
+    if(y===ny){line=nx>x?`M${x+336} ${y+85}H${nx-4}`:`M${x} ${y+85}H${nx+340}`;lx=(x+nx+336)/2;ly=y+64;}
+    else if(x===nx){line=ny>y?`M${x+168} ${y+170}V${ny-5}`:`M${x+168} ${y}V${ny+175}`;lx=x+190;ly=710;}
+    else {const sy=ny>y?y+170:y,ey=ny>y?ny-5:ny+175;line=`M${x+112} ${sy}V701H${nx+112}V${ey}`;lx=(x+nx)/2+168;ly=692;}
+    return `<path d="${line}" stroke="${d.accent}" stroke-width="3" fill="none" marker-end="url(#arrow)"/>${label?`<text x="${lx}" y="${ly}" font-size="14" text-anchor="middle" font-weight="600" fill="${d.accent}">${esc(label)}</text>`:''}`;
+  }).join('') : d.nodes.slice(0, -1).map((_, i) => {
+    const [x, y] = positions[i];
+    const [nx, ny] = positions[i + 1];
+    const line = ny === y
+      ? (nx > x ? `M${x + 343} ${y + 85}h18` : `M${x - 7} ${y + 85}h-18`)
+      : `M${x + 168} ${y + 179}v63`;
+    return `<path d="${line}" stroke="${d.accent}" stroke-width="3" fill="none" marker-end="url(#arrow)"/>`;
+  }).join('');
+  const titleLines = title.lines.map((line, i) => `<text x="64" y="${174 + i * (title.size + 12)}" font-size="${title.size}" class="title">${esc(line)}</text>`).join('');
+  const footer = post.footer || "Akhilesh Ranjan Singh · Engineering in practice";
   const svg = `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-labelledby="image-title image-description">
+<title id="image-title">${esc(post.topic || post.imageSubtitle || post.imageTitle)}</title>
+<desc id="image-description">${esc(d.nodes.join(' → ') + '. ' + d.detail)}</desc>
 <defs>
- <filter id="paper"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="3" seed="8"/><feBlend in="SourceGraphic" mode="multiply"/></filter>
- <filter id="wobble"><feTurbulence type="fractalNoise" baseFrequency=".012" numOctaves="2" seed="4" result="warp"/><feDisplacementMap in="SourceGraphic" in2="warp" scale="3"/></filter>
- <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto"><path d="M1 1L10 4 1 8" fill="none" stroke="#172033" stroke-width="2" stroke-linecap="round"/></marker>
- <style>.ink{fill:none;stroke:#172033;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.thin{stroke-width:5}.eyebrow{font-family:"Comic Sans MS","Chalkboard SE",sans-serif;font-size:20px;font-weight:700;fill:${d.accent};letter-spacing:1.8px}.title{font-family:"Arial Rounded MT Bold","Trebuchet MS",Arial,sans-serif;font-size:48px;font-weight:900;fill:#172033}.note{font-family:"Comic Sans MS","Chalkboard SE",Arial,sans-serif;font-size:24px;font-weight:700;fill:#334155}.detail{font-family:"Comic Sans MS","Chalkboard SE",Arial,sans-serif;font-size:17px;font-weight:700;fill:#334155}.card{stroke:#172033;stroke-width:4;filter:url(#wobble)}.step{font-family:"Comic Sans MS",Arial,sans-serif;font-size:15px;font-weight:700;fill:${d.accent}}.cardText{font-family:"Arial Rounded MT Bold","Trebuchet MS",Arial,sans-serif;font-size:16px;font-weight:800;fill:#172033}.scribble{fill:none;stroke:#172033;stroke-width:3;stroke-linecap:round;stroke-dasharray:6 6}.footer{font-family:"Comic Sans MS","Chalkboard SE",Arial,sans-serif;font-size:18px;font-weight:700;fill:#475569}</style>
+ <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3 0 6" fill="none" stroke="${d.accent}" stroke-width="1.6"/></marker>
+ <style>text{font-family:"Avenir Next","Arial",sans-serif}.title{font-weight:800;fill:#142638;letter-spacing:-1.3px}.cardText{font-weight:700;fill:#142638}.number{font-size:18px;font-weight:800;fill:#fff}.ink{fill:none;stroke:#142638;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.thin{stroke-width:5}</style>
 </defs>
-<rect width="1200" height="675" fill="#fffdf6"/><g opacity=".03" filter="url(#paper)"><rect width="1200" height="675" fill="#64748b"/></g><circle cx="1100" cy="72" r="86" fill="${d.pale}"/>
-<path d="M53 75q30-30 64 0m-42-25 24 39" fill="none" stroke="${d.accent}" stroke-width="6" stroke-linecap="round"/><text x="72" y="104" class="eyebrow">${esc(d.label)}</text>${titleSvg}
-<path d="M72 ${177 + title.length * 58}q190 16 398 0" fill="none" stroke="${d.accent}" stroke-width="9" stroke-linecap="round" opacity=".65"/><g filter="url(#wobble)">${icon(d.icon, d.accent)}</g>
-<path d="M1054 137q24-17 43-1m-18 22q31-4 43 17M820 314q-28 18-43 48" class="scribble"/><text x="72" y="402" class="note">${esc(post.caption || "The production path, without the buzzwords ↓")}</text>
-${cards}<rect x="70" y="566" width="1020" height="39" rx="19" fill="${d.pale}"/><text x="580" y="592" class="detail" text-anchor="middle">${esc(d.detail)}</text><path d="M55 626q215-13 430 0t430-2" fill="none" stroke="${d.accent}" stroke-width="3" opacity=".55"/><text x="72" y="654" class="footer">${esc(post.footer || "Akhilesh Ranjan Singh  ·  ML Platform + DevOps")}</text><text x="1110" y="647" class="note" text-anchor="end">save this ↗</text>
+<rect width="1200" height="1200" fill="#f7f8f5"/>
+<rect x="32" y="32" width="1136" height="1136" rx="32" fill="#fcfdfb" stroke="#e3e8e2" stroke-width="2"/>
+<rect x="64" y="60" width="8" height="30" rx="4" fill="${d.accent}"/>
+<text x="88" y="83" font-size="19" font-weight="800" letter-spacing="2" fill="${d.accent}">${esc(d.label)}</text>
+<g transform="translate(654 -30) scale(.45)">${icon(d.icon, d.accent)}</g>
+${titleLines}
+<path d="M64 412h78" stroke="${d.accent}" stroke-width="6" stroke-linecap="round"/>
+<text x="164" y="420" font-size="${caption.size}" fill="#536575" font-weight="500">${esc(caption.lines[0])}</text>
+${connectors}${cards}
+<rect x="64" y="946" width="1072" height="126" rx="24" fill="${d.pale}"/>
+<text x="88" y="978" font-size="15" letter-spacing="2" font-weight="800" fill="${d.accent}">${d.evidence ? 'EXAMPLE FROM THE POST' : 'THE TAKEAWAY'}</text>
+${takeaway.lines.map((line, i) => `<text x="88" y="${1008 + i * (takeaway.size + 5)}" font-size="${takeaway.size}" font-weight="600" fill="#142638">${esc(line)}</text>`).join('')}
+<path d="M64 1104h1072" stroke="#dfe6df" stroke-width="2"/>
+<text x="64" y="1140" font-size="19" font-weight="600" fill="#536575">${esc(footer)}</text>
+<text x="1136" y="1140" font-size="16" font-weight="700" fill="${d.accent}" text-anchor="end">KEEP FOR YOUR NEXT PROJECT</text>
 </svg>`;
   fs.writeFileSync(svgPath, svg, "utf8");
   return svgPath;
@@ -83,9 +138,9 @@ function convertSvgToPng(svgPath) {
   return pngPath;
 }
 
-function createImage(post, slug) {
-  fs.mkdirSync(assetsDir, { recursive: true });
-  const svgPath = createSvg(post, slug);
+function createImage(post, slug, outputDir = assetsDir) {
+  fs.mkdirSync(outputDir, { recursive: true });
+  const svgPath = createSvg(post, slug, outputDir);
   return { svgPath, pngPath: convertSvgToPng(svgPath) };
 }
 

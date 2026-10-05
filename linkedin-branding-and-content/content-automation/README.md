@@ -26,6 +26,18 @@ Draft output is saved in:
 - `posts/`
 - `assets/`
 
+## Post image design
+
+Images use a 1200 × 1200 square layout with a complete headline, a content-specific diagram, a highlighted takeaway, and an author footer. Architecture diagrams show the primary component path and supporting controls with directed relationships. Process diagrams show numbered actions and checkpoints. `src/content-diagrams.js` selects topic recipes and FDE scenario domains from the post content; short scenario examples appear where available. The original FDE interview scenarios retain their definitions in `src/fde-diagrams.js`. Text adapts to available space instead of silently cutting off long titles.
+
+Regenerate images for upcoming, unpublished posts:
+
+```bash
+npm run render:doodles -- --from=2026-10-06
+```
+
+Omit `--from` to start from today's date in the configured timezone. The renderer skips archived posts and IDs recorded in `publish-state.json`. It updates SVG and PNG assets under their existing `*-doodle` filenames without editing post text or publication dates.
+
 ## Create 100 Days Of Content
 
 ```bash
@@ -192,3 +204,13 @@ Fix it in LinkedIn Developer Portal:
 4. Confirm `w_member_social` appears under OAuth scopes in the `Auth` tab.
 5. Confirm this redirect URL is listed exactly: `http://localhost:3000/callback`.
 6. Run `npm run linkedin:auth` again.
+
+Technical diagram references: [Kubernetes autoscaling](https://kubernetes.io/docs/concepts/workloads/autoscaling/), [probe responsibilities](https://kubernetes.io/docs/concepts/workloads/pods/probes/), and [NetworkPolicy behavior](https://kubernetes.io/docs/concepts/services-networking/network-policies/). These images are conceptual explanations of the post topics, not deployment inventories.
+
+To upgrade every remaining image in the local library, including historical posts, archived posts, and generated revision drafts:
+
+```bash
+npm run render:library
+```
+
+The library renderer inventories existing PNGs, finds post metadata or the existing SVG headline, and upgrades images that do not yet use the enhanced square layout. Existing enhanced images are skipped. Image filenames, post text, calendars, publication settings, and published state remain unchanged. The renderer writes `image-enhancement-report.json` with the paths and diagram types changed in that run. Python 3 is required for the inventory step.

@@ -1,0 +1,2842 @@
+{
+  "totalImages": 877,
+  "previouslyEnhanced": 310,
+  "enhancedInThisRun": 567,
+  "images": [
+    {
+      "imagePath": "archive/assets/2026-08-03-2026-08-03-k8s-production-checklist-before-deploying-to-kubernetes.png",
+      "topic": "Production checklist before deploying to Kubernetes",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-03-2026-08-03-python-python-learning-roadmap-for-devops-and-mlops.png",
+      "topic": "Python learning roadmap for DevOps and MLOps",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-03-day-061-how-hpa-vpa-and-cluster-autoscaler-work-together.png",
+      "topic": "How HPA, VPA, and Cluster Autoscaler work together - practical checklist",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-03-k8s-secrets-management-patterns-for-kubernetes-platforms-doodle.png",
+      "topic": "Secrets management patterns for Kubernetes platforms",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-04-2026-08-04-k8s-kubernetes-requests-and-limits-explained-with-production-examples.png",
+      "topic": "Kubernetes requests and limits explained with production examples",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-04-2026-08-04-python-python-automation-for-real-engineering-work.png",
+      "topic": "Python automation for real engineering work",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-05-2026-08-05-k8s-how-hpa-vpa-and-cluster-autoscaler-work-together.png",
+      "topic": "How HPA, VPA, and Cluster Autoscaler work together",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-05-2026-08-05-python-build-a-log-analyzer-with-python.png",
+      "topic": "Build a log analyzer with Python",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-05-day-056-gitops-workflow-design-for-production-infrastructure.png",
+      "topic": "GitOps workflow design for production infrastructure - security and governance angle",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-05-python-python-api-health-monitoring-doodle.png",
+      "topic": "Python API health monitoring",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-06-2026-08-06-k8s-pod-disruption-budgets-for-reliable-deployments.png",
+      "topic": "Pod disruption budgets for reliable deployments",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-06-2026-08-06-python-python-file-and-folder-automation.png",
+      "topic": "Python file and folder automation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-06-day-057-kubernetes-requests-and-limits-explained-with-production-examples.png",
+      "topic": "Kubernetes requests and limits explained with production examples - cost and reliability tradeoff",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-06-day-064-infrastructure-as-code-review-checklist-for-terraform.png",
+      "topic": "Infrastructure as Code review checklist for Terraform - architecture decision guide",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-06-k8s-designing-namespaces-for-multi-team-platforms-doodle.png",
+      "topic": "Designing namespaces for multi-team platforms",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-07-2026-08-07-k8s-debugging-crashloopbackoff-step-by-step.png",
+      "topic": "Debugging CrashLoopBackOff step by step",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-07-2026-08-07-python-python-cloud-cost-reporting.png",
+      "topic": "Python cloud cost reporting",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-07-day-065-pod-disruption-budgets-for-reliable-deployments.png",
+      "topic": "Pod disruption budgets for reliable deployments - debugging workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-08-2026-08-08-k8s-readiness-probes-vs-liveness-probes-in-real-workloads.png",
+      "topic": "Readiness probes vs liveness probes in real workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-08-2026-08-08-python-python-kubernetes-health-checks.png",
+      "topic": "Python Kubernetes health checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-08-python-python-excel-and-csv-automation-doodle.png",
+      "topic": "Python Excel and CSV automation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-09-2026-08-09-k8s-secrets-management-patterns-for-kubernetes-platforms.png",
+      "topic": "Secrets management patterns for Kubernetes platforms",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-09-2026-08-09-python-python-ci-cd-validation-scripts.png",
+      "topic": "Python CI/CD validation scripts",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-09-day-060-sli-slo-and-sla-explained-for-engineering-teams.png",
+      "topic": "SLI, SLO, and SLA explained for engineering teams - monitoring and operations view",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-09-fundamentals-tcp-ip-fundamentals-every-cloud-engineer-should-know-cold-doodle.png",
+      "topic": "TCP/IP fundamentals every cloud engineer should know cold",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-10-2026-08-10-k8s-designing-namespaces-for-multi-team-platforms.png",
+      "topic": "Designing namespaces for multi-team platforms",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-10-2026-08-10-python-python-api-health-monitoring.png",
+      "topic": "Python API health monitoring",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-10-day-061-how-hpa-vpa-and-cluster-autoscaler-work-together.png",
+      "topic": "How HPA, VPA, and Cluster Autoscaler work together - practical checklist",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-10-day-068-ci-cd-pipeline-design-for-safer-releases.png",
+      "topic": "CI/CD pipeline design for safer releases - interview-ready summary",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-10-k8s-kubernetes-rbac-mistakes-that-create-security-risk-doodle.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-11-2026-08-11-k8s-kubernetes-rbac-mistakes-that-create-security-risk.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-11-2026-08-11-python-python-excel-and-csv-automation.png",
+      "topic": "Python Excel and CSV automation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-11-day-069-kubernetes-rbac-mistakes-that-create-security-risk.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk - real-world platform pattern",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-12-2026-08-12-k8s-ingress-troubleshooting-for-production-applications.png",
+      "topic": "Ingress troubleshooting for production applications",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-12-2026-08-12-mlops-batch-inference-vs-real-time-inference-tradeoffs.png",
+      "topic": "Batch inference vs real-time inference tradeoffs",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-12-2026-08-12-python-python-sre-incident-summaries.png",
+      "topic": "Python SRE incident summaries",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-12-python-python-sre-incident-summaries-doodle.png",
+      "topic": "Python SRE incident summaries",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-13-2026-08-13-k8s-imagepullbackoff-debugging-checklist.png",
+      "topic": "ImagePullBackOff debugging checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-13-2026-08-13-python-python-mlops-data-drift-checks.png",
+      "topic": "Python MLOps data drift checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-13-day-064-infrastructure-as-code-review-checklist-for-terraform.png",
+      "topic": "Infrastructure as Code review checklist for Terraform - architecture decision guide",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-13-k8s-ingress-troubleshooting-for-production-applications-doodle.png",
+      "topic": "Ingress troubleshooting for production applications",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-14-2026-08-14-k8s-networkpolicy-design-for-safer-workloads.png",
+      "topic": "NetworkPolicy design for safer workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-14-2026-08-14-python-python-security-checks-for-config-files.png",
+      "topic": "Python security checks for config files",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-14-day-065-pod-disruption-budgets-for-reliable-deployments.png",
+      "topic": "Pod disruption budgets for reliable deployments - debugging workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-14-day-072-observability-signals-that-reduce-incident-response-time.png",
+      "topic": "Observability signals that reduce incident response time - common production mistake",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-14-mlops-rollback-strategy-for-bad-model-releases-doodle.png",
+      "topic": "Rollback strategy for bad model releases",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-15-2026-08-15-k8s-helm-values-structure-for-repeatable-deployments.png",
+      "topic": "Helm values structure for repeatable deployments",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-15-2026-08-15-python-python-helpers-inside-github-actions.png",
+      "topic": "Python helpers inside GitHub Actions",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-15-day-073-debugging-crashloopbackoff-step-by-step.png",
+      "topic": "Debugging CrashLoopBackOff step by step - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-15-python-python-mlops-data-drift-checks-doodle.png",
+      "topic": "Python MLOps data drift checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-16-2026-08-16-k8s-gke-node-pool-upgrade-strategy.png",
+      "topic": "GKE node pool upgrade strategy",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-16-2026-08-16-python-python-infrastructure-inventory-reports.png",
+      "topic": "Python infrastructure inventory reports",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-16-fundamentals-how-containers-actually-isolate-processes-namespaces-and-cgroups-explained-doodle.png",
+      "topic": "How containers actually isolate processes: namespaces and cgroups explained",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-17-2026-08-17-k8s-kubernetes-service-discovery-explained-practically.png",
+      "topic": "Kubernetes service discovery explained practically",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-17-2026-08-17-mlops-feature-pipeline-quality-checks-before-training.png",
+      "topic": "Feature pipeline quality checks before training",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-17-2026-08-17-python-python-cli-tools-for-devops-engineers.png",
+      "topic": "Python CLI tools for DevOps engineers",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-17-day-068-ci-cd-pipeline-design-for-safer-releases.png",
+      "topic": "CI/CD pipeline design for safer releases - interview-ready summary",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-17-k8s-imagepullbackoff-debugging-checklist-doodle.png",
+      "topic": "ImagePullBackOff debugging checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-18-2026-08-18-k8s-production-checklist-before-deploying-to-kubernetes.png",
+      "topic": "Production checklist before deploying to Kubernetes",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-18-2026-08-18-mlops-production-checklist-for-ml-model-deployment.png",
+      "topic": "Production checklist for ML model deployment",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-18-2026-08-18-python-python-learning-roadmap-for-devops-and-mlops.png",
+      "topic": "Python learning roadmap for DevOps and MLOps",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-18-day-069-kubernetes-rbac-mistakes-that-create-security-risk.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk - real-world platform pattern",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-18-day-076-secrets-management-patterns-for-kubernetes-platforms.png",
+      "topic": "Secrets management patterns for Kubernetes platforms - security and governance angle",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-18-mlops-model-serving-on-kubernetes-with-fastapi-doodle.png",
+      "topic": "Model serving on Kubernetes with FastAPI",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-19-day-077-designing-namespaces-for-multi-team-platforms.png",
+      "topic": "Designing namespaces for multi-team platforms - cost and reliability tradeoff",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-19-python-python-security-checks-for-config-files-doodle.png",
+      "topic": "Python security checks for config files",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-20-k8s-networkpolicy-design-for-safer-workloads-doodle.png",
+      "topic": "NetworkPolicy design for safer workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-21-day-072-observability-signals-that-reduce-incident-response-time.png",
+      "topic": "Observability signals that reduce incident response time - common production mistake",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-21-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads-doodle.png",
+      "topic": "Vertex AI vs self-managed GKE for ML workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-22-day-073-debugging-crashloopbackoff-step-by-step.png",
+      "topic": "Debugging CrashLoopBackOff step by step - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-22-day-080-cloud-cost-optimization-habits-for-engineering-teams.png",
+      "topic": "Cloud cost optimization habits for engineering teams - monitoring and operations view",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-22-python-python-helpers-inside-github-actions-doodle.png",
+      "topic": "Python helpers inside GitHub Actions",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-23-day-074-model-monitoring-signals-every-ml-platform-should-track.png",
+      "topic": "Model monitoring signals every ML platform should track",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-23-day-081-readiness-probes-vs-liveness-probes-in-real-workloads.png",
+      "topic": "Readiness probes vs liveness probes in real workloads - practical checklist",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-23-fundamentals-designing-a-ci-cd-pipeline-that-fails-fast-and-rolls-back-safely-doodle.png",
+      "topic": "Designing a CI/CD pipeline that fails fast and rolls back safely",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-24-k8s-helm-values-structure-for-repeatable-deployments-doodle.png",
+      "topic": "Helm values structure for repeatable deployments",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-25-day-076-secrets-management-patterns-for-kubernetes-platforms.png",
+      "topic": "Secrets management patterns for Kubernetes platforms - security and governance angle",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-25-mlops-inference-latency-troubleshooting-workflow-doodle.png",
+      "topic": "Inference latency troubleshooting workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-26-day-077-designing-namespaces-for-multi-team-platforms.png",
+      "topic": "Designing namespaces for multi-team platforms - cost and reliability tradeoff",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-26-day-084-gitops-workflow-design-for-production-infrastructure.png",
+      "topic": "GitOps workflow design for production infrastructure - architecture decision guide",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-27-day-078-automated-retraining-triggers-using-drift-and-performance-metrics.png",
+      "topic": "Automated retraining triggers using drift and performance metrics",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-27-day-085-kubernetes-requests-and-limits-explained-with-production-examples.png",
+      "topic": "Kubernetes requests and limits explained with production examples - debugging workflow",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-28-day-079-data-drift-vs-concept-drift-explained-clearly.png",
+      "topic": "Data drift vs concept drift explained clearly",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-29-day-080-cloud-cost-optimization-habits-for-engineering-teams.png",
+      "topic": "Cloud cost optimization habits for engineering teams - monitoring and operations view",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-30-day-081-readiness-probes-vs-liveness-probes-in-real-workloads.png",
+      "topic": "Readiness probes vs liveness probes in real workloads - practical checklist",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-30-day-088-sli-slo-and-sla-explained-for-engineering-teams.png",
+      "topic": "SLI, SLO, and SLA explained for engineering teams - interview-ready summary",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-31-day-082-building-audit-ready-ml-lineage-on-cloud-platforms.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-08-31-day-089-how-hpa-vpa-and-cluster-autoscaler-work-together.png",
+      "topic": "How HPA, VPA, and Cluster Autoscaler work together - real-world platform pattern",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-02-day-084-gitops-workflow-design-for-production-infrastructure.png",
+      "topic": "GitOps workflow design for production infrastructure - architecture decision guide",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-03-day-085-kubernetes-requests-and-limits-explained-with-production-examples.png",
+      "topic": "Kubernetes requests and limits explained with production examples - debugging workflow",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-03-day-092-infrastructure-as-code-review-checklist-for-terraform.png",
+      "topic": "Infrastructure as Code review checklist for Terraform - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-04-day-086-model-registry-approvals-and-controlled-production-releases.png",
+      "topic": "Model registry approvals and controlled production releases",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-04-day-093-pod-disruption-budgets-for-reliable-deployments.png",
+      "topic": "Pod disruption budgets for reliable deployments - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-06-day-088-sli-slo-and-sla-explained-for-engineering-teams.png",
+      "topic": "SLI, SLO, and SLA explained for engineering teams - interview-ready summary",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-07-day-089-how-hpa-vpa-and-cluster-autoscaler-work-together.png",
+      "topic": "How HPA, VPA, and Cluster Autoscaler work together - real-world platform pattern",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-07-day-096-ci-cd-pipeline-design-for-safer-releases.png",
+      "topic": "CI/CD pipeline design for safer releases - security and governance angle",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-08-day-090-canary-deployment-strategy-for-machine-learning-models.png",
+      "topic": "Canary deployment strategy for machine learning models",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-08-day-097-kubernetes-rbac-mistakes-that-create-security-risk.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-10-day-092-infrastructure-as-code-review-checklist-for-terraform.png",
+      "topic": "Infrastructure as Code review checklist for Terraform - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-11-day-093-pod-disruption-budgets-for-reliable-deployments.png",
+      "topic": "Pod disruption budgets for reliable deployments - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-11-day-100-observability-signals-that-reduce-incident-response-time.png",
+      "topic": "Observability signals that reduce incident response time - monitoring and operations view",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-12-day-094-feature-store-governance-for-production-ml.png",
+      "topic": "Feature store governance for production ML",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-14-day-096-ci-cd-pipeline-design-for-safer-releases.png",
+      "topic": "CI/CD pipeline design for safer releases - security and governance angle",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-15-day-097-kubernetes-rbac-mistakes-that-create-security-risk.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-16-day-098-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png",
+      "topic": "MLflow and Kubeflow pipeline design for reproducibility",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "archive/assets/2026-09-18-day-100-observability-signals-that-reduce-incident-response-time.png",
+      "topic": "Observability signals that reduce incident response time - monitoring and operations view",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-04-day-001-kubernetes-requests-and-limits-explained-with-production-examples.png",
+      "topic": "Kubernetes requests and limits explained with production examples - practical checklist",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-04-observability-signals-that-reduce-incident-response-time.png",
+      "topic": "Observability signals that reduce incident response time",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-05-day-002-model-registry-approvals-and-controlled-production-releases.png",
+      "topic": "Model registry approvals and controlled production releases - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-06-day-003-why-data-leakage-silently-breaks-ml-models.png",
+      "topic": "Why data leakage silently breaks ML models - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-07-day-004-sli-slo-and-sla-explained-for-engineering-teams.png",
+      "topic": "SLI, SLO, and SLA explained for engineering teams - architecture decision guide",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-08-day-005-how-hpa-vpa-and-cluster-autoscaler-work-together.png",
+      "topic": "How HPA, VPA, and Cluster Autoscaler work together - debugging workflow",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-09-day-006-canary-deployment-strategy-for-machine-learning-models.png",
+      "topic": "Canary deployment strategy for machine learning models - security and governance angle",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-10-day-007-train-validation-test-split-patterns-for-real-world-data.png",
+      "topic": "Train validation test split patterns for real-world data - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-11-day-001-kubernetes-requests-and-limits-explained-with-production-examples.png",
+      "topic": "Kubernetes requests and limits explained with production examples - practical checklist",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-11-day-008-infrastructure-as-code-review-checklist-for-terraform.png",
+      "topic": "Infrastructure as Code review checklist for Terraform - interview-ready summary",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-12-day-002-model-registry-approvals-and-controlled-production-releases.png",
+      "topic": "Model registry approvals and controlled production releases - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-12-day-009-pod-disruption-budgets-for-reliable-deployments.png",
+      "topic": "Pod disruption budgets for reliable deployments - real-world platform pattern",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-13-day-003-why-data-leakage-silently-breaks-ml-models.png",
+      "topic": "Why data leakage silently breaks ML models - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-13-day-010-feature-store-governance-for-production-ml.png",
+      "topic": "Feature store governance for production ML - monitoring and operations view",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-14-day-004-sli-slo-and-sla-explained-for-engineering-teams.png",
+      "topic": "SLI, SLO, and SLA explained for engineering teams - architecture decision guide",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-14-day-011-feature-engineering-habits-that-improve-model-quality.png",
+      "topic": "Feature engineering habits that improve model quality - practical checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-15-day-005-how-hpa-vpa-and-cluster-autoscaler-work-together.png",
+      "topic": "How HPA, VPA, and Cluster Autoscaler work together - debugging workflow",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-15-day-012-ci-cd-pipeline-design-for-safer-releases.png",
+      "topic": "CI/CD pipeline design for safer releases - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-16-day-006-canary-deployment-strategy-for-machine-learning-models.png",
+      "topic": "Canary deployment strategy for machine learning models - security and governance angle",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-16-day-013-kubernetes-rbac-mistakes-that-create-security-risk.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-17-day-007-train-validation-test-split-patterns-for-real-world-data.png",
+      "topic": "Train validation test split patterns for real-world data - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-17-day-014-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png",
+      "topic": "MLflow and Kubeflow pipeline design for reproducibility - architecture decision guide",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-18-day-008-infrastructure-as-code-review-checklist-for-terraform.png",
+      "topic": "Infrastructure as Code review checklist for Terraform - interview-ready summary",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-18-day-015-evaluating-classification-models-beyond-accuracy.png",
+      "topic": "Evaluating classification models beyond accuracy - debugging workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-19-day-009-pod-disruption-budgets-for-reliable-deployments.png",
+      "topic": "Pod disruption budgets for reliable deployments - real-world platform pattern",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-19-day-016-observability-signals-that-reduce-incident-response-time.png",
+      "topic": "Observability signals that reduce incident response time - security and governance angle",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-20-day-010-feature-store-governance-for-production-ml.png",
+      "topic": "Feature store governance for production ML - monitoring and operations view",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-20-day-017-debugging-crashloopbackoff-step-by-step.png",
+      "topic": "Debugging CrashLoopBackOff step by step - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-21-day-011-feature-engineering-habits-that-improve-model-quality.png",
+      "topic": "Feature engineering habits that improve model quality - practical checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-21-day-018-model-monitoring-signals-every-ml-platform-should-track.png",
+      "topic": "Model monitoring signals every ML platform should track - interview-ready summary",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-22-day-012-ci-cd-pipeline-design-for-safer-releases.png",
+      "topic": "CI/CD pipeline design for safer releases - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-22-day-019-handling-class-imbalance-in-production-datasets.png",
+      "topic": "Handling class imbalance in production datasets - real-world platform pattern",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-23-day-013-kubernetes-rbac-mistakes-that-create-security-risk.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-23-day-020-secrets-management-patterns-for-kubernetes-platforms.png",
+      "topic": "Secrets management patterns for Kubernetes platforms - monitoring and operations view",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-24-day-014-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png",
+      "topic": "MLflow and Kubeflow pipeline design for reproducibility - architecture decision guide",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-24-day-021-designing-namespaces-for-multi-team-platforms.png",
+      "topic": "Designing namespaces for multi-team platforms - practical checklist",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-25-day-015-evaluating-classification-models-beyond-accuracy.png",
+      "topic": "Evaluating classification models beyond accuracy - debugging workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-25-day-022-automated-retraining-triggers-using-drift-and-performance-metrics.png",
+      "topic": "Automated retraining triggers using drift and performance metrics - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-26-day-016-observability-signals-that-reduce-incident-response-time.png",
+      "topic": "Observability signals that reduce incident response time - security and governance angle",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-26-day-023-data-drift-vs-concept-drift-explained-clearly.png",
+      "topic": "Data drift vs concept drift explained clearly - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-27-day-017-debugging-crashloopbackoff-step-by-step.png",
+      "topic": "Debugging CrashLoopBackOff step by step - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-27-day-024-cloud-cost-optimization-habits-for-engineering-teams.png",
+      "topic": "Cloud cost optimization habits for engineering teams - architecture decision guide",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-28-day-018-model-monitoring-signals-every-ml-platform-should-track.png",
+      "topic": "Model monitoring signals every ML platform should track - interview-ready summary",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-28-day-025-readiness-probes-vs-liveness-probes-in-real-workloads.png",
+      "topic": "Readiness probes vs liveness probes in real workloads - debugging workflow",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-29-day-019-handling-class-imbalance-in-production-datasets.png",
+      "topic": "Handling class imbalance in production datasets - real-world platform pattern",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-29-day-026-building-audit-ready-ml-lineage-on-cloud-platforms.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms - security and governance angle",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-06-30-day-020-secrets-management-patterns-for-kubernetes-platforms.png",
+      "topic": "Secrets management patterns for Kubernetes platforms - monitoring and operations view",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-06-30-day-027-how-to-communicate-model-results-to-business-teams.png",
+      "topic": "How to communicate model results to business teams - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-01-day-021-designing-namespaces-for-multi-team-platforms.png",
+      "topic": "Designing namespaces for multi-team platforms - practical checklist",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-01-day-028-gitops-workflow-design-for-production-infrastructure.png",
+      "topic": "GitOps workflow design for production infrastructure - interview-ready summary",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-02-day-022-automated-retraining-triggers-using-drift-and-performance-metrics.png",
+      "topic": "Automated retraining triggers using drift and performance metrics - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-02-day-029-kubernetes-requests-and-limits-explained-with-production-examples.png",
+      "topic": "Kubernetes requests and limits explained with production examples - real-world platform pattern",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-03-day-023-data-drift-vs-concept-drift-explained-clearly.png",
+      "topic": "Data drift vs concept drift explained clearly - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-03-day-030-model-registry-approvals-and-controlled-production-releases.png",
+      "topic": "Model registry approvals and controlled production releases - monitoring and operations view",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-04-day-024-cloud-cost-optimization-habits-for-engineering-teams.png",
+      "topic": "Cloud cost optimization habits for engineering teams - architecture decision guide",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-04-day-031-why-data-leakage-silently-breaks-ml-models.png",
+      "topic": "Why data leakage silently breaks ML models - practical checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-05-day-025-readiness-probes-vs-liveness-probes-in-real-workloads.png",
+      "topic": "Readiness probes vs liveness probes in real workloads - debugging workflow",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-05-day-032-sli-slo-and-sla-explained-for-engineering-teams.png",
+      "topic": "SLI, SLO, and SLA explained for engineering teams - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-06-day-026-building-audit-ready-ml-lineage-on-cloud-platforms.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms - security and governance angle",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-06-day-033-how-hpa-vpa-and-cluster-autoscaler-work-together.png",
+      "topic": "How HPA, VPA, and Cluster Autoscaler work together - beginner-friendly explanation",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-07-day-027-how-to-communicate-model-results-to-business-teams.png",
+      "topic": "How to communicate model results to business teams - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-07-day-034-canary-deployment-strategy-for-machine-learning-models.png",
+      "topic": "Canary deployment strategy for machine learning models - architecture decision guide",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-08-day-028-gitops-workflow-design-for-production-infrastructure.png",
+      "topic": "GitOps workflow design for production infrastructure - interview-ready summary",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-08-day-035-train-validation-test-split-patterns-for-real-world-data.png",
+      "topic": "Train validation test split patterns for real-world data - debugging workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-09-day-029-kubernetes-requests-and-limits-explained-with-production-examples.png",
+      "topic": "Kubernetes requests and limits explained with production examples - real-world platform pattern",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-09-day-036-infrastructure-as-code-review-checklist-for-terraform.png",
+      "topic": "Infrastructure as Code review checklist for Terraform - security and governance angle",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-10-day-030-model-registry-approvals-and-controlled-production-releases.png",
+      "topic": "Model registry approvals and controlled production releases - monitoring and operations view",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-10-day-037-pod-disruption-budgets-for-reliable-deployments.png",
+      "topic": "Pod disruption budgets for reliable deployments - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-11-2026-07-11-k8s-designing-namespaces-for-multi-team-platforms.png",
+      "topic": "Designing namespaces for multi-team platforms",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-11-2026-07-11-mlops-data-drift-vs-concept-drift-explained-clearly.png",
+      "topic": "Data drift vs concept drift explained clearly",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-11-2026-07-11-python-python-api-health-monitoring.png",
+      "topic": "Python API health monitoring",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-11-day-031-why-data-leakage-silently-breaks-ml-models.png",
+      "topic": "Why data leakage silently breaks ML models - practical checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-11-day-038-feature-store-governance-for-production-ml.png",
+      "topic": "Feature store governance for production ML - interview-ready summary",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-12-2026-07-12-k8s-kubernetes-rbac-mistakes-that-create-security-risk.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-12-2026-07-12-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-12-2026-07-12-python-python-excel-and-csv-automation.png",
+      "topic": "Python Excel and CSV automation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-12-day-032-sli-slo-and-sla-explained-for-engineering-teams.png",
+      "topic": "SLI, SLO, and SLA explained for engineering teams - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-12-day-039-feature-engineering-habits-that-improve-model-quality.png",
+      "topic": "Feature engineering habits that improve model quality - real-world platform pattern",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-13-2026-07-13-k8s-ingress-troubleshooting-for-production-applications.png",
+      "topic": "Ingress troubleshooting for production applications",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-13-2026-07-13-mlops-batch-inference-vs-real-time-inference-tradeoffs.png",
+      "topic": "Batch inference vs real-time inference tradeoffs",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-13-2026-07-13-python-python-sre-incident-summaries.png",
+      "topic": "Python SRE incident summaries",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-13-day-033-how-hpa-vpa-and-cluster-autoscaler-work-together.png",
+      "topic": "How HPA, VPA, and Cluster Autoscaler work together - beginner-friendly explanation",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-13-day-040-ci-cd-pipeline-design-for-safer-releases.png",
+      "topic": "CI/CD pipeline design for safer releases - monitoring and operations view",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-14-2026-07-14-k8s-imagepullbackoff-debugging-checklist.png",
+      "topic": "ImagePullBackOff debugging checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-14-2026-07-14-mlops-rollback-strategy-for-bad-model-releases.png",
+      "topic": "Rollback strategy for bad model releases",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-14-2026-07-14-python-python-mlops-data-drift-checks.png",
+      "topic": "Python MLOps data drift checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-14-day-034-canary-deployment-strategy-for-machine-learning-models.png",
+      "topic": "Canary deployment strategy for machine learning models - architecture decision guide",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-14-day-041-kubernetes-rbac-mistakes-that-create-security-risk.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk - practical checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-15-2026-07-15-k8s-networkpolicy-design-for-safer-workloads.png",
+      "topic": "NetworkPolicy design for safer workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-15-2026-07-15-mlops-model-serving-on-kubernetes-with-fastapi.png",
+      "topic": "Model serving on Kubernetes with FastAPI",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-15-2026-07-15-python-python-security-checks-for-config-files.png",
+      "topic": "Python security checks for config files",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-15-day-035-train-validation-test-split-patterns-for-real-world-data.png",
+      "topic": "Train validation test split patterns for real-world data - debugging workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-15-day-042-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png",
+      "topic": "MLflow and Kubeflow pipeline design for reproducibility - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-16-2026-07-16-k8s-helm-values-structure-for-repeatable-deployments.png",
+      "topic": "Helm values structure for repeatable deployments",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-16-2026-07-16-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.png",
+      "topic": "Vertex AI vs self-managed GKE for ML workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-16-2026-07-16-python-python-helpers-inside-github-actions.png",
+      "topic": "Python helpers inside GitHub Actions",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-16-day-036-infrastructure-as-code-review-checklist-for-terraform.png",
+      "topic": "Infrastructure as Code review checklist for Terraform - security and governance angle",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-16-day-043-evaluating-classification-models-beyond-accuracy.png",
+      "topic": "Evaluating classification models beyond accuracy - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-17-2026-07-17-k8s-gke-node-pool-upgrade-strategy.png",
+      "topic": "GKE node pool upgrade strategy",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-17-2026-07-17-mlops-inference-latency-troubleshooting-workflow.png",
+      "topic": "Inference latency troubleshooting workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-17-2026-07-17-python-python-infrastructure-inventory-reports.png",
+      "topic": "Python infrastructure inventory reports",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-17-day-037-pod-disruption-budgets-for-reliable-deployments.png",
+      "topic": "Pod disruption budgets for reliable deployments - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-17-day-044-observability-signals-that-reduce-incident-response-time.png",
+      "topic": "Observability signals that reduce incident response time - architecture decision guide",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-18-2026-07-18-k8s-kubernetes-service-discovery-explained-practically.png",
+      "topic": "Kubernetes service discovery explained practically",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-18-2026-07-18-mlops-feature-pipeline-quality-checks-before-training.png",
+      "topic": "Feature pipeline quality checks before training",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-18-2026-07-18-python-python-cli-tools-for-devops-engineers.png",
+      "topic": "Python CLI tools for DevOps engineers",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-18-day-038-feature-store-governance-for-production-ml.png",
+      "topic": "Feature store governance for production ML - interview-ready summary",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-18-day-045-debugging-crashloopbackoff-step-by-step.png",
+      "topic": "Debugging CrashLoopBackOff step by step - debugging workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-19-2026-07-19-k8s-production-checklist-before-deploying-to-kubernetes.png",
+      "topic": "Production checklist before deploying to Kubernetes",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-19-2026-07-19-mlops-production-checklist-for-ml-model-deployment.png",
+      "topic": "Production checklist for ML model deployment",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-19-2026-07-19-python-python-learning-roadmap-for-devops-and-mlops.png",
+      "topic": "Python learning roadmap for DevOps and MLOps",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-19-day-039-feature-engineering-habits-that-improve-model-quality.png",
+      "topic": "Feature engineering habits that improve model quality - real-world platform pattern",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-19-day-046-model-monitoring-signals-every-ml-platform-should-track.png",
+      "topic": "Model monitoring signals every ML platform should track - security and governance angle",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-20-2026-07-20-k8s-kubernetes-requests-and-limits-explained-with-production-examples.png",
+      "topic": "Kubernetes requests and limits explained with production examples",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-20-2026-07-20-mlops-model-registry-approvals-and-controlled-production-releases.png",
+      "topic": "Model registry approvals and controlled production releases",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-20-2026-07-20-python-python-automation-for-real-engineering-work.png",
+      "topic": "Python automation for real engineering work",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-20-day-040-ci-cd-pipeline-design-for-safer-releases.png",
+      "topic": "CI/CD pipeline design for safer releases - monitoring and operations view",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-20-day-047-handling-class-imbalance-in-production-datasets.png",
+      "topic": "Handling class imbalance in production datasets - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-21-2026-07-21-k8s-how-hpa-vpa-and-cluster-autoscaler-work-together.png",
+      "topic": "How HPA, VPA, and Cluster Autoscaler work together",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-21-2026-07-21-mlops-canary-deployment-strategy-for-machine-learning-models.png",
+      "topic": "Canary deployment strategy for machine learning models",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-21-2026-07-21-python-build-a-log-analyzer-with-python.png",
+      "topic": "Build a log analyzer with Python",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-21-day-041-kubernetes-rbac-mistakes-that-create-security-risk.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk - practical checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-21-day-048-secrets-management-patterns-for-kubernetes-platforms.png",
+      "topic": "Secrets management patterns for Kubernetes platforms - interview-ready summary",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-22-2026-07-22-k8s-pod-disruption-budgets-for-reliable-deployments.png",
+      "topic": "Pod disruption budgets for reliable deployments",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-22-2026-07-22-mlops-feature-store-governance-for-production-ml.png",
+      "topic": "Feature store governance for production ML",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-22-2026-07-22-python-python-file-and-folder-automation.png",
+      "topic": "Python file and folder automation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-22-day-042-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png",
+      "topic": "MLflow and Kubeflow pipeline design for reproducibility - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-22-day-049-designing-namespaces-for-multi-team-platforms.png",
+      "topic": "Designing namespaces for multi-team platforms - real-world platform pattern",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-23-2026-07-23-k8s-debugging-crashloopbackoff-step-by-step.png",
+      "topic": "Debugging CrashLoopBackOff step by step",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-23-2026-07-23-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png",
+      "topic": "MLflow and Kubeflow pipeline design for reproducibility",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-23-2026-07-23-python-python-cloud-cost-reporting.png",
+      "topic": "Python cloud cost reporting",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-23-day-043-evaluating-classification-models-beyond-accuracy.png",
+      "topic": "Evaluating classification models beyond accuracy - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-23-day-050-automated-retraining-triggers-using-drift-and-performance-metrics.png",
+      "topic": "Automated retraining triggers using drift and performance metrics - monitoring and operations view",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-24-2026-07-24-k8s-readiness-probes-vs-liveness-probes-in-real-workloads.png",
+      "topic": "Readiness probes vs liveness probes in real workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-24-2026-07-24-mlops-model-monitoring-signals-every-ml-platform-should-track.png",
+      "topic": "Model monitoring signals every ML platform should track",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-24-2026-07-24-python-python-kubernetes-health-checks.png",
+      "topic": "Python Kubernetes health checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-24-day-044-observability-signals-that-reduce-incident-response-time.png",
+      "topic": "Observability signals that reduce incident response time - architecture decision guide",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-24-day-051-data-drift-vs-concept-drift-explained-clearly.png",
+      "topic": "Data drift vs concept drift explained clearly - practical checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-25-2026-07-25-k8s-secrets-management-patterns-for-kubernetes-platforms.png",
+      "topic": "Secrets management patterns for Kubernetes platforms",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-25-2026-07-25-mlops-automated-retraining-triggers-using-drift-and-performance-metrics.png",
+      "topic": "Automated retraining triggers using drift and performance metrics",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-25-2026-07-25-python-python-ci-cd-validation-scripts.png",
+      "topic": "Python CI/CD validation scripts",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-25-day-045-debugging-crashloopbackoff-step-by-step.png",
+      "topic": "Debugging CrashLoopBackOff step by step - debugging workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-25-day-052-cloud-cost-optimization-habits-for-engineering-teams.png",
+      "topic": "Cloud cost optimization habits for engineering teams - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-26-2026-07-26-k8s-designing-namespaces-for-multi-team-platforms.png",
+      "topic": "Designing namespaces for multi-team platforms",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-26-2026-07-26-mlops-data-drift-vs-concept-drift-explained-clearly.png",
+      "topic": "Data drift vs concept drift explained clearly",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-26-2026-07-26-python-python-api-health-monitoring.png",
+      "topic": "Python API health monitoring",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-26-day-046-model-monitoring-signals-every-ml-platform-should-track.png",
+      "topic": "Model monitoring signals every ML platform should track - security and governance angle",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-26-day-053-readiness-probes-vs-liveness-probes-in-real-workloads.png",
+      "topic": "Readiness probes vs liveness probes in real workloads - beginner-friendly explanation",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-27-2026-07-27-k8s-kubernetes-rbac-mistakes-that-create-security-risk.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-27-2026-07-27-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-27-2026-07-27-python-python-excel-and-csv-automation.png",
+      "topic": "Python Excel and CSV automation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-27-day-047-handling-class-imbalance-in-production-datasets.png",
+      "topic": "Handling class imbalance in production datasets - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-27-day-054-building-audit-ready-ml-lineage-on-cloud-platforms-doodle.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-27-day-054-building-audit-ready-ml-lineage-on-cloud-platforms.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms - architecture decision guide",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-27-k8s-debugging-crashloopbackoff-step-by-step-doodle.png",
+      "topic": "Debugging CrashLoopBackOff step by step",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-28-2026-07-28-k8s-ingress-troubleshooting-for-production-applications.png",
+      "topic": "Ingress troubleshooting for production applications",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-28-2026-07-28-mlops-batch-inference-vs-real-time-inference-tradeoffs.png",
+      "topic": "Batch inference vs real-time inference tradeoffs",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-28-2026-07-28-python-python-sre-incident-summaries.png",
+      "topic": "Python SRE incident summaries",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-28-day-048-secrets-management-patterns-for-kubernetes-platforms.png",
+      "topic": "Secrets management patterns for Kubernetes platforms - interview-ready summary",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-28-day-055-how-to-communicate-model-results-to-business-teams.png",
+      "topic": "How to communicate model results to business teams - debugging workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-28-mlops-model-monitoring-signals-every-ml-platform-should-track-doodle.png",
+      "topic": "Model monitoring signals every ML platform should track",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-29-2026-07-29-k8s-imagepullbackoff-debugging-checklist.png",
+      "topic": "ImagePullBackOff debugging checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-29-2026-07-29-mlops-rollback-strategy-for-bad-model-releases.png",
+      "topic": "Rollback strategy for bad model releases",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-29-2026-07-29-python-python-mlops-data-drift-checks.png",
+      "topic": "Python MLOps data drift checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-29-day-049-designing-namespaces-for-multi-team-platforms.png",
+      "topic": "Designing namespaces for multi-team platforms - real-world platform pattern",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-29-day-056-gitops-workflow-design-for-production-infrastructure.png",
+      "topic": "GitOps workflow design for production infrastructure - security and governance angle",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-29-python-python-kubernetes-health-checks-doodle.png",
+      "topic": "Python Kubernetes health checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-30-2026-07-30-k8s-networkpolicy-design-for-safer-workloads.png",
+      "topic": "NetworkPolicy design for safer workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-30-2026-07-30-mlops-model-serving-on-kubernetes-with-fastapi.png",
+      "topic": "Model serving on Kubernetes with FastAPI",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-30-2026-07-30-python-python-security-checks-for-config-files.png",
+      "topic": "Python security checks for config files",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-30-day-050-automated-retraining-triggers-using-drift-and-performance-metrics.png",
+      "topic": "Automated retraining triggers using drift and performance metrics - monitoring and operations view",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-30-day-057-kubernetes-requests-and-limits-explained-with-production-examples.png",
+      "topic": "Kubernetes requests and limits explained with production examples - cost and reliability tradeoff",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-30-k8s-readiness-probes-vs-liveness-probes-in-real-workloads-doodle.png",
+      "topic": "Readiness probes vs liveness probes in real workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-31-2026-07-31-k8s-helm-values-structure-for-repeatable-deployments.png",
+      "topic": "Helm values structure for repeatable deployments",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-31-2026-07-31-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.png",
+      "topic": "Vertex AI vs self-managed GKE for ML workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-07-31-2026-07-31-python-python-helpers-inside-github-actions.png",
+      "topic": "Python helpers inside GitHub Actions",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-31-day-051-data-drift-vs-concept-drift-explained-clearly.png",
+      "topic": "Data drift vs concept drift explained clearly - practical checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-31-day-058-model-registry-approvals-and-controlled-production-releases.png",
+      "topic": "Model registry approvals and controlled production releases - interview-ready summary",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-07-31-mlops-automated-retraining-triggers-using-drift-and-performance-metrics-doodle.png",
+      "topic": "Automated retraining triggers using drift and performance metrics",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-01-2026-08-01-k8s-gke-node-pool-upgrade-strategy.png",
+      "topic": "GKE node pool upgrade strategy",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-01-2026-08-01-mlops-inference-latency-troubleshooting-workflow.png",
+      "topic": "Inference latency troubleshooting workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-01-2026-08-01-python-python-infrastructure-inventory-reports.png",
+      "topic": "Python infrastructure inventory reports",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-01-day-052-cloud-cost-optimization-habits-for-engineering-teams.png",
+      "topic": "Cloud cost optimization habits for engineering teams - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-01-day-059-why-data-leakage-silently-breaks-ml-models.png",
+      "topic": "Why data leakage silently breaks ML models - real-world platform pattern",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-01-python-python-ci-cd-validation-scripts-doodle.png",
+      "topic": "Python CI/CD validation scripts",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-02-2026-08-02-k8s-kubernetes-service-discovery-explained-practically.png",
+      "topic": "Kubernetes service discovery explained practically",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-02-2026-08-02-mlops-feature-pipeline-quality-checks-before-training.png",
+      "topic": "Feature pipeline quality checks before training",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-02-2026-08-02-python-python-cli-tools-for-devops-engineers.png",
+      "topic": "Python CLI tools for DevOps engineers",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-02-day-053-readiness-probes-vs-liveness-probes-in-real-workloads.png",
+      "topic": "Readiness probes vs liveness probes in real workloads - beginner-friendly explanation",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-02-day-060-sli-slo-and-sla-explained-for-engineering-teams.png",
+      "topic": "SLI, SLO, and SLA explained for engineering teams - monitoring and operations view",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-02-fundamentals-linux-performance-troubleshooting-with-strace-perf-and-proc-doodle.png",
+      "topic": "Linux performance troubleshooting with strace, perf, and /proc",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-03-2026-08-03-mlops-production-checklist-for-ml-model-deployment.png",
+      "topic": "Production checklist for ML model deployment",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-03-day-054-building-audit-ready-ml-lineage-on-cloud-platforms.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms - architecture decision guide",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-04-2026-08-04-mlops-model-registry-approvals-and-controlled-production-releases.png",
+      "topic": "Model registry approvals and controlled production releases",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-04-day-055-how-to-communicate-model-results-to-business-teams.png",
+      "topic": "How to communicate model results to business teams - debugging workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-04-day-062-canary-deployment-strategy-for-machine-learning-models.png",
+      "topic": "Canary deployment strategy for machine learning models - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-04-mlops-data-drift-vs-concept-drift-explained-clearly-doodle.png",
+      "topic": "Data drift vs concept drift explained clearly",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-05-2026-08-05-mlops-canary-deployment-strategy-for-machine-learning-models.png",
+      "topic": "Canary deployment strategy for machine learning models",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-05-day-063-train-validation-test-split-patterns-for-real-world-data.png",
+      "topic": "Train validation test split patterns for real-world data - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-06-2026-08-06-mlops-feature-store-governance-for-production-ml.png",
+      "topic": "Feature store governance for production ML",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-07-2026-08-07-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png",
+      "topic": "MLflow and Kubeflow pipeline design for reproducibility",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-07-day-058-model-registry-approvals-and-controlled-production-releases.png",
+      "topic": "Model registry approvals and controlled production releases - interview-ready summary",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-07-mlops-building-audit-ready-ml-lineage-on-cloud-platforms-doodle.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-08-2026-08-08-mlops-model-monitoring-signals-every-ml-platform-should-track.png",
+      "topic": "Model monitoring signals every ML platform should track",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-08-day-059-why-data-leakage-silently-breaks-ml-models.png",
+      "topic": "Why data leakage silently breaks ML models - real-world platform pattern",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-08-day-066-feature-store-governance-for-production-ml.png",
+      "topic": "Feature store governance for production ML - security and governance angle",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-09-2026-08-09-mlops-automated-retraining-triggers-using-drift-and-performance-metrics.png",
+      "topic": "Automated retraining triggers using drift and performance metrics",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-09-day-067-feature-engineering-habits-that-improve-model-quality.png",
+      "topic": "Feature engineering habits that improve model quality - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-10-2026-08-10-mlops-data-drift-vs-concept-drift-explained-clearly.png",
+      "topic": "Data drift vs concept drift explained clearly",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-11-2026-08-11-mlops-building-audit-ready-ml-lineage-on-cloud-platforms.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-11-day-062-canary-deployment-strategy-for-machine-learning-models.png",
+      "topic": "Canary deployment strategy for machine learning models - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-11-mlops-batch-inference-vs-real-time-inference-tradeoffs-doodle.png",
+      "topic": "Batch inference vs real-time inference tradeoffs",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-12-day-063-train-validation-test-split-patterns-for-real-world-data.png",
+      "topic": "Train validation test split patterns for real-world data - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-12-day-070-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png",
+      "topic": "MLflow and Kubeflow pipeline design for reproducibility - monitoring and operations view",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-13-2026-08-13-mlops-rollback-strategy-for-bad-model-releases.png",
+      "topic": "Rollback strategy for bad model releases",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-13-day-071-evaluating-classification-models-beyond-accuracy.png",
+      "topic": "Evaluating classification models beyond accuracy - practical checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-14-2026-08-14-mlops-model-serving-on-kubernetes-with-fastapi.png",
+      "topic": "Model serving on Kubernetes with FastAPI",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-15-2026-08-15-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads.png",
+      "topic": "Vertex AI vs self-managed GKE for ML workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-15-day-066-feature-store-governance-for-production-ml.png",
+      "topic": "Feature store governance for production ML - security and governance angle",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-16-2026-08-16-mlops-inference-latency-troubleshooting-workflow.png",
+      "topic": "Inference latency troubleshooting workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-16-day-067-feature-engineering-habits-that-improve-model-quality.png",
+      "topic": "Feature engineering habits that improve model quality - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-16-day-074-model-monitoring-signals-every-ml-platform-should-track.png",
+      "topic": "Model monitoring signals every ML platform should track - architecture decision guide",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-16-fundamentals-kubernetes-multi-tenancy-patterns-for-shared-clusters-doodle.png",
+      "topic": "Kubernetes multi-tenancy patterns for shared clusters",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-17-day-075-handling-class-imbalance-in-production-datasets.png",
+      "topic": "Handling class imbalance in production datasets - debugging workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-17-k8s-how-hpa-vpa-and-cluster-autoscaler-work-together-doodle.png",
+      "topic": "How HPA, VPA, and Cluster Autoscaler work together",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-18-mlops-canary-deployment-strategy-for-machine-learning-models-doodle.png",
+      "topic": "Canary deployment strategy for machine learning models",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-19-day-070-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png",
+      "topic": "MLflow and Kubeflow pipeline design for reproducibility - monitoring and operations view",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-19-python-python-file-and-folder-automation-doodle.png",
+      "topic": "Python file and folder automation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-20-day-071-evaluating-classification-models-beyond-accuracy.png",
+      "topic": "Evaluating classification models beyond accuracy - practical checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-20-day-078-automated-retraining-triggers-using-drift-and-performance-metrics.png",
+      "topic": "Automated retraining triggers using drift and performance metrics - interview-ready summary",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-20-k8s-pod-disruption-budgets-for-reliable-deployments-doodle.png",
+      "topic": "Pod disruption budgets for reliable deployments",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-21-day-079-data-drift-vs-concept-drift-explained-clearly.png",
+      "topic": "Data drift vs concept drift explained clearly - real-world platform pattern",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-21-mlops-feature-store-governance-for-production-ml-doodle.png",
+      "topic": "Feature store governance for production ML",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-22-python-python-cloud-cost-reporting-doodle.png",
+      "topic": "Python cloud cost reporting",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-23-fundamentals-terraform-state-management-and-locking-for-multi-team-environments-doodle.png",
+      "topic": "Terraform state management and locking for multi-team environments",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-24-day-075-handling-class-imbalance-in-production-datasets.png",
+      "topic": "Handling class imbalance in production datasets - debugging workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-24-day-082-building-audit-ready-ml-lineage-on-cloud-platforms.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms - common production mistake",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-24-k8s-debugging-crashloopbackoff-step-by-step-doodle.png",
+      "topic": "Debugging CrashLoopBackOff step by step",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-25-day-083-how-to-communicate-model-results-to-business-teams.png",
+      "topic": "How to communicate model results to business teams - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-25-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility-doodle.png",
+      "topic": "MLflow and Kubeflow pipeline design for reproducibility",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-26-python-python-kubernetes-health-checks-doodle.png",
+      "topic": "Python Kubernetes health checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-27-k8s-readiness-probes-vs-liveness-probes-in-real-workloads-doodle.png",
+      "topic": "Readiness probes vs liveness probes in real workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-28-day-086-model-registry-approvals-and-controlled-production-releases.png",
+      "topic": "Model registry approvals and controlled production releases - security and governance angle",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-28-mlops-model-monitoring-signals-every-ml-platform-should-track-doodle.png",
+      "topic": "Model monitoring signals every ML platform should track",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-08-29-day-087-why-data-leakage-silently-breaks-ml-models.png",
+      "topic": "Why data leakage silently breaks ML models - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-29-python-python-ci-cd-validation-scripts-doodle.png",
+      "topic": "Python CI/CD validation scripts",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-30-fundamentals-linux-performance-troubleshooting-with-strace-perf-and-proc-doodle.png",
+      "topic": "Linux performance troubleshooting with strace, perf, and /proc",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-08-31-k8s-secrets-management-patterns-for-kubernetes-platforms-doodle.png",
+      "topic": "Secrets management patterns for Kubernetes platforms",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-09-01-day-083-how-to-communicate-model-results-to-business-teams.png",
+      "topic": "How to communicate model results to business teams - beginner-friendly explanation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-01-day-090-canary-deployment-strategy-for-machine-learning-models.png",
+      "topic": "Canary deployment strategy for machine learning models - monitoring and operations view",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-01-mlops-automated-retraining-triggers-using-drift-and-performance-metrics-doodle.png",
+      "topic": "Automated retraining triggers using drift and performance metrics",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-01-mlops-production-checklist-for-ml-model-deployment-doodle.png",
+      "topic": "Production checklist for ML model deployment",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-02-day-091-train-validation-test-split-patterns-for-real-world-data.png",
+      "topic": "Train validation test split patterns for real-world data - practical checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-02-python-python-api-health-monitoring-doodle.png",
+      "topic": "Python API health monitoring",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-03-k8s-designing-namespaces-for-multi-team-platforms-doodle.png",
+      "topic": "Designing namespaces for multi-team platforms",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-09-04-mlops-data-drift-vs-concept-drift-explained-clearly-doodle.png",
+      "topic": "Data drift vs concept drift explained clearly",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-05-day-087-why-data-leakage-silently-breaks-ml-models.png",
+      "topic": "Why data leakage silently breaks ML models - cost and reliability tradeoff",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-05-day-094-feature-store-governance-for-production-ml.png",
+      "topic": "Feature store governance for production ML - architecture decision guide",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-09-05-python-python-excel-and-csv-automation-doodle.png",
+      "topic": "Python Excel and CSV automation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-06-day-095-feature-engineering-habits-that-improve-model-quality.png",
+      "topic": "Feature engineering habits that improve model quality - debugging workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-06-fundamentals-tcp-ip-fundamentals-every-cloud-engineer-should-know-cold-doodle.png",
+      "topic": "TCP/IP fundamentals every cloud engineer should know cold",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-07-k8s-kubernetes-rbac-mistakes-that-create-security-risk-doodle.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-08-mlops-building-audit-ready-ml-lineage-on-cloud-platforms-doodle.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-09-day-091-train-validation-test-split-patterns-for-real-world-data.png",
+      "topic": "Train validation test split patterns for real-world data - practical checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-09-day-098-mlflow-and-kubeflow-pipeline-design-for-reproducibility.png",
+      "topic": "MLflow and Kubeflow pipeline design for reproducibility - interview-ready summary",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-09-python-python-sre-incident-summaries-doodle.png",
+      "topic": "Python SRE incident summaries",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-10-day-099-evaluating-classification-models-beyond-accuracy.png",
+      "topic": "Evaluating classification models beyond accuracy - real-world platform pattern",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-10-k8s-ingress-troubleshooting-for-production-applications-doodle.png",
+      "topic": "Ingress troubleshooting for production applications",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-09-11-mlops-batch-inference-vs-real-time-inference-tradeoffs-doodle.png",
+      "topic": "Batch inference vs real-time inference tradeoffs",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-09-12-python-python-mlops-data-drift-checks-doodle.png",
+      "topic": "Python MLOps data drift checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-13-day-095-feature-engineering-habits-that-improve-model-quality.png",
+      "topic": "Feature engineering habits that improve model quality - debugging workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-13-fundamentals-how-containers-actually-isolate-processes-namespaces-and-cgroups-explained-doodle.png",
+      "topic": "How containers actually isolate processes: namespaces and cgroups explained",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-09-14-k8s-imagepullbackoff-debugging-checklist-doodle.png",
+      "topic": "ImagePullBackOff debugging checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-15-mlops-rollback-strategy-for-bad-model-releases-doodle.png",
+      "topic": "Rollback strategy for bad model releases",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-16-python-python-security-checks-for-config-files-doodle.png",
+      "topic": "Python security checks for config files",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-17-day-099-evaluating-classification-models-beyond-accuracy.png",
+      "topic": "Evaluating classification models beyond accuracy - real-world platform pattern",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-17-k8s-networkpolicy-design-for-safer-workloads-doodle.png",
+      "topic": "NetworkPolicy design for safer workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-09-18-mlops-model-serving-on-kubernetes-with-fastapi-doodle.png",
+      "topic": "Model serving on Kubernetes with FastAPI",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-09-19-python-python-helpers-inside-github-actions-doodle.png",
+      "topic": "Python helpers inside GitHub Actions",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-20-fundamentals-designing-a-ci-cd-pipeline-that-fails-fast-and-rolls-back-safely-doodle.png",
+      "topic": "Designing a CI/CD pipeline that fails fast and rolls back safely",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-21-k8s-helm-values-structure-for-repeatable-deployments-doodle.png",
+      "topic": "Helm values structure for repeatable deployments",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-22-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads-doodle.png",
+      "topic": "Vertex AI vs self-managed GKE for ML workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-09-23-python-python-infrastructure-inventory-reports-doodle.png",
+      "topic": "Python infrastructure inventory reports",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-24-k8s-gke-node-pool-upgrade-strategy-doodle.png",
+      "topic": "GKE node pool upgrade strategy",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-25-mlops-inference-latency-troubleshooting-workflow-doodle.png",
+      "topic": "Inference latency troubleshooting workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-26-python-python-cli-tools-for-devops-engineers-doodle.png",
+      "topic": "Python CLI tools for DevOps engineers",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-27-fundamentals-trunk-based-development-vs-git-flow-for-fast-moving-teams-doodle.png",
+      "topic": "Trunk-based development vs Git Flow for fast-moving teams",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-28-k8s-kubernetes-service-discovery-explained-practically-doodle.png",
+      "topic": "Kubernetes service discovery explained practically",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-09-29-mlops-feature-pipeline-quality-checks-before-training-doodle.png",
+      "topic": "Feature pipeline quality checks before training",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-09-30-python-python-learning-roadmap-for-devops-and-mlops-doodle.png",
+      "topic": "Python learning roadmap for DevOps and MLOps",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-01-k8s-production-checklist-before-deploying-to-kubernetes-doodle.png",
+      "topic": "Production checklist before deploying to Kubernetes",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-02-mlops-production-checklist-for-ml-model-deployment-doodle.png",
+      "topic": "Production checklist for ML model deployment",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-03-python-python-automation-for-real-engineering-work-doodle.png",
+      "topic": "Python automation for real engineering work",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-04-fundamentals-choosing-between-gcp-aws-and-azure-for-a-new-platform-a-practical-framework-doodle.png",
+      "topic": "Choosing between GCP, AWS, and Azure for a new platform: a practical framework",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-05-fde-start-from-the-workflow-doodle.png",
+      "topic": "Start from the workflow, not the model",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-05-k8s-kubernetes-requests-and-limits-explained-with-production-examples-doodle.png",
+      "topic": "Kubernetes requests and limits explained with production examples",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-10-07-python-build-a-log-analyzer-with-python-doodle.png",
+      "topic": "Build a log analyzer with Python",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-09-mlops-canary-deployment-strategy-for-machine-learning-models-doodle.png",
+      "topic": "Canary deployment strategy for machine learning models",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-11-fundamentals-the-three-pillars-of-observability-logs-metrics-and-traces-in-practice-doodle.png",
+      "topic": "The three pillars of observability: logs, metrics, and traces in",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-10-13-mlops-feature-store-governance-for-production-ml-doodle.png",
+      "topic": "Feature store governance for production ML",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-10-15-k8s-debugging-crashloopbackoff-step-by-step-doodle.png",
+      "topic": "Debugging CrashLoopBackOff step by step",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-17-python-python-kubernetes-health-checks-doodle.png",
+      "topic": "Python Kubernetes health checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-19-k8s-readiness-probes-vs-liveness-probes-in-real-workloads-doodle.png",
+      "topic": "Readiness probes vs liveness probes in real workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-10-21-python-python-ci-cd-validation-scripts-doodle.png",
+      "topic": "Python CI/CD validation scripts",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-23-mlops-automated-retraining-triggers-using-drift-and-performance-metrics-doodle.png",
+      "topic": "Automated retraining triggers using drift and performance metrics",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-25-fundamentals-writing-python-automation-scripts-that-are-safe-to-run-in-production-doodle.png",
+      "topic": "Writing Python automation scripts that are safe to run in production",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-27-mlops-data-drift-vs-concept-drift-explained-clearly-doodle.png",
+      "topic": "Data drift vs concept drift explained clearly",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-29-k8s-kubernetes-rbac-mistakes-that-create-security-risk-doodle.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-10-31-python-python-sre-incident-summaries-doodle.png",
+      "topic": "Python SRE incident summaries",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-11-02-k8s-ingress-troubleshooting-for-production-applications-doodle.png",
+      "topic": "Ingress troubleshooting for production applications",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-11-04-python-python-mlops-data-drift-checks-doodle.png",
+      "topic": "Python MLOps data drift checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-11-06-mlops-rollback-strategy-for-bad-model-releases-doodle.png",
+      "topic": "Rollback strategy for bad model releases",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-11-08-fundamentals-shifting-security-left-embedding-scans-into-the-ci-cd-pipeline-doodle.png",
+      "topic": "Shifting security left: embedding scans into the CI/CD pipeline",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-11-10-mlops-model-serving-on-kubernetes-with-fastapi-doodle.png",
+      "topic": "Model serving on Kubernetes with FastAPI",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-11-12-k8s-helm-values-structure-for-repeatable-deployments-doodle.png",
+      "topic": "Helm values structure for repeatable deployments",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-11-14-python-python-infrastructure-inventory-reports-doodle.png",
+      "topic": "Python infrastructure inventory reports",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-11-16-k8s-gke-node-pool-upgrade-strategy-doodle.png",
+      "topic": "GKE node pool upgrade strategy",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-11-18-python-python-cli-tools-for-devops-engineers-doodle.png",
+      "topic": "Python CLI tools for DevOps engineers",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-11-20-mlops-feature-pipeline-quality-checks-before-training-doodle.png",
+      "topic": "Feature pipeline quality checks before training",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-11-22-fundamentals-gpu-scheduling-and-cost-tradeoffs-for-llm-inference-workloads-doodle.png",
+      "topic": "GPU scheduling and cost tradeoffs for LLM inference workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-11-24-mlops-production-checklist-for-ml-model-deployment-doodle.png",
+      "topic": "Production checklist for ML model deployment",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-11-26-k8s-kubernetes-requests-and-limits-explained-with-production-examples-doodle.png",
+      "topic": "Kubernetes requests and limits explained with production examples",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-11-28-python-build-a-log-analyzer-with-python-doodle.png",
+      "topic": "Build a log analyzer with Python",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-11-30-k8s-how-hpa-vpa-and-cluster-autoscaler-work-together-doodle.png",
+      "topic": "How HPA, VPA, and Cluster Autoscaler work together",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-12-02-python-python-file-and-folder-automation-doodle.png",
+      "topic": "Python file and folder automation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-12-04-mlops-feature-store-governance-for-production-ml-doodle.png",
+      "topic": "Feature store governance for production ML",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-12-06-fundamentals-argo-cd-sync-strategies-for-multi-cluster-gitops-at-scale-doodle.png",
+      "topic": "Argo CD sync strategies for multi-cluster GitOps at scale",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-12-08-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility-doodle.png",
+      "topic": "MLflow and Kubeflow pipeline design for reproducibility",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-12-10-k8s-readiness-probes-vs-liveness-probes-in-real-workloads-doodle.png",
+      "topic": "Readiness probes vs liveness probes in real workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-12-12-python-python-ci-cd-validation-scripts-doodle.png",
+      "topic": "Python CI/CD validation scripts",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-12-14-k8s-secrets-management-patterns-for-kubernetes-platforms-doodle.png",
+      "topic": "Secrets management patterns for Kubernetes platforms",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-12-16-python-python-api-health-monitoring-doodle.png",
+      "topic": "Python API health monitoring",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-12-18-mlops-data-drift-vs-concept-drift-explained-clearly-doodle.png",
+      "topic": "Data drift vs concept drift explained clearly",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-12-20-fundamentals-designing-a-secure-multi-account-landing-zone-from-day-one-doodle.png",
+      "topic": "Designing a secure multi-account landing zone from day one",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-12-22-mlops-building-audit-ready-ml-lineage-on-cloud-platforms-doodle.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-12-24-k8s-ingress-troubleshooting-for-production-applications-doodle.png",
+      "topic": "Ingress troubleshooting for production applications",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2026-12-26-python-python-mlops-data-drift-checks-doodle.png",
+      "topic": "Python MLOps data drift checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-12-28-k8s-imagepullbackoff-debugging-checklist-doodle.png",
+      "topic": "ImagePullBackOff debugging checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2026-12-30-python-python-security-checks-for-config-files-doodle.png",
+      "topic": "Python security checks for config files",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-01-01-mlops-model-serving-on-kubernetes-with-fastapi-doodle.png",
+      "topic": "Model serving on Kubernetes with FastAPI",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-01-03-fundamentals-choosing-between-postgresql-mongodb-and-redis-for-a-new-service-doodle.png",
+      "topic": "Choosing between PostgreSQL, MongoDB, and Redis for a new service",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-01-05-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads-doodle.png",
+      "topic": "Vertex AI vs self-managed GKE for ML workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-01-07-k8s-gke-node-pool-upgrade-strategy-doodle.png",
+      "topic": "GKE node pool upgrade strategy",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-01-09-python-python-cli-tools-for-devops-engineers-doodle.png",
+      "topic": "Python CLI tools for DevOps engineers",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-01-11-k8s-kubernetes-service-discovery-explained-practically-doodle.png",
+      "topic": "Kubernetes service discovery explained practically",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-01-13-python-python-learning-roadmap-for-devops-and-mlops-doodle.png",
+      "topic": "Python learning roadmap for DevOps and MLOps",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-01-15-mlops-production-checklist-for-ml-model-deployment-doodle.png",
+      "topic": "Production checklist for ML model deployment",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-01-17-fundamentals-api-versioning-strategies-that-don-t-break-your-consumers-doodle.png",
+      "topic": "API versioning strategies that don't break your consumers",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-01-19-mlops-model-registry-approvals-and-controlled-production-releases-doodle.png",
+      "topic": "Model registry approvals and controlled production releases",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-01-21-k8s-how-hpa-vpa-and-cluster-autoscaler-work-together-doodle.png",
+      "topic": "How HPA, VPA, and Cluster Autoscaler work together",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-01-23-python-python-file-and-folder-automation-doodle.png",
+      "topic": "Python file and folder automation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-01-25-k8s-pod-disruption-budgets-for-reliable-deployments-doodle.png",
+      "topic": "Pod disruption budgets for reliable deployments",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-01-27-python-python-cloud-cost-reporting-doodle.png",
+      "topic": "Python cloud cost reporting",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-01-29-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility-doodle.png",
+      "topic": "MLflow and Kubeflow pipeline design for reproducibility",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-01-31-fundamentals-rotating-secrets-automatically-with-vault-and-dynamic-credentials-doodle.png",
+      "topic": "Rotating secrets automatically with Vault and dynamic credentials",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-02-02-mlops-model-monitoring-signals-every-ml-platform-should-track-doodle.png",
+      "topic": "Model monitoring signals every ML platform should track",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-02-04-k8s-secrets-management-patterns-for-kubernetes-platforms-doodle.png",
+      "topic": "Secrets management patterns for Kubernetes platforms",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-02-06-python-python-api-health-monitoring-doodle.png",
+      "topic": "Python API health monitoring",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-02-08-k8s-designing-namespaces-for-multi-team-platforms-doodle.png",
+      "topic": "Designing namespaces for multi-team platforms",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-02-10-python-python-excel-and-csv-automation-doodle.png",
+      "topic": "Python Excel and CSV automation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-02-12-mlops-building-audit-ready-ml-lineage-on-cloud-platforms-doodle.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-02-14-fundamentals-a-practical-finops-framework-for-cutting-cloud-waste-without-breaking-reliability-doodle.png",
+      "topic": "A practical FinOps framework for cutting cloud waste without breaking reliability",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-02-16-mlops-batch-inference-vs-real-time-inference-tradeoffs-doodle.png",
+      "topic": "Batch inference vs real-time inference tradeoffs",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-02-18-k8s-imagepullbackoff-debugging-checklist-doodle.png",
+      "topic": "ImagePullBackOff debugging checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-02-20-python-python-security-checks-for-config-files-doodle.png",
+      "topic": "Python security checks for config files",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-02-22-k8s-networkpolicy-design-for-safer-workloads-doodle.png",
+      "topic": "NetworkPolicy design for safer workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-02-24-python-python-helpers-inside-github-actions-doodle.png",
+      "topic": "Python helpers inside GitHub Actions",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-02-26-mlops-vertex-ai-vs-self-managed-gke-for-ml-workloads-doodle.png",
+      "topic": "Vertex AI vs self-managed GKE for ML workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-02-28-fundamentals-writing-a-blameless-rca-that-actually-prevents-the-next-incident-doodle.png",
+      "topic": "Writing a blameless RCA that actually prevents the next incident",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-03-02-mlops-inference-latency-troubleshooting-workflow-doodle.png",
+      "topic": "Inference latency troubleshooting workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-03-04-k8s-kubernetes-service-discovery-explained-practically-doodle.png",
+      "topic": "Kubernetes service discovery explained practically",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-03-06-python-python-learning-roadmap-for-devops-and-mlops-doodle.png",
+      "topic": "Python learning roadmap for DevOps and MLOps",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-03-08-k8s-production-checklist-before-deploying-to-kubernetes-doodle.png",
+      "topic": "Production checklist before deploying to Kubernetes",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-03-10-python-python-automation-for-real-engineering-work-doodle.png",
+      "topic": "Python automation for real engineering work",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-03-12-mlops-model-registry-approvals-and-controlled-production-releases-doodle.png",
+      "topic": "Model registry approvals and controlled production releases",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-03-14-fundamentals-securing-your-container-registry-and-artifact-supply-chain-doodle.png",
+      "topic": "Securing your container registry and artifact supply chain",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-03-16-mlops-canary-deployment-strategy-for-machine-learning-models-doodle.png",
+      "topic": "Canary deployment strategy for machine learning models",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-03-18-k8s-pod-disruption-budgets-for-reliable-deployments-doodle.png",
+      "topic": "Pod disruption budgets for reliable deployments",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-03-20-python-python-cloud-cost-reporting-doodle.png",
+      "topic": "Python cloud cost reporting",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-03-22-k8s-debugging-crashloopbackoff-step-by-step-doodle.png",
+      "topic": "Debugging CrashLoopBackOff step by step",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-03-24-python-python-kubernetes-health-checks-doodle.png",
+      "topic": "Python Kubernetes health checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-03-26-mlops-model-monitoring-signals-every-ml-platform-should-track-doodle.png",
+      "topic": "Model monitoring signals every ML platform should track",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-03-28-fundamentals-why-go-is-a-practical-second-language-for-devops-and-platform-engineers-doodle.png",
+      "topic": "Why Go is a practical second language for DevOps and platform engineers",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-03-30-mlops-automated-retraining-triggers-using-drift-and-performance-metrics-doodle.png",
+      "topic": "Automated retraining triggers using drift and performance metrics",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-04-01-k8s-designing-namespaces-for-multi-team-platforms-doodle.png",
+      "topic": "Designing namespaces for multi-team platforms",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-04-03-python-python-excel-and-csv-automation-doodle.png",
+      "topic": "Python Excel and CSV automation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-04-05-k8s-kubernetes-rbac-mistakes-that-create-security-risk-doodle.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-04-07-python-python-sre-incident-summaries-doodle.png",
+      "topic": "Python SRE incident summaries",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-04-09-mlops-batch-inference-vs-real-time-inference-tradeoffs-doodle.png",
+      "topic": "Batch inference vs real-time inference tradeoffs",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-04-11-fundamentals-cap-theorem-in-practice-the-tradeoffs-behind-every-distributed-system-doodle.png",
+      "topic": "CAP theorem in practice: the tradeoffs behind every distributed system",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-04-13-mlops-rollback-strategy-for-bad-model-releases-doodle.png",
+      "topic": "Rollback strategy for bad model releases",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-04-15-k8s-networkpolicy-design-for-safer-workloads-doodle.png",
+      "topic": "NetworkPolicy design for safer workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-04-17-python-python-helpers-inside-github-actions-doodle.png",
+      "topic": "Python helpers inside GitHub Actions",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-04-19-k8s-helm-values-structure-for-repeatable-deployments-doodle.png",
+      "topic": "Helm values structure for repeatable deployments",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-04-21-python-python-infrastructure-inventory-reports-doodle.png",
+      "topic": "Python infrastructure inventory reports",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-04-23-mlops-inference-latency-troubleshooting-workflow-doodle.png",
+      "topic": "Inference latency troubleshooting workflow",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-04-25-fundamentals-designing-reusable-terraform-and-opentofu-modules-without-creating-a-monolith-doodle.png",
+      "topic": "Designing reusable Terraform and OpenTofu modules without creating a monolith",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-04-27-mlops-feature-pipeline-quality-checks-before-training-doodle.png",
+      "topic": "Feature pipeline quality checks before training",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-04-29-k8s-production-checklist-before-deploying-to-kubernetes-doodle.png",
+      "topic": "Production checklist before deploying to Kubernetes",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-05-01-python-python-automation-for-real-engineering-work-doodle.png",
+      "topic": "Python automation for real engineering work",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-05-03-k8s-kubernetes-requests-and-limits-explained-with-production-examples-doodle.png",
+      "topic": "Kubernetes requests and limits explained with production examples",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-05-05-python-build-a-log-analyzer-with-python-doodle.png",
+      "topic": "Build a log analyzer with Python",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-05-07-mlops-canary-deployment-strategy-for-machine-learning-models-doodle.png",
+      "topic": "Canary deployment strategy for machine learning models",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-05-09-fundamentals-debugging-dns-routing-firewalls-and-mtu-across-hybrid-cloud-networks-doodle.png",
+      "topic": "Debugging DNS, routing, firewalls, and MTU across hybrid cloud networks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-05-11-mlops-feature-store-governance-for-production-ml-doodle.png",
+      "topic": "Feature store governance for production ML",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-05-13-k8s-debugging-crashloopbackoff-step-by-step-doodle.png",
+      "topic": "Debugging CrashLoopBackOff step by step",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-05-15-python-python-kubernetes-health-checks-doodle.png",
+      "topic": "Python Kubernetes health checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-05-17-k8s-readiness-probes-vs-liveness-probes-in-real-workloads-doodle.png",
+      "topic": "Readiness probes vs liveness probes in real workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-05-19-python-python-ci-cd-validation-scripts-doodle.png",
+      "topic": "Python CI/CD validation scripts",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-05-21-mlops-automated-retraining-triggers-using-drift-and-performance-metrics-doodle.png",
+      "topic": "Automated retraining triggers using drift and performance metrics",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-05-23-fundamentals-progressive-delivery-with-canary-analysis-quality-gates-and-automated-rollback-doodle.png",
+      "topic": "Progressive delivery with canary analysis, quality gates, and automated",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-05-25-mlops-data-drift-vs-concept-drift-explained-clearly-doodle.png",
+      "topic": "Data drift vs concept drift explained clearly",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-05-27-k8s-kubernetes-rbac-mistakes-that-create-security-risk-doodle.png",
+      "topic": "Kubernetes RBAC mistakes that create security risk",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-05-29-python-python-sre-incident-summaries-doodle.png",
+      "topic": "Python SRE incident summaries",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-05-31-k8s-ingress-troubleshooting-for-production-applications-doodle.png",
+      "topic": "Ingress troubleshooting for production applications",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-06-02-python-python-mlops-data-drift-checks-doodle.png",
+      "topic": "Python MLOps data drift checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-06-04-mlops-rollback-strategy-for-bad-model-releases-doodle.png",
+      "topic": "Rollback strategy for bad model releases",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-06-06-fundamentals-mapping-compute-storage-networking-and-managed-services-across-gcp-aws-and-azure-doodle.png",
+      "topic": "Mapping compute, storage, networking, and managed services across GCP, AWS,",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-06-08-mlops-model-serving-on-kubernetes-with-fastapi-doodle.png",
+      "topic": "Model serving on Kubernetes with FastAPI",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-06-10-k8s-helm-values-structure-for-repeatable-deployments-doodle.png",
+      "topic": "Helm values structure for repeatable deployments",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-06-12-python-python-infrastructure-inventory-reports-doodle.png",
+      "topic": "Python infrastructure inventory reports",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-06-14-k8s-gke-node-pool-upgrade-strategy-doodle.png",
+      "topic": "GKE node pool upgrade strategy",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-06-16-python-python-cli-tools-for-devops-engineers-doodle.png",
+      "topic": "Python CLI tools for DevOps engineers",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-06-18-mlops-feature-pipeline-quality-checks-before-training-doodle.png",
+      "topic": "Feature pipeline quality checks before training",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-06-20-fundamentals-designing-a-url-shortener-apis-data-model-caching-and-scaling-tradeoffs-doodle.png",
+      "topic": "Designing a URL shortener: APIs, data model, caching, and scaling tradeoffs",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-06-22-mlops-production-checklist-for-ml-model-deployment-doodle.png",
+      "topic": "Production checklist for ML model deployment",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-06-24-k8s-kubernetes-requests-and-limits-explained-with-production-examples-doodle.png",
+      "topic": "Kubernetes requests and limits explained with production examples",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-06-26-python-build-a-log-analyzer-with-python-doodle.png",
+      "topic": "Build a log analyzer with Python",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-06-28-k8s-how-hpa-vpa-and-cluster-autoscaler-work-together-doodle.png",
+      "topic": "How HPA, VPA, and Cluster Autoscaler work together",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-06-30-python-python-file-and-folder-automation-doodle.png",
+      "topic": "Python file and folder automation",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-07-02-mlops-feature-store-governance-for-production-ml-doodle.png",
+      "topic": "Feature store governance for production ML",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-07-04-fundamentals-building-reusable-ansible-roles-with-inventories-handlers-templates-and-vault-doodle.png",
+      "topic": "Building reusable Ansible roles with inventories, handlers, templates, and",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-07-06-mlops-mlflow-and-kubeflow-pipeline-design-for-reproducibility-doodle.png",
+      "topic": "MLflow and Kubeflow pipeline design for reproducibility",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-07-08-k8s-readiness-probes-vs-liveness-probes-in-real-workloads-doodle.png",
+      "topic": "Readiness probes vs liveness probes in real workloads",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-07-10-python-python-ci-cd-validation-scripts-doodle.png",
+      "topic": "Python CI/CD validation scripts",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-07-12-k8s-secrets-management-patterns-for-kubernetes-platforms-doodle.png",
+      "topic": "Secrets management patterns for Kubernetes platforms",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-07-14-python-python-api-health-monitoring-doodle.png",
+      "topic": "Python API health monitoring",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-07-16-mlops-data-drift-vs-concept-drift-explained-clearly-doodle.png",
+      "topic": "Data drift vs concept drift explained clearly",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-07-18-fundamentals-golden-paths-and-self-service-templates-for-an-internal-developer-platform-doodle.png",
+      "topic": "Golden paths and self-service templates for an internal developer",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-07-20-mlops-building-audit-ready-ml-lineage-on-cloud-platforms-doodle.png",
+      "topic": "Building audit-ready ML lineage on cloud platforms",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-07-22-k8s-ingress-troubleshooting-for-production-applications-doodle.png",
+      "topic": "Ingress troubleshooting for production applications",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/2027-07-24-python-python-mlops-data-drift-checks-doodle.png",
+      "topic": "Python MLOps data drift checks",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-07-26-k8s-imagepullbackoff-debugging-checklist-doodle.png",
+      "topic": "ImagePullBackOff debugging checklist",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-07-28-python-python-security-checks-for-config-files-doodle.png",
+      "topic": "Python security checks for config files",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/2027-07-30-mlops-model-serving-on-kubernetes-with-fastapi-doodle.png",
+      "topic": "Model serving on Kubernetes with FastAPI",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/ai-revision-001-beginner-python-and-software-engineering-python-memory-management-generators-iterators-and-profiling.png",
+      "topic": "[Beginner] Python and software engineering: Python memory management generators iterators and profiling for ML workloads",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/ai-revision-002-intermediate-python-and-software-engineering-python-memory-management-generators-iterators-and-profi.png",
+      "topic": "[Intermediate] Python and software engineering: Python memory management generators iterators and profiling for ML workloads",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/ai-revision-003-advanced-python-and-software-engineering-python-memory-management-generators-iterators-and-profiling.png",
+      "topic": "[Advanced] Python and software engineering: Python memory management generators iterators and profiling for ML workloads",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/ai-revision-004-expert-python-and-software-engineering-python-memory-management-generators-iterators-and-profiling-f.png",
+      "topic": "[Expert] Python and software engineering: Python memory management generators iterators and profiling for ML workloads",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/ai-revision-005-beginner-python-and-software-engineering-concurrency-vs-parallelism-with-asyncio-threads-processes-a.png",
+      "topic": "[Beginner] Python and software engineering: Concurrency vs parallelism with asyncio threads processes and the GIL",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/ai-revision-006-intermediate-python-and-software-engineering-concurrency-vs-parallelism-with-asyncio-threads-process.png",
+      "topic": "[Intermediate] Python and software engineering: Concurrency vs parallelism with asyncio threads processes and the GIL",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/ai-revision-007-advanced-python-and-software-engineering-concurrency-vs-parallelism-with-asyncio-threads-processes-a.png",
+      "topic": "[Advanced] Python and software engineering: Concurrency vs parallelism with asyncio threads processes and the GIL",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/ai-revision-008-expert-python-and-software-engineering-concurrency-vs-parallelism-with-asyncio-threads-processes-and.png",
+      "topic": "[Expert] Python and software engineering: Concurrency vs parallelism with asyncio threads processes and the GIL",
+      "layout": "architecture"
+    },
+    {
+      "imagePath": "assets/ai-revision-009-beginner-python-and-software-engineering-designing-typed-testable-python-services-and-reproducible-p.png",
+      "topic": "[Beginner] Python and software engineering: Designing typed testable Python services and reproducible packages",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/ai-revision-010-intermediate-python-and-software-engineering-designing-typed-testable-python-services-and-reproducib.png",
+      "topic": "[Intermediate] Python and software engineering: Designing typed testable Python services and reproducible packages",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/ai-revision-011-advanced-python-and-software-engineering-designing-typed-testable-python-services-and-reproducible-p.png",
+      "topic": "[Advanced] Python and software engineering: Designing typed testable Python services and reproducible packages",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/ai-revision-012-expert-python-and-software-engineering-designing-typed-testable-python-services-and-reproducible-pac.png",
+      "topic": "[Expert] Python and software engineering: Designing typed testable Python services and reproducible packages",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/ai-revision-013-beginner-python-and-software-engineering-retries-timeouts-circuit-breakers-idempotency-rest-and-grpc.png",
+      "topic": "[Beginner] Python and software engineering: Retries timeouts circuit breakers idempotency REST and gRPC for AI APIs",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/ai-revision-014-intermediate-python-and-software-engineering-retries-timeouts-circuit-breakers-idempotency-rest-and-.png",
+      "topic": "[Intermediate] Python and software engineering: Retries timeouts circuit breakers idempotency REST and gRPC for AI APIs",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/ai-revision-015-advanced-python-and-software-engineering-retries-timeouts-circuit-breakers-idempotency-rest-and-grpc.png",
+      "topic": "[Advanced] Python and software engineering: Retries timeouts circuit breakers idempotency REST and gRPC for AI APIs",
+      "layout": "flow"
+    },
+    {
+      "imagePath": "assets/doodle-preview-log-analyzer.png",
+      "topic": "Build a log analyzer with Python",
+      "layout": "flow"
+    }
+  ]
+}

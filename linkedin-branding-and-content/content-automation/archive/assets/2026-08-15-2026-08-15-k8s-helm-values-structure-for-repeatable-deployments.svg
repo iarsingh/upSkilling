@@ -1,28 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#07111f"/>
-      <stop offset="48%" stop-color="#0f5132"/>
-      <stop offset="100%" stop-color="#f59e0b"/>
-    </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#020617" flood-opacity="0.35"/>
-    </filter>
-    <style>
-      .eyebrow { font: 700 24px Arial, sans-serif; fill: #bbf7d0; letter-spacing: 3px; }
-      .title { font: 800 58px Arial, sans-serif; fill: #f8fafc; }
-      .subtitle { font: 500 28px Arial, sans-serif; fill: #e2e8f0; }
-      .footer { font: 700 24px Arial, sans-serif; fill: #fef3c7; }
-    </style>
-  </defs>
-  <rect width="1200" height="675" fill="url(#bg)"/>
-  <circle cx="1050" cy="90" r="170" fill="#ffffff" opacity="0.09"/>
-  <circle cx="110" cy="630" r="210" fill="#ffffff" opacity="0.08"/>
-  <rect x="56" y="56" width="1088" height="563" rx="34" fill="#020617" opacity="0.42" filter="url(#shadow)"/>
-  <rect x="82" y="88" width="180" height="8" rx="4" fill="#22c55e"/>
-  <text x="82" y="144" class="eyebrow">DAILY ENGINEERING NOTE</text>
-  <text x="82" y="196" class="title">Kubernetes Series | Day 57</text>
-  <text x="86" y="306" class="subtitle">Design clean app and platform boundaries</text>
-  <text x="82" y="574" class="footer">Akhilesh Ranjan Singh | ML Platform &amp; DevOps</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-labelledby="image-title image-description">
+<title id="image-title">Helm values structure for repeatable deployments</title>
+<desc id="image-description">Base manifests → Values / overlays → Render output → Validate schema → Review diff → Apply + verify. Review rendered manifests rather than trusting templates or overlays alone.</desc>
+<defs>
+ <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3 0 6" fill="none" stroke="#0369a1" stroke-width="1.6"/></marker>
+ <style>text{font-family:"Avenir Next","Arial",sans-serif}.title{font-weight:800;fill:#142638;letter-spacing:-1.3px}.cardText{font-weight:700;fill:#142638}.number{font-size:18px;font-weight:800;fill:#fff}.ink{fill:none;stroke:#142638;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.thin{stroke-width:5}</style>
+</defs>
+<rect width="1200" height="1200" fill="#f7f8f5"/>
+<rect x="32" y="32" width="1136" height="1136" rx="32" fill="#fcfdfb" stroke="#e3e8e2" stroke-width="2"/>
+<rect x="64" y="60" width="8" height="30" rx="4" fill="#0369a1"/>
+<text x="88" y="83" font-size="19" font-weight="800" letter-spacing="2" fill="#0369a1">CONFIGURATION DELIVERY</text>
+<g transform="translate(654 -30) scale(.45)"><circle cx="938" cy="208" r="68" fill="#0369a1" opacity=".12"/><circle cx="938" cy="208" r="49" fill="none" stroke="#0369a1" stroke-width="10" stroke-dasharray="18 9"/><circle cx="938" cy="208" r="18" fill="none" stroke="#0369a1" stroke-width="8"/><path d="M938 132v-19m0 190v-19m-76-76h-19m190 0h-19m-130-54-14-14m135 135-14-14m0-107 14-14m-135 135 14-14" class="ink thin"/></g>
+<text x="64" y="174" font-size="64" class="title">Helm values structure for</text><text x="64" y="250" font-size="64" class="title">repeatable deployments</text>
+<path d="M64 412h78" stroke="#0369a1" stroke-width="6" stroke-linecap="round"/>
+<text x="164" y="420" font-size="28" fill="#536575" font-weight="500">Process flow · actions and checkpoints</text>
+<path d="M407 575h18" stroke="#0369a1" stroke-width="3" fill="none" marker-end="url(#arrow)"/><path d="M775 575h18" stroke="#0369a1" stroke-width="3" fill="none" marker-end="url(#arrow)"/><path d="M968 669v63" stroke="#0369a1" stroke-width="3" fill="none" marker-end="url(#arrow)"/><path d="M793 827h-18" stroke="#0369a1" stroke-width="3" fill="none" marker-end="url(#arrow)"/><path d="M425 827h-18" stroke="#0369a1" stroke-width="3" fill="none" marker-end="url(#arrow)"/><g><rect x="64" y="496" width="336" height="170" rx="22" fill="#132333" opacity=".055"/>
+      <rect x="64" y="490" width="336" height="170" rx="22" fill="#e0f2fe" stroke="#0369a1" stroke-opacity=".20" stroke-width="2"/>
+      <rect x="88" y="512" width="42" height="32" rx="10" fill="#0369a1"/>
+      <text x="109" y="535" text-anchor="middle" class="number" style="font-size:18px">01</text>
+      <text x="88" y="582" font-size="28" class="cardText">Base manifests</text>
+    </g><g><rect x="432" y="496" width="336" height="170" rx="22" fill="#132333" opacity=".055"/>
+      <rect x="432" y="490" width="336" height="170" rx="22" fill="#ffffff" stroke="#0369a1" stroke-opacity=".20" stroke-width="2"/>
+      <rect x="456" y="512" width="42" height="32" rx="10" fill="#0369a1"/>
+      <text x="477" y="535" text-anchor="middle" class="number" style="font-size:18px">02</text>
+      <text x="456" y="582" font-size="28" class="cardText">Values /</text><text x="456" y="615" font-size="28" class="cardText">overlays</text>
+    </g><g><rect x="800" y="496" width="336" height="170" rx="22" fill="#132333" opacity=".055"/>
+      <rect x="800" y="490" width="336" height="170" rx="22" fill="#ffffff" stroke="#0369a1" stroke-opacity=".20" stroke-width="2"/>
+      <rect x="824" y="512" width="42" height="32" rx="10" fill="#0369a1"/>
+      <text x="845" y="535" text-anchor="middle" class="number" style="font-size:18px">03</text>
+      <text x="824" y="582" font-size="28" class="cardText">Render output</text>
+    </g><g><rect x="800" y="748" width="336" height="170" rx="22" fill="#132333" opacity=".055"/>
+      <rect x="800" y="742" width="336" height="170" rx="22" fill="#ffffff" stroke="#0369a1" stroke-opacity=".20" stroke-width="2"/>
+      <rect x="824" y="764" width="42" height="32" rx="10" fill="#0369a1"/>
+      <text x="845" y="787" text-anchor="middle" class="number" style="font-size:18px">04</text>
+      <text x="824" y="834" font-size="28" class="cardText">Validate schema</text>
+    </g><g><rect x="432" y="748" width="336" height="170" rx="22" fill="#132333" opacity=".055"/>
+      <rect x="432" y="742" width="336" height="170" rx="22" fill="#ffffff" stroke="#0369a1" stroke-opacity=".20" stroke-width="2"/>
+      <rect x="456" y="764" width="42" height="32" rx="10" fill="#0369a1"/>
+      <text x="477" y="787" text-anchor="middle" class="number" style="font-size:18px">05</text>
+      <text x="456" y="834" font-size="28" class="cardText">Review diff</text>
+    </g><g><rect x="64" y="748" width="336" height="170" rx="22" fill="#132333" opacity=".055"/>
+      <rect x="64" y="742" width="336" height="170" rx="22" fill="#e0f2fe" stroke="#0369a1" stroke-opacity=".20" stroke-width="2"/>
+      <rect x="88" y="764" width="42" height="32" rx="10" fill="#0369a1"/>
+      <text x="109" y="787" text-anchor="middle" class="number" style="font-size:18px">06</text>
+      <text x="88" y="834" font-size="28" class="cardText">Apply + verify</text>
+    </g>
+<rect x="64" y="946" width="1072" height="126" rx="24" fill="#e0f2fe"/>
+<text x="88" y="978" font-size="15" letter-spacing="2" font-weight="800" fill="#0369a1">THE TAKEAWAY</text>
+<text x="88" y="1008" font-size="26" font-weight="600" fill="#142638">Review rendered manifests rather than trusting templates or</text><text x="88" y="1039" font-size="26" font-weight="600" fill="#142638">overlays alone.</text>
+<path d="M64 1104h1072" stroke="#dfe6df" stroke-width="2"/>
+<text x="64" y="1140" font-size="19" font-weight="600" fill="#536575">Akhilesh Ranjan Singh · Engineering in practice</text>
+<text x="1136" y="1140" font-size="16" font-weight="700" fill="#0369a1" text-anchor="end">KEEP FOR YOUR NEXT PROJECT</text>
 </svg>

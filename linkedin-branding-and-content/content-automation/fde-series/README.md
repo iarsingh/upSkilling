@@ -24,11 +24,13 @@ The story underneath the posts is the Harborline Freight engagement in `fde-harb
 | [posts/](posts/) | The LinkedIn text for those 10 days |
 | [../assets/](../assets/) | PNG and SVG for each draft, named `*-doodle` |
 
-Regenerate the images after a diagram change:
+Images use a 1200 × 1200 square layout with larger text and content-specific diagrams. Workflow and design posts show domain components, data paths, and human review boundaries. Other scenarios show the actions for the interview case, with a concrete example from the post where available. Domain recipes live in `../src/content-diagrams.js`; the original scenarios retain their interview-specific steps in `../src/fde-diagrams.js`.
+
+Regenerate images for upcoming, unpublished posts after a diagram change:
 
 ```bash
 cd linkedin-branding-and-content/content-automation
-node scripts/render-fde-doodles.js
+node scripts/render-upcoming-doodles.js --from=2026-10-06
 ```
 
 ## Draft calendar

@@ -21,6 +21,7 @@
     "dedupe:active": "node scripts/deduplicate-active-calendar.js",
     "normalize:ai-revision": "node scripts/normalize-ai-revision-posts.js",
     "render:doodles": "node scripts/render-upcoming-doodles.js",
+    "render:library": "node scripts/render-image-library.js",
     "schedule:three-daily": "node scripts/schedule-three-daily-series.js",
     "linkedin:auth": "node src/oauth.js",
     "schedule:cron": "node src/schedule-cron.js",
