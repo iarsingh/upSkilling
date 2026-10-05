@@ -1,5 +1,27 @@
 # upSkilling Portfolio
 
+<!-- project-guide:start -->
+## Project guide
+
+[Project architecture](PROJECT_ARCHITECTURE.md) · [Interview questions and answers](INTERVIEW_QA.md)
+
+This portfolio contains independent projects. Choose a project from the catalog below, follow its own setup instructions, and use its architecture and interview guide for the implementation walkthrough.
+
+### Main portfolio components
+
+| Component | Responsibility |
+| --- | --- |
+| [`github-pages/index.html`](github-pages/index.html) | Portfolio landing page |
+| [`README.md`](README.md) | Recruiter navigation and project catalog |
+| [`docs/README.md`](docs/README.md) | Portfolio reference notes |
+| [`kaggle-mlops-datasets/README.md`](kaggle-mlops-datasets/README.md) | Synthetic data generation and evaluation inputs |
+| [`pyMlSystem/README.md`](pyMlSystem/README.md) | Incident operations application |
+| [`ai-mock-interviewer/README.md`](ai-mock-interviewer/README.md) | Mock interview application |
+| [`linkedin-branding-and-content/README.md`](linkedin-branding-and-content/README.md) | Content and learning workflows |
+| [`.gitignore`](.gitignore) | Independent repositories and generated files excluded from this portfolio |
+
+<!-- project-guide:end -->
+
 <!-- repository-summary -->
 A curated learning and engineering portfolio spanning DevOps, GCP, Kubernetes, platform engineering, SRE, MLOps, AIOps, generative AI, automation, and interview preparation.
 <!-- /repository-summary -->
