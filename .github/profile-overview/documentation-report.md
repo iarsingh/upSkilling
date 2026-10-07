@@ -4,7 +4,7 @@ Published and verified documentation in all 281 owned repositories from the late
 
 This report replaces the earlier public-only inventory, which missed private repositories. Additional public repositories found during the final checks are also included.
 
-Updated 849 documents and added 3,510 interview questions with answers. Validated 19,012 local links and source-line references, balanced code fences, and architecture diagram presence.
+Updated 849 documents and added 3,514 interview questions with answers. Validated 19,012 local links and source-line references, balanced code fences, and architecture diagram presence.
 
 Every repository includes a README project guide, `PROJECT_ARCHITECTURE.md`, and `INTERVIEW_QA.md`. Existing notes and prior architecture documents were preserved. Documentation-only repositories are identified as such.
 
@@ -304,3 +304,7 @@ The latest scan found six additional repositories. Added 84 project-specific int
 - [support-ticket-classification-system process flows](https://github.com/iarsingh/support-ticket-classification-system/blob/master/docs/PROCESS_FLOW.md)
 - [technical-documentation-rag-assistant process flows](https://github.com/iarsingh/technical-documentation-rag-assistant/blob/master/docs/PROCESS_FLOW.md)
 - [weather-data-analyzer process flows](https://github.com/iarsingh/weather-data-analyzer/blob/master/docs/PROCESS_FLOW.md)
+
+## Portfolio upgrades
+
+See [the portfolio upgrade report](project-upgrade-report.md) for current feature, validation, deployment-example, and CI improvements.

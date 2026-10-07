@@ -252,3 +252,11 @@ It now includes structured hands-on projects across GCP, GKE, Terraform, Kuberne
 
 My goal is to show practical engineering depth through real project folders, not just resume keywords.
 ```
+
+## Documentation checks
+
+Project architecture, interview guides, and local source links are checked automatically on pushes and pull requests. Run the same check locally:
+
+```bash
+python3 .github/scripts/validate_project_docs.py
+```
