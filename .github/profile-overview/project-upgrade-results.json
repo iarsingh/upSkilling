@@ -6670,5 +6670,292 @@
       "ref": "main"
     }
   ],
-  "remainingEnterprisePolicyProject": "terraform-gcp-platform"
+  "remainingEnterprisePolicyProject": "terraform-gcp-platform",
+  "imageSecurityVerification": {
+    "repository": "kubernetes-mlops-platform",
+    "commit": "0c42e051e456c90e32447f999b55f09d39d2bf98",
+    "runtimeImports": "passed",
+    "trainingImageVulnerabilityScan": "passed",
+    "inferenceImageVulnerabilityScan": "passed",
+    "imagesPublished": true,
+    "workflow": "https://github.com/iarsingh/kubernetes-mlops-platform/actions/runs/37558847615",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "ciResults": [
+    {
+      "repo": "Engineer-poet-portfolio",
+      "commit": "f20dc37258a540e56ee9ce73965acfcb52792809",
+      "runs": [
+        {
+          "name": "Project documentation checks",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37558844778,
+          "url": "https://github.com/iarsingh/Engineer-poet-portfolio/actions/runs/37558844778"
+        },
+        {
+          "name": "CI/CD",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37558844739,
+          "url": "https://github.com/iarsingh/Engineer-poet-portfolio/actions/runs/37558844739"
+        }
+      ]
+    },
+    {
+      "repo": "automlops-platform",
+      "commit": "673c3fcb0250d301590abfb63e11008762da4e08",
+      "runs": [
+        {
+          "name": "CI Pipeline",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466111144,
+          "url": "https://github.com/iarsingh/automlops-platform/actions/runs/37466111144"
+        },
+        {
+          "name": "Project documentation checks",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466110999,
+          "url": "https://github.com/iarsingh/automlops-platform/actions/runs/37466110999"
+        }
+      ]
+    },
+    {
+      "repo": "customer-deployment-platform",
+      "commit": "8448d729a6ba7d79df85afa12a6942cf92fcd18a",
+      "runs": [
+        {
+          "name": "Scan",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466112532,
+          "url": "https://github.com/iarsingh/customer-deployment-platform/actions/runs/37466112532"
+        },
+        {
+          "name": "Project documentation checks",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466112450,
+          "url": "https://github.com/iarsingh/customer-deployment-platform/actions/runs/37466112450"
+        },
+        {
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466112442,
+          "url": "https://github.com/iarsingh/customer-deployment-platform/actions/runs/37466112442"
+        }
+      ]
+    },
+    {
+      "repo": "gcp-mlops-pipeline-showcase",
+      "commit": "90049a3c7cce5671c3fb97de0183f0c67094eb1c",
+      "runs": [
+        {
+          "name": "Project documentation checks",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466114332,
+          "url": "https://github.com/iarsingh/gcp-mlops-pipeline-showcase/actions/runs/37466114332"
+        },
+        {
+          "name": "MLOps Pipeline CI/CD",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466114275,
+          "url": "https://github.com/iarsingh/gcp-mlops-pipeline-showcase/actions/runs/37466114275"
+        }
+      ]
+    },
+    {
+      "repo": "gcp-platform-engineering-portfolio",
+      "commit": "5f190f71a0c6bed46ac0a13795cc6adba8b71c61",
+      "runs": [
+        {
+          "name": "Platform CI and GitOps Promotion",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37468395403,
+          "url": "https://github.com/iarsingh/gcp-platform-engineering-portfolio/actions/runs/37468395403"
+        },
+        {
+          "name": "Project documentation checks",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37468395315,
+          "url": "https://github.com/iarsingh/gcp-platform-engineering-portfolio/actions/runs/37468395315"
+        }
+      ]
+    },
+    {
+      "repo": "kubernetes-mlops-platform",
+      "commit": "0c42e051e456c90e32447f999b55f09d39d2bf98",
+      "runs": [
+        {
+          "name": "Project documentation checks",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37558847638,
+          "url": "https://github.com/iarsingh/kubernetes-mlops-platform/actions/runs/37558847638"
+        },
+        {
+          "name": "Docker Build & Scan",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37558847615,
+          "url": "https://github.com/iarsingh/kubernetes-mlops-platform/actions/runs/37558847615"
+        },
+        {
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37558847608,
+          "url": "https://github.com/iarsingh/kubernetes-mlops-platform/actions/runs/37558847608"
+        }
+      ]
+    },
+    {
+      "repo": "mlops-ollama-incident-copilot",
+      "commit": "43c7fcbdf272e719973931c1f0cb1bcb3637589b",
+      "runs": [
+        {
+          "name": "Project documentation checks",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466115407,
+          "url": "https://github.com/iarsingh/mlops-ollama-incident-copilot/actions/runs/37466115407"
+        },
+        {
+          "name": "ci",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466115406,
+          "url": "https://github.com/iarsingh/mlops-ollama-incident-copilot/actions/runs/37466115406"
+        }
+      ]
+    },
+    {
+      "repo": "python-gcp-automation-toolkit",
+      "commit": "dee20df6c9c4ee183a424ccfc2b053a4c7e824c5",
+      "runs": [
+        {
+          "name": "Python GCP Automation Toolkit CI",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37558844547,
+          "url": "https://github.com/iarsingh/python-gcp-automation-toolkit/actions/runs/37558844547"
+        },
+        {
+          "name": "Project documentation checks",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37558844460,
+          "url": "https://github.com/iarsingh/python-gcp-automation-toolkit/actions/runs/37558844460"
+        }
+      ]
+    },
+    {
+      "repo": "terraform-gcp-platform",
+      "commit": "48b2244d7796df545fa10d5495caf6662abaddd8",
+      "runs": [
+        {
+          "name": "terraform-ci",
+          "status": "completed",
+          "conclusion": "failure",
+          "id": 37558847732,
+          "url": "https://github.com/iarsingh/terraform-gcp-platform/actions/runs/37558847732"
+        },
+        {
+          "name": "Project documentation checks",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37558847718,
+          "url": "https://github.com/iarsingh/terraform-gcp-platform/actions/runs/37558847718"
+        }
+      ]
+    },
+    {
+      "repo": "ai-cloudops-agent",
+      "commit": "f32049fb49b24293e713e7978c88e6c7e90e2408",
+      "runs": [
+        {
+          "name": "Project documentation checks",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466127680,
+          "url": "https://github.com/iarsingh/ai-cloudops-agent/actions/runs/37466127680"
+        },
+        {
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466127544,
+          "url": "https://github.com/iarsingh/ai-cloudops-agent/actions/runs/37466127544"
+        }
+      ]
+    },
+    {
+      "repo": "ai-data-analyst-agent",
+      "commit": "ba71a20848c3fd786a250e462034e28839d1dfcf",
+      "runs": [
+        {
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466131759,
+          "url": "https://github.com/iarsingh/ai-data-analyst-agent/actions/runs/37466131759"
+        },
+        {
+          "name": "Project documentation checks",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466131670,
+          "url": "https://github.com/iarsingh/ai-data-analyst-agent/actions/runs/37466131670"
+        }
+      ]
+    },
+    {
+      "repo": "ai-incident-investigation",
+      "commit": "c7df4256dead13d840e7527f9b7121ca1f352c9f",
+      "runs": [
+        {
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466139672,
+          "url": "https://github.com/iarsingh/ai-incident-investigation/actions/runs/37466139672"
+        },
+        {
+          "name": "Project documentation checks",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466139422,
+          "url": "https://github.com/iarsingh/ai-incident-investigation/actions/runs/37466139422"
+        }
+      ]
+    },
+    {
+      "repo": "customer-onboarding-platform",
+      "commit": "81bc8b41fda23ca7a7ef8cb4b77b6789c6da2f05",
+      "runs": [
+        {
+          "name": "Project documentation checks",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466190842,
+          "url": "https://github.com/iarsingh/customer-onboarding-platform/actions/runs/37466190842"
+        },
+        {
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 37466190595,
+          "url": "https://github.com/iarsingh/customer-onboarding-platform/actions/runs/37466190595"
+        }
+      ]
+    }
+  ]
 }

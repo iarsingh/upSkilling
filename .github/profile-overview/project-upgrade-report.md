@@ -316,3 +316,5 @@ Existing unrelated local edits were preserved in the eight identified projects; 
 | [x-content-automation](https://github.com/iarsingh/x-content-automation) | Guide validation + CI | [96cea76d](https://github.com/iarsingh/x-content-automation/commit/96cea76d11792da64df9714c4a442bf098d4ddf2) |
 
 The portfolio application was upgraded to Next.js 15.5.27 and passed lint and a production build. Runtime packaging tools were removed from the Kubernetes MLOps images while preserving builder tooling; runtime imports and security scanning run in CI.
+
+Both Kubernetes MLOps images passed runtime-import verification and vulnerability scanning, then were published. [Verified build and scan run](https://github.com/iarsingh/kubernetes-mlops-platform/actions/runs/37558847615).
