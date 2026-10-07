@@ -127,11 +127,17 @@ async function main() {
 
   for (const item of items) {
     if (dryRun) {
-      console.log(`[dry-run] Would publish ${item.id} for ${dateArg}${item.slot ? ` at ${item.slot}` : ""}: ${item.topic}`);
+      const attachment = item.documentPath ? ` [document ${item.documentPath}]` : "";
+      console.log(`[dry-run] Would publish ${item.id} for ${dateArg}${item.slot ? ` at ${item.slot}` : ""}: ${item.topic}${attachment}`);
       continue;
     }
-    const imagePath = resolveImagePath(item);
-    const linkedInId = await publishPost(item.text, imagePath);
+    const documentPath = item.documentPath ? path.join(root, item.documentPath) : "";
+    if (documentPath && !fs.existsSync(documentPath)) {
+      throw new Error(`Missing carousel PDF for ${item.id}: ${item.documentPath}`);
+    }
+    const linkedInId = documentPath
+      ? await publishPost(item.text, "", { documentPath, documentTitle: item.documentTitle })
+      : await publishPost(item.text, resolveImagePath(item));
     markPublished(item, linkedInId);
     console.log(`Published ${item.id} for ${dateArg}: ${linkedInId}`);
   }

@@ -4,6 +4,10 @@ Local automation for generating daily LinkedIn posts about Kubernetes, MLOps, Da
 
 The AI Engineer Revision Series is an open-ended interview knowledge library rather than a fixed-day challenge. It covers software engineering, statistics, ML, deep learning, LLMs, RAG, agents, MCP, MLOps, serving, Kubernetes, cloud, GPUs, observability, security, system design, and debugging. Every core subject is a four-post progression—Beginner, Intermediate, Advanced, and Expert—so each post remains readable while the complete sequence reaches production and staff-level depth. Posts reinforce internals, implementation, architecture flow, production tradeoffs, failure analysis, interviewer follow-ups, and hands-on work.
 
+## Carousel calendar
+
+From 2026-10-08 the active calendar is 48 seven-page document carousels, two per week. Content, rendering and scheduling live in [`carousels/`](carousels/README.md). The daily workflow uploads each carousel PDF as a LinkedIn document.
+
 ## What It Does
 
 - Generates one fresh LinkedIn post per run.

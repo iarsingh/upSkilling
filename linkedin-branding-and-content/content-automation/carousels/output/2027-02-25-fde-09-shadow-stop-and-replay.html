@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>FDE Field Notes #09 — Shadow, stop, and replay.</title><style>
+@page { size: 1080px 1350px; margin: 0; }
+:root { --accent: #f5a860; --bg: #0b0f14; --panel: #131a22; --panel2: #18212b; --line: #243040; --text: #f3f6f9; --muted: #a9b6c4; --dim: #6f7f90; --bad: #ff8a80; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); }
+body { font-family: -apple-system, "SF Pro Display", "Segoe UI", Inter, Helvetica, Arial, sans-serif; color: var(--text); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.slide { width: 1080px; height: 1350px; padding: 72px 84px 0; position: relative; overflow: hidden; page-break-after: always; display: flex; flex-direction: column; background: var(--bg); }
+.slide:last-child { page-break-after: auto; }
+.slide::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 12px; background: var(--accent); }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px; position: relative; z-index: 1; }
+main { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 170px; }
+.chip { font-size: 20px; letter-spacing: 2.5px; font-weight: 650; color: var(--muted); border: 2px solid var(--line); border-radius: 999px; padding: 12px 22px; display: flex; gap: 14px; }
+.chip b { color: var(--accent); }
+.dots { display: flex; gap: 10px; }
+.dots span { width: 14px; height: 14px; border-radius: 50%; background: var(--line); }
+.dots span.done { background: var(--dim); }
+.dots span.on { background: var(--accent); width: 40px; border-radius: 8px; }
+.eyebrow { font-size: 22px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 26px; }
+h1 { line-height: 1.04; font-weight: 800; letter-spacing: -2.5px; }
+h2 { line-height: 1.1; font-weight: 780; letter-spacing: -1.2px; margin-bottom: 48px; }
+.lead { font-size: 36px; line-height: 1.4; color: var(--muted); margin-top: 40px; max-width: 880px; }
+
+.cover .big-n { position: absolute; right: -24px; bottom: 150px; font-size: 460px; font-weight: 900; line-height: 1; color: transparent; -webkit-text-stroke: 4px var(--accent); opacity: 0.22; letter-spacing: -20px; }
+.cover-body { margin-top: 170px; position: relative; z-index: 1; }
+.cover-foot { position: absolute; left: 84px; right: 84px; bottom: 80px; display: flex; justify-content: space-between; align-items: center; border-top: 2px solid var(--line); padding-top: 40px; }
+.avatar { width: 76px; height: 76px; border-radius: 50%; background: var(--accent); color: #0b0f14; font-weight: 800; font-size: 28px; display: inline-flex; align-items: center; justify-content: center; flex: none; letter-spacing: 1px; }
+.avatar.sm { width: 52px; height: 52px; font-size: 19px; }
+.who { display: flex; align-items: center; gap: 20px; }
+.name { font-size: 26px; font-weight: 700; }
+.role { font-size: 20px; color: var(--dim); margin-top: 4px; }
+.swipe { font-size: 26px; font-weight: 700; color: #0b0f14; background: var(--accent); border-radius: 999px; padding: 18px 30px; display: flex; gap: 12px; align-items: center; }
+
+footer { position: absolute; left: 84px; right: 84px; bottom: 56px; display: flex; justify-content: space-between; align-items: center; border-top: 2px solid var(--line); padding-top: 26px; }
+.page { font-size: 34px; font-weight: 800; }
+.page span { color: var(--dim); font-weight: 600; font-size: 24px; }
+
+.quote { font-size: 74px; line-height: 1.12; font-weight: 800; letter-spacing: -1.5px; padding-left: 44px; border-left: 12px solid var(--accent); }
+
+.list { list-style: none; display: flex; flex-direction: column; gap: 26px; }
+.list li { display: flex; gap: 30px; align-items: flex-start; background: var(--panel); border: 2px solid var(--line); border-radius: 18px; padding: 32px 36px; }
+.list .num { font-size: 30px; font-weight: 800; color: var(--accent); min-width: 48px; padding-top: 4px; }
+.list .h { font-size: 37px; font-weight: 740; margin-bottom: 10px; line-height: 1.2; }
+.list .p { font-size: 28px; line-height: 1.4; color: var(--muted); }
+.list.dense { gap: 18px; }
+.list.dense li { padding: 22px 30px; }
+.list.dense .h { font-size: 32px; }
+.list.dense .p { font-size: 25px; }
+
+.flow { display: flex; flex-direction: column; }
+.step { font-size: 34px; font-weight: 680; background: var(--panel); border: 2px solid var(--line); border-radius: 16px; padding: 20px 28px; display: flex; align-items: center; gap: 24px; }
+.step .idx { width: 48px; height: 48px; border-radius: 50%; border: 3px solid var(--accent); color: var(--accent); font-size: 22px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.step:last-child { border-color: var(--accent); }
+.arrow { width: 3px; height: 30px; background: var(--accent); margin-left: 51px; opacity: 0.7; }
+.flow.dense .step { font-size: 29px; padding: 13px 24px; }
+.flow.dense .step .idx { width: 40px; height: 40px; font-size: 19px; }
+.flow.dense .arrow { height: 18px; margin-left: 47px; }
+.note { font-size: 28px; line-height: 1.45; color: var(--muted); margin-top: 38px; padding-left: 24px; border-left: 4px solid var(--line); }
+
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+.col { background: var(--panel); border: 2px solid var(--line); border-radius: 18px; padding: 36px 32px; }
+.col.hi, .col.do { border-color: var(--accent); }
+.col-label { font-size: 22px; letter-spacing: 3px; text-transform: uppercase; font-weight: 750; color: var(--dim); margin-bottom: 30px; }
+.col.hi .col-label, .col.do .col-label { color: var(--accent); }
+.col.dont .col-label { color: var(--bad); }
+.col ul { list-style: none; display: flex; flex-direction: column; gap: 26px; }
+.col li { font-size: 30px; line-height: 1.3; padding-left: 30px; position: relative; }
+.col.hi li::before, .col:not(.do):not(.dont) li::before { content: ""; position: absolute; left: 0; top: 14px; width: 12px; height: 12px; border-radius: 3px; background: var(--dim); }
+.col.hi li::before { background: var(--accent); }
+.col.do li, .col.dont li { padding-left: 46px; }
+.mark { position: absolute; left: 0; top: 0; font-weight: 800; }
+.col.do .mark { color: var(--accent); }
+.col.dont .mark { color: var(--bad); }
+
+table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 29px; background: var(--panel); border: 2px solid var(--line); border-radius: 18px; overflow: hidden; }
+th { text-align: left; color: var(--accent); font-size: 20px; letter-spacing: 2.5px; text-transform: uppercase; padding: 26px 26px 20px; background: var(--panel2); }
+td { padding: 26px; border-top: 2px solid var(--line); line-height: 1.3; color: var(--muted); }
+td:first-child { color: var(--text); font-weight: 680; }
+table.dense td { padding: 20px 24px; font-size: 26px; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.cell { background: var(--panel); border: 2px solid var(--line); border-radius: 16px; padding: 30px 28px; font-size: 30px; font-weight: 650; line-height: 1.25; display: flex; flex-direction: column; gap: 14px; }
+.cell-n { font-size: 20px; color: var(--accent); font-weight: 800; letter-spacing: 2px; }
+
+.check { list-style: none; display: flex; flex-direction: column; gap: 22px; }
+.check li { font-size: 33px; display: flex; align-items: center; gap: 24px; padding-bottom: 22px; border-bottom: 2px solid var(--line); }
+.check li:last-child { border-bottom: 0; }
+.box { width: 44px; height: 44px; border-radius: 10px; border: 3px solid var(--accent); color: var(--accent); font-size: 26px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.check.dense { gap: 14px; }
+.check.dense li { font-size: 29px; padding-bottom: 14px; }
+
+.code { background: #070a0e; border: 2px solid var(--line); border-radius: 18px; overflow: hidden; }
+.code-bar { display: flex; align-items: center; gap: 10px; padding: 18px 24px; background: var(--panel); border-bottom: 2px solid var(--line); }
+.code-bar span { width: 14px; height: 14px; border-radius: 50%; background: var(--line); }
+.code-bar b { margin-left: auto; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); font-weight: 700; }
+pre { font-family: "SF Mono", Menlo, Consolas, monospace; line-height: 1.5; color: #dce6f0; padding: 28px 30px; white-space: pre-wrap; word-break: break-word; }
+pre .cmt { color: var(--accent); opacity: 0.85; }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.stat { background: var(--panel); border: 2px solid var(--line); border-radius: 18px; padding: 64px 26px; text-align: center; }
+.stat-v { font-size: 80px; font-weight: 850; color: var(--accent); letter-spacing: -2px; }
+.stat-l { font-size: 25px; color: var(--muted); margin-top: 14px; line-height: 1.3; }
+
+.takeaway { margin-bottom: 40px; }
+.points { list-style: none; display: flex; flex-direction: column; gap: 20px; margin-bottom: 44px; }
+.points li { font-size: 31px; line-height: 1.35; color: var(--muted); padding-left: 52px; position: relative; }
+.points li::before { content: "\2192"; position: absolute; left: 0; color: var(--accent); font-weight: 800; }
+.ask { font-size: 34px; line-height: 1.35; font-weight: 680; background: var(--panel); border: 2px solid var(--accent); border-radius: 18px; padding: 32px 36px; }
+.ask-label { font-size: 20px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 750; margin-bottom: 12px; }
+.next { margin-top: 26px; display: flex; justify-content: space-between; align-items: center; gap: 24px; background: var(--accent); color: #0b0f14; border-radius: 18px; padding: 26px 34px; }
+.next-label { font-size: 20px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 800; opacity: 0.75; }
+.next-text { font-size: 27px; font-weight: 750; margin-top: 6px; line-height: 1.3; }
+.actions { font-size: 22px; font-weight: 800; white-space: nowrap; }
+</style></head><body>
+<section class="slide cover">
+  <div class="big-n">09</div>
+  <header><div class="chip">FDE FIELD NOTES<b>#09</b></div><div class="dots"><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div></header>
+  <div class="cover-body">
+    <div class="eyebrow">FDE Field Notes · Issue 09 of 10</div>
+    <h1 style="font-size:96px">Shadow, stop, and replay.</h1>
+    <p class="lead">How a tool earns the right to go first.</p>
+  </div>
+  <div class="cover-foot">
+    <div class="who"><span class="avatar">AR</span><div><div class="name">Akhilesh Ranjan Singh</div><div class="role">Senior DevSecOps Engineer · github.com/iarsingh</div></div></div>
+    <div class="swipe">Swipe <span class="chev">→</span></div>
+  </div>
+</section>
+<section class="slide"><header><div class="chip">FDE FIELD NOTES<b>#09</b></div><div class="dots"><span class="done"></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div></header><main><h2 style="font-size:60px">Shadow week rules</h2><ol class="list"><li><span class="num">01</span><div><div class="h">Operator still decides</div><div class="p">They read every item, as before.</div></div></li><li><span class="num">02</span><div><div class="h">Tool runs beside</div><div class="p">Suggestions are logged, not shown as orders.</div></div></li><li><span class="num">03</span><div><div class="h">Measure agreement</div><div class="p">Daily, on consented items only.</div></div></li><li><span class="num">04</span><div><div class="h">Fix overnight</div><div class="p">Each disagreement reviewed the next morning.</div></div></li></ol></main><footer><div class="who"><span class="avatar sm">AR</span><div><div class="name">Akhilesh Ranjan Singh</div><div class="role">github.com/iarsingh</div></div></div><div class="page">2<span>/7</span></div></footer></section>
+<section class="slide"><header><div class="chip">FDE FIELD NOTES<b>#09</b></div><div class="dots"><span class="done"></span><span class="done"></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div></header><main><h2 style="font-size:60px">Replay before live</h2><div class="flow"><div class="step"><span class="idx">1</span><span>Pull last month</span></div><div class="arrow"></div><div class="step"><span class="idx">2</span><span>Run the tool offline</span></div><div class="arrow"></div><div class="step"><span class="idx">3</span><span>Compare to real outcomes</span></div><div class="arrow"></div><div class="step"><span class="idx">4</span><span>Review misses with ops</span></div><div class="arrow"></div><div class="step"><span class="idx">5</span><span>Lock as eval set</span></div></div><p class="note">Replay uses decisions people already made, so you test on real difficulty, not demo data.</p></main><footer><div class="who"><span class="avatar sm">AR</span><div><div class="name">Akhilesh Ranjan Singh</div><div class="role">github.com/iarsingh</div></div></div><div class="page">3<span>/7</span></div></footer></section>
+<section class="slide"><header><div class="chip">FDE FIELD NOTES<b>#09</b></div><div class="dots"><span class="done"></span><span class="done"></span><span class="done"></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span></div></header><main><h2 style="font-size:60px">Stop rules, agreed upfront</h2><table class=""><thead><tr><th>Trigger</th><th>Action</th></tr></thead><tbody><tr><td>Blocked record shown</td><td>Stop immediately</td></tr><tr><td>Agreement drops below target</td><td>Back to shadow</td></tr><tr><td>Export breaks</td><td>Pause, alert owner</td></tr><tr><td>Operator asks</td><td>Stop, no questions</td></tr></tbody></table></main><footer><div class="who"><span class="avatar sm">AR</span><div><div class="name">Akhilesh Ranjan Singh</div><div class="role">github.com/iarsingh</div></div></div><div class="page">4<span>/7</span></div></footer></section>
+<section class="slide"><header><div class="chip">FDE FIELD NOTES<b>#09</b></div><div class="dots"><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="on"></span><span class=""></span><span class=""></span></div></header><main><h2 style="font-size:60px">When something goes wrong</h2><ol class="list"><li><span class="num">01</span><div><div class="h">Stop first</div><div class="p">Kill switch, then investigate.</div></div></li><li><span class="num">02</span><div><div class="h">Timeline from logs</div><div class="p">What the tool saw, suggested, and who acted.</div></div></li><li><span class="num">03</span><div><div class="h">Fix + eval case</div><div class="p">The incident becomes a permanent test.</div></div></li></ol></main><footer><div class="who"><span class="avatar sm">AR</span><div><div class="name">Akhilesh Ranjan Singh</div><div class="role">github.com/iarsingh</div></div></div><div class="page">5<span>/7</span></div></footer></section>
+<section class="slide"><header><div class="chip">FDE FIELD NOTES<b>#09</b></div><div class="dots"><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="on"></span><span class=""></span></div></header><main><div class="eyebrow">Principle</div><div class="quote">The tool has not earned the right to be first.</div><p class="lead">Until a week of shadow agreement and a clean replay say it has.</p></main><footer><div class="who"><span class="avatar sm">AR</span><div><div class="name">Akhilesh Ranjan Singh</div><div class="role">github.com/iarsingh</div></div></div><div class="page">6<span>/7</span></div></footer></section>
+<section class="slide">
+  <header><div class="chip">FDE FIELD NOTES<b>#09</b></div><div class="dots"><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="on"></span></div></header>
+  <div class="eyebrow">Key takeaway</div>
+  <h2 class="takeaway" style="font-size:56px">Shadow it, replay it, and agree the stop rule before go-live.</h2>
+  <ul class="points"><li>Operator keeps doing the job in shadow week</li><li>Replay last month as the eval set</li><li>Anyone can pull the stop</li></ul>
+  <div class="ask"><div class="ask-label">Your turn</div>What would you force the operator to keep doing until you have a week of agreement?</div>
+  <div class="next"><div><div class="next-label">Follow Akhilesh Ranjan Singh</div><div class="next-text">Next in the series: #10 Rollout, rollback, and handoff</div></div><div class="actions">Save · Repost</div></div>
+  <footer><div class="who"><span class="avatar sm">AR</span><div><div class="name">Akhilesh Ranjan Singh</div><div class="role">github.com/iarsingh</div></div></div><div class="page">7<span>/7</span></div></footer>
+</section>
+<script>
+const s = new URLSearchParams(location.search).get("s");
+if (s) document.querySelectorAll(".slide").forEach((el, i) => { if (i + 1 !== Number(s)) el.style.display = "none"; });
+</script>
+</body></html>
