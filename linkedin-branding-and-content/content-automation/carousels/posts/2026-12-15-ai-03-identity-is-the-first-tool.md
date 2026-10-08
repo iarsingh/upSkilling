@@ -10,8 +10,6 @@ linkedinProfile: https://www.linkedin.com/in/iamarsingh/
 status: scheduled
 ---
 
-PLATFORM AI TRANSFORMATION PLAYBOOK | #03
-
 Identity is the first tool.
 
 If an agent uses a shared human login, you do not have an agent. You have an unaccountable coworker.
@@ -31,4 +29,15 @@ If you cannot revoke the agent’s credentials in five minutes, it is not ready.
 
 Do you give agents their own identity, or do they borrow yours?
 
-#DevSecOps #IAM #Kubernetes #AgenticAI #PlatformEngineering
+Or just reply 1, 2 or 3: which is hardest to get your team to do?
+1️⃣ Workload identity, short-lived tokens
+2️⃣ Least privilege per tool
+3️⃣ Audit who, what, result, approval
+
+🔖 Save this for your next AI architecture review. ♻️ Repost if it would help someone on your team.
+
+Next in Platform AI Transformation Playbook, Thu 14 Jan: Appropriate autonomy. Follow so it lands in your feed.
+
+Platform AI Transformation Playbook · #03 of 6
+
+#AgenticAI #PlatformEngineering #DevSecOps #AIArchitecture #MLOps

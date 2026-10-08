@@ -10,8 +10,6 @@ linkedinProfile: https://www.linkedin.com/in/iamarsingh/
 status: scheduled
 ---
 
-PLATFORM AI TRANSFORMATION PLAYBOOK | #02
-
 GenAI vs Agentic: what actually changes.
 
 Generative AI is usually:
@@ -47,4 +45,15 @@ I would rather ship a read-only agent with an approval gate than a write-capable
 
 Bigger challenge for most teams: building a clever agent, or writing the boundaries it is not allowed to cross?
 
-#AgenticAI #GenerativeAI #PlatformEngineering #DevSecOps #AIArchitecture
+Or just reply 1, 2 or 3: which is hardest to get your team to do?
+1️⃣ An agent is a service in a business process
+2️⃣ Budget for the control plane, not just the model
+3️⃣ Read-only with a gate beats write-capable and unexplainable
+
+🔖 Save this for your next AI architecture review. ♻️ Repost if it would help someone on your team.
+
+Next in Platform AI Transformation Playbook, Tue 15 Dec: Identity is the first tool. Follow so it lands in your feed.
+
+Platform AI Transformation Playbook · #02 of 6
+
+#AgenticAI #PlatformEngineering #DevSecOps #AIArchitecture #MLOps

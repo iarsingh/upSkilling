@@ -10,21 +10,31 @@ linkedinProfile: https://www.linkedin.com/in/iamarsingh/
 status: scheduled
 ---
 
-FDE FIELD NOTES | #04
-
 Do not invent the ROI.
+Measure the baseline before you build anything.
 
 “Saves 40% of analyst time” is a slide, not a number. If you did not measure the current process, the ROI is invented — and the first skeptical manager will find out.
 
-Inside the carousel:
-→ Baseline before build
-→ Invented vs measured
-→ Metrics that hold up
-→ Make it recomputable
-→ The test
+Swipe the carousel 👉
+1. Baseline before build
+2. Invented vs measured
+3. Metrics that hold up
+4. Make it recomputable
+5. The test
 
-An honest small number beats an impressive invented one.
+The takeaway: An honest small number beats an impressive invented one.
 
 What is the most invented ROI number you have seen in a deck?
+
+Or just reply 1, 2 or 3: which is hardest to get your team to do?
+1️⃣ Measure the baseline first
+2️⃣ Use the operator's units: minutes, queue, rework
+3️⃣ Keep the formula in the repo
+
+🔖 Save this for your next customer discovery call. ♻️ Repost if it would help someone on your team.
+
+Next in FDE Field Notes, Tue 29 Dec: When the operator overturns the score. Follow so it lands in your feed.
+
+FDE Field Notes · #04 of 10
 
 #ForwardDeployedEngineer #SolutionsEngineering #MLOps #PlatformEngineering #InterviewPrep

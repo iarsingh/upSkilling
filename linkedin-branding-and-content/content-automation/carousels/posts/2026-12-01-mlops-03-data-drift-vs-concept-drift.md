@@ -10,21 +10,31 @@ linkedinProfile: https://www.linkedin.com/in/iamarsingh/
 status: scheduled
 ---
 
-MLOPS IN PRODUCTION | #03
-
 Data drift vs concept drift.
+Drift is a question, not an action.
 
 A drift alert fires. Do you retrain? Not yet. First decide which drift it is — and whether it is drift at all, or a broken pipeline.
 
-Inside the carousel:
-→ Two different problems
-→ How to detect it
-→ When an alert fires
-→ Alerting on drift
-→ Examples
+Swipe the carousel 👉
+1. Two different problems
+2. How to detect it
+3. When an alert fires
+4. Alerting on drift
+5. Examples
 
-Before you retrain, rule out a data bug.
+The takeaway: Before you retrain, rule out a data bug.
 
 Was your last drift alert real drift or a pipeline bug?
+
+Or just reply 1, 2 or 3: which is hardest to get your team to do?
+1️⃣ Data drift: inputs move
+2️⃣ Concept drift: the relationship moves
+3️⃣ Triage first, act second
+
+🔖 Save this for your next model launch review. ♻️ Repost if it would help someone on your team.
+
+Next in MLOps in Production, Thu 24 Dec: Monitoring signals and retraining triggers. Follow so it lands in your feed.
+
+MLOps in Production · #03 of 8
 
 #MLOps #MachineLearning #Kubernetes #AIEngineering #DataScience

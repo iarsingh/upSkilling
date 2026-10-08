@@ -103,10 +103,18 @@ async function publishPost(text, imagePath, { documentPath = "", documentTitle =
   return createPost(text, imageUrn ? { title: "Daily engineering note", id: imageUrn } : null);
 }
 
+// The Posts API parses commentary as "little" text: reserved characters must be escaped or the
+// post is silently cut off. A # followed by a letter is left alone so hashtags still link.
+function escapeLittleText(text) {
+  return text
+    .replace(/[\\|{}@[\]()<>*_~]/g, (ch) => `\\${ch}`)
+    .replace(/#(?![A-Za-z])/g, "\\#");
+}
+
 async function createPost(text, media) {
   const body = {
     author: linkedinAuthorUrn,
-    commentary: text,
+    commentary: escapeLittleText(text),
     visibility: "PUBLIC",
     distribution: {
       feedDistribution: "MAIN_FEED",

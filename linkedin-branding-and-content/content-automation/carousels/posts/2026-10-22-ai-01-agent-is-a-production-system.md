@@ -10,8 +10,6 @@ linkedinProfile: https://www.linkedin.com/in/iamarsingh/
 status: scheduled
 ---
 
-PLATFORM AI TRANSFORMATION PLAYBOOK | #01
-
 An agent is a production system.
 
 If it can call an API, write to a ticket, or change a cluster, it is not a chat window. It is software sitting on the same path as CI, IAM, and on-call.
@@ -22,8 +20,17 @@ Until those three exist, an agent is an unowned process with a language model in
 
 I am writing this series from a platform and DevSecOps seat: Kubernetes, Terraform, GitOps, identity, observability. Public labs on github.com/iarsingh stay labelled as labs.
 
-Next: GenAI vs Agentic — what actually changes when the model is allowed to act.
-
 What would you refuse to let an agent touch in your environment?
 
-#PlatformEngineering #DevSecOps #AgenticAI #MLOps #ForwardDeployedEngineer
+Or just reply 1, 2 or 3: which is hardest to get your team to do?
+1️⃣ Owner, rollback, blast radius first
+2️⃣ Version model + prompt + tools together
+3️⃣ SLOs and a kill switch before users
+
+🔖 Save this for your next AI architecture review. ♻️ Repost if it would help someone on your team.
+
+Next in Platform AI Transformation Playbook, Tue 17 Nov: GenAI vs Agentic: what actually changes. Follow so it lands in your feed.
+
+Platform AI Transformation Playbook · #01 of 6
+
+#AgenticAI #PlatformEngineering #DevSecOps #AIArchitecture #MLOps

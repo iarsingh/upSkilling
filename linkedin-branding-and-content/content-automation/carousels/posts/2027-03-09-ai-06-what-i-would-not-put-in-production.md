@@ -10,8 +10,6 @@ linkedinProfile: https://www.linkedin.com/in/iamarsingh/
 status: scheduled
 ---
 
-PLATFORM AI TRANSFORMATION PLAYBOOK | #06
-
 What I would not put in production.
 
 I would not ship an agent that:
@@ -36,4 +34,15 @@ The playbook is one sentence: treat agents like production software, then give t
 
 If you are building this, what is the first production action you would still refuse?
 
-#PlatformEngineering #ResponsibleAI #DevSecOps #ForwardDeployedEngineer #AgenticAI
+Or just reply 1, 2 or 3: which is hardest to get your team to do?
+1️⃣ Grant only the autonomy you could defend on a bridge call
+2️⃣ Start read-only, earn Propose, rarely Act
+3️⃣ Label labs as labs
+
+🔖 Save this for your next AI architecture review. ♻️ Repost if it would help someone on your team.
+
+That closes Platform AI Transformation Playbook. Follow for the next series.
+
+Platform AI Transformation Playbook · #06 of 6
+
+#AgenticAI #PlatformEngineering #DevSecOps #AIArchitecture #MLOps

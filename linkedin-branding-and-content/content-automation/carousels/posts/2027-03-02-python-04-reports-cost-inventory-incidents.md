@@ -10,21 +10,31 @@ linkedinProfile: https://www.linkedin.com/in/iamarsingh/
 status: scheduled
 ---
 
-PYTHON FOR PLATFORM ENGINEERS | #04
-
 Python reports for cost, inventory and incidents.
+Automate the facts. Keep humans on the judgment.
 
 Weekly cost reviews, cluster inventories and incident timelines all follow the same pattern. Automate the collection and formatting, and spend human time on the decisions.
 
-Inside the carousel:
-→ One pattern for every report
-→ Weekly cost movers
-→ Reports worth automating
-→ Incident summaries
-→ Report habits
+Swipe the carousel 👉
+1. One pattern for every report
+2. Weekly cost movers
+3. Reports worth automating
+4. Incident summaries
+5. Report habits
 
-Let scripts gather the facts so people can make the calls.
+The takeaway: Let scripts gather the facts so people can make the calls.
 
 Which weekly report would you automate first?
+
+Or just reply 1, 2 or 3: which is hardest to get your team to do?
+1️⃣ Collect, normalize, enrich, summarize, publish
+2️⃣ Owner tags make cost actionable
+3️⃣ Humans write the why
+
+🔖 Save this for your next automation sprint. ♻️ Repost if it would help someone on your team.
+
+That closes Python for Platform Engineers. Follow for the next series.
+
+Python for Platform Engineers · #04 of 4
 
 #Python #DevOps #Automation #PlatformEngineering #SRE

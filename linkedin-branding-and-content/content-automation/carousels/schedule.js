@@ -7,6 +7,7 @@
 const fs = require("fs");
 const path = require("path");
 const { buildPlan, SLOT } = require("./plan");
+const { postText } = require("./caption");
 
 const ROOT = path.resolve(__dirname, "..");
 const CALENDAR = path.join(ROOT, "content-calendar.json");
@@ -30,27 +31,6 @@ const HANDWRITTEN_FDE = new Set([
 ]);
 
 const rel = (p) => path.relative(ROOT, p).split(path.sep).join("/");
-
-function stripFrontmatter(md) {
-  return md.replace(/^---\n[\s\S]*?\n---\n+/, "").trim();
-}
-
-function slideTitle(s) {
-  return s.type === "quote" ? s.label : s.title;
-}
-
-function postText(c) {
-  if (c.postFile) return stripFrontmatter(fs.readFileSync(path.join(__dirname, "content", c.postFile), "utf8"));
-  return [
-    `${c.series.label.toUpperCase()} | #${c.issue}`,
-    c.title,
-    c.hook,
-    ["Inside the carousel:", ...c.slides.map((s) => `\u2192 ${slideTitle(s)}`)].join("\n"),
-    c.takeaway,
-    c.question,
-    c.series.hashtags.join(" "),
-  ].join("\n\n");
-}
 
 function calendarItem(c, text) {
   const pdf = path.join(__dirname, "output", `${c.fileStem}.pdf`);
@@ -154,4 +134,6 @@ function main() {
   console.log("applied");
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = { draftMarkdown };

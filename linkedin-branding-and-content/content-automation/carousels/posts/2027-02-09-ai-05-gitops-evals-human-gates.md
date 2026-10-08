@@ -10,8 +10,6 @@ linkedinProfile: https://www.linkedin.com/in/iamarsingh/
 status: scheduled
 ---
 
-PLATFORM AI TRANSFORMATION PLAYBOOK | #05
-
 GitOps, evals, and human gates.
 
 I do not want an agent that “just runs kubectl.” I want an agent that opens a change the same way a human would:
@@ -31,4 +29,15 @@ If the path to production is only a chat message, we skipped the control plane.
 
 What is your eval for an agent run today — none, a rubric, or a human staring at the output?
 
-#GitOps #CI_CD #DevSecOps #AgenticAI #LLMOps
+Or just reply 1, 2 or 3: which is hardest to get your team to do?
+1️⃣ Agents open PRs, GitOps applies
+2️⃣ Evals gate merges like tests do
+3️⃣ Humans approve the irreversible
+
+🔖 Save this for your next AI architecture review. ♻️ Repost if it would help someone on your team.
+
+Next in Platform AI Transformation Playbook, Tue 9 Mar: What I would not put in production. Follow so it lands in your feed.
+
+Platform AI Transformation Playbook · #05 of 6
+
+#AgenticAI #PlatformEngineering #DevSecOps #AIArchitecture #MLOps

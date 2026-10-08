@@ -10,21 +10,31 @@ linkedinProfile: https://www.linkedin.com/in/iamarsingh/
 status: scheduled
 ---
 
-MLOPS IN PRODUCTION | #07
-
 Batch vs real-time serving.
+Choose batch unless the decision happens inside the request.
 
 Real-time serving is more expensive, harder to operate and often unnecessary. Here is how I choose, and what I check when a FastAPI model service on Kubernetes gets slow.
 
-Inside the carousel:
-→ Batch or real-time?
-→ Real-time path
-→ Load once, report readiness
-→ When latency climbs
-→ Serving baseline
+Swipe the carousel 👉
+1. Batch or real-time?
+2. Real-time path
+3. Load once, report readiness
+4. When latency climbs
+5. Serving baseline
 
-Batch by default. Real-time when the request needs the answer.
+The takeaway: Batch by default. Real-time when the request needs the answer.
 
 Which of your real-time models could have been a batch job?
+
+Or just reply 1, 2 or 3: which is hardest to get your team to do?
+1️⃣ Compare latency, cost and failure modes
+2️⃣ Load the model once, gate readiness
+3️⃣ Throttling and cold starts cause most latency
+
+🔖 Save this for your next model launch review. ♻️ Repost if it would help someone on your team.
+
+Next in MLOps in Production, Thu 18 Mar: Vertex AI vs self-managed GKE. Follow so it lands in your feed.
+
+MLOps in Production · #07 of 8
 
 #MLOps #MachineLearning #Kubernetes #AIEngineering #DataScience

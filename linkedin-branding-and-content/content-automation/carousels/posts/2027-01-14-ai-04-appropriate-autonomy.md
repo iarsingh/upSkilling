@@ -10,8 +10,6 @@ linkedinProfile: https://www.linkedin.com/in/iamarsingh/
 status: scheduled
 ---
 
-PLATFORM AI TRANSFORMATION PLAYBOOK | #04
-
 Appropriate autonomy.
 
 I bucket agent actions the same way I bucket production changes:
@@ -32,4 +30,15 @@ If you cannot name the rollback, the agent stays in Propose.
 
 Where is the line in your shop between Propose and Act?
 
-#SRE #AgenticAI #GitOps #PlatformEngineering #MLOps
+Or just reply 1, 2 or 3: which is hardest to get your team to do?
+1️⃣ Classes: Read, Propose, Sandbox, Production
+2️⃣ Promote on evidence, demote automatically
+3️⃣ Every version change resets trust
+
+🔖 Save this for your next AI architecture review. ♻️ Repost if it would help someone on your team.
+
+Next in Platform AI Transformation Playbook, Tue 9 Feb: GitOps, evals and human gates. Follow so it lands in your feed.
+
+Platform AI Transformation Playbook · #04 of 6
+
+#AgenticAI #PlatformEngineering #DevSecOps #AIArchitecture #MLOps

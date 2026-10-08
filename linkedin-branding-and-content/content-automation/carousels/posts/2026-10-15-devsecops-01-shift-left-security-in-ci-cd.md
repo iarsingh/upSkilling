@@ -10,21 +10,31 @@ linkedinProfile: https://www.linkedin.com/in/iamarsingh/
 status: scheduled
 ---
 
-DEVSECOPS & PLATFORM | #01
-
 Shift-left security in CI/CD.
+Block new risk. Burn down old risk. Never the other way round.
 
 Adding SAST, SCA and DAST to a pipeline is the easy part. Keeping developers from routing around them is the real work. This is the layout I use.
 
-Inside the carousel:
-→ Where each scan runs
-→ What blocks a merge
-→ Managing the noise
-→ Make it stick
-→ Pipeline security baseline
+Swipe the carousel 👉
+1. Where each scan runs
+2. What blocks a merge
+3. Managing the noise
+4. Make it stick
+5. Pipeline security baseline
 
-Security that blocks only new risk is security developers keep.
+The takeaway: Security that blocks only new risk is security developers keep.
 
 Which scan generates the most noise in your pipeline?
+
+Or just reply 1, 2 or 3: which is hardest to get your team to do?
+1️⃣ Right scan, right stage
+2️⃣ Baseline, then block new findings
+3️⃣ Templates over copy-paste
+
+🔖 Save this for your next pipeline review. ♻️ Repost if it would help someone on your team.
+
+Next in DevSecOps & Platform, Tue 10 Nov: Policy as code with OPA. Follow so it lands in your feed.
+
+DevSecOps & Platform · #01 of 8
 
 #DevSecOps #PlatformEngineering #GitOps #Terraform #SRE
