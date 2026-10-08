@@ -116,6 +116,7 @@ const technologyLabels = {
   coding: "Coding exercises",
   sre: "SRE / reliability",
   mlops: "MLOps / Vertex AI",
+  fde: "Forward Deployed Engineering",
   llmops: "LLMOps / GenAI production",
   ansible: "Ansible / config management",
   cicd: "CI/CD / GitOps",
@@ -144,6 +145,7 @@ const technologyMatchers = {
   coding: /\b(write|code|coding|implement|function|class|algorithm|script|program|parse|return|input|output|unit test)\b/i,
   sre: /\b(sre|reliability|sli|slo|sla|error budget|incident|postmortem|rca|on-call|oncall|availability|capacity planning|chaos|mttr|toil|runbook|disaster recovery|rto|rpo)\b/i,
   mlops: /\b(mlops|machine learning|vertex ai|mlflow|kubeflow|model|inference|feature store|training pipeline|data drift|concept drift|gpu|kserve|seldon|bentoml|tensorflow serving|torchserve)\b/i,
+  fde: /\b(fde|forward deployed|discovery call|shadow week|human review|data residency|customer readout|operator|handoff|success metric)\b/i,
   llmops: /\b(llm|genai|generative ai|rag|retrieval.augmented|vector database|vector db|embedding|prompt|token|agent|langchain|llamaindex|vllm|tgi|model garden|agent builder|guardrail|hallucinat|chatbot|copilot)\b/i,
   ansible: /\b(ansible|playbook|ansible vault|jinja2|ansible-lint|molecule|ansible tower|awx|ad-hoc command|ansible role)\b/i,
   cicd: /\b(ci\/cd|cicd|continuous integration|continuous delivery|continuous deployment|gitops|argocd|argo cd|jenkins|github actions|gitlab|cloud build|cloud deploy|pipeline|artifact|canary|blue.?green|rollback)\b/i,
@@ -163,7 +165,8 @@ const roleProfiles = {
   devops: { role: "Senior DevOps Engineer", technology: "kubernetes", focus: "Kubernetes, Docker, Terraform, CI/CD and GitOps, Linux, cloud networking, security, observability, SRE, incident response" },
   frontend: { role: "Senior Frontend Developer", technology: "frontend", focus: "HTML, CSS, JavaScript, TypeScript, React, state management, accessibility, responsive design, testing, web performance" },
   backend: { role: "Senior Backend Developer", technology: "backend", focus: "Python, FastAPI, Go, REST and GraphQL APIs, SQL and NoSQL databases, caching, messaging, security, distributed systems, system design" },
-  mlops: { role: "Senior MLOps Engineer", technology: "mlops", focus: "Python, MLflow, Kubeflow, Vertex AI, training pipelines, feature stores, model registry, model serving, drift monitoring, Kubernetes, CI/CD for ML" }
+  mlops: { role: "Senior MLOps Engineer", technology: "mlops", focus: "Python, MLflow, Kubeflow, Vertex AI, training pipelines, feature stores, model registry, model serving, drift monitoring, Kubernetes, CI/CD for ML" },
+  fde: { role: "Staff Forward Deployed Engineer", technology: "fde", focus: "10+ year staff FDE: TypeScript, React, Next.js, FastAPI, PostgreSQL, HLD and LLD, data engineering, testing, LangGraph, MCP and A2A, agent security, LLM serving, Bedrock and Azure AI Foundry, compliance, ROI and pre-sales, plus last-mile judgment and hands-on engineering: discovery, eval design, kill switch, scope control, productization, Python, SQL, data contracts, APIs and webhooks, event pipelines, RAG, context engineering, agent memory, token budgets, tool calling, LLM evals, guardrails, end-to-end customer scenarios, cloud IAM, Docker, Kubernetes, Terraform, CI/CD, secrets and egress, telemetry, runbooks, ITSM, and Git" }
 };
 let selectedCareerProfile = "";
 let selectedInterviewTopics = [];

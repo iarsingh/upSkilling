@@ -14,3 +14,5 @@ Machine learning and data learning workspace used to strengthen MLOps and AI inf
 - Data analysis practice
 - Python-based ML exercises
 - Concepts that connect into production MLOps
+
+Runnable labs live in [`python-ml-framework-labs`](../python-ml-framework-labs/README.md): NumPy features, data-quality gates, an MLOps train/monitor loop, and FastAPI serving. All use synthetic data.

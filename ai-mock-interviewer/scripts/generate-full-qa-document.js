@@ -38,6 +38,7 @@ const TOPIC_RULES = [
   ["System Design", ["system design", "architecture"]],
   ["MLOps / LLMOps / GenAI", ["mlops", "llmops", "genai", "llm ", "rag", "kubeflow", "mlflow", "machine learning", "prompt engineering"]],
   ["Databases", ["database", "postgres", "sql", "kafka"]],
+  ["Forward Deployed Engineering", ["forward deployed", "fde:", "fde discovery", "fde data", "fde success", "fde human", "fde stakeholder", "fde integration", "fde security", "fde design", "fde delivery", "fde shadow", "fde handoff", "fde retrieval", "fde privacy", "fde rollback", "fde safety", "fde versioning", "fde engagement", "fde portfolio", "fde walk-away", "fde scope", "fde eval", "fde productization", "fde change control", "fde exec", "fde incident", "fde ontology", "fde kill", "fde custom", "fde adversarial", "fde legal", "fde capacity", "fde multi-site", "fde identity", "fde observability", "fde commercial", "fde architecture", "fde disagreement", "fde time"]],
   ["Behavioral / HR", ["behav", "hr", "leadership", "stakeholder", "experience"]]
 ];
 
@@ -265,6 +266,12 @@ function loadAiAgentEngineerScenarioQuestions() {
   return JSON.parse(fs.readFileSync(p, "utf8"));
 }
 
+function loadForwardDeployedEngineerQuestions() {
+  const p = path.join(__dirname, "answer-bank", "94-forward-deployed-engineer.json");
+  if (!fs.existsSync(p)) return [];
+  return JSON.parse(fs.readFileSync(p, "utf8"));
+}
+
 function loadHandWrittenAnswers() {
   const dir = path.join(__dirname, "answer-bank");
   const merged = new Map();
@@ -278,7 +285,7 @@ function loadHandWrittenAnswers() {
     }
   }
   for (const file of fs.readdirSync(dir)) {
-    if (!file.endsWith(".json") || ["needs-answer.json", "final-qa-dataset.json", "bulk-generated-cache.json", "90-data-science-scenario-beginner-to-expert.json", "91-ai-agent-engineer-scenario-beginner-to-expert.json", curatedFile].includes(file) || file.startsWith("actual-interview-")) continue;
+    if (!file.endsWith(".json") || ["needs-answer.json", "final-qa-dataset.json", "bulk-generated-cache.json", "90-data-science-scenario-beginner-to-expert.json", "91-ai-agent-engineer-scenario-beginner-to-expert.json", "94-forward-deployed-engineer.json", curatedFile].includes(file) || file.startsWith("actual-interview-")) continue;
     const obj = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8"));
     for (const [question, answer] of Object.entries(obj)) {
       const key = normalizeQuestion(question);
@@ -382,9 +389,10 @@ const gcpNetworkEngineerAdvancedQuestions = loadGcpNetworkEngineerAdvancedQuesti
 const linuxComposerGkeInterviewQuestions = loadLinuxComposerGkeInterviewQuestions();
 const dataScienceScenarioQuestions = loadDataScienceScenarioQuestions();
 const aiAgentEngineerScenarioQuestions = loadAiAgentEngineerScenarioQuestions();
+const forwardDeployedEngineerQuestions = loadForwardDeployedEngineerQuestions();
 const reviewedGeneratedAnswers = loadReviewedGeneratedAnswers();
 
-const allSources = [...mockSets, ...codingBank, ...appBanks, ...dataScienceScenarioQuestions, ...aiAgentEngineerScenarioQuestions, ...actualInterviewQuestions, ...importedConversationQuestions, ...gcpPrivateConnectivityQuestions, ...gcpNetworkEngineerAdvancedQuestions, ...linuxComposerGkeInterviewQuestions, ...techQa, ...largeBank];
+const allSources = [...forwardDeployedEngineerQuestions, ...mockSets, ...codingBank, ...appBanks, ...dataScienceScenarioQuestions, ...aiAgentEngineerScenarioQuestions, ...actualInterviewQuestions, ...importedConversationQuestions, ...gcpPrivateConnectivityQuestions, ...gcpNetworkEngineerAdvancedQuestions, ...linuxComposerGkeInterviewQuestions, ...techQa, ...largeBank];
 
 const seen = new Set();
 const seenCanonical = new Set();

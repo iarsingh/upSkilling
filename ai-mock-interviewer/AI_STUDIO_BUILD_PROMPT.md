@@ -21,6 +21,7 @@ Career tracks:
 - Frontend Developer: HTML, CSS, JavaScript, TypeScript, React, state management, components, testing, accessibility, performance.
 - Backend Developer: Python, Go, FastAPI, SQL, NoSQL, Redis, queues, REST APIs, security, system design.
 - MLOps Engineer: Python, MLflow, model registry, feature stores, Vertex AI, Kubeflow, Kubernetes, model serving, drift monitoring, ML CI/CD.
+- Forward Deployed Engineer: role scope, discovery, stakeholders, success metrics, engagement, data residency, human review, privacy, safety, security proofs, dirty-export integration, retrieval, workflow design, versioning, shadow week, handoff, rollback, safe delivery, portfolio evidence.
 
 Add a separate **Core Interview Rounds** section containing:
 

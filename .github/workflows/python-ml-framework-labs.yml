@@ -1,0 +1,23 @@
+name: Python ML framework labs
+on:
+  push:
+    paths: ["python-ml-framework-labs/**", ".github/workflows/python-ml-framework-labs.yml"]
+  pull_request:
+    paths: ["python-ml-framework-labs/**", ".github/workflows/python-ml-framework-labs.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+defaults:
+  run:
+    working-directory: python-ml-framework-labs
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e . pytest ruff
+      - run: ruff check src tests
+      - run: pytest -q

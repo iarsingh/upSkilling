@@ -395,6 +395,7 @@ Core skills to test:
 - Networking: TCP/IP, DNS, HTTP/HTTPS, VPN, Interconnect, firewall rules, load balancers, service networking
 - Programming and Automation: Python, FastAPI, Bash, Go awareness, REST APIs, SDK automation
 - Platform Engineering: IDP, self-service infrastructure, golden paths, DevEx, Backstage awareness
+- Forward Deployed Engineering: staff last-mile judgment including discovery, eval design, ontology, kill switch, shadow week, scope control, walk-away, change control, productization, multi-site reuse, exec readout, commercial renegotiation, data residency, human review, and a handoff the desk can run without the FDE
 - AI Infrastructure: MLflow, Kubeflow, Vertex AI, model serving on Kubernetes, GPU workloads, MLOps fundamentals
 - Additional senior skills: GCP landing zones, folders, projects, org policies, Shared VPC, governance, FinOps, DR, backup/restore, production readiness, incident communication, postmortems, runbooks, Linux fundamentals, TLS/certificates, Cloud Deploy, progressive delivery, Gatekeeper, Kyverno, BigQuery basics, Cloud Composer, Gateway API, Envoy, Apigee awareness
 

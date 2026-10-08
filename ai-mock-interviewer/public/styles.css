@@ -518,6 +518,7 @@ h2 {
 .track-frontend { --track-accent: #e34f26; --track-soft: rgba(227,79,38,.08); }
 .track-backend { --track-accent: #16a34a; --track-soft: rgba(22,163,74,.08); }
 .track-mlops { --track-accent: #8b5cf6; --track-soft: rgba(139,92,246,.09); }
+.track-fde { --track-accent: #0f766e; --track-soft: rgba(15,118,110,.09); }
 .role-card-top { display: flex; align-items: center; gap: 12px; }
 .role-card-top > span:last-child { display: grid; gap: 3px; }
 .role-card-top strong { font-size: 19px; }

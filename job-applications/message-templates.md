@@ -24,7 +24,7 @@ Hi {{name}}, I am exploring DevOps, MLOps, GCP, Kubernetes, and Platform Enginee
 
 ## Naukri / Portal Cover Note
 
-I have 7 years of experience in DevOps, Kubernetes, GCP, CI/CD, Terraform, Ansible, observability, and MLOps/platform engineering. I have worked across deployment automation, cloud infrastructure, container platforms, monitoring, GitOps workflows, and ML infrastructure projects.
+Cloud/Platform/DevSecOps engineer with 7+ years on GCP, Kubernetes, Terraform, CI/CD and SRE. Currently Senior DevSecOps at Bupa Capability Centre. Targeting FDE, MLOps/platform and Platform/SRE roles. Public labs: github.com/iarsingh · iarsingh.github.io.
 
 Current CTC: 13 LPA. Expected CTC: 19 LPA. Notice period: 90 days. Open to any location and work mode.
 

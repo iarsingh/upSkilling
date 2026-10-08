@@ -23,6 +23,7 @@ This folder is the working kit for high-volume applications on LinkedIn and Nauk
 - `search-links.md`: LinkedIn and Naukri search links.
 - `tracker.md`: Application tracker.
 - `message-templates.md`: Recruiter, cover note, and follow-up messages.
+- `naukri-profile.md`: Headline, summary, skills, and employment text to paste into Naukri.
 
 ## Recommended Daily Batch
 

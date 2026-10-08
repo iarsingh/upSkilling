@@ -1,0 +1,8 @@
+services:
+  api:
+    build: .
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      PYTHONDONTWRITEBYTECODE: "1"
+# Bind loopback only. This compose file is a local lab, not a customer deployment.

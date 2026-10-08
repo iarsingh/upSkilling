@@ -3,10 +3,10 @@
 [![CI](https://github.com/iarsingh/ai-mock-interviewer/actions/workflows/ci.yml/badge.svg)](https://github.com/iarsingh/ai-mock-interviewer/actions/workflows/ci.yml) · [MIT licensed](LICENSE) · [Contribute](CONTRIBUTING.md)
 
 <!-- repository-summary -->
-Voice-led AI mock interview practice for DevOps, SRE, Cloud, Platform Engineering, MLOps, and software engineering roles.
+Voice-led AI mock interview practice for DevOps, SRE, Cloud, Platform Engineering, MLOps, Forward Deployed Engineering, and software engineering roles.
 <!-- /repository-summary -->
 
-A local-first, voice-led mock interview simulator for DevOps, SRE, Cloud, Platform Engineering, and MLOps
+A local-first, voice-led mock interview simulator for DevOps, SRE, Cloud, Platform Engineering, MLOps, and Forward Deployed Engineering
 preparation. It runs against a local Node server and requires no cloud service in offline mode.
 
 The app asks interview questions, reads them aloud, records or accepts typed answers, saves progress
@@ -61,7 +61,7 @@ with the question and a reliable source. Do not include personal or confidential
 
 - Voice-led mock interview flow with question audio and answer transcript.
 - Offline mode with built-in mock questions and local template feedback.
-- Practice by topic: Kubernetes/GKE, Docker, GCP, Terraform, Ansible, Python, FastAPI, Go, SRE, MLOps, LLMOps, CI/CD, observability, security, networking, Linux, platform engineering, behavioral, and basics.
+- Practice by topic: Kubernetes/GKE, Docker, GCP, Terraform, Ansible, Python, FastAPI, Go, SRE, MLOps, LLMOps, Forward Deployed Engineering, CI/CD, observability, security, networking, Linux, platform engineering, behavioral, and basics.
 - 50-day practice plan and fixed mock interview sets.
 - Custom JD practice by pasting or uploading a job description.
 - Custom skills from the UI, so developers can add Java, React, AWS, Spring Boot, or any other topic locally.

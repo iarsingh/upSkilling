@@ -1,0 +1,26 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>cover clipboard</title>
+<body>
+  <p id="s">loading</p>
+  <script>
+    (async () => {
+      const r = await fetch("linkedin-cover-1584x396-upload.png");
+      const blob = await r.blob();
+      window.__blob = blob;
+      window.__size = blob.size;
+      try {
+        await navigator.clipboard.write([
+          new ClipboardItem({ "image/png": blob }),
+        ]);
+        document.getElementById("s").textContent =
+          "copied " + blob.size;
+        window.__copied = true;
+      } catch (e) {
+        document.getElementById("s").textContent = String(e);
+        window.__copied = false;
+        window.__err = String(e);
+      }
+    })();
+  </script>
+</body>

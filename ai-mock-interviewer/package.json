@@ -39,7 +39,8 @@
     "test": "node --test tests/*.test.js",
     "stop": "lsof -ti:${PORT:-3030} | xargs kill 2>/dev/null || echo 'No process running on port '${PORT:-3030}",
     "test:documents": "node scripts/run-python.js tests/test_docx_answer_format.py",
-    "check:repository": "node scripts/check-repository.js"
+    "check:repository": "node scripts/check-repository.js",
+    "coverage:fde": "node scripts/fde-coverage.js --gaps"
   },
   "engines": {
     "node": ">=22 <23"
