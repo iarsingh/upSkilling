@@ -21066,6 +21066,360 @@
         "topic": "Forward Deployed Engineering",
         "question": "FDE enterprise apps: How do you test GenAI features inside licensed platforms like Salesforce or SAP before production?",
         "answer": "Use sandboxes with representative, masked data, test across user roles to confirm permissions, run an eval set of real scenarios for quality, and check usage limits and costs. Follow the platform's deployment processes, such as Salesforce change sets or DevOps Center and SAP transports, and get business sign-off on sample outputs."
+      },
+      {
+        "category": "Forward Deployed Engineering - Backend",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE Pydantic: How do you use Pydantic to validate data coming from a customer system you do not control?",
+        "answer": "Define a Pydantic v2 model for the fields you actually use, with strict types where it matters, and set model_config = ConfigDict(extra=\"forbid\") on your own API inputs but extra=\"ignore\" for upstream feeds that add columns. Use field_validator for business rules such as a positive amount or a known status code, and parse with Model.model_validate(payload). Catch ValidationError, log the field path and the record id, and send bad records to a quarantine table instead of failing the whole batch."
+      },
+      {
+        "category": "Forward Deployed Engineering - Backend",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE Pydantic: How do Pydantic models, dataclasses and TypedDict differ, and when do you use each?",
+        "answer": "TypedDict only describes a dict shape for the type checker and does nothing at runtime. A dataclass gives you a typed container with no validation or coercion. A Pydantic model validates and coerces at runtime, produces JSON Schema and serialises cleanly, which is why FastAPI uses it. I use Pydantic at trust boundaries: API requests, LLM structured outputs, config and customer data. Inside the core logic I use dataclasses or plain types, because the data has already been validated."
+      },
+      {
+        "category": "Forward Deployed Engineering - Backend",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE Pydantic: How do you load configuration and secrets for a deployment with pydantic-settings?",
+        "answer": "Create a Settings class that extends BaseSettings, with typed fields and defaults only for non-secret values, and an env_prefix such as APP_. Values come from environment variables, which the platform fills from AWS Secrets Manager, GCP Secret Manager or Azure Key Vault. Mark secrets as SecretStr so they are masked in logs and reprs. Instantiate it once at startup, so a missing or malformed value fails the deploy instead of the first request."
+      },
+      {
+        "category": "Forward Deployed Engineering - Backend",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE SQLAlchemy: How do you structure database access with SQLAlchemy 2.0 in a FastAPI service?",
+        "answer": "Create one engine per process with pool_pre_ping=True and a pool size that fits the database connection limit, and a sessionmaker. Provide a session per request through a FastAPI dependency that yields the session and closes it in finally. Use the 2.0 style: select() with session.execute or session.scalars, typed models with Mapped and mapped_column, and explicit commits in the service layer. For async, use create_async_engine with asyncpg and AsyncSession with expire_on_commit=False, so attributes stay readable after a commit."
+      },
+      {
+        "category": "Forward Deployed Engineering - Backend",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE SQLAlchemy: An endpoint that lists 50 tickets issues 51 queries. How do you find and fix it?",
+        "answer": "This is the N+1 pattern: one query for the tickets, then one lazy load per ticket for a relationship such as the assignee. Confirm it by setting echo=True or counting queries in a test. Fix it with eager loading on the query, such as select(Ticket).options(selectinload(Ticket.assignee)) for collections or joinedload for a single related row. Then add a test that asserts the query count, so it does not come back. In async code, lazy loading raises an error, which makes these problems visible early."
+      },
+      {
+        "category": "Forward Deployed Engineering - Backend",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE Alembic: How do you ship schema changes with Alembic without downtime?",
+        "answer": "Generate a revision with alembic revision --autogenerate, then review it by hand, because autogenerate sees a column rename as a drop and an add, and can miss some server default and enum changes. Use expand and contract: first add nullable columns or new tables that old code ignores, deploy code that writes both, backfill in batches, then switch reads, and only drop the old column in a later release. Create large indexes with postgresql_concurrently=True inside an autocommit block, and run alembic upgrade head as a separate step before the new pods start."
+      },
+      {
+        "category": "Forward Deployed Engineering - Data Engineering",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE data engineering: Why use Parquet instead of CSV for analytics data in object storage?",
+        "answer": "Parquet is columnar, typed and compressed. Queries read only the columns they need, and engines skip row groups by using min and max statistics, which is predicate pushdown. The schema travels with the file, so you avoid CSV problems with quoting, encodings and numbers stored as text. Files are often several times smaller, which cuts storage and scan cost in S3, Cloud Storage or Azure Blob Storage. CSV is still fine for small hand-offs that a person will open."
+      },
+      {
+        "category": "Forward Deployed Engineering - Data Engineering",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE data engineering: How do you lay out Parquet data in object storage so queries stay fast and cheap?",
+        "answer": "Partition by the column most queries filter on, usually date, with Hive-style paths such as events/dt=2026-10-13/. Do not partition on high-cardinality columns such as customer id. Aim for files of roughly 128 MB to 1 GB, and compact small files from streaming writes on a schedule, because thousands of tiny files slow every engine. Keep raw, cleaned and curated prefixes separate, and use a table format such as Iceberg or Delta when you need schema evolution, deletes or time travel."
+      },
+      {
+        "category": "Forward Deployed Engineering - Data Engineering",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE data engineering: A nightly job writing Parquet to object storage left partial files after a crash. How do you make it safe?",
+        "answer": "Write to a temporary prefix or a run-specific path first, then publish atomically: write a _SUCCESS marker last and have readers wait for it, or commit through a table format such as Iceberg or Delta, which updates metadata in one step. Make the job idempotent by overwriting a whole partition for the run date instead of appending. Add a lifecycle rule to clean up abandoned temporary objects and incomplete multipart uploads."
+      },
+      {
+        "category": "Forward Deployed Engineering - Frontend",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE frontend: How do you build forms and data tables for an internal operator tool in React?",
+        "answer": "For forms, use React Hook Form with a Zod schema, so the same rules give inline errors and typed values, and validate again on the server because the client can be bypassed. Disable submit while saving and show server errors next to the field. For tables, use TanStack Table with server-side pagination, sorting and filtering once rows go past a few thousand, and keep the filter state in the URL so operators can share a view. Add an empty state, a loading state, and keyboard access to row actions."
+      },
+      {
+        "category": "Forward Deployed Engineering - Frontend",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE frontend: How do you stream an LLM response into a React or Next.js UI?",
+        "answer": "On the server, return a streaming response: a FastAPI StreamingResponse or a Next.js route handler that returns a ReadableStream, using server-sent events or plain chunked text. On the client, read the stream with fetch and response.body.getReader(), or use a helper such as the Vercel AI SDK, and append tokens to state as they arrive. Pass an AbortController signal so a Stop button cancels the request upstream. Render the markdown incrementally, show a clear error if the stream breaks, and only save the message once it is complete."
+      },
+      {
+        "category": "Forward Deployed Engineering - Programming",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE YAML: A Kubernetes or CI config value behaves strangely after parsing. What YAML pitfalls do you check?",
+        "answer": "YAML 1.1 parsers, including PyYAML, turn unquoted yes, no, on and off into booleans, so a country code NO becomes false. Strings such as 0755 or 1e3 can become numbers, and 1.10 becomes 1.1. Indentation errors silently move a key to another level, and tabs are not allowed. Quote any value that must stay a string, use yaml.safe_load instead of yaml.load, and validate the parsed result with a JSON Schema or a typed model."
+      },
+      {
+        "category": "Forward Deployed Engineering - Programming",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE YAML: How do you validate YAML and JSON configuration before it reaches production?",
+        "answer": "Parse it in CI and check it against a schema: JSON Schema with check-jsonschema, kubeconform for Kubernetes manifests, actionlint for GitHub Actions workflows, and a Pydantic model for application config. Fail the pipeline on unknown keys, so typos are not silently ignored. Keep environment differences in small overlay files, such as Kustomize overlays or Helm values per environment, instead of copying whole files that drift apart."
+      },
+      {
+        "category": "Forward Deployed Engineering - DevOps & Platform",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE YAML: When do you use YAML, JSON or a real language for configuration?",
+        "answer": "JSON is strict and easy to parse, so I use it for machine-generated data and API payloads. YAML is easier for people to read and is the convention for Kubernetes, Helm and CI, but its implicit typing causes bugs, so I keep it shallow and schema-checked. When configuration needs loops, conditions or shared logic, I move that logic into Terraform, Kustomize, Helm templates or a small Python or TypeScript generator, instead of building logic into YAML with anchors."
+      },
+      {
+        "category": "Forward Deployed Engineering - Data Engineering",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE data engineering: What is change data capture (CDC), and when is it better than polling an updated_at column?",
+        "answer": "Log-based CDC reads the database transaction log, such as the PostgreSQL WAL through logical replication, and emits every insert, update and delete in commit order. Polling updated_at misses hard deletes, misses rows written without updating the timestamp, and adds query load. CDC is better when you need deletes, low latency or an exact history. Polling is simpler and fine for small tables that change slowly and only need a daily sync."
+      },
+      {
+        "category": "Forward Deployed Engineering - Data Engineering",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE data engineering: How would you set up CDC from a customer's PostgreSQL database on AWS, GCP or Azure?",
+        "answer": "Ask for a replication user with minimum rights and logical replication enabled: rds.logical_replication on RDS, the cloudsql.logical_decoding flag on Cloud SQL, and wal_level=logical on Azure Database for PostgreSQL. Use Debezium with Kafka Connect, or a managed service such as AWS DMS or GCP Datastream; on Azure, Debezium is the common choice. Start with a consistent snapshot, then stream changes, and monitor replication slot lag, because a stalled consumer makes the WAL grow until the disk fills."
+      },
+      {
+        "category": "Forward Deployed Engineering - Data Engineering",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE data engineering: Your CDC consumer is applying changes out of order and creating duplicates. How do you fix it?",
+        "answer": "Treat delivery as at least once. Key every change by primary key, carry the source log position, such as the LSN, and apply an update only when its position is newer than the one already stored, so replays and duplicates become no-ops. Keep ordering per key by partitioning the stream on the primary key. Use upserts in the target. Run a periodic row count and checksum comparison between source and target to catch drift."
+      },
+      {
+        "category": "Forward Deployed Engineering - Observability & SRE",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE observability: What does OpenTelemetry give you, and how do traces, metrics and logs connect?",
+        "answer": "OpenTelemetry is a vendor-neutral standard and set of SDKs for emitting traces, metrics and logs, sent over OTLP to a collector and then to any backend, such as Grafana, Datadog or a cloud monitoring service. Traces show one request across services as spans. Metrics show aggregate rates and latencies. Logs carry detail. They connect through context: the trace id is propagated in the W3C traceparent header and written into each log line, so you can jump from a slow trace to its logs."
+      },
+      {
+        "category": "Forward Deployed Engineering - Observability & SRE",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE observability: How do you add OpenTelemetry tracing to a FastAPI service that calls an LLM and a database?",
+        "answer": "Install the OpenTelemetry SDK with the FastAPI, HTTPX and SQLAlchemy instrumentations, or run the app with opentelemetry-instrument, and send OTLP to a collector. Add manual spans around retrieval, the LLM call and tool calls, with attributes for model name, token counts and latency. The OpenTelemetry GenAI semantic conventions define gen_ai.* attribute names for this, though they are still evolving. Never put raw prompts or personal data in span attributes by default."
+      },
+      {
+        "category": "Forward Deployed Engineering - Observability & SRE",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE observability: Why run an OpenTelemetry Collector instead of exporting directly from every service?",
+        "answer": "The collector decouples apps from backends: services send OTLP to one place, and you change destinations, or send to two during a migration, without redeploying code. It handles batching, retries and memory limits, and it can redact attributes such as emails before data leaves the customer network. It can also apply tail-based sampling, keeping all error and slow traces while sampling routine ones. Run it as an agent per node or a gateway deployment, and watch its own queue and drop metrics."
+      },
+      {
+        "category": "Forward Deployed Engineering - Observability & SRE",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE observability: How do you instrument a service with Prometheus metrics and avoid cardinality problems?",
+        "answer": "Use counters for requests and errors, histograms for latency, and gauges for current values such as queue depth, following the RED method: rate, errors and duration. Prometheus scrapes a /metrics endpoint. Labels must have a small, fixed set of values, such as route template, method and status class. Never label by user id, request id or raw URL, because each distinct value creates a new time series, which can exhaust Prometheus memory."
+      },
+      {
+        "category": "Forward Deployed Engineering - Observability & SRE",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE observability: Write the Prometheus PromQL for error rate and p95 latency, and explain how you alert on them.",
+        "answer": "Error ratio: sum(rate(http_requests_total{status=~\"5..\"}[5m])) / sum(rate(http_requests_total[5m])). p95 latency: histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket[5m]))). Use rate over counters, never raw counter values. Alert on symptoms tied to the SLO, ideally with multi-window burn-rate rules, set a for: duration to avoid flapping, and route through Alertmanager to the owning team with a runbook link."
+      },
+      {
+        "category": "Forward Deployed Engineering - Observability & SRE",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE observability: How do you design a Grafana dashboard for a customer AI deployment?",
+        "answer": "Put the SLOs and error budget at the top, then RED panels for the API: request rate, error rate and p95 latency. Add AI-specific panels: LLM latency and errors by provider, tokens and cost per day, retrieval hit rate, guardrail blocks and the rate of human overrides. Add the dependencies, such as database and queue depth, at the bottom. Use template variables for environment and service, link panels to traces and logs, and keep the dashboard as code in Git."
+      },
+      {
+        "category": "Forward Deployed Engineering - Observability & SRE",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE observability: How do you set up structured logging in a Python service?",
+        "answer": "Log JSON, one event per line, with stable fields: timestamp, level, service, version, environment, trace_id, span_id and request_id, and an event name, with variables as separate fields instead of being baked into the message text. Use structlog or python-json-logger, bind the request context in middleware, and send to stdout for the platform to collect. Keep levels meaningful, so ERROR means someone should look."
+      },
+      {
+        "category": "Forward Deployed Engineering - Observability & SRE",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE observability: Customer security finds personal data in your structured logs. What do you change?",
+        "answer": "Stop the leak first: add a redaction step in the logging pipeline that masks known fields and patterns such as emails, phone numbers and tokens, and redeploy. Then fix the source by logging ids instead of payloads, and keep full prompts or documents out of logs by default. Work with the customer to purge or expire the affected logs under their retention rules. Add a test that fails if a log record contains a sample secret or email."
+      },
+      {
+        "category": "Forward Deployed Engineering - Observability & SRE",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE observability: How do you make structured logs useful for incident response across services?",
+        "answer": "Use one schema across services, so queries work everywhere. Propagate a correlation id or trace id from the edge and log it everywhere, including queue messages and background jobs. Log decisions and outcomes, such as which model version answered and why a guardrail blocked, not every function call. Set retention by value, sample noisy debug logs, and save the queries an on-call engineer will need in the runbook."
+      },
+      {
+        "category": "Forward Deployed Engineering - Observability & SRE",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE runbooks: What goes into a good runbook for an alert in a customer deployment?",
+        "answer": "Start with what the alert means and the user impact. Then give a dashboard link and a first check that takes under five minutes. Give step-by-step diagnosis with exact commands or queries, and the safe mitigations in order: roll back, scale, fail over, or turn the feature off with a flag. Say who to escalate to on the customer side and ours, and what not to do. Date it, name an owner, and update it after every incident where it was wrong or missing."
+      },
+      {
+        "category": "Forward Deployed Engineering - Observability & SRE",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE runbooks: How do you hand runbooks over so the customer team can actually use them?",
+        "answer": "Write them with the customer's on-call engineers, using their tools and access, not ours. Run a game day where they follow each runbook against a staged failure in a non-production environment while we watch, and fix every step where they got stuck. Link each alert directly to its runbook, keep the runbooks in their repository, and agree who owns updates after handoff."
+      },
+      {
+        "category": "Forward Deployed Engineering - Security & DevSecOps",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE prompt injection: How do you defend an agent that reads emails and documents against indirect prompt injection?",
+        "answer": "Assume any retrieved text can contain instructions, because no prompt reliably stops that. Limit what injected text can make the agent do: least-privilege tools scoped to the user, no direct action on untrusted content, human approval for writes, payments and external sends, and an allowlist for outbound links and recipients. Keep secrets out of the context. Mark untrusted content clearly in the prompt, validate tool arguments in code, and log and red-team injection attempts as part of the eval set."
+      },
+      {
+        "category": "Forward Deployed Engineering - Security & DevSecOps",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE prompt injection: What is the difference between direct and indirect prompt injection, and which defenses work?",
+        "answer": "Direct injection is a user typing instructions to override the system prompt. Indirect injection hides instructions in content the model reads, such as a web page, PDF, email or tool output, so the attacker never talks to the system. Classifiers and delimiting help but are bypassable, so treat them as one layer. What holds is architectural: least-privilege tools, approval gates for risky actions, output validation, and keeping data with different trust levels apart."
+      },
+      {
+        "category": "Forward Deployed Engineering - Forward Deployment",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE discovery: How do you run a stakeholder interview in the first week of an engagement?",
+        "answer": "Interview the operators who do the work, not only the sponsor. Ask them to walk through the last real case rather than describe the ideal process, and ask what they did when something went wrong. Ask what they would stop doing if they could, and which numbers their manager watches. Keep the questions open, do not pitch the solution, and write down exact phrases and timings. Close by asking who else you should talk to, and send a short summary so they can correct it."
+      },
+      {
+        "category": "Forward Deployed Engineering - Forward Deployment",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE discovery: Your stakeholder interviews with users and with their managers give conflicting pictures. What do you do?",
+        "answer": "Treat the gap as the finding. Managers describe the process on paper, while users describe the workarounds that keep it running. Check both against evidence: system logs, ticket timestamps, or a session watching the work. Show both groups the observed workflow with the differences marked, without blaming anyone, and agree which version the solution must support. Usually it is the real one, with a plan to remove the workaround."
+      },
+      {
+        "category": "Forward Deployed Engineering - Forward Deployment",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE discovery: What do you do with stakeholder interview notes so they turn into scope?",
+        "answer": "Within a day, tag each note as pain point, constraint, metric, data source or decision owner, and group them by the workflow step they touch. Count how often each pain point appears and attach a cost, in time or errors. Turn the top few into problem statements with a baseline metric, and list constraints that rule options out. Share that one-page summary with the sponsor and use it to agree the first slice of scope."
+      },
+      {
+        "category": "Forward Deployed Engineering - Forward Deployment",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE discovery: How do you map the workflow of the team you are building for?",
+        "answer": "Map the current state, not the documented one, from observation. Use swimlanes for each role and system, with every handoff, wait, manual copy-paste, and the tools used at each step. Time the steps and mark where errors and rework happen. Note exceptions separately, because they often drive most of the effort. Review the map with the people who do the work, then mark which steps the solution removes, speeds up or leaves alone."
+      },
+      {
+        "category": "Forward Deployed Engineering - Forward Deployment",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE discovery: Your workflow map shows the slowest step is not the one the customer asked you to automate. What next?",
+        "answer": "Show the map with the timings to the sponsor and make the trade-off explicit: automating the requested step saves, for example, 3 minutes per case, while the actual bottleneck costs 40 minutes of waiting at a handoff. Offer to do the requested step if it is still valuable, but propose adding the bottleneck or measuring it first. Let the customer choose, and write the decision down so success is measured against the agreed target."
+      },
+      {
+        "category": "Forward Deployed Engineering - Forward Deployment",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE discovery: What is the difference between a process map and a system architecture diagram, and why do you need both?",
+        "answer": "A process map shows people, steps, decisions, handoffs and time: how work actually flows. An architecture diagram shows systems, data stores, integrations and trust boundaries: how data and calls flow. You need the process map to choose what to build and measure impact, and the architecture to know where you can plug in, what access you need and what can break. Linking each process step to the system it touches shows which integrations matter."
+      },
+      {
+        "category": "Forward Deployed Engineering - DevOps & Platform",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE GitHub Actions: How do you deploy from GitHub Actions to AWS, GCP and Azure without storing cloud keys?",
+        "answer": "Use OIDC federation. Give the workflow permissions: id-token: write. On AWS, create an IAM role that trusts token.actions.githubusercontent.com, limited by the sub claim to one repository and branch or environment, and use aws-actions/configure-aws-credentials with role-to-assume. On GCP, use Workload Identity Federation with google-github-actions/auth. On Azure, add a federated credential to an Entra app registration or managed identity and use azure/login. Short-lived tokens replace long-lived secrets."
+      },
+      {
+        "category": "Forward Deployed Engineering - DevOps & Platform",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE GitHub Actions: How do you harden GitHub Actions workflows for a customer repository?",
+        "answer": "Set top-level permissions to read-only and grant more only to the jobs that need it. Pin third-party actions to a full commit SHA. Use environments with required reviewers and branch rules for production deploys. Avoid pull_request_target with checkout of untrusted code, and never interpolate untrusted input such as PR titles directly into run scripts; pass it through env variables. Use OIDC instead of stored cloud keys, and let Dependabot update actions."
+      },
+      {
+        "category": "Forward Deployed Engineering - DevOps & Platform",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE GitHub Actions: How do you structure CI/CD in GitHub Actions for a service with dev, staging and production?",
+        "answer": "Run fast checks on every pull request: lint, unit tests, type checks and a Docker build, with caching and path filters. On merge to main, build the image once, scan it, tag it with the commit SHA and push it. Promote that same image through environments: deploy to dev automatically, run smoke tests and evals, then deploy to staging and production behind environment approvals. Use concurrency groups so two deploys to one environment never overlap, and reusable workflows to share the steps."
+      },
+      {
+        "category": "Forward Deployed Engineering - Cloud",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: How do compute and container services (EC2/EKS, Compute Engine/GKE, Azure VMs/AKS) map across AWS, GCP and Azure, and how do you choose?",
+        "answer": "Virtual machines: EC2, Compute Engine and Azure VMs. Managed Kubernetes: EKS, GKE and AKS. Serverless containers: ECS on Fargate, Cloud Run, and Azure Container Apps. I choose by what the customer team can operate: if they already run Kubernetes, use their cluster. For a single stateless API, serverless containers remove most operations work. I use VMs only for software that needs them, such as licensed or GPU-pinned workloads."
+      },
+      {
+        "category": "Forward Deployed Engineering - Cloud",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: The customer runs EKS and your reference deployment targets GKE. What changes when you port it?",
+        "answer": "The manifests and Helm charts mostly carry over. The differences are at the edges. Workload identity changes from GKE Workload Identity Federation to EKS Pod Identity or IRSA. Ingress changes from the GKE ingress or Gateway to the AWS Load Balancer Controller. Storage classes, node autoscaling (Karpenter or Cluster Autoscaler instead of GKE autoscaling) and the registry (ECR instead of Artifact Registry) also change. I keep these in a cloud-specific overlay and test the port in their account before go-live."
+      },
+      {
+        "category": "Forward Deployed Engineering - Cloud",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: How do you give pods cloud permissions on EKS, GKE and AKS without static keys?",
+        "answer": "Map a Kubernetes service account to a cloud identity. On EKS, use EKS Pod Identity or IAM Roles for Service Accounts. On GKE, use Workload Identity Federation for GKE. On AKS, use Microsoft Entra Workload ID with a federated credential on a managed identity. Give each workload its own identity with least-privilege roles, and remove mounted key files and node-level broad roles."
+      },
+      {
+        "category": "Forward Deployed Engineering - Cloud",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: Compare S3, Cloud Storage and Azure Blob Storage for an AI document pipeline.",
+        "answer": "All three are durable object stores with strong read-after-write consistency, lifecycle rules and event notifications: S3 Event Notifications, Cloud Storage Pub/Sub notifications, and Event Grid for Blob. The cold tiers are S3 Standard-IA and Glacier, Cloud Storage Nearline, Coldline and Archive, and Azure Cool, Cold and Archive. Watch minimum storage durations and retrieval fees on cold tiers. For a document pipeline, an upload event triggers parsing and embedding, and versioning protects against overwrites."
+      },
+      {
+        "category": "Forward Deployed Engineering - Cloud",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: How do you let users upload and download files from S3, Cloud Storage or Azure Blob without exposing the bucket?",
+        "answer": "Keep the bucket or container private: S3 Block Public Access, Cloud Storage public access prevention with uniform bucket-level access, and anonymous blob access disabled on Azure. The API checks authorisation and returns a short-lived URL: an S3 presigned URL, a Cloud Storage signed URL, or an Azure user delegation SAS. Scope it to one object and one operation, with an expiry of minutes. Scan uploaded files before processing and record who requested each URL."
+      },
+      {
+        "category": "Forward Deployed Engineering - Cloud",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: The customer's S3, Cloud Storage or Blob Storage costs doubled in a month. How do you investigate?",
+        "answer": "Break the bill down into storage, requests, retrieval and egress, because they have different causes. Check object counts and sizes by prefix with S3 Storage Lens, Cloud Storage insights or Azure storage metrics, and look for missing lifecycle rules, many old versions, or incomplete multipart uploads. Check whether a job is reading cold-tier data or downloading data across regions or to the internet. Then fix the cause: lifecycle rules, compaction, caching, or co-locating compute with the data."
+      },
+      {
+        "category": "Forward Deployed Engineering - Databases",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: Compare managed PostgreSQL on RDS, Cloud SQL and Azure Database for PostgreSQL for a pgvector RAG app.",
+        "answer": "All three offer managed PostgreSQL with the pgvector extension, automated backups, point-in-time recovery and read replicas. On Azure Database for PostgreSQL flexible server, you must allowlist vector in the azure.extensions parameter first. High availability is Multi-AZ on RDS, a regional HA instance on Cloud SQL, and zone-redundant HA on Azure. Each also has a higher-end option: Aurora PostgreSQL, AlloyDB, and Azure Cosmos DB for PostgreSQL. I start on the standard service and check the pgvector version and HNSW support."
+      },
+      {
+        "category": "Forward Deployed Engineering - Databases",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: How do you connect a service privately and without passwords to RDS, Cloud SQL or Azure Database for PostgreSQL?",
+        "answer": "Put the database on private networking only: RDS in private subnets, Cloud SQL with private IP or Private Service Connect, and Azure with VNet integration or a private endpoint. Use cloud identity instead of stored passwords: RDS IAM database authentication, Cloud SQL IAM database authentication through the Cloud SQL Auth Proxy or connectors, and Microsoft Entra authentication on Azure. Require TLS, use a separate database role per service, and keep the master credential in the secrets manager for break-glass only."
+      },
+      {
+        "category": "Forward Deployed Engineering - Databases",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: The app sees connection errors on managed PostgreSQL (RDS, Cloud SQL or Azure) after scaling to more pods. What happened?",
+        "answer": "Each pod has its own connection pool, so scaling multiplied connections past the database max_connections limit. Confirm it with active connections in the database metrics. Fix it by reducing pool size per pod, adding a pooler such as RDS Proxy, PgBouncer, Cloud SQL Managed Connection Pooling where it is available, or Azure's built-in PgBouncer, and capping horizontal autoscaling. Make the app release connections quickly and handle retries for transient connection errors."
+      },
+      {
+        "category": "Forward Deployed Engineering - Cloud",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: How do VPC, firewall rules, security groups, VNets and NSGs differ across AWS, GCP and Azure?",
+        "answer": "An AWS VPC is regional, with subnets in each availability zone. Security groups are stateful allow rules attached to instances or network interfaces, and network ACLs are stateless subnet rules. A GCP VPC network is global, with regional subnets, and its stateful firewall rules apply at the network level, targeted by network tags or service accounts. An Azure VNet is regional, and NSGs are stateful rules attached to subnets or network interfaces. In all three, I default to deny inbound and open only what is needed."
+      },
+      {
+        "category": "Forward Deployed Engineering - Cloud",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: How do you keep traffic from a VPC or VNet to managed services private on AWS, GCP and Azure?",
+        "answer": "Avoid the public endpoints. On AWS, use VPC endpoints: gateway endpoints for S3 and DynamoDB, and interface endpoints through PrivateLink for other services. On GCP, use Private Google Access or Private Service Connect. On Azure, use private endpoints through Private Link, with private DNS zones so names resolve to private IPs. Send internet egress through a NAT gateway or Cloud NAT, with an allowlist, and log flows with VPC Flow Logs or the Azure equivalent."
+      },
+      {
+        "category": "Forward Deployed Engineering - Cloud",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: Your service in a private subnet cannot reach the LLM provider API. How do you debug the VPC or VNet?",
+        "answer": "Trace the path outbound. Check whether the subnet has a route to the internet through a NAT gateway, Cloud NAT or Azure NAT Gateway, and whether the customer forces traffic through a proxy or firewall. Check whether egress rules in the security group, GCP firewall rules or NSG allow port 443, and whether DNS resolves the provider hostname. Test from inside the workload with curl -v. Often the customer firewall needs the provider domain allowlisted, or a private connection is available instead."
+      },
+      {
+        "category": "Forward Deployed Engineering - Security & DevSecOps",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: Compare AWS Secrets Manager, GCP Secret Manager and Azure Key Vault.",
+        "answer": "All three store versioned secrets with IAM-controlled access and audit logs. AWS Secrets Manager has built-in rotation through Lambda, plus managed rotation for RDS. GCP Secret Manager versions secrets and can send rotation reminders to Pub/Sub, but you write the rotation logic. Azure Key Vault also manages keys and certificates; use the Azure RBAC permission model with soft delete and purge protection on. For simple config, AWS Systems Manager Parameter Store is the lighter option."
+      },
+      {
+        "category": "Forward Deployed Engineering - Security & DevSecOps",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: How do you get secrets from Secrets Manager, Secret Manager or Key Vault into Kubernetes pods?",
+        "answer": "Use the Secrets Store CSI Driver with the AWS, GCP or Azure provider to mount secrets as files, optionally synced into Kubernetes Secrets, or use External Secrets Operator to sync them into Kubernetes Secrets. Either way, authenticate with workload identity, not a stored key. Prefer files over environment variables, because rotation can update files and environment variables leak into crash dumps. Restrict who can read Secret objects in the namespace and enable etcd encryption."
+      },
+      {
+        "category": "Forward Deployed Engineering - Security & DevSecOps",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: A database password stored in the customer's secrets manager must be rotated with no downtime. How?",
+        "answer": "Use two credentials or the alternating-users strategy: create the new password, or a second user, and store it as a new secret version, while the old one still works. Make the app re-read the secret on authentication failure or on a short refresh interval instead of only at startup. Roll the pods, confirm that nothing still uses the old credential in the database logs, then revoke it. AWS Secrets Manager rotation automates these steps for RDS; on GCP and Azure, run the same steps as a scheduled job."
+      },
+      {
+        "category": "Forward Deployed Engineering - System Design",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: Compare SQS, Pub/Sub and Azure Service Bus for a document-processing queue.",
+        "answer": "SQS standard queues are at least once with best-effort ordering, and FIFO queues add ordering per message group and deduplication. A visibility timeout hides a message while it is processed. Pub/Sub is topic-based with fan-out to subscriptions, at least once by default, with ordering keys and an exactly-once option for pull subscriptions. Service Bus adds sessions for ordering, peek-lock, duplicate detection and topics. All three support dead-letter queues. Whatever you pick, make the consumer idempotent."
+      },
+      {
+        "category": "Forward Deployed Engineering - System Design",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: Messages are processed twice or end up in the dead-letter queue on SQS, Pub/Sub or Service Bus. How do you fix it?",
+        "answer": "Messages are processed twice when processing takes longer than the visibility timeout, ack deadline or lock duration, so set that above the p99 processing time, or extend it while the work runs. Make handlers idempotent with a processed-message key. For dead-lettered messages, read the failure reason and attempt count, fix poison messages or the bug, and redrive them in a controlled way. Alert on dead-letter queue depth and the age of the oldest message."
+      },
+      {
+        "category": "Forward Deployed Engineering - Cloud",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: How do you map a reference architecture across AWS, GCP and Azure for a customer on a different cloud?",
+        "answer": "Keep the application cloud-neutral: containers, PostgreSQL with pgvector, OpenTelemetry and Terraform. Then map each managed piece. Kubernetes: EKS, GKE or AKS. Object storage: S3, Cloud Storage or Blob. PostgreSQL: RDS, Cloud SQL or Azure Database for PostgreSQL. Secrets: Secrets Manager, Secret Manager or Key Vault. Queues: SQS, Pub/Sub or Service Bus. Identity: IAM roles, service accounts, or managed identities with Entra ID. Write the mapping in a table, with the behavioural differences, such as delivery guarantees, private networking and identity, called out per row."
+      },
+      {
+        "category": "Forward Deployed Engineering - Cloud",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: The customer asks whether your solution can run on AWS, GCP and Azure. How do you answer honestly?",
+        "answer": "Say what is portable and what is not. The application, containers and PostgreSQL schema run anywhere. Identity, networking, secrets and managed AI services differ per cloud, and each cloud needs its own Terraform module and a tested deployment. Say which clouds we have actually deployed and tested, and what porting to another one takes in weeks. Avoid promising one codebase with zero changes, and do not build abstractions for clouds no customer uses yet."
+      },
+      {
+        "category": "Forward Deployed Engineering - Cloud",
+        "topic": "Forward Deployed Engineering",
+        "question": "FDE multi-cloud: What is the equivalent on AWS and Azure of GCP Cloud Run, Pub/Sub and Secret Manager?",
+        "answer": "For Cloud Run, the closest is ECS on Fargate, and Azure Container Apps. For Pub/Sub, use SNS with SQS for fan-out, or EventBridge, on AWS, and Service Bus topics or Event Grid on Azure. For Secret Manager, use AWS Secrets Manager and Azure Key Vault. The mapping is never exact: check scaling to zero, request timeouts, delivery guarantees and rotation features before assuming the port is a rename."
       }
     ]
   }

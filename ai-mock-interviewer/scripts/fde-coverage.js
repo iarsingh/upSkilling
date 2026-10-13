@@ -113,6 +113,19 @@ const taxonomy = {
     ["GenAI on the client's stack", /client's stack|existing stack|enterprise app/, S], ["License-free hands-on build", /license-free|free tier|developer edition|open-source alternative|no access to the client's licensed/, S],
     ["Salesforce (CRM)", /salesforce|crm/, S], ["SAP (ERP)", /\bsap\b|\berp\b/, S], ["MuleSoft (Integration)", /mulesoft|anypoint/, S], ["Licensed platform features", /einstein|agentforce|joule|sap ai core|licensed/, S],
   ],
+  "Multi-cloud FDE stack": [
+    ["Pydantic", /pydantic/, S], ["SQLAlchemy & Alembic", /sqlalchemy|alembic/, S], ["Parquet & object storage", /parquet|object storage/, S], ["Document databases", /document database|mongodb|firestore|cosmos db|dynamodb/, S],
+    ["pgvector & hybrid search", /pgvector|hybrid search/, S], ["Forms, tables & streaming UI", /\bforms?\b|data table|stream(ing)? (the )?(llm|ai|response|token)/, S], ["YAML/JSON config", /\byaml\b/, S],
+    ["Schema contracts", /schema contract|data contract|schema registry|schema evolution/, S], ["CDC", /change data capture|\bcdc\b|debezium/, S], ["Event streams", /event stream|kafka|kinesis|event hubs?/, S],
+    ["OpenTelemetry", /opentelemetry/, S], ["Prometheus & Grafana", /prometheus|grafana/, S], ["Structured logging", /structured log/, S], ["Runbooks", /runbook/, S],
+    ["Prompt injection defense", /prompt injection/, S], ["AI threat modeling", /threat model.*(ai|llm|agent)|(ai|llm|agent).*threat model/, S],
+    ["Stakeholder interviews", /stakeholder interview|interview (the )?(users|stakeholders|operators)/, S], ["Workflow mapping", /workflow map|map the workflow|process map/, S],
+    ["Handoff & adoption metrics", /handoff|hand-off|adoption metric/, S], ["GitHub Actions", /github actions/, S],
+    ["Compute & containers (EC2/ECS/EKS, GCE/GKE, VMs/AKS)", /\beks\b|\becs\b|\bec2\b|\bgke\b|\baks\b|compute engine/, S], ["Storage (S3, Cloud Storage, Blob)", /\bs3\b|cloud storage|blob storage/, S],
+    ["Managed Postgres (RDS, Cloud SQL, Azure Database)", /\brds\b|cloud sql|azure database for postgresql/, S], ["Identity (AWS IAM, Cloud IAM, Entra ID)", /entra|cloud iam|aws iam/, S],
+    ["Networking (VPC/SGs, VPC/firewall, VNet/NSGs)", /\bvpc\b|security group|firewall rule|\bvnet\b|\bnsgs?\b/, S], ["Secrets (Secrets Manager, Secret Manager, Key Vault)", /secrets manager|secret manager|key vault/, S],
+    ["Messaging (SQS, Pub/Sub, Service Bus)", /\bsqs\b|pub\/sub|service bus/, S], ["Cross-cloud service mapping", /aws.*gcp.*azure|equivalent on (aws|gcp|azure)|map .* across (aws|clouds)/, S],
+  ],
 };
 
 let totalTarget = 0;

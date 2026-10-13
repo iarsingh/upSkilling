@@ -1,5 +1,61 @@
 # AI Mock Interviewer
 
+<!-- project-guide:start -->
+## Project guide
+
+[Project architecture](PROJECT_ARCHITECTURE.md) · [Interview questions and answers](INTERVIEW_QA.md)
+
+Use the architecture document for the component diagram, implementation boundaries, and verification entry points. The interview guide includes source-backed answers and project walkthroughs.
+
+### Main application components
+
+| Component | Responsibility |
+| --- | --- |
+| [server.js](server.js) | Node HTTP server, application wiring, authentication and configuration |
+| [Interview routes](src/routes/interview.routes.js) | Versioned interview HTTP interface and error responses |
+| [Interview service](src/services/interview.service.js) | Interview lifecycle and ownership checks |
+| [Interview repository](src/repositories/interview.repository.js) | Interview persistence operations |
+| [SQLite factory](src/database/sqlite.js) | Interview-session database initialization |
+| [AI gateway](src/ai/ai.gateway.js) | Validated generation and deterministic fallback |
+
+### Supporting implementation map
+
+| Component | Responsibility |
+| --- | --- |
+| [`scripts/build-interview-prep-document.py`](scripts/build-interview-prep-document.py) | Functions: `load_curriculum`, `set_cell_shading`, `set_cell_margins`, `set_table_geometry`, `set_repeat_header`, `style_run`, `write_cell` |
+| [`scripts/build-docx.py`](scripts/build-docx.py) | Functions: `classify_question`, `build_example`, `add_heading`, `add_qa` |
+| [`scripts/build-actual-interview-docx.py`](scripts/build-actual-interview-docx.py) | Functions: `set_font`, `shade_paragraph`, `set_cell_margins`, `add_page_field`, `configure_styles`, `parse_source` |
+| [`scripts/generate-podcast-audio.py`](scripts/generate-podcast-audio.py) | Functions: `classify`, `clean_for_speech`, `sanitize_answer`, `est_seconds`, `build_script`, `_cycle_transitions`, `render` |
+| [`package.json`](package.json) | Implementation or supporting configuration |
+| [`server.js`](server.js) | Implementation or supporting configuration |
+| [`api/[...path].js`](api/%5B...path%5D.js) | Implementation or supporting configuration |
+| [`chrome-extension/content.js`](chrome-extension/content.js) | Implementation or supporting configuration |
+| [`chrome-extension/popup.js`](chrome-extension/popup.js) | Implementation or supporting configuration |
+| [`public/admin.js`](public/admin.js) | Implementation or supporting configuration |
+| [`public/ai-agent-engineer-path.js`](public/ai-agent-engineer-path.js) | Implementation or supporting configuration |
+| [`public/app.js`](public/app.js) | Implementation or supporting configuration |
+| [`public/auth-client.js`](public/auth-client.js) | Authentication or access-control implementation |
+| [`Dockerfile`](Dockerfile) | Container build/service configuration |
+| [`tests/interview-prep.test.js`](tests/interview-prep.test.js) | Executable checks and regression examples |
+| [`tests/interview.service.test.js`](tests/interview.service.test.js) | Executable checks and regression examples |
+| [`tests/public-page.test.js`](tests/public-page.test.js) | Executable checks and regression examples |
+| [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | GitHub Actions job definitions |
+| [`.github/pull_request_template.md`](.github/pull_request_template.md) | Project explanations or operating notes |
+| [`30-day-interview-plan.md`](30-day-interview-plan.md) | Project explanations or operating notes |
+| [`50-day-interview-plan.md`](50-day-interview-plan.md) | Project explanations or operating notes |
+
+### Local setup and verification
+
+From the repository root (the commands follow the checked-in manifests):
+
+```bash
+npm install
+npm test
+npm run start
+```
+
+<!-- project-guide:end -->
+
 [![CI](https://github.com/iarsingh/ai-mock-interviewer/actions/workflows/ci.yml/badge.svg)](https://github.com/iarsingh/ai-mock-interviewer/actions/workflows/ci.yml) · [MIT licensed](LICENSE) · [Contribute](CONTRIBUTING.md)
 
 <!-- repository-summary -->
@@ -739,3 +795,11 @@ This project is available under the [MIT License](LICENSE). See [CONTRIBUTING.md
 
 Maintained by [Akhilesh Ranjan Singh](https://github.com/iarsingh). For project questions, contact
 [akhileshranjan.ks@gmail.com](mailto:akhileshranjan.ks@gmail.com) or open a GitHub issue.
+
+## Documentation checks
+
+Project guides and local source links are checked on pushes and pull requests. Run locally:
+
+```bash
+python3 .github/scripts/validate_project_docs.py
+```
