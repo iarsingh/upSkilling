@@ -1,6 +1,7 @@
 import numpy as np
+from pgvector.sqlalchemy import Vector
 from sklearn.feature_extraction.text import HashingVectorizer
-from sqlalchemy import select
+from sqlalchemy import cast, select
 
 from incident_ops.db import Runbook
 
@@ -15,7 +16,8 @@ def embed(text: str) -> list[float]:
 def retrieve(session, text: str, threshold: float = 0.12) -> list[dict]:
     vector = embed(text)
     if session.bind.dialect.name == "postgresql":
-        distance = Runbook.embedding.cosine_distance(vector)
+        # The column is a JSON variant, so it has no pgvector comparator until cast.
+        distance = cast(Runbook.embedding, Vector(384)).cosine_distance(vector)
         rows = session.execute(select(Runbook, distance).order_by(distance).limit(3)).all()
         scored = [(book, 1 - float(dist)) for book, dist in rows]
     else:
