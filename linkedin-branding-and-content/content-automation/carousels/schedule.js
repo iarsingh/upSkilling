@@ -2,6 +2,7 @@
 // Replaces every upcoming, unpublished calendar entry with the carousel plan.
 // Replaced entries and drafts are moved to archive/carousel-consolidation/, never deleted.
 // Usage: node schedule.js            (dry run)
+//        node schedule.js --append [--apply]   (add new carousels only)
 //        node schedule.js --apply
 
 const fs = require("fs");
@@ -72,9 +73,30 @@ ${item.text}
 `;
 }
 
+// Adds planned carousels that are not in the calendar yet, leaving every existing entry alone.
+function append(plan, apply) {
+  const calendar = JSON.parse(fs.readFileSync(CALENDAR, "utf8"));
+  const known = new Set(calendar.items.map((i) => i.id));
+  const fresh = plan.filter((c) => !known.has(c.id));
+  const missing = fresh.filter((c) => !fs.existsSync(path.join(__dirname, "output", `${c.fileStem}.pdf`)));
+  if (missing.length) throw new Error(`Render first (node build.js --from=${fresh[0].date}). Missing PDFs: ${missing.map((c) => c.fileStem).join(", ")}`);
+  const items = fresh.map((c) => calendarItem(c, postText(c)));
+  console.log(items.length ? `append ${items.length} carousels (${items[0].date} \u2192 ${items[items.length - 1].date})` : "nothing to append");
+  if (!apply || !items.length) {
+    if (items.length) console.log("dry run \u2014 pass --apply to write");
+    return;
+  }
+  fs.mkdirSync(POSTS_OUT, { recursive: true });
+  for (const item of items) fs.writeFileSync(path.join(ROOT, item.draftPath), draftMarkdown(item));
+  calendar.items = [...calendar.items, ...items].sort((a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id));
+  fs.writeFileSync(CALENDAR, JSON.stringify(calendar, null, 2));
+  console.log("applied");
+}
+
 function main() {
   const apply = process.argv.includes("--apply");
   const plan = buildPlan();
+  if (process.argv.includes("--append")) return append(plan, apply);
   const cutoff = plan[0].date;
   const missing = plan.filter((c) => !fs.existsSync(path.join(__dirname, "output", `${c.fileStem}.pdf`)));
   if (missing.length) throw new Error(`Render first (node build.js). Missing PDFs: ${missing.map((c) => c.fileStem).join(", ")}`);

@@ -50,15 +50,41 @@ const SERIES = {
     saveFor: "portfolio review",
     hashtags: ["#PlatformEngineering", "#Portfolio", "#DevOps", "#MLOps", "#OpenSource"],
   },
+  cloud: {
+    label: "Multi-Cloud FDE Stack",
+    short: "MULTI-CLOUD FDE STACK",
+    accent: "#3dd6c6",
+    saveFor: "cloud architecture review",
+    hashtags: ["#AWS", "#GCP", "#Azure", "#ForwardDeployedEngineer", "#CloudArchitecture"],
+  },
+  scenarios: {
+    label: "FDE Scenario Drills",
+    short: "FDE SCENARIO DRILLS",
+    accent: "#ff7eb6",
+    saveFor: "incident review",
+    hashtags: ["#ForwardDeployedEngineer", "#SRE", "#IncidentResponse", "#AIEngineering", "#InterviewPrep"],
+  },
+  interview: {
+    label: "FDE Interview Prep",
+    short: "FDE INTERVIEW PREP",
+    accent: "#a3e05f",
+    saveFor: "interview prep",
+    hashtags: ["#ForwardDeployedEngineer", "#InterviewPrep", "#AIEngineering", "#SystemDesign", "#CareerGrowth"],
+  },
 };
 
-const SERIES_ORDER = ["ai", "fde", "k8s", "devsecops", "mlops", "python", "projects"];
+// Each phase is spread evenly on its own and starts after the previous one ends,
+// so adding a phase never moves dates that are already scheduled.
+const PHASES = [
+  ["ai", "fde", "k8s", "devsecops", "mlops", "python", "projects"],
+  ["cloud", "scenarios", "interview"],
+];
 const START_DATE = "2026-10-08";
 const PUBLISH_WEEKDAYS = [2, 4]; // Tuesday, Thursday
 const SLOT = "08:00";
 
 function loadSeries() {
-  return Object.fromEntries(SERIES_ORDER.map((key) => [key, require(`./content/${key}.js`)]));
+  return Object.fromEntries(PHASES.flat().map((key) => [key, require(`./content/${key}.js`)]));
 }
 
 function addDays(dateString, days) {
@@ -81,12 +107,16 @@ function publishDates(count) {
 function buildPlan() {
   const bySeries = loadSeries();
   const slots = [];
-  for (const key of SERIES_ORDER) {
-    bySeries[key].forEach((carousel, i) => {
-      slots.push({ key, i, position: (i + 0.5) / bySeries[key].length, rank: SERIES_ORDER.indexOf(key) });
-    });
+  for (const order of PHASES) {
+    const phase = [];
+    for (const key of order) {
+      bySeries[key].forEach((carousel, i) => {
+        phase.push({ key, i, position: (i + 0.5) / bySeries[key].length, rank: order.indexOf(key) });
+      });
+    }
+    phase.sort((a, b) => a.position - b.position || a.rank - b.rank);
+    slots.push(...phase);
   }
-  slots.sort((a, b) => a.position - b.position || a.rank - b.rank);
 
   const dates = publishDates(slots.length);
   const plan = slots.map((slot, n) => {

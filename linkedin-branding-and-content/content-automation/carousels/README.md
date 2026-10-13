@@ -1,6 +1,6 @@
 # Carousel calendar
 
-48 seven-page LinkedIn document carousels, published Tuesday and Thursday at 08:00 Asia/Kolkata from 2026-10-08 to 2027-03-23. They replaced the 515 upcoming daily and FDE posts, many of which repeated the same topics.
+72 seven-page LinkedIn document carousels, published Tuesday and Thursday at 08:00 Asia/Kolkata from 2026-10-08 to 2027-06-15. The first 48 (to 2027-03-23) replaced the 515 upcoming daily and FDE posts, many of which repeated the same topics. The second phase (from 2027-03-25) covers the multi-cloud FDE skill set.
 
 | Series | Carousels | Accent |
 | --- | --- | --- |
@@ -11,13 +11,16 @@
 | MLOps in Production | 8 | violet |
 | Python for Platform Engineers | 4 | yellow |
 | Lab Notes (public GitHub labs) | 4 | coral |
+| Multi-Cloud FDE Stack (phase 2) | 8 | teal |
+| FDE Scenario Drills (phase 2) | 8 | pink |
+| FDE Interview Prep (phase 2) | 8 | lime |
 
 Each carousel is a cover, five content slides and a closing slide with the takeaway, a question and the next issue.
 
 ## Layout
 
 - `content/<series>.js` holds slide content. Each entry has a title, subtitle, post hook, five slides, a takeaway, three points and a question.
-- `plan.js` holds series metadata, spreads series evenly across the calendar and assigns dates.
+- `plan.js` holds series metadata and phases. Each phase spreads its series evenly and starts after the previous phase, so adding a phase never moves scheduled dates.
 - `build.js` renders `output/<date>-<series>-<issue>-<slug>.html`, `.pdf` and `-cover.png`, plus `output/index.html`, a contact sheet of every cover.
 - `schedule.js` writes `posts/*.md` and replaces upcoming unpublished entries in `../content-calendar.json`.
 
@@ -28,9 +31,11 @@ Slide types: `list`, `flow`, `compare`, `dodont`, `table`, `grid`, `checklist`, 
 ```bash
 cd linkedin-branding-and-content/content-automation/carousels
 node build.js --only=requests-limits-and-qos   # re-render one carousel
+node build.js --from=2027-03-25                # render carousels from a date onward
 node build.js                                  # re-render everything (~3 minutes)
 node schedule.js                               # dry run
 node schedule.js --apply                       # update calendar and posts/
+node schedule.js --append --apply              # add new carousels only, leave existing entries alone
 ```
 
 Rendering needs Google Chrome; set `CHROME_PATH` if it is not in `/Applications`. Preview a single slide with `output/<file>.html?s=3`.
@@ -45,4 +50,4 @@ The daily workflow (`.github/workflows/linkedin-daily.yml`) runs `src/publish-ca
 
 Replaced calendar entries are in `../archive/carousel-consolidation/content-calendar-entries.json`. Their drafts were moved to `../archive/carousel-consolidation/posts/` and `../archive/carousel-consolidation/fde-series/posts/`. The ten hand-written FDE posts stay in `../fde-series/posts/`.
 
-Lab Notes carousels describe public GitHub labs and synthetic datasets. They are labelled as labs, not customer deployments.
+Lab Notes carousels describe public GitHub labs and synthetic datasets. They are labelled as labs, not customer deployments. FDE Scenario Drills are fictional interview scenarios.

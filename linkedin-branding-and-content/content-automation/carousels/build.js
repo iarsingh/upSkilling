@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Renders every planned carousel to output/<stem>.html, .pdf (7 pages, 1080x1350) and -cover.png.
-// Usage: node build.js [--only=<slug|date|id>] [--no-pdf] [--no-png]
+// Usage: node build.js [--only=<slug|date|id>] [--from=<YYYY-MM-DD>] [--no-pdf] [--no-png]
 
 const fs = require("fs");
 const path = require("path");
@@ -273,9 +273,10 @@ function contactSheet(plan) {
 async function main() {
   const args = process.argv.slice(2);
   const only = args.find((a) => a.startsWith("--only="))?.split("=")[1];
+  const from = args.find((a) => a.startsWith("--from="))?.split("=")[1];
   const plan = buildPlan();
-  const selected = only ? plan.filter((c) => [c.slug, c.date, c.id].includes(only)) : plan;
-  if (!selected.length) throw new Error(`nothing matches --only=${only}`);
+  const selected = plan.filter((c) => (!only || [c.slug, c.date, c.id].includes(only)) && (!from || c.date >= from));
+  if (!selected.length) throw new Error(`nothing matches ${only ? `--only=${only}` : `--from=${from}`}`);
 
   fs.mkdirSync(OUT, { recursive: true });
   const tasks = [];
