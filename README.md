@@ -1,5 +1,12 @@
 # upSkilling Portfolio
 
+## Overview
+
+A learning and engineering collection organized into hands-on folders across DevOps, GCP, Kubernetes, platform engineering, SRE, MLOps, AIOps, generative AI, automation and interview preparation. Top-level folders follow a lowercase domain-purpose-project naming scheme, and the README maps areas such as GCP labs with Terraform, GKE and Cloud Run, a platform engineering track with ArgoCD GitOps and Prometheus/Grafana, an MLOps pipeline with Vertex AI, MLflow and KServe, and BigQuery and FinOps notebooks. A GitHub Pages landing page and a mock interview app sit alongside them.
+
+- **Built with:** GCP, Kubernetes, Terraform, ArgoCD, Prometheus, Grafana, Vertex AI, MLflow, FastAPI, HTML
+- **Scope:** Learning portfolio of labs, notebooks and notes; the folders are practice projects, not live production systems.
+
 <!-- project-guide:start -->
 ## Project guide
 
