@@ -55,3 +55,41 @@ jobs:
 
       - name: Publish scheduled post
         run: node src/publish-calendar-date.js
+
+  token-expiry:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      EXPIRES_AT: ${{ vars.LINKEDIN_TOKEN_EXPIRES_AT }}
+      WARN_DAYS: "7"
+      TITLE: "LinkedIn access token expires soon"
+    steps:
+      - name: Open an issue when the LinkedIn token is close to expiry
+        run: |
+          if [ -z "$EXPIRES_AT" ]; then
+            echo "::warning::Repository variable LINKEDIN_TOKEN_EXPIRES_AT is not set, so token expiry cannot be checked."
+            exit 0
+          fi
+          days_left=$(( ($(date -d "$EXPIRES_AT" +%s) - $(date +%s)) / 86400 ))
+          echo "LinkedIn token expires $EXPIRES_AT ($days_left days left)"
+          if [ "$days_left" -gt "$WARN_DAYS" ]; then exit 0; fi
+          echo "::warning::LinkedIn access token expires in $days_left days ($EXPIRES_AT)."
+          existing=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number -q '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "Still not renewed: $days_left days left (expires $EXPIRES_AT)."
+            exit 0
+          fi
+          gh issue create --title "$TITLE" --body "$(cat <<EOF
+          The LinkedIn access token used by Daily LinkedIn Publish expires on $EXPIRES_AT ($days_left days left). Posts will fail after that.
+
+          To renew, from linkedin-branding-and-content/content-automation:
+
+          1. Run \`npm run linkedin:auth\`, open the printed link and click Allow.
+          2. Run the three \`gh\` commands it prints to update the secrets and the expiry date.
+          3. Close this issue.
+          EOF
+          )"

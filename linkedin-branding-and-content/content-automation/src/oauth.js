@@ -47,7 +47,8 @@ async function exchangeCode(code) {
   const tokenData = await tokenResponse.json();
   const accessToken = tokenData.access_token;
 
-  const updates = { LINKEDIN_ACCESS_TOKEN: accessToken };
+  const expiresAt = new Date(Date.now() + tokenData.expires_in * 1000).toISOString();
+  const updates = { LINKEDIN_ACCESS_TOKEN: accessToken, LINKEDIN_TOKEN_EXPIRES_AT: expiresAt };
   let authorUrn = existingAuthorUrn;
 
   if (scopes.includes("openid")) {
@@ -68,6 +69,7 @@ async function exchangeCode(code) {
 
   return {
     expiresIn: tokenData.expires_in,
+    expiresAt,
     authorUrn
   };
 }
@@ -122,7 +124,12 @@ function main() {
         console.log("Author URN not available because OpenID scope is not enabled for this app.");
         console.log("Enable 'Sign In with LinkedIn using OpenID Connect' in LinkedIn Products, then rerun with openid profile email w_member_social.");
       }
-      console.log(`Token expires in ${result.expiresIn} seconds.`);
+      console.log(`Token expires ${result.expiresAt}.`);
+      console.log("");
+      console.log("Update GitHub Actions so scheduled publishing keeps working:");
+      console.log("  grep '^LINKEDIN_ACCESS_TOKEN=' .env | cut -d= -f2- | tr -d '\\n' | gh secret set LINKEDIN_ACCESS_TOKEN");
+      console.log("  grep '^LINKEDIN_AUTHOR_URN=' .env | cut -d= -f2- | tr -d '\\n' | gh secret set LINKEDIN_AUTHOR_URN");
+      console.log(`  gh variable set LINKEDIN_TOKEN_EXPIRES_AT --body ${result.expiresAt}`);
       server.close();
     } catch (error) {
       res.writeHead(500, { "Content-Type": "text/plain" });
