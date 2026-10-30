@@ -1,0 +1,422 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Python",
+    "topic": "Mutable defaults",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "Why is a mutable default argument in Python dangerous in a long-running API process, and what do you write instead?",
+    "answer": "A list or a dict used as a default argument is created once, when the function is defined, and every caller that omits the argument shares that same object for the life of the process. In a long-running API worker, one request can change data the next request sees. I never put a list or a dict in the signature. I default the parameter to None and create a new list or dict on the first line of the function. Python evaluates default expressions at definition time, which for a module function is import time, not call time. Append, extend, and key assignment all write into that one object. A warm worker keeps it until the process restarts, so the bug stays hidden in tests that import a fresh module and appears after the process has served real traffic. On a clinic scheduling integration, a helper normalized reminder channels with an empty list as the default. The first booking appended sms. The next booking, for a different site, returned both channels, and the confirmation showed another site's preference. The pitfall is copying the list at a few call sites while leaving the default in the signature. The next person who calls the helper with one argument inherits the shared list again."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Python",
+    "topic": "Generators",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How do you read a multi-million-row customer export in Python without loading the whole file into memory?",
+    "answer": "When a customer export is larger than the worker's memory, I stream it with a generator instead of building a list of every row. The generator yields one record at a time, so memory stays near the size of a single row plus the open file, and the caller can stop early. A generator function runs until it hits yield, then pauses and keeps its local variables. The next pull resumes after that yield. Nothing materializes the whole sequence unless someone wraps it in list. I open the file in a with block, iterate the CSV reader, and yield a normalized dict. The API can stream that as a chunked response, or a writer can flush it to object storage in batches. On a freight audit, a nightly claims export was about four million rows. The first version assigned rows to list of the reader, and the worker was killed for memory at peak. Yielding one normalized row, and flushing the upload every thousand rows, kept the process under a few hundred megabytes and let us resume from a byte offset after a crash. The pitfall is passing that generator into a helper that iterates it twice, such as a length check and then a write. The second loop sees an empty stream, and the upload looks successful with zero rows."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Python",
+    "topic": "Context managers",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "Why do you open database connections and files with a context manager in a request handler?",
+    "answer": "I open connections, files, and locks with a context manager so cleanup runs when the block exits, including when the block raises. The with statement calls enter before the body and exit after it, and exit still runs on an exception, which is the point in a request handler. For a database connection I use the driver's context manager, or a small wrapper that commits on success, rolls back if the body raised, and returns the connection to the pool. Leaving close to a finally block that a later edit deletes is how pools run dry under errors. On a health-system intake service, a route opened a Postgres connection, hit a timeout talking to their document store, and returned 500 without closing. Under the Monday peak the pool hit its max size, and every later request waited until someone restarted the worker. Wrapping the checkout in a context manager put the connection back on both the success path and the timeout path. The pitfall is a context manager that swallows the exception by returning true from exit. Cleanup should still run, and the original error should still propagate, so the request fails loudly instead of committing a half-finished write."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - TypeScript",
+    "topic": "unknown versus any",
+    "difficulty": "beginner",
+    "questionType": "Comparison",
+    "question": "On a TypeScript client for a customer API, what is the difference between unknown and any, and which one do you use at the boundary?",
+    "answer": "I treat JSON from a customer system as unknown until a parser proves the shape, and I treat any as a hole that turns the type checker off. unknown means the value has no operations yet. I cannot read a field or pass it to a typed function until I narrow it with a type guard or a schema parse. any is assignable in both directions, so a missing tenant id sails through compile and fails in production. At the boundary I parse with a schema. The success branch gives me a typed object. The failure branch is a 422 or a dead-letter, with the raw body logged once. Inside the app I keep that typed object and I do not cast back to any to quiet an error. On a retail ticket sync, their payload sometimes sent status as a string and sometimes as an object with a code. An any-typed client stored both. Search filters that expected a string started throwing, and the bad rows were already in the table. A parse that required status to be a string rejected the object form, parked those events, and left the last good snapshot in place. The pitfall is sprinkling any on the client to get a build green. That deletes the only compile-time signal that their contract moved."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - SQL",
+    "topic": "Parameterized queries",
+    "difficulty": "beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you pass a search string from a customer UI into SQL without letting that string change the statement?",
+    "answer": "I send values to SQL as bound parameters, never by concatenating them into the query string. The database receives the statement and the values separately, so a quote or a semicolon in a customer field cannot change the statement. In Python the driver uses a placeholder, and it sends the value out of band. The query text stays constant, which also lets the database reuse a plan. Parameters bind values, not identifiers, so a column or table name still has to come from a whitelist I wrote, not from the request. On an insurance search box, an engineer built the WHERE clause by interpolating the user's text. A support agent pasted a ticket id that contained a single quote, the query errored, and a later test string in staging turned the predicate into something that matched every row. Switching to a bound parameter made that input a string to compare, and the statement text in the logs no longer contained the raw search. The pitfall is building an IN list by joining strings, or formatting a LIMIT from user input, when the driver can bind an array and an integer. Both are still injection, just wearing a numeric costume."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Bash",
+    "topic": "Safe shell options",
+    "difficulty": "beginner",
+    "questionType": "Scenario",
+    "question": "What Bash options and quoting rules do you turn on before a deploy script runs on a customer host?",
+    "answer": "I turn on set -euo pipefail at the top of any Bash that runs in CI or on a customer host, and I quote every expansion. set -e exits on a failing command, set -u exits on an unset variable, and pipefail makes a pipeline fail if any stage fails, not only the last one. Quoting stops a filename or a tenant id with a space or a glob character from splitting into extra arguments. Secrets stay out of the script body. The job reads them from the environment at runtime, and the script never echoes them. I also refuse to parse production JSON with grep and cut when a real parser is on the box. On an energy-company deploy job, a script copied a config with an unquoted source variable, and that variable was unset. Without set -u, cp ran with a missing source and the next command restarted the service on an empty file. With set -u and quotes, the job stopped before the restart, and the previous config stayed in place. The pitfall is set -e around a command whose failure I meant to handle, or a pipeline I thought was checked. I put those checks in an explicit if, so the option does not hide a failure I still need to see."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - DSA",
+    "topic": "Hash maps",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "When do you reach for a hash map instead of scanning a list while matching customer records in a hot path?",
+    "answer": "I use a hash map when I need to know whether a key is present or to fetch the value for a key, and I scan a list only when the collection is tiny or I truly must visit every element. Average lookup in a Python dict or a Go map is constant time. A linear scan is proportional to the number of items, and doing that scan inside a loop over requests becomes quadratic. I build the map once from the source of truth, then answer each lookup from it. If the source changes, I rebuild or update the map in the same place that commits the change, so readers do not keep a stale key forever. On a transit incident board, matching each alert to a route meant scanning a list of about nine thousand routes per alert. At a few hundred alerts a minute the API latency climbed and the box pegged one core. Loading the routes into a dict keyed by route code turned each match into a direct lookup, and the same host went back to idle. The pitfall is using a dict when order or duplicates are the contract, or when the key is an object that can change after insertion. Membership belongs in the map. Sequence and repeats belong in a list."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - DSA",
+    "topic": "Nested-loop cost",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "A dedupe job is fast on the sample file and still running an hour later on the real export. What cost are you looking for, and what data structure removes it?",
+    "answer": "A nested loop that compares every item to every other item does work proportional to the square of the input size, and that is the first thing I look for when a job is fine on a sample and falls over on the real export. One loop over n rows is linear. A loop inside that loop, with no early exit, is n times n. Putting the inner collection in a hash map first turns the inner check into a constant-time lookup and brings the pass back to linear, plus the cost of building the map. I ask for the real row count before I bless the shape. A hundred rows can afford a simple double loop. Tens of thousands cannot. On a manufacturing quality export, a dedupe compared each defect row with every later row to find repeats by code. It finished in seconds on the two hundred row sample and was still running after an hour on the weekly file of about eighty thousand rows. Indexing the codes in a dict and checking membership once per row finished that file in a couple of seconds. The pitfall is quoting Big-O and skipping the constant factors that actually hurt, such as a linear pass that does a database round trip on every row."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Testing",
+    "topic": "Pytest parametrize",
+    "difficulty": "beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you use pytest parametrize to lock down a parser for messy customer exports?",
+    "answer": "I use pytest parametrize when the same assertion should hold for many inputs, and I keep each case as data rather than copying the test function. The decorator runs the test once per set of arguments, and a failure names the case, so I can see which customer shape broke. I include the happy path and the edges real exports contain: an empty string, a missing key, an extra column, a duplicate id, and a value of the wrong type. Those cases call a pure function. They do not open the network. The function takes the row and returns a result or a typed error code. On a clinic lab-file parser, we had one test with a perfect CSV row. Production files had a blank patient id, a date in two formats, and a repeated header line halfway down the file. Three parametrized cases, each with the raw line and the expected error code, failed the build when a cleanup change started treating blank as zero. We saw the case id in the failure instead of a vague assertion on a giant fixture. The pitfall is one giant parameter table that asserts a different property in each row, gated by conditionals inside the test. That hides which contract broke. When the expected behavior is actually different, I split the test."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - REST",
+    "topic": "201, 202, and 204",
+    "difficulty": "beginner",
+    "questionType": "Comparison",
+    "question": "When do you return 201, 202, and 204 from a customer integration API, and what does the client do differently for each?",
+    "answer": "I return 201 when the resource exists at the end of the request, 202 when I have accepted the work and it is not done yet, and 204 when the action succeeded and there is no body. The status is the contract their generated client will branch on. A 201 includes a Location header and a body with the new id. A 202 includes a status URL they can poll, and the resource they asked for is not ready. A 204 is what I use for a delete that has already finished, so their client does not try to parse an empty body as JSON. On a freight document upload, the first pilot returned 201 only after parsing and the virus scan finished. Large files blew past their HTTP timeout, their client retried, and we stored duplicates. We changed POST to write the row as accepted, return 202 with a job URL, and move the scan to a worker. GET on the job moved from queued to ready, and only then did the document URL return 200. The pitfall is returning 200 with a body that says pending, or 201 for work that can still fail. Their client will treat that as success and never poll."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - React",
+    "topic": "List keys",
+    "difficulty": "beginner",
+    "questionType": "Troubleshooting",
+    "question": "Agents pin a ticket, then sort the queue, and the pin jumps to a different row. What is going wrong in the React list, and what do you change?",
+    "answer": "A key tells React which list item is which across renders, and I use a stable id from the data, not the array index, whenever the list can reorder, filter, or insert. React matches the previous tree to the next tree by key. A matching key reuses that component instance and its state. An index key ties state to the position, so when a row moves, the state stays in the old slot and shows the wrong record. I put the key on the element returned from the map, and the id is the one the API sent, such as a ticket id, not a value computed from the title. On a support queue, agents could pin a ticket. The pin state lived in the row component and the key was the index. Sorting by age moved the pin highlight onto a different ticket, and an agent escalated the wrong one on a live bridge. Keying by ticket id kept the pin, the open accordion, and the half-typed note on the ticket they had clicked, even after a refresh reordered the queue. The pitfall is a random number as the key on each render. React then destroys and recreates the row every time, focus jumps out of the field, and the agent loses the sentence they were writing."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Redis",
+    "topic": "Strings, hashes, and sorted sets",
+    "difficulty": "beginner",
+    "questionType": "Comparison",
+    "question": "When do you store a value in Redis as a string, a hash, or a sorted set?",
+    "answer": "I pick the Redis type from the operation I need, not from whatever is easiest to dump as one JSON blob. A string holds one value, such as a cached response or a counter I can increment in one call. A hash holds a small set of fields on one key, such as job status, stage, and updated time, so I can change one field without rewriting the whole blob and without two writers clobbering each other. A sorted set holds members with a score, which is what I use for a delay queue or a top-n list of slow endpoints, because I can read a range by score. I set a TTL on cache keys. I do not set a TTL on data I cannot rebuild from Postgres. On an operations dashboard, job progress was one JSON string. Every heartbeat rewrote the whole blob, and two workers overwrote each other's fields. Moving progress to a hash let the worker set only the stage and the percent, and the API read the hash in one call. The pitfall is using a sorted set or a list as the system of record for a customer's documents. Redis can evict or drop that key. Postgres holds the record. Redis holds a rebuildable copy or a short-lived coordination value."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Indexing",
+    "topic": "EXPLAIN and index order",
+    "difficulty": "beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "You added an index and the customer query is still slow. How do you use EXPLAIN to decide whether that index can even serve the predicate?",
+    "answer": "I do not trust an index until EXPLAIN shows the planner using it for the query I actually run, on a realistic amount of data. A sequential scan reads the table. An index scan walks the index and then fetches the rows that qualify. For a selective predicate, the index should win. For a query that returns most of the table, a sequential scan can be the honest plan, and another index will not make it faster. I look at the filter, the row estimate, and whether the condition matches the leftmost columns of a composite index. On a retail product search we had an index on updated_at, and the query filtered by tenant id and then updated_at. The plan still walked a large part of the table because tenant id was not the leading column. A composite index on tenant id, then updated_at, let the planner jump to that tenant's recent rows. A vector index is a different access method, for ordering by distance rather than equality or range. On a first pilot I would keep that column in Postgres instead of adding a second database, and I would still read the plan before I believed it. The pitfall is adding an index per column and never running EXPLAIN on production-shaped data. The planner's choice on a thousand-row dev database is not the choice on fifty million rows."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Caching",
+    "topic": "Cache-aside",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How does cache-aside work for a repeated customer read, and what has to be in the cache key?",
+    "answer": "Cache-aside means the application reads the cache first, and on a miss it reads the database, then writes the cache. The database stays the source of truth. I use it for a read that is expensive, repeated, and safe to be slightly stale. The key includes every input that changes the result: the tenant, the query, and a version of the underlying data. I set a TTL so a missed invalidation still expires. I do not cache a permission decision under a key that omits the user. On a city knowledge search, the same policy question arrived hundreds of times an hour. We cached the assembled answer for ten minutes under a key of tenant, corpus version, and the normalized question. A hit skipped retrieval. A miss ran the query and filled Redis. When they published a new policy, the corpus version bumped and the old keys stopped matching, so we did not have to hunt every key by hand. The pitfall is filling the cache before the database write commits, or treating a cache hit as proof the row still exists. A delete that forgets the version bump keeps serving the old answer until the TTL, so the TTL has to be short enough that the business can live with that window."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - TypeScript",
+    "topic": "Discriminated unions",
+    "difficulty": "intermediate",
+    "questionType": "Conceptual",
+    "question": "How do you model a job that can be queued, running, succeeded, or failed in TypeScript so the UI cannot read a result that does not exist yet?",
+    "answer": "I model a job that moves through states as a discriminated union, so each state carries only the fields that exist in that state, and the compiler forces a handler for every case. A single interface with an optional error, an optional result, and a status string lets the UI read a result while status is failed. A union of queued with no payload, running with a started time, succeeded with a result, and failed with an error code makes that illegal combination unrepresentable. In the switch I narrow on the status field. If the union is exhaustive, a missing branch is a compile error rather than a blank panel in production. On a document pipeline for a hospital group, the UI read the result URL whenever the object was present. Failed jobs still carried a stale URL from a previous attempt, and agents opened a file from the wrong run. Splitting the payload into a union made that read a type error until it lived inside the succeeded branch, and the failed branch rendered the error code instead. The pitfall is a string status plus a wide optional object, with a cast at the switch. The cast compiles, and the impossible state comes back the first time the API adds a canceled status nobody handled."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - SQL",
+    "topic": "Keyset pagination",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "A tenant list times out on the last pages when the client sends OFFSET. How do you paginate that query instead, and what makes the plan stay cheap?",
+    "answer": "I paginate a large tenant-scoped list with a keyset, not with OFFSET. OFFSET tells the database to walk and throw away every row before the page, so the first page is cheap and a late page is a long scan that grows with the page number. A keyset says give me rows after this last key, ordered by that same column, and stop at the page size. An index on tenant id plus the sort key makes each page a short range walk from the cursor, independent of how deep the user has scrolled. I return the last key to the client and they send it back. I do not let them pick an arbitrary sort column from a free string. On an insurance claims console, the UI used a page number and a page size. Opening the last pages of a tenant with about two million claims took seconds and loaded the primary. An ordered id cursor with a limit of fifty turned each request into a range scan, and the console stopped timing out. The pitfall is a keyset on a column that is not unique. Two rows with the same timestamp get skipped or repeated when the page boundary lands on the tie. I break ties with a unique id in both the order and the cursor."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - SQL",
+    "topic": "Window functions",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "The customer wants the three longest open incidents per depot, with the incident rows still intact. Why is GROUP BY the wrong tool, and what SQL do you use?",
+    "answer": "I use a window function when I need a calculation across related rows without collapsing those rows the way GROUP BY does. ROW_NUMBER, RANK, and a sum over a partition keep the detail and still tell me the rank or the running total inside each group. PARTITION BY defines the group. ORDER BY inside the OVER clause defines the sequence. The database computes the window after WHERE, so I filter to open incidents first and I do not try to recover columns that a GROUP BY already threw away. On a transit reliability report, the lead wanted the three longest open incidents per depot, plus the incident id, the line, and the owner, not a single max duration. GROUP BY depot with MAX returned one number and hid the rows. A ROW_NUMBER partitioned by depot and ordered by duration, wrapped so the outer query kept ranks up to three, returned the three incidents per depot in one statement. The pitfall is a window over a partition that is huge and unordered, or a window added after the detail has already been aggregated away. I read the plan, because a sort of a million-row partition will spill to disk and the report will look fine in staging."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Async",
+    "topic": "asyncio.gather",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "A request must call three independent customer services. How do you run those waits together in asyncio, and when do you refuse to ignore a partial failure?",
+    "answer": "I use asyncio.gather when a request must wait on several independent calls and I want them in flight together on the same loop. Gather schedules the awaitables and resumes when they finish, so the route waits for the slowest call instead of the sum of the three. I pass return_exceptions only when I have a written policy for a partial result. Otherwise the first failure should fail the request, and a TaskGroup keeps that error from getting buried in a list of mixed values and exceptions. I also cap how many I start. A fan-out of one call per file will stampede their API. On a clinic chart pull, each upload needed a patient lookup, a consent check, and a scan status. In series the route sat for the sum of the three latencies. Gather overlapped them. One of those calls still used a synchronous database driver, and it froze the loop for every other request on that worker until we moved it to an async driver and kept a semaphore around the fan-out. The pitfall is gather into one shared buffer with an await in the middle and no coordination, or treating a result list that contains an exception as a successful body. The handler then returns 200 with a hole where the failed call should have failed the request."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Go",
+    "topic": "Bounded worker pool",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "When would you put a bounded Go worker pool on a customer edge box, and how do you stop it from starting one goroutine per message?",
+    "answer": "I use a small Go binary with a bounded worker pool when the edge job must stay up, use little memory, and pull from a queue or a directory the customer already has. I do not start one goroutine per message with no cap. The pool is a fixed set of goroutines reading from one channel. Main creates the channel, starts N workers, and on shutdown stops intake, waits for the in-flight work, and then closes the channel so the workers leave the range loop. N follows the concurrency their downstream API allows. If the work is network, N is not the number of cores. On a freight edge box, a Python poller of dropped files used a few hundred megabytes and was killed under memory pressure during a backlog. A Go process with eight workers, a bounded channel, and a context cancelled on SIGTERM drained the files already in hand and exited cleanly. We left the scoring service in Python behind an HTTP call, because that logic changed every week and the edge box was the wrong place to redeploy it. The pitfall is a bare go statement inside the receive loop. A spike creates tens of thousands of goroutines, the process runs out of memory, and the box the customer can see is the one that falls over."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - DSA",
+    "topic": "Topological order",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "A customer spreadsheet lists migration steps that depend on each other. How do you decide a safe run order, and how do you detect a cycle before the maintenance window?",
+    "answer": "I order migration steps with a breadth-first walk of the dependency graph, and I refuse to start the window if that walk cannot finish. Each step is a node. An edge means this step needs that one first. I count how many unmet dependencies each step has, put the steps with none into a queue, and pop them in order. When I take a step, I reduce the count on everything it unlocks, and I enqueue a step when its count hits zero. If nodes remain at the end, those names are a cycle and the runbook stops with that list, not with a half-loaded database. On a plant cutover, the sheet said accounts, then sites, then devices, and a later row said devices before accounts because a foreign key had been drawn backwards. The cycle check named those steps on Thursday. We fixed the sheet before Saturday, instead of failing halfway through the load with orphan devices. The pitfall is a recursive depth-first walk with no cycle guard on a graph a customer edited by hand. It recurses until the process dies, or it loops, and the runbook looks hung with no names to fix."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - SOLID",
+    "topic": "Dependency inversion",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you apply dependency inversion so a second customer adapter does not require edits through the core ingestion loop?",
+    "answer": "Dependency inversion, in a module I would ship, means the ingestion loop depends on a small interface I own, and each customer adapter implements that interface. The loop asks for list-since, acknowledge, and map-to-document. It does not import the customer's SDK, read their environment variables, or know whether they paginate with a cursor or a page number. A new customer is a new adapter plus a registration entry, not a branch inside the scorer. That is the SOLID move I reach for first on an engagement, because a dependency that points at one vendor makes every later account a rewrite of the core. On a retail integration, the first adapter called their ticket API from inside the worker, and their field names were spread through the scoring code. The second customer used a different status enum, and every change risked both tenants. We extracted a source interface, put the first customer behind it, and the scorer saw only our document type. The second customer was another class and a contract test against saved payloads. The pitfall is an interface with dozens of methods copied from one vendor SDK. Every adapter then pretends to be that vendor, and the boundary is a rename."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Testing",
+    "topic": "Fakes versus monkeypatch",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "For a pytest suite around an HTTP integration, when do you pass a fake client, and when is monkeypatch the weaker choice?",
+    "answer": "I prefer a fake client with a small in-memory behavior over monkeypatching a function deep inside a third-party library. The production code depends on an interface, and the test passes a fake that implements it. I can script a timeout, a 429, or a body, and the code under test does not know it is a test. Monkeypatch replaces an attribute after import. It breaks when someone renames the import or calls a sibling function in the same library, and it often skips the real timeout and header wiring. On an uploader, tests patched the post function on the requests module and asserted a 200. Production had moved to an HTTP client with retry middleware, so the 429 path had no test and still shipped. A fake transport that recorded calls and returned scripted responses covered the retry and the give-up, and the route received the client as an argument. The constructor in production passed the real client. The pitfall is a fake that only returns the happy body. The suite stays green while the failure mode the customer actually hits, a timeout or a 429, has no assertion and no recorded call to inspect."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - FastAPI",
+    "topic": "Depends injection",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you use FastAPI dependencies so every route gets a database session and a tenant check without copying that boilerplate into each handler?",
+    "answer": "I use FastAPI dependencies for the objects a route must not construct by hand, especially the database session and the tenant taken from the caller. Depends runs that function before the handler, injects the return value, and runs cleanup after the response. A session dependency yields a session and closes it afterward, so a route that raises still returns the connection to the pool. A tenant dependency reads the authenticated principal and compares it to the path. If they differ, it rejects the call before the handler runs. Routes then take the tenant and the session as arguments. A new route cannot forget the check by copying a handler and deleting a line, because the dependency is on the router, not inside one function body. On a multi-site health pilot, one internal route took the tenant id from the query string and skipped the shared dependency. A tester passed another site's id and read their document titles. Moving the check into the dependency, and deleting the query-string tenant, made that call a rejection. The pitfall is a dependency that opens a session and also commits as a side effect. Commit belongs with the request's unit of work. A dependency that commits will persist a write the route still wanted to roll back."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Auth",
+    "topic": "Client credentials",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "For a server-to-server customer integration, why do you prefer OAuth client credentials over a long-lived API key?",
+    "answer": "For a service calling our API with no person at the keyboard, I prefer OAuth client credentials over one long-lived API key. The caller presents a client id and a secret to the token endpoint, receives a short-lived access token, and sends that token on the API. We can rotate the secret without changing every request, and a leaked token dies when it expires. An API key is one string that is both the identity and the credential. It gets pasted into a config file and stays valid until someone remembers to revoke it, which on a plant network can be months. I still scope the token to one tenant and to the operations that integration needs, and I keep the secret on a server they control. On an energy-plant integration, a key in a shared environment file was copied onto a vendor laptop image. We could not expire it without stopping the plant, because no second key was staged. Client credentials let us issue a second secret, deploy it, and revoke the first the same day. Tokens already in the wild expired within the hour. The pitfall is putting the client secret in a browser bundle or a mobile app. That grant is for a confidential server. A public client needs a user present and a different flow."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Rate Limits",
+    "topic": "Token bucket",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "What is the difference between a fixed-window rate limit and a token bucket, and which one do you put in front of a customer sync job?",
+    "answer": "I rate-limit a customer API with a token bucket when a short burst is legitimate, and I treat a fixed window as a counter that unfairly punishes traffic at the boundary. A fixed window counts calls in each clock minute and rejects the rest. Two bursts, one at the end of a minute and one at the start of the next, can both pass and briefly double the rate I thought I had set. A token bucket refills at a steady rate up to a burst size. The caller can spend the burst, then has to wait for tokens to come back. I key the bucket by tenant and by credential, store it in Redis so every replica agrees, and return 429 with a retry-after value their client can honor. On a retail catalog sync, a fixed one-minute window let their hourly job send two spikes back to back across the minute mark and saturate the database pool. A bucket of sixty per minute with a burst of twenty smoothed that job, and their client already slept on retry-after. The pitfall is limiting only by source IP. Their NAT puts every plant behind one address, so one noisy job locks the rest out, or a cloud caller rotates addresses and walks around the limit."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Background Jobs",
+    "topic": "Retries and dead letters",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Which background-job failures do you retry, which do you dead-letter, and what do you store so the event is not gone?",
+    "answer": "A background job retries when the failure is likely to clear, and it lands in a dead-letter record when another attempt would only clog the queue. I retry timeouts, connection resets, and a 429 or 503 from their API. I do not retry a 400 or a schema error. The payload is wrong, and the next attempt fails the same way. Between tries I wait with exponential backoff and jitter, and I cap the number of attempts. After the cap, the worker writes the payload, the last error, and the attempt count to a dead-letter table, then acknowledges the message so the queue can move. On an insurance attachment fetch, their file server reset connections for about a minute every night. Three retries with backoff cleared those. A second class of jobs failed because the file id had been deleted on their side. Those retried until the queue lagged for the whole tenant. Dead-lettering the not-found cases, and paging when that table grew, kept the queue current and gave their admin a list to reconcile. The pitfall is an immediate retry in a tight loop, or a dead letter that stores only the error string. The first hammers their API. The second throws away the only copy of the event."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Webhooks",
+    "topic": "Inbound HMAC",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you verify an inbound customer webhook so a replay or a tampered body is rejected before you parse it?",
+    "answer": "I verify an inbound webhook by recomputing an HMAC over the raw request bytes with the shared secret, and I compare that digest to the signature header in constant time. I also reject a timestamp outside a short window. Parsing the JSON and then signing the re-serialized object will not match, because key order and spacing change. I read the bytes, compute the digest, compare, and only then parse. The timestamp inside the signed header stops someone from replaying a captured request next week. I store recent delivery ids and reject a repeat inside that window, so their immediate retry of a lost response is allowed and an old copy is not. On a facilities webhook, their first attempts failed our check because we hashed a parsed dict. We switched to the raw body, agreed the header name, and their retries started succeeding. A day later a replay of an old outage notice created a second work order. A five-minute skew allowance plus a stored delivery id stopped the replay and still allowed the retry they send within seconds. The pitfall is comparing signatures with ordinary string equality, or logging the expected digest next to a mismatch. Timing leaks, and the log line hands a signature oracle to anyone who can read it."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - React",
+    "topic": "Stale responses",
+    "difficulty": "intermediate",
+    "questionType": "Troubleshooting",
+    "question": "An agent clicks through queues quickly and the table paints the previous queue under the new heading. What is the React fetch doing, and what do you change?",
+    "answer": "I do not fetch dashboard data in a bare effect if the screen refetches often and must ignore a response that belongs to an old filter. An effect that sets state when the promise resolves will still apply that state after the agent has changed queues, unless I abort the request or ignore the result with a cancelled flag. A query cache keys the request by tenant and by queue, drops the response that no longer matches, and can keep the last good rows on screen while the next request is in flight. It also dedupes two components that ask for the same tickets. On an insurance console, an effect fetched the selected queue and had no cleanup. Fast clicks painted an earlier response last, so the heading said one queue and the rows were another. Agents escalated from the wrong list. Moving the fetch to a query keyed by queue id made the stale response irrelevant, and the heading and the rows changed together. The pitfall is a cache key that omits the tenant. A second tab, or the next person on a shared workstation, can see the previous tenant's rows come back from memory without a new request."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Next.js",
+    "topic": "Auth middleware",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Where do you put the login gate in a Next.js dashboard so an agent never sees another route's HTML, and what does that gate refuse to decide?",
+    "answer": "I put the authentication gate for a Next.js dashboard in middleware that runs before the page is rendered, and the page assumes a session is already present. Middleware reads the session cookie, checks that it is there and not expired, and redirects to the login route when it is not. It does not decide which tickets this user may see. That check stays on the API, because a request can call the API without ever loading the page. Middleware exists so an agent does not get a flash of queue HTML and then a client-side redirect. On a hospital deployment, the page fetched in the browser and redirected only after a 401. Agents saw a spinner, then login, and a cached shell sometimes flashed titles from the last visit. Moving the cookie check into middleware sent them to login before the document. The API still returned 401 when they called it directly with no cookie. The pitfall is treating middleware as the only authorization and then letting a server component trust a tenant id from the query string. Middleware answers whether a session exists. The data fetch still filters by the tenant inside that session."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - PostgreSQL",
+    "topic": "MVCC",
+    "difficulty": "intermediate",
+    "questionType": "Conceptual",
+    "question": "Why can a long report read PostgreSQL while the app keeps writing, and what does that long transaction still cost you?",
+    "answer": "PostgreSQL MVCC lets a reader see a consistent snapshot without blocking writers, and a writer does not block readers, because a transaction looks at row versions instead of taking a table lock for an ordinary read. An update creates a new version of the row. The old version stays until no snapshot still needs it, and vacuum reclaims it later. A select under the default read committed isolation sees data that was committed as of that statement. It does not see another transaction's in-progress update. That is why a report can run while the app keeps inserting, and also why a transaction that sits open for a long time holds old versions in place and stops vacuum from cleaning the table. On a retail catalog, a nightly export opened one transaction and streamed for about forty minutes. Inserts of new products still committed, but dead row versions piled up and the site slowed until the export finished and vacuum caught up. We changed the export to short reads by id ranges so each transaction was brief. The pitfall is hearing MVCC and concluding that writers never block each other. Two updates of the same row still queue on a row lock, and an idle transaction left open in a session still bloats the table."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Concurrency",
+    "topic": "Cross-process races",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "An in-memory counter is supposed to cap each tenant at three concurrent scans, but production runs about twelve. Where is the race, and where do you move the counter?",
+    "answer": "I do not keep a mutable cap in process memory and expect it to hold for the fleet. The event loop runs one callback at a time, so a pure Python increment with no await in the middle is not preempted inside that process. The bug shows up in two places. The read-modify-write can await between the read and the write, so two requests both observe three and both allow a fourth. And several worker processes, or several pods, each keep their own dict, so a cap of three becomes three times the process count. I move the count to a single atomic update: a Redis increment, or a SQL update that adds one in one statement and checks the returned value. On an energy-company upload screen, an in-memory dict capped each tenant at three scans. Four worker processes made the real cap twelve, and their antivirus queue backed up while our dashboard still said the limit was holding. A Redis increment with a compare made the cap true across processes, and a crash of one worker no longer forgot the count. The pitfall is adding an asyncio lock and calling the problem solved. That lock lives inside one process. The next pod has its own lock and its own memory, and the cap is wrong again."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - DSA",
+    "topic": "Binary search",
+    "difficulty": "advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "A multi-gigabyte customer log is sorted by time. How do you find the first line at or after an incident timestamp without scanning from the start of the file?",
+    "answer": "I use binary search when the data is sorted and I need the boundary of a range, such as the first log line at or after a timestamp, instead of reading from byte zero. Each step throws away half of the remaining interval, so a few dozen probes cover a file that a linear scan cannot finish during the review. On a sorted file I keep a low and a high offset, seek to the middle, and read forward to the next complete line so I do not compare a torn record. If that line is earlier than the target, the answer is to the right. I keep the bounds inclusive and I move them so the loop terminates, and if the exact timestamp is missing I return the first line after it. On a transit outage review, engineers searched a multi-gigabyte syslog for the first line after the incident opened. A scan from the start took minutes and filled the jump host's disk cache. The file was time-ordered, so a binary search on byte offsets landed in the window after a handful of seeks. The pitfall is binary search on data that is only almost sorted, or rewriting it in Python when an index on the timestamp column already gives the database the same walk. A single out-of-order line makes the result look precise and wrong."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Auth",
+    "topic": "JWT validation",
+    "difficulty": "advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "Which checks do you run before you trust the tenant claim inside a JWT, and what do you refuse to paper over with clock leeway?",
+    "answer": "I accept a JWT only after the signature, the issuer, the audience, and the expiry all check out, and I allow a small clock skew of a minute or two, not an open window. The signature says a key I trust minted the token. The issuer and the audience say it was minted for this API, not for another product that happens to share the identity provider. Expiry says it is still current. I read the tenant and the subject only after those checks. I do not decode the middle segment and trust it because it is base64. That segment is a claim, not a proof. On a hospital rollout, a token from their developer portal had a valid signature from the same issuer and a future expiry, but the audience was a different API. We had checked signature and expiry only, and that token called our assistant. Adding the audience check rejected it. Their real integration used a dedicated client whose tokens named our API. The pitfall is a large leeway to hide clock drift, or accepting a token whose header says the algorithm is none. A wide leeway keeps a logged-out session alive. An unsigned token is not a credential, even when the payload looks perfect."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Caching",
+    "topic": "Cache stampede",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A popular cached answer expires on the hour and two hundred agents refresh at once. What is the failure called, and how do you keep a single rebuild?",
+    "answer": "That spike is a cache stampede: many requests miss the same key in the same moment and each one runs the expensive query. I keep a single rebuild with a lock so one request fills the value and the others wait briefly and read it, or they serve a previous value if I still have one. The lock key matches the cache key. The winner computes, writes Redis with a TTL, and releases. Losers wait a short time and read again. I also jitter the expiry so every tenant's keys do not die on the same second. On a retail home screen, a popular answer expired at the top of the hour and about two hundred agents refreshed together. Each miss ran retrieval and the model gateway saturated, which looked like a model outage. A single-flight lock around the rebuild dropped that hour to one retrieval, and the rest read the new value. We kept the previous payload under a second key so a slow rebuild could still serve a slightly stale answer for a few seconds. The pitfall is a lock with no timeout. If the winner dies after taking the lock, every waiter blocks until the request times out, and the stampede becomes an outage of its own."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Events",
+    "topic": "At-least-once consumers",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "A broker redelivers an event after your handler already committed. How do you make the consumer safe under at-least-once delivery?",
+    "answer": "I design the consumer for at-least-once delivery, which means the same event can arrive twice, and the handler has to be idempotent so the second delivery does not repeat the side effect. The broker can retry after a timeout even when the first attempt committed and the acknowledgement was lost. I write the event id into a processed table in the same database transaction as the business write. A unique key on that id makes the second delivery a no-op that still acknowledges, so the broker can move on. I do not ask the network for exactly-once. On a freight status feed, the broker redelivered a shipment-arrived event after we had updated the row and before we acknowledged. The second run sent a second customer notification for the same arrival. Storing the event id with a unique constraint in the same transaction as the notification row turned the redelivery into a duplicate key. We acknowledged it and did not send again. The pitfall is checking the processed table in one transaction and writing the notification in another. A crash between them either loses the event or sends it twice on the retry, which is the bug the unique key was supposed to close."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Dashboards",
+    "topic": "Polling versus SSE",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "When do you poll job status from a customer dashboard, and when do you switch that panel to server-sent events?",
+    "answer": "I poll job status when a few seconds of delay is acceptable and the path has to be an ordinary HTTP request through their proxies. I switch to server-sent events when agents are watching a live run and the complaint is the lag, not the correctness of the final state. Polling is a GET on a timer. A missed tick waits for the next one, and every proxy already understands it. Server-sent events hold one response open and push stage changes. The stream is one-way, which matches a status feed. It needs a heartbeat and a reconnect that sends the last event id, so a proxy that drops an idle connection does not freeze the panel on a stale stage. On a manufacturing index screen, a one-second poll from about forty browsers during a demo overloaded the status route. A stream cut that to one connection per browser and pushed changes as the stage moved. Their proxy closed idle streams at about a minute, so the client reconnected with the last id and the server resumed without restarting the job. The pitfall is a stream with no cap and no heartbeat. A forgotten tab holds a worker, and a proxy timeout looks like a failed index unless the client treats the drop as reconnect."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Auth UI",
+    "topic": "CSRF and session cookies",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "The dashboard uses a session cookie and an admin was tricked into creating an invite from another site. What do you change in the auth UI, and what do you refuse to store in the browser?",
+    "answer": "With a session cookie, the browser will attach that cookie to a request that another site triggers, so state-changing calls need a CSRF token that only our origin can read, and the session cookie itself stays unreadable to script. The cookie is HttpOnly, Secure, and SameSite. SameSite blocks a lot of cross-site posts. I still require a token on POST, PUT, and DELETE, because some embedded flows and older browsers will send the cookie anyway. Our page receives the token from our own response and sends it back in a header. A foreign form cannot read it. On a city admin screen, the cookie was SameSite none so an embedded frame would work, and there was no CSRF token. A page they did not control posted to the invite endpoint while an admin was signed in and created an account. We required the header token on every mutating call and left the cookie HttpOnly. The pitfall is moving the session into localStorage and calling the CSRF problem finished. Any script that runs on our origin can read localStorage, so one cross-site scripting bug steals the session. An HttpOnly cookie plus a CSRF token is the narrower failure."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Transactions",
+    "topic": "Lost updates",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "Two coordinators enroll the last seat in a training session at the same moment and both succeed. What statement stops the oversell, and what do you refuse to hold the lock across?",
+    "answer": "Read committed, the Postgres default, does not save you if the application reads the seat count and then writes a new count from Python. Both transactions can read one seat left, both can write zero, and the second commit wins with no error. The statement that does the work is one update that decrements only while seats remain: set seats to seats minus one where the id matches and seats are greater than zero, then check that a row changed. That update locks the row. The second transaction waits, sees the new value, and changes zero rows if the seat is gone. I return a conflict to the loser so the UI reloads. Raising the isolation to serializable can also abort one of them, and I would retry, but the conditional update is easier to operate and does not depend on every session remembering the isolation level. On a hospital training portal, two coordinators enrolled the last nurse into the same slot seconds apart. The app selected the count and then updated it, and the roster showed two people in one seat. The conditional update made the second enroll a conflict and offered the next session. The pitfall is taking that row lock and then calling their HR API before commit. The second enroll waits on a network call, and a slow partner looks like a database outage."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Migrations",
+    "topic": "Expand and contract",
+    "difficulty": "advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you rename a live column while two versions of the app are running during a rolling deploy?",
+    "answer": "I change a live column with expand and contract so the old app and the new app can run at the same time. Expand adds the new column as nullable, or starts a dual-write, and it does not drop the old shape. I deploy code that writes both columns and still reads the old one. I backfill the new column in batches. I switch reads to the new column only after every running version can understand it. A later release drops the old column, after no pod still selects it. A migration that renames or drops in one step breaks the pods still on the previous release during the rollout. On an insurance claims table, we renamed a partner identifier in a single migration while two app versions were up. The old pods inserted into a column that was already gone, and intake failed for that tenant. The repair added the new column, copied values until the new version was everywhere, and dropped the old column in a following release. The pitfall is a backfill that locks the table inside the migration transaction. I backfill in small batches outside that lock. The migration itself should only take the brief metadata change."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Redis",
+    "topic": "Locks and fencing",
+    "difficulty": "advanced",
+    "questionType": "Troubleshooting",
+    "question": "Two nightly jobs both wrote the close file because a Redis lock expired mid-run. What was wrong with the lock, and when do you stop using Redis for that exclusion?",
+    "answer": "A Redis lock is a key with an expiry, not a lock the database holds until I commit. I set it only if absent, with a TTL, so a crashed holder does not keep the key forever. I delete it only when the value is still the token I stored, so I do not remove a lock that a later owner took after my TTL. Expiry is not enough if the work can run longer than the TTL. Two owners then enter the section. If the job must not double-run, I add a fencing token that the write path checks, or I skip Redis and take a Postgres advisory lock for that one job. On an energy nightly close, two schedulers both acquired the lock because the first holder's TTL expired during a slow file write, and the first process then deleted the second process's key on the way out. Both wrote the close file. A token check on delete stopped the bad release, and we moved the mutual exclusion for that job to a Postgres advisory lock, which lives with the transaction instead of a timer. The pitfall is a set-if-absent with no expiry at all. The first crash leaves the key until a person deletes it, and every later night skips the job in silence."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - PostgreSQL",
+    "topic": "PgBouncer transaction pooling",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "App pods are exhausting Postgres connections. How do you put PgBouncer in front, and which session features break in transaction pooling mode?",
+    "answer": "I put PgBouncer in front of Postgres when the pods would otherwise open more connections than the database can accept, and I pick the pool mode from how the app uses a session. Session pooling holds one server connection for the whole client session. It is safe, and it saves little if the app already pools. Transaction pooling lends a server connection only for the length of a transaction, which is what a short web request needs, and it drops session state between transactions. A SET, a prepared statement tied to the session, an advisory lock, and LISTEN do not survive that hand-off. On a hospital cluster, twenty pods each opened a pool of twenty connections, and Postgres hit its connection ceiling during a rollout overlap. Transaction-mode PgBouncer let those pods share a much smaller server pool. A feature that set a tenant variable on the connection, then ran later queries, leaked that setting onto the next request's borrowed connection. We set the tenant inside every transaction and stopped using session-level SET. The pitfall is transaction pooling beside a driver cache of server-side prepared statements that assumes one session. The statement prepared on one backend is absent on the next, and the driver throws on requests that look random."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 1 - Full-Stack Foundations",
+    "category": "Senior FDE - Foundations - Async",
+    "topic": "Blocking the event loop",
+    "difficulty": "advanced",
+    "questionType": "Troubleshooting",
+    "question": "One large PDF parse freezes logins and health checks on the same async worker. What is blocking the loop, and how do you move that work without spawning an unbounded number of threads?",
+    "answer": "A blocking call inside an async route stalls every other request on that worker, because the loop cannot switch until the call returns. Health checks, logins, and status polls queue behind a PDF parse even though they have nothing to do with that file. I keep HTTP and the database on async libraries, and I move a CPU-heavy or synchronous library call off the loop. asyncio.to_thread is the short-term move for a sync SDK I cannot replace this week. If the hot path is pure Python CPU, a process pool is the better neighbor, because extra threads will not run Python bytecode in parallel under the GIL. I bound the pool. One thread or process per request recreates the outage as a memory spike. On a city upload route, a sync PDF library parsed manuals on the event loop. One large file froze health and login for every user on that process for several seconds. Moving the parse to a small process pool, and awaiting the result, left the loop free to answer health while the parse ran. The pitfall is to_thread with no limit. A burst of uploads starts hundreds of threads, the process is killed, and the symptom still looks like a slow event loop."
+  }
+]

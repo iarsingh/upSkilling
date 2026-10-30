@@ -76,6 +76,65 @@ function ensureDataDir() {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 }
 
+// Personal practice log: off by default in production so a shared deployment
+// never writes candidates' answers to disk.
+const ANSWER_LOG_DIR = process.env.ANSWER_LOG_DIR || path.join(DATA_DIR, "answer-log");
+const ANSWER_LOG_ENABLED = process.env.ANSWER_LOG
+  ? !/^(0|false|off)$/i.test(process.env.ANSWER_LOG)
+  : !IS_PRODUCTION;
+
+function localDateStamp(date = new Date()) {
+  const pad = (value) => String(value).padStart(2, "0");
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
+function scoreFromFeedback(feedback) {
+  const section = String(feedback || "").split(/^## Score\s*$/m)[1] || String(feedback || "");
+  const match = section.match(/(\d+(?:\.\d+)?)\s*(?:\/|out of)\s*10\b/i);
+  return match ? Number(match[1]) : null;
+}
+
+async function appendAnswerLog(input, feedback, { fallback }) {
+  if (!ANSWER_LOG_ENABLED) return;
+  const now = new Date();
+  const entry = {
+    timestamp: now.toISOString(),
+    role: String(input.role || ""),
+    level: String(input.level || ""),
+    interviewNumber: Number(input.interviewNumber) || 1,
+    question: String(input.question || "").trim(),
+    answer: String(input.answer || "").trim(),
+    score: scoreFromFeedback(feedback),
+    feedbackSource: fallback ? "offline" : "llm",
+    feedback: String(feedback || "").trim()
+  };
+  const markdown = [
+    `## ${now.toLocaleTimeString()} - Interview ${entry.interviewNumber}${entry.role ? ` - ${entry.role}` : ""}${entry.level ? ` (${entry.level})` : ""}`,
+    "",
+    "### Question",
+    entry.question || "(no question text)",
+    "",
+    "### Your answer",
+    entry.answer,
+    "",
+    `### Feedback${entry.score === null ? "" : ` - score ${entry.score}/10`}`,
+    entry.feedback.replace(/^## /gm, "#### "),
+    "",
+    "---",
+    ""
+  ].join("\n");
+  const stamp = localDateStamp(now);
+  try {
+    await fs.promises.mkdir(ANSWER_LOG_DIR, { recursive: true });
+    await Promise.all([
+      fs.promises.appendFile(path.join(ANSWER_LOG_DIR, `${stamp}.jsonl`), `${JSON.stringify(entry)}\n`),
+      fs.promises.appendFile(path.join(ANSWER_LOG_DIR, `${stamp}.md`), markdown)
+    ]);
+  } catch (error) {
+    console.warn(`Answer log write failed: ${error.message}`);
+  }
+}
+
 function getSessionSecret() {
   if (SESSION_SECRET_VALUE) return SESSION_SECRET_VALUE;
   ensureDataDir();
@@ -1688,21 +1747,20 @@ async function handleRequest(req, res) {
         return;
       }
       if (OFFLINE_ONLY) {
-        sendJson(res, 200, {
-          feedback: fallbackQuestionFeedback(input),
-          fallback: true
-        });
+        const feedback = fallbackQuestionFeedback(input);
+        await appendAnswerLog(input, feedback, { fallback: true });
+        sendJson(res, 200, { feedback, fallback: true });
         return;
       }
       try {
         const feedback = await askLLM(feedbackPrompt(input));
         if (!isValidQuestionFeedback(feedback)) throw new Error("LLM feedback failed the accuracy or format gate.");
+        await appendAnswerLog(input, feedback, { fallback: false });
         sendJson(res, 200, { feedback, validated: true, fallback: false });
       } catch {
-        sendJson(res, 200, {
-          feedback: fallbackQuestionFeedback(input),
-          fallback: true
-        });
+        const feedback = fallbackQuestionFeedback(input);
+        await appendAnswerLog(input, feedback, { fallback: true });
+        sendJson(res, 200, { feedback, fallback: true });
       }
       return;
     }

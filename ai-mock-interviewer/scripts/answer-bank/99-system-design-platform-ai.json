@@ -1,0 +1,802 @@
+[
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Fundamentals",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "System Design: Why should you separate functional from non-functional requirements before drawing any boxes in a design interview?",
+    "answer": "Because functional requirements tell you what the system does, while non-functional requirements tell you how big, fast, available and secure it must be, and the second set drives almost every architecture decision. For a notification service, the functional list is send email, SMS and push, respect user preferences, and show delivery status. The non-functional list is 50 million messages a day, p99 enqueue latency under 200 ms, 99.9% availability, at-least-once delivery, and GDPR-compliant retention. Only the second list tells you whether you need a queue, sharding, or multi-region. A strong candidate spends three to five minutes writing both lists, states assumptions out loud, and gets the interviewer to confirm scale. The common pitfall is jumping to Kafka and Kubernetes before knowing whether the load is 10 requests per second or 100,000, which leads to an over-engineered or under-sized design."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Fundamentals",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "System Design: How do SLIs, SLOs and SLAs relate to each other when you specify a new internal service?",
+    "answer": "An SLI is the measurement, an SLO is the internal target for that measurement, and an SLA is the external contract with consequences if you miss it. For an internal API, a good SLI is the ratio of requests that return non-5xx within 300 ms, measured at the load balancer. The SLO might be 99.9% of requests over a rolling 28 days, which gives an error budget of about 40 minutes of full outage. An SLA, if one exists, is usually looser, for example 99.5%, so you breach your own SLO and react long before you owe service credits. In design, SLOs decide redundancy: 99.9% is achievable in one region with zonal redundancy, 99.99% generally needs multi-region. The pitfall is defining SLIs on CPU or pod health instead of user-visible outcomes, which hides real failures."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Fundamentals",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "System Design: Walk through a back-of-envelope estimate for 10 million daily active users who each make 20 API calls a day, including peak load and storage.",
+    "answer": "That is 200 million requests a day, roughly 2,300 requests per second on average, and with a typical 3x to 5x peak factor you should design for about 10,000 requests per second. The math: 200 million divided by 86,400 seconds is about 2,315. For storage, if each call writes a 1 KB record, that is 200 GB a day, about 73 TB a year before replication; with three replicas, plan for around 220 TB, which immediately tells you a single Postgres instance is not enough for raw events and you want partitioned or columnar storage with retention policies. For bandwidth, 10,000 RPS times a 10 KB response is about 100 MB per second egress. Round aggressively and say your assumptions, because the goal is the order of magnitude, not precision. The pitfall is forgetting peak factor and replication overhead."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Fundamentals",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "System Design: How much downtime per month do 99.9%, 99.95% and 99.99% availability targets allow, and how does that change the architecture?",
+    "answer": "Over a 30-day month, 99.9% allows about 43 minutes of downtime, 99.95% about 22 minutes, and 99.99% only about 4.3 minutes. Those numbers change the architecture because they tell you whether a human can be in the loop. At 43 minutes, an on-call engineer can be paged, diagnose and roll back a bad deploy. At 4 minutes, recovery must be automated: health-checked load balancing across zones or regions, automatic failover, and progressive rollouts with automatic rollback. Also remember availability compounds across dependencies: a service calling three 99.9% dependencies in series is at best about 99.7% unless it degrades gracefully. A good check is to ask whether your cloud provider's own SLA for the components, such as a regional Cloud SQL instance, even supports your target. The pitfall is promising four nines on single-region infrastructure."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Data and Storage",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "System Design: Explain the cache-aside pattern and when you would put Redis in front of a database.",
+    "answer": "In cache-aside, the application reads from the cache first, and on a miss it reads the database, writes the result into the cache with a TTL, and returns it; on writes it updates the database and deletes the cache key. You add Redis, for example Memorystore on GCP or ElastiCache on AWS, when reads heavily outnumber writes, the same keys are read repeatedly, and the database is the bottleneck for latency or cost. A product catalogue read 1,000 times per update is a perfect fit. The trade-off is staleness: readers may see old data until the TTL expires or the key is invalidated, so pick TTLs per data type. Delete rather than update the cache on writes to avoid races between concurrent writers. Verify value by tracking hit ratio; below roughly 80% the cache may not be paying for itself."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Data and Storage",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "System Design: Compare vertical and horizontal scaling for a stateful database tier versus a stateless API tier.",
+    "answer": "Stateless API tiers should scale horizontally, while databases usually scale vertically first and horizontally only when you must. A stateless service behind a load balancer can add pods via a Kubernetes HorizontalPodAutoscaler with almost no coordination cost. A database holds state, so horizontal scaling means read replicas for read-heavy load or sharding for write-heavy load, and sharding brings cross-shard queries, rebalancing and distributed transactions. Vertical scaling, such as moving Cloud SQL from 8 to 32 vCPUs, is simple and often buys years of headroom. The practical path is: scale up the database, add read replicas, add caching, and only then shard or move to a horizontally scalable store such as Spanner, AlloyDB with read pools, or CockroachDB. The pitfall is sharding prematurely and paying the operational complexity before the load requires it."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Data and Storage",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "System Design: What is leader-follower replication and what does replication lag mean for application behaviour?",
+    "answer": "In leader-follower replication, all writes go to one leader, which streams its change log to followers that serve reads, and replication lag is the delay before a follower reflects a committed write. With asynchronous replication, lag is usually milliseconds but can grow to seconds or minutes under heavy write load or long-running queries on the replica. The application impact is that a user who updates their profile and immediately reloads from a replica may see the old value. Mitigations are reading your own writes from the leader for a short window, routing session-critical reads to the leader, or using synchronous or semi-synchronous replication where latency allows. On Postgres you can monitor lag with pg_stat_replication on the primary or by comparing pg_last_xact_replay_timestamp on the replica. The pitfall is promoting a lagging replica during failover and silently losing recent writes."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Messaging and Async",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "System Design: Why would you put a message queue between an order API and the services that send emails and update analytics?",
+    "answer": "A queue decouples the user-facing request from slow or unreliable downstream work, so the order API stays fast and available even when email or analytics is down. The API commits the order, publishes an OrderPlaced message to Pub/Sub, SQS or Kafka, and returns. Consumers process at their own pace, retry on failure, and can be scaled independently. Benefits are load levelling during spikes, failure isolation, and the ability to add new consumers later without changing the producer. Trade-offs are eventual consistency, since the email arrives seconds later, plus the need for idempotent consumers because most brokers deliver at least once, and operational work such as monitoring backlog and dead-letter queues. The pitfall is publishing the message and writing the database in two separate steps without an outbox, which can lose or duplicate events when one of them fails."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Messaging and Async",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "System Design: What does idempotency mean for an API or message consumer, and how do you implement it simply?",
+    "answer": "An operation is idempotent if performing it twice has the same effect as performing it once, which is essential because networks and brokers cause retries and duplicate deliveries. The simplest implementation is an idempotency key: the client sends a unique key, for example a UUID in an Idempotency-Key header as Stripe does, and the server stores the key with the result in a table that has a unique constraint. On a repeat, it returns the stored result instead of re-executing. For message consumers, use the message ID or a business key such as order ID and write the dedup record in the same database transaction as the side effect. Natural idempotency also helps: setting status to shipped is idempotent, incrementing a counter is not. The pitfall is checking for the key and then writing in separate steps, which leaves a race window."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - APIs and Gateways",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "System Design: Compare offset-based and cursor-based pagination for an API that lists millions of audit events.",
+    "answer": "Use cursor-based pagination for large, frequently changing datasets, because offset pagination gets slower and returns inconsistent pages as data shifts. With offset, the query is LIMIT 50 OFFSET 100000, and the database must scan and discard 100,000 rows, so deep pages get slow, and inserts between requests cause duplicates or skipped rows. With a cursor, the server returns an opaque token encoding the last seen sort key, for example created_at and id, and the next query is WHERE (created_at, id) < (cursor values) ORDER BY created_at DESC, id DESC LIMIT 50, which uses an index and stays constant time. The trade-off is that cursors cannot jump to page 400 and are harder to show as numbered pages. Encode the cursor in base64 so clients treat it as opaque. The pitfall is sorting on a non-unique column without a tie-breaker."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - APIs and Gateways",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "System Design: What responsibilities belong in an API gateway, and what should stay out of it?",
+    "answer": "An API gateway should handle cross-cutting edge concerns: TLS termination, authentication such as JWT validation, rate limiting and quotas, request routing, API versioning paths, request size limits, and access logging. Examples are Apigee, AWS API Gateway, Kong, or Envoy-based gateways using the Kubernetes Gateway API. Business logic should stay out of it, including data transformation that encodes domain rules, orchestration of multiple backends, or per-customer special cases, because the gateway becomes a shared bottleneck that every team must change and deploy. A good rule is that the gateway knows who the caller is and where the request goes, but not what the request means. Keep fine-grained authorization in services, because only they know resource ownership. The pitfall is a gateway with hundreds of custom plugins that becomes a distributed monolith with a single point of failure."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Reliability",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "System Design: What is the difference between liveness and readiness checks, and why does getting them wrong cause outages?",
+    "answer": "A readiness check says whether an instance should receive traffic right now, while a liveness check says whether the process is stuck and should be restarted. In Kubernetes, a failing readinessProbe removes the pod from Service endpoints, and a failing livenessProbe makes the kubelet restart the container. Readiness can reasonably include warm-up state, such as caches loaded. Liveness should only check the process itself, for example a lightweight HTTP handler. The classic outage is a liveness probe that calls the database: when the database slows down, every pod fails liveness, Kubernetes restarts all of them at once, and the restart storm turns a slow dependency into a full outage. Also add a startupProbe for slow-starting apps so liveness does not kill them during boot. Verify by checking kubectl describe pod events for probe failures and restart counts."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Reliability",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "System Design: Explain the circuit breaker pattern and its three states.",
+    "answer": "A circuit breaker stops a service from repeatedly calling a failing dependency, failing fast instead of waiting on timeouts that tie up threads and connections. In the closed state, calls pass through and failures are counted. When the failure rate crosses a threshold, for example 50% over the last 20 calls, it trips to open and immediately rejects calls or returns a fallback for a cool-down period such as 30 seconds. It then moves to half-open and lets a few trial calls through; if they succeed it closes, otherwise it reopens. Implementations include Resilience4j in Java, Polly in .NET, and outlier detection in Envoy or Istio. Pair it with timeouts and a sensible fallback, such as cached data. The pitfall is a breaker shared across all endpoints of a dependency, so one bad endpoint blocks healthy ones."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Platform Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "System Design: What is an internal developer platform and what is a golden path?",
+    "answer": "An internal developer platform is a self-service layer built by a platform team that lets product engineers create, deploy and operate services without filing tickets, and a golden path is the paved, opinionated default way to do that. A typical platform combines a portal such as Backstage with software templates, CI/CD pipelines, a Kubernetes runtime like GKE, Terraform modules for databases and queues, and built-in observability and secrets. The golden path might be: pick the Python service template, get a repository with Dockerfile, pipeline, Helm chart, dashboards and alerts already wired, and deploy to staging in under an hour. Teams can leave the path, but they then own the extra work. Measure success with DORA metrics and time to first deploy for a new service. The pitfall is building the platform as a mandate rather than a product nobody asked for."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Observability Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "System Design: When do you reach for metrics, logs or traces while investigating a production issue?",
+    "answer": "Metrics tell you that something is wrong and how widely, traces tell you where in the request path it is wrong, and logs tell you why for a specific event. Metrics are cheap aggregated numbers such as request rate, error rate and latency histograms in Prometheus or Cloud Monitoring, ideal for dashboards and alerting. Traces, typically from OpenTelemetry, show a request crossing services with timing per span, so you can see that 900 ms of a 1 second request is spent in a downstream payment call. Logs are detailed, high-cardinality records, best when structured as JSON with a trace ID so you can jump from a slow trace to its log lines. A typical flow: an SLO burn alert fires on metrics, you open exemplar traces, then read correlated logs. The pitfall is logging everything at debug level instead of investing in metrics and traces."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "System Design: Describe the basic components of a retrieval-augmented generation system.",
+    "answer": "A RAG system has an ingestion pipeline that turns documents into searchable chunks, a retrieval step that finds the most relevant chunks for a query, and a generation step where an LLM answers using those chunks as context. Ingestion loads documents, extracts text, splits it into chunks of a few hundred tokens, computes embeddings with a model such as text-embedding-005 on Vertex AI or OpenAI text-embedding-3-small, and stores vectors plus metadata in a vector store. At query time, the question is embedded, the top-k similar chunks are retrieved, often combined with keyword search and a reranker, and the prompt includes them with instructions to cite sources. RAG keeps answers grounded in private, current data without fine-tuning. The pitfall is assuming the LLM is the problem when most quality issues come from poor chunking or retrieval."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "System Design: What is an embedding, and why does a RAG system need a vector index instead of a normal database index?",
+    "answer": "An embedding is a fixed-length vector of numbers produced by a model so that texts with similar meaning end up close together in vector space, and you need a vector index because finding nearest neighbours by cosine or dot-product similarity cannot use a B-tree. A query like 'how do I reset MFA' should match a chunk titled 'recovering two-factor access' even with no shared keywords. Brute-force comparison against millions of vectors is too slow, so vector stores use approximate nearest neighbour indexes such as HNSW or IVF, available in pgvector, Vertex AI Vector Search, OpenSearch, Pinecone or Qdrant. The trade-off is recall versus latency and memory, tuned with parameters like ef_search for HNSW. Always use the same embedding model for documents and queries. The pitfall is changing embedding models without re-embedding the whole corpus."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Multi-tenant SaaS",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "System Design: Compare silo, pool and bridge tenancy models for a B2B SaaS product.",
+    "answer": "In the silo model each tenant gets dedicated infrastructure, in the pool model all tenants share infrastructure with logical isolation, and the bridge model mixes them, for example a shared application tier with per-tenant databases. Silo gives the strongest isolation, simple per-tenant cost attribution and easy data residency, but costs more and makes upgrades slower because you operate many copies. Pool is cheapest and simplest to operate at scale, but needs strict tenant ID enforcement in every query, protection against noisy neighbours, and careful blast-radius thinking. Many products run a tiered approach: pooled for self-serve customers and siloed for enterprise customers who pay for isolation or compliance. Decide based on regulatory requirements, tenant count, and per-tenant revenue. The pitfall is choosing pool and relying only on application code to filter tenant_id with no database-level backstop such as row-level security."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Security by Design",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "System Design: How do you apply least privilege when designing a new service that reads from a bucket and writes to a database?",
+    "answer": "Give the service its own identity and grant only the exact permissions on the exact resources it needs, nothing at project or account level. On GKE, create a dedicated Kubernetes service account bound through Workload Identity Federation to a Google service account, then grant roles/storage.objectViewer on that one bucket and a Cloud SQL login for a database user that only has INSERT and SELECT on its own schema. On AWS the equivalent is an IAM role for service accounts with a policy scoped to one bucket ARN prefix. Avoid long-lived keys entirely. Separate read and write identities if different components need them. Verify with IAM Recommender or AWS IAM Access Analyzer, which highlight unused permissions. The pitfall is granting roles/editor or a wildcard policy during development and never tightening it, so one compromised pod can reach everything."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Fundamentals",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Beginner",
+    "questionType": "Scenario",
+    "question": "System Design: The interviewer says only 'design a file sharing service' and goes quiet. How do you structure the first ten minutes?",
+    "answer": "I would turn the vague prompt into a scoped problem by clarifying requirements, estimating scale, and proposing a high-level design before going deep. First, functional scope: upload, download, share links with permissions, versioning or not, and whether sync clients are in scope. Second, non-functional: number of users, average file size, read to write ratio, availability target, and security needs such as encryption and audit. Third, quick estimates, for example 5 million users uploading 2 files a day at 2 MB means about 20 TB a day of object storage. Then I draw the core: API service, metadata database, object storage like Cloud Storage or S3 with signed URLs for direct upload, and a CDN. I state what I am deliberately leaving out and ask which area to deepen. The pitfall is designing silently for twenty minutes without confirming priorities."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Platform Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a feature flag service used by 200 microservices with sub-millisecond flag evaluation.",
+    "answer": "Requirements: create and change flags with targeting rules, evaluate in under 1 ms, propagate changes within seconds, keep working if the service is down, and audit every change. Core components are a control-plane API and UI backed by Postgres, a change stream, and SDKs that evaluate locally. Flow: an admin updates a flag, the control plane writes a new versioned ruleset and publishes it; SDKs hold the full ruleset in memory and receive updates via server-sent events or polling a CDN-cached JSON snapshot, then evaluate rules locally with consistent hashing on user ID for percentage rollouts. Scaling is easy because evaluation never calls the server. Failure modes: if the control plane is down, SDKs keep the last known config and fall back to coded defaults. Trade-off: local evaluation means short propagation delay. Consider the OpenFeature standard for SDK portability, and clean up stale flags."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - APIs and Gateways",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design per-customer rate limiting for a public REST API serving 20,000 requests per second across 30 gateway instances.",
+    "answer": "Requirements: limits per API key and per plan, for example 100 requests per second with bursts to 200, consistent across all gateway instances, adding under 2 ms latency, and returning 429 with Retry-After. Use a token bucket per key stored in Redis, updated atomically with a Lua script that refills based on elapsed time and decrements in one round trip. Limit configs come from the plan database and are cached in each gateway. Scaling: shard Redis by key with Redis Cluster; 20,000 RPS of tiny scripts is well within a few shards. Failure mode: if Redis is unavailable, fail open with a conservative local in-memory limiter so the API stays up, and alert. Trade-off: a purely local limiter per instance avoids Redis but allows up to 30 times the limit. Return X-RateLimit-Remaining headers so clients can self-throttle. Pitfall: hot keys for the largest customers."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Security by Design",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a tamper-evident audit log system for a regulated SaaS platform.",
+    "answer": "Requirements: record who did what to which resource and when, never lose an event, make tampering detectable, retain for seven years, and support search by actor, tenant and resource. Services emit structured audit events through an outbox into Pub/Sub or Kafka, so the event commits with the business change. An ingestion service validates the schema, assigns a sequence number per tenant, and computes a hash chain where each record includes the hash of the previous one. Data model: event_id, tenant_id, actor, action, resource, timestamp, request_id, before and after summary, prev_hash, hash. Store hot data in BigQuery or OpenSearch for queries and write immutable copies to Cloud Storage with a Bucket Lock retention policy or S3 Object Lock in compliance mode. Failure modes: queue backlog triggers alerts, never silent drops. Trade-off: hashing serializes per tenant. Pitfall: logging secrets or full PII payloads."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Data and Storage",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "System Design: Every hour at the top of the hour your database CPU spikes to 100% and latency jumps. The cache hit ratio drops at the same time. What is happening and how do you fix it?",
+    "answer": "This is almost certainly a cache stampede: many popular keys were set with the same one-hour TTL, they expire simultaneously, and thousands of concurrent misses hit the database at once. Confirm by graphing cache misses per key and database queries per second at one-second granularity around the hour mark, and checking whether TTLs are fixed values set by a batch warm-up. Fixes, usually combined: add random jitter to TTLs, for example 3,600 seconds plus or minus 10%; use request coalescing so only one caller recomputes a key while others wait, via a short Redis lock with SET NX PX or singleflight in Go; and use stale-while-revalidate, serving the expired value while refreshing in the background. For the hottest keys, refresh proactively before expiry. The pitfall is just scaling up the database, which treats the symptom and costs more."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Data and Storage",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "System Design: Why is consistent hashing used for distributing keys across cache or storage nodes?",
+    "answer": "Consistent hashing lets you add or remove nodes while moving only about 1/N of the keys, whereas simple modulo hashing remaps almost every key when N changes. With hash(key) mod N, going from 10 to 11 cache nodes invalidates roughly 90% of the cache, which can cause a stampede on the database. Consistent hashing places nodes and keys on a ring, and each key belongs to the next node clockwise, so a new node only takes keys from its neighbour. Virtual nodes, many points per physical node, smooth out uneven distribution and let bigger machines take more load. It is used in DynamoDB and Cassandra partitioning and in client-side memcached sharding. Redis Cluster uses a related approach with 16,384 fixed hash slots. The pitfall is assuming even hashing solves hot keys; one extremely popular key still lands on one node."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Data and Storage",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "System Design: You partitioned a multi-tenant events table by tenant_id, and now one large tenant creates a hot partition. How do you redesign the partition key?",
+    "answer": "Move from a pure tenant_id key to a composite key that spreads a large tenant across partitions while keeping queries efficient, for example tenant_id plus a time bucket or a hash suffix. In DynamoDB or Bigtable, a key like tenant_id#day#shard with 0 to 15 shards spreads writes, and readers query all shards for a day in parallel and merge. In Spanner, avoid monotonically increasing keys and prefix with a hash. In Postgres with declarative partitioning, partition by time range and index on tenant_id, or move the largest tenants to dedicated partitions or databases. Trade-offs: reads become scatter-gather, and the shard count must be decided per tenant size. Verify with the provider's key visualizer, such as Bigtable Key Visualizer or CloudWatch Contributor Insights for DynamoDB. The pitfall is applying heavy sharding to every tenant when only the top few need it."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Messaging and Async",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "System Design: How does the transactional outbox pattern work, and how do you implement it with Postgres?",
+    "answer": "The outbox pattern guarantees an event is published if and only if the business change commits, by writing the event to an outbox table in the same database transaction and publishing it asynchronously afterward. In Postgres, the service runs one transaction that inserts the order row and inserts a row into outbox with id, aggregate_id, event_type, payload as JSONB and created_at. A relay then publishes those rows to Kafka or Pub/Sub. The relay can poll with SELECT ... FOR UPDATE SKIP LOCKED in batches and mark rows published, or use change data capture with Debezium reading the write-ahead log, which has lower latency and no polling load. Delivery is at least once, so consumers must deduplicate on the event id. Clean up published rows with a scheduled delete or partition drop. The pitfall is calling the broker inside the transaction, which reintroduces the dual-write problem."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Messaging and Async",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "System Design: Customers report occasional duplicate charge emails from a Pub/Sub consumer. How do you investigate and fix it?",
+    "answer": "Duplicates are expected with at-least-once delivery, so the fix is making the consumer idempotent, after confirming why redeliveries happen. Investigate by logging message ID and delivery attempt, then check whether processing time exceeds the subscription ack deadline, which makes Pub/Sub redeliver while the first attempt is still running; also look for crashes after sending the email but before acking. Fixes: extend the ack deadline or rely on client library lease management for long work; record a processed key such as payment_id plus email_type in a table with a unique constraint before or atomically with sending; and use the email provider's idempotency features where available. Pub/Sub exactly-once delivery can reduce redelivery within a region, but it does not make the external email side effect exactly once. Verify with a metric for dedup hits. The pitfall is relying on in-memory dedup that disappears on restart."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - APIs and Gateways",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "System Design: Compare URL path, header and query parameter API versioning, and explain how you would retire an old version.",
+    "answer": "URL path versioning such as /v1/orders is the most visible and easiest to route and cache, header-based versioning keeps URLs stable but is harder to debug, and query parameters are simple but easy to omit and messy for caching. For public APIs I prefer major versions in the path plus additive, backward-compatible changes within a version, because routing at the gateway and documentation stay obvious. Google APIs use path versions; Stripe uses dated versions pinned per account via a header, which suits frequent small changes. To retire a version: announce a timeline, return Deprecation and Sunset headers, track usage per client from gateway logs, contact the remaining callers directly, run brownouts that briefly return errors, then remove. The pitfall is making breaking changes such as renaming fields within a version, which breaks clients that never opted in."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - APIs and Gateways",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "System Design: Should the gateway validate JWTs locally or call the identity provider's token introspection endpoint on every request?",
+    "answer": "Validate JWTs locally for most traffic, and use introspection only where immediate revocation matters more than latency. Local validation checks the signature against public keys fetched from the provider's JWKS endpoint and cached, plus exp, iss and aud claims, adding microseconds and no network dependency. The cost is that a revoked token remains valid until it expires, so keep access tokens short-lived, five to fifteen minutes, with refresh tokens handling longer sessions. Introspection per RFC 7662 gives real-time revocation but adds a network call, latency, and makes the identity provider a hard dependency for every request. A middle ground is caching introspection results for 30 to 60 seconds or keeping a small revocation list of token IDs pushed to gateways. Pitfalls are accepting the none algorithm, not checking audience, and failing to handle JWKS key rotation by kid."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Reliability",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "System Design: The personalization service behind your e-commerce home page goes down during a sale. How should the system degrade gracefully?",
+    "answer": "The home page should still load quickly with a generic but useful experience, because personalization is an enhancement, not a core dependency. Design-wise, the page service calls personalization with a tight timeout, around 100 to 150 ms, behind a circuit breaker. On failure or open circuit it falls back to a precomputed list of bestsellers per category, cached in Redis or served as a static file from the CDN and refreshed every few minutes. The response is marked degraded in logs and metrics so you can track how often fallbacks are served. Checkout, cart and search must not depend on personalization at all. Load shedding at the edge can also drop low-priority calls first. Verify through game days or fault injection, for example Istio fault injection returning 503. The pitfall is a fallback that itself calls the same overloaded database."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Reliability",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "System Design: After a brief database blip, your service stays overloaded for 20 minutes even though the database recovered in 30 seconds. What went wrong?",
+    "answer": "This is likely a retry storm, where clients retrying at fixed intervals multiply load so the system cannot recover after the original fault clears. Check whether request volume to the service jumped well above normal organic traffic, whether retries are configured at multiple layers such as the client SDK, the service mesh and application code, and whether timeouts are shorter than normal processing time so in-flight work is abandoned and retried. Fixes: use exponential backoff with full jitter, cap retries at two or three, enforce a retry budget such as retries no more than 10% of requests, retry only at one layer, and return 429 or 503 with Retry-After to shed load. Add admission control or concurrency limits on the server. Verify with a retry-count metric and load tests that inject a 30-second failure. The pitfall is fixed-interval retries that synchronize all clients."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Platform Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "System Design: How would you design secrets delivery for workloads on a shared GKE platform?",
+    "answer": "Keep secrets in a managed store, give each workload its own cloud identity, and sync or mount only the secrets that identity is allowed to read, with no static keys in Git or images. Store secrets in Google Secret Manager with one secret per credential and IAM bindings of roles/secretmanager.secretAccessor per workload's Google service account, linked through Workload Identity Federation for GKE. Deliver them either with the Secret Manager add-on for GKE or the Secrets Store CSI driver to mount them as files, or with External Secrets Operator syncing into Kubernetes Secrets if apps need environment variables. Enable application-layer secrets encryption for etcd with Cloud KMS. Rotation: add new secret versions and have apps reload on file change. Audit access through Cloud Audit Logs data access logs. The pitfall is granting the accessor role at project level, which lets every workload read every secret."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Observability Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a centralized logging pipeline for 50 microservices producing 2 TB of logs per day.",
+    "answer": "Requirements: collect structured logs from all pods, make the last 7 to 14 days searchable within a minute, retain longer for compliance cheaply, and control cost. Components: a node-level agent such as Fluent Bit or the OpenTelemetry Collector as a DaemonSet, a buffer such as Kafka or Pub/Sub, processing that parses, redacts PII and drops noise, a hot search store such as Cloud Logging, OpenSearch or Loki, and cold storage in object storage. Flow: services log JSON with trace_id and severity to stdout; agents tail and forward; processors route by severity and team. Scaling: 2 TB a day is about 23 MB per second, fine for a partitioned buffer. Failure modes: the buffer absorbs backend outages; agents use disk buffering. Trade-off: full-text indexing is expensive, Loki indexes labels only. Pitfall: high-cardinality labels in Loki and debug logging left on."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Observability Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "System Design: On-call engineers receive 300 alerts a week and ignore most of them. How do you redesign the alerting system?",
+    "answer": "Alert on user-facing symptoms against SLOs, page only for issues needing urgent human action, and route everything else to tickets or dashboards. Start by exporting a month of alert history and classifying each alert as actionable or not; delete or downgrade alerts that nobody acted on. Replace cause-based alerts like CPU above 80% with SLO burn-rate alerts, using the multi-window approach from the Google SRE workbook: page when 2% of the monthly error budget burns in one hour, ticket on slower burns over six hours or three days. Group and deduplicate in Alertmanager or the incident tool with group_by on service and alertname, add inhibition rules so a cluster-down alert suppresses its children, and require a runbook link on every page. Track pages per on-call shift as a metric. The pitfall is adding alerts after every incident without ever removing any."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "System Design: How do you choose a chunking strategy for a RAG system over technical documentation and PDFs?",
+    "answer": "Chunk along the document's natural structure, sections and headings, with a target size of roughly 300 to 800 tokens and small overlap, then validate the choice against a retrieval evaluation set. For Markdown or HTML docs, split by headings and keep the heading path as metadata so each chunk carries context like 'Install > Linux > Proxy settings'. For PDFs, use a layout-aware parser such as Document AI or unstructured to keep tables and lists intact rather than splitting mid-table. Too small chunks lose context, too large chunks dilute similarity and waste prompt tokens. Techniques that help: parent-child retrieval, where small chunks are matched but the larger parent section is sent to the LLM, and prepending a short document summary to each chunk. Measure recall at k on 50 to 200 labelled questions while varying size. The pitfall is fixed character splitting that breaks code blocks."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "System Design: How do you choose between pgvector, a managed vector service like Vertex AI Vector Search, and a dedicated vector database?",
+    "answer": "Start with pgvector when you already run Postgres and have up to tens of millions of vectors, move to a managed or dedicated vector service when scale, latency, or filtering needs exceed what Postgres handles comfortably. pgvector's advantage is transactional consistency with your relational data, joins for permissions, and one less system; with HNSW indexes it handles millions of vectors well on AlloyDB or Cloud SQL. Vertex AI Vector Search scales to billions of vectors with low latency and supports restricts for filtering, but adds a separate system and index update pipeline. Dedicated databases such as Qdrant, Weaviate or Pinecone offer strong metadata filtering, hybrid search and multi-tenancy features. Decide on vector count, query rate, filter complexity, update frequency, and team operational capacity. Benchmark recall and p95 latency on your own data. The pitfall is choosing by hype before measuring scale."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "System Design: Users say your internal RAG assistant gives confident but wrong answers. How do you find out whether retrieval or generation is at fault?",
+    "answer": "Separate the two stages by logging retrieved chunks for each answer and checking whether the correct information was in the context at all. Collect 50 to 100 failing questions, and for each record the top-k chunks, their scores, and the final prompt. If the right chunk is missing, it is a retrieval problem: check chunking, embedding model, missing documents in the index, stale ingestion, metadata filters excluding content, or k being too small; adding hybrid BM25 search and a reranker often helps. If the right chunk is present but the answer is wrong, it is generation: tighten instructions to answer only from context and cite sources, reduce irrelevant chunks, or try a stronger model. Measure with retrieval recall and faithfulness metrics using tools such as Ragas or Vertex AI Gen AI evaluation. The pitfall is changing the prompt repeatedly when the index is missing documents."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "System Design: How would you manage prompt versions for an LLM feature used across several services?",
+    "answer": "Treat prompts as versioned, reviewed artifacts separate from code deploys, with each version tied to evaluation results and referenced explicitly by the services that use it. Store templates in Git or a prompt registry such as Langfuse prompt management or Vertex AI prompt management, with an immutable version ID, model name, parameters like temperature, and an owner. Changes go through pull requests that run an offline evaluation suite against a golden dataset and block on regression. Services reference a label like production that points to a version, so you can promote or roll back without redeploying, and traces record the prompt version for every call. Roll out new versions gradually with a feature flag and compare quality metrics and cost. The pitfall is editing prompts directly in production with no history, making it impossible to explain why behaviour changed last Tuesday."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Multi-tenant SaaS",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "System Design: One tenant's bulk import job slows the whole shared SaaS platform for everyone. How do you prevent noisy neighbours?",
+    "answer": "Enforce per-tenant fairness at every shared resource: admission, queues, compute and database. Immediately, throttle the offending tenant's import with a per-tenant rate limit. Structurally, move bulk work off the request path into a job queue with per-tenant concurrency limits and fair scheduling, for example separate Pub/Sub subscriptions or Kafka partitions per tier, or a weighted fair queue that takes work round-robin by tenant. Put API rate limits and quotas per tenant at the gateway. In the database, cap statement_timeout for batch roles, use separate connection pools for interactive and batch traffic, and run heavy imports against dedicated workers. For the biggest tenants, offer a dedicated cell or silo tier. Track per-tenant latency and resource usage so you can see who is consuming capacity. The pitfall is only global limits, which punish every tenant equally for one tenant's spike."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Multi-tenant SaaS",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "System Design: How do you enforce tenant isolation in a shared Postgres schema using row-level security?",
+    "answer": "Add tenant_id to every tenant-owned table, enable row-level security with a policy comparing tenant_id to a session setting, and have the application set that setting per transaction, so the database enforces isolation even if a query forgets a filter. Concretely: ALTER TABLE orders ENABLE ROW LEVEL SECURITY and FORCE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation ON orders USING (tenant_id = current_setting('app.tenant_id')::uuid). The app connects as a non-owner role without BYPASSRLS and runs SET LOCAL app.tenant_id at the start of each transaction, which works with PgBouncer in transaction mode because SET LOCAL resets at commit. Index tenant_id as the leading column. Test with automated cross-tenant access tests in CI. Pitfalls: connecting as the table owner or a superuser, which bypasses policies unless forced, and using SET instead of SET LOCAL with pooled connections."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Messaging and Async",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a webhook delivery system that sends events to thousands of customer endpoints reliably.",
+    "answer": "Requirements: at-least-once delivery, retries for up to three days, ordering per subscription where possible, signed payloads, isolation so slow endpoints do not block others, and a delivery log customers can inspect. Components: events arrive from an outbox into a queue; a fan-out service looks up subscriptions and creates delivery records; workers send HTTP POSTs with timeouts around 10 seconds and an HMAC-SHA256 signature header with a timestamp to prevent replay. Data model: delivery_id, subscription_id, event_id, attempt, status, next_attempt_at, response_code. Retries use exponential backoff with jitter; after the final attempt, mark failed and allow manual replay. Scaling: partition work by endpoint so one slow customer gets its own concurrency limit; auto-disable endpoints failing for days and notify the owner. Security: block private IP ranges to prevent SSRF. Pitfall: a shared worker pool that one timing-out endpoint exhausts."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Messaging and Async",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a notification service that sends email, SMS and push messages with user preferences and quiet hours.",
+    "answer": "Requirements: one API for producers, respect per-user channel preferences, quiet hours and unsubscribe, deduplicate, prioritize transactional over marketing, and track delivery status. Components: a notification API that validates and enqueues; a preference service backed by a key-value store; a templating service; per-channel queues and workers calling providers such as SendGrid, Twilio, Firebase Cloud Messaging and APNs; and a status store fed by provider webhooks. Flow: a producer sends user_id, template and idempotency key; the router checks preferences and quiet hours, delays non-urgent messages with a scheduled queue, renders the template and enqueues per channel. Scaling: separate high-priority and bulk queues so a marketing blast never delays password resets. Failure modes: provider outage triggers failover to a secondary provider. Trade-off: multiple providers add cost. Pitfall: missing per-user frequency caps, which annoys users and hurts sender reputation."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Data and Storage",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "System Design: Users update their settings, refresh the page, and see the old values for a few seconds. What is causing it and how do you fix it?",
+    "answer": "The likely cause is reads served from an asynchronous read replica or a cache that has not yet caught up, which breaks read-your-writes consistency. Confirm by checking whether the settings endpoint reads from a replica and comparing the timing with replica lag metrics, or whether a cache entry is updated on write. Fixes, in order of simplicity: route reads of a user's own data to the primary for a short window after they write, tracked with a cookie or session timestamp; return the updated object in the write response so the UI uses it directly; record the commit LSN on write and have the read wait until the replica has replayed past it; and delete cache keys on write rather than waiting for TTL. Verify by adding a test that writes then reads immediately. The pitfall is sending all reads to the primary, which removes the benefit of replicas."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Reliability",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "System Design: What is the bulkhead pattern and how do you apply it in a Kubernetes-based service?",
+    "answer": "The bulkhead pattern partitions resources so a failure or overload in one area cannot exhaust capacity needed by others, like watertight compartments in a ship. Inside a service, use separate thread pools or connection pools per downstream dependency, so a slow reporting database cannot consume the connections needed for the checkout database. At the deployment level, run separate Deployments for different workloads, for example API pods and batch worker pods with their own resource requests, limits and autoscalers, and use separate node pools for critical traffic. In a mesh like Istio, set per-destination connectionPool limits in a DestinationRule. In multi-tenant systems, cells or per-tier pools act as bulkheads for tenants. The trade-off is lower utilization because capacity cannot be freely shared. Verify by load-testing one dependency into failure and confirming other endpoints keep their SLOs."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Observability Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design an alert ingestion and deduplication service that receives alerts from Prometheus, cloud monitoring and third-party tools.",
+    "answer": "Requirements: accept 5,000 alerts per second at peak via webhooks, normalize formats, deduplicate repeats, correlate related alerts into incidents, route to the right on-call, and never drop a critical alert. Components: stateless ingestion endpoints behind a load balancer that authenticate the source and write raw payloads to Kafka or Pub/Sub; normalizers mapping each source to a common schema; a dedup engine; a routing service using ownership rules; and notification connectors. Data model: fingerprint as a hash of source, service, alertname and key labels, plus status, first_seen, last_seen, count and incident_id. Dedup: partition the stream by fingerprint so one worker owns each key, keep state in Redis or a table with upsert, and suppress repeats within a window. Correlation groups by service and time window. Failure modes: the queue buffers downstream outages; a bypass path pages directly if dedup is down. Trade-off: aggressive grouping can hide distinct incidents."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design an LLM gateway that routes requests across multiple model providers with fallback and cost control.",
+    "answer": "Requirements: one OpenAI-compatible API for internal teams, routing by task and cost tier, automatic fallback on provider errors, per-team budgets and rate limits, logging for audit, and minimal added latency. Components: a stateless gateway service, which could start from LiteLLM proxy or Envoy AI Gateway; a config store for routes and budgets; Redis for token-based rate limits and spend counters; provider adapters for Vertex AI Gemini, Azure OpenAI and Anthropic; and an async usage pipeline into BigQuery. Flow: authenticate the caller, check budget and rate limit, choose a model from the route policy, stream the response back, then record tokens and cost. Fallback: on 429, 5xx or timeout, retry once on a secondary provider with an equivalent model. Failure modes: the gateway itself is critical, so run multi-zone with no synchronous database on the hot path. Trade-off: fallback models answer differently. Pitfall: logging full prompts containing PII."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Platform Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a CI system for 2,000 engineers working in a large monorepo.",
+    "answer": "Requirements: about 15,000 pipeline runs a day, median feedback under 10 minutes, hermetic and reproducible builds, isolation between jobs, and controlled cost. Components: a webhook receiver and scheduler, ephemeral runners on Kubernetes with autoscaling, for example GitHub Actions Runner Controller or Buildkite agents, a remote build cache and remote execution such as Bazel with BuildBuddy, an artifact registry, and a test results store. Flow: on push, compute affected targets from the dependency graph, run only those builds and tests, shard large suites across runners, and publish signed artifacts. Scaling: cache hits do most of the work; spot or preemptible nodes for non-critical jobs; a merge queue to keep main green. Failure modes: flaky tests are auto-detected and quarantined; runner pools span zones. Trade-off: Bazel adoption is costly. Pitfall: long-lived shared runners leaking state and secrets between jobs."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Platform Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a multi-tenant Kubernetes platform for 60 internal teams, and decide between namespace-per-team, virtual clusters and cluster-per-team.",
+    "answer": "For trusted internal teams I would use namespace-per-team on a few shared GKE clusters per environment, with virtual clusters or dedicated clusters for teams needing cluster-scoped control or stronger isolation. Each team gets namespaces provisioned via GitOps with RBAC bound to their Google group, ResourceQuota and LimitRange, default-deny NetworkPolicy, Pod Security Admission at restricted, and Workload Identity per service account. Policy is enforced by Gatekeeper or Kyverno, for example requiring resource requests and blocking privileged pods. Costs are attributed with GKE cost allocation by namespace labels. vcluster gives teams their own API server and CRDs without a full cluster. Cluster-per-team gives the strongest isolation but multiplies upgrade and operations work. Failure modes: shared control plane limits and noisy neighbours, mitigated with node pools and priority classes. Pitfall: letting teams install cluster-wide CRDs and webhooks that can break every tenant."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Observability Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a distributed tracing pipeline for 400 services producing 200,000 spans per second while keeping cost under control.",
+    "answer": "Use OpenTelemetry SDKs everywhere, an agent and gateway tier of OpenTelemetry Collectors, tail-based sampling at the gateway, and a scalable trace backend such as Grafana Tempo, Jaeger with object storage, or Cloud Trace. Flow: services export OTLP to a node or sidecar collector, which batches and forwards to a gateway collector tier. To make tail sampling work, the first gateway layer uses the loadbalancing exporter keyed on trace ID so all spans of a trace reach the same sampler. The tail_sampling processor keeps 100% of error traces and slow traces above a latency threshold, plus 1 to 5% of normal traces. Propagate W3C traceparent headers everywhere. Scaling: gateway collectors autoscale on queue size; storage in object stores is cheap. Failure modes: collector memory pressure, handled by memory_limiter. Trade-off: tail sampling needs buffering memory and adds delay. Pitfall: head sampling only, which drops most error traces."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Messaging and Async",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Conceptual",
+    "question": "System Design: Why is end-to-end exactly-once delivery called a myth, and how do you achieve effectively-once processing in practice?",
+    "answer": "Across a network with failures, a sender cannot distinguish a lost message from a lost acknowledgement, so it must either retry and risk duplicates or not retry and risk loss; exactly-once delivery to arbitrary side effects is therefore impossible, but effectively-once processing is achievable. Kafka's exactly-once semantics, using idempotent producers and transactions with read_committed consumers, cover reading from Kafka, processing and writing back to Kafka atomically, but not an external database or email. Pub/Sub exactly-once delivery prevents redelivery after a successful ack within a region, not duplicate side effects. In practice you combine at-least-once delivery with idempotent consumers: deduplicate on a message or business key, commit the dedup record and side effect in one database transaction, or store consumer offsets in the same transaction as the output. The pitfall is enabling a broker's exactly-once flag and assuming downstream systems are protected."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design an evaluation pipeline that gates changes to a production RAG application.",
+    "answer": "Requirements: every change to prompts, models, chunking or retrieval settings is scored offline before release, regressions block deployment, and production quality is monitored continuously. Components: a versioned golden dataset of several hundred questions with reference answers and expected source documents, built from real queries and expert review; an evaluation runner triggered in CI; metric computation; and a results store with dashboards. Metrics: retrieval recall and MRR against expected sources, plus faithfulness, answer relevance and correctness scored by an LLM judge using tools such as Ragas, DeepEval or the Vertex AI Gen AI evaluation service, and latency and cost per query. Gate on thresholds relative to the current baseline. Online: sample production traces for judge scoring and collect user feedback, feeding failures back into the dataset. Trade-off: LLM judges are noisy, so calibrate them against human labels. Pitfall: a static golden set that no longer reflects real traffic."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Reliability",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "System Design: Your primary GCP region becomes unavailable. Walk through failing over a Cloud SQL-backed service to a secondary region.",
+    "answer": "Execute a pre-rehearsed runbook: confirm the regional outage, promote the cross-region replica, repoint the application, and shift traffic, accepting the RPO implied by asynchronous replication. Prerequisites matter: a cross-region read replica, or Cloud SQL Enterprise Plus with a designated DR replica, application deployments and secrets already in the secondary region, images in a multi-region Artifact Registry, and a global load balancer. Steps: declare the incident and freeze deploys; promote the replica with gcloud sql instances promote-replica or use the switchover and failover features of Enterprise Plus; update the connection target, ideally via a DNS name or config the apps already read; scale up secondary GKE workloads; and confirm the global load balancer routes healthy traffic. Then verify writes, check replication lag at failure to estimate lost data, and communicate. Pitfall: never testing the runbook, so quotas or missing IAM bindings block failover."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Security by Design",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a policy-as-code system that enforces security and cost guardrails across Terraform and Kubernetes for a platform team.",
+    "answer": "Enforce the same policies at three points: pull request time, deploy or admission time, and continuously on live resources, with policies versioned in Git and tested like code. For Terraform, run terraform plan in CI, export JSON with terraform show -json, and evaluate it with OPA Conftest or Checkov, blocking things like public buckets, missing labels or oversized machine types. For Kubernetes, use Gatekeeper constraint templates or Kyverno policies as admission controllers to require resource requests, block privileged containers, and restrict image registries, starting in audit mode before enforcing. Cloud-level backstops are GCP Organization Policies or AWS SCPs, which hold even if pipelines are bypassed. Exceptions are explicit, time-limited and recorded. Report violations to a dashboard per team. Trade-off: too many hard blocks frustrate teams, so warn first. Pitfall: policies only in CI, so console changes go unchecked."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Observability Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "System Design: Your Prometheus servers run out of memory after a deploy, and the active series count jumps tenfold. How do you diagnose and prevent cardinality explosions?",
+    "answer": "A deploy almost certainly added a high-cardinality label such as user_id, request path with IDs, or pod-specific values to a metric, creating millions of new series. Diagnose with the TSDB status page or the /api/v1/status/tsdb endpoint, which lists top metrics and labels by series count, or query topk(10, count by (__name__)({__name__=~\".+\"})). Short-term: roll back or drop the label with metric_relabel_configs using labeldrop, then let the head block compact. Prevention: set sample_limit and label_limit per scrape job so one target cannot overwhelm the server, add CI lint checks on metric definitions, normalize HTTP routes to templates like /users/:id, and move per-request detail to traces or logs. At larger scale use horizontally scalable backends such as Mimir, Thanos or Google Cloud Managed Service for Prometheus with per-tenant series limits. Pitfall: just adding memory."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Messaging and Async",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "System Design: Consumer lag on a Kafka topic keeps growing during business hours and only recovers overnight. How do you troubleshoot it?",
+    "answer": "Lag growing under load means consumption throughput is below production throughput, so measure both and find which part of the consumer is the bottleneck. Check per-partition lag with kafka-consumer-groups --describe or Burrow; if lag is concentrated on a few partitions, you have key skew and need a better key. If evenly spread, check whether consumer count already equals partition count, since extra consumers sit idle, and whether processing time per record is dominated by a slow downstream call. Look for frequent rebalances caused by max.poll.interval.ms being exceeded, which stalls the whole group. Fixes: increase partitions and consumers, batch downstream writes, process records concurrently per partition while preserving key order, tune fetch.min.bytes and max.poll.records, or use cooperative-sticky rebalancing. Verify with a dashboard of produce rate versus consume rate. Pitfall: adding consumers beyond partition count."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Platform Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a distributed job scheduler that runs millions of scheduled jobs a day with at-least-once guarantees.",
+    "answer": "Requirements: support cron and one-off schedules, trigger within a few seconds of the due time, never skip a job, tolerate node failures, and give per-job history. Components: a job API storing definitions in a database; a scheduler tier that finds due jobs; a queue; and a worker fleet. Data model: job_id, schedule, next_run_at, owner, payload, status, plus a runs table with run_id, attempt, started_at and result. Flow: schedulers own shards of jobs by hash of job_id, poll an index on next_run_at with SELECT ... FOR UPDATE SKIP LOCKED, enqueue the run, and compute the next run time in the same transaction. Workers execute with a lease and heartbeat; expired leases are retried. Scaling: shard the table and scheduler tier. Failure modes: double execution is possible, so handlers must be idempotent. Trade-off: polling granularity versus database load. Pitfall: thundering herd at midnight, solved with jitter."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a sandbox for executing code and tool calls produced by an AI agent.",
+    "answer": "Requirements: run untrusted, model-generated code and commands with strong isolation, no access to secrets or internal networks by default, resource and time limits, and full audit. Components: a tool broker that validates each call against a schema and allowlist; a pool of pre-warmed sandboxes using gVisor via GKE Sandbox, Firecracker microVMs, or a managed option like Cloud Run with second-generation execution environment; an egress proxy; and an artifact store. Flow: the agent proposes a call, the broker checks policy and whether human approval is required for risky actions, runs it in a fresh sandbox with CPU, memory and wall-clock limits and a read-only base image, collects output, then destroys the sandbox. Credentials are short-lived and scoped per tool, never visible in the sandbox environment. Failure modes: timeouts return structured errors to the agent. Trade-off: fresh sandboxes add latency. Pitfall: reusing sandboxes across users."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a guardrails layer for a customer-facing LLM assistant covering prompt injection, PII and unsafe output.",
+    "answer": "Put guardrails before the model, around tools and retrieved content, and after the model, and treat them as layered risk reduction rather than a perfect filter. Input stage: detect and redact PII with Cloud DLP or Microsoft Presidio, run a prompt injection and jailbreak classifier such as Model Armor or Llama Prompt Guard, and enforce topic scope. Retrieval stage: mark retrieved documents as untrusted data in the prompt and never let their contents change tool permissions. Tool stage: least-privilege tools, parameter validation, and human confirmation for irreversible actions. Output stage: safety filters for harmful content, groundedness checks against sources, and structured output validation with a JSON schema. Log decisions for review and measure false positive rates. Failure modes: classifier outage should fail closed for high-risk actions and open for low-risk chat. Trade-off: each check adds latency. Pitfall: relying only on a system prompt telling the model to behave."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Data and Storage",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "System Design: After a price change, users in Europe keep seeing old prices for up to 30 minutes while US users see the new ones. How do you redesign cache invalidation across regions?",
+    "answer": "The European region's cache or CDN is relying on TTL expiry rather than receiving invalidations, so the fix is event-driven invalidation to every region plus bounded TTLs as a safety net. Confirm by checking where the stale value is served from: CDN edge, regional Redis, or a local in-process cache. Redesign: the pricing service publishes a PriceChanged event through an outbox to a global topic such as Pub/Sub or a replicated Kafka cluster; a subscriber in each region deletes affected Redis keys and issues CDN invalidations, for example gcloud compute url-maps invalidate-cdn-cache or cache-tag purges. Include a version number with prices so stale writes cannot overwrite newer data. Keep TTLs short for price data, around 60 seconds. Monitor invalidation lag per region. Trade-off: more invalidation traffic. Pitfall: in-process caches on pods that no invalidation reaches."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Platform Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a progressive delivery system that performs canary releases with automatic rollback for hundreds of services.",
+    "answer": "Requirements: every production deploy starts with a small traffic slice, is judged automatically on SLO metrics, promotes in steps, and rolls back without humans when metrics degrade. Components: GitOps with Argo CD or Flux as the source of truth; a rollout controller such as Argo Rollouts or Flagger, or Cloud Deploy canary strategies on GKE; traffic splitting through the Gateway API or Istio; and an analysis engine querying Prometheus or Cloud Monitoring. Flow: a new image creates a canary at 5%, analysis compares error rate and p95 latency against the stable version for 10 minutes, then promotes to 25%, 50% and 100%, aborting and shifting traffic back on failure. Scaling: analysis templates are shared, so teams only set thresholds. Failure modes: low traffic gives noisy signals, so use minimum request counts. Trade-off: slower releases. Pitfall: database migrations that are not backward compatible, which make rollback impossible."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "System Design: The p99 latency of your LLM-powered chat endpoint jumped from 6 to 25 seconds while p50 is unchanged. How do you troubleshoot it?",
+    "answer": "A tail-only regression usually points to a subset of requests: very long prompts or outputs, provider throttling with retries, or queuing in your own gateway. Break down latency by span using traces: time to first token, total generation time, retrieval time, tool calls, and retries. Correlate slow requests with input and output token counts; a new feature that stuffs more context or removed max_output_tokens can produce long generations. Check provider responses for 429s, since SDK retries with backoff silently inflate the tail; Vertex AI and Azure OpenAI both throttle per quota. Check agent loops making extra tool calls. Fixes: stream responses so perceived latency is time to first token, cap output tokens, trim context, set per-attempt timeouts with fallback to another region or model, and request quota increases or provisioned throughput. Pitfall: looking only at averages."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Multi-tenant SaaS",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "System Design: A new enterprise customer signs and needs a dedicated environment in under an hour. Design the tenant provisioning workflow.",
+    "answer": "Model provisioning as an idempotent, durable workflow driven by a tenant record, so every step can be retried and the whole process is observable. The control plane creates a tenant record with tier, region and status pending, then a workflow engine such as Temporal, Cloud Workflows or Step Functions runs the steps: create the cloud project or account from a landing-zone template, apply Terraform modules for network, database and storage, create the Kubernetes namespace or cell via GitOps, generate KMS keys and secrets, configure the identity provider with SSO, seed data, run smoke tests, then mark the tenant active and notify. Each step records its outputs and checks existence before creating. Failure modes: partial failures resume from the failed step; compensations tear down on cancel. Trade-off: dedicated environments cost more, so price the tier accordingly. Pitfall: manual steps hidden in a runbook."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Security by Design",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design service-to-service authentication and authorization for a zero-trust microservices platform.",
+    "answer": "Every service gets a strong workload identity, all traffic uses mutual TLS based on that identity, and authorization policies decide which identities can call which endpoints, with no trust based on network location. On Kubernetes, a service mesh such as Istio or Cloud Service Mesh issues SPIFFE identities derived from Kubernetes service accounts, rotates certificates automatically, and enforces STRICT mTLS through PeerAuthentication. AuthorizationPolicy resources allow, for example, only the orders service account to call payments on POST /charge. For end-user context, propagate a signed JWT so downstream services authorize on behalf of the user. For calls to cloud APIs, use Workload Identity rather than keys. Failure modes: certificate authority outage, mitigated by cert lifetimes long enough to ride it out. Trade-off: mesh adds latency and operational load. Pitfall: leaving mTLS in permissive mode indefinitely after migration."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - APIs and Gateways",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "System Design: Implement a thread-safe token bucket rate limiter in Python and explain its complexity.",
+    "answer": "A token bucket refills at a fixed rate up to a capacity, and each request consumes a token; computing refill lazily from elapsed time avoids background threads.\n\nimport threading, time\n\nclass TokenBucket:\n    def __init__(self, rate: float, capacity: int):\n        self.rate = rate\n        self.capacity = capacity\n        self.tokens = float(capacity)\n        self.last = time.monotonic()\n        self.lock = threading.Lock()\n\n    def allow(self, cost: float = 1.0) -> bool:\n        with self.lock:\n            now = time.monotonic()\n            self.tokens = min(self.capacity, self.tokens + (now - self.last) * self.rate)\n            self.last = now\n            if self.tokens >= cost:\n                self.tokens -= cost\n                return True\n            return False\n\nUse one bucket per key in a dict, evicting idle keys with an LRU. Each call is O(1) time and each bucket O(1) space, so overall space is O(K) for K active keys. Use time.monotonic, not time.time, so clock adjustments cannot grant or remove tokens. For a fleet of instances, move the same logic into a Redis Lua script so the read, refill and decrement are atomic across servers. The pitfall is a fixed window counter, which allows double the limit at window boundaries."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a multi-tenant RAG platform with strict per-tenant data isolation for thousands of enterprise customers.",
+    "answer": "Requirements: thousands of tenants from tiny to tens of millions of chunks, no cross-tenant leakage, per-tenant document permissions, per-tenant encryption options, and cost-efficient scale. Components: ingestion workers per tenant queue, an embedding service, a vector store, a metadata and ACL store, a query service, and the LLM gateway. Isolation strategy: pool small tenants in shared indexes with a mandatory tenant_id filter applied server-side, never from the client; give large or regulated tenants dedicated namespaces, collections or indexes, with customer-managed keys via Cloud KMS. Data model: chunk_id, tenant_id, document_id, acl_groups, embedding_model_version, text, source_uri. Flow: authenticate the user, resolve tenant and groups, retrieve with tenant and ACL filters, rerank, generate with citations. Scaling: shard by tenant; re-embed per tenant in the background. Failure modes: filtered ANN queries can lose recall, so test filtered recall. Pitfall: a shared semantic cache that returns one tenant's answer to another."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Reliability",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design an active-active multi-region architecture for a user profile service, including how write conflicts are handled.",
+    "answer": "Requirements: serve reads and writes from the nearest of three regions, survive a full region loss with no manual failover, and keep profiles consistent enough that users never see their own edits disappear. The simplest correct design uses a globally consistent database such as Spanner with a multi-region configuration or CockroachDB, which handle conflicts with consensus at the cost of cross-region write latency of tens of milliseconds. If write latency must be local, use per-region stores with asynchronous replication and explicit conflict resolution: last-writer-wins on per-field timestamps with hybrid logical clocks, or CRDTs for counters and sets. Better still, assign each user a home region and route writes there, avoiding conflicts entirely while reads stay local. Traffic uses a global load balancer with health checks. Failure modes: network partitions create divergent writes in async designs. Trade-off: consistency versus latency per PACELC. Pitfall: wall-clock last-writer-wins silently losing updates."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - APIs and Gateways",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a global rate limiter that enforces a customer's quota across five regions without adding cross-region latency to each request.",
+    "answer": "Enforce limits locally in each region against a share of the global quota, and asynchronously rebalance shares based on observed usage, accepting brief, bounded overshoot. Each region runs a Redis-backed token bucket per customer. A coordinator aggregates per-region consumption every one to five seconds through a replicated store or stream and reassigns quota: a customer whose traffic is 80% in Europe gets 80% of the allowance there. New customers start with an equal split plus a small burst allowance. Scaling: request paths only touch regional Redis; coordination traffic is proportional to active customers, not requests. Failure modes: if the coordinator or inter-region link fails, regions keep their last shares, so the global limit remains approximately enforced. Trade-off: exact global limits need synchronous consensus, which adds 50 to 150 ms per request. For billing-grade quotas, reconcile usage afterwards. Pitfall: static equal splits that throttle customers concentrated in one region."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Reliability",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "System Design: A regional failover succeeded technically, but finance discovers about four minutes of orders are missing. How do you handle the incident and redesign to meet a near-zero RPO?",
+    "answer": "First recover what you can, then fix the design gap: asynchronous cross-region replication gave a non-zero RPO that the business never explicitly accepted. Immediately, identify the gap window from replication lag at failover, recover orders from other durable sources such as payment provider records, Kafka topics with cross-region mirroring, outbox tables, or gateway logs, and replay them idempotently into the new primary once the old region is back. Communicate clearly with finance on scope. Redesign options: synchronous multi-region writes with Spanner or a quorum-based database for orders, accepting higher write latency; or a durable regional write-ahead log like a multi-region Pub/Sub topic that captures every order before acknowledgement. Document RPO and RTO per data class and get business sign-off. In the postmortem, add replication lag alerting and regular DR drills that measure actual RPO. Pitfall: treating all data the same."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a semantic cache for an LLM gateway and explain where it is dangerous.",
+    "answer": "A semantic cache embeds each incoming prompt, searches for a previously answered prompt above a similarity threshold, and returns the stored response, cutting cost and latency for repetitive queries. Components: an embedding model, a vector index such as Redis vector search keyed by tenant and model, and a store of responses with metadata including prompt version, model, retrieval context hash and TTL. Flow: normalize the prompt, compute the cache key scope from tenant, user permissions and prompt version, run nearest-neighbour search, and return a hit only above a tuned threshold such as 0.95 cosine. Also keep an exact-match cache, which is safe and cheap. Danger zones: personalized or permissioned answers, time-sensitive data, near-identical questions with different meaning like 'cancel my order' versus 'do not cancel my order', and cross-tenant leakage. Measure false-hit rate with sampled human or judge review. Pitfall: caching responses produced from documents the next user cannot access."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Platform Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Behavioral",
+    "question": "System Design: Tell me about a time you pushed back on an architecture proposal and changed the final design.",
+    "answer": "Situation: on a platform engagement for a fictional logistics customer, Harborline, the lead architect proposed an active-active, three-region Kafka and Postgres setup for a shipment tracking service. Task: I owned the platform delivery and had to make sure the design matched requirements and the team could operate it. Action: I went back to the requirements and found the business needed 99.9% availability and a 15-minute RPO, not four nines. I wrote a one-page comparison of active-active against active-passive with a warm standby, covering cost, operational complexity, conflict handling and failure drills, and estimated the active-active option at roughly three times the monthly cost. I presented it as options with trade-offs, not as a veto, and offered a path to upgrade later. Result: we shipped active-passive two months earlier, passed the first DR drill with an 8-minute recovery, and the architect co-presented the decision record. I learned to argue from requirements, not preferences."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Platform Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design an internal developer platform for 300 teams running workloads on both GCP and AWS.",
+    "answer": "Build one developer-facing contract with cloud-specific implementations underneath, so teams declare what they need and the platform decides how it is provisioned on each cloud. Components: a Backstage portal with software catalog and templates; a platform API where teams declare services, databases and queues, implemented with Crossplane compositions or Terraform modules run by a controller; GitOps with Argo CD to GKE and EKS clusters; a shared CI system; OpenTelemetry-based observability into a single backend; secrets via Secret Manager and AWS Secrets Manager behind External Secrets Operator; and policy with Kyverno or Gatekeeper plus Organization Policies and SCPs. Identity federates through one IdP into both clouds. Scaling: cluster fleets managed as cattle, with templated cluster creation. Failure modes: platform outages must not take down running workloads, so the control plane is off the data path. Trade-off: abstraction hides useful cloud-native features; allow escape hatches. Pitfall: lowest-common-denominator abstractions nobody wants."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design per-tenant LLM cost attribution and hard budget enforcement for a SaaS product that resells AI features.",
+    "answer": "Meter every model call at the gateway with tenant, feature, model and token counts, convert to cost with a versioned price table, and enforce budgets with fast pre-checks plus asynchronous reconciliation. Flow: before a call, the gateway estimates cost from input tokens and max_output_tokens and atomically reserves it against the tenant's remaining budget in Redis; after the call, it settles the reservation using actual usage from the provider response and emits a usage event to Pub/Sub, landing in BigQuery for invoices and dashboards. Budgets have soft thresholds that notify at 80% and hard limits that switch to a cheaper model, queue requests or return a clear 402-style error. Data model: tenant_id, feature, model, input_tokens, output_tokens, cached_tokens, unit_prices_version, cost, request_id. Failure modes: Redis loss means falling back to conservative per-tenant rate limits. Reconcile daily against provider billing exports. Pitfall: ignoring embedding, reranking and retry costs."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Security by Design",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "System Design: Security mandates rotating every database password and API key every 30 days with zero downtime across 400 services. Design the rotation system.",
+    "answer": "Rotate using an overlap window where both old and new credentials are valid, automate it centrally, and make applications reload credentials without restarts, or eliminate static secrets altogether where possible. First reduce scope: replace database passwords with IAM database authentication for Cloud SQL or RDS IAM auth, and cloud keys with Workload Identity, so only third-party API keys remain. For the rest, a rotation controller, triggered by Secret Manager rotation schedules via Pub/Sub or AWS Secrets Manager rotation Lambdas, creates the new credential at the provider, adds it as a new secret version, waits for all consumers to report using it via metrics, then disables and later deletes the old one. For databases, alternate two users so one is always valid. Apps read mounted secret files and reload on change. Failure modes: a consumer still on the old version blocks revocation and alerts. Pitfall: revoking immediately after creating."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Messaging and Async",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Coding",
+    "question": "System Design: Write an idempotent message handler in Python that guarantees a payment side effect is applied once even when the broker redelivers.",
+    "answer": "Record the message ID in a processed table and apply the business change in the same database transaction, so a redelivery either sees the record and skips or rolls back entirely.\n\nimport psycopg\n\ndef handle(conn: psycopg.Connection, msg_id: str, account_id: str, amount_cents: int) -> bool:\n    with conn.transaction():\n        cur = conn.execute(\n            'INSERT INTO processed_messages (msg_id) VALUES (%s) ON CONFLICT DO NOTHING',\n            (msg_id,),\n        )\n        if cur.rowcount == 0:\n            return False\n        conn.execute(\n            'UPDATE accounts SET balance_cents = balance_cents + %s WHERE id = %s',\n            (amount_cents, account_id),\n        )\n    return True\n\nAck the message only after handle returns, whether True or False. The unique primary key on msg_id makes concurrent duplicates safe: the second insert blocks until the first commits, then does nothing. Time is O(1) per message with an index lookup of O(log n); space is O(n) dedup rows, bounded by deleting rows older than the broker's maximum redelivery window. If the side effect is an external API rather than your database, pass msg_id as the provider's idempotency key instead. Pitfall: using the broker's delivery ID, which changes across redeliveries, instead of a stable producer-assigned ID."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Reliability",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Troubleshooting",
+    "question": "System Design: A slow inventory database causes a full outage across five layers of services, and the edge sees 30 times normal traffic. How do you analyse the cascading failure and redesign the call chain?",
+    "answer": "The 30x amplification points to retries at every layer multiplying each other: three retries at each of five layers can turn one request into hundreds of downstream calls, while long timeouts hold threads and connections until every layer saturates. Analyse traces from the incident to count attempts per user request and check timeout values per hop; often an inner timeout is longer than the outer one, so work continues after the caller gave up. Redesign: retry only at one layer, usually closest to the failure, with backoff, jitter and a retry budget; propagate deadlines, for example via gRPC deadlines, so each hop uses the remaining time; set circuit breakers and concurrency limits per dependency; shed load early at the edge with 503 and Retry-After; and cache or degrade inventory to 'availability unknown'. Validate with chaos tests that slow the database. Pitfall: timeouts that increase toward the bottom of the stack."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - AI Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "System Design: Design a platform for long-running AI agents that execute multi-step workflows over hours, survive restarts and pause for human approval.",
+    "answer": "Run each agent as a durable workflow whose state is persisted after every step, so crashes resume exactly where they left off and human approvals are just durable waits. Components: a workflow engine such as Temporal or Cloud Workflows; activity workers for LLM calls and tool executions in sandboxes; the LLM gateway; a state and artifact store; an approval service; and tracing. Flow: a run starts with goal and context; each model decision and tool call is an activity with timeouts, retries and idempotency keys; risky actions emit an approval signal and the workflow waits, possibly for days, without holding compute. Data model: run_id, tenant, step history, tool inputs and outputs, token usage, approvals. Scaling: workers autoscale on task queue depth. Failure modes: non-deterministic workflow code breaks replay, so keep LLM calls inside activities. Trade-off: engine operational cost. Pitfall: unbounded loops; enforce step and budget limits per run."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Multi-tenant SaaS",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "System Design: Your SaaS must guarantee that EU customers' data, including logs and backups, never leaves the EU, while US customers stay in the US. How do you redesign the platform?",
+    "answer": "Move to a cell-based architecture where each tenant is pinned to a regional cell containing all of its data plane, and keep only a minimal, non-personal global control plane for routing. Each EU cell runs in EU regions with its own databases, object storage, queues, vector indexes, log buckets, backups and KMS keys; GCP Organization Policy with gcp.resourceLocations or AWS SCPs restrict resource creation to allowed regions. A global directory maps tenant to cell and holds only tenant ID and region, and the edge routes requests to the right cell. Audit every data flow that crosses cells: logging sinks, tracing backends, support tools, analytics exports and LLM providers, which must use EU endpoints with data residency commitments. Failure modes: DR must fail over within the EU. Trade-off: duplicated infrastructure and harder global analytics. Verify with data flow inventories and periodic location audits. Pitfall: a central observability stack quietly copying EU logs to the US."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Observability Systems",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "System Design: Your observability bill has tripled to more than the compute it monitors. How do you redesign the telemetry platform to cut cost without losing incident visibility?",
+    "answer": "Shift from collecting everything at full fidelity to deliberate tiers: keep metrics and SLO signals complete, sample traces intelligently, and route logs by value into cheap storage. Start with a cost breakdown by signal, team and source to find the top contributors, usually debug logs, duplicate log shipping and high-cardinality metrics. Put an OpenTelemetry Collector or Fluent Bit tier in front of every backend so you control processing centrally: drop health-check and noisy logs, convert repetitive logs to metrics, tail-sample traces keeping errors and slow requests, and enforce per-team quotas. Route long-retention logs to object storage or BigQuery instead of an indexed search tier, with short hot retention. Use exclusion filters in Cloud Logging. Publish showback per team. Verify that incident investigations from the last quarter could still be done with the reduced data. Pitfall: cutting across the board, which removes the signals you need during outages."
+  },
+  {
+    "source": "System Design Bank",
+    "section": "System Design for Platform and AI Systems",
+    "category": "System Design for Platform and AI Systems - Data and Storage",
+    "topic": "System Design for Platform and AI Systems",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "System Design: You must rename a heavily used column and split a 2 TB table while the service keeps serving 15,000 requests per second. How do you plan the migration?",
+    "answer": "Use the expand and contract pattern in small, backward-compatible steps, so every deploy can be rolled back and old and new code coexist. Expand: add the new column or new table without constraints that lock, using ADD COLUMN with no volatile default and CREATE INDEX CONCURRENTLY in Postgres. Dual-write: deploy code that writes both old and new shapes. Backfill: copy historical rows in small batches, throttled by replication lag and database load, idempotent so it can restart; for very large tables consider tools like pg_repack or logical replication into the new layout. Verify: compare counts and checksums, and shadow-read from the new shape. Switch reads behind a feature flag, monitor, then stop writing the old shape. Contract: drop old columns only after a full release cycle. Set lock_timeout on every DDL statement. Pitfall: a single long ALTER TABLE that takes an ACCESS EXCLUSIVE lock and blocks all traffic."
+  }
+]

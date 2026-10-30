@@ -1,0 +1,802 @@
+[
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Customer Discovery and Ambiguity",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you started a customer engagement with a vague problem statement. How did you turn it into something you could build?",
+    "answer": "I turned a vague request into a written problem statement and a two-week pilot scope within the first three meetings. Situation: a fictional logistics customer, Harborline, asked us to 'add AI to dispatch'. Task: I had to find a problem worth solving before anyone wrote code. Action: I interviewed four dispatchers and their manager, shadowed a shift, and asked what they did manually every day. The pattern was that dispatchers spent around an hour per shift searching old PDF runbooks for exception handling. I wrote a one-page brief with the user, the pain, a success metric, and what was out of scope, and got the manager to sign it. Result: we built a small RAG assistant over the runbooks on Vertex AI, and in the pilot dispatchers reported cutting lookup time roughly in half. Lesson: I now insist on watching the real workflow before proposing any solution, because the stated ask is rarely the real need."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Customer Discovery and Ambiguity",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Which questions do you ask in a first discovery call with a new customer, and can you give an example where one of them changed the plan?",
+    "answer": "I ask who the user is, what they do today, what it costs them, how they will measure success, and what constraints exist on data, security and timeline. Situation: on a data integration project for a fictional retailer, Ridgepoint Retail, the sponsor wanted a real-time pipeline from their stores into BigQuery. Task: confirm the requirement before designing streaming infrastructure. Action: I asked how often the downstream reports were actually read. The answer was once each morning by the finance team. I proposed a nightly batch load using Cloud Storage and scheduled BigQuery load jobs instead of Pub/Sub and Dataflow. Result: we delivered in three weeks instead of the estimated eight, and running cost was a fraction of the streaming design. Lesson: the question about how the output is consumed saves more effort than any technical question, so I always ask it early."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Customer Discovery and Ambiguity",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Behavioural: Two departments at the same customer give you contradictory requirements for the same RAG assistant. How do you proceed?",
+    "answer": "I would make the conflict visible, tie each requirement to a business outcome, and get the shared sponsor to choose rather than silently picking a side. Situation: at a fictional insurer, Corvane Mutual, claims wanted the assistant to answer freely from all policy documents, while compliance wanted answers only from approved wording with citations. Task: deliver one pilot both could accept. Action: I ran a joint session, wrote both requirements side by side with the risk each was managing, and proposed a design that satisfied both: retrieval restricted to an approved-document index, mandatory citations, and a fallback message when confidence was low. I documented the decision and had the sponsor approve it. Result: both teams signed off, and the pilot launched with a measured citation accuracy above 90 percent on our evaluation set. Lesson: I bring conflicting stakeholders into one room early instead of shuttling between them, which only lets the disagreement grow."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Customer Discovery and Ambiguity",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Describe a time you discovered midway through a project that you had misunderstood the customer's core problem.",
+    "answer": "I caught the misunderstanding at a demo, owned it, and re-scoped within a week. Situation: I was building a GKE-based model serving platform for a fictional analytics customer, Larkspur Data, assuming their pain was inference latency. Task: show progress at a midpoint demo. Action: during the demo the data scientists were polite but unexcited, so I asked what had blocked them last month. The real issue was that deploying any new model took two weeks of tickets to the platform team. I paused the latency work, told the sponsor plainly that I had optimised the wrong thing, and pivoted to a self-service deployment path using a Helm chart template and a GitHub Actions pipeline with Workload Identity Federation. Result: model deployment time went from about two weeks to under a day. Lesson: I now run a short user check-in every week instead of waiting for a formal demo to validate assumptions."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Customer Discovery and Ambiguity",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Behavioural: A customer cannot give you access to production data for a pilot. How do you still prove value?",
+    "answer": "I would agree a representative, safe dataset and an evaluation method up front, so the pilot proves value without touching production. Situation: a fictional healthcare customer, Fernvale Health, could not share patient records for a document-search pilot. Task: show the approach worked within their data rules. Action: I worked with their data owner to select a few hundred de-identified policy and procedure documents that carried no patient data, and we used Cloud DLP to scan them before ingestion. I wrote fifty test questions with their clinicians and agreed the pass bar in advance. Everything ran in their own GCP project with VPC Service Controls. Result: the pilot hit the agreed answer-quality bar, and their security team approved a production phase because they had seen the controls in action. Lesson: agreeing the evaluation set before building removes later arguments about whether the pilot succeeded."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Customer Discovery and Ambiguity",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Behavioural: You arrive on site and find the customer has no clear owner for the AI initiative they asked you to deliver. What do you do in your first two weeks?",
+    "answer": "I would find or create an accountable owner before building anything substantial, because without one the project will stall at the first decision. Situation: at a fictional manufacturer, Ironbridge Components, the AI pilot was requested by IT but the business problem belonged to operations, and nobody owned the outcome. Task: get the engagement onto a decision-making footing. Action: in week one I mapped the stakeholders, held short interviews and identified the operations director as the person who felt the pain most. I wrote a two-page proposal with the problem, metric, and decisions needed, and asked our account lead and their IT sponsor to jointly request that she own it. In week two I ran a scoping workshop she chaired. Result: she accepted ownership, decisions that had waited weeks were made in one meeting, and the pilot launched a month later. Lesson: I treat 'who decides' as a discovery question on day one rather than an escalation later."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Customer Discovery and Ambiguity",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you decided a customer did not need the AI solution they asked for.",
+    "answer": "I recommended a simpler non-AI solution and lost a flashy pilot but kept the customer's trust. Situation: a fictional bank, Quillstone Bank, wanted an LLM agent to route incoming support emails. Task: assess feasibility and propose a design. Action: I analysed a sample of a few thousand emails and found that around 80 percent could be routed by sender domain and a handful of keywords. I built a quick comparison: a rules engine in a Cloud Run service against an LLM classifier, including cost, latency and auditability, which mattered to their regulators. I presented both honestly and recommended rules first, with an LLM only for the remaining ambiguous cases. Result: they shipped the rules engine in two weeks, routing accuracy improved noticeably, and they later engaged us for a larger document-processing project. Lesson: recommending the boring option builds credibility, though next time I would quantify the residual cases earlier so the LLM phase had a clear business case."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Customer Discovery and Ambiguity",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Behavioural: A strategic customer signs a large contract based on a sales promise of fully autonomous agents, and on arrival you find the use case is not feasible. How do you handle it?",
+    "answer": "I would reset expectations quickly and honestly, with evidence and an alternative path to value, after aligning internally first. Situation: a fictional energy company, Corvana Energy, expected agents that would autonomously change grid maintenance schedules. Task: deliver value without overpromising on safety-critical automation. Action: in the first week I tested the idea against their data and found the scheduling inputs were inconsistent and the decisions needed engineering sign-off. I briefed our account executive and sales engineer privately before telling the customer, so we presented one story. With the sponsor I proposed a phased plan: an agent that drafts schedule changes with reasoning and citations, a human approves, and we measure acceptance rates before considering more autonomy. Result: the sponsor accepted the reframing, the human-in-the-loop version was in use within two months, and planners accepted most drafts with minor edits. Lesson: I now join pre-sales calls for complex deals so feasibility is checked before promises are made."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Stakeholder Management and Executives",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: How do you keep a customer sponsor informed during a multi-week deployment? Give an example.",
+    "answer": "I send a short weekly written update with status, what changed, risks, and decisions needed, and I keep it the same format every week. Situation: I was migrating a fictional retailer, Ridgepoint Retail, from self-managed Kubernetes to GKE Autopilot over eight weeks. Task: keep their head of engineering confident without pulling her into daily detail. Action: every Friday I sent a five-line update with a red, amber or green status, and I flagged any risk as soon as I saw it, not at the weekly mark. When a dependency on their networking team slipped, I raised it on Tuesday with a proposed workaround and the decision I needed from her. Result: she resolved the blocker the same day, the migration finished one week late instead of the three it threatened, and she later told us the updates were why she trusted the timeline. Lesson: bad news should travel faster than the weekly cadence, together with a proposed option."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Stakeholder Management and Executives",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you had to present to a customer executive with only ten minutes of their attention.",
+    "answer": "I led with the decision I needed and the business impact, and kept technical detail as backup. Situation: a fictional insurer, Corvane Mutual, had a RAG pilot ending and the COO would decide on production funding in a ten-minute slot. Task: get a clear yes or no. Action: I prepared one slide with three things: what the pilot achieved in their terms, which was claims handlers finding policy answers faster with cited sources, what production would cost and take, and the single decision required. I kept evaluation results, architecture and security controls in an appendix. I rehearsed it with their pilot lead, who predicted the COO would ask about data leaving their environment, so I had a one-sentence answer ready. Result: the COO approved funding in the meeting, and the question about data residency came up exactly as predicted. Lesson: rehearsing with someone who knows the executive is worth more than polishing slides."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Stakeholder Management and Executives",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Behavioural: A customer's project manager keeps adding status meetings that eat into delivery time. How do you handle it?",
+    "answer": "I would address the need behind the meetings, which is usually anxiety about visibility, and offer a cheaper way to meet it. Situation: on a Terraform landing-zone build for a fictional bank, Quillstone Bank, their project manager had scheduled six recurring meetings a week, and my build time was shrinking. Task: protect delivery time without damaging the relationship. Action: I asked him privately what he needed to report upward. It turned out his steering committee wanted weekly progress against milestones. I set up a shared board tracking each module and environment, posted a short written update daily, and proposed replacing four meetings with one weekly review plus an on-demand call. Result: he agreed, I regained several hours a week, and the landing zone was delivered on schedule. Lesson: I now agree a communication plan in the kickoff so meeting load is designed rather than accumulated."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Stakeholder Management and Executives",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Behavioural: A customer executive demands a feature by Friday that would bypass their own security review. What do you do?",
+    "answer": "I would not bypass the review, but I would work hard to give the executive something real by Friday and a credible date for the rest. Situation: at a fictional logistics customer, Harborline, the VP wanted the RAG assistant connected to their shipment database by Friday for a board demo, and the connector had not passed security review. Task: protect the customer from a risk they were about to take while keeping the VP's demo alive. Action: I explained the specific risk in business terms, that an unreviewed service account with database read access could expose customer data. I then proposed a demo using a sanitised snapshot in a sandbox project, and asked their CISO for an expedited review slot, offering to walk the reviewers through the IAM design myself. Result: the demo went ahead on Friday with sandbox data, and the review passed the following Wednesday. Lesson: saying no works when it arrives with an alternative that meets the underlying goal."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Stakeholder Management and Executives",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Describe a time a customer stakeholder was actively resistant to your project. How did you win them over, or not?",
+    "answer": "I won over a resistant platform lead by making her team's goals part of the project rather than treating her as a blocker. Situation: deploying an AI document pipeline into a fictional manufacturer, Ironbridge Components, I needed their platform team to approve a new GKE cluster, and their lead saw us as outsiders adding operational burden. Task: get approval without escalating over her head. Action: I asked her what had gone wrong with previous vendor projects. She described clusters left behind with no owners. I proposed building on her team's existing Terraform modules, following their labelling and policy standards, and pairing one of her engineers with me so they could run it after handover. Result: she approved the cluster, her engineer co-owned the runbook, and the handover took a day instead of the weeks she had experienced before. Lesson: resistance usually encodes a past failure, so I ask about history before arguing about the present."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Stakeholder Management and Executives",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Behavioural: Your customer sponsor leaves the company halfway through the engagement. What do you do next?",
+    "answer": "I would treat it as a risk to the whole engagement and quickly re-establish sponsorship, rather than continue building and hope. Situation: at a fictional healthcare customer, Fernvale Health, our sponsor for a clinical-search pilot resigned in week five of ten. Task: keep the project funded and moving. Action: the same week, I wrote a two-page summary of goals, progress, evaluation results and open decisions, and asked our account lead to arrange introductions to her manager and her likely successor. In those meetings I listened for their priorities, which had shifted towards cost, and adjusted the remaining scope to include a clear per-query cost estimate. I also identified a respected clinician user who could vouch for the pilot. Result: the new sponsor kept the project, and the cost analysis became a key part of the production business case. Lesson: I now cultivate at least two champions at every customer so one departure cannot stall delivery."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Stakeholder Management and Executives",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Behavioural: A customer CTO publicly criticises your company's platform in a steering meeting you are attending. How do you respond in the room and afterwards?",
+    "answer": "In the room I would stay calm, acknowledge the specific concern without defending or blaming, and commit to a concrete follow-up; afterwards I would turn the criticism into a tracked plan. Situation: at a fictional bank, Quillstone Bank, the CTO said in a steering meeting that our managed agent service was unreliable after two incidents. Task: protect the relationship and fix the actual problem. Action: I said the incidents had affected their team, that I would bring a written analysis and a plan within three business days, and asked which outcome mattered most to him. He said predictability. Afterwards I gathered the incident timelines, separated the issues that were ours from one caused by their quota settings, opened escalations with our product team, and proposed SLO-based reporting with a monthly review. Result: the follow-up was well received, and both causes were fixed within the quarter. Lesson: a fast, specific, written follow-up does more to repair trust than anything said defensively in the room."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Stakeholder Management and Executives",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about managing a situation where your own company's interests and the customer's interests seemed to diverge.",
+    "answer": "I recommended the option that was best for the customer, and made sure my leadership understood the trade-off before I said it to the customer. Situation: a fictional retailer, Ridgepoint Retail, asked whether to move a batch analytics workload to our managed service, which would have increased our revenue but raised their cost substantially for little benefit. Task: give an honest recommendation. Action: I modelled both options with their real usage numbers and showed the existing setup on Cloud Run jobs and BigQuery was adequate. Before the meeting, I walked my account lead through the analysis and argued that a credible recommendation would help the larger AI expansion we were discussing. He agreed. I presented the analysis openly to the customer. Result: they stayed on the cheaper setup, and two months later chose us for a larger RAG platform deployment, citing the honest advice. Lesson: aligning internally first lets me be honest with the customer without surprising my own team."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Delivery Under Pressure and Scope Control",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you had to deliver a working demo on a very tight deadline.",
+    "answer": "I delivered a RAG demo in four days by cutting scope to one complete user journey and making the remainder obviously out of scope. Situation: a fictional logistics customer, Harborline, moved their executive review forward by a week. Task: show a working runbook assistant instead of slides. Action: I picked the single most common question type, which was handling delayed shipments, indexed only that set of runbooks into a Vertex AI Search data store, and built a minimal Cloud Run front end with citations. I skipped authentication polish and multi-language support and listed them on a 'next' slide. I tested with twenty real questions from a dispatcher and fixed the three worst answers. Result: the demo worked live, the executives approved the pilot phase, and nothing I had cut was missed. Lesson: one complete journey beats five half-working ones, though I would have pushed earlier for the dispatcher's test questions."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Delivery Under Pressure and Scope Control",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: How do you handle scope creep from a friendly customer who keeps asking for small extras?",
+    "answer": "I log every request, say yes to the ones that fit within the agreed goal, and make the trade-off explicit for the rest. Situation: on a GKE migration for a fictional analytics firm, Larkspur Data, their engineers kept asking for small additions such as extra dashboards and a new namespace for a side project. Task: keep the relationship warm while protecting the milestone. Action: I created a shared change log. For each item I noted the effort and whether it served the migration goal. Small items that helped, like a Grafana dashboard for pod restarts, I did. Others I proposed for a later phase and showed the sponsor what each would delay if added now. Result: the migration finished on time, and the backlog of extras became the scope of a follow-on engagement. Lesson: writing requests down makes it easy to say 'not now' without saying 'no', and I now set up the log in week one."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Delivery Under Pressure and Scope Control",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Behavioural: Two days before go-live you find that the evaluation scores for a RAG system have dropped after a document refresh. What do you do?",
+    "answer": "I would treat it as a release blocker until I understood the cause, tell the sponsor that day, and present options with dates. Situation: before go-live at a fictional insurer, Corvane Mutual, our nightly evaluation run showed answer correctness falling from about 88 to 74 percent after they uploaded a new batch of policy documents. Task: decide whether to launch. Action: I diffed retrieval results for the failing questions and found that many new documents were scanned PDFs with poor OCR, which were crowding out good chunks. I informed the sponsor with two options: launch on the previous index snapshot and add the new documents after re-processing, or slip three days. Result: they chose the snapshot, we launched on time, and the re-processed documents went in a week later with scores back above 87 percent. Lesson: running the evaluation suite on every index change is what made this a calm decision rather than a production incident."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Delivery Under Pressure and Scope Control",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you realised a deadline was going to slip. How and when did you communicate it?",
+    "answer": "I told the sponsor as soon as I had evidence, which was three weeks before the deadline, along with a revised plan and options. Situation: I was building a Terraform-based multi-project landing zone for a fictional bank, Quillstone Bank, and their firewall change process took ten days per request, far longer than planned. Task: deliver the production environment by the agreed date. Action: when the second change request took two weeks, I recalculated the schedule and saw a two-week slip. I wrote a short note showing the cause, the new date, and two options: batch all remaining firewall requests into one approval, or descope the second region until after launch. I asked for a decision within the week. Result: the sponsor chose batching, their change board approved it, and we slipped only four days. Lesson: early warnings with options turn a slip into a joint decision, and I now map approval lead times during kickoff."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Delivery Under Pressure and Scope Control",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Behavioural: Your customer wants to skip load testing to hit a launch date. How do you respond?",
+    "answer": "I would argue for a reduced but real load test sized to the launch risk, rather than either skipping it or insisting on the full plan. Situation: a fictional retailer, Ridgepoint Retail, wanted to launch a product-search assistant on Cloud Run before a seasonal sale, and the full load test would take a week. Task: protect the launch without creating a major outage risk on their busiest day. Action: I explained that the sale would likely bring several times normal traffic and that the model endpoint quota was the most likely failure. I proposed a one-day test using Locust against a staging environment at three times expected peak, focused on the Vertex AI quota and Cloud Run max instances. Result: the test revealed the quota limit, we requested an increase and added a cached fallback, and the launch handled the sale traffic without errors. Lesson: offering a smaller, targeted test is far easier to agree than defending an ideal one."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Delivery Under Pressure and Scope Control",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Behavioural: You are three weeks into a six-week pilot and realise the original success metric cannot be measured. What do you do?",
+    "answer": "I would raise it immediately with the sponsor and agree a replacement metric that still reflects business value, rather than quietly continuing. Situation: in a fictional energy company, Corvana Energy, our pilot metric was reduction in time to resolve maintenance tickets, but their ticketing system did not record resolution timestamps reliably. Task: keep the pilot measurable. Action: I confirmed the data gap with their analyst, then proposed two proxy metrics: engineer-rated usefulness of the assistant's suggested fix on each ticket, and time-to-first-action logged in our own app. I set up the logging that week and asked the sponsor to approve the change in writing. Result: we had three weeks of clean data by the end, showing most suggestions were rated useful, and the sponsor accepted it as evidence for production. Lesson: I now validate in week one that every success metric can actually be measured with available data."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Delivery Under Pressure and Scope Control",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Describe a time you had to choose between shipping something imperfect and delaying for quality.",
+    "answer": "I shipped an imperfect version with clear guardrails and a fix plan, because the main risk was cosmetic rather than about safety or data. Situation: a fictional logistics firm, Harborline, needed a GKE-hosted shipment-tracking API live before a partner integration date, and our autoscaling configuration was not fully tuned. Task: decide whether to launch. Action: I listed the known issues and judged their impact: slower scale-up under bursts, but no correctness or security risk. I set conservative minimum replicas in the HorizontalPodAutoscaler to absorb bursts at extra cost, added alerting on p95 latency, and committed to tuning within two weeks. I explained this trade-off to the sponsor in writing. Result: the integration launched on time, latency stayed within the agreed SLO, and after tuning we reduced the node cost again. Lesson: shipping imperfect is fine when the imperfection is visible, bounded and owned, and I always write down which category a flaw falls into."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Delivery Under Pressure and Scope Control",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Behavioural: You are running three customer deployments at once and all three hit critical issues in the same week. How do you prioritise?",
+    "answer": "I would prioritise by business impact and irreversibility, communicate to all three customers the same day, and pull in help rather than trying to be a hero. Situation: in one week, a fictional bank had a failing Terraform apply blocking a regulatory deadline, a fictional retailer had a RAG pilot producing wrong prices, and a fictional manufacturer had a slow GKE upgrade. Task: protect all three relationships. Action: I ranked them: wrong prices to customers was live harm, so I disabled price answers that hour behind a feature flag; the regulatory deadline came next; the slow upgrade could safely wait. I messaged each sponsor with what I was doing and when they would hear from me, and asked my manager for a colleague to take the upgrade. Result: all three were resolved within the week, and no sponsor escalated. Lesson: a fast containment step plus honest timing buys time on every front, and asking for help early is part of the job."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Conflict and Disagreement",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a technical disagreement you had with a colleague and how it was resolved.",
+    "answer": "We resolved it with a small experiment instead of more debate. Situation: a colleague and I disagreed about chunking strategy for a RAG pilot at a fictional insurer, Corvane Mutual; he wanted fixed 512-token chunks, and I wanted section-aware chunks based on document headings. Task: choose quickly without damaging our working relationship. Action: I suggested we each build our version over the same fifty documents and run the shared evaluation set of forty questions. We agreed in advance that the higher retrieval recall would win and that any tie went to the simpler option. Result: section-aware chunking won on recall, but his fixed chunks were better on short FAQ pages, so we used a hybrid. He later said the experiment made it easy to change his mind. Lesson: agreeing the decision criteria before testing removes ego from technical disagreements."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Conflict and Disagreement",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Describe a time you received critical feedback from a customer. What did you do with it?",
+    "answer": "I thanked them, asked for specifics, and changed my behaviour visibly within a week. Situation: a project lead at a fictional analytics company, Larkspur Data, told me my handover documents were too technical for her operations team. Task: fix it without getting defensive. Action: I asked her for two examples of confusing sections and which person on her team should be able to follow them. I then rewrote the GKE runbook with a short 'what to do when' section at the top in plain language, kept the kubectl details underneath, and asked one of her operators to walk through a simulated pod crash using only the document. Result: the operator handled the simulation without help, and the lead used the format as a template for other vendors. Lesson: testing documentation with the intended reader is far more reliable than reviewing it myself."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Conflict and Disagreement",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Behavioural: The customer's lead engineer insists on an architecture you believe is wrong for their scale. How do you handle it?",
+    "answer": "I would make my case once, clearly and with data, then respect their decision if it is not unsafe, while recording the risk. Situation: at a fictional retailer, Ridgepoint Retail, the lead engineer wanted a self-managed Kafka cluster on GKE for an event stream of a few hundred messages per minute, while I thought Pub/Sub was a better fit. Task: influence the decision without undermining him. Action: I wrote a short comparison covering operational effort, cost at their volume, and the skills on his team, and presented it to him privately before any group meeting. He valued Kafka compatibility for a planned future integration, which I had underweighted. We agreed on Pub/Sub now, with a documented migration path if that integration materialised. Result: they launched with far less operational overhead, and the decision record helped when the topic came up again. Lesson: presenting privately first lets people change their mind without losing face."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Conflict and Disagreement",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you disagreed with your manager's decision about a customer engagement.",
+    "answer": "I disagreed openly in private, offered evidence, and committed fully once the decision was made. Situation: my manager wanted to staff a new customer engagement for a fictional healthcare company, Fernvale Health, with only one engineer to save cost, and I believed their compliance requirements needed a second person for security reviews. Task: raise the concern without undermining him. Action: I listed the security documentation their data team had asked for and estimated the effort, showing it would consume roughly half of one person's time. I proposed a compromise of a part-time security specialist for the first month. He decided on one engineer with an on-call escalation path to a specialist instead. I committed to that plan and tracked the security hours. Result: by week three I needed the specialist, and the data I had tracked made it a quick approval. Lesson: disagree and commit works best when you keep measuring the risk you raised."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Conflict and Disagreement",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Behavioural: Two engineers on your deployment team stop cooperating after a heated argument in a code review. What do you do?",
+    "answer": "I would talk to each of them separately first, then bring them together around the specific work, and fix the process that triggered the argument. Situation: on a GKE platform engagement, two engineers argued in a pull request about Helm versus Kustomize, and comments became personal. Task: restore cooperation without escalating it. Action: I spoke to each privately and found the real issue was that one felt his earlier reviews had been ignored. I set up a short session where both explained their preference against our real requirements, and we chose Helm for the third-party charts and Kustomize for our own overlays. I also added a team norm that review comments state the concern and suggest an alternative. Result: they worked together for the rest of the engagement, and review tone improved across the team. Lesson: arguments about tools are often about feeling unheard, so I listen for that first."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Conflict and Disagreement",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Behavioural: The customer's security team rejects your deployment design late in the project, and their objections seem partly unreasonable. How do you proceed?",
+    "answer": "I would separate the objections into ones I agree with, ones that need clarification, and ones I believe are mistaken, and handle each differently. Situation: at a fictional bank, Quillstone Bank, their security team rejected our Vertex AI RAG design two weeks before go-live with eleven findings. Task: get approval without simply caving or fighting. Action: I met their lead and went through each finding. Five were valid, such as needing CMEK on the vector index storage, and I fixed them that week. Four came from misunderstanding our private service access setup, so I drew a network diagram and showed traffic stayed inside VPC Service Controls. Two I believed added no protection, so I proposed compensating controls and asked them to accept the residual risk formally. Result: approval came eight days later, with only one finding deferred. Lesson: I now invite security into design reviews in week two so findings arrive early."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Conflict and Disagreement",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you were wrong in a disagreement and how you handled realising it.",
+    "answer": "I admitted it openly to the team and credited the person who was right. Situation: I argued strongly against a customer engineer at a fictional logistics firm, Harborline, who wanted to keep their Terraform state per environment in separate GCS buckets with separate service accounts; I preferred one bucket with prefixes for simplicity. Task: settle the design. Action: we went with my approach. A month later, an engineer accidentally ran a plan with production credentials against staging prefixes, and while nothing broke, it showed his isolation concern was valid. I raised it in the next team meeting, said he had been right, and led the migration to separate buckets with per-environment service accounts and Workload Identity Federation. Result: the blast radius of credentials was reduced, and our working relationship improved because he saw I would change course. Lesson: I now ask 'what failure is this protecting against' before pushing simplicity over isolation."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Conflict and Disagreement",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Behavioural: A customer's internal teams are in a political conflict, and each wants you to build the AI platform in a way that strengthens their position. How do you navigate it?",
+    "answer": "I would stay neutral, anchor every decision to the documented goals of the shared sponsor, and make trade-offs transparent to both sides. Situation: at a fictional manufacturer, Ironbridge Components, the central data team wanted all AI workloads on their platform, while a business-unit engineering team wanted its own GKE cluster. Task: deliver without becoming a pawn. Action: I interviewed both teams, then wrote an options paper comparing a central platform, independent clusters, and a hybrid with shared guardrails, scored against the sponsor's priorities of speed, cost and governance. I presented it to both teams together, never privately endorsing either side. The sponsor chose the hybrid: a central landing zone with Terraform-managed policies, and a business-unit-owned cluster inside it. Result: both teams accepted it because they had seen the same analysis, and the first workload launched within six weeks. Lesson: in political situations, transparency about the trade-offs is the only defensible position for an outsider."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Ownership and Failure",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a mistake you made in a customer environment and what you did about it.",
+    "answer": "I made a configuration mistake, reported it within minutes, fixed it, and added a guard so it could not recur. Situation: during a GKE migration for a fictional analytics firm, Larkspur Data, I applied a NetworkPolicy to the wrong namespace, blocking their internal reporting service from reaching its database. Task: restore service and keep trust. Action: when their alert fired, I checked recent changes, saw my policy, and messaged their on-call engineer immediately saying it was my change. I reverted it with kubectl and confirmed the service recovered within about ten minutes. Afterwards I moved all policy changes into a Git repository applied through Config Sync, with namespace names checked in a pull request review. Result: no repeat incidents, and their team appreciated that I owned it before they had to investigate. Lesson: admitting a mistake fast costs less trust than being discovered, and manual kubectl changes in shared clusters should be rare."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Ownership and Failure",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Give an example of a time you went beyond your assigned scope because you saw a problem nobody owned.",
+    "answer": "I took ownership of an unowned cost problem and fixed it in a few days. Situation: during a RAG pilot at a fictional insurer, Corvane Mutual, I noticed their GCP bill had a large line for idle GPU node pools from an earlier, abandoned experiment that belonged to no current team. Task: it was not my project, but the cost risked making our pilot look expensive. Action: I confirmed with their cloud lead that nobody used the node pools, documented what they were and who had created them, and proposed removing them. With his approval I deleted them through Terraform, and set up a budget alert and a label policy requiring an owner label on new node pools. Result: their monthly spend in that project dropped substantially, and the owner label became a standard. Lesson: unowned resources are everyone's problem, though I would also have reviewed their billing export on day one."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Ownership and Failure",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Behavioural: Your Terraform change causes a production outage at a customer on a Friday evening. Walk me through what you do in the first hour and the following week.",
+    "answer": "In the first hour I would focus on restoring service and communicating, then in the following week lead a blameless postmortem with concrete fixes. Situation: a Terraform apply I ran for a fictional retailer, Ridgepoint Retail, replaced a Cloud SQL instance's authorised network block, cutting off their order service. Task: restore service and own the outcome. Action: I declared an incident in their channel, said my change was the likely cause, and reverted by applying the previous commit, which restored connectivity in about twenty-five minutes. I posted updates every ten minutes to their on-call lead. That week I wrote the postmortem: the plan output showed the change but was not reviewed carefully. Fixes were plan review in pull requests through a CI pipeline, a no-Friday-production-changes rule, and lifecycle prevent_destroy on critical resources. Result: no repeat, and their team adopted the pipeline. Lesson: I never apply to production without a second reviewer on the plan."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Ownership and Failure",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a project that failed. What was your role in the failure?",
+    "answer": "A pilot I led was not taken to production, and a significant part of that was my failure to secure user adoption early. Situation: I built a RAG-based internal search for a fictional energy company, Corvana Energy, and the technical evaluation results were good. Task: get the pilot adopted by field engineers. Action: I spent most of the time on retrieval quality and the GKE deployment, and only involved field engineers in the last two weeks. They worked offline on tablets at remote sites, and our web app needed connectivity. By then there was no time to address it. I wrote an honest retrospective for the sponsor and my team covering what I had missed. Result: the project was paused, but the retrospective led to a smaller follow-on scoped around an offline-capable workflow. Lesson: I now validate the user's working environment in the first week, because technical quality cannot compensate for a solution that does not fit how people work."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Ownership and Failure",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Behavioural: A RAG assistant you deployed gives a customer's end user a confidently wrong answer that causes a complaint. How do you respond?",
+    "answer": "I would contain the risk immediately, investigate the specific failure, and fix both the instance and the class of error, while keeping the customer informed. Situation: a policy assistant at a fictional insurer, Corvane Mutual, told a customer service agent an outdated claim limit, and the agent passed it on, leading to a complaint. Task: fix it and restore confidence. Action: that day I traced the answer through our logs, finding that retrieval returned a superseded policy version. I added a temporary rule blocking answers on claim limits pending review, informed the sponsor in writing, then fixed the root cause by adding effective-date metadata and filtering retrieval to current versions. I added the failing question and similar ones to the evaluation set. Result: the restriction was lifted three days later, and version-related errors did not reappear in later evaluation runs. Lesson: document lifecycle metadata is a core requirement for RAG, and I now check for it during ingestion design."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Ownership and Failure",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Describe how you ran a blameless postmortem after an incident that involved a customer's team and yours.",
+    "answer": "I ran it around the timeline and contributing factors rather than individuals, and made sure both organisations owned actions. Situation: a GKE node auto-upgrade at a fictional logistics firm, Harborline, evicted pods for a stateful service without a PodDisruptionBudget, causing a forty-minute partial outage. Our team had built the chart; their team had enabled auto-upgrade without a maintenance window. Task: learn from it without blame between companies. Action: I drafted a timeline from Cloud Logging and alert history, circulated it for corrections, and facilitated a one-hour session using 'what made this possible' questions. We identified three factors: missing PDB, no maintenance window, and no alert on replica count. Each became an owned action with a date, split across both teams. Result: all actions closed within two weeks, and their team began using the same postmortem template. Lesson: sharing the draft timeline before the meeting removes defensiveness, because people correct facts rather than defend themselves."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Ownership and Failure",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Behavioural: You discover that a data pipeline you built months ago has been silently dropping a small percentage of records that feed a customer's financial reporting. What do you do?",
+    "answer": "I would tell the customer promptly, quantify the impact, fix the pipeline, and help remediate the reports, even though nobody had noticed. Situation: while extending a pipeline for a fictional bank, Quillstone Bank, I found my Dataflow job had been sending malformed records to a dead-letter path that nobody monitored, about 0.3 percent of transactions over four months. Task: own a failure with potential regulatory implications. Action: the same day I informed my manager and the customer's data owner, with a precise description of what was affected and what was not. I reprocessed the dead-letter records after fixing the parsing bug, produced a reconciliation showing totals by month, and added an alert on dead-letter volume plus a daily row-count reconciliation against the source. Result: their finance team restated two internal reports, no external filing was affected, and they extended our engagement. Lesson: a dead-letter queue without monitoring is just a hidden data-loss mechanism, so I alert on every one I create."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Ownership and Failure",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you had to take responsibility publicly for a failure that was only partly your fault.",
+    "answer": "I owned my part fully in front of the customer and handled the other contributing factors privately and constructively. Situation: a fictional healthcare customer, Fernvale Health, had a two-hour outage of a clinical search service; the root cause combined my missing readiness probe and their team's change to a database firewall rule without notice. Task: lead the incident review with their executives present. Action: in the review I said clearly that the missing readiness probe was my error and meant traffic was sent to pods that could not reach the database. I described the firewall change factually as a contributing factor without assigning blame. Privately afterwards, I worked with their platform lead to create a shared change calendar. Result: the executives responded well to the direct ownership, and their platform lead was more cooperative because I had not blamed his team publicly. Lesson: taking clear ownership of my part makes it far easier for others to own theirs."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Influence Without Authority",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you convinced a customer team to adopt a practice they initially did not want.",
+    "answer": "I convinced a customer team to adopt infrastructure as code by solving a pain they already felt rather than lecturing about best practice. Situation: a fictional retailer, Ridgepoint Retail, managed GCP resources by clicking in the console, and their engineers saw Terraform as extra work. Task: I needed reproducible environments for our deployment. Action: I asked what slowed them down and learned that creating a new test environment took them two days. I wrote a small Terraform module for their test environment and showed them it could be created in about fifteen minutes with terraform apply and destroyed afterwards. I then paired with one engineer to add the next module himself. Result: within a month, their team managed new projects through Terraform, and test environment setup dropped from days to minutes. Lesson: adoption follows a visible personal win, so I start with their pain, not my principle."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Influence Without Authority",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Behavioural: You need a customer's network team to make a firewall change, but they have no incentive to prioritise you. How do you get it done?",
+    "answer": "I would make the request easy to approve, link it to something their leadership cares about, and build a personal relationship with the person doing the work. Situation: at a fictional manufacturer, Ironbridge Components, our GKE private cluster needed egress rules opened to Artifact Registry and the Vertex AI endpoints, and the network team's queue was three weeks long. Task: unblock without escalating aggressively. Action: I met their network engineer, asked how they liked requests prepared, and submitted the exact rules with source ranges, ports, and justification in their format. I offered Private Google Access as an alternative that needed fewer rules, which he preferred. I also asked our sponsor to mention the dependency in his weekly leadership update. Result: the change was done in four days, and that engineer prioritised later requests quickly. Lesson: reducing the effort for the person helping you matters more than escalating, which I save for genuine deadlock."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Influence Without Authority",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Describe a time you influenced another internal team, such as product or support, without any formal authority over them.",
+    "answer": "I persuaded our support team to change how they triaged customer AI incidents by giving them data and a draft solution. Situation: customers using our managed RAG service were waiting a long time for help with retrieval issues, because support routed them as generic platform tickets. Task: improve the process even though I had no say over support. Action: I collected ticket data from my three customer accounts showing average resolution times and the questions support asked repeatedly. I drafted a triage checklist covering index status, embedding model version, and query logs, and offered to run a short training session. I presented it to the support lead as a way to reduce their repeated back-and-forth. Result: she piloted the checklist with her team, and resolution time for those tickets fell noticeably over the next quarter. Lesson: bringing a ready-made solution with data turns a complaint into an offer of help."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Influence Without Authority",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Behavioural: The customer's engineers keep deploying directly to the GKE cluster with kubectl, bypassing the GitOps workflow you set up. How do you change the behaviour?",
+    "answer": "I would find out why they bypass it, fix the friction, and then add guardrails, rather than starting with enforcement. Situation: at a fictional analytics company, Larkspur Data, engineers bypassed our Argo CD workflow because pull request reviews took a day and they needed urgent fixes. Task: get them back on the workflow. Action: I interviewed three engineers, confirmed the delay was the main reason, and worked with their lead to allow self-approval for changes to non-production overlays and a two-hour review target for production. I documented an emergency path that still went through Git. Once the friction was reduced, we enabled Argo CD self-heal so manual drift was reverted, and limited direct write RBAC to a break-glass group. Result: direct kubectl changes to production dropped to almost none within a month. Lesson: people bypass processes that are slower than the risk they manage, so I measure the friction before adding enforcement."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Influence Without Authority",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you built a coalition to push through a change that one person could not have achieved alone.",
+    "answer": "I built support across security, finance and engineering at a customer to standardise their AI workloads on one governed platform. Situation: a fictional bank, Quillstone Bank, had four teams running separate LLM experiments with inconsistent controls, and the CIO had not prioritised consolidation. Task: get a shared platform approved, although I had no authority there. Action: I met each group separately to understand what they gained: security wanted central audit logging and DLP, finance wanted cost visibility, and engineers wanted faster access to models. I drafted a proposal for a shared Vertex AI project with Terraform-managed guardrails that addressed each need, and asked one leader from each group to co-present it. Result: the CIO approved it, and three of the four teams migrated within a quarter. Lesson: a proposal with several sponsors carries more weight than any argument I could make alone, though I would involve the fourth team earlier next time."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Influence Without Authority",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Behavioural: A senior customer architect who is not on your project keeps undermining your design in meetings. How do you deal with it?",
+    "answer": "I would engage him directly and privately, try to understand his concerns, and give him a real role in shaping the design. Situation: at a fictional energy company, Corvana Energy, a senior architect repeatedly questioned our agent design in steering meetings, slowing approvals. Task: stop the friction without escalating against someone respected in their organisation. Action: I asked for a one-to-one meeting and asked what concerned him. His concern was that agents calling internal APIs had no audit trail, which was partly fair. I invited him to review our tool-calling design, and we added structured audit logs of every tool invocation to BigQuery, plus per-tool service accounts with least-privilege IAM. I credited his input in the next steering meeting. Result: he became one of the strongest advocates for the project, and approvals sped up. Lesson: persistent critics often hold a legitimate concern, and turning them into reviewers converts opposition into ownership."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Influence Without Authority",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Behavioural: You believe a customer's planned enterprise-wide rollout of an AI agent is premature and risky, but their leadership is committed. What do you do?",
+    "answer": "I would present the risks with evidence through the right channels, propose a safer path that preserves their ambition, and accept their decision while helping reduce the risk. Situation: a fictional retailer, Ridgepoint Retail, planned to roll out a customer-facing returns agent to all regions at once, and our evaluation showed weak handling of edge cases such as partial refunds. Task: influence a committed leadership team without authority. Action: I shared the evaluation data with the sponsor first, then presented a staged plan: one region for four weeks with defined go or no-go metrics, human handoff for refund amounts above a threshold, and a kill switch. I framed it as protecting the launch rather than slowing it. Result: leadership accepted a two-region start; the edge-case issues appeared as predicted, were fixed within the stage, and the full rollout followed a month later. Lesson: offering a staged path with clear exit criteria is easier to accept than a warning alone."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Influence Without Authority",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you changed an engineering standard across an organisation where you were an outside contributor.",
+    "answer": "I helped a customer adopt a standard evaluation gate for all LLM applications, starting from one project and spreading it through proof rather than mandate. Situation: at a fictional insurer, Corvane Mutual, teams shipped prompt and model changes without any regression testing. Task: improve quality across teams I did not work with. Action: on my own project I built an evaluation pipeline in GitHub Actions that ran a fixed question set against each change and blocked merges when correctness dropped beyond an agreed tolerance. When it caught a regression from a model version change, I wrote a short internal blog post for their engineering community, packaged the pipeline as a reusable workflow, and ran an open session for other teams. I worked with their architecture board to make it a recommended practice. Result: five teams adopted it within two quarters, and the board later made it mandatory for customer-facing apps. Lesson: a real caught regression is the best argument for a standard, so I publicise those moments."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Communicating Technical Trade-offs to Non-technical People",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: How would you explain to a non-technical sponsor why the AI assistant sometimes gets answers wrong? Give an example of when you did this.",
+    "answer": "I explain that the assistant finds relevant passages and then writes an answer from them, so mistakes come either from finding the wrong passage or from summarising it badly, and we measure and reduce both. Situation: a sponsor at a fictional logistics firm, Harborline, was alarmed after seeing one wrong answer in a demo. Task: rebuild confidence honestly. Action: I compared it to a new employee searching a filing cabinet: usually good, sometimes grabbing the wrong folder. I showed our evaluation results, roughly nine in ten answers correct on their test questions, explained that every answer shows its source so users can check, and described how we were fixing the wrong-folder cases. Result: she understood the risk, approved continuing, and asked for the accuracy number in each weekly update. Lesson: an analogy plus a measured number works better than either alone, and I now show accuracy figures before any live demo."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Communicating Technical Trade-offs to Non-technical People",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you had to explain a cloud cost trade-off to a finance stakeholder.",
+    "answer": "I explained the trade-off in terms of monthly cost against risk of downtime, using their numbers rather than technical terms. Situation: a finance manager at a fictional retailer, Ridgepoint Retail, questioned why their GKE production setup cost more than a single-zone alternative. Task: justify the regional cluster or agree to cut it. Action: I explained that a regional cluster runs copies across three data centres, so one failing does not take the shop offline. I asked what an hour of website downtime cost them in lost sales; she estimated it, and I showed that the extra monthly cost was less than the cost of one short outage per year. I also offered savings elsewhere, such as committed use discounts and scaling down non-production clusters at night. Result: she approved the regional setup and the non-production savings offset much of the difference. Lesson: putting cost and risk in the same currency makes the decision obvious, and offering savings elsewhere builds goodwill."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Communicating Technical Trade-offs to Non-technical People",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Scenario",
+    "question": "Behavioural: A business user asks why the new system cannot just 'use the latest AI model' everywhere. How do you answer?",
+    "answer": "I would say that the latest model is not always the best choice because each model trades off answer quality, speed, and cost per request, and we choose per task. Situation: an operations manager at a fictional manufacturer, Ironbridge Components, asked this after reading about a new model release. Task: answer without jargon and without dismissing the question. Action: I compared it to choosing between a senior specialist and a capable junior: you send hard problems to the specialist and routine ones to the junior to keep costs and wait times down. I showed that for classifying maintenance tickets, a smaller Gemini Flash model matched the larger model's accuracy on our test set at a fraction of the cost and with faster responses. I committed to re-testing when new models are released. Result: he was satisfied, and asked us to report model choices in the monthly review. Lesson: inviting the question and showing a test result treats business users as partners."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Communicating Technical Trade-offs to Non-technical People",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Behavioural: A non-technical sponsor must choose between building a custom solution and buying an off-the-shelf product. How do you help them decide?",
+    "answer": "I would frame the decision around total cost, time to value, control, and who maintains it, and present it on one page with a recommendation. Situation: a sponsor at a fictional healthcare company, Fernvale Health, had to choose between a custom RAG application on GKE and a managed product, Vertex AI Search, for staff policy questions. Task: help her decide without technical background. Action: I built a simple table comparing time to first users, yearly cost including engineers to maintain it, how much the look and behaviour could be customised, and how data was protected. I explained that the custom option offered more control but needed an engineer to maintain it permanently, which her team lacked. I recommended starting with the managed product and revisiting if requirements outgrew it. Result: she chose the managed option, staff were using it within five weeks, and the comparison was reused for a later decision. Lesson: including ongoing maintenance in the cost usually settles build-versus-buy questions."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Communicating Technical Trade-offs to Non-technical People",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Describe a time you explained technical debt to a business stakeholder in a way that got it prioritised.",
+    "answer": "I described the technical debt as a growing tax on every new feature and showed the measured cost. Situation: at a fictional logistics firm, Harborline, their data pipelines were a collection of cron scripts on a single VM, and the product owner kept deprioritising a migration in favour of new reports. Task: get the migration onto the roadmap. Action: I tracked the past two months: each new report took around four days, three of which went on working around the scripts, and two failures had delayed the morning dashboard. I presented this as 'three of every four days go on keeping old plumbing running' and proposed migrating to Cloud Composer in stages, starting with the pipeline behind the most visible dashboard. Result: she approved the first stage, the next report took a day and a half, and she then prioritised the rest. Lesson: measured time lost is persuasive, whereas the phrase 'technical debt' alone rarely is, so I start tracking it early."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Communicating Technical Trade-offs to Non-technical People",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Behavioural: A legal stakeholder asks you to guarantee that the LLM will never produce an incorrect answer. How do you respond?",
+    "answer": "I would say honestly that no one can guarantee that, then explain the controls that reduce and contain the risk and how we measure it. Situation: a legal counsel at a fictional bank, Quillstone Bank, asked for this guarantee before approving a customer-service assistant. Task: give an accurate answer that still let the project move forward. Action: I explained that the system retrieves approved documents and answers only from them, cites its sources, refuses when it cannot find support, and is tested against a fixed set of questions before every change. I proposed human review for sensitive categories such as complaints and fee disputes, logging of every answer for audit, and a monthly accuracy report. I offered to write these controls into the risk assessment. Result: she approved a limited launch with those controls documented. Lesson: replacing an impossible guarantee with measurable controls is more credible to legal teams than any reassurance."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Communicating Technical Trade-offs to Non-technical People",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time a non-technical leader made a decision you disagreed with after you explained the trade-offs. What did you do?",
+    "answer": "I accepted the decision, documented the risk, and put measures in place so we would know early if it went wrong. Situation: a business leader at a fictional energy company, Corvana Energy, chose to keep a single-region deployment for a field-support assistant to save cost, after I had explained the availability trade-off. Task: respect the decision while protecting the customer. Action: I recorded the decision and the accepted risk in the project log, with her agreement. I then set up uptime checks and an alert on the Cloud Run service, wrote a runbook for redeploying to a second region with Terraform in about thirty minutes, and tested it once. Result: a regional disruption months later caused a short outage, we recovered within the runbook time, and she then approved a standby region. Lesson: when I lose a trade-off argument, preparing the fallback is more valuable than repeating the argument."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Communicating Technical Trade-offs to Non-technical People",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Behavioural: A customer board wants a one-page view of whether their AI programme is safe to scale. How would you prepare it?",
+    "answer": "I would build the page around four plain questions: is it delivering value, is it accurate enough, is it safe and compliant, and what does scaling cost, each with a measured answer and a clear risk rating. Situation: a fictional insurer, Corvane Mutual, asked for this before approving expansion of a claims assistant to all regions. Task: give board members a page they could trust without technical knowledge. Action: I worked with their programme lead to gather real data: time saved per claim from usage logs, answer accuracy from our monthly evaluation, incidents and how they were resolved, data protection controls confirmed by their security team, and projected model and infrastructure costs. I wrote each section in two sentences, rated it green, amber or red, and listed the two conditions we recommended before scaling. Result: the board approved expansion with both conditions attached. Lesson: boards trust pages that show amber ratings honestly, so I never present everything as green."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Product Feedback and Productisation",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you passed customer feedback to a product team. How did you make it actionable?",
+    "answer": "I turned a vague complaint into a specific, reproducible request with business impact attached. Situation: engineers at a fictional analytics firm, Larkspur Data, complained our managed vector search was 'hard to debug'. Task: get the product team to act. Action: I asked them to show me the last three times they had struggled. The common issue was that they could not see why a document was or was not returned for a query. I wrote a feedback ticket with the user, the exact workflow, screenshots, the workaround we used, which was a custom logging script, and the time it cost them each week. I also checked whether other field engineers saw the same issue and found two more customers. Result: the product team prioritised a retrieval debugging view, citing the three-customer evidence. Lesson: product teams act on patterns, so I now check for the same issue across accounts before filing."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Product Feedback and Productisation",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Describe a time you built a workaround for a product gap at a customer. How did you make sure it did not become permanent debt?",
+    "answer": "I built a small, documented workaround with an explicit removal plan tied to the product roadmap. Situation: a fictional retailer, Ridgepoint Retail, needed scheduled re-indexing of documents into our RAG service, which had no built-in scheduler at the time. Task: unblock their launch without leaving fragile code behind. Action: I wrote a Cloud Scheduler job that triggered a Cloud Run job to call the indexing API, kept it in their Terraform repository, and documented it with a clear 'temporary' note naming the product feature that would replace it. I filed a product request and linked it in the code comments and the handover document. Result: they launched on time, and when the product added scheduled sync six months later, their engineer removed the workaround in an afternoon using my notes. Lesson: workarounds stay temporary only if the exit plan is written down where the next engineer will find it."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Product Feedback and Productisation",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Behavioural: A customer asks you to build a custom feature that you suspect many other customers also need. What do you do?",
+    "answer": "I would build it for the customer in a way that could be generalised, while bringing evidence to the product team so it can become a supported feature. Situation: a fictional bank, Quillstone Bank, needed per-user document access filtering in their RAG assistant so employees only saw documents they were permitted to read. Task: deliver for them and avoid a one-off. Action: I checked with other field engineers and found four similar requests. I built the filtering as a separate module that mapped Google Groups membership to metadata filters at query time, with clean interfaces, and wrote a short design note. I shared it with the product manager along with the list of customers. Result: the bank launched with access filtering, and the product team used my design as input for a native access-control feature a few months later. Lesson: building with reuse in mind costs little extra and gives product a working reference implementation."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Product Feedback and Productisation",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you turned repeated deployment work into a reusable asset.",
+    "answer": "I turned a landing-zone setup I kept repeating into a reusable Terraform blueprint, which cut setup time for later engagements. Situation: across three customer engagements I had built nearly the same GCP foundation: project hierarchy, shared VPC, logging sinks, organisation policies, and a GKE cluster. Task: stop rebuilding it each time. Action: I extracted the common parts into versioned Terraform modules with input variables for customer-specific settings, added terratest checks and examples, and wrote a short guide. I presented it to my team and asked two colleagues to use it on their next engagement and report problems, which led to several fixes. Result: foundation setup went from about two weeks to a few days on the next engagements, and it became our team's standard starting point. Lesson: I should have extracted it after the second repetition, not the third, because the cost of generalising is lowest while the details are fresh."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Product Feedback and Productisation",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Behavioural: The product team rejects your feature request that three of your customers urgently need. How do you respond?",
+    "answer": "I would first understand their reasoning, then either strengthen the case with better evidence or find an alternative path for the customers. Situation: product declined my request for a batch evaluation API in our AI platform, saying it was not on the roadmap for two quarters. Task: help my customers without fighting product. Action: I asked the product manager what would change the decision. She needed revenue impact and evidence it was not just a few loud accounts. I gathered the contract value at risk from my three customers and asked colleagues, finding two more. Meanwhile I built a shared open-source-style script using the existing online prediction API with rate limiting, so customers were unblocked. Result: product moved the feature up one quarter based on the new evidence, and the interim script served customers until then. Lesson: a rejection is often a request for better evidence, and I should have brought revenue data with the first request."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Product Feedback and Productisation",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time field experience changed a product decision.",
+    "answer": "My deployment experience changed a product decision about default safety settings for our agent framework. Situation: product planned to ship agent tool-calling with unrestricted tool access by default, to make demos easier. Task: I had seen customers struggle with exactly this and wanted to influence the decision. Action: I wrote a short field report with two anonymised examples from fictional-named accounts: an agent at one customer called a write API during testing because permissions were too broad, and another customer's security review blocked rollout for a month over the same issue. I proposed a default of read-only tools with explicit opt-in for write actions, plus an approval step. I shared it in the product review and offered to test the change with a customer. Result: product changed the default, and security approvals for agent deployments became noticeably faster on later engagements. Lesson: concrete field stories carry more weight than general opinions, so I keep a running log of them."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Product Feedback and Productisation",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Behavioural: Your custom-built solution at one customer is so successful that sales wants to sell it to ten more customers next quarter. What do you do?",
+    "answer": "I would support the opportunity but insist on turning the one-off into a supportable product before selling it widely, with a clear plan and honest timelines. Situation: a document-processing pipeline I built for a fictional logistics firm, Harborline, using Document AI and Cloud Run, got strong results, and sales wanted to replicate it. Task: avoid ten fragile copies that my team would support forever. Action: I listed what was customer-specific and what was general, estimated the work to parameterise it, add tenant configuration, tests, monitoring and documentation, and identified the support owner. I proposed selling it to two design-partner customers first while we productised, and presented the plan to sales and engineering leadership together. Result: leadership funded a small productisation effort, two customers deployed it in the quarter, and the hardened version later went to more customers without me. Lesson: success creates pressure to cut corners, so I push for a support owner before anything is sold."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Product Feedback and Productisation",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Describe how you have balanced customer-specific delivery against contributing to the core platform.",
+    "answer": "I balance them by making every engagement deliver one reusable contribution, planned up front rather than squeezed in afterwards. Situation: as a forward deployed engineer, I was measured on customer outcomes, but the platform team depended on field contributions. Task: deliver for customers without losing the platform contribution. Action: at the start of each engagement I identified one likely gap, such as a Helm chart for secure model serving or a connector for an enterprise document store, and agreed with my manager and the platform team that it would be built to their standards. I time-boxed it to roughly one day a week and reviewed it with a platform engineer. When customer deadlines pressed, I cut the contribution's scope, never its quality. Result: over a year, four of my contributions were merged into the core platform and used by other teams. Lesson: agreeing the contribution with my manager at kickoff protects it when deadlines arrive, which they always do."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Teamwork and Mentoring",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you helped a junior engineer grow during a customer project.",
+    "answer": "I helped a junior engineer go from shadowing to leading a customer workstream in about two months. Situation: on a GKE and Terraform deployment for a fictional manufacturer, Ironbridge Components, I was paired with a graduate engineer who had little cloud experience. Task: deliver the project while developing him. Action: I gave him a contained piece, the logging and monitoring setup, with clear goals, and we paired for the first few days. I reviewed his pull requests with explanations rather than fixes, and had him present his work in the weekly customer call, preparing beforehand. When he made a mistake in an alert policy, I let him find and fix it with guidance. Result: by the end he owned the observability workstream, the customer named him as their go-to person for alerts, and he led a similar workstream on his next project. Lesson: giving visible ownership early builds confidence faster than tasks done behind the scenes."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Teamwork and Mentoring",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Describe how you have worked with a customer's engineers so that they could run the system after you left.",
+    "answer": "I planned the handover from the first week by pairing with their engineers and having them operate the system before I left. Situation: I deployed a RAG application on Cloud Run with a BigQuery logging pipeline for a fictional insurer, Corvane Mutual, whose team had not used either. Task: leave them fully self-sufficient. Action: I invited two of their engineers to daily pairing sessions, had them make the Terraform changes themselves under review, and wrote runbooks for common tasks such as re-indexing, rotating secrets in Secret Manager, and rolling back a revision. In the final two weeks they handled all changes while I only reviewed, and we ran a simulated incident. Result: after handover they operated it without calling us for the first three months and extended it themselves. Lesson: handover is a process across the whole project, not a final meeting, and I now put it in the plan from day one."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Teamwork and Mentoring",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Behavioural: A teammate on your deployment is consistently missing commitments and it is affecting the customer. What do you do?",
+    "answer": "I would talk to them privately and early to understand the cause, offer specific support, and escalate to our manager only if it continued. Situation: on a data integration project for a fictional retailer, Ridgepoint Retail, a teammate missed three pipeline deliverables in a row, and the customer had noticed. Task: protect the customer without damaging the teammate. Action: I asked him over coffee how things were going and learned he was struggling with Dataflow and embarrassed to ask. I paired with him for two afternoons, split his work into smaller tasks with daily check-ins, and covered one deliverable myself while telling the customer the revised date. I told our manager about the support plan. Result: he caught up within two weeks, delivered the remaining pipelines, and the customer relationship recovered. Lesson: missed commitments are often a hidden skills gap, so I ask before assuming a motivation problem."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Teamwork and Mentoring",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you collaborated with a remote team across time zones on a customer deployment.",
+    "answer": "I made the collaboration work by moving most coordination into written handoffs and protecting one short overlap meeting. Situation: I was delivering a GKE platform for a fictional logistics firm, Harborline, with colleagues five and a half hours ahead of me, and work kept stalling waiting for answers. Task: keep progress continuous. Action: we agreed an end-of-day handoff note in a shared channel covering what was done, what was blocked, and the question needing an answer. We kept a thirty-minute daily overlap for decisions only. I moved design discussions into short written proposals in pull request descriptions, so either side could review asynchronously. Result: work moved forward almost around the clock, waiting time for answers fell sharply, and we delivered a week early. Lesson: in distributed teams, clear written handoffs matter more than more meetings, and I now set up the handoff format on day one."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Teamwork and Mentoring",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Describe a time you shared knowledge from a customer engagement with the rest of your team.",
+    "answer": "I turned lessons from a difficult RAG deployment into a short internal guide and a session that other engineers used on their projects. Situation: at a fictional healthcare company, Fernvale Health, I learned several non-obvious lessons about document ingestion: scanned PDFs, tables, and version control of policies. Task: stop colleagues from repeating the same mistakes. Action: I wrote a two-page ingestion checklist with concrete checks, such as running OCR quality sampling with Document AI before indexing and storing effective dates as metadata, and added anonymised examples. I presented it in our team's weekly knowledge-share session and put it in our shared repository with a template evaluation set. Result: three colleagues used the checklist on their next engagements, and one reported catching a scanned-document problem in week one instead of week five. Lesson: writing down lessons while they are fresh multiplies their value, so I now schedule it in the final week of every engagement."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Teamwork and Mentoring",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Behavioural: You are asked to lead a newly formed team of engineers you have never worked with on a high-stakes customer deployment. How do you get them working well quickly?",
+    "answer": "I would establish clear goals, roles and working norms in the first week, learn each person's strengths, and create early wins together. Situation: I led four engineers from different teams to build an AI document-processing platform for a fictional bank, Quillstone Bank, over twelve weeks. Task: make them effective quickly under scrutiny. Action: in the first two days, I held one-to-ones to learn each person's experience and goals, then ran a kickoff where we agreed the customer outcome, workstream owners, a definition of done, and review norms. I chose a first milestone achievable in ten days, a working ingestion path in a development project, so the team succeeded together early. I held short daily stand-ups and a weekly retrospective. Result: the team hit the first milestone, delivered the platform on time, and two members asked to work together again. Lesson: an early shared win builds trust faster than any team-building exercise."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Teamwork and Mentoring",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you gave difficult feedback to a peer.",
+    "answer": "I gave a respected peer direct feedback about how he treated customer engineers, focusing on specific behaviour and its impact. Situation: on a joint engagement at a fictional energy company, Corvana Energy, a senior colleague often dismissed customer engineers' questions in meetings, and two of them stopped speaking up. Task: address it without damaging our relationship. Action: I asked for a private conversation, described two specific moments, and explained the effect I had observed: the customer engineers had stopped raising issues, which put the handover at risk. I asked how he saw it. He had not realised and explained he was under deadline pressure. We agreed he would route detailed questions to a written thread where he could answer properly. Result: the customer engineers became more engaged, and he later thanked me. Lesson: describing specific behaviour and its impact, rather than character, makes difficult feedback hearable, and I should have raised it after the first instance."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Teamwork and Mentoring",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Behavioural: You are the most senior engineer on site, and a customer executive asks you to assess whether their internal platform team is capable of running the AI platform. How do you handle it?",
+    "answer": "I would give an honest, evidence-based assessment focused on capabilities and gaps rather than individuals, and share it in a way that helps the team rather than threatening it. Situation: the CTO of a fictional manufacturer, Ironbridge Components, asked me privately whether his platform team could take over our GKE and Vertex AI platform. Task: answer truthfully without becoming an informal performance reviewer. Action: I agreed to assess capabilities, not people, and told the platform lead openly what I had been asked. I assessed against concrete areas: Terraform and GitOps practice, Kubernetes operations, incident response, and AI-specific skills like evaluation and model updates, using evidence from our work together. The report showed strengths in infrastructure and gaps in evaluation and on-call. I recommended a training plan and a three-month shadowing period. Result: the CTO funded the plan, and the team took over successfully. Lesson: transparency with the assessed team turns an awkward request into a development plan."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Motivation and Role Fit",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Why do you want to work as a Forward Deployed Engineer rather than in a traditional platform or product engineering team?",
+    "answer": "I want the FDE role because I do my best work close to real users, where I can see a problem, build a solution, and watch it change how people work. Situation: in my platform engineering work, the projects I enjoyed most were the ones where I sat with users, such as building a RAG assistant with dispatchers at a fictional logistics firm, Harborline. Task: I wanted more of that direct impact. Action: I volunteered for customer-facing work, ran discovery sessions, and handled deployments end to end, from Terraform foundations to GKE workloads to evaluation of AI behaviour. Result: those projects had the clearest measurable outcomes in my career, such as halving lookup time for dispatchers, and customer feedback was the most rewarding part of my work. The FDE role combines the engineering depth I have with the customer contact I value. Lesson: I learned that I am motivated by visible outcomes, and I look for roles that keep me close to them."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Motivation and Role Fit",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: How do you feel about frequent travel and working on site with customers? Give an example of how you have managed it.",
+    "answer": "I am comfortable with regular travel and see on-site time as valuable, as long as it is planned around clear goals. Situation: on an engagement with a fictional manufacturer, Ironbridge Components, I travelled to their site every other week for three months. Task: make the travel worthwhile and sustainable. Action: I used on-site days for work that benefits from being in the room, such as discovery workshops, shadowing operators, whiteboard design sessions, and building relationships with their platform team. Remote days were for focused engineering: Terraform modules, pipeline work, and code reviews. I planned trips with the customer in advance and kept a consistent routine so travel did not erode my sleep or exercise. Result: the on-site sessions resolved decisions much faster than calls had, and I stayed productive throughout. Lesson: travel is most valuable when on-site time is reserved for things that only work face to face."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Motivation and Role Fit",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Beginner",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you had to learn a new technology very quickly for a customer.",
+    "answer": "I learned enough Document AI in about a week to deliver a working extraction pipeline for a customer pilot. Situation: a fictional insurer, Corvane Mutual, needed claim forms processed automatically, and I had never used Document AI. Task: be credible with the customer within days. Action: I worked through the official quickstarts, built a throwaway prototype on a sample of twenty anonymised forms, and wrote down what worked and what did not. I asked a colleague who had used it for a thirty-minute review of my approach, which saved me from a processor choice that would not have handled their handwritten fields. I was honest with the customer that I was new to the service but showed the prototype. Result: the pilot pipeline on Cloud Run extracted the key fields accurately on most forms, and the customer approved the next phase. Lesson: a quick prototype plus one expert review is the fastest way I know to learn safely."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Motivation and Role Fit",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Intermediate",
+    "questionType": "Behavioral",
+    "question": "Behavioural: How do you manage constant context switching between customers, technologies and internal work? Give an example.",
+    "answer": "I manage context switching by batching work by customer, keeping a written context log per engagement, and protecting focus blocks. Situation: at one point I supported three customers at once: a GKE migration, a RAG pilot, and a Terraform landing zone. Task: stay effective without dropping details. Action: I assigned customers to specific days or half days where possible, and kept a short running log per customer with open decisions, next actions, and recent changes, which I reviewed for two minutes before switching. I blocked two mornings a week for deep engineering work with notifications off, and used one shared task board so nothing lived only in my head. I told each customer my availability pattern so they knew when to expect responses. Result: I delivered all three on schedule, and customers said response times felt predictable. Lesson: writing context down is what makes switching cheap, and I should have set up the logs before taking on the third customer."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Motivation and Role Fit",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Behavioural: You are placed with a customer whose technology stack you have never used, such as Azure instead of GCP. How do you become effective in the first two weeks?",
+    "answer": "I would map the concepts I know to their stack, focus on the parts that matter for the deployment, and be honest about what I am learning while delivering early value. Situation: I was assigned to a fictional retailer, Ridgepoint Retail, running on Azure, while my experience was mainly GCP. Task: become credible quickly. Action: in the first days I mapped equivalents, GKE to AKS, Cloud Run to Azure Container Apps, IAM and Workload Identity to Entra ID and managed identities, and Terraform providers from google to azurerm. I asked their engineers to walk me through their existing setup and pair on the first changes. I took a task I could deliver well, containerising and deploying the RAG service through their pipeline, while learning the rest. Result: I shipped the first deployment in week two, and their team valued my Kubernetes and evaluation experience regardless of cloud. Lesson: fundamentals transfer across clouds, and asking to be shown their setup builds trust faster than pretending to know it."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Motivation and Role Fit",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Advanced",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Tell me about a time you felt burned out or overloaded in a demanding role and what you did about it.",
+    "answer": "I recognised early signs of overload, raised it with my manager with a concrete proposal, and changed how I worked. Situation: during a period with two concurrent customer launches and on-call duty, I was working late most nights, and my code review quality was slipping. Task: recover without letting customers down. Action: I listed my commitments with effort estimates and showed my manager that they exceeded my capacity by roughly a third. I proposed handing on-call for one customer to a colleague for a month and pushing a non-urgent internal project. I also set firmer boundaries: no work messages after a set time except pages, and a proper break each day. Result: both launches went well, my review quality recovered, and my manager adjusted how engagements were staffed for the team. Lesson: raising capacity problems with data and a proposal is professional rather than weak, and I now check my load every two weeks."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Motivation and Role Fit",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Behavioral",
+    "question": "Behavioural: Where do you see yourself growing as a Forward Deployed Engineer over the next few years, and what have you already done towards it?",
+    "answer": "I want to grow into someone who leads complex, multi-team AI deployments and shapes the platform from field experience, and I have already started on both. Situation: in recent work I moved from delivering individual components to owning whole engagements, such as a RAG platform for a fictional bank, Quillstone Bank, covering discovery, Terraform foundations, GKE serving, and evaluation. Task: build the skills for broader leadership. Action: I have led small teams on two engagements, mentored junior engineers, contributed reusable modules to our platform, and written field reports that influenced product defaults. I am deepening multi-cloud skills, practising on AWS and Azure equivalents, and studying agent evaluation and safety. Result: I now lead discovery and executive conversations independently, and colleagues use my Terraform blueprint and ingestion checklist. Over the next few years I want to lead larger programmes and mentor other FDEs. Lesson: growth came fastest when I volunteered for the uncomfortable parts, so I deliberately keep doing that."
+  },
+  {
+    "source": "FDE Behavioural Bank",
+    "section": "Customer-Facing and Behavioural (FDE)",
+    "category": "Customer-Facing and Behavioural (FDE) - Motivation and Role Fit",
+    "topic": "Customer-Facing and Behavioural (FDE)",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Behavioural: Midway through a long engagement, the customer asks you to join them full time. How do you handle the offer professionally?",
+    "answer": "I would thank them, avoid any commitment on the spot, tell my manager promptly, and make sure the engagement is not affected whatever I decide. Situation: the head of engineering at a fictional logistics firm, Harborline, offered me a role during a six-month platform engagement. Task: handle it with integrity towards both organisations. Action: I said I appreciated it and would need to think and follow my employer's policies. That week I told my manager openly and checked the non-solicitation terms in our contract, which restricted hiring for a period. I considered my goals honestly: I valued the variety of the FDE role more than depth at one company. I declined politely, explained why, and suggested how they could hire for the role, including the skills to look for. Result: the relationship stayed strong, they hired a strong internal candidate whom I helped onboard, and they renewed our engagement. Lesson: transparency with my own manager is what keeps an offer like this from becoming a conflict of interest."
+  }
+]

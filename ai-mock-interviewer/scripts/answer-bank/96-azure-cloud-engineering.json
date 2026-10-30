@@ -1,0 +1,802 @@
+[
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Fundamentals and Resource Hierarchy",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Azure: Walk me through the Azure resource hierarchy from the Entra tenant down to an individual resource.",
+    "answer": "The hierarchy is tenant, then management groups, then subscriptions, then resource groups, then resources. The Entra ID tenant is the identity boundary and owns a single root management group. Management groups nest up to six levels below the root and exist to apply Azure Policy and RBAC to many subscriptions at once. A subscription is the billing, quota and isolation boundary, and every resource lives in exactly one resource group, which is a lifecycle container: you deploy, tag and delete its contents together. Policy and role assignments inherit downward, so a Deny policy at a management group cannot be overridden by an Owner in a subscription. For example, I would put a 'allowed locations' policy on the landing-zones management group and give an app team Contributor on only their resource group. A common pitfall is treating resource groups as security boundaries for networking; they are not, a VNet in one group can be peered or referenced from anywhere the caller has rights."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Fundamentals and Resource Hierarchy",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "Azure: Coming from GCP and AWS, how do Azure management groups, subscriptions and resource groups map to folders, projects, OUs and accounts?",
+    "answer": "Management groups map to GCP folders and AWS Organizations OUs, subscriptions map to GCP projects and AWS accounts, and resource groups have no exact equivalent in either. A subscription is like a GCP project in that it holds billing, quotas and API enablement (resource provider registration), and like an AWS account in that it is the usual blast-radius boundary. Resource groups sit one level lower as a lifecycle and RBAC scope inside the subscription; the closest analogues are a CloudFormation stack or a set of GCP resources grouped by labels. Policy also maps: Azure Policy at a management group plays the role of GCP Organization Policy or AWS SCPs, although Azure Policy can also audit and auto-remediate, not only deny. The pitfall when migrating is creating one subscription per app the way you would create one GCP project per app; that is fine, but you must automate subscription vending because subscriptions are heavier to create and quotas are per subscription per region."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Fundamentals and Resource Hierarchy",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Azure: What is Azure Resource Manager and why does it matter that the portal, CLI, Bicep and Terraform all go through it?",
+    "answer": "Azure Resource Manager (ARM) is the single control-plane API at management.azure.com that authenticates, authorizes and routes every create, update and delete request to the relevant resource provider. Because the portal, az CLI, PowerShell, Bicep, Terraform azurerm and the REST SDKs all call ARM, you get consistent behaviour: RBAC is evaluated once, Azure Policy is evaluated on every write, locks are enforced, and every operation lands in the Activity Log. Resources are addressed by a resource ID such as /subscriptions/{id}/resourceGroups/{rg}/providers/Microsoft.KeyVault/vaults/{name}, and resource providers like Microsoft.ContainerService must be registered in the subscription before use. A practical example is that a Deny policy blocks a public storage account whether someone clicks in the portal or runs terraform apply. The pitfall is assuming ARM covers the data plane too: reading a secret or a blob goes to the service endpoint, so control-plane roles like Contributor do not automatically grant data access."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Fundamentals and Resource Hierarchy",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Azure: Explain Azure regions, availability zones and region pairs, and how they influence where you deploy a workload.",
+    "answer": "A region is a set of datacenters in a geography, availability zones are physically separate datacenter groups inside a region with independent power, cooling and networking, and a region pair is a Microsoft-designated partner region used for sequenced platform updates and some geo-replication defaults. For high availability inside a region I deploy zone-redundant resources, for example zone-redundant storage, an AKS node pool across zones 1, 2 and 3, and a Standard Load Balancer with a zone-redundant frontend. For disaster recovery I use a second region, often the pair because services such as GRS storage replicate there automatically. The trade-off is cost and latency: cross-zone traffic is billed and adds a little latency, and cross-region replication is usually asynchronous. Pitfalls to verify are that not every region supports zones, some newer regions have no pair, and zone numbers are mapped per subscription, so zone 1 in one subscription may not be the same physical zone as zone 1 in another."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Fundamentals and Resource Hierarchy",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "Azure: What are resource locks, and when would you choose CanNotDelete over ReadOnly?",
+    "answer": "Resource locks are ARM-level guards applied at subscription, resource group or resource scope that block deletion (CanNotDelete) or all control-plane writes (ReadOnly), regardless of the caller's RBAC role. I use CanNotDelete on things that are catastrophic to lose, such as the hub VNet, the Terraform state storage account, ExpressRoute circuits and production Key Vaults. ReadOnly is much more disruptive than it sounds, because some read-like operations are POST calls: a ReadOnly lock on a storage account blocks listing keys, on an App Service it can block scaling, and on a resource group it can stop AKS from updating its node resources. Locks are inherited, and removing one needs Microsoft.Authorization/locks/delete, which Owner and User Access Administrator have, so they stop accidents rather than determined admins. For true immutability against privileged users I combine locks with deployment stacks deny settings or Azure Policy. Verify with az lock list --resource-group before a cleanup job runs, otherwise the job fails halfway."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Fundamentals and Resource Hierarchy",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Design / Architecture",
+    "question": "Azure: How would you design the management group hierarchy for a new Azure landing zone?",
+    "answer": "I follow the Azure Landing Zones reference: under an intermediate root I create Platform with Management, Connectivity and Identity children, Landing Zones with Corp and Online children, plus Sandbox and Decommissioned. The hierarchy is organised by policy needs, not by org chart, because its job is to apply guardrails. Corp landing zones get policies denying public IPs and requiring private endpoints, Online allows internet-facing apps behind Front Door with WAF, Sandbox has relaxed policy but a budget and no hybrid connectivity, and Decommissioned denies all new resources. Connectivity holds the hub or Virtual WAN subscription, Management holds Log Analytics and automation. I keep it shallow, typically three or four levels, because deep trees make policy inheritance hard to reason about. The example I give is moving an app from Online to Corp: you move the subscription and it inherits the stricter guardrails immediately. Pitfall: do not assign anything at the tenant root group, create an intermediate root so you can test changes in a canary hierarchy first."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Fundamentals and Resource Hierarchy",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Azure: A team asks you to move a running application's resources into a different subscription. What do you check before and after the move?",
+    "answer": "I first confirm every resource type supports moves and run the validation, then plan for the fact that resource IDs change and role assignments do not follow. Before the move I run az resource invoke-action with validateMoveResources, or use the portal validation, because some types cannot move or must move together, for example a VM with its disks and NICs, or App Service plans with their apps. Both subscriptions must be in the same tenant, the target must have the resource providers registered and enough quota, and there must be no ReadOnly locks. After the move, anything referencing the old ID breaks: Terraform state, diagnostic settings, alert rules, private DNS links, policy exemptions and scripts. Role assignments scoped to the moved resources are not carried over, so I export them with az role assignment list and reapply them. For example, an app's managed identity might still work but lose its AcrPull assignment. I usually prefer redeploying through IaC into the new subscription when the app is stateless, since that is cleaner than a move."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Fundamentals and Resource Hierarchy",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Azure: Design a subscription vending process so product teams can self-serve new Azure subscriptions safely.",
+    "answer": "I build vending as a pull-request-driven pipeline that creates the subscription through the Microsoft.Subscription/aliases API and then applies a baseline in the same run. A team opens a PR with a small YAML request: name, environment, management group, budget, owners and network size. The pipeline, authenticated with OIDC to an identity that has subscription-creator rights on the EA enrollment account or MCA invoice section, uses the Azure Verified Modules lz-vending Terraform module to create the alias, place the subscription under the right management group, create a spoke VNet peered to the hub or connected to Virtual WAN, register resource providers, set a budget with alerts, and assign RBAC to Entra groups rather than people. Policy inheritance from the management group provides guardrails automatically. IP allocation comes from a central IPAM so address spaces never overlap. The trade-off is up-front engineering versus tickets; vending pays off once you exceed about ten subscriptions. Pitfalls are forgetting deprovisioning, so I move retired subscriptions to Decommissioned and cancel them after a hold period, and granting the pipeline Owner at root instead of scoped rights."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Entra ID and RBAC",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "Azure: What is the difference between a system-assigned and a user-assigned managed identity, and when do you use each?",
+    "answer": "A system-assigned identity is created with and tied to one resource and is deleted when that resource is deleted, whereas a user-assigned identity is a standalone resource that you create once and attach to any number of resources. Both are Entra service principals whose credentials Azure rotates for you, so code gets tokens from the local identity endpoint without any secret. I use system-assigned for a single long-lived resource like one Function App reading one Key Vault, because cleanup is automatic. I use user-assigned when several resources need the same permissions, when I need the identity and its role assignments to exist before the resource is created, which matters in Terraform to avoid propagation races, and for AKS workload identity. The GCP analogue is attaching a service account to a VM or Cloud Run service; the AWS analogue is an instance profile or task role. A pitfall is having both types on one resource: SDKs then need AZURE_CLIENT_ID or an explicit client_id to pick the user-assigned one."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Entra ID and RBAC",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Azure: How do an app registration, a service principal and an enterprise application relate to each other in Entra ID?",
+    "answer": "An app registration is the global definition of an application in its home tenant, and a service principal is the local instance of that application in a specific tenant, which the portal shows under Enterprise applications. When you register an app you get an application object with a client ID, redirect URIs, exposed API scopes and credentials such as certificates or federated credentials. Each tenant that uses it, including the home tenant, gets a service principal, and that is the object you assign Azure RBAC roles to and apply Conditional Access to. Managed identities are a special kind of service principal with no app registration you manage. A concrete example: a GitHub deployment app has one app registration with a federated credential, and its service principal receives Contributor on a resource group. A common pitfall is granting permissions on the registration while the role assignment needs the service principal object ID, which differs from the application client ID; az ad sp show --id <clientId> returns the right object ID."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Entra ID and RBAC",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Azure: Distinguish Entra ID directory roles from Azure RBAC roles. Why does a Global Administrator not automatically see every subscription?",
+    "answer": "Entra ID roles govern the directory, such as users, groups, app registrations and Conditional Access, while Azure RBAC roles govern ARM resources at management group, subscription, resource group and resource scope. They are separate authorization systems. Global Administrator, Application Administrator and Privileged Role Administrator are Entra roles; Owner, Contributor, Reader, User Access Administrator and data roles like Storage Blob Data Reader are Azure RBAC roles. That is why a Global Administrator does not see subscriptions by default. They can toggle Access management for Azure resources, which elevates them to User Access Administrator at root scope so they can grant themselves access, and that elevation is logged and should be alerted on and removed afterwards. In practice I give platform engineers Azure RBAC on the platform management group and only a few, PIM-eligible people Entra roles. The pitfall is assuming Owner on a subscription lets you create app registrations or groups; it does not, and pipelines that create service principals need Entra application permissions such as Application.ReadWrite.OwnedBy."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Entra ID and RBAC",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Azure: How does Entra workload identity federation work, and how does it compare to GCP Workload Identity Federation?",
+    "answer": "Workload identity federation lets an external workload exchange its own OIDC token for an Entra access token, so no client secret or certificate is stored anywhere. You add a federated identity credential to an app registration or user-assigned managed identity specifying the issuer, the subject, and the audience, usually api://AzureADTokenExchange. The workload, for example a GitHub Actions job, a Kubernetes service account or a GCP workload, presents its signed JWT to the Entra token endpoint as a client assertion, Entra validates the signature against the issuer's JWKS and matches issuer and subject exactly, then returns a token for that identity. GCP does the same thing through a workload identity pool and provider with attribute mappings and CEL conditions, followed by optional service account impersonation. The biggest difference is matching: GCP lets you write conditions over claims, while Entra classically requires an exact subject match and caps each identity at 20 federated credentials. So for many branches or environments on Azure you plan subjects carefully, typically using GitHub environments, rather than writing one flexible condition."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Entra ID and RBAC",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "Azure: You just granted a user Contributor on a resource group, but they still get AuthorizationFailed. How do you troubleshoot it?",
+    "answer": "I check scope, propagation and token freshness first, because most of these are timing or scope mistakes rather than missing roles. Role assignments can take several minutes to propagate, and the user's existing ARM token keeps the old claims, so I ask them to run az logout and az login or refresh the portal. Then I confirm the assignment is where I think: az role assignment list --assignee <upn> --all --include-inherited shows the scope, and the error message names the exact action and scope that failed. If the action is a data-plane one like Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read, Contributor is the wrong role and they need Storage Blob Data Reader. If they act through a group, nested group or PIM eligibility, I confirm membership or activation. I also check for deny assignments, often created by deployment stacks or managed applications, and for Microsoft.Authorization actions that Contributor excludes, such as creating role assignments. Finally, a Deny policy produces RequestDisallowedByPolicy, not AuthorizationFailed, which is a quick way to tell the two apart."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Entra ID and RBAC",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "Azure: How would you roll out Privileged Identity Management for Azure resource roles and Entra roles?",
+    "answer": "I convert standing privileged access into PIM eligible assignments that people activate just in time, with MFA, justification and a time limit, and approval for the most sensitive roles. Eligible means the user can activate, active means they hold the role now; I keep almost nothing permanently active except break-glass accounts. Concretely, Owner and User Access Administrator on production management groups become eligible for a platform group with a one to four hour maximum activation and approval from a second engineer, Contributor activation needs only MFA and a ticket number, and Global Administrator requires approval and alerts on activation. I assign eligibility to groups and use PIM for Groups so membership itself is just in time. Access reviews run quarterly to remove stale eligibility. PIM needs Entra ID P2 or Entra ID Governance licences for the users involved. The pitfall is automation: pipelines cannot activate PIM roles interactively, so service principals keep narrowly scoped active assignments and humans use PIM. I verify by querying the PIM audit history and alerting on any new permanent Owner assignments."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Entra ID and RBAC",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Azure: After enabling a Conditional Access policy requiring MFA for all cloud apps, several automation jobs and an admin are locked out. How do you recover and redesign?",
+    "answer": "I recover with an excluded break-glass account, then redesign so policies are tested in report-only mode and workloads authenticate with identities that never need MFA. Break-glass accounts are cloud-only, protected with FIDO2 keys, excluded from all Conditional Access policies, and monitored by a Log Analytics alert on any sign-in. Using one, I switch the policy to report-only and read the sign-in logs and the Conditional Access insights workbook to see who failed. Automation broke because it ran as user accounts with passwords; Microsoft also enforces MFA for Azure portal, CLI and IaC tool sign-ins by human users, so those jobs would have failed eventually. I move them to managed identities or workload identity federation, which are service principals and are not subject to user MFA policies; if you need location controls on them, Conditional Access for workload identities exists with Workload ID licensing. Then I re-enable the policy scoped by groups, with explicit exclusions documented. The verification step is the What If tool in Conditional Access before every change."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Entra ID and RBAC",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Azure: Platform teams need to grant app teams the ability to assign roles without being able to make themselves Owner. How do you design that?",
+    "answer": "I delegate role assignment with conditions: give the app team's lead group the Role Based Access Control Administrator role at their subscription with an ABAC condition that constrains which roles and principal types they can assign. The condition uses @Request[Microsoft.Authorization/roleAssignments:RoleDefinitionId] ForAnyOfAnyValues:GuidEquals a list such as Reader, Storage Blob Data Contributor, Key Vault Secrets User and AcrPull, and optionally restricts PrincipalType to ServicePrincipal so they can only grant their own workloads. That replaces the old pattern of handing out User Access Administrator, which allows assigning Owner and therefore privilege escalation. I pair it with custom roles for gaps, keeping custom roles in IaC with assignable scopes at management group level, and Azure Policy to deny role assignments to external guests. The trade-off is maintaining the allowed-role list as teams need new services. Verification is concrete: an attempt to assign Owner fails with an authorization error, and Activity Log alerts fire on any Microsoft.Authorization/roleAssignments/write at subscription scope outside the pipeline identity."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Networking",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Azure: What is a virtual network in Azure, and what do subnets, network security groups and application security groups each do?",
+    "answer": "A virtual network (VNet) is a private, regional address space in one subscription; subnets carve it up, network security groups filter traffic, and application security groups let NSG rules target workloads by role instead of IP. Each subnet gets a CIDR range and Azure reserves five addresses in it. Some services need dedicated, specially named or delegated subnets, such as GatewaySubnet, AzureFirewallSubnet, AzureBastionSubnet, or a subnet delegated to Microsoft.Web/serverFarms for App Service VNet integration. An NSG is a stateful list of allow and deny rules by priority from 100 to 4096, attached to a subnet or NIC, with default rules allowing VNet-to-VNet and load balancer traffic and denying other inbound internet traffic. An ASG groups NICs, so a rule can say allow 443 from asg-web to asg-api. Service tags such as AzureLoadBalancer, Storage.WestEurope or AzureCloud replace hard-coded Microsoft IP ranges. A pitfall is forgetting that the VirtualNetwork service tag includes peered and on-premises ranges, so allow VirtualNetwork is broader than it looks."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Networking",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "Azure: How does an Azure VNet differ from a GCP VPC network, and what design habits from GCP do not carry over?",
+    "answer": "The biggest difference is scope: a GCP VPC is global with regional subnets, while an Azure VNet is regional, so a multi-region design needs one VNet per region joined by peering, Virtual WAN or a hub per region. GCP firewall rules are defined at the VPC level and target network tags or service accounts; Azure uses NSGs attached to subnets or NICs and ASGs for grouping. GCP Shared VPC lets service projects use subnets owned by a host project; on Azure the usual equivalent is hub-and-spoke, where each spoke subscription owns its VNet and peers to a central hub, although subnet sharing across subscriptions is possible with RBAC. Private Service Connect maps roughly to Private Endpoints and Private Link. Routing also differs: Azure adds system routes automatically and you override them with route tables (UDRs) per subnet. The habit that breaks is assuming one global network means cross-region traffic just works; on Azure you must plan non-overlapping address spaces per region and explicit connectivity from day one."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Networking",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Azure: What are the default inbound and outbound rules in an NSG, and how is a rule's priority evaluated?",
+    "answer": "Every NSG has three default inbound rules and three default outbound rules at priorities 65000 to 65500, and rules are evaluated from the lowest priority number upwards, stopping at the first match. Inbound defaults are AllowVnetInBound, AllowAzureLoadBalancerInBound, and DenyAllInBound. Outbound defaults are AllowVnetOutBound, AllowInternetOutBound and DenyAllOutBound. You cannot delete them but you can override them with custom rules numbered 100 to 4096. Because NSGs are stateful, return traffic for an allowed flow is permitted automatically. If an NSG is attached to both the subnet and the NIC, inbound traffic must pass the subnet NSG and then the NIC NSG, outbound the reverse. For example, to lock down outbound internet I add a rule at 4000 denying Internet but allowing the AzureMonitor and Storage service tags at lower numbers. To verify, I use Network Watcher IP flow verify or the effective security rules view on the NIC, which shows the merged result rather than guessing from two separate NSGs."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Networking",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "Azure: VNet peering is non-transitive. What does that mean in practice and how do hub-and-spoke designs work around it?",
+    "answer": "Non-transitive means if spoke A peers to the hub and spoke B peers to the hub, A and B still cannot talk to each other through the hub just because both are peered. Peering only exchanges routes for the two directly connected VNets. Hub-and-spoke solves this by placing a router in the hub, usually Azure Firewall or a network virtual appliance, and attaching route tables to spoke subnets with a user-defined route sending other spokes' prefixes, or 0.0.0.0/0, to the firewall's private IP. The firewall then forwards between spokes and inspects the traffic. Alternatively, Azure Virtual WAN provides a managed hub with transitive routing built in, and Azure Virtual Network Manager can build mesh connectivity groups if direct spoke-to-spoke is acceptable. For on-premises reachability, spokes use the hub's VPN or ExpressRoute gateway by enabling allow gateway transit on the hub side and use remote gateways on the spoke side. Pitfall: forgetting a matching UDR on the hub's GatewaySubnet causes asymmetric routing that the firewall drops."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Networking",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Azure: Compare Private Endpoints with Service Endpoints for reaching PaaS services like Storage and Key Vault.",
+    "answer": "A Private Endpoint gives the PaaS resource a private IP inside your subnet, while a Service Endpoint keeps the service's public IP but sends traffic over the Azure backbone and lets the service firewall allow your subnet. Private Endpoints are the default choice for sensitive workloads: you can disable public network access entirely, they are reachable from peered VNets and on-premises over VPN or ExpressRoute, and they map to one specific resource, which prevents data exfiltration to other accounts. The cost is per-endpoint hourly and per-GB charges plus DNS work, because clients must resolve names such as myacct.blob.core.windows.net to the private IP through a privatelink.blob.core.windows.net Private DNS zone. Service Endpoints are free and simple but apply to the whole service type, only work from the VNet itself, not on-premises, and the public endpoint stays live. Service endpoint policies can narrow storage access somewhat. The pitfall with Private Endpoints is DNS: if a client resolves the public IP, the request is denied by the service firewall even though networking looks correct."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Networking",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Azure: When would you use Azure Front Door, Application Gateway, Azure Load Balancer or Traffic Manager?",
+    "answer": "Front Door is a global layer 7 entry point, Application Gateway is a regional layer 7 load balancer inside your VNet, Azure Load Balancer is a regional layer 4 balancer, and Traffic Manager is DNS-based global routing. I use Front Door Standard or Premium for public HTTP apps that need global anycast, CDN caching, WAF and fast regional failover; Premium can reach origins over Private Link so the backend stays private. Application Gateway v2 with WAF fits regional apps, path-based routing to private backends, mutual TLS, or as the AKS ingress through Application Gateway for Containers. Azure Load Balancer handles non-HTTP TCP or UDP traffic, internal load balancing for services like SQL clusters, and is what AKS uses for Service type LoadBalancer. Traffic Manager suits non-HTTP global failover because it only answers DNS. A common architecture combines them: Front Door globally, then Application Gateway or an internal load balancer per region. The GCP comparison is the global external Application Load Balancer for Front Door and regional load balancers for the rest. Pitfall: lock origins to Front Door using the X-Azure-FDID header or Private Link."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Networking",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "Azure: After you attach a route table sending 0.0.0.0/0 to Azure Firewall, VMs in a spoke lose internet access. How do you debug it?",
+    "answer": "I verify the route is actually used, then check the firewall rules and logs, then look for asymmetric paths. Network Watcher next hop on the VM should show VirtualAppliance with the firewall's private IP; effective routes on the NIC confirm the UDR is applied and not overridden by a more specific route. Next, the firewall itself: with forced traffic, the firewall denies everything by default, so there must be an application rule allowing the FQDNs or a network rule for the ports, and DNS proxy must be enabled if rules use FQDNs in network rules. The AZFWApplicationRule and AZFWNetworkRule resource-specific tables in Log Analytics show denied flows. Then NSGs: an NSG on the spoke subnet may deny outbound to the firewall's range. Finally asymmetric routing: if the VM also has a public IP or the traffic returns through a load balancer, replies bypass the firewall and are dropped. A pitfall is applying the route table to AzureFirewallSubnet itself, which breaks the firewall's own egress and management."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Networking",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Azure: Pods in an AKS cluster time out when calling a storage account that has a Private Endpoint, but a VM in the hub VNet works. What is your troubleshooting approach?",
+    "answer": "I start with DNS, because the classic cause is that the AKS VNet is not linked to the privatelink.blob.core.windows.net Private DNS zone, so pods resolve the public IP and the storage firewall rejects them. From a debug pod I run nslookup myacct.blob.core.windows.net; a private IP in the endpoint subnet means DNS is fine, a public IP means it is not. Fixes depend on the DNS design: link the zone to the AKS VNet, or if the VNet uses custom DNS servers in the hub, make sure those forward to 168.63.129.16 or to a DNS Private Resolver inbound endpoint, since CoreDNS forwards to the node's resolver. If DNS is correct, I test routing: a UDR sending traffic through Azure Firewall needs a matching rule, NSGs must allow 443 to the endpoint subnet, and with Azure CNI Overlay the source is the node IP after SNAT, so rules must allow the node subnet. I confirm with Network Watcher connection troubleshoot from a node. Pitfall: a CoreDNS custom ConfigMap forwarding to a resolver that lacks the private zone."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Networking",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "Azure: Design a hub-and-spoke network with centralized egress inspection using Azure Firewall.",
+    "answer": "I put Azure Firewall Premium, the VPN or ExpressRoute gateway, Bastion and DNS Private Resolver in a hub VNet in the connectivity subscription, and peer each application spoke to it. Each spoke subnet gets a route table with 0.0.0.0/0 and other spokes' prefixes pointing to the firewall's private IP, with BGP route propagation disabled so on-premises routes cannot bypass inspection. The GatewaySubnet gets a route table sending spoke prefixes to the firewall so return traffic from on-premises is symmetric. Firewall Policy holds rule collection groups per team, managed in Terraform, with application rules by FQDN and FQDN tags like AzureKubernetesService, threat intelligence in deny mode, and TLS inspection on Premium where compliance allows. DNS proxy is enabled so FQDN network rules resolve consistently. Private DNS zones live centrally and are linked to the hub, with Azure Policy deploying private endpoint DNS records automatically. Trade-offs are cost, since the firewall is a fixed hourly charge per hub, and SNAT port limits, which I address by attaching a NAT Gateway to the firewall subnet. I verify with flow logs and the firewall structured logs."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Networking",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "Azure: Compare ExpressRoute with site-to-site VPN Gateway for hybrid connectivity, and relate them to GCP and AWS equivalents.",
+    "answer": "ExpressRoute is a private layer 3 circuit through a connectivity provider or ExpressRoute Direct with predictable latency and bandwidth up to 100 Gbps, while VPN Gateway is IPsec over the internet, cheaper and faster to set up but with variable latency and lower throughput. ExpressRoute is not encrypted by default; you add MACsec on ExpressRoute Direct or run IPsec over the private peering if policy requires encryption. Routing uses BGP in both cases, and the ExpressRoute gateway SKU, not the circuit, often limits throughput, which FastPath can bypass for data-path traffic. A common pattern is ExpressRoute as primary with a site-to-site VPN as backup, plus two circuits in different peering locations for resilience. The equivalents are GCP Dedicated or Partner Interconnect and HA VPN, and AWS Direct Connect and Site-to-Site VPN. ExpressRoute Global Reach links on-premises sites through Microsoft's backbone, similar in spirit to Network Connectivity Center hubs. Pitfall: advertising overlapping prefixes from on-premises, or exceeding the private peering route limit of 4,000 prefixes on Standard, which drops the BGP session."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Networking",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Azure: On-premises servers resolve an Azure SQL database to its public IP even though it has a Private Endpoint and traffic should go over ExpressRoute. How do you fix hybrid DNS properly?",
+    "answer": "I deploy Azure DNS Private Resolver in the hub and have on-premises DNS conditionally forward the public service zone, here database.windows.net, to the resolver's inbound endpoint IP. On-premises servers cannot query 168.63.129.16 directly, so without forwarding they get the public answer. Forwarding the public zone rather than privatelink.database.windows.net is deliberate: the client asks for myserver.database.windows.net, Azure DNS returns a CNAME to myserver.privatelink.database.windows.net, and the resolver answers it from the Private DNS zone linked to the hub VNet. The reverse direction uses an outbound endpoint and a DNS forwarding ruleset linked to spokes so Azure workloads resolve corp.example.internal on-premises. All privatelink zones are centralised in the connectivity subscription, with an Azure Policy DeployIfNotExists creating the private DNS zone group whenever a team creates a private endpoint. Trade-off: forwarding a public zone means resources without private endpoints still resolve publicly, which is correct behaviour. I verify with nslookup from on-premises and by checking the SQL connection's client IP in audit logs shows a private address."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - AKS",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Azure: What is the difference between system and user node pools in AKS, and how do you keep application pods off the system pool?",
+    "answer": "System node pools host critical add-ons like CoreDNS, metrics-server and konnectivity, while user node pools run application workloads; every cluster needs at least one system pool. A system pool should have at least three nodes across availability zones for production, and Linux only. To keep apps off it I add the taint CriticalAddonsOnly=true:NoSchedule to the system pool, for example az aks nodepool add --mode System --node-taints CriticalAddonsOnly=true:NoSchedule; AKS system pods tolerate that taint, while application pods do not and land on user pools. User pools can scale to zero, use different VM sizes such as GPU SKUs, Spot instances, or Windows. This is similar to GKE node pools, though GKE does not require a dedicated system pool. A pitfall is undersizing the system pool, since CoreDNS starvation looks like random application DNS failures. I verify placement with kubectl get pods -A -o wide and by checking the agentpool label on each node."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - AKS",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "Azure: How do you let an AKS cluster pull images from a private Azure Container Registry without image pull secrets?",
+    "answer": "Grant the cluster's kubelet managed identity the AcrPull role on the registry, which az aks update --attach-acr <registry> does for you. Nodes then authenticate to ACR with that identity, so pods can reference myregistry.azurecr.io/app:1.4.2 without any imagePullSecrets. In Terraform I create azurerm_role_assignment with role_definition_name AcrPull, scope set to the registry ID, and principal_id set to the cluster's kubelet_identity object ID; note it is the kubelet identity, not the control-plane identity. If the registry has public access disabled, I add a Private Endpoint for it with the privatelink.azurecr.io zone linked to the AKS VNet, and Premium SKU is required for private endpoints. The GKE parallel is granting the node service account Artifact Registry Reader. To troubleshoot ErrImagePull with 401 Unauthorized, I run az aks check-acr --name <cluster> --resource-group <rg> --acr <registry>.azurecr.io, which validates DNS, network and permissions from a node. Pitfall: a pull-through to another subscription's registry needs the role assignment there too."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - AKS",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Azure: Compare Azure CNI Overlay, Azure CNI with pod subnet, and kubenet for AKS networking.",
+    "answer": "Azure CNI Overlay is my default today: nodes take IPs from the VNet subnet, but pods get IPs from a separate private CIDR such as 10.244.0.0/16 that does not consume VNet address space. That solves IP exhaustion and supports up to 250 pods per node, with pod egress SNATed to the node IP. Azure CNI with a pod subnet, the dynamic IP allocation mode, gives pods real VNet IPs from a dedicated subnet, which is useful when on-premises systems or firewalls must see and route to individual pod IPs, at the cost of planning large subnets. Kubenet also uses NAT and route tables but has worse scale limits and is being retired, so new clusters should not use it; existing ones can migrate to Overlay with az aks update --network-plugin-mode overlay. Each option can run the Cilium dataplane via --network-dataplane cilium for eBPF-based network policy, much like GKE Dataplane V2. Pitfall: with Overlay, firewall rules and Private Endpoint NSGs must allow the node subnet, not the pod CIDR."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - AKS",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Azure: Walk through setting up Microsoft Entra Workload ID for a pod in AKS that needs to read from Key Vault.",
+    "answer": "Enable the OIDC issuer and workload identity on the cluster, federate a user-assigned managed identity to a Kubernetes service account, and label the pod. Steps: az aks update --enable-oidc-issuer --enable-workload-identity, then read the issuer URL from oidcIssuerProfile.issuerUrl. Create a user-assigned identity and grant it Key Vault Secrets User on the vault. Create the federation with az identity federated-credential create --identity-name id-app --issuer $ISSUER --subject system:serviceaccount:payments:app-sa --audience api://AzureADTokenExchange. Create the service account with the annotation azure.workload.identity/client-id set to the identity's client ID, and give the pod the label azure.workload.identity/use: 'true'. The mutating webhook then injects AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_FEDERATED_TOKEN_FILE and a projected token, and DefaultAzureCredential picks them up. This is the Azure counterpart of GKE Workload Identity Federation. Pitfalls: the label must be on the pod template, not the deployment metadata, the subject must match namespace and service account exactly, and pods created before the federation existed need a restart."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - AKS",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Azure: Explain how the cluster autoscaler, node autoprovisioning, HPA and KEDA work together in AKS.",
+    "answer": "HPA and KEDA scale pods, while the cluster autoscaler or node autoprovisioning scales nodes to fit those pods. HPA changes replica counts from CPU, memory or custom metrics. KEDA, available as an AKS add-on, extends this with event sources like Service Bus queue length, Kafka lag or Prometheus queries, and can scale to zero. When new pods are unschedulable, the cluster autoscaler, configured per node pool with --enable-cluster-autoscaler --min-count --max-count, adds nodes to that pool's scale set and removes underused ones. Node autoprovisioning, based on Karpenter, instead chooses VM sizes dynamically from pending pod requirements, which suits mixed workloads better than fixed pools. Tuning matters: the autoscaler profile settings such as scale-down-unneeded-time and expander control behaviour. For example, a queue worker uses a KEDA ScaledObject on Service Bus and lands on a Spot user pool that autoscales from zero to twenty. Pitfalls are missing resource requests, which make scheduling decisions meaningless, and Pod Disruption Budgets or local storage that block scale-down."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - AKS",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Azure: You own a dozen production AKS clusters. How do you plan Kubernetes version and node image upgrades without outages?",
+    "answer": "I separate Kubernetes version upgrades from node OS updates, automate both inside maintenance windows, and roll through environments in rings. The cluster auto-upgrade channel, set to patch or stable, handles Kubernetes versions, and the node OS upgrade channel, set to NodeImage or SecurityPatch, handles OS updates; each gets a planned maintenance configuration, aksManagedAutoUpgradeSchedule and aksManagedNodeOSUpgradeSchedule. Dev clusters upgrade first, staging a week later, production after that. Before minor version bumps I check deprecated APIs with the AKS diagnose and solve breaking change detection or kubent, and confirm add-on compatibility. During upgrades each pool surges new nodes and drains old ones; I set --max-surge to 33 percent for large pools to go faster, and every workload has replicas over one, correct Pod Disruption Budgets and readiness probes so drain is safe. For risky changes I use blue-green node pools, creating a new pool, cordoning the old one and deleting it once traffic is stable. I watch AKS events through the Azure Event Grid system topic and verify with az aks show for provisioningState and nodeImageVersion."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - AKS",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Azure: An AKS upgrade fails partway with a drain error and the node pool is stuck with mixed versions. What do you do?",
+    "answer": "I find the pod that blocked eviction, fix the Pod Disruption Budget or workload, then rerun the upgrade, which resumes from where it stopped. The error in az aks show or the activity log usually names the pod and says eviction failed because it would violate a PDB, typically a PDB with minAvailable equal to the replica count or maxUnavailable 0, or a single-replica deployment with a PDB. I confirm with kubectl get pdb -A and look for ALLOWED DISRUPTIONS of 0. The fix is scaling the workload up or relaxing the PDB temporarily, not deleting it permanently. Then I rerun az aks nodepool upgrade with the same version; if a drain is legitimately slow I raise --drain-timeout, and newer API versions offer --undrainable-node-behavior Cordon to quarantine blocked nodes instead of failing. I also check surge capacity: quota or subnet IP exhaustion stops surge nodes from being created. Afterwards I add a policy, via Gatekeeper or Azure Policy for AKS, that rejects PDBs allowing zero disruptions so this does not recur."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - AKS",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Azure: New pods in an AKS cluster stay in ContainerCreating with FailedCreatePodSandBox and the autoscaler cannot add nodes. You suspect IP exhaustion. How do you confirm and fix it?",
+    "answer": "I confirm by checking subnet usage and the node pool's operation errors, then fix it by moving to Azure CNI Overlay or giving pods their own larger subnet. With legacy Azure CNI, each node reserves max-pods plus one IPs from the subnet at creation, so a /24 with max-pods 30 fits only around seven nodes. Symptoms are pod events saying failed to allocate an address, and scale-up failures reporting SubnetIsFull in az aks nodepool show or the activity log. az network vnet subnet show --query 'ipConfigurations | length(@)' gives a quick count. Short-term fixes are lowering max-pods for new pools or adding a new node pool in a fresh subnet with --vnet-subnet-id. The durable fix is az aks update --network-plugin-mode overlay with a --pod-cidr, which stops pods consuming VNet IPs; or dynamic allocation with --pod-subnet-id so node and pod subnets grow independently. Remember surge upgrades need spare IPs too. I validate migrations in a non-production cluster first, because changing the network plugin reimages nodes and requires checking NSGs and firewall rules for the new source addresses."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - AKS",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Comparison",
+    "question": "Azure: You know GKE well. What are the meaningful differences when you run the same platform on AKS?",
+    "answer": "The concepts transfer, but identity, networking defaults, tiers and upgrade mechanics differ. GKE Autopilot maps to AKS Automatic, which preconfigures node autoprovisioning, Azure CNI Overlay with Cilium, workload identity and auto-upgrades. GKE Workload Identity Federation maps to Entra Workload ID, but on AKS you create a user-assigned identity and a federated credential per service account rather than binding a Kubernetes principal directly in IAM. Dataplane V2 maps to Azure CNI powered by Cilium. AKS has Free, Standard and Premium tiers; Standard adds the financially backed API server SLA and Premium adds long-term support versions, whereas GKE charges a per-cluster management fee across editions. AKS places nodes in a separate MC_ node resource group that you should not hand-edit. Node upgrades on AKS use surge on the VM scale set rather than GKE's surge or blue-green strategies, though you can emulate blue-green with new pools. Private clusters work differently too: AKS uses a private endpoint or API server VNet integration with a privatelink azmk8s.io zone. My pitfall list: kubelet identity for ACR, zone settings fixed at pool creation, and quota per VM family."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - AKS",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Azure: Design a private, egress-locked AKS cluster for a regulated workload. How do operators and pipelines reach the API server?",
+    "answer": "I build a private cluster with no public API endpoint, all egress through Azure Firewall, and operator access through private networking or az aks command invoke. The cluster uses --enable-private-cluster, or API Server VNet Integration which projects the API server into a delegated subnet, with the private DNS zone privatelink.<region>.azmk8s.io managed centrally and linked to the hub. Outbound type is userDefinedRouting, so the node subnet's route table sends 0.0.0.0/0 to the firewall, and the firewall allows the AzureKubernetesService FQDN tag plus required endpoints like MCR, the Entra login endpoint and the regional data plane. Images come only from ACR through a private endpoint, enforced by an Azure Policy for AKS rule allowing only approved registries. Pipelines run on self-hosted runners or Managed DevOps Pools inside a peered VNet, authenticating with workload identity federation and Entra-integrated RBAC with local accounts disabled. Break-glass access uses az aks command invoke through ARM. Trade-offs are operational friction and firewall cost. Pitfall: missing a required FQDN causes nodes to fail provisioning, so I check firewall deny logs during the first cluster build."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Infrastructure as Code",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "Azure: Compare ARM templates, Bicep and Terraform for provisioning Azure infrastructure.",
+    "answer": "Bicep is a concise language that compiles to ARM template JSON, and both are stateless and deploy straight through ARM, while Terraform keeps its own state file and works across clouds. ARM JSON is verbose and nobody should hand-write it now. Bicep gives day-zero support for new resource types and API versions, what-if previews, modules from registries, and deployment stacks for lifecycle and deny settings, with no state to protect. Terraform with the azurerm provider gives a consistent workflow across Azure, GCP, Kubernetes and SaaS providers, rich plan output, and a large module ecosystem including Azure Verified Modules; the azapi provider fills gaps where azurerm lags behind the REST API. For a GCP-heavy team that already runs Terraform, I would choose Terraform for consistency. For an Azure-only team or for packaging solutions into customers' tenants, Bicep is simpler. The pitfall with Terraform is state security and drift; the pitfall with Bicep is incremental mode, where removing a resource from the template does not delete it unless you use deployment stacks."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Infrastructure as Code",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "Azure: How does the Terraform azurerm provider authenticate, and what changed with subscription_id in provider version 4?",
+    "answer": "The azurerm provider authenticates through the Azure CLI locally and through a managed identity, OIDC workload identity federation, or a client certificate or secret in automation, configured by provider arguments or ARM_ environment variables. Locally, az login is enough. In GitHub Actions I set ARM_USE_OIDC=true, ARM_CLIENT_ID, ARM_TENANT_ID and ARM_SUBSCRIPTION_ID so there is no stored secret; on an Azure-hosted runner I set ARM_USE_MSI=true. From version 4.0, subscription_id is required in the provider block or the ARM_SUBSCRIPTION_ID variable, even when using the CLI, which prevents accidentally deploying to whatever subscription the CLI happens to have selected. Version 4 also replaced skip_provider_registration with resource_provider_registrations, which lets you choose core, extended, all or none. A provider block for a multi-subscription repo uses aliases, for example provider azurerm with alias hub and its own subscription_id. Pitfall: falling back to client secrets in CI because OIDC failed; fix the federated credential instead, since secrets expire and leak."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Infrastructure as Code",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Azure: How do you configure a secure Terraform azurerm backend in an Azure Storage account?",
+    "answer": "I use a dedicated storage account in a platform subscription with Entra ID authentication, no shared keys, private access and versioning. The backend block sets resource_group_name, storage_account_name, container_name, key such as prod/network.tfstate, and use_azuread_auth = true, plus use_oidc = true in CI. The pipeline identity gets Storage Blob Data Contributor on the container only, not account keys. On the account I disable shared key access and public blob access, enable blob versioning and soft delete so a corrupted state can be restored, add a CanNotDelete lock, and either restrict the firewall to runner networks or use a private endpoint with self-hosted runners. State locking is automatic: the backend takes a blob lease on the state file during plan and apply. I split state by layer and environment, one key per stack, so a network change cannot lock or damage application state. GCS backends on GCP are the analogue, with object versioning playing the same role. Pitfall: leaving key-based auth enabled means anyone with Contributor can list keys and read secrets inside state."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Infrastructure as Code",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "Azure: Explain Bicep deployment modes, what-if, and deployment stacks. How do they help prevent drift and accidental deletion?",
+    "answer": "Incremental mode adds or updates resources in the template and leaves others alone, complete mode deletes resources in the resource group that are not in the template, what-if previews changes, and deployment stacks manage a set of resources as one lifecycle unit with deny settings. I run az deployment group what-if in pull requests, which works like terraform plan and shows creates, modifications and deletes, although some properties produce noise. I avoid complete mode because it only works at resource group scope and can wipe resources created by other teams. Deployment stacks are the better answer: az stack group create with --action-on-unmanage deleteResources removes resources dropped from the template, and --deny-settings-mode denyWriteAndDelete creates deny assignments so nobody, including Owners, can change managed resources outside the pipeline, with excluded principals for the deployer identity. That gives Terraform-style lifecycle without a state file. Pitfall: deny settings also block legitimate break-fix in an incident, so I document the excluded break-glass principal and test that it works."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Infrastructure as Code",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "Azure: terraform apply fails with 'A resource with the ID ... already exists - to be managed via Terraform this resource needs to be imported into the State'. What happened and how do you resolve it?",
+    "answer": "The azurerm provider checks whether a resource exists before creating it, and this error means something with the same resource ID already exists but is not in this state file. Common causes are a previous apply that created the resource and then failed before writing state, someone creating it manually or with another tool, two stacks defining the same resource, or a resource that Azure creates automatically, like a default diagnostic setting. I first confirm the resource matches what I intended with az resource show --ids. If it should be managed here, I add an import block with to = azurerm_storage_account.logs and id set to the full resource ID, run terraform plan to confirm no unexpected changes, then apply; that is reviewable in a PR, unlike the terraform import command. If another stack owns it, I remove the duplicate and use a data source. If it is junk from a failed run, I delete it. Pitfall: resource ID casing, such as resourceGroups versus resourcegroups, causes plan diffs after import, so copy the ID exactly from Azure."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Infrastructure as Code",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Azure: A pipeline fails with 'Error acquiring the state lock' on the azurerm backend and the lock info shows a run from two hours ago. How do you handle it safely?",
+    "answer": "I first prove no Terraform process still holds the lock, then release it with terraform force-unlock using the lock ID, and only then rerun. The azurerm backend implements locking with a blob lease on the state blob, and the error shows the lock ID, who took it and when. A stale lock usually comes from a cancelled pipeline or a runner that was killed mid-apply. I check the CI history for that run and confirm it is finished, because breaking a lease during an active apply can corrupt state or cause two applies to race. Then terraform force-unlock <LOCK_ID> from the same backend configuration; if the provider cannot do it, az storage blob lease break --container-name tfstate --blob-name prod/app.tfstate --account-name <account> --auth-mode login breaks the lease directly. Afterwards I run terraform plan to check the state matches reality, since a killed apply may have created resources not recorded in state. Prevention: pipeline concurrency groups per state key, so two runs cannot target the same stack, and blob versioning to roll back a damaged state."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Infrastructure as Code",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Azure: A customer's Azure estate was built by clicking in the portal. How would you bring it under Terraform without downtime?",
+    "answer": "I bring it under management incrementally: inventory, generate code, import with import blocks, then iterate until plan is empty, one layer at a time starting with low-risk resources. I use Azure Resource Graph to inventory resources by type and resource group, then aztfexport on a resource group to generate HCL and import blocks as a starting point. The generated code is verbose and hard-codes IDs, so I refactor it into modules with variables before merging, for example replacing a literal subnet ID with a reference. Each stack is imported in a pull request, and the acceptance criterion is terraform plan showing no changes; any diff means my code does not reflect reality yet, and applying it would modify production. I start with networking and identities the customer rarely changes, and freeze portal changes for that scope using RBAC or deployment stack deny settings after import. Pitfalls are properties set outside Terraform by Azure, such as tags added by policy, which I handle with lifecycle ignore_changes, and secrets ending up in state, which is why the backend must be locked down first."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Infrastructure as Code",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Azure: How would you structure Terraform repositories, state and pipelines for a multi-subscription Azure landing zone with dozens of application teams?",
+    "answer": "I split by ownership and change rate: a platform repo with separate states for management groups and policy, connectivity, identity and management, a vending repo that creates subscriptions, and per-team application repos that consume platform outputs. Each state has its own key in a locked-down storage account, and each pipeline identity has rights only where that stack writes, so the connectivity pipeline cannot touch policy. Cross-stack values flow through data sources or a small outputs file, not terraform_remote_state with broad read access. I use Azure Verified Modules for core resources, pin provider and module versions, and run Renovate for upgrades. Pull requests run fmt, validate, tflint, checkov and terraform plan, posting the plan; merges to main apply to dev, then promote through environments with GitHub environment approvals and OIDC federated credentials scoped per environment. Provider aliases handle hub-and-spoke peering across subscriptions. Trade-offs are more pipelines to maintain versus small blast radius and fast plans. Pitfalls: one giant state that takes twenty minutes to plan, and app teams editing hub resources directly instead of requesting changes through modules."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure DevOps and GitHub Actions",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "Azure: Map the main concepts of Azure Pipelines to GitHub Actions for someone moving between them.",
+    "answer": "Both are YAML-defined CI/CD, and the concepts map closely: an Azure Pipelines pipeline is a GitHub workflow, stages map to dependent jobs, jobs and steps map directly, tasks map to actions, agent pools map to runners, service connections map to repository or environment secrets plus OIDC login, and environments with approvals and checks exist in both. Azure Pipelines has variable groups backed optionally by Key Vault and templates with extends for enforced structure; GitHub has reusable workflows and composite actions. Self-hosted agents in Azure DevOps can run on Managed DevOps Pools; GitHub uses self-hosted runners or larger hosted runners with Azure private networking. For Azure deployments, Azure Pipelines uses tasks like AzureCLI@2 with a service connection, while GitHub uses azure/login@v2 followed by az or terraform steps. A practical difference is governance: Azure DevOps can enforce required templates and branch control checks on a service connection, and in GitHub you rely on environment protection rules and repository rulesets. The pitfall when migrating is copying long-lived secrets across instead of switching to federation."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure DevOps and GitHub Actions",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "Azure: Compare keyless deployment from GitHub Actions into Azure, GCP and AWS. What is common and what differs?",
+    "answer": "All three use the GitHub OIDC token as proof of identity and exchange it for short-lived cloud credentials, so no static keys are stored. The job needs permissions id-token: write in every case. On Azure, an app registration or user-assigned managed identity has a federated credential with issuer https://token.actions.githubusercontent.com, an exact subject like repo:org/app:environment:prod, and audience api://AzureADTokenExchange; azure/login@v2 then takes client-id, tenant-id and subscription-id. On GCP, google-github-actions/auth uses a workload identity pool provider, where an attribute condition such as assertion.repository == 'org/app' restricts access, optionally impersonating a service account. On AWS, aws-actions/configure-aws-credentials assumes an IAM role whose trust policy checks token.actions.githubusercontent.com:sub with StringLike, which permits wildcards. So the key difference is matching flexibility: AWS and GCP allow conditions or wildcards, whereas Azure federated credentials classically need exact subjects, so I bind them to GitHub environments. The pitfall common to all is trusting the whole organisation or any branch, which lets a fork-adjacent workflow or feature branch deploy to production."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure DevOps and GitHub Actions",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Azure: Set up a GitHub Actions workflow that deploys to Azure using OIDC with no stored secrets. What exactly do you configure?",
+    "answer": "I create a user-assigned managed identity, add a federated credential for the GitHub environment, grant it a scoped role, and use azure/login@v2 in a job with id-token write permission. Concretely: az identity create -n id-gh-prod; az identity federated-credential create --identity-name id-gh-prod --issuer https://token.actions.githubusercontent.com --subject repo:acme/payments:environment:production --audiences api://AzureADTokenExchange. I assign Contributor, or a custom role, only on the target resource group. In GitHub, the production environment holds AZURE_CLIENT_ID, AZURE_TENANT_ID and AZURE_SUBSCRIPTION_ID as variables, not secrets, since they are identifiers. The workflow sets permissions with id-token: write and contents: read, the job declares environment: production, and the step uses azure/login@v2 with client-id, tenant-id and subscription-id from vars, followed by azure/cli or terraform with ARM_USE_OIDC=true. Using the environment in the subject means required reviewers must approve before Azure will issue a token. Pitfall: if the job omits the environment key, the subject becomes ref:refs/heads/main and login fails."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure DevOps and GitHub Actions",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Azure: How do workload identity federation service connections work in Azure DevOps, and how do you migrate existing secret-based connections?",
+    "answer": "A workload identity federation service connection lets Azure Pipelines present an OIDC token issued by Azure DevOps to Entra, which trusts it through a federated credential on the app registration or managed identity, so no client secret exists. The issuer is https://vstoken.dev.azure.com/<organization-id> and the subject identifies the connection, in the form sc://<organization>/<project>/<service-connection-name>. When you create the connection with the automatic option, Azure DevOps creates the identity and the federated credential for you; with the manual option you create a managed identity, add the federated credential with the issuer and subject shown in the dialog, and grant the role. Tasks like AzureCLI@2, AzureResourceManagerTemplateDeployment and the Terraform tasks support it directly. Existing Azure Resource Manager connections that use secrets have a Convert action in the UI and a REST API equivalent, and conversion can be reverted for a short period if something breaks. Pitfalls are older third-party tasks that read the secret from the endpoint, and renaming the service connection, which changes the subject and breaks federation."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure DevOps and GitHub Actions",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Azure: A GitHub Actions job fails at azure/login with 'No matching federated identity record found for presented assertion subject'. How do you debug it?",
+    "answer": "That error, AADSTS700213, means Entra received a valid GitHub token but its subject, issuer or audience does not exactly match any federated credential on that identity. I compare the actual token claims against the configured credential. The subject depends on the trigger: a job with environment: production produces repo:org/app:environment:production, a push to main without an environment produces repo:org/app:ref:refs/heads/main, a pull request produces repo:org/app:pull_request, and tags produce ref:refs/tags/v1.2.0. Organisations that customise the OIDC subject template with the GitHub API get different formats again, for example including job_workflow_ref. To see the real claims I temporarily add a step that requests the token and decodes the payload, or check the sign-in logs for service principals in Entra, which show the failed assertion. I also verify the client-id points to the identity I edited, since teams often have several, and that the audience is api://AzureADTokenExchange. Fix the credential rather than widening it, and remember each identity allows at most 20 federated credentials."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure DevOps and GitHub Actions",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Azure: Your team wants zero-downtime releases for a web API on App Service with quick rollback. How do you implement it in the pipeline?",
+    "answer": "I deploy to a staging deployment slot, warm and test it, then swap it into production, and roll back by swapping again. Slots need the Standard tier or higher. The pipeline deploys the build to the staging slot with azure/webapps-deploy or az webapp deploy --slot staging, runs smoke tests against the slot URL, then calls az webapp deployment slot swap --slot staging --target-slot production. During the swap App Service applies production settings to the staging instances, restarts them and waits for warm-up, which I control with applicationInitialization paths or WEBSITE_SWAP_WARMUP_PING_PATH and WEBSITE_SWAP_WARMUP_PING_STATUSES so traffic only moves to healthy instances. Settings that must not move, such as connection strings to the production database or the slot's managed identity role, are marked as deployment slot settings. For extra safety I use swap with preview, which applies settings first and lets me validate before completing. Rollback is another swap because the previous version now sits in staging. Pitfall: database schema changes must be backward compatible, since both versions run against the same database around the swap."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure DevOps and GitHub Actions",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Azure: Design a multi-environment delivery pipeline to Azure where dev, staging and production use separate identities and production requires approval.",
+    "answer": "I give each environment its own managed identity with a federated credential bound to the matching GitHub environment, so the token for production can only be issued after production's protection rules pass. Dev, staging and prod identities each hold roles only on their own subscription or resource groups, so a compromised dev workflow cannot touch production. The workflow builds once, signs and pushes an immutable image digest to ACR, then promotes that digest through jobs with environment: dev, environment: staging and environment: production. Staging runs integration tests and a terraform plan for production that is uploaded as an artifact; the production job requires reviewers, restricts deployment branches to main, and applies exactly that saved plan. Repository rulesets require pull request reviews and status checks on main, and CODEOWNERS covers workflow files so nobody can quietly change the deployment path. On Azure DevOps the equivalent is environments with approvals and checks plus a separate service connection per environment, restricted with pipeline permissions and branch control. Pitfalls: sharing one identity across environments, and rebuilding artifacts per stage, which means production runs something never tested."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure DevOps and GitHub Actions",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Azure: A service principal client secret used by several pipelines is found in a public repository. Walk through your response.",
+    "answer": "I contain first by revoking the credential, then investigate its use, then remove the class of problem by moving to federation. Containment: delete the secret from the app registration with az ad app credential delete, which invalidates new token requests immediately, and if I suspect active misuse also revoke sessions and temporarily remove its role assignments. Existing access tokens remain valid until expiry, usually up to an hour, so I watch that window closely. Investigation: query the service principal sign-in logs for the app ID, filtering for sign-ins from unexpected IP addresses, then join the Azure Activity Log on the caller's object ID to list every write it made; Defender for Cloud and Microsoft Sentinel alerts help here. I check for persistence, such as new credentials added to other apps, new role assignments or new federated credentials. Recovery: replace the secret with workload identity federation in each pipeline, not a new secret, scope its roles down, and enable GitHub secret scanning push protection. Finally, a blameless review covering why a long-lived secret existed and an Azure Policy or alert flagging apps with password credentials."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Observability",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Azure: Explain how Azure Monitor, Log Analytics workspaces and Application Insights fit together.",
+    "answer": "Azure Monitor is the umbrella platform, Log Analytics workspaces are where log data is stored and queried with KQL, and Application Insights is the application performance monitoring feature that stores its telemetry in a Log Analytics workspace. Azure Monitor collects two main data types: platform metrics, which are numeric time series kept for 93 days and are cheap and fast for alerts, and logs, which go to workspaces through diagnostic settings, data collection rules and the Azure Monitor Agent. Application Insights is now workspace-based, so requests, dependencies, exceptions and traces appear in tables like AppRequests and AppDependencies alongside infrastructure logs, which allows joins across layers. Alerts, workbooks, dashboards and Azure Managed Grafana sit on top. The GCP mapping is Cloud Monitoring for metrics, Cloud Logging with log buckets for Log Analytics, and Cloud Trace plus Error Reporting for Application Insights. A pitfall is creating a workspace per resource; I usually centralise into a few workspaces per environment or region and use resource-context RBAC so teams see only their own data."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Observability",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Azure: How do you ensure every Azure resource sends its platform logs to the central Log Analytics workspace?",
+    "answer": "I enforce diagnostic settings with Azure Policy DeployIfNotExists rather than relying on each team to configure them. Resource logs, such as Key Vault AuditEvent or Azure Firewall rule logs, are not collected until a diagnostic setting routes them to a workspace, storage account or Event Hub. Microsoft provides built-in initiatives that enable logging by category group, allLogs or audit, to Log Analytics for most resource types, and I assign them at the landing zone management group with the workspace ID as a parameter. The assignment's managed identity needs Log Analytics Contributor and Monitoring Contributor, and existing resources need a remediation task, for example az policy remediation create. I choose resource-specific destination tables where supported, which give typed tables like AZFWNetworkRule instead of the generic AzureDiagnostics table. The Activity Log is exported once per subscription with its own diagnostic setting. I verify through policy compliance state and a KQL query counting distinct _ResourceId per table. Pitfall: enabling allLogs everywhere can be expensive, so noisy categories go to Basic or Auxiliary table plans or are filtered."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Observability",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Azure: Write Python that runs a KQL query against Log Analytics to report the per-minute 5xx error rate for an API over the last hour.",
+    "answer": "I use LogsQueryClient from azure-monitor-query with DefaultAzureCredential, push the aggregation into KQL so only small results come back, and handle partial results.\n\nfrom datetime import timedelta\nfrom azure.identity import DefaultAzureCredential\nfrom azure.monitor.query import LogsQueryClient, LogsQueryStatus\n\nQUERY = '''\nAppRequests\n| where AppRoleName == 'orders-api'\n| summarize total = count(), errors = countif(toint(ResultCode) >= 500) by bin(TimeGenerated, 1m)\n| extend errorRate = round(100.0 * errors / total, 2)\n| order by TimeGenerated asc\n'''\n\ndef error_rate(workspace_id):\n    client = LogsQueryClient(DefaultAzureCredential())\n    resp = client.query_workspace(workspace_id, QUERY, timespan=timedelta(hours=1))\n    if resp.status == LogsQueryStatus.PARTIAL:\n        print('partial result:', resp.partial_error)\n        tables = resp.partial_data\n    else:\n        tables = resp.tables\n    rows = []\n    for table in tables:\n        for row in table.rows:\n            rows.append(dict(zip(table.columns, row)))\n    return rows\n\nResultCode is a string in AppRequests, hence toint. The caller needs Log Analytics Reader or workspace-level read access. Python complexity is O(n) time and space in the returned rows, which is at most 60 here; the real cost is the KQL scan, which the time filter keeps bounded. Pitfall: the query limits are about 500,000 rows and 64 MB per result, so never pull raw requests into Python to aggregate."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Observability",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Azure: What are your options for monitoring AKS clusters, and how do Managed Prometheus and Container Insights differ?",
+    "answer": "Azure Monitor managed service for Prometheus collects metrics into an Azure Monitor workspace queried with PromQL, usually visualised in Azure Managed Grafana, while Container Insights collects container logs and Kubernetes inventory into Log Analytics for KQL queries. I enable both: az aks update --enable-azure-monitor-metrics with a linked Grafana instance for metrics and dashboards, and the monitoring add-on with a data collection rule for logs. Prometheus is cheaper and better for high-cardinality time series, and existing PromQL recording rules and alerts port across from GKE Managed Service for Prometheus. Container Insights is better for searching stdout logs, pod events and node inventory; I tune its DCR to collect only needed namespaces and use the ContainerLogV2 schema, possibly on the Basic table plan. Application telemetry goes to Application Insights through OpenTelemetry. Control plane logs such as kube-audit-admin come from AKS diagnostic settings. The pitfall is collecting all container logs from every namespace into the Analytics plan, which often becomes the biggest line on the bill; filter kube-system and noisy debug logs at the DCR."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Observability",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Azure: A newly deployed Python service shows no requests or traces in Application Insights. How do you troubleshoot it?",
+    "answer": "I check configuration, then whether telemetry leaves the process, then whether ingestion accepts it. Configuration: the service should use the Azure Monitor OpenTelemetry Distro, azure-monitor-opentelemetry, calling configure_azure_monitor() before the web framework is imported, and APPLICATIONINSIGHTS_CONNECTION_STRING must be set; instrumentation-key-only configuration is no longer supported for ingestion. I confirm the connection string points at the right resource, a frequent copy-paste error between environments. Process: I enable the distro's logging at debug level to see exporter errors, and check that the framework instrumentation is installed, for example FastAPI or Django, otherwise spans exist but no requests. Network: egress to the ingestion endpoint in the connection string must be allowed by Azure Firewall or NSGs; if the resource uses Azure Monitor Private Link Scope, DNS must resolve the private endpoints. Ingestion: if local authentication is disabled on the resource, the app must authenticate with a managed identity holding Monitoring Metrics Publisher. Finally, sampling and the daily cap can hide data, so I check the Usage and estimated costs blade. Telemetry normally appears within a few minutes."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Observability",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Azure: Log Analytics ingestion costs tripled in a month. How do you find the cause and reduce it without losing important data?",
+    "answer": "I find which tables and resources grew using the Usage table, then cut volume at the source, filter at ingestion, and move low-value data to cheaper table plans. The query Usage | where IsBillable | summarize GB = sum(Quantity) / 1000 by DataType, bin(TimeGenerated, 1d) shows which table grew; then for that table, summarize by _ResourceId or Computer to find the source. Typical culprits are ContainerLogV2 from a debug log level left on, AzureDiagnostics from someone enabling allLogs on a busy firewall or storage account, or Syslog at info level. Fixes in order: reduce verbosity in the app, narrow diagnostic setting categories, add a DCR ingestion-time transformation with transformKql to drop fields or rows, and move verbose tables to the Basic or Auxiliary plan, which are much cheaper to ingest but have limited query features and charge per query. For steady volumes above 100 GB per day, commitment tiers lower the unit price. I set a daily cap only as a guardrail with an alert, since hitting it silently drops security data. Then a budget alert on the workspace prevents repeats."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Observability",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Azure: Design an alerting strategy for a platform of fifty services on Azure that avoids alert fatigue.",
+    "answer": "I alert on user-facing symptoms against SLOs, route through a small set of action groups, and suppress noise with alert processing rules, keeping cause-based alerts as non-paging tickets. Each service defines availability and latency SLIs from AppRequests or Prometheus metrics, and the paging alerts are multi-window burn-rate log search or Prometheus rule alerts, for example 2 percent of the monthly error budget burned in one hour. Platform signals like node NotReady, Key Vault throttling or certificate expiry go to a ticket queue. Metric alerts are preferred for infrastructure because they evaluate quickly and cost less than log queries; dynamic thresholds help for seasonal traffic. Everything is deployed as code with Terraform, with Azure Monitor Baseline Alerts as a starting set for platform resources. Action groups map to ownership: one per team, plus a platform on-call group, integrated with the incident tool through webhook or Logic App. Alert processing rules suppress notifications during planned maintenance windows. Every page must have a runbook link in the alert description. I review monthly: any alert that paged without action gets tuned or deleted."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Security and Governance",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Azure: What Azure Policy effects exist, and when would you use Audit, Deny, Modify and DeployIfNotExists?",
+    "answer": "Azure Policy evaluates resource properties on every ARM write and periodically, and the effect decides what happens on a match: Deny blocks the request, Audit flags non-compliance, Modify changes properties or tags on the request, and DeployIfNotExists deploys a related resource when it is missing. Others include Append, AuditIfNotExists, DenyAction, Manual and Disabled. I start new policies in Audit to measure impact, then switch to Deny for hard rules like allowed regions or storage accounts with public network access enabled. Modify suits tagging, for example inheriting a cost-center tag from the resource group. DeployIfNotExists handles companion resources such as diagnostic settings or private DNS zone groups for new private endpoints. Modify and DeployIfNotExists need the assignment's managed identity with roles to make the change, and existing resources only change through a remediation task. Policies are grouped into initiatives and assigned at management groups. The GCP comparison is Organization Policy constraints, which mostly deny. Pitfall: Deny does not affect resources that already exist; they show as non-compliant until fixed."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Security and Governance",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Azure: What do soft delete and purge protection do on Key Vault, and why do they sometimes break Terraform runs?",
+    "answer": "Soft delete keeps a deleted vault or secret recoverable for a retention period of 7 to 90 days, and purge protection prevents anyone from permanently purging it before that period ends. Soft delete is now always on for new vaults; purge protection is optional but cannot be disabled once enabled, and it is required for scenarios like customer-managed keys for storage or disk encryption. They protect against ransomware-style deletion and mistakes. The Terraform friction is that names stay reserved: if you destroy a vault and apply again with the same name, creation fails because a soft-deleted vault with that name exists. The azurerm provider's features block has key_vault settings, purge_soft_delete_on_destroy and recover_soft_deleted_key_vaults, which help in dev, but with purge protection enabled you cannot purge and must recover the old vault or choose a new name. Same applies to individual secrets. I verify with az keyvault list-deleted. Pitfall: enabling purge protection in ephemeral test environments, which then leaves reserved names for up to 90 days."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Security and Governance",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Azure: Should you use Azure RBAC or access policies for Key Vault data-plane permissions? Explain the difference.",
+    "answer": "Use Azure RBAC; it is Microsoft's recommended model and access policies are legacy. With access policies, permissions are stored on the vault itself and anyone with Contributor on the vault can edit them, meaning Contributor effectively grants themselves secret access. With RBAC, enabled by enableRbacAuthorization, data-plane access comes from role assignments such as Key Vault Secrets User for reading secrets, Key Vault Secrets Officer for managing them, Key Vault Crypto User for key operations, and Key Vault Administrator, and creating those assignments requires Owner, User Access Administrator or RBAC Administrator, a much smaller group. RBAC also supports scoping to an individual secret, PIM for just-in-time access, and assignment at management group level, plus consistent auditing. Migrating an existing vault means creating equivalent role assignments first and then flipping the permission model, because switching removes the effect of all access policies immediately. GCP Secret Manager uses IAM in the same way, so the RBAC model will feel familiar. Pitfall: role assignments take a few minutes to propagate, so Terraform should create the assignment before the application first reads secrets."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Security and Governance",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Azure: How do you roll out a DeployIfNotExists policy and remediate the resources that already exist?",
+    "answer": "Assign the policy with a managed identity that has the roles listed in the definition's roleDefinitionIds, test it in Audit-like mode, then create a remediation task for existing resources. The policy definition's then block names the deployment and the roles needed. When you assign it with Terraform or az policy assignment create --mi-system-assigned --location westeurope, you also grant those roles to the assignment identity at the assignment scope, and in Terraform that is a separate azurerm_role_assignment you must not forget. New and updated resources are handled automatically after evaluation. Existing non-compliant resources need az policy remediation create --policy-assignment <id> --resource-discovery-mode ReEvaluateCompliance or the remediation button. I trigger a fresh scan with az policy state trigger-scan rather than waiting up to 24 hours. For safety I roll out to a canary management group first, using enforcementMode DoNotEnforce to see compliance without deploying. Verification is the remediation task's deployment status and the Activity Log for the deployments it created. Pitfall: a failed remediation deployment rarely alerts anyone, so I monitor task failures."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Security and Governance",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Azure: An app running with a managed identity gets 403 Forbidden from Key Vault even though you assigned it a role. How do you troubleshoot?",
+    "answer": "I read the error code in the 403 body, because Key Vault tells you whether it is RBAC, access policy, or the network. ForbiddenByRbac means the caller lacks a data-plane role: confirm the vault uses the RBAC model, that the role is a data role like Key Vault Secrets User rather than Contributor or Reader, that it was assigned to the right principal's object ID, and wait out propagation. ForbiddenByPolicy means the vault still uses access policies, so the RBAC assignment is ignored. ForbiddenByFirewall or ForbiddenByConnection means the network: public access is disabled or restricted, so the app needs a private endpoint, correct private DNS resolving vault.azure.net to a private IP, or its subnet allowed. Next I check which identity actually called; the AuditEvent logs in Log Analytics show the caller's object ID. With multiple user-assigned identities, DefaultAzureCredential may pick the wrong one unless AZURE_CLIENT_ID or ManagedIdentityCredential(client_id=...) is set. On AKS, check workload identity labels. Pitfall: identity tokens are cached, so after fixing group membership the app may need a restart."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Security and Governance",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Conceptual",
+    "question": "Azure: What does Microsoft Defender for Cloud provide, and how would you decide which Defender plans to enable?",
+    "answer": "Defender for Cloud combines cloud security posture management, which assesses configuration against benchmarks and produces a secure score, with cloud workload protection plans that detect threats on specific resource types. Foundational CSPM is free and gives recommendations based on the Microsoft cloud security benchmark. Defender CSPM, the paid tier, adds attack path analysis, the cloud security explorer, agentless scanning of VMs and container images, and data security posture. Workload plans include Defender for Servers Plan 1 and 2, Containers, Storage with malware scanning, Key Vault, Resource Manager, Databases, APIs and AI services. I enable plans based on what we run and risk: Containers for AKS and ACR image scanning, Servers Plan 2 where we have VMs, Storage for buckets that accept uploads, and Resource Manager everywhere because it is cheap and catches suspicious control-plane activity. Connectors also bring AWS and GCP projects into the same view, useful for a multi-cloud team. I enforce enablement with Azure Policy and export alerts to Sentinel. Pitfall: treating secure score as the goal rather than prioritising attack paths."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Security and Governance",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Azure: Write a Python helper that reads secrets from Key Vault with a managed identity, caches them briefly, and handles a missing secret cleanly.",
+    "answer": "I use SecretClient with DefaultAzureCredential, which picks up a managed identity or workload identity in Azure and the CLI locally, and wrap it in a small TTL cache so hot paths do not call Key Vault every request.\n\nimport os, time\nfrom azure.identity import DefaultAzureCredential\nfrom azure.keyvault.secrets import SecretClient\nfrom azure.core.exceptions import ResourceNotFoundError\n\nclass SecretCache:\n    def __init__(self, vault_url, ttl=300):\n        cred = DefaultAzureCredential(managed_identity_client_id=os.getenv('AZURE_CLIENT_ID'))\n        self.client = SecretClient(vault_url=vault_url, credential=cred)\n        self.ttl = ttl\n        self.cache = {}\n\n    def get(self, name, default=None):\n        hit = self.cache.get(name)\n        if hit and time.monotonic() - hit[1] < self.ttl:\n            return hit[0]\n        try:\n            value = self.client.get_secret(name).value\n        except ResourceNotFoundError:\n            return default\n        self.cache[name] = (value, time.monotonic())\n        return value\n\nLookups are O(1) time on a cache hit and one network call on a miss; space is O(k) for k cached secrets. The SDK already retries transient errors and 429s with exponential backoff, so I do not add another retry loop. The identity needs Key Vault Secrets User. Key Vault throttles per vault, so caching matters at scale. Pitfalls: never log the value, and keep the TTL short enough that rotations take effect, or reference a specific secret version during rotation."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Security and Governance",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Azure: Security wants to block public network access on all PaaS services across 200 subscriptions within a quarter, without breaking production. How do you run that program?",
+    "answer": "I treat it as a staged policy rollout: measure with Audit, fix with private endpoints and automation, then enforce Deny with time-boxed exemptions. First I assign built-in policies such as storage accounts should disable public network access and Key Vault should disable public network access, grouped in an initiative in Audit mode at the root of landing zones, and use Azure Resource Graph to produce a per-team list of non-compliant resources. In parallel the platform makes the compliant path easy: central private DNS zones, a DeployIfNotExists policy for DNS zone groups, Terraform modules with private endpoints by default, and self-hosted runners in VNets so pipelines still reach data planes. Teams get a deadline and a dashboard. Enforcement goes ring by ring: Sandbox and dev first, then Corp landing zones, then Online. Resources with a real need, like a public static website, get a policy exemption with category Waiver and an expiry date. Trade-off: private endpoints add cost and DNS complexity. I verify with compliance percentage per management group and by watching for RequestDisallowedByPolicy spikes after each ring."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure AI",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Azure: How are models accessed in Azure OpenAI and Microsoft Foundry, and what is a deployment?",
+    "answer": "You create an Azure OpenAI or Foundry resource in a region, then create deployments, each of which binds a specific model and version, such as a GPT chat model or text-embedding-3-large, to a name, a deployment type and a quota in tokens per minute. Your code calls the resource endpoint using the deployment name, not the raw model name, so you can upgrade the model behind a deployment by changing configuration. Microsoft Foundry is the broader platform: a Foundry resource with projects gives one place for OpenAI models, other models such as Llama, Mistral and DeepSeek, agents, evaluations and tracing, while Azure OpenAI remains available as the OpenAI-specific endpoint. Authentication should use Entra ID with the Cognitive Services OpenAI User role and local key auth disabled. The comparison on GCP is Vertex AI with Gemini endpoints and Model Garden. Pitfalls: model availability and quota differ by region and deployment type, and model versions have retirement dates, so I track them and configure the deployment's version upgrade policy rather than being surprised."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure AI",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Azure: Compare Standard, Global Standard, Data Zone and Provisioned deployment types in Azure OpenAI. How do you choose?",
+    "answer": "Standard and Global Standard are pay-per-token with tokens-per-minute quota, Data Zone deployments keep processing within a geography such as the EU or US, and Provisioned deployments buy reserved throughput in provisioned throughput units for predictable latency. Global Standard routes requests to any Azure region with capacity, so it gets the highest default quotas and newest models, but data may be processed outside your resource's region, although data at rest stays in the chosen geography. Regional Standard keeps processing in the resource's region with lower quotas. Data Zone Standard is the middle ground for EU or US residency requirements. Provisioned, available as Global, Data Zone or Regional, suits steady high-volume production where latency variance matters, billed hourly or via monthly and yearly reservations, and returns 429 when you exceed the purchased capacity. Global Batch handles asynchronous jobs at a discount with a 24-hour target turnaround. My usual choice: Data Zone Standard for regulated EU workloads, Global Standard for everything else, PTUs once utilisation is predictable, and Batch for offline evaluation or bulk embedding."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure AI",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "Azure: What safety controls does Azure provide around generative AI, such as content filters, Prompt Shields and groundedness detection?",
+    "answer": "Azure OpenAI and Foundry models run through a configurable content filtering system, built on Azure AI Content Safety, that classifies prompts and completions for hate, sexual, violence and self-harm at severity levels, plus optional detectors like Prompt Shields and protected material detection. Default filters block medium and high severity; you create a custom content filter configuration and attach it to a deployment to tighten them, and loosening them requires an approved modification request. Prompt Shields detect direct jailbreak attempts in user prompts and indirect prompt injection hidden in documents, which matters for RAG and agents that read untrusted content. Protected material detection flags known copyrighted text and public code. Groundedness detection in Content Safety checks whether a response is supported by provided sources. When a filter triggers, the API returns finish_reason content_filter or a 400 with content_filter_result details, and the application must handle it gracefully. These are guardrails, not a full security model: I still constrain agent tool permissions, validate outputs and log filter results to measure false positives."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure AI",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Azure: Your Azure OpenAI-backed service starts returning 429 Too Many Requests under load. How do you diagnose and fix it?",
+    "answer": "A 429 means the deployment hit its tokens-per-minute or requests-per-minute limit, or on Provisioned it exceeded utilisation, so I confirm which limit, back off correctly, and then add capacity or spread load. Response headers x-ratelimit-remaining-tokens and x-ratelimit-remaining-requests, plus retry-after-ms, tell me the state; Azure Monitor metrics for the resource show processed tokens and throttled requests per deployment. RPM is enforced at roughly 6 requests per minute per 1,000 TPM, and the rate estimate counts max_tokens, so setting max_tokens far above real output burns quota without generating tokens. Fixes in order: honour retry-after with jittered exponential backoff, which the openai SDK does through max_retries; lower max_tokens; increase the deployment's TPM up to the subscription's regional quota or request more; switch to Global Standard for higher quota; and spread load across deployments in several regions behind Azure API Management with a backend pool and circuit breaker. For steady heavy traffic, Provisioned throughput gives predictable capacity. Batch work should go to Global Batch. I verify by load testing and watching the throttle metric."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure AI",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "Azure: How do Microsoft Foundry and Azure AI Search compare with Vertex AI and Vertex AI Search for building an enterprise RAG assistant?",
+    "answer": "They cover the same layers: model hosting, retrieval, agents, evaluation and governance, but Azure separates retrieval into Azure AI Search, a standalone search engine you configure in detail, while Vertex AI Search is more of a managed, opinionated retrieval product. Foundry maps to Vertex AI: both host first-party and partner models, provide agent services, evaluations and tracing. Azure AI Search gives explicit control over indexes, analyzers, vector fields, hybrid queries and the semantic ranker, plus indexers and skillsets for ingestion; on GCP the equivalent control comes from Vertex AI Vector Search or AlloyDB with pgvector, while Vertex AI Search trades control for speed of setup. Identity and networking differ: Azure uses managed identities with Search Index Data Reader and private endpoints with shared private links, GCP uses service accounts and VPC Service Controls perimeters. For a customer already standardised on Microsoft 365 and Entra, Azure simplifies document-level security with Entra groups. I choose based on where the data and identity live, required residency, and how much retrieval tuning the use case needs."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure AI",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Azure: Design a RAG pipeline on Azure using Azure AI Search and Azure OpenAI that returns accurate, permission-aware answers over SharePoint and PDF content.",
+    "answer": "I ingest into Azure AI Search with integrated vectorization, query with hybrid search plus the semantic ranker, filter by user permissions, and generate with a grounded prompt that cites sources. Ingestion: an indexer pulls from Blob Storage or SharePoint, a skillset uses Document Layout or Text Split to chunk by section with overlap, and the Azure OpenAI embedding skill vectorizes chunks; index projections write one search document per chunk with parent ID, title and URL. Each chunk stores allowed Entra group IDs in a filterable field, and the API applies a filter like group_ids/any(g: search.in(g, '...')) from the user's token, so retrieval never surfaces documents they cannot see. Query: hybrid keyword and vector search combined with reciprocal rank fusion, then the semantic ranker reranks the top 50, and I pass the top five chunks to the model with instructions to answer only from them and cite. Quality comes from an evaluation set run in Foundry with groundedness and relevance metrics in CI. Trade-offs: semantic ranker adds latency and cost. Pitfall: stale permissions, so incremental indexing must refresh ACL fields."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure AI",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Azure: How do you deploy Azure OpenAI, Azure AI Search and Storage fully privately so no traffic touches public endpoints?",
+    "answer": "I disable public network access and key authentication on every service, give each a private endpoint with central Private DNS zones, and use shared private links so AI Search's indexers can reach Storage and OpenAI privately. Private endpoints: Azure OpenAI or Foundry uses privatelink.openai.azure.com and privatelink.cognitiveservices.azure.com, AI Search uses privatelink.search.windows.net, and Storage uses privatelink.blob.core.windows.net, all linked to the hub and resolved through DNS Private Resolver. Because AI Search's indexers and vectorizers run in Microsoft's multi-tenant environment, they cannot use my private endpoints, so I create shared private link resources from Search to the storage account and the OpenAI resource, then approve those connections on the targets. Authentication is all managed identities: the app's identity has Cognitive Services OpenAI User and Search Index Data Reader, the Search identity has Storage Blob Data Reader and OpenAI access, with disableLocalAuth true everywhere. Apps run in VNet-integrated App Service or AKS. Trade-offs: extra cost and slower setup. Pitfalls: forgetting to approve shared private link connections, and developer laptops losing access, which needs VPN or a jump host."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure AI",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Azure: A customer's production assistant on Azure OpenAI must survive a regional outage and quota exhaustion. How do you design the AI gateway layer?",
+    "answer": "I put Azure API Management in front of model deployments in several regions as an AI gateway, with load balancing, circuit breakers, token limits per consumer and failover, so applications call one endpoint. APIM backends point to Azure OpenAI deployments in, for example, Sweden Central, France Central and a Global Standard deployment, grouped in a load-balanced backend pool with priorities and weights: a Provisioned deployment as priority one, pay-as-you-go deployments as overflow. A circuit breaker rule trips a backend on 429 or 5xx and respects Retry-After, so traffic shifts automatically. APIM authenticates to each backend with its managed identity, so apps never hold keys. The llm-token-limit or azure-openai-token-limit policy enforces tokens-per-minute per subscription key or app, and the token metric policy emits usage by consumer for chargeback. The semantic cache policy can serve repeated prompts from Azure Managed Redis. For regional failure of APIM itself, the Premium tier supports multi-region gateways. Pitfalls: model versions must match across regions, and streaming responses complicate retries, so I retry only before the first token."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Azure AI",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Coding",
+    "question": "Azure: Write a Python function that calls an Azure OpenAI chat deployment with Entra ID authentication and handles 429 throttling using the server's retry hints.",
+    "answer": "I use the openai SDK's AzureOpenAI client with a bearer token provider from azure-identity, disable the SDK's built-in retries so the policy is explicit, and back off using retry-after-ms with jitter.\n\nimport random, time\nfrom openai import AzureOpenAI, RateLimitError\nfrom azure.identity import DefaultAzureCredential, get_bearer_token_provider\n\ntoken_provider = get_bearer_token_provider(\n    DefaultAzureCredential(), 'https://cognitiveservices.azure.com/.default')\nclient = AzureOpenAI(azure_endpoint='https://contoso-ai.openai.azure.com',\n    azure_ad_token_provider=token_provider, api_version='2024-10-21', max_retries=0)\n\ndef chat(deployment, messages, attempts=5):\n    for attempt in range(attempts):\n        try:\n            resp = client.chat.completions.create(\n                model=deployment, messages=messages, max_tokens=800)\n            return resp.choices[0].message.content\n        except RateLimitError as err:\n            if attempt == attempts - 1:\n                raise\n            hint = err.response.headers.get('retry-after-ms')\n            delay = float(hint) / 1000 if hint else 2 ** attempt\n            time.sleep(delay + random.uniform(0, 0.5))\n\nThe endpoint name is fictional. The identity needs Cognitive Services OpenAI User, and the token provider refreshes tokens automatically. Time complexity is O(attempts) calls with bounded backoff, and space is O(1) beyond the response. Keeping max_tokens realistic matters because the quota estimator reserves it. In production I add a total deadline, log x-ratelimit-remaining-tokens, and fail over to another deployment, usually via API Management, instead of retrying one region forever."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Cost Management",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "Azure: How do you use Cost Management budgets, alerts and tags to keep a team's Azure spend visible and under control?",
+    "answer": "I set budgets per subscription or resource group with alert thresholds wired to action groups, enforce cost-allocation tags with Azure Policy, and give teams cost analysis views filtered to their scope. A budget, created with az consumption budget create or the azurerm_consumption_budget_subscription resource, tracks actual and forecasted cost against a monthly amount and notifies at, for example, 80 percent actual and 100 percent forecasted; budgets alert but do not stop spending, although an action group can trigger automation such as scaling down dev resources. Anomaly alerts catch unexpected daily spikes even when a budget is not breached. Tags such as cost-center, owner and environment are required or inherited from the resource group with a Modify policy, so cost analysis can group by tag. Scheduled exports to a storage account feed Power BI or the FinOps toolkit for showback. GCP budgets with Pub/Sub notifications are the direct analogue. Pitfall: cost data lags by several hours up to about a day, so budgets are not real-time guardrails; quotas and policy limits on SKUs are better for hard stops."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Cost Management",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Azure: Compare Azure Reservations, Azure savings plan for compute, Spot VMs and Azure Hybrid Benefit as cost levers.",
+    "answer": "Reservations give the deepest discount for a specific resource type and region commitment, savings plans give a smaller but flexible discount for an hourly spend commitment across compute services and regions, Spot gives very cheap capacity that can be evicted, and Hybrid Benefit reuses existing Windows Server or SQL Server licences. Reservations, for one or three years, suit stable workloads like a database or a fixed VM family; they also exist for services such as Azure SQL, Cosmos DB and Azure OpenAI provisioned throughput. Savings plans cover VMs, AKS nodes, App Service premium plans and Functions premium, which suits teams that change VM sizes often. Spot VMs or AKS spot node pools fit batch, CI runners and stateless workers tolerant of 30-second eviction notices. I size commitments from Advisor recommendations and the last 30 to 60 days of usage, covering the steady baseline only. The GCP equivalents are committed use discounts and Spot VMs; AWS has Reserved Instances and Savings Plans. Pitfall: buying three-year reservations before rightsizing, which locks in waste."
+  },
+  {
+    "source": "Azure Bank",
+    "section": "Azure Cloud Engineering",
+    "category": "Azure Cloud Engineering - Cost Management",
+    "topic": "Azure Cloud Engineering",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Azure: The monthly Azure bill for a platform jumped 40 percent with no new launches. Walk through how you investigate and what you would expect to find.",
+    "answer": "I break the increase down by service, meter and resource in Cost analysis, compare to the previous month's daily trend, then drill into the top movers and match them to change history. Grouping by service name and then resource usually shows a handful of causes. The usual suspects on a platform are Log Analytics ingestion from a debug flag or new diagnostic settings, bandwidth and inter-region transfer after someone moved a dependency to another region, NAT Gateway or Azure Firewall data processing from a chatty integration, AKS autoscaler max-count raised and never scaling down because of PDBs or a stuck job, orphaned managed disks and snapshots, premium SKUs left over from a load test, and Azure OpenAI token usage growing with a new prompt that sends a large context. For each, I correlate the start date with the Activity Log and deployments. I fix quickly, then add guardrails: anomaly alerts, budgets per team, policies restricting expensive SKUs, and a weekly cost review in the platform standup. Finally, I quantify savings to confirm the fix in the next week's daily cost."
+  }
+]

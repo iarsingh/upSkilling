@@ -1,0 +1,802 @@
+[
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Arrays and Hashing",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Coding",
+    "question": "Python DSA: Write a one-pass function that returns the indices of two numbers in a list that sum to a target, or None when no pair exists. How do you handle duplicates such as [3, 3] with target 6?",
+    "answer": "Use a dict that maps each value to the index where it was seen, and check for the complement before inserting the current value, so one pass finds the pair.\n\ndef two_sum(nums, target):\n    seen = {}\n    for i, x in enumerate(nums):\n        j = seen.get(target - x)\n        if j is not None:\n            return j, i\n        seen[x] = i\n    return None\n\nChecking before inserting is what makes duplicates work: for [3, 3] and target 6 the second 3 finds index 0 already stored and returns (0, 1), while a lone 3 never pairs with itself. Empty and single-element lists fall through and return None. Time is O(n) on average because dict lookups and inserts are amortised O(1); space is O(n) for the dict. A classic pitfall is writing if seen.get(target - x):, which treats index 0 as falsy and silently misses valid pairs, so compare against None explicitly. If the input is already sorted, two pointers give the same O(n) time with O(1) extra space."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Arrays and Hashing",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Coding",
+    "question": "Python DSA: Group a list of words into anagram groups while preserving the order in which each group first appears. Which dictionary key do you choose and what does it cost?",
+    "answer": "Key each word by a canonical form, either its sorted characters or a letter-count tuple, and collect words in a defaultdict(list); because dicts keep insertion order, groups come out in first-seen order.\n\nfrom collections import defaultdict\ndef group_anagrams(words):\n    groups = defaultdict(list)\n    for w in words:\n        groups[''.join(sorted(w))].append(w)\n    return list(groups.values())\n\nWith n words of maximum length k, building sorted keys costs O(n k log k) time; a 26-slot count tuple brings that to O(n k) for lowercase ASCII but does not generalise to Unicode. Space is O(n k) for the keys and grouped words. Edge cases: an empty list returns [], duplicates like ['ab', 'ab'] land in the same group, and the empty string is a valid key of its own. Ask about case sensitivity before coding: 'Tea' and 'eat' only group together if you lower-case or casefold first, and that requirement changes the expected test output."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Arrays and Hashing",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Return the k most frequent elements of a list. Compare a heap-based solution with bucket sort and state the complexity of each.",
+    "answer": "Count with collections.Counter, then either take the k largest counts with a heap or index values by frequency in buckets for linear time.\n\nfrom collections import Counter\nimport heapq\ndef top_k_heap(nums, k):\n    counts = Counter(nums)\n    return heapq.nlargest(k, counts, key=counts.get)\ndef top_k_bucket(nums, k):\n    counts = Counter(nums)\n    buckets = [[] for _ in range(len(nums) + 1)]\n    for x, c in counts.items():\n        buckets[c].append(x)\n    out = []\n    for c in range(len(nums), 0, -1):\n        out.extend(buckets[c])\n        if len(out) >= k:\n            return out[:k]\n    return out\n\nCounting is O(n). heapq.nlargest keeps a heap of size k over u distinct values, so the heap version is O(n + u log k) time and O(u + k) space; Counter.most_common(k) does exactly this internally and is the idiomatic answer. Bucket sort works because a frequency can never exceed n, giving O(n) time and O(n) space. Edge cases: empty input returns [], k larger than the number of distinct values returns all of them, and ties come back in arbitrary order, so confirm tie-breaking rules before writing assertions."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Arrays and Hashing",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Find the length of the longest run of consecutive integers in an unsorted list in O(n) time, without sorting.",
+    "answer": "Put the values in a set and only start counting from numbers that have no predecessor, so each run is walked exactly once.\n\ndef longest_consecutive(nums):\n    values = set(nums)\n    best = 0\n    for x in values:\n        if x - 1 not in values:\n            y = x\n            while y + 1 in values:\n                y += 1\n            best = max(best, y - x + 1)\n    return best\n\nThe x - 1 check is the key insight: the inner while loop only runs from the start of a run, so across the whole function every value is visited a constant number of times, giving O(n) average time and O(n) space for the set. Iterate over the set, not the original list; with input like [1] * 100000 plus a long run starting at 1, looping over the list would re-walk the same run for every duplicate and degrade to O(n squared). Edge cases: an empty list returns 0, a single element returns 1, and negative numbers work unchanged. Sorting would also solve it in O(n log n) and is a fine fallback to mention when memory is tight."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Arrays and Hashing",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Given a list of integers, return a list where each position holds the product of all other elements, without using division and in O(n) time.",
+    "answer": "Make two passes: the first writes the running prefix product into each slot, the second multiplies in a running suffix product from the right.\n\ndef product_except_self(nums):\n    n = len(nums)\n    out = [1] * n\n    prefix = 1\n    for i in range(n):\n        out[i] = prefix\n        prefix *= nums[i]\n    suffix = 1\n    for i in range(n - 1, -1, -1):\n        out[i] *= suffix\n        suffix *= nums[i]\n    return out\n\nAfter the first loop out[i] holds the product of everything left of i; the second loop multiplies in everything right of i. Time is O(n) and extra space is O(1) beyond the output list. Avoiding division matters because total // nums[i] breaks on zeros: with one zero every position except the zero's own must be 0, and with two zeros everything is 0, which this approach handles naturally. Edge cases: an empty list returns [], a single element returns [1] because the empty product is 1. Python integers do not overflow, but in a fixed-width language you would mention overflow; verify with [1, 2, 0, 4] giving [0, 0, 8, 0]."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Arrays and Hashing",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Count the contiguous subarrays whose sum equals k when the list may contain negative numbers. Why does a sliding window fail on this problem?",
+    "answer": "Use prefix sums with a hash map of how many times each running total has appeared: a subarray ending here sums to k exactly when an earlier prefix equals total - k.\n\ndef count_subarrays(nums, k):\n    seen = {0: 1}\n    total = count = 0\n    for x in nums:\n        total += x\n        count += seen.get(total - k, 0)\n        seen[total] = seen.get(total, 0) + 1\n    return count\n\nSeeding seen with {0: 1} counts subarrays that start at index 0, and reading before writing ensures that for k = 0 you never count the empty subarray. Time is O(n) and space is O(n) for the distinct prefix totals. A sliding window only works when extending the window always increases the sum and shrinking always decreases it; negative numbers break that monotonicity, so you cannot decide which side to move. Example: [1, -1, 1] with k = 1 returns 3, counting [1] twice and [1, -1, 1] once. Edge cases: an empty list returns 0. Verify against an O(n squared) brute force on random lists with negatives, which catches the off-by-one around the seed entry."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Arrays and Hashing",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Python DSA: Why are membership checks on Python dicts and sets O(1) on average, and what conditions make them degrade toward O(n)?",
+    "answer": "Dicts and sets are open-addressing hash tables: hash(key) picks a starting slot, collisions are resolved by probing other slots, and the table resizes before it gets more than about two-thirds full, so a lookup inspects only a few slots on average. Inserts are amortised O(1) because occasional resizes copy everything but happen geometrically less often. Performance degrades when many keys produce the same hash, because every lookup then probes through a long chain of equal-hash entries and calls __eq__ on each. That happens with a custom class whose __hash__ returns a constant, or with adversarial input crafted to collide; CPython randomises str and bytes hashes per process via PYTHONHASHSEED to blunt hash flooding, but small integers hash to themselves. Keys must be hashable, and __eq__ and __hash__ must agree, otherwise equal objects land in different slots and lookups miss. To verify, time lookups with timeit while growing n and confirm the cost stays flat."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Two Pointers and Sliding Window",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Coding",
+    "question": "Python DSA: Check whether a string is a palindrome considering only alphanumeric characters and ignoring case, using O(1) extra space.",
+    "answer": "Walk two pointers inward from both ends, skipping non-alphanumeric characters and comparing the rest case-insensitively.\n\ndef is_palindrome(s):\n    i, j = 0, len(s) - 1\n    while i < j:\n        if not s[i].isalnum():\n            i += 1\n        elif not s[j].isalnum():\n            j -= 1\n        elif s[i].lower() != s[j].lower():\n            return False\n        else:\n            i += 1\n            j -= 1\n    return True\n\nTime is O(n) because each pointer only moves inward, and extra space is O(1). The one-liner that builds a cleaned string and compares it with its reverse is also O(n) but allocates O(n) memory, which is worth mentioning as the readable alternative. Edge cases: an empty string, a single character, and a string of only punctuation such as ',.!' all return True because the pointers meet without a mismatch. 'A man, a plan, a canal: Panama' returns True and 'race a car' returns False. For non-ASCII input prefer casefold() over lower(), since characters like the German sharp s only compare equal after case folding."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Two Pointers and Sliding Window",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Return all unique triplets in a list that sum to zero, without duplicate triplets in the output. How do you skip duplicates correctly?",
+    "answer": "Sort, fix the first element, then run two pointers on the remainder, skipping equal values at both the outer and inner levels.\n\ndef three_sum(nums):\n    nums = sorted(nums)\n    res = []\n    for i in range(len(nums) - 2):\n        if nums[i] > 0:\n            break\n        if i and nums[i] == nums[i - 1]:\n            continue\n        lo, hi = i + 1, len(nums) - 1\n        while lo < hi:\n            s = nums[i] + nums[lo] + nums[hi]\n            if s < 0:\n                lo += 1\n            elif s > 0:\n                hi -= 1\n            else:\n                res.append((nums[i], nums[lo], nums[hi]))\n                lo += 1\n                hi -= 1\n                while lo < hi and nums[lo] == nums[lo - 1]:\n                    lo += 1\n    return res\n\nSkipping a repeated first element and advancing lo past repeats after each hit guarantees uniqueness without a set of tuples. Time is O(n squared) and space is O(n) for the sorted copy. The early break works because once the smallest element is positive no triplet can sum to zero. Edge cases: fewer than three elements returns [], and [0, 0, 0, 0] returns exactly one triplet (0, 0, 0)."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Two Pointers and Sliding Window",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Find the length of the longest substring without repeating characters using a sliding window, and explain why inputs like 'abba' break naive implementations.",
+    "answer": "Track the last index of every character and move the window start just past a repeat, but only if that repeat is inside the current window.\n\ndef longest_unique(s):\n    last = {}\n    start = best = 0\n    for i, ch in enumerate(s):\n        if last.get(ch, -1) >= start:\n            start = last[ch] + 1\n        last[ch] = i\n        best = max(best, i - start + 1)\n    return best\n\nThe >= start condition is what 'abba' tests: when the final 'a' arrives, its previous index 0 is already left of the window start 2, and a naive start = last[ch] + 1 would move the start backwards to 1, producing a window 'bba' with a duplicate and a wrong answer of 3 instead of 2. Time is O(n) since each character is processed once, and space is O(min(n, alphabet size)) for the dict. Edge cases: the empty string returns 0, a single character returns 1, and 'bbbb' returns 1. A max(start, last[ch] + 1) formulation is an equivalent fix and reads well in an interview."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Two Pointers and Sliding Window",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Given strings s and t, return the shortest substring of s that contains every character of t including duplicates, or an empty string if none exists.",
+    "answer": "Expand a right pointer until the window covers t, then shrink from the left while it still covers t, recording the best window; a single missing counter makes the coverage check O(1).\n\nfrom collections import Counter\ndef min_window(s, t):\n    if not t:\n        return ''\n    need = Counter(t)\n    missing = len(t)\n    left = 0\n    best = (0, float('inf'))\n    for right, ch in enumerate(s):\n        if need[ch] > 0:\n            missing -= 1\n        need[ch] -= 1\n        while missing == 0:\n            if right - left < best[1] - best[0]:\n                best = (left, right)\n            need[s[left]] += 1\n            if need[s[left]] > 0:\n                missing += 1\n            left += 1\n    return '' if best[1] == float('inf') else s[best[0]:best[1] + 1]\n\nneed[c] going negative means the window holds surplus copies of c, which is why shrinking only increments missing once a count turns positive again. Duplicates in t such as 'aa' are handled because missing starts at len(t), not the number of distinct characters. Time is O(len(s) + len(t)) since each pointer moves forward at most len(s) times; space is O(alphabet). Edge cases: empty t returns '', t longer than s returns '', and s = 'ADOBECODEBANC', t = 'ABC' returns 'BANC'."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Two Pointers and Sliding Window",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Given a list of wall heights, pick two walls that hold the most water between them. Prove why moving the shorter pointer inward is safe.",
+    "answer": "Start with pointers at both ends, record the area, then always move the pointer at the shorter wall inward.\n\ndef max_area(heights):\n    i, j = 0, len(heights) - 1\n    best = 0\n    while i < j:\n        best = max(best, (j - i) * min(heights[i], heights[j]))\n        if heights[i] < heights[j]:\n            i += 1\n        else:\n            j -= 1\n    return best\n\nThe argument: area is width times the shorter height. If heights[i] is the shorter wall, every other pairing of i with some k between i and j has smaller width and a height capped at heights[i], so none can beat the area just recorded; discarding i loses nothing. Moving the taller wall instead could only shrink width without raising the cap, which is why the greedy choice is correct. Time is O(n) and space is O(1), versus O(n squared) for checking every pair. Edge cases: fewer than two walls returns 0, and equal heights can move either pointer. Verify with [1, 8, 6, 2, 5, 4, 8, 3, 7], which returns 49, and fuzz against the brute force."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Two Pointers and Sliding Window",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Given per-second request counts for a service, return the maximum count in every sliding window of k seconds in O(n) time using a monotonic deque.",
+    "answer": "Keep a deque of indices whose values are strictly decreasing; the front is always the window maximum, and each index is pushed and popped at most once.\n\nfrom collections import deque\ndef window_max(nums, k):\n    if k <= 0:\n        raise ValueError('k must be positive')\n    dq, out = deque(), []\n    for i, x in enumerate(nums):\n        while dq and nums[dq[-1]] <= x:\n            dq.pop()\n        dq.append(i)\n        if dq[0] <= i - k:\n            dq.popleft()\n        if i >= k - 1:\n            out.append(nums[dq[0]])\n    return out\n\nWhen a new value arrives, any smaller value behind it can never be a future maximum, so it is popped from the back; indices that have slid out of the window are dropped from the front. Storing indices rather than values is what lets you detect expiry and handle duplicates correctly. Time is O(n) amortised and space is O(k). A heap would be O(n log n) with lazy deletion, and recomputing max per window is O(n k). Edge cases: k larger than the list returns [], k = 1 returns the input, and [1, 3, -1, -3, 5, 3, 6, 7] with k = 3 returns [3, 3, 5, 5, 6, 7]."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Two Pointers and Sliding Window",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "Python DSA: Your 'longest substring with at most k distinct characters' solution returns wrong lengths for 'eceba' with k = 2. You track counts in a dict and compare len(counts) with k. What is the likely bug and how do you fix it?",
+    "answer": "The most likely bug is that the shrink step decrements counts but never deletes keys that reach zero, so len(counts) still reports characters that have left the window and the loop shrinks too far. The fix is to delete zero-count keys and shrink with a while loop, not an if:\n\nwhile len(counts) > k:\n    c = s[left]\n    counts[c] -= 1\n    if counts[c] == 0:\n        del counts[c]\n    left += 1\n\nTwo other common causes: updating the best length before shrinking, which records an invalid window, and using if instead of while, which removes only one character when several must go. With the fix, 'eceba' and k = 2 gives 3 for 'ece'. To catch this class of bug, write a brute-force O(n cubed) checker and compare on a few thousand random short strings over a small alphabet, for example using Hypothesis; small alphabets force many repeats and boundary cases, including k = 0 and the empty string."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Stacks and Queues",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Coding",
+    "question": "Python DSA: Check whether the brackets (), [] and {} in a string are balanced while ignoring every other character, such as in a template or config snippet.",
+    "answer": "Push opening brackets onto a stack and, for each closing bracket, pop and confirm it matches; the string is balanced if nothing mismatches and the stack ends empty.\n\ndef is_balanced(s):\n    pairs = {')': '(', ']': '[', '}': '{'}\n    stack = []\n    for ch in s:\n        if ch in '([{':\n            stack.append(ch)\n        elif ch in pairs:\n            if not stack or stack.pop() != pairs[ch]:\n                return False\n    return not stack\n\nThe not stack guard handles a closing bracket with nothing open, such as ')(' , and the final return not stack catches leftover openers such as '(('. Characters that are not brackets are skipped, so '{\"a\": [1, 2]}' returns True. Time is O(n) and space is O(n) in the worst case of all openers. Edge cases: the empty string is balanced, '(]' fails on the type mismatch, and '([)]' fails because nesting order matters, which a simple per-type counter would miss. That last case is the reason a stack is required rather than three integer counters."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Stacks and Queues",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: For each day's temperature, return how many days you must wait for a strictly warmer day, or 0 if none comes. Explain the monotonic stack you use.",
+    "answer": "Keep a stack of indices whose temperatures are non-increasing; when a warmer day arrives, pop every cooler index and record the distance.\n\ndef days_until_warmer(temps):\n    res = [0] * len(temps)\n    stack = []\n    for i, t in enumerate(temps):\n        while stack and temps[stack[-1]] < t:\n            j = stack.pop()\n            res[j] = i - j\n        stack.append(i)\n    return res\n\nEach index is pushed once and popped at most once, so the nested loop is O(n) amortised rather than O(n squared); space is O(n) for the stack and output. The strict < comparison means equal temperatures stay on the stack, matching the requirement for a strictly warmer day. Indices left on the stack at the end never found a warmer day and keep their default 0. Edge cases: empty input returns [], a single day returns [0], and a strictly decreasing series returns all zeros. The same pattern answers next-greater-element questions such as how many minutes until a queue depth exceeds its current level."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Stacks and Queues",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Evaluate an arithmetic expression given in reverse Polish notation where division truncates toward zero. Why is the // operator wrong here?",
+    "answer": "Push numbers onto a stack; on an operator pop the right operand first, then the left, apply the operation, and push the result.\n\ndef eval_rpn(tokens):\n    def div(a, b):\n        q = abs(a) // abs(b)\n        return q if (a >= 0) == (b > 0) else -q\n    ops = {\n        '+': lambda a, b: a + b,\n        '-': lambda a, b: a - b,\n        '*': lambda a, b: a * b,\n        '/': div,\n    }\n    stack = []\n    for tok in tokens:\n        if tok in ops:\n            b = stack.pop()\n            a = stack.pop()\n            stack.append(ops[tok](a, b))\n        else:\n            stack.append(int(tok))\n    return stack[-1]\n\nPython's // floors toward negative infinity, so -7 // 2 is -4, while truncation toward zero requires -3. int(a / b) gives the right sign but goes through a float and loses precision beyond 2**53, so the integer-only div helper is safer. Popping b before a matters for subtraction and division. Tokens like '-3' are not in ops, so they parse as negative numbers. Time and space are O(n). Edge cases: a single token returns that number, and malformed input raises IndexError, which you would wrap in a clearer ValueError in production."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Stacks and Queues",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Implement a stack class that supports push, pop, top and get_min, all in O(1) time, and handles repeated minimum values correctly.",
+    "answer": "Store each element together with the minimum of the stack at the moment it was pushed, so the current minimum is always at the top.\n\nclass MinStack:\n    def __init__(self):\n        self._items = []\n    def push(self, x):\n        current = self._items[-1][1] if self._items else x\n        self._items.append((x, min(x, current)))\n    def pop(self):\n        if not self._items:\n            raise IndexError('pop from empty MinStack')\n        return self._items.pop()[0]\n    def top(self):\n        return self._items[-1][0]\n    def get_min(self):\n        return self._items[-1][1]\n\nEvery operation touches only the last list element, so all four are O(1), and space is O(n). Because each entry carries its own snapshot of the minimum, duplicates are safe: pushing 2, 1, 1 and popping once still reports 1, a case that breaks the variant using a separate min stack updated only with strict less-than. The trade-off is roughly double memory; the two-stack variant saves space when the minimum rarely changes but must push on <= to handle duplicates. top and get_min raise IndexError on an empty stack, which is a reasonable contract to state explicitly."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Stacks and Queues",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Scenario",
+    "question": "Python DSA: A background worker uses a Python list as its job queue with append() and pop(0), and throughput drops sharply as the backlog grows to hundreds of thousands of jobs. What is happening and what do you switch to?",
+    "answer": "list.pop(0) is O(n) because a Python list is a dynamic array and removing the first element shifts every remaining pointer left, so draining a backlog of n jobs costs O(n squared) overall. Switch to collections.deque, whose append and popleft are O(1) because it is a doubly linked list of fixed-size blocks. If producers and consumers are different threads, use queue.Queue instead: it wraps a deque with a lock and condition variables, giving blocking get(timeout=...), maxsize for back-pressure, and task_done/join for shutdown. Inside asyncio code use asyncio.Queue, which is not thread-safe but awaits without blocking the event loop. One trade-off to mention is that deque indexing in the middle is O(n), so it is a queue, not a random-access list. Verify the fix with python -m timeit comparing pop(0) and popleft() at 100,000 elements, then watch the worker's queue-latency metric flatten as the backlog grows."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Stacks and Queues",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Find the largest rectangle area in a histogram, for example to size the largest contiguous block of free capacity across a row of nodes.",
+    "answer": "Use a stack of indices with increasing heights; when a shorter bar arrives, pop taller bars and compute the widest rectangle each popped bar can anchor.\n\ndef largest_rectangle(heights):\n    stack = []\n    best = 0\n    for i, h in enumerate(heights + [0]):\n        while stack and heights[stack[-1]] >= h:\n            height = heights[stack.pop()]\n            left = stack[-1] + 1 if stack else 0\n            best = max(best, height * (i - left))\n        stack.append(i)\n    return best\n\nWhen a bar is popped, the current index i is the first bar to its right that is shorter, and the new stack top is the last shorter bar to its left, so the rectangle with that height spans left to i - 1. Appending a sentinel 0 forces every remaining bar to be popped at the end without a separate cleanup loop. Each index is pushed and popped once, so time is O(n) and space is O(n). Edge cases: an empty list returns 0, a single bar returns its height, and equal heights are handled by popping on >=, which merges them. [2, 1, 5, 6, 2, 3] returns 10 from the bars of height 5 and 6."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Linked Lists",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Coding",
+    "question": "Python DSA: Reverse a singly linked list iteratively and return the new head. Walk through what happens for an empty list and a single node.",
+    "answer": "Walk the list once with three references, prev, cur and nxt, and flip each next pointer to point backwards; prev ends up as the new head.\n\nclass ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\ndef reverse_list(head):\n    prev = None\n    cur = head\n    while cur:\n        nxt = cur.next\n        cur.next = prev\n        prev = cur\n        cur = nxt\n    return prev\n\nFor an empty list the loop never runs and None is returned. For a single node, its next is set to None (it already was) and that node is returned. For 1 -> 2 -> 3 the pointers become 1 <- 2 <- 3 and 3 is returned. Time is O(n) and extra space is O(1). The usual bug is forgetting to save cur.next before overwriting it, which loses the rest of the list after the first step. A recursive version is shorter but uses O(n) call stack and hits RecursionError around 1,000 nodes by default, so the iterative form is what you ship. Verify by converting to a Python list before and after and checking the result equals the reversed original."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Linked Lists",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Coding",
+    "question": "Python DSA: Merge two sorted linked lists into one sorted list by splicing existing nodes rather than allocating new ones. Why does a dummy head node simplify the code?",
+    "answer": "Use a dummy node as a fixed anchor, keep a tail pointer, repeatedly attach the smaller head, then attach whatever remains of the other list.\n\ndef merge_two(a, b):\n    dummy = tail = ListNode(0)\n    while a and b:\n        if a.val <= b.val:\n            tail.next, a = a, a.next\n        else:\n            tail.next, b = b, b.next\n        tail = tail.next\n    tail.next = a or b\n    return dummy.next\n\nThe dummy removes the special case of choosing the first head: every node, including the first, is attached the same way, and dummy.next is the answer even when both inputs are empty (it stays None). Using <= keeps the merge stable, so equal values from a come before those from b. The final tail.next = a or b links the leftover run in O(1) instead of looping over it. Time is O(n + m) and extra space is O(1) because nodes are reused. A pitfall with the tuple assignment is ordering: Python evaluates the right side first, so tail.next, a = a, a.next is safe, but splitting it into two statements in the wrong order loses the reference. Test with one empty list, all duplicates, and lists of very different lengths."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Linked Lists",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Detect whether a linked list has a cycle and return the node where the cycle begins, using O(1) extra memory. Why does resetting one pointer to the head find the entry?",
+    "answer": "Use Floyd's tortoise and hare: a slow pointer moves one step and a fast pointer two; if they meet there is a cycle, and then moving one pointer back to head and advancing both one step at a time makes them meet at the cycle entry.\n\ndef cycle_start(head):\n    slow = fast = head\n    while fast and fast.next:\n        slow = slow.next\n        fast = fast.next.next\n        if slow is fast:\n            slow = head\n            while slow is not fast:\n                slow = slow.next\n                fast = fast.next\n            return slow\n    return None\n\nWhy it works: if the distance from head to the entry is a and the meeting point is b steps into a cycle of length c, then fast travelled twice as far, which gives a = k*c - b for some k. So a pointer starting at head and one starting at the meeting point both reach the entry after a steps. Time is O(n) and space is O(1). Compare nodes with is, not ==, because a node class may define __eq__ on values and two distinct nodes with equal values would look like a meeting. A set of visited node ids is simpler but costs O(n) memory. Test with no cycle, a self-loop on one node, and a cycle that starts at the head."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Linked Lists",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Implement an LRU cache with O(1) get and put using a dict plus a hand-written doubly linked list, without OrderedDict. How does eviction work?",
+    "answer": "A dict maps key to node for O(1) lookup, and a doubly linked list with sentinel head and tail keeps recency order; the most recent node sits after head and the eviction victim sits before tail.\n\nclass Node:\n    __slots__ = (\"key\", \"val\", \"prev\", \"next\")\n    def __init__(self, key=None, val=None):\n        self.key, self.val = key, val\n        self.prev = self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity):\n        self.cap, self.map = capacity, {}\n        self.head, self.tail = Node(), Node()\n        self.head.next, self.tail.prev = self.tail, self.head\n    def _unlink(self, n):\n        n.prev.next, n.next.prev = n.next, n.prev\n    def _push_front(self, n):\n        n.prev, n.next = self.head, self.head.next\n        self.head.next.prev = n\n        self.head.next = n\n    def get(self, key):\n        n = self.map.get(key)\n        if n is None:\n            return -1\n        self._unlink(n)\n        self._push_front(n)\n        return n.val\n    def put(self, key, val):\n        if key in self.map:\n            self._unlink(self.map.pop(key))\n        n = Node(key, val)\n        self.map[key] = n\n        self._push_front(n)\n        if len(self.map) > self.cap:\n            lru = self.tail.prev\n            self._unlink(lru)\n            del self.map[lru.key]\n\nSentinels remove every None check at the ends. Storing the key in the node is essential so eviction can delete the dict entry. All operations are O(1); space is O(capacity). With capacity 0, put inserts then immediately evicts. In production, functools.lru_cache or OrderedDict.move_to_end do the same job; this version is not thread-safe without a lock."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Linked Lists",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Coding",
+    "question": "Python DSA: Reverse the nodes of a linked list in groups of k, leaving any final group shorter than k untouched, using O(1) extra space.",
+    "answer": "Keep a pointer to the node just before the current group, check that k nodes exist ahead, reverse exactly that segment in place, and reconnect both ends before moving on.\n\ndef reverse_k_group(head, k):\n    dummy = ListNode(0, head)\n    group_prev = dummy\n    while True:\n        kth = group_prev\n        for _ in range(k):\n            kth = kth.next\n            if kth is None:\n                return dummy.next\n        group_next = kth.next\n        prev, cur = group_next, group_prev.next\n        while cur is not group_next:\n            nxt = cur.next\n            cur.next = prev\n            prev, cur = cur, nxt\n        first = group_prev.next\n        group_prev.next = kth\n        group_prev = first\n\nThe trick is initialising prev to group_next, so the old first node of the group automatically points at the start of the next group once reversed. After the inner loop, kth is the new group head and the old first node is the new group tail, which becomes group_prev for the next round. The lookahead loop returns as soon as fewer than k nodes remain, so the short tail is never touched. For 1..5 with k = 2 the result is 2 1 4 3 5; k = 1 returns the list unchanged. Each node is visited at most twice, so time is O(n) and extra space is O(1). The common bug is reversing first and then discovering the group was short, which forces a second reversal to undo it."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Linked Lists",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Python DSA: In production Python code, when would you use a hand-written linked list instead of a built-in list or collections.deque?",
+    "answer": "Almost never for plain sequences: list and deque are implemented in C and beat a Python-level node class on both speed and memory, so a hand-written linked list is justified only when you need O(1) removal or relinking of a node you already hold a reference to. A list is a dynamic array with O(1) indexing and amortised O(1) append, but inserting or deleting at the front or middle shifts elements and costs O(n). A deque is a doubly linked list of fixed-size blocks, giving O(1) appends and pops at both ends, but indexing into the middle is O(n) and you cannot hold a handle to an element. A custom doubly linked list paired with a dict gives O(1) unlink-by-handle, which is exactly why LRU caches and some schedulers use one; OrderedDict is built on the same idea in C. Each Python node object costs tens of bytes even with __slots__, so a million-node list uses far more memory than a list of a million references. Verify any choice with timeit and tracemalloc on realistic sizes rather than Big-O alone."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Trees and Graphs",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Count the number of islands in a grid of '1' (land) and '0' (water) cells connected horizontally and vertically, without recursion and without mutating the input grid.",
+    "answer": "Scan every cell; each unvisited land cell starts a new island, and an iterative BFS from it marks all connected land as visited so it is counted once.\n\nfrom collections import deque\n\ndef num_islands(grid):\n    if not grid or not grid[0]:\n        return 0\n    rows, cols = len(grid), len(grid[0])\n    seen = set()\n    count = 0\n    for r in range(rows):\n        for c in range(cols):\n            if grid[r][c] != \"1\" or (r, c) in seen:\n                continue\n            count += 1\n            seen.add((r, c))\n            q = deque([(r, c)])\n            while q:\n                i, j = q.popleft()\n                for ni, nj in ((i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)):\n                    if (0 <= ni < rows and 0 <= nj < cols\n                            and grid[ni][nj] == \"1\" and (ni, nj) not in seen):\n                        seen.add((ni, nj))\n                        q.append((ni, nj))\n    return count\n\nCells are marked as seen when enqueued, not when dequeued, so no cell enters the queue twice. Time is O(rows * cols) because every cell is checked a constant number of times; space is O(rows * cols) for the seen set in the worst case of all land. Avoiding recursion matters because a recursive DFS on a 1000 x 1000 all-land grid exceeds Python's default recursion limit. If mutating is allowed, overwrite land with '0' instead of keeping a set to save memory. Test with an empty grid, a single cell, and diagonal-only land, which must count as separate islands."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Trees and Graphs",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Validate whether a binary tree is a binary search tree with strictly increasing keys. Why is comparing each node only with its direct children wrong?",
+    "answer": "A tree is a valid BST exactly when its in-order traversal is strictly increasing, so do an iterative in-order walk and compare each value with the previous one.\n\ndef is_valid_bst(root):\n    stack, prev, node = [], None, root\n    while stack or node:\n        while node:\n            stack.append(node)\n            node = node.left\n        node = stack.pop()\n        if prev is not None and node.val <= prev:\n            return False\n        prev = node.val\n        node = node.right\n    return True\n\nChecking only parent and children misses violations deeper down: in the tree 5 with left child 3 and 3's right child 7, every parent-child pair looks fine, but 7 sits in the left subtree of 5. The in-order check catches it because the sequence 3, 7, 5 decreases. The equivalent recursive approach passes (low, high) bounds down the tree. Using prev = None rather than float('-inf') keeps it correct for any comparable keys, including strings, and avoids a false failure if a node genuinely holds negative infinity. Time is O(n) and space is O(h) for the explicit stack, where h is tree height, so there is no recursion limit problem on a degenerate tree. An empty tree returns True. If duplicates are allowed on one side, change <= to < and document the rule."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Trees and Graphs",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Given a dict mapping each build target to its list of prerequisite targets, return a valid build order or raise an error naming the targets stuck in a cycle.",
+    "answer": "Use Kahn's algorithm: count incoming prerequisite edges per target, start from targets with none, and release dependents as their counts reach zero; anything left over is in or behind a cycle.\n\nfrom collections import deque\n\ndef build_order(deps):\n    nodes = set(deps) | {p for ps in deps.values() for p in ps}\n    indeg = {n: 0 for n in nodes}\n    users = {n: [] for n in nodes}\n    for target, prereqs in deps.items():\n        for p in prereqs:\n            users[p].append(target)\n            indeg[target] += 1\n    q = deque(sorted(n for n in nodes if indeg[n] == 0))\n    order = []\n    while q:\n        n = q.popleft()\n        order.append(n)\n        for u in users[n]:\n            indeg[u] -= 1\n            if indeg[u] == 0:\n                q.append(u)\n    if len(order) != len(nodes):\n        stuck = sorted(n for n in nodes if indeg[n] > 0)\n        raise ValueError(f\"dependency cycle involving {stuck}\")\n    return order\n\nPrerequisites that never appear as keys, such as external libraries, are still included as nodes. Sorting the initial queue makes output deterministic, which matters for reproducible CI logs. Time is O(V + E) plus the sort, and space is O(V + E). The stuck list includes targets downstream of a cycle, not only cycle members; use a DFS if you need the exact loop. Each zero-indegree layer can be built in parallel. In real code, the standard library's graphlib.TopologicalSorter provides this, including get_ready() for parallel scheduling and CycleError carrying the cycle."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Trees and Graphs",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Implement Dijkstra's shortest path from a source node over a weighted adjacency dict using heapq. How do you handle stale heap entries without a decrease-key operation?",
+    "answer": "Push (distance, node) pairs into a min-heap and use lazy deletion: when a popped distance is larger than the best known distance for that node, it is stale and is skipped.\n\nimport heapq\n\ndef dijkstra(graph, src):\n    dist = {src: 0}\n    pq = [(0, src)]\n    while pq:\n        d, u = heapq.heappop(pq)\n        if d > dist.get(u, float(\"inf\")):\n            continue\n        for v, w in graph.get(u, ()):\n            nd = d + w\n            if nd < dist.get(v, float(\"inf\")):\n                dist[v] = nd\n                heapq.heappush(pq, (nd, v))\n    return dist\n\nheapq has no decrease-key, so a node may sit in the heap several times; only the entry matching dist[u] is processed, which keeps results correct. Unreachable nodes are simply absent from the returned dict. Time is O(E log E), which is O(E log V) because E is at most V squared, and space is O(V + E). Two pitfalls: Dijkstra is wrong with negative edge weights, so use Bellman-Ford there, and when two entries tie on distance Python compares the node values, so node types must be mutually comparable or you add a counter as a tiebreaker. To recover the path, record prev[v] = u on each improvement and walk back from the destination. For a single target you can return as soon as that target is popped."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Trees and Graphs",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Find the lowest common ancestor of two nodes in a general binary tree (not a BST). How does the approach change if the tree is a BST?",
+    "answer": "Recurse post-order: a subtree returns p or q if it contains one of them, and the first node whose left and right subtrees both return something non-None is the lowest common ancestor.\n\ndef lca(root, p, q):\n    if root is None or root is p or root is q:\n        return root\n    left = lca(root.left, p, q)\n    right = lca(root.right, p, q)\n    if left and right:\n        return root\n    return left or right\n\nIf p is an ancestor of q, the search stops at p and returns it, which is correct because a node is its own ancestor. This version assumes both nodes are in the tree; if that is not guaranteed, track whether each was actually found and return None otherwise. Time is O(n) and space is O(h) for the recursion, so on a degenerate tree with tens of thousands of nodes switch to an iterative traversal that builds a parent map, then walk up from p collecting ancestors into a set and walk up from q until you hit one. For a BST you can use the ordering instead:\n\ndef lca_bst(root, p, q):\n    while root:\n        if p.val < root.val and q.val < root.val:\n            root = root.left\n        elif p.val > root.val and q.val > root.val:\n            root = root.right\n        else:\n            return root\n\nThat runs in O(h) time and O(1) space because it follows a single path. Compare nodes with is so equal values on different nodes are not confused."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Trees and Graphs",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Python DSA: A recursive function that computes the depth of an org-chart tree works in tests but raises RecursionError: maximum recursion depth exceeded on a production tree that is effectively a 50,000-node chain. How do you fix it properly?",
+    "answer": "Rewrite the traversal iteratively with an explicit stack; raising the limit with sys.setrecursionlimit only moves the failure. CPython's default limit is 1000 frames, and a degenerate tree needs one frame per node. Raising the limit to 100,000 can work, but deep recursion still risks exhausting the thread's native stack in some paths and crashing the process, and the next larger input breaks again.\n\ndef max_depth(root):\n    if root is None:\n        return 0\n    best = 0\n    stack = [(root, 1)]\n    while stack:\n        node, depth = stack.pop()\n        best = max(best, depth)\n        for child in node.children:\n            stack.append((child, depth + 1))\n    return best\n\nThe explicit stack lives on the heap, so depth is limited only by memory, and time stays O(n) with O(n) worst-case space. Tests passed because fixtures were small, balanced trees; add a test that builds a long chain programmatically. If the data comes from a self-referencing table, also guard against cycles with a visited set, or a bad record turns this into an infinite loop."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Trees and Graphs",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "Python DSA: Your BFS over a service-dependency graph reports some services multiple times and runs far slower than expected on dense graphs, even though you keep a visited set. What is the likely bug?",
+    "answer": "You are almost certainly marking nodes as visited when they are dequeued instead of when they are enqueued, so a node reachable from several frontier nodes is pushed onto the queue several times before it is ever processed. On a dense graph this blows the queue up toward O(E) entries and processes nodes repeatedly. The fix is to add to visited at the moment you append:\n\nfrom collections import deque\n\ndef bfs(graph, start):\n    visited = {start}\n    q = deque([start])\n    order = []\n    while q:\n        u = q.popleft()\n        order.append(u)\n        for v in graph.get(u, ()):\n            if v not in visited:\n                visited.add(v)\n                q.append(v)\n    return order\n\nOther causes worth checking: using list.pop(0) instead of deque.popleft(), which makes each dequeue O(n); and node objects that define __eq__ without a consistent __hash__, so set membership never matches. Verify with a diamond graph A to B, A to C, B to D, C to D: D must appear exactly once."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Trees and Graphs",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Python DSA: A deployment tool hangs because some microservices wait on each other's readiness. Given a dict of service to dependencies, how do you detect the problem and report the exact cycle path to the operator?",
+    "answer": "Run a three-colour DFS: white is unvisited, grey is on the current path, black is finished; reaching a grey node means a back edge, and the slice of the path from that node is the cycle.\n\ndef find_cycle(graph):\n    color, path = {}, []\n    def dfs(u):\n        color[u] = 1\n        path.append(u)\n        for v in graph.get(u, ()):\n            if color.get(v) == 1:\n                return path[path.index(v):] + [v]\n            if v not in color and (cyc := dfs(v)):\n                return cyc\n        color[u] = 2\n        path.pop()\n    for n in list(graph):\n        if n not in color and (cyc := dfs(n)):\n            return cyc\n\nFor api to auth to db to api it returns ['api', 'auth', 'db', 'api'], which an operator can act on. Black nodes are never re-explored, so this is O(V + E). For thousands of services, convert to an explicit stack to avoid RecursionError. Run it as a pre-deploy check in CI so the cycle is rejected before rollout."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Heaps and Intervals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Coding",
+    "question": "Python DSA: Merge all overlapping intervals in a list such as maintenance windows, treating intervals that touch at an endpoint as overlapping.",
+    "answer": "Sort by start time, then sweep once: if the next interval starts at or before the end of the last merged one, extend that end; otherwise start a new merged interval.\n\ndef merge_intervals(intervals):\n    merged = []\n    for start, end in sorted(intervals):\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = max(merged[-1][1], end)\n        else:\n            merged.append([start, end])\n    return merged\n\nFor [[1, 3], [2, 6], [8, 10], [10, 12]] the result is [[1, 6], [8, 12]]; using <= is what merges the touching pair at 10. Taking max on the end matters for containment such as [1, 10] followed by [2, 3], where blindly assigning end would shrink the interval. Sorting tuples orders by start then end, and the input list is not mutated because sorted returns a new list. Time is O(n log n) for the sort plus O(n) for the sweep, and space is O(n) for the output. An empty input returns an empty list. If the windows are half-open, such as [start, end) timestamps, decide whether touching windows should merge and switch to < if not."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Heaps and Intervals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Given meeting time intervals, return the minimum number of rooms needed so that no two overlapping meetings share a room. A meeting ending at 10 frees its room for one starting at 10.",
+    "answer": "Sort meetings by start and keep a min-heap of end times for rooms in use; if the earliest-ending room is free by the time the next meeting starts, reuse it, otherwise open a new room. The heap size at the end is the answer.\n\nimport heapq\n\ndef min_rooms(meetings):\n    ends = []\n    for start, end in sorted(meetings):\n        if ends and ends[0] <= start:\n            heapq.heapreplace(ends, end)\n        else:\n            heapq.heappush(ends, end)\n    return len(ends)\n\nheapreplace pops the smallest end and pushes the new one in a single O(log n) operation. The <= comparison implements the rule that a room freed at 10 can host a meeting starting at 10. For [(0, 30), (5, 10), (15, 20)] the result is 2. Time is O(n log n) and space is O(n). An alternative sweep line sorts starts and ends separately and walks both with two pointers, also O(n log n); it is handy when you also want the peak time. Verify with an empty list (0), fully nested meetings, and back-to-back meetings, which should need only one room."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Heaps and Intervals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Python DSA: You must merge 200 per-pod log files, each already sorted by ISO-8601 UTC timestamp and several gigabytes in size, into one time-ordered file on a small VM. How do you do it in Python?",
+    "answer": "Do a streaming k-way merge with heapq.merge over the open file objects, which keeps only one pending line per file in a heap of size k.\n\nimport heapq\nfrom contextlib import ExitStack\n\ndef merge_logs(paths, out_path):\n    with ExitStack() as stack, open(out_path, \"w\") as out:\n        files = [stack.enter_context(open(p)) for p in paths]\n        for line in heapq.merge(*files, key=lambda s: s[:24]):\n            out.write(line if line.endswith(\"\\n\") else line + \"\\n\")\n\nCost is O(N log k) time for N lines and O(k) memory, independent of file size. Keying on the fixed-width timestamp prefix works because ISO-8601 UTC strings sort lexicographically in time order; mixed offsets or formats must be parsed first. Pitfalls: a file whose last line lacks a newline would glue onto the next record, hence the fix above; heapq.merge assumes each input is sorted and silently produces disorder otherwise; and opening thousands of files can hit the descriptor limit shown by ulimit -n, so merge in batches. Verify by checking the output is non-decreasing and line counts match."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Heaps and Intervals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Python DSA: A metrics consumer must always be able to report the 100 slowest request latencies seen so far from an unbounded stream, without storing every value. What data structure do you use and why?",
+    "answer": "Keep a min-heap of size k: its root is the smallest of the current top k, so each new value only needs comparing against the root and, if larger, replacing it.\n\nimport heapq\n\nclass TopK:\n    def __init__(self, k):\n        self.k, self.heap = k, []\n    def add(self, x):\n        if len(self.heap) < self.k:\n            heapq.heappush(self.heap, x)\n        elif self.heap and x > self.heap[0]:\n            heapq.heapreplace(self.heap, x)\n    def result(self):\n        return sorted(self.heap, reverse=True)\n\nEach add is O(log k) and memory is O(k), regardless of stream length. A max-heap of everything would need O(n) memory. The self.heap guard avoids an IndexError when k is 0. Reporting sorts only k items, O(k log k). If records carry payloads, push (latency, seq, record) with an increasing seq so ties never compare records. For the most frequent items rather than the largest, exact counts need unbounded memory, so use Space-Saving or Count-Min Sketch with bounded error. Verify against sorted(all_values)[-k:] on a replayed sample."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Heaps and Intervals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Troubleshooting",
+    "question": "Python DSA: A priority job queue built on heapq works for weeks, then crashes with TypeError: '<' not supported between instances of 'dict' and 'dict'. Entries are (priority, job_dict) tuples. What is going on and how do you fix it?",
+    "answer": "The crash happens when two jobs share the same priority: tuple comparison falls through to the second element, and dicts do not support <. It only appears when a tie lands on a comparison path, which is why it took weeks. Fix it by inserting a monotonically increasing tiebreaker so the payload is never compared:\n\nimport heapq\nimport itertools\n\ncounter = itertools.count()\n\ndef push(pq, priority, job):\n    heapq.heappush(pq, (priority, next(counter), job))\n\ndef pop(pq):\n    priority, _, job = heapq.heappop(pq)\n    return priority, job\n\nThe counter also gives FIFO order among equal priorities, which is usually what users expect. An alternative is a dataclass(order=True) with the payload declared as field(compare=False). Two related bugs: changing a job's priority in place breaks the heap invariant, so mark the old entry removed and push a new one; and with dataclasses or objects, a tie can silently use an unintended ordering rather than crashing. Add a test that pushes many equal-priority jobs."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Heaps and Intervals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Comparison",
+    "question": "Python DSA: For a delayed-job scheduler that must support cancellation and rescheduling, compare heapq, a list kept sorted with bisect.insort, and queue.PriorityQueue.",
+    "answer": "Use heapq with lazy deletion for a single-threaded scheduler, wrap it in a lock or use queue.PriorityQueue across threads, and choose a sorted list only when the job count is small or you need ordered iteration. heapq gives O(log n) push and pop, but there is no cancel or decrease-key; the heapq documentation's pattern keeps an entry_finder dict, marks a cancelled entry as removed, and skips it on pop, with rescheduling done as cancel plus push. bisect.insort finds the position in O(log n) but inserting shifts the list, so it is O(n) per insert, while cancellation is a bisect lookup plus an O(n) delete; in exchange you can iterate upcoming jobs in order and peek at any rank. queue.PriorityQueue is a thread-safe wrapper over heapq with blocking get, but exposes no cancellation, so you still need the removed-marker trick. For asyncio code use asyncio.PriorityQueue or loop.call_at, whose TimerHandle supports cancel(). Verify under load: lazy deletion can bloat the heap if most jobs are cancelled, so rebuild with heapify when tombstones dominate."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Binary Search",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Given a sorted list that may contain duplicates, return the first and last index of a target, or [-1, -1] if it is absent, in O(log n) time.",
+    "answer": "Run two lower-bound searches: the first index where nums[i] >= target, and the first index where nums[i] > target; the last occurrence is one before the second boundary.\n\ndef lower_bound(nums, target):\n    lo, hi = 0, len(nums)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if nums[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid\n    return lo\n\ndef search_range(nums, target):\n    first = lower_bound(nums, target)\n    if first == len(nums) or nums[first] != target:\n        return [-1, -1]\n    return [first, lower_bound(nums, target + 1) - 1]\n\nThe half-open range [lo, hi) with hi = len(nums) means an empty list returns 0 immediately and a target larger than everything returns len(nums), which the guard catches before indexing. Using target + 1 works for integers; for floats or strings use bisect.bisect_right(nums, target) - 1 instead, which is exactly what the standard library gives you. For [5, 7, 7, 8, 8, 10] and 8 the answer is [3, 4]; for 6 it is [-1, -1]. Time is O(log n) for two searches and space is O(1). The common mistake is finding any match with classic binary search and then scanning left and right, which degrades to O(n) when the whole list is the target value."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Binary Search",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Search for a target in a sorted list of distinct integers that has been rotated at an unknown pivot, such as [4, 5, 6, 7, 0, 1, 2], in O(log n) time.",
+    "answer": "At every step at least one half around mid is sorted, so check whether the target lies inside that sorted half and discard the other half accordingly.\n\ndef search_rotated(nums, target):\n    lo, hi = 0, len(nums) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if nums[mid] == target:\n            return mid\n        if nums[lo] <= nums[mid]:\n            if nums[lo] <= target < nums[mid]:\n                hi = mid - 1\n            else:\n                lo = mid + 1\n        else:\n            if nums[mid] < target <= nums[hi]:\n                lo = mid + 1\n            else:\n                hi = mid - 1\n    return -1\n\nThe first branch means the left half [lo, mid] is sorted; otherwise the right half [mid, hi] is. The <= in nums[lo] <= nums[mid] matters: with two elements lo equals mid, and a strict comparison would wrongly treat the right half as sorted. For [4, 5, 6, 7, 0, 1, 2] and target 0 the search returns 4; for target 3 it returns -1, and an empty list skips the loop. Time is O(log n) and space O(1). With duplicates such as [1, 1, 1, 3, 1] you cannot tell which half is sorted when nums[lo] == nums[mid] == nums[hi], so you shrink both ends by one and the worst case becomes O(n). Test unrotated input, rotation by one, and single-element lists."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Binary Search",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Packages with given weights must ship in order within D days. Find the minimum truck capacity that makes this possible, and explain why binary search on the answer is valid.",
+    "answer": "Binary search over capacity, because feasibility is monotonic: if capacity C ships everything within D days, any capacity above C does too, so there is a single boundary between infeasible and feasible.\n\ndef ship_within_days(weights, days):\n    def days_needed(cap):\n        used, load = 1, 0\n        for w in weights:\n            if load + w > cap:\n                used += 1\n                load = 0\n            load += w\n        return used\n\n    lo, hi = max(weights), sum(weights)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if days_needed(mid) <= days:\n            hi = mid\n        else:\n            lo = mid + 1\n    return lo\n\nThe lower bound is max(weights), since a smaller truck could never carry the heaviest package; that also keeps the greedy check correct because no single package exceeds cap. The upper bound sum(weights) always fits in one day. The greedy check is optimal for a fixed capacity because packages must stay in order, so filling each day as much as possible never hurts. For [1..10] and D = 5 the answer is 15. Time is O(n log S) where S is sum(weights), and space is O(1). The pitfall is writing hi = mid - 1 in the feasible branch, which can skip the true minimum; keep the feasible candidate inside the range and use lo = mid + 1 only for infeasible ones."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Binary Search",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Python DSA: You must find the minimum number of replicas that keeps p99 latency under 300 ms, and each probe is a 15-minute load test. How do you apply binary search on the answer, and what can break it?",
+    "answer": "Treat meets_slo(replicas) as a monotonic predicate and binary search for the smallest replica count where it turns true, using exponential search first if you have no safe upper bound.\n\ndef min_replicas(meets_slo, cap=512):\n    lo, hi = 1, 1\n    while not meets_slo(hi):\n        if hi >= cap:\n            return None\n        lo, hi = hi + 1, min(hi * 2, cap)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if meets_slo(mid):\n            hi = mid\n        else:\n            lo = mid + 1\n    return hi\n\nA range of 1 to 256 needs about 8 probes instead of 256, which turns days of load testing into roughly two hours. The method is only valid if latency really falls as replicas rise. It breaks when a shared dependency saturates, for example a database whose connection limit is exceeded so more pods make p99 worse, and when measurements are noisy near the boundary. Mitigate by running each probe more than once, requiring headroom such as p99 under 270 ms, caching probe results, and confirming the final answer and the answer minus one with a longer run before you commit it to HPA minReplicas."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Binary Search",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Troubleshooting",
+    "question": "Python DSA: Your binary search for the last element <= target uses while lo < hi, mid = (lo + hi) // 2 and lo = mid in one branch, and it hangs forever on some inputs. Why, and how do you fix it?",
+    "answer": "It hangs because when hi equals lo + 1, (lo + hi) // 2 rounds down to lo, so lo = mid makes no progress and the loop repeats the same state forever.\n\nThe rule is that every branch must shrink the range. If one branch assigns lo = mid, round the midpoint up with mid = (lo + hi + 1) // 2 so mid is always greater than lo. If the branch assigns hi = mid, round down. For the last element <= target, the corrected loop is: while lo < hi, compute mid = (lo + hi + 1) // 2; if nums[mid] <= target set lo = mid, otherwise set hi = mid - 1. Unlike C or Java, Python integers do not overflow, so (lo + hi) // 2 is safe and you do not need lo + (hi - lo) // 2. To verify, test two-element lists with the target at each position, plus targets below and above every element, and add a loop guard or a pytest timeout while debugging. Alternatively, call bisect.bisect_right(nums, target) - 1 and avoid hand-rolled loops."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Binary Search",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Python DSA: An integration test started failing somewhere in the last 500 commits and each test run takes ten minutes. How do you find the first bad commit efficiently, and what assumption must hold?",
+    "answer": "Binary search the commit range, because roughly nine test runs (log2 of 500) isolate the first bad commit instead of up to 500 sequential runs.\n\nThe required assumption is monotonicity: every commit after the breaking one is also bad, and every commit before it is good. Git automates this with git bisect start, git bisect bad HEAD, git bisect good <known-good-sha>, then git bisect run ./run_test.sh. The script exits 0 for good, 1 to 127 for bad, and 125 to tell git to skip a commit that cannot be built or tested. The logic is the same as a lower-bound search where is_bad(i) flips from False to True once. Monotonicity breaks when the test is flaky, when a later commit temporarily fixes and re-breaks it, or when the failure depends on external state such as a changed upstream API. Mitigate flakiness by retrying the test inside the script, pin dependencies and data so only the code varies, and confirm the result by checking out the reported commit and its parent and running the test on both."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Dynamic Programming",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Coding",
+    "question": "Python DSA: Count the distinct ways to climb n stairs when you can take 1 or 2 steps at a time, using O(1) extra space.",
+    "answer": "The number of ways to reach step i equals ways(i - 1) + ways(i - 2), because your last move was either one step or two, so it is a Fibonacci sequence and you only need the previous two values.\n\ndef climb_stairs(n):\n    a, b = 1, 1\n    for _ in range(n - 1):\n        a, b = b, a + b\n    return b\n\nHere a and b start as the ways to reach step 0 and step 1, both 1. For n = 1 the loop does not run and the answer is 1; n = 2 gives 2; n = 3 gives 3; n = 5 gives 8. For n = 0 the function returns 1, which matches the convention of one way to do nothing; state that convention to your interviewer. Time is O(n) and space is O(1). Python integers are arbitrary precision, so large n does not overflow, but the numbers grow quickly; many variants ask for the result modulo 10**9 + 7, which you apply inside the loop. A naive recursive version without memoisation is O(2^n). If the allowed steps become a set such as {1, 3, 5}, keep a full dp list where dp[i] sums dp[i - s] for each allowed step s."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Dynamic Programming",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Return the fewest coins needed to make an amount from given denominations, or -1 if impossible. Show an input where a greedy largest-coin-first approach fails.",
+    "answer": "Use bottom-up DP where dp[a] is the fewest coins for amount a, built from dp[a - c] + 1 for each coin c.\n\ndef coin_change(coins, amount):\n    unreachable = amount + 1\n    dp = [0] + [unreachable] * amount\n    for a in range(1, amount + 1):\n        for c in coins:\n            if c <= a and dp[a - c] + 1 < dp[a]:\n                dp[a] = dp[a - c] + 1\n    return dp[amount] if dp[amount] <= amount else -1\n\nGreedy fails for coins [1, 3, 4] and amount 6: it picks 4, 1, 1 for three coins, while 3 + 3 needs only two. The sentinel amount + 1 is safe because no solution can use more than amount coins when the smallest coin is at least 1, and it avoids float('inf') arithmetic. Amount 0 returns 0, and coins [2] with amount 3 returns -1. Time is O(amount x len(coins)) and space is O(amount). This is pseudo-polynomial: an amount of 10**9 makes the table infeasible, so ask about constraints. The related problem of counting combinations loops over coins in the outer loop and amounts in the inner loop so that each combination is counted once rather than once per ordering."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Dynamic Programming",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Find the length of the longest strictly increasing subsequence in O(n log n) time, and explain what the auxiliary list actually represents.",
+    "answer": "Maintain tails, where tails[k] is the smallest possible tail value of any increasing subsequence of length k + 1 seen so far, and update it with binary search.\n\nfrom bisect import bisect_left\n\ndef length_of_lis(nums):\n    tails = []\n    for x in nums:\n        i = bisect_left(tails, x)\n        if i == len(tails):\n            tails.append(x)\n        else:\n            tails[i] = x\n    return len(tails)\n\ntails stays sorted, so bisect_left finds the first tail >= x. If x is larger than every tail it extends the longest subsequence; otherwise it replaces a tail with a smaller value, which keeps more room for future extensions. For [10, 9, 2, 5, 3, 7, 101, 18] the answer is 4, for example 2, 3, 7, 18. Using bisect_left enforces strictly increasing; switch to bisect_right for non-decreasing subsequences. An empty list returns 0. Time is O(n log n) and space is O(n). The pitfall is presenting tails as the subsequence itself: it is not, because replacements mix values from different candidates. To reconstruct the actual sequence, store the index of each tail and a parent pointer for every element. The simpler O(n^2) DP, where dp[i] is 1 plus the max dp[j] for j < i with nums[j] < nums[i], is fine for a few thousand elements."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Dynamic Programming",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Compute the Levenshtein edit distance between two strings, for example to power a 'did you mean' suggestion in a CLI, using O(min(m, n)) extra space.",
+    "answer": "Use the classic DP where cell (i, j) is the distance between the first i characters of a and the first j of b, but keep only the previous row because each cell depends on the row above and the cell to the left.\n\ndef edit_distance(a, b):\n    if len(a) < len(b):\n        a, b = b, a\n    prev = list(range(len(b) + 1))\n    for i in range(1, len(a) + 1):\n        cur = [i] + [0] * len(b)\n        for j in range(1, len(b) + 1):\n            if a[i - 1] == b[j - 1]:\n                cur[j] = prev[j - 1]\n            else:\n                cur[j] = 1 + min(prev[j], cur[j - 1], prev[j - 1])\n        prev = cur\n    return prev[-1]\n\nprev[j] is a deletion, cur[j - 1] an insertion and prev[j - 1] a substitution. Swapping so b is the shorter string is safe because edit distance is symmetric, and it bounds the row length by min(m, n). The first row and column encode the cost of building from or reducing to an empty string, so edit_distance('', 'abc') is 3 and edit_distance('horse', 'ros') is 3. Time is O(m x n) and space O(min(m, n)). For a CLI suggestion, compute the distance to every known command and suggest those within 2 edits; the standard library's difflib.get_close_matches uses a different similarity ratio, so the results are not identical. If you also need the actual edit script, keep the full table and backtrack."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Dynamic Programming",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Coding",
+    "question": "Python DSA: Choose a subset of batch jobs, each with a memory cost and a business value, to maximise total value within a fixed memory budget. Implement 0/1 knapsack in one dimension and explain the loop direction.",
+    "answer": "This is 0/1 knapsack: best[c] is the maximum value achievable with capacity c, and each item updates the array once with capacities iterated from high to low.\n\ndef knapsack(items, capacity):\n    best = [0] * (capacity + 1)\n    for weight, value in items:\n        for c in range(capacity, weight - 1, -1):\n            best[c] = max(best[c], best[c - weight] + value)\n    return best[capacity]\n\nIterating downward guarantees best[c - weight] still holds the value from before this item, so each job is used at most once. Iterating upward would let the same item be added repeatedly, which is the unbounded knapsack. Items heavier than capacity are skipped because the range is empty. For items [(1, 1), (3, 4), (4, 5), (5, 7)] and capacity 7 the answer is 9, choosing weights 3 and 4. Time is O(n x W) and space O(W), which is pseudo-polynomial since the problem is NP-hard. That matters in practice: a budget in bytes makes W huge, so scale memory to whole GiB or MiB units, use a DP over value instead when values are small, or switch to branch and bound or an ILP solver such as OR-Tools. The one-dimensional array loses which items were chosen; to report the selected jobs, keep a 2D boolean table of decisions and backtrack from (n, capacity)."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Dynamic Programming",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Given a string and a list of dictionary words, decide whether the string can be segmented into a sequence of those words, such as 'applepenapple' with ['apple', 'pen'].",
+    "answer": "Use a boolean DP where ok[i] means the prefix s[:i] can be segmented, and ok[end] becomes True if some ok[start] is True and s[start:end] is a dictionary word.\n\ndef word_break(s, words):\n    vocab = set(words)\n    max_len = max(map(len, vocab), default=0)\n    ok = [True] + [False] * len(s)\n    for end in range(1, len(s) + 1):\n        for start in range(max(0, end - max_len), end):\n            if ok[start] and s[start:end] in vocab:\n                ok[end] = True\n                break\n    return ok[len(s)]\n\nok[0] is True because the empty prefix needs no words, so an empty string returns True. Limiting start to the last max_len positions avoids checking substrings longer than any word, which matters when the dictionary has short words and the input is long. A set gives average O(1) membership, though hashing a slice of length L costs O(L). For 'applepenapple' the answer is True; for 'catsandog' with ['cats', 'dog', 'sand', 'and', 'cat'] it is False. Time is O(n x L^2) where L is max_len, and space is O(n). A plain recursive version without memoisation is exponential on inputs like 'aaaa...b' with words ['a', 'aa', 'aaa']. To return the actual segmentations, store the valid start indices for each end and backtrack."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Dynamic Programming",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Python DSA: Your house robber solution uses @lru_cache on a recursive rob(i) that returns max(rob(i + 1), nums[i] + rob(i + 2)). It passes small tests but raises RecursionError for 5,000 houses. Why, and what do you change?",
+    "answer": "Memoisation removes repeated work but not recursion depth: rob(0) calls rob(1), which calls rob(2), so the stack grows to n frames and exceeds the default limit from sys.getrecursionlimit(), which is 1000.\n\nThe fix is to convert the recurrence to an iterative tabulation that keeps only two states:\n\ndef rob(nums):\n    take, skip = 0, 0\n    for x in nums:\n        take, skip = skip + x, max(take, skip)\n    return max(take, skip)\n\nFor [2, 7, 9, 3, 1] it returns 12. This runs in O(n) time with O(1) space and no recursion. Raising sys.setrecursionlimit is a weak fix because deep recursion can still exhaust the C stack and crash the interpreter, especially in threads with smaller stacks. Also check how the cache is scoped: an @lru_cache defined at module level on a function that reads a global nums returns stale results across test cases unless you call rob.cache_clear(), and the default maxsize of 128 evicts entries. Verify with a generated 100,000-element input and compare results against the recursive version on small random lists."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Dynamic Programming",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Comparison",
+    "question": "Python DSA: Compare memoisation and tabulation for dynamic programming in Python. When does each win, and which Python-specific pitfalls affect your choice?",
+    "answer": "Memoisation is top-down recursion with a cache and computes only the states actually reached, while tabulation is a bottom-up loop that fills every state in a dependency-safe order; tabulation is usually faster and safer in Python, but memoisation wins when the reachable state space is sparse.\n\nMemoisation is quick to write from the recurrence with functools.cache, and it shines when only a fraction of states is visited, such as knapsack with a huge capacity but few distinct reachable sums. Its costs are function-call overhead, dict memory per state, and recursion depth, which hits RecursionError around 1000 frames by default. Tabulation needs you to work out the evaluation order, but it enables rolling-array space reduction, as in edit distance with two rows, and avoids the stack entirely. Python pitfalls include @lru_cache defaulting to maxsize=128, which silently evicts and can make runtimes explode, so use @cache or maxsize=None; unhashable list arguments that raise TypeError; and slicing strings into cache keys, which adds O(n) per call. Verify by timing both with timeit on realistic sizes and cross-checking outputs on random inputs."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Strings",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Coding",
+    "question": "Python DSA: Check whether two strings are anagrams of each other. Compare the Counter approach with sorting, and say how you would handle case and Unicode.",
+    "answer": "Two strings are anagrams when they have the same character counts, so compare collections.Counter objects after a cheap length check.\n\nfrom collections import Counter\n\ndef is_anagram(s, t):\n    return len(s) == len(t) and Counter(s) == Counter(t)\n\nThe length check short-circuits obvious mismatches. Counter runs in O(n) time with O(k) space for k distinct characters. The sorting alternative, sorted(s) == sorted(t), is O(n log n) time and O(n) space, but it is short and fine for small inputs. If the input is guaranteed to be lowercase ASCII, a fixed list of 26 counts, incremented for s and decremented for t, avoids hashing. For case-insensitive comparison use str.casefold() rather than lower(), because casefold handles characters such as the German sharp s. For Unicode, normalise both strings with unicodedata.normalize('NFC', text) first, since an accented letter can be one code point or a base letter plus a combining mark, and the two forms would otherwise compare as different. Edge cases: two empty strings are anagrams, 'rat' and 'car' are not, and spaces count as characters unless you strip them, so confirm that with the interviewer."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Strings",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Implement run-length string compression so that 'aabcccccaaa' becomes 'a2b1c5a3', returning the original string when the compressed form is not shorter.",
+    "answer": "Walk the string once, track the current run character and length, append each finished run to a list, and join at the end.\n\ndef compress(s):\n    if not s:\n        return s\n    parts = []\n    run_char, run_len = s[0], 1\n    for ch in s[1:]:\n        if ch == run_char:\n            run_len += 1\n        else:\n            parts.append(f'{run_char}{run_len}')\n            run_char, run_len = ch, 1\n    parts.append(f'{run_char}{run_len}')\n    out = ''.join(parts)\n    return out if len(out) < len(s) else s\n\nThe final append after the loop is the step people forget; without it the last run disappears. For 'aabcccccaaa' the result is 'a2b1c5a3'; for 'abc' the compressed 'a1b1c1' is longer, so 'abc' is returned; the empty string returns itself; and 'aaaaaaaaaaaa' gives 'a12', which shows counts can have several digits. Building a list and joining is O(n) overall, whereas repeated string concatenation can be quadratic in principle, even though CPython sometimes optimises it in place. The s[1:] slice copies once, which is fine. Time is O(n) and space O(n). A shorter alternative is ''.join(f'{k}{len(list(g))}' for k, g in itertools.groupby(s)). Point out that the format is ambiguous if the input itself contains digits, so a real codec would need an escape scheme or fixed-width counts."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Strings",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Find the longest common prefix of a list of strings, for example a shared prefix of object storage keys, and explain a trick that avoids comparing every pair.",
+    "answer": "Compare only the lexicographically smallest and largest strings, because any prefix shared by those two is shared by every string that sorts between them.\n\ndef longest_common_prefix(strs):\n    if not strs:\n        return ''\n    lo, hi = min(strs), max(strs)\n    i = 0\n    while i < len(lo) and lo[i] == hi[i]:\n        i += 1\n    return lo[:i]\n\nIndexing hi[i] is safe: if hi were shorter than lo and matched it for all of hi, then hi would be a prefix of lo and therefore sort before it, which contradicts hi being the maximum. For ['flower', 'flow', 'flight'] the result is 'fl'; for ['dog', 'racecar'] it is ''; an empty list or a list containing '' returns ''. min and max each scan the list with string comparisons, so time is O(n x m) in the worst case for n strings of length m, and extra space is O(1) besides the output. The vertical scan alternative compares column by column across all strings and stops early on the first mismatch. For file paths, note that os.path.commonprefix works character by character, so '/data/abc' and '/data/abd' give '/data/ab'; use os.path.commonpath when you need a valid directory such as '/data'."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Strings",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Python DSA: A release script picks the latest tag with max(tags) and chooses 1.9 over 1.10.2. Why does this happen, and how do you compare dotted version strings correctly?",
+    "answer": "String comparison is lexicographic, so '1.9' beats '1.10.2' because the character '9' sorts after '1' at the third position; you must compare the numeric components instead.\n\ndef version_key(v):\n    parts = [int(p) for p in v.strip().lstrip('v').split('.')]\n    while parts and parts[-1] == 0:\n        parts.pop()\n    return tuple(parts)\n\nlatest = max(['1.9', '1.10.2', '1.10'], key=version_key)\n\nThis returns '1.10.2'. Tuples compare element by element, and a shorter tuple that is a prefix sorts first, so (1, 10) < (1, 10, 2). Stripping trailing zeros makes '1.10' and '1.10.0' equal, which is usually the intended meaning. The function is O(k) per version for k components. Pre-release and build tags such as 1.10.0rc1 or 2.0.0-beta.1 make int() raise ValueError, so for Python packages use packaging.version.Version, which implements PEP 440 ordering, and for SemVer tags use a SemVer library, because the two standards order pre-releases differently. Verify with a table-driven pytest covering 1.9 versus 1.10, equal versions with trailing zeros, and a leading v prefix."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Strings",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Comparison",
+    "question": "Python DSA: Compare the KMP algorithm with Rabin-Karp rolling hash for substring search. When would you reach for each, and why do you rarely hand-write either in production Python?",
+    "answer": "KMP gives guaranteed O(n + m) search with no false positives by precomputing a failure function, while Rabin-Karp uses a rolling hash for O(n + m) expected time and is the better fit when you search for many patterns of the same length or need hashes of substrings.\n\nKMP's failure array stores, for each pattern prefix, the length of the longest proper prefix that is also a suffix, so on a mismatch the pattern shifts without re-reading text characters. That makes it predictable on adversarial input. Rabin-Karp slides a window, updating a polynomial hash modulo a large prime in O(1) per step, and only compares characters when hashes match. Collisions make its worst case O(n x m), so verify each hash hit, use a random base, or use double hashing to resist crafted inputs. Rolling hashes also power content-defined chunking for deduplication. In production Python, str.find and the in operator run in C, and since CPython 3.10 they use the Two-Way algorithm for longer needles, so they beat a hand-written KMP. For many patterns at once, an Aho-Corasick library or a compiled regex is the practical choice."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Strings",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Python DSA: A memoised recursive function segments 20,000-character log lines by calling solve(s[i:]) and caching on the remaining string. It is correct but extremely slow and memory-hungry. What is wrong and how do you fix it?",
+    "answer": "Every call slices a new suffix, which copies O(n) characters, and the cache keys are those suffix strings, so hashing and storing them costs O(n) each; across n states that is O(n^2) memory and roughly O(n^3) time hidden inside what looks like an O(n x L) DP.\n\nThe fix is to pass an integer index instead of the substring and cache on the index, so each state key is O(1) to hash and store. Better still, convert the recursion into a bottom-up loop, because 20,000 levels of recursion also exceed the default recursion limit of 1000. Inside the loop, only slice the short candidate word s[i:j] bounded by the maximum dictionary word length, or compare against a trie walked character by character so no slices are made at all. If you must keep the recursive form, use functools.cache on solve(i) rather than lru_cache with its default maxsize of 128. Verify the improvement with cProfile to confirm time moves out of slicing and hashing, and use tracemalloc to compare peak memory before and after on a real log line."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Python Language Internals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Python DSA: A team wraps a CPU-bound image-hashing job in ThreadPoolExecutor(max_workers=16) on an 8-core VM, and the runtime barely changes while only about one core is busy. What is happening and what do you change?",
+    "answer": "The GIL is serialising the threads: in CPython only one thread executes Python bytecode at a time, so pure-Python CPU work gets no parallel speed-up from threads, only extra switching overhead. Threads help for I/O-bound work because the GIL is released while waiting on sockets or disk. For this job I would switch to concurrent.futures.ProcessPoolExecutor, which runs separate interpreters, each with its own GIL, and pass work in reasonably large batches using map with chunksize so pickling overhead does not dominate. Alternatives are moving the hot loop into a library that releases the GIL, such as hashlib on large buffers or NumPy, which lets threads scale. Python 3.13 added an experimental free-threaded build, but 3.12 has none, so I would not rely on it in production. To verify, compare wall time and per-core utilisation in htop before and after, and profile with py-spy to confirm time is spent in Python code rather than waiting on I/O. Pitfall: with the spawn start method, the default on macOS and Windows, the entry point needs an if __name__ == '__main__' guard."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Python Language Internals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "Python DSA: Compare a list comprehension with a generator expression for summing the sizes of millions of records. When is each the right choice?",
+    "answer": "A generator expression produces items lazily, one at a time, so extra memory stays O(1), while a list comprehension builds every element up front, so memory is O(n). For sum(r.size for r in records) the generator is the right choice: sum consumes each value once and nothing needs to be stored. sys.getsizeof makes the difference obvious: a list of ten million ints holds about 80 MB of pointers alone, plus the int objects, whereas the generator object is a couple of hundred bytes. Lists win when you need to iterate more than once, index randomly, call len, or sort, and list comprehensions can be slightly faster per item on small inputs because there is no generator frame to resume. The classic pitfall is that a generator is exhausted after one pass: computing total = sum(g) and then max(g) raises ValueError because g is already empty. If you need two aggregates, compute both in one loop or deliberately materialise a list."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Python Language Internals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Troubleshooting",
+    "question": "Python DSA: A helper def add_tag(tag, tags=[]) appends the tag and returns tags. In production, tags from earlier requests start appearing on unrelated resources. Explain the bug and the fix.",
+    "answer": "The default list is created once, when the def statement executes, and every call that omits tags reuses and mutates that same list object, so tags accumulate across requests. Defaults live on the function in add_tag.__defaults__, which you can print to watch the list grow. The fix is a None sentinel:\n\ndef add_tag(tag, tags=None):\n    if tags is None:\n        tags = []\n    tags.append(tag)\n    return tags\n\nUse 'is None' rather than 'if not tags', otherwise a caller who deliberately passes an empty list they own gets a fresh list back and never sees the update. The same bug happens with dict and set defaults; dataclasses refuse such defaults with ValueError and force field(default_factory=list). Linters catch it: Ruff rule B006 and pylint dangerous-default-value. A unit test that calls the function twice without the argument and asserts the second result has one element prevents regressions."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Python Language Internals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "Python DSA: A service builds per-tenant config with cfg = base.copy() and then sets cfg['limits']['cpu'] = '2'. Every tenant, and the base template itself, ends up with cpu '2'. Why, and how do you fix it?",
+    "answer": "dict.copy() is a shallow copy: it creates a new outer dict, but the values are the same objects, so cfg['limits'] and base['limits'] are one shared inner dict and mutating it changes the template for everyone. You can confirm with cfg['limits'] is base['limits'], which returns True. The simplest fix is copy.deepcopy(base), which recursively copies nested containers and handles cycles through its memo dict. It costs time proportional to the whole structure, so on hot paths I prefer copying only the path being changed, for example cfg = {**base, 'limits': {**base['limits'], 'cpu': '2'}}. Another layer of defence is making the template read-only with types.MappingProxyType or frozen dataclasses, so accidental mutation raises instead of leaking. Pitfall: deepcopy also copies objects you probably want shared, such as clients, and some objects, like threading locks or open sockets, cannot be deep-copied at all and raise TypeError; keep them out of config or define __deepcopy__."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Python Language Internals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Write a decorator that logs how long a function takes, works with any arguments, and preserves the wrapped function's name and docstring. Why does functools.wraps matter?",
+    "answer": "Wrap the call in a closure that accepts *args and **kwargs, time it with time.perf_counter, and apply functools.wraps so metadata survives.\n\nimport functools, logging, time\n\nlog = logging.getLogger(__name__)\n\ndef timed(func):\n    @functools.wraps(func)\n    def wrapper(*args, **kwargs):\n        start = time.perf_counter()\n        try:\n            return func(*args, **kwargs)\n        finally:\n            ms = (time.perf_counter() - start) * 1000\n            log.info('%s took %.1f ms', func.__qualname__, ms)\n    return wrapper\n\n@timed\ndef fetch_quota(project_id: str) -> int:\n    '''Return the CPU quota for a project.'''\n    return 42\n\nThe try/finally logs the duration even when the function raises, and the exception still propagates. Without functools.wraps, fetch_quota.__name__ becomes 'wrapper', the docstring disappears, and anything that relies on metadata breaks: FastAPI and Click read the signature, logs and pytest output show the wrong name. wraps copies __name__, __qualname__, __doc__, __module__ and __annotations__, merges __dict__, and sets __wrapped__ so inspect.signature follows it back to the original parameters. Overhead is O(1) time and space per call. Pitfall: this wrapper is synchronous, so applied to an async def it only times coroutine creation; check inspect.iscoroutinefunction(func) and return an async wrapper that awaits func instead."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Python Language Internals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Implement a context manager that temporarily sets environment variables for a block, for example in tests, and always restores the previous values even if the block raises. Show both the contextlib and the class form.",
+    "answer": "Save the old values, apply the overrides, and restore in finally or __exit__ so cleanup runs on exceptions too.\n\nimport os\nfrom contextlib import contextmanager\n\ndef _restore(saved):\n    for k, old in saved.items():\n        if old is None:\n            os.environ.pop(k, None)\n        else:\n            os.environ[k] = old\n\n@contextmanager\ndef env(**overrides):\n    saved = {k: os.environ.get(k) for k in overrides}\n    os.environ.update(overrides)\n    try:\n        yield\n    finally:\n        _restore(saved)\n\nclass Env:\n    def __init__(self, **overrides):\n        self.overrides = overrides\n    def __enter__(self):\n        self.saved = {k: os.environ.get(k) for k in self.overrides}\n        os.environ.update(self.overrides)\n        return self\n    def __exit__(self, exc_type, exc, tb):\n        _restore(self.saved)\n        return False\n\nwith env(REGION='europe-west2'):\n    run_job()\n\nVariables that did not exist before are deleted rather than set to an empty string, which is the subtle bug in naive versions. Returning False from __exit__ lets the exception propagate; returning True would silently swallow it. In the generator form, forgetting try/finally around yield means an exception inside the block skips restoration entirely. Cost is O(k) time and space for k overridden keys. Pitfall: os.environ is process-global, so this is not safe when threads run concurrently; in pytest prefer monkeypatch.setenv, which is undone automatically after each test."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Python Language Internals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "Python DSA: When would you model data with a standard library dataclass versus a Pydantic v2 model in a platform service?",
+    "answer": "Use dataclasses for trusted internal data and Pydantic at trust boundaries where input must be parsed and validated. A dataclass generates __init__, __repr__ and __eq__ from type hints but never checks types at runtime, so Job(retries='3') happily stores a string. It is in the standard library, cheap to construct, and supports frozen=True and slots=True for immutability and lower memory. Pydantic v2 models, built on the Rust pydantic-core, validate and coerce on construction, raise ValidationError with field-level detail, and provide model_validate, model_dump and model_json_schema, which is why FastAPI uses them for request bodies and OpenAPI docs; the pydantic-settings package also loads config from environment variables. The trade-off is construction cost and a third-party dependency. My pattern is Pydantic for API payloads, config and LLM tool-call arguments, then plain dataclasses for the domain core. Pitfall: Pydantic's default lax mode turns '3' into 3; enable strict mode or use StrictInt where silent coercion would hide bugs."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Python Language Internals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Python DSA: A FastAPI async def endpoint calls time.sleep(2) while waiting for a downstream job, and under load the whole service freezes, including /healthz. Diagnose and fix it.",
+    "answer": "time.sleep blocks the event loop thread, and an async def endpoint runs directly on that loop, so while one request sleeps no other coroutine, health check included, can make progress; Kubernetes may then fail liveness probes and restart the pod. The fix depends on the call. For waiting, use await asyncio.sleep(2), which yields control. For blocking libraries such as requests, boto3 or a sync database driver, switch to async clients like httpx.AsyncClient, or offload with await asyncio.to_thread(func, *args) or Starlette's run_in_threadpool. Alternatively declare the endpoint with plain def; FastAPI then runs it in a threadpool, which AnyIO limits to 40 threads by default, so it is a ceiling rather than unlimited. CPU-heavy work belongs in a ProcessPoolExecutor or a task queue. To find the culprit, run with PYTHONASYNCIODEBUG=1, which logs callbacks that take longer than 100 ms, or take a py-spy dump while the process is stuck. Pitfall: putting a blocking call inside async def does not make it non-blocking."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Python Language Internals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Troubleshooting",
+    "question": "Python DSA: A check written as if retry_count is 300: passes in unit tests that use small numbers but never fires in the service, where retry_count is parsed from a header. Why, and when is using 'is' actually correct?",
+    "answer": "'is' tests object identity, whether two names refer to the same object, while '==' tests value equality through __eq__. CPython caches small integers from -5 to 256, so a computed 5 happens to be the same object as the literal 5, but a computed 300, such as int('300'), is a new object and the identity check is False even though the values are equal. Strings behave similarly because of interning: short identifier-like literals may be shared, values read from a request or file usually are not. This is an implementation detail, and since Python 3.8 the compiler emits a SyntaxWarning for 'is' with a literal, which is a strong hint. Fix: use == for numbers, strings and containers. Use 'is' only for singletons and sentinels: x is None, a module-level _MISSING = object() sentinel, and enum members, where identity is the intended meaning. The reverse pitfall: x == None can be overridden by a custom __eq__, as with NumPy arrays, so prefer 'is None'."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Python Language Internals",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Coding",
+    "question": "Python DSA: You need to deduplicate Endpoint(host, port) objects in a set and use them as dict keys while keeping first-seen order. Implement __eq__ and __hash__ correctly and explain what breaks if an object is mutated after insertion.",
+    "answer": "Equal objects must have equal hashes, so derive both from the same immutable tuple of fields; the simplest correct version is a frozen dataclass.\n\nfrom dataclasses import dataclass\n\n@dataclass(frozen=True, slots=True)\nclass Endpoint:\n    host: str\n    port: int\n\nclass EndpointManual:\n    __slots__ = ('host', 'port')\n    def __init__(self, host, port):\n        self.host, self.port = host.lower(), port\n    def _key(self):\n        return (self.host, self.port)\n    def __eq__(self, other):\n        if not isinstance(other, EndpointManual):\n            return NotImplemented\n        return self._key() == other._key()\n    def __hash__(self):\n        return hash(self._key())\n\ndef dedupe(items):\n    return list(dict.fromkeys(items))\n\ndict.fromkeys keeps first-seen order because dicts preserve insertion order since Python 3.7, so dedupe runs in O(n) average time and O(n) space. Defining __eq__ without __hash__ sets __hash__ to None and makes instances unhashable; a plain dataclass with eq=True does the same unless frozen=True or unsafe_hash=True. If a field used in the hash changes after insertion, the object stays in its old bucket: lookups compute the new hash and miss it, and the set can end up holding two equal entries. Hence immutability. Returning NotImplemented lets Python try the reflected comparison instead of answering a wrong False. Pitfall: normalisation such as lower-casing the host must happen before hashing, as in __init__ above, otherwise 'API' and 'api' become distinct keys."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Practical Platform Coding",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Python DSA: Given an access log where each line looks like '2026-03-01T10:00:00Z GET /api/orders?id=7 200 183ms', return the top N endpoints by average latency, ignoring endpoints with too few requests and counting malformed lines.",
+    "answer": "Stream the file, aggregate count and total latency per (method, path) in a dict, then take the top N with heapq.nlargest.\n\nimport heapq\nfrom collections import defaultdict\n\ndef slowest_endpoints(path, n=10, min_count=20):\n    stats = defaultdict(lambda: [0, 0.0])\n    bad = 0\n    with open(path, encoding='utf-8', errors='replace') as f:\n        for line in f:\n            parts = line.split()\n            if len(parts) != 5 or not parts[4].endswith('ms'):\n                bad += 1\n                continue\n            try:\n                ms = float(parts[4][:-2])\n            except ValueError:\n                bad += 1\n                continue\n            key = (parts[1], parts[2].split('?', 1)[0])\n            s = stats[key]\n            s[0] += 1\n            s[1] += ms\n    ranked = ((tot / cnt, cnt, key) for key, (cnt, tot) in stats.items()\n              if cnt >= min_count)\n    return heapq.nlargest(n, ranked), bad\n\nIterating the file object reads line by line, so memory depends on the number of distinct endpoints, not the file size. Stripping the query string stops each id value becoming a separate key; real logs also need IDs inside the path collapsed with a regex. min_count filters out an endpoint hit once that happened to be slow. Time is O(L + E log N) for L lines and E endpoints, and space is O(E). Returning the malformed count makes silent parsing failures visible. Pitfall: averages hide tail latency; for p95, keep an HDR histogram or t-digest per endpoint and rank by that."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Practical Platform Coding",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Coding",
+    "question": "Python DSA: Implement a thread-safe token-bucket rate limiter with a refill rate and a burst capacity, exposing a non-blocking allow() method. Why do you use time.monotonic, and how does this change across multiple replicas?",
+    "answer": "Store tokens as a float, refill lazily on each call from elapsed time, and guard state with a lock.\n\nimport threading, time\n\nclass TokenBucket:\n    def __init__(self, rate: float, capacity: float):\n        if rate <= 0 or capacity <= 0:\n            raise ValueError('rate and capacity must be positive')\n        self.rate = rate\n        self.capacity = capacity\n        self.tokens = capacity\n        self.updated = time.monotonic()\n        self._lock = threading.Lock()\n\n    def allow(self, cost: float = 1.0) -> bool:\n        with self._lock:\n            now = time.monotonic()\n            elapsed = now - self.updated\n            self.tokens = min(self.capacity, self.tokens + elapsed * self.rate)\n            self.updated = now\n            if self.tokens >= cost:\n                self.tokens -= cost\n                return True\n            return False\n\nTokenBucket(rate=5, capacity=10) allows a burst of 10, then a sustained 5 per second. Lazy refill needs no background thread, and each call is O(1) time and space. time.monotonic never goes backwards, whereas time.time can jump on NTP corrections or manual clock changes, minting a huge burst or producing negative elapsed time. The lock is required because the read-modify-write on tokens is not atomic across threads, GIL or not. A cost above capacity can never succeed, so reject it up front. Across replicas this limiter only bounds each pod; a global limit needs shared state, typically a Redis Lua script doing the same refill arithmetic atomically, or the rate limiting built into Envoy or an API gateway."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Practical Platform Coding",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Implement an LRU cache with O(1) get and put using collections.OrderedDict and a fixed capacity. When would you use functools.lru_cache instead?",
+    "answer": "OrderedDict keeps keys in a doubly linked list, so move_to_end and popitem(last=False) are O(1) and give recency tracking for free.\n\nfrom collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        if capacity <= 0:\n            raise ValueError('capacity must be positive')\n        self.capacity = capacity\n        self.data = OrderedDict()\n\n    def get(self, key, default=None):\n        if key not in self.data:\n            return default\n        self.data.move_to_end(key)\n        return self.data[key]\n\n    def put(self, key, value):\n        if key in self.data:\n            self.data.move_to_end(key)\n        self.data[key] = value\n        if len(self.data) > self.capacity:\n            self.data.popitem(last=False)\n\nUpdating an existing key moves it to the most-recent end before overwriting, so it is not evicted next, and eviction only happens after an insert pushes the size over capacity. Both operations are O(1) average time and the cache uses O(capacity) space. get returns default on a miss; if None is a legitimate cached value, callers should pass a unique sentinel object to tell a miss apart. functools.lru_cache is the better choice for memoising a pure function by its arguments: it is implemented in C, keeps its internal state consistent across threads, and exposes cache_info and cache_clear. Write a custom class when you need per-key invalidation, TTL expiry, size limits in bytes, or keys that are not the function arguments. Pitfall: this class is not thread-safe, so guard get and put with a threading.Lock when shared."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Practical Platform Coding",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Python DSA: Write a retry helper for a flaky HTTP call that uses exponential backoff with full jitter, a delay cap and a maximum attempt count, and retries only on transient errors.",
+    "answer": "Loop over attempts, catch only transient exceptions, and sleep a random delay below a capped exponential ceiling.\n\nimport random, time\n\nclass TransientError(Exception):\n    pass\n\ndef retry(func, *, attempts=5, base=0.2, cap=10.0,\n          retry_on=(TransientError, ConnectionError, TimeoutError)):\n    if attempts < 1:\n        raise ValueError('attempts must be at least 1')\n    for attempt in range(attempts):\n        try:\n            return func()\n        except retry_on:\n            if attempt == attempts - 1:\n                raise\n            time.sleep(random.uniform(0, min(cap, base * 2 ** attempt)))\n\nFull jitter spreads retries from many clients so they do not hit a recovering service in synchronised waves; the AWS Architecture Blog analysis showed it reduces total work compared with plain exponential backoff. The cap stops delays growing without bound, and the final attempt re-raises the original exception with its traceback. Retry only transient failures, such as connection resets, timeouts, HTTP 429 and 503 raised by the caller as TransientError, never 400 or 401, which fail identically every time. Honour a Retry-After header when present. Only retry idempotent operations, or send an idempotency key, otherwise a POST that succeeded but timed out is applied twice. Time is O(attempts) calls and space is O(1). In production I would use tenacity with stop_after_attempt and wait_random_exponential, and in asyncio code use await asyncio.sleep. Pitfall: retries at several layers multiply, so retry at one layer only."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Practical Platform Coding",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Python DSA: After a 30-second database blip, your Python API stays overloaded for 20 minutes even though the database has recovered. Logs show each request retried up to 5 times at the gateway, in the service and in the DB client. Explain what is happening and how you stop it.",
+    "answer": "This is a retry storm causing a metastable failure: layered retries multiply load, 5 attempts at three layers is up to 125 database calls per user request, so the recovering database is pushed straight back into overload and stays there. Timeouts make it worse, because clients give up and retry while the original work is still running. I would fix it in layers. Retry at one layer only, usually the one closest to user intent, and make inner clients fail fast. Use exponential backoff with full jitter and a cap. Add a retry budget, for example retries limited to 10 percent of requests over a window; Envoy and Istio support this through retry_budget in cluster circuit_breakers. Add a circuit breaker, such as pybreaker in Python, that opens after consecutive failures and lets a few probe requests through. Shed load early with bounded queues and concurrency limits returning 503 with Retry-After. Keep operations idempotent. Verify with a load test plus injected fault, watching the ratio of attempts to requests, which should stay near 1. Pitfall: autoscaling more API pods only amplifies the storm."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Practical Platform Coding",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Coding",
+    "question": "Python DSA: An alerting pipeline receives events as (timestamp_seconds, key) in non-decreasing time order. Emit an event only if the same key has not been emitted in the previous W seconds, using memory bounded by the keys emitted within the window.",
+    "answer": "Track the last emitted time per key in a dict and expire old keys from a deque ordered by emission time, so memory holds only keys emitted within W seconds.\n\nfrom collections import deque\n\ndef dedupe_window(events, window):\n    last = {}\n    order = deque()\n    for ts, key in events:\n        while order and ts - order[0][0] >= window:\n            _, old_key = order.popleft()\n            del last[old_key]\n        if key not in last:\n            last[key] = ts\n            order.append((ts, key))\n            yield ts, key\n\nlist(dedupe_window([(0, 'a'), (3, 'a'), (5, 'b'), (10, 'a')], 10)) returns [(0, 'a'), (5, 'b'), (10, 'a')]. A key enters the deque only when emitted and cannot be emitted again until its entry expires, so each key appears at most once and the del is always safe; that same invariant means membership in last is the whole duplicate check. Each event is pushed and popped at most once, so total time is O(n) amortised and space is O(k) for k keys emitted in the last W seconds. Being a generator, it works on an unbounded stream. Suppressed duplicates do not extend the window; for quiet-for-W semantics, refresh the timestamp on every event, which needs a lazily cleaned heap instead. Pitfall: the ordering assumption. Pub/Sub or Kafka streams arrive out of order, so buffer with an allowed-lateness watermark, and for dedup across replicas use Redis SET key 1 NX EX with the window as TTL."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Practical Platform Coding",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Beginner",
+    "questionType": "Coding",
+    "question": "Python DSA: Write a function that deep-merges an override config dict into a base config dict and returns a new dict without mutating either input. Nested dicts merge recursively; any other override value replaces the base value.",
+    "answer": "Deep-copy the base once, then walk the override, recursing only when both sides hold a dict.\n\nimport copy\n\ndef deep_merge(base: dict, override: dict) -> dict:\n    result = copy.deepcopy(base)\n    _merge_into(result, override)\n    return result\n\ndef _merge_into(target: dict, override: dict) -> None:\n    for key, value in override.items():\n        if isinstance(value, dict) and isinstance(target.get(key), dict):\n            _merge_into(target[key], value)\n        else:\n            target[key] = copy.deepcopy(value)\n\nbase = {'db': {'host': 'localhost', 'port': 5432}, 'tags': ['a']}\nprod = {'db': {'host': 'db.internal'}, 'tags': ['b']}\ndeep_merge(base, prod) gives {'db': {'host': 'db.internal', 'port': 5432}, 'tags': ['b']}.\n\nIf the base holds a dict and the override holds a scalar or None, the override wins, which is the usual layered-config rule. Lists are replaced, not concatenated, because appending is rarely what an override author means. Copying both sides means the result shares no nested objects with either input, so later mutation cannot leak back into the template. Time and space are O(n) in the total size of both structures, and recursion depth equals nesting depth, far below the default recursion limit of 1000 for real configs. The dict union operator base | prod is shallow and would replace the whole db dict, losing port. Pitfall: decide explicitly how an override deletes a key; a common convention is a dedicated sentinel value meaning remove."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Practical Platform Coding",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "Python DSA: A script that counts ERROR lines in a 20 GB log is OOM-killed in a Kubernetes pod with a 2 GiB memory limit. It starts with lines = open(path).readlines(). How do you fix it, and what if the file has no newlines at all?",
+    "answer": "readlines() materialises every line as a str object in one list, so a 20 GB file needs well over 20 GB of RAM once per-object overhead is added, and the container is killed at its 2 GiB limit, shown as OOMKilled with exit code 137 in kubectl describe pod. Iterate the file object instead: with open(path, 'rb') as f: count = sum(1 for line in f if b'ERROR' in line). That streams through a buffered reader in constant memory, and reading bytes skips decoding cost. If the file is one giant line, such as minified JSON, line iteration still loads it all, so read fixed-size chunks with f.read(1 << 20) in a loop and carry the last few bytes of each chunk into the next so a token split across a boundary is not missed. For speed, split the file into byte ranges aligned to newlines and process them in a ProcessPoolExecutor. Verify peak memory with /usr/bin/time -v, which reports maximum resident set size. Pitfall: compressed logs need gzip.open, which also streams."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Practical Platform Coding",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Coding",
+    "question": "Python DSA: Fetch 5,000 URLs with httpx.AsyncClient while never having more than 50 requests in flight, collecting a result or error per URL so that one failure does not cancel the rest.",
+    "answer": "Share one client, gate each request with an asyncio.Semaphore, and turn exceptions into data inside each task.\n\nimport asyncio\nimport httpx\n\nasync def fetch_all(urls, limit=50, timeout=10.0):\n    sem = asyncio.Semaphore(limit)\n    limits = httpx.Limits(max_connections=limit)\n    async with httpx.AsyncClient(timeout=timeout, limits=limits) as client:\n\n        async def fetch(url):\n            async with sem:\n                try:\n                    resp = await client.get(url)\n                    resp.raise_for_status()\n                    return url, resp.status_code, None\n                except httpx.HTTPError as exc:\n                    return url, None, repr(exc)\n\n        return await asyncio.gather(*(fetch(u) for u in urls))\n\nresults = asyncio.run(fetch_all(urls))\n\nThe semaphore caps concurrency at 50 so you do not exhaust file descriptors, ephemeral ports or the target's rate limit, and the shared client reuses pooled keep-alive connections instead of a TLS handshake per request. Catching httpx.HTTPError, which covers timeouts, transport errors and bad statuses, means gather never sees an exception, and gather preserves input order. Time is roughly n / 50 times typical latency, and space is O(n) for results. Pitfall: this creates 5,000 coroutines up front, fine here, but for millions of URLs use 50 worker tasks reading from an asyncio.Queue so memory stays O(limit). asyncio.TaskGroup in 3.11+ is the structured alternative, but it cancels siblings on the first unhandled exception, so the per-task try/except is still needed."
+  },
+  {
+    "source": "Python Coding and DSA Bank",
+    "section": "Python Coding and DSA",
+    "category": "Python Coding and DSA - Practical Platform Coding",
+    "topic": "Python Coding and DSA",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Python DSA: A ProcessPoolExecutor job that submits 2 million small records one by one runs slower than a single process, and memory triples. Diagnose it and describe how you restructure the job.",
+    "answer": "Per-task overhead dominates: each submit pickles its arguments, sends them through a pipe to a worker and pickles the result back, so for microseconds of work per record the IPC costs far more than the computation. Memory triples because submitting 2 million records creates 2 million Future objects and queued payloads up front, and each worker holds its own copy of any large object it receives. Fixes: batch the work, either executor.map(func, records, chunksize=5000) or explicit lists of a few thousand records per task, so pickling is amortised. Send references, not data: pass file paths or byte offsets and let each worker read its own slice. Load large read-only lookup tables once per worker through the initializer argument instead of per call. Bound in-flight futures by submitting in waves so memory stays flat. In a container, os.cpu_count reports host cores and ignores the CPU limit, so derive max_workers from the pod's limit, for example via a Downward API environment variable. Verify by timing one chunk alone and profiling with py-spy. Pitfall: lambdas and nested functions cannot be pickled as tasks."
+  }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Customer Engineering",
+    "topic": "Discovery",
+    "difficulty": "beginner",
+    "questionType": "Scenario",
+    "question": "You have one hour with a support lead and someone from IT. What do you leave the room with before you agree to build a knowledge assistant?",
+    "answer": "I leave with four things written down, and I do not agree to build yet. I need the documents the desk opened on a real ticket this week, the system each one lives in, one sample question paired with the page that answers it, and the name of the person who can refuse the corpus if it is not ready. In the hour I ask the support lead to pull up one ticket from the last few days and walk the clicks. Which page did they open, was it current, and what did they still have to ask a teammate. With IT I ask how that page is stored, who grants access, whether a service account can read it, and whether the text may be indexed inside their network. Before we stand up I read the list back: sources, access path, and one known failure, such as scanned PDFs with no text layer. On a regional bank's card desk, the lead opened a Confluence space and a department file share. IT said the share had no API and that about half the procedure PDFs were scans. We wrote down those two sources, a declined foreign-transaction ticket, the Confluence page that answered it, and a note that scans stayed out of scope until someone ran OCR. The pitfall is treating a friendly meeting as a signed corpus. If nobody owns the share, agreeing to build means the first demo retrieves titles and nothing an agent can follow."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Customer Engineering",
+    "topic": "Real questions",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "How do you discover the questions the desk actually asks, instead of the questions a sponsor lists in the kickoff deck?",
+    "answer": "I pull the questions from tickets and from sitting with the desk, and I treat the kickoff deck as a hypothesis until the export agrees with it. Sponsors write the questions they wish the product answered. Agents type the questions that show up on a Tuesday night. I ask for a recent export of ticket subjects and the first customer message, then I sit with two agents for a shift and write down what they type into the existing search box, including the typos and the internal shorthand. I cluster those lines by intent, count how often each cluster appears in a week, and only then lay the list next to the deck. Anything on the deck that never appears gets marked as a sponsor question, not a desk question. At a parcel carrier, the kickoff deck had twelve questions about network redesign. The night desk's search box was full of driver says parcel scanned twice and label will not print at depot 14. Those two intents were about a third of the week's volume. The redesign questions never showed up in the export. We indexed the scan-exception runbook and the printer procedure first. The pitfall is interviewing only the sponsor and the team lead. They remember the unusual cases. The export shows the repetitive ones, and those are what the assistant has to get right before anyone trusts it."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Customer Engineering",
+    "topic": "Proof of concept",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "How do you scope a two-week proof of concept so it proves retrieval on their documents without pretending it is a production rollout?",
+    "answer": "The two-week proof of concept proves that a frozen sample of their documents can return the right passage for a fixed set of real questions, and it stops there. There is no identity provider, no ticket write-back, no on-call rotation, and no claim that agents can rely on it Monday morning. I freeze the corpus on day one: a named folder or space, a snapshot date, and a row count. I take twenty to forty questions agents actually asked, each with the page an expert marked as the right source. We index that snapshot, run the questions, and score whether the expected page is in the top results and whether the citation opens. Failures stay in a log next to the chunk that came back. The readout is that table, not a launch plan. For a hospital group's scheduling desk, we indexed one policy space and forty PDFs exported on a Monday, about 1,200 chunks. Twenty-five questions came from the prior week's tickets. Eighteen returned the page the lead had marked. Seven failed because the policy lived in a scanned PDF. We showed those seven with the bad chunk on screen and refused to connect the assistant to the live scheduling system. The pitfall is letting a clean demo slide into turning it on for the floor next Monday. A frozen folder is not their production store, and a missed scan is a corpus problem, not a reason to widen the rollout."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Customer Engineering",
+    "topic": "Enterprise integration",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you integrate with a customer's identity provider, ticket system, and document store when each is owned by a different team with its own change window?",
+    "answer": "I integrate them as three separate contracts with three owners, and I sequence the work to each team's change window instead of one plan that pretends they move together. Identity, tickets, and documents fail independently, so each gets its own interface, credentials, test tenant, and rollback. I start by naming the owner, the environment, and the next window for each system. Identity is the gate. Until an agent can sign in with their own account and we can show which groups we read, I do not put their documents behind our UI. The document connector can be built against a copy while identity waits on its board. Ticket read can follow. Ticket write waits until identity and a stable case id both exist. Each connector has a feature flag and a health check the owning team can see. At an insurer, Okta sat with IAM on a monthly change board, ServiceNow sat with the service desk on a weekly window, and SharePoint sat with knowledge management, who had no formal window and a nervous site owner. We shipped read-only indexing of a test site in week three, single sign-on in the next IAM window, and left ServiceNow write for a later phase because the case table had no stable key. The pitfall is one ticket that says connect the enterprise. When IAM slips a month, the whole plan looks late even though the index was ready, and nobody can tell which boundary actually moved."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Customer Engineering",
+    "topic": "On-premises boundary",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "The customer forbids document text from leaving their network. What do you build, what do you refuse, and how do you prove the boundary?",
+    "answer": "I build the index, the embeddings, and the model call inside their network, and I refuse any path that sends chunk text, prompts, or document bytes to our cloud. The proof is a network path their team can inspect, not a sentence on a slide. On their side I run the document connector, the chunk store, the vector index, and the inference endpoint, whether that is a model they already host or a container we ship for them to run. I refuse a temporary cloud index, a vendor-hosted embedding API, logging that ships prompt bodies to our observability tenant, and a support tunnel that dumps retrieved passages when someone files a bug. To prove the boundary, we draw the data flow with their network team, place the service on a subnet with egress denied, and capture traffic while an agent asks a question. The capture shows calls only to their identity provider and their model host. At a defense supplier we deployed the stack in their VPC, pointed embeddings at a local model, and blocked all outbound routes. During the test a debug flag still tried to post traces to our hosted service. The capture caught it, we removed the exporter, and we reran until the capture showed no external destinations. The pitfall is proving the diagram and skipping the runtime. A telemetry SDK or a browser extension can carry the passage out after the architecture review has already passed."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Customer Engineering",
+    "topic": "Go-live",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you run a go-live for the assistant so the night desk can turn it off without calling you, and so the old search page still works?",
+    "answer": "Go-live is a flagged add-on beside the old search page, with a kill switch the night desk already knows how to use, and the old page stays available the moment the flag is off. I do not replace the search box on the first night. The assistant sits next to it. Turning it off means flipping a flag in a tool their supervisor already uses, a feature flag in their admin console or a config key their on-call already edits for other tools. The runbook is one page: the symptoms, the flag name, who is allowed to flip it, and how to confirm the old search still returns results. We rehearse that flip during business hours with the night lead watching. Rollback does not require a deploy or a call to me. For a utilities contact center, we put the assistant behind a flag named assistant_enabled in the same flag tool their supervisors used for call scripts. The old SharePoint search page stayed linked in the header. At 22:10 on the first night the answers cited a retired outage procedure. The supervisor turned the flag off in under a minute, agents fell back to the old page, and we read the bad citations in the morning. The pitfall is a kill switch only I can reach, or a go-live that removes the old page in the same change. When the assistant mis-cites at 2 a.m., the desk needs a switch, not my phone number."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Customer Engineering",
+    "topic": "Success metrics",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "Which customer-facing measures are you willing to put your name on, such as time to answer, citation clicks, deflection, or escalation rate, and which claims do you refuse?",
+    "answer": "I will put my name on time to answer and on citation clicks when we measure them on the same tickets against a baseline taken before the assistant. I refuse deflection, and I refuse a claim that the assistant caused a drop in escalation rate, until the desk agrees how those events are labeled and we can separate other changes. Time to answer is the clock from the agent opening the question to pasting a reply, compared with the prior month on the same queue. Citation clicks tell me whether anyone opened the source. Both sit in our logs plus their ticket timestamps, so I can recompute them. Deflection claims a contact never happened, and most desks have no definition of the ticket that would have been filed. Escalation rate also moves when staffing, incidents, and policy change, so I will show it as context and I will not sign a sentence that credits the assistant for the drop. At a telecom desk we published median handle time on billing questions, about forty seconds lower on a tagged subset, and a citation open rate of 61 percent. We declined a press line that said we deflected 30 percent of chats, because a chat bot and the assistant launched the same week and nobody could separate them. The pitfall is signing a blended number because a steering committee wants one figure. A metric I cannot recompute from the logs is a metric I will not own."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Customer Engineering",
+    "topic": "Fine-tune request",
+    "difficulty": "advanced",
+    "questionType": "Behavioral",
+    "question": "A stakeholder says to just fine-tune the model on their documents. How do you recommend retrieval instead, including the tradeoff you are asking them to accept?",
+    "answer": "I recommend retrieval because their documents change every week, and a fine-tune freezes a copy of them inside weights we cannot cite or update. The tradeoff I ask them to accept is that the assistant answers only from what we indexed, and it says when it has no passage, instead of sounding fluent on every question. I walk through a page they edited last month. A fine-tune needs a new training run, a new evaluation, and a new release to pick up that edit, and the model still cannot point at the paragraph. Retrieval picks up the edit on the next index and can show the link. I also name what retrieval will not do. It will not absorb their tone from a thin set of examples, and the first version will miss any question whose page was never indexed. At a software vendor's support org, a director wanted the model trained on three years of help-center articles. Those articles were edited every Tuesday. We indexed the help center, showed an article updated that morning appearing in the afternoon index, and showed the model refusing a question whose article we had held out. He accepted the refusal once he saw a fluent answer that named a menu the product no longer had. The pitfall is winning the argument and skipping the corpus work. Retrieval only beats a fine-tune when the index is fresh and the refusal path is real."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Staff Leadership",
+    "topic": "Executive briefing",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "How do you brief an executive who wants a transformation story when you only have two weeks of shadow use and a disagreement log from the desk?",
+    "answer": "I brief the two weeks as a shadow trial with a count of questions, a count of disagreements, and a decision on whether to continue. I decline the transformation story. An executive can use a small true number, and a narrative we cannot defend will get repeated until it breaks. I open with the scope: which team, how many agents, that the old search stayed in place, and that nobody was told to trust the assistant yet. Then three figures: questions asked, answers an agent marked usable, and answers the desk disagreed with, each with one example. The disagreement log is the center of the briefing. I close with what we will change before any wider use, and I do not forecast annual savings. At a retail bank, fourteen agents used the assistant in shadow for ten business days. They asked 186 questions. They marked 121 usable. The log had 27 disagreements, and 19 of those were the same stale fee schedule still indexed from a PDF. I told the chief operating officer we would not expand until that PDF was removed and the next week's disagreement count dropped. She had wanted a line about reinventing the contact center. We left it out of the notes. The pitfall is dressing shadow numbers in rollout language because the room expects a story. Two weeks of optional use is evidence about retrieval quality. Calling it a transformation makes the next disagreement look like a failed program."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Staff Leadership",
+    "topic": "Build versus buy",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "The customer asks whether to buy your product, extend their existing search, or let an internal team build an assistant. How do you frame build versus buy without a sales script?",
+    "answer": "I frame the choice as three costs they already understand: who operates it at 2 a.m., how fast a corrected document shows up in an answer, and what they must build that is not the model. I say that I work for the vendor, then compare all three paths on one grid: identity, document freshness, an evaluation set, a kill switch, and who gets paged. Extending their existing search is the right first move when the pain is a keyword miss and they already have an index with an owner. Buying from us makes sense when they want citations, a refusal path, and connectors they would rather not staff. An internal assistant makes sense when they have a team that will own ingestion, evaluation, and on-call, and when the corpus sits behind a boundary we cannot meet. At a logistics company, Elasticsearch already covered shipment documents and had an owner. The gap was agents pasting ticket text and needing a cited step. Their internal platform team was four people with a queue of warehouse work. I told them to keep Elasticsearch as the index and use us for the assistant layer, rather than staff a second ingestion pipeline. If they had a hard on-premises rule we could not meet, the same grid would have pointed at an internal build. The pitfall is a feature matrix that only our column can win. They can tell, and the useful frame is who holds the pager and the corpus."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Staff Leadership",
+    "topic": "Mentoring",
+    "difficulty": "advanced",
+    "questionType": "Behavioral",
+    "question": "How do you mentor a newer forward deployed engineer who is about to customize a prompt on production because the demo is tomorrow?",
+    "answer": "I stop the production edit and move the change onto a copy of the prompt, then we rerun a handful of yesterday's questions before anyone decides what the demo will show. A prompt change is a release, even when it is one sentence, because it changes answers the desk will see. I sit with them and ask what the demo is supposed to prove. Usually it is one workflow, not a better prompt for every question. We reproduce the failing question on a staging tenant, change the prompt there, and rerun the small set we already trust, including two questions that were correct that morning. If those regress, the change does not go. If the demo is truly blocked, we narrow the script to the questions we rechecked, and we tell the account team before the meeting. On a payroll customer, a newer engineer wanted to add a line telling the model to always give a confident answer, the night before a finance demo, because one question had refused. That line would have covered a missing tax-form page. We kept the refusal, indexed the form they had in a side folder, and demoed the question once the citation opened. The pitfall is either letting the edit ship to save the meeting, or taking the keyboard and fixing it myself. They need to watch the regression check, or the next demo night they will do the same thing after I am offline."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Staff Leadership",
+    "topic": "Estimation",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "How do you estimate an integration when the customer's export sample arrived late and three fields do not match the workshop notes?",
+    "answer": "I estimate the integration as a range, with the three mismatched fields called out as open scope, and I do not give a single date until we map those fields on a real row. The late sample is the first true spec. Workshop notes are what people remembered. I open the file, list every column, and mark the three that disagree: different names, different types, or values the notes never mentioned. Each one becomes a question with an owner and a default if they do not answer by a named day. The estimate then splits into known work, the connector against the columns that match, and unknown work, the mapping, the backfill, and any code that depends on a stable key. I give the range in weeks and say what shrinks it. At a claims administrator, the workshop said the export had case_id, status, and closed_date. The CSV arrived with CaseNumber, State, a blank close column, and a free-text Notes field that held the only status. I estimated three to six weeks. Three if they added a real status column and a stable id. Six if we had to parse Notes and reconcile duplicates. We did not quote three weeks as the plan. The pitfall is averaging the uncertainty into one number so the schedule looks tidy. The sponsor hears the low end, and the three fields are still wrong when the build starts."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Staff Leadership",
+    "topic": "Escalation",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "Sales promised a write-back into the system of record in thirty days. The export has no stable case id. How do you escalate that without ambushing the account team in front of the customer?",
+    "answer": "I tell the account team the same day, in private, that write-back in thirty days is not possible until a stable case id exists, and I ask them to reset the promise with me before the next customer meeting. I do not save it for the steering call. The issue is a broken key, not who oversold. I bring the export, show two rows that would collide or disappear without an id, and say what we can still do in thirty days: read-only retrieval, a written mapping, and a test write against a sandbox once they add the key. I also say what I will not demo. Then we agree the words. If they want to lead the conversation, I back them. If the customer asks me directly before that reset, I answer the technical fact and I do not invent a workaround that pretends the id is there. At a benefits administrator, sales had told the vice president we would update case status from the assistant inside a month. The nightly file used a row number that changed every export. I called the account executive that afternoon, showed three rows whose numbers moved after a re-export, and we moved write-back to a later phase on the next day's call, with their data team owning the id. The pitfall is correcting the account executive in front of the customer to stay clean. They stop bringing me in early, and the next promise gets made even further from the file."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Customer Engineering",
+    "topic": "Expand or pause",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you decide the pilot is ready to expand to a second team, and what evidence makes you pause even if the sponsor wants a press mention?",
+    "answer": "The pilot expands when a second team would use the same sources, the disagreement rate has been flat for two weeks, and the first team's supervisors still run with the flag on. I pause when disagreements are still about wrong or stale pages, when the first team is a friendly subset, or when the only pressure is a press mention. Readiness is ordinary evidence. The same document store, the same identity groups, a question set we can rerun, a kill switch the new desk has already practiced, and a named owner for the corpus on the new team. I want the share of answers marked wrong to be low and steady, not one good Friday. A press mention does not move that bar. At an airline, the baggage desk pilot had run for three weeks, agents were opening citations, and wrong-answer marks sat around one in ten, mostly a policy PDF that knowledge management had already replaced. The sponsor wanted a press note before a conference. The second team was the airport desk, which used a different share drive we had never indexed. I paused. We removed the stale PDF, indexed the airport drive, and expanded two weeks later with no announcement. The pitfall is expanding because the first team likes the assistant. They were chosen because they would tolerate a pilot. The second team will judge it on the first wrong answer their supervisor sees."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Staff Leadership",
+    "topic": "Architecture ownership",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you own the architecture of an assistant integration when three customer teams disagree and none of them report to you?",
+    "answer": "I own the architecture by writing the decision, the options, and the cost of waiting, then getting one executive sponsor to pick, while each team keeps ownership of its own system. They do not need to report to me. I need one place where the disagreement is visible and a single person who can choose. I publish a short decision note: the question, the three options, what each team is protecting, the path I recommend, and what breaks if we wait another month. I review it with each team separately so they can correct my description of their constraint before anyone sees it in a group. Then the sponsor chooses in a meeting where all three are present. After that I hold the diagram and the interface contracts, and I turn down side agreements that quietly change them. At a hospital network, clinical applications wanted the assistant inside the electronic health record, security wanted it in a separate virtual network, and the service desk wanted it inside the ticket tool. I wrote the note, recommended the separate network with read-only chart context and no write into the record, and the chief information officer picked that in a thirty-minute review. Security kept the network, clinical applications kept the record API, and we stopped relitigating it in side channels. The pitfall is blending the three designs so nobody is unhappy. A blended path usually breaks the one constraint that mattered, and it still has no owner when it fails."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 5 - Senior FDE: Customer Delivery and Staff Leadership",
+    "category": "Senior FDE - Staff Leadership",
+    "topic": "Estimate ranges",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "How do you give a useful estimate range to a sponsor when discovery is unfinished, without padding until the number is meaningless?",
+    "answer": "I give a range tied to the unfinished decisions. The low end is the path if those decisions go the simple way, the high end is the path if they do not, and I name the date when the range gets narrower. I list the two or three unknowns that move the estimate, such as whether the export has a stable id, whether documents can be read through an API, and whether identity is in the next change window. The low number assumes the simple answer on each. The high number assumes the painful version we have already seen on this account. I do not add a flat cushion on top of the high number. I tell the sponsor which sample or meeting collapses the range, and I put that date on the calendar. At a city agency, discovery was halfway done. If their document library had an API and the ticket export kept a case id, the integration was five weeks. If we had to crawl a file share and invent a key, it was twelve. I refused a range of five to twenty because the extra months had no scenario behind them. We set a checkpoint in ten days, when the sample and the API answer were due. The pitfall is padding until every outcome fits inside the range. The sponsor cannot staff or sequence anything, and the range becomes a way to avoid the unfinished discovery."
+  }
+]

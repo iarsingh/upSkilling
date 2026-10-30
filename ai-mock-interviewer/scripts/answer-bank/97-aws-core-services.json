@@ -1,0 +1,802 @@
+[
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - IAM",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "AWS: What is the practical difference between an IAM user, an IAM group, and an IAM role, and which should workloads use?",
+    "answer": "Workloads and humans should both prefer roles, because roles issue short-lived credentials through STS while IAM users carry long-lived access keys. An IAM user is a permanent identity with a password or access keys; a group is just a container for attaching policies to many users and cannot be a principal itself; a role is an identity with no permanent credentials that a trusted principal assumes via sts:AssumeRole, receiving temporary keys that expire. For example, an EC2 instance gets a role through an instance profile, a Lambda function through its execution role, and engineers federate through IAM Identity Center into roles. The pitfall is creating IAM users for CI pipelines; use GitHub OIDC federation to a role instead. Verify with IAM credential reports and Access Analyzer unused access findings to find stale user keys."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - IAM",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "AWS: Walk through how IAM evaluates a request when several policy types apply to the same principal.",
+    "answer": "IAM starts from an implicit deny, any explicit Deny anywhere wins, and an action is allowed only if every applicable guardrail permits it and at least one policy grants it. In order, AWS checks for explicit denies across all policies, then Organizations SCPs and RCPs, then resource-based policies, then identity-based policies, then permission boundaries, and finally session policies. Within the same account a resource-based policy can grant access on its own, but cross-account access needs both the identity policy in the caller account and the resource policy in the target account. For example, a role with s3:* can still be denied by a bucket policy that denies requests without aws:SecureTransport. To verify, use the IAM policy simulator or the decoded authorization message from sts decode-authorization-message, and read the CloudTrail errorCode and errorMessage."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - IAM",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "AWS: What is an IAM permission boundary, and when would you use one instead of just writing a tighter policy?",
+    "answer": "A permission boundary is a managed policy attached to a user or role that sets the maximum permissions it can ever have; it grants nothing by itself, so effective access is the intersection of the boundary and the identity policies. You use it when you delegate role creation. For instance, a platform team lets application teams create their own Lambda execution roles, but requires via an IAM condition that every role they create carries the AppTeamBoundary using iam:PermissionsBoundary. That stops privilege escalation, because a developer cannot create a role more powerful than themselves. A tighter policy does not solve this, since the developer could simply attach AdministratorAccess to a new role. The pitfall is forgetting to deny iam:DeleteRolePermissionsBoundary and iam:PutRolePermissionsBoundary, which lets people remove the boundary. Test with the policy simulator."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - IAM",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "AWS: Compare identity-based policies with resource-based policies, and explain why cross-account access behaves differently.",
+    "answer": "Identity-based policies attach to a user, group or role and say what that principal can do; resource-based policies attach to the resource, such as an S3 bucket policy, KMS key policy, SQS queue policy or Lambda resource policy, and include a Principal element saying who can access it. Inside one account, either policy alone can allow access. Across accounts, both sides must agree: the caller account identity policy must allow the action and the resource policy in the owning account must trust the caller. Resource policies also let a principal keep its own identity instead of assuming a role, which matters for auditing. An example is a central logging bucket that allows s3:PutObject from every account using aws:PrincipalOrgID. A pitfall is KMS: its key policy is mandatory, so IAM permissions alone never suffice unless the key policy delegates to IAM."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - IAM",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "AWS: Compare IRSA with EKS Pod Identity for giving Kubernetes pods AWS permissions, and say which you would choose for a new cluster.",
+    "answer": "For a new EKS cluster on EC2 nodes I would choose EKS Pod Identity, because it removes per-cluster OIDC provider management and makes roles reusable across clusters. IRSA works by registering the cluster OIDC issuer as an IAM identity provider, annotating a ServiceAccount with eks.amazonaws.com/role-arn, and trusting that issuer and service account subject in each role trust policy, so roles are tied to specific clusters. Pod Identity uses the eks-pod-identity-agent add-on and the CreatePodIdentityAssociation API to map namespace and service account to a role whose trust policy trusts pods.eks.amazonaws.com with sts:AssumeRole and sts:TagSession, and it adds session tags like eks-cluster-name for ABAC. IRSA is still needed where Pod Identity is not supported, notably Fargate pods, and works on self-managed Kubernetes. The GCP analogue is GKE Workload Identity Federation. Verify by running aws sts get-caller-identity inside the pod."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - IAM",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "AWS: How would you set up IAM Identity Center so engineers sign in with the corporate IdP and get least-privilege access across many accounts?",
+    "answer": "Enable IAM Identity Center in the Organizations management account, delegate administration to a dedicated identity account, and connect the corporate IdP such as Entra ID or Okta as an external identity source using SAML 2.0 for sign-in and SCIM for automatic user and group provisioning. Then define permission sets, which are templates that Identity Center turns into roles in each account, for example ReadOnly, Developer and PlatformAdmin, with session durations of a few hours. Assign IdP groups to permission sets per account or OU, ideally through Terraform using the aws_ssoadmin_account_assignment resource so changes are reviewed. Engineers use aws configure sso and aws sso login for CLI access. A pitfall is assigning users individually rather than groups, which makes offboarding unreliable. Verify through CloudTrail events showing the AWSReservedSSO role names and periodic access reviews."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - IAM",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "AWS: A CI role in account A gets AccessDenied calling sts:AssumeRole on a deploy role in account B. How do you debug it?",
+    "answer": "Cross-account assumption needs two permissions to line up, so I check both sides. In account A, the CI role identity policy must allow sts:AssumeRole on the exact role ARN in account B, and no SCP in A may deny it. In account B, the deploy role trust policy must name the CI role ARN, or the account root with a condition, as the Principal, and any conditions must match: a required sts:ExternalId, aws:PrincipalOrgID, or session tags requiring sts:TagSession. Common causes are a typo in the ARN, the CI role having been recreated so the trust policy now shows an unreadable principal ID, or the caller already being a chained role session exceeding the one-hour chaining limit with a longer DurationSeconds. I read the CloudTrail AssumeRole event in both accounts and test with aws sts assume-role using the CLI as the CI role."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - IAM",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "AWS: Design a least-privilege IAM model for 40 application teams across 150 accounts without the platform team becoming a ticket queue.",
+    "answer": "I would combine strong organisation-level guardrails with self-service inside them. At the top, SCPs and RCPs deny the dangerous things everywhere: disabling CloudTrail, leaving approved regions, creating IAM users or access keys, and access from outside the organisation via aws:PrincipalOrgID. Humans come through IAM Identity Center with a small set of permission sets mapped to IdP groups. For workloads, teams create their own roles through a Terraform module that enforces a permission boundary, required tags and naming, with ABAC using aws:PrincipalTag/team matched against aws:ResourceTag/team so one policy scales across teams. IAM Access Analyzer generates policies from CloudTrail activity, flags unused permissions and external access, and custom policy checks run in CI to block new public or wildcard grants before merge. The trade-off is upfront module effort versus permanent ticket toil. Measure success by unused-access findings trending down and IAM request lead time."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - IAM",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "AWS: Coming from GCP, how do AWS IAM roles map to GCP service accounts and IAM bindings?",
+    "answer": "The closest analogue to a GCP service account is an AWS IAM role, but the policy model is inverted. In GCP you bind a principal to a role on a resource, and permissions inherit down the organisation, folder and project hierarchy. In AWS, a role carries identity policies listing actions and resources, a trust policy says who may assume it, and the account is the main boundary rather than a hierarchy. Service account impersonation maps to sts:AssumeRole, GCP Workload Identity Federation maps to AWS OIDC or SAML federation with AssumeRoleWithWebIdentity, and GCP organisation policies map loosely to SCPs. GCP predefined roles resemble AWS managed policies. A pitfall for GCP engineers is expecting a grant at the organisation level to flow into every account; in AWS you must deploy roles into each account, typically with StackSets or Terraform."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Organizations and Landing Zone",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "AWS: What are AWS Organizations and organizational units, and why do companies use many accounts instead of one?",
+    "answer": "AWS Organizations groups many AWS accounts under one management account with consolidated billing, and organizational units are folders that group accounts so you can apply policies like SCPs to the whole set. Companies use many accounts because the account is the strongest isolation boundary in AWS: separate blast radius for security incidents, separate service quotas, clean cost attribution, and simpler IAM because you do not need complex resource-level conditions to keep teams apart. A typical layout has a Security OU with log archive and audit accounts, an Infrastructure OU for networking and shared services, a Workloads OU split into prod and non-prod, and a Sandbox OU. The pitfall is running workloads in the management account, which SCPs cannot restrict. Keep it limited to billing and organisation administration."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Organizations and Landing Zone",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "AWS: How do service control policies differ from IAM policies, and where do resource control policies fit?",
+    "answer": "SCPs never grant permissions; they define the maximum permissions available to IAM principals in the accounts they apply to, so an action must be allowed by both the SCP chain and the principal's own policies. They do not affect the management account or service-linked roles. Resource control policies, added in late 2024, are the mirror image: they cap what can be done to resources such as S3 buckets, KMS keys, SQS queues and Secrets Manager secrets, regardless of who calls, which makes them ideal for a data perimeter like denying access from principals outside the organisation. A common SCP pattern is denying actions outside approved regions using aws:RequestedRegion, with exemptions for global services like IAM and CloudFront. The pitfall is keeping the default FullAWSAccess SCP detached by accident, which blocks everything. Test new SCPs on a sandbox OU first."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Organizations and Landing Zone",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "AWS: An engineer with AdministratorAccess in a member account cannot create an RDS instance in eu-west-2 and gets an explicit deny. What do you check?",
+    "answer": "An explicit deny for a full administrator almost always comes from an SCP, so I start at the Organizations layer. I list the policies attached to the account and to every parent OU up to the root with aws organizations list-policies-for-target, because SCPs inherit, and look for a region restriction using aws:RequestedRegion that excludes eu-west-2, or a Control Tower region deny control. Next I check for a deny on untagged resource creation, such as a requirement on aws:RequestTag/cost-center. The CloudTrail event for CreateDBInstance shows the error message, and newer messages state that the denial came from a service control policy. I also rule out a permission boundary on the role and a session policy from the federation. The fix is either adding the region to the allowed list through the landing zone pipeline or tagging correctly, not detaching the SCP by hand."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Organizations and Landing Zone",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "AWS: What does AWS Control Tower set up for you, and what are its controls?",
+    "answer": "Control Tower automates a multi-account landing zone on top of Organizations: it creates a Security OU with a log archive account and an audit account, configures an organisation CloudTrail trail and AWS Config delivery to central buckets, sets up IAM Identity Center, and provides Account Factory for vending new accounts. Controls, formerly called guardrails, come in three kinds: preventive controls implemented as SCPs or RCPs, detective controls implemented as AWS Config rules, and proactive controls implemented as CloudFormation hooks that block non-compliant resources before deployment. They are labelled mandatory, strongly recommended or elective and are enabled per OU. The trade-off is opinionated structure in exchange for speed. A pitfall is modifying Control Tower managed resources directly, which causes drift; you repair it from the console or by updating the landing zone."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Organizations and Landing Zone",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "AWS: Design an account vending pipeline that delivers a fully baselined, network-connected workload account in under an hour.",
+    "answer": "I would use Control Tower with Account Factory for Terraform so an account request is a pull request. A team submits a request file with account name, OU, owner email, cost centre and environment; merging it triggers AFT, which calls Account Factory to create and enrol the account under the right OU so preventive and detective controls apply immediately. AFT then runs global customisations for every account, such as deleting default VPCs, enabling EBS encryption by default, S3 Block Public Access at account level and baseline IAM roles, followed by account-specific customisations. Networking is attached by sharing Transit Gateway or subnets through AWS RAM and allocating CIDRs from VPC IPAM. Finally the pipeline registers budgets and posts access details to the team. Trade-offs include AFT's own pipeline maintenance. Verify with a smoke test stage checking Config compliance and Security Hub scores before handing over."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Organizations and Landing Zone",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "AWS: How would you design the OU structure for a regulated company with prod, non-prod, sandbox, and a few PCI workloads?",
+    "answer": "I design OUs around policy differences, not the org chart, because OUs exist to apply different SCPs and controls. My layout would be: Security for log archive, audit and security tooling; Infrastructure for networking, shared services and CI; Workloads split into Prod and NonProd child OUs; a separate PCI OU with stricter SCPs such as denying non-approved regions and services, requiring encryption and blocking internet gateways outside designated accounts; Sandbox with spend budgets and an aggressive cleanup policy and no connectivity to the corporate network; plus Suspended for accounts being closed and Policy Staging for testing SCPs. I keep nesting shallow, since SCPs are limited to five levels and deep trees get confusing. The pitfall is making business units the top level, which forces duplicate policies under each. Verify by mapping every SCP to a reason and reviewing OU placement during audits."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Organizations and Landing Zone",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "AWS: Compare the AWS Organizations account model with the GCP organisation, folder, and project hierarchy for governance.",
+    "answer": "Both use a hierarchy, but GCP inherits IAM grants downward while AWS inherits only guardrails. In GCP, organisation, folders and projects form a tree where IAM bindings and organisation policy constraints flow down, and the project is the unit of billing and API enablement. In AWS, OUs map to folders and accounts map to projects, but SCPs and RCPs only restrict; permissions must be created inside each account. AWS accounts are heavier than GCP projects, with their own root user, quotas, and support plan, so teams typically have fewer accounts than they would have projects. GCP shared VPC maps to AWS RAM subnet sharing, and GCP org policy constraints like restricting resource locations map to region-deny SCPs. A pitfall when migrating is assuming an org-level role grant gives access everywhere; in AWS you deploy permission sets through Identity Center."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Compute",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "AWS: What are an AMI and an EC2 launch template, and how do they relate to an instance?",
+    "answer": "An AMI is the machine image, containing the root volume snapshot, architecture and boot configuration, while a launch template is the full recipe for starting instances, referencing an AMI plus instance type, security groups, IAM instance profile, user data, EBS settings and IMDS options. An instance is a running server created from a launch template or direct parameters. Launch templates are versioned, so an Auto Scaling group can point at a specific version or at the latest. For example, a pipeline built with EC2 Image Builder or Packer produces a hardened AMI each week, updates the launch template, and an ASG instance refresh rolls it out. Best practice is enforcing IMDSv2 in the template with HttpTokens set to required. The pitfall is using deprecated launch configurations, which do not support newer features."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Compute",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "AWS: What does an EC2 Auto Scaling group do beyond just adding instances under load?",
+    "answer": "An Auto Scaling group keeps a fleet at the desired capacity between a minimum and maximum, replaces unhealthy instances, and spreads instances across Availability Zones, in addition to scaling on demand. It uses EC2 status checks by default and can also use ELB health checks, so an instance failing the load balancer target group check gets terminated and replaced. It rebalances across AZs when one zone becomes uneven, supports lifecycle hooks to run scripts during launch or termination such as draining connections, and performs instance refreshes for rolling AMI updates. Warm pools keep pre-initialised instances ready to cut scale-out time. For example, a web tier with min 3 and max 12 across three AZs survives one zone loss. A pitfall is enabling ELB health checks with too short a grace period, causing a replacement loop before the app finishes booting."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Compute",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "AWS: Compare target tracking, step scaling, scheduled scaling, and predictive scaling for an Auto Scaling group.",
+    "answer": "Target tracking should be the default: you choose a metric and target, such as average CPU at 50 percent or ALBRequestCountPerTarget at 1000, and AWS creates and manages the CloudWatch alarms to hold that value, like a thermostat. Step scaling adds or removes specific amounts based on alarm breach size, which helps when you need aggressive responses to large spikes or are scaling on a custom metric with non-linear behaviour. Scheduled scaling changes capacity at known times, such as raising minimum capacity before a nightly batch or business hours. Predictive scaling uses machine learning on up to 14 days of history to launch capacity ahead of recurring daily or weekly patterns, and can run in forecast-only mode first. Combining predictive with target tracking is common. The pitfall is scaling on CPU for an I/O-bound or queue-driven app; use request count or queue backlog per instance instead."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Compute",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "AWS: What is AWS Lambda, and what limits shape whether a workload fits it?",
+    "answer": "Lambda runs your code in response to events without managing servers, billing per request and per millisecond of duration multiplied by memory. The limits that decide fit are: a maximum timeout of 15 minutes, memory from 128 MB to 10,240 MB with CPU scaling proportionally, ephemeral /tmp storage up to 10,240 MB, synchronous request and response payloads of 6 MB, deployment packages of 250 MB unzipped or 10 GB as a container image, and a default regional concurrency quota of 1,000 that can be raised. Lambda suits event-driven glue, APIs with spiky traffic, S3 and SQS processing, and scheduled jobs. It suits long-running jobs, steady high throughput, or GPU work poorly; those fit ECS on Fargate, Batch or SageMaker better. A pitfall is ignoring cold starts for latency-sensitive Java APIs, which SnapStart or provisioned concurrency can address."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Compute",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "AWS: How do you choose between ECS on Fargate, ECS on EC2, and EKS for running containers?",
+    "answer": "I choose ECS on Fargate for most stateless services when the team does not need Kubernetes, because there are no nodes to patch and each task gets its own isolated micro-VM with per-second billing for vCPU and memory. ECS on EC2 makes sense when you need GPUs, specific instance types, very high steady utilisation where bin-packing and Savings Plans or Spot reduce cost, or daemon workloads. EKS is right when you need the Kubernetes API and ecosystem: Helm charts, operators, Karpenter, portability with GKE, or a platform team already fluent in Kubernetes, at the cost of an hourly control plane fee and more operational surface, though EKS Auto Mode reduces node management. For example, an FDE team shipping a small API to a customer AWS account would use Fargate; a multi-cloud ML platform would use EKS. Validate with a cost model at expected utilisation."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Compute",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "AWS: A Lambda function attached to a VPC times out every time it queries an RDS PostgreSQL database. Walk through your diagnosis.",
+    "answer": "A consistent timeout rather than an auth error points to networking, so I check the path first. The RDS security group must allow inbound 5432 from the Lambda function security group, and the Lambda must be in subnets with routes to the database subnets; network ACLs must permit the return ephemeral ports. Next, if the function also calls AWS APIs like Secrets Manager or S3 before the query, a VPC-attached Lambda has no internet access, so it hangs unless there is a NAT gateway or VPC interface endpoints for those services; this is the most common hidden cause. I add timing logs around each call to see which hangs. I also confirm the code opens the connection outside the handler and sets a connect timeout shorter than the function timeout. Use VPC Reachability Analyzer between the Lambda ENI and the RDS ENI to prove the path."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Compute",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "AWS: Users report that the first request to a Lambda-backed API after idle periods takes three seconds. How do you reduce it?",
+    "answer": "That is a cold start, so I first measure it using the Init Duration in the REPORT log line or X-Ray traces to see how much is runtime initialisation versus my own code. Then I reduce it in order of cost: shrink the package and lazy-load heavy dependencies, move SDK clients and connections outside the handler, and pick a faster runtime or arm64. More memory also gives more CPU, which speeds initialisation. For Java, Python 3.12 and later, and .NET 8, Lambda SnapStart restores a snapshot of the initialised environment and can cut cold starts dramatically, though you must handle uniqueness and stale connections in restore hooks. For strict latency, provisioned concurrency keeps environments warm, scheduled with Application Auto Scaling around business hours. The pitfall is ping-based warmers, which only warm one environment and do not help under concurrent bursts."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Compute",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "AWS: After a deploy, an Auto Scaling group keeps launching instances that are terminated a few minutes later as unhealthy. What do you do?",
+    "answer": "First I stop the churn and protect capacity, then find why health checks fail. I suspend the ReplaceUnhealthy process or roll back the launch template version, and check the ASG activity history for the termination cause. If the cause is ELB health checks, I compare the health check grace period with actual boot time from instance console output and application logs; a new AMI or heavier user data often takes longer than the grace period. I then check the target group health check path, port and matcher, and look at the target health reason, such as Target.Timeout or Target.ResponseCodeMismatch. A security group change blocking the load balancer from the instance port is another frequent cause. I use a lifecycle hook to keep a failing instance alive for SSM Session Manager inspection. Prevention is an instance refresh with checkpoints and automatic rollback on alarms."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Compute",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "AWS: A customer wants to move a set of GCP Cloud Run services to AWS with minimal re-engineering. Which AWS compute service do you recommend and why?",
+    "answer": "I would recommend ECS on Fargate behind an Application Load Balancer as the default landing zone, because it runs the same OCI container images unchanged and supports long-running requests, streaming and steady traffic. Cloud Run concepts map as follows: a service maps to an ECS service, revisions map to task definition revisions, autoscaling maps to target tracking on ALBRequestCountPerTarget, Secret Manager maps to Secrets Manager injected via task definition secrets, and the runtime service account maps to the task IAM role. App Runner is closer to Cloud Run's developer experience but has fewer networking and scaling controls, and AWS has limited its new feature investment, so I avoid it for strategic platforms. Lambda container images work only if requests finish within 15 minutes and fit Lambda payload limits. The main gap is scale-to-zero: Fargate services keep at least one task, so I budget for a minimum. Verify with a load test comparing latency and cost."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Compute",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "AWS: An ECS Fargate task stops immediately with CannotPullContainerError for an image in ECR. What are the likely causes?",
+    "answer": "This error means the task never got its image, which is either a network path problem or a permissions problem. For networking, a Fargate task in private subnets needs a route to ECR: either a NAT gateway, or VPC endpoints for ecr.api, ecr.dkr and an S3 gateway endpoint because image layers are stored in S3, plus a CloudWatch Logs endpoint if using awslogs. A task in a public subnet needs assignPublicIp enabled. For permissions, the task execution role, not the task role, must have ecr:GetAuthorizationToken, ecr:BatchGetImage and ecr:GetDownloadUrlForLayer, usually via AmazonECSTaskExecutionRolePolicy, and cross-account repositories need a repository policy allowing the pulling account. Also check the tag exists and the architecture matches, such as an arm64 image on an X86_64 task. The stopped reason in describe-tasks usually names the failing step."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Storage and Databases",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "AWS: Explain the main S3 storage classes and how you decide which to use.",
+    "answer": "You choose an S3 storage class by access frequency and retrieval latency requirements. S3 Standard is for frequently accessed data with millisecond access. S3 Intelligent-Tiering automatically moves objects between access tiers based on usage for a small monitoring fee per object, which is the best default when patterns are unknown. Standard-Infrequent Access and One Zone-IA are cheaper storage but charge per GB retrieved and have a 30-day minimum; One Zone-IA lives in a single AZ, so only use it for re-creatable data. Glacier Instant Retrieval suits archives read a few times a year with millisecond access, while Glacier Flexible Retrieval and Glacier Deep Archive take minutes to hours to restore and suit compliance archives. S3 Express One Zone offers single-digit millisecond latency for hot analytics or ML training data. Pitfall: tiny objects in IA classes, which are billed at a 128 KB minimum."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Storage and Databases",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "AWS: Compare EBS, EFS, and S3 and give a workload that fits each.",
+    "answer": "EBS is block storage attached to one EC2 instance in one AZ, EFS is a managed NFS file system shared by many instances across AZs, and S3 is object storage accessed over HTTPS APIs. EBS gp3 volumes give predictable low latency with independently configurable IOPS and throughput, so they fit boot disks and self-managed databases; io2 Block Express fits demanding databases. EFS fits shared content like a legacy CMS uploads directory or home directories used by ECS tasks and Lambda functions, scaling automatically with elastic throughput. S3 fits data lakes, backups, static assets and ML datasets, with eleven nines durability and virtually unlimited scale. The pitfall is treating S3 as a file system, for example with frequent small in-place updates or renames, which are expensive copy and delete operations. Mountpoint for Amazon S3 helps read-heavy workloads but is not POSIX-complete."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Storage and Databases",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "AWS: An application role gets S3 AccessDenied on GetObject even though its IAM policy clearly allows s3:GetObject on the bucket. What do you check?",
+    "answer": "A correct-looking identity policy only proves one of several layers, so I walk the others. First the ARN: GetObject needs arn:aws:s3:::bucket/*, not just the bucket ARN. Second, the bucket policy may explicitly deny, for example requiring aws:SecureTransport, a specific aws:SourceVpce, or aws:PrincipalOrgID. Third, if objects use SSE-KMS, the role needs kms:Decrypt and the key policy must allow it; S3 reports this as AccessDenied too. Fourth, object ownership: if Object Ownership is not BucketOwnerEnforced, objects uploaded by another account may be owned by that account. Fifth, an SCP, RCP, permission boundary, or VPC endpoint policy may block it. Also, a missing object returns AccessDenied rather than 404 when the caller lacks s3:ListBucket. I check CloudTrail data events, the decoded error message, and IAM Access Analyzer to identify the denying policy."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Storage and Databases",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "AWS: A DynamoDB table with plenty of provisioned capacity still returns ProvisionedThroughputExceededException during peaks. How do you diagnose and fix a hot partition?",
+    "answer": "Table-level capacity is fine but traffic is concentrated on a few partition keys, and each physical partition supports about 3,000 read units and 1,000 write units per second. I confirm with CloudWatch Contributor Insights for DynamoDB, which shows the most-accessed and most-throttled keys, alongside the ThrottledRequests metric. Typical causes are low-cardinality keys like status or date, or a single celebrity tenant. Adaptive capacity and split-for-heat help with sustained skew, but not instant spikes on one item. Fixes include redesigning the key for higher cardinality, write sharding by appending a random or calculated suffix such as tenantId#3 and scatter-gather reads, caching hot reads with DAX or ElastiCache, and batching writes for the hot key. Moving to on-demand mode raises table limits but does not remove per-partition limits. Verify by watching throttles drop and key distribution flatten in Contributor Insights."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Storage and Databases",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "AWS: When would you use DynamoDB on-demand capacity versus provisioned capacity with auto scaling?",
+    "answer": "On-demand is the right default for new, spiky or unpredictable workloads, while provisioned with auto scaling is cheaper for steady, predictable traffic. On-demand charges per read and write request, scales instantly to previously seen peaks and roughly doubles headroom from there, and needs no capacity planning; AWS cut on-demand prices by about half in late 2024, narrowing the gap. Provisioned mode charges per hour for read and write capacity units, auto scaling adjusts toward a target utilisation such as 70 percent, and reserved capacity reduces cost further for stable baselines. Auto scaling reacts over minutes, so sudden bursts can throttle. For example, a B2B API with flat weekday traffic suits provisioned, while an event ticketing system suits on-demand. You can switch modes, with limits on how often. Verify with Cost Explorer comparing consumed units against a provisioned baseline."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Storage and Databases",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "AWS: Compare RDS Multi-AZ, RDS read replicas, and Aurora for availability and read scaling.",
+    "answer": "Multi-AZ is for availability, read replicas are for read scaling, and Aurora gives both with a different storage architecture. Classic RDS Multi-AZ keeps a synchronous standby in another AZ that serves no traffic and takes over in about one to two minutes via DNS failover. The Multi-AZ DB cluster option has two readable standbys and faster failover. Read replicas use asynchronous replication, can be cross-region, and can be promoted, but may lag. Aurora separates compute from a storage volume that keeps six copies across three AZs; up to 15 Aurora Replicas share that storage with low lag, any can become writer in roughly 30 seconds, and the reader endpoint load-balances reads. Aurora Serverless v2 scales capacity in fine-grained increments. Pitfall: sending reads to replicas without handling replication lag, such as read-your-own-write after an update."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Storage and Databases",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "AWS: Design a DynamoDB single-table model for a multi-tenant SaaS with tenants, users, projects, and audit events.",
+    "answer": "I would start from access patterns, then key everything by tenant so isolation and queries align. Partition key PK is TENANT#id for tenant-scoped items, with sort keys like USER#id, PROJECT#id and PROJECT#id#TASK#id, so one Query with begins_with returns a project and its tasks. Audit events go under PK TENANT#id#AUDIT#yyyy-mm with SK as an ISO timestamp plus event ID, which spreads write load across months and enables range queries, with TTL to expire old records. A GSI on email supports login lookup, and a sparse GSI on a status attribute supports open-items queries. For isolation, IAM fine-grained access with dynamodb:LeadingKeys restricts a tenant-scoped role to its own partition. Large tenants may need sharded keys to avoid hot partitions. Trade-offs: ad hoc analytics is poor, so export to S3 and query with Athena. Pitfall: designing tables before listing the access patterns."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Storage and Databases",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "AWS: How do you configure S3 versioning and lifecycle rules to protect data without letting storage costs grow forever?",
+    "answer": "Enable versioning to recover from overwrites and deletes, then add lifecycle rules that expire noncurrent versions, otherwise every overwrite keeps billing. A typical rule set: transition current objects to Standard-IA or Intelligent-Tiering after 30 days and to Glacier Flexible Retrieval after 180 days; for noncurrent versions use NoncurrentVersionExpiration with NoncurrentDays of 30 and optionally NewerNoncurrentVersions to keep the last few; add AbortIncompleteMultipartUpload after 7 days; and use ExpiredObjectDeleteMarker to clean up orphaned delete markers. In Terraform this is aws_s3_bucket_versioning plus aws_s3_bucket_lifecycle_configuration. For compliance, add S3 Object Lock in governance or compliance mode. A pitfall is lifecycle transitions of small objects, since each transition request costs money and IA has a 128 KB minimum billing size; use object size filters. Verify with S3 Storage Lens showing noncurrent bytes and incomplete uploads."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Storage and Databases",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "AWS: A traffic burst causes hundreds of concurrent Lambda invocations and RDS starts rejecting connections with too many clients. How do you fix it properly?",
+    "answer": "The root cause is that each Lambda execution environment opens its own database connection, so concurrency translates directly into connections beyond max_connections. The proper fix is RDS Proxy, which pools and multiplexes connections, holds client connections during failover, and supports IAM authentication with credentials stored in Secrets Manager. I then cap blast radius by setting reserved concurrency on the function, or a maximum concurrency on the SQS event source mapping, so the database only sees what it can handle. In code I open the connection outside the handler for reuse and avoid session-level state like temporary tables or SET commands that cause proxy pinning, which defeats multiplexing; the DatabaseConnectionsCurrentlySessionPinned metric reveals it. For write-heavy bursts, buffering through SQS smooths load. Verify by load testing and watching DatabaseConnections and ClientConnections on the proxy."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Storage and Databases",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "AWS: Your primary region hosting an Aurora Global Database is degraded. Walk through failing over and the data-loss implications.",
+    "answer": "First I decide between a switchover and a failover, because they have different data-loss profiles. If the primary is still reachable, a managed switchover keeps replication synchronised and promotes the secondary with no data loss. If the primary is unavailable, I run a global database failover with allow data loss, which promotes the secondary cluster; RPO equals the replication lag at that moment, typically under a second, visible in the AuroraGlobalDBReplicationLag metric, and I can set rpo via the aurora_global_db_rpo parameter on PostgreSQL to block commits if lag grows. RTO is usually minutes. Applications must then point at the new writer, ideally via the global writer endpoint or a Route 53 record managed by the runbook. Afterwards the old primary must be rebuilt as a secondary before failing back. Pitfall: never rehearsing it, so test quarterly."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Serverless and Messaging",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "AWS: Compare SQS, SNS, and EventBridge and say when to use each.",
+    "answer": "SQS is a queue for decoupling a producer from one consumer group with buffering and retries; SNS is pub-sub fan-out that pushes each message to many subscribers; EventBridge is an event bus that routes events by content rules to targets. Use SQS when a worker should pull work at its own pace, like an image processing backlog. Use SNS for high-throughput fan-out to SQS queues, Lambda, HTTPS, email or SMS, often in the SNS-to-multiple-SQS pattern. Use EventBridge for integrating many services and accounts with JSON pattern filtering, schema registry, archive and replay, scheduled rules via EventBridge Scheduler, and native events from AWS services and SaaS partners. EventBridge has higher latency than SNS, so it is not ideal for ultra-low-latency fan-out. Pitfall: using SNS without queues behind it, which loses messages when subscribers are down beyond retry policies."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Serverless and Messaging",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "AWS: What is the difference between SQS standard and FIFO queues?",
+    "answer": "Standard queues offer nearly unlimited throughput with at-least-once delivery and best-effort ordering, while FIFO queues guarantee ordering within a message group and exactly-once processing within a deduplication window, at lower throughput. FIFO requires a MessageGroupId: messages with the same group are delivered in order, one batch at a time, while different groups process in parallel, so a customer ID is a good group key. Deduplication uses a MessageDeduplicationId or content-based deduplication over a five-minute window. FIFO high-throughput mode raises limits substantially but still less than standard. For example, order state transitions per customer belong in FIFO, while thumbnail generation belongs in standard. A pitfall is using a single message group ID for everything, which serialises the whole queue. Even with FIFO, consumers should still be idempotent because retries after visibility timeout can redeliver."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Serverless and Messaging",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "AWS: Customers are occasionally charged twice by a payment worker consuming an SQS standard queue. What causes it and how do you make processing idempotent?",
+    "answer": "Duplicates come from SQS at-least-once delivery and, more often, from the visibility timeout expiring before the worker deletes the message, so another consumer receives it again. I check whether processing time sometimes exceeds the visibility timeout, whether deletes fail, and whether a Lambda batch fails partially so the whole batch is retried. The fix has two parts. First, reduce redelivery: set visibility timeout to at least six times the function timeout for Lambda, extend it with ChangeMessageVisibility for long jobs, and enable ReportBatchItemFailures. Second, make the side effect idempotent: derive an idempotency key from the business ID, record it with a DynamoDB conditional PutItem using attribute_not_exists before charging, and pass the same key to the payment provider's idempotency header. Powertools for AWS Lambda has an idempotency utility implementing this. Verify by replaying the same message in a test."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Serverless and Messaging",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "AWS: Explain SQS visibility timeout, maxReceiveCount, and dead-letter queues and how they work together.",
+    "answer": "When a consumer receives a message, SQS hides it for the visibility timeout; if the consumer deletes it in time it is gone, otherwise it reappears and its receive count increments. A redrive policy on the source queue sets maxReceiveCount, and once a message exceeds it SQS moves it to the dead-letter queue instead of retrying forever. This isolates poison messages so they do not block or burn compute. Typical settings are a maxReceiveCount of 3 to 5, a DLQ retention of 14 days, and a CloudWatch alarm on ApproximateNumberOfMessagesVisible in the DLQ above zero. After fixing the bug, use DLQ redrive to move messages back to the source queue. For Lambda event sources, configure the DLQ on the queue rather than on the function. Pitfall: a DLQ retention shorter than the source message age, since the original enqueue timestamp is preserved for standard queues."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Serverless and Messaging",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "AWS: How do you choose between API Gateway REST APIs and HTTP APIs?",
+    "answer": "HTTP APIs are cheaper and lower latency and fit most Lambda or HTTP proxy backends, while REST APIs offer more features for public, managed APIs. HTTP APIs support native JWT authorizers for Cognito or any OIDC provider, Lambda authorizers, CORS configuration and private integrations via VPC links. REST APIs add usage plans and API keys for throttling per customer, request validation and mapping templates, response caching, AWS WAF integration, private API endpoints reachable only from VPCs, edge-optimised endpoints, and canary deployments. For example, an internal SPA backend authenticated with Cognito fits an HTTP API, while a partner API that needs per-client quotas and WAF fits a REST API. Both default to a 29-second integration timeout, which REST APIs can raise for regional and private endpoints by a quota increase. Pitfall: picking HTTP API then discovering you need WAF or caching later."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Serverless and Messaging",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "AWS: How would you implement a booking saga across flights, hotels, and payments using Step Functions, and which workflow type would you pick?",
+    "answer": "I would use a Standard workflow, because it runs up to a year, has exactly-once state transitions and full execution history, which suits business transactions that need auditing; Express workflows run at most five minutes with at-least-once semantics and suit high-volume, short event processing. The saga has sequential Task states ReserveFlight, ReserveHotel and ChargePayment, each calling a Lambda or using direct SDK integrations to DynamoDB. Each Task has Retry with exponential backoff for transient errors and a Catch that routes to compensation states, CancelHotel then CancelFlight, in reverse order, ending in a Fail state. Compensations must be idempotent and retried until they succeed. For waiting on a human or third-party callback, use the waitForTaskToken pattern. Pitfall: passing large payloads between states beyond the 256 KB limit; store data in S3 and pass references. Verify with execution history and test failure injection in each step."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Serverless and Messaging",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "AWS: Map AWS messaging services to their closest GCP equivalents and point out the semantic differences that bite during migration.",
+    "answer": "GCP Pub/Sub roughly covers both SNS and SQS: a topic is like an SNS topic, and each subscription behaves like its own SQS queue with acknowledgement deadlines similar to visibility timeouts. Eventarc and Cloud Scheduler map to EventBridge rules and EventBridge Scheduler, Cloud Tasks maps to SQS with rate-controlled HTTP dispatch, and Workflows maps to Step Functions. Differences that bite: Pub/Sub ordering keys require enabling message ordering on the subscription, whereas SQS FIFO uses message groups and a dedicated queue type; Pub/Sub supports exactly-once delivery as a subscription setting, whereas SQS standard is at-least-once; SQS message size is 256 KB per message while Pub/Sub allows up to 10 MB; and dead-lettering in Pub/Sub is configured per subscription with a max delivery attempts value. EventBridge content filtering is richer than Pub/Sub attribute filters. Always keep consumers idempotent regardless."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Serverless and Messaging",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "AWS: Design an event-driven order pipeline handling 10,000 events per second that must preserve per-customer ordering and survive consumer outages.",
+    "answer": "I would use Kinesis Data Streams or SQS FIFO in high-throughput mode, with customer ID as the partition key or message group, so ordering holds per customer while load spreads. At 10,000 events per second with variable consumers, Kinesis in on-demand mode is a strong fit: shards preserve order per key, data is retained 24 hours by default and up to 365 days for replay, and Lambda consumers use bisect-on-error, maximum retry attempts and an on-failure destination to avoid blocking a shard on a poison record. Downstream fan-out uses EventBridge for loosely coupled services. Each consumer writes idempotently with DynamoDB conditional writes keyed by event ID and sequence number, rejecting out-of-order updates. Outages are absorbed by retention; monitor IteratorAge. Trade-offs: Kinesis needs shard capacity awareness, while SQS FIFO is simpler but replay is harder. Verify with load tests at twice peak and chaos tests stopping consumers."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Serverless and Messaging",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "AWS: Write a Python Lambda handler for an SQS event source that processes messages idempotently and reports partial batch failures.",
+    "answer": "I use a DynamoDB conditional write as an idempotency lock, and return batchItemFailures so only failed messages are retried; the event source mapping must enable ReportBatchItemFailures.\n\nimport json, os, boto3\nfrom botocore.exceptions import ClientError\n\ntable = boto3.resource('dynamodb').Table(os.environ['IDEMPOTENCY_TABLE'])\n\ndef handler(event, context):\n    failures = []\n    for record in event['Records']:\n        body = json.loads(record['body'])\n        key = body['orderId']\n        try:\n            table.put_item(\n                Item={'pk': key, 'status': 'DONE', 'ttl': body['expiresAt']},\n                ConditionExpression='attribute_not_exists(pk)')\n        except ClientError as e:\n            if e.response['Error']['Code'] == 'ConditionalCheckFailedException':\n                continue\n            failures.append({'itemIdentifier': record['messageId']})\n            continue\n        try:\n            process(body)\n        except Exception:\n            table.delete_item(Key={'pk': key})\n            failures.append({'itemIdentifier': record['messageId']})\n    return {'batchItemFailures': failures}\n\nTime complexity is O(n) per batch of n messages with one or two DynamoDB calls each; space is O(n) for the failures list. A more robust version writes an IN_PROGRESS status with an expiry first, so a crash mid-process does not permanently mark the item done; Powertools for AWS Lambda implements that pattern. Use the business key, not messageId, because a producer retry creates a new messageId."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Security",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "AWS: What is AWS KMS, and how does envelope encryption work with it?",
+    "answer": "KMS is a managed service for creating and controlling encryption keys, where key material for KMS keys never leaves FIPS-validated HSMs unencrypted, and every use is logged in CloudTrail and governed by a key policy. Envelope encryption means KMS does not encrypt your large data directly. Instead you call GenerateDataKey, which returns a plaintext data key and the same key encrypted under your KMS key. You encrypt data locally with the plaintext key, discard it from memory, and store the encrypted data key alongside the ciphertext. To decrypt, call Decrypt on the encrypted data key, then decrypt the data locally. Services like S3, EBS and RDS do this transparently. Benefits are speed and the 4 KB direct-encrypt limit being irrelevant. A pitfall is deleting a key: KMS enforces a 7 to 30 day waiting period because deletion makes data unrecoverable."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Security",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "AWS: When would you store a credential in Secrets Manager rather than SSM Parameter Store?",
+    "answer": "Use Secrets Manager for credentials that need rotation, cross-region replication or cross-account sharing, and Parameter Store for configuration values and simple secrets where cost matters. Secrets Manager costs about 0.40 US dollars per secret per month plus API calls, provides managed rotation for RDS, Aurora, Redshift and DocumentDB, custom rotation via Lambda, resource policies for cross-account access, and replica secrets in other regions. Parameter Store standard parameters are free up to 4 KB, advanced parameters allow 8 KB and policies like expiration, and SecureString values are encrypted with KMS, but there is no built-in rotation. For example, an RDS master password goes in Secrets Manager, or better, use RDS managed master passwords which store it there automatically, while feature flags and endpoints go in Parameter Store. Pitfall: fetching secrets on every request; cache them with the AWS Parameters and Secrets Lambda Extension."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Security",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "AWS: What does CloudTrail record, and what is the difference between management events and data events?",
+    "answer": "CloudTrail records API activity in an account: who called which API, from which IP and credentials, when, with what parameters and whether it succeeded. Management events are control-plane operations like CreateBucket, RunInstances, PutRolePolicy or console sign-ins; the last 90 days are visible in Event history at no cost, and one trail copy of management events is free. Data events are high-volume data-plane operations such as S3 GetObject and PutObject, Lambda Invoke, and DynamoDB item operations; they are off by default and billed per event, so you enable them selectively with advanced event selectors. Best practice is an organisation trail delivered to a locked-down S3 bucket in a log archive account with log file validation enabled and KMS encryption. CloudTrail Lake lets you query events with SQL. Pitfall: assuming S3 object access is audited when data events were never enabled."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Security",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "AWS: Explain the roles of GuardDuty, Security Hub, AWS Config, and Inspector and how they fit together.",
+    "answer": "They answer different questions: GuardDuty detects active threats, Inspector finds vulnerabilities, Config tracks resource configuration and compliance, and Security Hub aggregates and scores findings. GuardDuty analyses CloudTrail, VPC Flow Logs, DNS logs and optional sources like EKS audit logs, S3 data events and runtime monitoring to flag things like credential exfiltration or crypto mining. Inspector scans EC2 instances, ECR images and Lambda functions for CVEs and network exposure. Config records configuration history and evaluates rules like s3-bucket-public-read-prohibited, with conformance packs and automatic remediation through SSM Automation. Security Hub collects findings from all of these in the AWS Security Finding Format, runs standards such as AWS Foundational Security Best Practices and CIS, and routes findings to EventBridge for ticketing. In an organisation, delegate administration to a security account. The GCP analogue is Security Command Center."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Security",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "AWS: A consumer account can list objects in a producer account's bucket but gets AccessDenied reading SSE-KMS encrypted objects. How do you fix it?",
+    "answer": "Listing works because it only needs the bucket policy, but reading an SSE-KMS object also calls kms:Decrypt on the producer key, and cross-account KMS access needs both the key policy and the caller's IAM policy. First I check which key encrypted the objects using head-object to read SSEKMSKeyId. If it is the AWS managed key aws/s3, cross-account access is impossible because its key policy cannot be edited, so the producer must re-encrypt with a customer managed key. If it is a customer managed key, the key policy must allow the consumer account or role kms:Decrypt, ideally with a kms:ViaService condition for s3 in the region, and the consumer role's IAM policy must allow kms:Decrypt on that key ARN. Also check SCPs and RCPs. CloudTrail in the producer account shows the denied Decrypt call with the caller identity, confirming the fix."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Security",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "AWS: You receive an alert that an IAM user's access key was pushed to a public GitHub repository. What are your first 30 minutes?",
+    "answer": "Contain first, then scope, then eradicate. Immediately deactivate the key with aws iam update-access-key set to Inactive rather than deleting it, so evidence remains; if AWS already attached the AWSCompromisedKeyQuarantineV3 policy, keep it. Then attach an explicit deny-all inline policy or revoke sessions to cover temporary credentials the attacker may have minted with GetSessionToken. Next, scope: query CloudTrail for the access key ID across all regions using CloudTrail Lake or Athena, looking for GetCallerIdentity, CreateUser, CreateAccessKey, RunInstances in unusual regions, and new roles or Lambda functions, and check GuardDuty findings and Cost Explorer for spikes. Remove any persistence found, rotate dependent secrets, and remove the commit from history while assuming it is already copied. Afterwards, replace IAM user keys with OIDC federation, add an SCP denying iam:CreateAccessKey, and enable secret scanning push protection."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Security",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "AWS: Design an organisation-wide security baseline that is enabled automatically for every new account and region.",
+    "answer": "I would centralise detection in a security tooling account and make every service auto-enrol new accounts. Using Organizations delegated administration, the security account administers GuardDuty, Security Hub, Inspector, Macie, IAM Access Analyzer and Detective, each with auto-enable for new member accounts, and Security Hub central configuration applies standards and controls per OU across all enabled regions with cross-region aggregation into a home region. An organisation CloudTrail trail and AWS Config with an organisation aggregator deliver to the log archive account with S3 Object Lock and restricted access. Preventive controls come from SCPs and RCPs plus Control Tower controls, including region denial so unused regions stay dark. Findings flow through EventBridge to a ticketing integration and high-severity ones to on-call paging. Account-level defaults like EBS encryption and S3 Block Public Access come from AFT customisations. Verify with Security Hub control scores per account and a quarterly attack simulation."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Security",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "AWS: How does automatic secret rotation work in Secrets Manager, and how do you avoid breaking applications during rotation?",
+    "answer": "Secrets Manager rotation runs a Lambda function through four steps, createSecret, setSecret, testSecret and finishSecret, moving staging labels AWSPENDING to AWSCURRENT and the old value to AWSPREVIOUS. For RDS and Aurora you use the AWS-provided rotation templates or managed rotation, with a schedule such as every 30 days using a rate or cron expression. To avoid outages, prefer the alternating users strategy, where two database users are rotated in turn so the previous credential stays valid while clients pick up the new one, rather than the single user strategy that invalidates the old password immediately. Applications should fetch secrets via the SDK with a cache that refreshes on authentication failure. The rotation Lambda needs network access to both the database and the Secrets Manager endpoint. Verify by triggering rotate-secret in staging and watching connection errors, and alarm on RotationFailed events in EventBridge."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Security",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "AWS: GuardDuty reports a CryptoCurrency:EC2/BitcoinTool finding on a production instance in an Auto Scaling group. How do you respond?",
+    "answer": "I treat it as a confirmed compromise and preserve evidence before the ASG destroys it. Detach the instance from the ASG with should-decrement-desired-capacity false so a clean replacement launches, deregister it from the load balancer, and swap its security group to an isolation group with no inbound and only forensic outbound. Snapshot its EBS volumes and capture memory if tooling allows, tag it as under investigation, and enable termination protection. Then scope: check the instance role's CloudTrail activity, because stolen instance credentials are the bigger risk, and revoke active sessions by adding a deny policy with an aws:TokenIssueTime condition. Review GuardDuty runtime findings and Detective for the entry point, such as an exposed admin port or a vulnerable dependency flagged by Inspector. Rebuild from a patched AMI, not by cleaning. Afterwards enforce IMDSv2, tighten security groups, and automate isolation with EventBridge and SSM Automation."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Observability",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "AWS: Explain CloudWatch metrics, log groups, and alarms and how they relate.",
+    "answer": "CloudWatch metrics are time series identified by namespace, name and dimensions, such as AWS/Lambda Errors with FunctionName; logs are events stored in log groups and streams; alarms watch a metric or metric math expression and change state between OK, ALARM and INSUFFICIENT_DATA. AWS services publish metrics automatically, and you add custom metrics with PutMetricData or, more cheaply, by writing Embedded Metric Format JSON to logs. Metric filters turn log patterns, like ERROR lines, into metrics you can alarm on. Alarms trigger actions such as SNS notifications, Auto Scaling policies or EC2 recovery. For example, an alarm on API Gateway 5XXError above 1 percent for three of five minutes pages on-call. Pitfall: leaving log groups at the default never-expire retention, which steadily grows cost; set retention per log group, for example 30 days."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Observability",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "AWS: A CloudWatch alarm on a queue-processing Lambda keeps flipping between OK and INSUFFICIENT_DATA and never pages when it should. How do you fix it?",
+    "answer": "INSUFFICIENT_DATA usually means the metric has no data points during quiet periods, which is normal for metrics like Lambda Errors that are only emitted when invocations happen. I fix the alarm semantics with TreatMissingData: notBreaching for error counts, so silence counts as healthy, or breaching for heartbeat-style metrics where silence means something is broken. Then I check the period, statistic and evaluation settings; using Sum for error counts rather than Average, and M out of N datapoints to alarm such as 3 of 5, reduces flapping without missing real issues. I also confirm the dimensions match exactly, because an alarm on the wrong FunctionName or a version alias silently watches an empty series. For the real failure signal I would add an alarm on ApproximateAgeOfOldestMessage on the queue. Verify with set-alarm-state to test the notification path."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Observability",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "AWS: How would you add distributed tracing across API Gateway, Lambda, SQS, and DynamoDB, and where do X-Ray and OpenTelemetry fit?",
+    "answer": "I would instrument with OpenTelemetry via the AWS Distro for OpenTelemetry and send traces to X-Ray, because AWS now steers new instrumentation toward OpenTelemetry while X-Ray remains the trace backend and service map. Enable active tracing on API Gateway stages and Lambda functions, add the ADOT Lambda layer or use Powertools Tracer for Python, and the SDK auto-instruments boto3 calls so DynamoDB and SQS appear as subsegments. SQS to Lambda propagates trace context through the AWSTraceHeader system attribute, linking producer and consumer traces. I add annotations like tenantId and orderId so traces are searchable, and use sampling rules, for example 5 percent plus all errors, to control cost. CloudWatch Application Signals builds service-level metrics and SLOs on this telemetry. Pitfall: async hops without propagation create disconnected traces. Verify by following one request end to end in the trace map."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Observability",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "AWS: For someone used to GCP Cloud Monitoring and Cloud Logging, how does CloudWatch compare?",
+    "answer": "CloudWatch combines what GCP splits into Cloud Monitoring and Cloud Logging, with similar concepts but different defaults. CloudWatch metrics resemble Cloud Monitoring metrics, alarms resemble alerting policies, and dashboards are similar. CloudWatch Logs resembles Cloud Logging, Logs Insights resembles Log Analytics queries, and subscription filters resemble log sinks for streaming logs to Kinesis, Firehose or Lambda. X-Ray maps to Cloud Trace. Differences: CloudWatch log groups never expire by default, unlike Cloud Logging's default 30-day bucket retention, so you must set retention; cross-account observability requires explicitly linking source accounts to a monitoring account, while GCP uses metrics scopes; and EC2 needs the CloudWatch agent for memory and disk metrics, similar to the Ops Agent on Compute Engine. Both support Prometheus via Amazon Managed Service for Prometheus and Google Managed Prometheus respectively. Pitfall: high-cardinality custom metric dimensions, which multiply cost."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Observability",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "AWS: Design alerting for a multi-account serverless platform that pages on customer impact rather than on every noisy metric.",
+    "answer": "I would alert on SLOs and symptoms at the edge, and route cause-level metrics to dashboards and tickets instead of pages. First, CloudWatch cross-account observability links all workload accounts to a central monitoring account. For each customer-facing API I define availability and latency SLIs from API Gateway or ALB metrics, and create SLOs in CloudWatch Application Signals, alerting on burn rate using a fast window like 1 hour at 14 times burn and a slow window like 6 hours at 6 times. Composite alarms combine conditions, for example paging only when error rate is high and request volume is above a floor, which suppresses noise at night. Anomaly detection bands cover metrics without fixed thresholds. Component alarms like DLQ depth and throttles create tickets via EventBridge. The trade-off is fewer but more meaningful pages. Verify by reviewing pages each month for actionability."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Observability",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "AWS: The CloudWatch bill tripled in a month, mostly from log ingestion. How do you investigate and bring it down without losing critical visibility?",
+    "answer": "I find which log groups grew, then cut volume at the source before touching retention. Cost Explorer filtered by usage type DataProcessing-Bytes shows ingestion by region, and the IncomingBytes metric per log group, sorted in a Logs Insights or metric math query, pinpoints the offenders, often a service switched to DEBUG, a chatty health check, VPC Flow Logs, or Lambda logging full payloads. Fixes in order: lower log levels with Lambda advanced logging controls or app config, sample high-volume success logs, drop health check noise, and move flow logs to S3 where ingestion is cheaper. For logs needed only for occasional investigation, use the Infrequent Access log class, which roughly halves ingestion cost but limits features. Then set retention everywhere and archive to S3 via subscription filters if needed. Prevent recurrence with a budget alarm and an alarm on IncomingBytes per account."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Reliability and DR",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "AWS: What are AWS Regions and Availability Zones, and what does deploying multi-AZ actually protect you from?",
+    "answer": "A Region is a geographic area with multiple isolated Availability Zones, and each AZ is one or more data centres with independent power, cooling and networking, connected to other AZs in the region by low-latency links. Deploying multi-AZ protects against the failure of a single data centre or AZ, such as a power or networking event, which is the most common large-scale failure. For example, an ALB across three AZs with an Auto Scaling group and RDS Multi-AZ keeps serving if one AZ goes down. Multi-AZ does not protect against a region-wide service disruption, a bad deployment, data corruption, or accidental deletion; those need multi-region strategies, backups and safe deployment practices. A pitfall is having multi-AZ compute but a single NAT gateway in one AZ, which creates a hidden single point of failure."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Reliability and DR",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "AWS: Define RTO and RPO and give examples of how AWS service choices change each one.",
+    "answer": "RTO, recovery time objective, is how long the service can be down; RPO, recovery point objective, is how much data loss, measured in time, is acceptable. Service choices move each number. Nightly AWS Backup snapshots of an RDS database give an RPO up to 24 hours, while point-in-time recovery using transaction logs reduces RPO to about five minutes, though restoring a large database may still take an hour, which drives RTO. Aurora Global Database typically achieves an RPO of about a second and an RTO of minutes. DynamoDB global tables with multi-region active-active can give near-zero RTO. S3 Cross-Region Replication with Replication Time Control targets replicating 99.99 percent of objects within 15 minutes. The point is that RTO and RPO should come from business impact per hour of downtime, and lower numbers cost more. Always validate them with restore drills."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Reliability and DR",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "AWS: Compare the four common DR strategies on AWS: backup and restore, pilot light, warm standby, and multi-site active-active.",
+    "answer": "They trade cost against recovery speed. Backup and restore copies snapshots and data to another region with AWS Backup and rebuilds infrastructure from Terraform when needed; cheapest, with RTO in hours. Pilot light keeps core data live in the DR region, such as a replicated database and S3 replication, but compute is off or minimal, so RTO is tens of minutes while you scale up. Warm standby runs a scaled-down but fully working copy that can take traffic immediately and scale out, giving RTO in minutes. Multi-site active-active serves traffic from multiple regions all the time using DynamoDB global tables or Aurora Global Database with write forwarding, and Route 53 latency or failover routing, giving near-zero RTO at the highest cost and complexity, particularly around data conflicts. AWS Elastic Disaster Recovery suits lift-and-shift servers. Choose based on per-workload RTO and RPO tiers."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Reliability and DR",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "AWS: How would you implement AWS Backup across an organisation so backups survive a compromised workload account?",
+    "answer": "I would manage backup policies centrally through Organizations and copy recovery points out of the workload account into a vault the workload account cannot touch. Enable AWS Backup cross-account management, attach organisation backup policies to OUs that select resources by tag, such as backup-tier set to gold, with daily and monthly rules and lifecycle to cold storage. Each rule includes a copy action to a vault in a dedicated backup account and to a second region. That central vault uses AWS Backup Vault Lock in compliance mode, so nobody, including root, can delete recovery points before retention expires, or a logically air-gapped vault for stronger isolation. Encrypt with customer managed KMS keys owned by the backup account. AWS Backup Audit Manager reports on compliance with frameworks. Pitfall: forgetting that copies of KMS-encrypted resources need key policy grants. Verify with scheduled restore testing plans."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Reliability and DR",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "AWS: Design a multi-region active-active architecture for a user profile service with sub-second failover expectations.",
+    "answer": "I would run identical stateless stacks in two regions behind Route 53 latency-based routing with health checks, storing data in DynamoDB global tables. Each region runs API Gateway or ALB with ECS or Lambda and reads and writes its local table replica; global tables replicate asynchronously, typically within a second, with last-writer-wins conflict resolution, or you can choose multi-region strong consistency where the latency cost is acceptable. To avoid conflicts, I route a given user's writes to a home region where possible and make updates idempotent. For controlled failover, Route 53 Application Recovery Controller routing controls let operators shift traffic deterministically without depending on the failing region's control plane, and readiness checks confirm the standby has capacity. Each region is statically stable, pre-scaled to handle full load. Pitfall: hidden single-region dependencies like Cognito user pools or a parameter in one region. Verify with game days that disable a region."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Reliability and DR",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "AWS: One Availability Zone in your region is impaired and latency spikes for a third of requests. What do you do in the moment and what should have been designed in?",
+    "answer": "In the moment, I shift traffic away from the impaired zone rather than waiting for health checks to catch partial failures. ARC zonal shift on the ALB or NLB moves traffic out of that AZ for a set duration, and I can suspend AZRebalance on the ASG and temporarily raise desired capacity so healthy AZs absorb load. If RDS Multi-AZ has its primary in the impaired zone and is struggling, a manual reboot with failover moves it. Gray failures like this are why health checks alone fail: instances still pass shallow checks. Designed in, I want static stability, meaning enough capacity in remaining AZs without needing to launch, so N plus one AZ provisioning; zonal autoshift enabled; per-AZ CloudWatch metrics to detect skew; and NAT gateways and endpoints in every AZ. Verify with AWS Fault Injection Service AZ power interruption scenarios."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Reliability and DR",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "AWS: Leadership asks whether you could recover if an attacker gained admin in your production account and deleted everything. How do you prove the answer?",
+    "answer": "I would answer with evidence from a restore drill, not a diagram. First, verify the prerequisites: production backups are copied by AWS Backup to a separate backup account and second region into a vault with Vault Lock in compliance mode or a logically air-gapped vault; S3 critical buckets replicate to that account with Object Lock; infrastructure is fully defined in Terraform stored outside the production account; and the backup account has distinct identity access through break-glass roles not federated from the same path an attacker would use. Second, run a drill: provision a clean account from Account Factory, restore databases and buckets from the locked vault using restore testing, deploy the stack from code, and run smoke tests. Record actual RTO and RPO and gaps, such as secrets or DNS that were not backed up. Report the measured numbers and remediation, then repeat twice a year."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Reliability and DR",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "AWS: During an RDS Multi-AZ failover test, the database is back in 60 seconds but the Java application errors for 15 minutes. Why?",
+    "answer": "The application is still connecting to the old primary's IP because DNS is cached, while RDS failover works by repointing the endpoint CNAME to the standby. Java historically caches DNS lookups, and when a security manager is installed the JVM caches positive lookups indefinitely; the fix is setting networkaddress.cache.ttl to around 5 seconds in java.security or at startup. Connection pools also hold dead connections, so configure a validation query or test-on-borrow, a short connection timeout, and a max lifetime so stale connections are retired. For faster and DNS-independent failover, use the AWS Advanced JDBC Wrapper, which tracks cluster topology, or put RDS Proxy in front, which keeps client connections open and reconnects behind the scenes. Verify by running reboot-db-instance with force-failover in staging while load testing and measuring error duration from the client side."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Cost Optimisation",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "AWS: Compare On-Demand, Savings Plans, Reserved Instances, and Spot for EC2 pricing.",
+    "answer": "On-Demand is pay-per-second with no commitment; Savings Plans and Reserved Instances discount committed usage; Spot discounts spare capacity that can be reclaimed. Compute Savings Plans commit to a dollar amount per hour for one or three years and give up to about 66 percent off across EC2, Fargate and Lambda in any region or family, while EC2 Instance Savings Plans give up to about 72 percent but lock family and region. Reserved Instances offer similar discounts and are still relevant for RDS, ElastiCache, OpenSearch and Redshift, plus zonal capacity reservations. Spot gives up to 90 percent off with a two-minute interruption notice, suiting stateless, fault-tolerant work like CI runners and batch. A common strategy is covering a steady baseline with Savings Plans, bursts with On-Demand, and interruptible work with Spot. Pitfall: overcommitting before rightsizing, which locks in waste."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Cost Optimisation",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "AWS: The AWS bill jumped from 20,000 to 65,000 US dollars in nine days with no planned changes. How do you find and stop the cause?",
+    "answer": "I find the service, account, region and usage type, stop the bleeding, then add guardrails. Cost Explorer grouped by service then by usage type and linked account, with daily granularity, usually isolates it fast; Cost Anomaly Detection may already have a root cause. Typical culprits are NAT gateway data processing from a new data flow, a Lambda in a recursive loop with S3 or SQS, an unexpected GPU instance fleet in an unused region possibly from compromised credentials, CloudWatch Logs ingestion, or S3 request charges from a misbehaving job. I correlate the start date with CloudTrail for RunInstances or CreateFunction calls and with deploys. Mitigation might be scaling down, setting Lambda reserved concurrency to zero, or adding S3 gateway endpoints. Then I add AWS Budgets with alerts and budget actions, anomaly monitors per account, and region-deny SCPs, and check whether AWS Support can grant a credit for abuse cases."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Cost Optimisation",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "AWS: How would you run a large share of an EKS or Auto Scaling fleet on Spot without hurting availability?",
+    "answer": "Diversify widely, choose capacity-aware allocation, and handle interruptions gracefully. For Auto Scaling groups, use a mixed instances policy with many instance types across families and sizes using attribute-based instance type selection, the price-capacity-optimized allocation strategy, an On-Demand base capacity for the critical minimum, and Capacity Rebalancing so replacements launch when EC2 sends a rebalance recommendation. For EKS, Karpenter with a NodePool allowing spot and on-demand capacity types and broad instance requirements does similar diversification and handles interruption events through an SQS queue, cordoning and draining nodes. Workloads must tolerate termination: PodDisruptionBudgets, multiple replicas spread across AZs, graceful shutdown within the two-minute notice, and checkpointing for batch. Keep stateful systems like databases on On-Demand. Trade-off: more instance diversity complicates performance testing. Verify interruption handling with Fault Injection Service spot interruption actions and track savings in Cost Explorer."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - Cost Optimisation",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "AWS: How do cost allocation tags and AWS Budgets help teams own their spend?",
+    "answer": "Cost allocation tags let you break down the bill by team, product or environment, and Budgets alert or act when spend crosses thresholds, together giving each team visibility and accountability. User-defined tags like team and cost-center must be activated as cost allocation tags in the Billing console before they appear in Cost Explorer and the Cost and Usage Report, and only apply going forward. Enforce tagging with tag policies in Organizations and SCPs denying resource creation without required aws:RequestTag keys. Then create budgets per account or per tag, with alerts at 80 and 100 percent of forecasted spend sent to the team's channel via SNS or AWS User Notifications, and budget actions that can apply a restrictive policy in sandboxes. Pitfall: shared resources like NAT gateways, Transit Gateway or EKS clusters that cannot be tagged per team; use split cost allocation data for EKS and ECS."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - AI on AWS",
+    "topic": "AWS Core Services",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "AWS: What is Amazon Bedrock and what does it give you compared with calling a model provider directly?",
+    "answer": "Amazon Bedrock is a managed service providing API access to foundation models from Anthropic, Meta, Mistral, Cohere, Amazon Nova and others, inside your AWS account boundary. Compared with calling a provider directly, you get IAM-based access control instead of separate API keys, VPC interface endpoints through PrivateLink, CloudTrail logging, KMS encryption, and a commitment that prompts and outputs are not used to train the models. It also bundles building blocks: Knowledge Bases for managed RAG, Guardrails for safety filtering, Agents for tool use, model evaluation, batch inference, and fine-tuning for supported models. The Converse API gives a consistent request format across models, which eases switching. For example, a customer with data residency requirements can keep traffic in an approved region. Pitfall: models must be enabled per region and quotas differ per model, so check Service Quotas early."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - AI on AWS",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "AWS: How do you build a RAG application with Bedrock Knowledge Bases, and what design choices matter most?",
+    "answer": "You point a Knowledge Base at a data source such as an S3 prefix, choose an embedding model and vector store, sync to ingest, then call Retrieve or RetrieveAndGenerate from your app. Supported vector stores include OpenSearch Serverless, Aurora PostgreSQL with pgvector, Pinecone, MongoDB Atlas, Redis Enterprise Cloud and Neptune Analytics, with Amazon S3 Vectors as a newer low-cost option. The choices that matter most are chunking strategy, where fixed-size, hierarchical and semantic chunking are available, plus metadata files for filtering, for example restricting retrieval by tenant or document type. Enabling hybrid search on supported stores and a reranking model improves relevance. RetrieveAndGenerate returns citations, which you should surface to users. Pitfall: forgetting to schedule ingestion jobs so the index drifts from source documents. Verify with a labelled question set and Bedrock RAG evaluation measuring retrieval and answer correctness."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - AI on AWS",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "AWS: A production chatbot on Bedrock returns ThrottlingException during business-hour peaks. How do you diagnose and fix it?",
+    "answer": "Throttling means you hit the per-model, per-region quota on requests per minute or tokens per minute, so I first check which one. CloudWatch AWS/Bedrock metrics like Invocations, InputTokenCount, OutputTokenCount and InvocationThrottles per ModelId, compared with the values in Service Quotas, show whether tokens or requests are the limit; large prompts from RAG context often exhaust tokens per minute first. Immediate fixes: retry with exponential backoff and jitter, which the SDK does with adaptive retry mode, and switch to a cross-region inference profile so requests route across several regions in the geography. Next, reduce tokens by trimming retrieved chunks, setting maxTokens sensibly and using prompt caching on supported models. Request a quota increase with evidence, and for guaranteed capacity consider Provisioned Throughput. Route simple queries to a smaller model. Verify by alarming on InvocationThrottles and load-testing at peak traffic."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - AI on AWS",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "AWS: What can Bedrock Guardrails enforce, and how do you apply them to models or agents?",
+    "answer": "Bedrock Guardrails apply configurable safety and privacy policies to both prompts and responses, independent of the model. The policies include content filters for categories like hate, violence, sexual content, misconduct and prompt attacks with adjustable strength; denied topics defined in natural language; word filters including profanity; sensitive information filters that block or mask PII types such as email or card numbers, plus custom regex; contextual grounding checks that flag responses not supported by the retrieved source or irrelevant to the query; and Automated Reasoning checks that validate answers against formal policy rules. You attach a guardrail ID and version to InvokeModel, Converse, Knowledge Base or Agent calls, or call the ApplyGuardrail API to use it with models hosted elsewhere. Trace output shows which policy intervened. Pitfall: tuning filters too strictly and blocking legitimate domain terms; evaluate with a test set of allowed and disallowed prompts."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - AI on AWS",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Comparison",
+    "question": "AWS: A customer runs GenAI on GCP Vertex AI and is evaluating Bedrock for a new AWS-hosted product. How do you compare them honestly?",
+    "answer": "Both are managed platforms for foundation models with RAG, agents and safety tooling, so the decision usually hinges on model availability, where the data and workloads already live, and operational integration. Bedrock offers Anthropic Claude, Meta Llama, Mistral, Cohere and Amazon Nova models, with Knowledge Bases, Guardrails, Agents and AgentCore for deploying agents. Vertex AI offers Gemini natively plus Claude and open models through Model Garden, with Vertex AI Search, RAG Engine and Agent Engine. Equivalences: Bedrock Knowledge Bases versus RAG Engine or Vertex AI Search, Guardrails versus Gemini safety settings and Model Armor, Provisioned Throughput versus Vertex provisioned throughput. Practical factors are regional model availability, quota headroom, IAM and private networking integration, and egress cost if data stays in the other cloud. I would recommend a two-week bake-off with the same evaluation set, measuring quality, p95 latency and cost per thousand requests, rather than deciding on feature lists."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - AI on AWS",
+    "topic": "AWS Core Services",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "AWS: When would you host a model on a SageMaker endpoint instead of using Bedrock?",
+    "answer": "Use Bedrock when a supported foundation model fits and you want serverless per-token pricing with no infrastructure; use SageMaker endpoints when you need a model Bedrock does not serve, full control over the container and hardware, or custom ML models. SageMaker real-time endpoints run your chosen instance types, including GPU and Inferentia, with autoscaling, multi-model and inference component deployments, and serverless or asynchronous inference for spiky or long-running jobs. SageMaker JumpStart deploys open models in a few clicks, and you can bring custom containers with vLLM or the Large Model Inference container. The trade-off is that you pay for instance hours even when idle and own scaling, patching and performance tuning. Bedrock Custom Model Import is a middle path for supported open-weight architectures. For example, a fine-tuned fraud classifier belongs on SageMaker, while a Claude-based summariser belongs on Bedrock. Verify with cost per request at expected traffic."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - AI on AWS",
+    "topic": "AWS Core Services",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "AWS: Design a secure multi-tenant RAG service on AWS where tenants must never see each other's documents.",
+    "answer": "I would enforce tenant isolation at retrieval time with mandatory metadata filters derived from the authenticated identity, never from the prompt. Documents land in S3 under tenant prefixes with metadata files tagging tenantId, ingested into a Bedrock Knowledge Base backed by OpenSearch Serverless or Aurora pgvector; very large or regulated tenants get their own knowledge base. The API layer, behind API Gateway with a Cognito or OIDC JWT authorizer, extracts tenantId from verified claims and always adds an equals filter on tenantId to Retrieve calls, then calls Converse with a Guardrail for PII masking and prompt-attack filtering. Each tenant's data can use a dedicated KMS key. Bedrock calls go through VPC endpoints, and model invocation logging goes to an encrypted bucket. Trade-off: shared indexes are cheaper, separate ones isolate more strongly. Verify with automated cross-tenant leakage tests in CI and red-team prompts attempting to override filters."
+  },
+  {
+    "source": "AWS Core Services Bank",
+    "section": "AWS Core Services",
+    "category": "AWS Core Services - AI on AWS",
+    "topic": "AWS Core Services",
+    "difficulty": "Intermediate",
+    "questionType": "Behavioral",
+    "question": "AWS: Tell me about a time you had to deliver on AWS for a customer when your strongest experience was on GCP.",
+    "answer": "Situation: a fictional logistics customer, Harborline, required a document-extraction pilot inside their own AWS account within four weeks, while my team's reference implementation ran on GCP with Cloud Run and Vertex AI. Task: I owned the AWS deployment and had to avoid slowing the pilot down. Action: in the first two days I mapped every GCP component to an AWS equivalent in a one-page table, Cloud Run to ECS Fargate, Secret Manager to Secrets Manager, Vertex AI to Bedrock, and validated the riskiest assumptions first, Bedrock model access and quotas in their region and their SCP restrictions. I rewrote our Terraform modules for AWS, used IAM Identity Center for customer access, and paired daily with their cloud engineer, which built trust and caught a VPC endpoint requirement early. Result: we went live in week three, passed their security review first time, and the mapping table became our standard AWS onboarding document."
+  }
+]

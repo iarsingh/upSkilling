@@ -1,0 +1,802 @@
+[
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django ORM and Migrations",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Django/FastAPI: What does a Django migration file represent, and how do makemigrations and migrate differ?",
+    "answer": "A migration is a versioned Python file describing a set of schema operations, such as CreateModel, AddField or AlterField, plus dependencies on earlier migrations. makemigrations compares your current models against the state reconstructed from existing migration files and writes new migration files; it never touches the database. migrate applies unapplied migrations to the database and records each one in the django_migrations table. That split matters because migration files are code: they are reviewed, committed and deployed together with the models. For example, adding a nullable phone field creates 0007_customer_phone.py, and migrate runs ALTER TABLE on each environment. A common pitfall is editing models without committing the generated migration. Verify with python manage.py makemigrations --check --dry-run in CI, and inspect the SQL with sqlmigrate app 0007."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django ORM and Migrations",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Django/FastAPI: What does it mean that Django QuerySets are lazy, and when does a QuerySet actually hit the database?",
+    "answer": "A QuerySet is lazy: building it with filter, exclude or order_by only composes SQL, and the database is queried when the QuerySet is evaluated. Evaluation happens on iteration, slicing with a step, len(), list(), bool() in an if statement, repr() in the shell, and methods such as get, first, count, exists or aggregate. After evaluation the results are cached on that QuerySet object, so iterating twice does not query twice, but calling filter again creates a new QuerySet and a new query. For example, orders = Order.objects.filter(status='open') costs nothing until a template loops over it. Pitfalls include using if qs: when you only need qs.exists(), or len(qs) instead of qs.count() on large tables. Verify query counts with connection.queries in DEBUG or django-debug-toolbar."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django ORM and Migrations",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Django/FastAPI: Compare select_related and prefetch_related in the Django ORM and explain when to use each.",
+    "answer": "select_related follows ForeignKey and OneToOne relationships with a SQL JOIN in a single query, while prefetch_related runs a separate query per relationship and joins the results in Python, which is required for ManyToMany and reverse ForeignKey relations. Use select_related when each row has exactly one related object, for example Order.objects.select_related('customer'). Use prefetch_related for collections, for example Customer.objects.prefetch_related('orders'), which issues one query for customers and one WHERE customer_id IN (...) query for orders. A Prefetch object lets you filter or order the prefetched set and store it with to_attr. Trade-offs: deep select_related chains can create wide, duplicated rows, and prefetch_related with huge IN lists can be slow. Pitfall: calling .filter() on a prefetched relation discards the cache and triggers new queries. Verify with assertNumQueries."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django ORM and Migrations",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: How do you write a safe Django data migration that backfills a new column?",
+    "answer": "Write a separate migration with migrations.RunPython that uses apps.get_model inside the function, and always supply a reverse function. Using apps.get_model gives you the historical model as it existed at that migration, so the code keeps working after the real model changes later; importing the model class directly breaks old migrations. Keep the schema change and the backfill in separate migrations, and for large tables process rows in batches, for example iterating primary key ranges of 5,000 and using bulk_update. Pass migrations.RunPython.noop as reverse if nothing needs undoing. For very large tables set atomic = False on the Migration class so each batch commits independently and you avoid one huge transaction holding locks. Pitfall: custom model methods and managers are not available on historical models unless use_in_migrations is set. Test it by running migrate forwards and backwards on a copy of production data."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django ORM and Migrations",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "Django/FastAPI: Staging and production report different migration states and a deploy fails with conflicting migrations. How do you diagnose and fix migration drift?",
+    "answer": "First establish what each database believes is applied with python manage.py showmigrations, then compare it with the migration files on the deployed commit. Conflicting migrations usually mean two branches each added a 0012 migration with the same parent, giving two leaf nodes; resolve it with makemigrations --merge, or better, rebase and renumber one branch before merge. Drift also happens when someone ran migrate --fake, applied a hotfix SQL manually, or deleted a migration file that had already run. For a manual change, write a migration matching the real schema and apply it with migrate app 0013 --fake only after verifying the table really matches, using sqlmigrate and psql \\d. Prevent recurrence by running makemigrations --check in CI, failing builds with multiple leaf nodes, and banning manual DDL on shared environments."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django ORM and Migrations",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Django/FastAPI: Under load you find duplicate subscription rows for the same user even though the code checks for an existing row first. What is happening and how do you fix it?",
+    "answer": "This is a check-then-insert race: two requests both run the existence check before either inserts, so both insert. Application checks cannot prevent this; the database must enforce it. Add a UniqueConstraint(fields=['user', 'plan'], name='uniq_user_plan') or a conditional one with condition=Q(active=True) for one active subscription per user, clean up existing duplicates in a data migration first, then let the insert fail. In code, wrap the create in try/except IntegrityError inside transaction.atomic, or use get_or_create, which relies on that same unique constraint to be race-safe. When you must read-modify-write an existing row, use select_for_update inside atomic to lock it. Pitfall: get_or_create without a unique constraint still creates duplicates. Verify by firing concurrent requests with a load tool and checking that only one row exists."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django ORM and Migrations",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: How do you add an index and a NOT NULL column to a 200-million-row PostgreSQL table through Django migrations without downtime?",
+    "answer": "Split it into several migrations and avoid operations that take long ACCESS EXCLUSIVE locks. For the index, use django.contrib.postgres.operations.AddIndexConcurrently in a migration with atomic = False, because CREATE INDEX CONCURRENTLY cannot run inside a transaction. For the column, first add it as nullable, or with db_default on Django 5.0 or later, which uses a database default that PostgreSQL 11+ applies without rewriting the table. Then backfill in batches in a separate RunPython migration, then add a CHECK constraint NOT VALID and VALIDATE it, and finally set NOT NULL, which PostgreSQL 12+ can do without a full scan when a validated check constraint exists. Also set lock_timeout on the migration connection so it fails fast instead of queueing behind long transactions. Verify with sqlmigrate and test on a production-sized snapshot."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django ORM and Migrations",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Django/FastAPI: A rolling deploy ran a migration that dropped a column while old pods were still serving traffic, causing errors. How do you design migrations so this cannot happen again?",
+    "answer": "Adopt an expand-and-contract policy where every migration is backwards compatible with the code version currently running. During a rolling deploy old and new code run together, so a schema change must work for both. To remove a column: release one stops reading and writing it and removes it from the model while keeping the column, using SeparateDatabaseAndState so Django state drops the field but the database keeps it; release two, after all old pods are gone, drops the column. For renames, add the new column, dual-write, backfill, switch reads, then drop the old one. Run migrations as a pre-deploy job before new pods start. Enforce this with django-migration-linter or a CI check that flags RemoveField, RenameField and non-null AddField without a default. Pitfall: Django selects all model columns, so old code breaks the instant a column disappears."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Admin and Auth",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: How do you register a model in the Django admin and make its list page useful for support staff?",
+    "answer": "Create a ModelAdmin subclass in admin.py and register it with the @admin.register(Model) decorator. The most useful options are list_display for columns, list_filter for the right-hand filters, search_fields for the search box, ordering, and readonly_fields for values staff should see but not edit. For example, an OrderAdmin might set list_display = ('id', 'customer', 'status', 'total', 'created_at'), list_filter = ('status', 'created_at') and search_fields = ('id', 'customer__email'). date_hierarchy adds date drill-down navigation, and inlines let you edit child rows such as order lines on the parent page. Pitfall: search_fields with leading wildcards on large tables causes slow ILIKE scans, so use exact lookups like '=id' or '^email' where possible. Verify by checking the page as a non-superuser staff account with limited permissions."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Admin and Auth",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Django/FastAPI: How do users, groups, permissions, is_staff and is_superuser work together in Django's auth system?",
+    "answer": "Authentication proves who the user is, and authorization decides what they can do; Django handles the second through permissions attached to users directly or via groups. For every model, django.contrib.auth creates add, change, delete and view permissions such as orders.change_order. Groups bundle permissions so you assign roles like Support or Finance instead of individual grants. is_staff only controls whether a user may log into the admin site, while is_superuser bypasses all permission checks. In code you check user.has_perm('orders.change_order'), use the permission_required decorator, or PermissionRequiredMixin on class-based views. Pitfall: giving support staff is_superuser for convenience removes all guardrails. Verify by logging in as a test user with only the Support group and confirming the admin hides models they lack view permission for."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Admin and Auth",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: Why should you define a custom user model at the start of a Django project, and how do you do it?",
+    "answer": "Define a custom user model before the first migrate, because AUTH_USER_MODEL is referenced by foreign keys across many apps and changing it later requires painful manual migration of tables and constraints. Even if you need nothing extra today, subclass AbstractUser in an accounts app, set AUTH_USER_MODEL = 'accounts.User' in settings, and run the initial migration. If you want email login without a username, subclass AbstractBaseUser with PermissionsMixin, set USERNAME_FIELD = 'email', and write a custom manager with create_user and create_superuser. Elsewhere, reference the user with settings.AUTH_USER_MODEL in model fields and get_user_model() in code, never django.contrib.auth.models.User directly. Pitfall: forgetting to register the model with UserAdmin, which breaks the admin password change form. Verify by running createsuperuser and the auth test suite."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Admin and Auth",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Django/FastAPI: Compare Django session authentication with token or JWT authentication for a Django REST Framework API.",
+    "answer": "Session authentication is the better default for a browser app on the same site, while tokens suit mobile apps, third-party clients and service-to-service calls. Sessions store a random session ID in an HttpOnly cookie and keep state server-side in the database or cache, so logout and revocation are immediate, but DRF's SessionAuthentication enforces CSRF on unsafe methods. Token approaches send an Authorization header, so CSRF is not a concern, but the client must store the token safely. DRF's TokenAuthentication stores one opaque token per user in the database; djangorestframework-simplejwt issues signed, short-lived JWTs that need no database lookup but are hard to revoke before expiry. For example, a React SPA served from the same domain can use sessions plus the csrftoken cookie. Pitfall: storing JWTs in localStorage exposes them to XSS."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Admin and Auth",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Django/FastAPI: The Django admin changelist for a 30-million-row orders table takes 20 seconds to load. How do you speed it up?",
+    "answer": "Profile it first with django-debug-toolbar or pg_stat_statements; usually the cost is a full COUNT(*), N+1 queries from list_display foreign keys, and unindexed filters or searches. Set show_full_result_count = False to drop the second count query, and use a custom Paginator whose count property returns the estimate from pg_class.reltuples for unfiltered views. Add list_select_related = ('customer',) so foreign key columns in list_display do not query per row. Replace foreign key dropdowns on the edit page with raw_id_fields or autocomplete_fields. Restrict search_fields to indexed exact or prefix lookups, and index columns used in list_filter, ordering and date_hierarchy, or remove date_hierarchy, which runs extra date queries. Override get_queryset to use .only() for heavy text columns. Verify by comparing query count and time before and after in the toolbar."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Admin and Auth",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Django/FastAPI: After moving a Django app behind an HTTPS load balancer and Nginx, every admin login fails with CSRF verification failed. How do you fix it?",
+    "answer": "The usual cause is that Django sees the request as plain HTTP or a different host, so the Origin header check fails; tell Django to trust the proxy headers and list the trusted origin. Since Django 4.0, CSRF checks the Origin header against the request host and CSRF_TRUSTED_ORIGINS, which must include the scheme, for example CSRF_TRUSTED_ORIGINS = ['https://app.example.com']. Set SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') and make Nginx send proxy_set_header X-Forwarded-Proto $scheme, so request.is_secure() returns True. If the proxy rewrites Host, either pass proxy_set_header Host $host or enable USE_X_FORWARDED_HOST. Also set CSRF_COOKIE_SECURE and SESSION_COOKIE_SECURE to True. Pitfall: only set SECURE_PROXY_SSL_HEADER when the proxy strips any client-supplied X-Forwarded-Proto. Verify in the 403 page reason with DEBUG on staging."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Admin and Auth",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Django/FastAPI: How would you enforce per-tenant data isolation in the Django admin for a multi-tenant SaaS where support staff belong to specific tenants?",
+    "answer": "Enforce tenancy in a shared ModelAdmin base class that filters every query and permission by the staff user's tenant, rather than relying on staff choosing correctly. Override get_queryset to return qs.filter(tenant=request.user.tenant) unless the user is a platform superuser, and override has_view_permission, has_change_permission and has_delete_permission to compare obj.tenant with the user's tenant. Override formfield_for_foreignkey so dropdowns and autocomplete only show same-tenant rows, and save_model to stamp the tenant on new objects. For finer object-level rules, django-guardian adds per-object permissions. As defence in depth, enable PostgreSQL row-level security keyed on a session variable set per request. Pitfall: admin actions, inlines and autocomplete endpoints use separate querysets, so test them too. Verify with automated tests that log in as tenant A staff and assert 404 on tenant B object URLs."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Admin and Auth",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Django/FastAPI: A security review finds your Django admin is publicly reachable at /admin/ with password-only login. What hardening do you implement?",
+    "answer": "Take the admin off the public internet first, then add strong authentication and auditing. Put it behind an identity-aware proxy such as Google Cloud IAP or a VPN, or serve it on a separate internal hostname, and move the URL away from /admin/ to reduce noise. Add MFA with django-otp or django-two-factor-auth, or delegate login to the corporate IdP through OIDC with mozilla-django-oidc. Set SESSION_COOKIE_SECURE, CSRF_COOKIE_SECURE, SESSION_COOKIE_AGE for short sessions, and SECURE_HSTS_SECONDS. Rate-limit login attempts with django-axes. Review who has is_staff and is_superuser and move people to least-privilege groups. Use the built-in LogEntry history plus centralized logs for audit. Pitfall: relying on obscure URLs alone is not security. Verify with an external scan and a penetration test of the login flow."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Views/DRF and Templates",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "Django/FastAPI: What are the trade-offs between function-based views and class-based views in Django?",
+    "answer": "Function-based views are explicit and easy to read for one-off logic, while class-based views give reuse through inheritance and mixins for common patterns like list, detail, create and update. An FBV is a function taking request and returning HttpResponse; you branch on request.method yourself and apply decorators like login_required. A CBV such as ListView or UpdateView handles method dispatch and provides hooks like get_queryset, get_context_data and form_valid, so a CRUD page can be a few lines. The trade-off is that CBV behaviour is spread across several mixins, which makes debugging harder; the site ccbv.co.uk is useful for tracing method resolution. Pitfall: deep custom mixin hierarchies that nobody can follow. A pragmatic team uses generic CBVs for standard CRUD and FBVs for unusual workflows."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Views/DRF and Templates",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Django/FastAPI: How does Django template auto-escaping protect against XSS, and when is marking content safe dangerous?",
+    "answer": "Django templates HTML-escape every variable by default, converting characters like <, >, &, and quotes into entities, so user input renders as text instead of executing as script. You bypass this with the |safe filter, {% autoescape off %}, or mark_safe in Python, and each of those tells Django you guarantee the string is already safe. That is dangerous when any part of the string came from users, for example a profile bio rendered with |safe that contains a script tag. If you must render user-supplied rich text, sanitize it first with a library such as nh3 or bleach using an allow-list of tags. For building HTML in Python, use format_html, which escapes its arguments. Also remember escaping is context-specific: values placed inside JavaScript should use the json_script filter. Verify with a test that submits a script payload."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Views/DRF and Templates",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Django/FastAPI: Compare APIView, GenericAPIView with mixins, and ViewSets with routers in Django REST Framework.",
+    "answer": "They trade explicitness for less code: APIView is the most explicit, generics remove CRUD boilerplate, and ViewSets plus routers also generate URLs. APIView gives you get, post and similar methods with DRF's request parsing, authentication, permissions and throttling, but you write the logic. GenericAPIView adds queryset, serializer_class, get_object and pagination, and concrete classes like ListCreateAPIView combine it with mixins. ModelViewSet bundles list, create, retrieve, update and destroy, and DefaultRouter maps them to URLs, while @action adds custom endpoints like /orders/{pk}/cancel/. Use ViewSets for resource-style CRUD, generics when you need only a couple of operations, and APIView for non-resource endpoints like a webhook receiver. Pitfall: ModelViewSet exposes delete and update unless you restrict it, so prefer composing only the mixins you need. Check generated routes with the browsable API or schema."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Views/DRF and Templates",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: Where do you put validation logic in a DRF serializer, and how do field-level, object-level and model-level validation differ?",
+    "answer": "Put single-field rules in validate_<field_name>, cross-field rules in validate(self, attrs), and true invariants in the database. A validate_quantity method receives the already-typed value and raises serializers.ValidationError if it is out of range. validate receives the dict of all fields, so it handles rules like end_date after start_date. Reusable rules can be validator callables passed via validators on the field, and UniqueTogetherValidator checks uniqueness before saving. Note that DRF's ModelSerializer does not call the model's full_clean, so validators defined only in model clean methods are skipped. Unique checks in serializers are not race-safe, so back them with a UniqueConstraint and handle IntegrityError. Keep side effects such as sending emails out of validation and put them in create, update or a service function. Verify with unit tests on serializer.is_valid() and serializer.errors."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Views/DRF and Templates",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: How do you add pagination and filtering to a DRF list endpoint, and which paginator suits a large, frequently changing table?",
+    "answer": "Configure DEFAULT_PAGINATION_CLASS and PAGE_SIZE in REST_FRAMEWORK settings or set pagination_class per view, and use django-filter's DjangoFilterBackend with filterset_fields or a FilterSet for filtering, plus SearchFilter and OrderingFilter. For large, frequently changing tables use CursorPagination. PageNumberPagination and LimitOffsetPagination run COUNT(*) and use OFFSET, which gets slower as page numbers grow and can skip or repeat rows when data is inserted between requests. CursorPagination encodes position on an ordering field such as -created_at, produces stable results, and needs no count, but it cannot jump to arbitrary pages and requires a unique, indexed ordering. For example, an activity feed with millions of rows uses CursorPagination with ordering = ('-created_at', '-id'). Pitfall: allowing unrestricted ordering fields, which defeats indexes. Verify with EXPLAIN on the generated query."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Views/DRF and Templates",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Django/FastAPI: A DRF endpoint returning 50 orders with nested customer and line items makes over 300 queries. How do you find and fix the N+1 problem?",
+    "answer": "Nested serializers access related objects per row, so fix it by optimizing the viewset's get_queryset to load relationships up front. Confirm the cause with django-debug-toolbar on the browsable API, or nplusone or django-silk, which show repeated identical queries. Then use select_related('customer') for the foreign key and prefetch_related for collections, for example Prefetch('lines', queryset=OrderLine.objects.select_related('product')) so each line's product is not fetched individually. Watch SerializerMethodField methods that call obj.lines.count() or filter, because they bypass the prefetch cache; replace them with annotate(line_count=Count('lines')) and read the annotation. Lock it in with a test using django_assert_num_queries or assertNumQueries so a later serializer change cannot reintroduce it. After the fix the endpoint should run a small constant number of queries regardless of page size."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Views/DRF and Templates",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Django/FastAPI: A mobile app that cannot be force-upgraded depends on a DRF response field you need to rename and restructure. How do you evolve the API without breaking it?",
+    "answer": "Introduce a new API version and keep the old contract working until usage drops to zero. DRF supports this through DEFAULT_VERSIONING_CLASS, for example URLPathVersioning for /api/v1/ and /api/v2/, or AcceptHeaderVersioning. In the view, override get_serializer_class to return OrderSerializerV1 or OrderSerializerV2 based on request.version, sharing the queryset and business logic so only representation differs. For small additive changes you may not need a version: add the new field alongside the old one and mark the old one deprecated in the OpenAPI schema generated by drf-spectacular. Track old-version traffic with request logging or a metric labelled by version and app build, and send Deprecation and Sunset headers. Pitfall: changing field types or meanings in place. Verify with contract tests that snapshot v1 responses."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Django Views/DRF and Templates",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Django/FastAPI: Design a DRF endpoint for creating payments that is safe against client retries, double clicks and abuse.",
+    "answer": "Make the endpoint idempotent with a client-supplied Idempotency-Key, enforce it with a database constraint, and add throttling. Store keys in an IdempotencyRecord table with a UniqueConstraint on (user, key), plus a hash of the request body and the stored response. Inside transaction.atomic, insert the record first; if IntegrityError occurs, load the existing record and return its saved response, or 409 if the body hash differs or the original is still in progress. Create the payment and call the provider with the same key, since providers such as Stripe accept idempotency keys. Use transaction.on_commit to enqueue follow-up work only after commit. Add UserRateThrottle and a ScopedRateThrottle for this view, backed by a shared Redis cache so limits hold across pods. Expire old keys after 24 hours. Verify with concurrent duplicate requests asserting a single charge."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Fundamentals and Pydantic",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Django/FastAPI: How does FastAPI use Python type hints, and what do you get from them automatically?",
+    "answer": "FastAPI reads the type hints on your endpoint function parameters and return type, and uses them for request parsing, validation, serialization and OpenAPI documentation. A parameter typed int in the path is converted and validated; a parameter typed as a Pydantic model is parsed from the JSON body; invalid input gets an automatic 422 response describing which field failed. The same information generates an OpenAPI schema served at /openapi.json with interactive docs at /docs (Swagger UI) and /redoc. For example, def get_item(item_id: int, q: str | None = None) defines a required integer path parameter and an optional query string. FastAPI is built on Starlette for the ASGI web layer and Pydantic for validation. Pitfall: using untyped dict parameters loses validation and documentation. Verify by opening /docs and trying invalid inputs."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Fundamentals and Pydantic",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Django/FastAPI: How does FastAPI decide whether a parameter comes from the path, the query string, the body or a header?",
+    "answer": "FastAPI infers the source from the declaration: names that appear in the route path are path parameters, Pydantic model parameters are the JSON body, and other simple types default to query parameters. You can be explicit with Path, Query, Body, Header, Cookie and Form, ideally using Annotated, for example limit: Annotated[int, Query(ge=1, le=100)] = 20, which also adds constraints and documentation. Header converts underscores to hyphens, so user_agent maps to User-Agent. For a single scalar you want in the body, use Body(embed=True). Form data requires the python-multipart package. Example: @app.put('/items/{item_id}') with item_id: int, item: ItemUpdate, and x_request_id: Annotated[str | None, Header()] = None. Pitfall: defining a list parameter without Query makes FastAPI expect it in the body. Verify the inferred locations in /docs."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Fundamentals and Pydantic",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Django/FastAPI: What changed between Pydantic v1 and v2 that matters when upgrading a FastAPI service?",
+    "answer": "Pydantic v2 rewrote the validation core in Rust as pydantic-core, making validation much faster, and renamed most of the public API. parse_obj becomes model_validate, dict becomes model_dump, json becomes model_dump_json, and schema becomes model_json_schema. @validator and @root_validator are replaced by @field_validator and @model_validator with explicit mode='before' or 'after'. The inner class Config becomes model_config = ConfigDict(...), and orm_mode becomes from_attributes=True. BaseSettings moved to the separate pydantic-settings package. Coercion is stricter in places, for example ints are no longer silently converted to str by default. FastAPI 0.100 and later support v2, and recent releases have dropped v1 model support. Upgrade with the bump-pydantic codemod, run the full test suite, and diff the generated OpenAPI schema because optional field and nullability representations changed."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Fundamentals and Pydantic",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: Why should a FastAPI endpoint use separate input and output Pydantic models, and how does response_model enforce that?",
+    "answer": "Separate models stop clients from setting fields they should not control and stop the API from leaking internal fields. A typical set is UserCreate with email and password, UserUpdate with optional fields, and UserOut with id, email and created_at but no password hash. Declaring response_model=UserOut, or simply annotating the return type as UserOut, makes FastAPI validate and filter the returned object, so even if you return the ORM instance, hashed_password is dropped. Set model_config = ConfigDict(from_attributes=True) on UserOut so it can read SQLAlchemy objects. For updates, use model_dump(exclude_unset=True) so absent fields are not overwritten with None. Pitfall: reusing one model for input and output, which lets clients send is_admin or id. Verify by asserting the response JSON keys in tests and inspecting the schema in /docs."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Fundamentals and Pydantic",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Django/FastAPI: A frontend team reports intermittent 422 Unprocessable Entity responses from a FastAPI endpoint. How do you debug them?",
+    "answer": "A 422 means FastAPI rejected the request during validation before your function ran, so read the detail array, which lists loc, msg and type for each failing field. Common causes are sending form-encoded data or a missing Content-Type: application/json header, a query parameter declared as a list without Query, sending null for a non-optional field, a datetime string without the expected format, or an int field receiving a float string. Intermittent failures usually point to optional client fields that are sometimes null or empty strings. Register an exception handler for RequestValidationError that logs exc.errors() with a request ID and redacted body, while still returning 422. Reproduce with the exact payload in TestClient. Fix by correcting the schema, for example str | None = None, or using a field_validator with mode='before' to normalize empty strings. Pitfall: never return raw request bodies containing secrets in logs."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Fundamentals and Pydantic",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: How do you manage startup and shutdown resources such as a database engine and an HTTP client in FastAPI?",
+    "answer": "Use the lifespan parameter with an async context manager; the older @app.on_event('startup') and 'shutdown' handlers are deprecated. Code before yield runs once per worker process at startup, and code after yield runs at shutdown. For example: @asynccontextmanager async def lifespan(app): app.state.http = httpx.AsyncClient(timeout=10); app.state.engine = create_async_engine(settings.database_url, pool_size=5); yield; await app.state.http.aclose(); await app.state.engine.dispose(). Then app = FastAPI(lifespan=lifespan), and dependencies read request.app.state. Sharing one AsyncClient reuses connections instead of opening a new pool per request. Pitfall: each Uvicorn or Gunicorn worker runs lifespan separately, so pools multiply by worker count. In tests, TestClient only runs lifespan when used as a context manager, so write with TestClient(app) as client. Verify cleanup by checking for unclosed-client warnings on shutdown."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Fundamentals and Pydantic",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Django/FastAPI: How would you structure a large FastAPI codebase owned by several teams so it stays maintainable?",
+    "answer": "Organize by domain, not by technical layer, with thin routers on top of a service layer and explicit dependencies. Each domain package such as orders or billing contains router.py with an APIRouter, schemas.py for Pydantic models, service.py for business logic, and repository.py for SQLAlchemy queries; main.py only includes routers with prefixes and tags. Routers depend on services through Depends, which makes services testable with dependency_overrides. Configuration comes from a single pydantic-settings Settings class cached with lru_cache. Cross-domain calls go through service interfaces, never another domain's tables, and you can enforce that with import-linter contracts in CI. Add consistent error handling via custom exception classes and handlers, and request ID middleware for logging. Pitfall: putting queries directly in route functions, which spreads transaction handling everywhere. Verify boundaries by running import-linter and keeping per-domain test suites."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Fundamentals and Pydantic",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Django/FastAPI: Welcome emails sent via FastAPI BackgroundTasks occasionally never arrive, especially during deploys. What is wrong and what would you use instead?",
+    "answer": "BackgroundTasks run in the same worker process after the response is sent, with no persistence or retry, so a pod restart, SIGTERM during a rolling deploy, or an exception silently loses the work. They are fine for best-effort, quick tasks like writing a log line, not for work that must happen. Move durable work to a queue: Celery with Redis or RabbitMQ, arq or Dramatiq, or a managed option like Google Cloud Tasks or Pub/Sub. To avoid sending an email for a user whose transaction rolled back, write an outbox row in the same database transaction and have a worker publish it, or enqueue only after commit. Make the consumer idempotent with a sent_at column or dedupe key, configure retries with exponential backoff and a dead-letter queue. Verify by killing a worker mid-task in staging and confirming the email still goes out once."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Dependencies/Auth/JWT",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Django/FastAPI: What is Depends in FastAPI and why is dependency injection useful for endpoints?",
+    "answer": "Depends declares that a parameter's value comes from calling another function, which FastAPI resolves per request, including that function's own parameters and sub-dependencies. This keeps cross-cutting concerns such as database sessions, current user lookup, pagination parameters and permission checks out of endpoint bodies. For example, def list_orders(db: Annotated[Session, Depends(get_db)], user: Annotated[User, Depends(get_current_user)]) receives a ready session and an authenticated user. Results are cached within one request, so two dependencies that both need get_db share the same session. Dependencies can also be applied to a whole router with APIRouter(dependencies=[Depends(require_admin)]). The big testing benefit is app.dependency_overrides, which swaps real dependencies for fakes. Pitfall: doing heavy work in a dependency used by every route. Verify the dependency graph appears correctly in the OpenAPI security schemes."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Dependencies/Auth/JWT",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Django/FastAPI: What are the three parts of a JWT, and what does its signature guarantee and not guarantee?",
+    "answer": "A JWT is three base64url-encoded parts joined by dots: a header with the algorithm and key ID, a payload of claims such as sub, exp, iat, iss and aud, and a signature. The signature guarantees integrity and authenticity: the token was issued by someone holding the signing key and has not been modified. It does not provide confidentiality, because anyone can decode the payload, so never put secrets or sensitive personal data in it. HS256 uses one shared secret for signing and verifying, while RS256 or ES256 sign with a private key and verify with a public key, which suits multiple verifying services. On verification, always pin allowed algorithms, for example jwt.decode(token, key, algorithms=['RS256'], audience='orders-api'), and check exp. Pitfall: accepting the alg from the token header, which enables algorithm confusion attacks."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Dependencies/Auth/JWT",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "Django/FastAPI: Write a FastAPI dependency that validates a bearer JWT and returns the current user, rejecting expired or invalid tokens.",
+    "answer": "Use OAuth2PasswordBearer or HTTPBearer to extract the token, decode it with PyJWT while pinning the algorithm and audience, then load the user and reject inactive accounts.\n\noauth2 = OAuth2PasswordBearer(tokenUrl='/auth/token')\n\nasync def get_current_user(token: Annotated[str, Depends(oauth2)], db: Annotated[AsyncSession, Depends(get_db)]) -> User:\n    creds_error = HTTPException(401, 'Invalid credentials', headers={'WWW-Authenticate': 'Bearer'})\n    try:\n        claims = jwt.decode(token, settings.jwt_public_key, algorithms=['RS256'], audience='api', leeway=30)\n    except jwt.ExpiredSignatureError:\n        raise HTTPException(401, 'Token expired', headers={'WWW-Authenticate': 'Bearer'})\n    except jwt.InvalidTokenError:\n        raise creds_error\n    user = await db.get(User, int(claims['sub']))\n    if user is None or not user.is_active:\n        raise creds_error\n    return user\n\nThe 30-second leeway tolerates small clock skew between issuer and API. Returning a distinct expired message lets the client know to refresh. Complexity is O(n) in token length for decoding and signature verification plus one primary-key lookup, and O(1) extra space. Pitfall: skipping the database lookup means disabled users keep access until expiry; if you skip it for performance, keep token lifetimes short. Test with tokens that are expired, wrongly signed, wrong audience, and valid."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Dependencies/Auth/JWT",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: How do you use a yield dependency in FastAPI to manage a database session and transaction per request?",
+    "answer": "Write a generator dependency that creates the session, yields it, and commits, rolls back and closes in the code after yield. For example: async def get_db(): async with SessionLocal() as session: try: yield session; await session.commit() except Exception: await session.rollback(); raise. The async with block closes the session and returns the connection to the pool. FastAPI caches it per request, so every dependency that asks for get_db in that request shares one session and transaction. Since FastAPI 0.106, exit code for yield dependencies runs before the response is sent, which means the session is not available to background tasks; create a fresh session inside a background task. Pitfall: committing in both the endpoint and the dependency, which makes failure handling unclear; choose one place. Verify with a test where the endpoint raises and the row is not persisted."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Dependencies/Auth/JWT",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Django/FastAPI: How do access tokens and refresh tokens differ, and where should a browser SPA store them?",
+    "answer": "Access tokens are short-lived credentials sent on every API call, typically 5 to 15 minutes, while refresh tokens are long-lived, used only against the token endpoint, and can be revoked server-side. The short access lifetime limits damage if one leaks, and the refresh token avoids forcing users to log in again. For a browser SPA, the safer pattern keeps the refresh token in an HttpOnly, Secure, SameSite=Strict or Lax cookie scoped to the refresh path, so JavaScript cannot read it, and keeps the access token in memory only. Many teams go further with a backend-for-frontend that holds tokens server-side and gives the browser only a session cookie. Avoid localStorage because any XSS can exfiltrate tokens. Pitfall: cookie-based refresh needs CSRF protection on the refresh endpoint, such as SameSite plus an anti-CSRF header. Verify with browser devtools that tokens are not readable from document.cookie."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Dependencies/Auth/JWT",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Django/FastAPI: Users complain they are randomly logged out mid-session and sometimes see bursts of 401s when several tabs are open. How do you redesign JWT expiry and refresh?",
+    "answer": "The symptoms point to access tokens expiring without a coordinated refresh, plus refresh token rotation racing across tabs. On the client, refresh proactively shortly before exp and use a single-flight lock so concurrent 401s wait for one refresh call instead of each tab rotating the token; share the result across tabs with BroadcastChannel. On the server, implement refresh token rotation with a token family ID: each refresh issues a new refresh token and marks the old one used. Allow a short grace window of a few seconds where reusing the just-rotated token returns the same new pair, which absorbs multi-tab races; reuse after that window signals theft, so revoke the whole family. Add leeway of 30 seconds for clock skew. Track refresh failures and 401 rates per client version. Verify with an automated multi-tab test that holds a session across several expiry cycles."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Dependencies/Auth/JWT",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Django/FastAPI: An admin disables a compromised account, but the attacker keeps calling the FastAPI service for 30 minutes with a valid JWT. How do you close this gap?",
+    "answer": "Stateless JWTs remain valid until exp, so you need either shorter lifetimes or a revocation check on each request. First reduce access token lifetime to around 5 to 10 minutes and revoke the account's refresh tokens so no new access tokens are issued. For immediate cutoff, add a check in get_current_user: either load the user and reject is_active False, or keep a token_version integer on the user, embed it as a claim, and reject tokens whose version is lower; disabling the account increments the version. To avoid a database hit per request, cache the version or a denylist of jti values in Redis with TTL equal to remaining token lifetime. Trade-off: this reintroduces a stateful lookup, but Redis adds roughly a millisecond. Verify by disabling a test user and asserting the next request returns 401."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - FastAPI Dependencies/Auth/JWT",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Django/FastAPI: A Django monolith handles login and a new FastAPI service must authenticate the same users. How do you design shared authentication?",
+    "answer": "Make one component the token issuer and have the other verify tokens with public keys, rather than sharing a session database or a symmetric secret. If Django remains the identity provider, use djangorestframework-simplejwt or django-oauth-toolkit with RS256, publish a JWKS endpoint, and include iss, aud, sub, exp and a key ID. FastAPI verifies tokens with PyJWT's PyJWKClient, caching keys and pinning algorithms and audience. Authorization claims should stay coarse, such as roles or scopes, with fine-grained checks inside each service. Rotate signing keys by publishing the new key in JWKS before switching. For larger estates, move identity to a dedicated IdP such as Keycloak, Auth0 or Google Identity Platform, and let both apps be relying parties via OIDC. Pitfall: FastAPI reading Django's session table couples schemas tightly. Verify with cross-service integration tests and a key rotation drill."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Async and Performance",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "Django/FastAPI: In FastAPI, what is the difference between declaring an endpoint with def and with async def?",
+    "answer": "FastAPI runs async def endpoints directly on the event loop, and runs plain def endpoints in a thread pool so blocking code does not freeze the loop. Use async def when everything you await is non-blocking, such as httpx.AsyncClient, asyncpg or SQLAlchemy's async engine. Use def when you call blocking libraries such as requests, psycopg2 or boto3; FastAPI offloads them via Starlette's run_in_threadpool, which uses an AnyIO thread limiter defaulting to 40 threads. The worst case is async def that calls blocking code, because it stalls every request handled by that worker. For example, an endpoint calling requests.get inside async def serializes all traffic on that process. The same rule applies to dependencies. Verify by load testing with a slow downstream and watching whether unrelated endpoints slow down too."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Async and Performance",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "Django/FastAPI: What is the difference between WSGI and ASGI, and which servers run Django and FastAPI under each?",
+    "answer": "WSGI is the synchronous Python web server interface where each request occupies a worker thread or process until it returns, while ASGI is its asynchronous successor that supports async request handling, WebSockets, and long-lived connections. Django supports both through wsgi.py and asgi.py; it is commonly served by Gunicorn under WSGI, or by Uvicorn, Daphne or Hypercorn under ASGI. FastAPI is ASGI-only, built on Starlette, and runs on Uvicorn, often managed by Gunicorn with uvicorn workers or by uvicorn --workers. ASGI shines when requests spend time waiting on I/O, such as calling LLM APIs or streaming responses. Trade-off: async gains vanish if your code calls blocking libraries. Pitfall: running Django under ASGI with mostly sync views adds thread-switch overhead without benefit. Verify by comparing latency and throughput under realistic I/O-bound load."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Async and Performance",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "Django/FastAPI: A FastAPI service handles 500 requests per second until one slow endpoint is called, then all endpoints on that pod stall. What is the likely cause and fix?",
+    "answer": "The slow endpoint is almost certainly blocking the event loop from inside an async def function, so no other coroutine can run until it finishes. Typical culprits are requests or urllib calls, time.sleep, synchronous database drivers like psycopg2, boto3 calls, large file reads, or CPU-heavy work such as parsing a big PDF. Confirm with py-spy dump against the worker PID, which shows the stack stuck in a blocking call, or enable asyncio debug mode with PYTHONASYNCIODEBUG=1 to log slow callbacks. Fix by switching to async libraries like httpx.AsyncClient or asyncpg, by declaring the endpoint def so it runs in the thread pool, or by wrapping the call in await run_in_threadpool or asyncio.to_thread. CPU-bound work belongs in a process pool or a task queue. Verify with a load test that mixes slow and fast endpoints."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Async and Performance",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: How do you write async views in Django and use the ORM from them correctly?",
+    "answer": "Define the view with async def and run Django under an ASGI server; then use the ORM's async methods, which are prefixed with a, such as aget, acreate, afirst, acount, aupdate and async for iteration over a QuerySet. For example: async def order_detail(request, pk): order = await Order.objects.select_related('customer').aget(pk=pk). Anything without an async variant, including transaction.atomic and many third-party libraries, must be wrapped with asgiref.sync.sync_to_async. Calling a sync ORM method directly in async code raises SynchronousOnlyOperation. Note that Django's async ORM currently still runs queries in a thread under the hood, so gains come mainly from concurrent outbound I/O, for example awaiting several httpx calls with asyncio.gather. Pitfall: accessing a lazy related attribute in async code triggers a sync query and fails. Verify by running under Uvicorn with ASGI-specific tests."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Async and Performance",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Django/FastAPI: After scaling a FastAPI deployment to 10 pods with 4 Uvicorn workers each, PostgreSQL starts rejecting connections with too many clients already. How do you fix connection pool exhaustion?",
+    "answer": "Every worker process has its own SQLAlchemy pool, so total connections are pods times workers times (pool_size plus max_overflow); with defaults of 5 and 10, that is 10 x 4 x 15 = 600, far beyond a typical max_connections of 100 to 200. Immediately, lower pool_size and max_overflow per worker, set pool_timeout so requests fail fast instead of hanging, and use pool_pre_ping to drop dead connections. Structurally, put PgBouncer in transaction pooling mode, or Cloud SQL managed connection pooling, between apps and Postgres so thousands of client connections map to a few dozen server connections. With asyncpg behind PgBouncer transaction mode, disable prepared statement caching, for example statement_cache_size=0 in connect_args. Also check for leaked sessions that never close. Verify with pg_stat_activity grouped by application_name and state, and alert at 80 percent of max_connections."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Async and Performance",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Coding",
+    "question": "Django/FastAPI: Write an async Python function that fetches 200 URLs concurrently with httpx while limiting concurrency to 20 and tolerating individual failures.",
+    "answer": "Share one AsyncClient, bound concurrency with an asyncio.Semaphore, and use asyncio.gather with return_exceptions=True so one failure does not cancel the rest.\n\nimport asyncio, httpx\n\nasync def fetch_all(urls: list[str], limit: int = 20) -> dict[str, int | str]:\n    sem = asyncio.Semaphore(limit)\n    timeout = httpx.Timeout(10.0, connect=3.0)\n    limits = httpx.Limits(max_connections=limit)\n    async with httpx.AsyncClient(timeout=timeout, limits=limits) as client:\n        async def one(url: str):\n            async with sem:\n                resp = await client.get(url)\n                resp.raise_for_status()\n                return resp.status_code\n        results = await asyncio.gather(*(one(u) for u in urls), return_exceptions=True)\n    return {u: (r if not isinstance(r, Exception) else repr(r)) for u, r in zip(urls, results)}\n\nThe semaphore caps in-flight requests so you do not overwhelm the downstream service or exhaust sockets, and matching max_connections keeps the pool consistent. Time complexity is O(n) work with wall-clock time roughly n divided by the limit times average latency; space is O(n) for tasks and results. On Python 3.11 and later, asyncio.TaskGroup is an alternative, but it cancels siblings on the first error, which is not what we want here. Pitfall: creating a new AsyncClient per URL defeats connection reuse. Add retries with backoff for 429 and 503 if the downstream is flaky."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Async and Performance",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Troubleshooting",
+    "question": "Django/FastAPI: A FastAPI service has fine median latency but p99 spikes to several seconds under moderate load, with low CPU overall. How do you investigate?",
+    "answer": "Low CPU with tail spikes usually means queueing: requests waiting for an exhausted resource such as the thread pool, the database pool, or an event loop blocked briefly. Instrument before guessing. Add OpenTelemetry tracing to see where time goes inside slow requests, and log SQLAlchemy pool checkout wait time. Measure event loop lag with a periodic task that records scheduling delay. Sync def endpoints and dependencies share AnyIO's default 40-thread limiter, so a burst of slow sync calls queues everything else; raise the limit via anyio.to_thread.current_default_thread_limiter().total_tokens or convert to async. Use py-spy record on a worker to catch short blocking calls such as JSON encoding of huge responses or synchronous logging handlers. Also check garbage collection pauses and downstream timeouts without limits. Verify fixes by replaying the load profile with k6 or Locust and comparing p99."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Async and Performance",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Django/FastAPI: How do you design a FastAPI endpoint that streams LLM tokens to browsers via server-sent events reliably at scale?",
+    "answer": "Return a StreamingResponse with media_type text/event-stream from an async generator that relays tokens from the provider's async streaming client, and design the surrounding infrastructure for long-lived connections. Each SSE message is formatted as data: payload followed by a blank line; send periodic comment heartbeats so proxies do not idle out the connection. Disable proxy buffering, for example the X-Accel-Buffering: no header for Nginx, and raise load balancer and Cloud Run request timeouts. Inside the generator, check await request.is_disconnected() and cancel the upstream call so you stop paying for tokens nobody reads. Because connections are long, capacity is bounded by concurrent streams per worker and the upstream rate limit, so cap concurrency with a semaphore and return 429 when full. Include event IDs so clients can resume. Verify with a load test of many concurrent streams and client disconnects."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Databases (PostgreSQL, SQLAlchemy 2.0, transactions, N+1)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Django/FastAPI: What is a database transaction, and how do you use one in Django and in SQLAlchemy?",
+    "answer": "A transaction groups statements so they all commit or all roll back, giving atomicity, consistency, isolation and durability. In Django, autocommit is on by default, so each query commits immediately unless you wrap code in transaction.atomic(), as a decorator or context manager; nested atomic blocks become savepoints. You can also set ATOMIC_REQUESTS = True to wrap each view in a transaction. In SQLAlchemy 2.0, a Session starts a transaction implicitly on first use and you call session.commit() or session.rollback(), or use with session.begin(): to commit on success and roll back on exception. For example, transferring credit between two accounts must debit and credit inside one transaction. Pitfall: calling external APIs inside a transaction holds locks and connections for the network duration. Verify behaviour with a test that raises midway and checks nothing persisted."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Databases (PostgreSQL, SQLAlchemy 2.0, transactions, N+1)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Django/FastAPI: What is the N+1 query problem in an ORM, and how do you spot it?",
+    "answer": "The N+1 problem is running one query to fetch a list of N rows and then one extra query per row to load a related object, giving N+1 round trips instead of one or two. It happens because ORMs lazy-load relationships on attribute access, for example looping over posts and reading post.author.name. With 100 posts that is 101 queries, and latency grows linearly with page size. Spot it by counting queries per request: django-debug-toolbar in Django, setting echo=True on a SQLAlchemy engine, or pg_stat_statements showing the same query with very high calls. The fix is eager loading: select_related or prefetch_related in Django, selectinload or joinedload in SQLAlchemy. Pitfall: it often appears only in production because test fixtures have few rows. Verify with query-count assertions in tests."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Databases (PostgreSQL, SQLAlchemy 2.0, transactions, N+1)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Django/FastAPI: What are the main differences between SQLAlchemy 2.0-style code and the legacy 1.x Query API?",
+    "answer": "SQLAlchemy 2.0 unifies Core and ORM around the select() construct executed through session.execute or session.scalars, replacing session.query(). For example, session.scalars(select(User).where(User.email == email)).one_or_none() replaces session.query(User).filter_by(email=email).one_or_none(). Models use typed declarative mapping with DeclarativeBase, Mapped[int] and mapped_column(), which gives type checkers real types and infers nullability from Optional. Autocommit mode was removed, so transactions are always explicit through commit or begin blocks. Full asyncio support comes via create_async_engine and AsyncSession. session.get(User, id) replaces query.get. The legacy Query API still works but is considered legacy. Pitfall: mixing styles in one codebase confuses reviewers, so migrate module by module. Verify by running with SQLALCHEMY_WARN_20=1 on 1.4 before upgrading to surface deprecated usage."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Databases (PostgreSQL, SQLAlchemy 2.0, transactions, N+1)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: How do you prevent N+1 queries in SQLAlchemy 2.0, and when do you choose selectinload versus joinedload?",
+    "answer": "Specify eager loading per query with options(), and use raiseload to make accidental lazy loads fail loudly. selectinload issues a second query with WHERE parent_id IN (...) and is the best default for one-to-many collections because it avoids row multiplication. joinedload uses a LEFT OUTER JOIN in the same query and suits many-to-one relationships like order to customer; for collections it duplicates parent rows and requires .unique() on the result. Example: select(Order).options(joinedload(Order.customer), selectinload(Order.lines).joinedload(OrderLine.product)). Set lazy='raise' on relationships, or add raiseload('*') to queries, so any unplanned access raises instead of silently querying, which is essential with AsyncSession where lazy loads raise MissingGreenlet anyway. Verify with echo=True or an event listener counting statements in tests."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Databases (PostgreSQL, SQLAlchemy 2.0, transactions, N+1)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "Django/FastAPI: An order search endpoint became slow as the table grew to tens of millions of rows. How do you diagnose it in PostgreSQL?",
+    "answer": "Find the exact SQL, then read its plan with EXPLAIN (ANALYZE, BUFFERS) to see where time and I/O go. Capture the query from Django's connection.queries, SQLAlchemy echo, or pg_stat_statements sorted by total_exec_time. In the plan, look for sequential scans on large tables, row estimates far from actual counts, sorts spilling to disk, and nested loops over many rows. Typical fixes are a composite index matching the filter and sort, for example (tenant_id, status, created_at DESC), a partial index for hot subsets like WHERE status = 'open', or a trigram GIN index with pg_trgm for ILIKE '%term%' searches. Run ANALYZE if statistics are stale. Create indexes with CREATE INDEX CONCURRENTLY in production. Pitfall: functions on indexed columns such as lower(email) need an expression index. Verify by re-running the plan and comparing timings."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Databases (PostgreSQL, SQLAlchemy 2.0, transactions, N+1)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Django/FastAPI: During a flash sale two customers bought the last unit of stock and inventory went negative. How do you make the decrement correct under concurrency?",
+    "answer": "The code read stock, checked it in Python, then wrote it back, so concurrent requests both saw one unit. Make the database perform the check and decrement atomically. The simplest fix is a conditional update: UPDATE inventory SET qty = qty - 1 WHERE sku = :sku AND qty >= 1, then check the affected row count; in Django that is Inventory.objects.filter(sku=sku, qty__gte=1).update(qty=F('qty') - 1). Alternatively lock the row with SELECT ... FOR UPDATE, via select_for_update() in Django or select(...).with_for_update() in SQLAlchemy, inside a transaction. Add a CHECK (qty >= 0) constraint as a safety net. Optimistic locking with a version column also works where contention is low. Pitfall: raising isolation to SERIALIZABLE without retry logic just converts bugs into errors. Verify with a concurrent load test against the last unit."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Databases (PostgreSQL, SQLAlchemy 2.0, transactions, N+1)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Django/FastAPI: pg_stat_activity shows many connections in idle in transaction state and other queries waiting on locks. What causes this and how do you fix it?",
+    "answer": "Idle in transaction means the application opened a transaction, ran a statement, and is now doing something else without committing, so it holds locks and a pooled connection. Common causes are HTTP calls or slow Python work inside transaction.atomic or a SQLAlchemy session, sessions never closed after an exception, or Celery tasks that keep a session open. Identify offenders with pg_stat_activity filtered by state, using xact_start age and the query column showing the last statement, and use pg_blocking_pids() to see who blocks whom. Fix the code by keeping transactions short and moving external calls outside them. As guardrails set idle_in_transaction_session_timeout, statement_timeout and lock_timeout per role, for example ALTER ROLE app SET idle_in_transaction_session_timeout = '30s'. Verify the count stays near zero on dashboards after deploy."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Databases (PostgreSQL, SQLAlchemy 2.0, transactions, N+1)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Troubleshooting",
+    "question": "Django/FastAPI: After migrating a FastAPI service to async SQLAlchemy with asyncpg, some endpoints fail with MissingGreenlet errors or return stale data. What is going on?",
+    "answer": "MissingGreenlet means code triggered implicit synchronous I/O, usually a lazy relationship load or an expired attribute refresh, outside SQLAlchemy's async context. Common triggers are accessing order.lines that was not eager-loaded, or reading attributes after commit, because the default expire_on_commit=True expires everything and the next access needs a query. Fix it by creating the sessionmaker with async_sessionmaker(engine, expire_on_commit=False), eager-loading everything the response needs with selectinload, setting lazy='raise' to catch mistakes in tests, and using await session.refresh(obj, ['lines']) or AsyncAttrs with awaitable_attrs when you truly need a deferred load. Stale data usually comes from sharing one AsyncSession across requests or tasks; sessions are not safe for concurrent use, so create one per request via a yield dependency. Verify with tests that serialize responses after commit."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Testing (pytest-django, TestClient, fixtures)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: How do you set up pytest-django and write a first test that touches the database?",
+    "answer": "Install pytest-django, point it at your settings with DJANGO_SETTINGS_MODULE in pytest.ini or pyproject.toml, and mark database tests with @pytest.mark.django_db. Without the marker, any ORM access raises an error, which keeps pure unit tests fast. By default each django_db test runs inside a transaction that is rolled back, so tests stay isolated. pytest-django provides fixtures such as client for the Django test client, admin_client, rf for RequestFactory, settings for overriding settings, and django_assert_num_queries. Example: @pytest.mark.django_db def test_create_order(client, user): client.force_login(user); resp = client.post('/orders/', {'sku': 'A1'}); assert resp.status_code == 201. Use --reuse-db locally to keep the test database between runs. Pitfall: forgetting that the test database is created by running migrations, so broken migrations fail the whole suite."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Testing (pytest-django, TestClient, fixtures)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Django/FastAPI: What is FastAPI's TestClient and how do you use it in a pytest test?",
+    "answer": "TestClient wraps your FastAPI app in an httpx-compatible client that calls the ASGI app in-process, so you can test endpoints without starting a server. You write synchronous test code even for async endpoints: client = TestClient(app); resp = client.get('/items/1'); assert resp.status_code == 200 and resp.json()['id'] == 1. Use it as a context manager, with TestClient(app) as client, so lifespan startup and shutdown run, which matters if the app creates its database engine or HTTP clients there. Create it in a pytest fixture so each test gets a configured client, and combine it with app.dependency_overrides to swap the database session or the current user. Pitfall: TestClient runs the app on a separate event loop thread, so async database fixtures created on pytest's loop may not be usable; use httpx.AsyncClient with ASGITransport for fully async tests."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Testing (pytest-django, TestClient, fixtures)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: How do you use dependency_overrides to test FastAPI endpoints that require authentication and a database session?",
+    "answer": "Assign replacement callables to app.dependency_overrides keyed by the original dependency function, and clear them after each test. For auth, app.dependency_overrides[get_current_user] = lambda: User(id=1, email='a@example.com', is_active=True) lets you test business logic without minting tokens. For the database, override get_db with a function yielding a session bound to a test database, typically wrapped in a transaction that is rolled back at teardown. Put this in a fixture: set overrides, yield the TestClient, then app.dependency_overrides.clear() so tests do not leak state. Keep at least a few tests that exercise the real get_current_user with signed test tokens, because overriding auth everywhere means the security path is never tested. Pitfall: the key must be the exact function object used in Depends, not a wrapper. Verify that overridden tests fail when you deliberately break the endpoint."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Testing (pytest-django, TestClient, fixtures)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "Django/FastAPI: When should you use pytest fixtures versus factory_boy factories for test data, and how do fixture scopes affect speed and isolation?",
+    "answer": "Use pytest fixtures to provide setup and shared resources, and factory_boy factories to build model instances with sensible defaults that each test overrides as needed. A factory like OrderFactory(status='paid') with SubFactory for the customer keeps tests readable and avoids brittle JSON fixture files. Fixtures wire things together, for example a user fixture that returns UserFactory() or an api_client fixture that logs in. Fixture scope controls lifetime: function scope rebuilds per test and gives the best isolation; module or session scope is faster but shares state, so use it only for immutable or expensive resources like a database container or app instance. With pytest-django, use django_db_setup or django_db_blocker for session-level data. Pitfall: session-scoped mutable data causes order-dependent failures. Verify isolation by running with pytest-randomly or -p xdist."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Testing (pytest-django, TestClient, fixtures)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Django/FastAPI: A Django test asserting that an email is sent after an order is placed always fails, though the feature works in staging. What is the likely cause?",
+    "answer": "The feature probably sends the email in transaction.on_commit, and the default django_db test wraps everything in a transaction that is rolled back, so the commit never happens and the callback never runs. Fix it with TestCase.captureOnCommitCallbacks(execute=True) as a context manager around the action, or the django_capture_on_commit_callbacks fixture in pytest-django, which executes the callbacks. Alternatively use @pytest.mark.django_db(transaction=True), which behaves like TransactionTestCase with real commits and table truncation, but it is much slower, so reserve it for tests that truly need commit semantics or multiple connections. Then assert against django.core.mail.outbox, which the locmem backend fills in tests. Pitfall: if a Celery task sends the mail, also set CELERY_TASK_ALWAYS_EAGER in tests or mock the task delay. Verify by checking len(mail.outbox) == 1."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Testing (pytest-django, TestClient, fixtures)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: How do you write fully asynchronous tests for a FastAPI app that uses async SQLAlchemy?",
+    "answer": "Use httpx.AsyncClient with ASGITransport so requests and database fixtures share pytest's event loop, and mark tests with pytest-asyncio or the anyio plugin. Example fixture: async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test') as client: yield client. ASGITransport does not run lifespan events, so wrap with asgi-lifespan's LifespanManager or set up resources directly in fixtures. For the database, create an async engine against a test Postgres, open a connection, begin a transaction, bind an AsyncSession with join_transaction_mode='create_savepoint', override get_db to yield it, and roll back at teardown so each test is isolated even if code commits. Configure the event loop scope consistently, for example asyncio_default_fixture_loop_scope = 'function' in pytest-asyncio 0.24 and later, to avoid attached to a different loop errors. Verify isolation by running tests in random order."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Testing (pytest-django, TestClient, fixtures)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Django/FastAPI: Design a test strategy for a Django and FastAPI system that share one PostgreSQL database.",
+    "answer": "Test each service in isolation against real PostgreSQL, and add a thin layer of contract and schema tests where they meet. Use Postgres, not SQLite, because behaviour like JSONB, constraints, locking and case sensitivity differs; run it with testcontainers-python or a CI service container matching the production major version. Django tests use pytest-django with migrations applied as the schema source of truth. FastAPI tests run against the schema built from those same Django migrations, not from SQLAlchemy create_all, so any mismatch fails fast. Add a CI job that reflects the migrated schema and compares it to SQLAlchemy metadata, for example with Alembic's compare_metadata. Add API contract tests from OpenAPI with Schemathesis. Keep a small end-to-end suite for critical flows. Parallelize with pytest-xdist, which gives each worker its own database. Pitfall: mocking the database for everything hides real constraint failures."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Testing (pytest-django, TestClient, fixtures)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Django/FastAPI: Your Django test suite has grown to 40 minutes in CI and developers stop running it. How do you bring it down without losing confidence?",
+    "answer": "Measure first, then fix the biggest costs: slow setup, slow individual tests, and lack of parallelism. Run pytest --durations=30 to find the worst tests and fixtures. Set PASSWORD_HASHERS to MD5PasswordHasher in test settings, since real hashers deliberately cost tens of milliseconds per user created. Replace TransactionTestCase or transaction=True tests with regular ones plus captureOnCommitCallbacks where possible, because truncation is slow. Move heavy shared data to session-scoped fixtures with django_db_blocker, and replace network calls with respx or responses. Parallelize with pytest-xdist -n auto, sharding further across CI machines. Cache the test database with --reuse-db locally and use a prebuilt database image or squashed migrations in CI. Run fast unit tests on every push and the slower integration set before merge. Verify by tracking suite time per commit and watching flaky-test rates."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Deployment (gunicorn, uvicorn, Docker, static files, settings)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Django/FastAPI: Why should you not use Django's runserver or uvicorn --reload in production, and what do you use instead?",
+    "answer": "runserver and reload mode are development tools: they are single-process, watch files for changes, and have not been through security and performance hardening. Django's own documentation warns against using runserver in production. Instead run Gunicorn for Django under WSGI, with a worker class like sync or gthread, and run FastAPI on Uvicorn with multiple workers, either uvicorn main:app --workers 4 or Gunicorn managing uvicorn workers via the uvicorn-worker package. Put a reverse proxy or managed load balancer in front for TLS termination, request buffering and static asset caching, such as Nginx, Google Cloud Load Balancing, or the platform ingress on Cloud Run or Kubernetes. A common starting worker count is about 2 times CPU cores plus 1 for sync Gunicorn. Pitfall: leaving DEBUG=True alongside runserver leaks settings and tracebacks. Verify with python manage.py check --deploy."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Deployment (gunicorn, uvicorn, Docker, static files, settings)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Django/FastAPI: How are static files handled in a production Django deployment?",
+    "answer": "In production Django does not serve static files itself; you run collectstatic to gather every app's static assets into STATIC_ROOT, then serve that directory through WhiteNoise, a reverse proxy, or object storage with a CDN. STATIC_URL sets the public prefix, STATICFILES_DIRS lists project-level asset folders, and STATIC_ROOT is the collection target. WhiteNoise is a simple option for containers: add its middleware right after SecurityMiddleware and configure the staticfiles backend in the STORAGES setting with CompressedManifestStaticFilesStorage, which adds content hashes to filenames so you can cache them for a year. For larger setups, django-storages uploads to Google Cloud Storage or S3 behind a CDN. Media files uploaded by users are separate, under MEDIA_ROOT, and should go to object storage. Pitfall: running collectstatic at container start slows every boot, so do it at image build. Verify asset URLs return 200 with DEBUG off."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Deployment (gunicorn, uvicorn, Docker, static files, settings)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: Describe a production-quality Dockerfile for a Django application.",
+    "answer": "Use a multi-stage build on a slim Python base, install dependencies in a cached layer, run as a non-root user, and start Gunicorn with exec-form CMD. Stage one, from python:3.12-slim, installs build tools and builds wheels from a locked requirements file or uv lock; stage two copies only the wheels and app code. Set ENV PYTHONDONTWRITEBYTECODE=1 and PYTHONUNBUFFERED=1 so logs stream immediately. Copy dependency files before source code so code changes do not invalidate the dependency layer. Run collectstatic during the build with dummy settings that need no database. Create an app user and switch with USER app. End with CMD ['gunicorn', 'config.wsgi:application', '--bind', '0.0.0.0:8000', '--workers', '3']. Do not run migrations in the container entrypoint; run them as a separate release job. Add a .dockerignore for .git and venvs. Verify with docker scout or Trivy scans and image size checks."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Deployment (gunicorn, uvicorn, Docker, static files, settings)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Django/FastAPI: How do you manage settings and secrets for Django and FastAPI across development, staging and production?",
+    "answer": "Read configuration from environment variables with typed parsing, keep secrets in a secret manager, and never commit them. For FastAPI, define a pydantic-settings BaseSettings class with fields like database_url: PostgresDsn and debug: bool = False, cached with lru_cache so it loads once. For Django, use django-environ or read os.environ in a single settings module, avoiding sprawling per-environment settings files. Production must set DEBUG = False, ALLOWED_HOSTS, SECRET_KEY, secure cookie flags and SECURE_HSTS_SECONDS. Inject secrets from Google Secret Manager, AWS Secrets Manager or Kubernetes Secrets synced by External Secrets Operator, mounted as environment variables or files. Fail fast at startup when a required variable is missing instead of falling back to an insecure default. Pitfall: a default SECRET_KEY in code that silently reaches production. Verify with python manage.py check --deploy and a startup test with empty environment."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Deployment (gunicorn, uvicorn, Docker, static files, settings)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "Django/FastAPI: Users intermittently receive 502 errors from the load balancer in front of Gunicorn, and logs show WORKER TIMEOUT messages. How do you troubleshoot it?",
+    "answer": "WORKER TIMEOUT means the Gunicorn arbiter killed a worker that did not respond within --timeout, default 30 seconds, so the in-flight request died and the proxy returned 502. First find which requests are slow using access logs with request time, or tracing, because raising the timeout only hides the problem. Common causes are slow external calls without client timeouts, long database queries, or too few sync workers for the concurrency. Fix by setting timeouts on every outbound call, moving long jobs to a task queue, and using gthread workers with --threads for I/O-heavy Django. Separately, intermittent 502s with no timeout often come from keep-alive mismatch: Gunicorn's --keep-alive, default 2 seconds, must exceed the load balancer's idle timeout, otherwise the backend closes connections the balancer reuses. Verify by correlating 502 timestamps with Gunicorn logs."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Deployment (gunicorn, uvicorn, Docker, static files, settings)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "Django/FastAPI: On Kubernetes, three replicas each run migrate in their entrypoint and occasionally a deploy fails with duplicate table or lock errors. How do you fix the deployment process?",
+    "answer": "Run migrations exactly once per release as a dedicated step, not in every replica's entrypoint. Options include a Kubernetes Job created by the CI pipeline before updating the Deployment, a Helm pre-upgrade hook, an Argo CD PreSync hook, or a Cloud Run job executed before the service revision rolls out. The pipeline waits for the job to succeed and aborts the rollout if it fails. Because old pods keep serving during the rollout, migrations must be backward compatible using expand and contract. Set lock_timeout on the migration connection so it fails fast instead of blocking traffic. Also configure readiness probes on a lightweight endpoint so pods receive traffic only when ready, and handle SIGTERM gracefully with terminationGracePeriodSeconds above Gunicorn's --graceful-timeout. Pitfall: init containers still run once per pod, so they have the same race. Verify with a staging rollout of several replicas."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Deployment (gunicorn, uvicorn, Docker, static files, settings)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Django/FastAPI: After setting DEBUG = False, the Django site returns 500 errors on every page with a Missing staticfiles manifest entry error. How do you fix it?",
+    "answer": "ManifestStaticFilesStorage, which WhiteNoise's CompressedManifestStaticFilesStorage extends, resolves {% static %} paths through staticfiles.json created by collectstatic; with DEBUG off, a missing entry raises ValueError instead of falling back. So either collectstatic did not run in the image, ran against a different STATIC_ROOT, or a template references a file that does not exist. Confirm by checking that STATIC_ROOT/staticfiles.json exists in the running container and contains the referenced path. Fix the build to run python manage.py collectstatic --noinput with the same settings used at runtime, configured through the STORAGES setting on Django 4.2 and later. Correct typos in template paths, and remember CSS files referencing missing images also fail post-processing. Pitfall: setting manifest_strict = False hides real broken links. Verify with a CI smoke test rendering key pages with DEBUG False."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Deployment (gunicorn, uvicorn, Docker, static files, settings)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Troubleshooting",
+    "question": "Django/FastAPI: Gunicorn worker memory grows steadily for days until pods are OOM-killed. How do you contain and find the leak?",
+    "answer": "Contain it with worker recycling, then find the leak with memory profiling. Set Gunicorn --max-requests 1000 with --max-requests-jitter 100, so workers restart gradually after a number of requests and never all at once; this stabilizes production while you investigate. Then reproduce in staging and compare tracemalloc snapshots taken minutes apart, or use memray or py-spy against a worker, to find which allocation sites grow. Usual causes are unbounded module-level caches or lru_cache on functions with high-cardinality arguments, DEBUG = True which stores every query in connection.queries, accumulating global lists, and C extension leaks in image or PDF libraries. Also check that pod memory limits account for the number of workers, and consider --preload to share imported code via copy-on-write. Pitfall: max-requests treats the symptom only. Verify with a memory graph flattening after the fix."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Architecture (Django vs FastAPI, sharing one database, schema ownership, service boundaries)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "Django/FastAPI: When would you choose Django over FastAPI for a new project, and vice versa?",
+    "answer": "Choose Django when you need a full product quickly with a relational data model, admin interface, authentication, forms and server-rendered pages; choose FastAPI for API-first services, high-concurrency I/O, or AI and streaming workloads where async matters. Django is batteries-included: ORM, migrations, admin, auth, sessions and security middleware are integrated and mature, and DRF adds REST APIs. FastAPI is minimal and typed: Pydantic validation, automatic OpenAPI docs and native async, but you assemble the ORM, migrations with Alembic, auth and admin yourself. For example, an internal back-office tool with dozens of models suits Django, while a RAG inference gateway calling LLM APIs and streaming tokens suits FastAPI. Many teams use both. Pitfall: picking FastAPI for a CRUD-heavy app and then rebuilding Django's admin and auth by hand. Decide based on team experience and the main workload."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Architecture (Django vs FastAPI, sharing one database, schema ownership, service boundaries)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "Django/FastAPI: What is a service boundary, and why do many teams start with a well-structured monolith instead of microservices?",
+    "answer": "A service boundary is the line around a capability that owns its data and exposes it only through an explicit interface, so other parts cannot reach into its internals. Good boundaries follow business domains such as billing, catalog or identity, rather than technical layers. Teams often start with a modular monolith, for example one Django project with separate apps per domain, because a single deployable, one database transaction and in-process calls are far simpler to build, test and debug. Microservices add network failure, distributed transactions, versioned APIs and operational overhead that only pays off when teams need independent deployment or very different scaling. Keep the monolith modular by forbidding cross-app model imports, enforced with import-linter, so extraction later is easy. Pitfall: splitting services that still share tables gives you a distributed monolith. Verify modularity by checking dependency graphs between apps."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Architecture (Django vs FastAPI, sharing one database, schema ownership, service boundaries)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Design / Architecture",
+    "question": "Django/FastAPI: A team wants Django's admin and ORM plus FastAPI for a high-throughput public API. What are the options for combining them?",
+    "answer": "There are three common patterns: separate services sharing a database, separate services where FastAPI calls Django over HTTP, or one ASGI process mounting both. Mounting means app.mount('/admin', WSGIMiddleware or the Django ASGI application) inside FastAPI; it is simple, but both share workers, deploys and failure modes, and you must run django.setup() before importing models. Using the Django ORM from FastAPI endpoints is possible but awkward, since sync ORM calls must run in the thread pool. Separate services give independent scaling: Django serves admin and back-office on a few instances, FastAPI scales out for public traffic. FastAPI then accesses data through SQLAlchemy models mapped to Django-owned tables, or through an internal Django API. For most teams I prefer separate deployables from one repository with Django owning migrations. Pitfall: letting both frameworks run schema migrations. Verify with load tests on the public path alone."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Architecture (Django vs FastAPI, sharing one database, schema ownership, service boundaries)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "Django/FastAPI: A Django service and a FastAPI service both read and write the same PostgreSQL schema. What problems do you expect and how do you make it workable?",
+    "answer": "Expect schema changes in one service breaking the other, conflicting business rules on the same rows, and confusion over who runs migrations. Make it workable by assigning a single schema owner: Django migrations are the only DDL path, and FastAPI's SQLAlchemy models map existing tables without create_all or independent Alembic revisions. Restrict FastAPI's database role with GRANT so it can only touch the tables it needs, and ideally make most of them read-only. Put invariants in the database through constraints, so both services are protected regardless of code. Apply expand-and-contract migrations and treat the shared tables as a versioned contract, with a CI job that fails when SQLAlchemy models drift from the migrated schema. Longer term, move writes for each table into its owning service. Pitfall: Django model signals and save logic do not run for FastAPI writes. Verify with integration tests that run both services against one migrated database."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Architecture (Django vs FastAPI, sharing one database, schema ownership, service boundaries)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "Django/FastAPI: Alembic autogenerate in the FastAPI repo keeps proposing to drop Django tables and alter columns Django created. How do you resolve the drift and prevent it?",
+    "answer": "Two tools are trying to own one schema, so decide ownership and configure the other tool to ignore what it does not own. If Django owns the shared tables, remove them from Alembic's scope with an include_object or include_name hook in env.py that skips tables not in the FastAPI service's metadata, and keep Alembic only for tables FastAPI genuinely owns, ideally in a separate PostgreSQL schema with version_table_schema set. Spurious alter proposals usually come from mismatched types, server defaults or nullability between SQLAlchemy models and Django's DDL, so align the models, for example matching Django's bigint identity primary keys and varchar lengths. Add CI checks: python manage.py makemigrations --check for Django and alembic check for FastAPI, both against a freshly migrated database. Pitfall: running an autogenerated revision without reading it. Verify that both checks pass with no pending changes."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Architecture (Django vs FastAPI, sharing one database, schema ownership, service boundaries)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "Django/FastAPI: How would you incrementally extract the billing domain from a large Django monolith into a FastAPI service?",
+    "answer": "Use the strangler fig pattern: carve out the boundary inside the monolith first, then move ownership of data and traffic step by step. Start by creating a billing module with a service interface and stop other apps from querying billing tables directly. Stand up the FastAPI billing service with its own database or schema, and route new endpoints to it through the gateway or ingress. Migrate data with a backfill plus change data capture, such as Debezium or Datastream, or dual writes guarded by reconciliation jobs, until the new store is authoritative. Switch reads to the service behind a feature flag, compare responses in shadow mode, then switch writes. Replace cross-domain joins with API calls or replicated read models fed by events. Finally delete the monolith's billing code and tables. Pitfall: extracting code but leaving shared tables. Verify each step with reconciliation reports and rollback plans."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Architecture (Django vs FastAPI, sharing one database, schema ownership, service boundaries)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "Django/FastAPI: Django must notify a FastAPI service whenever an order is paid, without losing or inventing events. How do you design this?",
+    "answer": "Use the transactional outbox pattern so the event is written in the same database transaction as the state change, then published asynchronously. Inside transaction.atomic, update the order and insert an OutboxEvent row with an event ID, type, aggregate ID and JSON payload. A relay process polls unpublished rows with SELECT ... FOR UPDATE SKIP LOCKED, publishes to Pub/Sub, Kafka or RabbitMQ, and marks them sent; alternatively Debezium reads the outbox table via logical replication. This avoids the dual-write problem where the commit succeeds but publishing fails, or the event is sent and the transaction rolls back. transaction.on_commit alone is not enough because a crash after commit loses the event. Delivery is at least once, so the FastAPI consumer must be idempotent, storing processed event IDs under a unique constraint. Verify by killing the relay mid-batch and reconciling counts."
+  },
+  {
+    "source": "Django and FastAPI Bank",
+    "section": "Django and FastAPI Full-Stack Python",
+    "category": "Django and FastAPI Full-Stack Python - Architecture (Django vs FastAPI, sharing one database, schema ownership, service boundaries)",
+    "topic": "Django and FastAPI Full-Stack Python",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "Django/FastAPI: A fictional B2B SaaS customer, Harborline, requires strict data isolation from other tenants in a Django and FastAPI platform. How do you choose a multi-tenancy model?",
+    "answer": "Choose based on isolation requirements, tenant count and operational cost: shared tables with a tenant_id column, schema-per-tenant, or database-per-tenant. Shared tables scale to thousands of tenants and keep migrations simple, but isolation depends on every query filtering correctly; harden it with PostgreSQL row-level security policies keyed on a per-request setting such as SET app.tenant_id, applied by both Django middleware and a FastAPI dependency. Schema-per-tenant, via django-tenants, gives stronger separation but migrations run once per schema and SQLAlchemy needs schema_translate_map, which gets slow beyond a few hundred tenants. For a customer contractually demanding isolation, a dedicated database or Cloud SQL instance for that tenant, routed by a tenant registry, is cleanest, with its own backups and keys. Many platforms mix: shared by default, dedicated for premium tenants. Verify with cross-tenant access tests and RLS policy audits."
+  }
+]

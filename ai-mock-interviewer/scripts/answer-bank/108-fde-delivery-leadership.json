@@ -1,0 +1,362 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - System Design",
+    "topic": "High-level design",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How do you open a high-level design for a multi-tenant knowledge assistant, and which boxes must exist before you name a model or a vendor?",
+    "answer": "The first page is a request path and an ingest path, with a tenant boundary on every store that holds customer text. I do not name a model until each box has an owner and a failure. On the request path I draw the chat surface, the API, retrieval, generation, and the citation record the user can open. On the ingest path I draw the connector, the chunker, the embedding step, and the access-list snapshot, because a document edit is not a user click. A queue sits between upload and index so a large corpus cannot run inside the question. Every chunk, job, and citation carries a tenant id that the application sets from the session, not from the question text. Identity is its own box: the customer's directory proves who signed in, and the API turns that into the filter. At a payments processor hosting the assistant for three acquiring banks, we drew one API and one index, with the bank id on chunks, citations, and the job table. The model box stayed labeled generate from passages until security asked where the weights ran. The pitfall is opening on a model logo. The hour then goes to parameters, and nobody has said how one bank's chargeback memo stays out of another bank's answer."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - System Design",
+    "topic": "Consistency",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "Documents, embeddings, and access lists update on different clocks. How do you keep a tenant's answer consistent with the document and the permission that were true at question time?",
+    "answer": "I treat the published version as one record: the text, the embedding, and the access list move together, and a question reads only a version that has finished publishing. Partial updates are invisible. The mechanism is a document version row with a state. Ingest writes chunks and embeddings under a new version id while the previous version stays current. The access list is copied onto that version from the source at the start of the job, not looked up later from a cache that may have moved. When the write commits, one pointer flips from the old version to the new one inside a transaction. Retrieval filters on tenant id, on the current pointer, and on the access list stored with that version. A reader never joins a fresh embedding to a stale permission or the reverse. At a pharmacy benefit manager, policy PDFs and the group that could read them changed on different nights. Agents were quoting a retired copay table that had re-embedded before the new group list landed. We stopped serving a version until chunks, vectors, and the access snapshot committed together, and the retired table disappeared on the next question. The pitfall is eventual consistency across three stores with no single current pointer. The question then assembles a document that never existed at one moment."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - System Design",
+    "topic": "Idempotency",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "The customer's webhook retries, and their nightly export sends the same file again. How do you make ingestion idempotent so you do not duplicate chunks or resurrect a deleted document?",
+    "answer": "The same document version produces one set of chunks, no matter how many times the webhook or the export delivers it, and a delete stays deleted until a newer version arrives. I key the work on tenant id, source system, source document id, and a version token from the source, such as an etag or a content hash. The job table has a unique constraint on that key. A retry that finds the key already committed returns success and writes nothing. The content hash decides whether the bytes changed. If the hash matches the published version, I skip embedding. If it differs, I publish a new version and only then move the current pointer. A delete is its own version with a tombstone. A late export of the old bytes does not clear the tombstone, because its version token is older than the delete. At a rail freight operator, their webhook retried for six hours and the nightly dump included documents deleted that afternoon. The first connector double-embedded and brought deleted yard procedures back. After the unique key and the tombstone check, retries were no-ops and the dump could not revive a document whose delete version was newer. The pitfall is keying on arrival time or a random delivery id. Every retry looks new, and the index fills with copies."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - System Design",
+    "topic": "Tenant placement",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "When do you put tenants in one database with a tenant key, and when do you give a customer their own database or cluster? What do you tell them is still shared?",
+    "answer": "I start with one database and a tenant key on every row when customers share a region, a similar data class, and an operations team that can run one stack. I split a customer onto their own database or cluster when they require a hard network boundary, a different residency region, a private model endpoint, or an isolation promise their contract will not accept as a row filter. The shared design keeps one schema, one migration, and one on-call path, and every query carries the tenant predicate from the session. Their own database gives a separate backup, a separate restore, and a credential that cannot read the other tenants. I still tell them what remains shared: the release pipeline, the base image, and, unless they paid for a dedicated model host, the inference capacity. At a grocery wholesaler we kept twelve regional banners in one database because they shared the same contract and the same support desk. A national retailer on the same product required the index inside their own account, so that deployment was a separate database and a separate runtime, with our control plane only shipping the image. The pitfall is calling a row filter a private environment. The customer hears dedicated, and a missing predicate in one query breaks the promise they thought they bought."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - System Design",
+    "topic": "Delete visibility",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "A customer deletes a policy and asks why the assistant can still quote it. How do you design the write path so a delete is invisible to the next question?",
+    "answer": "A delete becomes invisible by moving the current pointer off that document inside the same transaction that records the tombstone, before the API returns success to the connector. Search reads only the current pointer, so the next question cannot retrieve the retired chunks. I do not wait for a nightly rebuild to drop them. The connector receives the delete event, writes a tombstone version, and updates the pointer in one commit. Retrieval joins chunks through that pointer and filters by tenant. A background job may garbage-collect the old vectors, but the user path does not depend on that job. If the commit fails, the delete call fails, and the customer sees the failure instead of a success that left the old text searchable. At a municipal water utility, operators deleted a boil-water procedure after the advisory ended, and the assistant kept quoting it the next morning because we only marked a flag and let a crawler drop vectors overnight. We changed the delete path to flip the pointer before acknowledging the event. The following advisory cleared from search as soon as the source system sent the delete. The pitfall is acknowledging the webhook and cleaning up later. The customer's clock starts at the acknowledgement, and any question in that gap quotes a document they believe is gone."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - System Design",
+    "topic": "Partial failure",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "An index job dies after 18,000 of 40,000 documents. What state do you leave, and how does the customer retry without duplicating chunks or serving a half-built corpus as current?",
+    "answer": "I leave the last published corpus in service and keep the half-built run as an unpublished version the query path cannot see. The retry continues from the last committed document, and it does not insert a second copy of work already stored. Each document in the run has a row keyed by tenant, corpus version, and source document id, with a state of pending, published-to-staging, or failed. The job commits documents in batches. On a crash, the staging version stays unpointed, so agents still read the previous good corpus. Restart asks for rows that are not yet staging-complete and uses the same idempotency key, so a batch that committed just before the crash is skipped. I only move the tenant's current pointer when the run reaches the agreed bar, either every document or a named exception list the customer accepted. A failed run can be abandoned without a cleanup dance because nothing pointed at it. At an equipment manufacturer, a plant-manual index died at 18,000 documents during a network blip. The floor kept the prior manual set. The restart processed the remainder overnight, and we flipped the pointer at 40,000 after a checksum against the source inventory. The pitfall is writing straight into the live index and calling a partial corpus current. Agents then get a confident answer from a library that is missing half the plants."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - System Design",
+    "topic": "Noisy neighbor",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "One large tenant can saturate the shared query pool. How do you scale the deployment so their reindex or their Monday peak does not slow every other customer?",
+    "answer": "I separate interactive query capacity from ingest capacity, and I cap each tenant's share of the query pool so one customer's peak cannot take the whole pool. Ingest already runs on its own workers and its own queue, with a per-tenant concurrency limit, so a 40,000-document reindex does not sit on the request path. For queries I use a weighted fair queue or a per-tenant semaphore in front of retrieval and the model. The large tenant can burst until the pool is busy, then their extra requests wait or shed, while a reserved slice stays available for everyone else. I scale the shared pool on total concurrency, and I move a tenant to a dedicated pool only when their steady load, not one afternoon, consumes the reserve. Metrics are latency and queue time split by tenant, so I can show whose traffic moved the line. At a wealth manager platform, one private bank's Monday research upload and another bank's advisor chat shared workers. The upload saturated embeddings and chat latency for the smaller bank tripled. We split ingest workers, put a per-tenant query cap at forty percent of the pool, and the smaller bank's p95 returned to its baseline while the large bank's reindex ran. The pitfall is scaling only by adding replicas with no tenant cap. The noisy tenant consumes the new replicas too, and the bill rises without protecting anyone else."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - System Design",
+    "topic": "Query failure",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "Walk through the query path when the identity provider is down, the vector store is slow, and the model times out. What does the user see, and what do you refuse to retry?",
+    "answer": "Each dependency fails closed in a different way, and the user sees a specific message instead of a guessed answer. If the identity provider is down, I do not answer. There is no anonymous fallback and no cached permission that outlives a short grace, because I cannot prove who is asking. The user sees a sign-in failure and the previous search page, if they still have it. If the vector store is slow, I bound the wait, return a timeout, and I do not call the model on an empty or partial retrieval. A retry of that read is safe once, because a search has no side effect. If the model times out after retrieval succeeded, I show the citations without a generated paragraph and I do not resubmit the prompt. I also refuse to retry a tool call that writes to a system of record unless it carries an idempotency key and the first attempt is known not to have committed. At a public transit agency, a directory outage coincided with a slow index. The first build kept answering from a cached group list and retried the model until the rate limit tripped. We changed it so a failed login stopped the request, a slow search returned no generation, and agents used the old runbook link. The pitfall is one retry policy for every hop. Retrying a write, or retrying generation with a dropped tenant filter, turns a timeout into a duplicate or a leak."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Security",
+    "topic": "IAM",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How do you explain IAM for a multi-tenant assistant so a customer security lead can see who can read which corpus?",
+    "answer": "IAM here is three identities, and I draw them on one page so the security lead can point at each. The person is the employee, authenticated by the customer's directory, carrying groups that the source system already uses. The workload is the retrieval service, which can read the index and nothing else. The connector is a separate workload that can read only the libraries in scope, and it cannot answer a chat question. Nobody gets a standing admin role to make the pilot easier. The security lead should be able to answer, for a named employee, which documents the query filter will allow, and for the service, which buckets or sites its role can list. I show that the employee's groups are copied onto the query by our API, and that a prompt cannot add a group. At a university IT help desk, the lead wanted to know whether a student worker could reach finance procedures indexed for full-time staff. We walked one token: the worker's groups, the filter the API added, and the empty result when they asked for the finance runbook. The connector's identity was listed on the staff site only. The pitfall is explaining IAM as the cloud console roles and skipping the document access list. The console can be perfect while the query still searches every chunk in the tenant."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Security",
+    "topic": "OAuth and OIDC",
+    "difficulty": "intermediate",
+    "questionType": "Conceptual",
+    "question": "Each customer brings their own identity provider. How do OAuth 2 and OpenID Connect fit the login, and what do you store after the code exchange?",
+    "answer": "Each customer is a separate OAuth client registration against their own identity provider. OpenID Connect is how we learn who signed in. OAuth 2 is how we receive a token whose audience is our API, not a token we invented. The browser goes to that customer's authorization endpoint, the employee completes the factors their provider requires, and our server exchanges the authorization code using a client secret or a private key that never ships to the browser. I validate the identity token for issuer, audience, signature, and expiry, then I keep the subject, the tenant id, and the groups I am allowed to read. I store the access token only if I must call their API on the user's behalf, encrypted, short-lived, and bound to that session. I do not store their password, and I do not accept an identity token as the credential for our API. The session cookie is ours, scoped to the tenant, and it maps back to the subject we already verified. At an insurance broker with three acquired agencies, each agency had its own directory. We registered three clients, pinned three issuers, and rejected a token whose issuer did not match the tenant on the URL. An agency employee could not present another agency's login and land in the wrong corpus. The pitfall is one shared client id for every customer, or trusting the email claim without checking the issuer. Two directories can both issue the same email string."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Security",
+    "topic": "Secrets",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Where do connector credentials live in a customer VPC, and how do you rotate one without rebuilding the image or pasting the new value into a ticket?",
+    "answer": "Connector credentials live in a secret store inside the customer's VPC, and the running service reads them with its own identity. They do not live in the image, the repo, or the ticket. The workload identity can read only the secret names for that tenant's connector. At startup, or on a refresh interval, the process loads the current value into memory. The deployment manifest points at the secret name, so a rotation writes a new version in the store and the next refresh picks it up. I do not rebuild the image, because the image never contained the value. Rotation is a dual-key step when the source allows it: add the new credential, deploy the reference, confirm the connector reads, then revoke the old one. If the source allows only one key, I schedule the swap inside their change window and watch the connector's health check. The old value is not copied into a ticket or a screenshot. At a hotel group, the property-management connector used a key baked into the image. Rotation meant a rebuild, and the old key survived in the previous image tag. We moved it to their vault, referenced it by name, and rotated it the next month by writing a new version and restarting the connector. The pitfall is calling an environment variable in the deployment file a secret store. The value still shows up in the console, the diff, and the backup of the manifest."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Security",
+    "topic": "Connector scope",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "How do you scope the identity that reads SharePoint or Confluence so the pilot corpus is readable and the HR site next to it is not?",
+    "answer": "The connector's identity gets read access to the named sites in the pilot, and nothing adjacent, even when those sites sit in the same tenant and the same admin console. I start from the inventory the content owner signed: site URLs or space keys, not a pattern like all sites under this department. The grant is read, not write, and it is not a site-collection admin. I test with that identity, not with mine. A page inside the pilot must return text. A page in HR, opened with the same identity, must fail. I record both results and attach them to the security review. If a library is shared into the pilot site, I treat that as a new grant and stop until the owner confirms it belongs. Index-time access lists are copied from those sites only, so a later query cannot surface a page the connector was never allowed to crawl. At a law firm's support rollout, the knowledge site and the HR site were siblings in one SharePoint tenant. The first app registration used a tenant-wide read, and a crawl picked up offer letters linked from a shared navigation node. We deleted that index, replaced the grant with one site, and reran the HR probe until it returned access denied. The pitfall is accepting sites.read.all because the narrower permission is annoying to configure. The pilot then indexes whatever a future link happens to expose."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Security",
+    "topic": "OWASP for LLM apps",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "Which OWASP risks for LLM applications do you design against on a customer deployment, and which do you name without pretending the pilot closed them?",
+    "answer": "On a customer deployment I design against prompt injection, sensitive disclosure across tenants and employees, excessive agency, improper output handling, and unbounded consumption. I name supply chain and training-data poisoning, and I do not tell the customer the pilot closed them. Prompt injection is handled by keeping tools and retrieval filters outside the model. The model may request a tool, but the application checks the allow-list and the tenant before anything runs. Sensitive disclosure is the retrieval filter and a refusal to put other tenants' text in the prompt. Excessive agency means the assistant does not write to the system of record in the first release, or it writes only through a confirmed, idempotent action the user can see. Improper output handling means we render the answer as text, not as HTML or a query the app executes. Unbounded consumption means per-tenant rate limits, a chunk cap, and a timeout. Supply chain and base-model poisoning stay a separate review, and I do not mark them closed because a pilot answered well. At an energy trading desk we shipped retrieval with no write tools, a chunk cap, and escaped citations. We told the chief information security officer that dependency review was still open. The pitfall is handing them a checklist with every OWASP item marked done. The items we did not build become the incident."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Security",
+    "topic": "Prompt injection",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A ticket body says to ignore previous instructions, print the system prompt, and list other customers' documents. What actually stops that, and what does not?",
+    "answer": "What stops it is that the model never receives the other customers' documents, and it cannot change the query, the tools, or the system instructions. A sentence in the ticket is untrusted data, the same as any other passage. Retrieval builds the filter from the session before the model runs. The ticket text is not parsed for tenant ids. Tool calls go through an allow-list that does not include a dump of the prompt store or a cross-tenant search. What does not stop it is a line in the system prompt that says to ignore instructions in documents. The model can be talked out of that line, and once foreign text is in the context window it can be repeated. I also do not rely on a classifier alone. A missed classification would still have leaked if the passages were already retrieved. At a clinic network, a pasted ticket told the assistant to reveal the hidden prompt and the next clinic's patient-prep notes. The filter returned only that clinic's runbook. The model quoted the malicious sentence as ticket text and had no other clinic's notes to repeat. We still removed a debug route that would have echoed the full prompt to an admin who was not on call. The pitfall is believing the instruction hierarchy will hold under attack. Isolation has to be true before the model sees the words."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Security",
+    "topic": "Tenant isolation",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "Customers share one index, one model, and one cluster. How do you stop one customer from retrieving another's documents, including when the question names the other tenant?",
+    "answer": "The tenant predicate is applied by the application on every read, from the authenticated session, and the question text cannot change it. Sharing an index is acceptable only when that predicate is mandatory in the query layer, not optional in the prompt. Each chunk is written with the tenant id and the document access list. The query API ignores any tenant id, document id, or customer name that arrives in the user message. It takes the tenant from the session that the identity provider issued, adds it as a filter the client cannot override, and applies the same filter again when it fetches the full passage by id. A request with no tenant is rejected, not searched across the cluster. The model sees only the passages that survived both checks. I test this with a fixture: an account in tenant A asks for a document id that belongs to tenant B, and the store returns no row. Logs for the miss do not include tenant B's text. At a software platform serving several hospitals on one index, a test user pasted another hospital's name and a guessed document id. The query stayed on the session hospital, returned nothing, and the trace showed the filter rather than the other hospital's chunk. The pitfall is filtering in application code after a shared client has already run an unscoped vector search. The other tenant's text has already left the store, and a bug in the second step publishes it."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Security",
+    "topic": "Prompt logging",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A customer wants full prompt logs for quality review. Those prompts contain other employees' case text. What do you log, where does it live, and what do you refuse?",
+    "answer": "I log enough to debug retrieval quality, and I keep the case text in their environment under the same access rules as the case itself. I refuse to copy full prompts into our vendor tenant, a shared analytics tool, or a channel that the whole project team can read. The useful log is the tenant, the user subject, the document ids retrieved, the citation ids shown, latency, and whether the agent marked the answer usable. The prompt body and the retrieved passages stay in a store inside their boundary, encrypted, with a short retention they sign, and readable only by the role they name for quality review. That role is usually a small group on the desk, not every engineer on the account. I redact secrets and direct identifiers when the review does not need them. A support bundle that leaves their network contains ids and timings, not the passage text, unless their security lead approves a single sample. At a workers-compensation administrator, quality wanted every prompt in our status tool so they could argue about bad answers. Those prompts included claimant narratives. We stored the bodies in their own log bucket with a thirty-day retention and a three-person review group, and our weekly report carried document ids and disagreement counts only. The pitfall is logging the full prompt because the tracing library does it by default. The text then lands in a vendor project the customer's contract never named."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Customer Discovery",
+    "topic": "Discovery",
+    "difficulty": "beginner",
+    "questionType": "Scenario",
+    "question": "You have a half-day discovery workshop. What artifacts do you leave with, and what do you refuse to promise before you have seen a real document and a real question?",
+    "answer": "I leave with a written scope, not a build commitment. The artifacts are a list of source systems with an owner for each, five to ten real questions taken from recent work, the document an expert says answers each one, the access path and whether text can leave the network, and the open decisions that block a date. I also leave the name of the person who can say a source is out of scope. I refuse to promise a go-live date, a deflection rate, or a fine-tune. I have not seen the documents yet, so I do not know whether they are scans, whether the permissions are coherent, or whether the questions in the room match the questions on the desk. If they want a date, I promise the date of the next artifact: a sample export and a scored dry run. At a regional energy cooperative, the workshop produced eight outage questions, the SharePoint library that held the switching orders, and a note that the radio-procedure PDFs were scans with no text. IT owned the library. Operations owned the decision to exclude the scans until OCR existed. We did not leave with a quarter-end launch. The pitfall is a workshop photo of a whiteboard and a verbal yes. Two weeks later the sponsor remembers a promise, and the scans are still the corpus."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Customer Discovery",
+    "topic": "Workshop conflict",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "The sponsor, the desk lead, and IT disagree in the workshop about which documents are in scope. How do you close the session without picking a side by volume?",
+    "answer": "I close the session with a decision log that records each person's constraint, and I ask the sponsor to choose the pilot corpus before anyone estimates the build. I do not average their requests into a bigger scope. The sponsor is protecting a business outcome. The desk lead is protecting the questions agents actually ask. IT is protecting access, residency, and what they will support. I write those three sentences in their words, then I propose the smallest corpus that hits a real desk question and passes IT's access test. Anything else goes to a later phase with a named reason. If they cannot choose in the room, the session ends with an owner and a date for the choice, and my estimate stays blocked. Volume of opinion is not a vote. The person who will sign the access grant and the person who will live with the answers both have to live with the cut. At a manufacturing plant, the vice president wanted every SOP, the shift lead wanted the twenty procedures used on nights, and IT refused the engineering share because it had no permission model. We left with those twenty procedures, a written exclusion of the engineering share, and a date for the vice president to confirm. The pitfall is leaving with all three lists and calling it phase one. The build then starts on a corpus nobody agreed to support."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Production Rollout",
+    "topic": "Proof of concept",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "What is the difference between a proof of concept and a production deployment for this assistant, in identity, data, operations, and the claim you will sign?",
+    "answer": "A proof of concept shows that a frozen sample can return the right passage for a fixed question list. A production deployment is an operated service their employees can sign in to, with a rollback they can pull and a measure they can recompute. Identity in the proof of concept can be a shared test account. Production uses their directory, their groups, and a session that dies when they disable the employee. Data in the proof of concept is a snapshot with a date. Production is a connector with an owner, a delete path, and an access list that tracks the source. Operations in the proof of concept is me watching a laptop. Production is their on-call or ours, a health check, a rate limit, and a flag that turns the assistant off without a deploy. I will sign the proof of concept score on that question list. I will sign production for the runbook, the isolation test, and the metric definition, not a savings number we have not measured. At a freight broker, the proof of concept indexed 200 bills of lading on a shared login and scored 30 questions. Production, two months later, was their identity provider, a nightly delta, and a flag the night desk could clear. We never called the first score a launch. The pitfall is changing only the audience and keeping the test account. The moment real employees arrive, the missing identity and the missing delete path are production defects."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Production Rollout",
+    "topic": "Impact measures",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "After go-live, how do you measure impact in a way an operations lead will accept, and which headline numbers do you decline to own?",
+    "answer": "I measure impact on a baseline we captured before go-live, on the same queue, and I only sign numbers I can recompute from their tickets and our logs. The operations lead will accept time to answer on tagged contacts, the rate at which agents open a citation, and the rate at which they mark an answer unusable. Those three have a definition we wrote down: start clock, end clock, what counts as the same contact type, and who is allowed to mark unusable. I decline to own deflection, customer-satisfaction lifts, and headcount reduction unless their analysts already measure those and agree how to separate this launch from every other change that week. I report the numbers with the denominator and the window, and I show the unusable set by reason so the lead can see stale documents versus model wording. At a telecom field-support desk, we compared median time on provisioning questions for six weeks before and six weeks after, same shift pattern, and we published a citation-open rate. We refused a slide that said the assistant saved twelve full-time roles, because hiring had been frozen for other reasons the same quarter. The pitfall is a single blended percentage with no baseline. The lead cannot defend it to their own director, and the number becomes ours the moment it is wrong."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Production Rollout",
+    "topic": "Acceptance",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you write acceptance so a successful demo cannot be relabeled as production sign-off?",
+    "answer": "Acceptance is a checklist of operated behaviors, each with evidence, and a demo is not one of the lines. I write the criteria before the build, in the statement of work or the delivery plan, and I separate demonstration from acceptance. Demonstration is the scored question set on a snapshot. Acceptance adds employee login through their identity provider, a tenant-isolation test with a foreign document id, a delete that disappears on the next question, a rollback the customer's supervisor executed once, backup and restore of the index, and a named on-call path. Each line names the person who signs it and the artifact: a test log, a packet capture, a screen recording of the flag, or a ticket. The sponsor does not get to convert a meeting applause into the signature. If a line is waived, the waiver is written, dated, and scoped, and the risk sits with them. At a credit-union service center, the demo answered the ten scripted questions and the sponsor asked to sign production that afternoon. The acceptance list still had isolation, delete, and the supervisor rollback open. We signed the demo minutes as demo minutes and scheduled the three tests. The pitfall is a clause that says acceptance occurs when the customer is satisfied with the demonstration. Satisfaction has no test, and the sentence will be read back on the day something leaks."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Production Rollout",
+    "topic": "Legacy integration",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "The system of record offers a nightly CSV and an old SOAP endpoint. How do you integrate without pretending you have a modern API?",
+    "answer": "I integrate the CSV as the system of record for the pilot and treat the SOAP endpoint as a later, separate contract if a specific field cannot be had any other way. I do not wrap SOAP in a story about a real-time API. The nightly file gets a schema, a stable key, a checksum, and a landing table. Rows are upserted by that key, and a missing key is a rejected file, not a guessed join. I record the file date on every chunk so an answer can say which drop it came from. Deletes are explicit in the file or inferred only by a rule the customer signs, such as absence for two consecutive drops, because a partial file must not wipe the corpus. SOAP, if we use it, is called from a worker with a timeout, a recorded request id, and a contract test against a fixture they gave us. It is not called from the user request on day one. At a benefits administrator, claims lived in a nightly extract and a SOAP service nobody had patched in years. We indexed the extract, showed the file date on each citation, and left SOAP for the one eligibility field the extract lacked, behind a cache filled by the worker. The pitfall is calling the SOAP service during the question because the CSV feels old. When that endpoint hangs, the assistant hangs, and we have coupled a live desk to a service with no owner."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Production Rollout",
+    "topic": "VPC deployment",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "The customer requires the assistant inside their VPC or on premises. What runs inside the boundary, what do you refuse to leave outside, and how do you prove the split?",
+    "answer": "Inside the boundary I run retrieval, the chunk store, embeddings, the model call, and the logs that contain passage text. I refuse to leave any of those outside, including a temporary cloud index and a hosted embedding API. What may stay outside is our release pipeline shipping a signed image, and a license check that carries no document bytes. The proof is a path their network team can test. We place the runtime on a subnet with egress denied except to the destinations they list, usually their identity provider and their internal name service. During a scripted question I capture traffic with them and show that the only flows are internal. A second test tries to reach a public model endpoint and must fail. Telemetry exporters are off unless the collector is inside the VPC. Support access is a session they approve, and the session is not a tunnel that streams prompts to us. At an automotive supplier, the contract said no document text could leave the plant network. We ran the stack in their VPC, pointed embeddings at a model they hosted, and captured a query. The capture showed a call to an external tracing endpoint we had missed in the base image. We removed it and repeated the capture until the destination list matched the drawing. The pitfall is proving the diagram in a review and never capturing a live request. The SDK that ships traces will not appear on the slide."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Production Rollout",
+    "topic": "Go-live",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you run go-live so the customer's supervisors can roll back during their shift, and the previous way of working still answers the question?",
+    "answer": "Go-live turns the assistant on beside the existing workflow, behind a flag their supervisor can clear without me, and the old path stays up for the whole first release. I do not replace the old search or the old script in the same change. The flag lives in a tool they already use, with a name in the runbook, the people allowed to flip it, and the check that confirms the old path still returns results. We practice that flip on a business-day shift before the night it matters. The first population is one queue, not the whole company. I sit with them or I am reachable, but the rollback does not depend on my reachability. Success for the night is that agents can work either way, not that the flag stayed on. The next morning we read unusable marks and decide whether the flag stays. At a regional airline's irregular-operations desk, the assistant sat next to the existing procedure binder. At 23:40 the model cited a diversion rule from last season. The duty manager cleared the flag from the same console they use for call routing, agents went back to the binder, and we fixed the corpus in the morning. The pitfall is a rollback that requires a deploy, a database edit, or a call to a vendor bridge. The desk will keep using a bad answer until someone who is awake can find me."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Production Rollout",
+    "topic": "Change windows",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "The firewall change and the identity-provider registration sit on a monthly change board. How do you sequence delivery so the rest of the build is not idle, and the date you quote matches the board?",
+    "answer": "I sequence the work into streams that do not share that board, and I quote the go-live as the board date plus the rehearsal, not as the date the code is ready. The firewall rule and the identity-provider client are on the critical path because production traffic cannot flow without them. I submit both at the next board with the exact ports, the source subnet, and the redirect URLs, and I attend so the ticket is not deferred for a missing diagram. While that waits, the connector, the index, and the evaluation set run inside a pre-production network that does not need the new rule, using a test identity or a break-glass account their security team already allows. I do not burn the month polishing prompts against documents we cannot yet authorize. The date I give the sponsor is the board date, then one week to prove login and rollback, and I say what moves earlier if the board slips: nothing user-facing. At a public-sector agency, the firewall board met on the first Tuesday. We filed six weeks ahead, built the index on an internal test segment, and kept the executive date pinned to the Tuesday plus the rehearsal. When the board slipped a month, the status note moved the date with it the same day. The pitfall is quoting the engineering-complete date and treating the board as a formality. The formality is the gate, and the sponsor will hear the earlier number."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Production Rollout",
+    "topic": "Curated demo",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "The pilot looked strong on ten questions the sponsor chose. What evidence do you still require before agents on the floor are asked to use it?",
+    "answer": "I require a question set drawn from the desk's own tickets, scored by someone who does the job, plus a working login, a delete check, and a rollback the supervisor has performed. Ten sponsor questions prove we can answer the script. They do not prove the corpus covers Tuesday. I ask the desk lead for thirty questions from the last two weeks, including the messy ones, and I hide them from the people tuning the prompt. An agent or a senior representative marks whether the citation is the page they would have opened. I want the misses listed by cause: missing document, stale document, wrong passage, or wording. Floor use also waits until an employee signs in with their own account and sees only their documents, and until a deleted page stays deleted. The sponsor's ten can stay as a smoke test. They are not the acceptance set. At a home-warranty contact center, the sponsor's questions were all about a single popular plan. The ticket sample was full of claims on two older plans we had not indexed. We held the floor release, indexed those plans, and reran the thirty. The pitfall is inviting the floor because the scripted demo felt smooth. The first unscripted question is the one the sponsor did not rehearse, and that is the answer the supervisor will remember."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Staff Leadership",
+    "topic": "Architecture ownership",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What does architecture ownership mean for a senior forward deployed engineer on a customer account, compared with closing a feature ticket?",
+    "answer": "Architecture ownership means I am accountable for the boundaries that keep the customer's data, identity, and rollback intact, including the decisions I did not personally code. A feature ticket ends when the change ships. The architecture continues: which store holds text, which identity may read it, what happens when a dependency fails, and which choices are written down so the next engineer does not relitigate them in a side meeting. I publish the diagram, the interface contracts, and the decision notes. I review changes that cross a boundary, such as a new connector, a new tool the model can call, or a shortcut around the tenant filter. I do not need every customer team to report to me. I need one sponsor who can choose when they disagree, and I need to say no to a local optimization that breaks the contract. At a clinic group, a feature ticket added a handy export of retrieved passages to a shared mailbox so analysts could review quality. The ticket was small. The architecture said passage text stays in their VPC and in a named role. I stopped the export, wrote the decision down, and gave them a review screen inside the boundary instead. The pitfall is treating ownership as a title on the kickoff slide while every team merges past the boundaries. The leak will still be described as mine."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Staff Leadership",
+    "topic": "Mentoring",
+    "difficulty": "intermediate",
+    "questionType": "Behavioral",
+    "question": "A newer forward deployed engineer wants to hard-code one customer's tenant id and skip the isolation check so a demo still happens Friday. How do you mentor them through that moment?",
+    "answer": "I stop the hard-coded tenant and the skipped check, and we make the demo smaller so Friday still happens on the real path. I ask them to walk me through what the shortcut changes: which filter disappears, which test we would no longer be running, and what a customer could reach if that build were ever pointed at real data. Then we separate the demo from the shortcut. The Friday audience needs one tenant, one corpus, and five questions. That fits the normal session path if we fix the login bug or narrow the script. We pair on the failing check until it passes for the demo tenant, and we add the case they were about to skip to the test list so the next demo does not depend on memory. I do not take the keyboard and leave them watching. If the check cannot pass by Friday, we demo on staging with the check on, and we tell the account owner what we will not show. At a logistics account, a newer engineer wanted a constant tenant id because the identity provider registration was still in review. We kept the filter, used the approved test issuer, and cut two questions that needed production groups. The pitfall is either waving the shortcut through to protect the meeting, or correcting them in front of the customer. They learn that the date outranks the boundary, or they stop bringing me the risk early."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Staff Leadership",
+    "topic": "Estimation",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "How do you estimate a multi-tenant rollout when the security review has not started and the corpus size is still a guess from the workshop?",
+    "answer": "I give a range whose width is exactly those two unknowns, and I attach the date each unknown closes. I do not publish a single go-live day. Corpus size drives ingest time, embedding cost, and whether we need a dedicated index. I ask for a document count, a median size, and a sample. Until that arrives I estimate with the workshop's high and low, and I label both as assumptions. The security review drives the identity work, the network path, and any VPC requirement. If it has not started, the low end of the range assumes a standard single sign-on and a shared region. The high end assumes a VPC deployment and a monthly change board. I list the work that can proceed before either answer: the question set, the connector against a sample, and the isolation tests on synthetic tenants. I name the checkpoint where the range collapses, usually the review kickoff plus the sample. At a multi-brand retailer, the workshop guessed between fifty thousand and two million documents, and security had not been invited. I estimated eight to sixteen weeks, said the eight assumed the low corpus and our standard region, and refused to staff a launch date until both were known. The pitfall is picking the midpoint so the plan looks decisive. The midpoint is not a scenario anyone can execute, and the sponsor will remember it as a commitment."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Staff Leadership",
+    "topic": "Executive update",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "The pilot missed the citation target and the sponsor wants the weekly note to stay green. How do you write the executive update?",
+    "answer": "I write the miss in the first lines, with the number, the cause, and the decision I need, and I do not paint the note green to keep the sponsor comfortable. An executive can act on a small true status. A green note that hides a missed citation target gets repeated until an agent quotes the wrong page in front of a customer. The update has four parts. Where we are: the queue, the dates, and the target we agreed. What happened: the citation figure, the baseline, and the main cause, such as a stale library or questions outside the indexed set. What we changed or will change, with an owner. What I need from them, which is usually a decision to pause expansion or to remove a source. I send that wording to the sponsor before the meeting so they are not surprised, and I do not soften it into a different story in the room. At a card-issuing bank, the target was seventy percent of answers with a citation the agent opened and accepted. We landed at fifty-one, mostly one outdated fee schedule. The sponsor asked for green because a board observer would be present. The note said missed, named the schedule, and asked for a hold on the second queue. The observer thanked us for the hold. The pitfall is a status color that describes the relationship instead of the target. Green becomes a promise the desk has already disproved."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Staff Leadership",
+    "topic": "Build versus buy",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "The customer has an internal platform team and a quarter-end deadline. How do you frame build versus buy without turning the conversation into a feature checklist?",
+    "answer": "I frame the choice around who holds the pager at quarter end, how fast a corrected document appears in an answer, and which pieces they would be building that are not the model. I say that I work for the vendor, then I put three paths on one page: extend the search they already run, buy the assistant layer from us, or have their platform team build the assistant. The columns are identity, document freshness, an evaluation set, a kill switch, isolation, and who is on call after December. Extending search wins when the gap is keyword quality and an owner already exists. Buying wins when they want citations and a refusal path and they do not have people to staff ingestion through the deadline. Building wins when they have a team that can own those columns and a boundary we cannot meet in time. A feature checklist hides that choice, because every row can be made to favor the product in the room. At a shipping line, the platform team was six people with a warehouse roadmap through the quarter. They already ran search. The gap was cited answers for the booking desk. I recommended they keep their index and buy the assistant layer, and I said a full internal build would miss the quarter unless they stopped the warehouse work. The pitfall is pretending their team cannot build it. They can. The useful question is what they will not ship if they do."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Staff Leadership",
+    "topic": "Customer incident",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "You are on site and the assistant is showing one department's documents to another department during business hours. How do you escalate, and what do you do in the first hour?",
+    "answer": "I turn the assistant off for the affected tenant in the first minutes, then I call the customer's security contact and my own incident lead with the facts I have. The harm is still growing while the flag is on. The supervisor gets the rollback we rehearsed, so agents fall back to the old procedure immediately. I do not wait to understand the bug before I contain it. In the first hour I preserve the query logs, the session, the document id, and the filter that should have applied. I do not screenshot the other department's text into a chat channel. I tell security what was exposed, to whom, and for how long, and what I do not know yet. The path is their security lead, their executive sponsor, and my delivery manager, with the same facts in each call. A fix comes after containment, with an isolation test that fails if one department's id can read another's chunk. At a hospital group a coding change dropped the department predicate and a billing agent retrieved a clinical protocol. We cleared the flag, called their privacy officer within twenty minutes, and kept the passages out of the bridge chat. The pitfall is debugging on the live flag because I am already in the building. Every extra minute is another person who might see the document."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Model Strategy",
+    "topic": "Fine-tune decision",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A stakeholder wants to fine-tune on their private documents. How do you walk them through retrieval, fine-tuning, and a long context window as a delivery decision?",
+    "answer": "I walk them through how an edit, a permission change, and a citation survive each option. Retrieval indexes passages and fetches the ones this user may see. A Tuesday edit is in the next index, a permission change is a filter change, and the answer can point at the passage. We only answer from what we indexed, and missing pages must refuse. Fine-tuning changes weights on a snapshot. The model may sound more like their writers, but it does not cite, it keeps a deleted paragraph until the next training run, and it cannot enforce per-user permissions inside the weights. Anyone who can prompt that model is prompting the private set. A long context window pastes one bounded packet, such as one contract already open. It does not scale to a library, it costs on every question, and the permission check is whatever we chose to paste. For a private corpus that changes and has different readers, I recommend retrieval. A small fine-tune is only for format, after citations are already right. At a specialty insurer, the chief claims officer wanted the guidelines baked into the model. They changed twice a month and differed by state. We indexed them, showed a morning edit in the afternoon index, and showed one state failing to retrieve another's appendix. The pitfall is treating the three options as quality rankings of the same feature. They are different operating models, and only retrieval can drop a paragraph by tonight."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Model Strategy",
+    "topic": "Fine-tune persistence",
+    "difficulty": "advanced",
+    "questionType": "Behavioral",
+    "question": "They still want the fine-tune because retrieval feels like search. How do you show the maintenance cost of each option against how often their documents actually change?",
+    "answer": "I put last quarter's edit history next to the work each option requires per change, and I let that table carry the argument. Retrieval feeling like search is a product complaint I can answer with citations and a refusal, not a reason to freeze the library into weights. I ask for the count of material edits in ninety days and how fast an agent must use the new text. Then I price three rows. Retrieval is a re-index of the changed document, usually hours, plus a spot check. A long context approach means someone maintains the pasted packet, and it breaks once the packet no longer fits. A fine-tune is a data refresh, a training run, an evaluation so we can see what regressed, a release, and a rollback, and it still cannot point at the paragraph. I show one real edit from last month and ask which row they will staff. At a medical-device support org, the stakeholder called retrieval a fancy search box. Their procedures had changed fourteen times that quarter. We wrote the fourteen against a two-day re-index on one side and a full fine-tune cycle on the other, and they chose retrieval with a formatting fine-tune deferred until the citation rate held. The pitfall is winning the debate in the meeting and never attaching the edit log. Without their change rate, the fine-tune stays a preference, and it returns at the next steering review."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Model Strategy",
+    "topic": "Choosing the approach",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "When would you recommend retrieval, a small fine-tune, or a long context window for a customer corpus, and what evidence from their documents makes the call?",
+    "answer": "I recommend retrieval when the corpus is larger than a packet, changes on a schedule, and different employees may see different pages. I recommend a long context window when the user already holds a small bundle, such as one policy or one matter, and the task is to work inside that bundle rather than to find it. I recommend a small fine-tune when the gap is format or vocabulary after the right passages are already in the prompt, and I do not recommend it as the way to store the documents. The evidence is a sample. I look at document count, size, how many changed last month, whether permissions differ inside the tenant, and whether a correct answer must cite a paragraph. A few hundred stable pages can still be retrieval, because citation and freshness remain. One contract already on screen is a context-window problem. A fine-tune enters only if the right facts are already present and the shape is wrong, and a held-out set shows the tune did not invent facts. At a university registrar, the catalog was thousands of pages with per-college visibility and weekly edits, so we retrieved. Degree-audit letters were one student file at a time, so we used a long context on that file. We did not fine-tune on either. The pitfall is choosing the approach because a stakeholder liked a demo of one of them. The sample's size, change rate, and access rules are the decision."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 5 - Customer Delivery and Leadership",
+    "category": "Senior FDE - Delivery - Staff Leadership",
+    "topic": "Shared-region incident",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "Two customers share a region and one is in a severity-1 incident. How do you decide what to pause, who to call, and what you tell the other customer's sponsor?",
+    "answer": "I protect the healthy tenant by pausing the sick tenant's ingest and, if the fault is shared, by shedding that tenant's traffic. Then I tell the other sponsor what I paused. If the incident is a bad connector or a bad corpus in tenant A, I stop A's jobs and A's flag, and tenant B keeps serving. If the fault is the shared query pool, the model host, or a bad release, I roll back or cap both, and I will slow B slightly rather than let A's failure keep the shared capacity. I call A's security or operations lead, my incident commander, and B's sponsor. B hears that another tenant in the region is in incident, whether B's data path is affected, and the next update time. I do not name A's documents or users. I do tell B if I failed over, rolled back, or expect latency. At a region shared by a credit union and a retailer, the retailer's reindex corrupted their own collection and saturated the pool. We paused the retailer's jobs, left the credit union's flag on, and told the credit union's sponsor their corpus was not involved and latency had spiked for twelve minutes. The pitfall is going silent on the healthy tenant. They will notice the latency, and the story they invent will be worse than the one I owe them."
+  }
+]

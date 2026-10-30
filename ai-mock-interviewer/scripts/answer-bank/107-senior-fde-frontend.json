@@ -1,0 +1,102 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Frontend",
+    "category": "Senior FDE - Frontend",
+    "topic": "SPA versus SSR",
+    "difficulty": "beginner",
+    "questionType": "Comparison",
+    "question": "What is the difference between a React single-page app and Next.js server rendering for an internal support dashboard, and which one do you ship in the first pilot?",
+    "answer": "A React single-page app ships a thin HTML shell and constructs the support dashboard in the browser after JavaScript downloads and runs. Next.js server rendering produces the HTML on the server, so the first response already contains the ticket table, and the browser then hydrates that markup into a live React tree. The mechanism is the location of the first render. In the SPA the sequence is index.html, the bundle, React startup, and only then the tickets request, which leaves an agent on a customer laptop looking at a spinner. In the server-rendered path the server runs the open-ticket query, turns the rows into HTML, and sends them immediately, so the queue is readable before the client bundle finishes. For the first pilot I ship the client SPA. A handful of signed-in agents do not need search indexing, and a static file host plus one API is simpler to debug on site when a proxy or a certificate misbehaves. I move the queue and the login gate to server rendering only after a measurement shows that cold load, rather than the model, is the delay agents feel. The pitfall is calling server rendering a free upgrade. Every page view now depends on that server process, and an exception during render takes the dashboard down for the whole pilot instead of one tab."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Frontend",
+    "category": "Senior FDE - Frontend",
+    "topic": "UI states",
+    "difficulty": "beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "How does a support dashboard call an API and show loading, empty, and error states without pretending the model is still thinking when the request has already failed?",
+    "answer": "The dashboard tracks the request as an explicit status and clears the thinking indicator the moment that request fails or returns empty. The mechanism is a four-way state on the call: idle, loading, success, and error. Starting a question sets loading and fires fetch with an AbortController so a newer question cancels the old one. When the response arrives I branch on the HTTP result, because fetch resolves on a 500 and only rejects when the network itself fails. A non-OK status moves the panel to error, stops the spinner, and shows the status code with a retry button. An OK body with no tickets or no grounded answer moves to an empty state that says nothing matched, and it offers a wider filter rather than a pulsing cursor. On the scanner screen, a timeout while the agent asks how to pair a replacement gun replaces the typing dots with a plain failure line and leaves the ticket details visible so the agent can keep working. A successful call with an empty citation list says that no source matched and does not animate as if the model were still writing. The pitfall is folding empty and error into one banner. An empty queue is a real result the agent can trust. A failed call is a broken result. Leaving the spinner up after either one tells the agent the model is still thinking, which is the lie this state machine exists to prevent."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Frontend",
+    "category": "Senior FDE - Frontend",
+    "topic": "Client secrets",
+    "difficulty": "beginner",
+    "questionType": "Scenario",
+    "question": "What belongs in the browser for a forward deployed pilot, and what do you refuse to put in client-side code even if it makes the demo easier?",
+    "answer": "The browser may hold public configuration and a short-lived session that the server minted for this agent. It may not hold any credential that can spend money, read every tenant, or impersonate the service. The mechanism is simple: the bundle, the source map, and localStorage are all readable. Anyone who loads the pilot URL can open devtools, and any variable prefixed for the client, such as a Vite or NEXT_PUBLIC value, is compiled into the shipped JavaScript. For a forward deployed warehouse pilot the page can include the API base URL, the product name, feature flags, and the agent's display name. The session itself rides in an HttpOnly cookie. I refuse to put an OpenAI or Azure OpenAI key, a database password, a service-account file, a webhook signing secret, or a tenant-admin token in client code, even when that would let the demo call the model with no backend. The easier demo is a one-route server that holds the key and returns the answer. On the dashboard that means the chat box posts to the answer route and never sees the key. The pitfall is a dotenv entry that looks private because the repo is private. If the frontend build inlines it, the key leaves with the static files and sits on a customer laptop, where it can be copied from the bundle in one search."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Frontend",
+    "category": "Senior FDE - Frontend",
+    "topic": "Auth UI",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you implement a login flow in a React or Next.js dashboard that does not store a long-lived access token in localStorage?",
+    "answer": "The login flow keeps the long-lived credential in an HttpOnly cookie set by the server, and the React tree never reads or writes that token. The mechanism is the cookie flags. HttpOnly means document.cookie and page JavaScript cannot see the value, Secure means it travels only over HTTPS, and SameSite limits which sites can send it. localStorage has none of those protections, so one cross-site scripting bug can copy a bearer token and replay it from another machine for as long as it lives. In this dashboard the login form posts the email and password to a Next.js route handler or to the identity provider backend. That server validates the user, sets the session cookie, and redirects to the ticket queue. Later calls are same-origin fetch requests with credentials included, so the browser attaches the cookie and the page never builds an Authorization header from a stored string. If the API wants a short access token, the server exchanges the session and refreshes it there. Logout hits a route that clears the cookie. The client context stores only the agent name and role for rendering the header. The pitfall is storing the refresh token in localStorage because the access token expires in fifteen minutes. The refresh token is the long-lived secret, and that is the value an XSS payload will steal."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Frontend",
+    "category": "Senior FDE - Frontend",
+    "topic": "Citations UI",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you render citations next to an assistant answer so a support agent can open the source chunk without trusting a made-up link?",
+    "answer": "Citations are rendered only from structured records the retriever returned, and a link that appears only inside the model prose is never treated as a source. The mechanism is a split between untrusted text and trusted metadata. The answer string can mention any title or URL the model feels like writing. The citation array is separate JSON from the API, and each item carries a chunk id, a document id, a title, and a tenant id that the retrieval service produced before generation. The UI prints a marker beside a sentence only when that marker's id exists in the array. Clicking it does not navigate to a URL from the paragraph. It calls our source route with the chunk id, and that route loads the stored text after checking the agent's tenant. On the support dashboard an answer about scanner pairing shows Warehouse SOP 14, section 3, in a side list, and the agent can open the paragraph and compare it with the generated steps. A URL written in the answer, if it is absent from the citation list, stays plain text. The pitfall is a markdown renderer that turns every https link in the model output into an anchor. A made-up link then looks identical to a real citation, and the agent can forward it to a customer as if our knowledge base had published it."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Frontend",
+    "category": "Senior FDE - Frontend",
+    "topic": "Frontend performance",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "What makes a support dashboard feel slow, and which React mistakes do you fix before you blame the language model or the network?",
+    "answer": "A support dashboard feels slow when the main thread is busy painting, not only when the model or the network is late. The mechanism is that JavaScript, layout, and a large bundle all sit on the path between a click and the next frame. I split the wait before I name a cause. The Network panel shows time to first byte and download time for the completion request. The Performance panel shows long tasks, forced layout, and React commits. Three React mistakes come before any complaint about the model. The first is keeping the streaming transcript in a context provider wrapped around the whole page, so the ticket table renders again on every token. The transcript state belongs inside the chat panel. The second is an inline handler or a fresh object prop that defeats memo on a list of hundreds of tickets. The third is a barrel file that pulls the entire component kit into the first bundle, which delays the moment the queue can paint. In a pilot, filtering two thousand tickets on every keystroke without a virtualized list or a deferred value makes the search box stutter even when the API returns in under a hundred milliseconds. The pitfall is raising the model timeout while the profiler shows a long React commit on each keypress. That change hides the real stall and makes agents wait longer for a failure."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Frontend",
+    "category": "Senior FDE - Frontend",
+    "topic": "Streaming UI",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you render a streaming answer in the UI, and what do you show the user if the stream dies halfway through a sentence?",
+    "answer": "The UI appends each decoded chunk to the visible answer and, if the stream ends early, it keeps the partial text and replaces the live cursor with an interrupted state and a retry. The mechanism is fetch plus a reader on the response body. I decode the bytes, split them into tokens or server-sent events, and append them to the message. Paints are tied to an animation frame so a fast model does not commit the whole panel on every token. The status stays on streaming until the reader reports done and the server has sent an explicit finish marker. A thrown reader error, a closed connection, or a missing finish marker sets the status to interrupted. On the dashboard, an answer that dies after the words hold the yellow button until remains on screen in a quieter style, the caret stops blinking, and a line under it says the reply was cut off, with a button that resubmits the same question. I leave the partial sentence visible because the agent may already have used the first half, and I refuse to keep the thinking animation, because that animation claims work is still in progress. The message id is kept so the retry replaces that row instead of stacking a second ghost reply. The pitfall is marking the turn successful because some tokens arrived. A half sentence reads as a confident instruction and it is not finished."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Frontend",
+    "category": "Senior FDE - Frontend",
+    "topic": "Tenant UI",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you design a multi-tenant admin screen so it cannot show another customer's documents even when a buggy API response includes them?",
+    "answer": "The admin screen paints a document only when its tenant id matches the tenant in the signed-in session, and it drops every other row even if the JSON included it. The mechanism is a client guard in front of a server guard. The server still has to filter in the query, because the browser check is not the security boundary. The client check exists so a bad join, a stale cache, or a serializer bug cannot flash another customer's title on this screen. After login the active tenant id comes from the session payload that the auth route returns, and the page does not take that id from the address bar or from the documents response. When the list arrives, the render path keeps an item only if its tenant id equals the session tenant. A mismatch is counted and the row is omitted, including its title, snippet, and open action. On the Northwind admin page, a buggy payload that also contains a Contoso procedure never shows the Contoso name. Opening a chunk goes back through our API with the session tenant, and a cross-tenant id returns 404 so the response does not confirm that the other document exists. The pitfall is using the tenant id found on the first document in the same response as the value to compare against. That field came from the buggy payload, so it can bless the leak. The comparison value has to be the session."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Frontend",
+    "category": "Senior FDE - Frontend",
+    "topic": "Server rendering",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "When do you use server rendering or server components versus a client chat panel, and which data must never be serialized into the browser bundle?",
+    "answer": "Server rendering and server components draw the shell, enforce the session, and load data that must stay on the server. The streaming chat panel is a client component because it holds typing state, a reader, and effects. The mechanism is the server-client boundary in the React Server Components model. Code in a server component never ships as client JavaScript, and it can read the session and the ticket store while it renders HTML. A file marked as a client component, and every prop passed into that file, is serialized into the payload the browser receives. I keep the queue counts, the agent header, and the document list for this tenant on the server. I isolate the composer, the token transcript, and open or closed panels in the client chat island. The values that must never be serialized are the model API key, database URLs, retrieval credentials, other tenants' document bodies, a system prompt that quotes private policy, and any long-lived access token. On the support home page the server renders the open tickets, and the chat island receives only the selected ticket id plus a short title the agent already sees. The pitfall is importing a server helper that closes over the API key into the client chat file. The bundler will either fail the build or, if someone quiets it by moving the key to a public environment variable, ship the secret inside the browser bundle."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Frontend",
+    "category": "Senior FDE - Frontend",
+    "topic": "Frontend telemetry",
+    "difficulty": "advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you instrument the frontend so you can tell a slow model answer from a slow page load during a customer pilot?",
+    "answer": "I record page-load timing and model-request timing as separate spans that share a trace id, so a slow answer and a slow dashboard show up as different problems. The mechanism uses the browser navigation timings plus marks around the completion call. For the page I capture time to first byte, DOM content loaded, and largest contentful paint of the ticket queue. Those describe HTML, JavaScript, and first render. They do not describe the model. When the agent sends a question I stamp the click, the moment fetch is issued, the first streamed chunk, and the finish event. Each stamp goes out with the route name, the tenant id, the model name, and the HTTP status. The prompt and the answer text stay out of the event. In a pilot review, a four-second largest contentful paint beside a sub-second time to first token means the bundle or the server render is the stall. A one-second paint beside an eight-second wait for the first token means retrieval or the model is the stall. Putting both spans on one trace makes that split visible without guessing. The pitfall is a single timer named answer latency that starts on click and stops when the last token is painted. That number adds click handling, rendering, network, retrieval, and generation, and nobody can tell which fix to ship."
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Data Stores",
+    "category": "Senior FDE - Data Stores",
+    "topic": "pgvector first",
+    "difficulty": "beginner",
+    "questionType": "Comparison",
+    "question": "Why would you store document metadata in PostgreSQL and embeddings in pgvector instead of standing up a separate vector database on the first customer pilot?",
+    "answer": "On a first customer pilot I store document metadata and embeddings together in PostgreSQL with pgvector, because the pilot exists to prove that retrieval helps the user, and a second database does not change that proof. Documents, chunks, tenant ids, and access-control rows already sit in Postgres. pgvector adds a vector column on the chunk and an approximate nearest-neighbor index, so one SQL statement filters by tenant and permission and then orders by cosine distance. That single statement is what keeps the security filter and the similarity search in the same plan. A separate vector database makes the application search vectors and then join metadata through another API. A chunk can stay searchable after its source row is deleted, or a chunk from the wrong tenant can come back, until a second write catches up. On a support-assistant pilot for a single plant, about forty thousand chunks, an HNSW index answered filtered queries in tens of milliseconds, and one Postgres backup covered both the wiki rows and the vectors. Their database operators already knew how to restore it. A dedicated vector store starts to earn its cost when query rate, recall, or index size outgrows one Postgres primary. The pitfall is leaving the pilot design in production and applying the tenant check only after the vector search returns, which is how another customer's chunks leak into an answer."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Data Stores",
+    "category": "Senior FDE - Data Stores",
+    "topic": "Redis",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What does a Redis cache sit in front of in a retrieval service, and what do you refuse to treat Redis as the source of truth for?",
+    "answer": "A Redis cache in a retrieval service sits in front of the expensive repeatable reads: the embedding call, the vector search against PostgreSQL, and the assembled answer for a question already asked against an unchanged corpus. PostgreSQL remains the source of truth for documents, chunks, permissions, and the vectors. Redis holds a copy under a short TTL, and the key includes the tenant, the corpus version, and a hash of the query. A hit returns that copy and skips the model and the database. A miss runs the retrieval, and only then writes the Redis key. I refuse to treat Redis as the source of truth for the documents themselves, the embeddings, any access-control decision, or a write the user must not lose. Redis evicts keys under memory pressure, can drop data on restart when persistence is off, and will serve a stale value after the source page changes. On a policy assistant we cached full answers for six hours and a compliance delete did not touch Redis, so the assistant kept quoting a page that no longer existed. The pitfall is caching the authorization result or the chunk text without the tenant and the content version in the key, then trusting that entry after the source row is gone."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Data Stores",
+    "category": "Senior FDE - Data Stores",
+    "topic": "Tenant schema",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you model tenants, documents, chunks, and access-control rows so a retrieval query cannot forget the tenant filter?",
+    "answer": "I model the tenant as a real row and put tenant_id on every child table, with foreign keys that make a cross-tenant link impossible to insert. The tenants table is the parent. Documents uses a primary key of tenant_id plus document_id and a foreign key to tenants. Chunks uses tenant_id, document_id, and chunk_id, and its foreign key to documents includes both tenant_id and document_id, so a chunk cannot hang off another tenant's document. Access-control rows carry the same tenant_id, the principal, and the document or collection they may read. The retrieval function takes tenant_id as a required argument, and the SQL always contains a predicate that chunks.tenant_id equals the bound parameter before the distance ordering. Row-level security on documents, chunks, and the access-control table compares tenant_id to a session setting applied at the start of the request, so a forgotten predicate still returns no rows. On a multi-customer wiki search this caught a pooled connection that reused a statement built for one tenant and would have scanned another tenant's embeddings. The pitfall is keeping tenant_id only on the document and joining it optionally, or trusting every caller to remember the filter, because one missing predicate in a vector query returns another tenant's nearest chunks."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Data Stores",
+    "category": "Senior FDE - Data Stores",
+    "topic": "Indexes",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Which PostgreSQL indexes matter for fetching the latest chunks of a document and for vector search, and how do you prove the planner is using them?",
+    "answer": "The fetch of the latest chunks uses a B-tree on tenant_id, document_id, and updated_at descending, or on tenant_id, document_id, and chunk_index, matching the filter and the order exactly. Vector search uses an HNSW index, or IVFFlat when the corpus is rebuilt in batches, on the embedding column with the same operator class the query orders by, usually cosine distance. A partial index that includes only rows where deleted_at is null keeps retired chunks out of both plans. The tenant predicate stays in the query so the planner can combine the B-tree filter with the vector index, and so row-level security still applies. I prove the planner is using them with EXPLAIN ANALYZE and buffer counts on the production statement, against statistics that match a real tenant, not an empty staging table. The plan names an index scan or an index-only scan for the chunk fetch, and for the vector query it names the HNSW index with a small row count after the tenant filter. A sequential scan means the index is missing, the distance operator does not match the operator class, or the planner thinks the table is tiny. The pitfall is adding the vector index and then ordering by a different distance, which silently ignores it, or trusting a plan captured before analyze on production-sized data."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Data Stores",
+    "category": "Senior FDE - Data Stores",
+    "topic": "Transactions",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you wrap writing the document, writing the chunks, and enqueueing the index job so a crash cannot leave an unsearchable document that the API already confirmed?",
+    "answer": "I write the document, the chunks, and the index job in one database transaction, and the API returns success only after that commit. The handler inserts the document, inserts each chunk with its text and a pending embedding status, and inserts an outbox row for the index job. A crash before commit rolls all of that back, so the client never heard that the document was stored. After commit, a worker claims outbox rows with a row lock that skips locked rows, embeds the chunks, writes the vectors, and marks the job complete. If the worker dies mid-flight, the lock drops and the row stays pending, and a retry is safe because the chunk id is the idempotency key. The client can read the document at once, while search either finds the new chunks or the product shows indexing in progress. Confirming the document does not mean claiming it is already searchable. On an ingestion API we used to publish to the queue and then commit. A crash between those steps left a job for a document the transaction had rolled back, and the opposite crash returned success with no job at all, so the page sat unsearchable. The pitfall is treating the broker publish as part of the user-facing success while it sits outside the database transaction."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Data Stores",
+    "category": "Senior FDE - Data Stores",
+    "topic": "Locking",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you choose a locking strategy when two editors update the same wiki page that your indexer is also reading?",
+    "answer": "I use optimistic concurrency for the two editors and a snapshot read for the indexer. Editors collide rarely on a wiki page, and the indexer must not block them or observe a half-written body. The document row carries a version integer. A save updates only when the id and the version match, and sets the version one higher, in the same transaction as the new body and the outbox row that wakes the indexer. Zero rows updated means the other editor committed first, and the API returns the current page so the client can merge instead of overwriting. The indexer takes no row lock. Under read committed, its select sees the last committed version, never a torn write. If an editor commits while a pass is running, the new outbox row schedules another pass, and each indexed chunk stores the version it was built from so a stale embedding can be dropped. A pessimistic lock fits only a short critical section such as claiming a unique title, and that lock ends at commit, never around the embedding call. On a runbook wiki, holding the row lock across the embedding request stalled both editors for several seconds whenever a long page was reindexed. The pitfall is skipping the version check and letting the slower save overwrite a newer page that search has already indexed."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Data Stores",
+    "category": "Senior FDE - Data Stores",
+    "topic": "Vector database choice",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "How do you compare pgvector with a dedicated vector database for a single-tenant on-premises pilot versus a multi-tenant hosted product?",
+    "answer": "For a single-tenant on-premises pilot I choose pgvector. For a multi-tenant hosted product I move to a dedicated vector database once memory, query rate, or isolation needs outgrow one Postgres primary. On premises the customer already operates Postgres, the security review covers one datastore, and backup, restore, and access control stay in a single place. Metadata filters and vector distance run in one query, which is what a small corpus needs while the team is still measuring answer quality. Installing a second engine means another process to license, patch, and explain, with little latency gain at pilot size. In the hosted product the comparison flips. Vector memory and query rate grow apart from transactional traffic, one tenant's reindex must not stall the others, and a purpose-built store can add replicas and tune the index without resizing the system of record. Documents, access-control rows, and tenant identity stay in Postgres. The vector store is a derived index that can be rebuilt from those rows. On an on-premises pilot we spent three weeks standing up a separate cluster the customer's operators would not own, then replaced it with pgvector in an afternoon. The pitfall is picking the dedicated database because it sounds more advanced on day one, or stretching one pgvector instance across every hosted tenant until a large reindex blocks search for the rest."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Data Stores",
+    "category": "Senior FDE - Data Stores",
+    "topic": "Cache invalidation",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you expire cached answers in Redis when the source document is updated or deleted, so the assistant stops quoting a page that no longer exists?",
+    "answer": "I put a content version in every Redis key and delete the keys tied to a document in the same flow that commits an update or a delete. The key contains the tenant, a hash of the question, and either a tenant corpus version or the document versions that produced the answer. A side set in Redis, keyed by tenant and document id, records which answer keys cited that document. On update, the database transaction bumps the document version and records the document id for invalidation. After commit, a worker reads that set, deletes those answer keys, and increments the tenant corpus version so any leftover key built on the old version is a miss. A delete removes the document from the searchable table inside the transaction first, then deletes the cache keys, so a miss cannot rebuild a quote from a row that is already gone. A TTL of a few minutes is only a backstop if the invalidation message is lost. On a policy bot, answers were cached for a day with no version in the key. After legal deleted a page, the assistant kept quoting it until the TTL expired. The pitfall is deleting the row and waiting for Redis to expire, or clearing only the question the editor just tried, while other phrasings of the same page remain cached."
+  }
+]

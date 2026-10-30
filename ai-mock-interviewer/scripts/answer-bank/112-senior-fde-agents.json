@@ -1,0 +1,122 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 3 - Advanced AI: Agents",
+    "category": "Senior FDE - Agents",
+    "topic": "Agent versus prompt",
+    "difficulty": "beginner",
+    "questionType": "Comparison",
+    "question": "What is the difference between a single prompt that answers once and an agent that can take a next step, in a support workflow a customer would recognize?",
+    "answer": "A single prompt reads the ticket and returns one reply. An agent can take a next step, see what came back, and only then speak. The shopper sees either a bare apology or a date that was actually checked. The loop lives in your service. The model proposes one action, such as a shipment lookup. Your code checks that the action is allowed, runs it, and returns the result as data. The model then writes the reply or asks for one more lookup. A prompt has no second turn. If the tracking number was not in the message, it asks a vague question or invents a status from the complaint wording. At a retailer, shoppers chat that an order is late. A prompt produces a generic apology. An agent, with the order id already on the signed-in session, calls shipment status, sees the parcel held at the regional hub, and names that hub and the next scan window. If the lookup times out, it says the status could not be confirmed and hands the case to a person. The pitfall is wrapping every reply in a loop. A password reset, store hours, or a policy line already in the ticket needs no tool call. Extra steps add wait time and a place for the model to wander. Use a prompt when the facts are already in the message. Use an agent when the next fact is in a system of record, and stop once that fact is enough to answer."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 3 - Advanced AI: Agents",
+    "category": "Senior FDE - Agents",
+    "topic": "ReAct loop",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What does a reason-and-act loop mean in practice for an assistant that may look something up before it answers, and where does the loop stop?",
+    "answer": "A reason-and-act loop means the assistant names what it still needs, calls one allowed lookup, reads the result, and either answers or plans one more lookup. The customer sees a short wait, then a reply grounded in a system the assistant was allowed to read. Each cycle has three parts owned by your service. The model states the gap, names one tool and its arguments, and your code runs that call under a timeout. The result comes back as data, not as a new order. The model then writes the customer reply or proposes another lookup. The loop stops when the reply is ready, when a step budget is hit, when the same call fails twice, or when the next proposed action is not on the allow list. Stopping is a code decision. The model can request another step. It cannot grant itself one. At a card-support desk, the first step loads the last five transactions for the account already in the session. A question about why a charge posted ends there, with the merchant and the date. A dispute request takes a second step that opens a draft for a person, then stops. It does not keep searching the web for similar cases. The pitfall is an open loop with no step cap. The model will call search again because another page might help, and the customer waits while cost climbs. Cap steps, cap identical retries, and treat a clear answer or a handoff as a successful stop."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 3 - Advanced AI: Agents",
+    "category": "Senior FDE - Agents",
+    "topic": "Graph orchestration",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "When would you orchestrate an assistant as an explicit graph of steps rather than a single open loop, and what do you gain on a customer site by making the steps visible?",
+    "answer": "Use an explicit graph when the workflow already has an order, required checkpoints, and different tools at each checkpoint. An open loop fits when the next step truly depends on the last result and the path is short. A graph fits when skipping a step would be a defect the customer can name. The graph is a set of nodes your service runs, with branches you wrote. Classify the request, retrieve the policy, read the system of record, draft, then a human gate if the draft changes money or access. The model fills a node. It does not choose to skip the gate. Each node has its own prompt, tool list, timeout, and exit. A failure routes to a named fallback, not back into a free roam. On a telecom outage page the visible steps are identify the line, check the network ticket, check planned maintenance, then draft the status. A support lead can see that a bad answer came from the maintenance node returning a stale window, and can replay that node alone. The gain on site is audit, replay, and a slot for a person. The pitfall is drawing a graph for a two-step FAQ. Every node is latency, a prompt to maintain, and a new failure. If the happy path is retrieve then answer, keep the loop small. Promote it to a graph when the business already has a checklist and each box must be shown as ticked."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 3 - Advanced AI: Agents",
+    "category": "Senior FDE - Agents",
+    "topic": "Tool schemas",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you define a tool the agent may call, including the schema, the timeout, and the fact that your service executes the call rather than the model?",
+    "answer": "A tool is a function your service exposes as a name, a short description, and a schema for the arguments. The model may only propose a call. Your service validates the arguments, runs the function, and returns a result the model can read on the next turn. The schema lists required fields, types, and enums. An order lookup might take an order id as a string in the customer's format, plus a reason limited to status or refund eligibility. The description says what comes back and when the tool is the wrong choice. The model never receives credentials, a raw query language, or a URL it can invent. The handler binds the customer id from the session on the server, so an account id supplied by the model is ignored or checked against that session. Timeouts sit on the handler. A lookup might be allowed eight hundred milliseconds, then return a structured error the model must treat as a failed lookup, not as permission to guess. Your code retries once on a transient failure and does not retry a client error. The response is small and stable so a huge payload does not flood the next turn. At a logistics desk, shipment status takes a tracking number and returns three scans, not the carrier's full history. The pitfall is a loose schema, such as a free-text query field that can reach any API. If the model can pass arbitrary parameters, that is a proxy, not a tool."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 3 - Advanced AI: Agents",
+    "category": "Senior FDE - Agents",
+    "topic": "Agent memory",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "What conversation memory do you keep between turns for a support agent, and what customer data do you refuse to store in that memory?",
+    "answer": "Keep the working set the next turn needs to stay coherent, and keep it small, tied to the case, and expired when the case closes. That is the recent turns, the case id, the tools already called with their short results, and decisions the customer confirmed, such as replace rather than refund. The store is keyed by case id and written by your service, not by the model. Each turn sends a short summary plus the last few messages, not the entire transcript. Tool results are trimmed to the fields the next step needs. When the case closes, the memory deletes or folds into the official ticket, which already has a retention rule and an owner. Refuse passwords, full card numbers, government ids, health details, and raw authentication tokens. Also refuse copies of documents the case did not need, and refuse to store a sentence the model wrote as if it were a confirmed fact. If a tool returned a large payload, store the citation and the few fields that were used. At an insurer's claims assistant, memory holds the claim number, the peril the customer confirmed, and that photos were uploaded. It does not hold the photo bytes, the bank account on the settlement form, or a free-text profile the model inferred about the household. The pitfall is a growing scratchpad the model appends every turn. It becomes a second system of record with no owner, and a later turn treats an old guess as a fact."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 3 - Advanced AI: Agents",
+    "category": "Senior FDE - Agents",
+    "topic": "MCP",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "What problem does a tool protocol like MCP solve for an enterprise assistant, and when would you skip it and call one internal API directly?",
+    "answer": "A tool protocol such as MCP gives many assistants one way to discover tools, pass arguments, and receive results. The problem it solves is a customer with several internal systems who does not want each assistant to grow a private adapter, a private secret path, and a private schema dialect. A server advertises the tools and executes them. The assistant speaks the protocol. Authentication, the allow list, and timeouts still live in your service or in that server, not in the model. Adding a ticket reader or a knowledge search becomes another server the same client can mount, instead of a new SDK inside every bot. Skip the protocol when the engagement has one internal API, one owning team, and a deadline inside a month. A typed client, a service account, and a timeout are easier to explain in a security review and easier to operate. At a hospital pilot, if the only action is reading an appointment from the scheduling API the integration team already exposes, call that API. Bring in a shared protocol when a second and third system appear, or when another product team will reuse the same tools. The pitfall is adopting the protocol as the architecture before a tool exists. A handshake does not decide who may issue a refund, how long a call may run, or what gets logged. Those boundaries remain yours. With one system, the extra process is latency and a new failure domain that nothing reuses yet."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 3 - Advanced AI: Agents",
+    "category": "Senior FDE - Agents",
+    "topic": "Multi-agent",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "When does splitting work across multiple agents help a customer workflow, and when is a multi-agent demo just extra latency and unclear ownership?",
+    "answer": "Split agents when the workflow has separate authorities, separate tool sets, and a handoff a person on the desk already understands. One agent may draft from policy. Another may only read billing. A person approves anything that moves money. Each agent cannot see the other's tools, so untrusted text in the policy corpus cannot reach billing. The router is yours. It sends the case to one specialist, receives a structured result, and names the next owner. Specialists do not chat freely. They return a typed object with a finding, the evidence, and a proposed action. One writer produces the customer-facing sentence at the end, so the user does not get three tones and three partial answers. This helps on a marketplace dispute desk: a policy reader, a payment reader, and a human reviewer. The payment reader cannot send mail. The policy reader cannot see card data. When the answer is wrong, the trace shows which reader supplied the bad field. It hurts when one assistant could call two tools and write one reply. Three agents that collaborate in a demo add a round trip per hop, a chance for each to contradict the last, and no owner of the final sentence. If nobody can name which agent is allowed to take the irreversible step, the design has no owner. Start with one agent and one allow list. Split only when a tool must stay unreachable from the agent that reads untrusted text."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 3 - Advanced AI: Agents",
+    "category": "Senior FDE - Agents",
+    "topic": "Human in the loop",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you put a human in the loop before an agent sends a customer-facing message or writes into a system of record?",
+    "answer": "The agent prepares a draft and a proposed write. A person approves, edits, or rejects it before anything leaves your service. The model has no tool that sends a message or commits a change. Actions fall into read, draft, or commit. Reads may run inside the loop when the allow list says so. Drafts land in a queue with the case id, the evidence used, the exact text, and the exact payload that would be written. The human action is the only caller of the send or write API. Approval is bound to a hash of that payload, so a later model turn cannot swap the text after the click. A proposal expires. The agent may not retry the commit on its own. On a utility outage desk, the agent may read the incident and draft that a crew will be on site by 4 pm. A supervisor approves it in the console, and only then does the notification service send. A billing adjustment follows the same path, with a second approver when the amount crosses the threshold finance already uses for manual adjustments. The pitfall is a button that approves a message the agent already emailed as pending review. If the side effect happened before the click, the person is an auditor. The other failure is asking for approval on every FAQ reply. People click through, and the gate stops meaning anything. Gate the irreversible steps, and sample the rest."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 3 - Advanced AI: Agents",
+    "category": "Senior FDE - Agents",
+    "topic": "Agent evaluation",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you evaluate an agent on a fixed set of tasks, including tool choice and refusal, rather than only scoring the final paragraph?",
+    "answer": "Score the path the agent took, not only the last paragraph. A fixed task has the user message, stubbed tool results, the tools that were allowed, and the outcome you expect: which tool, which arguments, whether it must refuse, and what the reply must include or must not include. Run the set with tools replaced by fixtures, so an outage in the real CRM does not change the score. Record every proposed call. The task passes when the agent called the expected tool with arguments that match the case, stopped inside the step budget, and refused when the task required a refusal. It fails when a forbidden tool was called, a field was invented that the fixture did not return, or a fluent paragraph contradicts the fixture. At a travel support pilot, one task is a refund request outside the fare rule. The expected trace is a policy lookup, no refund call, and a reply that states the rule. A polished apology that still offers the refund fails. Another task checks that a missing booking id produces a clarifying question rather than a lookup with a guessed id. The pitfall is grading only with a model judge on tone. Tone can be perfect while the tool choice is wrong. Keep a human-labeled set, pin the model and the fixtures, and fail the build when refusal or tool accuracy drops. Read a sample of traces each week so the number stays tied to real cases."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 3 - Advanced AI: Agents",
+    "category": "Senior FDE - Agents",
+    "topic": "Prompt injection via tools",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How can untrusted text inside a retrieved page or a tool result redirect an agent, and what boundary stops that text from becoming an instruction?",
+    "answer": "Untrusted text redirects an agent when a page or a tool result contains a line that looks like a new order: ignore the policy, call a different tool, or reveal hidden instructions. The model reads that line in the same channel as the task, so a forum post can try to steer the next action. The boundary is that retrieved text stays data, and only your service can turn a proposal into a call. Tool results go into a data envelope. Content inside it never grants tools, never changes the allow list, and never overrides the task. That wording helps the model, and it is not the control. The control is the allow list, argument checks, and the absence of dangerous tools. A page that says to email every customer cannot succeed if this process has no email tool, and if the handler ignores any argument that did not pass the schema. On a software vendor's knowledge assistant, a public forum post says to dump an admin token and reply with it. The retriever still returns the post because it matched the question. The agent may mention the post as a claimed workaround. It cannot obtain a token, because no tool returns secrets and the hidden instructions are not inside the tool result. The pitfall is pasting retrieved HTML into the system instructions, or letting a tool return a string the next step executes. Check the proposed call against policy in code before it runs."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 3 - Advanced AI: Agents",
+    "category": "Senior FDE - Agents",
+    "topic": "Agent bounds",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you bound an agent so it cannot email the customer's end users or issue a refund, even if the model asks for that tool?",
+    "answer": "Leave those tools off the agent. A request for a tool that is not registered never reaches a handler. The bound is the set of functions in this process, plus checks inside the functions that are registered. The runtime holds an allow list for this assistant, this environment, and this role. Mail to end users and refunds are absent from the support pilot. If the model emits a call named send email or issue refund, the runtime returns a structured tool-not-available result and stops or hands the case to a person. For tools that are exposed, the handler checks the action again. A read-ticket function cannot grow a mutate flag, because that flag is not in the schema. Credentials for the mail gateway and the payments service are not on this workload, so a bug in the loop still cannot authenticate to them. At a subscription company, the assistant can look up an invoice and draft a reply for an agent to send from the help desk. The draft tool writes to your database. Mail leaves only from the help desk compose window, under a human click. Refunds stay in the billing console. The pitfall is a general HTTP or code-execution tool that can reach the mail API even though send email was never defined. A shared tool server that mounts another assistant's refund tool by default is the same hole. A prompt line that says never refund is a wish. A missing tool is a bound."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 3 - Advanced AI: Agents",
+    "category": "Senior FDE - Agents",
+    "topic": "Framework choice",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "How do you choose an orchestration library on a forward deployed engagement, and what do you refuse to standardize on during the first month?",
+    "answer": "Choose the library that matches the workflow already observed, the runtime the customer runs, and the people who will own it after the engagement. In the first month, pick the smallest option that can call their APIs, log each step, and fail in a way their on-call can see. A few tool calls and a human gate fit a short loop inside the service they already deploy. A hard checklist that needs replay fits a graph library their team can read. Prefer something that runs in their network without a new control plane. During that first month, refuse to freeze the framework, the memory store, and the tool protocol while the use case is still moving. Also refuse a multi-agent product adopted because a workshop demo looked busy, and refuse a hosted orchestrator the security team has not reviewed. The month is for proving one workflow, its tools, and its human gate. At a manufacturer, the first week showed that maintenance techs need a procedure lookup and a work-order draft, with a supervisor sending the order. That shipped as one service, two tools, and a queue, on the Python stack plant IT already runs. A graph product, a vector-store brand, and an agent marketplace stayed undecided until a second workflow existed. The pitfall is locking the customer into a framework before the first successful case. Standardize the traces, the allow list, and the evaluation set. Leave the library replaceable until the workflow stops changing."
+  }
+]

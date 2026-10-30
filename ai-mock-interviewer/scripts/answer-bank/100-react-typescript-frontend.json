@@ -1,0 +1,802 @@
+[
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - TypeScript Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "React/TS: When would you choose a type alias over an interface in a TypeScript codebase, and when the other way round?",
+    "answer": "I use interfaces for object shapes that may be extended or merged, and type aliases for everything an interface cannot express, such as unions, tuples, mapped types and conditional types. Both describe object shapes and are mostly interchangeable for props and DTOs. Interfaces support declaration merging, which is useful when augmenting a library type like Window or a third-party module, and extends gives clearer error messages for deep hierarchies. Type aliases are required for things like type Status = 'idle' | 'loading' | 'error' or type Pair = [string, number]. In practice I pick one convention per repo, usually type for props and API models, and enforce it with the typescript-eslint consistent-type-definitions rule. The pitfall is accidental declaration merging: two interfaces with the same name in the same scope silently combine, which a type alias would flag as a duplicate identifier."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - TypeScript Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "React/TS: What does turning on strict in tsconfig.json actually enable, and why should a new React project start with it?",
+    "answer": "The strict flag turns on a family of checks, most importantly strictNullChecks, noImplicitAny, strictFunctionTypes, strictBindCallApply, strictPropertyInitialization, useUnknownInCatchVariables, alwaysStrict and noImplicitThis. The biggest win is strictNullChecks: null and undefined stop being assignable to every type, so the compiler forces you to handle a user that has not loaded yet or a query param that may be missing. noImplicitAny stops untyped parameters quietly becoming any. Starting strict is cheap; retrofitting it onto a large codebase means thousands of errors. Vite's react-ts template already enables strict plus noUnusedLocals and noFallthroughCasesInSwitch. I often add noUncheckedIndexedAccess too, so array[i] and record[key] are typed as possibly undefined. To verify, run tsc --noEmit in CI, because Vite strips types with esbuild and never type-checks during the build."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - TypeScript Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "React/TS: Contrast unknown, any and never, and say where each legitimately appears in frontend code that consumes a REST API.",
+    "answer": "any switches off type checking, unknown means the value could be anything but you must narrow it before use, and never means a value that cannot exist. For API code, the honest type of response.json() is unknown, because the server could return anything; I narrow it with a runtime schema such as zod's parse before treating it as a User. any is acceptable only as a short-lived escape hatch during migration, and I flag it with the no-explicit-any lint rule. never shows up in exhaustiveness checks: in a switch over a discriminated union, the default branch assigns the value to a const of type never, so adding a new variant breaks the build until it is handled. It is also the return type of a function that always throws. The pitfall is casting with as User, which looks typed but gives zero runtime safety."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - TypeScript Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: How would you model the loading, success and error states of an API call with a discriminated union so impossible states cannot be represented?",
+    "answer": "I define a union keyed on a literal status field, so each state carries only the data valid for it. For example: type RemoteData<T> = { status: 'idle' } | { status: 'loading' } | { status: 'success'; data: T } | { status: 'error'; error: ApiError }. Compared with three separate booleans and nullable fields, this rules out combinations like isLoading true with an error also set. In the component I switch on state.status, and TypeScript narrows, so state.data is only accessible inside the success branch. A default branch that assigns state to a never variable gives an exhaustiveness check if someone adds a 'refreshing' variant later. TanStack Query exposes the same idea through its status field. The pitfall is destructuring early, such as const { data } = state, which loses the narrowing because data is not on every member of the union."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - TypeScript Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "React/TS: Write a generic, typed fetch helper that validates the JSON response at runtime and throws a structured error on non-2xx responses.",
+    "answer": "I make the helper generic over a zod schema so the static type is inferred from the same object that performs runtime validation.\n\nimport { z } from 'zod';\nexport class ApiError extends Error {\n  constructor(public status: number, public body: unknown) { super(`HTTP ${status}`); }\n}\nexport async function apiFetch<S extends z.ZodTypeAny>(url: string, schema: S, init?: RequestInit): Promise<z.infer<S>> {\n  const res = await fetch(url, { ...init, headers: { 'Content-Type': 'application/json', ...init?.headers } });\n  const body: unknown = res.status === 204 ? null : await res.json().catch(() => null);\n  if (!res.ok) throw new ApiError(res.status, body);\n  return schema.parse(body);\n}\n\nUsage: const user = await apiFetch('/api/users/1', UserSchema, { signal }); and user is typed as z.infer<typeof UserSchema>. Passing init through lets callers supply an AbortSignal. The work is linear in the size of the response body for both parsing and validation, so time and space are O(n). Pitfalls: fetch only rejects on network failures, not on 4xx or 5xx, which is why the res.ok check matters, and calling res.json() on a 204 throws, so I guard it."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - TypeScript Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: Using built-in utility types, derive a PATCH request body type and a form-values type from a single User model without duplicating fields.",
+    "answer": "I keep one source model and derive the rest with Pick, Omit, Partial, Readonly and Record. Given type User = { id: string; email: string; name: string; role: 'admin' | 'viewer'; createdAt: string }, the PATCH body is type UserPatch = Partial<Omit<User, 'id' | 'createdAt'>>, so every editable field is optional and server-owned fields cannot be sent. The create form might be type UserForm = Omit<User, 'id' | 'createdAt'>, and per-field errors become Partial<Record<keyof UserForm, string>>. For function-driven types I use ReturnType and Awaited, for example type Me = Awaited<ReturnType<typeof fetchMe>>. The benefit is that adding a field to User flows everywhere and breaks the compiler where it is not handled. A pitfall is that Partial is shallow: nested objects stay fully required, so for deep patches you need a custom DeepPartial or a flatter API design."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - TypeScript Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "React/TS: The TypeScript type says user.profile.avatarUrl always exists, yet production crashes with Cannot read properties of undefined. How do you diagnose and prevent this class of bug?",
+    "answer": "The root cause is that TypeScript types are erased at runtime, so a hand-written interface claimed a shape the FastAPI backend does not always return. First I reproduce by checking the actual response in the Network tab or the OpenAPI schema at /openapi.json; typically profile is Optional in the Pydantic model, or it is excluded with response_model_exclude_none. Short-term, I fix the type to profile?: Profile | null and use optional chaining with a fallback avatar. Long-term, I stop hand-writing API types: generate them from the OpenAPI document with openapi-typescript in CI, and validate critical responses at the boundary with zod so a contract change fails loudly in one place instead of deep in the render tree. I also wrap route segments in an error boundary so one bad field does not blank the whole app. Verification is a CI step that regenerates types and fails on diff."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - TypeScript Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "React/TS: Design a contract workflow that keeps a FastAPI backend and a React TypeScript frontend in sync across separate repositories and release cadences.",
+    "answer": "I treat the OpenAPI document as the contract and generate the client from it, with compatibility checks in both pipelines. FastAPI already emits /openapi.json from Pydantic models, so the backend CI exports it as a versioned artifact on every merge. The frontend runs openapi-typescript, or a client generator such as orval or openapi-ts, to produce types plus a typed fetch client, committed so diffs are reviewable. To catch breaking changes before release, the backend CI runs oasdiff breaking against the previous published spec and fails on removed fields or narrowed enums. Rollout follows expand-and-contract: add the new field as optional, ship the frontend, then make it required or remove the old one. At runtime, zod validation on a few critical responses gives a clear error and telemetry if drift slips through. The pitfall is generating types but casting responses anyway; generated types describe intent, while validation and contract tests prove it."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - TypeScript Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "React/TS: Walk through the narrowing techniques TypeScript gives you, such as typeof, in, instanceof and user-defined type guards.",
+    "answer": "Narrowing is how TypeScript refines a broad type to a specific one inside a branch, based on runtime checks it understands. typeof works for primitives, so if (typeof id === 'string') lets you call id.trim(). The in operator checks for a property, which is handy for unions of object shapes without a shared tag, such as if ('detail' in body). instanceof narrows class instances, for example err instanceof ApiError in a catch block, which matters because catch variables are unknown under strict mode. Equality checks against literals narrow discriminated unions. For custom logic I write a type predicate, function isUser(x: unknown): x is User, so callers get narrowing after calling it. Since TypeScript 5.5, simple filter callbacks infer predicates too, so items.filter(x => x !== null) returns a non-null array. The pitfall is a type predicate that lies: the compiler trusts it completely, so it must actually check the fields."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - React Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "React/TS: Explain how props differ from state in a React component and who owns each.",
+    "answer": "Props are inputs passed from a parent and are read-only to the child, while state is data a component owns and changes over time with a setter from useState or useReducer. When a parent re-renders with new props, the child receives the new values; when a component calls its state setter, React schedules a re-render of that component and its children. A good rule is that each piece of data has one owner: if two siblings need it, lift the state to their closest common parent and pass it down as props along with callbacks such as onChange. In TypeScript I type props with a type alias, for example type ButtonProps = { label: string; onClick: () => void }. The common pitfall is copying props into state with useState(props.value), which freezes the initial value and ignores later updates from the parent."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - React Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "React/TS: Why does React require a key on items rendered from an array, and what makes a good key?",
+    "answer": "Keys let React match each rendered item with its previous version during reconciliation, so it can preserve component state and DOM nodes for items that moved, and only create or destroy the ones that were added or removed. A good key is stable, unique among siblings and tied to the data's identity, typically a database id or UUID from the API, such as key={order.id}. Without keys React warns and falls back to position, which behaves like using the array index. Index keys are acceptable only for static lists that never reorder, insert or delete. Keys must not be generated during render, for example with Math.random() or crypto.randomUUID(), because every render then produces new keys and React remounts every row, losing focus and input state and hurting performance. Keys can also be used deliberately to reset a component by changing its key."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - React Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "React/TS: What causes a React component to re-render, and does a re-render always mean the DOM changes?",
+    "answer": "A component re-renders when its own state changes, when its parent re-renders, or when a context it consumes changes value. Props changing is not a separate trigger; by default a child re-renders whenever its parent does, whether or not its props changed, unless it is wrapped in React.memo. A re-render means React calls the component function again to produce a new element tree; it then diffs that against the previous tree and commits only the actual differences to the DOM. So many re-renders are cheap and result in no DOM mutation at all. Re-rendering becomes a problem only when render work is expensive or happens on every keystroke across a large tree. To check, I use the React DevTools Profiler or the highlight updates option rather than guessing. A common misconception is that calling setState with the same value always re-renders; React bails out when Object.is reports the value unchanged."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - React Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "React/TS: After deleting the second row in an editable table, the text a user typed into row three now appears in a different row. What is wrong and how do you fix it?",
+    "answer": "This is almost always caused by using the array index as the key while rows hold uncontrolled input state or local component state. When row two is deleted, the old row three becomes index one, so React reuses the component and DOM input that belonged to the deleted row, and the typed text ends up attached to the wrong record. The fix is to key rows by a stable identity, key={row.id}, coming from the API or generated once when a new row is created client-side, for example with crypto.randomUUID() in the add handler, never during render. A second improvement is making the inputs controlled from a single state array keyed by id, so the source of truth is the data rather than the DOM. To verify, reproduce with React DevTools open and confirm that component instances now follow the data after delete and reorder operations."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - React Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: Two sibling components, a filter box and a results table, need the same search term. How do you share it, and when would you reach for composition instead?",
+    "answer": "I lift the search term into their closest common parent and pass it down: the parent holds const [term, setTerm] = useState(''), gives the filter box value={term} and onChange={setTerm}, and gives the table term as a prop. That keeps one source of truth and keeps data flow explicit. If the term must also survive refresh or be shareable, I move it into the URL with useSearchParams instead of component state. Composition helps when an intermediate component is just forwarding props it does not use: rather than drilling through five layers, the parent can pass already-configured elements as children or slot props, so the middle layers never see the data. Context is the next step only when many distant components need the value. The pitfall is duplicating the term in both siblings and syncing them with effects, which leads to lag and inconsistent states."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - React Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Conceptual",
+    "question": "React/TS: Why do components and effects run twice in development under StrictMode, and what bugs is that designed to expose?",
+    "answer": "In development, StrictMode intentionally double-invokes component bodies, state initialisers and reducers, and mounts, unmounts and remounts components once so that effects run setup, cleanup, then setup again. Production builds do not do this. The purpose is to surface impure rendering and effects that lack proper cleanup, which would otherwise break with features like Fast Refresh, Activity-style offscreen rendering and concurrent rendering, where React may render a component more than once before committing. Typical bugs it exposes are a WebSocket or event listener subscribed in useEffect without unsubscribing, an analytics call duplicated because it was placed in render, or a mutation like array.push on state during render. The correct fix is to make the effect symmetric, returning a cleanup that closes the socket or aborts the fetch, not to remove StrictMode or use a ref flag to skip the second run. Seeing two identical GET requests in dev is expected if the first is aborted."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - React Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "React/TS: A teammate's click handler calls setCount(count + 1) three times but the counter only increases by one, and a console.log right after shows the old value. Explain and fix it.",
+    "answer": "State updates are not applied immediately; React queues them and re-renders later, and inside one render the count variable is a constant snapshot. So setCount(count + 1) three times queues the same value, count + 1, three times, and the console.log reads the snapshot from the current render. React 18 and later batch all updates within an event, timeout or promise into a single re-render. The fix is the functional updater, setCount(c => c + 1), which receives the latest queued value, so three calls add three. If you need the new value immediately in the handler, compute it into a local variable first and use that for both setState and the follow-up logic, rather than reading state. If you truly need the DOM updated synchronously, flushSync exists but is rarely appropriate. To verify, log inside the component body or use React DevTools to inspect state after the render."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - React Fundamentals",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "React/TS: How would you structure a large internal admin SPA with dozens of screens, multiple teams and a shared design system so it stays maintainable?",
+    "answer": "I organise by feature rather than by file type, keep server state in a query library, and enforce boundaries with tooling. Each feature folder, such as features/billing, owns its routes, components, hooks and API client, and exposes a small public index; an eslint import-boundary rule stops features importing each other's internals. Shared primitives live in a design-system package, ideally built on accessible headless components like Radix UI or React Aria, with Storybook for review. Server state goes through TanStack Query with a typed client generated from OpenAPI, and only truly global UI state, such as the current tenant or theme, lives in context or Zustand. Routes are lazy-loaded per feature to keep the initial bundle small. In a monorepo managed with pnpm workspaces plus Nx or Turborepo, teams can run affected tests only. The pitfall is a giant global store holding API responses, which couples every screen together and makes cache invalidation manual."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Hooks",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "React/TS: State the rules of hooks and explain why React needs them.",
+    "answer": "Hooks must be called only at the top level of a React function component or custom hook, never inside conditions, loops, nested functions or after an early return, and only from React functions, not regular utilities or class components. React needs this because it stores hook state in an ordered list per component instance and matches each call to its slot by call order on every render. If a useState call is skipped on one render because of an if statement, every later hook reads the wrong slot and state gets mixed up. The fix for conditional logic is to call the hook unconditionally and put the condition inside it, or to split the component. Custom hooks must start with use so linters can recognise them. eslint-plugin-react-hooks enforces these rules and should run in CI. React 19's use API is the documented exception: it can be called conditionally."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Hooks",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: Describe how the dependency array and cleanup function of useEffect behave, using a window resize listener as the example.",
+    "answer": "useEffect runs after React commits the render to the screen; the dependency array decides when it re-runs, and the returned cleanup runs before the next run and on unmount. With no array, the effect runs after every render. With an empty array it runs once after mount and cleans up on unmount. With values, it re-runs whenever one of them changes by Object.is comparison. For a resize listener: useEffect(() => { const onResize = () => setWidth(window.innerWidth); window.addEventListener('resize', onResize); return () => window.removeEventListener('resize', onResize); }, []). The cleanup must remove the exact same function reference, which is why the handler is defined inside the effect. Forgetting cleanup leaks listeners and, under StrictMode in development, you would immediately see two listeners registered. Dependencies should list every reactive value used inside, and the exhaustive-deps lint rule will flag omissions."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Hooks",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "React/TS: A page hammers the API with hundreds of requests per second and the browser freezes. You find a useEffect that fetches data and calls setState. How do you find and fix the infinite loop?",
+    "answer": "The loop happens because the effect sets state that changes one of its own dependencies, so every render re-triggers the fetch. The usual culprits are an object or array dependency recreated each render, such as const filters = { status } passed to useEffect(..., [filters]), a function defined in the component body used as a dependency, a missing dependency array entirely, or storing the fetched result in a variable the effect depends on. To diagnose, I check the Network tab for the repeating request, then add a console.log of the dependencies or use React DevTools to see which value changes identity. Fixes are depending on primitives like status instead of the object, moving the function inside the effect, or memoising it with useMemo or useCallback when it genuinely must be shared. Better still, move fetching to TanStack Query keyed on ['orders', status], which deduplicates and caches requests. Never silence exhaustive-deps to stop the loop."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Hooks",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "React/TS: Compare useMemo and useCallback, and say when using them is a waste.",
+    "answer": "useMemo caches the result of a calculation between renders, while useCallback caches a function reference; useCallback(fn, deps) is equivalent to useMemo(() => fn, deps). Both recompute only when a dependency changes. They are worth it in two cases: when a calculation is measurably expensive, such as sorting and filtering several thousand rows, or when referential stability matters, such as passing a callback or object to a React.memo child or using it as a useEffect dependency. They are a waste when wrapping cheap work like string formatting, or when the receiving child is not memoised, because the child re-renders anyway and you have paid the cost of comparing dependencies for nothing. To decide, I measure with the Profiler or console.time rather than guessing. With React Compiler enabled, much of this manual memoisation becomes unnecessary because the compiler inserts it automatically. A pitfall is an incorrect dependency list, which produces stale values."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Hooks",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "React/TS: Write a typed useDebouncedValue custom hook and show how a search box would use it to avoid calling the API on every keystroke.",
+    "answer": "The hook stores a delayed copy of the value and resets a timer whenever the input changes, cleaning up the pending timer on each change and on unmount.\n\nimport { useEffect, useState } from 'react';\nexport function useDebouncedValue<T>(value: T, delayMs = 300): T {\n  const [debounced, setDebounced] = useState(value);\n  useEffect(() => {\n    const id = setTimeout(() => setDebounced(value), delayMs);\n    return () => clearTimeout(id);\n  }, [value, delayMs]);\n  return debounced;\n}\n\nIn the search component: const [term, setTerm] = useState(''); const q = useDebouncedValue(term, 300); const { data } = useQuery({ queryKey: ['search', q], queryFn: ({ signal }) => searchApi(q, signal), enabled: q.length > 1 }). The input stays responsive because term updates immediately, while the network only sees q. Each keystroke does O(1) work, scheduling and clearing one timer, and space is O(1). The generic T means it works for strings, numbers or filter objects, but objects must be stable references or the timer resets every render. Passing the AbortSignal also cancels in-flight requests when q changes."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Hooks",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "React/TS: A polling component uses setInterval inside useEffect with an empty dependency array, and it keeps sending the original filter value even after the user changes it. Why, and how do you fix it?",
+    "answer": "This is a stale closure: the interval callback was created during the first render and captured the filter value from that render, and because the dependency array is empty the effect never re-runs, so the callback keeps seeing the original value. There are three fixes. First, add filter to the dependencies so the effect clears and recreates the interval when it changes, with return () => clearInterval(id) as cleanup. Second, if recreating the interval is undesirable, keep the latest value in a ref updated on each render, filterRef.current = filter, and read filterRef.current inside the callback. Third, for polling API data specifically, replace the hand-rolled interval with TanStack Query's refetchInterval option on a query keyed by ['jobs', filter], which handles key changes, background tabs and cleanup. The same stale-closure issue appears with setState; use the functional updater there. The exhaustive-deps lint rule would have flagged the missing dependency."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Hooks",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "React/TS: A user opens a report page and navigates away before its slow request finishes; you see warnings or errors about updating state on an unmounted component. How should the code be changed?",
+    "answer": "The correct fix is to cancel the work when the component unmounts, using an AbortController in the effect cleanup, rather than tracking an isMounted flag. Pattern: useEffect(() => { const controller = new AbortController(); fetch(`/api/reports/${id}`, { signal: controller.signal }).then(r => r.json()).then(setReport).catch(err => { if (err.name !== 'AbortError') setError(err); }); return () => controller.abort(); }, [id]). This stops the network request, avoids wasted backend work, and also fixes the race when id changes quickly. React 18 removed the old warning because setting state after unmount is a harmless no-op, but the underlying issue, a request outliving its UI and possibly writing into a newer screen's state, is still real. With TanStack Query you get this by passing the provided signal into fetch, and the cache keeps the result useful if the user returns. Verify in DevTools that the request shows as cancelled on navigation."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Hooks",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Expert",
+    "questionType": "Conceptual",
+    "question": "React/TS: Which common uses of useEffect are actually anti-patterns, and what should replace them?",
+    "answer": "Effects are for synchronising with systems outside React, such as the network, timers, subscriptions or the DOM; using them to transform data or respond to user events is an anti-pattern. First, derived state: an effect that sets fullName whenever firstName or lastName changes causes an extra render; compute it during render instead, with useMemo if expensive. Second, event-driven logic: sending a POST when a submitted flag flips should happen directly in the submit handler, since you know exactly what the user did there. Third, resetting state when a prop changes: pass a key, such as <Profile key={userId} />, so React remounts with fresh state. Fourth, chains of effects that each set state to trigger the next, which should be one event handler or a reducer. Fifth, hand-rolled data fetching, which a query library or a router loader handles with caching and race safety. The benefit is fewer renders, fewer bugs from stale or intermediate states, and code that reads causally."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Hooks",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "React/TS: When do you use useRef instead of useState, and when does useReducer become a better choice than several useState calls?",
+    "answer": "Use useRef for values that must persist across renders but should not trigger a re-render when they change, and useState for anything the UI displays. Typical ref uses are DOM nodes for focus or measuring, timer ids, an AbortController, or the latest value of a prop for a long-lived callback. Mutating ref.current is synchronous and invisible to React, so rendering from a ref produces stale UI. useReducer wins when several pieces of state change together or the next state depends on the previous one in non-trivial ways, such as a multi-step form wizard or a request lifecycle with status, data, error and retry count. A reducer centralises transitions in one pure, easily unit-tested function, and dispatch is stable across renders, so it can be passed to children without useCallback. With TypeScript, a discriminated union of action types makes invalid transitions a compile error. The pitfall is reading ref.current during render, which React's rules discourage."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Data Fetching and State",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: Show how you cancel an in-flight fetch with AbortController and how you tell a cancellation apart from a real failure.",
+    "answer": "Create an AbortController, pass its signal to fetch, and call abort() when the result is no longer needed; the fetch promise then rejects with a DOMException whose name is 'AbortError'. Example: const controller = new AbortController(); fetch('/api/orders', { signal: controller.signal }).then(res => res.json()).catch(err => { if (err.name === 'AbortError') return; showError(err); }); and later controller.abort(). In a component, abort in the useEffect cleanup so navigating away or changing inputs cancels the old request. For timeouts, AbortSignal.timeout(5000) gives a signal that aborts with a 'TimeoutError', and AbortSignal.any combines a user cancel with a timeout. Remember that fetch does not reject on HTTP errors like 404 or 500, so you still check res.ok separately. Cancellation only stops the browser waiting; the backend may continue processing, so non-idempotent POSTs still need server-side idempotency keys."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Data Fetching and State",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "React/TS: In a type-ahead search, typing quickly sometimes shows results for an older query than the one in the input box. What is the bug and how do you fix it?",
+    "answer": "It is a race condition: requests for 'rea' and 'react' are in flight together, the slower 'rea' response arrives last, and it overwrites the newer results because the code blindly calls setResults on every response. Fixes, in order of preference: use a query library such as TanStack Query keyed on ['search', term], which only exposes data for the current key and passes an AbortSignal to cancel stale requests. If hand-rolling, abort the previous request in the effect cleanup with AbortController, or keep an ignore flag in the effect closure that the cleanup sets to true so late responses are discarded. Debouncing the input to around 300 ms reduces the number of overlapping requests but does not by itself eliminate the race. To reproduce reliably, throttle the network in DevTools or add a random delay in the FastAPI handler during testing, and write a test with MSW that resolves responses out of order."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Data Fetching and State",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "React/TS: Why would you adopt TanStack Query or SWR instead of writing fetch calls in useEffect, and what do you give up?",
+    "answer": "A server-state library gives you caching, request deduplication, background refetching, retries, cancellation and invalidation for free, all of which useEffect fetching makes you reinvent badly. With useQuery({ queryKey: ['orders', page], queryFn }), two components asking for the same key share one request, revisiting a page shows cached data instantly while refetching in the background, and mutations can call queryClient.invalidateQueries({ queryKey: ['orders'] }) to refresh dependent lists. It also handles races because results are tied to keys. The costs are an extra dependency of roughly a dozen kilobytes gzipped, a mental model around staleTime versus gcTime and query keys, and defaults that surprise people, such as refetchOnWindowFocus and three retries on failure, which can hammer a struggling API. SWR is lighter with fewer features; TanStack Query has richer mutations, devtools and infinite queries. For a tiny app with two calls, plain fetch is fine; beyond that the library pays for itself."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Data Fetching and State",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "React/TS: A user edits an order on its detail page, clicks back to the order list, and still sees the old status until they refresh. How do you fix stale data after navigation?",
+    "answer": "The list is served from a cache that nobody told about the mutation, so the fix is to invalidate or update the relevant cache entries when the edit succeeds. With TanStack Query, the mutation's onSuccess calls queryClient.invalidateQueries({ queryKey: ['orders'] }), which marks every orders list and detail query stale and refetches the active ones; alternatively setQueryData updates the detail entry directly from the PATCH response. Query keys must be structured hierarchically, such as ['orders', 'list', filters] and ['orders', 'detail', id], so one prefix invalidation covers both. I also check staleTime: a very long staleTime with no invalidation means cached data is served indefinitely. If the app uses React Router loaders instead, actions automatically trigger revalidation of loaders after a submission. If the data is cached in a hand-written global store, the store must be updated in the same success handler. Verify with TanStack Query Devtools that the list query flips to stale and refetches."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Data Fetching and State",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Comparison",
+    "question": "React/TS: When is React Context enough for shared state, and when do you move to Zustand or Redux Toolkit?",
+    "answer": "Context is enough for low-frequency, widely read values such as the authenticated user, theme, locale or feature flags, while a store like Zustand or Redux Toolkit is better for frequently changing client state read by many components. The reason is that every consumer of a context re-renders when its value changes, and context has no selector mechanism, so putting a rapidly updating object in one provider causes broad re-renders. Zustand lets components subscribe to slices with a selector, useStore(s => s.selectedIds), and re-render only when that slice changes; it is tiny and needs no provider. Redux Toolkit adds stricter structure, devtools time travel and RTK Query, which suits large teams that want conventions. In all cases, server data belongs in a query cache, not in context or a store. The pitfall is reaching for a global store too early; most state is local or server state, and very little is truly global client state."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Data Fetching and State",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "React/TS: After adding an AppContext provider holding user, theme, cart and notifications, typing in any input makes the whole app sluggish. How do you diagnose and fix it?",
+    "answer": "The provider value is probably a new object every render, and because all consumers re-render when the value identity changes, any state change in the provider re-renders the entire tree of consumers. I confirm with the React DevTools Profiler, enabling why did this render, which will show context changed for unrelated components. Fixes, cheapest first: memoise the value with useMemo so it only changes when its contents change; split the single context into separate providers by update frequency, such as AuthContext, ThemeContext and CartContext; and separate state from dispatch so components that only trigger actions do not re-render on data changes. If notifications or cart update very frequently, move them to a store with selector-based subscriptions like Zustand. Also make sure the input's own state is local rather than lifted into the global provider. Verify by profiling the same interaction and checking that commit times and rendered component counts drop."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Data Fetching and State",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "React/TS: Your SPA uses short-lived JWT access tokens; when one expires, five parallel requests all get 401 and the app fires five refresh calls, some of which fail due to refresh-token rotation. How do you redesign the 401 handling?",
+    "answer": "Make the refresh single-flight: the first 401 starts one refresh promise, every other failed request awaits that same promise, then each retries once with the new token. In the fetch wrapper I hold let refreshing: Promise<string> | null; on 401, if refreshing is null, set it to callRefresh().finally(() => { refreshing = null }), then await it and replay the original request with the new Authorization header, marking it so a second 401 does not loop. If refresh itself fails, clear the in-memory token, cancel queued queries and redirect to login with a returnTo parameter. With rotation, concurrent refreshes invalidate each other, and some identity providers treat reuse as theft and revoke the whole family, so single-flight is essential. Across multiple tabs, coordinate with the Web Locks API or a BroadcastChannel so only one tab refreshes. Proactively refreshing shortly before exp reduces 401s further. Test it with MSW returning 401 for the first batch."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Data Fetching and State",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: A FastAPI backend returns detail as a string for HTTPException but as an array of objects for 422 validation errors. How do you handle both shapes in the frontend?",
+    "answer": "I normalise every error response into one frontend type at the API client boundary, so components never parse raw FastAPI bodies. FastAPI's HTTPException returns { detail: 'Not found' }, while request validation failures return 422 with detail as a list of objects containing loc, msg and type, for example loc ['body', 'email']. The client parses the body as unknown, then: if detail is a string, produce { message: detail, fieldErrors: {} }; if it is an array, map each item to fieldErrors keyed by the last loc element, joined if nested, plus a generic message. Status codes drive behaviour: 401 triggers re-auth, 403 shows a permission message, 409 a conflict prompt, 422 maps onto form fields with React Hook Form's setError, and 5xx shows a retryable banner with a correlation id from a response header. Ideally the backend also adopts a consistent envelope such as RFC 9457 problem details. Validate the parsing with zod so unexpected shapes still render something sensible."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Data Fetching and State",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "React/TS: Design optimistic updates for toggling a task as done in a list, including rollback when the API call fails.",
+    "answer": "I update the cache immediately, keep a snapshot, and restore it on error, then reconcile with the server either way. With TanStack Query's useMutation: in onMutate, call queryClient.cancelQueries({ queryKey: ['tasks'] }) so an in-flight refetch cannot overwrite the optimistic state, read the previous list with getQueryData, write the toggled version with setQueryData, and return { previous } as context. In onError, setQueryData back to context.previous and show a toast. In onSettled, invalidateQueries to sync with the server's truth. React 19's useOptimistic is a lighter alternative for component-local optimistic UI tied to an action. Design considerations: only do this for operations that usually succeed and are easily reversible, so not payments; make the PATCH idempotent so retries are safe; and handle rapid double toggles, either by disabling while pending or by sending the desired final state rather than a toggle command. Test rollback with MSW returning 500."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Data Fetching and State",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "React/TS: What is the difference between server state and client state in a React application, and why does the distinction matter?",
+    "answer": "Server state is data owned by the backend that the frontend only holds a cached copy of, such as orders, users or reports; client state is data that exists only in the browser, such as whether a modal is open, the current form draft or a selected tab. The distinction matters because server state has problems client state does not: it can become stale, it is shared with other users, it needs loading and error handling, and it must be refetched or invalidated after mutations. That is why server state belongs in a cache library like TanStack Query, SWR or RTK Query, while client state can live in useState, useReducer, the URL or a small store. Mixing them, for example copying API responses into a Redux slice, forces you to rebuild caching and invalidation by hand. A quick test: if refreshing the page should fetch it again from an API, it is server state."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Routing and Forms",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "React/TS: Compare controlled and uncontrolled form inputs and give a case where each is the right choice.",
+    "answer": "A controlled input gets its value from React state and reports every change through onChange, while an uncontrolled input keeps its value in the DOM and you read it when needed, through a ref or FormData on submit. Controlled inputs suit live behaviour: instant validation feedback, formatting a phone number as the user types, or enabling a submit button only when fields are valid. Uncontrolled inputs suit simple forms and large forms where re-rendering on every keystroke is wasteful; React Hook Form uses uncontrolled inputs with refs for exactly that performance reason, and React 19 form actions receive FormData directly. File inputs are always uncontrolled because their value is read-only. The classic pitfall is switching between modes, for example value={user?.name} where name is undefined at first, which triggers React's warning about changing an uncontrolled input to controlled; default to an empty string instead."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Routing and Forms",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: How do you define routes with a URL parameter in React Router and read that parameter in the page component?",
+    "answer": "In React Router, routes are defined as configuration objects or JSX, and dynamic segments use a colon prefix, which the component reads with the useParams hook. With the data router: const router = createBrowserRouter([{ path: '/', element: <Layout />, children: [{ index: true, element: <Home /> }, { path: 'orders/:orderId', element: <OrderDetail /> }, { path: '*', element: <NotFound /> }] }]); then render <RouterProvider router={router} />. Inside OrderDetail, const { orderId } = useParams(); gives the value as string | undefined, so I validate it before calling the API. The Layout renders an <Outlet /> where child routes appear, and navigation uses <Link to={`/orders/${id}`}> or the useNavigate hook rather than anchor tags, so the page does not reload. In React Router v7 the same APIs are imported from the react-router package. A common pitfall is forgetting the catch-all route, leaving users on a blank screen for unknown URLs."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Routing and Forms",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: Implement protected routes in an SPA so unauthenticated users are redirected to login and returned to their original page afterwards.",
+    "answer": "I wrap protected routes in a layout component that checks auth state and redirects with the original location preserved. For example, function RequireAuth() { const { user, isLoading } = useAuth(); const location = useLocation(); if (isLoading) return <Spinner />; if (!user) return <Navigate to='/login' replace state={{ from: location }} />; return <Outlet />; } and nest protected routes under it. After login, navigate(location.state?.from?.pathname ?? '/', { replace: true }). Role checks follow the same pattern with a requiredRole prop. The loading state matters: without it, a refresh flashes the login page while the session is being restored from a cookie or refresh call. With data routers you can also do the check in a loader and throw redirect('/login'). The critical point for a backend engineer is that this is purely UX; the API must enforce authorisation on every request, because anyone can bypass client routing by calling the endpoints directly."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Routing and Forms",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: How would you build a signup form with React Hook Form and zod, and surface server-side 422 validation errors on the right fields?",
+    "answer": "I define the schema once with zod, infer the form type from it, connect it with zodResolver, and map server errors back with setError. Example: const Schema = z.object({ email: z.string().email(), password: z.string().min(12) }); type Form = z.infer<typeof Schema>; const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<Form>({ resolver: zodResolver(Schema) }). Inputs use {...register('email')} and render errors.email?.message. On submit, call the API; if it returns 422 from FastAPI, iterate over detail and call setError(item.loc.at(-1), { message: item.msg }) for known fields, and setError('root.server', ...) for anything else. Client validation gives instant feedback; server validation remains authoritative for things like an email already being registered. Disable the button while isSubmitting to prevent double posts. Pitfall: the client and server rules drift, so keep limits like password length aligned or derived from the OpenAPI schema."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Routing and Forms",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "React/TS: Users report duplicate orders when they double-click Submit, and lost drafts when they click a nav link mid-edit. How do you address both?",
+    "answer": "Duplicates need protection on both client and server, and lost drafts need a navigation guard plus persistence. On the client, disable the submit button while the mutation is pending, using isSubmitting from React Hook Form, isPending from useMutation, or useFormStatus in React 19. That is not enough, since retries and flaky networks still resend, so the client generates an idempotency key with crypto.randomUUID() when the form opens and sends it as an Idempotency-Key header; the FastAPI endpoint stores it with a unique constraint and returns the original result on repeats. For drafts, React Router's useBlocker can intercept in-app navigation when the form isDirty and show a confirm dialog, and a beforeunload listener covers tab closes and refreshes. For long forms, autosave the draft to sessionStorage or a drafts endpoint, debounced. Verify with tests that simulate double clicks and with a backend test that replays the same key."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Routing and Forms",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "React/TS: Why store table filters, sort order and pagination in URL search params rather than component state?",
+    "answer": "Putting them in the URL makes the view shareable, bookmarkable, refresh-safe and compatible with the back button, which component state cannot do. With React Router, const [params, setParams] = useSearchParams(); const page = Number(params.get('page') ?? '1'); and changing a filter calls setParams with the new values. Those params then feed the query key, such as ['orders', { status, page }], so the cache naturally separates each view and navigating back is instant. Search params are strings, so I parse and validate them, often with a small zod schema that applies defaults and rejects garbage like page=-5. For text inputs, I debounce before writing to the URL and use replace: true so typing does not create dozens of history entries. Libraries like nuqs offer typed search-param state if you want less boilerplate. The pitfall is duplicating the values in useState and syncing them with effects, which causes flicker and loops."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Routing and Forms",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "React/TS: Explain React Router's loaders and actions and how they change data loading compared with fetching inside components.",
+    "answer": "Loaders fetch a route's data before the route renders, and actions handle mutations from forms, after which the router automatically revalidates loaders; this moves data flow from component effects into the routing layer. A route declares loader: ({ params, request }) => fetchOrder(params.orderId, request.signal), and the component reads it with useLoaderData. Because the router knows all matched routes up front, nested route loaders run in parallel instead of the waterfall you get when a parent component renders, fetches, then a child renders and fetches. Navigation aborts stale loads through request.signal, which solves race conditions. A <Form method='post'> submits to the route's action, which can return validation errors or throw redirect, and useNavigation exposes pending state. Loaders can throw responses that render in an errorElement. Many teams combine loaders with TanStack Query, calling queryClient.ensureQueryData in the loader to get prefetching plus caching. The trade-off is coupling data to routes, which suits page-level data more than widgets."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Routing and Forms",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "React/TS: How does client-side routing in a single-page application differ from traditional server-side routing?",
+    "answer": "In client-side routing the browser loads one HTML page and JavaScript bundle once, then the router swaps components and updates the URL with the History API, without asking the server for a new page. In server-side routing every navigation sends a request and the server returns a full HTML document. The client-side approach makes navigation fast and preserves in-memory state, such as caches and open panels, and the server only serves JSON from APIs. The costs are a larger initial download, needing to manage scroll restoration, focus and page titles yourself for accessibility, and SEO limitations for public content. It also means the web server must return index.html for any unknown path, otherwise a refresh on /orders/42 returns 404 because no such file exists. Frameworks like Next.js or React Router framework mode blend the two with server rendering on first load and client navigation afterwards."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Performance",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "React/TS: An audit log page renders 5,000 rows and scrolling stutters while typing in its filter box lags. How do you make it fast?",
+    "answer": "The main fix is list virtualisation, rendering only the rows visible in the viewport plus a small overscan, so the DOM holds about 30 rows instead of 5,000. I would use TanStack Virtual's useVirtualizer, or react-window, with a fixed or estimated row height and a scroll container. Before that, I profile with the React DevTools Profiler and the Chrome Performance panel to confirm whether the cost is React rendering, layout, or the filter computation. Supporting fixes: memoise the filtered array with useMemo keyed on data and the debounced term; wrap the row component in React.memo with stable props; and use useDeferredValue on the filter term so typing stays responsive while the list updates at lower priority. Also question the requirement: server-side pagination or infinite loading with useInfiniteQuery may be better than shipping 5,000 rows at all. Pitfalls of virtualisation are that browser find-in-page no longer sees off-screen rows and that variable row heights need measurement."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Performance",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "React/TS: What does React.memo do, and why can wrapping a component in it fail to stop re-renders?",
+    "answer": "React.memo wraps a component so React skips re-rendering it when its props are shallowly equal to the previous props, using Object.is on each prop. It is useful for components that are expensive to render and receive the same props often, such as rows in a large table. It commonly fails because a parent passes new references every render: an inline object like style={{ color: 'red' }}, an inline arrow function like onClick={() => select(id)}, or a freshly filtered array. Each is a new reference, so the shallow comparison fails and the memo does nothing except add comparison cost. The fixes are useCallback and useMemo in the parent, or passing primitives such as id instead of objects. A memoised component still re-renders when its own state changes or when a context it uses changes. React Compiler automates much of this memoisation, so in compiled code React.memo is often unnecessary."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Performance",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: How do you code-split a React app by route with React.lazy and Suspense, and how do you handle a chunk that fails to load?",
+    "answer": "I lazy-load each heavy route so its code is fetched only when the user visits it, using dynamic import which Vite turns into a separate chunk. Example: const Reports = lazy(() => import('./features/reports/ReportsPage')); then render it inside <Suspense fallback={<PageSkeleton />}>. With React Router data routers, the route's lazy property achieves the same and can load the loader alongside the component. Good candidates are admin areas, charting libraries and rich text editors. A chunk can fail to load because of a flaky network or because a new deployment removed the old hashed file, so I wrap lazy routes in an error boundary that offers a retry or a full reload, and I listen for Vite's vite:preloadError event to reload once. To verify, check the build output and the Network tab to confirm the chunk loads on navigation. Pitfall: over-splitting into dozens of tiny chunks creates request waterfalls; split by route and big dependency, not by every component."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Performance",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "React/TS: Walk through how you would use the React DevTools Profiler to find why a dashboard re-renders excessively when a single widget updates.",
+    "answer": "I record the slow interaction in the Profiler, then look at which components rendered in each commit, how long they took, and why. In the Profiler settings, I enable recording why each component rendered, then click record, reproduce the widget update, and stop. The flame graph shows every component that rendered in a commit with its duration, and the ranked view sorts by cost. Selecting a component shows the reason, such as props changed with the specific prop names, hooks changed, context changed, or parent rendered. Typical findings are a state value held too high in the tree, a context provider value recreated each render, or inline object props defeating React.memo. I fix the biggest offender first, usually by moving state down, splitting context or stabilising props, then re-record to compare commit durations. For production-only issues, a profiling build of react-dom enables the Profiler there. The Chrome Performance panel complements this for layout and long tasks."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Performance",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Conceptual",
+    "question": "React/TS: What does React Compiler do, and how does it change the way you write useMemo, useCallback and React.memo?",
+    "answer": "React Compiler is a build-time tool, released as stable 1.0 in October 2025, that analyses components and hooks and automatically inserts fine-grained memoisation, so most manual useMemo, useCallback and React.memo becomes unnecessary. It runs as a Babel plugin, babel-plugin-react-compiler, which you add to the Vite React plugin's babel configuration, and it works with React 17 and later, with React 19 needing no extra runtime package. It can memoise at a finer granularity than hand-written code, including individual JSX elements. It relies on code following the rules of React: pure render functions, no mutation of props or state, and hooks called correctly. Components that break those rules are skipped rather than miscompiled, and eslint-plugin-react-hooks surfaces the violations. For adoption I enable it incrementally on a directory, run the test suite, and compare Profiler recordings. Existing manual memoisation can stay; the compiler respects it. The pitfall is assuming it fixes architectural issues like oversized contexts."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Performance",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "React/TS: On low-end laptops, typing in a dashboard's global search freezes the UI because every keystroke re-renders charts and tables. How would you use concurrent React features to fix responsiveness?",
+    "answer": "I would mark the expensive downstream update as non-urgent so React keeps the input responsive and renders the heavy views in an interruptible background pass. The simplest tool is useDeferredValue: const deferredQuery = useDeferredValue(query); pass deferredQuery to the charts and tables, and wrap them in React.memo so they only re-render when the deferred value changes. React first re-renders with the old deferred value, updating the input immediately, then renders the new value in the background and abandons that work if another keystroke arrives. Comparing query with deferredQuery lets me dim stale results. If I control the state update, useTransition with startTransition(() => setFilter(value)) does the same and exposes isPending. These only help if the expensive components are memoised and rendering is the bottleneck; they do not make a slow chart library faster. I would combine this with virtualisation, moving heavy aggregation to the API or a Web Worker, and measure Interaction to Next Paint before and after."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Performance",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: The production bundle of a Vite app has grown to 2 MB of JavaScript. How do you find what is bloating it and shrink it?",
+    "answer": "I visualise the bundle, find the largest dependencies, then remove, replace, lazy-load or tree-shake them. First run the build with rollup-plugin-visualizer, or npx vite-bundle-visualizer, to get a treemap of each chunk by module and gzipped size. Common offenders are moment with all locales, full lodash imported as a namespace, an icon library imported wholesale, a charting or PDF library loaded on the first page, and duplicate copies of a package at different versions. Fixes: switch to date-fns or Intl APIs, import lodash-es functions individually, import icons by path, lazy-load heavy routes and modals with dynamic import, and deduplicate versions in the lockfile. Make sure dependencies ship ES modules and declare sideEffects false so Rollup can tree-shake. Then add a size budget in CI, for example with size-limit, so regressions are caught at review time. Verify the gain by comparing gzipped sizes and Lighthouse metrics, not just raw bytes."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Performance",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "React/TS: How do you measure and improve Core Web Vitals for a client-rendered React SPA that sits in front of a FastAPI backend?",
+    "answer": "I measure LCP, INP and CLS from real users with the web-vitals library sending to an analytics endpoint, then fix the biggest contributor for each. INP replaced First Input Delay as a Core Web Vital in March 2024; good thresholds are LCP under 2.5 seconds, INP under 200 milliseconds and CLS under 0.1 at the 75th percentile. For a SPA, LCP suffers from the waterfall of HTML, then JS bundle, then API call, then render; I shrink the initial bundle with route splitting, preload critical assets, serve compressed files with long cache headers, start the critical API request early, such as in a route loader, and make the FastAPI endpoint fast. INP improves by breaking up long tasks, deferring non-urgent renders with transitions, and virtualising large lists. CLS improves by reserving space for images, skeletons matching final layout, and font-display settings. Lighthouse and the Chrome Performance panel help in the lab, but field data decides, since lab devices are faster than users' machines."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Performance",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Scenario",
+    "question": "React/TS: You wrapped a chart component in React.memo, but the Profiler shows it still re-renders on every parent update. The parent passes options={{ stacked: true }} and onPointClick={(p) => open(p.id)}. What do you change?",
+    "answer": "Both props are recreated on every parent render, so the shallow prop comparison always fails and React.memo has no effect. The options object is static, so I hoist it to module scope, const chartOptions = { stacked: true }, which gives a permanent stable reference at no cost. If it depended on props or state, I would wrap it in useMemo with those dependencies. The handler becomes const onPointClick = useCallback((p: Point) => open(p.id), [open]), and I check that open itself is stable, since an unstable dependency just moves the problem. Data arrays passed in should also be memoised rather than built with filter or map inline. After the change, I re-record in the Profiler and confirm the chart shows did not render for unrelated parent updates. If the project has React Compiler enabled, it would memoise these automatically, which is a good argument for adopting it instead of sprinkling hooks manually."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Security",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "React/TS: How does React protect against cross-site scripting by default, and where does that protection stop?",
+    "answer": "React escapes any string rendered inside JSX as text, so a comment containing a script tag is displayed literally rather than executed. Values in attributes are also set safely as properties rather than concatenated into HTML. The protection stops in several places. dangerouslySetInnerHTML inserts raw HTML, so any user content there must be sanitised. URL attributes are a gap: href={userUrl} with a javascript: URL can execute code on click; React 19 blocks javascript: URLs in href and src, but older versions only warn, so I validate URLs to http or https. Direct DOM manipulation through refs, innerHTML or third-party widgets bypasses React entirely. Spreading user-controlled objects as props can inject event handlers or attributes. Server-rendered HTML that embeds JSON state without escaping is another vector. And XSS can still come from dependencies, which is why a Content Security Policy is a valuable second layer."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Security",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: Product wants to render rich-text release notes authored in a CMS. How do you use dangerouslySetInnerHTML safely?",
+    "answer": "Only pass HTML through dangerouslySetInnerHTML after sanitising it with a well-maintained allowlist sanitiser such as DOMPurify, ideally on both the server when content is saved and the client before rendering. Example: const clean = DOMPurify.sanitize(html, { USE_PROFILES: { html: true } }); return <div dangerouslySetInnerHTML={{ __html: clean }} />. DOMPurify strips script tags, inline event handlers like onerror and javascript: URLs, and I tighten the configuration further, for example forbidding style attributes and iframes if the content does not need them, and adding rel='noopener noreferrer' to links via a hook. If the source is Markdown, I prefer react-markdown, which renders to React elements without raw HTML by default, avoiding the problem entirely. A Content Security Policy without unsafe-inline adds defence in depth, and Trusted Types can enforce that only sanitised values reach HTML sinks. Verify with a test that injects a payload like an img tag with onerror and asserts it is removed."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Security",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "React/TS: A security report shows an attacker used a stored XSS in a comments widget to read JWTs from localStorage and call your API as other users. How do you respond and redesign?",
+    "answer": "Contain first, then remove the XSS, then change token storage so a future XSS cannot exfiltrate long-lived credentials. Immediately, patch the vulnerable rendering path, purge the malicious stored comments, and revoke sessions: rotate the JWT signing key or bump a token version claim so every stolen token fails validation, and invalidate refresh tokens. Review API logs for requests from unusual IPs using affected tokens to scope the impact and notify as required. Then fix root causes: remove the dangerouslySetInnerHTML or add DOMPurify sanitisation, add a strict nonce-based CSP to block inline and third-party script injection, and enable Trusted Types. For storage, move to a backend-for-frontend or an httpOnly, Secure, SameSite cookie session, so JavaScript never sees the credential; if bearer tokens remain, keep short-lived access tokens in memory only and refresh via an httpOnly cookie. Be honest that XSS can still make requests while the user is on the page, so cookies reduce theft, not every abuse."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Security",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Comparison",
+    "question": "React/TS: Compare storing an access token in localStorage, in JavaScript memory, and in an httpOnly cookie for a SPA calling your API.",
+    "answer": "An httpOnly cookie is the most resistant to token theft, memory is a reasonable middle ground, and localStorage is the weakest because any script on the origin can read it. localStorage persists across tabs and reloads and is simple, but a single XSS or compromised npm dependency can exfiltrate the token and use it from anywhere until it expires. In-memory storage, such as a module variable, disappears on reload, so it is usually paired with a refresh token in an httpOnly cookie to silently obtain a new short-lived access token; XSS can still use the token during the session but stealing it is harder. An httpOnly, Secure, SameSite=Lax or Strict cookie is invisible to JavaScript, but the browser sends it automatically, so you must handle CSRF and configure CORS with credentials and an explicit origin. Cookies are simplest when the SPA and API share a site, for example behind one domain via nginx. Whatever you choose, keep tokens short-lived and support revocation."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Security",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Conceptual",
+    "question": "React/TS: If your SPA authenticates with session cookies against a FastAPI backend, how do you defend against CSRF?",
+    "answer": "Cookie auth means the browser attaches credentials to cross-site requests automatically, so I combine SameSite cookies with an explicit CSRF check on state-changing requests. First, set the session cookie with HttpOnly, Secure and SameSite=Lax or Strict; Lax blocks cookies on cross-site POSTs, which stops classic form-based CSRF in modern browsers. Second, never perform state changes on GET, since Lax still sends cookies on top-level GET navigations. Third, add a token: the double-submit pattern sets a non-httpOnly csrf cookie, the SPA copies it into an X-CSRF-Token header, and FastAPI middleware rejects mismatches; requiring a custom header also forces a CORS preflight for cross-origin attackers. Fourth, check the Origin or Sec-Fetch-Site header server-side. CORS itself is not CSRF protection, because simple requests are sent before the browser decides whether the response is readable. Bearer tokens in an Authorization header are not vulnerable to CSRF, but they shift the risk to token theft via XSS."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Security",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Expert",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: How would you roll out a strict Content Security Policy for a Vite-built React SPA served by nginx without breaking production?",
+    "answer": "I start in report-only mode, fix violations, then enforce a policy that disallows inline scripts and limits connections to known origins. A Vite production build emits external hashed script files, so a static SPA can usually use script-src 'self' without nonces, as long as there are no inline scripts in index.html. A starting header in nginx: add_header Content-Security-Policy-Report-Only \"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; connect-src 'self' https://api.example.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; report-to csp\" always; with a Reporting-Endpoints header pointing to a collector. Typical violations are analytics snippets, CSS-in-JS injecting style tags, and inline event handlers. Third-party scripts either get explicit origins or move behind a tag manager with nonces via server rendering. After a clean week of reports, switch to the enforcing header. Remember the dev server needs a looser policy for HMR, so apply CSP only in the nginx production config."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Security",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "React/TS: The SPA on localhost:5173 calls a FastAPI service on localhost:8000 and the console shows a CORS error, while curl works fine. What is happening and what are your two main fixes?",
+    "answer": "The browser enforces the same-origin policy: a different port is a different origin, and FastAPI is not returning an Access-Control-Allow-Origin header that permits http://localhost:5173, so the browser hides the response. curl ignores CORS entirely, which is why it works. In development the cleanest fix is a Vite dev proxy: server.proxy in vite.config.ts maps '/api' to http://localhost:8000, so the browser only talks to one origin and no CORS is needed, mirroring production where nginx serves both on one domain. The alternative is FastAPI's CORSMiddleware with allow_origins=['http://localhost:5173'], plus allow_credentials=True if you send cookies; with credentials you cannot use a wildcard origin. Also check the preflight: an Authorization header or JSON content type triggers an OPTIONS request that must succeed, and a 401 or 500 from auth middleware on OPTIONS looks like a CORS error. Error responses must include the CORS headers too, or real errors appear as CORS failures."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Security",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "React/TS: Explain the backend-for-frontend pattern for SPA authentication with an OIDC provider and when you would recommend it over handling tokens in the browser.",
+    "answer": "In a backend-for-frontend, a small server on the same site as the SPA performs the OIDC authorization code flow as a confidential client, keeps access and refresh tokens server-side, and gives the browser only an httpOnly session cookie; the SPA calls the BFF, which attaches tokens when proxying to downstream APIs. The current IETF guidance on OAuth for browser-based apps recommends this as the most secure option, because tokens never reach JavaScript, so XSS cannot steal them, and the client secret stays confidential. It also centralises refresh-token rotation and lets you call multiple APIs without exposing them to CORS. Costs are an extra service to run and scale, session storage such as Redis, CSRF protection because cookies are used, and added latency through the proxy. I recommend it for apps handling sensitive data or regulated workloads. For low-risk internal tools, authorization code with PKCE in the browser and in-memory tokens can be acceptable. The BFF can be a FastAPI app or an API gateway feature."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Security",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "React/TS: Why must an API key never be put in a VITE_ environment variable, and what do you do instead?",
+    "answer": "Every variable prefixed with VITE_ is inlined as a literal string into the JavaScript bundle at build time, so anyone can read it in DevTools or by downloading the file; the frontend has no way to keep a secret. Vite deliberately only exposes variables with that prefix through import.meta.env to prevent accidental leaks of other environment variables, but anything you prefix becomes public. Safe values are things like a public API base URL, a Sentry DSN or a feature flag. For secrets such as a third-party API key or an LLM provider key, the frontend calls your own backend, for example a FastAPI endpoint, which holds the key in Secret Manager or a Kubernetes secret, adds it server-side, and enforces authentication, rate limits and quotas. If a key has already shipped in a bundle, treat it as compromised and rotate it, because old builds may be cached by CDNs and browsers."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Testing",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "React/TS: What philosophy does React Testing Library follow, and which queries should you prefer?",
+    "answer": "React Testing Library encourages testing components the way users interact with them, through visible text, roles and labels, instead of implementation details like state, props or component internals. The guiding idea is that the more your tests resemble real usage, the more confidence they give, and refactors that do not change behaviour should not break tests. Query priority: getByRole with an accessible name first, such as screen.getByRole('button', { name: /save/i }); then getByLabelText for form fields; then getByPlaceholderText and getByText; getByTestId only as a last resort. Use getBy when the element must exist, queryBy to assert absence, and findBy for elements that appear asynchronously. A side benefit is accessibility: if you cannot find a button by role and name, screen-reader users probably cannot either. The pitfall is reaching into container.querySelector with CSS classes, which couples tests to markup and styling."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Testing",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: Set up Vitest with React Testing Library in a Vite project, including the DOM environment and jest-dom matchers.",
+    "answer": "Install vitest, @testing-library/react, @testing-library/user-event, @testing-library/jest-dom and jsdom as dev dependencies, then configure the test block in vite.config.ts so tests share the app's Vite transforms and aliases. Configuration: test: { environment: 'jsdom', globals: true, setupFiles: './src/test/setup.ts', css: false }. The setup file imports '@testing-library/jest-dom/vitest' to register matchers like toBeInTheDocument and toHaveTextContent, and can start the MSW server. With globals true, add vitest/globals to the types array in tsconfig so describe and expect type-check. Add scripts: test runs vitest in watch mode, and test:ci runs vitest run --coverage with @vitest/coverage-v8. Testing Library cleans up automatically after each test when globals are enabled. happy-dom is a faster alternative environment but has gaps in some DOM APIs. For behaviour that depends on real layout, consider Vitest browser mode with Playwright. Verify with a smoke test that renders App and asserts a heading."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Testing",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: How do you mock API calls in component tests, and why do many teams prefer Mock Service Worker over stubbing fetch directly?",
+    "answer": "I mock at the network layer with Mock Service Worker, so components use the real fetch client and only the HTTP responses are faked. In Node tests, setupServer from msw/node intercepts requests; handlers look like http.get('/api/orders', () => HttpResponse.json([{ id: '1', status: 'open' }])). The setup file calls server.listen({ onUnhandledRequest: 'error' }) before all tests, server.resetHandlers() after each, and server.close() at the end. Individual tests override with server.use(http.get('/api/orders', () => HttpResponse.json({ detail: 'boom' }, { status: 500 }))) to test error states. Compared with vi.spyOn(globalThis, 'fetch') or mocking a module, MSW exercises URL building, headers, JSON parsing and error handling in your client, works with any library such as axios or TanStack Query, and the same handlers can run in the browser for Storybook or local development. Stubbing fetch is fine for a tiny unit test of a utility. The error mode on unhandled requests catches unexpected calls."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Testing",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Troubleshooting",
+    "question": "React/TS: Your component tests are flaky and print warnings that an update was not wrapped in act. How do you fix them properly?",
+    "answer": "The warning means state updated after the test thought it was done, usually because an async operation like a fetch or timer resolved after assertions ran, so the fix is to wait for the UI outcome rather than sprinkle act calls. Use findBy queries, which retry until the element appears, for example expect(await screen.findByText('Order 42')).toBeInTheDocument(), or waitFor for assertions that are not about a single element. Use userEvent with await, const user = userEvent.setup(); await user.click(button), since its interactions are async. Make sure each test's async work completes or is cancelled: reset MSW handlers, give each test a fresh QueryClient with retry: false so failed queries do not retry in the background, and unmount happens via automatic cleanup. With fake timers, call vi.useFakeTimers({ shouldAdvanceTime: true }) or pass advanceTimers to userEvent.setup. Avoid waitFor with side effects inside, and avoid arbitrary sleeps; they hide races and slow the suite."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Testing",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Coding",
+    "question": "React/TS: Write a Vitest and React Testing Library test verifying that an OrdersPage shows a loading state, then the API's FastAPI-style error message when the request fails.",
+    "answer": "I render the page inside a fresh QueryClient, override the MSW handler to return an error, and assert on what the user sees.\n\nimport { render, screen } from '@testing-library/react';\nimport { QueryClient, QueryClientProvider } from '@tanstack/react-query';\nimport { http, HttpResponse } from 'msw';\nimport { server } from '../test/server';\nimport { OrdersPage } from './OrdersPage';\n\nfunction renderWithClient(ui: React.ReactElement) {\n  const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });\n  return render(<QueryClientProvider client={client}>{ui}</QueryClientProvider>);\n}\n\ntest('shows API error detail', async () => {\n  server.use(http.get('/api/orders', () => HttpResponse.json({ detail: 'Orders service unavailable' }, { status: 503 })));\n  renderWithClient(<OrdersPage />);\n  expect(screen.getByRole('status')).toHaveTextContent(/loading/i);\n  expect(await screen.findByRole('alert')).toHaveTextContent('Orders service unavailable');\n});\n\nKey choices: retry false stops TanStack Query retrying three times and slowing the test; a new client per test prevents cache leakage between tests; and role-based queries assume the component uses role status and alert, which also improves accessibility. Runtime is dominated by rendering, effectively O(1) for this fixed tree. Pitfall: asserting the loading state with findBy instead of getBy can miss it because it resolves after the response."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Testing",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Design / Architecture",
+    "question": "React/TS: How do you split testing effort across unit tests, component integration tests and Playwright end-to-end tests for a React app backed by FastAPI?",
+    "answer": "I put most effort into component integration tests with RTL and MSW, keep pure unit tests for logic, and reserve Playwright for a small set of critical journeys against a real backend. Unit tests with Vitest cover reducers, formatters, zod schemas and the API error normaliser, where they are fast and precise. Integration tests render a page or feature with its real hooks, router and query client, with only the network mocked; they catch most regressions and stay stable through refactors. Playwright end-to-end tests cover login, the main create and edit flows and permission boundaries, running against the built SPA, a FastAPI container and a seeded database in CI, with traces captured on failure. Contract safety between layers comes from generated OpenAPI types and a backend diff check, not from end-to-end tests. Add an accessibility scan with axe in Playwright on key pages. The pitfall is a top-heavy suite of slow, flaky end-to-end tests that teams learn to ignore."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Testing",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Expert",
+    "questionType": "Scenario",
+    "question": "React/TS: A suite of date-related component tests passes on every developer laptop but fails intermittently in the CI pipeline. How do you track it down and make the tests deterministic?",
+    "answer": "Intermittent CI-only failures in date logic are usually caused by timezone, locale or real clock differences, so I pin all three and remove wall-clock dependence. First, read the failing assertions: a date off by one day suggests the CI runner uses UTC while laptops use a local zone, and formatted strings that differ suggest locale. Set TZ=UTC in the test script or in the Vitest config's env, and pass explicit locale and timeZone options to Intl.DateTimeFormat in the code so it does not depend on the machine. For time-dependent logic such as 'expires in 5 minutes', use vi.useFakeTimers() and vi.setSystemTime(new Date('2026-01-15T10:00:00Z')), restoring with vi.useRealTimers() after each test. Also check for test-order dependence by running vitest with --sequence.shuffle, and for shared mutable state like a module-level QueryClient. CI machines are slower, so arbitrary timeouts and waitFor with small limits also fail there. Verify by reproducing locally with TZ set to a non-UTC zone."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Testing",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Comparison",
+    "question": "React/TS: In React Testing Library, why is userEvent generally preferred over fireEvent?",
+    "answer": "userEvent simulates complete user interactions the way a browser would, while fireEvent dispatches a single DOM event, so userEvent catches bugs that fireEvent misses. Typing with await user.type(input, 'hello') fires keydown, keypress, input and keyup for each character, respects maxLength and disabled state, and moves focus; fireEvent.change sets the value in one jump and would happily change a disabled input. user.click triggers pointer, mouse, focus and click events in order and refuses to click elements hidden by pointer-events none. The modern API is const user = userEvent.setup() at the start of the test, and every interaction is awaited because it is asynchronous. fireEvent remains useful for events userEvent does not model, such as scroll or a custom event, and for very low-level tests. The pitfall is forgetting to await userEvent calls, which produces act warnings and assertions that run before the interaction finishes."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Build and Tooling",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Beginner",
+    "questionType": "Conceptual",
+    "question": "React/TS: What does Vite do differently in development compared with the production build?",
+    "answer": "In development Vite serves your source files as native ES modules over its dev server, transforming each file on demand, while production uses a bundler to produce optimised, minified, hashed static files. In dev, the browser requests modules individually, Vite transpiles TypeScript and JSX with esbuild per request, and pre-bundles dependencies from node_modules once so a library with hundreds of files loads quickly. Hot Module Replacement with React Fast Refresh updates edited components without losing state. For production, vite build bundles with Rollup, with Rolldown as the Rust-based successor being adopted in newer Vite versions, applying tree-shaking, code splitting, minification and content hashes in filenames, and writes everything to dist. Because dev and prod pipelines differ, some issues only appear after building, such as case-sensitive import paths or dynamic import edge cases, so I always run vite preview locally before deploying. Note that neither step type-checks; run tsc --noEmit separately."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Build and Tooling",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Troubleshooting",
+    "question": "React/TS: import.meta.env.API_URL is undefined in the deployed app even though API_URL is set as an environment variable on the Kubernetes pod. Why?",
+    "answer": "There are two problems: Vite only exposes variables prefixed with VITE_, and it substitutes them at build time, so a variable set on the running pod is never seen by already-built JavaScript. A static SPA served by nginx has no Node process reading the environment; import.meta.env.VITE_API_URL is replaced with a string literal when vite build runs. So first rename the variable to VITE_API_URL and make sure it is present during the build, for example passed as a Docker build arg or set in the CI job, or placed in a .env.production file. Second, decide whether build-time configuration is acceptable: it means one image per environment. If you want one image promoted through dev, staging and production, load configuration at runtime instead, for example from a config.json generated at container start or by using relative URLs like /api behind nginx. Add a vite-env.d.ts interface for ImportMetaEnv so typos are compile errors."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Build and Tooling",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "React/TS: The SPA works when you click around, but refreshing on /orders/42 behind nginx returns a 404. Diagnose and fix it.",
+    "answer": "nginx is looking for a file at /orders/42 on disk, finds none, and returns 404, because that route only exists inside the client-side router; the fix is to fall back to index.html for unknown paths. In the server block: location / { try_files $uri $uri/ /index.html; } so real files like /assets/index-abc123.js are served directly and anything else gets index.html, after which React Router renders the right page. API traffic must be excluded so missing endpoints still return proper errors: location /api/ { proxy_pass http://backend:8000; } placed separately. Make sure missing static assets under /assets/ return a real 404 rather than HTML, with location /assets/ { try_files $uri =404; }, otherwise a missing chunk returns index.html and causes a confusing MIME type error. If the app is served from a subpath, set Vite's base option and the router's basename. The same issue appears on S3 or GCS buckets, solved there with error document or CDN rewrites. Verify with curl -I on a deep link."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Build and Tooling",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Scenario",
+    "question": "React/TS: Your platform team wants one immutable frontend container image promoted from dev to staging to production, but each environment has a different API URL and OIDC client ID. How do you implement runtime configuration?",
+    "answer": "Move environment-specific values out of the build and load them at runtime from a small file served alongside the app. At container start, an entrypoint script renders /usr/share/nginx/html/config.json from environment variables with envsubst, or a Kubernetes ConfigMap is mounted at that path. The SPA fetches /config.json before rendering, validates it with zod, and provides it through context or a module singleton; React Router loaders and the API client read from it. Serve config.json with Cache-Control: no-store so changes apply without cache-busting. An alternative is window.__CONFIG__ set by a generated config.js script, which avoids an extra await but needs CSP allowance if inlined, so a separate file is cleaner. Simplest of all, where possible, use relative URLs such as /api and let nginx or the ingress route them, so many values disappear. Only public values belong here, never secrets. Verify by deploying the same image digest to two namespaces and checking each loads its own settings."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Build and Tooling",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Expert",
+    "questionType": "Design / Architecture",
+    "question": "React/TS: Design the Dockerfile and nginx caching strategy for shipping a Vite React SPA to production.",
+    "answer": "Use a multi-stage build so the final image contains only nginx and static files, and cache hashed assets forever while never caching index.html. Stage one: FROM node:22-alpine AS build, copy package.json and the lockfile first, run npm ci to benefit from layer caching, copy sources, then npm run build. Stage two: FROM nginxinc/nginx-unprivileged:alpine, copy dist to /usr/share/nginx/html and a custom nginx.conf; the unprivileged image listens on 8080 and runs as non-root, which satisfies restricted Pod Security Standards. In nginx, location /assets/ sets Cache-Control: public, max-age=31536000, immutable, because Vite puts content hashes in filenames; location = /index.html sets Cache-Control: no-cache so clients always revalidate and pick up new chunk names; location / uses try_files with an index.html fallback. Enable gzip or serve precompressed brotli files, and add security headers such as CSP, X-Content-Type-Options and Referrer-Policy. Add a /healthz location for probes. Pitfall: caching index.html at the CDN, which strands users on deleted chunks."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Build and Tooling",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "React/TS: Configure the Vite dev server to proxy /api requests to a local FastAPI backend, and explain why this mirrors production better than enabling CORS.",
+    "answer": "Add a proxy entry in vite.config.ts: server: { proxy: { '/api': { target: 'http://localhost:8000', changeOrigin: true, rewrite: (path) => path.replace(/^\\/api/, '') } } }. The browser then calls relative URLs like fetch('/api/orders') on localhost:5173, and Vite forwards them server-side to FastAPI, so there is no cross-origin request and no CORS configuration needed. Drop the rewrite if FastAPI routes already include the /api prefix, or set root_path in FastAPI so its generated docs and redirects stay correct behind the prefix. This mirrors a typical production setup where nginx or an ingress serves the SPA and routes /api to the backend on the same domain, so cookies, SameSite behaviour and relative URLs behave identically in both environments. Enabling CORS only in development hides problems that then appear in production. For WebSockets, add ws: true to the proxy entry. If proxied calls fail, check the Vite terminal for ECONNREFUSED, often because FastAPI is bound to a different host or port."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - Build and Tooling",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Expert",
+    "questionType": "Troubleshooting",
+    "question": "React/TS: Right after each deployment, some users get a blank page and console errors saying a dynamically imported module failed to fetch. What is going on and how do you fix it for good?",
+    "answer": "Users still running the previous version request lazy-loaded chunks whose hashed filenames were deleted by the new deployment, so the dynamic import fails. It can also happen when index.html is cached by a CDN or browser and references old asset names. Fixes come in layers. Serve index.html with Cache-Control: no-cache and purge it on deploy, while keeping hashed assets immutable. Keep the previous release's assets available for a while, by uploading new assets to a bucket or CDN without deleting old ones, or by baking the last few releases into the image. In the app, listen for Vite's vite:preloadError event on window and reload the page once, guarded with a sessionStorage flag to avoid loops, and wrap lazy routes in an error boundary that offers a refresh. Optionally poll a version.json endpoint and prompt users to reload when a new build is live. Check nginx too: a missing chunk must return 404, not index.html via try_files, or you get a MIME type error instead."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - React 19 Features",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Intermediate",
+    "questionType": "Conceptual",
+    "question": "React/TS: What are Actions in React 19, and how do useActionState and useFormStatus simplify form submissions?",
+    "answer": "In React 19, an Action is an async function used in a transition, typically passed to a form's action prop, and React manages its pending state, errors and form reset for you. With useActionState you write const [state, submit, isPending] = useActionState(async (prev, formData) => { const res = await createProject(formData.get('name')); return res.ok ? { error: null } : { error: await res.text() }; }, { error: null }); and render <form action={submit}>. The returned state holds the last result, such as a validation message, and isPending drives a disabled button. useFormStatus, from react-dom, lets a child component like a SubmitButton read pending status of the enclosing form without prop drilling. Uncontrolled forms are reset automatically after a successful action. Compared with the older pattern of onSubmit, preventDefault, useState for loading and error, and try/finally, this removes boilerplate and handles transitions consistently. The backend still validates; the action just makes the client plumbing cleaner."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - React 19 Features",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Advanced",
+    "questionType": "Conceptual",
+    "question": "React/TS: What does the React 19 use API do with promises and context, and what is the main pitfall when using it for data fetching in a client-only SPA?",
+    "answer": "use reads the value of a promise or a context during render: with a promise it suspends the component until it resolves, showing the nearest Suspense fallback, and throws rejections to the nearest error boundary. Unlike other hooks, it can be called inside conditions and loops, so const theme = use(ThemeContext) can sit inside an if block. The main pitfall is creating the promise during render, for example use(fetch('/api/me')) inside the component: each render creates a new promise, React suspends again, and you get an infinite loop or a warning about uncached promises. The promise must be stable, created outside render, cached by a library, passed from a parent, or created in a router loader or server component. That is why, in a client-only SPA, use works best combined with something that owns caching, such as TanStack Query's suspense APIs or React Router loaders, rather than as a raw replacement for useEffect fetching. Errors still need an error boundary around the Suspense region."
+  },
+  {
+    "source": "React and TypeScript Bank",
+    "section": "React and TypeScript Frontend",
+    "category": "React and TypeScript Frontend - React 19 Features",
+    "topic": "React and TypeScript Frontend",
+    "difficulty": "Expert",
+    "questionType": "Conceptual",
+    "question": "React/TS: Explain React Server Components at a conceptual level and how they change the relationship between frontend and backend compared with an SPA calling a FastAPI service.",
+    "answer": "React Server Components run only on the server, can be async and fetch data or query a database directly, and send a serialised component tree to the browser without shipping their code as JavaScript; client components, marked with the 'use client' directive, handle interactivity and run in the browser. They require a framework that implements the bundler and server integration, such as Next.js App Router or React Router framework mode, so they do not apply to a plain Vite SPA served by nginx. Compared with an SPA that downloads a bundle then calls FastAPI for JSON, RSC moves data fetching next to the data, removes client-side request waterfalls, keeps secrets and heavy libraries on the server, and reduces bundle size. Server Functions, marked 'use server', let client components call server code like an RPC. The trade-offs are operating a Node runtime, new caching semantics, and blurrier boundaries where security reviews must treat every server function as a public endpoint. With an existing FastAPI backend, server components typically call it rather than replace it."
+  }
+]

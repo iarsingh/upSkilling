@@ -1,0 +1,122 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Backend and APIs",
+    "category": "Senior FDE - Backend",
+    "topic": "REST resources",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What does a REST resource look like for a customer's knowledge document, and which HTTP methods do you actually implement on the first pilot?",
+    "answer": "A customer's knowledge document is a noun with a stable id. On the first pilot the resource is /v1/tenants/{tenant_id}/documents/{document_id}. I implement POST to create, GET for one document, GET on the collection for a tenant-scoped list, and DELETE to retire it. PUT, PATCH, and bulk import stay off the contract until a real caller needs them. POST accepts a title, a content type, an optional external_id the customer already uses, and either a storage key or the file. FastAPI writes a PostgreSQL row in status uploaded and returns 201 with a Location header and the new id. GET returns metadata plus status, which moves through uploaded, indexing, and ready. The list filters by tenant and external_id so their system can reconcile. DELETE returns 204 when the row and object are gone, or 202 when cleanup is queued and the client polls until that id responds 404. On a regional bank pilot, policy PDFs arrived as POST for tenant northwind-bank with external_id POL-4412. Their integration polled GET until status was ready, then let agents ask questions. They never replaced a file in place, so PUT would have been a contract nobody called. The pitfall is blocking POST until embeddings finish. A slow model looks like a failed upload, the customer retries, and duplicate documents appear. The resource is the document record. Indexing is a later state change on a worker."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Backend and APIs",
+    "category": "Senior FDE - Backend",
+    "topic": "FastAPI contracts",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How does FastAPI turn a Pydantic model into a request contract, and what breaks when the customer's integration sends extra or missing fields?",
+    "answer": "FastAPI builds the request contract from the Pydantic model declared on the route, and it validates the JSON body before the handler runs. A missing required field or a wrong type becomes a 422. Extra fields are rejected as well, unless the model is opened on purpose, which I keep closed on a customer-facing contract. The route takes a DocumentCreate body. That model requires title as a string and content_type as one of pdf, html, or markdown, and it treats external_id as optional. FastAPI publishes that shape in the OpenAPI document, and Pydantic v2 checks the payload at runtime. Omit title and the client gets 422 with a location pointing at body.title, so their integrator can see the exact gap. Send content_type docx and the allowed-value check fails the same way. Send an unexpected checksum field and the error is extra_forbidden. The handler never receives a half-parsed object, so it cannot store a blank title and still return 200. A logistics customer had gateway middleware that injected trace_id on every POST to /documents. Those calls all failed validation. I left the model closed, added trace_id as an optional string, regenerated the OpenAPI file their client generates from, and they began sending it as a known field. The pitfall is accepting a raw dictionary or allowing extra fields in the name of being flexible. A renamed key then arrives beside the old one, the handler reads the stale value, and their integration looks healthy while documents land with empty titles."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Backend and APIs",
+    "category": "Senior FDE - Backend",
+    "topic": "HTTP status codes",
+    "difficulty": "beginner",
+    "questionType": "Comparison",
+    "question": "What is the difference between a 401 and a 403 in an enterprise integration, and why does that distinction matter to the customer's identity team?",
+    "answer": "A 401 means the caller has not proved who they are. A 403 means we know who they are and this action is not allowed. The customer's identity team owns 401, covering issuance, expiry, audience, and issuer. The application owns 403, covering which role or tenant the token may touch. Mixing the codes sends their on-call into the wrong system. The assistant API expects a bearer token. A missing header, an expired token, a bad signature, or an unknown issuer returns 401 with a WWW-Authenticate header so their client can refresh. A token that validates, but whose tenant claim does not match the path, or whose scopes omit documents:read, returns 403. The body stays generic so other tenant ids stay hidden. Their SIEM pages identity on 401 and the application team on 403. At a hospital group, night-batch jobs returned 401 after a signing-certificate rotation, and identity rolled the new key. A separate 403 spike was the role knowledge.reader, which had not been granted to the service principal. Two codes, two owners. The pitfall is returning 403 for a missing token, or 401 for a valid token that lacks a role. Identity then hunts a bug that is not there, and the missing grant sits in the application logs."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Backend and APIs",
+    "category": "Senior FDE - Backend",
+    "topic": "AuthZ",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you add authentication and per-tenant authorization to a FastAPI route so the check cannot be skipped by a caller who never loads the UI?",
+    "answer": "Authentication and per-tenant authorization belong in FastAPI dependencies that run before the route function, so a caller who never opens the UI still hits the same gate. The handler receives a principal and a tenant that already passed, or the request has already failed with 401 or 403. get_principal reads the bearer token, checks signature, issuer, audience, and expiry against the customer's identity provider, and returns the subject plus the tenant ids that token may touch. require_tenant reads the tenant id on the path and returns 403 when that id is outside the set. The document route depends on both, and there is no flag inside the function that turns the check off. Scripts, webhook receivers, and tests use those same dependencies. A service account still carries an explicit tenant. Integration tests hit the API with httpx and no browser, using a token minted for a different tenant, and they expect 403 before PostgreSQL is queried. For a multi-brand retailer, finance and store operations shared one assistant. A finance token scoped to tenant finance-eu requested a store-ops document and received 403. The row was never loaded. The same refusal happens from curl, because the browser is not where the rule lives. The pitfall is enforcing the rule only in the frontend, or loading the document and filtering afterward. A direct request skips the UI, and a later filter mistake can leak another tenant's title inside an error payload."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Backend and APIs",
+    "category": "Senior FDE - Backend",
+    "topic": "Rate limits",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "Where do you put rate limits on a customer assistant API, and what status, headers, and behavior do you return when a tenant exceeds the limit?",
+    "answer": "Rate limits sit at the edge of the customer assistant API, keyed by tenant, before retrieval or any model call. When that tenant is over budget I return 429, a Retry-After header, and headers that show the quota, the remaining budget, and the reset time. The extra calls are rejected. They are not queued inside the API process. A FastAPI dependency checks a Redis token bucket for the tenant id on every route, so a route added later inherits the same gate. Metadata reads might allow sixty requests a minute, while generation uses a tighter bucket because completions cost more than a document lookup. On a breach the dependency returns 429 with Retry-After in seconds, X-RateLimit-Limit, X-RateLimit-Remaining set to zero, and X-RateLimit-Reset as a unix timestamp. The body is a small problem detail with code rate_limited and no stack trace. Their client can back off on purpose. If Redis is down, health checks may fail open, but generation fails closed so a cache outage cannot stampede the model. An insurance assistant shared one tenant key between a claims bot and a human search page. The bot looped and emptied the minute budget. Their client honored Retry-After. We then split a machine quota from the interactive quota so adjusters were not locked out. The pitfall is limiting by source IP alone. Enterprise traffic leaves through a few NAT addresses, so one noisy job blocks the company, and a client that rotates addresses walks around the cap."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Backend and APIs",
+    "category": "Senior FDE - Backend",
+    "topic": "Answer caching",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "When do you cache a generated answer for a customer assistant, and when does that cache become a correctness bug rather than a latency win?",
+    "answer": "Cache a generated answer when the question, the retrieved document versions, the model, and the prompt template are all unchanged, and the answer is not personalized. The cache becomes a correctness bug when any of those inputs move and the key still matches, so the customer hears prose about a policy that has already been replaced. I store the answer in Redis under a hash of tenant id, the normalized question, the sorted document ids with their content hashes, the model name, and the prompt version. Time to live is a few minutes, and a reindex deletes every key that includes that document. A hit skips the model and returns the stored text with a field marking it cached. Answers that include the caller's name, a live ticket status, or a fresh permission check are never stored. A different chunk set changes the hash, so we generate again. For a telecom support assistant, the roaming cap on plan Plus was cached and the page got faster. That evening they published a new cap. The content hash was part of the key, so the old sentence missed and a new answer came from the updated PDF. An earlier key built from the question text alone kept serving the previous cap until expiry. Agents quoted a number the contract no longer contained. The pitfall is caching the final paragraph without the source versions. The latency chart improves while the legal text has moved underneath it."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Backend and APIs",
+    "category": "Senior FDE - Backend",
+    "topic": "Background jobs",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you run a background reindex after a document upload without blocking the HTTP request that accepted the file?",
+    "answer": "The upload request stores the file and a durable job, then returns. Reindexing runs in another process, so embedding time never holds the HTTP call open. The FastAPI route writes the object to storage, then inserts the documents row and an index_jobs row in one PostgreSQL transaction with status queued. After that commit it returns 202 with the document id and a status URL. The handler does not await the embedding client. A worker claims the job with SELECT FOR UPDATE SKIP LOCKED, or a consumer reads it from Redis, then chunks the file, writes embeddings, and sets status to ready or failed. The customer polls GET until the status is ready, or receives a webhook when it changes. If the API process dies after the commit, the job row is still queued and another worker picks it up. An idempotency key on the document id keeps a client retry from indexing the same file twice. On a law-firm pilot, a forty megabyte brief would have occupied a web worker for more than a minute if the route had embedded inline. POST returned 202 in a few hundred milliseconds with status indexing. Their integration polled until ready, and a second worker drained the queue while new uploads continued. The pitfall is launching the embed as an in-process background task and calling that durability. A deploy kills the task after the client already received success, and nothing retries because no job row was written."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Backend and APIs",
+    "category": "Senior FDE - Backend",
+    "topic": "API styles",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "How do you compare REST, GraphQL, and gRPC for a forward deployed integration, and which one do you pick for a one-way ticket sync into the customer's system?",
+    "answer": "REST, GraphQL, and gRPC split on who writes the caller and what their network team will allow. For a forward deployed integration I default to REST, because the customer's engineers can call ordinary HTTPS with a documented JSON body. GraphQL fits when their own UI must pick fields across many types and they already run a gateway. gRPC fits calls between our services, where we share protobuf and care about internal latency. For a one-way ticket sync into their system I pick REST, as a signed webhook or a plain outbound POST. Their ticket desk already accepts JSON over HTTPS. A security review knows how to allow a URL, a bearer token, and a signature. GraphQL would ask them to host a schema they did not request. gRPC would need HTTP/2, generated stubs, and a port their firewall will not open to a vendor. The body is ticket id, status, a link back to the transcript, and an idempotency key so a retry does not open a duplicate ticket. If they cannot take a push, they poll a GET on the same resource. On a manufacturing rollout the desk had a REST inbound endpoint and a change window of weeks. We posted each resolved handoff as JSON. A protobuf client would have missed that window while they waited on a firewall exception. The pitfall is choosing gRPC because an internal benchmark was faster. Their constraint is the review board and the proxy they already terminate."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Backend and APIs",
+    "category": "Senior FDE - Backend",
+    "topic": "Webhooks",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you design webhook delivery into a customer system that is often down, including retries, signing, and what you do with a poison event?",
+    "answer": "Webhook delivery into a system that is often down is a durable queue of signed attempts, with capped retries and a dead-letter path for poison events. The user request commits the event and returns before any delivery attempt. Each event is a PostgreSQL row with an id, a type, a tenant, the payload, an attempt count, and the next attempt time. A worker POSTs to their URL with a short timeout. Headers carry a timestamp and an HMAC of that timestamp plus the raw body, using a shared secret. They reject a bad signature or a timestamp outside a five-minute skew. Any 2xx is success. A timeout, a 429, or a 5xx is rescheduled with exponential backoff and jitter, from about thirty seconds toward an hour, capped near eight attempts. A 400 or a 401 stops automatic retry, because the payload or the secret is wrong. That row is a poison event when validation fails every time or the cap is exhausted. I move it to a dead-letter table and alert. Their receiver stores the event id so a replay is idempotent. A retailer's endpoint sat behind a VPN that dropped every night. document.ready rows waited and drained in the morning. One payload with a null document id returned 400 on every try. We dead-lettered that id and fixed the producer. The pitfall is retrying a 400 without a cap. One bad event occupies the worker, and later good events sit behind it."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Backend and APIs",
+    "category": "Senior FDE - Backend",
+    "topic": "Async workers",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you structure async Python so a slow embedding call does not stall every other request sharing that worker process?",
+    "answer": "A slow embedding call stays on the request that needs it, with a timeout and a concurrency cap, and it never runs as blocking work on the event loop. Other requests in that worker keep moving only when the slow call actually yields. FastAPI under uvicorn talks to the embedding service through an async HTTP client, with its own connection limit and a timeout shorter than the gateway. The await hands the loop back, so list routes and health checks continue. An asyncio semaphore around eight stops a burst from opening unbounded sockets. If the vendor SDK is synchronous, calling it inside the async route stalls every coroutine on that process. That work moves to a separate process through the job queue. A very short blocking call can use asyncio.to_thread, with a small bounded pool. CPU tokenization stays off the loop. Cheap GET routes never take the generation semaphore. During a pilot, a synchronous embedding SDK inside the route stalled for about fifteen seconds and froze document list calls on the same worker. The load balancer marked the pod unhealthy. An async client, a semaphore of eight, and an eight-second timeout returned 504 only for that request. The rest of the process kept serving. The pitfall is trusting async def to make a library non-blocking. A synchronous HTTP call inside an async route still blocks the loop, and every request on that process waits on one embedding."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Backend and APIs",
+    "category": "Senior FDE - Backend",
+    "topic": "API versioning",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you version an integration API when the customer's consumer cannot move for a quarter, and how do you retire the old contract without a surprise outage?",
+    "answer": "I version the integration in the URL, keep the old contract running as a real path, and retire it on a written date backed by traffic. v1 stays behavior-compatible for the quarter they cannot move, and breaking changes exist only on v2. FastAPI mounts /v1 and /v2 as separate routers over the same PostgreSQL tables. v1 models stay frozen: no removed fields, no type changes, and no new required request field. I also avoid optional response additions on a locked client, because some generated parsers fail on unknown JSON. v2 carries the new shape. Gateway logs tag the version so remaining v1 callers stay visible. About ninety days out I send their integration owner the date, a changelog, and a sample v2 payload. If v1 traffic is still present, the date does not move. On the agreed day v1 returns 410 with a body that names the v2 URL, and the router comes out only after a short overlap. A public-sector team had procurement lock their client for a quarter. Status timestamps shipped on /v2 while /v1 kept the original shape. 410 followed a week of clean v2 traffic. The pitfall is an unlogged version header, or editing v1 in place because one field looks small. Their consumer fails closed, and the outage shows up as a broken Monday batch."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Backend and APIs",
+    "category": "Senior FDE - Backend",
+    "topic": "Transactional outbox",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you design an events outbox so a document update is not lost between the database commit and the queue publish?",
+    "answer": "Write the document update and the outbound event in the same database transaction, then publish from that outbox after commit in a separate process. The event row commits with the document, or the whole unit rolls back. In PostgreSQL the request updates the documents row and inserts an outbox row together: a new event id, the aggregate id, the type, the payload, and a null published_at. Commit makes both durable. A publisher selects unpublished rows with FOR UPDATE SKIP LOCKED, sends the payload to Redis or the broker, and sets published_at only after the broker accepts. If the process crashes after that accept and before the update, the next poll sends the event again. Consumers treat the event id as idempotent and ignore the duplicate. If the broker rejects the publish, published_at stays null and the row retries with backoff. The HTTP handler never publishes by itself, so a webhook sees an event only for a committed version. On a claims assistant, a change to approved sometimes never reached the customer's case system. Redis publish threw after the document commit, and the API returned 500. The outbox insert in that same transaction closed the window. Their receiver stored processed ids, so a replay of event 90412 did not open a second case. The pitfall is publishing before commit, or setting published_at before the broker acknowledgement. The first announces a version that rolls back. The second records delivery for an event the queue never accepted."
+  }
+]

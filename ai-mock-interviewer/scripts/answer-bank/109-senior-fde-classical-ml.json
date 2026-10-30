@@ -1,0 +1,62 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Classical ML Fundamentals",
+    "category": "Senior FDE - Classical ML",
+    "topic": "Classifier versus LLM",
+    "difficulty": "beginner",
+    "questionType": "Comparison",
+    "question": "How do you explain the difference between a classical classifier and a large language model to a support director, using ticket routing as the example?",
+    "answer": "A classical classifier and a large language model can both send a ticket to a queue, and they are built for different jobs. The classifier is a small model trained on tickets agents have already labeled. It outputs one label from a fixed list the desk actually staffs, such as billing, access, or product bug, plus a confidence score. It usually looks at the subject, the product, the channel, and a compact set of words. Scoring is fast, cheap, and easy to check against last month's tickets, because the label set stays closed. A large language model reads the whole ticket and can summarize it, draft a reply, or guess a queue even when the customer uses wording the desk has never seen. That flexibility helps on messy mail, and every ticket pays for a large inference call. The model can also name a queue that does not exist in the workforce tool. For a support director, I put the classifier on the routing step. High-confidence billing tickets go straight to billing. Low-confidence tickets land in a review tray. The language model drafts the reply after the ticket is in the right queue. On a desk I sat with, agents trusted the route while the queue names matched their staffing tool, and they routed by hand the week a model invented a refunds queue nobody owned. The pitfall is letting the language model invent queue names."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Classical ML Fundamentals",
+    "category": "Senior FDE - Classical ML",
+    "topic": "Precision and recall",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What do precision and recall mean when a customer says the assistant misses the right article, and which one do they usually care about first?",
+    "answer": "Precision and recall answer two different complaints, and when a customer says the assistant misses the right article they are talking about recall first. Recall is the share of times the correct article showed up, out of every time that article was the one a senior agent would have used. If the password-reset article is the right one and the assistant never returns it, recall on that article is low, and the agent searches by hand while the customer waits. Precision is the share of suggested articles that were actually the right one. High precision means an agent can open the first suggestion and trust it. A list of ten loosely related articles can look busy and still waste the call, because most of the list is wrong. I measure both on a labeled sample from the desk: for each ticket, the article the senior agent picked, and the articles the assistant returned. The complaint that it misses the right article is a recall problem. The complaint that it keeps suggesting junk is a precision problem. Support leaders usually care about recall first, because a miss means handle time goes up and the customer waits while the agent searches. A banking support lead I worked with cared about card-lock tickets where the right article never appeared in the top three. The pitfall is tightening the confidence bar until precision looks excellent and the assistant returns nothing on the hard tickets. The dashboard gets cleaner, and the original complaint gets worse."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Classical ML Fundamentals",
+    "category": "Senior FDE - Classical ML",
+    "topic": "Small classifier",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "When would you train a small classifier to route tickets instead of asking a language model to label every ticket at inference time?",
+    "answer": "I train a small classifier for routing when the queues are stable, the volume is high, and paying a language model to label every ticket is what makes the design too slow or too expensive for the desk. Routing is a closed choice. The workforce tool already has billing, access, shipping, and product bug, and agents have been correcting those labels for months. That history is a training set. A logistic regression or a small gradient-boosted model on subject, product, channel, and a simple bag of words can score a ticket in milliseconds inside the service the desk already runs, with no per-token bill and no extra network hop. I still use a language model where it earns its cost: drafting the reply after the queue is chosen, and helping label the odd tickets that the classifier sends to a review tray. I leave the language model off the routing path when the desk handles tens of thousands of tickets a day and the route has to be ready before the ticket is offered to an agent. On one retail support operation the nightly export of agent-corrected labels was enough to match agents on the common cases, and the language model stayed on the low-confidence tray, which cut the routing bill without changing the queues agents already knew. The pitfall is training once and freezing the model. A new product or a new queue shows up, confidence stays high, and tickets keep landing in the old queue with no alarm."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Classical ML Fundamentals",
+    "category": "Senior FDE - Classical ML",
+    "topic": "Overfitting",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "How do you explain overfitting to a sponsor who wants the demo accuracy number printed on the steering-committee slide?",
+    "answer": "Overfitting means the model memorized the tickets we already scored, so the demo accuracy will not hold on next week's mail. That demo number is often the score on the same pile used for training, or on a pile that leaked in because the label was copied into a feature. It is a real calculation, and it is the wrong number for a steering-committee slide. The number that belongs on the slide is the score on tickets held out by time: train on January through March, score April, and report precision and recall alongside accuracy so one easy queue cannot hide the misses. If the training score and the later-week score are far apart, the model fit the quirks of the demo set. A sponsor once wanted 96 percent printed because that was the figure in the notebook. The following week's live tickets sat near 71 percent. The demo set was full of one product launch, and the live week was mostly billing disputes with different wording. I walk through that gap with twenty tickets on the table. The model nails tickets that look like the demo and misses new phrasing. The held-out number goes on the slide, and 96 percent stays in the appendix as the training score. The pitfall is printing the larger number because the committee likes a clean headline. Six weeks later the desk stops using the tool, and the sponsor hears that the model degraded, when it was never that accurate on new mail."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Classical ML Fundamentals",
+    "category": "Senior FDE - Classical ML",
+    "topic": "Data drift",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you notice that the documents customers added after go-live no longer look like the set you evaluated, without turning the conversation into a research review?",
+    "answer": "I notice the new documents no longer match the evaluation set from the desk's own numbers, then I confirm it with a handful of tickets. After go-live I watch, each week, which article the assistant retrieved, which article the agent actually opened, and whether the ticket was reopened. When agents start skipping suggestions, or the share of tickets with no accepted article jumps, I open the documents customers added and compare them to the evaluation sample in ordinary language. New product names, new file types, much longer pages, or a pile of release notes that were not in the original set are the usual signs. I sit with a senior agent on twenty recent misses and ask whether the right article even existed when we evaluated. If the right article is new, and nothing in the evaluation set looks like it, the old score no longer describes production. On one engagement the customer uploaded a policy library the week after launch. Evaluation had short how-to articles. The new files were forty-page PDFs with the answer on page twelve, so retrieval returned the right file and the wrong passage. I bring three of those tickets to the weekly review, then we reslice the long files and add them to the labeled set. The pitfall is leading with a statistical test the sponsor cannot see. They need the missed ticket, the new document, and the drop in accept rate."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Classical ML Fundamentals",
+    "category": "Senior FDE - Classical ML",
+    "topic": "Feature store",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "When do you keep a scoring feature in a SQL table the desk already trusts, and when would you introduce a feature store on a forward deployed engagement?",
+    "answer": "I keep a scoring feature in the SQL table the desk already trusts when one team owns the number, one application reads it, and a warehouse job already refreshes it on a schedule analysts understand. Ticket age, prior reopen count, product tier, and last queue are columns they query today. A view or a nightly table lets them audit the score with the same SQL they use for staffing. I introduce a feature store when several models need that same feature computed the same way, when training and live scoring have disagreed because one path defined open tickets in the last day differently, or when a second team is about to copy the SQL into its own job. On a forward deployed engagement that bar stays high. Most of these accounts have one routing model and a warehouse. A feature store is another service, another permission model, and another on-call. I bring it in only after a real training-serving mismatch has cost the desk, and only if their platform team will own it when we leave. A logistics account kept reopen count in the warehouse view until a second model used a different cutoff and the two queues disagreed. The pitfall is standing the store up in week two because it matches a platform diagram. The desk then has a score they cannot query, and the engagement spends its time on the store instead of on routing quality."
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: System Design",
+    "category": "Senior FDE - System Design",
+    "topic": "High-level design",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How do you open a high-level design for a customer knowledge assistant, and which boxes do you draw before you name any vendor product?",
+    "answer": "A high-level design for a customer knowledge assistant opens from the support agent's question and the answer on the screen, then names the boxes that carry text from the customer's documents to that screen. Product names wait until each box has a job. The boxes are the chat surface, the query service, the retrieval index, the generation step, and the ingestion pipeline that fills the index. Beside them sit connectors for Confluence, the ticket system, and PDFs, a store for the raw files, and a metadata record for tenant, document id, and version. The query path is the live request: accept the question, fetch passages, compose an answer, and return the links stored with those passages. The ingest path is the background flow: a change arrives, the document is split, turned into embeddings, and written into the index. A card-support team of about two hundred agents asks how to refund a duplicate capture. On the diagram the question enters the query service, the index returns the refund runbook, and the generation step writes the steps with that page's link. The ingest box sits to the side, fed by a Confluence export and ticket webhooks, so the edit never runs inside the agent's click. The pitfall is labeling the first box with a vendor product before the box has a responsibility. The review then argues about a logo, and nobody has said which data crosses which line."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: System Design",
+    "category": "Senior FDE - System Design",
+    "topic": "Low-level design",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What does low-level design add after the high-level picture is agreed, and which interfaces do you write down so another engineer can build the indexer?",
+    "answer": "Low-level design turns the agreed boxes into contracts another engineer can build without sitting in the review. For the indexer, that means the message it consumes, the rows it writes, and what happens when a document cannot be parsed. The high-level picture already says a connector feeds an indexer that updates the index. The low-level sheet writes the queue payload: tenant id, source type, document id, version, content hash, and a pointer to the raw object. It writes the chunk row: tenant id, document id, version, chunk ordinal, text, embedding, source URL, and updated time. It writes the idempotency key, tenant plus document plus version, so a replay replaces rows instead of appending them. It also writes the error record for a PDF that fails to parse, so the previous complete version stays readable. A billing customer's Confluence space publishes a twelve-page refund policy. The worker reads one message, fetches the HTML, splits on headings into chunks of a few hundred tokens with a small overlap, calls the embedding endpoint, and upserts rows keyed by tenant, document, version, and ordinal. A second engineer can build that worker from the sheet alone. The pitfall is leaving the interface as a sentence that says index the document. Two people then invent different keys, and a replay creates duplicate chunks that both show up in the agent's answer."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: System Design",
+    "category": "Senior FDE - System Design",
+    "topic": "Consistency",
+    "difficulty": "intermediate",
+    "questionType": "Conceptual",
+    "question": "What consistency do you actually need between a document edit and the next retrieval, and where is eventual consistency acceptable to the support team?",
+    "answer": "The consistency that matters is that a retrieval returns one complete version of a document, either the new one or the previous one, and never a mix of chunks from both. A lag between the edit and the index is acceptable when the support team has agreed to a freshness window and the screen shows it. The edit lands first in Confluence or the ticket system. Ingestion is asynchronous, so the index trails the source by seconds or minutes. During that window the query reads only the latest version whose chunks are all stored. A half-written update stays invisible. Agents can live with a few minutes of lag on a policy page if the answer shows the indexed time and the link opens the live page. They cannot live with a refund answer that stitches yesterday's limit to today's exception. A payments customer updates the duplicate-capture runbook at 09:12. Queries keep serving the 09:00 version until every chunk of the new version is committed, then they flip together. A ticket comment that is still being typed can lag further, and the team accepts that. The pitfall is promising that the person who just saved the page will see it in the next question. That promise is read-your-writes on a path that is deliberately queued. Saying the index trails the source by a few minutes is honest. Claiming the edit is already live is the break."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: System Design",
+    "category": "Senior FDE - System Design",
+    "topic": "Ingestion idempotency",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you make document ingestion idempotent when the customer's webhook delivers the same update three times?",
+    "answer": "Document ingestion is idempotent when the same update, delivered three times, leaves one version in the index and the same chunk rows. The customer's webhook is at least once, so duplicates are normal. Each delivery carries tenant id, document id, and a version or an updated timestamp. The worker also hashes the body. It writes an ingest record under a unique key of tenant, document, and content hash. The first delivery inserts that record, fetches the raw object, chunks it, embeds it, and upserts. The second and third hit the same key. If the first run finished, they stop. If the first run died halfway, they continue the upsert, because chunk identity is tenant, document, version, and ordinal, so a replay overwrites the same rows instead of adding new ones. A version becomes readable only after a complete flag is set. A helpdesk sends the webhook for ticket PAY-1842 three times in one second because a slow acknowledgement triggers their retry. The first worker stores the hash and eight chunks. The next two see the hash already complete and do not add eight more. The pitfall is deduplicating only on the HTTP request id. Many senders mint a new request id on each retry, so the duplicate looks new, and the index fills with repeated passages that crowd out the real policy."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: System Design",
+    "category": "Senior FDE - System Design",
+    "topic": "Multi-tenant isolation",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you design tenant isolation for a hosted assistant used by several customers, from the request path down to the index and the logs?",
+    "answer": "Tenant isolation means one customer's question can retrieve only that customer's documents, and their text never appears in another customer's prompt, index rows, or logs. The boundary starts at the request. The session token resolves to a tenant id inside the application, and every query, queue message, and log line carries that id. The index stores tenant id as a required column. Retrieval adds it to the filter before similarity runs, and a query that arrives without a tenant is rejected rather than scanned. Raw files sit under a per-tenant prefix, and encryption keys are per tenant when the contract asks for that. Logs keep document ids, latencies, and scores, and they drop raw chunk text, so a dump from one account cannot be pasted into a ticket another account's staff can read. A hosted assistant serves a bank and a retailer on the same cluster. An agent at the retailer asks about refund windows. The query service binds tenant retailer-17, and the index searches only those rows. The bank's card-dispute PDF lives in the same table and does not appear. A failed embedding job logs the tenant and the document id, not the PDF body. The pitfall is treating a prompt line that says stay on this customer's data as the boundary. The model never sees the other tenant because those rows were never retrieved. An instruction is not isolation."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: System Design",
+    "category": "Senior FDE - System Design",
+    "topic": "End-to-end assistant",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "Walk through the design of a retrieval assistant over Confluence, tickets, and PDFs, from ingestion to the first production-like rollout.",
+    "answer": "The assistant is a retrieval path in front of a model, with ingestion beside it, and the first rollout is one team and one corpus they already trust. Connectors pull Confluence by space, take ticket webhooks from the helpdesk, and pick up PDFs from an object-storage drop. A worker fetches the raw object, parses it, chunks on headings with overlap, embeds the chunks, and upserts them under tenant, document, version, and ordinal. A version becomes readable only when every chunk is stored. On a question, the chat service checks the tenant, embeds the question, runs a filtered similarity search plus a keyword pass for error codes and ticket ids, reranks a short list, and sends those passages with their stored URLs to the model. The screen shows the answer and the links from the rows, not titles the model invented. The first production-like step is a shadow week with one support pod: answers are logged, agents still open the source page, and mismatches become the eval set. A card-support pod of thirty people uses it for refund and chargeback questions, over that Confluence space, the billing ticket project, and the chargeback PDF pack. The pitfall is indexing the whole wiki on day one and calling that a launch. A wide corpus with no checked questions hides bad chunks, and the first week goes to explaining wrong answers instead of tightening the space the team already uses."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: System Design",
+    "category": "Senior FDE - System Design",
+    "topic": "Backpressure",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A customer dumps fifty thousand pages on the first day. How do you keep ingestion from taking down the query path?",
+    "answer": "The dump goes onto a queue the query path does not share, and a fixed pool of ingest workers keeps embedding and index writes inside a budget. Fifty thousand pages is a bulk load, not a reason to scale the chat service. Connectors accept the pages, store the raw objects, and enqueue one message per document. Ingest workers pull at a cap sized to the embedding quota and the index write rate. Queue depth is allowed to grow, and that tenant's freshness clock shows the backlog. Query pods, their database pool, and their embedding calls for live questions sit on a separate quota, so the bulk job cannot borrow the key the chat path uses. New versions stay invisible until they are complete, and bulk writes avoid long locks on the rows a live search is reading. A retailer uploads fifty thousand help pages the morning they go live. The queue holds most of that work for hours while workers drain it. Agents already on the pilot still get answers from the few thousand pages indexed the day before, and their latency stays flat because the chat pods are not parsing the dump. The pitfall is embedding inside the webhook handler, or sharing one API key and one database pool between ingest and query. The dump then occupies every connection, and a simple refund question waits behind a PDF parse."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: System Design",
+    "category": "Senior FDE - System Design",
+    "topic": "Degraded modes",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you design the assistant so an index outage, an embedding-API outage, or a model timeout degrades in a way the user can understand?",
+    "answer": "Each failed dependency becomes a named state the agent can read, with a next step, instead of a spinner or a fluent answer that has no pages behind it. The query path checks the dependencies and says which one failed. If the index is down, the assistant says retrieval is unavailable and offers the ordinary Confluence and ticket search links. It does not call the model to invent a procedure. If the embedding API is down and the index is up, keyword search still runs, and a banner says meaning-based search is paused, so an error code or a page title can still hit. If the model times out, the screen shows the retrieved passages and their links without a composed paragraph. An agent who can read the runbook can finish the call from that. Timeouts stay short, and a dead dependency is remembered for a brief interval so every keystroke does not hammer it again. A card agent asks about the duplicate-capture window while the model host is timing out. The page lists the refund runbook chunk and the excerpt from ticket PAY-1842, plus a line that the summary could not be written. The agent opens the runbook and continues. The pitfall is falling through to an ungrounded model answer when retrieval fails. The reply sounds normal, the links are missing, and the agent cannot tell the assistant left the customer's documents behind."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: System Design",
+    "category": "Senior FDE - System Design",
+    "topic": "Cache stampede",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you stop a cache stampede when a popular policy page expires and every support agent asks the same question in the same minute?",
+    "answer": "One request rebuilds the cached answer for that question, and the rest of the requests in that minute wait on the same result. The hot key is the tenant plus a normalized form of the question, or the tenant plus the policy document id when the question maps to one page. Before the TTL vanishes, a single refresh runs early, so the key is replaced while the old value is still being served. If the key does expire, a lock or a single-flight entry lets one caller run retrieval, rerank, and the model call. The others wait a short time and read what the winner stored. They do not each embed, search, and generate. The cached value holds the passages, the composed answer, and the document version, so a real policy edit still deletes the key. Two hundred agents on a payments desk ask, inside the same minute, whether a weekend capture can be refunded after the Monday batch. The policy key expired at the top of the hour. One request rebuilds it. The others join that flight and receive the same citations. The embedding quota sees one question, not two hundred. The pitfall is a TTL with no lock and no early refresh. The minute the key expires, every agent is a miss, the model quota saturates, and the page that was fast at the end of the hour is timing out at the start of the next one."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: System Design",
+    "category": "Senior FDE - System Design",
+    "topic": "Sync versus async",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "Which parts of the assistant are synchronous in the user request, and which parts must be asynchronous so the page does not wait on a full reindex?",
+    "answer": "The user request stays synchronous only for the work that answers this question: the tenant check, embedding the question, retrieval, a short rerank, the model call, and rendering the stored links. Ingestion, reindexing, and bookkeeping stay on a queue so the page never waits on them. Rebuilding a Confluence space can take minutes or hours. That job runs on ingest workers and publishes a new version only when it finishes. The chat request reads whichever version is already marked complete. Writing a thumbs-down, an eval row, or a usage metric happens after the response is sent. A call that reaches back into the helpdesk and rewrites a ticket does not sit on the ask path either. An agent on the billing desk asks for the chargeback evidence checklist. The request embeds the question, reads the current index, and returns in a couple of seconds with the PDF page and the ticket template. In the same moment a space export is rechunking four thousand pages on the ingest queue. That job does not hold the agent's connection. The new chunks show up on a later question, after the version flips. The pitfall is embedding a changed page inside the request that noticed the webhook. One edit then stalls the chat until parsing finishes, and a large PDF turns the spinner into the product."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: System Design",
+    "category": "Senior FDE - System Design",
+    "topic": "Residency regions",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "The customer asks for the assistant in two regions because of residency. What do you replicate, what do you keep regional, and what do you refuse to promise?",
+    "answer": "Residency means a region's documents, embeddings, prompts, and logs stay in that region. A second region is a second home for a different corpus, or a failover that still respects the boundary, not a silent copy of every page. What replicates is the application build, the configuration, and, only when the contract allows, an index replica of that same region's corpus so a zone loss does not hide those pages. What stays regional is the raw files, the chunk text, the embeddings, the query logs, and the model call. A question from an EU agent is embedded, searched, and answered inside the EU boundary. The other region's index is a different partition, reached by that region's users. Copying chunk text across the boundary stays off unless the customer signs for that copy. The design refuses two promises. It refuses that any agent, anywhere, can ask about any page with the same latency and the same documents. It also refuses that a failover region will answer from the other region's corpus during an outage. A bank runs the assistant in Frankfurt for EU card disputes and in Virginia for US disputes. EU spaces are indexed only in Frankfurt. During a Frankfurt index incident, the banner says EU retrieval is down. The pitfall is replicating the vector table worldwide for convenience. The embedding of a dispute PDF is still the customer's data, and a replica in the other region breaks the promise the contract was written to keep."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: System Design",
+    "category": "Senior FDE - System Design",
+    "topic": "Latency and cost estimate",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you estimate latency and cost for a design review when you do not yet have their real question logs?",
+    "answer": "The estimate uses a workload written down in the review, because the real question logs are not here yet. Pick a number of agents, questions per agent per day, documents in the corpus, and a peak factor, then price embed, retrieve, and generate on that shape. Latency is a sum of budgets. Embedding the question is a small call, tens to a couple of hundred milliseconds. A filtered search over a few million chunks is aimed under a hundred milliseconds. Reranking a short list and the model call dominate, often one to three seconds, so the page budget is a few seconds, not a database round trip. Cost splits the same way. Ingestion is paid once per document version: parse, embed each chunk, and store it. Each question pays one query embedding, one search, one rerank, and one generation, and the passages in the prompt are most of the tokens. The sheet might say two hundred agents, forty questions a day, peak around four times the average hour, and a prompt of a few thousand tokens. That pilot is about eight thousand questions a day, and the monthly bill is mostly generation tokens, not the index. The pitfall is a single dollar figure with no assumption sheet. When the real logs show longer questions or a much larger corpus, there is nothing to revise except the number that was never tied to a workload."
+  }
+]

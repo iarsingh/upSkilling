@@ -1,0 +1,122 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Security",
+    "category": "Senior FDE - Security",
+    "topic": "Least privilege",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How do you explain least privilege for a retrieval service that needs to read documents, and which permission do you refuse to grant just to make the pilot start?",
+    "answer": "Least privilege means the retrieval service can read only the documents this pilot is allowed to use. The identity it runs as gets one read on that corpus. It does not get write, delete, share, or admin, and it does not get a role that sees every library in the tenant just because the first query came back empty. The mechanism is a workload identity, a role with one action such as read object or read page, and a scope that names the collection or the site. The query path assumes that identity. A developer laptop does not. A missing page is a missing grant for the content owner, not a reason to widen the role for the afternoon. At a bank support pilot the service reads published help articles in one library. It cannot edit those articles, open the HR folders beside them, or create a share link. The permission I refuse just to start the pilot is any write or owner role, and a tenant-wide read offered so the connector would stop returning empty. The pitfall is calling that wide role temporary. It becomes the production identity, and a later bug or prompt reaches mail, source code, or files the pilot was never meant to see."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Security",
+    "category": "Senior FDE - Security",
+    "topic": "Secrets",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "Where do model API keys and database passwords live in a customer environment, and why is the application environment file the wrong place?",
+    "answer": "Model API keys and database passwords live in a secret store the customer already runs. The service reads them at startup or at connection time, through an identity allowed to read only those names. That store is the cloud secret manager, a vault, or the platform secret, with access logged and rotation owned by the platform team. The application environment file is the wrong place because it is a file in the repo, the image, or the host, and files get copied. It lands in tickets, build logs, a laptop so the pilot runs locally, and the next environment that cloned the config. A password there has no audit of who read it and no rotation short of a redeploy. At a retailer the model key and the database password sit in the secret manager. The manifest references the name, and the value never appears in the manifest, the pipeline log, or the local stub file. Local runs use a personal development key with no production data behind it. The pitfall is calling the file safe because version control ignores it. That rule stops a commit. It does not stop the file on a jump host, a screenshot in chat, or a container layer that copied it in at build time."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Security",
+    "category": "Senior FDE - Security",
+    "topic": "OAuth and OIDC",
+    "difficulty": "intermediate",
+    "questionType": "Conceptual",
+    "question": "How do OAuth 2 and OpenID Connect fit a support dashboard where employees sign in with the customer's identity provider?",
+    "answer": "OAuth 2 is how the support dashboard gets a limited right to call an API as the signed-in employee. OpenID Connect is OAuth 2 plus a login. The customer's identity provider is the authorization server, and the dashboard is a confidential client registered there. The employee is sent to the customer's login page, completes whatever factor that provider requires, and returns with an authorization code. The dashboard server, not the browser, exchanges the code for tokens, using a secret or a private key that stays on the server. OpenID Connect says who signed in. The identity token carries the subject, the email, and the groups from the customer's directory. OAuth lets the dashboard call an API with a scope that customer agreed to, such as read tickets. Passwords stay at the identity provider. The pilot does not collect a second password, and a leaver loses access when the directory disables the account. At a manufacturer the agent signs in through the company identity provider. The dashboard sees the tier-two group and requests only the scope that reads tickets for that line of business. The pitfall is treating a finished login as permission for every API. Login establishes identity. Each API still checks audience and scope, and a group named all employees is not a role."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Security",
+    "category": "Senior FDE - Security",
+    "topic": "Tokens",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "What is the difference between an ID token and an access token in that login, and which one do you send to your API?",
+    "answer": "The ID token is proof of the login. It is a signed statement from the customer's identity provider about who authenticated, and its audience is the dashboard, the client that asked to sign in. The access token is the credential an API accepts. It names the API as its audience, carries the granted scopes, and expires quickly. After the code exchange the dashboard receives both. It checks the ID token's issuer, audience, signature, and expiry, then builds the session from the subject, tenant, and groups. It sends the access token, and only the access token, when it calls the API. The API rejects the ID token even when the signature is valid, because that token was not issued for the API. It also rejects an access token minted for some other service. At the support dashboard the session is built from the identity claims, and the server attaches the access token only on the call that lists that employee's tickets. The token stays on the server and is never handed to front-end script. The pitfall is putting the ID token in the authorization header because the API library can decode it. The API then trusts a token minted for the client. If that token reaches the browser, anyone who copied it can replay it. Audience is the check that stops the mix-up."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Security",
+    "category": "Senior FDE - Security",
+    "topic": "Tenant isolation",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you stop retrieval from leaking another customer's documents, or another employee's documents inside the same customer, even if the model is prompted to try?",
+    "answer": "Retrieval leaks when search runs over the whole index and the access check is left to the model, or when the check is only a sentence in the prompt. The filter belongs in the query, as a predicate the application sets from the authenticated session. The user message cannot set it, and the model cannot set it. Across customers the predicate is the tenant id on every chunk. Inside one customer it is the document access list from the source: this person, these groups, this clearance. Rows that fail are not returned, so they never enter the prompt. A question that names another customer, or another employee's tickets, does not widen the query. Identifiers in the question are ignored. Fetching the full passage checks the same constraint again, so a stale id cannot skip the filter. At a vendor hosting the assistant for several hospitals, every chunk carries the hospital id and the department groups from index time. A nurse search adds the hospital and the groups on the token. Naming another hospital returns no rows, and notes that carry a different group stay out too. The pitfall is filtering after the model already has the top matches, or trusting a prompt line that says to stay in the tenant. Once another tenant's text is in the context, a later instruction can ask the model to repeat it. Isolation has to hold before the model speaks."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Security",
+    "category": "Senior FDE - Security",
+    "topic": "Prompt injection",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A retrieved wiki page contains instructions telling the model to ignore the system prompt and reveal other tickets. How does that attack work, and what controls reduce the damage?",
+    "answer": "The attack works because the wiki page is data pasted into the same model input as the instructions. The model has no reliable boundary between an order and retrieved text. A page can contain sentences that read like new orders, including an order to drop the earlier instructions and print other tickets. If those tickets are already in the context, the model may recite them. If a tool can list tickets, the model may call it because the page said to. The editor need not be an outsider. Anyone who can change a page, or text copied from a ticket, can place those sentences. Damage is reduced in the application, not by hoping the system prompt wins. Labeling the passage as untrusted data helps and is not enough. The stronger control is that other tickets were never retrieved, because the query was limited to this caller's rights, and the model has no tool that lists anyone else's queue. Before the reply is shown, a check drops ticket identifiers the caller may not see. Pages that read like directions to the assistant stay out of the index until an owner reviews them. At a support desk a page that tries to steer the assistant still yields only that caller's articles, or a refusal, because the queue was not in the prompt. The pitfall is a tool that can read tickets. The page then drives that tool, and tighter wording does not put the boundary back."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Security",
+    "category": "Senior FDE - Security",
+    "topic": "Data leakage",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How can customer data leak through prompts, logs, traces, and a vendor model API, and which of those paths do you close before go-live?",
+    "answer": "Customer data leaves on paths that look like normal operation. The prompt sends the question and the retrieved passages to the model, and a vendor API means those passages leave the customer's network. Logs store the prompt and the completion for debugging, then ship to a platform with a wider audience than the pilot. Traces do the same, with the full body on a span. The vendor may keep prompts for abuse review or training unless the contract and the project setting both forbid it. Before go-live those four paths are closed for the data in scope. Prompts go only to an endpoint the security partner accepted, with training off and retention off, over a private connection when they required one. Logs and traces keep request ids, latency, token counts, and document ids. They do not keep the question, the passages, or the answer. Redaction strips secrets and account numbers before any remaining text is stored. At a payments company the pilot stayed blocked until traces stopped capturing the question body and the vendor confirmed zero retention on that key. The pitfall is a contract that closes the vendor path while application logs still print the prompt. The next incident bridge copies that line into a ticket, and the data leaves through a path nobody called an AI risk."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Security",
+    "category": "Senior FDE - Security",
+    "topic": "LLM risks",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "Which risks from an LLM security list show up on a real forward deployed pilot, and which ones do you handle with product controls rather than a policy slide?",
+    "answer": "On a live pilot the long list collapses to failures a customer can already point at. A page or a ticket steers the answer. A reply contains a secret or another person's case. A downstream system trusts a link or a command the model drafted. The assistant sends mail or edits a ticket because a demo tool was connected. Someone edits the knowledge base the assistant treats as truth. A loop or an open endpoint runs up cost. Those need product controls, not a slide. Retrieval is filtered by the caller's rights before the model sees a passage. Tools that write or send are absent, or a person approves the exact action. Output that would change another system is parsed and checked, never passed through as text to run. The corpus has an owner, and pages that direct the assistant are reviewed before indexing. A rate limit and a step cap bound spend. A rule that staff must not paste secrets, or a claim that the model will refuse to misbehave, does not count. At an airline support pilot the working controls were the ticket access list, no send tool, and redacted logs. The pitfall is assigning each line of the industry list to a policy owner. The security partner will ask which control stops a retrieved page from moving money, and a slide cannot answer."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Security",
+    "category": "Senior FDE - Security",
+    "topic": "Workload identity",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you give the workload its own identity to call cloud APIs, and why is a key file in the container a finding you fix before the security review?",
+    "answer": "The workload gets an identity the cloud issues to the running service, and that identity assumes a role limited to the APIs this pilot calls. On the major clouds that is a service account, a managed identity, or a role on the task or the pod, bound to the compute rather than copied into the image. The platform hands the process short-lived credentials. The application uses the default credential chain and never opens a long-lived key from disk. Calls to storage, the secret store, and internal APIs are signed as that identity, so the audit log names the retrieval service rather than a shared person. A key file in the container is a finding because the key is long-lived and traveled with the image. Anyone who can pull the image or open a shell can copy it. It does not expire on restart, and every environment that reused the image shares it. I remove the file, revoke the key, and attach the role before the review. A key in the image is a failed control, not a note. At a retailer the retrieval task runs as a service account that can read one bucket prefix and one secret. The build fails if a cloud key file is present. The pitfall is mounting that same key and calling the mount workload identity. A mounted key is still a copied secret. The platform has to be able to expire it and bind it to that workload alone."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Security",
+    "category": "Senior FDE - Security",
+    "topic": "Secret rotation",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "The customer requires the database password to rotate without downtime. How do you design the application to pick up the new secret?",
+    "answer": "The application reads the database password from the secret store when it opens a connection, and it can build a new pool with the new password while the old pool finishes work already in flight. It does not read the password once at process start and hold it until the next deploy. Rotation keeps a short overlap where both passwords work. The job sets the new password on the database, publishes it as the current secret, leaves the previous value in place, and removes the old password only after that overlap. Each instance refreshes on a timer and again when a login fails. New requests use the new pool. Requests already running keep their connection. The listener stays up. If an instance cannot read the secret, its health check fails and the platform replaces it. At a telecom pilot the password rotates daily in the secret manager. The service caches it for a few minutes, refreshes on authentication failure, and swaps pools without dropping the process. The customer runs a rotation in business hours and the ticket flow does not error. The pitfall is a connection string fixed at deploy time, so the only pickup is a rollout, and a rollout in a change freeze is downtime. Revoking the old password in the same minute as the secret change drops every pod that has not refreshed."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Security",
+    "category": "Senior FDE - Security",
+    "topic": "Secret leakage in answers",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you stop the assistant from returning secrets that were accidentally embedded in a runbook, even when retrieval correctly found that page?",
+    "answer": "A correct retrieval is how the secret reaches the model. The employee was allowed to read the runbook, and the page contains a password or a key pasted under a step. The assistant will quote that line when the job is to follow the runbook and nothing else inspects the text. The live secret belongs only in the secret store, and the page names the vault entry. The pilot still assumes a secret is already in the corpus. At index time a scanner looks for credential-shaped strings and long high-entropy tokens, then drops the page, redacts the span, or parks it for the owner. What reaches the model keeps the host, the user, and the vault name, with the secret replaced. On the way out, the same strings are masked before the reply is shown, written to a ticket, or logged. Telling the model not to repeat credentials is a backstop, because it will sometimes quote the page anyway. At an operations desk a restart runbook had a database URL with the password in it. The indexed chunk kept the host and pointed at the vault. The reply did the same. The pitfall is a blocklist of passwords already known. The next leak is a value the list has never seen, and a check for the word password misses a key inside a command. Scan while indexing, mask before display, and keep the live value off the page."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Security",
+    "category": "Senior FDE - Security",
+    "topic": "Threat model",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you run a short threat model with the customer's security partner before the pilot, and what decision do you write down if they cannot accept a hosted model?",
+    "answer": "A short threat model is a working session with a decision at the end. I book the customer's security partner for an hour before the pilot, with one page: who signs in, where documents live, which tools the model can call, where prompts go, and what is logged. We walk abuses they already care about. An employee asks for another employee's tickets. A document contains directions to the assistant. A prompt leaves the network. A secret lands in a log. A tool writes, though the pilot was described as read-only. For each one we record the control in place, the evidence they can inspect, and the residual risk for this window only. The pilot record states the data classes, the retention, and who can switch the integration off. If they cannot accept a hosted model, the decision is that the pilot does not call a vendor model API. The model runs in their network, or the pilot waits. There is no path through a developer key, and the same endpoint is not relabeled temporary. At a hospital the partner refused a public endpoint because clinical notes would sit in the prompt. The record says the pilot uses the model in their tenant, and the vendor API is out. The pitfall is writing risk accepted with no owner and no end date. A quiet fallback to the hosted model during an outage reverses that decision with the partner out of the room."
+  }
+]

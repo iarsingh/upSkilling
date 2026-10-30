@@ -1,0 +1,402 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - GCP",
+    "topic": "GKE node pools",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What does a GKE cluster actually consist of, and why do you split workloads across node pools instead of one large pool?",
+    "answer": "A GKE cluster is a Google-managed Kubernetes control plane plus the node pools that run pods. Google operates the API server, scheduler, and etcd across the zones of a regional cluster. The platform team owns the node pools, which are groups of Compute Engine virtual machines that register as nodes. Separate pools exist so machine shape, taint, and upgrade blast radius stay different. The API pool uses a general-purpose machine and no taint. A second pool with a GPU accelerator carries a taint that only the embedding job tolerates, so the scheduler cannot place the public API on that expensive node and cannot place the GPU job on the API pool. Each pool scales and upgrades on its own. At a freight carrier in us-central1, the customer-facing assistant runs on a private regional pool, and the nightly document embed runs on a tainted GPU pool that is allowed to scale to zero after the queue drains. An AWS comparison is a managed node group on EKS, and on Azure it is a node pool on AKS. The control-plane split is the same idea. The pitfall is one large shared pool because it is easier to draw. The API then sits on GPU-priced nodes it never uses, and a node-image upgrade restarts the website and the batch job in the same window."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - GCP",
+    "topic": "Cloud Run revisions",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How does a Cloud Run revision receive traffic, and what does concurrency mean for a Python API that calls a model?",
+    "answer": "A Cloud Run revision is an immutable snapshot of one container image plus its environment, CPU, memory, and identity. Traffic is a percentage assigned to revisions, so a new revision can take five percent while the previous revision keeps the rest. Concurrency is the number of requests one instance is allowed to handle at the same time. The default is high, which is right for a tiny async handler and wrong for a FastAPI process that spends seconds blocked on a model call and holds a database connection for each request. Set concurrency near the size of that connection pool, cap max instances, and turn on always-allocated CPU if a background thread must keep running between requests. At a regional insurer, the chat API runs as a Cloud Run service in europe-west1. Revision 18 keeps ninety-five percent of traffic at concurrency eight. Revision 19, which points at a new prompt id, takes five percent. Rolling back is a traffic change, not a rebuild. App Runner and Azure Container Apps also split traffic, but their concurrency and CPU-throttling rules differ, so the numbers get remeasured. The pitfall is leaving concurrency at the default while each request holds a Cloud SQL connection. Instance count looks healthy while the database rejects new sessions."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - GCP",
+    "topic": "IAM bindings",
+    "difficulty": "beginner",
+    "questionType": "Comparison",
+    "question": "How do you explain a Google Cloud IAM binding to a security reviewer who already knows AWS IAM or Azure RBAC?",
+    "answer": "An IAM binding says which principal has which role on which resource. The principal is a user, a group, a service account, or a workload-identity subject. The role is a named set of permissions, such as Cloud SQL Client or Secret Manager Secret Accessor. The resource is the project, the folder, or a single secret or instance. Access is the union of every binding that matches. There is no implicit allow from being a member of the project. Compared with AWS, a Google service account is both an identity and a resource you can grant roles on, and the binding lives on the target resource rather than only inside a policy document attached to the caller. Compared with Azure RBAC, the idea is a role assignment at a scope, but the scope names and the inheritance from organization to project are Google's. At a bank pilot, the runtime service account receives Cloud SQL Client on one instance and Secret Accessor on one secret. The human platform group receives Viewer on the project and nothing that can read secret payloads. The pitfall is granting Project Editor or Owner so the first deploy succeeds. That binding lets a workload create keys, change firewalls, and read every secret. A reviewer will reject it, and they are right."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - GCP",
+    "topic": "Secret Manager versions",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How do you store a database password in Secret Manager so a rotation does not require rebuilding the container image?",
+    "answer": "The password lives in Secret Manager as a secret with numbered versions, and the image never contains it. The workload's identity has Secret Accessor on that one secret. At process start the application, or a small init step, reads a specific version or the latest alias and keeps the value in memory. Adding version 4 does not change the image digest. Processes that already started keep version 3 until they restart or until the code refreshes the value on a timer. A Cloud Run revision or a Kubernetes rollout is the restart, and it still uses the same image. Destruction of an old version waits until no running revision pins it. At a payroll customer, Cloud SQL password rotation is a new secret version written by the platform pipeline. The Deployment annotation changes, pods roll, and they read version 4 through Workload Identity. The image tag does not move. AWS Secrets Manager and Azure Key Vault solve the same job with different identity bindings, so the rotation runbook names the product the customer actually runs. The pitfall is baking the password into an environment file copied into the image, or mounting a JSON key so the container can reach Secret Manager. The secret then lives in the registry and in any node backup. Rotation becomes a rebuild, which means it will not happen."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Kubernetes",
+    "topic": "Container probes",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What is the difference between a startup probe, a readiness probe, and a liveness probe on a GKE Deployment?",
+    "answer": "A startup probe protects a slow boot. Readiness controls whether the pod receives traffic. Liveness restarts a process that is wedged. Kubernetes does not run readiness or liveness until the startup probe succeeds, so a model load that takes ninety seconds can have a high failure threshold without being killed for being slow. Readiness failing removes the pod from Service endpoints and leaves the container running, which is what you want while a dependency is briefly down. Liveness failing kills the container. It belongs on a check that the process itself can answer, not on a call to the database or the model. A failed dependency would then restart every pod and make the outage worse. At a hospital assistant, the startup probe allows two minutes for the embedding client to initialize. Readiness hits /ready, which returns failure when the local cache is cold. Liveness hits /live and only checks that the event loop responds. The same three probes exist on any Kubernetes distribution, including EKS and AKS. Cloud Run has its own startup and liveness settings and no Service endpoints. The pitfall is pointing liveness at a deep health check. A Cloud SQL blip restarts the fleet, the new pods all hit the database together, and a short dependency error becomes a crash loop."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Kubernetes",
+    "topic": "Multi-stage images",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "Why does a multi-stage Docker build matter for a Python service that ships to Artifact Registry?",
+    "answer": "A multi-stage build compiles or installs dependencies in one stage and copies only the runtime files into a second, smaller image. The registry stores that final image, addressed by digest, and the cluster pulls the digest rather than a floating tag. Build tools, compilers, and the source tree stay out of the runtime layer, which cuts pull time and removes packages that have no reason to run in production. The Dockerfile creates a non-root user, and the container listens as that user. A .dockerignore keeps local virtualenvs and secret files out of the build context so they cannot leak into a layer. At a retailer assistant, the builder stage installs wheels, and the runtime stage is a slim Python image with the app and those wheels. GitHub Actions pushes the digest to Artifact Registry in the same region as the cluster. The Deployment pins that digest. ECR and Azure Container Registry are the same pattern on the other clouds: immutable digest, regional replication, and a pull identity on the node or the pod. The pitfall is a latest tag overwritten on every build, combined with an image that still contains the compiler and a copied .env. You cannot tell which bits are running, and a secret scan of the registry finds the database password."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Delivery",
+    "topic": "Terraform state",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What is Terraform state, and why does a platform team keep it in a remote backend with locking?",
+    "answer": "Terraform state is the mapping from the resources in configuration to the real ids in the cloud. The next plan diffs desired config against that mapping, not against a person's memory. A laptop file means two engineers can apply different copies and lose track of what exists. A remote backend puts one state object in a Cloud Storage bucket with versioning, so a bad apply can be recovered from the previous object generation. Locking, or a CI concurrency group when the Terraform version has no lock on that backend, makes a second apply wait instead of writing a partial state. The bucket is in the same organization as the project, access is limited to the CI service account and a break-glass group, and state is encrypted. State often contains resource attributes, so it is treated as sensitive even when passwords are in Secret Manager. At a credit-union platform, each environment has its own state prefix in one bucket. Pull requests run plan. Only the main branch applies, and a second apply queues. An S3 backend with a lock table, or Azure Blob storage, is the same contract on the other clouds. The pitfall is applying from a laptop against production because CI is red. The local state and the bucket diverge, and the next CI plan wants to destroy a live database."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Delivery",
+    "topic": "Helm releases",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How do you use one Helm chart for three customer environments without copying the chart for each environment?",
+    "answer": "The chart is the parameterized package. The environment is a values file and a release name. Templates reference values for image digest, replica count, host name, resource requests, and the name of the Kubernetes service account. A default values file documents every knob. Dev, staging, and prod each pass their own small file, and a customer override file sits on top when one tenant needs a larger memory request. The release name is the install identity, so three releases can share a chart version without sharing a Deployment name. Chart version tracks template changes. The application version tracks the image. Those two numbers move independently. At a logistics company, chart 1.8.0 renders the assistant. Staging values point at a digest built that morning. Production values still point at last week's digest and a higher replica count. Promoting is a values change in git, not a forked chart. The same chart installs with Helm on EKS or AKS because the templates are Kubernetes, while the ingress annotations and the workload-identity annotation stay in the values file for that cloud. The pitfall is copying the chart into three repos so each environment can drift. A security fix then has to land three times, and one copy will miss it."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - MLOps",
+    "topic": "Model registry",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What belongs in a model registry for a customer assistant, and what stays out of it?",
+    "answer": "A model registry records the things you would need to redeploy or explain a behavior change. Each entry has a version id, the artifact URI or the hosted model name, the container or runtime, the evaluation set id, the metric snapshot, the owner, and an alias such as candidate or production. Vertex AI Model Registry fits a model you deploy as an endpoint. A hosted publisher model still gets a row, even when there is no weight file, because the model name and region are the artifact. Prompts and index builds are versioned beside it, because they change answers without a new weight file. Customer documents, raw prompts filled with user text, and API keys stay out. The registry is not a second content store. At an insurer, production points at publisher model version pinned in europe-west3, evaluation set claims-2026-04, and prompt hash 9c1. A challenger version sits in the registry with a lower citation score and no alias. MLflow or SageMaker Model Registry is the same record on another cloud. The pitfall is registering only training runs from a notebook and letting the prompt the customer hears live in a wiki. The next bad answer has no version to roll back to."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Data",
+    "topic": "Kafka versus batch",
+    "difficulty": "beginner",
+    "questionType": "Comparison",
+    "question": "When does a customer event path belong on Kafka, and when is a nightly batch enough?",
+    "answer": "Put an event on Kafka when a downstream worker needs it within seconds and each event stands on its own, such as a document upload, a ticket update, or a feature flag change. A nightly batch is enough when the consumer is a daily aggregate, the source is a file drop, and a delay of hours does not change a user-facing answer. Kafka gives a partitioned log, consumer groups, replay from an offset, and retention you must operate. Batch gives a scheduled read of a bucket or a table, simpler failure handling, and a clear window. On GCP, Pub/Sub covers many of the same jobs as Kafka with less cluster work. Choose Kafka when the customer already runs it, or when log compaction and long replay are actual requirements. At a freight carrier, shipment scans land on Kafka because the assistant must see a delay within a minute. The customer satisfaction extract is a nightly file into Cloud Storage, because nobody asks that question during the scan. MSK on AWS and Event Hubs on Azure are the managed equivalents, with different retention and consumer APIs. The pitfall is standing up Kafka for a report that runs once a night. The team then pages on under-replicated partitions for data that could have been a load job."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Observability",
+    "topic": "OpenTelemetry signals",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What does OpenTelemetry collect from a platform service, and where do those signals land on GCP?",
+    "answer": "OpenTelemetry collects traces, metrics, and logs through one set of APIs and a collector. A trace is the timed path of one request. A metric is a number aggregated over time. A log is a discrete event tied to that request by id. The service SDK starts a span on the API handler and child spans on the database call and the model call, and it propagates W3C trace context on outbound headers. The collector runs as a DaemonSet or sidecar, receives OTLP, and exports traces to Cloud Trace, metrics to Cloud Monitoring or Managed Prometheus, and logs to Cloud Logging. Resource attributes name the service, version, namespace, and pod, so a span can be tied to a deploy. The question text and secret values are not span attributes. At a telecom assistant, one chat turn is one trace. The ticket carries a request id. That id shows retrieval at 200 milliseconds and the model span at four seconds, in the same project as the GKE cluster. The same SDK exports to X-Ray or Azure Monitor when the customer is not on GCP, with a different collector config and the same span names. The pitfall is one span around the whole handler and a collector that drops the trace header at the mesh. The trace then proves the request was slow and hides which hop to fix."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Observability",
+    "topic": "SLI and SLO",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How do you write an SLI and an SLO for a platform API that a product manager can repeat?",
+    "answer": "An SLI is the measurement of what the caller experiences. An SLO is the target for that measurement over a window. For a platform API, the indicator is the share of valid requests that returned a successful response within a stated latency during the agreed hours. The objective is a percentage, such as 99.9 percent of those requests over 30 days. A successful response is a non-5xx that finished under the threshold and, for an assistant, included a non-empty cited answer. The error budget is the allowed miss, about 43 minutes a month at 99.9 percent. When the budget is nearly gone, risky releases wait. The product manager hears a sentence, not a PromQL expression: met, or missed on these days for this reason. At a retail support desk, the SLO is 99.9 percent of questions between 8 am and 10 pm local time returning a cited answer in under five seconds, excluding a published maintenance window. Cloud Monitoring can host the SLO. The same ratio can be computed from any metrics backend. The pitfall is an objective written only as a CPU target or a latency average. A fast empty reply looks healthy, and one slow hour is hidden by a quiet month. One indicator the manager can say in a standup is enough until a real failure stays invisible to it."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - GCP",
+    "topic": "Private VPC design",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you design a VPC for a private GKE cluster that must reach Cloud SQL and Google APIs without public node IPs?",
+    "answer": "The cluster is private, the database has a private address, and nodes reach Google APIs without a public IP of their own. The VPC has a subnet for nodes, a secondary range for pods, and a secondary range for services. Private Google Access is on for that subnet so nodes can reach Artifact Registry, Secret Manager, and logging without Cloud NAT for those APIs. Cloud NAT exists only for the remaining egress, such as a vendor webhook, and it is not a path to the database. Cloud SQL is created with a private IP on a Private Service Access range and with its public IP disabled. The master authorized networks, or a private endpoint, limit who can talk to the Kubernetes API. Firewall rules or network policy allow the pod range to the SQL port and deny everything else. At a payroll company in us-east1, nodes have no public IPs, pods use alias IPs, and only the pod range may open 5432 on the private Cloud SQL address. Engineers reach the API through Identity-Aware Proxy, not a public endpoint with a wide authorized network. A private EKS cluster in a private subnet with a VPC endpoint, or a private AKS cluster with a private link, is the same shape. The pitfall is turning on the Cloud SQL public IP with an authorized network of the whole internet so a laptop can connect. That one flag publishes the rows."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - GCP",
+    "topic": "Pub/Sub workers",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you configure a Pub/Sub subscription so a slow embedding worker does not lose messages or stall healthy documents?",
+    "answer": "The upload handler stores the object and publishes one message with the object name and generation. The worker pulls, embeds, and writes vectors, and it acknowledges only after that write commits. The ack deadline is longer than a normal embed, and the client extends the deadline while work is still running, so a two-minute document is not redelivered at ten seconds. The subscriber caps outstanding messages so a burst cannot exhaust memory. After a fixed number of delivery attempts, the subscription forwards the message to a dead-letter topic. The document row stays failed with the last error, and a person can requeue it. Ordering is enabled only when a single document id must be processed in order, because an ordering key reduces parallelism for that key. The handler is safe to run twice, keyed by document id and generation, so a redelivery overwrites chunks instead of duplicating them. At a law firm, each contract is one message. A corrupt PDF dies into the dead-letter subscription after five attempts and does not block the rest of the firm's uploads. SQS with a redrive policy, or Service Bus dead-lettering, is the same pattern. The pitfall is acknowledging on receipt and then failing the embed, which drops the document, or retrying poison messages forever until the backlog stalls good ones."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - GCP",
+    "topic": "Cloud SQL connectivity",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you connect GKE or Cloud Run to Cloud SQL for a private pilot, and what still breaks during a failover if the application does not retry?",
+    "answer": "Connect over the private IP, grant the runtime identity Cloud SQL Client, and leave the public IP off. On GKE, run the Cloud SQL Auth Proxy as a sidecar on localhost so the application does not hold a long-lived password. On Cloud Run, attach the service to the VPC that can route to the Private Service Access range and point the app at the private address or the connector. Regional high availability keeps a standby in another zone. Failover promotes it and drops existing connections even when the address stays the same. The application must retry with backoff, and the pool must not stampede. A small tier's connection limit is only a few dozen. Each pod opens its own pool, so twenty instances with a pool of ten ask for two hundred connections. Cap instances, shrink the pool, or raise the tier, and chart connection count next to latency. Point-in-time recovery depends on backups and binary logs being on before the incident. At a retailer, the proxy sidecar uses Workload Identity, the public IP is disabled, and the app retries three times on a dropped connection during the quarterly failover test. RDS and Azure SQL also drop connections on failover. The pitfall is raising max instances to cure a slow query. More pools turn a slow statement into a total refusal of new work."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - GCP",
+    "topic": "Vertex endpoint path",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "At architecture level, how does a request from a private GKE service reach a Vertex AI endpoint, and which data-residency choice stops that path?",
+    "answer": "The application calls a regional Vertex endpoint with its workload identity, and the prompt stays inside the region named in the contract. A publisher model or a model you deployed is reached through the Vertex API, not by opening a notebook. Private Google Access or Private Service Connect lets the private cluster reach that API without a public node IP. The Google service account on the pod has a narrow AI Platform role on the project or the endpoint, not project Owner. The endpoint's region, the bucket, and Cloud SQL are the same region when the agreement says so. A global endpoint is the wrong default when the data-processing terms name one region. Refuse the path when the customer requires that document text never leave a named country, a named VPC, or their own hardware, and the chosen model is not offered there. Sending a sample to check quality is already processing. At a German insurer, the pod in a private cluster calls a regional endpoint in europe-west3, and the policy bucket stays in that region. If the policy text must remain on their premises, the design moves to a model they host there. SageMaker or Azure OpenAI is a different region list, so the same question is asked again. The pitfall is starting on a convenient model region and promising to relocate later. Prompts already sent are a residency event."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Kubernetes",
+    "topic": "Requests and limits",
+    "difficulty": "intermediate",
+    "questionType": "Conceptual",
+    "question": "How do you set CPU and memory requests and limits for an API pod that also loads a local embedding model?",
+    "answer": "Requests are what the scheduler reserves. Limits are the ceiling the container cannot pass. Memory request is the working set you expect, including the model weights and a margin for request peaks. Memory limit sits just above that, because crossing it OOMKills the container. CPU request is the steady compute the pod needs to meet latency. CPU limit, if you set one, throttles the container when it bursts, which shows up as latency rather than a kill. On a node, requests decide whether the pod fits. Setting a limit and omitting a request causes Kubernetes to copy the limit into the request, so a cautious limit also blocks scheduling. The embedding process and the API can be two containers in one pod with separate requests, so a spike in one does not hide the other's reservation. At a support assistant, the API container requests 500 millicores and 1 GiB, and the model container requests 2 CPUs and 4 GiB with a memory limit of 5 GiB. The node pool machine type is chosen so two such pods fit and still leave room for system daemons. The same fields exist on EKS and AKS. The pitfall is a memory limit copied from a laptop that never loaded the model. Every pod restarts with exit code 137, and the Deployment never becomes ready."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Kubernetes",
+    "topic": "Namespace RBAC",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you scope RBAC so a customer's CI robot can deploy into one namespace and cannot read secrets in another?",
+    "answer": "RBAC binds an identity to a role at a scope. A Role and a RoleBinding are namespace-scoped. A ClusterRole is a bundle of permissions that becomes namespace-scoped when a RoleBinding references it, and cluster-wide only when a ClusterRoleBinding references it. The CI robot is a Kubernetes service account, or a cloud identity mapped into one, and it receives a RoleBinding in the target namespace only. That role may update Deployments, ConfigMaps, and ServiceAccounts in that namespace. It may not get or list Secrets. A separate human role can read secret metadata if operations need it, and almost nobody can read secret payloads from the API because the payloads live in Secret Manager. The robot has no ClusterRoleBinding and is not cluster-admin. At a bank, GitHub Actions impersonates a service account that can deploy into assistant-prod and nothing else. A test pipeline bound to assistant-dev cannot list secrets in assistant-prod. The same Role and RoleBinding model exists on EKS and AKS. The pitfall is binding a ClusterRole named edit or cluster-admin with a ClusterRoleBinding because the first pipeline failed on a missing verb. The robot can then read every secret in the cluster and deploy into kube-system."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Kubernetes",
+    "topic": "Services and NetworkPolicy",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How does traffic reach a pod, from a ClusterIP Service through a NetworkPolicy, and what do empty endpoints usually mean?",
+    "answer": "A pod has an IP from the cluster's pod range. On GKE that range is a secondary subnet, and routes are alias IPs. A ClusterIP Service is a stable virtual address. The data plane, kube-proxy or GKE Dataplane V2, forwards that address to pods that are Ready in the EndpointSlice. A pod that fails readiness is removed from the slice and keeps running. NetworkPolicy is allow-list once any policy selects the pod. Until a policy selects it, traffic is allowed. After a policy selects it, only the listed pods, namespaces, or CIDRs may connect on the listed ports. The API allows the worker namespace on 8080. The worker allows the API and the Cloud SQL CIDR, and it denies everything else. An empty EndpointSlice means no pod is Ready: the replicas are zero, the readiness probe is failing, or the selector labels do not match. At a hospital deployment, a NetworkPolicy on the API namespace stopped a mislabeled worker from connecting. The Service had endpoints again after the worker labels matched the selector and readiness passed. Kubernetes NetworkPolicy behaves the same on EKS and AKS once the network plugin enforces it. The pitfall is debugging an empty slice by opening the policy to allow all. The outage gets hidden and the policy never returns to least privilege."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Delivery",
+    "topic": "GitHub Actions identity",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How does a GitHub Actions workflow build an image and deploy it to GCP without a long-lived service-account key?",
+    "answer": "The workflow uses GitHub's OIDC token and Workload Identity Federation. A pool and a provider in the customer's project trust token.actions.githubusercontent.com. An attribute condition locks the repository and the branch, so a fork or a random repo cannot assume the identity. The Google service account has two narrow grants: writer on one Artifact Registry repo, and the Kubernetes permission or the Cloud Run permission used to roll the digest. The auth step exchanges the OIDC token for a short-lived credential. The job builds, pushes by digest, and updates the Helm values or the Cloud Run revision to that digest. No JSON key is stored in GitHub secrets. The same workflow on AWS assumes a role through a GitHub OIDC trust policy, and on Azure it uses a federated credential on a managed identity. At a credit union, only the main branch of the platform repo can push to the prod registry and update the prod values file. Pull requests build and run tests with a read-only identity. The pitfall is a JSON key in the repo secrets with Project Editor, created because federation took an afternoon to configure. That key does not expire when an employee leaves, and it is not limited to one repository."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Delivery",
+    "topic": "Terraform environments",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you structure Terraform so dev, staging, and prod share modules but do not share state?",
+    "answer": "Modules hold the reusable shape of a network, a cluster, and a database. Each environment is a thin root module that calls those modules with its own variables and its own remote state. Dev, staging, and prod never share a state file, a state prefix, or a lock. A change to a module is applied in dev, then staging, then prod, as separate plans. The prod root does not interpolate from dev state. Remote state outputs are read only when a boundary is deliberate, such as a network host project publishing a subnet id. Variable files hold names and sizes, not secrets. Secret ids are passed in, and the secret payload stays in Secret Manager. CI runs terraform plan on the pull request and posts the diff. Apply happens from the protected branch for that environment, with a concurrency group so two applies cannot run. At a retailer, the GKE module is version 2.4.0 in all three roots. Prod's plan is empty until the change window, even though dev already applied 2.5.0. Separate state in S3 or Azure Blob is the same rule. The pitfall is Terraform workspaces on one state backend key as a shortcut. A wrong workspace selection applies the dev plan to prod, and the blast radius is the entire stack."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Delivery",
+    "topic": "Argo CD sync",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How does Argo CD keep a GKE namespace aligned with git, and what do self-heal and prune actually change?",
+    "answer": "Argo CD treats git as the desired state for a namespace. An Application points at a repo path or a Helm chart and values file, and at a destination cluster and namespace. A sync makes the live objects match that rendering. Automated sync means a commit applies without a click. Self-heal means a later kubectl edit is reverted to git, so a hotfix typed into the cluster does not stick unless it is committed. Prune means an object removed from git is deleted from the cluster on the next sync. Prune is off until the team has seen a plan of what would disappear. Health is not the same as synced: a Deployment can be synced and still unavailable because the new pods are crash-looping. Argo then shows degraded, and the previous ReplicaSet is still the place to look. At a logistics customer, the prod Application tracks the prod values path. A digest bump in git rolls the assistant. An engineer who scales a Deployment by hand sees it return to the git replica count within minutes. Flux on EKS or AKS offers the same git-as-source contract. The pitfall is turning on automated prune and self-heal on the first day. A bad commit deletes a Service, and a manual rollback on the cluster is overwritten before anyone can commit the fix."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - MLOps",
+    "topic": "Evaluation gate",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "What evaluation must pass before a new prompt or model alias is allowed to take production traffic?",
+    "answer": "A candidate prompt or model alias takes traffic only after a pinned evaluation set passes a written bar against the current production alias. The set is a versioned list of questions with expected citations, expected refusals, and a few answers that must not appear. The job runs offline in CI, calls the candidate the same way production will, and records citation hit rate, refusal correctness, empty-answer rate, and latency. The bar is a comparison with the champion, not a vague improvement. A drop past the threshold fails the pipeline. A human still approves the last step for a regulated customer, but the human is not the only check. Shadow traffic can follow the gate. It does not replace it, because shadow sees live data the golden set may not cover, and it also misses cases the golden set was built to catch. At a card issuer, prompt 15 cannot replace prompt 14 until citation hit rate stays within two points and the refusal set still blocks account-number requests. The registry stores the score next to the version. The pitfall is a demo on five hand-picked questions, then a full traffic cutover. The five questions pass and the long tail of policy edge cases does not."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - MLOps",
+    "topic": "Prompt versions",
+    "difficulty": "intermediate",
+    "questionType": "Conceptual",
+    "question": "How do you version a prompt so a bad answer next week can be tied to the exact text the model saw?",
+    "answer": "A prompt is an artifact with an id and a content hash, stored in git or in a table the registry points at. The running service loads a named alias, such as production, which resolves to one immutable version. Changing a word creates a new version. It does not edit the old row. Every answer log records the prompt id, the hash, the model name and region, and the index build id. It does not record the full user question. With those ids, a bad answer can be rebuilt from the same inputs in a sandbox. The alias move is the release. A rollback moves the alias back, which is safe because the previous text is still stored. Template variables are part of the versioned text. Filled-in customer content is not, because that would copy customer data into the registry. At a telecom desk, an agent challenges a roaming answer. The trace shows prompt p-22 hash 4ab, model name pinned in the region, and index 2026-10-12. Opening p-22 shows a sentence that softened a fair-use cap. The alias returns to p-21 the same day. The pitfall is a prompt file edited on the server, or a latest key overwritten in a bucket, with no hash in the log. The text that produced the answer is already gone."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Data",
+    "topic": "Airflow to BigQuery",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "Where does Airflow sit when feature rows land in BigQuery, and what makes a DAG safe to rerun?",
+    "answer": "Airflow, often Cloud Composer on GCP, orders batch work that is too slow and too dependent to live in a request. A DAG extracts a day's events from Cloud Storage or from a replica, loads a BigQuery partition, runs quality checks, and publishes a ready flag that downstream training or eval jobs wait on. It does not serve the assistant. A rerun is safe when each task overwrites a named partition instead of appending. The load uses a write disposition that replaces the date partition. The quality task asserts row counts, null rates, and uniqueness for that same date. A second run of Tuesday produces the same Tuesday partition, not a second copy. Task retries are on. Catchup is explicit, because a paused DAG that wakes up and backfills ninety days can spend the slot budget. At a retailer, Composer runs a nightly DAG. The assistant reads a serving table that updates only after the quality task succeeds. Analysts can query the warehouse during the load because the serving table swaps after success. Managed Airflow on the other clouds follows the same DAG contract. The pitfall is an append-only insert with retries enabled. A failed task that actually committed, then retries, doubles the rows, and the model trains on a skewed day."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Data",
+    "topic": "BigQuery versus Cloud SQL",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "When do you query BigQuery from a platform job, and when do you refuse to put it on the user request path?",
+    "answer": "BigQuery is the columnar warehouse for scans, aggregates, eval sets, and drift tables. Cloud SQL, or the vector store in front of it, is the operational path for a single user's request. A nightly job that computes citation rates by tenant belongs in BigQuery, partitioned by date and clustered by tenant, with an authorized view so the assistant's analytics identity cannot read raw prompts. A chat request that needs one document's status, a session row, or a vector lookup belongs on Cloud SQL or the serving index, reached over a private IP with a small connection pool. BigQuery charges by bytes scanned or by slots and answers in seconds when the query is large. That profile misses a five-second user budget once the warehouse is under load. At an insurer, the eval harness reads a BigQuery table of labeled questions. The live assistant never does. It reads Cloud SQL for document status and the vector index for chunks. Redshift or Synapse plays the warehouse role on the other clouds, with the same split. The pitfall is calling BigQuery from the request handler because the data is already there. One popular dashboard query then competes with user traffic, latency jumps, and the bill follows the scan."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Observability",
+    "topic": "Prometheus metrics",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "Which Prometheus metrics do you expose from a GKE service, and which labels do you refuse because they explode cardinality?",
+    "answer": "Expose the RED signals and the saturation signals the on-call will use. A counter of requests by status class, a histogram of latency with explicit buckets, and a gauge of in-flight requests cover rate, errors, and duration. Separate histograms for the database span and the model span, fed from the same process or from OpenTelemetry, show which hop moved. Saturation is CPU throttling, memory working set against the limit, and the database pool in use. On GKE, Managed Prometheus scrapes a PodMonitoring resource. Recording rules precompute the error ratio and the latency quantile so dashboards do not evaluate a heavy query on every refresh. Labels are method, status class, and a small set of dependency names. They are not user id, document id, prompt text, or a raw URL. Those labels create a series per customer action and take down the scraper before they teach you anything. At a telecom service, the board reads the recording rule for 5xx ratio and the model-span histogram. A deploy annotation marks the digest change. The same exposition format works on EKS and AKS. The pitfall is a histogram with a label per tenant and a bucket per millisecond. The metric store bills and then drops samples, and the SLO page goes silent during the incident."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Observability",
+    "topic": "Grafana on-call board",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "What does the first Grafana dashboard for an assistant platform contain, and what do you leave off it?",
+    "answer": "The first board answers whether users are hurt and which hop to open. A top row shows request rate, 5xx ratio, empty-answer ratio, and latency at the agreed threshold, with a deploy annotation. A second row splits latency into API, retrieval, and model. A third row shows saturation: pod restarts, CPU throttling, memory against the limit, Cloud SQL connections, and Pub/Sub oldest unacked message. Template variables select namespace and customer. Each panel links to the trace query for that service. Logs are one click away, filtered by the trace id, not pasted onto the board. Leave off node-level trivia, a panel per pod, and any chart that includes the question text. Those belong in a debug board used after the hop is known. At a regional bank, the on-call opens one board during a slow-answer page. The model-span panel steps up at the same minute as the deploy annotation, and the SQL connection panel stays flat. The incident lead sends that sentence to the sponsor. Grafana reads Managed Prometheus on GCP, Amazon Managed Prometheus, or Azure Monitor, depending on where the customer runs. The pitfall is a board of averages and fifty panels. The average hides the slow tail, and nobody can find the one chart that matches the SLO."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - GCP",
+    "topic": "Workload Identity",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "How do you give a pod access to GCP APIs without a service-account key, and how does that differ from IRSA or Azure workload identity?",
+    "answer": "The pod impersonates a Google service account and receives a short-lived token. No JSON key is created. On GKE, Workload Identity binds a Kubernetes service account in one namespace to that Google account. The binding on the Google side names the Kubernetes subject. The pod requests tokens from the metadata server, and clients for Cloud SQL, Secret Manager, or Vertex use that token. The Google account's roles stay narrow and resource-scoped. On Cloud Run the revision runs as the Google service account directly, so there is no second binding. AWS IRSA is the same job with a different mechanism: an IAM role trusts the cluster's OIDC issuer, and the service account annotation carries the role ARN. Azure workload identity uses a federated credential on a managed identity that trusts the cluster issuer and the service account subject. The runbook cannot swap the names. A Workload Identity annotation does nothing on EKS. At a hospital cluster, the namespace account assistant-reader binds to a Google account that can connect to one Cloud SQL instance and read one secret. There is no key to export. The pitfall is copying a key onto the node because the first impersonation failed, or binding every Kubernetes account to one broad Google account. A key survives pod deletion. A broad account makes the namespace boundary decorative."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Kubernetes",
+    "topic": "CrashLoopBackOff",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A Deployment on GKE is in CrashLoopBackOff after a digest bump. How do you find the cause and restore traffic?",
+    "answer": "CrashLoopBackOff means the container process is exiting and the kubelet is waiting longer between restarts. It is not the root cause. Read the Deployment events and the pod describe output for the last exit code, then logs from the previous container. Exit 137 with an OOMKilled reason points at the memory limit. Exit 1 in the first lines often means a missing secret, a bad environment variable, or a migration that throws. A probe failure in the events means the process stayed up and was killed for failing liveness, which is a different fix than a Python traceback. If the new ReplicaSet is the one crashing and the old ReplicaSet is still scaled down but healthy, point the Deployment back at the previous digest or roll it back so endpoints return while you keep the broken pod for logs. Do that before editing the probe in production to hide the symptom. At a retailer, revision 42 crash-looped because Secret Manager rejected the new service account. Rollback restored the previous digest in four minutes. The broken pod's previous logs kept the permission error. The same describe, previous logs, and rollback sequence works on EKS and AKS. The pitfall is deleting the pod repeatedly or raising the memory limit without reading the exit code. Deleting a crash-looping pod throws away the previous logs, and a permission error will not be cured by more memory."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Kubernetes",
+    "topic": "Pending pods",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "Pods stay Pending on a private GKE cluster after a scale-up. How do you tell a scheduling failure from an autoscaler that cannot add nodes?",
+    "answer": "Pending means the scheduler has not bound the pod to a node. Describe the pod and read the events before changing requests. Insufficient cpu or memory means no node has room for the requests, including daemonsets already on the node. An untolerated taint means the pod is aimed at a pool it cannot enter, often the GPU pool. A node affinity or a missing architecture has the same effect. If the events say the autoscaler cannot add a node, the cluster is not short of a scheduler rule. It is short of quota, a max node-pool size, or addresses in the pod secondary range. Private clusters fail this way when the alias range was sized for the first pilot and the new replica count does not fit. Fix the range or the pool max, or lower the requests if they were copied from a limit by mistake. Image pull problems are not Pending. Those pods are scheduled and stuck in ContainerCreating or ImagePullBackOff. At a freight carrier, forty pods stayed Pending because the pod CIDR had no free addresses, while CPU looked idle. Raising the secondary range and adding nodes cleared it. EKS subnet exhaustion and AKS node-pool max look the same in events. The pitfall is raising replica count again or forcing the pods onto a tainted pool. Both hide the capacity error and can take down the pool that was still healthy."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Kubernetes",
+    "topic": "Node pool upgrades",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you upgrade a GKE node pool under a live assistant without taking every replica down at once?",
+    "answer": "A node-pool upgrade drains nodes and replaces them. The application survives when the Deployment has more than one replica, a PodDisruptionBudget keeps a minimum available, and the pool's surge or max-unavailable setting lets a new node join before the old one leaves. Readiness must be real, because a pod that is Ready too early receives traffic during the surge and fails. Graceful termination handles in-flight requests up to the termination grace period, and the model client retries on a dropped connection. Drain respects the budget. If the budget says one pod must stay up and only one pod is healthy, the drain waits, and the upgrade stalls on purpose. That stall is better than an outage. Pause the upgrade if error rate moves past the SLO burn alert. At a bank, the API runs three replicas with a budget of at least two available, and the pool surges one extra node. The upgrade rolls one node at a time during the change window. The assistant stays on the previous digest. The node image is the only change. EKS managed node groups and AKS surge settings are the same idea with different pause buttons. The pitfall is a disruption budget of zero allowed disruptions copied from a stateful example, or a single replica with no budget. The first drain deletes the only pod, and the upgrade is blamed for an availability choice."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Delivery",
+    "topic": "ApplicationSet",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you use an Argo CD ApplicationSet when each customer has a namespace, and what keeps one customer from deploying into another?",
+    "answer": "An ApplicationSet generates one Application per customer from a list or a git directory, so you do not click fifty apps into existence. The generator supplies the customer id, the namespace, the values file, and the destination cluster. The template pins the chart version and renders a release whose name and namespace are that customer's. A values file that tries to set a different namespace is rejected by the template, not trusted. Each Application's destination is fixed by the generator. The repo path for customer A does not contain customer B's secrets, and the secrets are not in git anyway. They are references to Secret Manager. Sync windows and sync waves let a shared platform app land before tenant apps. Prune stays off until a generated diff is reviewed, because a generator bug can delete every tenant at once. At a retailer with thirty brands, one ApplicationSet renders thirty Applications from folders in git. Brand A's pipeline can change only its folder. Argo's project role denies that Application a destination outside its namespace. The pitfall is one cluster-admin Application that points at a values file the customer can edit. They can then render a ClusterRoleBinding and read another brand's secrets. The generator's destination and the AppProject boundary are the control, not a comment in the chart."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Delivery",
+    "topic": "Terraform drift",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A terraform plan wants to revert a firewall rule and resize a node pool that a customer changed in the console. How do you respond?",
+    "answer": "The plan is showing drift between git and the live project. Do not apply it just to make the plan empty. Read each diff and decide whether git or the console is the intended state. A firewall opening to the internet is almost always a mistake to revert, and the apply that restores the private rule is the fix, done in a window with the customer watching. A node-pool size change may be a real capacity fix made during an incident. In that case, commit the new size to the module variables first, so the next plan is empty because git moved, not because Terraform was told to ignore the resource. Import is for a resource that exists and is absent from state. It is the wrong tool when the resource is already in state and someone edited it. After the incident, remove the human permission to change firewalls and node pools in the console, and leave a break-glass group that is logged. At a credit union, an engineer had added 0.0.0.0/0 during a laptop debug and scaled a pool by hand. The firewall revert shipped the same day. The pool size was committed, with a note in the change window. The pitfall is terraform apply -auto-approve on a drifted prod plan, or lifecycle ignore_changes on the firewall so the open rule becomes invisible. One hides a destructive revert. The other hides a public database."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - MLOps",
+    "topic": "Quality drift",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "Citation rate on a live assistant drops over two weeks while the error rate stays flat. How do you tell drift from a bad release?",
+    "answer": "A flat error rate with a falling citation rate means requests succeed and the answers are getting less grounded. Start by comparing the release pins. If the prompt hash, model name, and index build id changed in the same window, treat it as a bad release and move the alias back if the eval bar would now fail. If those pins are unchanged, the inputs moved. Split the drop by query class, tenant, and document age. A new product line with no indexed documents looks like drift and is actually missing content. A policy rewrite that makes last month's golden set wrong is concept drift, and the set must be updated before anyone retrains or swaps models. Input drift is a shift in query mix or document length with the same correct behavior. Track retrieval empty rate, score distribution, and a weekly eval on fresh tickets, not only the original golden set. At an insurer, citation rate fell after a new rider was emailed to agents but never uploaded. The index id was unchanged. Loading the rider restored the rate. No model rollback was required. The pitfall is an automatic swap to a challenger model on the first drift alert. The challenger was trained on the same incomplete corpus and fails the same way, and the alias move hides the missing document."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - MLOps",
+    "topic": "Canary releases",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you canary a new prompt or model so a small share of sessions see it, and how do you stop it without redeploying the API?",
+    "answer": "The candidate is a new prompt version or model alias behind a traffic split, not a second untracked deploy. Five percent of sessions are assigned by a stable hash of the session id, so one conversation does not mix prompts. Cloud Run can split revisions by percent when the revision itself changed. When only the prompt id changes, a flag in the same image reads the alias from config and sticks the session to candidate or champion. Online comparison uses the same SLIs as production: error rate, empty-answer rate, latency, and citation rate, sliced by alias. A scheduled sample of canary traces is scored against the eval rubric. The stop condition is written first. If the canary slice burns the error budget faster than the champion, or citation rate drops past the gate, the weight returns to zero. That is a config or traffic change, and the API image stays. At a card issuer, prompt 15 takes five percent of sessions for one business day. Citation rate falls four points. The flag goes to zero before lunch, and prompt 14 remains the alias. A similar split exists with SageMaker endpoint variants or Azure traffic weights. The pitfall is a random split per request inside a session, or a canary that requires a full rollback of a healthy API image to undo a prompt. Users see mixed answers, and the stop takes a deploy window."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Data",
+    "topic": "Data quality gates",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "What data-quality checks must pass before a BigQuery table is allowed to feed an evaluation or a feature build?",
+    "answer": "The table is not consumable until a gate on the same partition passes. Freshness checks that the newest event time is inside the agreed lag. Volume checks that the row count sits inside a band of the trailing days for that tenant, so a partial export fails. Uniqueness checks the declared key, such as event id or document id plus version. Null checks cover the columns the model or the eval job requires, and they allow nulls only where the schema says so. A schema check fails on a type change or a missing column. A distribution check on a small set of categorical columns catches a tenant that suddenly accounts for every row. The DAG writes the result to a quality table and sets a ready flag. The eval job and the feature job read the flag. They do not scan the latest partition on hope. A failed gate pages the data owner and leaves yesterday's ready partition in place. At a retailer, a Tuesday export arrived with half the stores because an upstream filter changed. The volume check failed, the eval job stayed on Monday's partition, and the assistant did not train on a silent hole. The pitfall is a check that only logs a warning and still sets the ready flag. The warehouse looks monitored, and the bad partition ships."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Data",
+    "topic": "Lag versus missed batch",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "A product manager says answers are stale. How do you tell Kafka consumer lag from a missed nightly batch?",
+    "answer": "Stale answers have two different clocks, and the fix depends on which clock stopped. Consumer lag is the gap between the latest offset produced and the offset the worker has committed. If the document-upload topic's lag is growing, the index worker is behind or stuck, and recent uploads are missing from retrieval while older documents are fine. A missed batch is a DAG that did not mark today's partition ready. Yesterday's warehouse features, eval aggregates, or full-index rebuild are still what serving reads. Check the consumer group's lag and the oldest unacked message first when the complaint is about events from the last hour. Check the Airflow or Composer task and the BigQuery partition date when the complaint is about yesterday's complete picture. Do not restart the consumer group and the DAG together. At a freight carrier, agents said dwell time was wrong. Kafka lag on the scan topic was near zero. The nightly terminal-summary DAG had failed its quality check, and serving was still on the prior day, which the ready flag made visible. Restarting consumers would have done nothing. MSK lag and a failed Glue or Data Factory run are the same split on the other clouds. The pitfall is treating all staleness as a model problem and shipping a new prompt. The index and the feature table were the stale inputs."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Observability",
+    "topic": "Error budgets",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you turn an SLO into an error-budget policy that decides whether a prompt experiment ships this week?",
+    "answer": "The SLO defines the allowed failure. The policy says what the team does as that allowance is spent. For a 99.9 percent SLO over 30 days, the budget is about 43 minutes of bad requests, measured by the SLI, not by CPU. A fast-burn alert pages when the last hour would exhaust the monthly budget if it continued. A slow-burn alert tickets when the last day is over budget. The policy, agreed with the product owner before the incident, is concrete. Above half the budget remaining, canaries and prompt experiments proceed. Below a quarter remaining, only fixes that improve the SLI ship. At zero, experiments stop and the on-call works the top burn cause until the window recovers or a new window starts. A canary that burns faster than the champion counts against the same budget and stops first. At a retail desk, the monthly SLO left six minutes of budget after a model-timeout week. A planned prompt test waited. The timeout fix shipped because it was the burn cause. The policy was a one-page agreement, not a dashboard. The pitfall is paging on a five-minute dip with no budget math, or ignoring a budget that has been gone for a week because the average latency chart still looks calm. One trains the team to mute pages. The other ships a prompt into an already broken month."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Senior FDE Phase 4 - Production Cloud and Platform",
+    "category": "Senior FDE - Platform - Observability",
+    "topic": "Incident leadership",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A regional GKE cluster serving the assistant starts failing requests during the customer's business hours. How do you lead the first thirty minutes?",
+    "answer": "Failing requests in business hours are a user-facing incident. One person leads, a second communicates, and a small group debugs. The lead says who is affected, using the 5xx and empty-answer charts and a handful of traces, and assigns an owner for the next update. Mitigate before the architecture debate. If a digest, a prompt alias, or a node-pool upgrade lines up with the start, pause the upgrade or move traffic back to the last known revision when that path is already rehearsed. If nodes are NotReady, check quota, the autoscaler, and the cloud status page before rewriting the app. Page the platform on-call for the cluster and the assistant on-call for the release. Page the database or model owner only when the traces name that hop. The sponsor hears what agents see, the share of requests once that number is real, the workaround they already have, and the time of the next note. At a bank on a Tuesday morning, the lead paused a node-pool upgrade, shifted Cloud Run overflow to the previous revision, and told the operations director that about a third of answers had failed since 9:05, with the next update in fifteen minutes. The pitfall is every senior engineer debugging in one channel while the sponsor hears nothing, or declaring the incident over because one pod became Ready while the SLO chart is still burning."
+  }
+]

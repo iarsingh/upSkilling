@@ -1,0 +1,142 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Retrieval-Augmented Generation",
+    "category": "Senior FDE - RAG",
+    "topic": "RAG flow",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What is retrieval-augmented generation, in the order a request actually moves, from the user's question to the answer they see?",
+    "answer": "Retrieval-augmented generation answers a user by fetching passages from the customer's own corpus and only then asking the model to compose a reply from those passages. The question does not begin inside the model; it begins as a lookup. The request lands in the chat service. The service may lightly clean the wording, then searches an index that was built earlier from Confluence spaces, ticket exports, and PDFs. Each stored piece is a chunk with an embedding and metadata such as title, URL, product, and last updated time. A similarity query, often in pgvector, returns a short list. The application places those passages, with their links, into the prompt next to the original question and tells the model to stay inside that text. The model writes the answer. The screen shows the answer plus the links taken from the index rows. A card-support agent asks how to refund a duplicate capture after the nightly batch. Retrieval returns the refund runbook section and a ticket that records the batch close at 18:00 UTC. The agent reads the steps and opens the Confluence page to confirm the window. The pitfall is treating the model call as the whole product. If the retrieved passages are the wrong page, the reply can still sound confident, and the agent has no way to notice until a customer is already affected."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Retrieval-Augmented Generation",
+    "category": "Senior FDE - RAG",
+    "topic": "Private knowledge",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "Why can a language model not answer from a customer's private runbooks unless you build a retrieval path, even if the model is very large?",
+    "answer": "A language model cannot read a customer's private runbooks because those pages were never part of its training data and are not sent to it unless a retrieval path puts them in the prompt. Size does not fix that. A larger model has more general language skill, not a hidden copy of this account's wiki. Training happens once, on public and licensed text, long before this customer signed. Their Confluence space, internal PDFs, and ticket comments sit in their tenant. The model weights do not update when someone edits a runbook at 2 a.m. There is also a hard boundary: the vendor must not train on that private corpus, so even a huge model stays ignorant of it. The only reliable path is to index the pages, search at question time, and paste the matching chunks into the context window for that one request. An outage bot for a logistics customer is asked how to restart the label printer in warehouse three. The public internet has nothing about that closet, that VLAN, or that on-call rotation. pgvector returns the site runbook chunk, and only then can the model name the right switch. The pitfall is assuming a fine-tune or a bigger context window silently absorbed the wiki. Fine-tuning does not keep up with daily edits, and a closed ticket from last quarter is still invisible until it is chunked and indexed."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Retrieval-Augmented Generation",
+    "category": "Senior FDE - RAG",
+    "topic": "Embeddings",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What is an embedding in one concrete support example, and why do two paraphrases of the same outage land near each other while an unrelated page does not?",
+    "answer": "An embedding is a list of numbers that stands for the meaning of a piece of text, so a search can compare meanings instead of only matching words. Two paraphrases of the same outage land near each other because the embedding model was trained to place similar meanings close in that number space, while an unrelated page is pushed far away. The mechanism is geometric. A support sentence and a runbook sentence each become a vector, often a few hundred dimensions. Distance, usually cosine, is small when the situations match and large when they do not. Shared wording is not required. The model has seen many ways people describe failures, so a line about checkout throwing 504s and a line about the payment page timing out with a gateway error point in similar directions. A page about office badge access does not. On a retail customer's corpus, an agent types that shoppers cannot pay and the spinner never finishes. The nearest pgvector rows are a Confluence incident titled checkout gateway timeouts and a ticket about the same 504. A facilities PDF about parking permits has a distant vector and never enters the prompt. The pitfall is trusting that nearness means the page is the right procedure. Two outages can share symptoms and still have different fixes, so similarity is a candidate filter, not the final decision."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Retrieval-Augmented Generation",
+    "category": "Senior FDE - RAG",
+    "topic": "Chunking",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What is chunking, and why does a chunk that is too small or too large change whether the right runbook step is retrieved?",
+    "answer": "Chunking is splitting a long document into smaller pieces before they are embedded and stored, so retrieval can return the passage that holds the step rather than an entire manual. A chunk that is too small or too large changes the result because the embedding and the later prompt both see only what was stored as one unit. If the piece is a single sentence, the embedding may capture the words restart the worker without the condition that the worker is only safe to restart after the queue drains. Search then returns a fragment the model cannot apply. If the piece is a forty-page PDF, the vector is a blur of many topics, so the right step is diluted and may lose to a shorter page that mentions the same product once. Overlap and headings exist so a step is not cut off from its warning. A Confluence runbook for a database failover has the actual command in section four, under a warning about freezing writes. Chunks of one line retrieve the command and drop the warning. One chunk for the whole page retrieves a vague failover vector and loses to an older ticket that says failover in the title. The pitfall is choosing a token size once and never reading the text that came back. The useful size is the one that keeps a complete step, its precondition, and its page link together."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Retrieval-Augmented Generation",
+    "category": "Senior FDE - RAG",
+    "topic": "Hybrid search",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "When does keyword search beat vector search on a customer knowledge base, and when do you run both and merge them?",
+    "answer": "Keyword search beats vector search when the user needs an exact token that embeddings tend to smear, such as an error code, a SKU, a hostname, or a ticket id. Both methods run together, and their lists are merged, when the same knowledge base also holds paraphrased how-to pages, because neither method covers the other's misses. Keyword search, whether BM25 or a Postgres full-text index, ranks documents that contain the literal string. Vector search ranks chunks whose embeddings sit near the question, even when the words differ. A code like ERR-4401 or a host like pay-gw-03 is rare and precise. A semantic neighbor might be a generic gateway error page that never names the code. A question such as customers stuck on the pay screen may share no tokens with a runbook titled checkout timeout, so keywords return nothing useful and vectors succeed. Hybrid retrieval runs both, then fuses the lists, often with reciprocal rank fusion, and keeps one short set for the model. On a billing customer's Confluence and ticket corpus, ERR-4401 on pay-gw-03 must hit the exact incident PDF. A question about invoices late after month end must hit a runbook that never uses the word invoice. Both queries use the same pgvector table plus a keyword index. The pitfall is merging by raw score. The two score scales are not comparable, so a naive average lets one method drown the other."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Retrieval-Augmented Generation",
+    "category": "Senior FDE - RAG",
+    "topic": "Reranking",
+    "difficulty": "intermediate",
+    "questionType": "Conceptual",
+    "question": "What does a reranker add after the first retrieval pass, and why is embedding similarity alone a weak final ranking for a support answer?",
+    "answer": "A reranker re-scores a short candidate list after the first retrieval pass, reading the question and each passage together, so the chunks that actually answer rise to the top. Embedding similarity alone is a weak final ranking because it compares two vectors built separately and never reads the passage against this exact question. The first pass has to stay cheap. pgvector can scan a large Confluence and ticket index and return twenty or fifty neighbors in milliseconds. Those neighbors are about the same topic, which is not the same as containing the step. A cross-encoder reranker takes the question and one chunk as a pair and outputs a relevance score. It is too slow to run on every page, and fast enough on a few dozen. The prompt then receives the top three or five, not the original twenty. An agent asks how to waive a late fee after a bank holiday. Vector search returns many billing pages, including a fee schedule, a dunning policy, and the waiver runbook. The reranker puts the waiver steps first because they mention the holiday exception, and the fee table drops out of the prompt. The pitfall is reranking a huge list, or skipping the reranker and stuffing every neighbor into the prompt. The first wastes latency. The second buries the one useful paragraph among near misses."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Retrieval-Augmented Generation",
+    "category": "Senior FDE - RAG",
+    "topic": "Grounding and citations",
+    "difficulty": "intermediate",
+    "questionType": "Conceptual",
+    "question": "What does grounding mean for a support answer, and how do you show the user a source they can open rather than a citation the model invented?",
+    "answer": "Grounding means every factual claim in the support answer is supported by a retrieved passage, and the user can open that passage and check it. A real source is a link or identifier stored with the chunk at index time and rendered by the application, not a title the model typed from memory. Provenance stays outside the model's free text. Each chunk row carries the Confluence URL, the ticket key, or the PDF name and page. When the prompt is built, those ids travel with the text. The model may quote a passage, but the screen attaches the links from the retrieved rows. If the answer comes back as structured fields, claim text plus chunk id, the app resolves the id to the URL. A citation string the model invents, such as a plausible page title that was never retrieved, is dropped because it has no matching row. A telecom agent asks for the after-hours escalation path. The answer names the on-call bridge and shows a button to the Confluence page for NOC escalation, updated in March. The button URL came from the index. If the model also writes a 2019 PDF title, and that file was not in the retrieved set, the screen does not offer it. The pitfall is asking the model to cite sources in prose and trusting the brackets. Models invent plausible filenames. Only ids that exist on the retrieved rows are safe to show."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Retrieval-Augmented Generation",
+    "category": "Senior FDE - RAG",
+    "topic": "Hallucination and RAG",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "How does retrieval reduce hallucinations, and why can the assistant still state something the retrieved pages do not support?",
+    "answer": "Retrieval reduces hallucinations by placing the customer's text in the prompt at answer time, so the model can copy a procedure instead of inventing one from general training. The assistant can still state something the pages do not support, because it may mix in outside knowledge, over-read a vague sentence, or answer from a near-miss chunk. The drop in invention is real when the right passage is present and the prompt is strict. If the steps are in the context, the model tends to follow them. The remaining failures sit in generation. The model has seen millions of similar runbooks and will fill a gap with a plausible step. It may also join two chunks into a rule that neither page states, or treat an old ticket's workaround as current policy because both chunks were retrieved. A hosting customer's agent asks whether a disk resize needs a reboot. The retrieved Confluence page says resize is online for data volumes and is silent on the boot volume. The assistant answers that no reboot is needed for any volume, which the page does not say. In a second case the only hit is a ticket about a different Linux image, and the model still speaks as if it were this account's standard. The pitfall is treating the phrase we use retrieval as proof the answer is grounded. Extra sentences have to be checked against the retrieved text, or they ship to the customer."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Retrieval-Augmented Generation",
+    "category": "Senior FDE - RAG",
+    "topic": "Metadata filters",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do metadata filters keep one employee's retrieval from returning another team's or another customer's documents?",
+    "answer": "Metadata filters keep retrieval inside the documents this person is allowed to see by applying tenant, team, and permission fields in the search itself, before any chunk reaches the model. Another team's page or another customer's page never enters the candidate list, so it cannot leak into the answer. Every chunk is written with fields captured at ingest: customer id, Confluence space, group, classification, and sometimes an access list. The query to pgvector includes a predicate on those fields, built from the signed-in user's identity, not from the question text. The vector comparison runs only inside that subset. This is different from fetching broadly and deleting rows afterward. A late filter is too late. The forbidden text may already sit in the prompt, in a log, or in a citation. The same filters also separate a shared platform: one deployment, many customers, and no cross-tenant neighbors. An employee on the billing team asks about a refund exception. Their token carries customer Northwind and group billing. The query restricts to that customer and that space. A payroll PDF for the same company, and a refund runbook for a different customer with a similar product name, stay out of the result even when the embeddings are close. The pitfall is trusting the model to respect permissions written in the prompt. The model does not enforce access. The database predicate does. A missing filter on one code path is a data leak."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Retrieval-Augmented Generation",
+    "category": "Senior FDE - RAG",
+    "topic": "Empty stale conflict",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "What should the assistant do when retrieval returns nothing, when the only hits are stale, or when two sources disagree?",
+    "answer": "When retrieval returns nothing, the assistant says it has no matching source and stops, rather than answering from general knowledge. When the only hits are stale it labels them as old, and when two sources disagree it shows both with dates instead of picking a winner in silence. An empty result is an index miss, or a filter that removed every row. The reply is a short refusal and a pointer to search or a human queue. Stale means the hits fail a freshness rule, such as last updated more than a year ago or marked superseded. The assistant may quote them as history with the date, and it does not present them as the current procedure. Conflict means two in-policy pages state different steps. The assistant shows both links and dates and sends the contradiction to the knowledge owner. A support agent asks for the VPN setup after a laptop rebuild. No chunk matches, so the bot says it cannot find a runbook and opens a ticket. Only a 2019 PDF matches, so it shows the date and does not walk the old client install. Confluence says split tunnel and a newer ticket says full tunnel, so both links appear and the reply asks the network owner which is current. The pitfall is letting the model smooth the conflict into one decisive paragraph. A fluent choice hides the disagreement and sends the agent down one path with no audit trail."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Retrieval-Augmented Generation",
+    "category": "Senior FDE - RAG",
+    "topic": "RAG evaluation",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you evaluate faithfulness, answer relevance, and context precision on a saved set of customer questions before a demo?",
+    "answer": "Faithfulness, answer relevance, and context precision are three separate scores on a frozen set of real customer questions, run before a demo so a regression shows up as a number. Faithfulness asks whether the answer stays inside the retrieved text, relevance asks whether the answer addresses the question, and context precision asks whether the retrieved chunks were the right pages. Questions come from tickets, each labeled with an expected page. For every question the pipeline retrieves, writes a reply, and stores the chunks. A reviewer marks a sample by hand, and a rubric model marks the full set. Faithfulness is claims checked against those chunks. Answer relevance is the reply checked against the question. Context precision is how many of the top chunks sit on the expected pages. The scores can diverge. A relevant-sounding answer can be unfaithful, and a faithful answer can be irrelevant if retrieval brought the wrong page and the model said only what that page said. Before a demo for a software customer, the set includes resetting SSO for a contractor, with the Confluence page id as the label. A chunk-size change drops context precision because the parent page still matches loosely while the step chunk is gone. The demo uses the build that held the earlier scores. The pitfall is one looks-fine rating on five hand-picked questions. That hides a retrieval regression that only appears on the long tail of ticket wording."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Retrieval-Augmented Generation",
+    "category": "Senior FDE - RAG",
+    "topic": "Query rewriting",
+    "difficulty": "advanced",
+    "questionType": "Implementation / Workflow",
+    "question": "When do you rewrite the user's question or retrieve with several queries, and what latency do you add by doing that on every turn?",
+    "answer": "Rewrite the user's question, or search with several queries, when the raw turn is too vague, full of pronouns, or bundled into more than one lookup. Doing that on every turn adds a model call before search, typically a few hundred milliseconds to about two seconds, plus extra retrieval time if each rewrite is searched on its own. The trigger is measured, not automatic. A follow-up like what about the other one cannot be embedded until the prior turn expands it into refund the duplicate capture on order 18442. A question that asks for both the escalation path and the customer email template is two searches. Rewriting also helps when agents use nicknames and Confluence titles use product codes. The cost is latency and a new failure: a bad rewrite searches for the wrong thing and the original words are lost. A practical bound is one rewrite call, at most three queries in parallel, then a merge, and no rewrite when the question is already specific. On a support desk, it is broken again, same as last Tuesday, becomes checkout 504 after the Tuesday release only because the session holds that context. That extra call adds about a second before pgvector runs. For a pasted code such as ERR-4401 on pay-gw-03, the raw string is already the best query, and the rewrite is skipped. The pitfall is rewriting every message, including exact error pastes. The model generalizes the code into payment error, and the keyword hit disappears."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Retrieval-Augmented Generation",
+    "category": "Senior FDE - RAG",
+    "topic": "When not to use RAG",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "What is lost-in-the-middle, and when would you refuse retrieval and use a deterministic lookup, SQL, or a plain search page instead?",
+    "answer": "Lost-in-the-middle is the tendency of a model to use facts at the start and end of a long prompt and to skip a relevant passage buried in the center. Retrieval is the wrong tool, and a deterministic lookup, SQL, or a plain search page is better, when the user needs an exact record, a computed number, or a browse of sources rather than a generated paragraph. If the right runbook step sits in chunk seven of twelve, the model may answer from chunk one. That is a reason to rerank and keep the prompt short, and also a reason to leave retrieval for some questions. An order status or which tickets are open belongs in SQL against the system of record, not in a paraphrased wiki chunk. A known error code that maps to one article belongs in a table lookup. When the agent wants to scan pages, a results page with titles and dates is more honest than a synthesized answer. A billing agent asks for the balance on invoice 8831. Retrieval over PDF copies can quote a stale export. A query to the billing database returns the live figure. Another agent asks to see every Confluence page on refunds. A search page is the right surface, because a paragraph that summarizes forty pages will drop most of them. The pitfall is routing every question through retrieval by default. Exact, numeric, and browse tasks get worse when a model retells them."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Retrieval-Augmented Generation",
+    "category": "Senior FDE - RAG",
+    "topic": "Chunk strategies and GraphRAG",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "How do you compare fixed chunks with overlap, parent-child chunks, and a graph of linked pages when the customer's knowledge is a wiki plus a ticket history?",
+    "answer": "Fixed chunks with overlap fit long pages when the needed fact is local to one section, parent-child chunks fit when a short passage must be found but a wider section must be shown, and a graph of linked pages fits when the answer walks from a ticket to the wiki page it names. A wiki plus a ticket history usually starts with fixed chunks and adds the graph only where questions hop. Fixed windows of a few hundred tokens with overlap index easily in pgvector. They still cut context unless the split follows headings. Parent-child searches a small child and returns the parent section, so the model still sees the warning above the command. A graph keeps Confluence links and ticket links the corpus already has. Retrieval can start at a ticket, step to the runbook it names, and pull that page even when the question never matched the title. For an outage, the ticket says see Network Failover. Fixed search may miss that page. A graph walk from the ticket finds it, and parent-child then returns the failover section rather than one orphan sentence. Overlap still keeps a command with its flag. The pitfall is building a graph of every sentence before counting multi-hop questions. Most support lookups are one page. The graph earns its cost on the ticket-to-runbook path, and it adds freshness work whenever a link or a ticket status changes."
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Observability and SRE",
+    "category": "Senior FDE - Observability",
+    "topic": "Logs metrics traces",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What is the difference between a log, a metric, and a trace for an assistant request, and which one do you open first when a user says the answer was slow?",
+    "answer": "A log is a record of one event. A metric is a number aggregated over time. A trace is the timed path of one assistant request through the API, retrieval, and the model. When a user says the answer was slow, open the trace for that request first. It shows which hop spent the time. The metric says whether many users are slow. The log explains a decision inside a hop already identified. A trace splits the request into spans, so a six-second model span beside a two-hundred-millisecond retrieval span is obvious. A log on that span records the timeout, the retry, or an empty result, tied by request id. Start from the id on the ticket, read the spans, and open logs only on the slow span. If several traces share that hop, the metric shows how wide it is. At a bank, a relationship manager says a policy answer took eight seconds on a live call. The trace shows retrieval at one hundred eighty milliseconds and the model span at seven seconds, with one retry. The latency chart jumps at 10:12. The log records the timeout and retry count, without the customer's question. The pitfall is searching logs first while the user is still on the phone. The other pitfall is treating one slow trace as an outage. A single request can be a cold start. The metric says whether anyone else is affected."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Observability and SRE",
+    "category": "Senior FDE - Observability",
+    "topic": "SLI and SLO",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How do you define an SLI and an SLO for a support assistant that the customer's operations lead can understand without learning Prometheus?",
+    "answer": "An SLI is the measurement of what the user feels. An SLO is the target agreed for that measurement over a window, such as a month. For a support assistant, say both in the operations lead's words. The indicator is the share of questions that returned a cited answer within five seconds during business hours, excluding planned maintenance. The objective is ninety-nine percent of those questions meeting that bar in a calendar month. The mechanism is one ratio. A good event finished under five seconds, returned a non-empty cited answer, and was a real question. The total is every question accepted in that window. Good divided by total is the indicator. The one percent allowed to miss is the error budget. When it is nearly gone, risky releases wait. A metrics system can compute the ratio. The lead only needs a monthly sentence: met, or missed on these days, for this reason. At a regional insurer, the lead wants agents to have a policy answer before the caller grows impatient. The agreement is ninety-nine percent of questions from 8 am to 6 pm local time, with a cited answer in under five seconds. The pitfall is an objective written only as a latency percentile. A fast empty reply looks healthy while agents still complain. The other pitfall is five objectives on day one. One indicator the lead can repeat in a standup is enough until a real failure stays invisible to it."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Observability and SRE",
+    "category": "Senior FDE - Observability",
+    "topic": "OpenTelemetry",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "What do you trace with OpenTelemetry across the API, the retrieval call, and the model call, and which identifiers let you stitch one user question together?",
+    "answer": "Trace one user question as one trace, with a span on each hop the user waits on. The API span runs from accept to the returned answer. A child span covers retrieval, from the outgoing query through the document ids and scores. Another child covers the model call, including time to first token if the reply streams and time until the answer is complete. OpenTelemetry stitches the hops with one trace id shared by the API, the retrieval client, and the model client. Each span has its own span id and a parent span id pointing at the span above it. The API sends context on outbound calls, usually the W3C traceparent header, so retrieval continues the same trace. The product request id goes on the root span as an attribute, because that is the id on the ticket. The question text stays off the span. At a telecom support assistant, one chat turn is one trace. The ticket shows request id 8f3c. That id in the tracing UI shows retrieval at 220 milliseconds and the model at four seconds, on the same trace. The pitfall is a proxy that drops the trace header, so retrieval starts a new trace and the slow hop cannot be tied to the complaint. The other pitfall is one span around the whole handler. It proves the request was slow and hides which call to fix."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Observability and SRE",
+    "category": "Senior FDE - Observability",
+    "topic": "Safe logging",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "What do you log for a retrieval request, including query class, document ids, scores, and latency, and what do you refuse to write because it is customer content or a secret?",
+    "answer": "Log the shape of the retrieval call, not the customer's words. For each request, write the request id, the trace id, the index name, the query class, the document ids returned, their scores, the latency, the filter names, and whether the result was empty. Query class is a label the service assigned, such as policy, billing, or outage. Ids and scores show whether the expected articles came back. Refuse the question text, the answer text, document bodies, and chunks. Refuse anything the user typed that could hold a name, an account number, or a medical detail. Refuse API keys, passwords, bearer tokens, and connection strings. Refuse embeddings when the vector can be turned back toward the question, and refuse the full prompt sent to the model. If a filter value is a customer id, log the filter type and leave the value out. At a hospital staff assistant, a line can show query class visiting hours, three public-policy document ids, scores 0.82, 0.77, and 0.61, and 140 milliseconds. It does not show the nurse's question, a patient name, or the index key. The pitfall is logging the raw query for a pilot and never turning it off. That store becomes a second copy of customer content with weaker access than the product database. The other pitfall is logging only latency. When answers go empty, ids and scores separate a bad index from an unusual query class."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Observability and SRE",
+    "category": "Senior FDE - Observability",
+    "topic": "Incident leadership",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "The assistant starts returning empty answers during the customer's business hours. How do you lead the first thirty minutes, including who you page and what you tell the sponsor?",
+    "answer": "Empty answers during business hours are a user-facing incident. Lead the first thirty minutes by sizing how many people are hit, stopping blank replies if a safe switch exists, and sending one plain update to the sponsor. Check the empty-answer chart and sample a few request ids. The traces show whether retrieval returned nothing or the model returned an empty string. Page the assistant on-call, and page the retrieval on-call when the empty hop is the index. Page the model vendor or platform on-call only when spans show the model failing or timing out. If a flag or an index publish lines up with the start, roll it back when that rollback is already rehearsed. Otherwise shift to the fallback that says a person will follow up. Tell the sponsor what agents are seeing, that this is an incident, the share of questions affected once that number is real, and the time of the next update. Name the workaround they already have, such as article search. At a retailer on Saturday peak, the sponsor is the support director. The first note says about forty percent of answers since 9:10 are empty, retrieval is the hop under look, the index on-call is paged, and the next update is in fifteen minutes. The pitfall is spending the half hour in logs before the sponsor hears anything. The other pitfall is paging every team at once. Page the owners of the failing hop, and widen only when the traces say to."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Observability and SRE",
+    "category": "Senior FDE - Observability",
+    "topic": "Paging",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "Which alerts are worth paging a human for on this service, and which charts stay as dashboards so you do not train the team to ignore pages?",
+    "answer": "Page a human when users are harmed now, or will be within minutes if nobody acts, and when that person can do something. On this assistant, page when empty or failed answers are burning the error budget during business hours, when the API is unavailable, or when the burn will miss the month's target inside a day. A hard-down retrieval or model dependency is a page when the fallback is not taking the traffic. The alert names the symptom, the user effect, and a link to a trace, and it goes to the current on-call. Charts stay on a dashboard when they help someone already looking. Token spend, cost per answer, index size, cache hit rate, and median latency are dashboard material. Deploy markers and retries that have not produced empty answers stay on the wall. Review pages weekly. If an alert fired and nobody needed to act, move it to a chart or a ticket. At a logistics company, the page is more than five percent of answers empty for ten minutes. A cache-hit page used to fire on every deploy, and people muted the channel. That one moved to the dashboard. The empty-answer page stayed. The pitfall is paging on a cause. A low cache hit rate can be harmless when answers are still fast and complete. The other pitfall is a warning that rings the phone like a critical page. Once a page can wait until morning, the empty-answer page will wait too."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Observability and SRE",
+    "category": "Senior FDE - Observability",
+    "topic": "Prometheus and Grafana",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "How do you use Prometheus and Grafana on a customer cluster without replacing the monitoring they already pay for, and what do you adapt if they only have Cloud Monitoring?",
+    "answer": "Use Prometheus and Grafana for the assistant's own measurements when the cluster already runs them, and leave the monitoring the customer pays for as the system that pages their on-call. The assistant exports the same numbers either way: request count, empty-answer count, latency, retrieval latency, and model latency. Prometheus scrapes those series. Grafana reads Prometheus and, where allowed, the store they already have, so the assistant board can sit beside the platform charts they trust. Do not replace Datadog, Splunk, or Cloud Monitoring. Ask where their on-call already looks, and send the signals there. Remote write or a small exporter copies the series into their store so alerts stay in their tool. Engagement Grafana boards are for debugging. They are not a second pager only the visiting team sees. If they only have Cloud Monitoring, skip a permanent Prometheus store. Expose the same counters and histograms in the form their collector accepts. Build the empty-answer alert and the monthly target in Cloud Monitoring, because that is where paging policy lives. At a manufacturer standardized on Cloud Monitoring, empty-answer ratio and latency land as custom metrics in that project. Their on-call policy pages from there. The workshop sketches panels in Grafana, then the same panels are rebuilt where their SREs already work. The pitfall is a private Grafana whose pages never reach their on-call. The other pitfall is importing a huge public cluster dashboard they already own, which hides the few assistant charts that matter."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Observability and SRE",
+    "category": "Senior FDE - Observability",
+    "topic": "Incident review",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "After the incident, what do you put in the review that is about the retrieval system, and what blame do you keep out of the write-up?",
+    "answer": "The review says what the retrieval system did, how that is known, and what will change. It records start and end in the customer's timezone, the share of questions that came back empty, and who was affected. On retrieval, include the index version that was live, the publish just before the failure, the query classes that went empty, the document ids that should have returned, the latency, and the trace ids showing the empty hop was retrieval rather than the model. Include when it was detected, who was paged, whether rollback or fallback ran, and when answers returned. Action items name an owner and a retrieval change, such as a canary on index publish and an alert on empty results by query class. Keep personal blame out. Do not call an engineer careless, and do not write that the retrieval team failed. Name the missing guard. If a publish skipped the canary, the gap is a pipeline that allowed a full publish with no empty-result check. At an airline, the write-up says the 14:05 index publish dropped the baggage-policy documents, empty answers hit thirty percent of those questions, and rollback at 14:40 restored them. Actions are a pre-publish check for required document ids and a page on the empty rate. The person who published is not called negligent. The pitfall is a review that retells the chat and ends with a plea to be more careful. The other pitfall is hiding a retrieval defect to spare a vendor."
+  }
+]

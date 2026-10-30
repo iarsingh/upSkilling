@@ -1,0 +1,162 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - LLMs",
+    "topic": "What an LLM is",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How do you explain what a large language model is to an operations lead who thinks the product has already read their private Confluence space?",
+    "answer": "A large language model is a system that predicts the next token from patterns in text, and it has not read this customer's private Confluence space unless the application sends those pages in the prompt or through a retrieval index. The operations lead is picturing an employee with a wiki login, and that picture is wrong. Training fits numeric weights so the model can continue text it has never stored as documents. Those weights come from the training corpus, not from the customer's tenant. At request time the product assembles a prompt from an instruction, the user's message, and only the snippets the application attaches. The model samples a continuation from that prompt alone. If a Confluence page is absent from the prompt and absent from the index, the model cannot recall it, even when the sentence sounds specific. During a support pilot the lead believed the assistant already knew their incident runbooks. The request trace contained the instruction and the ticket text only, and the model described an escalation path that did not match the real on-call rotation. The follow-up is usually about vendor logging. I separate model weights from the provider's retention settings, then I confirm region, prompt storage, and that page bodies move only after a retrieval step the customer can turn off."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - LLMs",
+    "topic": "Tokens and context",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What is a token, and why do token counts decide both the bill and whether a customer prompt still fits in the context window?",
+    "answer": "A token is the small chunk of text the model actually reads and writes, often a word piece rather than a whole word, and the provider bills by how many of those chunks enter and leave each request. The same count decides whether the prompt still fits, because the context window is a hard cap on tokens, not on characters, pages, or words. A tokenizer splits text with a fixed vocabulary before the model ever runs. Common words may be one token, while rare product names, code, and punctuation often split into several. Input tokens cover the instruction, the user message, retrieved passages, and earlier turns. Output tokens are the continuation the model generates, and they are often priced higher than input. If the assembled prompt is longer than the window, the call fails or the application has to cut text before sending it. In a billing review for a help-desk pilot, one customer pasted entire policy PDFs into every chat. A long policy became a few thousand tokens and was resent with the growing history on each turn, so a quiet week produced a bill that looked like heavy usage. The follow-up is why two similar tickets cost different amounts. I open the token log for each call, including retries, because one user message can be transmitted more than once."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - LLMs",
+    "topic": "Temperature and top-p",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What do temperature and top-p change in a factual support assistant, and how do you set them when the customer wants consistent answers?",
+    "answer": "Temperature and top-p change how widely the model samples among likely next tokens, and for a factual support assistant I keep both tight so the same question returns nearly the same answer. Consistent answers come from low randomness plus a grounded prompt, not from hoping the model remembers a house style. At each step the model assigns probabilities to candidate tokens. Temperature rescales those probabilities. Near zero, the highest-probability token almost always wins. A higher temperature flattens the distribution, so less likely tokens show up more often. Top-p, also called nucleus sampling, keeps the smallest set of tokens whose probabilities sum to p and drops the rest. A small top-p stays on the most likely few tokens, while a value near one lets in a long tail. For policy and troubleshooting replies I set temperature around one or two tenths and top-p well below one, and I still attach the retrieved passage so the wording is stable and the facts are sourced. A retailer wanted identical return-window answers across agents. With temperature near one, the assistant sometimes said thirty days and sometimes said the window depended on the item, even with the same policy snippet present. After we lowered both settings and pinned the reply to that snippet, the answers matched. The pitfall is treating sampling settings as a truth control. Low temperature makes the model more repetitive, and it will still state a wrong fact confidently if the source is missing from the prompt."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - LLMs",
+    "topic": "Training versus inference",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "What is the difference between training and inference for a language model, and which of those activities is the customer actually paying for in a pilot?",
+    "answer": "Training is the job that updates a model's weights from a dataset, and inference is the later job that uses frozen weights to generate text for a single request. In a normal pilot the customer is paying for inference, which means the tokens on each API call, not for a training run that changes the model. During training the system reads examples in batches, computes a loss, and adjusts weights over many steps on accelerators until a checkpoint is saved. Inference loads that checkpoint, runs the prompt through the network, and samples output tokens. No weights change on that path. A pilot against a hosted model is almost entirely inference: every chat, every retry, and every evaluation prompt shows up as tokens. Fine-tuning would be a separate training-style job with its own bill, and turning the assistant on does not imply that job. For a logistics customer, the pilot week was a couple of thousand conversations on a hosted model. Finance asked why a training line appeared. It had not. The invoice was input and output tokens, plus a smaller charge for nightly evaluation prompts we used to score answer quality. The follow-up is whether embedding the knowledge base counts as training. I call that indexing plus query-time inference on an embedding model, and I keep it on a separate line so nobody confuses it with gradient updates."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - LLMs",
+    "topic": "Prompt hierarchy",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you separate the system instruction, the user question, and retrieved passages in one prompt, and which instruction wins when they conflict?",
+    "answer": "I put the system instruction, the user question, and the retrieved passages in separate labeled blocks, and the system instruction is the one that wins when they conflict. That win is a product rule I enforce with placement, wording, and a check after the reply, not a hidden guarantee inside the model. A practical layout starts with a system block that states the role, the policy, and what to do when sources disagree. Next comes a context block that quotes retrieved passages with source identifiers. The user block contains only the customer's question. I tell the model to treat the context block as untrusted evidence, not as new orders. If a passage says to ignore the instruction or to reveal restricted data, that passage loses. A long, confident passage can still sway generation, so I also inspect the output. On a knowledge assistant for an insurer, a retrieved FAQ told the model to answer as the claims system and to skip the usual disclaimer. The system instruction required the disclaimer and forbade acting as the system of record. We kept the FAQ as evidence, rejected replies that dropped the disclaimer, and regenerated once with the conflicting lines removed. The follow-up is what happens when the user repeats the conflicting instruction. The user message stays below the system block, and the same output check still runs, because priority written in the prompt is not a guarantee."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - LLMs",
+    "topic": "Attention",
+    "difficulty": "intermediate",
+    "questionType": "Conceptual",
+    "question": "How do you explain attention, at interview depth, as the reason a model can use earlier tokens while generating the next one, without deriving the math on a whiteboard?",
+    "answer": "Attention is the mechanism that lets the model look back at earlier tokens and decide which of them matter for the token it is about to write. That look-back is why a name or a constraint from the start of the prompt can still shape the end of the answer. I picture the text so far as a set of notes. For the next token, the model builds a query from its current position and compares that query with a key stored for every earlier position. Those comparisons become weights. Positions that match the query get more weight, and the model mixes their stored values into the representation it uses to pick the next token. The mix happens at every layer, so an early fact can influence a later choice without being copied into a separate memory store. I can use that picture without writing the formula. On a contract assistant, the customer asked for a summary and, many messages earlier, had said to keep amounts in euros. Attention is what lets the later summary still pull that constraint forward when the earlier tokens score highly against the query for the amount being written. The pitfall is assuming attention always lands on the right earlier token. It can overweight a recent, similar sentence and underweight the actual policy line, which is one reason a long prompt still needs retrieval and a check on the final answer."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - LLMs",
+    "topic": "Structured output",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "Why does asking a model to reply in JSON fail in production, and how do you enforce a schema the customer's integration can parse?",
+    "answer": "Asking a model to reply in JSON fails in production because the model is still sampling text, so it can add prose, trailing commas, or a shape the parser has never seen. I enforce a schema by constraining decoding, or by validating the text and rejecting anything that does not parse into the customer's contract. A prompt that says to return only JSON is a preference, not a parser. Under load the model wraps the object in fences, omits a required field, or turns a number into a sentence when the question is ambiguous. The integration then throws and retries. The reliable path is a schema the provider can enforce with structured outputs or a grammar, so invalid tokens are never chosen. When the provider cannot do that, I validate with a strict parser, check required fields and types, and on failure return a controlled error or one repair call that must pass the same schema. The raw string never goes downstream. For a claims intake API, the customer expected an object with a claim identifier, an amount, and a currency. Free-form JSON mode sometimes returned the amount as a phrase, which their deserializer rejected and which their queue retried until an alarm fired. Constrained decoding plus a schema check reduced those failures to rare provider errors. The follow-up is what happens when the source text lacks a required field. I fail closed with an explicit missing-field result, rather than inventing a value that still type-checks."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - LLMs",
+    "topic": "Tool calling",
+    "difficulty": "intermediate",
+    "questionType": "Conceptual",
+    "question": "How does tool calling work in an assistant, and what exactly executes the tool if the model itself never runs the customer's API?",
+    "answer": "Tool calling is a protocol where the model emits a structured request to run a named function, and the application, not the model, executes that function and sends the result back. The model never holds the customer's credentials and never opens their API connection. The loop starts when the application advertises tools with names, descriptions, and argument schemas. The model may reply with a tool call, for example a lookup that includes an order identifier. My service validates those arguments, checks that this user is allowed to see that order, calls the real API, and appends the tool result to the conversation. The model then writes the user-facing answer from that result. If validation is skipped, the model can request a tool the signed-in user is not allowed to reach. On an order-status assistant, the model emitted a shipment lookup for an identifier the customer typed. Our backend checked that the identifier belonged to the signed-in account, called the shipping API with a service credential, and returned only status and city. The model turned that payload into a sentence. It never saw the carrier token. The likely follow-up is what happens when the model calls the wrong tool or keeps calling tools. I cap the number of calls, require an allowlist, and stop with a plain error when the tool result is empty or the model names a tool that is not on the list."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - LLMs",
+    "topic": "Hallucination",
+    "difficulty": "intermediate",
+    "questionType": "Conceptual",
+    "question": "What is a hallucination in a support assistant, and why can a fluent answer still be wrong even when the grammar looks perfect?",
+    "answer": "A hallucination in a support assistant is a fluent claim that is not supported by the customer's sources or by a tool result, even when every sentence is grammatical. Fluency only means the token sequence is likely under the model, and likelihood is not the same thing as truth. The model is trained to continue text in a plausible way. When the prompt lacks the fact, or the fact is ambiguous, it still picks high-probability words, so it may invent a policy, a date, or a product name that fits the style of a help article. Nothing in the generation step checks a database unless the application added that check. Grammar can be perfect because grammar is exactly what the model is good at. In a telecom support bot, a caller asked whether a weekend outage qualified for an automatic credit. The knowledge base had no such rule. The model answered that credits post within five business days, which matched the tone of real articles and was false. We caught it by requiring a citation span for policy claims and by refusing when no span matched. The follow-up is how I tell a hallucination apart from a stale document. If the retrieved page itself is wrong, the model can quote it faithfully, so I treat source freshness and ownership as a separate problem from unsupported generation."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - LLMs",
+    "topic": "RAG versus fine-tune versus long context",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "When does a forward deployed engineer choose retrieval, fine-tuning, or a long context window for a customer's knowledge base, and what do you refuse to sell as the same thing?",
+    "answer": "I choose retrieval when the customer needs current, citable facts from their own documents, fine-tuning when they need a stable skill or format that documents will not supply, and a long context window when one request must hold a bounded packet the user already selected. I refuse to sell those three as the same thing, because one fetches evidence, one changes weights, and one only raises the token cap. Retrieval keeps the base model and searches an index at question time, so updates appear when the index updates, and answers can point at a passage. Fine-tuning continues training on examples so the model more often follows a style, a schema, or a narrow task. It does not reliably memorize a changing knowledge base, and it is the wrong fix for facts that go stale. A long window lets me paste a contract or a thread that fits, at higher cost and latency, and it still misses anything I did not paste. For a bank procedure library of tens of thousands of pages that change weekly, I sell retrieval with citations. I add a fine-tune only if they also need a rigid compliance tone that prompting cannot hold. I use a long window for one uploaded dispute file, not for the library. The pitfall is a request to fine-tune on the wiki so the model knows everything. New pages would stay invisible until the next training run, while retrieval can index them the same day."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - Model Decisions",
+    "topic": "LoRA and quantization",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "When would you recommend LoRA or quantization for a customer who wants the model on their own machines, and what decision are you actually making?",
+    "answer": "I recommend LoRA when the customer needs the model to behave differently on their task, and I recommend quantization when they need the same behavior to fit in less memory on their own machines. The decision I am actually making is whether we change behavior with a small set of trained adapters or change deployment cost by storing weights at lower precision. LoRA keeps the base weights frozen and trains low-rank matrices on top. The artifact is a small adapter, which is easier to store, swap, and roll back than a full fine-tune. Quantization, such as eight-bit or four-bit weights, reduces the bytes per parameter so a model that needed a large GPU can run on a smaller one. It does not teach the model new facts. The two can stack: a quantized base plus a LoRA adapter. For a hospital that could not send clinical notes to a hosted API, we quantized a mid-size model to four-bit so it fit on their on-premises GPU, and we added a LoRA adapter so discharge summaries followed their section order. Quantization alone would have fit the hardware and still written generic summaries. The follow-up is quality loss. I measure task accuracy before and after quantization, and if four-bit drops a critical extraction score, I step up to eight-bit or a smaller full-precision model rather than pretending the compressed model is identical."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - Model Decisions",
+    "topic": "Model routing",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you route requests across a small model and a large model so a customer assistant stays inside a latency and cost budget?",
+    "answer": "I route short, well-covered requests to a small model and send hard or high-risk requests to a large model, using rules I can budget before I trust a learned classifier. The point is to keep typical latency and cost on the small model while the large model handles the slice that actually needs it. A gateway inspects the request first. Short answers, simple classification, and high-confidence retrieval matches go to the small model with a tight output cap. I escalate when the user asks for multi-step reasoning, when retrieval confidence is low, when the small model abstains, or when a policy tag marks the topic as sensitive. I also set a hard budget: a maximum share of large-model calls per hour, a timeout, and a fallback reply if the large model would miss the latency target. On a travel assistant, booking-status questions stayed on the small model and returned in a few hundred milliseconds. Change-fee disputes and itinerary replans went to the large model. After a week, most calls were small, and the bill stayed inside a pilot cap that an all-large design had missed in the first two days. The pitfall is a router that escalates too eagerly, so the large model becomes the default. I watch the escalation rate and a sample of disagreements between the two models, and I tighten the rules when the large-model share drifts above the budget."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - LLMs",
+    "topic": "Guardrails",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you design refusal behavior for a customer assistant that must not answer payroll questions even if a document about payroll was retrieved?",
+    "answer": "I design refusal so payroll questions are blocked by policy before and after retrieval, and a retrieved payroll document is evidence the model must not use, not permission to answer. The system instruction outranks the document, and the application enforces that ranking outside the model. The flow is explicit. A classifier or a rule list tags payroll topics from the user text, including salary, bonus, bank details, and compensation bands. If the tag hits, I skip retrieval over those sources or I strip payroll passages before the prompt is built. The system instruction says to refuse payroll questions even when a passage discusses them, and to point the person to the payroll channel. After generation I scan the draft for figures, employee identifiers, and compensation language, and I replace a leaking draft with a fixed refusal. Retrieval recall is not authorization. On an HR assistant for a manufacturer, a manager asked what a named colleague earns. Search returned a compensation guideline that had been indexed too broadly. The topic rule refused before the model could quote the band, and the audit log stored the refusal reason rather than the passage text. The follow-up is a payroll question hidden inside a benign one, such as a request for total team cost. I classify on intent and on entities, not only on the word payroll, and I fail closed when the classifier is unsure."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - Model Decisions",
+    "topic": "PyTorch versus API",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "When would you open PyTorch on a forward deployed engagement, and when is calling a hosted model API the whole job?",
+    "answer": "I open PyTorch when the engagement requires training, adapting, or debugging the model itself on hardware we can access, and I stay on a hosted model API when the job is to ship a reliable assistant around a model someone else already serves. The choice is about who owns the weights and the gradients, not about which option sounds more technical. PyTorch belongs in the engagement for a custom loss, a LoRA or full fine-tune, an evaluation loop over their private data, export to an on-premises runtime, or a failure I cannot see through API logs. A hosted API is the whole job when the customer needs prompt design, retrieval, tool calls, guardrails, and an integration, and a managed endpoint already meets their residency and quality bar. Loading tensors would add risk without changing the product. For a regional insurer, notes could not leave their network and the hosted region did not qualify, so we trained a small adapter with PyTorch on their GPU cluster and served it locally. A retailer pilot stayed on the hosted API because the work was retrieval over public help articles plus a JSON ticket tool, and no weight update was required. The pitfall is opening PyTorch to look thorough on a pilot that only needed an instrumented API integration. I ask whether any gradient update or on-premises weight is in scope before I bring a training stack into the engagement."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - LLMs",
+    "topic": "Cost explanation",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "How do you explain a surprising language-model bill to a customer after a pilot week, using tokens, retries, and context size rather than a vague cloud invoice?",
+    "answer": "A surprising language-model bill is almost always input tokens times price, multiplied by retries and by a context that grew far past the user's short question. I walk the customer through three counts from the logs: tokens in, tokens out, and how many times each turn was sent. A single chat turn is not one small prompt. The request includes the system instruction, the conversation so far, and every retrieved passage. A long policy chunk can dwarf the question. With a large window we may be paying to resend that chunk on every follow-up. Retries multiply the same payload when a tool times out or a structured reply fails validation. Output tokens add a second rate, often higher, especially when the model writes long answers. For a field-service pilot, the dashboard showed modest session counts, yet the invoice spiked. The median request carried a very large input because we appended several manual chapters plus the full chat history, and a flaky tool triggered extra retries on a large share of calls. Sending that wide prompt more than once, not a surge in users, explained the gap versus their spreadsheet. The follow-up is what changes the next week. I cap retrieved tokens, stop resending static chapters on every turn, cache identical retrieval, and limit repair attempts, then I reforecast the bill from the new per-call token budget."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 2 - AI Engineering: Generative AI and LLMs",
+    "category": "Senior FDE - LLMs",
+    "topic": "Context overflow",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "What happens when a customer prompt plus retrieved text exceeds the context window, and how do you fail that request on purpose instead of silently dropping the system instruction?",
+    "answer": "When the customer prompt plus retrieved text exceeds the context window, the provider rejects the call or, if the application truncates first, drops tokens from one end of the prompt. I fail that request on purpose whenever the full prompt does not fit, and I never drop the system instruction to make room. I count tokens for the instruction, the question, and each passage before the call. I reserve a fixed budget for the instruction and the question, then I pack passages into whatever remains, ordered by relevance. If the instruction plus the question already exceed the window, or the remainder cannot hold the minimum evidence the task needs, I return a structured error that names the overflow. I do not trim the front of the prompt, because that is where refusal rules and tool policy sit. The user sees a message that the question needs a narrower scope, and the log shows that no model call went out. On a legal-research assistant, a user attached a full contract and retrieval added three more agreements. The total overflowed the window. An earlier build trimmed from the start, and the model answered without the confidentiality instruction. We now reject that request, ask the user to select one agreement, and keep the instruction on every call that proceeds. A larger window raises the ceiling and the bill, and the same preflight still stops a bigger paste from pushing the instruction out."
+  }
+]

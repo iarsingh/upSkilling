@@ -1,0 +1,202 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Programming",
+    "topic": "Python collections",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How do you choose between a Python list, dict, and set when shaping a customer API payload that will be cached and compared for changes?",
+    "answer": "I pick the collection from how the payload is read and from whether order or duplicates are part of the contract. A list keeps sequence and repeats, a dict maps one stable key to one value, and a set only answers membership with no defined order, so a set stays inside the process. Caching and change detection need a byte-stable form. JSON objects come from dicts and JSON arrays come from lists, and both round-trip through the wire. Serializing a set forces an arbitrary order, so two equal sets hash differently and the cache treats every read as a write. Before I store or compare, I canonicalize by sorting object keys, sorting arrays only when the customer does not care about order, and dropping volatile fields such as generated timestamps and request ids. On a freight customer's ticket sync, the cached body was a dict keyed by ticket id, and each ticket carried a list of comments because comment order was the audit trail. We stored a sha256 of that canonical JSON in Redis and skipped the upsert when the hash matched. A teammate stored tags as a set, and every poll produced a new hash even though the tags had not changed, so the dashboard showed phantom edits. The pitfall is leaking an internal set across the API boundary, because membership checks belong in memory while the wire format should be a sorted list so the cache key and the diff stay honest."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Programming",
+    "topic": "Python GIL",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "A customer engineer wants to speed up a CPU-bound document scoring loop by starting more Python threads. How do you explain what the GIL does and what you change instead?",
+    "answer": "More Python threads will not speed up a CPU-bound scoring loop, because the GIL lets only one thread run Python bytecode at a time. Threads still help when the work is waiting on the network or the disk, but they fight each other when the work is pure computation. The GIL is a mutex inside CPython that protects the interpreter's memory. A thread must hold it to execute Python bytecode, and it releases the lock around many C extensions and around blocking IO. A pure Python loop over tokens or regexes holds it the whole time, so extra threads mostly add context-switch cost. The change I make is to move the CPU work out of threaded Python: a process pool, one process per core, or a small native extension if the hot loop is stable. Processes each have their own interpreter and their own GIL, so the scoring actually runs in parallel. On a claims customer, document scoring was a Python loop over embeddings and keyword weights, and the engineer raised thread count from four to thirty-two. CPU sat near one core, latency got worse, and the API started timing out under the extra switching. We switched that loop to a process pool sized to the machine's cores and left the HTTP handlers on threads, because those were waiting on the model gateway. The pitfall is spawning a process per request instead of a long-lived pool, which burns memory until the box falls over."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Programming",
+    "topic": "Async IO",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What does async and await actually buy you in a Python service that spends most of its time waiting on HTTP calls and a database?",
+    "answer": "Async and await buy concurrency during waits, not faster CPU work. In a service that spends most of its time on HTTP calls and the database, one event loop can keep many requests in flight while each one is idle on the network. Await marks a point where this request has nothing to do until a socket or a query returns, so the loop switches to another request instead of blocking a worker thread. A few hundred in-flight calls can sit on a handful of threads compared with one OS thread per request. That only holds if every library in the path is async. A synchronous database driver or a blocking HTTP call freezes the whole loop, and every other request waits behind it. On a policy-admin customer, the intake service called a document store, a tenant directory, and a scoring API for each upload. The thread pool topped out at forty workers and the box ran out of memory during Monday peaks. We moved those three calls onto an async HTTP client and an async driver, bounded concurrency with a semaphore so we did not stampede the database, and the same host held the peak with CPU still mostly idle. The pitfall is treating async as a speedup for the scoring math itself. If the wait is gone and the CPU is busy, async will not help, and a blocking call hidden inside an async route will stall every customer on that process."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Programming",
+    "topic": "SQL",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you write a SQL query that returns the latest document version per tenant without scanning the whole history table, and which index makes that plan honest?",
+    "answer": "I fetch the latest version for one tenant by filtering on tenant id, ordering by version descending, and limiting to one row, backed by a composite index that starts with tenant id. The index is what makes the plan honest, because the planner can walk straight to that tenant's newest row instead of reading the history table. In Postgres I select the columns I need from the document version table where tenant id equals the parameter, order by version descending, and limit one. The supporting index is on tenant id then version descending. If the caller needs the latest row for every tenant in one shot, I do not scan history and group it. I keep a current version table with one row per tenant, updated in the same transaction as the insert, with a primary key on tenant id. Reading current state is then a point lookup, and history stays an append-only audit trail. On a bank's document vault, the history table held about eighty million rows and a nightly job computed the max version grouped by tenant. It scanned the table, held IO, and the customer-facing read path slowed every night. We added the composite index for the single-tenant read and a current pointer table for the batch job, and the night query dropped from minutes to milliseconds. The pitfall is an index on version alone, which still makes the planner visit other tenants before it can stop."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Programming",
+    "topic": "TypeScript",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "When does a forward deployed engineer reach for TypeScript instead of Python on a customer integration, and what fails in production if that boundary stays untyped?",
+    "answer": "I reach for TypeScript when the customer integration is a typed HTTP boundary, a shared frontend, or a contract that several teams will call, and I stay in Python when the work is data wrangling, model calls, or a short-lived script. The failure mode of an untyped boundary is silent shape drift that shows up as bad data in production rather than a red build. TypeScript checks the shape at compile time: required fields, unions, and nulls fail in CI before a customer hits them. Python will happily pass a dict with a missing tenant id until runtime. On an integration I generate types from the customer's OpenAPI spec, parse responses with a runtime validator on either side, and treat a mismatch as a hard error with the raw body logged once. Compile-time types alone are not enough, because the network can still send a surprise, so the runtime parse is what protects the process. On a retailer integration, the ticket API added an optional status field and then started sending null for an old string field without a release note. The Python worker stored the null, and downstream search broke for a subset of stores. A typed client with a parse step would have failed that batch, paged us, and left the last good snapshot in place. The pitfall is sprinkling an escape-hatch any type across the client to get the build green, which deletes the only signal that the customer contract moved."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Programming",
+    "topic": "SOLID",
+    "difficulty": "intermediate",
+    "questionType": "Conceptual",
+    "question": "How would you apply SOLID inside one customer-facing ingestion module you would actually ship, without reciting five textbook definitions?",
+    "answer": "I apply SOLID in that module as seams I can change without rewriting the pipeline. The parser, the validator, and the writer stay separate so a mapping tweak cannot break retry logic, and a new customer file layout plugs in beside the old ones instead of growing a chain of conditionals. The ingestion function takes a small save interface in its constructor, not a vendor SDK. Production passes the real client and tests pass a fake, which is the inversion I actually use. Every parser I register accepts bytes and returns records, so the pipeline never special-cases a subclass and a substitute cannot surprise the caller. The writer only sees a save method, so a storage swap does not force the parser to change. A new layout is a new parser registered by content type, and the retry and dedupe code stay on the other side of that boundary. On a hospital document feed we ingested HL7, CSV, and a vendor JSON export through that one pipeline. Adding JSON was a new parser class and a config line. When the customer moved storage from an SFTP drop to an API, only the writer adapter changed, and the weekend cutover did not touch parsing. The pitfall is splitting every ten-line function into its own class and interface, which makes a small module harder to read than the duplication it was meant to avoid."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Programming",
+    "topic": "Idempotency",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "What does idempotency mean in a webhook handler that may be retried, and how do you implement it with a database unique key rather than hoping the sender is careful?",
+    "answer": "Idempotency means a retried webhook does the same business write once, even if the sender delivers the same event five times. I implement that with a unique key in the database, so the second insert fails or no-ops, instead of trusting the sender to be careful. The handler reads a stable event id from the payload, or hashes the tenant, the object id, and the event type when the sender has no id. It inserts a row into a processed-events table with that key as a primary key, in the same transaction as the business write. If the insert hits a unique violation, the handler returns success and does not apply the change again. Returning success matters, because a server error makes the sender retry forever while the work is already done. I store the response I already sent when the caller needs an identical body, and I keep the key long enough to cover the sender's retry window, often a few days. On a billing customer, their ticket webhook retried for twenty-four hours whenever we were slow. The first version incremented a counter and emailed the account team on every delivery, so one outage produced dozens of duplicate emails. After the unique key landed, retries still returned success, the counter moved once, and the duplicate mail stopped. The pitfall is using a key that changes across retries, such as a timestamp or a random request id, which makes every delivery look new and defeats the constraint."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Programming",
+    "topic": "Concurrency",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "Two workers might process the same customer event. How do you choose between a queue, a lock, and a database transaction, and what failure does each choice still leave open?",
+    "answer": "I choose based on whether the workers must not both run, or whether they must not both commit, and I usually want a database transaction with a unique key before I reach for a lock or a queue. Each option still leaves a failure open, so the choice is which failure I can detect and repair. A queue gives one active consumer, but a crash between the side effect and the ack runs the handler twice, and an ack before the commit can drop work. A lock, whether in Redis or in the row, stops the second worker while the first holds it, but a lock that expires mid-job lets a second worker in, and a lock that never expires strands the event when the holder dies. A transaction plus a unique constraint on the event id makes the second commit fail even if both workers run the read, and the loser treats the unique violation as success. The transaction does not cover side effects outside the database, such as an email or a call to the customer's API, so those still need their own idempotency key. On a roadside-assistance intake pipeline, two workers pulled the same document-ready event during a deploy. The queue path double-created cases until we added a unique case key. A Redis lock reduced the window but still doubled once when the lock TTL was shorter than the model call. The transaction on the case row closed the double write."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Programming",
+    "topic": "Python troubleshooting",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A Python service stalls under load on a customer site. How do you tell a GIL problem from a connection-pool problem from an async event-loop block?",
+    "answer": "I separate them by what the process is doing while latency climbs: one core saturated means the GIL, pool timeouts with idle CPU means connections, and a frozen loop with a single hot thread means a blocking call. The fix follows the signal, because adding threads, pool size, or workers at random hides the wrong bottleneck. For a GIL problem I look at CPU near one core per process, a traceback showing pure Python in a tight loop, and no growth in throughput when I add threads. The change there is processes or moving that loop out of the interpreter. For a pool problem I look at errors such as a pool limit or too many connections, threads stuck in the driver, and the database showing few active queries while the app waits. The change is to bound concurrency, fix leaked sessions, and match pool size to the database. For an event-loop block I look at one thread inside a sync driver, event-loop lag climbing, and every request on that worker slowing together. On a clinic scheduling site the booking service stalled at lunch. A sampler showed most threads idle inside the pool checkout, the database had spare connections, and one worker was pegged inside a sync PDF library called from an async route. That was a loop block, not a GIL ceiling and not an exhausted pool. The pitfall is raising pool size because the dashboard looks busy, which turns one blocking call into a wider outage."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Programming",
+    "topic": "Go",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "When would you write a small Go binary instead of another Python service for a customer edge job, and when is that the wrong call on a six-week engagement?",
+    "answer": "I write a small Go binary when the edge job is a long-running process with tight latency, a static deploy, and little need for the Python data stack. On a six-week engagement that is the wrong call when the customer cannot build or operate Go, or when the job is mostly glue around their API. Go gives one static binary, cheap concurrency, predictable memory, and a fast startup that fits a sidecar. I use it for a log shipper, a webhook fan-in, or a file watcher that must stay up with a tiny footprint. I stay in Python when the job calls a model, reshapes messy exports, or shares code with the integration service we are already shipping. A second language means a second toolchain, a second patch path, and a customer team that may not be able to change the code after we leave. On a plant-floor engagement, a Python poller on a small gateway kept getting killed because the base image and the scientific stack were heavy for a job that only tailed a CSV and posted rows. A Go binary supervised by systemd held steady for the rest of the rollout. The pitfall is rewriting the whole integration in Go because it feels cleaner, then spending the engagement on builds and cross-compiles instead of the customer's workflow. If the on-site team writes Python daily and the job changes weekly, Python finishes inside the six weeks and Go becomes leftover software nobody owns."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Programming",
+    "topic": "Bash",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you use Bash safely in a CI job that touches production credentials on a customer tenant, and what do you refuse to put in a shell script?",
+    "answer": "I use Bash in that CI job only as a thin wrapper that calls vetted tools, with secrets injected by the runner and never written into the script or the logs. I refuse to put raw credentials, long business logic, or unquoted customer input in the shell. The job reads the secret from the CI secret store into the environment at runtime, and the command receives it through a file descriptor or an environment variable that the tool expects, not through the process list. I turn on nounset and pipefail, quote every expansion, and avoid eval and unquoted commands built from a branch name or a tenant id. Logs go through a filter that masks tokens, and the script does not echo the environment. Anything with branches, retries, or parsing moves to Python or Go, where failures are typed and tests exist. I also refuse to disable certificate checks or to pipe a downloaded script into a shell. On a tenant cutover, a CI job needed a short-lived database password to run a migration. The first draft exported the password and echoed the connection string on failure, which landed in the build log that the customer's contractors could read. We switched to a masked secret, a one-hour token, and a Python migrator, and the shell only invoked that program. The pitfall is treating the script as private because the repo is private, then discovering the secret in a forked log, a crash dump, or a trace flag."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Programming",
+    "topic": "Rust",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "When would a forward deployed engineer reach for Rust on a customer engagement, and what cost makes you leave that work in Python or Go instead?",
+    "answer": "I reach for Rust when a customer job is CPU-heavy, must be memory-safe without a garbage collector, and will stay in production long enough to repay the learning cost. I leave it in Python or Go when the engagement is short, the team cannot review Rust, or the bottleneck is IO rather than the language. Rust fits a parser for hostile file formats, a hot loop over embeddings, or a static edge binary where a memory bug or a data race would corrupt customer documents. The compiler catches a class of bugs that show up only under load, and the binary has a small runtime. The cost is time: slower writing, slower review, a thinner hiring pool on the customer side, and crates we must patch ourselves. On a six or eight week deployment, that cost usually dominates the runtime win. Go covers most edge binaries with less friction, and Python covers glue, model calls, and code the customer's engineers will edit next month. On a media customer, a Python worker re-encoded thumbnails and pegged CPU so hard that uploads queued for minutes. A focused Rust extension for the resize loop, called from the existing Python service, cut that latency without rewriting the API. We did not move the webhook handler or the admin UI. The pitfall is adopting Rust for a one-off script because it is impressive, then leaving the customer with a crate they cannot patch when a dependency advisory lands."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Testing",
+    "topic": "Pytest",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What does a pytest fixture buy you compared with setup code copied into every test, when the thing under test is a document parser for messy customer exports?",
+    "answer": "A fixture gives every test the same parser setup, the same messy sample files, and the same cleanup, without copying that boilerplate into each test. The tests then read as the case they care about, and a change to the setup happens in one place. Pytest runs the fixture, injects the result into the test argument, and tears it down afterward, including when the test fails. I put the sample export bytes, the expected records, and a temporary directory in fixtures, and I scope the expensive ones to the module. Copied setup drifts: one test strips a header, another does not, and a green suite no longer means the parser agrees with itself. Fixtures also make the failure mode obvious, because a broken sample fails in the fixture instead of as a confusing assertion deep in a copy. For a payroll customer's exports, the files mixed encodings, blank lines, and a trailer row that looked like data. A fixture loaded three real anonymized files and yielded the parser plus the expected row counts. Each test then checked one behavior, such as a missing column or a duplicate employee id, and when the vendor added a new trailer we updated the fixture once. The pitfall is a giant fixture that hides the input, so a failure tells me the parser broke and not which line of the export caused it. I keep the shared setup small and let each test pass the specific messy fragment it owns."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Testing",
+    "topic": "LLM endpoint tests",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How would you test a FastAPI endpoint that calls a language model, including which assertions belong in a unit test and which ones you refuse to freeze?",
+    "answer": "I test the FastAPI endpoint by faking the model client, and I assert on status codes, schema, and the exact request we send, while I refuse to freeze the model's wording. A unit test that expects a full sentence from a live model will fail every time the provider changes a token. The unit test overrides the client dependency with a fake that returns a fixed structured payload. I assert the route returns 200, the JSON matches the response model, tenant id is passed through, and a timeout from the fake becomes a gateway timeout rather than a stack trace. I also assert that a user-supplied prompt cannot overwrite the system instruction, by checking the messages the fake recorded. What I leave unfrozen is the prose, the temperature noise, and any field the model is allowed to paraphrase. Those belong in an offline eval with scored rubrics, run on a schedule, not in the pull-request suite. On a support assistant, the endpoint summarized a ticket and suggested a next action from a fixed list. The unit test locked the action enum and the citation ids, and it used a fake so CI never called the paid model. A separate nightly eval sampled real tickets and graded helpfulness, and we did not fail the build when the summary phrasing moved. The pitfall is snapshotting the entire JSON body from a live call, which turns every model upgrade into a red build that people start ignoring."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Testing",
+    "topic": "Load testing",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "How would you load-test a customer-facing assistant with k6 without burning their production model quota or their support team's trust?",
+    "answer": "I load-test the assistant against a stub or a capped staging model, with production traffic left alone and the support team told before any test that can touch them. The goal is to find the app's breaking point, not to spend the customer's model quota or to flood their agents with fake tickets. k6 drives the HTTP path: auth, session creation, and the chat route. In the script I point the base URL at staging, replace the model client with a fake that returns in a realistic latency band, and keep a small separate scenario that calls the real model a handful of times. I ramp virtual users, watch the tail latency, error rate, and pool saturation, and I stop on a threshold instead of running until the tenant falls over. I use synthetic tenant ids that cannot page a human, I tag every request with a load-test header, and I run inside a window the support lead agreed to. On a retail assistant, an unbounded k6 run against production burned a month of token budget in an afternoon and created dozens of empty tickets the help desk tried to answer. The rerun used a stub that slept the model's usual latency, a ceiling of twenty real calls, and a note to support with the test window and the header to filter. The pitfall is calling that stub test a full capacity number, because the real model will add latency and rate limits the stub does not have."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Testing",
+    "topic": "Playwright",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "What do you cover with Playwright in the browser for an FDE support dashboard, and what do you keep in API or contract tests instead?",
+    "answer": "I cover the browser paths a support engineer actually clicks, and I keep data rules, authorization, and API shapes in contract and API tests. Playwright is for what only exists in the rendered page, not for every branch of the backend. In the dashboard I automate sign-in, the tenant switcher, opening a ticket, sending a reply, and the empty and error states that have bitten us before. I assert on visible text, the URL, and one or two network calls that prove the page talked to the right API. I do not assert on every column, sort permutation, or permission matrix in the browser, because those tests are slow, flaky, and expensive to rerun. Contract tests lock the ticket payload and the error codes. API tests lock who can read which tenant. A component test can lock a single widget if the page is heavy. Playwright then stays a thin journey on top. On an FDE support dashboard for a logistics customer, the bug that escaped was a tenant switcher that showed the previous customer's tickets for a second after navigation. A Playwright test caught that flash by waiting for the tenant header and asserting the ticket list matched the new tenant. The field-level mapping of the ticket API stayed in a contract test, so a renamed field failed in milliseconds instead of in a browser farm. The pitfall is growing the browser suite until every pull request waits on it, which trains people to ignore red runs."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Testing",
+    "topic": "Contract tests",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you design contract tests between your integration service and a customer ticket API that changes field names without a release note?",
+    "answer": "I design the contract test around the fields we actually depend on, recorded from real responses, and I fail the build when a required field disappears, changes type, or arrives under a new name. A ticket API that renames fields without a note will break ingestion, so the test has to notice before customers do. I store a small set of sanitized fixtures captured from their sandbox, plus a schema that marks which keys are required for our integration. The test replays those fixtures through the parser and also, on a schedule, calls the live sandbox and compares the observed keys to the schema. Unknown fields are allowed, because providers add them, but a missing ticket id, a status that left the enum, or a renamed priority field fails. When the sandbox drift fails, the pipeline keeps serving the last good mapping and pages us instead of writing partial tickets. I version the schema in the repo so a deliberate change is a reviewed diff, not a silent edit on the customer side. A facilities customer renamed description to details over a weekend and left the old key null. Our nightly contract run failed on the required description string, we shipped an alias that read either key, and production ingestion never stored blank descriptions. The pitfall is pinning the entire JSON document, including fields we do not read, because every harmless addition becomes a failure and the team starts skipping the check."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Programming",
+    "topic": "DSA",
+    "difficulty": "intermediate",
+    "questionType": "Conceptual",
+    "question": "Which data-structure idea actually matters when you dedupe and rank retrieved chunks in a support assistant, and which algorithm-puzzle habits do you leave out of the design?",
+    "answer": "The idea that matters is a hash set for dedupe and a bounded heap or a simple score sort for ranking, not a puzzle about the theoretically fastest sort. I leave out trick algorithms that do not change a support assistant at this size. Chunks come back from retrieval with overlaps, near-copies, and the same paragraph under two ids. I dedupe with a set keyed by a stable hash of the normalized text, or by document id plus span, so repeats collapse before I spend tokens on them. I rank with the retrieval score, then a small tie-break such as recency or source trust, and I keep a fixed top set of results. A heap is useful when I merge several retrievers and only need the best handful, because I never materialize a full sort of a huge list. At a few hundred chunks, a normal sort is honest and readable, and that is the one I ship unless measurement says otherwise. What I leave out is manual binary search, clever bit tricks, and graph algorithms that the retrieval engine already applied upstream. On a help-desk assistant, three retrievers returned the same warranty clause in different chunk sizes, and the model answered with the clause three times. Hashing the normalized text and keeping the highest score cut the prompt roughly in half and made the citation list readable. The pitfall is spending the design review on complexity theater while the real defect is duplicate text and an unbounded prompt."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Programming",
+    "topic": "Code review",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you review a pull request that adds concurrency to a shared customer cache and still needs to ship this week without a production incident?",
+    "answer": "I review the concurrency change by asking what happens when two workers touch the same cache key, and I only approve it this week if the failure mode is bounded and tested. Shipping without an incident means a small, measurable change, not a clever rewrite that nobody can roll back. I look for a single owner of each key, a timeout on every lock, and no lock that is held across a network call to the customer. I want a test that runs the two writers in parallel and asserts one winner, plus a test where the holder dies and the key recovers. I check that a stale cache entry cannot authorize the wrong tenant, because a cross-tenant read is worse than a cache miss. If the pull request mixes a new locking scheme with unrelated refactors, I ask for the refactor to come out. For this week I prefer an existing primitive, such as a database row lock or a cache set-if-not-exists with a TTL, over a new distributed lock service. Rollout is a flag, one tenant first, with a metric on lock waits and on double fills. On a shared customer cache for search filters, a pull request added threads that populated the same key and sometimes stored one tenant's filters under another tenant's key. We blocked it, added the tenant id to the key, covered the race with a parallel test, and shipped the smaller fix behind a flag the same week."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 1 - Full-Stack Foundations: Programming and Testing",
+    "category": "Senior FDE - Testing",
+    "topic": "Eval fixtures",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you test a chunking change against a saved set of customer questions so you can tell whether the new splitter helped before you reindex production?",
+    "answer": "I test a chunking change against a saved set of real customer questions, with the previous chunks and the expected citations stored beside them, before any production reindex. The fixture tells me whether the new splitter helped on questions we already understand, instead of hoping a fresh index feels better. I keep a file of anonymized questions, the source document version, and the passages a human or a prior run marked as relevant. The test runs the old splitter and the new splitter on the same documents, retrieves a fixed top set with the same embedder frozen, and scores hit rate, mean reciprocal rank, and how often the answer passage survived. I also record token count per question, because a splitter that raises recall by stuffing the prompt is not a win. A change ships only if the saved set improves or holds on the questions that matter and does not collapse a tagged regression case. On a benefits assistant, a new splitter cut chunks at headings and looked cleaner in a demo. The fixture showed it dropped the table that answered the most common question about coverage limits, so hit rate fell even though the chunks looked tidy. We kept the old splitter for those manuals and only adopted the new one where the fixture improved. The pitfall is scoring the change on a handful of questions I wrote after seeing the new chunks, which flatters the change and misses the customer's real wording."
+  }
+]

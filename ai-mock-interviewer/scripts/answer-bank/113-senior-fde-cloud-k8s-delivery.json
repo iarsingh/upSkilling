@@ -1,0 +1,332 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Cloud",
+    "topic": "GCP starter set",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "Which Google Cloud services do you reach for first when deploying a retrieval assistant for one customer, and what job does each one do?",
+    "answer": "For one customer retrieval assistant the first set is Cloud Run, Artifact Registry, Cloud Storage, Cloud SQL, Secret Manager, Pub/Sub, and Cloud Logging. Cloud Run serves the chat API and can scale down between demos. Artifact Registry stores the image by digest so a deploy is not a build from a laptop. Cloud Storage holds the source PDFs in the same region as the service. Cloud SQL, with a vector extension when the corpus is modest, stores chunks, citations, and document status. Secret Manager holds the database password and any model credential, and the runtime reads them with its own identity. Pub/Sub carries index work so a large upload does not sit inside the user request. Cloud Logging, with a latency metric split by retrieval and model, shows which part is slow. On a credit-union pilot in us-central1, Cloud Run answers member questions, a private bucket stores policy PDFs, Cloud SQL stores embeddings, and a second Cloud Run service consumes Pub/Sub to embed new documents overnight. The pitfall is adding GKE, Vertex AI, and a service mesh before there is a traffic pattern. Those earn a place later. The first week needs a private request path, a document bucket, a secret, a queue, and logs a security reviewer can read."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Cloud",
+    "topic": "Cloud Run versus GKE",
+    "difficulty": "beginner",
+    "questionType": "Comparison",
+    "question": "How do you choose between Cloud Run and GKE for a customer pilot that might later need private networking and a steady queue worker?",
+    "answer": "Start on Cloud Run when the pilot is one HTTP service and maybe one worker, and move to GKE when private networking and a steady queue worker become real requirements rather than a maybe. Cloud Run gives a revision, a concurrency setting, and Direct VPC egress or a Serverless VPC Access connector without operating nodes. It can scale to zero, which is awkward for a worker that must keep a subscription warm. GKE gives a Deployment that stays up, a node pool in a private subnet, NetworkPolicy, and Workload Identity. The application stays a container with config in the environment, so the move is a change of runtime, not a rewrite. For a logistics customer, the first month runs the assistant and a Cloud Run worker on Pub/Sub. When they ask to join the private GKE cluster that already hosts warehouse APIs, the same image becomes an API Deployment and a worker Deployment, with Cloud SQL reached on a private IP and no public ingress. The pitfall is starting on GKE because it sounds more serious. The first weeks then go to node upgrades and IP ranges instead of retrieval quality. Stay on Cloud Run until a private cluster, an always-on worker, or an existing platform is an actual requirement."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Cloud",
+    "topic": "Workload identity",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you grant a workload on GKE or Cloud Run access to Cloud SQL and a secrets store without a long-lived service-account key on the node?",
+    "answer": "The workload impersonates a Google service account at runtime and receives a short-lived token. No JSON key is created, downloaded, or mounted. On Cloud Run the revision runs as that Google service account directly. On GKE, Workload Identity binds a Kubernetes service account in the namespace to the same Google account, and the pod requests tokens from the metadata server. The Google account gets Cloud SQL Client on one instance and Secret Manager Secret Accessor on one secret, not project Owner. Cloud SQL Auth Proxy or the Cloud SQL connector uses the token. Secret reads use the same identity. Nothing secret sits in an env file or an image layer. For a hospital prior-authorization assistant on a private GKE cluster, the namespace account assistant-reader binds to a Google account that can connect to one Cloud SQL instance and read one secret. Developers cannot export a key because no key exists. A failed impersonation is fixed in the binding and the IAM role. The pitfall is mapping the Kubernetes account to a broad Google account that can read every secret in the project, or dropping a key on the node because the first connection failed. A key survives pod deletion and shows up in backups. The pilot does not get a key to get unblocked."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Cloud",
+    "topic": "VPC placement",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you place a customer assistant in a VPC so the model endpoint and the database are not reachable from the public internet by accident?",
+    "answer": "The database and the model endpoint have private addresses only, and the path from the assistant to them never uses a public IP. Cloud SQL is created with a private IP on a Private Service Access range, and its public IP stays disabled. Cloud Run reaches that range through Direct VPC egress or a Serverless VPC Access connector on a subnet that can route to the private address. On GKE the pods sit on private nodes. Egress to the internet, if any, goes through Cloud NAT, and the database firewall or network policy allows only the pod or connector CIDR on the SQL port. The model call goes to a regional Vertex endpoint or a private gateway, not a URL the public internet can open. Users enter through a load balancer with Identity-Aware Proxy or the customer's SSO, and that front door has no route to the database subnet. For a payroll company in us-east1, Cloud SQL has a private IP, Cloud Run attaches to a small subnet, and only that subnet may open port 5432. The pitfall is leaving the Cloud SQL public IP on with an authorized network of the whole internet because a laptop connection was convenient. That single setting publishes customer rows. Private IP and no authorized networks is the pilot default."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Cloud",
+    "topic": "Pub/Sub indexing",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "When do you use Pub/Sub in an indexing pipeline, and what do you do with a message that fails three times while embedding a document?",
+    "answer": "Use Pub/Sub when embedding is slower or burstier than the request that noticed the new document. The upload handler writes the object to Cloud Storage and publishes one message with the object name and generation. A worker pulls, embeds, and writes vectors. The user request returns as soon as the object is stored and the message is accepted. The worker acknowledges the message only after the vectors and the document status commit. A crash mid-embed redelivers the message, so the handler must be safe to run twice. After three failed deliveries the subscription stops retrying that message and forwards it to a dead-letter topic. The document row stays failed, with the last error in the worker log, and a person can requeue after the file is fixed. Healthy documents keep moving. For a law firm's contract assistant, each agreement publishes one message. A corrupt PDF fails three times, lands on the dead-letter subscription, and does not block the rest of the firm's uploads. The pitfall is acknowledging on receipt and then failing the embed, which drops the document with no trace, or retrying poison messages until the backlog stalls good ones. Cap the attempts, dead-letter the rest, and key the chunks by document id so a redelivery overwrites instead of duplicating."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Cloud",
+    "topic": "Second cloud mapping",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "A customer is on AWS or Azure rather than Google Cloud. How do you map Cloud Run, Pub/Sub, and Secret Manager without pretending the products are identical?",
+    "answer": "Map the job each product does, and write the runbook against the product they actually operate. Cloud Run is a managed container runtime that scales with requests and can scale to zero. On AWS the nearer match is App Runner or Fargate behind a load balancer. On Azure it is Container Apps. None of them share Cloud Run concurrency or revision traffic split, so timeouts and scale limits get retested rather than copied. Pub/Sub is a managed message log with subscriptions and dead letters. AWS uses SQS, often with SNS when one event fans out. Azure uses Service Bus queues. Ordering, payload size, and how a dead letter is stored differ, so the worker still acknowledges only after commit, and the delivery limit is measured again. Secret Manager is a versioned secret store bound to identity. AWS Secrets Manager and Azure Key Vault cover that job with different identity bindings. For a customer already on AWS, the assistant runs on Fargate in a private subnet, SQS carries index jobs, and the task role reads Secrets Manager. The diagram does not relabel those boxes as Cloud Run. The pitfall is swapping names while leaving Cloud SQL Auth Proxy, Workload Identity, or Pub/Sub ordering in the design. Those mechanisms do not travel. Rewrite the identity path and the retry path for the cloud they run."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Cloud",
+    "topic": "Vertex and residency",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "When do you call a model through Vertex AI for a customer, and what data-residency constraint makes you refuse that path in the first meeting?",
+    "answer": "Call the model through Vertex AI when the customer wants a managed model inside their Google Cloud project, with IAM, a regional endpoint, and a contract that allows the prompt and the retrieved chunks to be processed in a region they have named. Refuse that path in the first meeting when the customer requires that document text never leave a named country, a named VPC, or their own hardware, and the Vertex region or the chosen model cannot meet that rule. Not every model is offered in every region, and a global endpoint is the wrong default when the data-processing terms name one region. Sending a sample corpus to check quality is already processing. For a German insurer, a regional endpoint in europe-west3 is acceptable when the agreement allows processing in that region and the bucket and Cloud SQL stay there too. If policy text must never leave their on-premises network, the meeting stops on Vertex and moves to a model they host inside that network. The pitfall is starting on a convenient model region and promising to relocate later. Prompts and embeddings already sent are a residency event. Confirm the allowed region and whether that model exists there before the first document is indexed."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Cloud",
+    "topic": "Cloud SQL connectivity",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you connect Cloud Run or GKE to Cloud SQL for a private pilot, and what breaks if the connection limit is left at the default?",
+    "answer": "Connect over the Cloud SQL private IP, with the runtime identity granted Cloud SQL Client, and keep the public IP off. On Cloud Run, attach the service to the VPC that can route to the Private Service Access range and point the app at the private address or the Cloud SQL connector. On GKE, run Cloud SQL Auth Proxy as a sidecar on localhost so the application process does not hold a long-lived password. The default max connections on a small Cloud SQL tier is only a few dozen, because the default follows memory. Each Cloud Run instance or pod opens its own pool. A pilot that was fine at two instances fails when concurrency rises: new checkouts error with remaining slots at zero while database CPU still looks idle. For a retailer assistant, twenty Cloud Run instances with a pool of ten would demand two hundred connections against a small tier's default. The pool per instance drops, max instances is capped, or the tier grows, and connection count is a chart next to latency. The pitfall is raising max instances to cure a slow query. More instances open more pools and turn a slow statement into a total refusal of new work. Size the estate as instances times pool size, and leave headroom under the database limit."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Cloud",
+    "topic": "Timeout triage",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A customer says the assistant was fast yesterday and times out today. How do you separate a Cloud Run instance problem, a database problem, and a model-API problem?",
+    "answer": "Split the request by where the time went, using traces, before changing any service. A Cloud Run instance problem appears before the handler does real work: cold starts on a new revision, CPU throttling, or queueing when max instances is already hit. The logs show the process starting during the user's wait. A database problem appears in the query span or the pool checkout, with Cloud SQL CPU, connection count, or lock waits rising at the same minute. A model-API problem appears in the span after retrieval, while the database span stays short and the time sits inside the Vertex or model call. Compare yesterday's image digest and error rate so a bad deploy is visible. For a travel assistant that started timing out after a morning change, Cloud Run latency before the handler was flat and Cloud SQL connections were fine. The model span jumped because a new prompt attached twenty chunks instead of five. The pitfall is restarting Cloud Run because that is the surface the customer names. A restart can hide a bad prompt or a saturated database for a quiet interval, and the timeout returns with the next burst. Separate startup, retrieval, and the model call, then change the part whose span actually moved."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Cloud",
+    "topic": "Audit logs",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "What cloud audit logs do you turn on before a pilot so you can show the customer who accessed the document bucket and the secret?",
+    "answer": "Turn on Data Access audit logs for Cloud Storage and Secret Manager before the first document or secret is read, and keep Admin Activity logs, which Google records by default. Admin Activity shows who changed a bucket policy or created a secret. It does not show who read an object or a secret version. Data Access with DATA_READ and DATA_WRITE on the document bucket, and DATA_READ on Secret Manager, records the principal, the resource, and the time. Export those logs through a sink to a bucket or log project the application team cannot delete, with the retention the customer's security team named. The assistant's service account will appear as a reader, so the principal field has to distinguish a human from the runtime. For a bank pilot, storage data access and secret access land in a logging project with a one-year retention. When they ask who opened a policy PDF, the entry shows the principal, the object name, and the timestamp. The pitfall is enabling only Admin Activity and treating that as proof of reads. A person who downloads a document with an allowed identity never appears there. Data access must be on before the pilot, because those reads cannot be reconstructed after the fact."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Kubernetes",
+    "topic": "Container image",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What belongs in a container image for a retrieval service, and what do you refuse to bake into the image even for a short pilot?",
+    "answer": "The image contains the language runtime, the application code, and the libraries required to serve retrieval. It does not contain customer documents, embeddings, database passwords, API keys, or a copy of production configuration. Those arrive at runtime. The bucket name, the Cloud SQL connection name, and the secret resource name are environment variables on the Cloud Run revision or the Kubernetes Deployment. The password is read from Secret Manager with the workload identity when the process starts. The image is built once, stored in Artifact Registry by digest, and promoted. A short pilot is when a baked secret does the most harm, because that image is copied to laptops and demo projects. For a pharmacy benefits assistant, the image holds the Python service and its dependencies. Documents stay in the customer's bucket. Config that differs between demo and production stays outside the layers. The pitfall is copying a dotenv file into the image so the demo runs with one command. That layer remains in the registry history after a later commit deletes the file. Build from a clean context, scan the image, and reject any build argument that carries a credential. The pilot image is interchangeable across environments because it holds code, not the customer's data."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Kubernetes",
+    "topic": "Probes",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What is the difference between a liveness probe and a readiness probe for an assistant API, and which failure should remove the pod from the load balancer?",
+    "answer": "A liveness probe tells Kubernetes whether the process is wedged and needs a restart. A readiness probe tells Kubernetes whether this pod can take traffic. A failed readiness probe removes the pod from the Service endpoints, so the load balancer stops sending requests. A failed liveness probe kills the container. For an assistant API, liveness hits a cheap local path that does not call Cloud SQL or the model. It fails only when the event loop is stuck. Readiness fails when startup has not finished or a local check says the process cannot serve yet. During a brief database blip, readiness can go false and traffic moves to other pods, while liveness stays successful so every replica is not restarted at once. On a GKE assistant, readiness calls a ready path after config is loaded. Liveness calls a live path that only proves the process can answer. The pitfall is pointing both probes at a handler that runs a query or a model call. A slow model then restarts healthy pods, and the restarts extend the outage. Keep liveness local. Let readiness take the pod out of the load balancer. Restart only when the process itself is dead, not when a dependency is slow."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Kubernetes",
+    "topic": "Resources",
+    "difficulty": "intermediate",
+    "questionType": "Implementation / Workflow",
+    "question": "How do you set CPU and memory requests and limits for a Python assistant that spikes while it embeds a large PDF?",
+    "answer": "Set the API pod for steady chat, and put the PDF spike on a separate worker with its own requests and limits. The CPU request is what the scheduler reserves. The CPU limit is the ceiling before throttling. For Python, keep the memory request and the memory limit close together. A limit far above the request lets the node pack pods that later kill each other when they all touch the limit. Measure a normal question and a large embed separately. Chat might sit at a few hundred millicores and under a gibibyte. Parsing a long PDF can need a couple of CPUs and a few gibibytes for a short time. That work belongs on a Job or a queue worker, not inside the request pod. For a claims assistant, the API Deployment requests 500 millicores and one gibibyte, with the same memory as a limit. The index worker requests two CPUs and three gibibytes so one large PDF can parse without eviction, and it scales on queue depth. The pitfall is giving every API pod a four gibibyte limit because one file once used that much. The cluster then reserves memory it does not have, and ordinary chat pods stay Pending. Size the serving path for chat. Give the embed its own budget."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Kubernetes",
+    "topic": "RBAC",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you use Kubernetes RBAC so the on-call engineer can read logs but cannot exec into a pod that sees customer documents?",
+    "answer": "Grant a namespace Role that allows get, list, and watch on pods and on pods/log, and leave out create on pods/exec and pods/attach. Bind that Role to the on-call group with a RoleBinding in the assistant namespace, not with a cluster-admin binding. Exec is its own API. A person who can read logs still cannot open a shell unless that verb is present. The service account on the Deployment, the one that can see documents through Workload Identity, is not a human account and is not bound to the on-call group. Humans restart through a narrow update on the Deployment or through the pipeline, which does not require a shell. For a health-plan cluster, the oncall-reader role in the assistant namespace allows pod logs and Deployment reads. It omits exec, secret reads, and any verb on the document volume. A break-glass role that can exec exists for the platform team, with a short-lived binding and an audit event, when logs cannot explain the incident. The pitfall is handing on-call the built-in edit ClusterRole because they also need to restart. Edit includes exec. That shell lands inside a pod that may have customer files mounted. Split the roles so logs and restarts do not come with a terminal."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Kubernetes",
+    "topic": "Pending pod",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A pod stays Pending on the customer's cluster. How do you tell a resource shortage from a taint, a missing image pull secret, or an admission policy?",
+    "answer": "Read the pod events before changing capacity, because each cause names a different object. A resource shortage reports insufficient CPU or memory, and the nodes show requests already at the allocatable limit. Adding a node or lowering the request is the relevant next step, and only then. A taint shows nodes that reject the pod, and the pod spec has no toleration for that key, such as a GPU pool or a spot pool. A missing image pull secret, or a missing Artifact Registry permission, shows a failed image pull or a registry denial, and the event names the service account or the imagePullSecret that is absent. An admission policy rejects the pod after it is submitted, and the message names a Gatekeeper constraint or a webhook, such as a required label or a registry that is not allowed. For a customer GKE cluster, a Pending assistant pod had no insufficient-resource event. The pull failed because the Kubernetes service account was not bound to a Google account that can read Artifact Registry. More nodes would have sat empty. The pitfall is growing the node pool at the first Pending status. New nodes repeat a taint, a secret, or a policy. Describe the pod, read the events, and change the one object the event names."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Kubernetes",
+    "topic": "Crash loop",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "The assistant pod restarts every few minutes. How do you use the previous logs, probes, and memory limits to decide whether this is a leak, a failed health check, or a bad deploy?",
+    "answer": "Use the previous container logs, the termination reason, and the probe events together, and match them to the image digest. The previous log flag shows the output from the run that just died. A reason of OOMKilled, with usage at the memory limit, means the process crossed the limit. If usage climbs across restarts on idle traffic, treat it as a leak. If it dies on one large request and stays flat otherwise, treat it as a spike that needs its own worker. Probe events that show liveness failures, with a clean exit and no OOM, mean Kubernetes killed a process that failed its health check. A bad deploy shows a new digest, a crash during startup, and the same stack on every replica of that revision. Roll back to the last digest that stayed up. For an assistant restarting every few minutes, the previous log ended in a memory error while parsing one PDF, the reason was OOMKilled at one gibibyte, and probes had been healthy until that file arrived. That was a spike. The pitfall is raising the memory limit on every restart. A leak will eat the new limit. A bad probe will still kill the pod. A bad digest will still crash. Read the reason and the previous log, then choose a limit change, a probe fix, or a rollback."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Kubernetes",
+    "topic": "Helm values",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "What do you put in a Helm chart for this service, and what values must stay environment-specific so production is not a copy of the demo namespace?",
+    "answer": "The chart contains the Deployment, Service, ServiceAccount, probes, and the templates for environment variables. Values that differ by environment stay out of the chart defaults. Those are the image digest, replica count, host names, Cloud SQL instance, secret resource names, CPU and memory, ingress class, and whether the service is reachable only inside the network. Demo and production do not share a values file that was copied and lightly edited. Production points at the production project, a pinned digest, and a private ingress. Demo may scale down and use a smaller database. Secrets are not in the values file at all. The workload identity reads them at runtime. For a manufacturer's assistant, the chart in the platform repo has no customer bucket name. The production values in the customer config repo set the digest, the namespace, the Cloud SQL connection, and the Workload Identity annotation. A pull request promotes the digest. The pitfall is a default values file that still has the demo's public URL and a floating latest tag. Installing the chart with no overrides then publishes the demo into the production namespace. Fail the install when the digest or the database host is empty, so production cannot come up as a silent copy of the demo."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Kubernetes",
+    "topic": "Index job",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you run an indexing job on Kubernetes so a second replica does not embed the same document twice after a retry?",
+    "answer": "Claim the document in Cloud SQL before embedding, and write chunks so a second attempt overwrites the same rows. The Job or the queue worker updates the document from queued to processing with a conditional write that matches the previous status and takes a lease. Only the worker that wins that update embeds. A second replica sees zero rows changed and stops. Output is keyed by document id and content hash, so a repeated embed replaces chunks instead of inserting a twin. If the pod dies, the lease expires and another attempt may claim it. A row already marked done is not claimed again. Kubernetes will restart a failed pod, and Pub/Sub will redeliver, even when parallelism is one. The lock lives in the database, not in the pod's memory. For a policy assistant, two workers can both see a redelivery. The first sets the lease. The second acknowledges without embedding. The pitfall is trusting a Job setting of one completion to make the work unique. A retry is a new pod, and a redelivery is a second message. Without the conditional claim, both embeds write vectors and the assistant cites the same page twice. Idempotent writes plus a lease are what make the retry safe."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Kubernetes",
+    "topic": "Blast radius",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "How do namespaces, network policy, and a dedicated service account reduce the blast radius of one customer's assistant on a shared cluster?",
+    "answer": "Each control cuts a different path out of one customer's assistant. The namespace scopes RBAC and resource quotas, so a noisy embed cannot schedule away the whole cluster's CPU, and a role binding in that namespace does not grant access next door. A network policy defaults to deny, then allows the assistant pods to reach only their database port and their model endpoint. They cannot scan the kubelet network or open connections into another namespace. The Kubernetes service account is unique to that namespace and, on GKE, maps through Workload Identity to a Google service account that can read one bucket and one Cloud SQL instance. A token stolen from that pod fails on the next customer's secret. For a shared cluster hosting two insurers, each assistant has its own namespace, a policy that allows egress only to its private Cloud SQL range, and a Google account bound to that namespace alone. The pitfall is a shared default service account plus a wide egress rule added so a demo could call a public model. The default account often carries broader node permissions, and the egress rule is a path to every other service. A namespace by itself is only a label until policy and identity are tight."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Kubernetes",
+    "topic": "Rollout",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you roll out a new assistant image on GKE so a bad model prompt can be reverted without leaving half the pods on the new version?",
+    "answer": "Roll the Deployment so old pods keep serving until new pods are ready, and treat the prompt and the image as one revision that moves forward or back together. Set max unavailable to zero and a small max surge, and point readiness at a check that fails if the new prompt config did not load. Traffic stays on the previous pods until the new ones pass. If the prompt cites the wrong policy, roll the Deployment back to the previous ReplicaSet and the previous digest. Do not leave the rolling update paused in a mix. Every serving pod shares one digest. On GKE the working digest and the prompt version live in the Helm values or the GitOps commit. Reverting that commit returns the whole Deployment to the last good pair. Readiness keeps the bad pods out of the Service during the attempt, so users do not see alternating answers while the rollback runs. The pitfall is a rolling update with max unavailable at a quarter of the replicas and no readiness check on the new config. Half the pods run the new prompt and half run the old one, and the customer gets two different answers to the same question. Finish the rollout or revert it. A mixed ReplicaSet is not a steady state."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Terraform and CI/CD",
+    "topic": "Terraform ownership",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What does Terraform own in a customer pilot, and why do you refuse to apply production from a laptop even when the change is small?",
+    "answer": "Terraform owns the shape of the pilot project: the VPC, subnets, Cloud SQL instance, buckets, service accounts, IAM bindings, Pub/Sub topics, and the Cloud Run service or the GKE cluster. It does not own document bytes, embeddings, or one-off data fixes. Apply runs from a pipeline against a reviewed plan. A laptop apply uses a personal identity, skips review, and can write state that nobody else can lock. A small change is how production drifts. A one-line CIDR or a single IAM binding still needs a plan a second person can read, because refresh may touch resources nobody meant to edit. For a customer assistant project, the root module creates the private Cloud SQL instance and the runtime service account. A wider firewall rule starts as a pull request. Cloud Build shows the plan, a teammate approves, and then the pipeline applies. The pitfall is applying that one-line change from a laptop because the pipeline felt slow during an incident. The local run can refresh unrelated resources, use a stale local state, and change more than the CIDR. The next pipeline run then fights that state. Small changes use the same plan and apply path as large ones."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Terraform and CI/CD",
+    "topic": "Remote state",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you store Terraform state for a customer environment, and what goes wrong if two people apply against the same state without a lock?",
+    "answer": "Keep state in a remote backend the customer controls, usually a Cloud Storage bucket with versioning, uniform bucket-level access, and a retention rule the application cannot delete. The bucket sits in a separate project when the security team wants a boundary from the assistant runtime. Terraform acquires a lock before apply, so a second run waits or fails instead of writing beside the first. State holds resource ids and sometimes secret material that landed in outputs, so the bucket is private and encrypted with a key the deploy identity can use. If two people apply with no lock, both read the same serial, both create or destroy, and the state file keeps one writer's view. The cloud then has orphans, or a database the state still lists that no longer exists, or the reverse. The next plan proposes to recreate production. For a pilot, the bucket is versioned and named for that customer. A second apply during a Cloud SQL change errors on the lock, and the operator waits. The pitfall is a state file that was copied once to look remote, or turning the lock off to get unblocked. Without the lock, the loser of the race overwrites the winner, and the following plan tries to rebuild what the customer is already using."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Terraform and CI/CD",
+    "topic": "Modules",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you split a reusable module from the live customer root, and how do you pin the module so a Tuesday edit cannot change production by surprise?",
+    "answer": "The reusable module lives in its own repository or registry and takes inputs for names, region, and sizes. The live customer root calls that module with this customer's project, CIDRs, and labels, and the root is where the backend and the real values sit. The root pins the module to a version tag or a commit, not to a branch tip. A Tuesday edit merges and gets a new tag. Production does not move until the root changes that pin in a reviewed pull request. The pin is what stops a refactor inside the module from altering subnets on the next apply. For the assistant stack, the module publishes a Cloud Run service, a service account, and the SQL IAM binding. The customer root pins version 1.4.2. A change that adds an output ships as 1.5.0, and the customer upgrades in their window. The pitfall is a source that points at the main branch, or a relative path someone edits in the same tree that production applies from. The plan then includes surprises nobody scheduled. Pin the version. Upgrade when the customer root says so, and read the plan for that pin change the same way as any other production diff."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Terraform and CI/CD",
+    "topic": "CI versus deploy",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "What belongs in the CI pipeline versus the deploy pipeline for an assistant service, and which checks must pass before an image is allowed into the customer project?",
+    "answer": "CI builds the image, runs unit tests and lint, scans for vulnerabilities, and pushes a digest to Artifact Registry in a build project. The deploy pipeline promotes that digest into the customer project, renders the Terraform plan or the Helm release, and applies only after a person approves. Checks that do not need the customer's VPC stay in CI. Anything that changes the customer project stays in deploy. Before an image is allowed into that project, tests have passed, the scan has no unaccepted critical findings, and the digest carries a signature or attestation the deploy identity verifies. A floating tag is not an allow-list. For the assistant, GitHub Actions builds on the pull request and pushes the digest to the shared registry. Cloud Build in the customer project deploys only attested digests, and a separate stage applies Terraform. The pitfall is letting the CI job apply with a credential that can change production, because the test workflow and the prod apply became the same pipeline. A red test is then the only gate between a branch and the database. Split the identities. CI cannot apply. Deploy cannot build from a tree that never passed the scan and the attestation."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Terraform and CI/CD",
+    "topic": "GitOps",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How does GitOps with a tool such as Argo CD change the way you ship a prompt or an index config, and what do you still refuse to let the cluster pull automatically?",
+    "answer": "Git becomes the source the cluster follows. A prompt or an index config changes by a merge, Argo CD sees the commit, and it syncs the ConfigMap or the Helm values. A rollback is a revert of that commit, so git and the cluster match. The image digest is pinned in the same commit, which keeps the prompt and the code that understands it together. Automatic pull stops at stateless config. The cluster does not auto-sync production data changes, Terraform that moves the database network, secret values, or a Job that rebuilds the index. Those can destroy or copy customer data, and git cannot undo vectors already written. For a customer cluster, Argo CD watches the config repo and rolls a ConfigMap with the prompt version. The production application requires a manual sync, or a protected environment, before it tracks the new commit. The pitfall is auto-sync on the whole namespace, including an index Job, because someone merged a one-line config tweak. The Job runs, embeds into the live index, and there is no revert for those rows. Auto-sync the stateless prompt and config. Gate any Job that writes the index, and keep infrastructure apply on the Terraform pipeline."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Terraform and CI/CD",
+    "topic": "Workload identity federation",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you get a deploy identity into GitHub Actions or Cloud Build with workload identity federation instead of a JSON key stored in the repo?",
+    "answer": "The workflow trades a short-lived token from the CI system for a Google access token. No JSON key is committed or stored as a secret. On GitHub Actions the job requests an OIDC token whose subject names the repository and the branch or environment. A workload identity pool trusts that issuer. A provider maps the subject, and only that principal may impersonate the deploy service account through workloadIdentityUser. The service account holds the deploy roles, and the key-creation permission stays off. Cloud Build uses the build service account in the customer project the same way, without a downloaded key. For the assistant pipeline, only the main branch of the infra repo, and only after the protected environment approves, can impersonate the apply account. A pull request uses a read-only account that can plan and cannot apply. A fork cannot satisfy the attribute condition. The pitfall is a provider that trusts every repository in the organization, or a condition that checks the issuer and not the repository and branch. A personal fork then applies production. Constrain the condition to the exact repo and the protected environment. There is no long-lived key to rotate because none was created."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Terraform and CI/CD",
+    "topic": "Drift",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "Someone changed a firewall rule in the console. How do you detect the drift, decide whether code or the cloud is right, and stop the next apply from deleting the customer's exception?",
+    "answer": "Detect it with a plan that is not an apply. A scheduled terraform plan against the locked remote state shows the firewall rule as a diff, because the console no longer matches the code. Decide which side is right with the customer. If a network engineer added the range during a support call and it must stay, add that range to the configuration and merge it before anyone applies. The following plan then shows no destroy. If the console edit was a mistake, a reviewed plan that restores the code is the fix, and the pipeline applies it. The next apply deletes the exception only when the code still lacks it and someone applies anyway. Reading the plan is what stops that. For a customer assistant, the plan showed an extra source range on the admin firewall. That range went into the Terraform variable for approved CIDRs, the new plan showed no destroy, and only then was apply allowed. The pitfall is applying a noisy-looking plan that removes the extra range. That removal can cut off the customer's access path. Every destroy gets read. When the cloud change was intentional, code changes first, and apply runs only after the plan preserves the exception."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Terraform and CI/CD",
+    "topic": "Environments",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you separate dev and production for a single customer so a test reindex cannot embed into the production index the support team is using?",
+    "answer": "Separate them by project, state, database, and index, not by a flag inside one database. Each environment has its own Terraform state, its own Cloud SQL instance, and its own vector index. The dev service account cannot read the production secret or write the production bucket. A test reindex publishes to the dev Pub/Sub topic, and the dev worker is the only consumer. The production topic has a different name in the production project. The support team's assistant is configured with the production index host, and that host is not a default when an environment variable is missing. There is no shared instance where a schema prefix is the only guard. For one retailer, dev and production are two projects. The dev Cloud Run revision writes the dev index. The support tool reads the production index. A load test embeds sample catalogs into dev, and production documents stay untouched. The pitfall is one Cloud SQL instance with two databases and a connection string that falls back to production when the variable is empty. The test job then writes vectors the support team retrieves that afternoon. Make the production connection name impossible to default, and deny the dev identity Cloud SQL Client on the production instance."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Terraform and CI/CD",
+    "topic": "Terraform rollback",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A pipeline applied a bad Terraform change and the assistant cannot reach the database. How do you roll back state and infrastructure without making a second unreviewed change from a laptop?",
+    "answer": "Revert the commit that caused the bad apply and let the pipeline apply that reviewed plan. Use a state restore only when the state file itself is wrong. If the change closed the private path to Cloud SQL, the previous commit is the desired infrastructure. A pull request reverts it, the plan shows the route or the connection setting returning, and Cloud Build applies with the same identity as the bad run. If state was corrupted, or it dropped a resource that still exists, restore the prior object version from the state bucket under the lock, then plan. Do not hand-edit state and do not apply a fresh snippet from a laptop to open the database. For an assistant that lost its private path after a subnet change, the team reverted the merge. The pipeline plan restored the outputs the runtime uses, and the service reconnected. The bucket's previous generation stayed available in case the revert was incomplete. The pitfall is a laptop apply that adds a public IP so the demo works while the revert is still in review. That is a second unreviewed change. The next pipeline run deletes it or fights the person still applying locally. One path changes production, and it is the pipeline."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Terraform and CI/CD",
+    "topic": "Terraform versus Helm",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "What do you manage with Terraform versus Helm on a customer cluster, and which mistakes come from letting both tools own the same resource?",
+    "answer": "Terraform manages the cloud around the cluster. Helm manages the Kubernetes objects inside it. Terraform creates the GKE cluster, node pools, IAM, Cloud SQL, buckets, and the Google service account used for Workload Identity. Helm installs the assistant Deployment, Service, ConfigMap, and autoscaler. The cluster API is the boundary. When both tools own one resource, they overwrite each other. Terraform's Kubernetes provider and Helm both writing the same Deployment means the next terraform apply rolls back a Helm release, or Helm strips a label Terraform added. Pick one owner and keep it. A workable split is Terraform for the namespace and the Google service account, Helm for the workload, with the Workload Identity annotation set from values that come out of Terraform outputs. For the customer cluster, Terraform creates the cluster and the database identity. Helm installs the assistant chart and is the only writer of that Deployment. The pitfall is importing the Deployment into Terraform state because someone wanted a single tool, while Helm or Argo CD still applies it. The next run from either side reverts the other's image digest. One resource has one owner, and the repo that applies it is the place that says so."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Service Mesh",
+    "topic": "When to add a mesh",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "When would you introduce a service mesh for a customer's assistant platform, and what simpler control do you use while there is only one service?",
+    "answer": "Introduce a service mesh when several services need mutual TLS, consistent retries, and traffic splits that every client would otherwise implement alone. A single assistant with one database does not need that. While there is one service, use a Kubernetes NetworkPolicy for who may connect, a Gateway or Ingress for TLS at the edge, and timeouts in the application for the model and Cloud SQL. Those controls are local and easy to explain in a review. Add the mesh when a second and third service exist, the platform team already accepts sidecars or an ambient data plane, and security wants identity between services without a private certificate process in every repo. For an early pilot, the assistant is one Deployment behind an internal Gateway, and a network policy allows only that namespace to reach the private Cloud SQL range. The mesh waits until retrieval, the index worker, and a separate auth service must encrypt east-west traffic the same way. The pitfall is installing the mesh in week one because a reference diagram showed it. The pilot then debugs injection instead of answer quality. Start with edge TLS and network policy. Add a mesh when the number of services makes per-app TLS the larger risk."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Service Mesh",
+    "topic": "Mesh cost",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "What does a mesh buy you for mutual TLS and traffic shifting, and what operational cost do you warn the customer's platform team about before they ask for it?",
+    "answer": "A mesh gives mutual TLS between services without each team shipping certificates, and it gives traffic shifting so a new assistant revision can take a small share of calls and move back at the proxy. Policy sits in the data plane, which still applies when a service forgets its own checks. The cost to put in front of the platform team is ongoing. Every pod gains a proxy to upgrade, a failure mode that can drop traffic when the control plane is unhappy, and extra CPU and memory. Debugging splits between application logs and proxy logs. Certificate rotation, injection, and version skew between the mesh and the cluster become on-call work. For a customer with three services, mutual TLS and a canary on the assistant are real gains. The platform team still needs someone who can read a failed handshake and a runbook for a control-plane upgrade that does not land at the end of the week. The pitfall is treating the mesh as a security checkbox and leaving two engineers to own it with no practice cluster. The security property arrives with an operations product. If they cannot staff the upgrades, keep TLS at the gateway and leave the mesh off."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: Cloud, Kubernetes, and Delivery",
+    "category": "Senior FDE - Service Mesh",
+    "topic": "Mesh latency",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A mesh sidecar is adding latency to every retrieval call. How do you prove that, and when do you take the mesh out of the path for the pilot?",
+    "answer": "Prove it by comparing the time the application records with the time the sidecar records on the same calls. The application span for retrieval is shorter than the proxy span by the overhead. A histogram of that gap, plus one profile with injection and one with the namespace opted out, shows whether the extra time sits in the proxy. Sidecar access logs separate request duration from upstream time. When upstream time matches the application and the full request is much longer, the mesh is the difference. Take it out of the path for the pilot when that gap dominates the latency budget, when there is still one service, and when mutual TLS between services is not a contractual requirement. Opt the namespace out of injection, keep TLS at the gateway, and leave a note to revisit when more services exist. For a retrieval assistant, the model call was about three hundred milliseconds and the sidecar added tens of milliseconds on every hop, including health checks. With one service, injection came off and the percentile returned to the earlier baseline. The pitfall is blaming the mesh because a dashboard looked busy, or keeping it because removal feels like a security step backward. Measure the gap. One service and a material gap means the sidecar leaves the pilot path, with the reason written down."
+  }
+]

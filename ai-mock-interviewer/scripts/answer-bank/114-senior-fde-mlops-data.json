@@ -1,0 +1,172 @@
+[
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - MLOps",
+    "topic": "LLMOps meaning",
+    "difficulty": "beginner",
+    "questionType": "Conceptual",
+    "question": "What does LLMOps mean on a forward deployed engagement, as opposed to a research lab tracking training runs nobody will deploy?",
+    "answer": "LLMOps on a forward deployed engagement is the work of keeping a live assistant explainable, measurable, and reversible once it is in the customer's hands. It is not a research lab tracking training runs that nobody will deploy. The model on site is usually a hosted API the customer already calls. The artifacts that move are the prompt, the retrieval index, the model name, and the small evaluation set that stands in front of a demo. LLMOps means a release pins those together, a score is recorded before the demo pointer moves, and every answer logs the release id plus the chunk ids that were shown to the model. The next morning a bad reply can be rebuilt from that stamp instead of from memory. A loss curve from a training job that never shipped cannot do that. At a card-support desk an agent says the assistant quoted a seven-day chargeback window. The trace for that reply carries prompt v14, the index built at 02:10 from the policy space, and the exact hosted model name. Opening v14 shows a paraphrase that softened a number the policy states as thirty days. The prior release is still stored, so the demo can return to it the same day. The pitfall is importing an experiment tracker and calling the engagement done while the prompt the customer hears still lives in a pasted document with no version and no score."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - MLOps",
+    "topic": "Prompt versioning",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you version a prompt, a retrieval index, and a model name together so last night's answers can be explained the next morning?",
+    "answer": "Version the prompt, the retrieval index, and the model name as one release id, and stamp that id on every answer so last night can be reconstructed in the morning. Three files edited around the same time are not a version. The prompt text is stored with a content hash. The index build id records the corpus snapshot, the chunking rules, and the embedding model, because a rebuild from a newer export is a different system even when the prompt text is unchanged. The model field stores the provider and the exact version string the API was called with, since an alias such as latest can move overnight without a deploy. A release row points at all three, and the chat service loads a release rather than reading whatever is newest. The trace also keeps the retrieved chunk ids, so a replay uses those passages, that prompt, and that model name. At a logistics customer an agent says the assistant told a warehouse to skip a scan the runbook still requires. The trace shows release r-2026-04-08. The prompt hash for that release contains a line that treated the scan as optional. Monday's index is still attached, so the review can see the words came from the prompt and not from a missing page. The pitfall is versioning the prompt alone. If the index was rebuilt overnight or the model alias moved, the same prompt text produces a different answer and the morning review has no way to separate the causes."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - MLOps",
+    "topic": "Eval gate",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How do you put an offline evaluation in the path of a release so a prompt change cannot reach the customer demo without a score you can show?",
+    "answer": "Put the offline evaluation on the path the release must travel, and point the customer demo only at a release that already has a score. A prompt change can land in git at any time. It becomes the demo version only after the gate has run and written a result next to the release id. The set is a frozen list of questions taken from real tickets, each with the passage that should be cited or the fact that must appear, plus a few questions the corpus cannot answer so a confident invention fails the check. A CI job or orchestrator task loads the candidate prompt, the candidate index, and the pinned model, asks every question, and records citation match, required facts, and refusals. The score and the failing examples stay with the release. The demo reads releases marked passed. A person can override with a note on the release, not a silent copy into the demo config. The set stays the same week to week so the delta is the point, not a perfect number. At a telecom desk a warmer prompt drops the outage-window citation on four of thirty held-out tickets. The demo stays on the previous release, and the score sheet shows those four tickets. The pitfall is a gate that always passes because the set is three happy-path questions written by the person who edited the prompt. A score with no frozen set and no failures is a sticker."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - MLOps",
+    "topic": "Drift",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "How do you notice answer quality drifting after the customer adds a new product line to the knowledge base, and what do you measure besides a single accuracy number?",
+    "answer": "Notice the drift by splitting questions about the new product line from the old corpus, and by watching signals that move before a single accuracy number does. A new product line changes what a correct answer is. The old tickets can keep scoring well, so a blended accuracy stays flat while the new line is wrong. Tag each answer by product using retrieved metadata or the question itself. On the new line, measure whether retrieval returned any passage, whether the cited page belongs to that product, how often the assistant refuses, how often a person edits or rejects the draft, and the age of the cited page. Keep a small weekly labeled sample for the new line instead of trusting one live score on every reply. Compare those rates to the same rates on the products that already worked. At a retailer that adds a home-services line, checkout answers stay steady, while questions about booking a technician start citing the apparel return policy. The new pages were ingested under a generic catalog tag, so similarity pulls the old policy. The citation-to-product mismatch jumps the same day. A blended test set written before the launch barely moves, and a release gate based only on that set still passes. The pitfall is one accuracy number on a frozen set that predates the new line. That set cannot see the drift, and it will keep blessing answers that are already wrong for the new product."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - MLOps",
+    "topic": "Canary",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you canary a new prompt or model for a slice of one customer's traffic, and what metric sends the slice back to the old version?",
+    "answer": "Canary a new prompt or model by routing a small, sticky slice of one customer's traffic to the new release and leaving everyone else on the current one. Send the slice back when a guard metric, chosen before the trial, crosses a line. Stickiness is by agent or by session hash, so one person does not see two behaviors in the same conversation. A coin flip on every message is not a canary. The new release is a full tuple: prompt, index build, and model name. Both paths log the same fields, including the release id. The rollback metric is something the customer already feels: a rise in human edits of the draft, a rise in answers with no citation, latency past the agreed budget, or a drop in explicit approval on the slice. The offline score is a companion, not the trigger, because the live slice is what can embarrass the account. Set a minimum number of answers before the rule is allowed to fire, so one angry ticket cannot flap the version. At a billing desk, ten percent of agents receive prompt v18. Within a day their edit rate doubles and uncited answers climb, while latency stays inside budget. The routing rule returns that cohort to v17, and both release ids remain on the traces. The pitfall is canarying without stickiness or without a minimum sample. The version then flips on noise, and the morning review cannot tell a real regression from a single hard ticket."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - MLOps",
+    "topic": "Tooling choice",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "When would you use something like MLflow, Vertex experiments, or Langfuse, and what do you refuse to make the customer learn before the pilot is useful?",
+    "answer": "Use a trace tool in the family of Langfuse when the pilot changes prompts, retrieval, and live answers. Use an experiment tracker in the family of MLflow or Vertex experiments when someone is actually training or comparing model runs. Refuse to make the customer learn either product before a bad answer can be opened and replayed. The split follows the artifact. Experiment trackers store parameters, datasets, and metrics for training jobs. That record is useful later if the engagement fine-tunes or runs a large offline comparison of models. A forward deployed pilot usually calls one hosted model. The question that matters on day one is which prompt ran, which chunks came back, and why this reply was wrong. A trace answers that. The customer-facing page can be a list of recent answers with the release id and the cited links. The tracker stays behind that page. At a support pilot the lead opens yesterday's chargeback answer, sees prompt v14 and two Confluence chunks, and never opens an experiment screen. Training metrics would be empty because nobody trained a model. The pitfall is standing up the experiment stack as the first deliverable and teaching the data team its vocabulary while the demo prompt is still an unversioned string. The pilot is useful when last night's answer can be explained. A second tool can wait until that loop is real."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - MLOps",
+    "topic": "Registry",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "What belongs in a model or prompt registry for this engagement, and what is theater if the customer only has one hosted model?",
+    "answer": "A registry for this engagement stores the artifacts that change and must be recalled later: the prompt text and its hash, the index build id, the embedding model name, the hosted model name and version, the evaluation set id, the score, the approver, and the previous release to roll back to. That row is what the chat service loads and what the morning review opens. Theater, when the customer has only one hosted model, is a weight registry with stages, aliases, and artifact buckets copied from a training platform. Nobody is promoting checkpoints. The single model name belongs as a field on the release row, including the exact version string, so a silent vendor move is visible. It does not need its own lifecycle. The prompt and the index are the real versions, because those are what the engagement edits between demos. At a one-model support assistant the useful record is prompt v14, index b-441, the hosted model string, a score of passing on the April set, and the engagement lead as approver. Pointing the demo at that row, and keeping v13 as the rollback target, is the whole registry. The pitfall is a diagram that shows a model registry so the architecture looks complete, while the prompt the demo speaks is still a string in service config with no hash and no score. The customer cannot explain last night from a stage name that never changed."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - Data Engineering",
+    "topic": "Batch versus stream",
+    "difficulty": "beginner",
+    "questionType": "Comparison",
+    "question": "When is a nightly batch index enough for a knowledge assistant, and when does the customer actually need a stream?",
+    "answer": "A nightly batch index is enough when the knowledge changes on a human editorial cadence and being a day behind does not harm the customer. A stream is warranted when a new or deleted document must change answers inside minutes, or when a stale page would cause a wrong action the same day. Confluence policies, PDFs, and runbooks usually move when a person edits them. An overnight rebuild, or an overnight incremental pass over the day's changes, keeps the pipeline easy to inspect. A failure shows up in the morning before agents rely on a half-written index. A stream pays for itself when the corpus is operational: an incident page during an outage, a recall or policy change that legal cannot leave stale, or a ticket that is itself the procedure. Events for create, update, and delete then drive the index. At a retailer, product-care PDFs updated weekly are a nightly job. The same customer needs a faster path for a recall notice posted at noon. A nightly index would keep citing the old care steps until the next morning, and the assistant would tell agents the wrong remedy while the notice is already on the site. The pitfall is adding a stream because current sounds better. Streams require ordering, retries, and a consumer that can see the same event twice. If yesterday's pages are acceptable, the nightly batch is the system to run."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - Data Engineering",
+    "topic": "Orchestrator",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "How would you use an orchestrator such as Airflow or Cloud Composer to rebuild an index, and what do you do when Tuesday's run fails halfway through?",
+    "answer": "Use an orchestrator such as Airflow or Cloud Composer to rebuild the index as ordered tasks against a recorded snapshot, and leave the live index in place until a new build passes checks. When Tuesday's run fails halfway, the previous index keeps serving. The failed build is discarded or repaired in a staging area. It is not swapped in. The first task exports or lists the corpus and writes a snapshot id. Later tasks chunk and embed into a new index name or a new partition, never into the alias the chat service is reading. A check task compares the document count to the snapshot, confirms required fields, and samples a few known pages. Only the last task flips the alias. If the embed task dies at chunk four thousand of nine thousand, the alias still names Monday's index. The alert carries the failed task and the snapshot id. A rerun starts at the failed task when its outputs are idempotent, or it writes a fresh staging index from the same snapshot. It does not append into the live index. At a support customer the Tuesday embedding calls time out. Agents keep answering from Monday's build. Wednesday's rerun flips the alias only after the document count matches the snapshot. The pitfall is rebuilding in place. A halfway write mixes old and new chunks, and the assistant can cite a page that the same run had already deleted."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - Data Engineering",
+    "topic": "Event log",
+    "difficulty": "intermediate",
+    "questionType": "Design / Architecture",
+    "question": "When would you put document-change events on Kafka or Pub/Sub, and what makes a consumer safe to retry?",
+    "answer": "Put document-change events on Kafka or Pub/Sub when several sources publish creates, updates, and deletes, and the index should apply those changes without each source writing to the index itself. A consumer is safe to retry when handling the same event twice leaves the index unchanged in meaning, and when a failure can be repeated without skipping later events or duplicating passages. Each event names the document id, the change type, a version or updated time, and a pointer back to the source of truth. The message is not the only copy of the body. The consumer fetches the current document and upserts chunks by document id, replacing the previous chunks for that id. A delete writes a tombstone and drops those rows. If the worker crashes after the write and before the ack, the platform delivers the event again. The second upsert overwrites the same rows. A version check drops an older event that arrives late so a retry cannot resurrect stale text. At a company where Confluence, a PDF bucket, and a ticket export all change, each publishes a document-changed event. One index consumer applies them by document id. A timeout retry does not create a second copy of the page. The pitfall is a consumer that appends a new chunk on every message. A retry then duplicates the passage, and search returns the same paragraph twice with two ages."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - Data Engineering",
+    "topic": "BigQuery",
+    "difficulty": "intermediate",
+    "questionType": "Scenario",
+    "question": "How do you use BigQuery in this product without pretending it is the vector index, and which questions belong in SQL instead of retrieval?",
+    "answer": "Use BigQuery as the warehouse for history, joins, and counts, and keep the vector index as the store the assistant searches at question time. SQL is for answers that are numbers, lists, or filters over structured columns. Retrieval is for answers that live in a paragraph. The same facts can feed both, through an export of document metadata, ticket tables, and evaluation results into the warehouse, while chunk text and embeddings stay in the index. How many drafts were edited last week, which product line has the oldest cited page, and which pages changed since Monday are warehouse queries. They are cheap to express as SQL and painful to fake with similarity search. What is the chargeback window for this card product is a retrieval question, because the fact is a sentence in a policy page, and a paraphrase will not match a keyword filter reliably. The warehouse can also store the offline scores so the trend is a query. Pointing every how-to question at the warehouse scans far more text than a lookup needs and still does not rank by meaning. At a billing customer the weekly edit report runs in BigQuery, and the assistant reads policy chunks from the index, joined only by document id. The pitfall is treating a table of loaded PDFs as the vector index. A document table is not a similarity index, and a full scan written to imitate search will be slow, costly, and wrong on paraphrases."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - Data Engineering",
+    "topic": "Data quality",
+    "difficulty": "advanced",
+    "questionType": "Design / Architecture",
+    "question": "How do you stop a bad export, an empty file, or a schema change from quietly wiping the customer's index?",
+    "answer": "Stop a bad export, an empty file, or a schema change from wiping the index by publishing only a candidate build that passes checks, and by leaving the live pointer on the last good snapshot. The new data never replaces the serving index until the counts and the shape look like a real corpus. Before embedding, and again before the alias flip, the export must be non-empty. The document count must sit inside a band of the previous good count, so a near-total drop fails closed unless a person acknowledges a real deletion. Required fields, including document id, title, updated time, and body, must parse. A renamed column fails that parse and never reaches the embed task. A source count or a checksum from the system of record catches a truncated file that is non-empty but short. The failed run alerts with both counts and does not move the alias. At a support customer an upstream job writes a zero-byte Confluence export. The orchestrator sees zero documents against yesterday's nine thousand and refuses the flip. Agents keep citing Monday's pages. Someone inspects the export instead of discovering an assistant that suddenly knows nothing. The pitfall is a load that deletes all rows first and then inserts, with no count check. An empty file commits, and the next morning every question misses."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - Data Engineering",
+    "topic": "Freshness",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "How do you design incremental indexing, deletes, and a source of truth so a removed Confluence page stops being cited?",
+    "answer": "Design incremental indexing so Confluence remains the source of truth, every page is keyed by a stable document id and a version, and a delete removes that id from the index before another answer can cite it. Incremental means applying what changed, including removals, not only appending new pages. An incremental pass reads pages updated since a watermark and upserts chunks by page id, replacing the old chunks for that page so an edit does not leave yesterday's wording beside today's. A delete event, or a page that a reconciliation scan can no longer see, writes a tombstone and drops those rows. A periodic full compare against the live page list catches lost events, because a watermark will not notice a page that vanished without a message. The chat service reads only the live index, so a removed page has no row to retrieve and cannot appear as a citation. At a policy desk, legal unpublishes a fee-waiver page at three in the afternoon. The delete removes its chunks within the hour, and the nightly reconcile confirms the page id is absent. An agent who asks about the waiver gets the current policy or a refusal, not the withdrawn page. The pitfall is upsert-only incremental indexing. Removed pages stay embedded forever and keep being cited, because nothing in the pipeline ever deletes their vectors."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - Data Engineering",
+    "topic": "Three stores",
+    "difficulty": "intermediate",
+    "questionType": "Comparison",
+    "question": "How do you explain the difference between the warehouse, the operational database, and the retrieval index to a customer data team that wants one store for everything?",
+    "answer": "The warehouse, the operational database, and the retrieval index answer different questions, and one store for all three makes each question worse. The warehouse holds history for analysis: counts, trends, and joins over months. The operational database holds the current rows the product reads and writes on the request path, such as sessions, tickets, and the release id the assistant is serving. The retrieval index holds chunks and embeddings so a question can find a passage in a short time. A warehouse scan is the right tool for last quarter's edit rate and the wrong tool for a lookup that must return before the agent notices the wait. An operational row store is the right tool for ticket status and a poor place to rank thousands of passages by meaning. The index is the right tool for similarity and a poor place to compute totals. At a support customer the data team wants the assistant to query the warehouse so there is one copy of Confluence. The warehouse can keep the export, the change history, and the evaluation facts. The index keeps the embeddings the chat service queries. The operational database keeps the conversation. They share document ids, so a cited page can be traced across all three without making them the same engine. The pitfall is forcing one store to do every job. Either the assistant scans analytics tables on each question, or the warehouse is bent into a low-latency index and both workloads suffer."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - Data Engineering",
+    "topic": "Spark timing",
+    "difficulty": "advanced",
+    "questionType": "Comparison",
+    "question": "When would you reach for Spark to prepare a customer's corpus, and when is a Python job on a single machine still the right pilot?",
+    "answer": "Reach for Spark when the corpus is too large for one machine to prepare inside the window the customer will wait, or when the raw data already lives on a lake that Spark cluster reads. A Python job on a single machine is still the right pilot when the corpus fits on one disk and finishes overnight. Document preparation here is read, clean, split, call an embedding API, and write chunks. The work parallelizes, but the limit is often the embedding quota, not CPU. Spark does not raise that quota. It adds a cluster, partitions, and failures that are about the cluster. If twelve thousand Confluence pages embed in a few hours from one process with a rate limit, that process is the reliable job. Spark starts to earn its place when the export is hundreds of gigabytes, must be joined with other lake tables, or cannot finish in the maintenance window on one box. At the pilot, one Python job writes the staging index before morning and fails by printing the id of a bad PDF. Later, a multi-terabyte ticket archive that already sits on the customer's lake is a Spark job, because copying it onto a small VM is the expensive step. The pitfall is starting on Spark because the customer said scale. The first corpus is often small, and the cluster is then the thing that is down on the morning the index needs a rebuild."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - Data Engineering",
+    "topic": "Spark cost",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "What operational burden does Spark add on a forward deployed engagement, and which symptoms tell you that you introduced it too early?",
+    "answer": "Spark adds a cluster to run and pay for, a packaging story, partition-level failures, and an operator, on an engagement that may rebuild an index once a day. Those costs show up even when the assistant is idle. Introducing it too early looks like a pipeline whose incidents are cluster incidents, a rebuild that is harder to debug than the single process it replaced, and a customer who cannot rerun document preparation without a platform ticket. Someone has to own cluster size, preempted workers, library versions, and memory errors that have nothing to do with chunking. A bad PDF fails a partition instead of being logged and skipped. Logs are spread across executors. The engagement then spends the week on Spark instead of on evaluation, deletes, and the release the demo serves. At a support pilot of about twenty thousand pages, the job dies because one executor runs out of memory on a malformed PDF, the cluster scales up for a one-hour run, and Tuesday's rebuild waits on the platform team. The earlier single-process job failed on that same PDF by printing its id and continuing. The pitfall is treating the presence of a cluster as a sign the data path is mature. If the corpus fits on one machine, the burden appears as time spent on the platform while answer quality and freshness stay unmeasured."
+  },
+  {
+    "source": "Senior FDE interview preparation bank",
+    "section": "Phase 4 - Production AI: MLOps and Data Engineering",
+    "category": "Senior FDE - Data Engineering",
+    "topic": "Reuse Spark",
+    "difficulty": "advanced",
+    "questionType": "Scenario",
+    "question": "A customer already runs Spark for analytics. How do you reuse that platform for document preparation without coupling the assistant's uptime to their warehouse jobs?",
+    "answer": "Reuse the customer's Spark platform as a scheduled preparation job that writes a finished, versioned artifact, and keep the assistant reading that published build rather than a warehouse job still in flight. Their cluster can do the heavy read. The chat service never waits on it, and a failed analytics run does not take the index down. The contract is a handoff. A Spark job, scheduled beside their analytics and not as a task inside the critical warehouse graph, reads the corpus, chunks, embeds within the quota, and writes a new build id to object storage or to a staging index. Checks on count, schema, and a few known pages run in that job. A separate small publish step flips the pointer the assistant uses, and only after those checks pass. If Monday's sales aggregation fails or occupies the cluster, the assistant keeps serving the last published build. The preparation job is safe to rerun because it writes a new build id and does not truncate the live index. At a retailer the data platform already runs Spark over the product catalog. The document job is a separate pipeline on that same cluster, producing build b-441. The assistant's release points at b-441. When the warehouse graph is late, agents still cite Sunday's pages. The pitfall is embedding the rebuild inside the warehouse graph, or pointing retrieval at a table their jobs overwrite. A late analytics run then blanks the assistant with it."
+  }
+]

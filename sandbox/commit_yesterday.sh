@@ -37,7 +37,7 @@ end=$(date -j -f "%Y-%m-%d %H:%M:%S" "$END_DATE 00:00:00" +%s)
 
 while [ "$current" -le "$end" ]; do
     day_str=$(date -j -f "%s" "$current" +%Y-%m-%d)
-    if printf '%s\n' "$existing_dates" | grep -qx "$day_str"; then
+    if grep -qxF -- "$day_str" <<< "$existing_dates"; then
         current=$((current + 86400))
         continue
     fi

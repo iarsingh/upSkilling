@@ -14,7 +14,8 @@ const questionsLines = [
   `Total unique questions: ${entries.length}`,
   "Sources: fixed mock interview sets, the full app question bank (GCP/DevOps/SRE, Kubernetes, Docker, Terraform, " +
     "Python, Go, FastAPI, Ansible, Scripting, Coding Exercises, Debug-This-Script, LLMOps, MLOps, Technology Risk, " +
-    "HR/Behavioral), Technology Risk Q&A, and the 1000+ DevOps/MLOps/Kubernetes/GCP bank.",
+    "HR/Behavioral), Technology Risk Q&A, the 1000+ DevOps/MLOps/Kubernetes/GCP bank, and the Forward Deployed " +
+    "Engineer bank (including AWS/GCP/Azure multi-cloud questions).",
   ""
 ];
 
@@ -25,7 +26,8 @@ const qaLines = [
   `Total unique questions: ${entries.length}`,
   "Sources: fixed mock interview sets, the full app question bank (GCP/DevOps/SRE, Kubernetes, Docker, Terraform, " +
     "Python, Go, FastAPI, Ansible, Scripting, Coding Exercises, Debug-This-Script, LLMOps, MLOps, Technology Risk, " +
-    "HR/Behavioral), Technology Risk Q&A, and the 1000+ DevOps/MLOps/Kubernetes/GCP bank.",
+    "HR/Behavioral), Technology Risk Q&A, the 1000+ DevOps/MLOps/Kubernetes/GCP bank, and the Forward Deployed " +
+    "Engineer bank (including AWS/GCP/Azure multi-cloud questions).",
   "Answers include technical explanations and personal-response templates; confirm personal details before use.",
   ""
 ];

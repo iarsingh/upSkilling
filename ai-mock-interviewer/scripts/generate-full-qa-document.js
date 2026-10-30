@@ -272,6 +272,44 @@ function loadForwardDeployedEngineerQuestions() {
   return JSON.parse(fs.readFileSync(p, "utf8"));
 }
 
+// Role banks stored as arrays of full entries (same shape as the FDE bank).
+const ROLE_BANK_FILES = [
+  "95-django-fastapi-fullstack.json",
+  "96-azure-cloud-engineering.json",
+  "97-aws-core-services.json",
+  "98-python-coding-dsa.json",
+  "99-system-design-platform-ai.json",
+  "100-react-typescript-frontend.json",
+  "101-fde-behavioural-star.json",
+  "102-communication-skills.json",
+  "103-senior-staff-growth.json",
+  "105-fde-foundations.json",
+  "106-fde-llm-rag-agents.json",
+  "107-fde-cloud-platform.json",
+  "108-fde-delivery-leadership.json",
+  "105-senior-fde-programming-testing.json",
+  "106-senior-fde-backend-apis.json",
+  "107-senior-fde-frontend.json",
+  "108-senior-fde-data-stores.json",
+  "109-senior-fde-classical-ml.json",
+  "110-senior-fde-generative-ai.json",
+  "111-senior-fde-rag.json",
+  "112-senior-fde-agents.json",
+  "113-senior-fde-cloud-k8s-delivery.json",
+  "114-senior-fde-mlops-data.json",
+  "115-senior-fde-system-design.json",
+  "116-senior-fde-observability-sre.json",
+  "117-senior-fde-security.json",
+  "118-senior-fde-customer-leadership.json"
+];
+
+function loadRoleBankQuestions() {
+  return ROLE_BANK_FILES.flatMap((file) => {
+    const p = path.join(__dirname, "answer-bank", file);
+    return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : [];
+  });
+}
+
 function loadHandWrittenAnswers() {
   const dir = path.join(__dirname, "answer-bank");
   const merged = new Map();
@@ -285,7 +323,7 @@ function loadHandWrittenAnswers() {
     }
   }
   for (const file of fs.readdirSync(dir)) {
-    if (!file.endsWith(".json") || ["needs-answer.json", "final-qa-dataset.json", "bulk-generated-cache.json", "90-data-science-scenario-beginner-to-expert.json", "91-ai-agent-engineer-scenario-beginner-to-expert.json", "94-forward-deployed-engineer.json", curatedFile].includes(file) || file.startsWith("actual-interview-")) continue;
+    if (!file.endsWith(".json") || ["needs-answer.json", "final-qa-dataset.json", "bulk-generated-cache.json", "90-data-science-scenario-beginner-to-expert.json", "91-ai-agent-engineer-scenario-beginner-to-expert.json", "94-forward-deployed-engineer.json", curatedFile, ...ROLE_BANK_FILES].includes(file) || file.startsWith("actual-interview-")) continue;
     const obj = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8"));
     for (const [question, answer] of Object.entries(obj)) {
       const key = normalizeQuestion(question);
@@ -392,7 +430,8 @@ const aiAgentEngineerScenarioQuestions = loadAiAgentEngineerScenarioQuestions();
 const forwardDeployedEngineerQuestions = loadForwardDeployedEngineerQuestions();
 const reviewedGeneratedAnswers = loadReviewedGeneratedAnswers();
 
-const allSources = [...forwardDeployedEngineerQuestions, ...mockSets, ...codingBank, ...appBanks, ...dataScienceScenarioQuestions, ...aiAgentEngineerScenarioQuestions, ...actualInterviewQuestions, ...importedConversationQuestions, ...gcpPrivateConnectivityQuestions, ...gcpNetworkEngineerAdvancedQuestions, ...linuxComposerGkeInterviewQuestions, ...techQa, ...largeBank];
+const roleBankQuestions = loadRoleBankQuestions();
+const allSources = [...forwardDeployedEngineerQuestions, ...roleBankQuestions, ...mockSets, ...codingBank, ...appBanks, ...dataScienceScenarioQuestions, ...aiAgentEngineerScenarioQuestions, ...actualInterviewQuestions, ...importedConversationQuestions, ...gcpPrivateConnectivityQuestions, ...gcpNetworkEngineerAdvancedQuestions, ...linuxComposerGkeInterviewQuestions, ...techQa, ...largeBank];
 
 const seen = new Set();
 const seenCanonical = new Set();
